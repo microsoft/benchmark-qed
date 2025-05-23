@@ -15,13 +15,13 @@ from rich.progress import Progress, TaskID
 from scipy.stats import shapiro, ttest_rel, wilcoxon
 from statsmodels.stats.multitest import multipletests
 
+from benchmark_qed.autoe.config import Criteria
 from benchmark_qed.autoe.prompts import (
     PAIRWISE_EVALUATION_SYSTEM_PROMPT,
     PAIRWISE_EVALUATION_USER_PROMPT,
     REFERENCE_EVALUATION_PROMPT,
     REFERENCE_EVALUATION_USER_PROMPT,
 )
-from benchmark_qed.config.autoe_config import Criteria
 from benchmark_qed.config.llm_config import LLMConfig
 from benchmark_qed.llm.type.base import ChatModel
 from benchmark_qed.llm.utils import chat_typed_response

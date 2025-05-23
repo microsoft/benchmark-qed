@@ -11,13 +11,13 @@ import pandas as pd
 import typer
 from rich import print as rich_print
 
+from benchmark_qed.autoe.config import PairwiseConfig, ReferenceConfig
 from benchmark_qed.autoe.score import (
     analyze_criteria,
     get_pairwise_scores,
     get_reference_scores,
 )
 from benchmark_qed.cli.utils import print_df
-from benchmark_qed.config.autoe_config import PairwiseConfig, ReferenceConfig
 from benchmark_qed.config.utils import load_config
 from benchmark_qed.llm.factory import ModelFactory
 
