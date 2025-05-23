@@ -18,7 +18,7 @@ def save_activity_context(
         output_path_obj.mkdir(parents=True, exist_ok=True)
     output_file = output_path_obj / f"{output_name}.json"
     with open(output_file, "w") as f:
-        json.dump(activity_context.to_dict(include_entity_embedding=False), f)
+        json.dump(activity_context.to_dict(include_entity_embedding=False), f, indent=4)
     pickle_file = output_path_obj / f"{output_name}.pkl"
     with open(pickle_file, "wb") as f:
         pickle.dump(activity_context, f)
