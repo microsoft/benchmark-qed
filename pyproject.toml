@@ -1,0 +1,84 @@
+[project]
+name = "benchmark-qed"
+dynamic = ["version"]
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "aiohttp>=3.11.15",
+    "azure-ai-inference>=1.0.0b9",
+    "azure-identity>=1.22.0",
+    "numpy>=2.2.0",
+    "openai>=1.68.2",
+    "pandas>=2.2.3",
+    "pydantic>=2.10.4",
+    "python-dotenv>=1.0.1",
+    "pyyaml>=6.0.2",
+    "scipy>=1.14.1",
+    "statsmodels>=0.14.4",
+    "textual>=1.0.0",
+    "typer>=0.15.1",
+]
+
+[dependency-groups]
+dev = [
+    "ipykernel>=6.29.5",
+    "ipywidgets>=8.1.5",
+    "mkdocs-material>=9.6.10",
+    "poethepoet>=0.32.1",
+    "pyright>=1.1.392.post0",
+    "nest-asyncio>=1.6.0",
+    "pytest>=8.3.5",
+    "pytest-asyncio>=0.26.0",
+    "pytest-cov>=6.1.0",
+    "ruff>=0.8.4",
+    "uv-dynamic-versioning>=0.6.0",
+    "typos>=1.32.0",
+]
+
+[build-system]
+requires = ["hatchling", "uv-dynamic-versioning"]
+build-backend = "hatchling.build"
+
+[tool.hatch.version]
+source = "uv-dynamic-versioning"
+
+[tool.uv-dynamic-versioning]
+vcs = "git"
+style = "pep440"
+pattern-prefix = "release/"
+metadata = false
+
+
+
+[tool.poe.tasks]
+_sort_imports = "ruff check --select I --fix . --preview"
+_ruff_check = 'ruff check . --preview'
+_format_code = "ruff format  . --preview"
+_format_check = 'ruff format . --check --preview'
+_check_typos = 'typos .'
+
+typecheck = "pyright"
+check_package_types = "pyright --verifytypes benchmark_qed --ignoreexternal"
+check = ['_check_typos', '_format_check', '_ruff_check', 'typecheck', 'check_package_types', ]
+fix = "ruff  --preview check --fix ."
+fix_unsafe = "ruff check --preview --fix --unsafe-fixes ."
+format = ['_sort_imports', '_format_code']
+test = "pytest tests"
+
+_test_with_coverage = 'coverage run --source=benchmark_qed -m pytest tests/unit'
+_coverage_report = 'coverage report --fail-under=100 --show-missing --omit="benchmark_qed/doc_gen/__main__.py"'
+_generate_coverage_xml = 'coverage xml --omit="benchmark_qed/doc_gen/__main__.py"'
+_generate_coverage_html = 'coverage html --omit="benchmark_qed/doc_gen/__main__.py"'
+test_coverage = [
+    '_test_with_coverage',  
+    '_generate_coverage_xml',
+    '_generate_coverage_html',
+    '_coverage_report'
+]
+test_only = "pytest -v -k"
+
+# https://github.com/microsoft/pyright/blob/9f81564a4685ff5c55edd3959f9b39030f590b2f/docs/configuration.md#sample-pyprojecttoml-file
+[tool.pyright]
+include = ["benchmark_qed", "tests"]
+exclude = ["**/__pycache__"]

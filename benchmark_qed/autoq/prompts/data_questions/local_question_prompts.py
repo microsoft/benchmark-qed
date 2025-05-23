@@ -1,0 +1,88 @@
+LOCAL_EXTRACTION_PROMPT = """\
+You are a helpful and meticulous assistant tasked with identifying relevant questions and abstract categories from a list of input texts.
+
+--INSTRUCTIONS--
+Let's think step by step:
+1. Step 1: Read all the input texts and extract background information that provides context for the questions.
+- Background information should include key details on who, what, where, when, why, how, etc. from all relevant input texts.
+- Background information may connect entities and concepts from multiple input texts.
+
+2. Step 2: Extract a list of concrete questions that follow from the background information and can be answered based on the input texts.
+Each question should:
+- focus on specific entities, events, or concepts mentioned in the input texts
+- stand alone in the absence of the background information and other questions
+- be appropriately scoped to be answerable entirely and accurately using the input texts, rather than requiring external knowledge
+- ask only one thing at a time rather than having multiple sub-questions. For example, this question is BAD because it has multiple sub-questions: ""What recent tragic incidents related to the fentanyl crisis have occurred in Washington and Oregon, and what measures are officials taking in response to these events?".
+Question set should be distinct and diverse, avoiding repetitive questions.
+
+--OUTPUT--
+Use the following JSON object structure:
+
+{{
+    "background_information": "Background information that provides context for the question",
+    "questions": ["A list of concrete questions that follow from the background information and can be answered based on the input texts."]
+}}
+
+Output a single JSON object only, not a list, with no additional text or commentary.
+"""
+
+LOCAL_TEXT_INPUT_PROMPT = """\
+--INPUT TEXTS--
+
+{input_text}
+
+--NUMBER OF QUESTIONS-- 
+Aims for {num_questions} concrete questions.
+
+--OUTPUT--
+{{
+    "background_information": "Background information that provides context for the question, e.g., who, what, where, when, why, how, etc. Background information may connect entities and concepts from multiple input texts",
+    "questions": ["A distinct and diverse list of concrete questions that follow from the background information and can be answered based on the input texts. Questions must stand alone in the absence of the background information. Questions should be specific, short, concise, and appropriately scoped to be completely answerable based on the input texts. Avoid repetitive questions and questions that contain multiple sub-questions."]
+}}
+"""
+
+LOCAL_GENERATION_PROMPT = """\
+Expand the initial input questions to incorporate all necessary background context.
+
+--INSTRUCTIONS--
+Let's think step by step:
+
+1. STEP 1: For EACH input question, extract the following information:
+- period: The relevant period of time for the question, e.g., summer 2024.
+- location: The relevant location for the question, e.g., Boston.
+- named_entities: A list of named entities, events, or concepts that are relevant to the question.,
+- abstract_categories: A comprehensive list of abstract categories that the question falls into, e.g., 'AI technologies', 'healthcare policies', 'education', 'environment', 'security risks', 'safety concerns', 'societal impacts', or similar. Ensure the categories are general and abstract, but not overly broad. Fore example: 'issues' is too broad, 'safety issues' is at the right level of abstraction. Include as many relevant categories as possible.
+
+2. STEP 2: Rewrite each input question to incorporate all necessary context from the background information, period, and place
+- Keep the question short and concise.
+- Do not telegraph the answer or parts of the answer to the output question. For example, consider this output question: "Given the recent incidents in Zanzibar, what are the health implications of consuming sea turtle meat that have resulted in multiple deaths and hospitalizations?". This is a BAD output question because it telegraphs the answer by mentioning the deaths and hospitalizations as a result of consuming sea turtle meat.
+- The output question should ask only one thing at a time rather than having multiple sub-questions. For example, this question is BAD because it contains two sub-questions: ""What recent tragic incidents related to the fentanyl crisis have occurred in Washington and Oregon, and what measures are officials taking in response to these events?".
+- All references to people, places, or things should be fully described in the question. Such references should only be included if including this information materially affects the answer.
+Ensure that ALL references are clear and unambiguous, e.g., don't refer to "the <entity>", but refer to named or described entities in ways that distinguish them from all other <entities>. 
+Do this for ALL references, and ensure that all references are absolute (e.g., summer 2024) rather than relative (e.g., this summer).
+Examples:
+"the proposal" -> "the proposal of the governor of California to increase funding for public schools"
+"the meeting" -> "the meeting of Contoso with their new client to discuss the upcoming project"
+"the president" -> "the president of the company, John Doe"
+
+--OUTPUT--
+Return output as a JSON-formatted object with the following structure:
+
+{{
+    "questions": [
+          {{
+            "input_question": "The input question that the output question is based on.",
+            "period": "The relevant period of time for the question, e.g., summer 2024.",
+            "location": "The relevant location for the question, e.g., Boston.",
+            "named_entities": "A list of named entities, events, or concepts that are relevant to the question.",
+            "abstract_categories": "A comprehensive list of abstract categories that the question falls into, e.g., 'AI technologies', 'healthcare policies', 'education', 'environment', 'security risks', 'safety concerns', 'societal impacts', or similar. Ensure the categories are general and abstract, but not overly broad. Include as many relevant categories as possible.",
+            "background_information": "Background information that provides context for the question, e.g., who, what, where, when, why, how, etc.",
+            "output_question": "An expanded version of the input question that must stand alone in the absence of the background information. It should incorporate all necessary context from the background information, period, and place without telegraphing the answer to the question. Keep the question short and concise. Avoid questions that contain multiple sub-questions.",
+        }},
+        ...
+    ]
+}}
+
+Output a single JSON list only, with no additional text or commentary.
+
+"""

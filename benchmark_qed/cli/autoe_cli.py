@@ -1,0 +1,229 @@
+# Copyright (c) 2025 Microsoft Corporation.
+"""Score CLI for generating scores and significance tests for different conditions."""
+
+import json
+from itertools import combinations, product
+from pathlib import Path
+from typing import Annotated, cast
+
+import numpy as np
+import pandas as pd
+import typer
+from rich import print as rich_print
+
+from benchmark_qed.autoe.score import (
+    analyze_criteria,
+    get_pairwise_scores,
+    get_reference_scores,
+)
+from benchmark_qed.cli.utils import print_df
+from benchmark_qed.config.autoe_config import PairwiseConfig, ReferenceConfig
+from benchmark_qed.config.utils import load_config
+from benchmark_qed.llm.factory import ModelFactory
+
+app: typer.Typer = typer.Typer(pretty_exceptions_show_locals=False)
+
+
+@app.command()
+def pairwise_scores(
+    comparison_spec: Annotated[
+        Path,
+        typer.Argument(help="The path to the JSON file containing the conditions."),
+    ],
+    output: Annotated[
+        Path, typer.Argument(help="The path to the output file for the scores.")
+    ],
+    *,
+    trials: Annotated[
+        int,
+        typer.Option(
+            help="The number of trials to run for each comparison. This must be an even number."
+        ),
+    ] = 4,
+    alpha: Annotated[
+        float, typer.Option(help="The p-value threshold for the significance test.")
+    ] = 0.05,
+    exclude_criteria: Annotated[
+        list[str] | None,
+        typer.Option(help="The criteria to exclude from the scoring."),
+    ] = None,
+    print_model_usage: Annotated[
+        bool,
+        typer.Option(help="Whether to print the model usage statistics after scoring."),
+    ] = False,
+) -> None:
+    """Generate scores for the different conditions provided in the JSON file."""
+    if trials % 2 != 0:
+        msg = "The number of trials must be even to allow for counterbalancing of condition orders in pairwise comparisons"
+        raise ValueError(msg)
+
+    if exclude_criteria is None:
+        exclude_criteria = []
+    config = load_config(comparison_spec, PairwiseConfig)
+
+    config.criteria = [
+        criterion
+        for criterion in config.criteria
+        if criterion.name not in exclude_criteria
+    ]
+
+    llm_client = ModelFactory.create_chat_model(config.llm_config)
+    output.mkdir(parents=True, exist_ok=True)
+    all_results = []
+
+    all_combinations = (
+        product([config.base], config.others)
+        if config.base
+        else combinations(config.others, 2)
+    )
+
+    for base, other in all_combinations:
+        for question_set in config.question_sets:
+            rich_print(f"Scoring {base.name} vs {other.name} for {question_set}")
+            if (output / f"{question_set}_{base.name}--{other.name}.csv").exists():
+                rich_print(
+                    f"Skipping {base.name} vs {other.name} for {question_set} (already exists)"
+                )
+                result = pd.read_csv(
+                    output / f"{question_set}_{base.name}--{other.name}.csv"
+                )
+            else:
+                result = get_pairwise_scores(
+                    llm_client=llm_client,
+                    llm_config=config.llm_config,
+                    base_name=base.name,
+                    other_name=other.name,
+                    base_answers=pd.read_json(
+                        (base.answer_base_path / f"{question_set}.json"),
+                        encoding="utf-8",
+                    ),
+                    other_answers=pd.read_json(
+                        (other.answer_base_path / f"{question_set}.json"),
+                        encoding="utf-8",
+                    ),
+                    criteria=config.criteria,
+                    trials=trials,
+                )
+
+                result.to_csv(
+                    output / f"{question_set}_{base.name}--{other.name}.csv",
+                    index=False,
+                )
+            result["question_set"] = question_set
+            all_results.append(result)
+
+    all_results = pd.concat(all_results)
+    all_results.to_csv(output / "pairwise_scores.csv", index=False)
+
+    all_results_p_value = analyze_criteria(
+        all_results,
+        alpha=alpha,
+    )
+
+    all_results_p_value.to_csv(output / "pairwise_scores_p_value.csv", index=False)
+
+    print_df(
+        cast(
+            pd.DataFrame,
+            all_results_p_value[
+                [
+                    "question_set",
+                    "criteria",
+                    "base_name",
+                    "other_name",
+                    "base_mean",
+                    "other_mean",
+                    "formatted_corrected_p_value",
+                ]
+            ],
+        ),
+        "Pairwise Scores Summary",
+    )
+
+    if print_model_usage:
+        rich_print("Model usage statistics:")
+        rich_print(llm_client.get_usage())
+    usage_file = output / "model_usage.json"
+    usage_file.write_text(json.dumps(llm_client.get_usage()), encoding="utf-8")
+
+
+@app.command()
+def reference_scores(
+    comparison_spec: Annotated[
+        Path,
+        typer.Argument(help="The path to the JSON file containing the configuration."),
+    ],
+    output: Annotated[
+        Path, typer.Argument(help="The path to the output file for the scores.")
+    ],
+    *,
+    trials: Annotated[
+        int, typer.Option(help="The number of trials to run for each comparison.")
+    ] = 1,
+    exclude_criteria: Annotated[
+        list[str] | None,
+        typer.Option(help="The criteria to exclude from the scoring."),
+    ] = None,
+    print_model_usage: Annotated[
+        bool,
+        typer.Option(help="Whether to print the model usage statistics after scoring."),
+    ] = False,
+) -> None:
+    """Generate scores for the generated answers provided in the JSON file."""
+    if exclude_criteria is None:
+        exclude_criteria = []
+    config = load_config(comparison_spec, ReferenceConfig)
+
+    config.criteria = [
+        criterion
+        for criterion in config.criteria
+        if criterion.name not in exclude_criteria
+    ]
+
+    llm_client = ModelFactory.create_chat_model(config.llm_config)
+
+    for generated in config.generated:
+        result = get_reference_scores(
+            llm_client=llm_client,
+            llm_config=config.llm_config,
+            generated_answers=pd.read_json(
+                generated.answer_base_path, encoding="utf-8"
+            ),
+            ground_truth_answers=pd.read_json(
+                config.ground_truth.answer_base_path, encoding="utf-8"
+            ),
+            criteria=config.criteria,
+            score_min=config.score_min,
+            score_max=config.score_max,
+            trials=trials,
+        )
+        output.mkdir(parents=True, exist_ok=True)
+        result.to_csv(output / f"reference_scores-{generated.name}.csv", index=False)
+        summary_df = cast(
+            pd.DataFrame,
+            result.drop(
+                columns=[
+                    "question",
+                    "ground_truth",
+                    "generated_answer",
+                    "reasoning",
+                    "trial",
+                ]
+            )
+            .groupby("criteria")
+            .agg(list),
+        )
+
+        summary_df["mean"] = summary_df["score"].apply(np.mean)
+        summary_df["std"] = summary_df["score"].apply(np.std)
+        summary_df = summary_df.drop(columns=["score"])
+        print_df(
+            summary_df.drop(columns=["score_id"]).reset_index(),
+            f"Reference Scores Summary for {generated.name}",
+        )
+
+    if print_model_usage:
+        rich_print("Model usage statistics:")
+        rich_print(llm_client.get_usage())
+    usage_file = output / "model_usage.json"
+    usage_file.write_text(json.dumps(llm_client.get_usage()), encoding="utf-8")

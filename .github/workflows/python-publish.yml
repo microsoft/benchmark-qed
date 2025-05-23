@@ -1,0 +1,51 @@
+name: Python-Publish-CI
+on:
+  release:
+    types: 
+      - created
+  push:
+    branches: 
+      - "main" # match the main branch
+    tags: 
+      - "release/*" # match version tags like release/1.0.0
+
+env:
+  UV_VERSION: 0.6.17
+  PYTHON_VERSION: 3.12
+
+jobs:
+  publish:
+    name: Upload python projects to PyPI
+    runs-on: ubuntu-latest
+
+    environment:
+      name: pypi
+      url: https://pypi.org/p/benchmark-qed
+    permissions:
+        id-token: write  # IMPORTANT: this permission is mandatory for trusted publishing
+    
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python ${{ env.PYTHON_VERSION }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: '${{ env.PYTHON_VERSION }}'
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v2
+        with:
+          version: ${{ env.UV_VERSION }}
+
+      - name: Build Distributable
+        shell: bash
+        run: uv build
+
+      - name: Publish package distributions to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          skip-existing: true
+          verbose: true
+      
