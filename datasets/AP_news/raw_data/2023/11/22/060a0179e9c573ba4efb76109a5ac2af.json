@@ -1,0 +1,250 @@
+﻿{
+    "altids": {
+        "itemid": "060a0179e9c573ba4efb76109a5ac2af",
+        "etag": "060a0179e9c573ba4efb76109a5ac2af_0a2aza0c0",
+        "friendlykey": "795464203065",
+        "referenceid": "MN--Editorial Rdp"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Opinion",
+    "language": "en",
+    "versioncreated": "2023-11-22T12:10:44Z",
+    "firstcreated": "2023-11-22T09:24:23Z",
+    "editorialrole": "FullStory",
+    "fixture": {
+        "code": "21ea4067bb274c3b805353fb2b99ba70",
+        "name": "Editorial Roundup"
+    },
+    "pubstatus": "usable",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "MN--Editorial Rdp",
+    "headline": "Editorial Roundup: Minnesota",
+    "slugline": "BC-MN--Editorial Rdp",
+    "bylines": [
+        {
+            "by": "By The Associated Press"
+        }
+    ],
+    "copyrightnotice": "Copyright 2023 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "Editorial Rdp"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "5e3af32f00ad0d418f037f115324362b",
+            "name": "Health care industry",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 34
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "9c750296cbfa4fdd89e9a32848825b29",
+            "name": "Prescription drugs",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 47
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86aad5207dac100488ecba7fa5283c3e",
+            "name": "Politics",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 76
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "6cd98adfc84d405eadec8ca81bd37df4",
+            "name": "Access to health care",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 34
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "4626a38a1b52454ca5d01755d14f1dc9",
+            "name": "Legal proceedings",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 53
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a37eab90831510048fcfdf092526b43e",
+            "name": "Law enforcement",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 66
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e55ae0105cb337448557ceca13d587ac",
+            "name": "Financial services",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 34
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "1b29d45f8e8e4c008e8a58fe6f92a753",
+            "name": "Government programs",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 53
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "9f12355082c4100486addf092526b43e",
+            "name": "Minnesota",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -94.25055,
+                    46.25024
+                ]
+            },
+            "relevance": 84,
+            "parentnames": [
+                "United States"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "902a5eb082af1004828adf092526b43e",
+            "name": "Colorado",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -105.50083,
+                    39.00027
+                ]
+            },
+            "relevance": 74,
+            "parentnames": [
+                "United States"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "9f12355082c4100486addf092526b43e",
+            "name": "Minnesota",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "body_nitf": "<p>Minneapolis Star Tribune. November 20, 2023.</p><p>Editorial: Buyer beware on \u2018health care sharing ministries\u2019</p><p>What seems like a good deal on health insurance may be quite risky.</p><p>O <a href=\"https://www.mnsure.org/new-customers/enrollment-deadlines/open-enrollment/index.jsp\">pen enrollment</a> is the window of time at the year\u2019s end when consumers make a critical health care decision \u2014 which health insurance plan to buy for the coming year to cover themselves and their families.</p><p>Those with coverage through a job typically have a handful of plans to choose from. Those who buy on their own \u2014 such as early retirees, farm families or entrepreneurs \u2014 have a dizzying array of choices. It\u2019s that latter group, currently right in the middle of open enrollment, who should take heed of recent data from Colorado underscoring an old truth:</p><p>If something sounds too good to be true, it probably is.</p><p>The Colorado state regulators\u2019 information concerns a product known as \u201chealth care sharing ministries\u201d that may be marketed to consumers shopping for a health plan. In a Health Care Sharing Ministry (HCSM), \u201cmembers follow a common set of religious or ethical beliefs and make monthly payments to help pay the qualifying medical expenses of other members,\u201d according to the <a href=\"https://www.commonwealthfund.org/about-us/foundation-history\">Commonwealth Fund</a>, a nonpartisan health policy organization.</p><p>It sounds like health insurance. And to someone on a budget, it likely sounds like a good deal, with monthly payments often less, perhaps substantially so, than the monthly premiums for insurance sold through <a href=\"https://www.mnsure.org/\">MNsure</a> and other trusted <a href=\"https://www.healthcare.gov/\">marketplaces</a>.</p><p>But the <a href=\"https://content.naic.org/\">National Association of Insurance Commissioners</a> has <a href=\"https://content.naic.org/article/not-all-products-are-health-insurance-health-care-sharing-ministries-discount-plans-and-risk-sharing\">long cautioned</a> that health care ministry plans \u201care not insurance.\u201d The consumer protections provided by the Affordable Care Act don\u2019t apply, and in some states, ministries may fall between regulatory cracks.</p><p>That can mean big problems. \u201cHCSMs are under no obligations to pay members\u2019 claims,\u201d Commonwealth said in a <a href=\"https://www.commonwealthfund.org/blog/2023/health-care-sharing-ministries-leave-consumers-unpaid-medical-claims\">new warning</a> last week. Coverage for pre-existing conditions such as cancer, diabetes or asthma may be excluded. So might be other needs, such as preventive care or mental health treatment. In contrast, traditional medical plans \u201cmust cover essential health benefits and all pre-existing conditions.\u201d</p><p>The regulatory gray zone in which HCSMs operate has provided little visibility into their operations. But in 2022, Colorado legislators <a href=\"https://leg.colorado.gov/bills/hb22-1269\">passed a measure</a> requiring the state to collect data on them. State regulators have issued two yearly reports since then. Open enrollment is a smart time to highlight the findings:</p><ul><p>1. In 2021, nearly 68,000 Colorado residents were enrolled in an HCSM. That\u2019s about 30% of those who bought insurance in the state on their own that year, an alarming number.</p><p>2. The yearly medical claims far exceeded what the HCSMs paid out \u2014 $362 million in medical claims were submitted, while $97 million in fees were collected \u2014 enough to pay for 28% of members\u2019 medical costs. HCSMs contend that the $362 million included duplicate and ineligible charges and didn\u2019t reflect discounts or what members had agreed to pay. But even when adjusting this sum to reflect that, the amount collected by HCSMs only covered 74% of total eligible share requests. Translation: Members are at risk for significant out-of-pocket medical costs.</p><p>3. Many HCSMs reported excluding important types of medical claims, such as those for mental health and alcohol use disorders, ADHD treatments, contraceptives or prescription drugs for chronic conditions. In addition, some excluded or limited maternity care unless the pregnant woman belonged to a certain membership tier (one likely more expensive) for a required time.</p><p>4. Members in some HCSMs had to petition clinics or hospitals to write off or discount medical care, or request charity care or government assistance before the organization would pay the bill.</p></ul><p>A recent Commonwealth analysis of the Colorado data adds further troubling perspective. One HCSM recently surveyed members, and found that 42% of them had incomes below 200% of federal poverty guidelines. That means they probably could have qualified for medical assistance programs or Affordable Care Act financial subsidies. Either could provide low-cost or no-cost coverage without the gaping benefit loopholes.</p><p>There are HCSMs operating in Minnesota. On Monday, the state Department of Commerce advised \u201cconsumers seeking affordable insurance options to research legitimate plans available through MNsure.\u201d Officials also noted that the agency \u201cdoes have the ability to take enforcement action should an unlicensed entity engage in the business of insurance.\u201d</p><p>Consumers, as always, should be on guard during open enrollment, which <a href=\"https://www.mnsure.org/new-customers/enrollment-deadlines/open-enrollment/index.jsp\">began Nov. 1 and runs through Jan. 15</a>. Minnesotans are also welcome to file complaints with Commerce about insurance or insurance-like products. They can <a href=\"https://mn.gov/commerce/consumer/file-a-complaint/#portal\">file a complaint online</a>, via email at <a href=\"mailto:consumer.protection@state.mn.us\">consumer.protection@state.mn.us</a> or call 651-539-1600.</p><p>___</p><p>Mankato Free Press. November 19, 2023.</p><p>Editorial: Transparency: BCA must clear public records bottleneck</p><p>It would be troubling enough if the state Bureau of Criminal Apprehension was not able to provide public records to a family of a victim of a police shooting. But to not provide records on five police shootings is more than concerning.</p><p>The five families of victims have filed a lawsuit against the BCA claiming it has violated the Minnesota Data Practices Act. The case seems straightforward in favor of the plaintiffs if the investigations are indeed \u201cinactive\u201d or complete. State law requires release of the information in those cases.</p><p>But the BCA told The Free Press Friday that it will release the information to the families as soon as possible after it has reviewed \u201cvoluminous\u201d reports, body cam, dashcam and surveillance footage and images because by law it must remove information not considered public data.</p><p>A BCA spokesperson wrote in an email to The Free Press: \u201cThe BCA is committed to providing information to families and the public as quickly as possible, while ensuring the protection of information that we cannot release under Minnesota law.\u201d</p><p>The cases have been closed and no charges were brought against any police officer, but the fact of closure, according to Minnesota law, requires police agencies to release records of the investigation to the public with few exceptions. Plaintiffs argued the BCA is in violation of the Data Practices Act because they were not supplied information on their cases in 10 days after requesting the information.</p><p>All cases have been closed for months,and one family has been waiting three years for their report. That\u2019s significant in that the statute of limitations for a wrongful death case in Minnesota is three years.</p><p>The cases involve deaths by police shootings of Dolal Idd, Zachary Shogren, Okwan Sims, Tekle Sunberg and Brent Alsleben. The families held a press conference Thursday at the Ramsey County Courthouse to announce the lawsuit.</p><p>The BCA is a major law enforcement agency with significant power in Minnesota. It takes over many serious criminal investigations across Minnesota that smaller agencies can\u2019t handle.</p><p>The agency formed a special use of force team after the George Floyd murder that is an independent team of 13 investigators and scientists that are charged with putting together evidence for cases within 60 days. The officers are only assigned use of force cases and do not interact with other police agencies or work on cases with other BCA agents. That\u2019s a sound way to handle these cases, but the delays with data practices requests is troubling.</p><p>The volume of evidence in these cases can be substantial, especially with review hours of videotape from body cams and other webcams.</p><p>But the families say they\u2019ve been told by the BCA they\u2019re too busy or don\u2019t have the time. That\u2019s not a good reason. If the BCA needs more resources and more investigators to get families information in a timely manner, the Legislature and the governor should provide those resources.</p><p>The suit will be one of the first of its kind against the BCA and a judge will rule on whether the information should be released. But the public release of the information is critical not only so the families can understand what happened, but so the public can scrutinize police activity as well.</p><p>END</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/060a0179e9c573ba4efb76109a5ac2af",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 3,
+            "reason": "The document contains two editorials, one of which is highly relevant to the topic of health. The first editorial discusses 'health care sharing ministries' and their risks compared to traditional health insurance, which is directly related to health. It provides detailed information about the pitfalls of these ministries, regulatory issues, and advice for consumers during open enrollment. The second editorial, however, is about transparency and public records related to police shootings, which is not relevant to the topic of health. Given that half of the document is highly relevant and the other half is not relevant at all, a balanced rating is appropriate."
+        }
+    }
+}

@@ -1,0 +1,207 @@
+﻿{
+    "altids": {
+        "itemid": "331a8386f4efa5115bcb30afcf68708f",
+        "etag": "331a8386f4efa5115bcb30afcf68708f_0a2aza0c0",
+        "friendlykey": "694357057446",
+        "referenceid": "ME--Maine Shield Law"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2024-04-23T20:05:25Z",
+    "firstcreated": "2024-04-23T20:05:24Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "ME--Maine Shield Law",
+    "headline": "Maine's governor signs bill to protect providers of abortion, gender-affirming care",
+    "headline_extended": "Maine\u2019s Democratic governor has signed a bill designed to protect providers of abortion and gender-affirming care from legal action brought by other states",
+    "slugline": "AP-ME--Maine Shield Law",
+    "description_summary": "Maine\u2019s Democratic governor has signed a bill designed to protect providers of abortion and gender-affirming care from legal action brought by other states. Gov. Janet Mills signed the proposal after the Democratic-controlled Maine Legislature approved it earlier in the month. The state joins more than a dozen others that protect medical providers from out-of-state investigations about abortions. The proposal created a disagreement between Maine Attorney General Aaron Frey and attorney generals in several other states, including Tennessee.",
+    "located": "AUGUSTA, Maine",
+    "datelinelocation": {
+        "city": "Augusta",
+        "countryareacode": "ME",
+        "countryareaname": "Maine",
+        "countrycode": "USA",
+        "countryname": "United States",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                -69.77949,
+                44.31062
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "Maine shield law abortion"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "person": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "4a958288c5994ffca266f1e346eda07d",
+            "name": "Janet Mills",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "POLITICIAN",
+                "PERSON"
+            ],
+            "relevance": 45
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86aad5207dac100488ecba7fa5283c3e",
+            "name": "Politics",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 46
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e22e35087de410048fc2df092526b43e",
+            "name": "Abortion",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 62
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "570831e088701004882deb2e0e616f0b",
+            "name": "Gender",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86c1b8807dac10048990ba7fa5283c3e",
+            "name": "Legislation",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 33
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "8d2caa7082b3100484b8df092526b43e",
+            "name": "Maine",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -69.24977,
+                    45.50032
+                ]
+            },
+            "relevance": 91,
+            "parentnames": [
+                "United States"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "8d2caa7082b3100484b8df092526b43e",
+            "name": "Maine",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "body_nitf": "<p>AUGUSTA, Maine (AP) \u2014 Maine's Democratic governor has signed a bill designed to protect providers of <a href=\"https://apnews.com/article/maine-abortion-transgender-shield-law-9e1d7ca3d80089ff200ada9304813598\">abortion and gender-affirming care</a> from legal action brought by other states.</p><p>Gov. Janet Mills signed the proposal after the Democratic-controlled Maine Legislature approved it earlier in the month. The state joins more than a dozen others that protect medical providers from out-of-state investigations about abortions.</p><p>The proposal created a disagreement between Maine Attorney General Aaron Frey and attorneys general in several other states, including Tennessee. The out-of-state attorneys general threatened legal action if Maine proceeded with its law. Frey dismissed the threats as \u201cmeritless.\u201d</p><p>The proposal also caused considerable debate in Maine, where Republicans opposed it.</p><p>Representatives for Planned Parenthood Maine Action Fund said Tuesday the signing of the bill was a major step for reproductive freedom in Maine. \u201cMaine remains a safe harbor for sexual and reproductive health care, for providers and the patients they serve,\u201d from Lisa Margulies, vice president of public affairs for Planned Parenthood Maine Action Fund.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/maine-shield-law-abortion-331a8386f4efa5115bcb30afcf68708f",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 5,
+            "reason": "The document discusses a new bill signed by Maine's governor that protects providers of abortion and gender-affirming care from legal action by other states. This topic is directly related to health as it involves medical care and legal protections for healthcare providers. The document also mentions the impact on reproductive freedom and healthcare services, which are key aspects of health."
+        }
+    }
+}

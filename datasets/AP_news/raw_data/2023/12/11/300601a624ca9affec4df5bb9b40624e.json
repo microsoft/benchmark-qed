@@ -1,0 +1,263 @@
+﻿{
+    "altids": {
+        "itemid": "300601a624ca9affec4df5bb9b40624e",
+        "etag": "300601a624ca9affec4df5bb9b40624e_0a4aza0c0",
+        "friendlykey": "23563323130",
+        "referenceid": "AF--Africa-Anthrax Outbreaks"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2023-12-11T20:41:05Z",
+    "firstcreated": "2023-12-11T20:41:04Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "ednote": "Eds: UPDATES: With AP Photos.",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "AF--Africa-Anthrax Outbreaks",
+    "headline": "5 countries in East and southern Africa have anthrax outbreaks, WHO says, with 20 deaths reported",
+    "headline_extended": "The World Health Organization says five countries in East and southern Africa are in the middle of outbreaks of the anthrax disease with more than 1,100 suspected cases and 20 deaths this year",
+    "slugline": "BC-AF--Africa-Anthrax Outbreaks",
+    "description_summary": "The World Health Organization says five countries in East and southern Africa are in the middle of outbreaks of the anthrax disease with more than 1,100 suspected cases and 20 deaths this year. A total of 1,166 suspected cases have been reported in Kenya, Malawi, Uganda, Zambia and Zimbabwe. Thirty-seven cases have been confirmed by laboratory tests. WHO said Monday that the five countries have seasonal outbreaks every year. But Zambia was experiencing its worst since 2011 and Malawi reported its first human case this year. Uganda had 13 deaths. Anthrax usually affects livestock like cattle, sheep and goats as well as wild herbivores. Humans can be infected if they are exposed to the animals or contaminated animal products.",
+    "located": "CAPE TOWN, South Africa",
+    "datelinelocation": {
+        "city": "Cape Town",
+        "countrycode": "ZAF",
+        "countryname": "South Africa",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                18.42322,
+                -33.92584
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2023 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "africa anthrax outbreaks deaths world health organization"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "i",
+            "name": "i"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "9cce666bb29344b8ba61f3732d971d32",
+            "name": "Disease outbreaks",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 89
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "084c50287f00100481bcf571351eed07",
+            "name": "Anthrax",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 81
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 71
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Editorial",
+            "editorial_subject": "Health",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "bb2d2c5f441a452cb24bb511a2ab5eea",
+            "name": "World news",
+            "creator": "Editorial",
+            "editorial_subject": "World news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "661ff2007d5b100482bbc076b8e3055c",
+            "name": "Zambia",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661812607d5b100481f1c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "01f56e0e654841eca2e69bf2cbcc0526",
+                "name": "Nation"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    30,
+                    -15
+                ]
+            },
+            "relevance": 57,
+            "parentnames": [
+                "Africa"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "661ff2007d5b100482b7c076b8e3055c",
+            "name": "Malawi",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661812607d5b100481f1c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "01f56e0e654841eca2e69bf2cbcc0526",
+                "name": "Nation"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    34,
+                    -13.5
+                ]
+            },
+            "relevance": 37,
+            "parentnames": [
+                "Africa"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "661be2f07d5b1004824ec076b8e3055c",
+            "name": "Uganda",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661812607d5b100481f1c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "01f56e0e654841eca2e69bf2cbcc0526",
+                "name": "Nation"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    33,
+                    2
+                ]
+            },
+            "relevance": 37,
+            "parentnames": [
+                "Africa"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "661812607d5b100481f1c076b8e3055c",
+            "name": "Africa",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "associations": {
+        "1": {
+            "altids": {
+                "itemid": "7fc5138d028c46ec801015d00e10f640"
+            },
+            "type": "picture"
+        }
+    },
+    "body_nitf": "<p>CAPE TOWN, South Africa (AP) \u2014 Five countries in East and southern Africa are in the middle of outbreaks of the anthrax disease, with more than 1,100 suspected cases and 20 deaths this year, the World Health Organization said Monday.</p><p>A total of 1,166 suspected cases had been reported in Kenya, Malawi, Uganda, Zambia and Zimbabwe. Thirty-seven cases had been confirmed by laboratory tests, WHO said. It said the five countries have seasonal outbreaks every year, but Zambia was experiencing its worst since 2011 and Malawi reported its first human case this year. Uganda had reported 13 deaths.</p><p>Anthrax usually affects livestock like cattle, sheep and goats, as well as wild herbivores. Humans can be infected if they are exposed to the animals or contaminated animal products. Anthrax isn't generally considered to be contagious between humans, although there have been rare cases of person-to-person transmission, WHO says.</p><p>Anthrax is caused by spore-forming bacteria and is sometimes associated with the weaponized version used in <a href=\"https://apnews.com/general-news-domestic-news-domestic-news-0cec9a579218493a9beaaae7e83f2ae8\">the 2001 attacks</a> in the United States, when five people died and 17 others fell sick after being exposed to anthrax spores in letters sent through the mail.</p><p>Anthrax bacteria also occurs naturally in soil.</p><p>In a separate assessment of the Zambia outbreak, which was the most concerning, WHO said that 684 suspected cases had been reported in the southern African nation as of Nov. 20, with four deaths. Human cases of anthrax had been reported in nine out of Zambia's 10 provinces. In one instance, 26 people were suspected of contracting the disease from eating contaminated hippopotamus meat.</p><p>WHO said there was a high risk that the Zambian outbreak would spread to neighboring countries.</p><p>The outbreaks in all five countries were \u201clikely being driven by multiple factors, including climatic shocks, food insecurity, low-risk perception and exposure to the disease through handling the meat of infected animals,\u201d WHO said.</p><p>___</p><p>AP Africa news: <a href=\"https://apnews.com/hub/africa\">https://apnews.com/hub/africa</a></p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/africa-anthrax-outbreaks-deaths-world-health-organization-300601a624ca9affec4df5bb9b40624e",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 5,
+            "reason": "The document discusses an ongoing health crisis involving anthrax outbreaks in five countries in East and southern Africa. It provides detailed information on the number of cases, deaths, and the potential causes and risks associated with the outbreaks. The document also includes information on how anthrax affects both animals and humans, and mentions the World Health Organization's involvement. All these points are directly related to the topic of health."
+        }
+    }
+}

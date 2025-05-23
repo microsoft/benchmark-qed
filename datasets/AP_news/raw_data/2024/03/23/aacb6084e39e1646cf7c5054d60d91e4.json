@@ -1,0 +1,206 @@
+﻿{
+    "altids": {
+        "itemid": "aacb6084e39e1646cf7c5054d60d91e4",
+        "etag": "aacb6084e39e1646cf7c5054d60d91e4_0a4aza0c0",
+        "friendlykey": "365114804485",
+        "referenceid": "EU--Greece-Contraband Medicine"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2024-03-23T22:26:57Z",
+    "firstcreated": "2024-03-23T22:26:56Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "EU--Greece-Contraband Medicine",
+    "headline": "Greek authorities seize 3.75 million capsules of contraband nerve pain drug pregabalin",
+    "headline_extended": "Greek authorities have seized more than three tons of the prescription nerve pain drug pregabalin and impounded a yacht registered in the United Kingdom",
+    "slugline": "AP-EU--Greece-Contraband Medicine",
+    "description_summary": "Greek authorities have seized more than three tons of the prescription nerve pain drug pregabalin and impounded a yacht registered in the United Kingdom. Greece's coast guard says the yacht was raided Thursday night while anchored in the port of Lavrio, 45 miles southeast of Athens. Coast guard officers found 3.75 million capsules of Nervigesic, a brand name used by Indian pharmaceuticals firm HAB Pharma for pregabalin. The contraband drug was packed in 500 cardboard boxes weighing 3.15 tons. Pregabalin is used to treat nerve pain caused by a variety of conditions, such as diabetes and shingles, as well as a type of seizure.",
+    "located": "ATHENS, Greece",
+    "datelinelocation": {
+        "city": "Athens",
+        "countrycode": "GRC",
+        "countryname": "Greece",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                23.72784,
+                37.98376
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "Greece drug seizure pregabalin yacht"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "i",
+            "name": "i"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "d8e79a587f00100483bff571351eed07",
+            "name": "Pain management",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 91
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 72
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "bb2d2c5f441a452cb24bb511a2ab5eea",
+            "name": "World news",
+            "creator": "Editorial",
+            "editorial_subject": "World news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f5956db87efd100483d2df092526b43e",
+            "name": "Athens",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "6620e8187d5b100482d5c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "9d26a20b35f0484a891740f8189d4c7b",
+                "name": "City"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    23.71622,
+                    37.97945
+                ]
+            },
+            "relevance": 31,
+            "parentnames": [
+                "Greece"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "6620e8187d5b100482d5c076b8e3055c",
+            "name": "Greece",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661850e07d5b100481f4c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "01f56e0e654841eca2e69bf2cbcc0526",
+                "name": "Nation"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    22,
+                    39
+                ]
+            },
+            "relevance": 48,
+            "parentnames": [
+                "Europe"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "661850e07d5b100481f4c076b8e3055c",
+            "name": "Europe",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "body_nitf": "<p>ATHENS, Greece (AP) \u2014 Greek authorities said Saturday they seized more than three tons of the prescription nerve pain drug pregabalin and impounded a yacht registered in the United Kingdom.</p><p>The operation took place Thursday night at the port of Lavrio, 70 kilometers (43 miles) southeast of Athens, the coast guard said.</p><p>On the yacht, the coast guard found 3.75 million capsules of Nervigesic, a brand name used by Indian pharmaceuticals firm HAB Pharma for pregabalin. The capsules were packaged in 500 cardboard boxes weighing nearly 3.15 tons, the statement said.</p><p>Pregabalin is used to treat nerve pain caused by a variety of conditions, such as diabetes and shingles, and also to treat a type of seizure called partial seizure because it has its origin at a single location in the brain.</p><p>The raid was ordered based on information from Greece\u2019s \"National Intelligence Agency about the activity of networks of Egyptian nationals in Greek territory,\u201d the statement said.</p><p>The yacht and its contents remain at the Lavrio port while local authorities conduct an investigation, the coast guard said.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/greece-drug-seizure-pregabalin-yacht-aacb6084e39e1646cf7c5054d60d91e4",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 3,
+            "reason": "The document discusses the seizure of a large quantity of the nerve pain drug pregabalin by Greek authorities. While the primary focus is on the law enforcement action and the details of the seizure, the document does provide some information about pregabalin, including its uses for treating nerve pain and seizures. This information is relevant to the topic of health, but the main emphasis is on the contraband aspect rather than health implications or medical information."
+        }
+    }
+}

@@ -1,0 +1,221 @@
+﻿{
+    "altids": {
+        "itemid": "e6ecd39713b4e8d5afcae2eca0076815",
+        "etag": "e6ecd39713b4e8d5afcae2eca0076815_0a2aza0c0",
+        "friendlykey": "463595394777",
+        "referenceid": "OH--Editorial Rdp"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Opinion",
+    "language": "en",
+    "versioncreated": "2024-03-11T18:53:28Z",
+    "firstcreated": "2024-03-11T18:53:27Z",
+    "editorialrole": "FullStory",
+    "fixture": {
+        "code": "21ea4067bb274c3b805353fb2b99ba70",
+        "name": "Editorial Roundup"
+    },
+    "pubstatus": "usable",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "OH--Editorial Rdp",
+    "headline": "Editorial Roundup: Ohio",
+    "slugline": "AP-OH--Editorial Rdp",
+    "bylines": [
+        {
+            "by": "By The Associated Press"
+        }
+    ],
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "Editorial Rdp"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "person": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "06d316b4061d4bd097c5de777c7192a9",
+            "name": "Mike DeWine",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "GOVERNMENT_FIGURE",
+                "PERSON"
+            ],
+            "relevance": 46
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86b3a6f07dac10048921ba7fa5283c3e",
+            "name": "Redistricting",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 68
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "23dc8e40889510048a79cb8225d5863e",
+            "name": "Reproductive rights",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 49
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e22e35087de410048fc2df092526b43e",
+            "name": "Abortion",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 49
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86aad5207dac100488ecba7fa5283c3e",
+            "name": "Politics",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 62
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "organisation": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "d4b82a78857310048a38ff2260dd383e",
+            "name": "United States Senate",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 33
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "bf6e2e80760d10048f8ae6e7a0f4673e",
+            "name": "U.S. Republican Party",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 43
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "dcb000c082c610048843df092526b43e",
+            "name": "Ohio",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -83.00018,
+                    40.25034
+                ]
+            },
+            "relevance": 92,
+            "parentnames": [
+                "United States"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "dcb000c082c610048843df092526b43e",
+            "name": "Ohio",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "body_nitf": "<p>Akron Beacon Journal. March 8, 2024.</p><p>Editorial: Think lawmakers are ignoring you? Speak up at the polls</p><p>We the people are sick of our voices being ignored.</p><p>It seems some Ohio elected officials have decided \u2014 again and again \u2014 that the will of the voters is subject to politicians\u2019 personal beliefs and agendas.</p><p>Keep this in mind, voters, as you head to the polls this March and November to elect who represents you.</p><p>Case in point: The hot-button issue of abortion and whether it should be legal in Ohio.</p><p>Last November, Ohioans voted to protect continued access to abortion and other reproductive rights, <a href=\"https://www.beaconjournal.com/story/news/politics/2023/11/08/why-ohio-issue-1-abortion-rights-won-what-it-means-for-future-ohio-elections/71500219007/\">approving Issue 1 by a convincing 57% to 43% ratio</a>.</p><p>It appeared the voters had spoken with their approval of the constitutional amendment.</p><p>Perhaps Ohio Attorney General David Yost has selective hearing?</p><p>In a court filing last month, <a href=\"https://www.beaconjournal.com/story/news/politics/2024/02/02/ohio-ag-says-provisions-in-abortion-ban-could-be-constitutional/71972386007/\">Yost\u2019s office argued</a> that all aspects of Ohio\u2019s ban on most abortions might not be tossed out even though <a href=\"https://www.beaconjournal.com/story/news/politics/elections/2023/11/06/ohio-issue-1-election-results-voters-decide-tuesday-on-abortion-ballot-issue/71226364007/\">voters approved new language protecting abortion access</a>. That ban was in place for a short time after Roe v. Wade was overturned but subsequently was put on hold by a court injunction.</p><p>It appeared the voters had spoken with their approval of the constitutional amendment.</p><p>Perhaps Ohio Attorney General David Yost has selective hearing?</p><p>In a court filing last month, <a href=\"https://www.beaconjournal.com/story/news/politics/2024/02/02/ohio-ag-says-provisions-in-abortion-ban-could-be-constitutional/71972386007/\">Yost\u2019s office argued</a> that all aspects of Ohio\u2019s ban on most abortions might not be tossed out even though <a href=\"https://www.beaconjournal.com/story/news/politics/elections/2023/11/06/ohio-issue-1-election-results-voters-decide-tuesday-on-abortion-ballot-issue/71226364007/\">voters approved new language protecting abortion access</a>. That ban was in place for a short time after Roe v. Wade was overturned but subsequently was put on hold by a court injunction.</p><p>This comes after some Republican lawmakers tried \u2014 unsuccessfully \u2014 to make it harder for citizens to pass constitutional amendments in the first place</p><p>Last year\u2019s first Issue 1, appearing on the August ballot, would have raised the threshold for passing a constitutional amendment in the state from a simple majority to 60%.</p><p>The initiative \u2014 an obvious attempt to head off efforts to legalize abortion in the state \u2014 failed by 57%.</p><p>Along with paving the way for legalized abortion in Ohio, the failure of Issue 1 last August also opened the door for future ballot initiatives to raise the state\u2019s minimum wage and undo gerrymandering.</p><p>Of course, gerrymandering is another example of how the will of the voters has been largely ignored.</p><p>In 2018, Ohioans approved another state constitutional amendment to increase minority party representation on Ohio\u2019s redistricting commission and establish new requirements for district boundaries.</p><p>The goal was to get rid of gerrymandering, the manipulation of legislative and congressional district lines for political purposes. In recent years, it\u2019s been used to make sure the GOP keeps its majority status.</p><p>We\u2019ve seen the negative results of gerrymandering firsthand in our region. Summit County, for example, was split among four congressional districts from 2012 to 2022, leaving it without effective or cohesive representation in Congress.</p><p>The Ohio Redistricting Commission failed to achieve maps that passed constitutional muster, due to gerrymandering identified in multiple Ohio Supreme Court rulings. Eventually, the state high court OK\u2019d a version approved by Democratic and Republican lawmakers. (Democrats held their noses and supported the new congressional maps, but only because it as the best of bad options.)</p><p>The end result leaves a lot to be desired. The latest maps give Republicans an advantage in at least 62% of House seats and 70% of Senate districts \u2014 numbers that don\u2019t match the statewide voting preferences of Ohioans, about 54% of whom picked GOP candidates and 45% picked Democratic ones between 2012 and 2020.</p><p>There\u2019s an effort underway for yet another statewide ballot initiative to change that. The ballot initiative would replace the current Ohio Redistricting Commission <a href=\"https://ballotpedia.org/Ohio_Citizens_Redistricting_Commission_Amendment_(2024)\">with a citizen-led redistricting commission.</a></p><p>And what happened to legalized marijuana in Ohio? Voters approved recreational marijuana at the polls in November \u2014 but lawmakers immediately began trying to change the rules.</p><p>No wonder some 65% of Americans say they \u201coften\u201d or \u201calways\u201d feel exhausted when thinking about politics, according to a <a href=\"https://www.pewresearch.org/politics/2023/09/19/americans-dismal-views-of-the-nations-politics/\">recent Pew Research Center poll.</a></p><p>It\u2019s easy to feel defeated and become apathetic. But that\u2019s not the answer.</p><p>As the March primary approaches, do your research. Make sure you are electing candidates who will listen.</p><p>Your one voice can speak volumes at the polls.</p><p>___</p><p>Toledo Blade. March 8, 2024</p><p>Editorial: Unnecessary burn</p><p>Norfolk Southern railroad already had extensive blame for the derailment and subsequent release of toxic chemicals from the accident in East Palestine, Ohio, one year ago.</p><p>Following a hearing last week, it appears increasingly likely that the intentional torching of the five cars containing vinyl chloride was unnecessary \u2014 and for reasons that Norfolk Southern\u2019s experts on the scene knew about but did not relay to the incident commander and Gov. Mike DeWine.</p><p>Under questioning in a Senate committee by U.S. Sen. J.D. Vance (R., Ohio) on Wednesday, the head of the National Transportation Safety Board said the burning of the contents of the derailed cars could have been avoided.</p><p>Jennifer Homendy said the shipper\u2019s experts were on the scene and had explained to Norfolk Southern\u2019s contractors the five rail cars were cooling and were not in increasing danger of exploding.</p><p>Mr. Vance raised the topic during a meeting of the Senate Committee on Commerce, Science, & Transportation, diverting the committee temporarily from the subject of the door plug that fell out of an Alaska Airlines aircraft.</p><p>In direct language, Ms. Homendy said that contractors employed by the Norfolk Southern rail company \u201clacked the scientific background\u201d to decide that a vent-and-burn was necessary to head off a chemical reaction that could cause the cars to explode. She testified that a better option would have been to allow the tank cars time to cool down.</p><p>Mr. Vance noted that very soon after the cars stopped burning, they were moved aside and rail traffic started to move again.</p><p>\u201cThis town very well may have been poisoned to facilitate the rapid movement of freight,\u201d he said.</p><p>The Norfolk Southern train crossed northwest Ohio from its starting point at the border of Missouri and Illinois. The crew involved in the derailment took operations in Toledo and passed across northern Ohio before derailing in East Palestine near the Pennsylvania border. Dozens of Ohio communities including Toledo could have been the site of the optional chemical burn.</p><p>It appears that the OxyVinyls shipping company had representatives on scene who told Norfolk Southern\u2019s contractors that the cars were cooling and not in danger of exploding.</p><p>If Governor DeWine and the incident commander, East Palestine Fire Chief Keith Drabick, had been given this information they might not have set off the blaze that filled the sky with toxic smoke.</p><p>We already knew that Norfolk-Southern had failed to detect the burning wheel axle that caused the derailment in East Palestine. The derailment and the initial toxic leak from those cars was bad enough. The burning of the vinyl chloride multiplied the environmental impact of the disaster.</p><p>We have observed that Norfolk Southern has been taking appropriate responsibility for the disaster. That was before the public has learned that Norfolk Southern\u2019s blame didn\u2019t end with the faulty wheel bearing but apparently included concealing of critically important information just to get the trains running again.</p><p>___</p><p>Youngstown Vindicator. March 10, 2024.</p><p>Editorial: OneOhio must hold itself accountable with payouts</p><p>Ohio Gov. Mike DeWine said he chose Alisha Nelson to be executive director of OneOhio \u201cbecause I know that she shares my vision of intentionally using these settlement funds to help Ohioans struggling with substance use disorder for years to come.\u201d</p><p>Never mind what that says about the suspected motives of other potential candidates, it sounds as though DeWine believes OneOhio is under the right leadership to truly make a difference for Buckeye State residents.</p><p>Doing so will be a challenge and one that must be overcome in full view of the taxpayers. Having already been questioned on the matter once, the folks at OneOhio must remember they are \u2014 for all intents and purposes \u2014 an agency doing public business with public money. They are a public entity and as such must be transparent in their dealings.</p><p>Those dealings begin with the application period for organizations hoping to receive some of the $51 million to be allocated during the 2024 grant cycle. Region 7, which comprises Trumbull and Mahoning counties, is eligible for more than $2.8 million.</p><p>\u201cAfter all this work, we\u2019re finally seeing the dollars coming into the communities to help deal with this crisis,\u201d said Region 7 Board President Duane Piccirilli when then OneOhio Recovery Foundation announced its initial grant application cycle.</p><p>Among the parameters to be enforced by OneOhio is that all proposed programs and services must be \u201cevidence-based, forward-looking strategies for prevention, treatment, (and) recovery support services.\u201d</p><p>Eligible projects may span one, two or three years and must be regionally focused. Registration started March 4 and applications are due by May 3.</p><p>Those with ideas for helping lift Ohio out of the grip of the substance abuse epidemic that has haunted it for more than a decade should not hesitate to apply.</p><p>And OneOhio must hold itself accountable \u2014 to taxpayers, to the victims of that epidemic, to Ohio. Money must be given only to those programs that show the highest potential for helping us heal, and preventing the next wave.</p><p>___</p><p>Marietta Times. March 8, 2024.</p><p>Editorial: WCCC grants good for us all</p><p>Across Ohio, career and technical education providers sought a piece of the $67.7 million the state was handing out in the form of Career Technical Education Equipment grants. Among those receiving a grant was the Washington County Career Center, which has gotten a whopping $2.5 million.</p><p>\u201cInvesting in our schools is an investment into our students\u2019 futures,\u201d said Gov. Mike DeWine. \u201cAllowing more schools to purchase equipment so they can train more students will set them and our state up for success.\u201d</p><p>Here, that investment will be used to purchase updated equipment that can help prepare students for careers in the real world.</p><p>\u201cWe are beyond excited to announce that the Washington County Career Center (WCCC) has been awarded $2.5 million,\u201d the school announced on social media. \u201cThis remarkable achievement underscores the WCCC\u2019s role as a leader in providing exceptional career and technical education within our community.\u201d</p><p>It also underscores the success of grant-writers and officials working tirelessly to find more ways to support the career center.</p><p>As the money goes to training equipment and classroom and lab renovation, WCCC Superintendent Tony Huffman talked about what it will mean for the future.</p><p>\u201cIt\u2019s very fortunate for our students and our local workforce,\u201d he said. \u201d \u2026 One of our goals here is to consolidate all of our medical programs into one area of campus.\u201d</p><p>Students in other programs \u2014 welding, for example \u2014 will benefit, too.</p><p>And if they do, so will we.</p><p>Congratulations to those who worked to bring this grant to WCCC.</p><p>END</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/e6ecd39713b4e8d5afcae2eca0076815",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 3,
+            "reason": "The document contains multiple editorials from different Ohio newspapers, covering a range of topics. Only a portion of the document is relevant to health, specifically the sections discussing abortion rights, substance use disorder, and the impact of toxic chemical release from a train derailment. However, the majority of the content focuses on political issues, gerrymandering, and educational grants, which are not directly related to health."
+        }
+    }
+}

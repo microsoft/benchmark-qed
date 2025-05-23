@@ -1,0 +1,205 @@
+﻿{
+    "altids": {
+        "itemid": "0a2512e7be762a4baad38514f80a8703",
+        "etag": "0a2512e7be762a4baad38514f80a8703_0a2aza0c0",
+        "friendlykey": "459601620804",
+        "referenceid": "OH--Editorial Rdp"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Opinion",
+    "language": "en",
+    "versioncreated": "2024-04-22T11:10:40Z",
+    "firstcreated": "2024-04-21T21:34:48Z",
+    "editorialrole": "FullStory",
+    "fixture": {
+        "code": "21ea4067bb274c3b805353fb2b99ba70",
+        "name": "Editorial Roundup"
+    },
+    "pubstatus": "usable",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "OH--Editorial Rdp",
+    "headline": "Editorial Roundup: Ohio",
+    "slugline": "AP-OH--Editorial Rdp",
+    "bylines": [
+        {
+            "by": "By The Associated Press"
+        }
+    ],
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "Editorial Rdp"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "36f9833daec54de29abab6394feacafd",
+            "name": "Health disparities",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 87
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86aad5207dac100488ecba7fa5283c3e",
+            "name": "Politics",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 87
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "organisation": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "c05dca58760d10048f93e6e7a0f4673e",
+            "name": "U.S. Democratic Party",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 47
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "bf6e2e80760d10048f8ae6e7a0f4673e",
+            "name": "U.S. Republican Party",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 65
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "fbb9f091b5c44e13abaa3dfcf44274b3",
+            "name": "Peru government",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 56
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e47ea2045c104525b9efa8e6a41c6805",
+            "name": "Ohio state government",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 65
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "dcb000c082c610048843df092526b43e",
+            "name": "Ohio",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -83.00018,
+                    40.25034
+                ]
+            },
+            "relevance": 89,
+            "parentnames": [
+                "United States"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "dcb000c082c610048843df092526b43e",
+            "name": "Ohio",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "body_nitf": "<p>Marietta Times. April 19, 2024.</p><p>Editorial: Housing urgency</p><p>Most Buckeye State residents have understood Ohio has a big housing problem for years now. For those seeking a house or apartment, the crisis is unavoidable. But state lawmakers are just getting around to a sense of urgency on the matter.</p><p>The Ohio Senate Select Committee on Housing released a report Wednesday that includes 93 pages on \u201cHousing Reimagined.\u201d According to WBNS, there are 23 recommendations outlined for both short-term and long-term fixes.</p><p>\u201cWe can no longer be casual about this issue,\u201d said Committee Chair Sen. Michele Reynolds, R-Dist. 3. \u201cIt is a priority and we need to make it a priority because we\u2019re facing challenges that are increasingly getting worse.\u201d</p><p>Ideas for tackling the crisis that has kept mortgage and rental rates high include creating a housing dashboard to increase transparency about pricing, rates, housing inventory and foreclosures; encouraging alternatives such as modular or tiny homes; reviewing consumer protections in the home-buying process; updating codes for renters and looking at property taxes and incentives for builders, according to WBNS.</p><p>It\u2019s a great start, as long as lawmakers and other public officials keep up the momentum and remain determined to reverse this crisis.</p><p>\u201cTo be categorically clear, we must recognize that there is still work to be done. Together we can build a future where every Ohioan has a place to call home,\u201d said state Sen. Hearcel Craig, D-Dist. 15, according to WBNS.</p><p>It\u2019s a wonderful thought. But it will take cooperation from communities, counties, regional development authorities \u2014 maybe even financial institutions \u2014 to make it happen. It is certainly an effort for which it is worth pulling together. The question is: Can we?</p><p>___</p><p>Sandusky Register. April 20, 2024.</p><p>Editorial: Focus on protecting kids</p><p>It\u2019s downright frustrating that someone from somewhere would make a hoax call and tell a police dispatcher they intend to shoot up a school. It\u2019s mean and cruel, and intended to make kids scared.</p><p>That has happened, however, in communities across the state and nation. It\u2019s called \u201cswatting,\u201d which means the caller wants to provoke a police response with a false claim that officers are needed at a specific location. This monster is targeting schools.</p><p>So far police and state investigators have been unable to trace any local calls back to a source. It\u2019s \u201cdifficult to track them down. Not impossible,\u201d Hancock County Prosecutor Phillip Riegle said. If a suspect is identified the charges will likely be very serious, he said, felonies that could result in years behind bars.</p><p>Swatting this way is a kind of punishment, somehow, that our kids, who already are too conscious and aware of past school shootings and massacres, must endure.</p><p>Teachers, administrative staffs and other school employees also must endure the stress and concern these crank calls create, and police, too. To a passerby or someone near the school it was startling to see so many police cruisers with sirens and flashers speeding toward our schools. It is good to know they are ready and willing to serve when called. There\u2019s a lot of gratitude for that in our communities.</p><p>Swatting might best be described as a vicious and hateful act, a sickening disruption for students, teachers and staff, police and parents. It is also a felony crime that police and prosecutors say will be pursued once a suspect is found. We hope lawmakers will look for ways to reduce gun violence and restrict people who should not have guns from getting them.</p><p>Children and their frightened parents would be better served if lawmakers focused more on issues of life and death, gun violence, sexual assault rather than micromanaging school professionals and curriculum. Some lawmakers in Ohio and across the nation make clear what they won\u2019t do \u2014 with all due and proper respect to the Second Amendment \u2014 but they never say what they can do to reduce these violent massacres that happen in our schools.</p><p>Ohioans and all Americans deserve safe schools and officeholders who work to improve our schools. It\u2019s not too much to ask.</p><p>___</p><p>Chronicle-Telegram. April 19, 2024.</p><p>Editorial: Tinkering with term limits</p><p>We have never made a secret of our dislike of term limits.</p><p>They limit the options of voters, who are the best equipped to decide when it\u2019s time for a particular lawmaker to go.</p><p>Nor have they worked out the way that voters probably intended when they limited members of the state House and Senate to eight years of service in each chamber. (Lawmakers can serve four consecutive two-year terms in the House and two consecutive four-year terms in the Senate.)</p><p>That\u2019s because lawmakers have proved adept at jumping between chambers when their time in one is up.</p><p>State Rep. Gayle Manning, R-North Ridgeville, and her son, state Sen. Nathan Manning, R-North Ridgeville, are a prime example of that practice. Back in 2018, the elder Manning was approaching the end of her second term in the Senate, where she served as minority whip.</p><p>Rather than retire, she ran for her son\u2019s House seat, while he sought her Senate seat. They both won and have continued to do so ever since. Nathan Manning won a second term in the Senate two years ago, and Gayle Manning is running for her fourth term in the House this year.</p><p>The Mannings aren\u2019t the only state-level politicians who have bounced or tried to bounce from chamber to chamber.</p><p>Senate President Matt Huffman, R-Lima, is trying to do exactly that now as he nears the end of his second Senate term. He\u2019s running for a House seat and already is eyeing a challenge to House Speaker Jason Stephens, R-Kitts Hill, for the speaker\u2019s gavel if he wins. (Stephens is running for reelection to what would be his fourth term.)</p><p>Both men have expressed an openness to eliminating or changing the current term-limit rules. To do so they would need to persuade voters to amend the Ohio Constitution. (Voters approved the amendment imposing term limits in 1992.)</p><p>This isn\u2019t the first time the idea of modifying term limits has come up in Columbus.</p><p>Former Speaker Larry Householder, R-Glenford, was exploring changes to term limits before his career imploded in scandal when the FBI arrested him in connection with a $60 million bribery scheme in 2020. He is now serving a 20-year prison sentence after being convicted of federal corruption charges.</p><p>The Associated Press reported in 2020 that the proposal then under consideration would have imposed a lifetime limit of 16 years of state legislative service.</p><p>Although the idea never made it to the ballot, it conveniently would have allowed existing lawmakers to start the term-limit clock over. Under existing term limits Householder, for instance, would have had to leave the House in 2025, but the proposal would have allowed him to stick around through 2037.</p><p>Stephens said in December that he wasn\u2019t necessarily suggesting the elimination of term limits, but he also pointed out that about one-quarter of lawmakers are freshmen at the start of each new General Assembly, the Statehouse News Bureau reported.</p><p>\u201cYou come in and boom! You\u2019ve got $100 million in budget to figure out in six months. And you don\u2019t even know where the bathrooms are,\u201d Stephens said.</p><p>This, of course, leads to another problem with term limits. Because so many lawmakers are inexperienced, they often rely heavily on staffers to help them navigate the Statehouse. Depending on the staffer, that can be good or bad.</p><p>Worse, some inexperienced lawmakers are more susceptible to lobbyists who know the system, giving outsized power to people whose names are virtually unknown to most Ohioans.</p><p>Huffman has suggested that rather than an end to term limits, lawmakers could be limited to a total of 16 years of service, the Ohio Capital Journal reported. The idea seems to be that rather than jump between chambers, a lawmaker would be able to serve 16 years in one chamber.</p><p>Perhaps that would be a compromise worth exploring, but we aren\u2019t certain if it would do much to improve the functioning of the Statehouse. Thanks to GOP gerrymandering, Republicans hold veto-proof majorities in both chambers.</p><p>Unfortunately, state legislative districts are drawn in such a way that most races are decided in the primary rather than the general election.</p><p>This has allowed Republican lawmakers to pursue their agenda largely without much regard for what anyone other than GOP primary voters think.</p><p>No better example exists of lawmakers\u2019 fealty to right-wing voters than last year\u2019s failed effort to make it more difficult to amend the state Constitution as a way to block approval of an amendment to enshrine abortion and other reproductive rights in the Constitution. About 57 percent of Ohio voters rejected that idea in August and roughly the same percentage backed the abortion-rights amendment in November.</p><p>All of which leads us to the suspicion that the current interest in revisiting term limits is more about protecting the power of certain GOP lawmakers than improving state government.</p><p>If Huffman and Stephens want voters to change how term limits work, they\u2019re going to have to make the case that it would be good for all Ohioans, not just a few lawmakers.</p><p>___</p><p>Youngstown Vindicator. April 15, 2024.</p><p>Editorial: Minority health gaps in Ohio must be closed</p><p>\u201cOf all the forms of inequality, injustice in health is the most shocking and inhumane.\u201d</p><p>\u2014 Dr. Martin Luther King Jr., March 1966</p><p>Fifty-eight years ago last month, the father of America\u2019s civil-rights movement duly lashed out at the widening health gap between white Americans and minorities. Though not as brutal in those days as the billy clubs and attack dogs used to stifle discontent, the long-term pain of inaccessibility to basic health care dealt a harsh blow to the quality of life of blacks and other minorities. It also contributed significantly to the great divide between America\u2019s haves and have-nots.</p><p>Two decades later in 1985, the U.S. Department of Health and Human Services released its landmark report, the Secretary\u2019s Task Force Report on Black and Minority Health, better known as The Heckler Report. It reinforced King\u2019s angst by documenting the prevalence of health disparities among racial and ethnic minorities in the U.S. It called such disparities \u201can affront both to our ideals and to the ongoing genius of American medicine.\u201d</p><p>Today, improvements in technology, standards of living and access to health care have begun to narrow those once colossal gaps. Nonetheless, health inequities remain a stain on our nation. Those disparities, while narrowing, remain substantial.</p><p>According to the U.S. Centers for Disease Control and Prevention, African Americans have a 200% greater likelihood of dying from asthma, a 250% greater chance of dying during pregnancy, 900% greater risk of dying from HIV/AIDS and a 200% greater likelihood of dying from cervical or prostate cancer than do white Americans.</p><p>Close to home in Ohio, black infants are 2.7 times more likely to die than white infants in their first year of life. The rate of perinatal infant mortality (death before seven days old) is even more shocking with white infants dying at a rate of 7.2 per 1,000 live births and the black rate at 32.1, according to Ohio Department of Health data from 2021.</p><p>Locally, Mahoning and Trumbull counties both received grades of \u201cF\u201d from the March of Dimes report for pre-term births in 2023, noting the condition has worsened.</p><p>And though the wide gap between black and white life expectancy has narrowed in many parts of the nation, blacks in general today can expect to live four fewer years than whites, CDC reports.</p><p>Other minority groups face disparities as well. Fourteen percent of Hispanics have been diagnosed with diabetes compared with 8% of whites. They also have higher rates of end-stage renal disease, caused by diabetes.</p><p>One positive outgrowth of the Heckler Report has been the creation and proliferation of public-health offices at the federal, state and local levels of government designed specifically to target minority health and lessen or eliminate disparities.</p><p>In Youngstown, the Office of Minority Health was created in 2008 and has led the charge locally to bring greater equity to health care and health-care outcomes. On Saturday, the office sponsored its annual Citywide Baby Shower at the Eugenia Atkinson Recreation Center in Youngstown at which participants received baby items and education on effective lifestyle habits to maximize chances of a safe birth.</p><p>Later this month, the office is helping to sponsor a forum on preventing breast cancer at the Valley\u2019s OCCHA (Organizacion Civica y Cultural Hispana Americana) in Youngstown.</p><p>Clearly, such education and advocacy efforts hold the key to slow but steady progress in reducing minority infant mortality rates and narrowing other lingering health disparities in the Valley.</p><p>We therefore urge the YOMH in concert with larger public health districts in Mahoning and Trumbull counties to accelerate their work toward promoting awareness, education, advocacy and support to reduce health care inequities among racial and ethnic groups in our community during April, Minority Health Month, and every month .</p><p>In so doing they can live up to the the theme of Minority Health Month 2024, \u201cBe the Source for Better Health: Improving Health Outcomes Through Our Cultures, Communities, and Connections</p><p>Yet as long as so many health gaps between whites and minority groups fester, King\u2019s appeal of nearly six decades ago remains just as relevant today. Until the gaps are completely closed, his dream for equality for all \u2014 including equitable physical and mental health outcomes \u2014 will continue to be a dream deferred.</p><p>___</p><p>Toledo Blade. April 20, 2024.</p><p>Editorial: Help children read</p><p>Two stories in the news in the last two weeks were, on the surface, about different topics. But break the surface and they were the same topic: preparing young children for elementary school.</p><p>Gov. Mike DeWine visited Toledo to promote his agenda to implement \u201cthe science of reading\u201d in Ohio\u2019s elementary schools.</p><p>Blade staff writer Kelly Kaczala covered the governor\u2019s appearance, along with his education director, Steve Dackin, in the Toledo Lucas County Main Library ( <a href=\"https://www.toledoblade.com/local/education/2024/04/16/dewine-main-library-illiteracy-fight-roundtable-discussion-education/stories/20240416129?utm_source=theblade&utm_medium=newsroom&utm_campaign=storyref\">\u201cDeWine touts literacy efforts in Ohio,\u201d Wednesday</a> ). In the audience were 30 local business, government, education, and literacy leaders.</p><p>The concept favored by Mr. DeWine focuses on phonics, vocabulary, and comprehension as the most effective ways to teach children how to read. He wants Ohio\u2019s education universities to train new teachers in these methods.</p><p>Mr. Dackin offered some sobering statistics: 40 percent of third graders are not reading at grade level. In grades K through 4, we have 3,000 students who are not at grade level.</p><p>There is no question that Ohio school children have fallen behind in basic literacy. If that trend keeps up, Ohio is going to have a growing percentage of the adult population who are illiterate, which undermines economic development in Ohio and makes the state less attractive to businesses and individuals looking to move.</p><p>The second story in the paper was the news that Toledo Mayor Wade Kapszukiewicz wants the Lucas County Board of Commissioners to put a levy on the ballot to pay for universal pre-school education ( <a href=\"https://www.toledoblade.com/local/education/2024/04/10/pre-k-education-lucas-county-childcare-crisis-universal-on-ballot/stories/20240410147?utm_source=theblade&utm_medium=newsroom&utm_campaign=storyref\">\u201cLucas County exploring putting universal Pre-K on the ballot,\u201d by Melissa Burden, April 11</a> ).</p><p>The focus of that story was less on reading than on the shortage of decent child care and preschool, as noted by an analysis by the group ReadyNation. It said that Ohio\u2019s infant and toddler child-care crisis costs families, businesses, and taxpayers an estimated $3.85 billion each year.</p><p>___</p><p>Columbus Dispatch. April 18, 2024.</p><p>Editorial: Biden should be on the ballot. Alabama gets it \u2014 Why don\u2019t Ohio Republicans?</p><p>As they\u2019ve done with gerrymandering and last year\u2019s failed August special election for constitutional amendments changes, Ohio GOP leaders will show they see fair elections as hindrances, not goals.</p><p>There\u2019s no doubt the Democratic Party blundered big time.</p><p>It should have managed its calendar to ensure <a href=\"https://www.dispatch.com/story/news/politics/elections/2024/04/16/ohio-rejects-democrats-fix-to-get-joe-biden-on-november-ballot/73343798007/\">the Democratic National Convention</a> would be convened in time to ensure its presumptive candidate \u2014 President Joe Biden \u2014 was nominated in time to make the ballot in Ohio and all other states.</p><p>The timeline was clear.</p><p>Ohio law requires certification of the ballot 90 days before an election \u2212 Aug. 7 this year. Biden will not be officially nominated until the Democratic National Convention Aug. 19 in Chicago.</p><p>Ohio Secretary of State Frank LaRose\u2019s office <a href=\"https://www.dispatch.com/story/news/politics/state/2024/04/06/joe-biden-may-not-qualify-for-november-ballot-in-ohio-letter-says/73230352007/\">raised the error in an April 5 letter</a> to Ohio Democratic Party Chair Liz Walters, warning that Biden is at risk of not making the Nov. 5 ballot.</p><p>Ohio officials on April 16 soundly rejected a Democratic plan to provisionally certify Biden and Vice President Kamala Harris ahead of the Aug. 7 deadline.</p><p>\u201cNo alternative process is permitted,\u201d Julie M. Pfeiffer, a staff lawyer in Ohio Attorney General Dave Yost\u2019s office, told LaRose\u2019s office, according to reporting by the <a href=\"https://www.dispatch.com/story/news/politics/elections/2024/04/16/ohio-rejects-democrats-fix-to-get-joe-biden-on-november-ballot/73343798007/\">USA TODAY Ohio Bureau</a> which serves the Columbus Dispatch and other newspapers.</p><p>\u201cI think it\u2019s a Democratic problem,\u201d he told reporters.</p><p>Why Matt Huffman is wrong</p><p>The Democrats screwed up, but this is not a Democratic problem. It is a democratic problem that should be fixed and has been fixed here in past elections.</p><p>A similar problem is happening in Alabama. Republicans there are working with Democrats to find a solution.</p><p>\u201cI\u2019d like to think if the shoe was on the other foot, this would be taken care of,\u201d Alabama state Sen. Sam Givhan, a Republican, told that <a href=\"https://www.al.com/news/2024/04/bill-to-allow-joe-biden-on-alabama-ballot-advances-in-legislature.html\">state\u2019s Al.com.</a></p><p>Asked about the issue a week earlier, Ohio Senate President Matt Huffman, R-Lima, made it clear that he didn\u2019t mind twisting the sword.</p><p>Ohio has temporarily changed the <a href=\"https://www.usnews.com/news/best-states/ohio/articles/2024-04-13/bidens-ballot-access-in-ohio-and-alabama-is-in-the-hands-of-republican-election-chiefs-lawmakers\">deadline in the past.</a> It was done to accommodate both the 2020 Republican and Democratic conventions that saw the nominations of then-president Trump and Biden.</p><p>Before that, it was done for the 2012 conventions that saw the parties nominate Mitt Romney and then president-Barack Obama.</p><p>If democracy were a game, it would be perfectly fine for Ohio Republicans to take this as a crushing victory and leave Democrats on the field embarrassed and shaking.</p><p>If Biden\u2019s name does not appear on the November ballot, a price will be paid by the nearly 500,000 Ohioans who voted for the virtually unopposed Biden in the March primary and the millions who anticipate voting for him in November.</p><p>Those voters will not be the only losers.</p><p>As they\u2019ve done with gerrymandering and last year\u2019s failed August special election for constitutional amendments changes, Ohio GOP leaders will show that they see fair elections as hindrances not goals.</p><p>Playing democracy like a game could come with consequences</p><p>Such dirty tactics are not only immorally wrong, they are unlikely necessary to secure Donald Trump\u2019s victory in Ohio.</p><p>The presumptive Republican presidential nominee won Ohio in 2016 and 2020 by more than 8%. There is a good change he will win big again this year.</p><p>Making the Democrats\u2019 gaffe a them problem instead of an us problem will not only be a major embarrassment to Ohio but it may backfire on Republicans.</p><p>Such cringy gamesmanship no doubt energized typically unmotivated Democrats to turnout for the special election last August.</p><p>Not having Biden\u2019s name on the ballot may keep Republicans from showing up on Election Day believing Trump is running unopposed, which would help U.S. Sen. Sherrod Brown and other down ticket candidates.</p><p>This issue is not unprecedented</p><p>In 2020, both the Republican and Democratic parties ran into candidate certification issues in Oklahoma, Illinois, Washington and Montana, according to reporting by the <a href=\"https://www.dispatch.com/story/news/politics/elections/2024/04/16/ohio-rejects-democrats-fix-to-get-joe-biden-on-november-ballot/73343798007/\">USA TODAY Ohio Bureau.</a></p><p>The same issue came up in Alabama and Washington this year but solutions to allow Biden on ballots are likely in those states.</p><p>Washington\u2019s secretary of state \u2014 a Democrat \u2014is expected to accept a provisional certification, the <a href=\"https://www.seattletimes.com/seattle-news/politics/wa-seeks-provisional-certification-to-make-sure-biden-is-the-ballot/\">Seattle Times reported</a>.</p><p>On Wednesday, Alabama House and Senate committees approved bills to change the deadline to allow Biden on the November ballot, according to <a href=\"https://www.al.com/news/2024/04/bill-to-allow-joe-biden-on-alabama-ballot-advances-in-legislature.html\">Al.com.</a></p><p>What if the shoe was not on the Democrats\u2019 foot?</p><p>The shoe could very well have been on the Republicans\u2019 foot this year, meaning Donald Trump\u2019s name was not on the ballot.</p><p>It would be wrong to disenfranchise Republican voters just as it is wrong to disenfranchise Democrats.</p><p>It would be a democratic problem as it is now. We\u2019d expect the Democratic Party to work on a fix to get the Republican candidate on the ballot.</p><p>The reason is simple: this is not about the names on the ballot.</p><p>It is about voters.</p><p>END</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/0a2512e7be762a4baad38514f80a8703",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 3,
+            "reason": "The document contains multiple editorials on various topics, but only one of them is directly related to health. The editorial from the Youngstown Vindicator discusses minority health gaps in Ohio, which is highly relevant to the topic of health. However, the other editorials focus on housing, protecting children from swatting, term limits, literacy, and election issues, which are not related to health. Therefore, while there is some relevant content, it is not the primary focus of the document."
+        }
+    }
+}

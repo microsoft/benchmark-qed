@@ -1,0 +1,280 @@
+﻿{
+    "altids": {
+        "itemid": "6744548aa1a619d6734f25f64169da75",
+        "etag": "6744548aa1a619d6734f25f64169da75_0a2aza0c0",
+        "friendlykey": "63986814613",
+        "referenceid": "WI--Editorial Rdp"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Opinion",
+    "language": "en",
+    "versioncreated": "2024-01-11T17:52:59Z",
+    "firstcreated": "2024-01-11T17:52:58Z",
+    "editorialrole": "FullStory",
+    "fixture": {
+        "code": "21ea4067bb274c3b805353fb2b99ba70",
+        "name": "Editorial Roundup"
+    },
+    "pubstatus": "usable",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "WI--Editorial Rdp",
+    "headline": "Editorial Roundup: Wisconsin",
+    "slugline": "BC-WI--Editorial Rdp",
+    "bylines": [
+        {
+            "by": "By The Associated Press"
+        }
+    ],
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "Editorial Rdp"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "person": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e0ba11144ad04409bd6df4c6e8919411",
+            "name": "Herb Kohl",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "POLITICIAN",
+                "PERSON"
+            ],
+            "relevance": 46
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "1dc502af06274725a9b6a9f2c5856e90",
+            "name": "Tony Evers",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "POLITICIAN",
+                "PERSON"
+            ],
+            "relevance": 44
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a6331b54c46e4ca8b79fa40fada95db5",
+            "name": "Donald Trump",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "POLITICIAN",
+                "PERSON"
+            ],
+            "relevance": 33
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "fbdb0a94e4db464e813e8c4b3bdd6f98",
+            "name": "Stephen Paddock",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "NEWSMAKER",
+                "PERSON"
+            ],
+            "relevance": 35
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86aad5207dac100488ecba7fa5283c3e",
+            "name": "Politics",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 51
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a328daf6767245f18a263276f2e111f3",
+            "name": "Marijuana",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 57
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "d8e79a587f00100483bff571351eed07",
+            "name": "Pain management",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 43
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86ba17607dac1004894eba7fa5283c3e",
+            "name": "Courts",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 57
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "organisation": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "efa933c0892110048d92fb7860a2fc03",
+            "name": "Supreme Court of the United States",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 41
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "788b364882f110048df3df092526b43e",
+            "name": "District of Columbia",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "9d26a20b35f0484a891740f8189d4c7b",
+                "name": "City"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -77.00025,
+                    38.91706
+                ]
+            },
+            "relevance": 77,
+            "parentnames": [
+                "United States"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "1bc1bc3082c81004896cdf092526b43e",
+            "name": "Wisconsin",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -90.00041,
+                    44.50024
+                ]
+            },
+            "relevance": 87,
+            "parentnames": [
+                "United States"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "1bc1bc3082c81004896cdf092526b43e",
+            "name": "Wisconsin",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "body_nitf": "<p>Eau Claire Leader-Telegram. January 10, 2024.</p><p>Editorial: It\u2019s about time on medical marijuana for Wisconsin</p><p>We\u2019re glad to see Wisconsin\u2019s legislative Republicans moving toward a bill to allow medical marijuana in the state. While it\u2019s not perfect, it\u2019s an important step in the right direction.</p><p>The last time we talked about the issue here was back in April 2023. That was when Robin Vos, the Assembly\u2019s speaker, announced he was working with his fellow Republicans on some form of medical marijuana bill. The results took longer than one might have expected at that time, but last week officials presented the broad outlines for the public.</p><p>The proposal looks a lot more like some of the earliest state laws on the issue than it does legislation passed in numerous states over the past couple years. Sales are limited to severely ill individuals in most cases. Cancer patients would have access, as would people with multiple sclerosis. Glaucoma patients could use marijuana, as could people who have severe muscle spasms, chronic pain or nausea.</p><p>The most open category is for those who are terminally ill and are expected to have less than a year to live. Every category would require a doctor\u2019s diagnosis and purchases would be allowed only at one of five state dispensaries. While that figure could increase, that\u2019s where things would start.</p><p>The proposal doesn\u2019t go as far as most Wisconsin residents would probably prefer. An October 2022 poll from Marquette University showed 64% of Wisconsin residents favored full legalization of recreational marijuana, while a whopping 83% favored allowing it for medical uses. There\u2019s no reason to believe those numbers are lower today.</p><p>The overwhelming support for medical marijuana means there is phenomenally little risk for politicians backing this step. You probably wouldn\u2019t get that kind of approval for a proposal to eliminate the state\u2019s income tax, or virtually any other step a legislature could take.</p><p>This isn\u2019t a done deal just yet, though. The Legislature still has to vote on it, with passage in the Assembly and Senate likely but not assured. Gov. Tony Evers, who has urged legislators to approve full recreational legalization, has signaled he will sign the bill if it passes.</p><p>It\u2019s cynical \u2014 though probably accurate \u2014 to tie the announcement to the beginning of an election year. The extraordinarily strong appeal of such legislation gave politicians cover, and very few will willingly leave such a club laying around for an opponent to beat them with during a campaign. That meant the years of foot-dragging was incompatible with hopes for re-election for what appears to be a critical mass in the Republican caucus.</p><p>The move will, assuming it goes through as anticipated, end Wisconsin\u2019s status as a genuine outlier in the issue of marijuana access. It is one of only a handful of states in which absolute prohibition still stands, and three neighboring states allow recreational use. While being out of step with neighbors is one thing, being that far out of synch with voters was another.</p><p>Wisconsin\u2019s actions are a new signal, if one is needed, that the federal government\u2019s antiquated approach to marijuana needs to change. The Drug Enforcement Agency\u2019s listing of marijuana as a Schedule I drug \u2014 one with high potential for abuse and no currently accepted medical uses \u2014 isn\u2019t a sustainable argument.</p><p>There\u2019s a solid medical consensus that marijuana has some valid uses. Wisconsin\u2019s proposal aligns more with the requirements for Schedule II drugs, which have accepted medical uses with significant restrictions, than it does the DEA\u2019s claims. And there\u2019s a good argument for viewing it as a Schedule III drug, with accepted medical uses and varying levels of addictive potential.</p><p>Federal regulations need to change. It\u2019s obvious the vast majority of Americans, conservative or liberal, think they\u2019re off base. Wisconsin\u2019s change is in line with what residents want, and it adds to the pressure to update the federal guidelines.</p><p>___</p><p>Racine Journal Times. January 7, 2024.</p><p>Editorial: Bump stock ban needs court OK</p><p>Just after Christmas, attorneys general from 23 states and the District of Columbia urged the U.S. Supreme Court to uphold a federal rule banning bump stocks.</p><p>We concur and if the high court doesn\u2019t get it right, Congress should get to work and spell out the ban in a new law.</p><p>The high court agreed to take up the issue in November after differing lower court decisions over the ban, which was put in place by the Bureau of Alcohol, Tobacco, Firearms and Explosives six years ago by the then-President Donald Trump administration.</p><p>The ATFE bump stock ban went into effect after a mass shooting in Las Vegas, Nevada in 2017.</p><p>You remember that, of course. A crazed gunman in the 32nd floor of the Mandalay Bay hotel opened fire with bump stock-equipped AR-15s on a crowd of 20,000 people attending a country music festival across the street.</p><p>By the time the smoke had cleared and the screaming had stopped, 58 people were killed and another 500 were wounded or injured in the rush for cover. The gunman, Stephen Paddock, killed himself before he could be apprehended.</p><p>The attorneys general told the court in their petition that the ban aligns with longstanding prohibitions \u2014 dating to 1934 \u2014 against public ownership of most machine guns and that bump stocks, which use the recoil of the weapon to rapidly fire without additional trigger pulls belong in that category.</p><p>\u201cBump stocks were deliberately developed and marketed to circumvent federal law banning civilian use of automatic weapons,\u201d said District of Columbia Attorney General Brian L. Schwalb, \u201cThese devices are designed to convert semiautomatic firearms to illegal machine guns, with foreseeable tragic and deadly consequences. We urge the Supreme Court to prioritize public safety and the safety of law enforcement officers by upholding a reasonable, well-established rule classifying bump stocks as banned automatic weapons.\u201d</p><p>We can\u2019t undo the horror and bloodletting at Mandalay Bay, but we can take steps to prevent the next crazed shooting by keeping the ban on bump stocks.</p><p>If the Supreme Court can\u2019t see its way to support the ban, then Congress should step in and pass a single piece of legislation to enforce it. There may need to be an exception for handicapped hunters, but for the most part there is no reasonable purpose for nearly full automatic firepower. Not for hunting; not for self-protection.</p><p>Consider that Stephen Paddock, at one point in the tower at Mandalay Bay, was able to fire 90 shots in a 10 second period using bump stocks. A machine gun can fire 98 shots in a seven second period.</p><p>There\u2019s not a deer herd or a concert crowd that can stand up to that rain of fire.</p><p>The Supreme Court should get that.</p><p>___</p><p>Wisconsin State Journal. January 7, 2024.</p><p>Editorial: Herb Kohl did the impossible \u2014 he gave politicians a good name</p><p>The political class never seemed impressed with U.S. Sen. Herb Kohl, D-Milwaukee. He was always so polite and agreeable. Most of Washington doesn\u2019t believe that\u2019s how you get things done. And too often, they\u2019re right.</p><p>Kohl never hogged the headlines. He didn\u2019t say provocative things. He didn\u2019t incessantly pick partisan battles. That\u2019s what made him so different.</p><p>And unlike most of his colleagues, he didn\u2019t have to worry about raising piles of campaign cash. \u201cNobody\u2019s senator but yours,\u201d as his election ads dubbed him, had all the money he needed from the retail empire he built. He could always outspend his challengers and won four elections, the last three by landslides.</p><p>It wasn\u2019t just the money that keyed his success at the polls. People trusted him to do what he thought was right, even if they didn\u2019t always agree with his positions.</p><p>Keeping the Milwaukee Bucks basketball team in the state\u2019s largest city endeared him to many. So did his generosity \u2014 granting the best teachers and principals cash awards for great work, gifting universities tens of millions for academics and sports, regularly eating and engaging with constituents at a modest George Webb diner in Downtown Milwaukee.</p><p>Most unusual for a politician: He listened more than he spoke.</p><p>Kohl, who died at 88 just before the new year, wasn\u2019t a backroom dealer, which no doubt limited his impact. Yet he always stuck up for Wisconsin, especially education. He wanted everyone who works hard to have a shot at prosperity and happiness, just as he did. The son of Jewish immigrants, he grew up working in his father\u2019s grocery store, went on to UW-Madison and Harvard Business School.</p><p>Most important, Kohl led by example. He actually accomplished the seemingly impossible \u2014 he gave politicians a good name. He proved that the stereotype of the conniving, slick, power-hungry elected official doesn\u2019t have to be true. At least in his case, it wasn\u2019t.</p><p>For that we can thank him. And we can only hope his best instincts and values washed off on some of his less-than-pure peers.</p><p>Wisconsin and America definitely could use more of Kohl\u2019s attributes these days in seats of power. Our democracy needs more humility, cooperation and thoughtfulness. We need more humanity \u2014 the good kind.</p><p>Kohl recognized nuance and complication as he sought solutions. He wasn\u2019t a showboat. He was a serious public servant, not unlike so many people across Wisconsin who serve on local municipal, county and school boards. With open minds and flexibility, they try to solve problems for their neighbors.</p><p>That\u2019s what Kohl did.</p><p>Perhaps his worst moment in the national spotlight was sitting on the Senate Judiciary Committee in 1991. The committee of white men, led by then-U.S. Sen. Joe Biden, came off as out of touch and disrespectful of Anita Hill, a Black woman who accused Supreme Court nominee Clarence Thomas of sexual harassment.</p><p>But Kohl was a bit player in that, and he deserves to be remembered for so much more. His business acumen helped him improve federal policy on jobs, the economy and taxes. To his credit, he was more sensitive to government red tape than most Democrats. And he proved effective at landing federal money for projects back home.</p><p>The fiscally conservative Club for Growth faulted him for supporting wasteful earmarks. Yet the bipartisan Concord Coalition ranked him as the top U.S. senator in 1996 for his efforts to balance the federal budget, which was a much bigger goal.</p><p>As chair of the Senate Appropriations Committee\u2019s agriculture panel, he looked out for Wisconsin farmers. He also advocated for older folks, quality child care, clean elections and preserving wilderness.</p><p>His loyalty to Milwaukee and Wisconsin through his private gifts are legendary. Besides investing in Milwaukee sports teams, including a group that helped lure the Brewers to Wisconsin, he gave large sums to the United Way, public museums and art.</p><p>\u201cThe more you give, the richer you get,\u201d he said.</p><p>The political handlers and strategists may roll their eyes at Kohl\u2019s heartfelt public service. Though intensely competitive and disciplined as a businessman, he lacked the persuasiveness and pizzazz of a skilled politician.</p><p>Most of Wisconsin, though, was truly sad to hear he died, we suspect. And most of Wisconsin should want his distinguished brand of good citizenship to continue. May his sincere and generous ways live on through all the lives he touched, from his favorite booth at George Webb to Capitol Hill.</p><p>END</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/6744548aa1a619d6734f25f64169da75",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 3,
+            "reason": "The document contains three editorials, one of which is directly related to health as it discusses the legislative progress on medical marijuana in Wisconsin. This editorial covers the potential health benefits for patients with severe illnesses and the public support for medical marijuana. The other two editorials are not related to health; one discusses a bump stock ban and the other reflects on the life and career of Herb Kohl. Given that only one-third of the document is relevant to health, the overall relevance is moderate."
+        }
+    }
+}

@@ -1,0 +1,294 @@
+﻿{
+    "altids": {
+        "itemid": "3573dcefc894646228599715a3158cb0",
+        "etag": "3573dcefc894646228599715a3158cb0_1a5aza0c0",
+        "friendlykey": "744547151298",
+        "referenceid": "Financial Markets-Stocks"
+    },
+    "version": 1,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2023-12-14T21:16:15Z",
+    "firstcreated": "2023-12-14T17:16:07Z",
+    "editorialrole": "FullStory",
+    "fixture": {
+        "code": "d69ce83e91a2440cb5582615b405ecfb",
+        "name": "Financial Markets"
+    },
+    "pubstatus": "usable",
+    "editorialtypes": [
+        "Lead"
+    ],
+    "signals": [
+        "newscontent"
+    ],
+    "title": "Financial Markets-Stocks",
+    "headline": "Moderna, Rivian rise; Apellis, Adobe fall, Thursday, 12/14/2023",
+    "headline_extended": "Stocks that traded heavily or had substantial price changes on Thursday: Moderna, Rivian rise; Apellis, Adobe fall",
+    "slugline": "BC-Financial Markets-Stocks, 1st Ld-Writethru",
+    "description_summary": "Stocks that traded heavily or had substantial price changes on Thursday: Moderna, Rivian rise; Apellis, Adobe fall.",
+    "located": "NEW YORK",
+    "datelinelocation": {
+        "city": "New York",
+        "countryareacode": "NY",
+        "countryareaname": "New York",
+        "countrycode": "USA",
+        "countryname": "United States",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                -74.00597,
+                40.71427
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2023 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "Financial Markets Stocks Wall Street"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "f",
+            "name": "f"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "ace74e307f00100486cedf092526b43e",
+            "name": "Immunizations",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 43
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "c8e409f8858510048872ff2260dd383e",
+            "name": "Business",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 88
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "60a31c1888f91004804d8503ef5018bd",
+            "name": "Financial markets",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 43
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a86239008b6d1004897db5b842854103",
+            "name": "Electric vehicles",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 69
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "c8e409f8858510048872ff2260dd383e",
+            "name": "Business",
+            "creator": "Editorial",
+            "editorial_subject": "Business",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        }
+    ],
+    "organisation": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "bc1fbf0c22e24b9d96f842a6e1066356",
+            "name": "Hess Corp",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "symbols": [
+                {
+                    "ticker": "HES",
+                    "exchange": "NYSE",
+                    "instrument": "NYSE:HES"
+                }
+            ],
+            "relevance": 31
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "20ea89723ec44ac594f53d452245938c",
+            "name": "Moderna Inc",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "symbols": [
+                {
+                    "ticker": "MRNA",
+                    "exchange": "NASDAQ",
+                    "instrument": "NASDAQ:MRNA"
+                }
+            ],
+            "relevance": 78
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "29b3211cb3b740cb85ff0ba5c5a00cc5",
+            "name": "Apellis Pharmaceuticals Inc",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "symbols": [
+                {
+                    "ticker": "APLS",
+                    "exchange": "NASDAQ",
+                    "instrument": "NASDAQ:APLS"
+                }
+            ],
+            "relevance": 34
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a02efdd0ab64214ba6ad0043d28a6f00",
+            "name": "Glaukos Corp",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "symbols": [
+                {
+                    "ticker": "GKOS",
+                    "exchange": "NYSE",
+                    "instrument": "NYSE:GKOS"
+                }
+            ],
+            "relevance": 38
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "b47a2885feec41338affef7869820274",
+            "name": "AT&T Inc",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "symbols": [
+                {
+                    "ticker": "T",
+                    "exchange": "NYSE",
+                    "instrument": "NYSE:T"
+                }
+            ],
+            "relevance": 35
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "63357a6e46834cb1b55f6d30f0111a54",
+            "name": "Adobe Systems Inc",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "symbols": [
+                {
+                    "ticker": "ADBE",
+                    "exchange": "NASDAQ",
+                    "instrument": "NASDAQ:ADBE"
+                }
+            ],
+            "relevance": 78
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "95d14fb49647402aac1a930685170708",
+            "name": "Merck KGaA",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "symbols": [
+                {
+                    "ticker": "MRK",
+                    "exchange": "XETRA",
+                    "instrument": "XETRA:MRK"
+                },
+                {
+                    "ticker": "MKKGY",
+                    "exchange": "OTCP",
+                    "instrument": "OTCP:MKKGY"
+                }
+            ],
+            "relevance": 39
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "661850e07d5b100481f5c076b8e3055c",
+            "name": "Latin America and Caribbean",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "body_nitf": "<p>NEW YORK (AP) \u2014 Stocks that traded heavily or had substantial price changes on <a href=\"https://apnews.com/article/stock-markets-china-ecb-powell-8097a9b2ae0cf759d20773d31c785b3a\">Thursday</a>:</p><p>Moderna Inc., up $7.27 to $85.87.</p><p>The vaccine maker gave investors an encouraging update on a potential cancer vaccine being developed with Merck.</p><p>Glaukos Corp., up $15.32 to $75.74.</p><p>The glaucoma treatments developer received regulatory approval in the U.S. of its eye-condition drug iDose.</p><p>Jabil Inc., up $15.82 to $136.42.</p><p>The electronics manufacturer beat analysts' fiscal first-quarter earnings and revenue forecasts.</p><p>Rivian Automotive Inc., up $2.75 to $22.43.</p><p>AT&T will buy vehicles for its fleet from the electric vehicle maker.</p><p>Apellis Pharmaceuticals Inc., down $10.70 to $52.18.</p><p>The biopharmaceutical company warned investors about the potential for a negative opinion on an eye condition drug from European regulators.</p><p>Adobe Inc., down $39.62 to $584.64.</p><p>The software company's profit forecast for its current fiscal year disappointed investors.</p><p>Hess Corp., up $6.37 to $143.10.</p><p>Energy stocks gained ground along with rising crude oil prices.</p><p>Newmont Corp., up $1.15 to $41.15.</p><p>The gold producer rose along with prices for the precious metal.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/financial-markets-stocks-wall-street-3573dcefc894646228599715a3158cb0",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 3,
+            "reason": "The document primarily discusses stock price changes for various companies, including Moderna, Glaukos, and Apellis, which are involved in the health sector. However, the focus is on the financial performance and stock movements rather than detailed health-related information. The mention of a potential cancer vaccine by Moderna and regulatory approval for Glaukos' eye-condition drug are relevant to health, but these are brief mentions within a broader financial context."
+        }
+    }
+}

@@ -1,0 +1,215 @@
+﻿{
+    "altids": {
+        "itemid": "a0400b661939aba26015b61c06e1d1d5",
+        "etag": "a0400b661939aba26015b61c06e1d1d5_0a2aza0c0",
+        "friendlykey": "971297771505",
+        "referenceid": "MO--Editorial Rdp"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Opinion",
+    "language": "en",
+    "versioncreated": "2024-02-13T12:10:39Z",
+    "firstcreated": "2024-02-12T22:25:45Z",
+    "editorialrole": "FullStory",
+    "fixture": {
+        "code": "21ea4067bb274c3b805353fb2b99ba70",
+        "name": "Editorial Roundup"
+    },
+    "pubstatus": "usable",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "MO--Editorial Rdp",
+    "headline": "Editorial Roundup: Missouri",
+    "slugline": "AP-MO--Editorial Rdp",
+    "bylines": [
+        {
+            "by": "By The Associated Press"
+        }
+    ],
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "Editorial Rdp"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86b276407dac1004891aba7fa5283c3e",
+            "name": "Referendums",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 32
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86b08df87dac1004890cba7fa5283c3e",
+            "name": "Voting",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 47
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86aad5207dac100488ecba7fa5283c3e",
+            "name": "Politics",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 74
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e22e35087de410048fc2df092526b43e",
+            "name": "Abortion",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 68
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "organisation": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "9511d139da5646cfb0fbcce4d2ee1bad",
+            "name": "Planned Parenthood",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 40
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "8d9724e0381a4652bfc9b41a973e0fe4",
+            "name": "Missouri state government",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 62
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "efa933c0892110048d92fb7860a2fc03",
+            "name": "Supreme Court of the United States",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 62
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "bd8c35d082c4100486d5df092526b43e",
+            "name": "Missouri",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -92.50046,
+                    38.25031
+                ]
+            },
+            "relevance": 97,
+            "parentnames": [
+                "United States"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "bd8c35d082c4100486d5df092526b43e",
+            "name": "Missouri",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "body_nitf": "<p>St. Louis Post-Dispatch. February 9, 2024.</p><p>Editorial: Missouri\u2019s war on women targets rape victims, health care \u2014 and democracy itself</p><p>What does the Missouri Legislature have against women?</p><p>It\u2019s a question that feels more pressing all the time lately. And not just because of the near-total ban on abortion rights that the state imposed literally minutes after the Supreme Court\u2019s reversal of Roe v. Wade in 2022.</p><p>Despite already realizing their most long-held, fundamental goal, the Republicans who control state government still seem determined to continue transforming Missouri into some real-life version of the dystopian novel \u201cThe Handmaid\u2019s Tale.\u201d</p><p>In recent days alone, they have tried to nix funding for the contraceptive services provided by Planned Parenthood, have moved to prevent a fair referendum vote on abortion rights, and \u2014 in a remarkable demonstration of the callousness at the heart of their movement \u2014 summarily defeated proposals to allow abortion <a href=\"https://www.stltoday.com/news/local/government-politics/senate-republicans-block-rape-and-incest-exceptions-for-missouri-abortion-ban/article_92a45e90-c623-11ee-ba46-4bf53bd53020.html\">exceptions for rape victims</a>.</p><p>Missouri\u2019s abortion ban is as strict as any in the nation, outlawing the procedure in all cases, including rape and incest, with only a vaguely defined exception for \u201cmedical emergencies.\u201d</p><p>The specter of re-victimizing rape and incest victims, including minors, by forcing them to continue the pregnancy has made even many anti-abortion rights advocates around the country amenable to those exceptions.</p><p>But when Democrats on Wednesday proposed such exceptions in the Missouri Senate, every Republican present reaffirmed commitment to this cruelty by voting it down.</p><p>Comments in floor debate by Sen. Sandy Crawford, R-Buffalo, were especially illuminating regarding the party\u2019s mindset. She allowed that rape is \u201c <a href=\"https://missouriindependent.com/2024/02/08/missouri-abortion-legislation-defund-planned-parenthood-defund\">mentally taxing</a>,\u201d but declared: \u201cGod is perfect. God does not make mistakes. And for some reason he allows (rape) to happen. Bad things happen.\u201d</p><p>Just for the record, rape isn\u2019t \u201cmentally taxing\u201d \u2014 it\u2019s deeply traumatic. And American lawmakers are supposed to advance the public\u2019s interests, not their personal religious views.</p><p>Polls indicate that if Missouri voters were given the opportunity, the majority would reinstate abortion rights here. Which explains the continuing determination of Republican lawmakers to change the rules in order to make statewide referendums more difficult to pass.</p><p>The latest proposal would require majority support from voters in more than half of the state\u2019s 163 House districts, instead of just a majority of all voters statewide. It\u2019s a process that, according to an analysis by the <a href=\"https://missouriindependent.com/2024/02/05/as-few-as-1-in-5-voters-could-defeat-initiative-petitions-under-missouri-senate-proposal\">Missouri Independent</a>, could mathematically empower as few as 20% of the state\u2019s voters to determine the outcome of any referendum and give rural areas virtual veto power over every ballot measure.</p><p>It\u2019s a direct assault on the democratic principle of one person, one vote, with a clear goal in mind. As Tim Jones, state director of the hard-right Missouri Freedom Caucus, bluntly told the Independent, doing it that way would be \u201cbetter for folks on the right side of the political spectrum\u201d \u2014 meaning, worse for women and their supporters who are trying to restore abortion rights.</p><p>Separately, legislative Republicans are continuing their yearslong campaign to cut off all public Planned Parenthood funding in Missouri.</p><p>To be clear: Planned Parenthood no longer provides abortion services in Missouri because of the state ban. So what legislators would cut off with the defunding effort is contraceptive services, cancer screening, STI testing and other women\u2019s health care still provided by the organization.</p><p>But, hey \u2014 \u201cBad things happen.\u201d Especially for women in Missouri.</p><p>END</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/a0400b661939aba26015b61c06e1d1d5",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 4,
+            "reason": "The document discusses various legislative actions in Missouri that impact women's health, including abortion rights, contraceptive services, and other health care services provided by Planned Parenthood. These topics are directly related to health, particularly women's health. The document also touches on the broader implications for democracy and political maneuvering, but the primary focus remains on health-related issues."
+        }
+    }
+}

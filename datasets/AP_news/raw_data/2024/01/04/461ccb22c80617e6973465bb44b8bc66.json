@@ -1,0 +1,202 @@
+﻿{
+    "altids": {
+        "itemid": "461ccb22c80617e6973465bb44b8bc66",
+        "etag": "461ccb22c80617e6973465bb44b8bc66_0a2aza0c0",
+        "friendlykey": "388933199862",
+        "referenceid": "GA--Lawsuit-Mental Health Agencies"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2024-01-04T17:18:13Z",
+    "firstcreated": "2024-01-04T17:18:12Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "GA--Lawsuit-Mental Health Agencies",
+    "headline": "Federal lawsuit seeks to force Georgia mental health agencies to improve care for children",
+    "headline_extended": "Families who say their children suffered from being institutionalized for prolonged periods are suing three Georgia agencies that provide mental health services",
+    "slugline": "AP-GA--Lawsuit-Mental Health Agencies",
+    "description_summary": "Families who say their children suffered from being institutionalized for prolonged periods are suing three Georgia agencies that provide mental health services. The Atlanta Journal-Constitution reports the federal lawsuit asks a judge to force the state to make improvements in its mental health system. It was filed Wednesday on behalf of families of four children with mental disorders that attorneys say worsened as the youths were institutionalized repeatedly and for long periods. They contend the state failed to provide adequate follow-up care to allow the children to remain at home. The agencies named in the lawsuit declined comment.",
+    "located": "ATLANTA",
+    "datelinelocation": {
+        "city": "Atlanta",
+        "countryareacode": "GA",
+        "countryareaname": "Georgia",
+        "countrycode": "USA",
+        "countryname": "United States",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                -84.38798,
+                33.749
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "Georgia mental health agencies lawsuit children"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "4f95136e072e41c6a81e8fa820e26e9c",
+            "name": "Children",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 53
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "4626a38a1b52454ca5d01755d14f1dc9",
+            "name": "Legal proceedings",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 42
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e231c7187de410048fd7df092526b43e",
+            "name": "Mental health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 65
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "5898d3303b1e4dfc9e4ae39ed34f3378",
+            "name": "Lawsuits",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 86
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Editorial",
+            "editorial_subject": "Health",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "dec1cce882af10048320df092526b43e",
+            "name": "Georgia",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -83.50018,
+                    32.75042
+                ]
+            },
+            "relevance": 65,
+            "parentnames": [
+                "United States"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "dec1cce882af10048320df092526b43e",
+            "name": "Georgia",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "body_nitf": "<p>ATLANTA (AP) \u2014 Three Georgia agencies that provide social services are being sued in federal court by families who say their children's mental health disorders worsened from being institutionalized for prolonged periods as the state failed to provide adequate at-home services.</p><p>The lawsuit filed Wednesday in U.S. District Court says the state's shortcomings violate federal law including provisions of the Medicaid Act and the Americans with Disabilities Act. It asks a judge to order the agencies to make improvements to its mental health care system.</p><p>\u201cGeorgia\u2019s children belong at home with their families,\" said Ruby Moore, executive director of the nonprofit Georgia Advocacy Office, which represents the families suing the state. \u201cDue to Georgia\u2019s failings, children are unnecessarily thrust into institutions and child welfare.\u201d</p><p>The lawsuit names as defendants the leaders of three Georgia agencies \u2014 the Department of Community Health, the Department of Human Services and the Department of Behavioral Health and Developmental Disabilities. Each of the agencies declined comment, The Atlanta Journal-Constitution <a href=\"https://www.ajc.com/news/investigations/families-file-lawsuit-accusing-the-state-of-repeatedly-failing-mentally-ill-children/ICWV4NJZ3BAZPJ5KWATNVBPBZY/\">reported</a>.</p><p>The lawsuit says the child plaintiffs have spent long periods institutionalized, leading to worsening symptoms and more frequent trips to hospital emergency rooms and psychiatric care facilities. It says one of the children has been institutionalized 16 times and admitted to emergency rooms 18 times, in part because the state failed to provide sufficient home care.</p><p>Attorneys for the families want the court to require the state to perform assessments for children who have been institutionalized multiple times and to provide better remedial care, among other improvements.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/georgia-mental-health-agencies-lawsuit-children-461ccb22c80617e6973465bb44b8bc66",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 5,
+            "reason": "The document discusses a federal lawsuit aimed at improving mental health care for children in Georgia. It highlights the inadequacies in the current system, the impact on children's mental health, and the legal actions being taken to address these issues. This is directly related to the topic of health, specifically mental health care for children."
+        }
+    }
+}

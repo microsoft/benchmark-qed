@@ -1,0 +1,194 @@
+﻿{
+    "altids": {
+        "itemid": "4be497fc0571427d02306c5fb703fad5",
+        "etag": "4be497fc0571427d02306c5fb703fad5_0a2aza0c0",
+        "friendlykey": "825199951520",
+        "referenceid": "NV--License Symbol-Nevada"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2023-12-28T23:05:50Z",
+    "firstcreated": "2023-12-28T23:05:49Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "NV--License Symbol-Nevada",
+    "headline": "Nevada drivers can now add a symbol identifying certain medical conditions on their driver license",
+    "headline_extended": "Nevada drivers can now add a symbol that identifies certain medical conditions on their driver licenses, in an effort to improve safety on the roads, the Nevada Department of Motor Vehicles announced this month",
+    "slugline": "AP-NV--License Symbol-Nevada",
+    "description_summary": "Nevada drivers can now add a symbol that identifies certain medical conditions on their driver licenses, in an effort to improve safety on the roads, the Nevada Department of Motor Vehicles announced this month. The \u201cStar of Life\u201d symbol has different codes for different conditions including vision impairment, deafness, depression, schizophrenia and food allergies. The symbol, a six-pointed blue figure often seen in the medical field, is optional to have for those eligible. The symbol can help law enforcement and first responders \u201crecognize any medical conditions Nevadans may have that require extra consideration,\u201d according to the Nevada DMV.",
+    "located": "LAS VEGAS",
+    "datelinelocation": {
+        "city": "Las Vegas",
+        "countryareacode": "NV",
+        "countryareaname": "Nevada",
+        "countrycode": "USA",
+        "countryname": "United States",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                -115.13722,
+                36.17497
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2023 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "driver license Nevada DMV"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "2214d0c884fc1004844291f43387513e",
+            "name": "Vision impairment and blindness",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 63
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 88
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Editorial",
+            "editorial_subject": "Health",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "organisation": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "06c0a6e582f94a9189b0ea5bd27d2a30",
+            "name": "Nevada state government",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 53
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "8bb89dd082c61004879fdf092526b43e",
+            "name": "Nevada",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -116.75119,
+                    39.25021
+                ]
+            },
+            "relevance": 78,
+            "parentnames": [
+                "United States"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "8bb89dd082c61004879fdf092526b43e",
+            "name": "Nevada",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "body_nitf": "<p>LAS VEGAS (AP) \u2014 Nevada drivers can now add a symbol that identifies certain medical conditions on their driver licenses, in an effort to improve safety on the roads, the Nevada Department of Motor Vehicles announced this month.</p><p>The \u201cStar of Life\u201d symbol has different codes for different conditions including vision impairment, deafness, depression, schizophrenia and food allergies, among others. The symbol, a six-pointed blue figure often seen in the medical field, is optional to have for those eligible.</p><p>The symbol can help law enforcement and first responders \u201crecognize any medical conditions Nevadans may have that require extra consideration,\u201d according to the Nevada DMV. It stems from a law passed by state lawmakers that give drivers the option to have the symbol.</p><p>Eligible drivers must bring a physician\u2019s report to have the symbol added to their license.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/driver-license-nevada-dmv-4be497fc0571427d02306c5fb703fad5",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 4,
+            "reason": "The document discusses a new initiative by the Nevada Department of Motor Vehicles that allows drivers to add a medical symbol to their licenses to identify certain medical conditions. This initiative is directly related to health as it involves medical conditions such as vision impairment, deafness, depression, schizophrenia, and food allergies. The purpose of the symbol is to improve safety and provide necessary information to law enforcement and first responders, which is a health-related concern."
+        }
+    }
+}

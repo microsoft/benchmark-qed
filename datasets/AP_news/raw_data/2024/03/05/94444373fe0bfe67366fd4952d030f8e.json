@@ -1,0 +1,362 @@
+﻿{
+    "altids": {
+        "itemid": "94444373fe0bfe67366fd4952d030f8e",
+        "etag": "94444373fe0bfe67366fd4952d030f8e_6a10aza0c0",
+        "friendlykey": "580705992134",
+        "referenceid": "US--Election-2024-California-Mental Health"
+    },
+    "version": 6,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2024-03-06T07:41:58Z",
+    "firstcreated": "2024-03-05T06:01:24Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "ednote": "Eds: UPDATES: Recasts lede, adds too early to call",
+    "editorialtypes": [
+        "Lead"
+    ],
+    "signals": [
+        "newscontent"
+    ],
+    "title": "US--Election-2024-California-Mental Health",
+    "headline": "Californians split on ballot measure to tackle homelessness crisis",
+    "headline_extended": "Californians are split in early returns over a statewide ballot measure that Gov. Gavin Newson says he needs to tackle the state\u2019s homelessness crisis",
+    "slugline": "BC-US--Election-2024-California-Mental Health, 6th Ld-Writethru",
+    "description_summary": "Californians are split in early returns over a statewide ballot measure that Gov. Gavin Newson says he needs to tackle the state\u2019s homelessness crisis. Proposition 1 was the only measure on the ballot. It was too early to call Tuesday night. It has been one of the most complicated measures in the last few years. It would authorize the state to borrow $6.4 billion to build housing and treatment beds and would also restrict how counties use money from a 2004 tax on millionaires meant to fund mental health services. Critics say the change would threaten programs that are keeping people from becoming homeless in the first place.",
+    "bylines": [
+        {
+            "by": "By TR\u00c2N NGUY\u1ec4N",
+            "title": "Associated Press"
+        }
+    ],
+    "located": "SACRAMENTO, Calif.",
+    "datelinelocation": {
+        "city": "Sacramento",
+        "countryareacode": "CA",
+        "countryareaname": "California",
+        "countrycode": "USA",
+        "countryname": "United States",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                -121.4944,
+                38.58157
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "california homelessness mental health ballot measure"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "person": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "2fe690579a4042f5bbee491a75dfdc62",
+            "name": "Gavin Newsom",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "POLITICIAN",
+                "PERSON"
+            ],
+            "associatedstates": [
+                {
+                    "code": "789fdd8882af10048263df092526b43e",
+                    "name": "California"
+                }
+            ],
+            "relevance": 84
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "a",
+            "name": "a"
+        },
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "p",
+            "name": "p"
+        },
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e231c7187de410048fd7df092526b43e",
+            "name": "Mental health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 67
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "24e61d6d4e654ae6bda1f1558c8cc1f3",
+            "name": "2024 United States presidential election",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "397dbba0872a10048d20d7c656897a02",
+            "name": "Homelessness",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 58
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86aad5207dac100488ecba7fa5283c3e",
+            "name": "Politics",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 33
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86b08df87dac1004890cba7fa5283c3e",
+            "name": "Voting",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 78
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86aad5207dac100488ecba7fa5283c3e",
+            "name": "Politics",
+            "creator": "Editorial",
+            "editorial_subject": "Politics",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Editorial",
+            "editorial_subject": "Health",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "7d4f1d5882af1004827bdf092526b43e",
+            "name": "Sacramento",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "789fdd8882af10048263df092526b43e"
+            ],
+            "locationtype": {
+                "code": "9d26a20b35f0484a891740f8189d4c7b",
+                "name": "City"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -121.4944,
+                    38.58157
+                ]
+            },
+            "relevance": 43,
+            "parentnames": [
+                "California"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "789fdd8882af10048263df092526b43e",
+            "name": "California",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -119.75126,
+                    37.25022
+                ]
+            },
+            "relevance": 89,
+            "parentnames": [
+                "United States"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "789fdd8882af10048263df092526b43e",
+            "name": "California",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661850e07d5b100481f5c076b8e3055c",
+            "name": "Latin America and Caribbean",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "associations": {
+        "1": {
+            "altids": {
+                "itemid": "a20705abc508477789960a157dbf44cc"
+            },
+            "type": "video"
+        },
+        "2": {
+            "altids": {
+                "itemid": "0273b5d3275149c0a785d28129afa03a"
+            },
+            "type": "picture"
+        },
+        "3": {
+            "altids": {
+                "itemid": "b6b51047f9ac4f2fa1a03c28abcfd25e"
+            },
+            "type": "picture"
+        },
+        "4": {
+            "altids": {
+                "itemid": "e818eee259d247a39aeca8fe43bcdb85"
+            },
+            "type": "picture"
+        },
+        "5": {
+            "altids": {
+                "itemid": "9e6a403f5880487092473f2f749d8c82"
+            },
+            "type": "audio"
+        },
+        "6": {
+            "altids": {
+                "itemid": "84c1a3f1eb1f4436be98d68ad2749ce8"
+            },
+            "type": "audio"
+        },
+        "7": {
+            "altids": {
+                "itemid": "8770bed763004be8888ce0e71203faa2"
+            },
+            "type": "audio"
+        }
+    },
+    "body_nitf": "<p>SACRAMENTO, Calif. (AP) \u2014 California voters were split in early returns over <a href=\"https://apnews.com/article/california-homelessness-ballot-measure-mental-health-50248a062c9ad7f11560332d60e935af\">a statewide ballot measure</a> touted by Gov. Gavin Newsom as a necessary step to tackle the state's ongoing homelessness crisis.</p><p>Proposition 1 would be the first major update to the state\u2019s mental health system in 20 years. The measure needs a simple majority vote to pass. It was too early to call Tuesday night, and it could take days before the final results are tallied.</p><p>Newsom spent significant time and money campaigning on the measure's behalf, raising more than $13 million to promote it with the support of law enforcement, first responders, hospitals and mayors of major cities. Opponents raised just $1,000. He did not make any statements Tuesday as votes were counted.</p><p>\u201cThe status quo is not acceptable,\u201d Newsom said Monday at a final campaign stop.</p><p>The Democratic governor says the proposition is needed to address the <a href=\"https://apnews.com/article/homeless-california-study-poverty-high-rent-a2a4bfc9b386cb70fdd14d593f31b68c\">state\u2019s homelessness crisis</a> by boosting investments in housing and substance use programs, but social providers worry it would <a href=\"https://apnews.com/article/california-homelessness-initiative-mental-health-3e6765a30343f7cc0147efd40f5a2f2f\">threaten programs</a> that are keeping people from becoming homeless in the first place.</p><p>Republican Darlene Farnum, a retired salesperson from the Southern California suburban city of Fountain Valley, said Tuesday she voted for the proposition even though it was backed by Newsom, someone she said she disagrees with on just about everything else.</p><p>\u201cWe need to do something besides letting people die and be homeless,\u201d she said.</p><p>Brian Frey, a programmer who lives in Sacramento, also voted for the proposition and said the issue is personal to him.</p><p>\u201cMy brother is actually homeless. He\u2019s suffering from some mental health issues right now,\u201d Frey said. \u201cI think it\u2019d be good to provide funding for treatment centers.\u201d</p><p>The measure would restrict how counties use money from a voter-approved tax enacted in 2004 on millionaires that currently is earmarked for mental health services under broad guidelines. Revenue from the tax, now between $2 billion and $3 billion a year, provides about one-third of the state\u2019s total mental health budget.</p><p>Counties would be required to spend about two-thirds of those funds on housing and programs for homeless people with serious mental illnesses or substance abuse problems.</p><p>Newsom wants to give the state more control over how that money is spent, but critics say it would apply one formula to all counties regardless of the size of the local homeless population and could pit programs for children against those for homeless people.</p><p>Proposition 1 also would authorize the state to borrow $6.38 billion to build 4,350 housing units, half of which would be reserved for veterans, and add 6,800 mental health and addiction treatment beds.</p><p>In an effort to ensure accurate, comprehensive tallies, counting ballots in California has become a weekslong drama that, in close contests, can transform Election Day into an election month. Mail ballots postmarked by Tuesday can arrive within seven days and are still valid. The heavy reliance on mail ballots \u2014 every voter receives one \u2014 also results in an extended tally, since each must be opened, validated and processed.</p><p>Homelessness has become one of the most frustrating issues in California and one sure to dog Newsom should he ever mount a national campaign. The state accounts for nearly a third of the homeless population in the United States; roughly 181,000 Californians are in need of housing. The state, with a current inventory of 5,500 beds, needs some 8,000 more units to treat mental health and addiction issues.</p><p>Newsom\u2019s administration already has spent at least $22 billion on various programs to address the crisis, including $3.5 billion to <a href=\"https://apnews.com/article/lifestyle-business-health-california-coronavirus-pandemic-835c2091c63c199d397346a497e7ae49\">convert rundown motels into homeless housing</a>. California is also giving out $2 billion in grants to build more treatment facilities.</p><p>The proposition is touted as the final piece in Newsom's plan to reform California\u2019s mental health system. He has already pushed for laws that <a href=\"https://apnews.com/article/california-newsom-mental-health-conservatorship-baef68d08e1f8fd57869f40db2f2adce\">make it easier to force people</a> with behavioral health issues into treatment.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/california-homelessness-mental-health-ballot-measure-94444373fe0bfe67366fd4952d030f8e",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 4,
+            "reason": "The document discusses a ballot measure in California aimed at addressing the homelessness crisis by updating the state's mental health system. It includes details about funding for mental health services, housing for homeless individuals with mental health and substance abuse issues, and the potential impact on existing programs. While the primary focus is on homelessness, the document extensively covers aspects related to mental health, which is a significant component of the health topic."
+        }
+    }
+}

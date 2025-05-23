@@ -1,0 +1,227 @@
+﻿{
+    "altids": {
+        "itemid": "9a32fba45d330f89fd0f7565d1fcbc10",
+        "etag": "9a32fba45d330f89fd0f7565d1fcbc10_0a4aza0c0",
+        "friendlykey": "973568268823",
+        "referenceid": "LT--Mexico-Salmonella Cantaloupe"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2023-12-15T19:38:40Z",
+    "firstcreated": "2023-12-15T19:38:40Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "LT--Mexico-Salmonella Cantaloupe",
+    "headline": "Mexico closes melon-packing plant implicated in cantaloupe Salmonella outbreak that killed 8 people",
+    "headline_extended": "Mexico's Health Department has ordered the temporary closure of a melon-packing plant implicated in salmonella infections that killed five people in Canada and three in the United States",
+    "slugline": "AP-LT--Mexico-Salmonella Cantaloupe",
+    "description_summary": "Mexico's Health Department has ordered the temporary closure of a melon-packing plant implicated in salmonella infections that killed five people in Canada and three in the United States. The department did not name the company involved, but the Public Health Agency of Canada linked the outbreak to Malichita and Rudy brand cantaloupes. Mexico did not say Friday what violations were found at the plant in the northern border state of Sonora, and said testing was being done to find the source of the contamination. Since October, at least 230 people in the U.S. and 129 in Canada have been sickened in this outbreak.",
+    "located": "MEXICO CITY",
+    "datelinelocation": {
+        "city": "Mexico City",
+        "countrycode": "MEX",
+        "countryname": "Mexico",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                -99.12766,
+                19.42847
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2023 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "Mexico salmonella cantaloupes outbreak"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "i",
+            "name": "i"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "49ff30f87f0010048248f571351eed07",
+            "name": "Salmonella infections",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 63
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 74
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "c8e409f8858510048872ff2260dd383e",
+            "name": "Business",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 39
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "bb2d2c5f441a452cb24bb511a2ab5eea",
+            "name": "World news",
+            "creator": "Editorial",
+            "editorial_subject": "World news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Editorial",
+            "editorial_subject": "Health",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "71071d107f4f10048f70df092526b43e",
+            "name": "Mexico City",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661af0c07d5b10048239c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "9d26a20b35f0484a891740f8189d4c7b",
+                "name": "City"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -99.12766,
+                    19.42847
+                ]
+            },
+            "relevance": 51,
+            "parentnames": [
+                "Mexico"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "661e48387d5b1004828fc076b8e3055c",
+            "name": "Canada",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661850e07d5b100481f7c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "01f56e0e654841eca2e69bf2cbcc0526",
+                "name": "Nation"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -96,
+                    60
+                ]
+            },
+            "relevance": 88,
+            "parentnames": [
+                "North America"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "661850e07d5b100481f5c076b8e3055c",
+            "name": "Latin America and Caribbean",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "body_nitf": "<p>MEXICO CITY (AP) \u2014 Mexico\u2019s Health Department on Friday ordered the temporary closure of a melon-packing plant implicated in salmonella infections that killed five people in Canada and three in the United States.</p><p>The department did not name the company involved, but Canada's Public Health Agency linked the outbreak to Malichita and Rudy brand cantaloupes.</p><p>Mexico did not say what violations were found at the plant in the northern border state of Sonora, and said testing was being done to find the source of the contamination.</p><p>Inspectors took samples of water and swiped surfaces at the plant to look for traces of salmonella bacteria.</p><p>Since October, at least 230 people in the U.S. and 129 in Canada have been <a href=\"https://apnews.com/article/cantaloupe-salmonella-malichita-recall-b0e630ffcab3aff0936d7c43d3c3b323\">sickened in this outbreak.</a></p><p>The cantaloupes implicated in this outbreak include two brands, Malichita and Rudy, that are grown in the Sonora area.</p><p>The fruit was imported by Sofia Produce LLC, of Nogales, Arizona, which does business as TruFresh, and Pacific Trellis Fruit LLC, of Los Angeles. So far, more than 36,000 boxes or cases of cantaloupe have been recalled.</p><p>Health <a href=\"https://apnews.com/article/cantaloupe-precut-salmonella-recall-9d96245825d370c85b0c5b71c0c08994\">officials are warning</a> consumers, retailers and restaurants not to buy, eat or serve cantaloupe if they don\u2019t know the source.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/mexico-salmonella-cantaloupes-outbreak-9a32fba45d330f89fd0f7565d1fcbc10",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 5,
+            "reason": "The document discusses a health-related issue involving a salmonella outbreak linked to cantaloupes, which resulted in fatalities and numerous infections in both the United States and Canada. It details the actions taken by health authorities, including the closure of a melon-packing plant and the recall of contaminated products. The document also provides information on the brands involved and the measures being taken to prevent further spread of the infection. All these points are directly related to public health concerns and safety measures."
+        }
+    }
+}

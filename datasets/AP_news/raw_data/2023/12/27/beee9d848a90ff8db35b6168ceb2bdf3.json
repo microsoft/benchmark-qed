@@ -1,0 +1,233 @@
+﻿{
+    "altids": {
+        "itemid": "beee9d848a90ff8db35b6168ceb2bdf3",
+        "etag": "beee9d848a90ff8db35b6168ceb2bdf3_0a2aza0c0",
+        "friendlykey": "230204889891",
+        "referenceid": "IN--Editorial Rdp"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Opinion",
+    "language": "en",
+    "versioncreated": "2023-12-27T02:48:36Z",
+    "firstcreated": "2023-12-27T02:48:35Z",
+    "editorialrole": "FullStory",
+    "fixture": {
+        "code": "21ea4067bb274c3b805353fb2b99ba70",
+        "name": "Editorial Roundup"
+    },
+    "pubstatus": "usable",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "IN--Editorial Rdp",
+    "headline": "Editorial Roundup: Indiana",
+    "slugline": "BC-IN--Editorial Rdp",
+    "bylines": [
+        {
+            "by": "By The Associated Press"
+        }
+    ],
+    "copyrightnotice": "Copyright 2023 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "Editorial Rdp"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cf909730889610048df9cb8225d5863e",
+            "name": "Education funding",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 79
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "5018b8f4ded948128561c5af2144ca66",
+            "name": "Shootings",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 31
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "4626a38a1b52454ca5d01755d14f1dc9",
+            "name": "Legal proceedings",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 31
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e22655687de410048f98df092526b43e",
+            "name": "Lung cancer",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 60
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "4f95136e072e41c6a81e8fa820e26e9c",
+            "name": "Children",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 53
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "c7544ceb29c7442c842ec6be185c620a",
+            "name": "Smoking",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 31
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "936045008844100486a2a28878d48e09",
+            "name": "Addiction and treatment",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 60
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86aad5207dac100488ecba7fa5283c3e",
+            "name": "Politics",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 71
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "c8e409f8858510048872ff2260dd383e",
+            "name": "Business",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 31
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "0760000082b2100483c7df092526b43e",
+            "name": "Indiana",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -86.25027,
+                    40.00032
+                ]
+            },
+            "relevance": 93,
+            "parentnames": [
+                "United States"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "0760000082b2100483c7df092526b43e",
+            "name": "Indiana",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "body_nitf": "<p>Fort Wayne Journal Gazette. December 19, 2023.</p><p>Editorial: Lawmaker reviving safe-storage bill after surge in youth shootings</p><p>When Fort Wayne police answered a shooting call at a home in September, they found Justin T. Wiley with a gunshot wound in the middle of his upper back, according to a probable cause affidavit.</p><p>Wiley, 32, told police he put a handgun on a bed in the home of a woman he was visiting, then her 2-year-old son grabbed the gun and pulled the trigger. Wiley, who is not legally allowed to carry a gun because of prior felony convictions, was charged with neglect of a child and unlawful possession of a handgun.</p><p>According to data collected by the advocacy group Everytown for Gun Safety, that September shooting contributed to Indiana having the third-highest number of unintentional shootings by children so far in 2023, resulting in nine children killed and 18 others injured.</p><p>Everytown\u2019s troubling data has prompted one Democratic state lawmaker to revive a failed attempt to promote safe firearm storage and penalize adults with children in the home who fail to do so.</p><p>\u201cIt highlights how serious the situation is,\u201d Rep. Mitch Gore, D-Indianapolis, told The Journal Gazette Monday of the Everytown report, \u201cand it strengthens my resolve.\u201d</p><p>In the Everytown analysis, Indiana\u2019s death rate fell behind just Texas and Florida, whose populations are four times and three times larger, respectively, than that of the Hoosier State. Shootings involved children as old as 17 and as young as 2, spanning from northeast Indiana to Evansville. While many of the incidents have taken place in larger cities, children have died in rural areas as well.</p><p>Gore, a captain with the Marion County Sheriff\u2019s Office, said two incidents have occurred in his district since last year, including a shooting that killed a 4-year-old.</p><p>\u201cThis past summer, in Cumberland, we had a 4-year-old little girl killed by her 5-year-old brother after they came across an unsecured handgun while grandma was downstairs babysitting a bunch of kids,\u201d he said. \u201cAnd then we all saw the year before a toddler running through an apartment complex in his diaper waving a handgun around in Beech Grove, which is also in my district.\u201d</p><p>Gore plans to reintroduce a safe-storage bill in the coming legislative session this January, he said, and expects support from some Republican lawmakers, though the GOP supermajority struck his original safe-storage amendment from 2022\u2019s House Bill 1296, which repealed the law requiring a license to carry a handgun in Indiana.</p><p>Gore\u2019s proposal would make it a crime to leave a firearm unsecured, but it also is intended to create awareness among adults that guns should be locked up away from children.</p><p>\u201cThey have been receptive, some of them, to my and others\u2019 attempts to get this done,\u201d he said of Republican legislators. \u201cRural communities are just as likely, if not more likely, to have firearms in the home. So I think even legislators from other parts of the state understand the need to take this issue seriously, and the need to remind gun owners of their responsibilities, not just their rights.\u201d</p><p>Indiana gun laws provide that a child\u2019s parent or guardian commits the crime of \u201cdangerous control of a child\u201d if he or she knowingly, intentionally or recklessly permits a child to possess a firearm. But there\u2019s no law that either requires unattended firearms to be stored in a certain way, or a locking device to accompany the sale of a firearm.</p><p>State lawmakers should consider legislation mandating all firearms be securely stowed in a locked gun safe or be fitted with trigger locks so they can\u2019t be accessed by curious children. Hoosiers must show proof of insurance after purchasing a vehicle. Why shouldn\u2019t it be compulsory for gun owners to safely store firearms in their homes?</p><p>Even the most diligent gun-owning parents can\u2019t watch their children every second of the day, which is why safe storage is critical for all Hoosier residents.</p><p>___</p><p>Anderson Herald Bulletin. December 22, 2023.</p><p>Editorial: Vouchers fund private schools at cost to public schools</p><p>As record numbers of students across Indiana take advantage of the state\u2019s near-universal voucher program, local private schools are seeing their enrollment numbers surge.</p><p>The move has raised concerns among public school officials who say subsidizing voucher access siphons needed funding away from public school districts seeking to attract and retain teachers in a difficult hiring environment.</p><p>School choice advocates counter that the vouchers provide opportunities to families who otherwise wouldn\u2019t be able to chart educational paths of their choosing for their children.</p><p>If public school is, in fact, an inferior education to private school, and we\u2019re not convinced that it is, then our legislature\u2019s first priority should be improving the quality of public education.</p><p>Sending students elsewhere doesn\u2019t address the problem, nor does it show concern for the children who are still attending public school.</p><p>It\u2019s much like the manager of Walmart sending people to Target because it\u2019s a cleaner store. Such a manager should be immediately fired for not cleaning up their own store first.</p><p>Furthermore, the voucher system sends public funds to private schools, some of them being faith-based institutions.</p><p>The problem with government funds going to religious institutions should be an obvious violation of church-state separation, but advocates of school choice don\u2019t seem to notice or care.</p><p>Their argument is that money shouldn\u2019t stand in the way of people with religious values being able to send their child to a school that reflects their values.</p><p>That argument may have some merit but it doesn\u2019t change the fact that the state shouldn\u2019t be in the business of funding religious schools.</p><p>If politicians are interested in funding education, they should start with public schools and let private schools remain private.</p><p>___</p><p>Kokomo Tribune. December 22, 2023.</p><p>Editorial: Lawmakers must make health of all Hoosiers a priority</p><p>From the newly born to the elderly, health among Hoosiers is a major concern for everyone. Top concerns include the state\u2019s high maternal and infant mortality rates, the alarming rates of drug and tobacco use among teens and young adults, cancer rates, mental health and issues inside institutions caring for the elderly.</p><p>The state\u2019s various health rankings are concerning: mental health is 35th in the nation; infant mortality, 42nd; early adult mortality, 40th; obesity ranks 39th, smoking ranks 42nd and suicide is 28th, according to US News and World Report\u2019s 2022 \u201cBest States\u201d rankings.</p><p>In all, the media company ranks the Hoosier state 43rd in overall health.</p><p>Financially speaking, Hoosiers\u2019 poor health is costing the state and its businesses and residents more than $87 billion, according to Gov. Eric Holcomb\u2019s Public Health Commission.</p><p>Recommendations from the commission all point to this: More public money needs to be spent on health care in Indiana.</p><p>Early into the Indiana Senate\u2019s 2023 legislative session, the governor\u2019s commission met with legislators with proposed changes to the way Indiana tackles public health.</p><p>When the Indiana General Assembly passed its primary budget bill April 28, state health funding had increased. Specifically focused on decreasing overdoses, $5 million from an opioid settlement fund was allocated to the Substance Abuse Prevention, Treatment and Enforcement Program to combat addiction. From the state\u2019s opioid settlement fund, $18.7 million was approved for substance abuse treatment and overdose intervention. The funds will be split between fiscal years 2024 and 2025.</p><p>ADDICTION ISSUES</p><p>Lung cancer is the leading cause of cancer-related deaths worldwide, with millions of new cases diagnosed each year. Tobacco products are the primary risk factor for lung cancer.</p><p>Lawmakers should look at neighboring states and their increased tobacco product taxes as a way to help deter use among Hoosiers.</p><p>YOUNG HOOSIERS</p><p>While the state\u2019s infant mortality as a whole has declined in recent years, the eastern and central southwestern portions of Indiana saw an increase over the past five years.</p><p>Holcomb launched the \u201cMy Health Baby\u201d program in 2022, which was part of his goal to make Indiana\u2019s infant mortality rate the lowest in the Midwest by 2024. More outreach is needed to help Black Hoosier women whose numbers of deaths are staggering: According to the 2022 Indiana Maternal Mortality Annual Report, Indiana\u2019s pregnancy-associated mortality ratio was 117 per 100,000 live births in 2020, representing a 58% increase from 2019. For Black women, it\u2019s twice the average rate and three times higher than the rate for white women.</p><p>OLDER HOOSIERS</p><p>By the year 2035, the number of adults over the age of 65 is expected to outnumber the number of children under 18, according to a report this year by the Indiana Capital Chronicle. And it\u2019s well-documented that Indiana is facing an assisted living and nursing home crisis.</p><p>Add in the fact that chronic worker shortages and funding issues at those facilities are making it harder for elders to find a quality place to spend their golden years. More must be done to better monitor the state\u2019s nursing homes to protect older Hoosiers.</p><p>END</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/beee9d848a90ff8db35b6168ceb2bdf3",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 3,
+            "reason": "The document contains three editorials, each addressing different topics. The first editorial discusses gun safety and legislation related to firearm storage, which is not directly related to health. The second editorial focuses on the impact of vouchers on public and private schools, which is also not directly related to health. The third editorial, however, is highly relevant to health as it discusses various health concerns in Indiana, including maternal and infant mortality rates, drug and tobacco use, cancer rates, mental health, and issues in elderly care. Given that only one of the three editorials is directly related to health, the overall relevance of the document to the topic of health is moderate."
+        }
+    }
+}

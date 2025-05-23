@@ -1,0 +1,200 @@
+﻿{
+    "altids": {
+        "itemid": "1a32afd14e3b0c031d9829059b13439f",
+        "etag": "1a32afd14e3b0c031d9829059b13439f_0a2aza0c0",
+        "friendlykey": "107551945205",
+        "referenceid": "MO--Editorial Rdp"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Opinion",
+    "language": "en",
+    "versioncreated": "2024-03-05T12:10:38Z",
+    "firstcreated": "2024-03-04T17:27:12Z",
+    "editorialrole": "FullStory",
+    "fixture": {
+        "code": "21ea4067bb274c3b805353fb2b99ba70",
+        "name": "Editorial Roundup"
+    },
+    "pubstatus": "usable",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "MO--Editorial Rdp",
+    "headline": "Editorial Roundup: Missouri",
+    "slugline": "BC-MO--Editorial Rdp",
+    "bylines": [
+        {
+            "by": "By The Associated Press"
+        }
+    ],
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "Editorial Rdp"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "person": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "1a219c5dfe214490bc1d667a64f61f3f",
+            "name": "M\u00d8",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "MUSICIAN",
+                "ENTERTAINMENT_FIGURE",
+                "PERSON"
+            ],
+            "relevance": 64
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "394e30d2e3154229adc5f260b483adaa",
+            "name": "Premature births",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 38
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "c40fab387e891004837ad7e4e3aa4207",
+            "name": "Prenatal care",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 60
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e2305bd07de410048fcfdf092526b43e",
+            "name": "Pregnancy and childbirth",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 48
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86aad5207dac100488ecba7fa5283c3e",
+            "name": "Politics",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "bd8c35d082c4100486d5df092526b43e",
+            "name": "Missouri",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -92.50046,
+                    38.25031
+                ]
+            },
+            "relevance": 93,
+            "parentnames": [
+                "United States"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "bd8c35d082c4100486d5df092526b43e",
+            "name": "Missouri",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "body_nitf": "<p>Kansas City Star. March 1, 2024.</p><p>Editorial: Pregnant women in dangerous marriages need help. Update this Missouri law</p><p>Much has been made of Missouri\u2019s archaic law that restricts a judge from finalizing a divorce if a woman is pregnant. And rightfully so. Any measure that prevents anyone from leaving a potentially dangerous situation is a problem that should be fixed.</p><p>The draconian law has been on the books since 1973, last amended in 2016, and needs an update. Under the measure, a family court judge cannot finalize a divorce until a child is born, paternity is established and a custody agreement is put in place. The intent is to protect the financial and emotional well-being of the mother and child, a concept we support.</p><p>But no exceptions exist with the current law. As a result, victims of physical or emotional abuse or spousal rape could be put at the mercy of their abusers, victim advocates have warned.</p><p>We see no other recourse to this present ban: The Missouri General Assembly must act on House Bill 2402, a proposal that would allow a judge to finalize a divorce or legal separation no matter a woman\u2019s pregnancy status.</p><p>Introduced earlier this year by state Rep. Ashley Aune, a Democrat from Platte County, the measure did advance to the House Emerging Issues Committee, an encouraging development, Aune told us this week.</p><p>Last year, a similar bill she proposed failed to gain traction. This year\u2019s version has bipartisian support but needs some tweaks, according to Aune.</p><p>\u201cThe language is pretty broad,\u201d she said.</p><p>Once more instructive language is added, Aune is hopeful the proposal will advance out of committee for a full vote before the House.</p><p>\u201cWhat I am trying to do is for a judge to have another tool in the tool box to end a marriage,\u201d she said.</p><p>H.B. 2402 is co-sponsored by Republican state Reps. Jeff Farnan of Stanberry and Sherri Gallick of Belton and Rep. Richard Brown, a Democrat from Kansas City.</p><p>Farnan represents Nodaway, Gentry, Holt and Atchison counties in northwest Missouri. During a Feb. 7 public hearing on the legislation, he said he was not aware of the current law. Three days later, he signed on as co-sponsor.</p><p>\u201cHas this law always been this way?\u201d Farnan inquired at the hearing. \u201cI\u2019ve never even heard of anything like this.\u201d</p><p>Missouri isn\u2019t the only state that bars judges from finalizing divorce while a woman is pregnant, according to the American Pregnancy Association, a nonprofit anti-abortion organization. Arkansas, Arizona and Texas are the others.</p><p>\u201cIt is to me, an unintended consequence of the good intentions we have in our statute to prevent what the courts call the bastardization of a child,\u201d Aune testified at the hearing. \u201cWe want to make sure babies that are born have that support.</p><p>But what I\u2019m trying to do here is really give judges an opportunity to determine if the situation requires an additional step.\u201d</p><p>In other states, judges have the discretion to dissolve a marriage even if a woman is pregnant. In the best interest of all parties involved in family court matters, Missouri lawmakers should give judges in our state the ability to make those tough calls, too.</p><p>HOMICIDE 3RD LEADING CAUSE OF PREGNANCY RELATED DEATHS</p><p>Last year, the Missouri Department of Health and Senior Services released the findings of a multiyear review of maternal mortality. Homicide was the third leading cause of death among all pregnancy related deaths, according to the review.</p><p>In each of the eight homicides reported, the perpetrator was either a current or former partner, according to DHSS.</p><p>Giving a judge more power to expedite the dissolution process could possibly prevent these unfortunate tragedies.</p><p>Lawmakers must consider the overall health of an unborn child. Experiencing domestic violence during pregnancy puts both mother and child at risk, according to Matthew Huffman, chief public affairs officer for the Missouri Coalition Against Domestic and Sexual Violence, a statewide association made up of service providers for abuse victims.</p><p>\u201cWomen who are abused during pregnancy are more likely to receive no prenatal care or delay receiving any care because of the abuse they\u2019re already experiencing by their partner and that partner controlling their access to health care,\u201d Huffman told members of the Emerging Issues Committee.</p><p>\u201cMaternal exposure to domestic violence is associated with significantly increased risk of low birth weight and preterm birth,\u201d he said. \u201cInfants exposed to domestic violence can show signs of trauma that include problems eating, sleep disturbances, higher irritability and delays in development.\u201d</p><p>A pregnancy should not preclude a divorce from proceeding \u2014 especially if the woman is at risk. Missouri lawmakers must join many other states that give a family court judge the option to finalize a divorce between a pregnant woman and her spouse.</p><p>Keeping an archaic law on the books makes little sense. The protection and health of a mother and unborn child are more important than outdated state statutes.</p><p>___</p><p>St. Louis Post-Dispatch. February 27, 2024.</p><p>Editorial: Why did Missouri literally put its seal of approval on illegal gambling?</p><p>The thousands of illegal video gaming machines operating with impunity throughout Missouri will continue operating, for now, but without an official Missouri seal on them.</p><p>It\u2019s a small but notable victory if only in that it shows there actually are lines our state legislators won\u2019t cross in defense of this well-heeled, parasitic industry.</p><p>Give Torch Electronics points for gumption. The Wildwood-based company has placed thousands of its unlicensed video gaming machines in gas stations and elsewhere all over Missouri, in open defiance of state gambling laws. For years, it has siphoned off money from public education by peeling away gambling patrons from licensed casinos without paying the state a dime in gambling taxes.</p><p>The company even managed, for a time, to finagle what amounted to an official seal of approval from Missouri\u2019s state government on its illegal games \u2014 though that stunt has now, blessedly, backfired.</p><p>State Treasurer Vivek Malek had the bright idea to display official state ads publicizing his office\u2019s unclaimed property program on Torch\u2019s unlicensed gaming machines, which have been at the center of political and legal controversy for years.</p><p>Malek on Tuesday was forced to <a href=\"https://www.textise.net/showText.aspx?strURL=https%3A%2F%2Fwww.stltoday.com%2Fnews%2Flocal%2Fgovernment-politics%2Fmissouri-treasurer-reverses-course-on-cringeworthy-deal-with-gambling-company%2Farticle_433a4568-d596-11ee-bf01-178d1a869ebe.html%23tracking-source%3Dhome-top-story\">reverse course</a> and announce he will have those seals removed, in a rare instance of Missouri lawmakers standing up to the industry.</p><p>Malek had defended his decision to partner his office with a company that openly flouts state gaming laws by noting that Torch wasn\u2019t charging the state to display the ads.</p><p>Of course it wasn\u2019t \u2014 because the ads would fool players into thinking the machines are officially sanctioned and regulated, while helping further entrench an illegal industry with the sheen of state approval.</p><p>Missouri\u2019s licensed casinos operate under a regulatory system that ensures the games are fair, provides information for problem gamblers and heavily taxes the profits to help fund education.</p><p>The companies that operate the video gaming machines (Torch is the biggest of several) avoid all that pesky regulation and taxes by claiming the games aren\u2019t actually gambling because of the way they\u2019re structured.</p><p>Nonsense. People put money in hoping to win more back, and sometimes they do. That\u2019s gambling.</p><p>That\u2019s why the Missouri Gaming Association and others have long called for the state to crack down. Alas, the gaming machine industry has high-priced lobbyists in Jefferson City who <a href=\"https://www.textise.net/showText.aspx?strURL=https%3A%2F%2Fwww.stltoday.com%2Fopinion%2Feditorial%2Feditorial-bailey-bails-on-court-fight-with-unlicensed-gaming-figures-who-donate-to-him%2Farticle_09bd255c-e3a3-11ed-b43d-0b653faa409e.html\">pad the pockets of politicians</a>, who have obediently refrained from interfering with its illegal profit.</p><p>But Malek\u2019s move to put state public service announcements on the machines turned out to be a bridge too far even for them.</p><p>The announcements literally displayed an official state seal. They also displayed Malek\u2019s name as he seeks election to the office to which he was appointed.</p><p>\u201cIt\u2019s no secret that this is designed to make these machines appear as if they are operated by the state of Missouri,\u201d State Rep. Scott Cupps, R-Shell Knob, chair of the House subcommittee that controls the treasurer\u2019s budget, said last week.</p><p>As the Post-Dispatch\u2019s Kurt Erickson <a href=\"https://www.textise.net/showText.aspx?strURL=https%3A%2F%2Fwww.stltoday.com%2Fnews%2Flocal%2Fgovernment-politics%2Fmissouri-treasurer-under-fire-over-ads-on-slot-machines%2Farticle_3738e95e-d0d7-11ee-9085-cbf193e4afec.html\">reported</a> then, Cupps expressed frustration with Malek for refusing to appear before his subcommittee to explain the decision to effectively give the machines the state\u2019s imprimatur.</p><p>\u201cMan, this is bad,\u201d Cupps told the subcommittee. \u201cThis is bad government. We have the state seal and the state treasurer\u2019s name on illicit gambling machines.\u201d</p><p>Malek last week <a href=\"https://www.textise.net/showText.aspx?strURL=https%3A%2F%2Fmissouriindependent.com%2F2024%2F02%2F23%2Fmissouri-treasurer-fires-back-at-critic-of-ads-on-unregulated-slot-machines\">responded</a> with a letter to Cupps pushing back on the implication of impropriety. He maintained that the promotional campaign \u201cis neither a state endorsement of gaming nor a statement regarding the legality of the machines in question.\u201d</p><p>And how was the average gambler supposed to know that?</p><p>Most of Missouri\u2019s political leaders have, until now, been generally passive enablers of a rogue industry that drains education funding. But allowing a Missouri seal to remain on those machines would arguably have made them more like accomplices. Which was apparently too much even for this Legislature.</p><p>Under heavy pressure from both parties and lousy publicity for a week, Malek on Tuesday announced the promotional materials would come off the machines.</p><p>The episode may ultimately prove useful in that is has given Missouri voters a clear example of Malek\u2019s judgment as he seeks to win a full term as state treasurer. It\u2019s not a good look.</p><p>In a final defense of his indefensible original program, Malek (perhaps inadvertently) said the quiet part out loud, declaring, \u201cI am not here to judge Missourians who gamble. I am not the state pastor.\u201d</p><p>But the industry says this isn\u2019t really gambling, remember?</p><p>Of course it\u2019s gambling. And it\u2019s costing the state money for its schools and legitimacy in its laws. Now that some lawmakers have discovered they can confront this shady industry without the sky falling, they should make the obvious next play and finally shut them down.</p><p>END</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/1a32afd14e3b0c031d9829059b13439f",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 3,
+            "reason": "The document contains two editorials, one of which is highly relevant to health. The first editorial discusses the impact of Missouri's divorce law on pregnant women in dangerous marriages, highlighting the health risks associated with domestic violence during pregnancy. It provides statistics on maternal mortality and the negative health outcomes for both mother and child due to domestic violence. The second editorial, however, focuses on illegal gambling and its implications for state governance and education funding, which is not relevant to health. Given that half of the document is highly relevant to health, the overall rating is adjusted accordingly."
+        }
+    }
+}

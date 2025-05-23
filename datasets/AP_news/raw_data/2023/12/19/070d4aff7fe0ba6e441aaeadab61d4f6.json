@@ -1,0 +1,209 @@
+﻿{
+    "altids": {
+        "itemid": "070d4aff7fe0ba6e441aaeadab61d4f6",
+        "etag": "070d4aff7fe0ba6e441aaeadab61d4f6_0a2aza0c0",
+        "friendlykey": "912266842734",
+        "referenceid": "MS--Editorial Rdp"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Opinion",
+    "language": "en",
+    "versioncreated": "2023-12-20T12:10:42Z",
+    "firstcreated": "2023-12-19T19:50:24Z",
+    "editorialrole": "FullStory",
+    "fixture": {
+        "code": "21ea4067bb274c3b805353fb2b99ba70",
+        "name": "Editorial Roundup"
+    },
+    "pubstatus": "usable",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "MS--Editorial Rdp",
+    "headline": "Editorial Roundup: Mississippi",
+    "slugline": "BC-MS--Editorial Rdp",
+    "bylines": [
+        {
+            "by": "By The Associated Press"
+        }
+    ],
+    "copyrightnotice": "Copyright 2023 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "Editorial Rdp"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "person": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "7a7dc5869fe246a6b90a6846a20531e9",
+            "name": "Tate Reeves",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "POLITICIAN",
+                "PERSON"
+            ],
+            "relevance": 90
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86aad5207dac100488ecba7fa5283c3e",
+            "name": "Politics",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 59
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86aee4307dac10048901ba7fa5283c3e",
+            "name": "Elections",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 32
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "6cd98adfc84d405eadec8ca81bd37df4",
+            "name": "Access to health care",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 67
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "1b29d45f8e8e4c008e8a58fe6f92a753",
+            "name": "Government programs",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 42
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "523699d088e910048f43f8851349f9bd",
+            "name": "Government regulations",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 42
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "b3dfffa882c4100486c3df092526b43e",
+            "name": "Mississippi",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -89.75036,
+                    32.75041
+                ]
+            },
+            "relevance": 84,
+            "parentnames": [
+                "United States"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "b3dfffa882c4100486c3df092526b43e",
+            "name": "Mississippi",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "body_nitf": "<p>Greenwood Commonwealth. December 16, 2023.</p><p>Editorial: Reeves Gets OK On Hospital Plan</p><p>Tate Reeves was late to the hospital rescue crusade, but the Mississippi governor has pulled off what could be a vital part in the effort. This past week, Reeves announced that one of his two plans \u2014 and the largest of the two \u2014 to provide additional Medicaid funding to the state\u2019s hospitals has been approved by the federal government.</p><p>The change is expected to net the hospitals about $600 million a year extra in reimbursements from the state-federal insurance program that provides coverage to the poor and disabled. Another $100 million piece is still waiting on a decision by federal regulators.</p><p>Struggling rural hospitals, such as Greenwood Leflore Hospital, have described this additional funding as a \u201cgame changer.\u201d The Greenwood hospital\u2019s administration has estimated that Reeves\u2019 two plans combined would bring an extra $10 million annually to the hospital. That big bump in government funding has raised the hopes that Greenwood\u2019s hospital, whose fate seemed dire not long ago, could survive even if its pending application for a critical-access designation \u2014 and the extra Medicare funds that separately come with it \u2014 can\u2019t get past a federal regulation that stands in the way.</p><p>Reeves, it should be remembered, was pushed to address the hospital crisis by a tough reelection challenge from Brandon Presley. The Democratic opponent rested a big part of his campaign on the state\u2019s hospital crisis and the Republican incumbent\u2019s absolute refusal to help the hospitals by expanding Medicaid to cover an estimated 200,000 to 300,000 of the currently uninsured.</p><p>Instead, Reeves embraced as an alternative an idea previously pitched by the hospitals themselves \u2014 namely, to tax the hospitals and use that money to leverage additional federal funding.</p><p>It is a relief that it has worked out.</p><p>We still would prefer that Mississippi expand Medicaid, too. That\u2019s a billion dollars a year from Washington that the state continues to thumb its nose at, while 40 other states are happy to take the money.</p><p>But give credit where credit is due. Reeves produced a plan to help Mississippi\u2019s hospitals in a significant way, and to do it without requiring the taxpayers to come up with the state\u2019s share of the cost. It might have required an election to get him focused on the hospital crisis, but elections \u2014 particularly competitive ones \u2014 have a way of shaping the priorities of those in office who are trying to keep their jobs.</p><p>END</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/070d4aff7fe0ba6e441aaeadab61d4f6",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 5,
+            "reason": "The document discusses a significant development in healthcare funding in Mississippi, specifically focusing on additional Medicaid funding for hospitals. It details the impact of this funding on rural hospitals and the political context surrounding the decision. The content is directly related to healthcare policy, hospital funding, and Medicaid, making it highly relevant to the topic of Health."
+        }
+    }
+}

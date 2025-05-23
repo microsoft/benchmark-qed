@@ -1,0 +1,353 @@
+﻿{
+    "altids": {
+        "itemid": "20b408ae829043d75f07634f94707ec3",
+        "etag": "20b408ae829043d75f07634f94707ec3_1a8aza0c0",
+        "friendlykey": "149892554117",
+        "referenceid": "US--Senate-Radiation"
+    },
+    "version": 1,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2024-03-08T01:48:41Z",
+    "firstcreated": "2024-03-07T20:58:12Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "ednote": "Eds: UPDATES: Updates with detail and quotes from New Mexico, adds contrib line.",
+    "editorialtypes": [
+        "Lead"
+    ],
+    "signals": [
+        "newscontent"
+    ],
+    "title": "US--Senate-Radiation",
+    "headline": "Senate passes bill to compensate Americans exposed to radiation by the government",
+    "headline_extended": "The Senate has passed legislation that would compensate Americans exposed to radiation by the government by renewing a law initially passed more than three decades ago",
+    "slugline": "BC-US--Senate-Radiation, 1st Ld-Writethru",
+    "description_summary": "The Senate has passed legislation that would compensate Americans exposed to radiation by the government by renewing a law initially passed more than three decades ago. The bill by Missouri Sen. Josh Hawley, a Republican, and New Mexico Sen. Ben Ray Lujan, a Democrat, would expand the Radiation Exposure Compensation Act. It would include more people who believe their illnesses were caused by that exposure. It would cost an estimated $50 billion, according to Hawley's office. While many Republicans have balked at that cost, the senators have argued that the government is at fault and should step up. The bill's prospects in the House are uncertain.",
+    "bylines": [
+        {
+            "by": "By MARY CLARE JALONICK and JIM SALTER",
+            "title": "Associated Press"
+        }
+    ],
+    "located": "WASHINGTON",
+    "datelinelocation": {
+        "city": "Washington",
+        "countryareacode": "DC",
+        "countryareaname": "District of Columbia",
+        "countrycode": "USA",
+        "countryname": "United States",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                -77.03637,
+                38.89511
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "senate radiation bill hawley missouri nuclear waste"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "person": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "42fcd5108d2610048a34f7ae5e3ffd3e",
+            "name": "Joe Biden",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "POLITICIAN",
+                "PERSON"
+            ],
+            "relevance": 39
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "776e3c2e913b475eb54bb88cfa428c6b",
+            "name": "Ben Lujan",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "POLITICIAN",
+                "PERSON"
+            ],
+            "associatedstates": [
+                {
+                    "code": "aacce28082c6100487e4df092526b43e",
+                    "name": "New Mexico"
+                }
+            ],
+            "relevance": 56
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f3410c6100c0440bb53593fd3c3d20d8",
+            "name": "Josh Hawley",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "POLITICIAN",
+                "PERSON"
+            ],
+            "relevance": 75
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "w",
+            "name": "w"
+        },
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e22563387de410048f92df092526b43e",
+            "name": "Breast cancer",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86c1b8807dac10048990ba7fa5283c3e",
+            "name": "Legislation",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 46
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e57b6c907e3810048ae4df092526b43e",
+            "name": "Public health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 86
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86aad5207dac100488ecba7fa5283c3e",
+            "name": "Politics",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 63
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Editorial",
+            "editorial_subject": "Health",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "abfca78268874726966cdad8c35c4ae3",
+            "name": "Washington news",
+            "creator": "Editorial",
+            "editorial_subject": "Washington news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        }
+    ],
+    "organisation": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "898f52e08921100480efba0a2b2ca13e",
+            "name": "United States government",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 96
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "788b364882f110048df3df092526b43e",
+            "name": "District of Columbia",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "9d26a20b35f0484a891740f8189d4c7b",
+                "name": "City"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -77.00025,
+                    38.91706
+                ]
+            },
+            "relevance": 56,
+            "parentnames": [
+                "United States"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "bd8c35d082c4100486d5df092526b43e",
+            "name": "Missouri",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -92.50046,
+                    38.25031
+                ]
+            },
+            "relevance": 40,
+            "parentnames": [
+                "United States"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "661850e07d5b100481f5c076b8e3055c",
+            "name": "Latin America and Caribbean",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "bd8c35d082c4100486d5df092526b43e",
+            "name": "Missouri",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "aacce28082c6100487e4df092526b43e",
+            "name": "New Mexico",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "associations": {
+        "1": {
+            "altids": {
+                "itemid": "f36681b50f864e4a9474e70902fa4f1d"
+            },
+            "type": "picture"
+        }
+    },
+    "body_nitf": "<p>WASHINGTON (AP) \u2014 The Senate passed legislation Thursday that would compensate Americans <a href=\"https://apnews.com/hub/radiation-exposure\">exposed to radiation</a> by the government by renewing a law initially passed more than three decades ago.</p><p>The bill by Sens. Josh Hawley, R-Mo., and Ben Ray Lujan, D-N.M., would expand the Radiation Exposure Compensation Act to include more people who believe that exposure caused their illnesses. While some Republicans have balked at the cost \u2014 an estimated $50 billion, according to Hawley\u2019s office \u2014 the senators have argued that the government is at fault and should step up.</p><p>Hawley stood outside the Senate before the vote with advocates for the legislation, several of whom have been diagnosed with cancers or who have family members who have been diagnosed. He said it\u2019s \u201chard to look them in the eye\u201d and say they were poisoned by their government, \u201cbut we\u2019re not going to be there for you.\u201d</p><p>The bill passed the Senate 69-30, with 20 Republicans and all but two Democrats voting in favor. But its prospects in the House are uncertain.</p><p>Uranium processing in the St. Louis area played a pivotal role in developing the nuclear weapons that helped bring an end to World War II and provided a key defense during the Cold War. But eight decades later, the <a href=\"https://apnews.com/article/nuclear-contamination-waste-st-louis-takeaways-39378ddae0cdca09f972196c6965cd28\">region is still dealing with contamination</a> at several sites.</p><p>In July, <a href=\"https://apnews.com/article/nuclear-waste-cancer-st-louis-army-corps-school-9e1ceb765822fc53fcbc2e42005adef2\">an investigation published</a> by The Associated Press, The Missouri Independent and MuckRock showed that the federal government and companies responsible for nuclear bomb production and atomic waste storage sites in the St. Louis area were aware of health risks, spills, improperly stored contaminants and other problems but often ignored them.</p><p>While it is difficult to prove definitively that the waste caused residents\u2019 illnesses, the advocates argue that there is more than enough evidence that it has sickened people in the area.</p><p>\u201cI am a two-time breast cancer survivor,\u201d said Missouri state Rep. Chantelle Nickson-Clark, a Democrat who represents Florissant, an area that sits along the creek that was contaminated by nuclear waste in the 1960s. \u201cI lost my mother to breast cancer, an aunt to breast cancer. Two cousins that are breast cancer survivors, a nephew that had a cancerous brain tumor and other genetic mutation deficiencies in my family. I\u2019m here to represent a community that has been underserved, undervalued, underrepresented and unheard.\u201d</p><p>President Joe Biden signed an executive order in 2022 extending RECA for two years, but it expires in June. Hawley\u2019s bill would extend the law for five years and expand coverage to include people in Missouri as well as Idaho, Montana, Colorado, Tennessee, Kentucky, Alaska and Guam.</p><p>The White House indicated Wednesday that Biden would sign the legislation.</p><p>\u201cThe President believes we have a solemn obligation to address toxic exposure, especially among those who have been placed in harm\u2019s way by the government\u2019s actions,\u201d the White House said in a statement.</p><p>Others worried about the cost. The taxpayer advocacy group Committee for a Responsible Federal Budget said that the legislation should include budget offsets to pay for it.</p><p>Advocates have been fighting for years to expand the program to include more sites in the U.S. In New Mexico, residents in the communities surrounding the area where the first atomic bomb was detonated in 1945 \u2014 the top-secret Manhattan Project \u2014 were not warned of the radiological dangers and didn\u2019t realize that an atomic blast was the source of the ash that was raining down upon them. That included families who lived off the land \u2014 growing crops, raising livestock and getting their drinking water from cisterns.</p><p>Tina Cordova, a cancer survivor and founder of a group of New Mexico downwinders, talked about the wave of momentum for expanding the compensation program that has <a href=\"https://apnews.com/article/oppenheimer-atomic-bomb-radiation-legacy-new-mexico-85d2b6f57395520a924dd44c492e4c56\">been building since \u201cOppenheimer,\u201d</a> a film about the development of the first atomic bomb, premiered last year.</p><p>\u201cYou know, we are ground zero,\u201d she said. \u201cWe\u2019re where it all started. The origins of the whole nuclear program are in New Mexico, and we were the first people exposed to radiation as a result of an atomic bomb and to be left out for 79 years is just truly unacceptable.\u201d</p><p>Cordova has had many family members and friends die of cancer over the years. Thursday marked the 11th anniversary of her father\u2019s death, and she said she was thankful to be in Washington to celebrate the vote.</p><p>\u201cPeople have been waiting for justice for far too long, and it\u2019s just simply time to do the right thing,\u201d she said.</p><p>The vote was a rare up-or-down roll call on standalone legislation as Congress is busy trying to fund the government. Senate Majority Leader Chuck Schumer, D-N.Y., announced that he would put the bill on the Senate floor last week amid negotiations on the spending package.</p><p>Hawley would not say if he had threatened to hold up the spending bill over his legislation, which was included in a massive defense bill last year but stripped out at the last minute. But he said he had pledged to use \u201cevery tool at his disposal\u201d to get the bill passed.</p><p>Persuading the GOP-led House to take up and pass the legislation could be more difficult. Rep. Cori Bush, D-Mo., is among those pushing for the measure.</p><p>In St. Louis, nuclear waste stored near Lambert Airport made its way into Coldwater Creek in the 1960s. Many people who live near the meandering creek believe the contamination is responsible for cancers and other illnesses, though experts say connecting radiation exposure to illness is complicated. Cancer concerns also have been raised by people in nearby St. Charles County, Missouri, where uranium was processed and a large quarry became contaminated, resulting in a Superfund cleanup.</p><p>In 2022, a St. Louis County <a href=\"https://apnews.com/article/health-education-cancer-st-louis-missouri-be4a2acec5aeeae1fff94aca76f056a1\">grade school closed</a> amid worries that contamination from Coldwater Creek got onto the playground and inside the building. The Army Corps of Engineers announced this week that it is <a href=\"https://apnews.com/article/nuclear-contamination-study-st-louis-county-982fa4c3e2714f45dcd3794c0ab25489\">testing a few homes near the creek</a> after high radiation levels were found in their backyards.</p><p>After the report by AP and the other news agencies last year, Hawley introduced an amendment to the annual defense bill that would have extended the law. It also would have provided health care coverage and compensation to so-called \u201cdownwinders\u201d exposed to radiation during weapons testing in several new regions, as well as to people in Missouri who were exposed to the nuclear waste. But it was removed during negotiations with the House.</p><p>Advocates for the bill who traveled to Washington for the vote said it represents hope for them and their families as they have been burdened with medical costs.</p><p>Christen Commuso, who works for the advocacy group Missouri Coalition for the Environment, said she has dealt with many health issues, including thyroid cancer, and has had to at times ration her care because it is so costly.</p><p>\u201cIt\u2019s not about putting money in my pocket,\u201d Commuso said. \u201cIt\u2019s about providing me the ability to get the care that I deserve and need.\u201d</p><p>___</p><p>Associated Press writer Susan Montoya contributed from Albuquerque, N.M. Salter reported from O\u2019Fallon, Mo.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/senate-radiation-bill-hawley-missouri-nuclear-waste-20b408ae829043d75f07634f94707ec3",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 5,
+            "reason": "The document discusses a Senate bill aimed at compensating Americans exposed to radiation by the government, which has significant health implications. It details the health issues faced by individuals exposed to radiation, including various types of cancer and other illnesses. The document also mentions the need for medical care and the financial burden of health costs on affected individuals. Given the strong focus on health-related consequences of radiation exposure and the legislative efforts to address these health issues, the document is highly relevant to the topic of health."
+        }
+    }
+}

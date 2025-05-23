@@ -1,0 +1,223 @@
+﻿{
+    "altids": {
+        "itemid": "968df3fb5b53a1fb678c27afcebccbf1",
+        "etag": "968df3fb5b53a1fb678c27afcebccbf1_0a4aza0c0",
+        "friendlykey": "349959587281",
+        "referenceid": "LA--Blue Cross-Sale"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2024-02-06T22:38:11Z",
+    "firstcreated": "2024-02-06T22:38:11Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "ednote": "Eds: UPDATES: Updates Media.",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "LA--Blue Cross-Sale",
+    "headline": "Nonprofit Blue Cross and Blue Shield of Louisiana seeks approval for sale to Elevance",
+    "headline_extended": "Louisiana officials are discussing a possible $2.5 billion sale of a large health insurance nonprofit that nearly half of the state\u2019s residents get their insurance from",
+    "slugline": "AP-LA--Blue Cross-Sale",
+    "description_summary": "Louisiana officials are discussing a possible $2.5 billion sale of a large health insurance nonprofit that nearly half of the state\u2019s residents get their insurance from. A legislative committee held an hourslong meeting Monday on whether to sell Blue Cross and Blue Shield of Louisiana to the for-profit giant Elevance Health, which is based in Indiana and is one of the nation's largest insurers. Policyholders have been split on the proposed sale. Some fear that under Elevance they could see increases in their premiums while others argue that the sale would mean improved services.",
+    "located": "BATON ROUGE, La.",
+    "datelinelocation": {
+        "city": "Baton Rouge",
+        "countryareacode": "LA",
+        "countryareaname": "Louisiana",
+        "countrycode": "USA",
+        "countryname": "United States",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                -91.18747,
+                30.44332
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "Blue Cross Elevance Louisiana health insurance sale"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "08685a1085af10048c519a5aeba5fb06",
+            "name": "Philanthropy",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 41
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "c8e409f8858510048872ff2260dd383e",
+            "name": "Business",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 89
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Editorial",
+            "editorial_subject": "Health",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "43fb970882b310048496df092526b43e",
+            "name": "Louisiana",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -92.0004,
+                    31.00047
+                ]
+            },
+            "relevance": 70,
+            "parentnames": [
+                "United States"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "0760000082b2100483c7df092526b43e",
+            "name": "Indiana",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -86.25027,
+                    40.00032
+                ]
+            },
+            "relevance": 57,
+            "parentnames": [
+                "United States"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "43fb970882b310048496df092526b43e",
+            "name": "Louisiana",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "0760000082b2100483c7df092526b43e",
+            "name": "Indiana",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "associations": {
+        "1": {
+            "altids": {
+                "itemid": "9a152ac24ba046e3a7a10b9abba4de79"
+            },
+            "type": "picture"
+        }
+    },
+    "body_nitf": "<p>BATON ROUGE, La. (AP) \u2014 State officials are continuing discussions of a possible $2.5 billion sale of Blue Cross and Blue Shield of Louisiana, a non-profit health insurer used by nearly half of the state's residents, to a much larger for-profit insurer based in Indiana.</p><p>A legislative committee held a nearly eight-hour meeting Monday to consider the proposed sale of Blue Cross and Blue Shield of Louisiana to Elevance Health, one of the nation\u2019s largest insurers, The Times-Picayune/The New Orleans Advocate <a href=\"https://www.nola.com/news/business/lawmakers-seek-answers-from-blue-cross-over-controversial-proposed-sale/article_3fef9996-c482-11ee-8ca9-47a3f3f78c37.html\">reported.</a></p><p>While any decision on whether or not to sell will come down to the state's insurance commissioner and policyholders, legislators took the opportunity to question insurance regulators and gather more information, including about millions of dollars in regulatory fines issued to Elevance.</p><p>Policyholders have been split on a possible sale. Some fear that, under a for-profit company, they could see increases in their premiums and rates. Proponents of the proposed sale say that under Elevance there would be improved services and technology for 1.9 million Louisiana customers.</p><p>Blue Cross and Blue Shield of Louisiana executives say they are not making as much revenue as competitors and that the sale would put Blue Cross on more stable financial footing and bring improved services, The Times-Picayune/The New Orleans Advocate <a href=\"https://www.nola.com/news/business/blue-cross-elevance-health-deal-faces-new-opponents/article_c554453c-bfaf-11ee-b3ba-83e5ce417780.html\">reported.</a></p><p>As part of the proposed agreement, Elevance, which runs Blue Cross-branded insurers in more than a dozen other states, would take over the Blue Cross brand and customer base in Louisiana.</p><p>Next week, during a two-day hearing before the state's Department of Insurance, executives of Blue Cross Blue Shield of Louisiana will make their case for the sale. For a deal to move forward, approval is needed from Insurance Commissioner Tim Temple and two-thirds of the Blue Cross members with voting rights.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/blue-cross-elevance-louisiana-health-insurance-sale-968df3fb5b53a1fb678c27afcebccbf1",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 5,
+            "reason": "The document discusses the potential sale of Blue Cross and Blue Shield of Louisiana to Elevance Health, which is a significant event in the health insurance sector. It covers various aspects of the sale, including the financial stability of Blue Cross, the potential impact on policyholders, and the regulatory process involved. These elements are directly related to the topic of health, particularly in the context of health insurance and its implications for nearly half of Louisiana's residents."
+        }
+    }
+}

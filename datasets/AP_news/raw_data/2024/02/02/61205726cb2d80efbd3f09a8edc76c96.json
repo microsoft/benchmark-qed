@@ -1,0 +1,251 @@
+﻿{
+    "altids": {
+        "itemid": "61205726cb2d80efbd3f09a8edc76c96",
+        "etag": "61205726cb2d80efbd3f09a8edc76c96_2a6aza0c0",
+        "friendlykey": "163834833473",
+        "referenceid": "US--Hospital-Death"
+    },
+    "version": 2,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2024-02-03T02:31:45Z",
+    "firstcreated": "2024-02-02T23:18:15Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "ednote": "Eds: UPDATES: Adds previous statement from police chief.",
+    "editorialtypes": [
+        "Lead"
+    ],
+    "signals": [
+        "newscontent"
+    ],
+    "title": "US--Hospital-Death",
+    "headline": "Lawsuit says Tennessee hospital shouldn't have discharged woman who died, police should have helped",
+    "headline_extended": "A federal lawsuit says a woman who died last February shouldn\u2019t have been discharged from a Tennessee hospital, forced to leave despite her pleas for more help and unassisted by security guards and police during a medical emergency",
+    "slugline": "AP-US--Hospital-Death, 2nd Ld-Writethru",
+    "description_summary": "A federal lawsuit says a woman who died last February shouldn\u2019t have been discharged from a Tennessee hospital, forced to leave despite her pleas for more help and unassisted by security guards and police during a medical emergency. The son of 60-year-old Lisa Edwards sued the city of Knoxville, a security company, individual officers and security guards, Fort Sanders Regional Medical Center, its parent company and a physician group. The death sparked public outrage after the Knoxville Police Department released video early last year showing officers accusing Edwards of faking problems and ignoring her pleas for help. The Knox County district attorney declined to charge the officers. The hospital found her care and discharge clinically appropriate.",
+    "located": "KNOXVILLE, Tenn.",
+    "datelinelocation": {
+        "city": "Knoxville",
+        "countryareacode": "TN",
+        "countryareaname": "Tennessee",
+        "countrycode": "USA",
+        "countryname": "United States",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                -83.92074,
+                35.96064
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "tennessee woman died hospital police"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "a",
+            "name": "a"
+        },
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "4626a38a1b52454ca5d01755d14f1dc9",
+            "name": "Legal proceedings",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 36
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a37eab90831510048fcfdf092526b43e",
+            "name": "Law enforcement",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 80
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "5898d3303b1e4dfc9e4ae39ed34f3378",
+            "name": "Lawsuits",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 54
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Editorial",
+            "editorial_subject": "Health",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "6fa40c6a63664d80bf3e0bc5cedd887f",
+            "name": "Knoxville",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "62532b5882c7100488cedf092526b43e"
+            ],
+            "locationtype": {
+                "code": "9d26a20b35f0484a891740f8189d4c7b",
+                "name": "City"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -83.92074,
+                    35.96064
+                ]
+            },
+            "relevance": 97,
+            "parentnames": [
+                "Tennessee"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "62532b5882c7100488cedf092526b43e",
+            "name": "Tennessee",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -86.25027,
+                    35.75035
+                ]
+            },
+            "relevance": 70,
+            "parentnames": [
+                "United States"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "661850e07d5b100481f5c076b8e3055c",
+            "name": "Latin America and Caribbean",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "62532b5882c7100488cedf092526b43e",
+            "name": "Tennessee",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "body_nitf": "<p>KNOXVILLE, Tenn. (AP) \u2014 A federal lawsuit says a <a href=\"https://apnews.com/article/tennessee-woman-died-hospital-police-9793bf18a47c028353545d6a0826c256\">woman who died last February</a> shouldn't have been discharged from a Tennessee hospital, forced to leave despite her pleas for more help and unassisted by security guards and police during a medical emergency.</p><p>The son of 60-year-old Lisa Edwards on Thursday sued the city of Knoxville, a security company, individual officers and security guards, Fort Sanders Regional Medical Center, its parent company and a physician group.</p><p>The death sparked public outrage after the <a href=\"https://www.youtube.com/watch?v=NLJIQV1t1DI\">Knoxville Police Department released video</a> early last year showing officers accusing Edwards of faking mobility and breathing problems and ignoring her repeated pleas for help.</p><p>Edwards used a wheelchair because of a disability from a previous stroke, the lawsuit says.</p><p>Security officers at the hospital called police Feb. 5, 2023, saying that Edwards had been evaluated and discharged, but she was refusing to leave. Several <a href=\"https://apnews.com/article/tennessee-woman-died-hospital-police-9793bf18a47c028353545d6a0826c256\">police officers were investigated</a>. The lawsuit filed in Knoxville names three officers who were later disciplined by the city's police department, according to the <a href=\"https://www.knoxnews.com/story/news/crime/2024/02/01/lisa-edwards-family-files-federal-lawsuit-against-knoxville-police/72439274007/\">Knoxville News Sentinel</a>.</p><p>Police Chief Paul Noel has previously said he was \u201cembarrassed and disturbed\u201d by what he saw in the video of the interaction, and added that Edwards \u201cdeserved better from us.\u201d</p><p>The Knox County District Attorney\u2019s office declined to press criminal charges against the officers after an autopsy determined that Edwards died of a stroke and that \u201cat no time did law enforcement interaction cause or contribute to Ms. Edwards\u2019 death.\u201d</p><p>Additionally, the hospital said it conducted a thorough internal investigation of Edwards\u2019 care and found that her \u201cmedical treatment and hospital discharge <a href=\"https://apnews.com/article/tennessee-woman-died-hospital-police-b2ec8c106b5af77774f529e2e96e316e\">were clinically appropriate</a>.\u201d</p><p>The hospital said changes were being made to security procedures. Several security officers who were working at the facility when Edwards was removed are no longer working there, and the hospital and its parent company, Covenant Health, announced plans to add empathy training for security guards.</p><p>Edwards was \u201crolled by hospital security guards into the freezing cold wearing only paper scrubs, placed under physical arrest, and forcibly removed by police officers from the hospital property,\u201d according to the lawsuit, which says it was 29 degrees Fahrenheit (minus 1.7 Celsius) at the time.</p><p>A video released by police showed officers struggle for about 25 minutes to move Edwards into a police van and finally a cruiser. Edwards repeatedly asks for help. But she is rebuffed by officers and hospital security guards who become frustrated with her inability to step up into the van and tell her she is faking her incapacity.</p><p>After she is placed in a police cruiser, video shows Edwards trying to pull herself upright repeatedly, but eventually she slumps over out of sight. Several minutes later, one of the officers performs a traffic stop on another vehicle while Edwards remains in the backseat.</p><p>When he opens the rear door, Edwards is unresponsive. He calls dispatch for an ambulance, telling them, \u201cI don\u2019t know if she\u2019s faking it or what, but she\u2019s not answering me.\u201d</p><p>Edwards was pronounced dead at the Fort Sanders Regional Medical Center the following day.</p><p>\u201cThis was an emergency medical condition that began and worsened on hospital property and that was unequivocally preventable and treatable,\u201d the lawsuit states.</p><p>The 18-count lawsuit claims violations of the federal Emergency Medical Treatment and Labor Act, the U.S. Constitution's Fourth and 14th amendments, the Americans with Disabilities Act and the Rehabilitation Act. It alleges a conspiracy to violate federal civil rights and violations of state laws, including a wrongful death claim.</p><p>A Covenant Health spokesperson declined to comment on the lawsuit. A city of Knoxville spokesperson declined to comment as well.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/tennessee-woman-died-hospital-police-61205726cb2d80efbd3f09a8edc76c96",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 4,
+            "reason": "The document discusses a lawsuit involving a Tennessee hospital and the death of a woman who was discharged despite her medical condition. It touches on various aspects of healthcare, including hospital procedures, patient care, and the medical emergency that led to the woman's death. The document also mentions changes in hospital security procedures and empathy training, which are relevant to health and healthcare practices. However, the primary focus is on the legal and procedural aspects rather than broader health topics."
+        }
+    }
+}

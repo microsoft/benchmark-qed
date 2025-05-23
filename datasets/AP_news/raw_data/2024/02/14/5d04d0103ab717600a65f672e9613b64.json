@@ -1,0 +1,241 @@
+﻿{
+    "altids": {
+        "itemid": "5d04d0103ab717600a65f672e9613b64",
+        "etag": "5d04d0103ab717600a65f672e9613b64_1a6aza0c0",
+        "friendlykey": "912632291632",
+        "referenceid": "US--Texas-Emergency Room-Crash"
+    },
+    "version": 1,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2024-02-14T22:13:50Z",
+    "firstcreated": "2024-02-14T21:40:20Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "ednote": "Eds: UPDATES: with police changing the spelling of the driver's name to Michelle Holloway, not Michell. Also updates with police saying none of the injuries are considered life-threatening.",
+    "editorialtypes": [
+        "Lead"
+    ],
+    "signals": [
+        "newscontent"
+    ],
+    "title": "US--Texas-Emergency Room-Crash",
+    "headline": "Texas emergency room's aquarium likely saved lives when car smashed through wall, doctor says",
+    "headline_extended": "A Texas hospital official says a large aquarium in the lobby of an emergency room likely saved lives when it absorbed the impact of a car that smashed through the entrance",
+    "slugline": "AP-US--Texas-Emergency Room-Crash, 1st Ld-Writethru",
+    "description_summary": "A Texas hospital official says a large aquarium in the lobby of an emergency room likely saved lives when it absorbed the impact of a car that smashed through the entrance. The driver was killed and five others, including two children, were injured in Tuesday's crash at St. David\u2019s North Austin Medical Center. Police were still investigating the cause of the crash on Wednesday, but police spokeswoman Ariel Crumes said investigators don't believe it was intentional and that there is is no indication the driver had a medical episode right before the crash.",
+    "bylines": [
+        {
+            "by": "By JIM VERTUNO",
+            "title": "Associated Press"
+        }
+    ],
+    "located": "AUSTIN, Texas",
+    "datelinelocation": {
+        "city": "Austin",
+        "countryareacode": "TX",
+        "countryareaname": "Texas",
+        "countrycode": "USA",
+        "countryname": "United States",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                -97.74306,
+                30.26715
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "Texas emergency room car crash"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "a",
+            "name": "a"
+        },
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "d8e6d7087f00100483b5f571351eed07",
+            "name": "Emergency care",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 66
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 49
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "6e92d9b882c7100488e5df092526b43e",
+            "name": "Texas",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -99.25061,
+                    31.25044
+                ]
+            },
+            "relevance": 90,
+            "parentnames": [
+                "United States"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "661850e07d5b100481f5c076b8e3055c",
+            "name": "Latin America and Caribbean",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "6e92d9b882c7100488e5df092526b43e",
+            "name": "Texas",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "associations": {
+        "1": {
+            "altids": {
+                "itemid": "ce3072f15651402e93d6de966013eb08"
+            },
+            "type": "picture"
+        },
+        "2": {
+            "altids": {
+                "itemid": "3e7e85e9d0c0446998051df4f7f0659d"
+            },
+            "type": "picture"
+        },
+        "3": {
+            "altids": {
+                "itemid": "a38d5c9da2ce416b9d490e30889199e8"
+            },
+            "type": "picture"
+        },
+        "4": {
+            "altids": {
+                "itemid": "f3fce58bc0b246c48a84a738b04c1a9b"
+            },
+            "type": "picture"
+        },
+        "5": {
+            "altids": {
+                "itemid": "22dd3f6510cf434ca9f6f81fd7499ccd"
+            },
+            "type": "picture"
+        }
+    },
+    "body_nitf": "<p>AUSTIN, Texas (AP) \u2014 A large aquarium in the lobby of a Texas emergency room likely saved lives when it absorbed the impact of a car that <a href=\"https://apnews.com/article/austin-emergency-room-crash-texas-1ff2b8b13e1267d05c30357750dc9eec\">smashed through the entrance</a>, a hospital official said Wednesday.</p><p>The crash Tuesday evening at St. David's North Austin Medical Center killed the driver and injured five other people, including two children.</p><p>\u201cThe vehicle had direct impact to a very large aquarium that really, I believe, saved lives,\u201d Dr. Peter DeYoung, the hospital's chief medical officer, said at a news conference with police and city emergency officials.</p><p>The crash is still being investigated, but there is no indication that it was intentional or that the driver had a medical episode right before it happened, police spokeswoman Ariel Crumes said.</p><p>Police identified the driver as Michelle Holloway, 57. She was pulled from the car and received CPR, but died in the ER. Authorities declined to provide an update on the conditions of those who were injured.</p><p>Photos showed a silver sedan with a mangled front end sitting entirely inside the lobby. Video showed a chaotic scene of patients scrambling amid smoke and water.</p><p>The smoke came from the vehicle's tires as the wheels were still spinning on the floor tile, DeYoung said. The water was from the aquarium, he said.</p><p>\u201cIt was in drive and running, and they put their lives in harms way and stopped it from running, and did their best to preserve life,\u201d DeYoung said, referring to hospital staff.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/texas-emergency-room-car-crash-5d04d0103ab717600a65f672e9613b64",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 3,
+            "reason": "The document describes an incident where a car crashed into a Texas emergency room, and an aquarium in the lobby absorbed the impact, potentially saving lives. While the document does touch on health-related aspects, such as the injuries sustained and the hospital staff's response, the primary focus is on the crash and the aquarium's role in mitigating the damage. The connection to the broader topic of health is somewhat indirect, as the main emphasis is on the accident rather than health issues or medical care."
+        }
+    }
+}

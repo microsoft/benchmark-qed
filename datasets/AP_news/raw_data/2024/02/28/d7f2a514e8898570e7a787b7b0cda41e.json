@@ -1,0 +1,223 @@
+﻿{
+    "altids": {
+        "itemid": "d7f2a514e8898570e7a787b7b0cda41e",
+        "etag": "d7f2a514e8898570e7a787b7b0cda41e_0a2aza0c0",
+        "friendlykey": "85836480206",
+        "referenceid": "SC--Editorial Rdp"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Opinion",
+    "language": "en",
+    "versioncreated": "2024-02-29T12:10:38Z",
+    "firstcreated": "2024-02-28T19:10:38Z",
+    "editorialrole": "FullStory",
+    "fixture": {
+        "code": "21ea4067bb274c3b805353fb2b99ba70",
+        "name": "Editorial Roundup"
+    },
+    "pubstatus": "usable",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "SC--Editorial Rdp",
+    "headline": "Editorial Roundup: South Carolina",
+    "slugline": "BC-SC--Editorial Rdp",
+    "bylines": [
+        {
+            "by": "By The Associated Press"
+        }
+    ],
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "Editorial Rdp"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "person": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "8d07beb7a3a94ccab607dbe602499543",
+            "name": "Henry McMaster",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "POLITICIAN",
+                "PERSON"
+            ],
+            "relevance": 53
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f693073df0e5421cbd7ffa11489cc2fc",
+            "name": "Thomas Davis",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "POLITICIAN",
+                "PERSON"
+            ],
+            "relevance": 57
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "936045008844100486a2a28878d48e09",
+            "name": "Addiction and treatment",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 64
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "39a5551883591004893adf092526b43e",
+            "name": "Health care costs",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 71
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "9031a908899a10048bafcece19677003",
+            "name": "Traffic",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 49
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86aad5207dac100488ecba7fa5283c3e",
+            "name": "Politics",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 60
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "ec2db49888e810048c93f8851349f9bd",
+            "name": "Labor",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 49
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "29d11ec082c7100488aedf092526b43e",
+            "name": "South Carolina",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -81.00009,
+                    34.00043
+                ]
+            },
+            "relevance": 79,
+            "parentnames": [
+                "United States"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "29d11ec082c7100488aedf092526b43e",
+            "name": "South Carolina",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "body_nitf": "<p>Post and Courier. February 25, 2024.</p><p>Editorial: The sabotage effort has already begun; hang tough on fixing SC health services</p><p>There\u2019s not a single, perfect way to consolidate South Carolina\u2019s many <a href=\"https://www.live5news.com/2024/01/19/new-bill-would-merge-six-sc-health-agencies-into-one/\">disjointed, uncommunicative health agencies.</a> You could merge every agency that touches even tangentially on health care, or you could leave out, say, the social services or veterans\u2019 affairs offices, as legislation the Senate passed on Wednesday does.</p><p>Likewise you could create one completely consolidated super agency from the get-go or leave the six individual agencies largely intact but grouped under a single secretary with pretty much absolute authority, <a href=\"https://www.scstatehouse.gov/sess125_2023-2024/bills/915.htm\">as S.915</a> and and its <a href=\"https://www.scstatehouse.gov/sess125_2023-2024/bills/4927.htm\">companion H.4927</a> do.</p><p>But there\u2019s a perfect way to keep our state\u2019s long-awaited consolidation from happening \u2014 or at least a tried and true way: It\u2019s to let one individual agency talk its way out of the consolidation, or even a little piece of it. That creates blood in the water, and the other independent fiefdoms start circling, demanding first small concessions and then complete exemptions, and their legislative supporters start forming coalitions \u2014 I\u2019ll vote to keep your agency independent if you vote to keep mine independent \u2014 until the entire thing unravels.</p><p>This is what has happened every time legislators have tried to bring some sanity to this huge portion of our state government, and every time, we\u2019ve gotten left once again with <a href=\"https://www.postandcourier.com/opinion/editorials/sc-gov-mcmaster-urges-health-agency-merger/article_648d7120-bbb2-11ee-94b7-877814543b76.html\">eight separate agencies</a> that divvy up the job of providing crisis mental health care, physical health care, substance abuse services, disability and special needs services and assistance to the elderly and at-risk \u2014 in sometimes overlapping ways, often with no coordination or communication, diminishing the quality of care, increasing its cost and forcing patients to navigate a confusing labyrinth of bureaucratic entities.</p><p>And now, just barely one step into the most promising effort ever at consolidation, the House already has yielded to the first request for an out.</p><p>The original legislation embraced by Senate and House leaders and Gov. Henry McMaster would have ended the practice of sending $17 million a year in alcohol taxes to the counties for alcohol and drug abuse education and treatment and instead allowed the secretary of the new Executive Office of Health and Policy to allocate that money. That way, the state could get matching federal Medicaid funding that the counties can\u2019t draw down and, more importantly, make sure the money was spent where it was most needed, rather than being distributed on a per-capita basis.</p><p>Earlier this month, the Behavioral Health Services Association of South Carolina, a lobbying group for the 31 independent alcohol and drug abuse authorities that serve the 46 counties, started urging legislators to let them keep the $17 million, predicting calamity if they lose the funding and helpfully providing legislators with a breakdown of how much each county stood to lose. And presto chango, the House bill \u2014 which was still a skeleton when the lobbying began \u2014 suddenly emerged with no reference to redirecting the money.</p><p>Senate leaders initially refused to budge. When the Senate agreed Tuesday to let the counties keep $12 million, it was only after Sen. Tom Davis discovered that the current law was being read in a way that gives the agencies much more money than he and other authors of the bill realized, and urged the Senate to reallocate only the $5 million they had thought they were targeting.</p><p>Now, it\u2019s possible that the House will agree to the Senate\u2019s approach, but it\u2019s worrisome that its initial response to the usual sort of sabotage was to give in. It\u2019s worrisome not so much because changing the allocation for a few million dollars is essential but because lobbyist-driven erosion begets more lobbyist-driven erosion. Until, again, there\u2019s nothing left.</p><p>It was clear during the Senate debate that some of the local authorities aren\u2019t happy with the state using any of that money in a smarter way. And their initial volley also complained that the tiny Department of Alcohol and Other Drug Abuse Services was being subsumed into the huge Mental Health Department rather than being held out as a co-equal branch in the new Department of Behavioral Health. The Senate didn\u2019t change that, but the locals still have another crack at it when House debates its bill, likely this week. The House needs to see to it that they fail.</p><p>As Sen. Davis reminded his colleagues, this legislation isn\u2019t a solution in search of a problem. Merging the departments of Mental Health, Aging, Disabilities and Special Needs, Alcohol and Other Drug Abuse Services, Health and Human Services and the health side of DHEC is based on a thorough examination by national and state experts who found that South Carolina, with the most disjointed health delivery service in the nation, desperately needs this change because \u201cwe aren\u2019t getting the health care outcomes that we deserve based on the resources that we\u2019re putting in.\u201d</p><p>It\u2019s time we got the outcomes we deserve, and are paying for. The only way that happens is if we get the law we deserve \u2014 without it being scuttled by the usual death-by-a-thousand-cuts assault.</p><p>___</p><p>Times and Democrat. February 24, 2024.</p><p>Editorial: Highway heroes should not be at such great risk</p><p>Helping stranded motorists on the side of the road should not be one of America\u2019s most lethal jobs, but it is.</p><p>On average, two emergency responders are struck and killed every month by a driver failing to obey the law by moving over to an adjacent lane and allowing the roadside rescuers the space to operate, according to the U.S. Bureau of Labor Statistics.</p><p>Struck and killed \u2013 nearly four times more than reported. It\u2019s the chilling reality for RAPs, including tow truck drivers, mobile mechanics, emergency roadside technicians, and safety service patrols who put themselves at risk every day to help others.</p><p>A new study from the AAA Foundation for Traffic Safety examined the conditions of crashes in which roadside assistance workers were struck and killed by vehicles, and why the problem is even bigger than previously believed.</p><p>\u201cThis new research reveals that vehicle collisions with roadside workers are not always the result of poor visibility,\u201d said Tiffany Wright, spokesperson, AAA-The Auto Club Group in the Carolinas. \u201cMore often than not, speed, driver distractions and/or impairment are a factor.\u201d</p><p>AAA Foundation researchers combed through diverse information sources and determined that 123 roadside assistance providers were killed by passing vehicles between 2015 and 2021. This grim figure dwarfs the approximately 34 noted in national crash data.</p><p>AAA says the discrepancy is because state police crash reports incorrectly cited the crash victims as \u201cpedestrians\u201d instead of roadside assistance providers. While yearly total traffic fatalities increased significantly over the study period, the data suggest that roadside assistance provider fatalities increased even more.</p><p>Key findings are:</p><p>\u2022 Speed limits \u2013 89% of the crashes occurred at locations with 55 mph or higher speed limits, almost all on interstates or other limited-access highways.</p><p>\u2022 Weather conditions \u2013 84% of crashes occurred in good weather without precipitation/slippery road conditions.</p><p>\u2022 Time of day \u2013 63% occurred during darkness, of which nearly two-thirds were at locations without street lighting. But 34% of the crashes were in daylight.</p><p>\u2022 Driver distraction/impairment/fatigue \u2013 63% occurred in crashes in which the striking vehicle had already left the road and was traveling on the shoulder or beyond before impact. This suggests the involvement of factors such as impairment, fatigue or distraction. More than a third of striking drivers who were tested for alcohol were alcohol-positive. But nearly half were not tested.</p><p>AAA urges action on several fronts:</p><p>\u2022 Shield the vulnerable: Utilize countermeasures to prevent vehicles from striking workers. The foundation studied several countermeasures, and an electronic vehicle-mounted variable message sign was very effective. With VMS activated, drivers changed lanes and slowed down more than when the VMS was not operating. The odds of a vehicle moving over were 95% higher when the VMS was used.</p><p>\u2022 Train for survival: Teach roadside workers to prioritize work away from traffic and equip them with strategies to avoid harm\u2019s way. Training for roadside assistance providers should emphasize the importance of not working or standing on the traffic-facing side of the incident whenever possible and minimize time spent on the traffic-facing side of the scene.</p><p>\u2022 Slow down, move over: Reinforce life-saving laws, reminding drivers to give space to ANYONE (including but not limited to roadside assistance, police, fire, EMS) working on the side of the road. Every ounce of awareness could be the difference between life and death.</p><p>In South Carlina, the move-over law requires drivers \u2013 if they deem it is safe to do so \u2013 to move a lane away from any law enforcement or emergency vehicle on the side of the road. Law enforcement, emergency and utility vehicles should be stopped with lights flashing to alert drivers to move over.</p><p>It is also required that motorists slow down and approach cautiously when driving by a stopped emergency vehicle.</p><p>Failure to adhere to the law is considered a misdemeanor punishable by a fine of not less than $300 nor more than $500.</p><p>Too many people are not aware of the law but they should see that moving over away from those on the roadside is common sense -- for the safety of drivers as well as those outside.</p><p>Jake Nelson, AAA\u2019s traffic safety and advocacy director, is on target: \u201cIt\u2019s a shared responsibility to solve this safety challenge. Roadside workers and all of us who drive by them have to take action to move towards zero traffic deaths.\u201d</p><p>END</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/d7f2a514e8898570e7a787b7b0cda41e",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 3,
+            "reason": "The document contains two editorials. The first editorial is highly relevant to the topic of health as it discusses the consolidation of South Carolina's health agencies, the challenges faced, and the implications for health services in the state. The second editorial, however, is not relevant to the topic of health as it focuses on the risks faced by roadside assistance workers and the need for better safety measures. Given that only part of the document is relevant to the topic of health, the overall relevance is moderate."
+        }
+    }
+}

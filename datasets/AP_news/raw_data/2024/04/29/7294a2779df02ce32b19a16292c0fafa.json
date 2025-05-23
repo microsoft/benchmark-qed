@@ -1,0 +1,242 @@
+﻿{
+    "altids": {
+        "itemid": "7294a2779df02ce32b19a16292c0fafa",
+        "etag": "7294a2779df02ce32b19a16292c0fafa_0a2aza0c0",
+        "friendlykey": "778116317440",
+        "referenceid": "MO--Editorial Rdp"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Opinion",
+    "language": "en",
+    "versioncreated": "2024-04-30T11:10:37Z",
+    "firstcreated": "2024-04-29T20:49:36Z",
+    "editorialrole": "FullStory",
+    "fixture": {
+        "code": "21ea4067bb274c3b805353fb2b99ba70",
+        "name": "Editorial Roundup"
+    },
+    "pubstatus": "usable",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "MO--Editorial Rdp",
+    "headline": "Editorial Roundup: Missouri",
+    "slugline": "BC-MO--Editorial Rdp",
+    "bylines": [
+        {
+            "by": "By The Associated Press"
+        }
+    ],
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "Editorial Rdp"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "person": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "1a219c5dfe214490bc1d667a64f61f3f",
+            "name": "M\u00d8",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "MUSICIAN",
+                "ENTERTAINMENT_FIGURE",
+                "PERSON"
+            ],
+            "relevance": 64
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "523699d088e910048f43f8851349f9bd",
+            "name": "Government regulations",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 39
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86c1f7007dac10048991ba7fa5283c3e",
+            "name": "Constitutions",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 58
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86aad5207dac100488ecba7fa5283c3e",
+            "name": "Politics",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 46
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86ba17607dac1004894eba7fa5283c3e",
+            "name": "Courts",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 52
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e22e35087de410048fc2df092526b43e",
+            "name": "Abortion",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 78
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86b08df87dac1004890cba7fa5283c3e",
+            "name": "Voting",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 68
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "organisation": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "efa933c0892110048d92fb7860a2fc03",
+            "name": "Supreme Court of the United States",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 32
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "8d9724e0381a4652bfc9b41a973e0fe4",
+            "name": "Missouri state government",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 40
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "bd8c35d082c4100486d5df092526b43e",
+            "name": "Missouri",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -92.50046,
+                    38.25031
+                ]
+            },
+            "relevance": 94,
+            "parentnames": [
+                "United States"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "bd8c35d082c4100486d5df092526b43e",
+            "name": "Missouri",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "body_nitf": "<p>St. Louis Post-Dispatch. April 28, 2024.</p><p>Editorial: Missourians have one week left to help get abortion rights on the ballot</p><p>Missourians who believe that women have an inalienable right to decide what happens inside their own bodies could be forgiven for browsing the news last week and lamenting that that urgent cause looks increasingly hopeless.</p><p>In Washington, D.C., the Supreme Court <a href=\"https://www.nytimes.com/2024/04/24/us/politics/supreme-court-idaho-abortion-ban.html\">debated</a>, in all seriousness, whether emergency rooms can be required by federal law to provide medically stabilizing treatment to all patients who come in rather than waiting until their conditions become life-threatening.</p><p>The case spotlights an Idaho anti-abortion law so onerous that pregnant women in dire medical straits are literally being airlifted \u2014 like war refugees \u2014 to other states for care.</p><p>In Jefferson City, meanwhile, legislators advanced a measure plainly designed to <a href=\"https://www.stltoday.com/news/local/government-politics/missouri-house-approves-resolution-that-would-make-constitution-harder-to-amend/article_16818394-0307-11ef-9dc4-d310e293af6b.html#tracking-source=home-top-story\">dilute the votes</a> of Missourians from regions most likely to support abortion rights.</p><p>It does indeed feel like the Handmaid\u2019s Tale caucus is closing in from all sides. But in fact, pro-choice Missourians have an opportunity, right now, to fight back \u2014 starting with a signature.</p><p>There is now one week left to sign the petition to put abortion rights on Missouri\u2019s November ballot. The contact details are at the bottom of this editorial. The stakes could scarcely be higher.</p><p>Within minutes of the Supreme Court\u2019s overturn of Roe v. Wade in June 2022, Missouri\u2019s Republican leadership formally enshrined a previously approved law banning almost all abortions in the state from the moment of conception, even in cases of rape or incest. The sole exception is for vaguely defined medical emergencies.</p><p>With polls indicating that ban is more severe than what even Missouri\u2019s generally conservative population supports, opponents launched an effort to put an abortion rights amendment to the state constitution on the Nov. 5 ballot.</p><p>Contrary to all the anti-choice histrionics and diversions out there, the <a href=\"https://ballotpedia.org/Missouri_Right_to_Reproductive_Freedom_Amendment_(2024\">amendment</a> would not prevent all state regulation of abortion services. Instead, it would generally protect the right to abortion only up to the point of fetal viability outside the womb \u2014 the same standard that existed under Roe.</p><p>As an indication of how determined state leaders are to prevent the question from even getting on the ballot, several of them embarked on truly shameful, bad-faith attempts to sabotage the amendment process.</p><p>Secretary of State <a href=\"https://www.stltoday.com/opinion/editorial/editorial-ashcroft-is-determined-to-thwart-a-fair-abortion-vote-any-way-he-can/article_ad6235f6-5d2b-11ee-ae58-b38501473e5a.html\">Jay Ashcroft</a>, whose legal obligation was to create unbiased ballot language, instead produced an anti-choice screed that was predictably thrown out by the courts. Attorney General <a href=\"https://www.stltoday.com/opinion/editorial/editorial-the-bailey-tally-let-us-count-the-ways/article_b6e73288-dd92-11ee-93c7-3b825c1f3466.html\">Andrew Bailey</a>, abusing his authority as usual, tried to overrule the state auditor regarding the cost of the measure, until the courts threw that out as well.</p><p>The Republican-controlled state Legislature has also gotten in on the sabotage, advancing a measure that would dramatically alter the rules for passing a constitutional amendment.</p><p>Instead of passage by a simple statewide majority, the proposed change would require a majority of votes in five of the state\u2019s eight congressional districts. It would effectively allow a small minority of voters in rural areas to stop any amendment in its tracks.</p><p>In its current form, the proposal would also include a line specifying that illegal immigrants aren\u2019t allowed to vote in Missouri elections \u2014 which is already state and federal law. This is what\u2019s known as \u201cballot candy,\u201d designed to draw in votes from citizens who their elected legislators clearly think (and hope) are stupid.</p><p>There is, in short, virtually no cynical, dishonest thing that the anti-choice zealots who run Missouri government aren\u2019t willing to do to prevent a fair vote on this topic.</p><p>They have good reason to be afraid of it. In the seven states that have allowed statewide votes on abortion or related issues since the fall of Roe, every single one has come down on the pro-choice side. That includes red states like Kansas and Kentucky.</p><p>Last week\u2019s Supreme Court oral arguments in the case out of Idaho provided a chilling demonstration of how urgent it is for Missourians to take back this fundamental right.</p><p>At issue is a longstanding federal law that, reasonably enough, requires emergency rooms in hospitals that receive federal funds to provide stabilizing medical care to anyone who comes in. It was passed in 1986, to prevent hospitals from refusing emergency care to those who can\u2019t pay.</p><p>Idaho\u2019s new abortion law prohibits the procedure unless the life of the pregnant woman is in danger. The Biden administration argues this violates the federal law in that it literally requires doctors not to abort even a non-viable pregnancy that is threatening the woman\u2019s health, until it threatens her life.</p><p>This highlights a central, inevitable flaw with these abortion bans: They assume black-and-white clarity in medical issues that are, in reality, usually gray areas. Medical professionals, cowed by serious legal threats if they err on the side of caution for the safety of their patients, have in several cases had them airlifted out of Idaho for medical care.</p><p>As Justice Elena Kagan put it during oral arguments last week, \u201cIt can\u2019t be the right standard of care to force somebody onto a helicopter.\u201d</p><p>The bedrock constitutional principle that federal law supersedes state laws remains intact \u2014 the end of Roe didn\u2019t end that.</p><p>But, with these and other issues related to abortion, questions during the hearing from supposed constitutional originalists like Justices Samuel Alito and Clarence Thomas strongly confirmed what they\u2019ve previously indicated: Their supposed originalism is situational, subservient to their ideology.</p><p>If a federal law requiring emergency care for emergencies can\u2019t sway this Supreme Court (and it might not) \u2014 and with a federal abortion-rights law all but impossible for now \u2014 passage of a Missouri constitutional amendment protecting abortion rights is potentially the most important vote many Missourians will ever cast.</p><p>That\u2019s provided they\u2019re allowed to cast it. Organizers have until May 5 (next Sunday) to gather the required petition signatures to get it on the ballot. An overwhelming show of support now is the best way to build momentum for November, so voters can ensure that Missouri women are safe at last.</p><p>END</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/7294a2779df02ce32b19a16292c0fafa",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 3,
+            "reason": "The document is an editorial discussing the political and legal battles surrounding abortion rights in Missouri. While it touches on health-related issues, such as the medical implications of abortion laws and the requirement for emergency medical care, the primary focus is on the political and legal aspects rather than health itself. Therefore, it is somewhat relevant to the topic of health but not highly focused on it."
+        }
+    }
+}

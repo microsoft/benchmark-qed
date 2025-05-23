@@ -1,0 +1,359 @@
+﻿{
+    "altids": {
+        "itemid": "c17a5bc89c29f952b0d3f7f48c3b2412",
+        "etag": "c17a5bc89c29f952b0d3f7f48c3b2412_2a10aza0c0",
+        "friendlykey": "488403364316",
+        "referenceid": "US--Rosalynn Carter-Mental Health"
+    },
+    "version": 2,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2023-11-21T15:39:05Z",
+    "firstcreated": "2023-11-21T05:07:16Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "ednote": "Eds: UPDATES: ADDS video. Minor edits. With AP Photos, AP Video, AP Audio.",
+    "editorialtypes": [
+        "Lead"
+    ],
+    "signals": [
+        "newscontent"
+    ],
+    "title": "US--Rosalynn Carter-Mental Health",
+    "headline": "Rosalynn Carter's advocacy for mental health was rooted in compassion and perseverance",
+    "headline_extended": "Rosalynn Carter's advocacy for mental health started during her husband's 1966 campaign for governor, when she spoke almost daily with Georgia families struggling to get help for their loved ones",
+    "slugline": "BC-US--Rosalynn Carter-Mental Health, 2nd Ld-Writethru",
+    "description_summary": "Rosalynn Carter's advocacy for mental health started during her husband's 1966 campaign for governor, when she spoke almost daily with Georgia families struggling to get help for their loved ones. She later became the driving force behind federal health legislation when Jimmy Carter was president. After leaving Washington, she used The Carter Center in Atlanta to bring together policy experts and created a journalism fellowship program to improve the accuracy of reporting about mental illness. Those who knew her say her work was rooted in compassion, but she also had sharp political skills and the drive to get things done. Rosalynn Carter died Sunday at the age of 96.",
+    "bylines": [
+        {
+            "by": "By HOLLY RAMER",
+            "title": "Associated Press"
+        }
+    ],
+    "located": "CONCORD, N.H.",
+    "datelinelocation": {
+        "city": "Concord",
+        "countryareacode": "NH",
+        "countryareaname": "New Hampshire",
+        "countrycode": "USA",
+        "countryname": "United States",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                -71.53757,
+                43.20814
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2023 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "Rosalynn Carter mental health"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "person": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "44a8914a1be1415795f8ae4b7465d12c",
+            "name": "Jimmy Carter",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "POLITICIAN",
+                "PERSON"
+            ],
+            "associatedstates": [
+                {
+                    "code": "661c5ff07d5b1004825ac076b8e3055c",
+                    "name": "Georgia"
+                }
+            ],
+            "relevance": 74
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "bf4dff56f002465c8c0b2a3794e204b6",
+            "name": "Rosalynn Carter",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "NEWSMAKER",
+                "PERSON"
+            ],
+            "relevance": 87
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "a",
+            "name": "a"
+        },
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e231c7187de410048fd7df092526b43e",
+            "name": "Mental health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 88
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86aad5207dac100488ecba7fa5283c3e",
+            "name": "Politics",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 47
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Editorial",
+            "editorial_subject": "Health",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "organisation": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "ac18a2ea71034a5991f916b5b3e113e7",
+            "name": "Associated Press",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 37
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e549996082af10048337df092526b43e",
+            "name": "Atlanta",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "dec1cce882af10048320df092526b43e"
+            ],
+            "locationtype": {
+                "code": "9d26a20b35f0484a891740f8189d4c7b",
+                "name": "City"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -84.38798,
+                    33.749
+                ]
+            },
+            "relevance": 77,
+            "parentnames": [
+                "Georgia"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "66a6548082c410048691df092526b43e",
+            "name": "Boston",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "bed6942882b310048501df092526b43e"
+            ],
+            "locationtype": {
+                "code": "9d26a20b35f0484a891740f8189d4c7b",
+                "name": "City"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -71.05977,
+                    42.35843
+                ]
+            },
+            "relevance": 59,
+            "parentnames": [
+                "Massachusetts"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "788b364882f110048df3df092526b43e",
+            "name": "District of Columbia",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "9d26a20b35f0484a891740f8189d4c7b",
+                "name": "City"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -77.00025,
+                    38.91706
+                ]
+            },
+            "relevance": 41,
+            "parentnames": [
+                "United States"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "661850e07d5b100481f5c076b8e3055c",
+            "name": "Latin America and Caribbean",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "9531546082c6100487b5df092526b43e",
+            "name": "New Hampshire",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "dec1cce882af10048320df092526b43e",
+            "name": "Georgia",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "associations": {
+        "1": {
+            "altids": {
+                "itemid": "ebae35acc31043e4b05c39cd27eb2db3"
+            },
+            "type": "picture"
+        },
+        "2": {
+            "altids": {
+                "itemid": "a437f425bc4f46fa9e246c36d6021c02"
+            },
+            "type": "picture"
+        },
+        "3": {
+            "altids": {
+                "itemid": "a8c45563e47f48318260e6a3f74eb73d"
+            },
+            "type": "picture"
+        },
+        "4": {
+            "altids": {
+                "itemid": "a26e4429ea3748318aedc5b98ec48180"
+            },
+            "type": "audio"
+        },
+        "5": {
+            "altids": {
+                "itemid": "66a7f94f906947b48ca4c6b6c26c40cb"
+            },
+            "type": "video"
+        }
+    },
+    "body_nitf": "<p>CONCORD, N.H. (AP) \u2014 The sun was shining in June 1979 as <a href=\"https://apnews.com/hub/rosalynn-carter\">Rosalynn Carter</a> made her way through an enthusiastic crowd in Laconia, New Hampshire.</p><p>\u201cShe shook my hand!\u201d yelled one delighted participant.</p><p><a href=\"https://apnews.com/article/rosalynn-carter-dead-69fadff26354d26bdda94c5d52558a7f\">The first lady</a> was in the state for her husband\u2019s reelection campaign, but this was no political rally. Instead, she was at a sprawling 75-year-old institution founded for \u201cfeebleminded\u201d children that the U.S. Justice Department had deemed \u201ca classic example of warehousing.\u201d She was joined by Gov. Hugh Gallen, a kindred spirit who had been pushing to correct the deplorable conditions there and at the state\u2019s psychiatric hospital.</p><p>\u201cGoing to a place like the Laconia State School and talking not to voters but to people dealing with a very acute issue \u2014 well, it doesn\u2019t happen very often. It didn\u2019t then, and it certainly doesn\u2019t at all now,\u201d recalled Dayton Duncan, who was there as Gallen\u2019s press secretary.</p><p>\u201cShe could have just given a good speech about what the administration was hoping to do and left it at that,\u201d Duncan said. \u201cBut the fact that she would go to the Laconia State School and meet with the people who work there, the children who were warehoused there and the parents, was special.\u201d</p><p>After leaving the White House, Jimmy and Rosalynn Carter launched programs that have, among other things, monitored elections in at least 113 countries and <a href=\"https://apnews.com/article/health-skin-conditions-atlanta-south-sudan-central-african-republic-e7f12b17a6661907874ea05e77f83094\">nearly eradicated the Guinea worm parasite</a> in the developing world. But <a href=\"https://apnews.com/hub/jimmy-carter\">the former president</a> has said that The Carter Center would have been a success had it accomplished nothing but his wife\u2019s mental health work.</p><p>That\u2019s according to Kathy Cade, vice chair of Atlanta-based center and a longtime aide to Rosalynn Carter, and others who know the couple. They spoke to The Associated Press in the months leading up to <a href=\"https://apnews.com/article/rosalynn-carter-dead-e4291133392444bc9ad9d1da461d95c1\">Rosalynn Carter's death Sunday</a> at age 96.</p><p>\u201cI do not think there has ever been another sort of leader in the mental health field who has had as much of an impact on mental health care and access to care and how we think about mental health and mental illness as Mrs. Carter,\u201d Cade said. \u201cAnd I think it has to do with her incredible concern about the issue and her perseverance for more than 50 years.\u201d</p><p>What evolved into <a href=\"https://apnews.com/article/rosalynn-carter-dead-7b208f1b51fe0efd4fe8cf0ac0592fea\">a lifelong crusade</a> began during Carter\u2019s 1966 gubernatorial campaign in Georgia. Almost daily, Rosalynn was approached by voters distressed about loved ones housed at an overcrowded psychiatric hospital. Early one morning, she spoke to a weary cotton mill worker who explained that she and her husband worked opposite shifts to care for their mentally ill daughter.</p><p>\u201cThe image of the woman haunted me all day,\u201d Rosalynn Carter wrote in her 2010 book, \u201cWithin Our Reach: Ending the Mental Health Crisis.\u201d That night, she went to her husband\u2019s campaign rally and waited in line to shake his hand.</p><p>\u201cI came to see what you are going to do to help people with mental illness when you are governor,\u201d she told the surprised candidate.</p><p>Jimmy Carter responded by creating a state commission to improve services for those with mental illness. Then, as president, he created a national commission on mental health, which led to the passage of the Mental Health Systems Act of 1980, a major revamping of federal policy that sought to treat people with mental illness in their communities.</p><p>Rosalynn Carter was that commission's honorary co-chair and a driving force behind the legislation, traveling around the country to hear from experts and everyday citizens alike and sharing her findings with Congress. Though it was effectively repealed during the Reagan administration, advocates say it created a framework for much of the progress since then.</p><p>At The Carter Center, she created a program devoted solely to mental health in 1991 and eventually established fellowships for journalists who cover the topic. Years later, she lobbied Congress to create a landmark law requiring insurers to provide equality in mental health coverage.</p><p>Those who worked with her over the decades say <a href=\"https://apnews.com/article/rosalynn-carter-plains-1dc4151328c1844335e393492bcfa721\">Carter\u2019s accomplishments</a> were rooted in her compassion and listening skills.</p><p>\u201cHer power comes from her heart,\u201d said Cynthia Wainscott, a former board chair of Mental Health America, a national nonprofit organization. \u201cShe\u2019s very, very, very kind, and she listens to people. When you\u2019re talking to her, there can be three conversations going on around you, but you know she\u2019s keyed on you, and she hears you.\u201d</p><p>She also was an effective and inspiring mobilizer with sharp instincts, Wainscott said.</p><p>Preparing for an annual mental health symposium, Carter once suggested contacting a pollster to refine a key message: that 20% of Americans will have a psychiatric disorder in any given year. The pollster conducted focus groups and found that people didn\u2019t believe the statistic, but if it was restated as one in five Americans instead, they did.</p><p>\u201cWhen you hear 20%, you have to visualize 100 people and 20 of them are sick, and it\u2019s complex and impersonal. If you say one in five, people think about their workplace, their school, their neighborhood,\u201d said Wainscott, who also led the National Mental Health Association of Georgia.</p><p>\u201cIf she hadn\u2019t been in that room, none of us would have thought of asking a pollster to tell us how to phrase it,\u201d she said. \u201cIt was brilliant.\u201d</p><p>Journalist Bill Lichtenstein considered Rosalynn Carter \u201cthe patron saint of all who are dealing with mental health or behavioral issues.\u201d</p><p>Lichtenstein, who runs a media production company in Boston, was an investigative reporter for ABC News when he fell ill with manic depression in 1986. He went on to produce award-winning programs on recovery from mental illness, but he still remembers feeling shunned when he disclosed his own struggles. Carter\u2019s desire to reduce such stigma is at the heart of her accomplishments, he said.</p><p>\u201cAt the end of the day, whether it\u2019s talking about more money for research or people with a mental health history being on a level playing field when it comes to employment or renting an apartment, the thing that\u2019s the most insidious, difficult obstacle to all of it is stigma,\u201d he said.</p><p>Lichtenstein serves on the board of advisers for The Carter Center\u2019s mental health journalism fellowship program, which has provided support to more than 220 journalists from the U.S. and six other countries over the years.</p><p>Marion Scher, a freelance journalist and author in South Africa, was awarded a fellowship in 2005. Her first article, headlined \u201cWhen is it more than just a bad day?\u201d was published in a men\u2019s health magazine along with the phone number for a mental health organization. The response, in a country where stigma remains strong, was massive, she said.</p><p>\u201cThe phone was ringing off the hook for three weeks,\u201d she said. \u201cThey had to bring in extra counselors to man the phones.\u201d</p><p>Scher now offers mental health journalism fellowships in South Africa, using local sponsorships. That kind of multiplier effect illustrates the impact of The Carter Center fellowships, and it wouldn't have happened without her tenacity, Cade said.</p><p>Carter was a \u201cwoman of action\" \u2014 unsatisfied with just bringing together experts for discussions, she brainstormed ways to change policy by changing attitudes, Cade said, recalling how she'd sit with her advisers and say \"What can we do? What else could we be doing?\u201d</p><p>___</p><p>Associated Press reporter Holly Ramer received a 2017-18 Rosalynn Carter Fellowship for Mental Health Journalism.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/rosalynn-carter-mental-health-c17a5bc89c29f952b0d3f7f48c3b2412",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 5,
+            "reason": "The document is highly relevant to the topic of Health, specifically mental health. It details Rosalynn Carter's extensive advocacy and contributions to mental health care, including her efforts to improve conditions at psychiatric institutions, her role in creating mental health commissions, and her work at The Carter Center. The document also highlights her impact on mental health policy, stigma reduction, and support for mental health journalism. These aspects are directly related to the broader topic of Health."
+        }
+    }
+}

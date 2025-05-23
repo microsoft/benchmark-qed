@@ -1,0 +1,240 @@
+﻿{
+    "altids": {
+        "itemid": "6ed988ea20d164658991bc72cb6e9576",
+        "etag": "6ed988ea20d164658991bc72cb6e9576_0a4aza0c0",
+        "friendlykey": "481378693835",
+        "referenceid": "EU--Belarus-Crackdown"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2024-04-22T16:18:52Z",
+    "firstcreated": "2024-04-22T16:18:52Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "EU--Belarus-Crackdown",
+    "headline": "Nearly 100 Belarus political prisoners have severe medical problems, rights group says",
+    "headline_extended": "A human rights group says that nearly 100 political prisoners in Belarus who were incarcerated in a severe crackdown on dissent are suffering severe medical problems and could be close to death",
+    "slugline": "AP-EU--Belarus-Crackdown",
+    "description_summary": "A human rights group says that nearly 100 political prisoners in Belarus who were incarcerated in a severe crackdown on dissent are suffering severe medical problems and could be close to death. Viasna said in a report published on Monday that it identified 93 prisoners of particular concern who are suffering from cancer, heart disease and other conditions that are neglected or poorly treated behind bars. Belarus started a harsh crackdown on opposition after large protests arose across the country following August 2020 elections who disputed results gave authoritarian President Alexander Lukashenko a sixth term in office.",
+    "located": "TALLINN, Estonia",
+    "datelinelocation": {
+        "city": "Tallinn",
+        "countrycode": "EST",
+        "countryname": "Estonia",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                24.75353,
+                59.43696
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "Belarus political prisoners crackdown"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "person": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "b4dbc88953824410acac12a42b28b76d",
+            "name": "Ales Bialiatski",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "NEWSMAKER",
+                "PERSON"
+            ],
+            "relevance": 39
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "ee76afc08d9d10048cfda55c96277d3e",
+            "name": "Alexander Lukashenko",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "POLITICIAN",
+                "PERSON"
+            ],
+            "relevance": 46
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "i",
+            "name": "i"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86aad5207dac100488ecba7fa5283c3e",
+            "name": "Politics",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 56
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "0e8cf338896510048024d56c852d093e",
+            "name": "Protests and demonstrations",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 47
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 72
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "4c96e8e92e0441579dbce2f9e8d06493",
+            "name": "Prisons",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 63
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Editorial",
+            "editorial_subject": "Health",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "bb2d2c5f441a452cb24bb511a2ab5eea",
+            "name": "World news",
+            "creator": "Editorial",
+            "editorial_subject": "World news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "661c21707d5b10048255c076b8e3055c",
+            "name": "Belarus",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661850e07d5b100481f4c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "01f56e0e654841eca2e69bf2cbcc0526",
+                "name": "Nation"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    28,
+                    53
+                ]
+            },
+            "relevance": 80,
+            "parentnames": [
+                "Europe"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "661850e07d5b100481f4c076b8e3055c",
+            "name": "Europe",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "body_nitf": "<p>TALLINN, Estonia (AP) \u2014 Nearly 100 political prisoners in <a href=\"https://apnews.com/article/belarus-arrests-crackdown-lukashenko-62a326ea9f8d2133382d1229478c0f0f\">Belarus, incarcerated in a severe crackdown on dissent</a>, have severe medical problems and could be close to death, the <a href=\"https://apnews.com/article/belarus-lukashenko-crackdown-43bb792426aa072ff45cb44a89a695a1\">country's respected human rights group Viasna</a> said Monday.</p><p>Viasna, whose <a href=\"https://apnews.com/hub/ales-bialiatski\">Nobel Peace Prize-winning founder Ales Bialiatski</a> is among those imprisoned in the crackdown, identified 93 prisoners of particular concern who are suffering from cancer, heart disease and other conditions that are being neglected or poorly treated behind bars.</p><p>\u201cIn captivity, every disease progresses faster, in addition to the lack of qualified medical care,\" said Viasna representative Pavel Sapelka. \"This is influenced by the conditions of detention \u2014 lack of fresh air, poor nutrition, constant psychological pressure and stress.\u201d</p><p>Belarus started a harsh crackdown on opposition after large protests arose across the country following August 2020 elections who disputed results gave authoritarian <a href=\"https://apnews.com/hub/alexander-lukashenko\">President Alexander Lukashenko</a> a sixth term in office.</p><p>Human rights activists count some 35,000 people detained in the crackdown, many of whom were beaten by police. All significant opposition figures have been imprisoned or have fled the country.</p><p>Viasna says more than 1,400 political prisoners are now behind bars.</p><p>Among the cases cited by Viasna in the report is that of <a href=\"https://apnews.com/article/belarus-crackdown-opposition-prison-kolesnikova-ceae8eba43b09512624993d909a2e4de\">Maria Kolesnikova, who was one of the most prominent leaders</a> of the post-election protests. She underwent abdominal surgery but was quickly transported back to prison. Viasna said her dietary needs are not being observed and said investigation found that she was beaten prior to being hospitalized.</p><p>Other cases the group noted included 19-year-old Mikita Zalatarou, who reportedly is being denied pills to control his epilepsy, and Yauhen Barouski, who told his family while ill that \u201cI'm probably just going to die here.\u201d</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/belarus-political-prisoners-crackdown-6ed988ea20d164658991bc72cb6e9576",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 5,
+            "reason": "The document discusses the severe medical problems faced by nearly 100 political prisoners in Belarus, including conditions such as cancer, heart disease, and epilepsy. It highlights the lack of qualified medical care, poor nutrition, and stressful conditions that exacerbate these health issues. The focus on the health conditions and medical neglect of the prisoners makes the document highly relevant to the topic of Health."
+        }
+    }
+}

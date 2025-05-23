@@ -1,0 +1,233 @@
+﻿{
+    "altids": {
+        "itemid": "c27c1c28d51be9e8fed366efe201f300",
+        "etag": "c27c1c28d51be9e8fed366efe201f300_0a2aza0c0",
+        "friendlykey": "645154248678",
+        "referenceid": "WV--Editorial Rdp"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Opinion",
+    "language": "en",
+    "versioncreated": "2024-01-11T18:04:09Z",
+    "firstcreated": "2024-01-11T18:04:08Z",
+    "editorialrole": "FullStory",
+    "fixture": {
+        "code": "21ea4067bb274c3b805353fb2b99ba70",
+        "name": "Editorial Roundup"
+    },
+    "pubstatus": "usable",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "WV--Editorial Rdp",
+    "headline": "Editorial Roundup: West Virginia",
+    "slugline": "BC-WV--Editorial Rdp",
+    "bylines": [
+        {
+            "by": "By The Associated Press"
+        }
+    ],
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "Editorial Rdp"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "4626a38a1b52454ca5d01755d14f1dc9",
+            "name": "Legal proceedings",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 65
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "3ec37e763f534fdb8a10c63768dad1b7",
+            "name": "Capital punishment",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 60
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "fb629770cf154f91964e1789d2dd836e",
+            "name": "Opioids",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 41
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "6cd98adfc84d405eadec8ca81bd37df4",
+            "name": "Access to health care",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 79
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "6ef1c84088321004850dae2ac3a6923e",
+            "name": "Mining accidents",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 41
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a328daf6767245f18a263276f2e111f3",
+            "name": "Marijuana",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 55
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "1b29d45f8e8e4c008e8a58fe6f92a753",
+            "name": "Government programs",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86aad5207dac100488ecba7fa5283c3e",
+            "name": "Politics",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 35
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "48612b807c2b4b93bbbacbf54f547ad5",
+            "name": "Crime",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 70
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "130bcce882c81004895adf092526b43e",
+            "name": "West Virginia",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -80.50009,
+                    38.50038
+                ]
+            },
+            "relevance": 85,
+            "parentnames": [
+                "United States"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "130bcce882c81004895adf092526b43e",
+            "name": "West Virginia",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "body_nitf": "<p>Charlotte Gazette-Mail. January 10, 2024.</p><p>Editorial: The brief moment that still defines water crisis</p><p>Perhaps the most enduring moment in West Virginians\u2019 collective memory about the Jan. 9, 2014, chemical spill that left roughly 300,000 residents and businesses in the Kanawha Valley and surrounding areas without water came from the combination of a dismissive attitude and an Aquafina bottle.</p><p>It\u2019s hard to forget Freedom Industries president Gary Southern trying to dodge <a href=\"https://www.textise.net/showText.aspx?strURL=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DhAGixCOj8bg\">the press</a> while absent-mindedly chugging bottled water, a precious commodity at the time.</p><p>\u201cLook guys, it has been an extremely long day, I\u2019m having a hard (time) talking at the moment, I\u2019d appreciate it if we could wrap this thing up,\u201d Southern said.</p><p>The retort from former TV reporter Kallie Cart that news media members had a lot of questions and \u201cit\u2019s been a long day for a lot of people who don\u2019t have water,\u201d then telling Southern \u201cHey, hey, we\u2019re not done\u201d as he tries to walk away are as equally legendary as Southern\u2019s brief engagement with reporters is infamous.</p><p>Southern\u2019s approach was so disastrous that it <a href=\"https://www.textise.net/showText.aspx?strURL=https%3A%2F%2Fwww.dailymail.co.uk%2Fnews%2Farticle-2538144%2FWere-not-Reporter-corners-arrogant-CEO-tries-avoid-questions-chemical-spillage-thats-left-300-000-people-without-water-brazenly-drinks-bottled-water-camera.html\">made global news</a>, with some outlets reporting he appeared \u201carrogant\u201d or \u201crude and aloof.\u201d</p><p>A little more than two years later, Southern would be sentenced to 30 days in federal prison and fined $20,000 after pleading guilty to negligently discharging a pollutant, unlawfully discharging refuse matter and negligently violating the company\u2019s environmental permit because Freedom Industries didn\u2019t have a pollution prevention plan.</p><p>Some might argue that Southern\u2019s viral moment of shame isn\u2019t all that important when considering the broader implications of the chemical spill for hundreds of thousands of West Virginians, along with the reasons the spill occurred. There\u2019s also plenty to digest on what has and hasn\u2019t happened to protect the health of the state\u2019s people and the environment in the intervening 10 years.</p><p>At the same time, Southern\u2019s brief news media appearance personifies a huge part of the problem that applies to just about every major industrial accident that has taken its toll on the people of West Virginia during the state\u2019s history, which is a general disdain for those very same people.</p><p>Mining injuries, deaths and large-scale disasters in West Virginia have occurred because profits were more important than safe working conditions for those doing the actual labor. Communities have been left in financial and environmental ruin by industries that had no concern for either, especially once operations became unprofitable. Bodies of minorities and the poor who died working on projects like the Hawk\u2019s Nest Tunnel were dumped in unmarked graves.</p><p>Even today, agencies that are supposed to protect the public health of West Virginians and the state\u2019s environment don\u2019t have the staffing to do their jobs effectively. Meanwhile, complicit lawmakers work with industry shills to try to roll back what few health and safety regulations and penalties that do exist. The Freedom Industries spill is a great example. New policies on storage and containment of hazardous substances passed by the West Virginia Legislature in 2014 as a result of the spill were weakened in the very next legislative session, and lawmakers have continued to chip away at those protections.</p><p>West Virginians have to fight tooth and nail, often in court at great expense, just to get industrial interests and permitting agencies that should have citizens\u2019 backs to merely adhere to the minimum standard of the law. And the Gary Southerns of the world, along with those who aid them, sneer in contempt, wondering why insignificant people would dare complain and think they deserve answers or, God forbid, accountability.</p><p>___</p><p>The Herald-Dispatch. January 9, 2024.</p><p>Editorial: Legislature doesn\u2019t need distraction of death penalty bill</p><p>As the West Virginia Legislature prepares for the opening of its 2024 regular session Wednesday, its members should keep one question in mind: Do we really want to go there?</p><p>Not to the Capitol, of course, but do legislators really want to break decades of legal precedent and tradition by walking into some issues?</p><p>This past Friday, legislative leaders gave a preview of their priorities for the upcoming session at the annual panel event sponsored by the West Virginia Press Association.</p><p>One legislative proposal is legalizing the use of recreational marijuana, or cannabis. It could be that legalizing marijuana is inevitable. Ohio has done it.</p><p>House of Delegates Minority Leader Sean Hornbuckle, D-Cabell, said House Democrats believe adult-use cannabis should be discussed because voters say they want it. Hornbuckle said he favors letting voters decide the issue through an amendment to the state constitution. Voters have decided other contentious issues through constitutional amendments. It\u2019s probably time for recreational marijuana to be decided in a similar manner.</p><p>The big do-you-want-to-go-there question will be bringing back capital punishment, which was outlawed in 1965. The proposal comes up often, but usually it goes nowhere. This time it has the backing of Senate President Craig Blair, R-Berkeley. Blair said he wants capital punishment required for the illicit manufacturing and wholesale distribution of fentanyl.</p><p>\u201cWhat we\u2019re wanting to do is send a message out to these animals that are selling this and manufacturing this,\u201d Blair said. \u201cStay the hell out of West Virginia.\u201d</p><p>Blair conceded that capital punishment for distributing fentanyl might not get passed this year, but he hopes the Legislature will enact it someday.</p><p>The problem with capital punishment lies not in the act itself but in the process. The death penalty usually involves several rounds of appeals. Some states with the death penalty struggle to find humane ways of carrying it out. There are questions of whether certain groups of people are more likely to be sentenced to death for the same crime than other groups. And there is always the risk of executing an innocent person.</p><p>Some states that have the death penalty have moratoriums on it. They have the legal authority to execute people for some crimes, but they refuse to do so.</p><p>Allowing capital punishment for fentanyl distribution opens the door to allowing it for other crimes. This is one proposal legislators should be exceptionally careful with.</p><p>Legislators could also revisit a law allowing high school athletes to transfer to another school and not have to sit out a year. This could be a question that occupies a large amount of time that could be spent on discussing state employee pay raises, a permanent funding source for volunteer fire departments and other matters of more importance to voters.</p><p>Legislators have 60 days to get their work done. The hope always is that they use those 60 days on the most productive issues and set aside those that take a lot of time debating despite having little chance of passage or little impact on the state\u2019s future.</p><p>___</p><p>The Intelligencer. January 9, 2024.</p><p>Editorial: Ensure Medicaid Available to All</p><p>West Virginia\u2019s Medicaid eligibility review has booted approximately 100,000 off the rolls so far.</p><p>But according to a report by WDTV, many may remain eligible but did not respond to paperwork requests or may have a new address.</p><p>Renate Pore, health care policy consultant for West Virginians for Affordable Healthcare, told WDTV that will mean fewer resources for some of our state\u2019s most vulnerable residents.</p><p>\u201cThe 100,000 people who no longer have Medicaid coverage,\u201d Pore told the station, \u201cmay not even know they no longer have Medicaid coverage until they go to a doctor\u2019s office and find out that, indeed, their coverage has dropped.\u201d</p><p>Such a large reduction in Medicaid recipients doesn\u2019t just take away resources from some individuals who may need it, it means a 5% loss in federal funding for the program\u2019s operation and reimbursements, Pore said.</p><p>But what can be done about it?</p><p>Well, for starters, if you know someone who might need to check their status or start the Medicaid renewal process, direct them online to www.wvpath.wv.gov. They can call 877-716-1212 or visit a local Department of Health and Human Resources office.</p><p>Imagine needing medical attention and not being aware you were no longer on the Medicaid rolls until you went to the doctor.</p><p>At a time when we all need to be working a little harder to look out for one another, check in with anyone you know who might need a nudge to help avoid such a nasty surprise in 2024.</p><p>END</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/c27c1c28d51be9e8fed366efe201f300",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 3,
+            "reason": "The document contains three editorials, each discussing different topics. The first editorial focuses on the 2014 chemical spill in West Virginia and its aftermath, which includes some discussion on public health and environmental issues. The second editorial discusses legislative priorities, including the death penalty and recreational marijuana, which are not directly related to health. The third editorial is highly relevant to health as it discusses Medicaid eligibility and the impact of losing Medicaid coverage on vulnerable residents. Given that only one of the three editorials is directly focused on health, the overall relevance of the document to the topic of health is moderate."
+        }
+    }
+}

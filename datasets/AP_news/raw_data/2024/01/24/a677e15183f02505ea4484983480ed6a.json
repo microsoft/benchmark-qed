@@ -1,0 +1,233 @@
+﻿{
+    "altids": {
+        "itemid": "a677e15183f02505ea4484983480ed6a",
+        "etag": "a677e15183f02505ea4484983480ed6a_0a2aza0c0",
+        "friendlykey": "508363919841",
+        "referenceid": "WV--Editorial Rdp"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Opinion",
+    "language": "en",
+    "versioncreated": "2024-01-25T12:10:39Z",
+    "firstcreated": "2024-01-24T21:42:11Z",
+    "editorialrole": "FullStory",
+    "fixture": {
+        "code": "21ea4067bb274c3b805353fb2b99ba70",
+        "name": "Editorial Roundup"
+    },
+    "pubstatus": "usable",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "WV--Editorial Rdp",
+    "headline": "Editorial Roundup: West Virginia",
+    "slugline": "BC-WV--Editorial Rdp",
+    "bylines": [
+        {
+            "by": "By The Associated Press"
+        }
+    ],
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "Editorial Rdp"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "c8e409f8858510048872ff2260dd383e",
+            "name": "Business",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 62
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e22655687de410048f98df092526b43e",
+            "name": "Lung cancer",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 47
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "6cd98adfc84d405eadec8ca81bd37df4",
+            "name": "Access to health care",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 69
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86aad5207dac100488ecba7fa5283c3e",
+            "name": "Politics",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 79
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "ec2db49888e810048c93f8851349f9bd",
+            "name": "Labor",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 33
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e00eb978850a1004895591f43387513e",
+            "name": "Jobs and careers",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 33
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e22563387de410048f92df092526b43e",
+            "name": "Breast cancer",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 47
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a86239008b6d1004897db5b842854103",
+            "name": "Electric vehicles",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 47
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "c9469c808b6b10048d8ba385cd5ce603",
+            "name": "Medical diagnostic technology",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 33
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "130bcce882c81004895adf092526b43e",
+            "name": "West Virginia",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -80.50009,
+                    38.50038
+                ]
+            },
+            "relevance": 94,
+            "parentnames": [
+                "United States"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "130bcce882c81004895adf092526b43e",
+            "name": "West Virginia",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "body_nitf": "<p>Charleston Gazette-Mail. January 19, 2024.</p><p>Editorial: Easier access to cancer screening a no-brainer</p><p>Despite a proclivity toward culture war issues, given a GOP supermajority, the West Virginia Legislature is doing some meaningful work in addressing access to cancer screening.</p><p>The House of Delegates this week passed a bill, 96-0, with three abstentions, that would waive the certificate-of-need process for mobile health care services that provide mammograms to help screen for breast cancer or low-density computerized tomography (essentially, an image scan to detect lung cancer).</p><p>The certificate-of-need process, which is in place to prevent redundant services and provide cost control for patients, is something that lawmakers have often tried to eliminate completely. And the bill does include language that also would eliminate the certificate-of-need process for private practices purchasing tomography equipment up to $750,000.</p><p>Certificate-of-need itself is a bigger issue for another time. But it makes sense to waive the process for mobile cancer screening and smaller practices for a few reasons.</p><p>West Virginia\u2019s health care infrastructure isn\u2019t exactly top of the line, and access to basic health care is a huge problem owing to a combination of factors, including the state\u2019s high poverty rate, rural communities, lack of transportation for some and continuing decline of available facilities. The state also has one of the highest cancer rates in the nation and regularly appears among the highest in the country for cancer deaths. So, any means of providing early detection that also cuts through some of the barriers to health care access should be welcomed.</p><p>The bill doesn\u2019t establish a mobile screening service or provide funds for such a service, although waiving the certificate-of-need process will save money for any health care provider looking to establish such a service.</p><p>Hopefully, the state Senate will pass the bill in short order.</p><p>___</p><p>The Intelligencer. January 24, 2024.</p><p>Editorial: W.Va. Is Building Workforce of Future</p><p>Though politicians are still fond of diminishing West Virginia as only a fossil fuels state, the reality points to an even brighter future. According to West Virginia Affiliated Construction Trades Director Justin Williams, apprenticeship programs are growing here.</p><p>And yes, some of those workers are in coal mines, but others work in a variety of trades that will literally build our state\u2019s next chapters.</p><p>\u201cThere are 2,500 apprentices in West Virginia, and we represent about 24,000 construction workers,\u201d Williams told WV MetroNews.\u201d \u201cIt\u2019s not a huge number but it\u2019s people that get up and go to work every day, and they make a big impact on their communities and state.\u201d</p><p>For those hoping to work in the budding aviation, aerospace and even electric vehicle manufacturing industries in our state, apprenticeship programs can put them in a position to make starting wages of $20 to $23 per hour. \u201cWith the investments we\u2019re seeing \u2026 these are 20, 30, 40-year-old or more careers that people coming out of high school now can have,\u201d Williams said. \u201cThey\u2019ll have a living wage, benefits, and a pension.\u201d</p><p>Sounds a little bit like the career prospects our grandparents knew in this region, doesn\u2019t it?</p><p>Apprenticeships are classroom and on-the-job training that allow employers to tailor the training to build the workforce they need. Williams touted apprenticeships\u2019 ability to produce electricians, plumbers, pipe fitters, iron workers, truck drivers and more.</p><p>In a state full of people who can do it all, there is room for those who are ready and willing to get to work. Apprenticeship programs offer an option that will let workers make a difference for themselves \u2013and our state.</p><p>___</p><p>Parkersburg News and Sentinel. January 19, 2024.</p><p>Editorial: Diversity: Bribes can\u2019t fix an unwelcome atmosphere</p><p>State Senate Majority Leader Tom Takubo, R-Kanawha, has spoken in support of Senate Bill 208 \u2014 yet another attempt to attract and retain needed workers. This one would create a tax credit for physicians who chose to locate and practice in West Virginia. Certainly, there is a need to pull out all the stops to address the dearth of health care workers in the Mountain State, but one can\u2019t help but wonder if lawmakers are being a bit naive in their hope that such an idea would find success.</p><p>\u201cThis would be one way that if a person comes back to the state, it may be an incentive enticing them to come back,\u201d Takubo said during a committee meeting, according to a report by WV MetroNews. \u201c\u2026 Chances are (after the establishment of a medical practice) you\u2019ve probably got a spouse, home, kids in school, et cetera, and good chance we keep them for life after that.\u201d</p><p>Maybe, provided lawmakers and other public officials stop their relentless drive to push our state back to the socio-cultural and economic norms of a century ago. They must not underestimate an intelligent and caring person\u2019s desire to make sure his or her family is in the best environment possible.</p><p>Challenges such as the one Takubo is trying to address are precisely the kinds of issues West Virginia lawmakers SHOULD be tackling. Even better, they should be working toward affecting change that would expand and diversify our economy, improve access to healthcare, housing and a good education for our families and encourage an attitude of working toward lifting ALL Mountain State residents.</p><p>If young people \u2014 natives and outsiders alike \u2014 could see a West Virginia where those in positions of power had such a mindset, we wouldn\u2019t have to be throwing money at doctors, nurses, teachers and everyone else we are trying to bribe to come here (or stay).</p><p>SB 208 may be worth a try, and lawmakers should give it serious consideration. They MUST also be thinking about how to build a West Virginia where ideas such as SB 208 are no longer necessary.</p><p>END</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/a677e15183f02505ea4484983480ed6a",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 4,
+            "reason": "The document contains three editorials, two of which are directly related to health topics. The first editorial discusses a bill to improve access to cancer screening in West Virginia, which is highly relevant to health. The third editorial addresses a tax credit to attract physicians to the state, which is also relevant to health. The second editorial, however, focuses on workforce development and apprenticeship programs, which is less relevant to health. Overall, the document has significant content related to health, but not exclusively."
+        }
+    }
+}

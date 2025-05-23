@@ -1,0 +1,244 @@
+﻿{
+    "altids": {
+        "itemid": "c99f4a3db23b4264e4640189ba1e6706",
+        "etag": "c99f4a3db23b4264e4640189ba1e6706_0a14aza0c0",
+        "friendlykey": "73842870522",
+        "referenceid": "US--Cancer Center-Data Breach"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2023-12-09T19:36:27Z",
+    "firstcreated": "2023-12-09T19:36:26Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "US--Cancer Center-Data Breach",
+    "headline": "Some Seattle cancer center patients are receiving threatening emails after last month's data breach",
+    "headline_extended": "Some patients of a Seattle-based cancer center are receiving threatening emails following a data breach last month",
+    "slugline": "AP-US--Cancer Center-Data Breach",
+    "description_summary": "Some patients of a Seattle-based cancer center are receiving threatening emails following a data breach last month. Fred Hutchinson Cancer Center officials say a Nov. 19 hack hit a portion of the health care system\u2019s clinical network, possibly leaking patient data. The Seattle Times reports that this week some former and current patients received threatening emails claiming the names, Social Security numbers, medical history and other data of more than 800,000 patients had been compromised. Emails shared with the newspaper claim the stolen data of recipients will be sold. After last month\u2019s hack, the center took its clinical network offline, notified federal law enforcement and brought in a forensic security firm to investigate.",
+    "located": "SEATTLE",
+    "datelinelocation": {
+        "city": "Seattle",
+        "countryareacode": "WA",
+        "countryareaname": "Washington",
+        "countrycode": "USA",
+        "countryname": "United States",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                -122.33207,
+                47.60621
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2023 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "cancer center data breach threats"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "f",
+            "name": "f"
+        },
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "a",
+            "name": "a"
+        },
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e22524b87de410048f91df092526b43e",
+            "name": "Cancer",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 72
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "b8260bb88b6e10048b47b5b842854103",
+            "name": "Email and messaging",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 61
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 83
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Editorial",
+            "editorial_subject": "Health",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "455ef2b87df7100483d8df092526b43e",
+            "name": "Technology",
+            "creator": "Editorial",
+            "editorial_subject": "Technology",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "0ef379d082c810048954df092526b43e",
+            "name": "Seattle",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "08a0a00882c810048942df092526b43e"
+            ],
+            "locationtype": {
+                "code": "9d26a20b35f0484a891740f8189d4c7b",
+                "name": "City"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -122.33207,
+                    47.60621
+                ]
+            },
+            "relevance": 51,
+            "parentnames": [
+                "Washington"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "08a0a00882c810048942df092526b43e",
+            "name": "Washington",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "fe016fe882c61004886adf092526b43e",
+            "name": "Oregon",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661850e07d5b100481f5c076b8e3055c",
+            "name": "Latin America and Caribbean",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "body_nitf": "<p>SEATTLE (AP) \u2014 Some patients of a Seattle-based cancer center received threatening emails following a data breach last month.</p><p>Fred Hutchinson Cancer Center officials said a Nov. 19 hack hit a portion of the health care system's clinical network, possibly leaking patient data.</p><p>This week, some former and current patients received threatening emails claiming names, Social Security numbers, medical history and other data of more than 800,000 patients had been compromised, <a href=\"https://www.seattletimes.com/seattle-news/health/fred-hutch-patients-receiving-email-threats-following-recent-cyberattack/\">The Seattle Times reported.</a></p><p>Emails shared with the newspaper claimed the stolen data of recipients would be sold.</p><p>Christina VerHeul, the center's associate vice president of communications, said she couldn't speculate how many people were affected but said an investigation is ongoing.</p><p>After last month's hack, the center took its clinical network offline, notified federal law enforcement and brought in a forensic security firm to investigate, she said.</p><p>The center encouraged patients to keep a close eye on bank statements and credit reports.</p><p>The center directed those who received suspicious or threatening calls or emails to report them to the FBI, block senders and delete messages. If the message demands a ransom, do not pay it, the center instructed.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/cancer-center-data-breach-threats-c99f4a3db23b4264e4640189ba1e6706",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 5,
+            "reason": "The document discusses a data breach at a Seattle-based cancer center, which is a health-related institution. It details the impact on patients, including the potential compromise of sensitive health information and the subsequent threatening emails received by patients. The document also mentions the center's response to the breach, including taking the clinical network offline and advising patients on how to protect themselves. All these points are directly related to health, particularly in the context of patient data security and the implications of a cyberattack on a healthcare facility."
+        }
+    }
+}

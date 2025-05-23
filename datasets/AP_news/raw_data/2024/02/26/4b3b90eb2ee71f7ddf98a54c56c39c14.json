@@ -1,0 +1,220 @@
+﻿{
+    "altids": {
+        "itemid": "4b3b90eb2ee71f7ddf98a54c56c39c14",
+        "etag": "4b3b90eb2ee71f7ddf98a54c56c39c14_1a4aza0c0",
+        "friendlykey": "360835673293",
+        "referenceid": "EU-REL-Vatican-Pope-Flu"
+    },
+    "version": 1,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2024-02-26T10:51:07Z",
+    "firstcreated": "2024-02-26T09:20:19Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "ednote": "Eds: UPDATES: Updates Media.",
+    "editorialtypes": [
+        "Lead"
+    ],
+    "signals": [
+        "newscontent"
+    ],
+    "title": "EU-REL-Vatican-Pope-Flu",
+    "headline": "Pope Francis cancels Monday morning engagements due to mild flu symptoms, Vatican says",
+    "headline_extended": "Pope Francis has canceled his engagements Monday morning due to persistent but mild flu symptoms",
+    "slugline": "BC-EU-REL-Vatican-Pope-Flu, 1st Ld-Writethru",
+    "description_summary": "Pope Francis has canceled his engagements Monday morning due to persistent but mild flu symptoms. The Vatican press office made the announcement in a short statement on Monday, adding that the pontiff did not have a fever. The statement indicated the decision was made as a precautionary measure. Pope Francis was well enough on Sunday to celebrate his weekly Angelus prayer from the Vatican window overlooking St. Peter\u2019s Square, a day after canceling a public audience because of a mild flu-like condition. The Vatican calendar has no public audiences scheduled for the Pope on Monday morning, but he may have had other private engagements.",
+    "located": "VATICAN CITY",
+    "datelinelocation": {
+        "city": "Vatican City",
+        "countrycode": "VAT",
+        "countryname": "Vatican City",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                12.4533,
+                41.90225
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "Pope health flu cancelled audiences Vatican"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "person": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "2fd38d1dee8c4287a13ae64992300d96",
+            "name": "Pope Francis",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 90
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "i",
+            "name": "i"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "084e24e87f00100481c7f571351eed07",
+            "name": "Flu",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 40
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "026a1118e94443a2aacc08a2e70cc77b",
+            "name": "Religion",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 86
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "026a1118e94443a2aacc08a2e70cc77b",
+            "name": "Religion",
+            "creator": "Editorial",
+            "editorial_subject": "Religion",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "bb2d2c5f441a452cb24bb511a2ab5eea",
+            "name": "World news",
+            "creator": "Editorial",
+            "editorial_subject": "World news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f3e0ed387eff10048539df092526b43e",
+            "name": "Vatican City",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661850e07d5b100481f4c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "01f56e0e654841eca2e69bf2cbcc0526",
+                "name": "Nation"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    12.4533,
+                    41.90225
+                ]
+            },
+            "relevance": 40,
+            "parentnames": [
+                "Europe"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "661850e07d5b100481f4c076b8e3055c",
+            "name": "Europe",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "associations": {
+        "1": {
+            "altids": {
+                "itemid": "7f1a330f99b842f2874830fd9e502bd3"
+            },
+            "type": "picture"
+        },
+        "2": {
+            "altids": {
+                "itemid": "1746b7f770ca4f8aa646a7e3e57a56a3"
+            },
+            "type": "audio"
+        }
+    },
+    "body_nitf": "<p>VATICAN CITY (AP) \u2014 Pope Francis canceled his engagements Monday morning due to persistent but mild flu symptoms, the Vatican press office said in a short statement, adding that the pontiff did not have a fever.</p><p>The statement indicated the decision was made as a precautionary measure.</p><p>Pope Francis was well enough on Sunday to celebrate his weekly Angelus prayer from the Vatican window overlooking St. Peter\u2019s Square, a day after <a href=\"https://apnews.com/article/pope-health-flu-audience-cancelled-vatican-0f3e2c1e6db190883a5f9a5c63927dc0\">canceling a public audience</a> because of a mild flu-like condition.</p><p>The Vatican calendar has no public audiences scheduled for the Pope on Monday morning, but he may have had other private engagements.</p><p>On Saturday, in another brief announcement, the Vatican press office said the 87-year-old pontiff was forced to scrap a planned audience with Roman deacons as a precaution due to a \u201cmild, flu-like condition.\u201d</p><p>Over the past few months, Francis had to cancel some activities and one international trip due to his <a href=\"https://apnews.com/article/vatican-pope-health-758c3d7b07e6d6f242c4a5ea6f2de154\">fragile health</a>.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/pope-health-flu-cancelled-audiences-vatican-4b3b90eb2ee71f7ddf98a54c56c39c14",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 5,
+            "reason": "The document discusses Pope Francis canceling his engagements due to mild flu symptoms and mentions his fragile health, which directly relates to the topic of health. It provides specific details about his condition, the precautionary measures taken, and his recent health-related cancellations."
+        }
+    }
+}

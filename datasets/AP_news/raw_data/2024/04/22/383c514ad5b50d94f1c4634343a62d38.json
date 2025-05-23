@@ -1,0 +1,211 @@
+﻿{
+    "altids": {
+        "itemid": "383c514ad5b50d94f1c4634343a62d38",
+        "etag": "383c514ad5b50d94f1c4634343a62d38_0a2aza0c0",
+        "friendlykey": "802551845755",
+        "referenceid": "IL--Editorial Rdp"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Opinion",
+    "language": "en",
+    "versioncreated": "2024-04-23T11:10:39Z",
+    "firstcreated": "2024-04-22T17:33:52Z",
+    "editorialrole": "FullStory",
+    "fixture": {
+        "code": "21ea4067bb274c3b805353fb2b99ba70",
+        "name": "Editorial Roundup"
+    },
+    "pubstatus": "usable",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "IL--Editorial Rdp",
+    "headline": "Editorial Roundup: Illinois",
+    "slugline": "AP-IL--Editorial Rdp",
+    "bylines": [
+        {
+            "by": "By The Associated Press"
+        }
+    ],
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "Editorial Rdp"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "person": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "4f2cf81463144da3bc293007a0525a07",
+            "name": "J.B. Pritzker",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "POLITICIAN",
+                "PERSON"
+            ],
+            "relevance": 32
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "5e4e536087aa10048b0ee9f06a797907",
+            "name": "Wetlands",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 76
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "ace74e307f00100486cedf092526b43e",
+            "name": "Immunizations",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 58
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86aad5207dac100488ecba7fa5283c3e",
+            "name": "Politics",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 67
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "4f95136e072e41c6a81e8fa820e26e9c",
+            "name": "Children",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "organisation": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "efa933c0892110048d92fb7860a2fc03",
+            "name": "Supreme Court of the United States",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 39
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "2c6a186082b010048379df092526b43e",
+            "name": "Illinois",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -89.25037,
+                    40.00032
+                ]
+            },
+            "relevance": 91,
+            "parentnames": [
+                "United States"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "2c6a186082b010048379df092526b43e",
+            "name": "Illinois",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "body_nitf": "<p>Arlington Heights Daily Herald. April 17, 2024.</p><p>Editorial: For everyone\u2019s safety</p><p>With measles cases rising, IDPH\u2019s check of unvaccinated students is the right call</p><p>The Illinois Department of Health is asking schools to check records and get in touch with parents of kids who have not received the MMR vaccine. If an outbreak occurs, those students would be excluded from the classroom. Associated Press</p><p>Maybe you\u2019ve heard \u2014 measles is back.</p><p>Twenty-four years after the disease was eradicated in the U.S., measles is back.</p><p>Sixty-one years after the first measles vaccine was available to the public, measles is back.</p><p>And while some people may think the illness is back only in Chicago, think again. DuPage County reported its first measles case this past Saturday. And Lake, Kane and suburban Cook counties have all reported cases in the past few weeks, too.</p><p>Another troubling statistic from the Illinois State Board of Education \u2014 more than 690 schools statewide fall below the 95% vaccination rate that triggers herd immunity.</p><p>As of April 15, 64 cases have been reported in Illinois this year, with a total of 121 cases reported in the U.S.</p><p>Now, the Illinois Department of Health wants to control any potential outbreaks, especially in schools.</p><p>On April 8, the IDPH sent a letter to state regional offices of education asking that schools review immunization records for all students, then contact parents of children not up-to-date on the measles, mumps, rubella (MMR) vaccine. If students haven\u2019t had the vaccine, or don\u2019t have evidence of immunity to measles, schools will remind parents of the exclusion policy if there is an outbreak.</p><p>This would include students \u201cwho are not completely vaccinated due to religious exemption, medical exemption, McKinney-Vento exception, on an approved schedule, or noncompliance with measles vaccination,\u201d according to the IDPH.</p><p>Some may see this as controversial. Why punish kids when it\u2019s not their fault? When kids are excluded from school, it\u2019s like putting a scarlet letter on their backs. Everyone will know.</p><p>So, schools must handle with tact issues that arise. After all, parents made the decision, not the kids.</p><p>But the goal of the IDPH and schools around the state also must be to protect all kids \u2014 kids who can\u2019t be vaccinated for medical reasons or who haven\u2019t finished the full series of the vaccine.</p><p>We support these efforts. After 60-plus years, the MMR vaccine has proven itself safe. And measles has proven to be an awful disease, often causing hospitalization and even death. No one who is able to get this vaccine should be turning it down. But people are, and now we\u2019re in a situation where a once-eradicated disease is spreading \u2014 and it should not be. This is a preventable illness, and no one should suffer its wrath when they don\u2019t have to.</p><p>Remember, it\u2019s not just about you. Yes, vaccines protect you, but they also protect infants too young to be vaccinated or anyone with weak or failing immune systems, like people with cancer or HIV/AIDS.</p><p>Let\u2019s hope we don\u2019t have any outbreaks at our schools or elsewhere. We hope parents made responsible decisions at pediatrician well visits so their children are up to date on all vaccines. Doctors recommend a schedule for these immunizations, and parents should follow it.</p><p>For those who don\u2019t, the IDPH is doing what\u2019s necessary to protect everyone. We applaud the schools\u2019 efforts in checking health records, reaching out to parents of unvaccinated children and, in situations where outbreaks threaten to spread the disease, keeping these kids out of the classroom.</p><p>Because vaccines are not just about protecting you. They protect all of us.</p><p>___</p><p>Chicago Sun-Times. April 20, 2024.</p><p>Editorial: Illinois wetlands deserve protection. Lawmakers should make that happen, while there is still time.</p><p>State lawmakers can pass legislation that would restore the safeguards the U.S. Supreme Court removed last year on wetlands, which play a key role in helping to mitigate the impact of climate change and are critical habitats for birds, insects, mammals and amphibians.</p><p>In Illinois, certain wetlands are at risk. The Legislature has an opportunity to protect them, and it should.</p><p>Wetlands store carbon; provide habitat for endangered species; reduce flooding and erosion; and improve water quality by filtering pollution. Wetlands also stockpile nutrients that nurture plants and animals, and they recharge layers of groundwater that feed into streams and lakes through seeps and springs.</p><p>But Illinois has lost some 90% of the wetlands it had a couple of hundred years ago, and some others have been degraded. Many of those that remain are endangered because, in a case called Sackett v. EPA, the U.S. Supreme Court last May gutted protections for wetlands that are not connected to larger bodies of water, which include more than half the nation\u2019s wetlands. Those safeguards had existed for decades.</p><p>Before the Supreme Court acted, some states had established at least some level of their own wetlands protections, but Illinois relied on the federal government to protect its wetlands under the 1972 Clean Water Act. The state\u2019s remaining wetlands that are not clearly connected to larger bodies of water \u2014 along with the benefits they provide \u2014 could disappear if they are bulldozed for development, polluted or drained.</p><p>Companion bills with numerous co-sponsors, which have cleared committees in the Illinois Senate and House, would provide protection for threatened wetlands that is comparable to what the federal rules provided. The Senate bill appears to be the one that will advance. The Senate bill also would instruct the Illinois Department of Natural Resources to inventory small streams, which could provide the data necessary to protect those streams at a later point. The bill would not supersede wetland protection ordinances in Cook and other Chicago area counties, which were designed to act in concert with the federal protections, provided the local rules are as strong as the state\u2019s.</p><p>A state law is necessary because water crosses jurisdictional boundaries, and what benefits one part of the state will benefit other areas as well.</p><p>State Rep. Anna Moeller, D-Elgin, told us that supporters of the legislation are still negotiating with stakeholders and hope to pass something in May when lawmakers return to Springfield after next week\u2019s break. This is not something that should be kicked over to the next legislative session after the current one is expected to end May 31. Once bogs, fens, marshes and swamps are gone, they are probably gone forever, and the water they once absorbed could easily wind up in someone\u2019s basement.</p><p>\u201cIt\u2019s incredibly important,\u201d said Moeller, who introduced the House bill.</p><p>When wetlands are lost to development, the costs of additional flooding, poor water quality and other issues are often borne by the general public. Those costs are likely to rise as climate change brings stronger and more frequent storms.</p><p>\u201cWetlands, certainly around Cook County, are important because of the plants and animals that live there, the migratory waterfowl that depend on stopping there and all sorts of species of insects, mammals, birds and amphibians that depend on wetlands for a place to live and nest and get something to eat,\u201d said Carl Vogel, director of communications for the Cook County Forest Preserves. \u201cThey are critical habitats.\u201d</p><p>Many states are facing the same issue as Illinois. A <a href=\"https://mostendangeredrivers.org/\">new report</a> titled \u201cAmerica\u2019s Most Endangered Rivers\u201d by the environmental group America\u2019s Rivers says last year\u2019s U.S. Supreme Court decision will impact the quality of rivers that supply drinking water all over the nation.</p><p>Opposition to Illinois\u2019 legislation has come from, among others, real estate interests and the Illinois Farm Bureau, though normal farming activities will remain exempt, just as they were under the Clean Water Act.</p><p>But Metropolitan Water Reclamation District Commissioner Cameron \u201cCam\u201d Davis, who is a part-time farmer, said, \u201cMore and more farmers are understanding that protecting wetlands is in their own economic benefit.\u201d</p><p>Illinois needs its remaining wetlands and should protect them.</p><p>___</p><p>Champaign News Gazette. April 21, 2024.</p><p>Editorial: Governor\u2019s proposed fix comes too late to save child</p><p>The state\u2019s Prisoner Review Board has become a big headache for top state officials.</p><p>Gov. J.B. Pritzker is bulking up the staff at the state\u2019s Prisoner Review Board after an ill-conceived board decision led directly to the stabbing death of an 11-year-old boy.</p><p>Pritzker\u2019s decision to appoint Robert Montgomery as the board\u2019s executive director is not quite the equivalent of re-arranging the deck chairs on the Titanic. But it\u2019s clear the board needs all the help it can get when making decisions about releasing prison inmates back into society.</p><p>For those who don\u2019t know, the PRB is a secretive and separate entity in the state\u2019s corrections department made up of gubernatorial appointees who are \u2014 at least theoretically \u2014 required to be confirmed by the Illinois Senate.</p><p>That hasn\u2019t always been the case because the governor has gamed appointment timing rules in ways that have circumvented Senate oversight.</p><p>There are two possible explanations for his actions. Either the governor wants marginal appointees to evade scrutiny, or members of the Senate don\u2019t want to be on record as voting to confirm Pritzker\u2019s marginal appointees. It\u2019s probably a combination of both possibilities.</p><p>At any rate, the PRB approves release decisions and conditions for paroled inmates.</p><p>That is a huge responsibility fraught with peril for both board members and the public. If board members err, they bear personal responsibility. If an inmate returns to his criminal or violent proclivities, the public suffers.</p><p>Controversy recently surrounded the board because on March 12 it made a catastrophically bad decision involving inmate Crosetti Brand, no doubt due to the left hand not knowing what the right hand was doing.</p><p>One day after his release, Brand went to the home of a former girlfriend who had sought an order of protection against him just a month before. She sought the order because after Brand was released in February, he tried to break into her house.</p><p>She was denied the court order because Brand\u2019s parole was revoked. Why he came back before the PRB for a second parole is as unclear as it was unwise.</p><p>The very next day after his second parole, Brand went to his ex-girlfriend\u2019s home and stabbed her. When her son tried to protect her, Brand stabbed him to death.</p><p>This is an example of government at its absolute worst, a terrible parole decision leading directly to the death of an innocent child.</p><p>Naturally, there\u2019s been considerable controversy and plenty of finger-pointing. The governor has been publicly critical of his board. Two members, including board chairman Donald Shelton of Champaign, have resigned. Now the governor is proposing a bureaucratic fix to ease public concern.</p><p>It\u2019s no secret that the administrations of former Gov. Bruce Rauner and Pritzker have made it a priority to reduce the state\u2019s prison population as fast as possible.</p><p>As a consequence, the prison population has fallen from around 40,000 to roughly 29,000. That decline represents a lot of convicted felons who are returning to society and bringing all their personal problems \u2014 mental illness, drug and alcohol problems, violent tendencies and criminal outlooks \u2014 with them.</p><p>If only all of them were as intent on living a productive and law-abiding life as they claim when they go before the parole board. Clearly, they are not.</p><p>That\u2019s why the PRB\u2019s job is a crap-shoot in which public safety depends on how board members roll the dice. That\u2019s just one reason why the governor\u2019s rush to empty the prisons ought to be slowed from a torrent to a trickle.</p><p>END</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/383c514ad5b50d94f1c4634343a62d38",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 3,
+            "reason": "The document contains three editorials, one of which is highly relevant to the topic of health. The first editorial discusses the rise of measles cases in Illinois, the importance of the MMR vaccine, and the actions taken by the Illinois Department of Health to control potential outbreaks. This is directly related to public health and vaccination efforts. The other two editorials focus on environmental protection and a controversial decision by the state's Prisoner Review Board, which are not related to health. Given that one-third of the document is highly relevant to health, the overall relevance is moderate."
+        }
+    }
+}

@@ -1,0 +1,261 @@
+﻿{
+    "altids": {
+        "itemid": "5ef37965e250b7a202aa6621b5b54df0",
+        "etag": "5ef37965e250b7a202aa6621b5b54df0_3a8aza0c0",
+        "friendlykey": "61117366625",
+        "referenceid": "CB--Haiti-Health Crisis"
+    },
+    "version": 3,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2024-04-09T20:27:17Z",
+    "firstcreated": "2024-04-09T17:25:51Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "ednote": "Eds: UPDATES: with comment from Doctors Without Borders",
+    "editorialtypes": [
+        "Lead"
+    ],
+    "signals": [
+        "newscontent"
+    ],
+    "title": "CB--Haiti-Health Crisis",
+    "headline": "Medical care and supplies are scarce as gang violence chokes Haiti's capital",
+    "headline_extended": "Fresh gunfire has erupted in Haiti's capital, forcing aid workers in downtown Port-au-Prince to halt urgently needed care for thousands of people",
+    "slugline": "BC-CB--Haiti-Health Crisis, 3rd Ld-Writethru",
+    "description_summary": "Fresh gunfire has erupted in Haiti's capital, forcing aid workers in downtown Port-au-Prince to halt urgently needed care for thousands of people. The Alliance for International Medical Action says the gang violence has forced 18 hospitals to stop working and caused a shortage in medical supplies. Haiti\u2019s biggest seaport and main international airport remain closed. The violence has driven some 17,000 people from their homes in the capital. Many are crammed into abandoned schools and other buildings where they often share a single toilet.",
+    "bylines": [
+        {
+            "by": "By D\u00c1NICA COTO and EVENS SANON",
+            "title": "Associated Press"
+        }
+    ],
+    "located": "PORT-AU-PRINCE, Haiti",
+    "datelinelocation": {
+        "city": "Port-au-prince",
+        "countrycode": "HTI",
+        "countryname": "Haiti",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                -72.33881,
+                18.54349
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "haiti gangs medical care hospitals"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "i",
+            "name": "i"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "6c615120882f10048fa68bb2970c7204",
+            "name": "Earthquakes",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 36
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e237be707de410048fffdf092526b43e",
+            "name": "Medication",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 45
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "ec526ac088721004821ecb8225d5863e",
+            "name": "Violence",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 60
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 74
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Editorial",
+            "editorial_subject": "Health",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "bb2d2c5f441a452cb24bb511a2ab5eea",
+            "name": "World news",
+            "creator": "Editorial",
+            "editorial_subject": "World news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc2f02007f151004892edf092526b43e",
+            "name": "Port-au-Prince",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661a39287d5b10048226c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "9d26a20b35f0484a891740f8189d4c7b",
+                "name": "City"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -72.335,
+                    18.53917
+                ]
+            },
+            "relevance": 89,
+            "parentnames": [
+                "Haiti"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "661a39287d5b10048226c076b8e3055c",
+            "name": "Haiti",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "6618c9f87d5b10048203c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "01f56e0e654841eca2e69bf2cbcc0526",
+                "name": "Nation"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -72.41667,
+                    19
+                ]
+            },
+            "relevance": 97,
+            "parentnames": [
+                "Caribbean"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "661850e07d5b100481f5c076b8e3055c",
+            "name": "Latin America and Caribbean",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "associations": {
+        "1": {
+            "altids": {
+                "itemid": "6fa4dd5617ed4298af686c767b82b0cb"
+            },
+            "type": "picture"
+        },
+        "2": {
+            "altids": {
+                "itemid": "5e96fbeb20b842bfb5ce3ac258960b8c"
+            },
+            "type": "picture"
+        }
+    },
+    "body_nitf": "<p>PORT-AU-PRINCE, Haiti (AP) \u2014 Fresh gunfire erupted Tuesday in downtown Port-au-Prince, forcing aid workers to halt urgently needed care for thousands of Haitians.</p><p><a href=\"https://apnews.com/article/haiti-violence-prison-break-curfew-6341d1cda5f02f6c66d351ad2d206e7b\">Weeks of gang violence</a> have forced some 18 hospitals to stop working and caused a shortage of medical supplies as Haiti's biggest seaport and main international airport remain closed, warned aid workers with The Alliance for International Medical Action, a Senegal-based humanitarian organization.</p><p>\u201cThe situation is really challenging and affects our movement on a daily basis,\u201d said Antoine Maillard, the organization\u2019s medical coordinator based in Port-au-Prince.</p><p>The gang violence has driven about 17,000 people in the capital from their homes. Many are crammed into abandoned schools and other buildings where they often share a single toilet.</p><p>Maillard said aid workers were able to reach one of the camps for displaced people on Tuesday, \u201cbut there were too many gunshots to provide support.\u201d</p><p>He said the health crisis is worsening. It is difficult to find basic medications including antibiotics and antidiarrheals since gang violence has shuttered suppliers. The limited medication available has doubled and even tripled in price.</p><p>That means Haitians like 65-year-old Denise Duval are unable to buy needed medication or see a doctor.</p><p>\u201cMy health right now is not good,\u201d she said, adding that she has high blood pressure and often feels dizzy. \u201cFrom hearing gunfire all the time, my heart beats a lot.\u201d</p><p>Duval is taking care of three grandchildren whose mother migrated to the neighboring Dominican Republic in search of work. The mother sends money when she can, but Duval said it's not enough to buy medication and support the children at the same time.</p><p>\u201cWe\u2019re living day-by-day and hoping that something will change,\u201d she said as she sat outside her home and washed dishes in a bucket.</p><p>Gunfire still echoes daily throughout Port-au-Prince, though the gang violence has somewhat subsided in certain areas since <a href=\"https://apnews.com/video/prisons-haiti-violence-colombia-government-united-nations-f437685d4baf4661b3dd5fcfafa8adba\">gunmen began attacking key government infrastructure on Feb. 29</a>.</p><p>Key roads remain impassible, preventing Haitians like 52-year-old Nadine Prosper from reaching one of the few operating hospitals.</p><p>Prosper lost her lower left leg in Haiti's 2010 devastating earthquake, and she\u2019s unable to get the medication she needs.</p><p>\u201cI\u2019m still suffering,\u201d she said as she walked back to her house with a cane in one hand and groceries in the other. \u201cWhen the pain comes, if I don\u2019t have painkillers, that\u2019s the hardest part.\u201d</p><p>Haiti\u2019s largest public hospital, the State University Hospital, is among those closed. Located in downtown Port-au-Prince, it has been seized and looted by gangs that also pillaged nearby pharmacies.</p><p>While some private clinics and hospitals are operating, they remain inaccessible to the majority of people in a country where 60% of the population earn less than $2 a day.</p><p>Dr. Priscille Cupidon, medical activity manager for Doctors Without Borders, said the ongoing fighting resembles a war.</p><p>\u201cThe country\u2019s deepening political and economic crises have left medical facilities with few resources,\u201d she wrote in an essay published Tuesday. \u201cOur health care system is falling apart.\u201d</p><p>Cupidon, who runs a mobile health clinic, said an MSF team visited a neighborhood near the center of Port-au-Prince late last month that it hadn\u2019t been able to access since Feb. 29.</p><p>\u201cThe medical needs in the area are very high and are only likely to grow now that health care is so limited,\u201d Cupidon said.</p><p>Gangs are estimated to control 80% of Port-au-Prince. But ALIMA\u2019s Carlotta Pianigiani said the presence of armed groups is affected all of the city's population.</p><p>The violence forced Prime Minister Ariel Henry <a href=\"https://apnews.com/article/haiti-henry-resignation-prime-minister-violence-28acaecc1d80d993c99fe43a5e1e1f7f\">to announce last month that he would resign</a> once a <a href=\"https://apnews.com/article/haiti-transitional-council-democracy-violence-12e9e4f31400dd09c127038ee0fe0c3b\">transitional presidential council</a> is created.</p><p>___</p><p>Coto reported from San Juan, Puerto Rico.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/haiti-gangs-medical-care-hospitals-5ef37965e250b7a202aa6621b5b54df0",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 5,
+            "reason": "The document is highly relevant to the topic of health. It discusses the severe impact of gang violence on medical care and supplies in Haiti's capital, including the closure of hospitals, shortage of medications, and the inability of people to access healthcare. Specific examples of individuals affected by the health crisis are provided, and the overall deterioration of the healthcare system is highlighted."
+        }
+    }
+}

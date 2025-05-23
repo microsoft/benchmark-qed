@@ -1,0 +1,274 @@
+﻿{
+    "altids": {
+        "itemid": "6e285bb6cba9640660c71041242f721d",
+        "etag": "6e285bb6cba9640660c71041242f721d_0a4aza0c0",
+        "friendlykey": "508481810344",
+        "referenceid": "US-Editorial-Rdp"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Opinion",
+    "language": "en",
+    "versioncreated": "2024-03-18T19:15:03Z",
+    "firstcreated": "2024-03-18T19:15:02Z",
+    "editorialrole": "FullStory",
+    "fixture": {
+        "code": "21ea4067bb274c3b805353fb2b99ba70",
+        "name": "Editorial Roundup"
+    },
+    "pubstatus": "usable",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "US-Editorial-Rdp",
+    "headline": "Editorial Roundup: United States",
+    "slugline": "AP-US-Editorial-Rdp",
+    "bylines": [
+        {
+            "by": "By The Associated Press"
+        }
+    ],
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "US-Editorial-Rdp"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "a",
+            "name": "a"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "1af99ec3cb954ff4b349b32d60d0376d",
+            "name": "Education",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 87
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "838cac99285a42d69ac6ab7a8ed70377",
+            "name": "LGBTQ people",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 48
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86aad5207dac100488ecba7fa5283c3e",
+            "name": "Politics",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 54
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "39a5551883591004893adf092526b43e",
+            "name": "Health care costs",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 77
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "bb2d2c5f441a452cb24bb511a2ab5eea",
+            "name": "World news",
+            "creator": "Editorial",
+            "editorial_subject": "World news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        }
+    ],
+    "organisation": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "6dbef150892210048e51fb7860a2fc03",
+            "name": "U.S. Central Intelligence Agency",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 41
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e5cce8588bcc100480a3eb438e258b03",
+            "name": "U.S. National Security Council",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 67
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "662218c87d5b100482f0c076b8e3055c",
+            "name": "China",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661812607d5b100481f3c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "01f56e0e654841eca2e69bf2cbcc0526",
+                "name": "Nation"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    105,
+                    35
+                ]
+            },
+            "relevance": 69,
+            "parentnames": [
+                "Asia"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "661812607d5b100481f1c076b8e3055c",
+            "name": "Africa",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "locationtype": {
+                "code": "976d112cd5c3497ea180aeecab922c6b",
+                "name": "Continent"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    21.09375,
+                    7.1881
+                ]
+            },
+            "relevance": 41
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "661dcb387d5b1004827dc076b8e3055c",
+            "name": "Iran",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661850e07d5b100481f6c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "01f56e0e654841eca2e69bf2cbcc0526",
+                "name": "Nation"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    53,
+                    32
+                ]
+            },
+            "relevance": 69,
+            "parentnames": [
+                "Middle East"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "661850e07d5b100481f5c076b8e3055c",
+            "name": "Latin America and Caribbean",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "body_nitf": "<p>Excerpts from recent editorials in the United States and abroad:</p><p>March 14</p><p>The Washington Post on a step toward lower, more transparent Medicare payments</p><p>As if to prove that every rule has an exception, the usually dysfunctional Republican-majority House of Representatives has at least one sensible piece of bipartisan legislation on its record: In December, it passed a health care measure called the Lower Costs, More Transparency Act on a <a href=\"https://www.statnews.com/2023/12/11/house-passes-site-neutral-policy-transparency-pbm-reform-package/\">320-71 vote</a>. Also contrary to Congress\u2019s occasional practice, the bill\u2019s name is not hype. It actually would end a longstanding, but irrational, disparity in Medicare reimbursements for certain treatments, depending on whether they are administered in doctors\u2019 offices or hospitals. The <a href=\"https://www.cbo.gov/system/files/2023-12/hr5378-DS-and-Revs_12-2023.pdf\">savings would be more than $3.7 billion</a> over the next decade, according to the Congressional Budget Office. And beneficiaries\u2019 co-payments would go down, too \u2014 by <a href=\"https://craftmediabucket.s3.amazonaws.com/uploads/Drug-Admin-Off-Campus-Site-Neutrality-2023.10.18.pdf\">$40 a visit</a>. The next thing that needs to happen is for the Senate to follow suit.</p><p>At issue is how Medicare pays for drugs delivered by medical providers, such as chemotherapy for cancer or infusions used to treat autoimmune diseases. Under current law, Medicare pays <a href=\"https://www.arnoldventures.org/stories/site-neutral-payments-could-mean-big-savings-for-patients-with-chronic-conditions\">two to three times</a> as much for these treatments if they are given in a hospital rather than a doctor\u2019s office. The medicines and the means of administering them <a href=\"https://craftmediabucket.s3.amazonaws.com/uploads/Drug-Admin-Off-Campus-Site-Neutrality-2023.10.18.pdf\">are the same</a>; only the price is different. In theory, the difference reflects the higher costs involved in running a full-service, 24/7 hospital as opposed to a physician\u2019s practice, that keeps weekday office hours.</p><p>In practice, though, Medicare\u2019s rules have created an <a href=\"https://www.cbo.gov/system/files/2022-09/58222-medical-prices.pdf\">incentive</a> for hospitals to buy up physicians\u2019 practices, at which the hospitals can then charge the higher rate \u2014 and pocket the profits. In 2021, Medicare paid hospital rates for <a href=\"https://www.medpac.gov/wp-content/uploads/2023/06/Jun23_Ch8_MedPAC_Report_To_Congress_SEC.pdf\">more than half</a> of the chemotherapy services it funded, up from a little more than a third in 2012. Indeed, research has found that consolidation among providers brings <a href=\"https://www.kff.org/health-costs/issue-brief/what-we-know-about-provider-consolidation/\">higher prices for everyone</a>, including private medical insurers (often large corporate employers) and their beneficiaries. Larger medical systems have greater bargaining power in the health care marketplace. This legislation would also save money for private insurers, which <a href=\"https://www.kff.org/medicare/issue-brief/how-much-more-than-medicare-do-private-insurers-pay-a-review-of-the-literature/\">pay hospitals almost double</a> the Medicare rate.</p><p>The Lower Costs, More Transparency Act would basically end these discrepancies for all drugs that must be administered by a health care provider, as opposed to, say, taken orally at home. Instead, it aims to create \u201csite-neutral\u201d payments. To be sure, $3.7 billion in savings for Medicare over a decade seems small compared with the program\u2019s total projected hospital spending of more than $2.7 trillion. Yet hospitals have been <a href=\"https://www.fiercehealthcare.com/providers/fight-over-medicare-payments-hospital-lobby-shows-its-strength\">fighting the change</a> furiously, no doubt because of the precedent it would set for other medical services. In fact, that is exactly what should happen. <a href=\"https://www.medpac.gov/wp-content/uploads/2023/06/Jun23_Ch8_MedPAC_Report_To_Congress_SEC.pdf\">Dozens of services</a> cost more at hospitals, including mammograms, allergy tests, echocardiograms, epidural injections, colonoscopies and laser eye procedures. (The Medicare Payment Advisory Commission has <a href=\"https://www.medpac.gov/wp-content/uploads/2023/06/Jun23_Ch8_MedPAC_Report_To_Congress_SEC.pdf\">identified 57</a> such services.) If all were site-neutral, Medicare would save an <a href=\"https://www.crfb.org/papers/equalizing-medicare-payments-regardless-site-care\">estimated $150 billion</a> over 10 years.</p><p>Employers <a href=\"https://news.bloomberglaw.com/daily-labor-report/employers-push-for-same-health-care-billing-regardless-of-site\">support site-neutral payments</a>. They especially like a similar Senate bill that would require site neutrality not only for Medicare but also for commercial insurers. Unfortunately, <a href=\"https://www.statnews.com/2023/12/01/site-neutral-hospital-cuts/\">the measure is bogged</a> down over concern from senators, of both parties, who <a href=\"https://www.npr.org/sections/health-shots/2024/02/13/1230991999/medicare-hospital-site-neutral-payment-cut\">say they worry</a> it would hurt rural hospitals. The American Hospital Association has said the site-neutral provisions of the House bill would <a href=\"https://www.aha.org/news/blog/2024-02-07-anti-hospital-group-misleads-site-neutral-impact-rural-access-care\">cost rural hospitals $272 million</a> over the next decade, forcing them to cut staff and services, or perhaps even close, worsening a <a href=\"https://www.gao.gov/products/gao-21-93\">critical shortage of care</a> in those areas.</p><p>Ideally, though, federal support for hospitals would be provided directly and transparently, not via differential payments for patient services. If the needs of rural hospitals are the main impediment to passing a sensible site-neutral policy for Medicare, then they should be subsidized straightforwardly. It isn\u2019t even 100% clear that hospital-owned clinics that charge more for chemotherapy delivery than independent clinics actually use every dollar to offset their owners\u2019 higher costs. Notably, the House legislation <a href=\"https://www.healthcaredive.com/news/house-passes-bill-pbms-price-transparency-site-neutral-payments-hospitals/702236/#:~:text=from%20your%20inbox.-,House%20passes%20bill%20targeting%20price%20transparency%2C%20site-neutral%20payments%2C,that%20hospitals%20have%20lobbied%20against.\">calls for</a> hospitals, again, to be more transparent about their prices, something they have been obviously reluctant to do. Only <a href=\"https://www.patientrightsadvocate.org/semi-annual-report-feb2024\">about one-third</a> of hospitals are now complying with a three-year-old federal requirement to post all their charges online in an easily readable way, according to a new study by <a href=\"http://patientsrightsadvocate.org/\">PatientsRightsAdvocate.org</a>.</p><p>Site-neutral payment policy for Medicare would not be a \u201c <a href=\"https://www.aha.org/2024-01-30-aha-statement-health-care-spending-united-states-unsustainable-patients-employers-and-taxpayers\">cut</a> \u201d to hospital funding, as the AHA and other defenders of the status quo claim. It would only do away with a payment disparity that has unintentionally caused higher costs. The House bill would be a small but significant step toward lower, more transparent Medicare payments \u2014 just as the bill\u2019s title says. Before this Congress ends, the Senate should send it to <a href=\"https://www.washingtonpost.com/elections/candidates/joe-biden-2024/?itid=lk_inline_manual_14\">President Biden</a> for his signature.</p><p>ONLINE: <a href=\"https://www.washingtonpost.com/opinions/2024/03/14/medicare-hospitals-chemotherapy-site-neutral/\">https://www.washingtonpost.com/opinions/2024/03/14/medicare-hospitals-chemotherapy-site-neutral/</a></p><p>___</p><p>March 17</p><p>The Wall Street Journal on Biden and Iran sanctions</p><p>Two days after reissuing a $10 billion Iran sanctions waiver, the Biden Administration on Friday threatened coordinated Group of Seven sanctions against Iran if it delivers ballistic missiles to Russia. The policy signal these two moves send is incoherence.</p><p>G-7 leaders are talking tough. \u201cWere Iran to proceed with providing ballistic missiles or related technology to Russia,\u201d they write, \u201cwe are prepared to respond swiftly and in a coordinated manner including with new and significant measures against Iran.\u201d Russia has benefited greatly from Iranian drones in its invasion of Ukraine, and its interest in Tehran\u2019s missiles has been clear for months.</p><p>All of this was foreseeable when the U.S., U.K., France and Germany let the international embargo on Iran\u2019s missile program lapse in October. Instead of triggering snapback sanctions, the Biden Administration preferred to avoid an escalation that might disrupt diplomacy with Iran. Weeks after the Oct. 7 massacre, while Iran\u2019s proxies were firing on U.S. troops in the region, appeasement was in the air.</p><p>It was the same story in November, when the Administration last renewed the sanctions waiver giving Iran access to more than $10 billion. It opens up to Iran the frozen revenue from its electricity shipments to Iraq, which seems to have a perpetual excuse to buy sanctioned goods from Iran.</p><p>As usual, the State Department spin is that the money can be used only for \u201chumanitarian purposes,\u201d and that the Trump Administration issued waivers too. Neither point survives scrutiny.</p><p>The old waivers let Iraq import electricity from Iran but sent the money into escrow in Iraq, where Iran couldn\u2019t touch it. President Biden changed the rules, allowing the money to leave escrow, be converted to euros and end up as an Iranian fund in Omani banks. It can be put toward Iran\u2019s debt payments and import subsidies, according to Richard Goldberg of the Foundation for Defense of Democracies.</p><p>Adults know that money is fungible. These funds free up others for use in spreading terrorism abroad and advancing a nuclear-weapons program at home. Why does the Biden Administration pretend otherwise?</p><p>Maybe it\u2019s for the same reason the Administration keeps hidden how much of the $10 billion Iran has accessed since the waiver was last extended: The American people might not like what they find out.</p><p>The G-7\u2019s newfound assertiveness on Iranian missile transfers to Russia is welcome, but its deterrent value is undermined by President Biden\u2019s waiver 48 hours earlier. His Iran policy has remained stuck in the world of Oct. 6, desperate to buy peace and quiet from a regime with no interest in either.</p><p>ONLINE: <a href=\"https://www.wsj.com/articles/biden-does-an-iran-sanctions-two-step-g7-russia-waiver-773ae759?mod=editorials_article_pos4\">https://www.wsj.com/articles/biden-does-an-iran-sanctions-two-step-g7-russia-waiver-773ae759?mod=editorials_article_pos4</a></p><p>___</p><p>March 13</p><p>The Guardian on Africa's homophobic legislation and western influence</p><p>There was widespread horror and condemnation last year when Uganda <a href=\"https://www.theguardian.com/world/2023/may/02/uganda-parliament-passes-anti-lgbtq-bill\">passed a draconian anti-gay</a> law that included the death penalty for some same-sex acts and a 20-year sentence for \u201cpromoting\u201d homosexuality. Yet it was only the harshest in <a href=\"https://issafrica.org/iss-today/anti-gay-laws-africas-human-rights-regression\">a wave of homophobic new legislation</a> across Africa, which <a href=\"https://www.amnesty.org/en/latest/news/2024/01/africa-barrage-of-discriminatory-laws-stoking-hate-against-lgbti-persons/\">has yet to ebb</a>.</p><p>In February, Ghana\u2019s parliament <a href=\"https://www.theguardian.com/world/2024/feb/28/ghana-intensifies-crackdown-on-rights-of-lgbtq-people-and-activists\">passed</a> a bill making \u201cwilful promotion, sponsorship or support of LGBTQ+ activities\u201d punishable with up to five years in jail, and identifying as gay with up to three years\u2019 imprisonment. It was supported by both major parties, though the president has yet to validate it \u2013 and the finance ministry has <a href=\"https://www.bbc.co.uk/news/world-africa-68469613\">urged him not to do so</a>, warning that it could cost the country $3.8bn (\u00a33bn) in World Bank funding. There is particular concern that Kenya, which has previously given asylum to LGBTQ+ people forced to flee other countries, <a href=\"https://www.bbc.co.uk/news/world-africa-66079603\">could toughen laws</a>.</p><p>Around half of the 60 or so countries worldwide which criminalise same-sex relations are in Africa, though six countries \u2013 Angola, Botswana, Mozambique, Lesotho, Seychelles and Mauritius \u2013 have decriminalised it in recent years, and South Sudan lifted the death penalty. South Africa, which legalised same-sex marriage in 2006, has constitutional protections against discrimination on the basis of sexual orientation, and has continued to enact legislation to protect gay rights, though homophobic crime persists.</p><p>But the surge of lobbying for anti-gay legislation is disturbing. In addition to the fear and stigma that such laws breed, in Mauritania, Somalia and parts of Nigeria, as well as Uganda, same-sex relations are punishable by death.</p><p>In practice, laws do not need to lead to death row to cost lives. Criminalisation legitimates and fuels homophobia and violence, including by security forces. Activists in Ghana say its bill has already prompted <a href=\"https://www.theguardian.com/global-development/2022/aug/03/ghana-anti-lgbtq-bill-blamed-for-rise-in-attacks\">a sharp rise in violence</a>. Experts have also warned that such legislation is <a href=\"https://www.bmj.com/content/384/bmj.q599\">setting back the fight</a> against HIV/Aids on the continent, with gay men too frightened to access sexual health services.</p><p>Homophobic campaigning is usually couched as \u201cprotecting families\u201d against malign foreign influences. Burundi\u2019s president, \u00c9variste Ndayishimiye, who <a href=\"https://www.reuters.com/world/africa/burundis-president-says-gay-people-should-be-stoned-2023-12-30/\">declared</a> in December that gay people should be stoned, describes homosexuality as a western import. LGBTQ+ activists, however, argue that it is homophobia that is foreign. Many have pointed out that persecution often relies on colonial-era laws, and that the recent surge in legislation comes as U.S. evangelical groups have poured large sums into campaigning on the continent. An <a href=\"https://www.opendemocracy.net/en/5050/africa-us-christian-right-50m/\">openDemocracy investigation</a> in 2020 found that U.S campaigners who seek to limit sexual and reproductive rights had spent more than $50m in Africa since 2007, with much of that going to Uganda.</p><p>\u201cUgandan society has always lived \u2026 with LGBTQ persons \u2026 The homophobia, the transphobia we are seeing \u2026 is from the west. It is mostly peddled by extreme American evangelicals,\u201d <a href=\"https://twitter.com/benphillips76/status/1767167750546292994\">argues</a> the Ugandan activist Frank Mugisha. Last year <a href=\"https://www.theguardian.com/world/2023/jan/25/pope-francis-calls-for-end-to-anti-gay-laws-and-lgbtq-welcome\">the pope</a> and the <a href=\"https://www.theguardian.com/world/2023/jun/09/justin-welby-criticises-ugandan-church-backing-for-anti-gay-law\">archbishop of Canterbury</a> denounced the criminalisation of homosexuality. Donors have also <a href=\"https://www.bbc.co.uk/news/world-africa-66453098\">halted funding</a> to Uganda. Given the attempts to portray LGBTQ+ rights as a foreign imposition, however, it is especially essential to listen to domestic activists and support their priorities. Countries such as South Africa <a href=\"https://www.hrw.org/news/2023/03/31/it-vital-south-africa-oppose-ugandas-dangerous-anti-gay-bill\">should also take a lead</a> in challenging anti-gay legislation and homophobic attitudes. Finally, it is essential to expose and hold accountable those in the west who, not content to sow division at home, are spreading poison abroad.</p><p>ONLINE: <a href=\"https://www.theguardian.com/commentisfree/2024/mar/13/the-guardian-view-on-africas-homophobic-legislation-western-influences-are-encouraging-hatred\">https://www.theguardian.com/commentisfree/2024/mar/13/the-guardian-view-on-africas-homophobic-legislation-western-influences-are-encouraging-hatred</a></p><p>___</p><p>March 17</p><p>The Los Angeles Times on bringing back the SAT</p><p>The SAT and ACT are making a small but important comeback after the tests were widely dropped as a requirement for college applications during the pandemic.</p><p>Most schools went test-optional, meaning students could submit scores if they wanted but not doing so wouldn\u2019t count against them. The University of California won\u2019t consider test scores at all.</p><p>Only a <a href=\"https://www.nytimes.com/2024/02/22/us/yale-standardized-testing-sat-act.html\">handful of schools</a> have resurrected the testing requirement, but among them are heavyweights in the world of higher education: MIT, Dartmouth and Georgetown. Most recently, the <a href=\"https://www.texastribune.org/2024/03/11/university-texas-austin-test-admissions/\">University of Texas at Austin</a> and Brown University <a href=\"https://www.bloomberg.com/news/articles/2024-03-05/brown-university-becomes-third-ivy-to-reinstate-sat-requirements\">joined the list</a> and the University of North Carolina is <a href=\"https://www.newsobserver.com/news/local/education/article285835566.html\">considering it</a>. Yale also will require standardized test scores, but tests such as Advanced Placement can be used in place of college entrance exams.</p><p>Additional competitive schools are likely to join the group, along with schools that aren\u2019t as selective. The University of Tennessee, which accepts 68% of applicants, decided a year and a half ago to <a href=\"https://www.knoxnews.com/story/news/education/2022/05/09/university-tennessee-require-act-sat-scores-again/9672654002/\">bring the tests back</a>.</p><p>The tests were criticized long before the pandemic as giving an unfair boost to more affluent students who could afford tutoring. And it\u2019s true that scores are closely correlated with family income. But the pause in testing gave colleges a chance to study the issue more closely. <a href=\"https://opportunityinsights.org/wp-content/uploads/2024/01/SAT_ACT_on_Grades.pdf\">They found</a> that SAT scores were extremely effective at predicting whether students would succeed in college.</p><p>No one should be surprised. The University of California convened a panel several years ago to study the issue at length and it <a href=\"https://www.latimes.com/california/story/2020-02-03/uc-should-keep-sat-and-act-as-admission-requirements-faculty-report-says\">reached the same conclusion</a>. The standardized tests were more equitable than grades, the panel said, because <a href=\"https://www.edweek.org/teaching-learning/grade-inflation-is-greater-in-wealthier-schools-study-says/2017/08\">grade inflation</a> is more pervasive at affluent schools. Yet UC refuses to consider test scores, after bowing to pressure from critics. We hope that the trend toward reinstating the tests in admissions makes UC leaders rethink this position.</p><p>Making the tests optional was actually counterproductive, Dartmouth, Yale and Brown found. Their applicant pools became less diverse, because low-income students and students of color were less likely to apply even if they had good test scores, thinking they hadn\u2019t tested well enough.</p><p>The whole debate has sadly ignored the bigger factors perpetuating the uneven playing field of college admissions. Yes, rich students can receive SAT tutoring, and it helps, though only a little. The most rigorous <a href=\"https://www.researchgate.net/publication/228337033_Using_Linear_Regression_and_Propensity_Score_Matching_to_Estimate_the_Effect_of_Coaching_on_the_SAT\">study of the topic</a> found that tutoring could raise scores by about 20 points.</p><p>Meanwhile, some aspects of college admission tilt the field in favor of wealthier students more than test scores do. For example, teachers at more affluent schools have more time for writing letters of recommendation for college applications than teachers at low-income schools.</p><p>Athletes continue to get the <a href=\"https://www.latimes.com/opinion/story/2020-07-20/editorial-leveling-the-playing-field-in-college-admissions-by-trimming-the-sports-lineup\">upper hand on acceptance</a>, and not just in commonly played games like football and soccer that most students have access to in high school. Golf, equestrian, fencing, gymnastics and crew are among the sports that require families to pay for their children to participate, and those athletes also get preferential treatment in college admissions.</p><p>Essays can be coached, heavily edited or even written by college consultants for a fee. A 2021 <a href=\"https://cepa.stanford.edu/content/essay-content-strongly-related-household-income-and-sat-scores-evidence-60000-undergraduate-applications\">study at Stanford University</a> found that the quality of essay content was closely correlated with family income among University of California applicants. Yet UC <a href=\"https://www.latimes.com/opinion/story/2022-02-21/editorial-whats-less-fair-than-the-sat-you-might-be-surprised\">kept the essays</a> and got rid of the tests.</p><p>There is nothing inherently evil about the SAT or ACT. It all depends on how they\u2019re used. They can act as a reality check \u2014 a student who didn\u2019t get great grades might show a lot of potential in the test scores, and vice versa. And, as UC did before it <a href=\"https://www.latimes.com/opinion/story/2020-02-21/fairness-success-university-of-california-sat-act\">scrapped the tests</a>, colleges should consider the scores in context, such as, is this the best score in a generally low-scoring high school? A score might reflect the education at that school, not the student\u2019s aptitude for college work.</p><p>These latest changes also point to a larger problem in admissions at selective colleges: Every school seemingly wants different things. Some want high SAT scores, others care more about AP exams, and others don\u2019t want any standardized test scores. Some enhance grade-point averages depending on how tough the courses are, others don\u2019t, and others in just some cases.</p><p>Of course, schools have a right to seek out the students who will fit best at their institution. But the lack of transparency and consistency has given <a href=\"https://sandiegomagazine.com/partner-content/best-college-admissions-consultants/#:~:text=In%20the%20last%20few%20years,is%20a%20whopping%20%242.875%20billion.\">rise to a nearly $3-billion-a-year industry</a> of pricey college-admissions consultants.</p><p>Talk about tilting the playing field.</p><p>ONLINE: <a href=\"https://www.wsj.com/articles/biden-does-an-iran-sanctions-two-step-g7-russia-waiver-773ae759?mod=editorials_article_pos4\">https://www.wsj.com/articles/biden-does-an-iran-sanctions-two-step-g7-russia-waiver-773ae759?mod=editorials_article_pos4</a></p><p>___</p><p>March 17</p><p>China Daily on CIA disinformation</p><p>According to a Reuters report on Friday, in 2019, the Central Intelligence Agency was authorized by then U.S. president Donald Trump to launch a clandestine campaign on Chinese social media aimed at turning public opinion in China against the Communist Party of China.</p><p>CIA spokesperson Chelsea Robinson declined to comment on the existence of the program, its goals or impacts. Kate Waters, a spokesperson for the Joe Biden administration\u2019s National Security Council, also declined to comment on the program and whether it is still active. But the report was based on several anonymous former officials \u201cwith direct knowledge of the highly classified operation\u201d. And as Reuters\u2019 interviews with \u201ctwo intelligence historians\u201d indicate, when the White House grants the CIA covert action authority, through an order known as a presidential finding, it often remains in place across administrations.</p><p>The track record of the United States using such programs to win the Cold War and pave the way for \u201ccolor revolutions\u201d around the world over the past decades gives credence to the report. And the reaction to the report, not just from the Chinese Foreign Ministry, but also some U.S. analysts, as well as third-party observers from other countries, interviewed by Reuters, indicate they all consider the report to be true.</p><p>Chinese Foreign Ministry spokesperson Wang Wenbin said that the report shows \u201cthe U.S. has spread China-related disinformation in an organized and well-planned way for a long time and it\u2019s America\u2019s important approach to wage a battle of perception against China\u201d. Wang also referred to the comment by U.S. Republican Senator Rand Paul, who once said that the U.S. government is the biggest propagator of disinformation, and CIA Director William Burns\u2019 recent remarks that the CIA has committed substantially more resources toward China-related intelligence collection.</p><p>The CIA founded a new China Mission Center in 2021 after the Biden administration identified China as being the No 1 challenge to the U.S. And the CIA, according to a report of The Wall Street Journal in December last year, is trying to boost its human spy capacities at the agency and its sister spy agencies in China as a part of a massive shift of focus from terrorism to China.</p><p>The report by Reuters indicates that the U.S. has been not only spreading disinformation about China\u2019s ruling party, but also seeking to \u201cfoment paranoia among top leaders there\u201d so the country expends resources \u201cchasing intrusions\u201d into its political network in a bid to cause larger internal strife. As one of the former officials told Reuters: \u201cWe wanted them chasing ghosts.\u201d The interviewees also said the CIA program involved action in countries where the United States and China are competing for influence, targeting public opinion in Southeast Asia, Africa and the South Pacific.</p><p>The U.S. often accuses other countries of spreading disinformation, but as the Reuters report shows it is the U.S. that is the true breeding ground of disinformation. The response of some China hawks to the exposure of the covert propaganda program is a telling sign of the U.S.'s shamelessness. Their only concern is that Beijing may take advantage of the report to \u201cproselytize\u201d in a developing world already deeply suspicious of Washington.</p><p>Beijing has no need to do that. The U.S. is already alienating itself from the rest of the international community with its actions. Long before the Reuters report appeared, countries around the world knew the sort of nefarious activities the CIA gets up to. Many countries have firsthand experience of the chaos and suffering its troublemaking can cause. If the U.S. side really recognizes the importance of Sino-U.S. relations and intends to manage the risks and uncertainties in a responsible way as it has claimed, it should refrain from these say-one-thing-do-another tricks, and engage with China with reciprocal earnestness and in good faith.</p><p>ONLINE: <a href=\"https://www.chinadaily.com.cn/a/202403/17/WS65f6d862a31082fc043bd0fc.html\">https://www.chinadaily.com.cn/a/202403/17/WS65f6d862a31082fc043bd0fc.html</a></p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/6e285bb6cba9640660c71041242f721d",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 3,
+            "reason": "The document contains multiple editorials on various topics, but only one of them is directly related to health. The editorial from The Washington Post discusses Medicare payments and the Lower Costs, More Transparency Act, which is highly relevant to the topic of health. The other editorials cover topics such as international sanctions, homophobic legislation in Africa, standardized testing in education, and CIA disinformation, which are not related to health."
+        }
+    }
+}

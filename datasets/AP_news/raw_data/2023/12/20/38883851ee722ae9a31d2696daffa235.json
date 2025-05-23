@@ -1,0 +1,226 @@
+﻿{
+    "altids": {
+        "itemid": "38883851ee722ae9a31d2696daffa235",
+        "etag": "38883851ee722ae9a31d2696daffa235_0a6aza0c0",
+        "friendlykey": "786312554132",
+        "referenceid": "US--Cheese Factory-Workers Sickened"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2023-12-20T21:03:22Z",
+    "firstcreated": "2023-12-20T21:03:21Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "US--Cheese Factory-Workers Sickened",
+    "headline": "Chemical leak at Tennessee cheese factory La Quesera Mexicana sends 29 workers to the hospital",
+    "headline_extended": "Officials in the Tennessee city of Greeneville are working to determine the cause of a leak of anhydrous ammonia that sent 29 workers to the hospital Wednesday morning",
+    "slugline": "AP-US--Cheese Factory-Workers Sickened",
+    "description_summary": "Officials in the Tennessee city of Greeneville are working to determine the cause of a leak of anhydrous ammonia that sent 29 workers to the hospital Wednesday morning. Greeneville City Manager Todd Smith says the fire department was first called to La Quesera Mexicana, a local cheese factory, at 7:15 a.m. where a leak occurred during maintenance on a valve. Six people were hospitalized and the leak was believed fixed. However, a second call about a leak came at 10:01 a.m. and another 23 people were hospitalized. Smith says they aren't sure if the two leaks had the same source. He says the leak is now repaired and there is no threat to the surrounding community.",
+    "located": "GREENEVILLE, Tenn.",
+    "datelinelocation": {
+        "city": "Greeneville",
+        "countryareacode": "TN",
+        "countryareaname": "Tennessee",
+        "countrycode": "USA",
+        "countryname": "United States",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                -82.83099,
+                36.16316
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2023 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "chemical leak cheese factory tennessee"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "a",
+            "name": "a"
+        },
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 40
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "c8e409f8858510048872ff2260dd383e",
+            "name": "Business",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 59
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "532f7e2fcd804900ab41750c3f4718dd",
+            "name": "Greeneville",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "62532b5882c7100488cedf092526b43e"
+            ],
+            "locationtype": {
+                "code": "9d26a20b35f0484a891740f8189d4c7b",
+                "name": "City"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -82.83099,
+                    36.16316
+                ]
+            },
+            "relevance": 90,
+            "parentnames": [
+                "Tennessee"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "62532b5882c7100488cedf092526b43e",
+            "name": "Tennessee",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -86.25027,
+                    35.75035
+                ]
+            },
+            "relevance": 75,
+            "parentnames": [
+                "United States"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "62532b5882c7100488cedf092526b43e",
+            "name": "Tennessee",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661850e07d5b100481f5c076b8e3055c",
+            "name": "Latin America and Caribbean",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "body_nitf": "<p>GREENEVILLE, Tenn. (AP) \u2014 Twenty-nine workers at a Tennessee cheese factory were sent to the hospital on Wednesday morning after a leak of anhydrous ammonia, Greeneville City Manager Todd Smith said at a news conference.</p><p>The Greeneville Fire Department was first called to La Quesera Mexicana at 7:15 a.m. when a leak occurred during maintenance on a valve. Six people were hospitalized at the time.</p><p>\u201cThe leak was contained and fixed at that moment. And the scene was certified as safe,\u201d Smith said.</p><p>However, a second call about a leak came in at 10:01 a.m. A further 23 people were hospitalized and 53 other employees were evaluated for possible illness, Smith said. Anhydrous ammonia can irritate or damage the lungs and burn the eyes and skin.</p><p>Officials do not yet know if the two leaks came from the same source, Smith said, but the second leak was repaired and there was no risk to the surrounding community.</p><p>Ballad Health set up incident command centers at Greeneville Community Hospital and Johnson City Medical Center to handle the influx of patients, according to a news release from the health system. As of noon, the system was treating 25 patients from the incident.</p><p>Medical staff were working together with other emergency responders including from the Tennessee Emergency Management Agency.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/chemical-leak-cheese-factory-tennessee-38883851ee722ae9a31d2696daffa235",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 5,
+            "reason": "The document discusses a chemical leak at a cheese factory in Tennessee that resulted in 29 workers being hospitalized. It details the nature of the chemical (anhydrous ammonia), its health effects, and the response from medical and emergency services. This information is directly related to health, particularly occupational health and safety, and the medical response to chemical exposure."
+        }
+    }
+}

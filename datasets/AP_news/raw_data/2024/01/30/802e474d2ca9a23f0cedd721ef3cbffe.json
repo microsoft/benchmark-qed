@@ -1,0 +1,210 @@
+﻿{
+    "altids": {
+        "itemid": "802e474d2ca9a23f0cedd721ef3cbffe",
+        "etag": "802e474d2ca9a23f0cedd721ef3cbffe_0a3aza0c0",
+        "friendlykey": "887860105273",
+        "referenceid": "NC-XGR--Stevens-Cancer"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2024-01-30T19:35:41Z",
+    "firstcreated": "2024-01-30T19:35:40Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "NC-XGR--Stevens-Cancer",
+    "headline": "The No. 2 leader in the North Carolina House is receiving treatment for cancer",
+    "headline_extended": "The No. 2 elected leader in the North Carolina House says she's been receiving treatment for breast cancer",
+    "slugline": "AP-NC-XGR--Stevens-Cancer",
+    "description_summary": "The No. 2 elected leader in the North Carolina House says she's been receiving treatment for breast cancer. House Speaker Pro Tempore Sarah Stevens confirmed on Tuesday her disease and a high likelihood of a full recovery. Stevens says she was diagnosed in August and had a tumor removed. She's wrapping up chemotherapy and is about to begin radiation. Stevens says she was previously diagnosed with breast cancer two decades ago, but that this cancer is separate and apart from the past illness. Stevens was first elected to the House in 2008 and became speaker pro tempore in 2017.",
+    "located": "RALEIGH, N.C.",
+    "datelinelocation": {
+        "city": "Raleigh",
+        "countryareacode": "NC",
+        "countryareaname": "North Carolina",
+        "countrycode": "USA",
+        "countryname": "United States",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                -78.63861,
+                35.7721
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "north carolina house leader cancer diagnosis"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "p",
+            "name": "p"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e22563387de410048f92df092526b43e",
+            "name": "Breast cancer",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 90
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "79f1fae08359100489f8df583201d303",
+            "name": "Chemotherapy",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 33
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 90
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e22524b87de410048f91df092526b43e",
+            "name": "Cancer",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 53
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86aad5207dac100488ecba7fa5283c3e",
+            "name": "Politics",
+            "creator": "Editorial",
+            "editorial_subject": "Politics",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "c01d179082c610048813df092526b43e",
+            "name": "North Carolina",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -80.00032,
+                    35.50069
+                ]
+            },
+            "relevance": 71,
+            "parentnames": [
+                "United States"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "c01d179082c610048813df092526b43e",
+            "name": "North Carolina",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "body_nitf": "<p>RALEIGH, N.C. (AP) \u2014 The No. 2 elected leader in the North Carolina House said on Tuesday that she has been receiving treatment for breast cancer, with the likelihood of a full recovery deemed extremely high.</p><p>House Speaker Pro Tempore Sarah Stevens confirmed her disease and the prognosis in an interview following a visit to Raleigh for a legislative oversight committee.</p><p>Stevens, who will be 64 next month, said she was diagnosed in August and had a tumor removed. She said she is wrapping up chemotherapy and is about to begin radiation.</p><p>Stevens said cancer runs among the women in her family, and she was previously diagnosed with breast cancer two decades ago. This cancer is separate and apart from her previous illness, she said.</p><p>The Surry County Republican and attorney was first elected to the state House in 2008 and became a leader on judicial matters. She is now in her fourth two-year term as speaker pro tempore, having been first elected by the chamber in 2017. One of her chief responsibilities is directing debate when House Speaker Tim Moore is absent.</p><p>Stevens said she encourages people with a similar cancer diagnosis to find a support group and learn about the disease from friends who have battled it.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/north-carolina-house-leader-cancer-diagnosis-802e474d2ca9a23f0cedd721ef3cbffe",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 5,
+            "reason": "The document discusses the health condition of a political leader, specifically her diagnosis and treatment for breast cancer. It includes details about her medical history, current treatment, and advice for others with similar diagnoses. This information is directly related to the topic of health."
+        }
+    }
+}

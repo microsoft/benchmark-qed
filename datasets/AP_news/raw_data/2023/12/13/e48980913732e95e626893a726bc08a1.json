@@ -1,0 +1,216 @@
+﻿{
+    "altids": {
+        "itemid": "e48980913732e95e626893a726bc08a1",
+        "etag": "e48980913732e95e626893a726bc08a1_0a4aza0c0",
+        "friendlykey": "824675026698",
+        "referenceid": "NY--Editorial Rdp"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Opinion",
+    "language": "en",
+    "versioncreated": "2023-12-14T12:10:40Z",
+    "firstcreated": "2023-12-13T21:09:14Z",
+    "editorialrole": "FullStory",
+    "fixture": {
+        "code": "21ea4067bb274c3b805353fb2b99ba70",
+        "name": "Editorial Roundup"
+    },
+    "pubstatus": "usable",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "NY--Editorial Rdp",
+    "headline": "Editorial Roundup: New York",
+    "slugline": "BC-NY--Editorial Rdp",
+    "bylines": [
+        {
+            "by": "By The Associated Press"
+        }
+    ],
+    "copyrightnotice": "Copyright 2023 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "Editorial Rdp"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "person": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e0c066615c3f4bd0b8f2b07ac107774f",
+            "name": "Kathy Hochul",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "POLITICIAN",
+                "PERSON"
+            ],
+            "relevance": 37
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86ba17607dac1004894eba7fa5283c3e",
+            "name": "Courts",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 58
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86aad5207dac100488ecba7fa5283c3e",
+            "name": "Politics",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 81
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e231c7187de410048fd7df092526b43e",
+            "name": "Mental health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 58
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "organisation": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "bf6e2e80760d10048f8ae6e7a0f4673e",
+            "name": "U.S. Republican Party",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 43
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "c05dca58760d10048f93e6e7a0f4673e",
+            "name": "U.S. Democratic Party",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 43
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "b58f18a082c6100487fbdf092526b43e",
+            "name": "New York",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -75.4999,
+                    43.00035
+                ]
+            },
+            "relevance": 91,
+            "parentnames": [
+                "United States"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "b836d07082c610048807df092526b43e",
+            "name": "New York City",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "b58f18a082c6100487fbdf092526b43e",
+            "name": "New York",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "body_nitf": "<p>Albany Times Union. December 11, 2023.</p><p>Editorial: Fictional mental health care</p><p>A report finds health insurers often list providers who can\u2019t really be found. That\u2019s a stunning and dangerous disservice to people in need of care.</p><p>We hear about the need for mental health care all the time. We hear about children harmed by the turmoil and isolation of the COVID-19 pandemic. We\u2019re told that \u201cdoing something about mental illness\u201d is a key part of reducing gun violence. Lawmakers talk of making sure that mental health services are covered just like any other kind of health care.</p><p>And if you look at the subscriber manuals of health insurance companies, you might think all that mental health care is there for the asking. Except, it turns out, it often is not.</p><p>That\u2019s the maddening bottom line of a report from New York Attorney General Letitia James\u2019 office, which found, in just a sampling, that 86 percent of mental health providers listed on health plans\u2019 networks were not really available. These so-called \u201cghosts\u201d were either unreachable, not really in the network, or not accepting new patients. Some of the worst offenders were the Capital District Physicians Health Plan, which the survey found had a 92 percent ghost rate, and MVP \u2013 a survey of 24 Albany providers in that network found that all of them were ghosts.</p><p>The result, the report found, is that people either seek out-of-network mental health care \u2013 often at higher cost \u2013 or forgo it altogether. That leaves a society full of people with untreated mental health issues, especially lower income people.</p><p>It\u2019s troubling that it was the attorney general who uncovered this widespread problem, not the agencies that oversee insurance and mental health services in New York \u2013 not, that is, the state Department of Health, the Office of Mental Health or the Department of Financial Services, the latter of which oversees the insurance industry.</p><p>The attorney general\u2019s report recommends, among other things, that the state require insurers to conduct more regular surveillance of the situation, such as \u201csecret shopper\u201d surveys like those her office did to keep tabs on the accuracy of their network directories. They should make sure, too, that people are able to schedule mental health care appointments in a reasonably short period of time.</p><p>The report also urged health plans to actively recruit and work to keep mental health care providers in their networks, and to ensure greater diversity so that people with specific language or cultural needs can access mental health care.</p><p>Those are sound recommendations, as far as they go. But they don\u2019t get to what\u2019s really the heart of the problem \u2013 a shortage of mental health care providers not just in New York, but across the country.</p><p>New York actually ranks better than most states, with relatively fewer areas in the state with deficient numbers of mental health care providers, according to data gathered by KFF, a health policy research organization. Still, New York could do more to improve its residents\u2019 access to mental health care.</p><p>The state, for example, is one of only a few that are not part of a growing Psychology Interjurisdictional Compact, which allows telepsychology across state lines without practitioners already licensed in one state having to go through long, costly, state-by-state certifications.</p><p>The pandemic showed that nontraditional ways of delivering care \u2013 such as telemedicine \u2013 can be done responsibly. The governor and Legislature should look in the coming session at ways to broaden access across state lines.</p><p>___</p><p>Dunkirk Evening Observer. December 11, 2023.</p><p>Editorial: NEW YORK STATE: Make criminal court cases available</p><p>State lawmakers are busy setting priorities for the coming legislative session \u2013 and in our opinion, a series of recommendations from Reinvent Albany and Scrutinize should be high on the list.</p><p>Only about 6% of local court decisions are eventually published in the state record, and judges end up choosing the decisions they publish. That\u2019s the very definition of the foxes guarding the henhouse.</p><p>The groups are calling on criminal courts to make judges\u2019 written decisions or transcripts of oral decisions available online. These would include decisions dealing with admissibility of evidence, if a case presented to a grand jury should continue or not, prosecutorial misconduct, speedy trial rulings, if warrants are overly broad or properly handled and orders deciding if a prosecutor should be able to keep evidence from the defense.</p><p>These are the decisions made every day that affect who ends up in jail or not and, just as importantly, whether or not people accused of serious crimes end up walking the streets to potentially commit further crimes. Often, as we have seen locally, these decisions are often appealed \u2013 but unless someone is in court to hear the judge\u2019s oral orders members of the press and public don\u2019t find out about the decisions unless they are tipped off by an attorney. That\u2019s a horrible way for the public to hold the court system accountable or to judge the effectiveness of criminal justice reforms. Three years after the state\u2019s 2019 criminal justice reforms, there are still arguments over how they\u2019ve worked that could be resolved if it was easier to see judges\u2019 legal reasoning for their decisions.</p><p>State Sen. Michael Gianaris, D-Astoria and Senate majority leader, told the Albany Times Union he plans to introduce legislation to increase transparency in the state\u2019s criminal courts. Making the decisions available makes sense.</p><p>Already the state Court of Appeals and Appellate Division cases are available for free publicly, so it stands to reason that the lower court cases from which those higher courts are getting their cases should be available publicly at no charge too.</p><p>This should be a matter both Republicans and Democrats in the state Legislature can get behind.</p><p>___</p><p>Jamestown Post-Journal. December 13, 2023.</p><p>Editorial: Governor Should Sign Bill To Make Public Contracts Comptroller Can\u2019t Review</p><p>State legislators have voted several times over the past few years to return oversight of state contracts to the state Comptroller\u2019s Office.</p><p>Despite these improvements, the governor retains broad authority to issue executive orders suspending state Comptroller\u2019s Office oversight while the governor and state legislature approve individual state budget appropriations that exempt certain state spending from review.</p><p>State lawmakers, to their credit, agreed earlier this year that the public should be notified about those contracts by passing A.7404/S.6941. Legislators want more information made public about those exempted contracts.</p><p>The bills require all emergency and exempted contracts be publicly posted with information about the relevant emergency declaration or provision exempting the contract from review by the state Comptroller\u2019s Office, a brief description of the contract, the amount of the contract, the contract terms, what is being provided, and how the contract relates to the declared state of emergency. The bills also require a statement explaining whether the contract was chosen on a competitive basis, and if not, an explanation why a competitive process was not undertaken.</p><p>Gov. Kathy Hochul has yet to sign the bill. In our opinion, she should.</p><p>But Comptroller Thomas DiNapoli should go a step further and take the advice of five good government groups who asked earlier this year that the comptroller publish a list of current executive orders and laws that suspend his pre-audit review. Such a list will allow local governments, legislators, journalists, watchdog groups and the general public to better understand what pre-audit and competitive procurement exemptions agencies should be reporting.</p><p>Hundreds of millions of COVID-19 related contracts were approved during the pandemic without review by DiNapoli\u2019s office and without going through typical procurement procedures. Much of that money ended up being wasted.</p><p>There will always be contracts the comptroller\u2019s office isn\u2019t able to review, whether because there isn\u2019t time to look at every contract or because there are contracts the law exempts from outside review. In our view, the state Legislature is trying to do the right thing in at least making the public aware of those contracts so those interested can review them.</p><p>Hochul should sign A.7404/S.6941 before the end of the year.</p><p>___</p><p>New York Post. December 12, 2023.</p><p>Editorial: Hochul should ignore NRDC\u2019s fake \u2018grassroots\u2019 letter and veto the pesticide ban</p><p>A letter to the gov signed by nearly 100 New York \u201cfarms, farmers and food professionals\u201d this fall calls on her to back the Birds and Bees Protection Act, which would ban a class of pesticides called neonicotinoids \u2014 primarily to protect bees.</p><p>Yet the letter appears to be penned not by farmers \u2014 but by the radical Natural Resources Defense Council. One of its staffers, Daniel Raichel, is listed on the \u201cowner\u201d of the publicly released PDF of the letter.</p><p>(The NRDC did not respond to emails seeking confirmation.)</p><p>Hochul should toss the missive in the waste bin where it belongs \u2014 and veto the bill.</p><p>Why? As molecular biologist <a href=\"https://nypost.com/2023/10/03/new-york-farmers-futures-depend-on-a-single-hochul-decision/\">Henry Miller notes</a>, the ban would devastate New York\u2019s farmers and upstate communities, who depend on \u201cneonics\u201d to protect their crops.</p><p>Corn farmers can lose as much as 66% of their yield without neonics, thanks mainly to the seedcorn maggot: A similar ban in Europe caused enormous crop damage.</p><p>As for bees, their numbers nationwide have actually increased, despite the widespread use of neonics.</p><p>Some areas where bees have seen declines are far from places where pesticides are used, suggesting other causes driving the drops.</p><p>Meanwhile, the Hochul letter\u2019s signers are organic farmers who don\u2019t use pesticides, and several are small niche farmers \u2014 one \u201cfarm\u201d is just an 1/8th of an acre!</p><p>They clearly don\u2019t represent the view (or interests) of the vast majority of New York\u2019s agricultural community.</p><p>The New York Farm Bureau, which represents a far larger and more diverse number of farmers, insists \u201cthe science has demonstrated the safety and effectiveness of neonics.\u201d</p><p>Urging Hochul to veto the bill, the bureau notes that seeds treated with neonicotinoids were specifically designed to be safer and to reduce total pesticide use.</p><p>It also wisely fears setting a precedent by letting New York lawmakers \u2014 influenced by campaign donations and wacky ideologues \u2014 overrule science, urging the Department of Environmental Conservation to stick to \u201cscientific-based authority to determine what pesticides are safe and appropriate.\u201d</p><p>Clearly, if the NRDC were right <a href=\"https://nypost.com/2023/06/07/new-york-to-pass-green-law-that-could-slash-jobs-and-actually-harm-the-environment/\">on the merits</a> about neonics, it wouldn\u2019t need to send the gov a fake \u201cgrassroots\u201d letter.</p><p>Hochul should take the Farm Bureau\u2019s advice: Follow the science \u2014 and veto the pesticide bill.</p><p>___</p><p>Wall Street Journal. December 12, 2023.</p><p>Editorial: Democrats Stage a Congressional Map-Making Coup in New York</p><p>A state court orders a new House district map that could cost four GOP seats.</p><p>Congratulations to Democrats who on Tuesday significantly increased their odds of picking up at least four House seats next November\u2014thanks to New York\u2019s Court of Appeals. A progressive 4-3 majority on the state\u2019s high court bowed to the left and threw out the current court-ordered House map that was the most politically competitive in decades.</p><p>The backstory to this coup is that New Yorkers in 2014 passed a constitutional amendment banning partisan gerrymandering and establishing a 10-member bipartisan redistricting commission. But after the commission deadlocked on a new Congressional map, the Democratic Legislature redrew it in a way that would make Elbridge Gerry proud.</p><p>The Legislature\u2019s House map gave Democrats an edge in 22 of 26 seats, or 85%\u2014significantly more than <a href=\"https://www.wsj.com/topics/person/joe-biden\">Joe Biden</a> \u2019s 61% vote share in 2020. We\u2019ve long argued that proportional representation shouldn\u2019t be required in map-making, but the Legislature\u2019s disfigured districts were an egregious gerrymander that defied traditional redistricting principles.</p><p>A 4-3 majority on the state\u2019s Court of Appeals agreed and appointed a special master to redraw the map for the 2022 midterm election. The new map resulted in Republicans winning 11 of 26 seats\u2014giving the GOP a knife-thin majority. Democrats blamed New York\u2019s high court for costing them the House even though their partisan map-makers were at fault.</p><p>However, after Chief Judge Janet DiFiore\u2014who wrote the majority opinion striking down the maps\u2014stepped down last year, liberal groups mounted a legal attack on the new map. They argued that the commission should have to redraw districts for the 2024 election even though the result would invariably be another partisan deadlock.</p><p>Now a different appellate court majority has sided with Democrats. If the commission can\u2019t agree on a new map, as is likely, the Democratic Legislature could gerrymander one afresh. This is the real partisan end-game. By the time the Legislature adopts a new map, it may be too close to the 2024 election for Republicans to challenge it in court.</p><p>\u201cToday\u2019s decision is a win for democracy and particularly the people of New York,\u201d Democratic Congressional Campaign Committee Chair Suzan DelBene declared. Anyone notice how democracy seems to prevail only when Democrats do?</p><p>END</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/e48980913732e95e626893a726bc08a1",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 3,
+            "reason": "The document contains multiple editorials on various topics. Only one of the editorials, from the Albany Times Union, is directly related to health, specifically mental health care and the issues surrounding the availability of mental health providers in health insurance networks. The other editorials discuss topics such as criminal court transparency, state contract oversight, pesticide bans, and congressional redistricting, which are not related to health. Therefore, while the document does contain relevant information, it is only a portion of the entire content."
+        }
+    }
+}

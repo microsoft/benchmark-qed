@@ -1,0 +1,210 @@
+﻿{
+    "altids": {
+        "itemid": "d52fde1c34c51cd8d92db57cda25bf72",
+        "etag": "d52fde1c34c51cd8d92db57cda25bf72_0a2aza0c0",
+        "friendlykey": "379919380924",
+        "referenceid": "IN--Editorial Rdp"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Opinion",
+    "language": "en",
+    "versioncreated": "2023-11-28T18:09:45Z",
+    "firstcreated": "2023-11-28T18:09:44Z",
+    "editorialrole": "FullStory",
+    "fixture": {
+        "code": "21ea4067bb274c3b805353fb2b99ba70",
+        "name": "Editorial Roundup"
+    },
+    "pubstatus": "usable",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "IN--Editorial Rdp",
+    "headline": "Editorial Roundup: Indiana",
+    "slugline": "BC-IN--Editorial Rdp",
+    "bylines": [
+        {
+            "by": "By The Associated Press"
+        }
+    ],
+    "copyrightnotice": "Copyright 2023 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "Editorial Rdp"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "c7544ceb29c7442c842ec6be185c620a",
+            "name": "Smoking",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 71
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "4ba722d31d194c18baf0145922601573",
+            "name": "Vaping",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 39
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a328daf6767245f18a263276f2e111f3",
+            "name": "Marijuana",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 71
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86aad5207dac100488ecba7fa5283c3e",
+            "name": "Politics",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 63
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "0760000082b2100483c7df092526b43e",
+            "name": "Indiana",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -86.25027,
+                    40.00032
+                ]
+            },
+            "relevance": 93,
+            "parentnames": [
+                "United States"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "dcb000c082c610048843df092526b43e",
+            "name": "Ohio",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -83.00018,
+                    40.25034
+                ]
+            },
+            "relevance": 56,
+            "parentnames": [
+                "United States"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "0760000082b2100483c7df092526b43e",
+            "name": "Indiana",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "body_nitf": "<p>Fort Wayne Journal Gazette. November 22, 2023.</p><p>Editorial: State Budget Committee keeps questions of Indiana Gaming Commission secret</p><p>As part of a new legislative effort to limit the rule-making authority of state agencies, departments critical to government operations justified their fee and penalty schedules before the State Budget Committee last week.</p><p>Given an opportunity to add more transparency on how such departments raise revenue through fee collections, Republican members of the committee curiously threw a shroud of suspicion over the Indiana Gaming Commission.</p><p>In the 2023 legislative session, lawmakers passed House Bill 1623, a measure requiring fee-imposing agencies to first win the State Budget Committee\u2019s approval of fee schedules. Without the go-ahead, state agencies will be unable to impose fines and penalties in the next calendar year.</p><p>Ten departments presented nearly 50 fees, ranging from penalties for animal-quarantine violations to licensure exam fees for teachers. The Indiana Gaming Commission, which oversees 12 casinos that raked in $2.5 billion from July 2021 through June 2022 and sent about $700 million of that total in taxes to the state, was not invited to the commission\u2019s Nov. 14 meeting.</p><p>\u201cThere were just some questions that haven\u2019t been answered that we\u2019ve asked, and so we feel we want those questions answered first before we move forward,\u201d Sen. Ryan Mishler, R-Mishawaka, said at the meeting.</p><p>The problem, according to members of the gaming commission, is that they weren\u2019t aware there were questions to be answered.</p><p>Republican State Budget Committee chair Jeff Thompson and Mishler sent their questions directly to the gaming commission three days after that meeting, Jennifer Reske, deputy director of the gaming commission, told The Journal Gazette Friday.</p><p>The gaming commission asked to be on the budget committee\u2019s October agenda for approval of its fees, but was told no agencies would testify.</p><p>\u201cAnd then when we saw we weren\u2019t on the meeting in November, we tried to work to figure out what additional information we needed to provide,\u201d Reske told The Journal Gazette. That inquiry wasn\u2019t made to the gaming commission until the end of last week, she said, despite Mishler\u2019s public pronouncement.</p><p>The Journal Gazette filed a public records request with the gaming commission for the Thompson-Mishler letter, but the agency was still processing our inquiry Tuesday.</p><p>Our requests for interviews with State Budget Committee members Rep. Jeff Thompson, R-Lizton, and Sen. Chris Garten, R-Charlestown, were declined.</p><p>\u201cSen. Garten is still doing his due diligence by reading through everything the (gaming commission) has proposed and combing through data,\u201d Garten\u2019s press secretary, Kellyn Harrison, said in an email Friday. \u201cTherefore, if you are interested in his questions, he encourages you to tune into the next State Budget Committee meeting.\u201d</p><p>We\u2019re planning on it. But the committee\u2019s December meeting has yet to be scheduled. Reske has heard it could be slated for the week before Christmas.</p><p>Indiana\u2019s gaming industry is a huge contributor to the state\u2019s bottom line. In fiscal year 2022, gaming and sports wagering generated $691.4 million in state taxes, according to the gaming commission.</p><p>As of June 30, 2022, gaming has added more than $16.6 billion in tax support since the Indiana Riverboat Gaming Act was passed in 1993.</p><p>That\u2019s revenue Indiana would likely never be able to replace. So why would Republican members of the budget committee put off approving the Indiana Gaming Commission\u2019s fee schedule?</p><p>They won\u2019t say, which is a slap in the face to Hoosiers who value government transparency.</p><p>___</p><p>Anderson Herald Bulletin. November 27, 2023.</p><p>Editorial: Different approach needed for teens and vaping</p><p>The prevalence of electronic-cigarette use or \u201cvaping\u201d among middle and high school students suggests that a different approach may be necessary to address this dangerous trend.</p><p>The 2023 National Youth Tobacco Survey results suggest a nearly 4% drop in e-cigarette usage among middle and high school students, which may seem like cause for celebration but still indicates that about 2.8 million middle and high school students are using tobacco products.</p><p>Intersect, which heads up the local Students Against Destructive Decisions chapter, has been advocating for a change in schools\u2019 approach to tobacco use.</p><p>Teens smoking, and now vaping, has been often treated as a behavioral issue rather than an addiction.</p><p>Often the punishment involves suspension from school for a period of time, which may very well put them in an environment where they have even more opportunities to engage in tobacco use.</p><p>Adults who are addicted to nicotine aren\u2019t punished. They\u2019re offered resources and encouragement to help them quit, and this is what youth need as well.</p><p>The National Youth Tobacco Survey was conducted by self-report, and we can almost certainly say that many more teens are using e-cigarettes while being untruthful when asked. It\u2019s not breaking news that teenagers will lie if they\u2019re afraid of getting in trouble.</p><p>E-cigarettes were initially marketed to smokers as a way to get a nicotine fix where smoking is prohibited, or as a safer alternative to cigarettes.</p><p>In fairness, vaping may be less dangerous than smoking, but that doesn\u2019t mean it\u2019s not a harmful addiction. Cigarettes are less dangerous than heroin, but that doesn\u2019t mean either is a good idea.</p><p>Parents and educators should provide students with facts and resources needed to quit tobacco products or avoid picking up the habit at all.</p><p>Relying on condemnation and punishment clearly didn\u2019t work with cigarette smoking, and it won\u2019t work with vaping.</p><p>___</p><p>Jeffersonville News and Tribune. November 24, 2023.</p><p>Editorial: Clear path needed on marijuana issue</p><p>The grass is greener in many of our neighboring states, but Indiana continues to stall when it comes to making progress on the issue.</p><p>On Nov. 7, Ohio voters chose to make recreational marijuana use legal in the state. Ohio is the 24th state to pass the grass for recreational use, joining Hoosier neighbors Illinois and Michigan. Earlier this year, Kentucky legalized medical marijuana.</p><p>Indiana is an outlier, even in the Midwest, when it comes to cannabis. According to the Marijuana Policy Project, Indiana is one of just 12 states without a medical marijuana law and one of 19 that still imposes jail time for simple possession of cannabis.</p><p>Gov. Eric Holcomb has said he won\u2019t act on the matter until the federal government legalizes pot. Our state legislature has failed to move the issue forward. Yet another legislative committee provided no recommendations on marijuana legalization during a meeting earlier this month. Unlike Ohio, Hoosier voters are limited in deciding on the issue since Indiana is one of 27 states where questions such as marijuana legalization can\u2019t appear on the ballot without the will of the state legislature.</p><p>Given that our state lawmakers have largely failed to come up with even basic guidance on pot legalization or medical marijuana, it\u2019s hard to imagine that Hoosiers will be seeing the issue on a ballot anytime soon.</p><p>But marijuana-related products such as CBD, Delta-8 and Delta-9 are legal in Indiana.</p><p>Indiana doesn\u2019t need the tax revenue from marijuana like Illinois and other states, yet having the additional revenue from marijuana couldn\u2019t hurt. Kentucky lost millions of dollars by refusing to legalize gambling. Instead, Kentuckians drove to places like Southern Indiana to spend their money at casinos. In 2023, Hoosiers are driving to Michigan and Illinois to spend money on a drug that\u2019s been shown to have few adverse effects on users and has been proved to have medicinal value.</p><p>Legalizing marijuana would also free up law enforcement, from street patrols to eradication efforts, to focus on serious crimes and problems. It could alleviate some of the strain on our courts, which are backed up enough due to delays caused by the pandemic.</p><p>The majority of Hoosiers are in favor of it. A 2022 Ball State University survey found that 85% of the 600 adults polled supported legalization of marijuana in some form. For recreational use, 56% were in favor of legalization.</p><p>But there are other sides to the issue, such as how employers would handle marijuana use for workers if it\u2019s legalized.</p><p>Lawmakers need to seek reliable input from experts and the Hoosiers they represent, and move forward on a firm path to deciding the issue. Seating another committee won\u2019t make a difference unless there\u2019s a strong will to resolve the matter, either for or against pot legalization.</p><p>END</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/d52fde1c34c51cd8d92db57cda25bf72",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 3,
+            "reason": "The document contains three editorials, each focusing on different topics: the Indiana Gaming Commission's fee schedule, teen vaping, and marijuana legalization. Out of these, only the editorial on teen vaping is directly related to health, discussing the prevalence of vaping among teens, its dangers, and the need for a different approach to address it. The other two editorials are not related to health. Therefore, the document has partial relevance to the topic of health."
+        }
+    }
+}

@@ -1,0 +1,219 @@
+﻿{
+    "altids": {
+        "itemid": "b3a3e05ab191c020da5cace01292fbec",
+        "etag": "b3a3e05ab191c020da5cace01292fbec_0a2aza0c0",
+        "friendlykey": "928552525269",
+        "referenceid": "MN--Editorial Rdp"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Opinion",
+    "language": "en",
+    "versioncreated": "2024-03-20T11:10:44Z",
+    "firstcreated": "2024-03-19T18:26:26Z",
+    "editorialrole": "FullStory",
+    "fixture": {
+        "code": "21ea4067bb274c3b805353fb2b99ba70",
+        "name": "Editorial Roundup"
+    },
+    "pubstatus": "usable",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "MN--Editorial Rdp",
+    "headline": "Editorial Roundup: Minnesota",
+    "slugline": "BC-MN--Editorial Rdp",
+    "bylines": [
+        {
+            "by": "By The Associated Press"
+        }
+    ],
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "Editorial Rdp"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "person": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e5ff772aa2644f73aa46edfb2efcc174",
+            "name": "John Marty",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "POLITICIAN",
+                "PERSON"
+            ],
+            "relevance": 45
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cf909730889610048df9cb8225d5863e",
+            "name": "Education funding",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 51
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "d136a002b9e34c76b103e55426f3c4d5",
+            "name": "Suicide",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 36
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e231c7187de410048fd7df092526b43e",
+            "name": "Mental health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "c8e409f8858510048872ff2260dd383e",
+            "name": "Business",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 58
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86aad5207dac100488ecba7fa5283c3e",
+            "name": "Politics",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 69
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "7077b3c88b6b10048b67a385cd5ce603",
+            "name": "Medical technology",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 36
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "9f12355082c4100486addf092526b43e",
+            "name": "Minnesota",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -94.25055,
+                    46.25024
+                ]
+            },
+            "relevance": 94,
+            "parentnames": [
+                "United States"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "9f12355082c4100486addf092526b43e",
+            "name": "Minnesota",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "body_nitf": "<p>Minneapolis Star-Tribune. March 18, 2024.</p><p>Editorial: \u2018Human composting\u2019 should be legal</p><p>Minnesota lawmakers should legalize Natural Organic Reduction as an end-of-life alternative this session.</p><p>It\u2019s not often that someone who has died is among those advocating for a bill at a Minnesota legislative committee meeting. But had technology cooperated last Thursday, the Senate\u2019s Committee on Health and Human Services would have heard from <a href=\"https://www.startribune.com/twin-cities-minnesota-mans-dying-wish-compost-me-benefit-planet-green-burial-human-composting/600319447/?refresh=true\">Steve Wheeler</a>, a Lake Elmo resident who passed away in September at the age of 53.</p><p>Wheeler battled both cancer and multiple sclerosis. As his life came to a close, he became a passionate advocate for Natural Organic Reduction (NOR), which is a new but not-yet-legal-in-Minnesota alternative to traditional burial or cremation. In a <a href=\"https://www.youtube.com/watch?v=TJtLaYKNWVs\">video recorded</a> before his death, Wheeler spoke movingly of why he embraced this environmentally friendly innovation.</p><p>\u201cI can take this one action, this final action, and make some good, leave the world a better place than when I found it,\u201d Wheeler said. \u201cAnd to find out that Minnesota doesn\u2019t have this option, why not? ... Why wouldn\u2019t it be something that people can choose?\u201d</p><p>A glitch kept the Senate committee from hearing Wheeler\u2019s recorded remarks, available on YouTube at <a href=\"https://tinyurl.com/SteveWheelerMN\">tinyurl.com/SteveWheelerMN</a>. Fortunately, other advocates \u2014 including Mueller Memorial Funeral Home and Cremation, the St. Paul funeral provider that helped Wheeler find an out-of-state NOR service to realize his last wish \u2014 are making a strong argument for why Minnesota should legalize NOR this session. The Star Tribune Editorial Board agrees and urges legislators to do so with care but without delay.</p><p>Consumers deserve more choices, particularly more affordable choices in their end-of-life planning. The same is true for those facing the unexpected death of a loved one.</p><p>There also would be comfort for many families in knowing that this more natural process doesn\u2019t require embalming chemicals or land to be permanently set aside for a resting place. Nor does it require the energy or emissions cremation does. For those concerned about climate change and pollution, this is a way to honor these personal principles even after they\u2019ve taken their last breath.</p><p>NOR is currently <a href=\"https://recompose.life/human-composting-legislative-advocacy/\">legal in seven states</a> \u2014 Washington, Colorado, Oregon, Vermont, California, New York and Nevada, according to <a href=\"https://recompose.life/\">Recompose</a>, a Seattle-based NOR provider and pioneer. Minnesota is one of 17 states where legalization legislation has been introduced.</p><p>NOR is sometimes referred to as \u201chuman composting,\u201d because that\u2019s what it is. It involves putting a body into a vessel with alfalfa, wood chips and straw, then allowing the bacteria occurring naturally on the body to break it down. The entire process takes between eight and 12 weeks, and the result is top soil that can be donated or returned to a family. At Recompose, \u201ccustomers have used their person\u2019s soil to create groves of trees, nourish rose gardens tended by their person while they were alive, or scattered in a favorite natural area. In Washington State, the law for scattering human composting soil is the same for cremated remains \u2014 you must have permission of the landowner.\u201d</p><p>Nature centers in states where it\u2019s legal may also take donated soil. As one expert testified this week in St. Paul, there is no DNA in the end product, and the soil is \u201cnot visually, chemical or microbiologically recognized as human remains.\u201d Temperatures reached during the process also eliminate pathogens, though one exception is prions, which cause a rare condition called Creutzfeldt-Jakob disease.</p><p>The <a href=\"https://www.revisor.mn.gov/bills/text.php?version=latest&number=SF3134&session=ls93&session_year=&session_number=0\">Minnesota legislation\u2019s</a> lead authors are <a href=\"https://www.house.mn.gov/members/profile/15527\">Rep. John Huot</a>, DFL-Rosemount, and <a href=\"https://www.senate.mn/members/member_bio.html?mem_id=1035\">Sen. John Marty</a>, DFL-Roseville. Opponents include the Minnesota Catholic Conference, which stated in written testimony that the process is \u201cdisrespectful\u201d to the body. The Minnesota Funeral Directors Association has also testified against the bill, with concerns focusing mainly on who would be authorized to perform NOR. The trade organization has also urged lawmakers to wait until a state health department report comes out in 2025.</p><p>Marty told an editorial writer that other states have legalized NOR without problems and said advocates are working to accommodate the funeral directors\u2019 concerns. State regulators could also adjust as necessary once the report comes out, he added. There\u2019s no reason to delay making comfort and choice available in Minnesota when death occurs. Said Marty: \u201cIf you don\u2019t want to do it, that\u2019s fine. But don\u2019t stop anybody else from doing so.\u201d</p><p>___</p><p>Mankato Free Press. March 15, 2024.</p><p>Editorial: Mental Health: Programs get support, but providers still short</p><p>The Minnesota Legislature last year funded and established mental health programs and boosted reimbursement rates to providers. But mental health needs across the state and in southern Minnesota remain high.</p><p>The suicide rate in Minnesota in 2022 was 14.3 per 100,000 and the rate for the southwest Minnesota planning region of 23 counties, including Blue Earth and Nicollet counties, was more than 15 per 100,000 in 2021, according to state data. Rural areas of Minnesota have suicide rates of 20 per 100,000, according to an <a href=\"https://www.ruralmn.org/the-suicide-epidemic-in-rural-minnesota-how-we-got-here-and-how-we-move-forward\">analysis by the Center for Rural Policy and Development.</a></p><p>And the center notes rural area rates are \u201cspiking higher and trending up faster\u201d than rates in more populated urban areas.</p><p>The 2023 Legislature passed a number of programs aimed at preventing suicide and providing mental health treatment, but with a $17 billion budget surplus the $200 million spent to boost mental health programs fell short. In fact, the approved budget was below what was originally proposed by Gov. Tim Walz and the Democrat-controlled House and Senate, according to the National Alliance on Mental Health (NAMI), Minnesota.</p><p>The group notes there is widespread awareness of the mental health crisis facing Minnesota and the country even as the pandemic has faded. Suicide rates reported in 2022 are at a historical high in most areas even when compared to 2019, one of the worst years.</p><p>Providers are of course key to tackling the mental health crisis, and there remains a shortage. Waits to see a therapist sometimes last several months. The Legislature did increase reimbursement rates 3% plus inflation, but but NAMI calls that \u201cnot enough to address the current crisis.\u201d</p><p>Currently, mental health providers are paid about 74% of what the government would pay for Medicaid patients.</p><p>While the current rate from the Department of Human Services for residential substance abuse treatment is about $79.84 per day, a recent study recommended the level should be nearly triple that, $216.90 per day.</p><p>Funding for mobile crisis and school-based mental health programs were funded for one year with reduced or no funding for the second year. That creates uncertainty for providers and stymies the growth and establishment of such programs.</p><p>Minnesota\u2019s formula for reimbursement is not based on costs providers face or quality of care. It has been set arbitrarily. That must change.</p><p>The surplus is gone and it would have been one-time money in any event, but the Legislature and the governor must pull out all stops and figure out a way to fund mental health in Minnesota to a level that meets needs and costs.</p><p>With the lack of adequate funding, this crisis will only get more costly in terms of real dollars and lives lost.</p><p>You can find mental health resources by Googling \u201cmental health resources + mankatofreepress\u201d or going to this site: <a href=\"https://www.mankatofreepress.com/news/local_news/mental-health-resources/article_4e4c0286-fb3f-11eb-8e4b-cf780c9a480d.html\">https://www.mankatofreepress.com/news/local_news/mental-health-resources/article_4e4c0286-fb3f-11eb-8e4b-cf780c9a480d.html</a></p><p>For the nationwide 24 hour, 7 day a week mental health help line dial or text 988 or to chat go to <a href=\"http://988lifeline.org/chat\">988lifeline.org/chat</a>.</p><p>END</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/b3a3e05ab191c020da5cace01292fbec",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 5,
+            "reason": "The document contains two editorials, both of which are relevant to the topic of health. The first editorial discusses the legalization of 'human composting' as an environmentally friendly end-of-life option, which involves health-related considerations such as the use of embalming chemicals and the environmental impact of traditional burial methods. The second editorial addresses mental health issues in Minnesota, including suicide rates, mental health program funding, and the shortage of mental health providers. Both topics are directly related to health, making the document highly relevant to the given topic."
+        }
+    }
+}

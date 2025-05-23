@@ -1,0 +1,311 @@
+﻿{
+    "altids": {
+        "itemid": "1b4042c2f366454b0f92d4251752a538",
+        "etag": "1b4042c2f366454b0f92d4251752a538_0a9aza0c0",
+        "friendlykey": "770293598427",
+        "referenceid": "EU-REL--Vatican-Pope"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2023-11-30T12:27:00Z",
+    "firstcreated": "2023-11-30T12:26:59Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "EU-REL--Vatican-Pope",
+    "headline": "Pope says he has acute bronchitis, doctors recommended against travel to avoid change in temperature",
+    "headline_extended": "Pope Francis says he is suffering from acute and infectious bronchitis",
+    "slugline": "AP-EU-REL-Vatican-Pope",
+    "description_summary": "Pope Francis says he is suffering from acute and infectious bronchitis. He told an audience on Thursday that doctors recommended he cancel his planned visit to Dubai this weekend to avoid the quick changes in temperature that would be involved. Despite the illness, Francis had nine audiences on Thursday, suggesting he was still managing to carry a heavy workload. At the start of one meeting, he quipped: \u201cAs you can see, I\u2019m alive.\u201d Francis turns 87 in a few weeks. He had part of one lung removed as a young man. He came down with the flu last week and is on antibiotics.",
+    "located": "ROME",
+    "datelinelocation": {
+        "city": "Rome",
+        "countrycode": "ITA",
+        "countryname": "Italy",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                12.51133,
+                41.89193
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2023 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "Vatican pope bronchitis Dubai climate"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "person": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "2fd38d1dee8c4287a13ae64992300d96",
+            "name": "Pope Francis",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 87
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "f",
+            "name": "f"
+        },
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "i",
+            "name": "i"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "6cd98adfc84d405eadec8ca81bd37df4",
+            "name": "Access to health care",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 60
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "026a1118e94443a2aacc08a2e70cc77b",
+            "name": "Religion",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 78
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 87
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e228bab07de410048fa8df092526b43e",
+            "name": "Lung disease",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 68
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "026a1118e94443a2aacc08a2e70cc77b",
+            "name": "Religion",
+            "creator": "Editorial",
+            "editorial_subject": "Religion",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "c8e409f8858510048872ff2260dd383e",
+            "name": "Business",
+            "creator": "Editorial",
+            "editorial_subject": "Business",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "bb2d2c5f441a452cb24bb511a2ab5eea",
+            "name": "World news",
+            "creator": "Editorial",
+            "editorial_subject": "World news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "3a251f30ba234d49938aecd7adde1c62",
+            "name": "Dubai",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e09b87d5b10048288c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "9d26a20b35f0484a891740f8189d4c7b",
+                "name": "City"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    55.28,
+                    25.25222
+                ]
+            },
+            "relevance": 44,
+            "parentnames": [
+                "United Arab Emirates"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "03a6f9d07efe100483e9df092526b43e",
+            "name": "Rome",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "662122b07d5b100482d7c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "9d26a20b35f0484a891740f8189d4c7b",
+                "name": "City"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    12.4839,
+                    41.89474
+                ]
+            },
+            "relevance": 52,
+            "parentnames": [
+                "Italy"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "661850e07d5b100481f4c076b8e3055c",
+            "name": "Europe",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661850e07d5b100481f6c076b8e3055c",
+            "name": "Middle East",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "associations": {
+        "1": {
+            "altids": {
+                "itemid": "a91bf07a3cf547929deaebbe89e00d9f"
+            },
+            "type": "picture"
+        },
+        "2": {
+            "altids": {
+                "itemid": "5c59ec04de6b45fc892d0286fe35c9e9"
+            },
+            "type": "picture"
+        },
+        "3": {
+            "altids": {
+                "itemid": "a4812a136a804a84b705f7bbcb190660"
+            },
+            "type": "picture"
+        },
+        "4": {
+            "altids": {
+                "itemid": "41cc0603f2684875a041ab32c3daad4b"
+            },
+            "type": "picture"
+        },
+        "5": {
+            "altids": {
+                "itemid": "93d75abceacb4730b63617bb9d693dd0"
+            },
+            "type": "picture"
+        },
+        "6": {
+            "altids": {
+                "itemid": "f2f8a500ddc644e28b9d91862469a4df"
+            },
+            "type": "picture"
+        }
+    },
+    "body_nitf": "<p>ROME (AP) \u2014 <a href=\"https://apnews.com/hub/pope-francis\">Pope Francis</a> said on Thursday that he is suffering from acute, infectious bronchitis and that doctors recommended he <a href=\"https://apnews.com/article/pope-francis-flu-vatican-64a98163770508ad804495cb62f92d64\">cancel his planned visit to Dubai this weekend</a> to avoid the quick changes in temperature that would be involved.</p><p>\u201cAs you can see, I\u2019m alive,\u201d Francis quipped at the start of an audience with participants of a symposium on health care ethics.</p><p>It was one of nine audiences Francis had scheduled for Thursday, suggesting he was still managing to carry a heavy workload despite his illness.</p><p>Francis, who turns 87 in a few weeks and had part of one lung removed as a young man, came down with the flu last week and is on antibiotics. On Tuesday, the Vatican announced he was cancelling his planned participation in the U.N. climate conference on doctors\u2019 orders.</p><p>\u201cThe reason is that it\u2019s very hot there, and you go from heat to air conditioning,\u201d Francis told the health care workers. \u201cThank God it wasn\u2019t pneumonia. It\u2019s a very acute, infectious bronchitis.\u201d</p><p>Previously the Vatican had said <a href=\"https://apnews.com/article/pope-francis-vatican-audiences-flu-600fd34afaa58bbe2447546c3a0deaeb\">Francis was suffering from a lung inflammation and the flu</a>. Francis had a previous case of acute bronchitis in the spring, when he was hospitalized for three days at Rome's Gemelli hospital so he could <a href=\"https://apnews.com/article/vatican-pope-francis-illness-lung-inflammation-ef8ac8a607db7d71f995f12542ac6768\">receive intravenous antibiotics</a>.</p><p>The Vatican No. 2, Cardinal Pietro Parolin, said Thursday the Holy See was still trying to figure out how it would be represented at Dubai, where <a href=\"https://apnews.com/hub/cop28/\">the U.N. climate conference, or COP 28</a>, is underway. Parolin, the secretary of state, recalled that he had represented the Vatican at past U.N. climate conferences and could do the same in Dubai.</p><p>Francis was supposed to have left Rome on Friday, spoken at the conference Saturday, presided over the inauguration of a faith pavilion on the sidelines of the meeting Sunday and then returned to Rome. Parolin said doctors recommended against the trip \u201cto avoid any deterioration (in his condition) and so he can recover as soon as possible.\u201d</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/vatican-pope-bronchitis-dubai-climate-1b4042c2f366454b0f92d4251752a538",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 5,
+            "reason": "The document discusses Pope Francis's health condition in detail, including his acute bronchitis, the medical advice he received, and the impact on his travel plans. It also mentions his previous health issues and the measures taken to manage his current illness. This information is highly relevant to the topic of health as it provides insights into the Pope's medical condition and the healthcare decisions made for his well-being."
+        }
+    }
+}

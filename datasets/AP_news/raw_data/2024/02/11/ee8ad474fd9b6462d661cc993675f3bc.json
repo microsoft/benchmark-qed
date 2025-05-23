@@ -1,0 +1,249 @@
+﻿{
+    "altids": {
+        "itemid": "ee8ad474fd9b6462d661cc993675f3bc",
+        "etag": "ee8ad474fd9b6462d661cc993675f3bc_1a6aza0c0",
+        "friendlykey": "667468387017",
+        "referenceid": "US-ODD--Airport-Mummified Monkeys"
+    },
+    "version": 1,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2024-02-11T18:39:47Z",
+    "firstcreated": "2024-02-11T15:44:54Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "ednote": "Eds: UPDATES: Updates Media. Adds traveler's comment according to CPB on Sunday.",
+    "editorialtypes": [
+        "Lead"
+    ],
+    "signals": [
+        "newscontent"
+    ],
+    "title": "US-ODD--Airport-Mummified Monkeys",
+    "headline": "CBP dog sniffs out something unusual in passenger's luggage \u2014 mummified monkeys",
+    "headline_extended": "The U.S. Customs and Border Protection says one of its dogs sniffed out something unusual in a traveler's luggage in Boston \u2014 dead monkeys",
+    "slugline": "AP-US-ODD--Airport-Mummified Monkeys, 1st Ld-Writethru",
+    "description_summary": "The U.S. Customs and Border Protection says one of its dogs sniffed out something unusual in a traveler's luggage in Boston \u2014 dead monkeys. Agents say the passenger returning from a visit to the Democratic Republic of Congo reported that the luggage contained dried fish, but an inspection at Boston Logan Airport revealed four mummified monkeys. The CBP says raw or minimally processed meat from wild animals, sometimes referred to as \u201cbushmeat,\u201d is banned because of the threat of disease. The incident happened last month. A CBP spokesperson said Sunday that the luggage was seized and the nearly 9 pounds of bushmeat was marked for destruction.",
+    "located": "BOSTON",
+    "datelinelocation": {
+        "city": "Boston",
+        "countryareacode": "MA",
+        "countryareaname": "Massachusetts",
+        "countrycode": "USA",
+        "countryname": "United States",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                -71.05977,
+                42.35843
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "Mummified monkeys Boston airport bushmeat"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "a",
+            "name": "a"
+        },
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e8ae0d3087a91004899ae9f06a797907",
+            "name": "Monkeys",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a89f0ca887a9100481f8957095691f3e",
+            "name": "Animals",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 62
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "44811870882f10048079ae2ac3a6923e",
+            "name": "Oddities",
+            "creator": "Editorial",
+            "editorial_subject": "Oddities",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "661ab2407d5b10048232c076b8e3055c",
+            "name": "Democratic Republic of the Congo",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661812607d5b100481f1c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "01f56e0e654841eca2e69bf2cbcc0526",
+                "name": "Nation"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    25,
+                    0
+                ]
+            },
+            "relevance": 74,
+            "parentnames": [
+                "Africa"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "66a6548082c410048691df092526b43e",
+            "name": "Boston",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "bed6942882b310048501df092526b43e"
+            ],
+            "locationtype": {
+                "code": "9d26a20b35f0484a891740f8189d4c7b",
+                "name": "City"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -71.05977,
+                    42.35843
+                ]
+            },
+            "relevance": 36,
+            "parentnames": [
+                "Massachusetts"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "661850e07d5b100481f5c076b8e3055c",
+            "name": "Latin America and Caribbean",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "bed6942882b310048501df092526b43e",
+            "name": "Massachusetts",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "associations": {
+        "1": {
+            "altids": {
+                "itemid": "db2f6d4abcbc456cafdd363f1f252925"
+            },
+            "type": "picture"
+        }
+    },
+    "body_nitf": "<p>BOSTON (AP) \u2014 A U.S. Customs and Border Protection dog sniffed out something unusual in luggage from a traveler returning from Africa \u2014 mummified monkeys.</p><p>The passenger returning from a visit to the Democratic Republic of Congo reported that the luggage contained dried fish, but an inspection at Boston Logan Airport revealed dead and dehydrated bodies of four monkeys, agents said. The traveler said he brought the monkeys into the U.S. for his own consumption, Ryan Bissette, a CPB spokesperson, said Sunday.</p><p>Raw or minimally processed meat from wild animals, sometimes referred to as \u201cbushmeat,\u201d is banned in the U.S. because of the threat of disease.</p><p>\"The potential dangers posed by bringing bushmeat into the United States are real. Bushmeat can carry germs that can cause illness, including the Ebola virus,\u201d said Julio Caravia, local port director for Customs and Border Protection.</p><p>The incident happened last month but was made public on Friday.</p><p>Bissette said Sunday that no charges were filed but all of the luggage was seized and the nearly 9 pounds (4 kilograms) of bushmeat were marked for destruction by U.S. Centers for Disease Control and Prevention.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/mummified-monkeys-boston-airport-bushmeat-ee8ad474fd9b6462d661cc993675f3bc",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 4,
+            "reason": "The document discusses an incident involving the smuggling of mummified monkeys into the U.S. and highlights the health risks associated with bushmeat, including the potential for disease transmission such as the Ebola virus. This directly relates to public health concerns and the measures taken to prevent the spread of diseases."
+        }
+    }
+}

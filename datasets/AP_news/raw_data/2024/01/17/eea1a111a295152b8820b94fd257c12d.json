@@ -1,0 +1,450 @@
+﻿{
+    "altids": {
+        "itemid": "eea1a111a295152b8820b94fd257c12d",
+        "etag": "eea1a111a295152b8820b94fd257c12d_12a16aza0c0",
+        "friendlykey": "630386520735",
+        "referenceid": "EU--Britain-Royals"
+    },
+    "version": 12,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2024-01-18T01:59:35Z",
+    "firstcreated": "2024-01-17T14:25:33Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "ednote": "Eds: UPDATES: Makes minor edits and adds photos.",
+    "editorialtypes": [
+        "Lead"
+    ],
+    "signals": [
+        "newscontent"
+    ],
+    "title": "EU--Britain-Royals",
+    "headline": "King Charles III will have a prostate operation next week while Kate recovers from abdominal surgery",
+    "headline_extended": "Kensington Palace says the Princess of Wales has been hospitalized after undergoing planned abdominal surgery and will remain at the private London Clinic for up to two weeks",
+    "slugline": "BC-EU-Britain-Royals, 12th Ld-Writethru",
+    "description_summary": "Kensington Palace says the Princess of Wales has been hospitalized after undergoing planned abdominal surgery and will remain at the private London Clinic for up to two weeks. Buckingham Palace revealed moments after news of Kate's hospitalization was released on Wednesday that King Charles III would undergo a \u201ccorrective procedure\u201d next week for an enlarged prostate. The palace said the king\u2019s condition is benign. The palace says the 75-year-old monarch has sought treatment for an enlarged prostate \u201cin common with thousands of men each year.\u201d The former Kate Middleton is expected to return to public duties after Easter. The 42-year-old future queen was admitted to The London Clinic on Tuesday.",
+    "bylines": [
+        {
+            "by": "By DANICA KIRKA",
+            "title": "Associated Press"
+        }
+    ],
+    "located": "LONDON",
+    "datelinelocation": {
+        "city": "London",
+        "countrycode": "GBR",
+        "countryname": "United Kingdom",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                -0.12574,
+                51.50853
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "kate princess of wales operation uk royals"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "person": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f8955706b58c4b71901d46201750aa48",
+            "name": "King Charles III",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "GOVERNMENT_FIGURE",
+                "PERSON",
+                "ROYALTY"
+            ],
+            "relevance": 65
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "00f5b3b58e2246bda5876a4b62fe0fbb",
+            "name": "Kate Middleton",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "ROYALTY",
+                "PERSON"
+            ],
+            "relevance": 83
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "i",
+            "name": "i"
+        },
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "e",
+            "name": "e"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86aad5207dac100488ecba7fa5283c3e",
+            "name": "Politics",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 39
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e24779c87de410048069df092526b43e",
+            "name": "Men's health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 69
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "468257dba1c848ca93ba314d4ce86539",
+            "name": "Surgery",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "90aeac5089ef10048f63d56c852d093e",
+            "name": "Royalty",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 97
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "16cb0ba3e6d24d97ace39f5a1924669a",
+            "name": "Entertainment",
+            "creator": "Editorial",
+            "editorial_subject": "Entertainment",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "bb2d2c5f441a452cb24bb511a2ab5eea",
+            "name": "World news",
+            "creator": "Editorial",
+            "editorial_subject": "World news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e293fee87d6b10048fe8ba7fa5283c3e",
+            "name": "Wales",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "66219fb07d5b100482e2c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "d83e15f769714aab9d49a03eab919128",
+                "name": "Constituent country"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -3.5,
+                    52.5
+                ]
+            },
+            "relevance": 89,
+            "parentnames": [
+                "United Kingdom"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "7a55e0187eff10048492df092526b43e",
+            "name": "London",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "df4691387d6b10048fdeba7fa5283c3e"
+            ],
+            "locationtype": {
+                "code": "9d26a20b35f0484a891740f8189d4c7b",
+                "name": "City"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -0.12574,
+                    51.50853
+                ]
+            },
+            "relevance": 62,
+            "parentnames": [
+                "England"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "661850e07d5b100481f4c076b8e3055c",
+            "name": "Europe",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "associations": {
+        "1": {
+            "altids": {
+                "itemid": "23884a7b81cd41f486b7349558231031"
+            },
+            "type": "picture"
+        },
+        "2": {
+            "altids": {
+                "itemid": "2c830d663b294630a7ce90672800c05e"
+            },
+            "type": "picture"
+        },
+        "3": {
+            "altids": {
+                "itemid": "39ff89236f034ab0906a9dd254c69480"
+            },
+            "type": "picture"
+        },
+        "4": {
+            "altids": {
+                "itemid": "1743b51be4a04c5f8b9adbd6ef06a459"
+            },
+            "type": "picture"
+        },
+        "5": {
+            "altids": {
+                "itemid": "52b3069270ad4f96ae4307f796b3ef86"
+            },
+            "type": "picture"
+        },
+        "6": {
+            "altids": {
+                "itemid": "8747afaf9ebe4c59b5d2db1ea76ce8bf"
+            },
+            "type": "picture"
+        },
+        "7": {
+            "altids": {
+                "itemid": "ef8d71cc0c794324a60daa77a7254924"
+            },
+            "type": "picture"
+        },
+        "8": {
+            "altids": {
+                "itemid": "18de58716aec45e596bd4fd541c9b363"
+            },
+            "type": "picture"
+        },
+        "9": {
+            "altids": {
+                "itemid": "8a81320bdd0b400b9a9d876e22a74f32"
+            },
+            "type": "picture"
+        },
+        "10": {
+            "altids": {
+                "itemid": "900ca0f13b2a40788cb936dcc3795ebd"
+            },
+            "type": "picture"
+        },
+        "11": {
+            "altids": {
+                "itemid": "e638e59c04af4b8693ba0f95c4e2d1b1"
+            },
+            "type": "picture"
+        },
+        "12": {
+            "altids": {
+                "itemid": "39bdd5035b5040d1af8a71e8dab9b6f1"
+            },
+            "type": "picture"
+        },
+        "13": {
+            "altids": {
+                "itemid": "6478441ef154492eb5a692e025f5acd9"
+            },
+            "type": "picture"
+        },
+        "14": {
+            "altids": {
+                "itemid": "f554c35370474db990a4342d27ff24e2"
+            },
+            "type": "picture"
+        },
+        "15": {
+            "altids": {
+                "itemid": "ed87611bd7a8455a8d9a939efecca820"
+            },
+            "type": "picture"
+        },
+        "16": {
+            "altids": {
+                "itemid": "42a34563d87e44e39bd60b3dbcecb4cf"
+            },
+            "type": "picture"
+        },
+        "17": {
+            "altids": {
+                "itemid": "939965d22a24440597225c5ac3b39c4a"
+            },
+            "type": "picture"
+        },
+        "18": {
+            "altids": {
+                "itemid": "98b08d76327e410893c0dc708149e705"
+            },
+            "type": "picture"
+        },
+        "19": {
+            "altids": {
+                "itemid": "3aa02e544e004542bc9084120d76fe59"
+            },
+            "type": "picture"
+        },
+        "20": {
+            "altids": {
+                "itemid": "1709250f050f4f45b6f1d75ad098a4d8"
+            },
+            "type": "picture"
+        },
+        "21": {
+            "altids": {
+                "itemid": "325c04294afc4136bc8b9d665062e0e0"
+            },
+            "type": "audio"
+        },
+        "22": {
+            "altids": {
+                "itemid": "8adc3d53f1d043dbad22244bd6281769"
+            },
+            "type": "audio"
+        },
+        "23": {
+            "altids": {
+                "itemid": "f393768abf0542c2a64607c2d4f4d45e"
+            },
+            "type": "audio"
+        },
+        "24": {
+            "altids": {
+                "itemid": "db564f535a6e4ad69a3f4451a4aa115e"
+            },
+            "type": "audio"
+        },
+        "25": {
+            "altids": {
+                "itemid": "8941bf1421684aabbd71728ff2297a8f"
+            },
+            "type": "audio"
+        },
+        "26": {
+            "altids": {
+                "itemid": "0d8e1b50441141158a6329a59b166601"
+            },
+            "type": "audio"
+        },
+        "27": {
+            "altids": {
+                "itemid": "6efcbad55313425da807ca07725f522c"
+            },
+            "type": "video"
+        }
+    },
+    "body_nitf": "<p>LONDON (AP) \u2014 <a href=\"https://apnews.com/hub/king-charles-iii\">King Charles III</a> and the <a href=\"https://apnews.com/hub/kate-middleton\">Princess of Wales</a> are both dealing with medical issues that will force them to delay previously planned public engagements over the coming weeks.</p><p>Charles will undergo a \u201ccorrective procedure\u201d for an enlarged prostate next week, Buckingham Palace said on Wednesday. The palace said the king\u2019s condition is benign.</p><p>Moments earlier, the princess\u2019 office announced that Kate would remain at a private hospital in London for up to two weeks after undergoing planned abdominal surgery. The princess, formerly Kate Middleton, is the wife of <a href=\"https://apnews.com/hub/prince-william\">Prince William</a>, the heir to the throne.</p><p>While it is somewhat unusual for members of the royal family to release details about their health, the twin announcements may help to avoid speculation if events featuring Charles or Kate have to be postponed or canceled over the coming weeks.</p><p>The publicity around the king\u2019s surgery is seen as an opportunity to encourage other men to have their prostates checked in line with public health advice. The 75-year-old monarch sought treatment \u201cin common with thousands of men each year,\u201d the palace said.</p><p>An enlarged prostate is common in men over age 50. The condition affects how one urinates and isn't usually a serious health threat. It\u2019s not cancer and doesn't lead to an increased risk of developing prostate cancer.</p><p>The U.K. and foreign media have been focused on the health of Britain\u2019s senior royals in recent years, first as the late Queen Elizabeth II faded from public view during the last months of her 70-year reign, then when Charles ascended the throne at an age when most of his contemporaries were long retired.</p><p>A series of events on the monarch\u2019s schedule have already been postponed, including plans for a number of foreign dignitaries and members of Prime Minister Rishi Sunak\u2019s Cabinet to travel to Dumfries House in Scotland.</p><p>Kate, 42, was admitted to The London Clinic on Tuesday.</p><p>The princess\u2019 office at Kensington Palace didn\u2019t offer further details, but said her condition wasn\u2019t cancerous. Though she has generally experienced good health, Kate was hospitalized while pregnant because of severe morning sickness.</p><p>Kate apologized for postponing upcoming engagements, and the palace said she wouldn't return to public duties until after Easter, Kensington Palace said.</p><p>\u201cThe Princess of Wales appreciates the interest this statement will generate,\u201d the palace said. \u201cShe hopes that the public will understand her desire to maintain as much normality for her children as possible; and her wish that her personal medical information remains private.\u201d</p><p>After Prince Harry and Meghan\u2019s stormy departure to California in 2020, the Prince and Princess of Wales have solidified their position as being among the most popular members of the royal family.</p><p>Kate, in particular, has remained a reliable royal in the public eye \u2014 the smiling mother of three who can comfort grieving parents at a children\u2019s hospice or wow the nation by playing piano during a televised Christmas concert.</p><p>___</p><p>AP journalists Jill Lawless and Sylvia Hui contributed to this report.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/kate-princess-of-wales-operation-uk-royals-eea1a111a295152b8820b94fd257c12d",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 5,
+            "reason": "The document discusses the medical conditions and upcoming surgeries of King Charles III and Kate Middleton, including details about their health issues, the nature of their surgeries, and the impact on their public engagements. It also touches on public health advice related to prostate checks. These aspects are directly related to the topic of health."
+        }
+    }
+}

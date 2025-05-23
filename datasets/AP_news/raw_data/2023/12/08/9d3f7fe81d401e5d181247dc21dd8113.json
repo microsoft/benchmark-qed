@@ -1,0 +1,249 @@
+﻿{
+    "altids": {
+        "itemid": "9d3f7fe81d401e5d181247dc21dd8113",
+        "etag": "9d3f7fe81d401e5d181247dc21dd8113_1a6aza0c0",
+        "friendlykey": "233040475739",
+        "referenceid": "US--Hospital Worker Attack"
+    },
+    "version": 1,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2023-12-08T18:06:21Z",
+    "firstcreated": "2023-12-08T17:18:33Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "ednote": "Eds: UPDATES: to reflect attempt to reach accused.",
+    "editorialtypes": [
+        "Lead"
+    ],
+    "signals": [
+        "newscontent"
+    ],
+    "title": "US--Hospital Worker Attack",
+    "headline": "2 nurses, medical resident injured in attack at New Jersey hospital, authorities say",
+    "headline_extended": "Authorities in New Jersey say two nurses and a medical resident were stabbed inside a pediatric intensive care unit",
+    "slugline": "BC-US--Hospital Worker Attack, 1st Ld-Writethru",
+    "description_summary": "Authorities in New Jersey say two nurses and a medical resident were stabbed inside a pediatric intensive care unit. The hospital workers suffered cuts and are in stable condition. A woman has been arrested and charged in the violence, which unfolded as a domestic dispute involving two visitors to the unit at about 7 a.m. Friday at Newark Beth Israel Hospital. Authorities say 37-year-old Firdousi Abdul-Hakim faces charges of aggravated assault, unlawful possession of a weapon and possession of a weapon for unlawful purposes.",
+    "located": "NEWARK N.J.",
+    "datelinelocation": {
+        "city": "John J Delaney Homes",
+        "countryareaname": "New Jersey",
+        "countryname": "United States",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                -74.28126,
+                40.53399
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2023 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "New Jersey hospital worker attack"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "a",
+            "name": "a"
+        },
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "343405863a044ec7a190c5c0d395c536",
+            "name": "Assault",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 32
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e7d1d3f880a910048b8adf092526b43e",
+            "name": "Nursing care",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 32
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 59
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Editorial",
+            "editorial_subject": "Health",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a693a5a082c6100487dfdf092526b43e",
+            "name": "Newark",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "a0eed68882c6100487cddf092526b43e"
+            ],
+            "locationtype": {
+                "code": "9d26a20b35f0484a891740f8189d4c7b",
+                "name": "City"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -74.17237,
+                    40.73566
+                ]
+            },
+            "relevance": 70,
+            "parentnames": [
+                "New Jersey"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a0eed68882c6100487cddf092526b43e",
+            "name": "New Jersey",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -74.49987,
+                    40.16706
+                ]
+            },
+            "relevance": 86,
+            "parentnames": [
+                "United States"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "661850e07d5b100481f5c076b8e3055c",
+            "name": "Latin America and Caribbean",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "a0eed68882c6100487cddf092526b43e",
+            "name": "New Jersey",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "body_nitf": "<p>NEWARK N.J. (AP) \u2014 Two nurses and a medical resident were stabbed Friday inside a New Jersey pediatric intensive care unit, suffering cuts, and a woman has been arrested and charged in the attack, authorities said.</p><p>It unfolded about 7 a.m. Friday at Newark Beth Israel Hospital in Newark, New Jersey, arising from a \u201cdomestic dispute\u201d involving two visitors to the hospital\u2019s pediatric intensive care unit, according to a statement posted on social media by the hospital.</p><p>Firdousi Abdul-Hakim, 37, then attacked the hospital workers, who are in stable condition, according to Fritz Frag\u00e9, Newark's public safety director. Abdul-Hakim faces aggravated assault, unlawful possession of a weapon and possession of a weapon for unlawful purposes charges.</p><p>Abdul-Hakim was arrested immediately, and no patients or family members were injured, the hospital said.</p><p>A message left at a possible phone number for the suspect was not immediately returned, while other numbers were no longer working.</p><p>The injured nurses and the medical resident were not identified.</p><p>The 655-bed facility is a teaching hospital with more than 800 doctors and 3,200 employees and dates to 1901.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/new-jersey-hospital-worker-attack-9d3f7fe81d401e5d181247dc21dd8113",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 3,
+            "reason": "The document describes an incident involving an attack on healthcare workers at a hospital, which is related to the health sector. However, the focus is on the criminal event and its immediate consequences rather than broader health topics such as medical research, public health policies, or healthcare practices. Therefore, while it is somewhat relevant to health due to the setting and the individuals involved, it is not highly relevant to the broader topic of health."
+        }
+    }
+}

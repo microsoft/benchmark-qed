@@ -1,0 +1,414 @@
+﻿{
+    "altids": {
+        "itemid": "89d5c33dc5761ab62dcdc680fca28446",
+        "etag": "89d5c33dc5761ab62dcdc680fca28446_3a12aza0c0",
+        "friendlykey": "905145094546",
+        "referenceid": "US--Election 2024-Obamacare"
+    },
+    "version": 3,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2023-12-16T15:48:27Z",
+    "firstcreated": "2023-12-16T05:19:56Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "ednote": "Eds: UPDATES: Updates headline",
+    "editorialtypes": [
+        "Lead"
+    ],
+    "signals": [
+        "newscontent"
+    ],
+    "title": "US--Election 2024-Obamacare",
+    "headline": "As Trump threatens to repeal Obamacare, these 'insurance godmothers' are signing Florida Latinos up",
+    "headline_extended": "Suburbs in South Florida that have swung toward Donald Trump are where the \u201cObamacare\u201d health care program is more popular than anywhere else in the country",
+    "slugline": "AP-US--Election 2024-Obamacare, 3rd Ld-Writethru",
+    "description_summary": "Suburbs in South Florida that have swung toward Donald Trump are where the \u201cObamacare\u201d health care program is more popular than anywhere else in the country. The former Republican president has promised to renew efforts to repeal and replace the 2010 health care overhaul if he wins the White House in 2024. But doing that would be felt heavily in South Florida and could possibly reverse some of the GOP shift among the region's Latinos. President Joe Biden\u2019s reelection team has seized on Trump\u2019s statements about the health law as part of the campaigns broader efforts to shape the widely expected rematch with Trump next year.",
+    "bylines": [
+        {
+            "by": "By ADRIANA GOMEZ LICON",
+            "title": "Associated Press"
+        }
+    ],
+    "located": "MIAMI",
+    "datelinelocation": {
+        "city": "Miami",
+        "countryareacode": "FL",
+        "countryareaname": "Florida",
+        "countrycode": "USA",
+        "countryname": "United States",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                -80.19366,
+                25.77427
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2023 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "Biden Obamacare Trump Florida Latinos election"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "person": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a6331b54c46e4ca8b79fa40fada95db5",
+            "name": "Donald Trump",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "POLITICIAN",
+                "PERSON"
+            ],
+            "relevance": 80
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "42fcd5108d2610048a34f7ae5e3ffd3e",
+            "name": "Joe Biden",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "POLITICIAN",
+                "PERSON"
+            ],
+            "relevance": 58
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "b1d550d087874a0393ebfa85dab5ea0a",
+            "name": "Barack Obama",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "POLITICIAN",
+                "PERSON"
+            ],
+            "relevance": 45
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "a",
+            "name": "a"
+        },
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "p",
+            "name": "p"
+        },
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "1b29d45f8e8e4c008e8a58fe6f92a753",
+            "name": "Government programs",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 76
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "24e61d6d4e654ae6bda1f1558c8cc1f3",
+            "name": "2024 United States presidential election",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 84
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "5b4b7cf56c68466499b1607a138648a6",
+            "name": "Hispanics",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 42
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86aad5207dac100488ecba7fa5283c3e",
+            "name": "Politics",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 70
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86aee4307dac10048901ba7fa5283c3e",
+            "name": "Elections",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Editorial",
+            "editorial_subject": "Health",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "abfca78268874726966cdad8c35c4ae3",
+            "name": "Washington news",
+            "creator": "Editorial",
+            "editorial_subject": "Washington news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86aad5207dac100488ecba7fa5283c3e",
+            "name": "Politics",
+            "creator": "Editorial",
+            "editorial_subject": "Politics",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        }
+    ],
+    "organisation": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "bf6e2e80760d10048f8ae6e7a0f4673e",
+            "name": "U.S. Republican Party",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 43
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cb06ab1082af100482f8df092526b43e",
+            "name": "Florida",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -82.5001,
+                    28.75054
+                ]
+            },
+            "relevance": 94,
+            "parentnames": [
+                "United States"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "d8f472e882af1004831adf092526b43e",
+            "name": "Miami",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "cb06ab1082af100482f8df092526b43e"
+            ],
+            "locationtype": {
+                "code": "9d26a20b35f0484a891740f8189d4c7b",
+                "name": "City"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -80.19366,
+                    25.77427
+                ]
+            },
+            "relevance": 62,
+            "parentnames": [
+                "Florida"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "661850e07d5b100481f5c076b8e3055c",
+            "name": "Latin America and Caribbean",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "cb06ab1082af100482f8df092526b43e",
+            "name": "Florida",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "associations": {
+        "1": {
+            "altids": {
+                "itemid": "2c2262606c3c41d186e0e5b358848374"
+            },
+            "type": "picture"
+        },
+        "2": {
+            "altids": {
+                "itemid": "664e2329046f4b89a80fec71bfb71817"
+            },
+            "type": "picture"
+        },
+        "3": {
+            "altids": {
+                "itemid": "89b390ba4abe47239173042cab11d816"
+            },
+            "type": "picture"
+        },
+        "4": {
+            "altids": {
+                "itemid": "6ae0ae99a7de4912bc956cac93860e56"
+            },
+            "type": "picture"
+        },
+        "5": {
+            "altids": {
+                "itemid": "2fa12dd8f1e44cd384cf35eababe1206"
+            },
+            "type": "picture"
+        },
+        "6": {
+            "altids": {
+                "itemid": "82e35cb9d46a43098eccd6399cac763b"
+            },
+            "type": "picture"
+        },
+        "7": {
+            "altids": {
+                "itemid": "cec6d7d3852a4c029fc79daf78ef8075"
+            },
+            "type": "picture"
+        },
+        "8": {
+            "altids": {
+                "itemid": "42304b5f961847618504885db4766749"
+            },
+            "type": "picture"
+        },
+        "9": {
+            "altids": {
+                "itemid": "3cd13138fcc54a4abfe1563789ffe9ec"
+            },
+            "type": "audio"
+        },
+        "10": {
+            "altids": {
+                "itemid": "d6f2388b58a548f8b49600851fa8cbe9"
+            },
+            "type": "audio"
+        }
+    },
+    "body_nitf": "<p>MIAMI (AP) \u2014 Salsa music blares from the food court in a rundown Miami shopping center as Latinos head to a kiosk and an office showing signs for \u201c <a href=\"https://www.healthcare.gov/glossary/affordable-care-act/\">Obamacare</a>,\u201d where they hope to renew their <a href=\"https://apnews.com/article/biden-health-access-to-care-business-ca0fad2cc4af777044c1e61b5ec5372e\">health coverage plans</a> before the year ends.</p><p>It\u2019s areas near this mall where former Democratic President Barack Obama's <a href=\"https://apnews.com/hub/health-care-reform\">health care overhaul</a> is more popular than anywhere in the country, according to federal data. The region has also shifted away from Democrats to Republicans in recent years, with Donald Trump hosting several rallies here as part of his outreach to Latino voters.</p><p>Trump, the current front-runner for the Republican presidential nomination in 2024, has pledged to <a href=\"https://apnews.com/article/trump-obamacare-health-care-biden-c2b1f5776310870deed2fb997b07fc2c\">renew efforts to repeal and replace the 2010 law</a> \u2014 something that would be felt heavily in the region and could possibly reverse some of the GOP shift among South Florida's Latinos, experts say.</p><p>President Joe Biden's reelection campaign has already seized on Trump's statements about \u201cObamacare,\" which was enacted when Biden was vice president, as part of its broader efforts to shape the widely expected rematch with Trump next year.</p><p>\u201cHealth insurance is something that is extremely needed for everyone,\u201d said Odalys Arevalo, one of the managing partners of a health insurance agency serving Spanish-speaking clients in Miami. \u201cAnd I know that everybody that supports the Republican Party that has health insurance through Obamacare would not support the fact that it would be taken away from one day to another. That is a fact.\u201d</p><p>Arevalo and her business partner, Mercy Cabrera, started enrollment centers to help people navigate the Affordable Care Act\u2019s insurance marketplaces and remember how some Cubans would walk away uttering \u201cno, no, no,\u201d after seeing the name \u201cObamacare,\u201d which was coined by Republicans opposing the overhaul as an expensive government takeover of health insurance.</p><p>Insurers could no longer deny coverage based on preexisting medical conditions, and that drew many Latinos to consider it, Arevalo says. In the following years, the women started enrolling tens of thousands, earning the nickname of \u201cMadrinas del Obamacare,\u201d or \u201cObamacare\u201d godmothers, evoking the crucial role godparents play in Latino culture.</p><p>They have since renamed themselves \u201cLas Madrinas de los Seguros,\u201d or \u201cinsurance godmothers,\u201d because they offer other plans. But they continue to feature the word \u201cObamacare\u201d on their office walls and in their ads.</p><p>\u201cObamacare\u201d is seen throughout Miami in advertising flags, businesses and bus signs. Federal data from the Centers for Medicare & Medicaid Services indicates how widely used it is here.</p><p>About 3.4 million Hispanics are signed up with insurance through the health law. Florida leads enrollment with more than 3.2 million consumers selecting a plan during last year's enrollment period from November 2022 to January. Miami-Dade is the county with the most people enrolled, with about 750,000 consumers, or more than one-fourth of the total population.</p><p>Florida is also one of 10 states that has resisted expanding Medicaid coverage under a provision of the health law.</p><p>The two Zip codes with the most sign-ups last year and this year are in Doral and Hialeah, hubs for the Venezuelan and Cuban communities that are just north of Miami and are common stops for Trump\u2019s visits and rallies.</p><p>Last month, Trump posted on his Truth Social social media site that \u201cthe cost of Obamacare is out of control, plus, it\u2019s not good Healthcare.\u201d While he said he is looking at alternatives, he has not shared any plans. But Trump said he would not give up on terminating it \u2014 recalling when the late Sen. John McCain, R-Ariz., blocked the then-president's effort to repeal the law in July 2017.</p><p>During Trump's administration, Republicans managed to pass a provision that reduced the penalty for not having health insurance to zero, the most unpopular part of the law and something that people in South Florida say made them feel more at ease with the plans.</p><p>The Miami Herald, in a recent editorial, called the plans by Trump \u2014 also echoed by Florida Gov. Ron DeSantis, another 2024 GOP presidential candidate \u2014 \u201cexceedingly out of touch with voters.\"</p><p>Biden\u2019s campaign quickly mobilized a response and the chair of the Florida Democratic Party, Nikki Fried, specifically mentioned an area where \u201cObamacare\u201d is popular.</p><p>\u201cMiami-Dade County would be hardest hit by Trump\u2019s anti-health care agenda,\u201d Fried said.</p><p>According to a KFF poll conducted in May 2023, 59% of Americans say they have a favorable opinion of the Affordable Care Act. The same poll by the nonprofit organization focused on health policy found that 66% of Hispanics say they have a favorable opinion of the law.</p><p>According to APVoteCast, a wide-ranging survey of U.S. voters, 62% of 2022 midterm voters in Florida said it should be the responsibility of the federal government to make sure that all people in the country have health care coverage. About one-third of Florida voters in the 2022 midterm elections said that shouldn\u2019t be the government\u2019s job. Among Latino or Hispanic midterm voters in Florida, 77% said ensuring health care coverage for all should be the responsibility of the federal government, while 1 in 5 said it should not be.</p><p>Zulina Ruiz, a 72-year-old retired lawyer from Venezuela, said she found out about the Affordable Care Act options quickly after arriving in the U.S. in 2017. She said she is particularly grateful for having access to drugs to treat her high blood pressure. Green-card holders, refugees and other migrants who have been granted temporary protected status or who have come recently with humanitarian parole also qualify for coverage under the law.</p><p>\u201cThis is very important for me. I don\u2019t think a candidate can just make this program disappear,\u201d she said. \u201cThey would leave millions of low-income people without insurance.\u201d</p><p>Ruiz became a U.S. citizen in May, but has not registered with any party. She does not know whom she will vote for next year.</p><p>\u201cI am still not decided, and we don\u2019t have official candidates yet,\u201d Ruiz said, adding that she still feels more connected politically to Venezuela. Much of the growing support for Republicans in Miami is owed to Trump\u2019s record opposing socialist leaders across Latin America, including imposing White House sanctions on Venezuelan officials.</p><p>\u201cBut health policy is a top priority for me,\u201d Ruiz said.</p><p>The Biden campaign has run advertising in battleground states contrasting his efforts to lower drug costs with Trump\u2019s renewed promise to repeal the health overhaul. The ad campaign did not include markets in Florida.</p><p>Arevalo, one of the \u201cObamacare godmothers,\u201d thinks voters in Miami may not necessarily approve of all the positions of the candidates they ultimately back.</p><p>But as far as a local verdict on \u201cObamacare,\u201d and despite initial hesitations about it, the program grew on people in Miami once they understood it, she said.</p><p>\u201cWhen Trump was elected, some people came and said they wanted nothing to do with Obamacare. We said \u2018Obamacare, Trumpcare, whatever,\u2019\u201d she said of what they told people. \u201cThe important thing is that everybody has access to health insurance and that they can take care of their health.\u201d</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/biden-obamacare-trump-florida-latinos-election-89d5c33dc5761ab62dcdc680fca28446",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 5,
+            "reason": "The document extensively discusses health insurance, specifically the Affordable Care Act (Obamacare), and its impact on the Latino community in Florida. It covers various aspects of health policy, including enrollment statistics, political implications, and personal stories of individuals benefiting from the health law. The focus on health insurance and its significance to the community makes it highly relevant to the topic of Health."
+        }
+    }
+}

@@ -1,0 +1,223 @@
+﻿{
+    "altids": {
+        "itemid": "cdaf5baa0b7b0aa3ad056101a07d174c",
+        "etag": "cdaf5baa0b7b0aa3ad056101a07d174c_0a9aza0c0",
+        "friendlykey": "44972106506",
+        "referenceid": "AF-MED--Cameroon-Malaria Vaccine"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2024-01-22T05:03:16Z",
+    "firstcreated": "2024-01-22T05:03:15Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "ednote": "Eds: UPDATES: Updates Media.",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "AF-MED--Cameroon-Malaria Vaccine",
+    "headline": "Cameroon starts world's first malaria vaccine program for children",
+    "headline_extended": "Cameroon will be the first country to routinely give children a new malaria vaccine as the shots are rolled out in Africa",
+    "slugline": "AP-AF-MED--Cameroon-Malaria Vaccine",
+    "description_summary": "Cameroon will be the first country to routinely give children a new malaria vaccine as the shots are rolled out in Africa. The campaign is due to begin Monday in the Central African nation. It's being described as a milestone in the decades-long effort to curb malaria on the continent, which accounts for 95% of the world's deaths from the disease. Gavi vaccines alliance is helping Cameroon secure the shots and working with 20 other African countries. The vaccine is only about 30% effective but the World Health Organization says it would still dramatically reduce severe infections and hospitalizations.",
+    "bylines": [
+        {
+            "by": "By The Associated Press"
+        }
+    ],
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "malaria vaccine cameroon children disease"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "a",
+            "name": "a"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e237be707de410048fffdf092526b43e",
+            "name": "Medication",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 56
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "49fe94b87f0010048242f571351eed07",
+            "name": "Malaria",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 68
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "ace74e307f00100486cedf092526b43e",
+            "name": "Immunizations",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 88
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "4f95136e072e41c6a81e8fa820e26e9c",
+            "name": "Children",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 43
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Editorial",
+            "editorial_subject": "Health",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        }
+    ],
+    "organisation": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "8997c0688d7410048d178a3c53cbc603",
+            "name": "World Health Organization",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 34
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "662030807d5b100482bec076b8e3055c",
+            "name": "Cameroon",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661812607d5b100481f1c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "01f56e0e654841eca2e69bf2cbcc0526",
+                "name": "Nation"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    12,
+                    6
+                ]
+            },
+            "relevance": 80,
+            "parentnames": [
+                "Africa"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "661812607d5b100481f1c076b8e3055c",
+            "name": "Africa",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "associations": {
+        "1": {
+            "altids": {
+                "itemid": "262bb1cade64494780778c8d4e741b36"
+            },
+            "type": "picture"
+        },
+        "2": {
+            "altids": {
+                "itemid": "d4333de3cf5e44caacb19d6b0dec7d4b"
+            },
+            "type": "picture"
+        },
+        "3": {
+            "altids": {
+                "itemid": "58bc8e2758374bceabb5745c3fbc3b70"
+            },
+            "type": "picture"
+        }
+    },
+    "body_nitf": "<p>Cameroon will be the first country to routinely give children a new malaria vaccine as the shots are rolled out in Africa.</p><p>The campaign due to start Monday was described by officials as a milestone in the decades-long effort to curb the mosquito-spread disease on the continent, which accounts for 95% of the world\u2019s malaria deaths.</p><p>\u201cThe vaccination will save lives. It will provide major relief to families and the country\u2019s health system,\" said Aurelia Nguyen, chief program officer at the Gavi vaccines alliance, which is helping Cameroon secure the shots.</p><p>The Central Africa nation hopes to vaccinate about 250,000 children this year and next year. Gavi said it is working with 20 other African countries to help them get the vaccine and that those countries will hopefully immunize more than 6 million children through 2025.</p><p>In Africa, there are about 250 million cases of the parasitic disease each year, including 600,000 deaths, mostly in young children.</p><p>Cameroon will use the first of two recently approved malaria vaccines, known as <a href=\"https://apnews.com/article/covid-health-philanthropy-united-nations-world-organization-1699b39fbd70c43a741ddc01608212ec\">Mosquirix.</a> The World Health Organization endorsed the vaccine two years ago, acknowledging that that even though it is imperfect, its use would still dramatically reduce severe infections and hospitalizations.</p><p>The GlaxoSmithKline-produced shot is only about 30% effective, requires four doses and protection begins to fade after several months. The vaccine was tested in Africa and used in pilot programs in three countries.</p><p>GSK has said it can only produce about 15 million doses of Mosquirix a year and some experts believe a <a href=\"https://apnews.com/article/malaria-vaccine-oxford-who-f2dbc55cb7f92f82af52f7898a8260d0\">second malaria vaccine</a> developed by Oxford University and approved by WHO in October might be a more practical solution. That vaccine is cheaper, requires three doses and India\u2019s Serum Institute said they could make up to 200 million doses a year.</p><p>Gavi's Nguyen said they hoped there might be enough of the Oxford vaccines available to begin immunizing people later this year.</p><p>Neither of the malaria vaccines stop transmission, so other tools like bed nets and insecticidal spraying will still be critical. The malaria parasite mostly spreads to people via infected mosquitoes and can cause symptoms including fever, headaches and chills.</p><p>___</p><p>The Associated Press Health and Science Department receives support from the Howard Hughes Medical Institute\u2019s Science and Educational Media Group. The AP is solely responsible for all content.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/malaria-vaccine-cameroon-children-disease-cdaf5baa0b7b0aa3ad056101a07d174c",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 5,
+            "reason": "The document discusses the launch of a malaria vaccine program for children in Cameroon, which is a significant health initiative. It provides detailed information about the vaccine, its effectiveness, the scale of the vaccination campaign, and the broader context of malaria in Africa. This is highly relevant to the topic of Health as it addresses a major public health issue, the introduction of a new medical intervention, and its potential impact on disease prevention and healthcare systems."
+        }
+    }
+}

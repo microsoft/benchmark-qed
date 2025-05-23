@@ -1,0 +1,227 @@
+﻿{
+    "altids": {
+        "itemid": "7a5788425709a54b350bbebe5ebb1d88",
+        "etag": "7a5788425709a54b350bbebe5ebb1d88_2a4aza0c0",
+        "friendlykey": "581628576796",
+        "referenceid": "LT--Peru-Emergency"
+    },
+    "version": 2,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2024-02-27T10:28:05Z",
+    "firstcreated": "2024-02-27T02:39:20Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "ednote": "Eds: UPDATES: expands audience.",
+    "editorialtypes": [
+        "Lead"
+    ],
+    "signals": [
+        "newscontent"
+    ],
+    "title": "LT--Peru-Emergency",
+    "headline": "Peru has declared a health emergency in most of its provinces as dengue cases soar",
+    "headline_extended": "Peru has declared a health emergency in most of its provinces due to a growing number of dengue cases that are occurring at a time of higher than usual temperatures caused by the El Nino weather pattern",
+    "slugline": "AP-LT--Peru-Emergency, 2nd Ld-Writethru",
+    "description_summary": "Peru has declared a health emergency in most of its provinces due to a growing number of dengue cases that are occurring at a time of higher than usual temperatures caused by the El Nino weather pattern. According to the nation\u2019s health ministry, the number of dengue cases registered during the first seven weeks of this year is twice as high as during the same period in 2023 \u2013 with more than 31,000 cases recorded. The health emergency will enable the nation\u2019s government to transfer funds faster to the affected regions and also transport doctors and nurses.",
+    "bylines": [
+        {
+            "by": "By FRANKLIN BRICE\u00d1O",
+            "title": "Associated Press"
+        }
+    ],
+    "located": "LIMA, Peru",
+    "datelinelocation": {
+        "city": "Lima",
+        "countrycode": "PER",
+        "countryname": "Peru",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                -77.02824,
+                -12.04318
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "peru dengue health emergency el nino"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "i",
+            "name": "i"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "084dafb87f00100481c5f571351eed07",
+            "name": "Dengue fever",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 90
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 90
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Editorial",
+            "editorial_subject": "Health",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "bb2d2c5f441a452cb24bb511a2ab5eea",
+            "name": "World news",
+            "creator": "Editorial",
+            "editorial_subject": "World news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f53add107f4f10048fd8df092526b43e",
+            "name": "Lima",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661effd07d5b100482a2c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "9d26a20b35f0484a891740f8189d4c7b",
+                "name": "City"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -77.02824,
+                    -12.04318
+                ]
+            },
+            "relevance": 47,
+            "parentnames": [
+                "Peru"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "661effd07d5b100482a2c076b8e3055c",
+            "name": "Peru",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661908787d5b10048204c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "01f56e0e654841eca2e69bf2cbcc0526",
+                "name": "Nation"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -76,
+                    -10
+                ]
+            },
+            "relevance": 65,
+            "parentnames": [
+                "South America"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "661850e07d5b100481f5c076b8e3055c",
+            "name": "Latin America and Caribbean",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "body_nitf": "<p>LIMA, Peru (AP) \u2014 Peru declared a health emergency in most of its provinces on Monday due to a growing number of dengue cases that are occurring at a time of higher than usual temperatures caused by the El Nino weather pattern.</p><p>According to the nation\u2019s health ministry, the number of dengue cases registered during the first seven weeks of this year is twice as high as during the same period in 2023 \u2013 with more than 31,000 cases recorded.</p><p>\u201cThis is a grave problem,\u201d health minister Cesar V\u00e1squez said last week, before the emergency was declared. \u201cAnd it is getting out of hand.\u201d</p><p>The health emergency will enable the nation\u2019s government to transfer funds faster to the affected regions and also transport doctors and nurses. It will cover 20 of the country\u2019s 24 provinces, including regions that surround the capital city of Lima.</p><p>A dengue epidemic last year put Peru's public health system under strain as thousands sought care in emergency rooms.</p><p>The disease is spread by Aedys Egypti, a mosquito that reproduces in hot and humid conditions.</p><p>Although most dengue cases present light symptoms, the disease can cause severe headaches, fevers and muscle pains.</p><p>Last year, a dengue epidemic in Peru killed 18 people, while in the first two months of this year 32 Peruvians have died from the virus.</p><p>In December, the World Health Organization said that Peru's 2023 dengue epidemic was linked to rains and hot temperatures that helped mosquito populations to grow, especially in the north of the country.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/peru-dengue-health-emergency-el-nino-7a5788425709a54b350bbebe5ebb1d88",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 5,
+            "reason": "The document discusses a health emergency in Peru due to a significant increase in dengue cases. It provides detailed information about the number of cases, the impact on the healthcare system, and the measures being taken by the government. The document also explains the cause of the outbreak and its symptoms, which are all directly related to the topic of health."
+        }
+    }
+}

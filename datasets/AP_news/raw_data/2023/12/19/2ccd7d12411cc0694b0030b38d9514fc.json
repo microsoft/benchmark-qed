@@ -1,0 +1,285 @@
+﻿{
+    "altids": {
+        "itemid": "2ccd7d12411cc0694b0030b38d9514fc",
+        "etag": "2ccd7d12411cc0694b0030b38d9514fc_0a10aza0c0",
+        "friendlykey": "224178212547",
+        "referenceid": "US--Homelessness-Missouri"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2023-12-19T23:32:55Z",
+    "firstcreated": "2023-12-19T23:32:54Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "US--Homelessness-Missouri",
+    "headline": "Missouri Supreme Court strikes down law against homelessness, COVID vaccine mandates",
+    "headline_extended": "A Missouri law that prohibited homeless people from sleeping on state land has been struck down",
+    "slugline": "AP-US--Homelessness-Missouri",
+    "description_summary": "A Missouri law that prohibited homeless people from sleeping on state land has been struck down. The Missouri Supreme Court on Tuesday ruled the law is unconstitutional because it covers multiple unrelated issues. The law also banned COVID-19 vaccine requirements for public workers. The judges' ruling means vaccine mandates for public workers now are allowed in Missouri. The decision also means unhoused people no longer face jail time and fines for sleeping on state property.",
+    "bylines": [
+        {
+            "by": "By SUMMER BALLENTINE",
+            "title": "Associated Press"
+        }
+    ],
+    "located": "JEFFERSON CITY, Mo.",
+    "datelinelocation": {
+        "city": "Jefferson City",
+        "countryareacode": "MO",
+        "countryareaname": "Missouri",
+        "countrycode": "USA",
+        "countryname": "United States",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                -92.17352,
+                38.5767
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2023 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "homelessness tents crime unhoused"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "a",
+            "name": "a"
+        },
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "p",
+            "name": "p"
+        },
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "ace74e307f00100486cedf092526b43e",
+            "name": "Immunizations",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 81
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "397dbba0872a10048d20d7c656897a02",
+            "name": "Homelessness",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 54
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "b17e2751b26d4523a2c99d79e04747ee",
+            "name": "COVID-19 pandemic",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 44
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86ba17607dac1004894eba7fa5283c3e",
+            "name": "Courts",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 68
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86aad5207dac100488ecba7fa5283c3e",
+            "name": "Politics",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 74
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86c1b8807dac10048990ba7fa5283c3e",
+            "name": "Legislation",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 60
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "4c96e8e92e0441579dbce2f9e8d06493",
+            "name": "Prisons",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 36
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Editorial",
+            "editorial_subject": "Health",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86aad5207dac100488ecba7fa5283c3e",
+            "name": "Politics",
+            "creator": "Editorial",
+            "editorial_subject": "Politics",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "bd8c35d082c4100486d5df092526b43e",
+            "name": "Missouri",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -92.50046,
+                    38.25031
+                ]
+            },
+            "relevance": 98,
+            "parentnames": [
+                "United States"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "bd8c35d082c4100486d5df092526b43e",
+            "name": "Missouri",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661850e07d5b100481f5c076b8e3055c",
+            "name": "Latin America and Caribbean",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "body_nitf": "<p>JEFFERSON CITY, Mo. (AP) \u2014 The Missouri Supreme Court on Tuesday <a href=\"https://www.courts.mo.gov/file.jsp?id=203719\">struck down</a> a law that threatened homeless people with jail time for <a href=\"https://apnews.com/article/homelessness-encampment-sweeps-cities-08ff74489ba00cfa927fe1cf54c0d401\">sleeping on state land</a>.</p><p>Judges ruled unanimously to toss the law for violating a section of the Missouri Constitution that prohibits legislation from containing multiple unrelated subjects.</p><p>In this case, the sweeping 64-page bill also dealt with city and county governance and banned COVID-19 vaccine requirements for public workers in Missouri.</p><p>Judges ruled that the law is \u201cinvalid in its entirety,\u201d Judge Paul Wilson wrote in the court's decision.</p><p>The judges\u2019 ruling means unhoused people no longer face up to 15 days in jail and a $500 fine after an initial warning for sleeping on state land without permission, and vaccine mandates for public workers now are allowed in Missouri.</p><p>The law, enacted in 2022, also had prohibited state funding from being used for permanent housing for homeless people, instead directing it toward temporary shelters and assistance with substance use and mental health treatment.</p><p>In an amicus brief, advocates for homeless people argued that lawmakers \u201cblamed mental health and substance abuse for causing homelessness, but ignored that the real problem is affordable housing and offered no real mental-health or substance-abuse solutions in the bill.\u201d</p><p>\u201cAnd in the process, they tried to justify criminalizing homelessness as a method of improving outcomes for homeless individuals,\u201d attorneys for organizations including the National Coalition for the Homeless wrote.</p><p>A spokeswoman for the Attorney General\u2019s Office, which defended the law in court, did not immediately respond to an Associated Press request for comment Tuesday.</p><p><a href=\"https://apnews.com/article/homelessness-encampment-sweeps-cities-08ff74489ba00cfa927fe1cf54c0d401\">Records</a> obtained by The AP show attempts to clear homeless encampments increased in cities <a href=\"https://apnews.com/article/los-angeles-freeway-fire-homeless-e2af1c748fa8b170a4c3fc1c067b54a8\">from Los Angeles</a> to New York as public pressure grew to address what some residents say are dangerous and unsanitary living conditions.</p><p>In March, <a href=\"https://apnews.com/article/homeless-encampment-st-louis-1e57fe5ca7e79a69b2ba73b9a7a128ee\">bulldozers took down</a> what was left of a once-busy homeless encampment along the Mississippi River and near the Gateway Arch in St. Louis, ending nearly a year of debate over what to do about it.</p><p>Supreme Court judges ruled against the Missouri law without discussing the potential impact of the homelessness policy, instead focusing on whether that issue fits under the bill's subject: political subdivisions.</p><p>Wilson wrote that the connection between homelessness and political subdivisions is \u201cremote at best and, in some instances, completely missing.\u201d</p><p>State lawmakers had added the homelessness provision, along with 49 other new sections, to the legislation in an attempt to pass bills that otherwise were too far behind in the process to advance before the end-of-session deadline in 2022.</p><p>The lawmaker who spearheaded the homelessness provisions has since left office, and so far no other legislators have filed bills to reinstate the policy.</p><p>One Missouri lawmaker, Sen. Steven Roberts, proposed legislation that would have relaxed the homelessness provisions. On Tuesday, he said he was not yet aware of the court ruling striking down the law but likely will pull his proposal in response.</p><p>Missouri's next legislative session begins in January.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/homelessness-tents-crime-unhoused-2ccd7d12411cc0694b0030b38d9514fc",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 3,
+            "reason": "The document primarily discusses the Missouri Supreme Court's decision to strike down a law related to homelessness and COVID-19 vaccine mandates. While the document does touch on health-related topics such as COVID-19 vaccine mandates and mental health treatment for homeless individuals, the main focus is on the legal and legislative aspects of the ruling rather than health itself. Therefore, the document is only somewhat relevant to the topic of health."
+        }
+    }
+}

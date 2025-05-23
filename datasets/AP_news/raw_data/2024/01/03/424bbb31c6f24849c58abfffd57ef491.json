@@ -1,0 +1,255 @@
+﻿{
+    "altids": {
+        "itemid": "424bbb31c6f24849c58abfffd57ef491",
+        "etag": "424bbb31c6f24849c58abfffd57ef491_1a8aza0c0",
+        "friendlykey": "457472792336",
+        "referenceid": "US--Brigham Women's-IVF Flood"
+    },
+    "version": 1,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2024-01-05T00:23:59Z",
+    "firstcreated": "2024-01-03T22:45:47Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "ednote": "Eds: UPDATES: Adds AP Audio. With AP Photos.",
+    "editorialtypes": [
+        "Lead"
+    ],
+    "signals": [
+        "newscontent"
+    ],
+    "title": "US--Brigham Women's-IVF Flood",
+    "headline": "Flooding at Boston hospital disrupts IVF services for 200 patients, leaving some devastated",
+    "headline_extended": "Flooding from a burst water main at Boston\u2019s Brigham and Women\u2019s Hospital has disrupted services for about 200 patients seeking to have children through in vitro fertilization",
+    "slugline": "AP-US--Brigham Women's-IVF Flood, 1st Ld-Writethru",
+    "description_summary": "Flooding from a burst water main at Boston\u2019s Brigham and Women\u2019s Hospital has disrupted services for about 200 patients seeking to have children through in vitro fertilization. Alexis Goulette runs a private IVF support group on Facebook. She said Wednesday that a lot of the women were informed of cancellations by voicemail and hadn\u2019t been offered emotional support or been given explanations for alternative timelines or cost reimbursements. Hospital spokesperson Jessica Pastore says all frozen embryos and eggs remain safe inside cryogenic tanks in the lab, but that lab staff can\u2019t open the tanks until the risk of mold growth inside damp walls is mitigated. She said the process would likely take a month.",
+    "bylines": [
+        {
+            "by": "By NICK PERRY",
+            "title": "Associated Press"
+        }
+    ],
+    "located": "MEREDITH, N.H.",
+    "datelinelocation": {
+        "city": "Meredith",
+        "countryareacode": "NH",
+        "countryareaname": "New Hampshire",
+        "countrycode": "USA",
+        "countryname": "United States",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                -71.50035,
+                43.65757
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "Brigham Womens Boston IVF"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "a",
+            "name": "a"
+        },
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e22eae207de410048fc6df092526b43e",
+            "name": "Assisted reproductive technology",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 49
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "6c633968882f10048fa88bb2970c7204",
+            "name": "Floods",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 97
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 64
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Editorial",
+            "editorial_subject": "Health",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "66a6548082c410048691df092526b43e",
+            "name": "Boston",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "bed6942882b310048501df092526b43e"
+            ],
+            "locationtype": {
+                "code": "9d26a20b35f0484a891740f8189d4c7b",
+                "name": "City"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -71.05977,
+                    42.35843
+                ]
+            },
+            "relevance": 82,
+            "parentnames": [
+                "Massachusetts"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "661850e07d5b100481f5c076b8e3055c",
+            "name": "Latin America and Caribbean",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "9531546082c6100487b5df092526b43e",
+            "name": "New Hampshire",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "bed6942882b310048501df092526b43e",
+            "name": "Massachusetts",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "associations": {
+        "1": {
+            "altids": {
+                "itemid": "ffd2fa9a2abe42daa6aa814b149dd6bb"
+            },
+            "type": "picture"
+        },
+        "2": {
+            "altids": {
+                "itemid": "04598fd7964744cb91797fda51d494f9"
+            },
+            "type": "audio"
+        },
+        "3": {
+            "altids": {
+                "itemid": "137d97153da9493b9c48fc677e9529f1"
+            },
+            "type": "audio"
+        }
+    },
+    "body_nitf": "<p>MEREDITH, N.H. (AP) \u2014 Flooding from a burst water main at Boston's Brigham and Women\u2019s Hospital has disrupted services for about 200 patients seeking to have children through in vitro fertilization, leaving some of them devastated.</p><p>Alexis Goulette, who runs a private IVF support group on Facebook, said Wednesday that a lot of the women had been informed of cancellations by voicemail and hadn\u2019t been offered emotional support or been given explanations for alternative timelines or cost reimbursements.</p><p>Goulette also noted the enormous amount of intense preparation that is required for an embryo transfer.</p><p>\u201cAll the medications, the internal ultrasounds, the bloodwork,\u201d she said. \u201cIt can sometimes be every single day for an entire month.\u201d</p><p>The disruption has left some of the women burdened with extra costs such as canceled flights or new insurance deductibles as they move into the new year, Goulette added.</p><p>The pipe burst about 1 a.m. on Christmas Eve on the eighth floor of Brigham and Women\u2019s during ongoing construction, said hospital spokesperson Jessica Pastore. A significant amount of water was released, affecting multiple areas of the hospital, including the IVF laboratory, she said.</p><p>Pastore said all frozen embryos and eggs remain safe inside cryogenic tanks in the lab, but that lab staff can\u2019t open the tanks until the risk of mold growth inside damp walls is mitigated, a process likely to take a month.</p><p>Pastore said the hospital had contacted every affected patient. Some procedures, including egg retrievals and fresh embryo transfers, were continuing at a different location, she said.</p><p>One woman from New Hampshire said she had begun the IVF process about 16 months ago and was finally ready to go through the embryo transfer procedure when she got the cancellation call on Christmas Day.</p><p>\u201cAll the tests, all the procedures, everything that you put your body through, it all comes down to this one day of transferring that embryo to make that baby, to live out the dream that you have had since day 1,\" the woman said. \u201cAnd so getting that phone call was just absolutely devastating. There\u2019s no other words for that.\u201d</p><p>The woman said she and her wife wanted to remain anonymous because they were keeping their IVF journey private until they were pregnant.</p><p>The woman said that while her fertility clinic had been very communicative, she had been unable to contact anybody from the hospital to get answers. She said at one point she wasn't even able to leave voice messages.</p><p>\u201cThere has been no timeline released. There has been no verbal communication from Brigham,\u201d the woman said. \u201cWe\u2019re left in the dark and having to navigate this, with no answers.\u201d</p><p>A second woman, who also wanted to remain anonymous because of concerns that using her name could negatively affect her IVF treatment, echoed similar concerns about the hospital's lack of communication and said it should be providing more emotional support.</p><p>Pastore said the hospital is providing resources for affected patients, including mental health resources, and the hospital would mitigate financial or insurance costs associated with the flooding.</p><p>Brigham, which serves as a teaching hospital for Harvard Medical School, had a flooding event in 2014 that also affected the IVF laboratory.</p><p>The hospital is installing water shutoffs on multiple floors in the hospital to prevent the issue from happening again, Pastore said.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/brigham-womens-boston-ivf-424bbb31c6f24849c58abfffd57ef491",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 5,
+            "reason": "The document discusses a significant health-related event involving the disruption of IVF services at a hospital due to flooding. It details the impact on patients, the hospital's response, and the emotional and financial consequences for those affected. The topic of health is directly addressed through the lens of reproductive health services and the hospital's handling of the situation."
+        }
+    }
+}

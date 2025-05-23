@@ -1,0 +1,252 @@
+﻿{
+    "altids": {
+        "itemid": "f704f64942c14583e903b1936ab79360",
+        "etag": "f704f64942c14583e903b1936ab79360_0a2aza0c0",
+        "friendlykey": "492168590373",
+        "referenceid": "IN--Editorial Rdp"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Opinion",
+    "language": "en",
+    "versioncreated": "2024-04-30T11:10:38Z",
+    "firstcreated": "2024-04-29T21:36:51Z",
+    "editorialrole": "FullStory",
+    "fixture": {
+        "code": "21ea4067bb274c3b805353fb2b99ba70",
+        "name": "Editorial Roundup"
+    },
+    "pubstatus": "usable",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "IN--Editorial Rdp",
+    "headline": "Editorial Roundup: Indiana",
+    "slugline": "BC-IN--Editorial Rdp",
+    "bylines": [
+        {
+            "by": "By The Associated Press"
+        }
+    ],
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "Editorial Rdp"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "person": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "31005ebe2a774f3ea525080c27a5d548",
+            "name": "Tod Rokita",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "POLITICIAN",
+                "PERSON"
+            ],
+            "associatedstates": [
+                {
+                    "code": "0760000082b2100483c7df092526b43e",
+                    "name": "Indiana"
+                }
+            ],
+            "relevance": 54
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "523699d088e910048f43f8851349f9bd",
+            "name": "Government regulations",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 67
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "5898d3303b1e4dfc9e4ae39ed34f3378",
+            "name": "Lawsuits",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 49
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "4626a38a1b52454ca5d01755d14f1dc9",
+            "name": "Legal proceedings",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 49
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e57b6c907e3810048ae4df092526b43e",
+            "name": "Public health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 31
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a37eab90831510048fcfdf092526b43e",
+            "name": "Law enforcement",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 31
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "3c105048882f100489fd9528eb155503",
+            "name": "Automotive accidents",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 43
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "fb2205e7c39c457e98571d5245d22a46",
+            "name": "Fort Wayne",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "0760000082b2100483c7df092526b43e"
+            ],
+            "locationtype": {
+                "code": "9d26a20b35f0484a891740f8189d4c7b",
+                "name": "City"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -85.12886,
+                    41.1306
+                ]
+            },
+            "relevance": 78,
+            "parentnames": [
+                "Indiana"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "0760000082b2100483c7df092526b43e",
+            "name": "Indiana",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -86.25027,
+                    40.00032
+                ]
+            },
+            "relevance": 86,
+            "parentnames": [
+                "United States"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "0760000082b2100483c7df092526b43e",
+            "name": "Indiana",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "body_nitf": "<p>Fort Wayne Journal Gazette. April 27, 2024.</p><p>Editorial: Motorists need strategies, not scare campaigns, to reduce driving distractions</p><p>More than 40,000 people in the U.S. were killed last year in vehicle crashes, according to preliminary data from the National Highway Traffic Safety Administration. The new statistics, released to coincide with the launch of the agency\u2019s \u201cPut the Phone Away or Pay\u201d campaign, add to concerns that little is being done to address \u201cdistracted driving,\u201d one of the most common causes of preventable traffic deaths.</p><p>The federal agency said the issue has only grown in urgency with the ubiquity of smartphones, resulting in 3,308 deaths and 289,310 injuries in 2022, and 3,522 deaths in 2021.</p><p>This week, the Fort Wayne Police Department shared with The Journal Gazette its annual traffic report for 2023. Lt. Anthony Maze, a member of the Fort Wayne/Allen County Crash Team, said distracted driving is hard to enforce and, consequently, remains underreported.</p><p>\u201cIn reviewing crash reports, (motorists) will tell the officer, \u2018I was looking down\u2019 or \u2018I dropped something,\u2019 when in reality, they could have been on their phone,\u201d Maze said. \u201cWe\u2019re not going to know it, and they\u2019re not going to admit it.\u201d</p><p>Indiana statute allows law enforcement to pull over a motorist for distracted driving only if an officer sees a phone in the driver\u2019s hand. Still, 128 local motorists were ticketed or issued electronic citations for distracted driving in 2023.</p><p>The largest number of traffic complaints to Fort Wayne police are for speeders and motorists disregarding traffic lights and stop signs, Maze said.</p><p>\u201cWe will get complaints from citizens within neighborhoods of stop signs being run during peak hours, like going to work and coming home,\u201d he said. \u201cWe had 426 electronic citations written for disregarding a traffic control signal or sign, and 295 more in handwritten tickets.\u201d</p><p>Fort Wayne has no red-light cameras that snap photos of vehicles running traffic signals, Maze said, but the Traffic Engineering Department sets cameras along roads to monitor traffic flow and congestion that the local crash team can use to review crashes for violations. Most are set along the Coliseum Boulevard and Lafayette Street corridors, but others are placed in locations across the city.</p><p>FWPD\u2019s 2023 traffic report contained mostly good news. The 8,054 property-damage accidents and 2,133 hit-and-run crashes represent eight-year lows within the city, but the reported 1,573 personal-injury accidents in 2023 are at a four-year high and the number of crashes involving intoxicated or impaired drivers, 359, is up 107 over 2022.</p><p>Nineteen people were killed in crashes last year, the same number as in 2022. The eight-year low for traffic fatalities was 14 in 2018. The highest number since 2016 was 28 traffic deaths in 2021.</p><p>Scare campaigns, such as the federal traffic safety agency\u2019s \u201cPut the Phone Away or Pay\u201d crusade, are usually not effective, said Rachel Blakeman, director of Purdue Fort Wayne\u2019s Community Research Institute. She told The Journal Gazette motorists need strategies to reduce distractions while driving.</p><p>Lt. Maze of the Fort Wayne/Allen County Crash Team offers these suggestions:</p><p>Exercise patience: \u201cWe\u2019ve already got construction delays as it is. Maybe plan your day to leave 10 to 15 minutes early to arrive at your destination.\u201d</p><p>Be vigilant: \u201cBe aware of what the other drivers are doing around you, especially now with the warmer weather and motorcyclists being out.\u201d</p><p>Limit eating and drinking to traffic stops: \u201cThere\u2019s no traffic offense about eating or drinking in your car. Try not to do that while you\u2019re in motion.\u201d</p><p>That\u2019s good information to consider as we drive through neighborhoods, down boulevards and on highways throughout Fort Wayne. It\u2019s our choice to control how we drive to protect ourselves, our passengers and the people with whom we share the road.</p><p>___</p><p>Anderson Herald Bulletin. April 25, 2024.</p><p>Editorial: Rokita right to target forever chemicals</p><p>Most everyone can appreciate the convenience of waterproof and non-stick products.</p><p>But at what cost to public health and the environment?</p><p>Indiana Attorney General Todd Rokita has filed a lawsuit against 22 companies in the state that, allegedly, have tried to conceal their longtime use of \u201cforever chemicals\u201d and the potential cost to human health.</p><p>Defendants in the lawsuit include heavy hitters such as 3M Company, DuPont, Corteva, United Technologies and Carrier Global.</p><p>The lawsuit was filed in Shelby County because a 2022 probe at the Army Aviation Support Facility there linked forever chemical contamination to use of AFFF foam for firefighter training. The foam has also been linked to soil, sediment, surface water and groundwater contamination near fire training areas at Grissom Air Reserve Base and Fort Benjamin Harrison.</p><p>PFAS, or forever chemicals, have been directly connected to kidney cancer, organ dysfunction, endocrine system disruption, immune system suppression, reproductive abnormalities and childhood developmental issues.</p><p>Among other uses, forever chemicals render cookware non-stick and carpeting, clothing and cosmetics stain-resistant and waterproof.</p><p>Forever chemicals were first used in household products in the 1940s and over the past eight decades have seeped into our soil and water supplies \u2014 not to mention our bodies. The chemicals are now found in the blood of people and animals across the planet, as well as in the food supply and a wide array of consumer products.</p><p>Rokita maintains that some manufacturers in Indiana have used forever chemicals recklessly, flouting public health concerns.</p><p>The lawsuit contends that, while the companies \u201cknew or should have known about the risks associated with PFAS-containing products, \u201dthey marketed, sold and distributed contaminated products to Hoosiers \u201cwhile concealing the dangers\u201d and \u201caffirmatively distorting and/or suppressing their knowledge and the scientific evidence linking their products to the unreasonable dangers those products pose.\u201d</p><p>Furthermore, Rokita says the companies violated state and federal environmental regulations and ran afoul of Indiana consumer protection laws.</p><p>Similar lawsuits are being filed in some other states in the aftermath of the Environmental Protection Agency\u2019s recent establishment of new drinking water standards designed to limit exposure to forever chemicals.</p><p>The new EPA rule requires monitoring within five years of six different forever chemicals in public water systems and mitigation if the chemicals are found to be above the allowable level.</p><p>Indiana Department of Environmental Management public drinking water testing over the past few years has revealed forever chemicals levels that exceed the EPA\u2019s health advisory in 24 counties: Bartholomew, Carroll, Cass, Clark, Crawford, Decatur, Elkhart, Floyd, Gibson, Harrison, Jackson, Jefferson, Johnson, Lake, LaPorte, Madison, Marion, Perry, Posey, Scott, St. Joseph, Sullivan, Vigo and Warrick.</p><p>Rokita\u2019s office is targeting companies that not only used forever chemicals at \u201ctoxic levels\u201d but hid internal research about harm to consumers.</p><p>Hoosiers have the right to know the environmental and public health costs of using products containing forever chemicals.</p><p>Rokita is doing the right thing by holding almost two dozen companies operating in Indiana accountable for hiding those costs, allegedly, in order to sell their products.</p><p>END</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/f704f64942c14583e903b1936ab79360",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 3,
+            "reason": "The document contains two editorials. The first editorial focuses on strategies to reduce driving distractions and traffic safety, which is not directly related to health. The second editorial discusses a lawsuit against companies for using 'forever chemicals' and their impact on public health and the environment. This part is highly relevant to the topic of health as it addresses the health risks associated with exposure to these chemicals, including cancer, organ dysfunction, and other serious health issues."
+        }
+    }
+}

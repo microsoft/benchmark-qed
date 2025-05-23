@@ -1,0 +1,341 @@
+﻿{
+    "altids": {
+        "itemid": "98fce75ff5f6911e7e180108bc36c127",
+        "etag": "98fce75ff5f6911e7e180108bc36c127_0a12aza0c0",
+        "friendlykey": "215367558918",
+        "referenceid": "Editorial Rdp"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Opinion",
+    "language": "en",
+    "versioncreated": "2023-12-22T12:10:39Z",
+    "firstcreated": "2023-12-21T19:19:55Z",
+    "editorialrole": "FullStory",
+    "fixture": {
+        "code": "21ea4067bb274c3b805353fb2b99ba70",
+        "name": "Editorial Roundup"
+    },
+    "pubstatus": "usable",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "Editorial Rdp",
+    "headline": "Editorial Roundup New England",
+    "slugline": "AP--Editorial Rdp",
+    "bylines": [
+        {
+            "by": "By The Associated Press"
+        }
+    ],
+    "copyrightnotice": "Copyright 2023 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "-Editorial Rdp"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "person": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "0da03cf2c0344a639c921793f945927f",
+            "name": "Peter Welch",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "POLITICIAN",
+                "PERSON"
+            ],
+            "associatedstates": [
+                {
+                    "code": "d2f8d8a882c710048915df092526b43e",
+                    "name": "Vermont"
+                }
+            ],
+            "relevance": 39
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "7e9ac529c086430593dd3542e3435ade",
+            "name": "Bernie Sanders",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "POLITICIAN",
+                "PERSON"
+            ],
+            "associatedstates": [
+                {
+                    "code": "d2f8d8a882c710048915df092526b43e",
+                    "name": "Vermont"
+                }
+            ],
+            "relevance": 52
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "8d88432a0d344d86ab29d6eb4e2955bb",
+            "name": "Benjamin Netanyahu",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "POLITICIAN",
+                "PERSON"
+            ],
+            "relevance": 43
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "4d5634ffdf3a46ada73f7c0e5fbf3e9f",
+            "name": "Maura Healey",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "POLITICIAN",
+                "PERSON"
+            ],
+            "relevance": 53
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "205db687c0dd4f1a844ed278e069cea8",
+            "name": "Charlie Baker",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "POLITICIAN",
+                "PERSON"
+            ],
+            "associatedstates": [
+                {
+                    "code": "bed6942882b310048501df092526b43e",
+                    "name": "Massachusetts"
+                }
+            ],
+            "relevance": 50
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a6331b54c46e4ca8b79fa40fada95db5",
+            "name": "Donald Trump",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "POLITICIAN",
+                "PERSON"
+            ],
+            "relevance": 52
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "936045008844100486a2a28878d48e09",
+            "name": "Addiction and treatment",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 74
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86aad5207dac100488ecba7fa5283c3e",
+            "name": "Politics",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 61
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "7cf243908830100481e9ae2ac3a6923e",
+            "name": "War and unrest",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 46
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "organisation": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "962e787a6e964cfba68aec9259217e6d",
+            "name": "Israel government",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 91
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "661dcb387d5b1004827fc076b8e3055c",
+            "name": "Israel",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661850e07d5b100481f6c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "01f56e0e654841eca2e69bf2cbcc0526",
+                "name": "Nation"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    34.75,
+                    31.5
+                ]
+            },
+            "relevance": 35,
+            "parentnames": [
+                "Middle East"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "8d2caa7082b3100484b8df092526b43e",
+            "name": "Maine",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -69.24977,
+                    45.50032
+                ]
+            },
+            "relevance": 87,
+            "parentnames": [
+                "United States"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "1bf4bc0882c71004889cdf092526b43e",
+            "name": "Rhode Island",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "d2f8d8a882c710048915df092526b43e",
+            "name": "Vermont",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "9531546082c6100487b5df092526b43e",
+            "name": "New Hampshire",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "bed6942882b310048501df092526b43e",
+            "name": "Massachusetts",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "8d2caa7082b3100484b8df092526b43e",
+            "name": "Maine",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "a42dc0a082af100482a7df092526b43e",
+            "name": "Connecticut",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "body_nitf": "<p>Boston Globe. December 15, 2023.</p><p>Editorial: Give supervised consumption sites a chance to reduce drug-related deaths</p><p>Governor Maura Healey\u2019s DPH now supports the idea of creating sites where people can take illegal drugs under medical supervision. While no panacea, they\u2019re worth trying as a way to reduce overdose fatalities.</p><p>Elections have consequences, even in an issue as bipartisan as addressing the scourge of substance use disorder.</p><p>Some public health advocates have been calling for years for Massachusetts to create supervised consumption sites, where people can use illegal drugs that they obtained themselves under medical supervision. But the issue was a political nonstarter when former governor Charlie Baker <a href=\"https://www.boston.com/news/local-news/2019/03/21/charlie-baker-safe-injection-sites/#:~:text=Baker%20said%20there%20was%20a,recent%20Boston%20Globe%20op%2Ded.\">opposed them</a>, and former president Donald Trump\u2019s US Attorney for Massachusetts Andrew Lelling <a href=\"https://www2.bostonglobe.com/opinion/2019/01/28/opinion-andrew-lelling-safe-injection-sites-aren-safe-legal/T5OhtHD3b7jR0a5kGP8mtL/story.html?p1=Article_Inline_Text_Link\">promised to prosecute</a>.</p><p>But with new Democratic administrations, a new day may be dawning for supervised consumption sites (also called safe injection sites or overdose prevention centers). On Wednesday, Governor Maura Healey\u2019s Department of Public Health released two <a href=\"https://www.mass.gov/doc/overdose-prevention-center-feasibility-report/download\">reports</a> that provide a rationale for opening supervised consumption sites and a practical blueprint for doing so. The state Legislature should take the next step and create a legal framework that would let public health professionals oversee these efforts without fear of state-level professional or legal liability.</p><p>The idea is not to legalize drugs \u2014 but to recognize the reality that people are taking them, and the state should do whatever it can to save lives and get drug use off the streets.</p><p>While there would still be fears about federal prosecution, the Biden administration has shown a willingness to turn a blind eye to sites set up in New York. Removing state-level barriers would let the Department of Public Health move forward in crafting a responsible pilot program in partnership with municipalities and treatment organizations. Data collected could inform future decisions about whether to continue and expand the sites \u2014 or shut them down.</p><p>Supervised consumption sites are not a panacea or a long-term solution to the crisis of addiction. Ultimately, people with substance use disorders need access to effective treatment. But supervised consumption sites have the potential to reduce harm by preventing fatal overdoses and drug-related hospital visits, since anti-overdose medication is administered onsite if necessary. Consumption sites connected with existing harm reduction efforts would let drug users obtain clean needles and drug test strips used to <a href=\"https://www.cdc.gov/stopoverdose/fentanyl/fentanyl-test-strips.html\">detect the presence of fentanyl in street drug</a>, be offered referrals for treatment, and be tested for infectious diseases.</p><p>Department of Public Health Commissioner Robert Goldstein said overdose prevention centers \u201ccan be lifelines, serving not only as places of intervention, but as places of empathy, understanding, and healing.\u201d</p><p>Supervised consumption sites have existed for years in Canada, Australia, and parts of Europe, and the data on them is mixed but promising. <a href=\"https://nida.nih.gov/sites/default/files/NIH-RTC-Overdose-Prevention-Centers.pdf\">A report</a> by the National Institutes of Health, authorized by a 2021 budget bill, said there are conflicting studies regarding whether supervised consumption sites reduce mortality from drug overdoses in the population overall, but there is evidence that the sites prevent fatal overdoses among visitors who use them. Studies of these sites have identified reductions in ambulance calls and drug-related HIV infections, and increases in numbers of people entering drug treatment programs. In New York, <a href=\"https://jamanetwork.com/journals/jamanetworkopen/fullarticle/2811766?utm_source=For_The_Media&utm_medium=referral&utm_campaign=ftm_links&utm_term=111323\">a recent study</a> in the Journal of the American Medical Association found no significant increase in crimes or calls for emergency service in areas where two sites are located.</p><p>A 2020 study by the Institute for Clinical and Economic Review <a href=\"https://icer.org/wp-content/uploads/2020/10/SIF-RAAG-010521.pdf\">estimated that</a> if all existing clean syringe programs in Boston were paired with supervised consumption sites, Boston taxpayers would save $4 million a year from 773 fewer ambulance rides, 551 fewer emergency department visits, and 264 fewer hospitalizations.</p><p>As Sarah Wakeman, senior medical director at Mass General Brigham, said in a statement, \u201cThe choice is not between having overdose prevention centers or people not using drugs \u2014 the choice is between creating centers where people can not die from overdose versus the status quo, where people will continue to die behind bedroom doors down the hall from their parents, in public restrooms, and alleyways.\u201d</p><p>In 2019, Massachusetts\u2019 Harm Reduction Commission <a href=\"https://www.mass.gov/doc/harm-reduction-commission-report-3-1-2019/download\">recommended</a> establishing a supervised consumption site pilot program. Since then, New York has established two sites. Rhode Island plans to launch a two-year pilot in 2024. Minnesota has taken steps toward a program, while Philadelphia officials who tried to open a site are in settlement negotiations with the Biden administration over a 2019 lawsuit brought by Trump\u2019s Justice Department.</p><p>A newly released <a href=\"https://www.mass.gov/doc/harm-reduction-drop-in-overdose-prevention-centers/download\">41-page study</a> conducted by JSI Research and Training Institute for Massachusetts\u2019 Bureau of Substance Addiction Services suggests that people using drugs would be interested in supervised consumption sites. Users expressed interest in a site that is accessible, nonjudgmental, and provides other services, like laundry or showers. Two agencies told researchers that they are prepared to open a site if funding becomes available.</p><p>Unless Congress changes the law \u2014 which seems unlikely \u2014 those who operate and visit supervised consumption sites could be prosecuted for violations of federal drug laws. But New York\u2019s ability to operate sites since 2021 without federal interference suggests the Biden administration may be taking the type of hands-off approach that successive administrations have taken to state-sanctioned marijuana businesses.</p><p>As the Department of Public Health report points out, what is necessary for a pilot program is an update to state laws to protect staff, funders, operators, and users from criminal prosecution and civil liability under state drug laws. Additionally, either legislation or guidance from the Department of Public Health would be required to instruct professional licensing boards that working at a supervised injection site should not subject someone to disciplinary action. Lawmakers would need to set up a framework to let DPH license and oversee sites.</p><p>Establishing supervised injection sites won\u2019t solve the addiction crisis. But with <a href=\"https://www.mass.gov/doc/opioid-related-overdose-deaths-among-ma-residents-december-2023/download\">2,300 deaths</a> last year from opioid-related overdoses in Massachusetts, anything that could potentially save lives is worth a try.</p><p>___</p><p>Barre-Montpelier Times Argus. December 16, 2023.</p><p>Editorial: Be right, make enemies</p><p>The stakes are high for all parties taking sides in the Hamas-Israel conflict. The members of Vermont\u2019s congressional delegation have certainly been leaning in a direction of a cease-fire and an end to the bloodshed for good. Israel has said it will not stop. And now the U.S. pledge to maintain support through aid is feeling messy. So messy, in fact, that those individuals taking a firm stance are more than likely alienating members of their base. U.S. Rep. Becca Balint, who is Jewish, has been pushing for a peaceful solution as well as condemning acts of antisemitism that have arisen as a result of the heated conflict. In the U.S. Senate, Peter Welch has been urging a cease-fire and peace talks. Bernie Sanders has taken the fight to a different level \u2014 one that may cost him votes in the future. Sanders is Jewish and spent time in Israel as a young man. He has drawn criticism from some of his former supporters for not calling for a cease-fire in the conflict. Sanders said recently that he wants a humanitarian end to the conflict. First, he urged conditions on any aid provided to Israel. In a commentary in the New York Times three weeks ago, when the issue was coming to a head, Sanders concluded by writing, \u201cOver the years, people of good will around the world, including Israelis, have tried to address this conflict in a way that brings justice for Palestinians and security for Israel. I, and some other members of Congress, have tried to do what we could. Obviously, we did not do enough. Now we must recommit to this effort. The stakes are just too high to give up.\u201d Then Sanders called for President Biden to cut proposed aid to Israel by $10.1 billion in a letter that called the Israeli military\u2019s actions in Gaza a \u201cmass atrocity\u201d that the United States is complicit in. \u201cIsrael\u2019s military campaign will be remembered among some of the darkest chapters of our modern history,\u201d Sanders wrote in his letter. \u201cAnd it is being done with bombs and equipment produced and provided by the United States and heavily subsidized by American taxpayers. Tragically, we are complicit in this carnage.\u201d Sanders also asked Biden to support the humanitarian cease-fire resolution the United States recently vetoed in a meeting of the U.N. Security Council. \u201cLong-term, I don\u2019t know how you can have a permanent cease-fire when Hamas has made it very clear that that\u2019s not what they want or believe in,\u201d Sanders said. \u201cAnd at the same time you have Netanyahu and his right-wing government wanting to continue the war. So I think it raises false hopes.\u201d Then, when the aid vote came, Sanders was the lone member of the Senate Democratic caucus to oppose advancing a $10.5 billion supplemental foreign aid measure on, expressing opposition to the bill\u2019s unconditional military assistance for the Israeli government. \u201cI voted NO on the foreign aid supplemental bill today for one reason,\u201d he said in a statement. \u201cI do not believe that we should give the right-wing extremist Netanyahu government an additional $10.1 billion with no strings attached to continue their inhumane war against the Palestinian people.\u201d \u201cIsrael has the absolute right to defend itself against the Hamas terrorists who attacked them on October 7,\u201d Sanders added. \u201cThey do not have the legal or moral right to kill thousands of innocent Palestinian men, women and children.\u201d This week, Sanders introduced a resolution in Congress to investigate Israel\u2019s \u201cindiscriminate bombing campaign in Gaza.\u201d His stance has infuriated some of his former supporters and allies. But Sanders wants accountability. According to his statement, the resolution was introduced a resolution under Section 502B(copyright) of the Foreign Assistance Act \u201cto force a debate on the indiscriminate bombing being carried out by Prime Minister Benjamin Netanyahu\u2019s right-wing government.\u201d Sanders points out that the Foreign Assistance Act prohibits security assistance to any government \u201cwhich engages in a consistent pattern of gross violations of internationally recognized human rights.\u201d Section 502B(copyright) of this law allows Congress to request information on a country\u2019s human rights practices \u2014 such requests are privileged, allowing the sponsor to force a floor vote on the requesting resolution. If the resolution passes, the Department of State must submit the requested report within 30 days, or all security assistance to the country in question is cut off. After the report is received, Congress may then enact changes to condition, reduce, or terminate the security assistance in question. Both the initial vote to request the information and any subsequent votes to alter security assistance are privileged and require a simple majority for passage, according to the statement. \u201cThe scale of the suffering in Gaza is unimaginable \u2014 it will be remembered among some of the darkest chapters of our modern history. This is a humanitarian cataclysm, and it is being done with American bombs and money. We need to face up to that fact \u2014 and then we need to end our complicity in those actions,\u201d Sanders said. With no end to the conflict in sight, Sanders may just be posturing for the sake of posturing. History will look back on this time, indeed. It likely will assign blame on many nations, including us. It will also will reveal the carnage of sacrifice \u2014 in body counts and politics.</p><p>The stakes are high for all parties taking sides in the Hamas-Israel conflict. The members of Vermont\u2019s congressional delegation have certainly been leaning in a direction of a cease-fire and an end to the bloodshed for good.</p><p>Israel has said it will not stop. And now the U.S. pledge to maintain support through aid is feeling messy. So messy, in fact, that those individuals taking a firm stance are more than likely alienating members of their base.</p><p>U.S. Rep. Becca Balint, who is Jewish, has been pushing for a peaceful solution as well as condemning acts of antisemitism that have arisen as a result of the heated conflict. In the U.S. Senate, Peter Welch has been urging a cease-fire and peace talks.</p><p>Bernie Sanders has taken the fight to a different level \u2014 one that may cost him votes in the future. Sanders is Jewish and spent time in Israel as a young man. He has drawn criticism from some of his former supporters for not calling for a cease-fire in the conflict. Sanders said recently that he wants a humanitarian end to the conflict.</p><p>First, he urged conditions on any aid provided to Israel. In a commentary in the New York Times three weeks ago, when the issue was coming to a head, Sanders concluded by writing, \u201cOver the years, people of good will around the world, including Israelis, have tried to address this conflict in a way that brings justice for Palestinians and security for Israel. I, and some other members of Congress, have tried to do what we could. Obviously, we did not do enough. Now we must recommit to this effort. The stakes are just too high to give up.\u201d</p><p>Then Sanders called for President Biden to cut proposed aid to Israel by $10.1 billion in a letter that called the Israeli military\u2019s actions in Gaza a \u201cmass atrocity\u201d that the United States is complicit in.</p><p>\u201cIsrael\u2019s military campaign will be remembered among some of the darkest chapters of our modern history,\u201d Sanders wrote in his letter. \u201cAnd it is being done with bombs and equipment produced and provided by the United States and heavily subsidized by American taxpayers. Tragically, we are complicit in this carnage.\u201d</p><p>Sanders also asked Biden to support the humanitarian cease-fire resolution the United States recently vetoed in a meeting of the U.N. Security Council. \u201cLong-term, I don\u2019t know how you can have a permanent cease-fire when Hamas has made it very clear that that\u2019s not what they want or believe in,\u201d Sanders said. \u201cAnd at the same time you have Netanyahu and his right-wing government wanting to continue the war. So I think it raises false hopes.\u201d</p><p>Then, when the aid vote came, Sanders was the lone member of the Senate Democratic caucus to oppose advancing a $10.5 billion supplemental foreign aid measure on, expressing opposition to the bill\u2019s unconditional military assistance for the Israeli government.</p><p>\u201cI voted NO on the foreign aid supplemental bill today for one reason,\u201d he said in a statement. \u201cI do not believe that we should give the right-wing extremist Netanyahu government an additional $10.1 billion with no strings attached to continue their inhumane war against the Palestinian people.\u201d</p><p>\u201cIsrael has the absolute right to defend itself against the Hamas terrorists who attacked them on October 7,\u201d Sanders added. \u201cThey do not have the legal or moral right to kill thousands of innocent Palestinian men, women and children.\u201d</p><p>This week, Sanders introduced a resolution in Congress to investigate Israel\u2019s \u201cindiscriminate bombing campaign in Gaza.\u201d His stance has infuriated some of his former supporters and allies. But Sanders wants accountability.</p><p>According to his statement, the resolution was introduced a resolution under Section 502B(copyright) of the Foreign Assistance Act \u201cto force a debate on the indiscriminate bombing being carried out by Prime Minister Benjamin Netanyahu\u2019s right-wing government.\u201d</p><p>Sanders points out that the Foreign Assistance Act prohibits security assistance to any government \u201cwhich engages in a consistent pattern of gross violations of internationally recognized human rights.\u201d Section 502B(copyright) of this law allows Congress to request information on a country\u2019s human rights practices \u2014 such requests are privileged, allowing the sponsor to force a floor vote on the requesting resolution.</p><p>If the resolution passes, the Department of State must submit the requested report within 30 days, or all security assistance to the country in question is cut off. After the report is received, Congress may then enact changes to condition, reduce, or terminate the security assistance in question. Both the initial vote to request the information and any subsequent votes to alter security assistance are privileged and require a simple majority for passage, according to the statement.</p><p>\u201cThe scale of the suffering in Gaza is unimaginable \u2014 it will be remembered among some of the darkest chapters of our modern history. This is a humanitarian cataclysm, and it is being done with American bombs and money. We need to face up to that fact \u2014 and then we need to end our complicity in those actions,\u201d Sanders said.</p><p>With no end to the conflict in sight, Sanders may just be posturing for the sake of posturing. History will look back on this time, indeed. It likely will assign blame on many nations, including us. It will also will reveal the carnage of sacrifice \u2014 in body counts and politics.</p><p>___</p><p>Hearst Connecticut Media. December 17, 2023.</p><p>Editorial: CT should not let grass grow under feet on moving away from gas-powered leaf blowers</p><p>Only a few days of autumn remain, yet cheerful sounds of the holiday season are still commonly drowned out by the drone of gas-powered leaf blowers.</p><p>Nothing about blowers and related equipment is quiet, but the movement to ban them has been relatively hushed. That\u2019s poised to change, as Westport concludes its first year with restricted hours on using gas-engine leaf blowers.</p><p>Westport may be a Connecticut pioneer on the movement, but other states have lapped us in creating healthier environments. Palo Alto, Calif., banned gas-powered leaf blowers all the way back in 2005, and has since been followed by Miami Beach, Fla., Washington, D.C., Seattle, Wash., and Portland, Ore. Starting in July, California will forbid the sale of gas-powered leaf blowers and weed whackers.</p><p>Like everything involving the lawn equipment, though, they will not go away quietly in Connecticut. Landscapers have created an online petition to blow back against Greenwich\u2019s efforts to limit use of gas-fueled leaf blowers in the summer. They argue that switching to electric devices is not economically feasible.</p><p>From their perspective, massive properties in the likes of Greenwich can\u2019t be efficiently cleared off with rakes or electric devices that require frequent charges.</p><p>Leaders in Connecticut\u2019s cities and towns are watching one another to sort out best policies. But there are plenty of reasons we shouldn\u2019t let the grass grow beneath our feet on this issue:</p><p>Our air is dirty: A new study points to Fairfield County scoring poorly on pollutants produced by lawn equipment. A commonly cited, but revealing, data point is that a single car has to travel 1,100 miles to produce the same amount of smog as a commercial gas-powered leaf blower. Park the electric vehicle debate for a moment and remember how gas cars evolved over generations. Leaf blowers have not changed all that much since they were adapted from their original use in the 1940s to spray crops with pesticides.</p><p>All that noise isn\u2019t good for us either: Harvard released a study that each 5-decibel increase in the average daily noise level boosts the likelihood of a heart attack or stroke by 34 percent.</p><p>Take a breath: Wonder why you\u2019ve been sneezing and tearing up so much in the spring and fall? Consider all the pollen and mold swirling around the neighborhood, along with pesticides and animal feces. It\u2019s not just bad for allergies, but for asthma.</p><p>Let nature run its course: There are perils to wet leaves on roads and walkways, but there are also good reasons to just leave them where they are. They provide a habitat for life forms needed for pollination, such as beetles, bees and butterflies. They also deliver nutrients back to the trees.</p><p>Three Yale School of Medicine professors wrote to Greenwich officials about the \u201cmultiple health and environmental hazards\u201d presented by the equipment, deeming it nothing less than a \u201cpublic health emergency.\u201d</p><p>Like nature, this issue will evolve. As it does, the livelihood of the landscapers should not only be considered, but made a priority. They, more than anyone else, are exposed to the perils of this outdated practice.</p><p>___</p><p>Portland Press Herald. December 17, 2023.</p><p>Editorial: Remarkable population growth is a remarkable opportunity for Maine</p><p>Recent big-picture changes to American life can be turned to our advantage.</p><p>Maine is growing. Can we take a moment to recognize how remarkable that is?</p><p>Generations of politicians, bureaucrats, business owners, community leaders and activists have served the state under the shadow of stagnant growth. Untold hours of debate and millions of dollars in campaign funds have been spent on the question of how to turn it around.</p><p>Suddenly, Maine\u2019s population growth is booming, outpacing the national average for the first time in decades.</p><p>The reversal is the result of a once-in-a-century pandemic that led a lot of people to reconsider what they want out of life \u2013 playing right into Maine\u2019s strengths. It\u2019s time for us to take advantage.</p><p>UNEXPECTED GROWTH</p><p>As the Press Herald <a href=\"https://www.centralmaine.com/2023/12/10/pandemic-gave-maine-a-population-boom-will-climate-change-be-next/\">reported last week</a>, Maine\u2019s population as of July 1, 2022, stood at 1,385,340, an increase in the last decade of more than 56,000 people.</p><p>Most of that growth took place in the prior three years, when Maine has experienced a growth rate of twice the national average, alongside that of Sun Belt states such as Florida, Arizona and North Carolina.</p><p>While the growth was concentrated in York and Cumberland counties, more people moved here than moved away in every county \u2013 with Piscataquis, Lincoln and Oxford counties experiencing the largest increases as a percentage of population.</p><p>And although the influx of asylum seekers and other international migrants gets a lot of attention, they have made up less than 10% of the recent increase in population.</p><p>Most of the growth instead has come from people moving from other states, many of them searching for a safer, quieter, more community-centered place to live. There\u2019s a reason Vermont and Maine are growing while nearby metro areas lose people.</p><p>CHANGING COURSE</p><p>It\u2019s a strange place for Maine to find itself, even if policymakers have been chasing it for decades. Statewide growth has been below the national average since the 1990s. Mills closed at the same time Maine\u2019s population was aging, so there were fewer babies being born and fewer opportunities to keep young people here, or to attract them to the state.</p><p>From 2010 to 2020, Maine\u2019s population grew just 2.6% while the country as a whole grew 7.4%, making it uncertain whether the state would have enough people to fill its workforce and care for the older generation.</p><p>There\u2019s been a lot of fighting over how to change those conditions, with Republicans in general citing Maine\u2019s relatively high cost of doing business as the problem, while Democrats most often call for government investment in communities and the workforce.</p><p>No one saw the pandemic coming. But it should be noted that no one moved to Maine in the last few years because taxes or welfare were cut, or because businesses were allowed to pollute or mistreat workers. None of those things happened.</p><p>Instead, many Americans began to rethink a long workday with an soul-sucking commute. Many people can now work from anywhere, too, and are choosing to settle in Maine, where they can find tight-knit communities, a different pace and endless opportunities to enjoy the outdoors.</p><p>As the climate crisis brings high heat and more frequent storms to other parts of the country, people may continue to look to Maine for respite.</p><p>TAKING ADVANTAGE</p><p>As much as Mainers sometimes want things to stay the same, this growth is a positive development for the state. Communities either grow and allow their members to take advantage of opportunity and progress, or they wither and watch those opportunities go elsewhere \u2013 along with many of their residents.</p><p>So how do we take advantage of this moment? By reinforcing everything that makes Maine an attractive place \u2013 for both current and future residents. We need housing so that more people can live affordably in our great neighborhoods and close to work. We need to improve and expand our public areas \u2013 our parks, trails and downtowns. We need to manage growth so that we\u2019re not overwhelmed by traffic, or see our towns pulled apart by sprawl.</p><p>We need to do better supporting people <a href=\"https://www.centralmaine.com/2023/12/03/our-view-54/\">at the lower rungs of the economy</a>, too. A community where every member is counted and cared for is better for everyone, regardless of income.</p><p>Maine doesn\u2019t have year-round sun. Compared to other parts of the country, housing is expensive and taxes are high. But it has something else that keeps us here, and now it\u2019s drawing others as well. It\u2019s a rare opportunity to build a prosperous state while maintaining what makes it special. What are we going to do about it?</p><p>___</p><p>Bangor Daily News. December 18, 2023.</p><p>Editorial: This simple federal change can help Maine better support asylum seekers</p><p>Some of the many needed changes to America\u2019s immigration system require large shifts through an act of Congress. Others, however, can be done administratively and in a fairly simple way.</p><p>One such change is available to the Department of Homeland Security, and it should be quickly implemented in order to better support people arriving in Maine and the communities welcoming them.</p><p>Three of Maine\u2019s federal representatives \u2014 U.S. Sen. Susan Collins, U.S. Sen. Angus King and U.S. Rep. Chellie Pingree \u2014 have <a href=\"https://wgme.com/news/local/collins-king-and-pingree-want-to-extend-program-supporting-asylum-seekers-susan-collins-angus-king-chellie-pingree-shelter-and-services-program-migrants\">called on Homeland Security</a> to provide increased flexibility in the Shelter and Services Program. This program provides funding to organizations and municipalities that provide shelter and other services to people who aren\u2019t American citizens, like asylum seekers.</p><p>The Maine lawmakers have argued, convincingly, that the program\u2019s 45-day limitation on funds fails to match the current migration realities in Maine and other so-called destination areas far away from the southern border. They have asked for that limitation to be changed to 180 days.</p><p>\u201cThe SSP (notices of funding opportunities\u2019) 45-day limitation is inappropriate for migrant destination locations like Maine,\u201d Collins, King and Pingree wrote in a <a href=\"https://www.king.senate.gov/newsroom/press-releases/king-collins-pingree-request-additional-flexibility-for-funding-to-support-migrants\">Dec. 6 letter</a> to Homeland Security Secretary Alejandro Mayorkas. \u201cMaine immigrant services groups struggle with the 45-day limitation because migrants arriving in the state have typically been released from DHS custody many days prior, reducing the period in which these individuals and families may receive support. This reality makes it impossible for many Maine programs to access SSP funding that they have depended on under the (the Emergency Food and Shelter Program for humanitarian relief) to support and assist migrants.\u201d</p><p>Portland officials in particular have raised concerns about shifts in the availability of federal aid, and the way this 45-day threshold could limit access to funds for non-border cities.</p><p>\u201cForty-five days works mostly for a lot of folks along the southern border,\u201d Aaron Geyer, Portland\u2019s director of social services, <a href=\"https://www.pressherald.com/2023/12/07/members-of-maine-delegation-ask-federal-agency-to-ease-new-limit-on-funding-to-help-asylum-seekers/\">told the Portland Press Herald</a>.</p><p>\u201cFor destination cities away from the border, that\u2019s where the negative impact comes in. The length of stay is often much greater than 45 days,\u201d Geyer added.</p><p>In November, then-Portland Mayor Kate Snyder sent a letter to the city\u2019s representatives in the Maine Legislature, asking for assistance finding state or federal support for the city of Portland\u2019s Resettlement Program. Shifts in federal programs and funding sources put the 45-day requirement in play, threatening the longer-term services provided to asylum seekers here.</p><p>The simplest solution would be for the federal government to acknowledge the realities on the ground, make sure the intent of this program matches those realities and make the necessary administrative adjustment. As the Maine officials have suggested, 180 days would be more workable and appropriate.</p><p>\u201cWe understand that DHS can revise (notices of funding opportunities) through administrative action that does not require further legislation,\u201d Collins, King and Pingree continued in their letter. \u201cThe 45-day requirement does not appear in the Department of Homeland Security Appropriations Act, 2023 (Div. F, Title II of P.L. 117-328) that created the SSP. DHS created the requirement of its own volition, and DHS has the ability to amend or remove the requirement going forward.\u201d</p><p>Homeland Security has the ability, and it should do so without delay. Geyer explained the need clearly to the Press Herald.</p><p>\u201cI can\u2019t stress enough the negative impact it has on cities and municipalities away from the border because of the 45-day limit,\u201d Geyer said. \u201cThe work that could be done within 180 days, it just can\u2019t be done within the 45-day limit.\u201d</p><p>END</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/98fce75ff5f6911e7e180108bc36c127",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 3,
+            "reason": "The document contains multiple editorials, each addressing different topics. The first editorial from the Boston Globe discusses supervised consumption sites for drug users, which is highly relevant to health as it deals with public health measures to reduce drug-related deaths. The other editorials cover topics such as the Hamas-Israel conflict, gas-powered leaf blowers, population growth in Maine, and support for asylum seekers, which are not directly related to health. Given that only one of the editorials is highly relevant to health, the overall relevance of the document to the topic of health is moderate."
+        }
+    }
+}

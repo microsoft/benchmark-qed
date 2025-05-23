@@ -1,0 +1,303 @@
+﻿{
+    "altids": {
+        "itemid": "d68f6ef1599485ec876133bdd953b175",
+        "etag": "d68f6ef1599485ec876133bdd953b175_7a8aza0c0",
+        "friendlykey": "733947837075",
+        "referenceid": "US--Los Angeles-Homeless Count"
+    },
+    "version": 7,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2024-01-24T09:14:36Z",
+    "firstcreated": "2024-01-24T05:09:44Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "ednote": "Eds: UPDATES: Adds comment from Los Angeles mayor.; Updates Media.",
+    "editorialtypes": [
+        "Lead"
+    ],
+    "signals": [
+        "newscontent"
+    ],
+    "title": "US--Los Angeles-Homeless Count",
+    "headline": "Annual count of homeless residents begins in Los Angeles, where tens of thousands live on streets",
+    "headline_extended": "Los Angeles County\u2019s annual count of homeless residents is under way",
+    "slugline": "BC-US--Los Angeles-Homeless Count, 7th Ld-Writethru",
+    "description_summary": "Los Angeles County\u2019s annual count of homeless residents is under way. The tally is a crucial part of the region\u2019s efforts to confront the crisis of tens of thousands of people living on the streets. Up to 6,000 volunteers with the Los Angeles Homeless Services Authority fanned out Tuesday night for the effort\u2019s main component, the unsheltered street tally. The so-called \u201cpoint-in-time\u201d count will take place over three days and aims to estimate how many people are unhoused and what services they may require, such as mental health or drug addiction treatment. The results are expected to be released in late spring or early summer.",
+    "bylines": [
+        {
+            "by": "By CHRISTOPHER WEBER",
+            "title": "Associated Press"
+        }
+    ],
+    "located": "LOS ANGELES",
+    "datelinelocation": {
+        "city": "Los Angeles",
+        "countryareacode": "CA",
+        "countryareaname": "California",
+        "countrycode": "USA",
+        "countryname": "United States",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                -118.24368,
+                34.05223
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "Los Angeles homeless count"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "person": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "da63334d69f8412ebe7c402bd0656a6e",
+            "name": "Karen Bass",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "POLITICIAN",
+                "PERSON"
+            ],
+            "associatedstates": [
+                {
+                    "code": "789fdd8882af10048263df092526b43e",
+                    "name": "California"
+                }
+            ],
+            "relevance": 44
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "a",
+            "name": "a"
+        },
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "936045008844100486a2a28878d48e09",
+            "name": "Addiction and treatment",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 32
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e231c7187de410048fd7df092526b43e",
+            "name": "Mental health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 32
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "397dbba0872a10048d20d7c656897a02",
+            "name": "Homelessness",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 63
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "8345b5f082af10048280df092526b43e",
+            "name": "Los Angeles",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "789fdd8882af10048263df092526b43e"
+            ],
+            "locationtype": {
+                "code": "9d26a20b35f0484a891740f8189d4c7b",
+                "name": "City"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -118.24368,
+                    34.05223
+                ]
+            },
+            "relevance": 96,
+            "parentnames": [
+                "California"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "789fdd8882af10048263df092526b43e",
+            "name": "California",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661850e07d5b100481f5c076b8e3055c",
+            "name": "Latin America and Caribbean",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "associations": {
+        "1": {
+            "altids": {
+                "itemid": "96e042a660a5461a9d8bea95180e3641"
+            },
+            "type": "audio"
+        },
+        "2": {
+            "altids": {
+                "itemid": "99243daf4a5e4bba91aa95514ac84492"
+            },
+            "type": "audio"
+        },
+        "3": {
+            "altids": {
+                "itemid": "d55bdd6e50a4478d9d5cd71f4760083e"
+            },
+            "type": "picture"
+        },
+        "4": {
+            "altids": {
+                "itemid": "d5db9121d3d5445abb5075176c9200b7"
+            },
+            "type": "picture"
+        },
+        "5": {
+            "altids": {
+                "itemid": "a653ac56e9444117bcdc86ba826b8a74"
+            },
+            "type": "picture"
+        },
+        "6": {
+            "altids": {
+                "itemid": "adb7eba1a92642f897667debde2669fe"
+            },
+            "type": "picture"
+        },
+        "7": {
+            "altids": {
+                "itemid": "85955d7ad1c249ffb9089e9d817c2907"
+            },
+            "type": "picture"
+        },
+        "8": {
+            "altids": {
+                "itemid": "fa6b7f92cb8240cfa877376e0aafd758"
+            },
+            "type": "picture"
+        },
+        "9": {
+            "altids": {
+                "itemid": "c15be5a4a49748eca974301b08642364"
+            },
+            "type": "picture"
+        },
+        "10": {
+            "altids": {
+                "itemid": "3f4132870c744dc6a0370377a6097e06"
+            },
+            "type": "picture"
+        }
+    },
+    "body_nitf": "<p>LOS ANGELES (AP) \u2014 Los Angeles County\u2019s annual count of homeless residents began Tuesday night \u2014 a crucial part of the region\u2019s efforts to confront the crisis of tens of thousands of people living on the streets.</p><p>Up to 6,000 volunteers with the Los Angeles Homeless Services Authority fanned out for the effort\u2019s main component, the unsheltered street tally.</p><p>The so-called \u201cpoint-in-time\u201d count will take place over three days and aims to estimate how many people are unhoused and what services they may require, such as mental health or drug addiction treatment.</p><p>LA County\u2019s undertaking is the largest among similar tallies in major cities nationwide. The tally, which also makes use of demographic surveys and shelter counts, is mandated by the federal government for cities to receive certain kinds of funding.</p><p>The count this year comes amid increasing public outrage over the perceived failure \u2014 despite costly efforts \u2014 to reduce the surging population of people living in cars, tents and makeshift street shelters.</p><p><a href=\"https://apnews.com/article/los-angeles-county-homeless-f6c43a705d244d60f20236ce8fed804c\">The 2023 effort reported</a> more than 75,500 people were homeless on any given night in LA County, a 9% rise from a year earlier. About 46,200 were within the city of Los Angeles, where public frustration has grown as tents have proliferated on sidewalks and in parks and other locations.</p><p>Since 2015, homelessness has increased by 70% in the county and 80% in the city.</p><p>Karen Bass, the mayor of Los Angeles, joined city and county officials to kick off the count Tuesday night in the North Hollywood neighborhood of LA\u2019s San Fernando Valley.</p><p>The count \u201cis an important tool to confront the homelessness crisis,\u201d Bass said in a statement. \u201cHomelessness is an emergency, and it will take all of us working together to confront this emergency.\u201d</p><p><a href=\"https://apnews.com/article/california-los-angeles-kamala-harris-homelessness-state-government-b2cab2d64a0a33ae58141ec3a407db05\">On her first day in office</a> in Dec. 2022, Bass declared a state of emergency on homelessness. <a href=\"https://apnews.com/article/los-angeles-homeless-population-karen-bass-733fc2246efdfd46c9c7737b4b208960\">One year into her term</a>, the mayor, a Democrat, announced that over 21,000 unhoused people were moved into leased hotels or other temporary shelter during 2023, a 28% increase from the prior year. Dozens of drug-plagued street encampments were cleared, and housing projects are in the pipeline, she said last month.</p><p>City Hall, the City Council and the LA County Board of Supervisors have said they intend to work together to tackle the crisis. Progress hasn\u2019t always been apparent despite billions spent on programs to curb homelessness.</p><p>Homelessness remains hugely visible throughout California with people living in tents and cars and sleeping outdoors on sidewalks and under highway overpasses.</p><p>The results of the LA County homeless count are expected to be released in late spring or early summer.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/los-angeles-homeless-count-d68f6ef1599485ec876133bdd953b175",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 3,
+            "reason": "The document primarily focuses on the annual count of homeless residents in Los Angeles and the efforts to address homelessness. While it mentions services such as mental health and drug addiction treatment, which are health-related, the main emphasis is on the logistics and statistics of homelessness rather than health itself. Therefore, the document is somewhat relevant to the topic of health but not highly focused on it."
+        }
+    }
+}

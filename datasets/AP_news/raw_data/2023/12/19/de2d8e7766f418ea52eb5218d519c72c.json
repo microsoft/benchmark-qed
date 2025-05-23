@@ -1,0 +1,280 @@
+﻿{
+    "altids": {
+        "itemid": "de2d8e7766f418ea52eb5218d519c72c",
+        "etag": "de2d8e7766f418ea52eb5218d519c72c_2a6aza0c0",
+        "friendlykey": "196007748929",
+        "referenceid": "US--Chicago-Migrant-Child-Death"
+    },
+    "version": 2,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2023-12-19T23:14:01Z",
+    "firstcreated": "2023-12-19T21:25:14Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "ednote": "Eds: UPDATES: With details on boy's family and illness from family, along with number of patients seen at county clinic for migrants. Edits to conform.",
+    "editorialtypes": [
+        "Lead"
+    ],
+    "signals": [
+        "newscontent"
+    ],
+    "title": "US--Chicago-Migrant-Child-Death",
+    "headline": "Migrant child's death and other hospitalizations spark concern over shelter conditions",
+    "headline_extended": "The death of a 5-year-old migrant boy and reported illnesses in other children has raised fresh concerns about the living conditions and medical care provided for asylum-seekers arriving in Chicago",
+    "slugline": "AP-US--Chicago-Migrant-Child-Death, 2nd Ld-Writethru",
+    "description_summary": "The death of a 5-year-old migrant boy and reported illnesses in other children has raised fresh concerns about the living conditions and medical care provided for asylum-seekers arriving in Chicago. Six more people living in the shelter \u2014 four children and two adults \u2014 were hospitalized this week. Medical professionals have worried for months about the disjointed healthcare system, saying new arrivals in the U.S. face numerous health issues. Jean Carlos Martinez, 5, was a resident at a shelter in Chicago\u2019s Pilsen neighborhood when he suffered a medical emergency, then died shortly after arriving at a hospital Sunday afternoon.",
+    "bylines": [
+        {
+            "by": "By SOPHIA TAREEN and CLAIRE SAVAGE",
+            "title": "Associated Press"
+        }
+    ],
+    "located": "CHICAGO",
+    "datelinelocation": {
+        "city": "Chicago",
+        "countryareacode": "IL",
+        "countryareaname": "Illinois",
+        "countrycode": "USA",
+        "countryname": "United States",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                -87.65005,
+                41.85003
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2023 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "migrant boy death child shelter Chicago"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "a",
+            "name": "a"
+        },
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "0d3ed308885b1004802dd05694d87601",
+            "name": "Shelters",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 62
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "9cce666bb29344b8ba61f3732d971d32",
+            "name": "Disease outbreaks",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 93
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "bb2d2c5f441a452cb24bb511a2ab5eea",
+            "name": "World news",
+            "creator": "Editorial",
+            "editorial_subject": "World news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "5b86bbd082b01004839adf092526b43e",
+            "name": "Chicago",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "2c6a186082b010048379df092526b43e"
+            ],
+            "locationtype": {
+                "code": "9d26a20b35f0484a891740f8189d4c7b",
+                "name": "City"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -87.65005,
+                    41.85003
+                ]
+            },
+            "relevance": 82,
+            "parentnames": [
+                "Illinois"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "661850e07d5b100481f5c076b8e3055c",
+            "name": "Latin America and Caribbean",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "2c6a186082b010048379df092526b43e",
+            "name": "Illinois",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "associations": {
+        "1": {
+            "altids": {
+                "itemid": "4a9aa2c42dc4424a80bdbee6ed44b56c"
+            },
+            "type": "picture"
+        },
+        "2": {
+            "altids": {
+                "itemid": "8c72303da82f42a4849c48f6fbcee541"
+            },
+            "type": "picture"
+        },
+        "3": {
+            "altids": {
+                "itemid": "12452069789d4b2eb09c11fbafd540dd"
+            },
+            "type": "picture"
+        },
+        "4": {
+            "altids": {
+                "itemid": "73d20285f5c34d0da2f927bff4519754"
+            },
+            "type": "picture"
+        },
+        "5": {
+            "altids": {
+                "itemid": "45cf975656ec49ef86a4b1127a198eeb"
+            },
+            "type": "picture"
+        },
+        "6": {
+            "altids": {
+                "itemid": "c19749c3a2c44fa7a70ea50869dcecbb"
+            },
+            "type": "picture"
+        },
+        "7": {
+            "altids": {
+                "itemid": "ebd4955ab730408f800fd439ccfc0609"
+            },
+            "type": "picture"
+        },
+        "8": {
+            "altids": {
+                "itemid": "87c66a655d78490bad994e1a4c144473"
+            },
+            "type": "picture"
+        }
+    },
+    "body_nitf": "<p>CHICAGO (AP) \u2014 The death of a <a href=\"https://apnews.com/article/migrant-shelter-child-death-chicago-9a8c8e44d5970f478f59d7bc59892a3b\">5-year-old migrant boy</a> and reported illnesses in other children living at a warehouse retrofitted as a shelter has raised fresh concerns about the living conditions and medical care provided for asylum-seekers arriving in Chicago.</p><p>Medical professionals have worried for months about the <a href=\"https://apnews.com/article/immigration-migrants-border-health-care-us-mexico-79353b08f07933f66961a7f07cf3e397\">disjointed healthcare</a> system, saying new arrivals in the U.S. face numerous health issues. For many, the problems are either related to their journey, including trauma, or from living in crowded group settings where infections spread easily and quickly.</p><p>Five-year-old Jean Carlos Martinez was a resident at a shelter in Chicago\u2019s Pilsen neighborhood when he suffered a medical emergency, then was pronounced dead shortly after arriving at Comer Children\u2019s Hospital on Sunday afternoon, the city said. Six more people living in the shelter \u2014 four children and two adults \u2014 were hospitalized this week, according to Chicago Fire Department spokesperson Larry Langford.</p><p>All had been living in the same shelter as Martinez, whose family arrived in Chicago on Nov. 30. The cause of death was still \u201cpending\u201d on Tuesday, according to Cook County medical examiner records.</p><p>While city officials on Tuesday dismissed the notion of an outbreak at the shelter, there have been clusters of illness at other shelters where people sleep on cots close to each other, including chicken pox and hand foot and mouth disease. Area doctors are growing increasingly worried about RSV and COVID-19 this winter.</p><p>\u201cThese are hard environments for people to rest and feel good and be able to take care of themselves,\u201d said Dr. Evelyn Figueroa, who recently toured the shelter where the boy was living. She runs a nearby food pantry and has spent most of her medical career working with homeless, immigrant and low-income populations.</p><p>About 2,300 people are staying at the shelter, a former warehouse near downtown. The space has about 10 isolation rooms for when people get sick, according to Figueroa.</p><p>Questions about the environment for migrants come as Chicago is winding down its <a href=\"https://apnews.com/article/migrants-chicago-wintry-weather-40e9204b3666770298507bd213b98500\">much-maligned</a> practice of using <a href=\"https://apnews.com/article/migrants-police-chicago-immigration-border-6a917f05f71b42e969aff7a149d59b74\">police stations</a> and <a href=\"https://apnews.com/article/migrants-immigration-airports-asylum-chicago-1399cc2447f89fdd3ed7b650ca84bbf5\">airports</a> for temporarily housing migrants arriving in the city. However, its use of shelters \u2014 which range from park district field houses to commercial spaces \u2014 have prompted equal criticism.</p><p>Residents have complained of faulty heat, water leaks, expired food and crowded conditions that are closed to the public, including reporters and some volunteers who were critical in providing medical care at police stations.</p><p>More than 26,000 migrants have arrived in Chicago over the past year by bus and plane with about 14,000 currently in shelters. Roughly 10,000 have been resettled into their own places, which is the city\u2019s ultimate goal. Chicago recently instituted <a href=\"https://apnews.com/article/nyc-migrant-families-city-housing-limits-09cfae1acc86a8bc93ed34b955ffeaed\">a 60-day limit</a> for shelters, with the first batch of evictions taking effect next month.</p><p>In another setback earlier this month, Gov. J.B. Pritzker\u2019s administration announced that it is <a href=\"https://apnews.com/article/migrants-shelter-toxic-soil-chicago-winter-dfe68b9e80d98f6d35451ecaf89c4ac9\">scrapping plans for a temporary winter camp</a> for migrants in the city's Brighton Park neighborhood on the southwest side, citing the risk of contaminants at the former industrial site.</p><p>Some medical professionals worry that more migrants will end up back at police stations or on the street.</p><p>\u201cWe are going to be needed again very shortly,\u201d said Sara Izquierdo, a medical student at the University of Illinois Chicago, who organized <a href=\"https://apnews.com/article/immigration-chicago-migrants-health-care-border-e8d649e3a81b53ab39887740f45d467a\">teams of medics</a> to provide free care at police stations.</p><p>She and others argue that they city hasn\u2019t done enough to provide basic care.</p><p>City officials say each person is evaluated for medical issues when placed at city shelters and the city has partnered with two organizations to provide weekly medical care at shelters.</p><p>The city also pointed to its partnership with Cook County, which set up a <a href=\"https://apnews.com/article/immigration-migrants-border-health-care-us-mexico-79353b08f07933f66961a7f07cf3e397\">clinic exclusively for migrants</a> last year on the city\u2019s northwest side. As many as 100 patients are seen per day for vaccines, routine health concerns like rashes, and referrals for dental care or mental health issues. The clinic has seen more than 18,000 patients overall.</p><p>The Chicago Department of Public Health said Tuesday it didn\u2019t appear the boy died from an infectious disease, though an investigation was ongoing. City officials also said that the other illnesses do not appear to have originated in the same shelter and \u201care consistent with ongoing seasonal respiratory trends.\u201d</p><p>\u201cThere is no evidence of an outbreak at the shelter,\u201d the city said in a statement Tuesday.</p><p>City officials also offered a fuller account of the day the boy died, saying the family left the shelter for the day and returned around 2:30 p.m. About 13 minutes later, shelter staff saw a medical emergency, called 911 and administered first aid, including chest compressions, until medics arrived.</p><p>Mayor Brandon Johnson has directed blame at border states. He told reporters earlier this week that \u201cthe conditions in which people are arriving in Chicago are quite disturbing,\u201d he said. \u201cPeople are showing up in very extreme circumstances. Very very unhealthy.\u201d</p><p>He cited Texas Gov. Greg Abbott's <a href=\"https://apnews.com/article/migrants-new-york-adams-abbott-colombia-58d423ab3e84e5692d50f773803254ee\">practice of busing migrants to northern cities</a> without notice and migrants' strenuous, perilous journeys from their home countries as reasons for the health issues shelter residents are facing.</p><p>\u201cThey're just dropping off people anywhere. Do you understand how raggedy and how evil that is?\u201d Johnson said.</p><p>The shelters are run by a private-staffing company, Favorite Healthcare Staffing, which city officials have said provides some basic medical care and calls ambulances. At the Pilsen shelter, one Chicago organization has helped with medical care a few hours a week.</p><p>The city has <a href=\"https://www.chicago.gov/city/en/sites/texas-new-arrivals/home/cost-dashboard.html\">spent about $94 million</a> for Favorite Healthcare\u2019s services \u2014 nearly 70% of its total spending, despite critics\u2019 claims that Favorite\u2019s <a href=\"https://www.chicagotribune.com/politics/ct-favorite-staffing-migrant-shelter-renewed-20231026-qsorcuwpmrhmjbvidizuoj2wom-story.html\">costs are exorbitant</a> and <a href=\"https://www.chicago.gov/city/en/sites/texas-new-arrivals/home/cost-dashboard.html\">shelter conditions and resident treatment are poor</a>. The company, which staffs the shelter where Martinez had lived, said they are working with the city and other authorities to investigate the incident.</p><p>\u201cWe are heartbroken to learn of the death of a child at a Pilsen shelter on Sunday, and we send our deepest condolences to his loved ones and community. We take the safety and wellbeing of all shelter residents seriously,\u201d Vice President Keenan Driver said in an emailed statement.</p><p>A vigil for the child and family is scheduled for Wednesday evening.</p><p>___</p><p>Savage is a corps member for the Associated Press/Report for America Statehouse News Initiative. <a href=\"https://www.reportforamerica.org/\">Report for America</a> is a nonprofit national service program that places journalists in local newsrooms to report on undercovered issues.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/migrant-boy-death-child-shelter-chicago-de2d8e7766f418ea52eb5218d519c72c",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 5,
+            "reason": "The document discusses the death of a migrant child and the health conditions in shelters, including the spread of illnesses and the adequacy of medical care provided to asylum-seekers. It highlights concerns from medical professionals about the healthcare system and the living conditions that contribute to health issues. The document also mentions specific diseases and the measures taken by the city to address health concerns. All these points are directly related to health, making the document highly relevant to the topic."
+        }
+    }
+}

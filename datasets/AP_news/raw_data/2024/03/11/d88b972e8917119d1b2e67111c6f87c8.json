@@ -1,0 +1,195 @@
+﻿{
+    "altids": {
+        "itemid": "d88b972e8917119d1b2e67111c6f87c8",
+        "etag": "d88b972e8917119d1b2e67111c6f87c8_0a2aza0c0",
+        "friendlykey": "313317991331",
+        "referenceid": "NE--Editorial Rdp"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Opinion",
+    "language": "en",
+    "versioncreated": "2024-03-11T11:10:06Z",
+    "firstcreated": "2024-03-11T05:20:51Z",
+    "editorialrole": "FullStory",
+    "fixture": {
+        "code": "21ea4067bb274c3b805353fb2b99ba70",
+        "name": "Editorial Roundup"
+    },
+    "pubstatus": "usable",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "NE--Editorial Rdp",
+    "headline": "Editorial Roundup: Nebraska",
+    "slugline": "AP-NE--Editorial Rdp",
+    "bylines": [
+        {
+            "by": "By The Associated Press"
+        }
+    ],
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "Editorial Rdp"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "person": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "24e5815e579cea43934a8663b1888f1c",
+            "name": "Pete Ricketts",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "POLITICIAN",
+                "PERSON"
+            ],
+            "associatedstates": [
+                {
+                    "code": "808300b882c610048788df092526b43e",
+                    "name": "Nebraska"
+                }
+            ],
+            "relevance": 56
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "5e3af32f00ad0d418f037f115324362b",
+            "name": "Health care industry",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 53
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86aad5207dac100488ecba7fa5283c3e",
+            "name": "Politics",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 41
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "91767d28b7404685bd47a28350a28e9f",
+            "name": "Taxes",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 67
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "808300b882c610048788df092526b43e",
+            "name": "Nebraska",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -99.75067,
+                    41.50028
+                ]
+            },
+            "relevance": 82,
+            "parentnames": [
+                "United States"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "808300b882c610048788df092526b43e",
+            "name": "Nebraska",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "body_nitf": "<p>Lincoln Journal Star. March 9, 2024.</p><p>Editorial: Piecemeal approach to tax reforms brings danger</p><p>Increase the sales tax by 1 or 2 cents to offset property taxes. Eliminate sales tax exemptions to build receipts to the state general fund. Repeal the inheritance tax. Put a hard cap on property tax growth requests by local government or require those subdivisions to lower their levies in proportion to valuation increases.</p><p>Those are just some of the ideas aimed at restructuring Nebraska\u2019s taxation system being considered by the Legislature this session.</p><p>But those proposals are being considered individually with little regard to the cumulative impact on the state and local government budgets and operations, a method that, in keeping with standard legislative practice, could lead to serious unintended consequences if a handful of those measures are implemented.</p><p>The sales tax increase, which former Gov. Pete Ricketts properly labeled a tax shift, would, for example, favor property owners, especially those who have large, expensive holdings, and make all Nebraskans, especially those who will receive no property tax relief, pay one of the highest rates of sales tax in the country.</p><p>That would have a negative impact on those least able to pay, instantly increasing the cost of living for the underemployed, cash-strapped families and those on fixed incomes.</p><p>And, eliminating select sales tax exemptions, according to the proponents of those who now receive the exemptions, would hit the businesses that sell tax-exempt goods, such as farm machinery, and professions hard, slowing down the state\u2019s economy.</p><p>Repealing the inheritance tax would impact counties, especially in rural areas, likely forcing them to increase property taxes to make up for the lost revenue \u2014 a change that goes in the opposite direction of the proposed sales tax increases.</p><p>Putting a hard cap on local subdivision tax increases, which was deliberately excluded in the property tax relief plan approved by the Legislature last year, will severely hamstring public schools, especially larger districts like Lincoln Public Schools, as would the proposal to tie levies with valuation changes.</p><p>And, if, however unlikely, all of those measures would happen to be approved in the Legislature\u2019s rush to the conclusion of the short session, the combined economic displacements and negative impacts on local governments and schools could create serious issues for individual taxpayers, particularly those with low incomes, businesses and education, which legislators claim to support.</p><p>There\u2019s a simple solution to this jumble of the uncertain impact of tax proposals. Rather than haphazardly pass the tax-related bills, the Legislature should set them aside in favor of a comprehensive study of the state\u2019s tax system, directed to result in a series of property, sales and, perhaps, income tax measures that would be considered in the 2025 session.</p><p>That study would identify how the proposals would work together, anticipate and incorporate ways to prevent unintended consequences of the individual plans and come up with a plan that could receive widespread legislative support from rural and urban interests alike and, importantly, be fair and equitable to all Nebraskans, not just property owners.</p><p>___</p><p>Kearney Hub. March 10, 2024.</p><p>Editorial: KHOP makes big dent in rural health shortages</p><p>Nebraska\u2019s future rests on our state\u2019s ability to attract and retain profession als in key fields. We\u2019re battling for teachers, law officers and attorneys and many other professionals.</p><p>We\u2019re often told about the desperate need for people skilled in the building trades, in business, mechanics and agriculture, to name a few.</p><p>Perhaps the most troubling shortage is the one that has developed in the medical fields. Many Nebraska towns have no doctors. Many need nurses or professionals trained to operate the technology to diagnose and treat illnesses. Without these professionals, our rural communities face an uphill battle recruiting professionals in other fields.</p><p>The need for medical professionals in rural areas ranks as one of the most pressing and difficult to address, but there is good news.</p><p>Last week, the University of Nebraska at Kearney quietly announced that UNK has recruited a record-breaking group of students into the Kearney Health Opportunities Program, its signature health science program.</p><p>According to the announcement, a record-breaking 72 high school seniors have been accepted into KHOP for fall 2024. This year\u2019s number represents a significant increase from 2023 when 56 students were admitted into the program.</p><p>KHOP\u2019s rural roots</p><p>The 72 KHOP students enrolled at UNK for 2024 come from these rural communities: Ashland, Atkinson, Aurora, Bassett, Bee, Bladen, Blair, Blue Hill, Bridgeport, Cambridge, Campbell, Central City, Columbus, Cook, Dannebrog, De Witt, Doniphan, Elgin, Firth, Fremont, Genoa, Grand Island, Hastings, Hebron, Holdrege, Kearney, Laurel, McCool Junction, Miller, Minden, Morrill, Norfolk, North Platte, Ogallala, Osceola, Pickrell, Pierce, St. Paul, Sargent, Seward, Stromsburg, Stuart, Tilden, Waco, Wallace, Western, Wilber, York, Yutan.</p><p>KHOP began in 2010 as a partnership between UNK and the University of Nebraska Medical Center to grow the state\u2019s health care workforce by recruiting and training students from rural Nebraska who are committed to practicing in rural settings.</p><p>The program is based on the belief that students who learn medicine in a rural communities such as Kearney will graduate and decide to practice in rural areas.</p><p>That belief is proving to be valid as a strong majority of KHOP students do remain in rural communities after graduation.</p><p>KHOP aggressively offers incentives to attract students. Financial assistance, academic support and professional development opportunities are available. Many participants receive full-tuition scholarships to UNK and guaranteed admission to UNMC.</p><p>Dental hygiene, dentistry, medical laboratory science, medicine, nursing, occupational therapy, pharmacy, physical therapy, physician assistant and radiography are among the fields available to KHOP students.</p><p>When the Rural Health Education Center that\u2019s under construction at UNK opens, students will be able to train as physicians.</p><p>Instituting the KHOP program was challenging, but under the leadership of Peggy Abels, director of UNK Health Sciences, and the visionaries who supported the strategy to train medical professionals in rural settings, Nebraska is making progress in addressing health care needs.</p><p>This year\u2019s record-setting crop of KHOP students is a giant dose of encouragement, especially as construction is fully under way on the Rural Health Education Center just north of the existing Health Education Center.</p><p>Financial support for the rural health care endeavor will complement existing efforts to address rural Nebraska\u2019s shortage of medical professionals.</p><p>Abels underscored the significance of the record-setting KHOP class for fall 2024.</p><p>\u201cIt\u2019s very promising and exciting to have such a highly talented group of students who are dedicated to practicing health care in rural Nebraska,\u201d she said. \u201cThe KHOP program is an important part of the rural health initiatives on the UNK campus that are designed to alleviate the health care workforce shortages in our state.\u201d</p><p>___</p><p>McCook Gazette. March 4, 2024.</p><p>Editorial: Don\u2019t become a victim of the lates online scams</p><p>Attorney General Mike Hilgers\u2019 call for vigilance during National Consumer Protection Week couldn\u2019t have come at a more crucial time. The prevalence of online fraud, particularly in the form of identity theft, financial scams, and cyber threats, underscores the importance of safeguarding personal information and accounts. However, recent revelations regarding the widespread and evolving nature of cryptocurrency scams, notably the pig butchering scam, demand even greater caution and awareness from consumers.</p><p>The pig butchering scam, originating from Southeast Asia but now impacting victims globally, represents a disturbing trend in online fraud. Victims, often targeted through social media platforms and fake dating profiles, are manipulated into investing in cryptocurrency, only to be left with substantial financial losses when the perpetrators vanish. The sophistication of these scams, coupled with their coercive and exploitative nature, highlights the urgent need for enhanced preventive measures and international cooperation.</p><p>While the Attorney General\u2019s efforts to educate Nebraskans on protecting their privacy and increasing data security are commendable, it\u2019s crucial to recognize the evolving landscape of online fraud. The pig butchering scam serves as a stark reminder of the dangers lurking in cyberspace, where perpetrators exploit vulnerabilities for financial gain, often at the expense of unsuspecting victims.</p><p>In light of these developments, consumers must exercise caution and skepticism when engaging online, particularly with unfamiliar individuals or investment opportunities. Relying on free resources and reporting mechanisms provided by authorities, such as the Consumer Affairs Response Team, can aid in identifying and combating fraudulent activities. Additionally, staying informed through reputable sources and platforms like @ProtectNE on Twitter can help individuals stay ahead of emerging threats.</p><p>Furthermore, the international community must prioritize collaboration and coordination in addressing the root causes of pig butchering scams, including human trafficking and exploitation. Efforts to dismantle fraud networks and hold perpetrators accountable must be intensified to mitigate the far-reaching impact of these crimes.</p><p>The Federal Deposit Insurance Corp. offers these tips to improve your cybersecurity:</p><p>\u2022 Do not open emails from people you don\u2019t know and don\u2019t click any links unless you are absolutely sure it\u2019s safe.</p><p>\u2022 Be careful with links and new website addresses, even if they come from friends. Their email may have been unknowingly compromised.</p><p>(asterisk) Secure your personal information such as your date of birth, Social Security number, account numbers, and passwords; be sure that the website you are on is really secure.</p><p>\u2022 Stay informed on the latest cyber threats. The Cybersecurity and Infrastructure Security Agency (CISA) can provide you with Alerts.</p><p>\u2022 Use Strong Passwords. Strong passwords are critical to online security. Review CISA guidance on Choosing and Protecting Passwords.</p><p>\u2022 Keep your software up to date and maintain preventative software programs. Keep all of your software applications up to date on your computers and mobile devices. Install software that provides antivirus, firewall, and email filter services.</p><p>Update the operating systems on your electronic devices. Make sure your operating systems (OSs) and applications are up to date on all of your electronic devices. Older and unpatched versions of OSs and software are the target of many hacks. Read the CISA security tip on Understanding Patches and Software Updates for more information.</p><p>As Nebraskans and citizens worldwide navigate the complexities of the digital age, exercising caution and vigilance remains our best defense against online fraud. Let National Consumer Protection Week serve as a reminder of our collective responsibility to safeguard personal information, protect against financial scams, and uphold the principles of consumer rights in the digital realm.</p><p>END</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/d88b972e8917119d1b2e67111c6f87c8",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 3,
+            "reason": "The document contains three editorials, only one of which is directly related to health. The editorial from the Kearney Hub discusses the Kearney Health Opportunities Program (KHOP) and its impact on addressing rural health shortages in Nebraska. This section is highly relevant to the topic of health. However, the other two editorials focus on tax reforms and online scams, which are not related to health. Therefore, the overall relevance of the document to the topic of health is moderate."
+        }
+    }
+}

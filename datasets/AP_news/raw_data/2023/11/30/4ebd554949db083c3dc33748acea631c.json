@@ -1,0 +1,219 @@
+﻿{
+    "altids": {
+        "itemid": "4ebd554949db083c3dc33748acea631c",
+        "etag": "4ebd554949db083c3dc33748acea631c_0a2aza0c0",
+        "friendlykey": "615363481569",
+        "referenceid": "GA--Editorial Rdp"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Opinion",
+    "language": "en",
+    "versioncreated": "2023-11-30T12:10:42Z",
+    "firstcreated": "2023-11-30T01:26:55Z",
+    "editorialrole": "FullStory",
+    "fixture": {
+        "code": "21ea4067bb274c3b805353fb2b99ba70",
+        "name": "Editorial Roundup"
+    },
+    "pubstatus": "usable",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "GA--Editorial Rdp",
+    "headline": "Editorial Roundup: Georgia",
+    "slugline": "AP-GA--Editorial Rdp",
+    "bylines": [
+        {
+            "by": "By The Associated Press"
+        }
+    ],
+    "copyrightnotice": "Copyright 2023 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "Editorial Rdp"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "person": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "2cfdce4a18db49bfa2396b31139f7b6a",
+            "name": "Jeff Chapman",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "POLITICIAN",
+                "PERSON"
+            ],
+            "relevance": 37
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "ace74e307f00100486cedf092526b43e",
+            "name": "Immunizations",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 57
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e22df6887de410048fc1df092526b43e",
+            "name": "Women's health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 33
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "d8e6d7087f00100483b7f571351eed07",
+            "name": "Family medicine",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 33
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "084e24e87f00100481c7f571351eed07",
+            "name": "Flu",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 82
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e228bab07de410048fa8df092526b43e",
+            "name": "Lung disease",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 49
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 95
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "dec1cce882af10048320df092526b43e",
+            "name": "Georgia",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -83.50018,
+                    32.75042
+                ]
+            },
+            "relevance": 60,
+            "parentnames": [
+                "United States"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "dec1cce882af10048320df092526b43e",
+            "name": "Georgia",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "body_nitf": "<p>Valdosta Daily Times. November 27, 2023.</p><p>Editorial: Not too late for flu shot</p><p>It is not too late to get a flu shot.</p><p>The stress on the health care system by a very active flu season, persistent COVID-19 and an increase in RSV patients is palpable but the biggest concern is your health and well being.</p><p>While the Centers for Disease Control and Prevention says September and October are generally the best times to take the flu vaccine, it is not too late to get one now.</p><p>Here are the recommendations from the Centers for Disease Control for flu shots:</p><p>\u2014 CDC recommends a yearly flu vaccine as the first and most important step in protecting against flu viruses.</p><p>\u2014 While there are many different flu viruses, a flu vaccine protects against the viruses that research suggests will be most common.</p><p>\u2014 Flu vaccination can reduce flu illnesses, doctors\u2019 visits and missed work and school due to flu, as well as prevent flu-related hospitalizations.</p><p>\u2014 Everyone 6 months of age and older should get a flu vaccine every year before flu activity begins in their community.</p><p>\u2014 Vaccination of high-risk persons is especially important to decrease their risk of severe flu illness.</p><p>\u2014 People at high risk of serious flu complications include young children, pregnant women, people with chronic health conditions such as asthma, diabetes or heart and lung disease, and people 65 years and older.</p><p>\u2014 Vaccination also is important for health care workers and other people who live with or care for high-risk people to keep from spreading flu to them.</p><p>\u2014 Children younger than 6 months are at high risk of serious flu illness but are too young to be vaccinated. People who care for infants should be vaccinated instead.</p><p>Both for those who have and those who have not gotten the flu vaccine this season, the Centers for Disease Control and Prevention offers these recommendations to reduce your chances of getting sick and to manage your sickness if you do:</p><p>\u2014 Try to avoid close contact with sick people.</p><p>\u2014 While sick, limit contact with others as much as possible to keep from infecting them.</p><p>\u2014 If you are sick with flu-like illness, CDC recommends that you stay home for at least 24 hours after your fever is gone except to get medical care or for other necessities. (Your fever should be gone for 24 hours without the use of a fever-reducing medicine.)</p><p>\u2014 Cover your nose and mouth with a tissue when you cough or sneeze. Throw the tissue in the trash after you use it.</p><p>\u2014 Wash your hands often with soap and water. If soap and water are not available, use an alcohol-based hand rub.</p><p>\u2014 Avoid touching your eyes, nose and mouth. Germs spread this way.</p><p>\u2014 Clean and disinfect surfaces and objects that may be contaminated with germs such as the flu.</p><p>It should also be remembered that the hospital emergency room is not the first line of defense for battling the flu. A visit to a primary health care physician or after-hours clinic may be necessary if symptoms warrant but the emergency room should be reserved for emergencies. Fortunately, many of the same practices we used to help mitigate the spread of COVID-19 will also help prevent the spread of the flu \u2014 that is if we simply follow the guidelines. And while we\u2019re on the subject: COVID-19 hasn\u2019t gone away. Consider getting a vaccination against it along with your flu shot.</p><p>___</p><p>Brunswick News. November 27, 2023.</p><p>Editorial: Railroad proposal highlights Georgia\u2019s eminent domain weaknesses</p><p>One of Georgia\u2019s former and most outspoken state senators might have been right after all. Time will tell how accurate former state Sen. Jeff Chapman, R-Brunswick, was in his claim that legislation adopted by the state early in the new century regarding Georgia\u2019s eminent domain laws failed to go far enough in protecting private ownership of property.</p><p>Chapman, of course, is the Glynn County Tax Commissioner today, but before he left the senate for an unsuccessful run for governor, he warned that the state\u2019s revamped eminent domain law lacked strength. At the time, Chapman and others in the General Assembly were reacting to a wrestling match occurring in New London, Connecticut, over the condemnation of private land for what eventually will be a national museum for the U.S. Coast Guard on prime waterfront.</p><p>Today, it mimics a battle being waged in the Georgia upstate that pits private property owners against the Sandersville Railroad, a company that proposes to build a 4.5-mile spur that will connect a rock quarry to a CSX line. Landowners say they do not want a 200-foot wide swath cut through their property for a noisy train. Few can blame these rural property owners for desiring the peace and quiet that can be often found outside municipal areas.</p><p>The Sandersville Railroad says other industries in the area would likely use the rail service. There is also something to be said about limiting heavy truck traffic on the back roads and highways.</p><p>Still, it would be a matter of the government taking land for the benefit of a rock quarry that is owned and operated by a foreign company.</p><p>A hearing officer began taking testimony on Monday. He will eventually make a recommendation to the five-member Georgia Public Service Commission for consideration and a decision.</p><p>People should not be forced to give up or sell what they do not want to give up or sell. They also should not be forced to part with property for what the government considers a \u201cfair\u201d price, which they will have to do if condemned through the strong-arm legal powers of eminent domain.</p><p>END</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/4ebd554949db083c3dc33748acea631c",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 3,
+            "reason": "The document contains two editorials. The first editorial from the Valdosta Daily Times is highly relevant to the topic of health as it discusses the importance of getting a flu shot, provides recommendations from the CDC, and offers tips on how to avoid getting sick. The second editorial from the Brunswick News, however, is not relevant to the topic of health as it discusses Georgia's eminent domain laws and a specific case involving the Sandersville Railroad. Given that only part of the document is relevant to health, the overall relevance is moderate."
+        }
+    }
+}

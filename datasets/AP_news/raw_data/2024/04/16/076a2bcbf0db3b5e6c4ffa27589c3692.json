@@ -1,0 +1,209 @@
+﻿{
+    "altids": {
+        "itemid": "076a2bcbf0db3b5e6c4ffa27589c3692",
+        "etag": "076a2bcbf0db3b5e6c4ffa27589c3692_1a7aza0c0",
+        "friendlykey": "406451737122",
+        "referenceid": "UnitedHealth Group-Cyberattack"
+    },
+    "version": 1,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2024-04-16T15:23:26Z",
+    "firstcreated": "2024-04-16T13:15:58Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "ednote": "Eds: UPDATES: Corrects first-quarter loss to $1.41 billion from $1.2 billion. Adds more details, comments from company officials, updates stock price. Edits for space. With AP photo.",
+    "editorialtypes": [
+        "Lead"
+    ],
+    "signals": [
+        "newscontent"
+    ],
+    "title": "UnitedHealth Group-Cyberattack",
+    "headline": "Cyberattack costs hit UnitedHealth in 1Q that still turns out better than expected",
+    "headline_extended": "UnitedHealth Group trounced first-quarter expectations even as costs from a cyberattack to its Change Healthcare business ate into its performance",
+    "slugline": "AP-UnitedHealth Group-Cyberattack, 1st Ld-Writethru",
+    "description_summary": "UnitedHealth Group trounced first-quarter expectations even as costs from a cyberattack to its Change Healthcare business ate into its performance. The health care giant also said Tuesday that care patterns in the year\u2019s first quarter met its expectations after soaring medical costs at the end of last year surprised Wall Street. UnitedHealth said earlier this year that a ransomware group had gained access to systems of its Change Healthcare business, which provides technology for submitting and processing insurance claims. The attack disrupted payment and claims processing around the country, stressing doctor\u2019s offices and health care systems. Company shares jumped in midday trading.",
+    "bylines": [
+        {
+            "by": "By TOM MURPHY",
+            "title": "AP Health Writer"
+        }
+    ],
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "UnitedHealth Change cyberattack first quarter"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "person": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "ffee89f658a341ed87ee02a8fc279c8d",
+            "name": "Andrew Witty",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "BUSINESS_LEADER",
+                "PERSON"
+            ],
+            "relevance": 63
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "f",
+            "name": "f"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "7077b3c88b6b10048b67a385cd5ce603",
+            "name": "Medical technology",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "5e3af32f00ad0d418f037f115324362b",
+            "name": "Health care industry",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 57
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "c8e409f8858510048872ff2260dd383e",
+            "name": "Business",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 98
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "c8e409f8858510048872ff2260dd383e",
+            "name": "Business",
+            "creator": "Editorial",
+            "editorial_subject": "Business",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "9f12355082c4100486addf092526b43e",
+            "name": "Minnesota",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -94.25055,
+                    46.25024
+                ]
+            },
+            "relevance": 44,
+            "parentnames": [
+                "United States"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "661850e07d5b100481f5c076b8e3055c",
+            "name": "Latin America and Caribbean",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "9f12355082c4100486addf092526b43e",
+            "name": "Minnesota",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "associations": {
+        "1": {
+            "altids": {
+                "itemid": "911175a6ca9a42359d46dfa5a117c39a"
+            },
+            "type": "picture"
+        }
+    },
+    "body_nitf": "<p>UnitedHealth Group trounced first-quarter expectations even as costs from a <a href=\"https://apnews.com/article/change-cyberattack-hospitals-pharmacy-alphv-unitedhealthcare-521347eb9e8490dad695a7824ed11c41\">cyberattack to its Change Healthcare</a> business ate into the company\u2019s performance.</p><p>The health care giant also said Tuesday that care patterns in the year\u2019s first quarter met its expectations after soaring medical costs at the end of last year surprised Wall Street.</p><p>Company shares jumped in midday trading.</p><p>UnitedHealth said earlier this year that a ransomware group had gained access to some of the systems of its Change Healthcare business, which provides technology used to submit and process insurance claims. The attack disrupted payment and claims processing around the country, stressing doctor\u2019s offices and health care systems.</p><p><a href=\"https://apnews.com/article/change-healthcare-cyberattack-federal-government-hhs-88ac99fc0c62e69dc60fc5c39682e859\">Federal civil rights investigators</a> are looking into whether protected health information was exposed in the attack.</p><p>UnitedHealth is still restoring several services from the February attack. It took an $872 million hit from it in the first quarter, but CEO Andrew Witty told analysts on Tuesday that the company expected to bring Change Healthcare back \u201cmuch stronger than it was before.\u201d</p><p>UnitedHealth also booked a roughly $7 billion charge in the quarter for selling a Brazilian health benefits and care provider it bought more than a decade ago.</p><p>Overall the company lost $1.41 billion in the first quarter. Total revenue grew more than 8% to $99.8 billion.</p><p>Adjusted earnings totaled $6.91 per share. That excluded the cost from the sale of the Brazilian business and some of expenses tied to the cyberattack.</p><p>Analysts expected earnings of $6.61 per share on $99.23 billion in revenue.</p><p>UnitedHealth provides health insurance for more than 49 million people in the United States. Its Optum segment also provides care, runs one of the nation\u2019s largest pharmacy benefits management businesses and offers technology services.</p><p>Total costs tied to the cyberattack and recovery amounted to 74 cents per share in the quarter. About two-thirds of that, or 49 cents, was direct response costs that the company excluded from adjusted earnings.</p><p>That includes increased medical expenses the company incurred from suspending its pre-approval or prior authorization requirements for some care.</p><p>UnitedHealth expects the full impact of the cyberattack will amount to a hit of between $1.15 to $1.35 per share to earnings this year.</p><p>The Minnetonka, Minnesota, company on Tuesday also reaffirmed a 2024 earnings forecast it first laid out last fall for adjusted earnings of $27.50 to $28 per share.</p><p>Analysts expect earnings of $27.50 per share.</p><p>Company shares climbed more than 5% to $469.04 in midday trading Tuesday. The Dow Jones Industrial Average, of which UnitedHealth is a member, rose slightly.</p><p>Jefferies analyst David Windley said in a research note that the positive share reaction was not surprising because the stock had been down partially in anticipation of a guidance cut.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/unitedhealth-change-cyberattack-first-quarter-076a2bcbf0db3b5e6c4ffa27589c3692",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 3,
+            "reason": "The document discusses the financial impact of a cyberattack on UnitedHealth Group, including details about the company's performance, revenue, and stock market reaction. While it does touch on aspects of healthcare, such as the disruption of payment and claims processing and the company's health insurance services, the primary focus is on the financial and business implications rather than health itself. Therefore, it is somewhat relevant to the topic of health but not highly focused on it."
+        }
+    }
+}

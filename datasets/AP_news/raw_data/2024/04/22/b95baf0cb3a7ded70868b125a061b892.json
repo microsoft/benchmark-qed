@@ -1,0 +1,270 @@
+﻿{
+    "altids": {
+        "itemid": "b95baf0cb3a7ded70868b125a061b892",
+        "etag": "b95baf0cb3a7ded70868b125a061b892_1a4aza0c0",
+        "friendlykey": "45695090100",
+        "referenceid": "EU--Norway-King"
+    },
+    "version": 1,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2024-04-22T10:32:10Z",
+    "firstcreated": "2024-04-22T08:44:14Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "ednote": "Eds: UPDATES: Adds palace statement saying the king will scale back activities due to his age.",
+    "editorialtypes": [
+        "Lead"
+    ],
+    "signals": [
+        "newscontent"
+    ],
+    "title": "EU--Norway-King",
+    "headline": "Norway\u2019s King Harald, Europe\u2019s oldest monarch, is back at work after pacemaker implants",
+    "headline_extended": "Europe\u2019s oldest monarch, King Harald V of Norway, is resuming work after a long sick leave that followed two pacemaker implants",
+    "slugline": "BC-EU--Norway-King, 1st Ld-Writethru",
+    "description_summary": "Europe\u2019s oldest monarch, King Harald V of Norway, is resuming work after a long sick leave that followed two pacemaker implants. However, the royal household said he would scale back his official activities from now on. On Monday, the 87-year-old Harald is to receive Norwegian military officers. He fell ill in late February during a private holiday in Malaysia, and received a temporary pacemaker there due to a low heart rate. Ten days later, he was given a permanent pacemaker implant in Norway. Harald ascended to the throne following the death of his father, King Olav, in 1991. He has said he has no plans to abdicate.",
+    "located": "COPENHAGEN, Denmark",
+    "datelinelocation": {
+        "city": "Copenhagen",
+        "countrycode": "DNK",
+        "countryname": "Denmark",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                12.56553,
+                55.67594
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "harald king norway malaysia pacemaker sick leave oldest"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "person": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "b22af1d7001c42279c31e53c13fb0c18",
+            "name": "Queen Margrethe II",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "GOVERNMENT_FIGURE",
+                "PERSON",
+                "ROYALTY"
+            ],
+            "relevance": 35
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "76f2f7205c8c458b98d1fbb4d51d7492",
+            "name": "Harald V",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "GOVERNMENT_FIGURE",
+                "PERSON"
+            ],
+            "relevance": 86
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "i",
+            "name": "i"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "90aeac5089ef10048f63d56c852d093e",
+            "name": "Royalty",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 37
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "0d1cc8008c1e10048bb0a13d9888b73e",
+            "name": "Prostheses",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 48
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "bb2d2c5f441a452cb24bb511a2ab5eea",
+            "name": "World news",
+            "creator": "Editorial",
+            "editorial_subject": "World news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "c36108787eff100484d0df092526b43e",
+            "name": "Oslo",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "662161307d5b100482dcc076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "9d26a20b35f0484a891740f8189d4c7b",
+                "name": "City"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    10.74609,
+                    59.91273
+                ]
+            },
+            "relevance": 62,
+            "parentnames": [
+                "Norway"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "662161307d5b100482dcc076b8e3055c",
+            "name": "Norway",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661850e07d5b100481f4c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "01f56e0e654841eca2e69bf2cbcc0526",
+                "name": "Nation"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    10,
+                    62
+                ]
+            },
+            "relevance": 90,
+            "parentnames": [
+                "Europe"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "661850e07d5b100481f4c076b8e3055c",
+            "name": "Europe",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "locationtype": {
+                "code": "976d112cd5c3497ea180aeecab922c6b",
+                "name": "Continent"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    9.14062,
+                    48.69096
+                ]
+            },
+            "relevance": 78
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "661850e07d5b100481f4c076b8e3055c",
+            "name": "Europe",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "associations": {
+        "1": {
+            "altids": {
+                "itemid": "441d96b1ad16498a95c7cd272debb8a3"
+            },
+            "type": "picture"
+        }
+    },
+    "body_nitf": "<p>COPENHAGEN, Denmark (AP) \u2014 Europe\u2019s oldest monarch, King Harald V of Norway, returned to work Monday after a long sick leave following two surgeries to implant pacemakers, as the royal household said he would scale back his official activities from now on.</p><p>The first scheduled tasks for Harald, 87, is to receive Norwegian military officers at the royal palace in Oslo, according to the Norwegian royal calendar.</p><p>\u201cThe king will make adjustments to his program in the future, due to his age. This will entail a permanent reduction in the number and scope of activities in which the king participates,\u201d the royal household said in a statement. \u201cPractical arrangements will also be made in the implementation of his official activity.\u201d</p><p>Harald repeatedly has said he has no plans to abdicate, unlike his second cousin Queen Margrethe II of Denmark, who <a href=\"https://apnews.com/article/denmark-queen-king-margrethe-frederik-abdication-22d9356ab4bad4b058b2305fa8730a27\">stepped down earlier this year</a>.</p><p>Harald fell ill in late February during a private holiday with his wife, Queen Sonja, on the Malaysian resort island of Langkawi. He <a href=\"https://apnews.com/article/norway-king-harald-malaysia-hospital-pacemaker-heart-b68e290c6bbfc4c6a055b1137e65ee3b\">received a temporary pacemaker there due to a low heart rate</a> on March 2.</p><p>Harald returned to Norway aboard a medical airplane and was immediately transferred to a hospital. He underwent a second surgey to receive a permanent pacemaker 10 days later at Oslo\u2019s university hospital.</p><p>At first, he was expected to be on sick leave for two weeks, but that was extended several times. During that time, his 50-year-old son, Crown Prince Haakan, has been assuming the king\u2019s duties.</p><p>Harald\u2019s duties as Norway\u2019s head of state are ceremonial and he holds no political power. He ascended to the throne following the death of his father, King Olav, in 1991.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/harald-king-norway-malaysia-pacemaker-sick-leave-oldest-b95baf0cb3a7ded70868b125a061b892",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 4,
+            "reason": "The document discusses King Harald V of Norway's return to work after undergoing surgeries to implant pacemakers. It details his health condition, the medical procedures he underwent, and the impact on his official duties. The focus on his health issues and medical treatment makes the document relevant to the topic of Health."
+        }
+    }
+}

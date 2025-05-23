@@ -1,0 +1,193 @@
+﻿{
+    "altids": {
+        "itemid": "8fcb75397dd7085975e990a3a7b3adba",
+        "etag": "8fcb75397dd7085975e990a3a7b3adba_0a4aza0c0",
+        "friendlykey": "313819747422",
+        "referenceid": "ML--Iraq-Hospital Fire"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2024-01-08T21:57:35Z",
+    "firstcreated": "2024-01-08T21:57:34Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "ML--Iraq-Hospital Fire",
+    "headline": "Four premature babies die in hospital fire in Iraq",
+    "headline_extended": "Health officials say a fire erupted at a hospital in southern Iraq, sending smoke through a maternity ward and killing four premature babies",
+    "slugline": "BC-ML--Iraq-Hospital Fire",
+    "description_summary": "Health officials say a fire erupted at a hospital in southern Iraq, sending smoke through a maternity ward and killing four premature babies. Iraqi health minister Saleh al-Hasnawi tells journalists at the scene that the fire at the Women and Children\u2019s Hospital in Diwaniyiah started at a pile of debris belonging to a company working on renovations at the hospital. Al-Hasnawi says the hospital building did not burn but was filled with smoke, and that the four infants died from chest problems as a result of smoke inhalation. Some other patients suffered minor injuries.",
+    "bylines": [
+        {
+            "by": "By ABDULRAHMAN ZEYAD",
+            "title": "Associated Press"
+        }
+    ],
+    "located": "BAGHDAD",
+    "datelinelocation": {
+        "city": "Baghdad",
+        "countrycode": "IRQ",
+        "countryname": "Iraq",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                44.40088,
+                33.34058
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "iraq fire hospital premature babies"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "i",
+            "name": "i"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "394e30d2e3154229adc5f260b483adaa",
+            "name": "Premature births",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 90
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 71
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "bb2d2c5f441a452cb24bb511a2ab5eea",
+            "name": "World news",
+            "creator": "Editorial",
+            "editorial_subject": "World news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "661dcb387d5b1004827ec076b8e3055c",
+            "name": "Iraq",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661850e07d5b100481f6c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "01f56e0e654841eca2e69bf2cbcc0526",
+                "name": "Nation"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    44,
+                    33
+                ]
+            },
+            "relevance": 54,
+            "parentnames": [
+                "Middle East"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "661850e07d5b100481f6c076b8e3055c",
+            "name": "Middle East",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "associations": {
+        "1": {
+            "altids": {
+                "itemid": "dabda572c7d749ff88af6f3ed3cb7c3a"
+            },
+            "type": "picture"
+        }
+    },
+    "body_nitf": "<p>BAGHDAD (AP) \u2014 A fire erupted Monday evening at a hospital in southern Iraq, sending smoke through a maternity ward and killing four babies who had been born prematurely, health officials said.</p><p>The fire started at a pile of debris belonging to a construction company working on renovations at Women and Children\u2019s Hospital in Diwaniyiah, Iraqi Health Minister Saleh al-Hasnawi told journalists at the scene.</p><p>The hospital building did not burn but it was filled with smoke, and the four infants died of chest problems as a result of smoke inhalation, Al-Hasnawi said. Some other patients suffered minor injuries.</p><p>Iraq\u2019s Red Crescent Society said in a statement that its teams successfully evacuated 150 children and 190 relatives from the hospital. The Red Crescent said the fire might have been triggered by an electrical problem.</p><p>Prime Minister Mohammed Shia al-Sudani's office directed local authorities and the health ministry to open an investigation into the circumstances of the fire, the state-run Iraqi News Agency reported. Officials overseeing the hospital were suspended pending the outcome of the investigation.</p><p>Electrical fires, often due to inadequate maintenance and substandard wiring, pose a recurrent threat in Iraq, with the absence of proper fire escapes further compounding the risk. Construction companies and providers of building materials often neglect safety standards, contributing to the hazards.</p><p>In 2016, <a href=\"https://apnews.com/general-news-7fc4d09f034546e2a94833b2553f0cc6\">a fire ripped through a maternity ward</a> at a Baghdad hospital overnight, killing 12 newborn babies.</p><p>More recently, in September, <a href=\"https://apnews.com/article/iraq-wedding-fire-christians-investigation-d984d03d29d23fdfe5b99981fec93888\">more than 100 people died</a> in a blaze ignited by fireworks during a wedding ceremony in the northern Iraqi town of Qaraqosh.</p><p>\u2014\u2014-</p><p>Associated Press staff writer Qassim Abdul-Zahra contributed to this report.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/iraq-fire-hospital-premature-babies-8fcb75397dd7085975e990a3a7b3adba",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 3,
+            "reason": "The document discusses a tragic incident involving a fire at a hospital in Iraq, which resulted in the deaths of four premature babies. It provides details about the cause of the fire, the response by health officials, and the broader context of electrical fires in Iraq. While the primary focus is on the fire incident, it is relevant to health as it involves a hospital setting, the impact on patients, and the health implications of smoke inhalation. However, it does not delve deeply into broader health topics or issues beyond this specific event."
+        }
+    }
+}

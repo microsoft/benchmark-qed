@@ -1,0 +1,204 @@
+﻿{
+    "altids": {
+        "itemid": "5fa61f4752bcd9af267b088fe14d63ad",
+        "etag": "5fa61f4752bcd9af267b088fe14d63ad_0a4aza0c0",
+        "friendlykey": "232252771732",
+        "referenceid": "EU--Czech-Zeman"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2024-04-03T13:03:53Z",
+    "firstcreated": "2024-04-03T13:03:52Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "ednote": "Eds: UPDATES: Updates Media.",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "EU--Czech-Zeman",
+    "headline": "Former Czech President Milos Zeman released from a hospital after surgery for a blood clot",
+    "headline_extended": "Former Czech President Milos Zeman has been released from a hospital following surgery for a blood clot in his leg",
+    "slugline": "AP-EU--Czech-Zeman",
+    "description_summary": "Former Czech President Milos Zeman has been released from a hospital following surgery for a blood clot in his leg. That's according to the director of Motol University Hospital in Prague, who says Zeman will now recuperate at home. Doctors at the clinic discovered during a medical check on March 14 that Zeman had an insufficient blood supply in one of his legs because of the blood clot and immediately operated on him. The supply of blood was restored during the operation but Zeman remained in serious but stable condition for days. Zeman\u2019s second and final term in the largely ceremonial post of president ended in March last year.",
+    "located": "PRAGUE",
+    "datelinelocation": {
+        "city": "Prague",
+        "countrycode": "CZE",
+        "countryname": "Czech Republic",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                14.42076,
+                50.08804
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "czech former president zeman"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "person": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e9f4f3f4da234318a0a10d436f19b4ae",
+            "name": "Milos Zeman",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "POLITICIAN",
+                "PERSON"
+            ],
+            "relevance": 94
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "i",
+            "name": "i"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 89
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "468257dba1c848ca93ba314d4ce86539",
+            "name": "Surgery",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 48
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "bb2d2c5f441a452cb24bb511a2ab5eea",
+            "name": "World news",
+            "creator": "Editorial",
+            "editorial_subject": "World news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "886ab6587efd10048339df092526b43e",
+            "name": "Prague",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661c21707d5b10048259c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "9d26a20b35f0484a891740f8189d4c7b",
+                "name": "City"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    14.42076,
+                    50.08804
+                ]
+            },
+            "relevance": 70,
+            "parentnames": [
+                "Czech Republic"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "661850e07d5b100481f4c076b8e3055c",
+            "name": "Europe",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "associations": {
+        "1": {
+            "altids": {
+                "itemid": "bffa77c7b5694348a138b5c5c3dcc19c"
+            },
+            "type": "picture"
+        }
+    },
+    "body_nitf": "<p>PRAGUE (AP) \u2014 Former Czech President Milos Zeman was released from a hospital Wednesday following <a href=\"https://apnews.com/article/former-czech-president-zeman-surgery-bb387ad7e080d3715423f671b989351f\">surgery for a blood clot</a> in his leg.</p><p>Miloslav Ludvik, director of Motol University Hospital in Prague, said Zeman will now recuperate at home.</p><p>Doctors at the clinic discovered during a medical check on March 14 that Zeman had an insufficient blood supply in one of his legs because of the blood clot and immediately operated on him.</p><p>The supply of blood was restored during the operation but Zeman, 79, remained in serious but stable condition for days.</p><p>Zeman used to be a heavy smoker and drinker and suffers from diabetes and neuropathy. He has been hospitalized several times.</p><p>He has trouble walking and has been using a wheelchair.</p><p><a href=\"https://apnews.com/article/czech-president-milos-zeman-32bc8395516a9eff2723f3f5d57b1620\">Zeman\u2019s second and final term</a> in the largely ceremonial post of president ended in March last year. In office, he sought closer ties with China and was a leading pro-Russian voice in EU politics.</p><p>After <a href=\"https://apnews.com/hub/ukraine\">Russia invaded Ukraine in 2022</a>, Zeman condemned the \u201cunprovoked act of aggression.\u201d He opposed initial EU sanctions against Russia after its 2014 annexation of Crimea.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/czech-former-president-zeman-5fa61f4752bcd9af267b088fe14d63ad",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 5,
+            "reason": "The document discusses the health condition of former Czech President Milos Zeman, including details about his recent surgery for a blood clot, his medical history, and his current state of health. It provides specific information about his health issues, treatments, and recovery process, which are directly related to the topic of health."
+        }
+    }
+}

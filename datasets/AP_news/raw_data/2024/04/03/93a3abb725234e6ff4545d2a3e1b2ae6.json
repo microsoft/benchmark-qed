@@ -1,0 +1,298 @@
+﻿{
+    "altids": {
+        "itemid": "93a3abb725234e6ff4545d2a3e1b2ae6",
+        "etag": "93a3abb725234e6ff4545d2a3e1b2ae6_0a10aza0c0",
+        "friendlykey": "593390414541",
+        "referenceid": "US--Election 2024-Boebert-Hospitalized"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2024-04-03T15:45:09Z",
+    "firstcreated": "2024-04-03T15:45:08Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "US--Election 2024-Boebert-Hospitalized",
+    "headline": "US Rep. Lauren Boebert recovering from blood clot surgery",
+    "headline_extended": "Republican U.S. Rep. Lauren Boebert underwent surgery Tuesday in Colorado for a blood clot in her leg",
+    "slugline": "AP-US--Election 2024-Boebert-Hospitalized",
+    "description_summary": "Republican U.S. Rep. Lauren Boebert underwent surgery Tuesday in Colorado for a blood clot in her leg. The congresswoman's campaign said she is expected to make a full recovery. Boebert, a MAGA rabble-rouser, has represented the same Colorado House district since 2020. She is also running in the Republican primary race to fill former Rep. Ken Buck\u2019s seat in a different district across the state. The congresswoman was admitted to a hospital in northern Colorado on Monday after severe swelling in her left leg. Doctors discovered an acute blood clot with a CT scan.",
+    "bylines": [
+        {
+            "by": "By JESSE BEDAYN",
+            "title": "Associated Press/Report for America"
+        }
+    ],
+    "located": "DENVER",
+    "datelinelocation": {
+        "city": "Denver",
+        "countryareacode": "CO",
+        "countryareaname": "Colorado",
+        "countrycode": "USA",
+        "countryname": "United States",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                -104.9847,
+                39.73915
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "Congresswoman Lauren Boebert surgery election 2024"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "person": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "c40479c959ca434c9b257f5fad43f1a0",
+            "name": "Ken Buck",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "POLITICIAN",
+                "PERSON"
+            ],
+            "associatedstates": [
+                {
+                    "code": "902a5eb082af1004828adf092526b43e",
+                    "name": "Colorado"
+                }
+            ],
+            "relevance": 43
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "1dcb3db5148e4fee80a5191e3abf9a35",
+            "name": "Lauren Boebert",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "POLITICIAN",
+                "PERSON"
+            ],
+            "relevance": 90
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "a",
+            "name": "a"
+        },
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "p",
+            "name": "p"
+        },
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 61
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86aad5207dac100488ecba7fa5283c3e",
+            "name": "Politics",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 86
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "468257dba1c848ca93ba314d4ce86539",
+            "name": "Surgery",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 68
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86aee4307dac10048901ba7fa5283c3e",
+            "name": "Elections",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 47
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "24e61d6d4e654ae6bda1f1558c8cc1f3",
+            "name": "2024 United States presidential election",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 47
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86aad5207dac100488ecba7fa5283c3e",
+            "name": "Politics",
+            "creator": "Editorial",
+            "editorial_subject": "Politics",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "902a5eb082af1004828adf092526b43e",
+            "name": "Colorado",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -105.50083,
+                    39.00027
+                ]
+            },
+            "relevance": 79,
+            "parentnames": [
+                "United States"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "902a5eb082af1004828adf092526b43e",
+            "name": "Colorado",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661850e07d5b100481f5c076b8e3055c",
+            "name": "Latin America and Caribbean",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "associations": {
+        "1": {
+            "altids": {
+                "itemid": "edc647a31fa44b0db965c64a2891d309"
+            },
+            "type": "picture"
+        }
+    },
+    "body_nitf": "<p>DENVER (AP) \u2014 Republican U.S. Rep. Lauren Boebert underwent surgery Tuesday in Colorado for a blood clot in her leg and is expected to make a full recovery, her campaign said in a news release.</p><p>Boebert, a MAGA rabble-rouser, has represented the same Colorado House district since 2020 and is now also <a href=\"https://apnews.com/article/lauren-boebert-election-2024-primary-colorado-congress-4f63a797ca66af5e0217fb0901b7d016\">running in the Republican primary</a> race to fill former Rep. Ken Buck's <a href=\"https://apnews.com/article/lauren-boebert-district-colorado-republican-election-58cf21682012023f1362a01932909d36\">seat in a different</a> district across the state.</p><p>The congresswoman was admitted to a hospital in northern Colorado on Monday after severe swelling in her left leg. Doctors discovered an acute blood clot with a CT scan, and diagnosed Boebert with May-Thurner Syndrome, her campaign said.</p><p>The campaign said the condition could've been caused by dehydration, travel and extended periods of sitting.</p><p>The surgery removed the clot and put in a stent. In the news release, hospitalist Dr. Rebecca Bade said that those who undergo the surgery to restore blood flow and recover are able live and work as usual. Boebert thanked Bade and the medical team.</p><p>The congresswoman has received flak in recent months over her decision to switch districts after she nearly lost her seat to a Democrat in 2022. That's piled on top of a chaotic year for Boebert, with a <a href=\"https://apnews.com/article/lauren-boebert-jayson-restraining-order-exhusband-a85ca45070da98a9f55a938e0bd931dd\">very public divorce</a> and embarrassing moment at <a href=\"https://apnews.com/article/boebert-gop-voters-campaign-apology-reelection-frisch-af8cf7cb563e6b97bc75f3e8b849281c\">Beetlejuice with a date</a>.</p><p>Still, her near-national name recognition and support from former President Donald Trump are expected to be boons in a race against lesser known, local Republicans.</p><p>If Boebert wins the primary in June, she'll likely secure the seat in the general election against a Democrat in a dark red district. ___</p><p>Bedayn is a corps member for the Associated Press/Report for America Statehouse News Initiative. <a href=\"https://www.reportforamerica.org/\">Report for America</a> is a nonprofit national service program that places journalists in local newsrooms to report on undercovered issues.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/congresswoman-lauren-boebert-surgery-election-2024-93a3abb725234e6ff4545d2a3e1b2ae6",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 4,
+            "reason": "The document primarily focuses on U.S. Rep. Lauren Boebert's surgery for a blood clot and her recovery. It provides details about her medical condition, the surgery performed, and her expected recovery. While the document also touches on her political career and personal life, the main focus is on her health issue and treatment. Therefore, it is relevant to the topic of health, but not exclusively so, as it includes significant political context."
+        }
+    }
+}

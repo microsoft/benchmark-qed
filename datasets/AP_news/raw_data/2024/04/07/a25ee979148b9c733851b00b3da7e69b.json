@@ -1,0 +1,232 @@
+﻿{
+    "altids": {
+        "itemid": "a25ee979148b9c733851b00b3da7e69b",
+        "etag": "a25ee979148b9c733851b00b3da7e69b_0a8aza0c0",
+        "friendlykey": "21674777413",
+        "referenceid": "US--Addiction Obituary-Lawsuit"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2024-04-07T19:24:52Z",
+    "firstcreated": "2024-04-07T19:24:51Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "US--Addiction Obituary-Lawsuit",
+    "headline": "Massachusetts city is set to settle a lawsuit in the death of an opioid-addicted woman",
+    "headline_extended": "Relatives of a Vermont woman whose obituary drew national attention for its candid and heart-breaking discussion of her opioid addiction appear to have reached a settlement in a lawsuit over her death",
+    "slugline": "AP-US--Addiction Obituary-Lawsuit",
+    "description_summary": "Relatives of a Vermont woman whose obituary drew national attention for its candid and heart-breaking discussion of her opioid addiction appear to have reached a settlement in a lawsuit over her death. The family sued the city of Springfield, Massachusetts, and law enforcement, accusing them of failing to provide adequate medical care. The family of Madelyn Linsenmeir accused law enforcement of ignoring the 30-year-old mother\u2019s pleas for help before she died of an infected heart valve. Court documents indicate the Springfield City Council is scheduled to consider the settlement involving the city and three police employees. The deal doesn\u2019t cover the sheriff\u2019s office or its workers, who were also sued.",
+    "located": "SPRINGFIELD, Mass.",
+    "datelinelocation": {
+        "city": "Springfield",
+        "countryareacode": "MA",
+        "countryareaname": "Massachusetts",
+        "countrycode": "USA",
+        "countryname": "United States",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                -72.58981,
+                42.10148
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "Addiction obituary death lawsuit Vermont Massachusetts"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "a",
+            "name": "a"
+        },
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "5898d3303b1e4dfc9e4ae39ed34f3378",
+            "name": "Lawsuits",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 53
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Editorial",
+            "editorial_subject": "Health",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a93e7d56e02e4a41b933d4150aa249f4",
+            "name": "Springfield",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "bed6942882b310048501df092526b43e"
+            ],
+            "locationtype": {
+                "code": "9d26a20b35f0484a891740f8189d4c7b",
+                "name": "City"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -72.58981,
+                    42.10148
+                ]
+            },
+            "relevance": 89,
+            "parentnames": [
+                "Massachusetts"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "bed6942882b310048501df092526b43e",
+            "name": "Massachusetts",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -71.10832,
+                    42.36565
+                ]
+            },
+            "relevance": 70,
+            "parentnames": [
+                "United States"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "bed6942882b310048501df092526b43e",
+            "name": "Massachusetts",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "d2f8d8a882c710048915df092526b43e",
+            "name": "Vermont",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661850e07d5b100481f5c076b8e3055c",
+            "name": "Latin America and Caribbean",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "body_nitf": "<p>SPRINGFIELD, Mass. (AP) \u2014 Relatives of a Vermont woman whose obituary drew national attention for its candid and heart-breaking discussion of her opioid addiction have reached a settlement with some of the parties who were sued for allegedly failing to provide adequate medical care.</p><p>The family of Madelyn Linsenmeir <a href=\"https://apnews.com/general-news-94f098e35f2937d8787a95000131f174\">sued the city of Springfield, Massachusetts,</a> and the Hampden County Sheriff's Department, saying law enforcement officials ignored the 30-year-old mother\u2019s pleas for help before she died of an infected heart valve.</p><p>The Springfield City Council is scheduled this week to take up the proposed settlement involving the city and three police employees, according to a court document. The settlement doesn't cover the sheriff's office.</p><p>Linsenmeir\u2019s obituary <a href=\"https://apnews.com/1b053371a99b48c49a959d82a677230d\">was shared widely</a> for its blunt discourse on her struggle with drug addiction, encouraging readers to see addiction as a disease and \"not a choice or a weakness.\"</p><p>It urged workers in rehabilitation settings, hospitals, jails and courts to treat people battling substance use disorder with compassion and respect.</p><p>\u201cIf instead you see a junkie or thief or liar in front of you rather than a human being in need of help, consider a new profession,\" the obituary said.</p><p>The lawsuit filed by the American Civil Liberties Union of Massachusetts and Prisoners\u2019 Legal Services of Massachusetts contended Linsenmeir was arrested in September 2018 and charged with being a fugitive from a warrant in New Hampshire and giving a false name. Video after her arrest shows Linsenmeir telling police she was in pain, and \u201cmight need to go the hospital.\u201d</p><p>She was taken to the Western Massachusetts Regional Women\u2019s Correctional Center, where the plaintiffs contend she didn't receive appropriate care. On Oct. 4, medical staff saw that she was in distress, and she was taken to the hospital, according to the lawsuit. She died there days later while in the custody of the sheriff\u2019s office.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/addiction-obituary-death-lawsuit-vermont-massachusetts-a25ee979148b9c733851b00b3da7e69b",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 4,
+            "reason": "The document discusses the settlement of a lawsuit related to the death of a woman who was addicted to opioids. It touches on issues of medical care, addiction treatment, and the responsibilities of law enforcement and medical staff. These topics are relevant to health, particularly in the context of substance use disorder and the healthcare system's response to addiction. However, the primary focus is on the legal proceedings and the specific case rather than broader health issues or policies."
+        }
+    }
+}

@@ -1,0 +1,328 @@
+﻿{
+    "altids": {
+        "itemid": "00b50f366e3928ead7213a2da5f51f84",
+        "etag": "00b50f366e3928ead7213a2da5f51f84_6a5aza0c0",
+        "friendlykey": "252571810896",
+        "referenceid": "EU--Britain-COVID Inquiry"
+    },
+    "version": 6,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2023-12-06T17:19:35Z",
+    "firstcreated": "2023-12-06T09:36:19Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "ednote": "Eds: UPDATES: This story has been updated to add a video.",
+    "editorialtypes": [
+        "Lead"
+    ],
+    "signals": [
+        "newscontent"
+    ],
+    "title": "EU--Britain-COVID Inquiry",
+    "headline": "Former UK Prime Minister Boris Johnson admits to making mistakes but defends COVID record at inquiry",
+    "headline_extended": "Former Prime Minister Boris Johnson has acknowledged that his government was too slow to grasp the scale of the COVID-19 crisis",
+    "slugline": "BC-EU-Britain-COVID-Inquiry, 6th Ld-Writethru",
+    "description_summary": "Former Prime Minister Boris Johnson has acknowledged that his government was too slow to grasp the scale of the COVID-19 crisis. But he defended his handling of the pandemic and skirted questions about whether any of his decisions had contributed to the country\u2019s high coronavirus death toll. Johnson was grilled Wednesday under oath by lawyers at a public inquiry into Britain's handling of the pandemic. Johnson opened his testimony with an apology \u201cfor the pain and the loss and the suffering of the COVID victims.\u201d He said the government \u201cunderestimated the scale and the pace of the challenge.\u201d Former colleagues, aides and advisers have painted an unflattering picture of him over weeks of testimony.",
+    "bylines": [
+        {
+            "by": "By JILL LAWLESS",
+            "title": "Associated Press"
+        }
+    ],
+    "located": "LONDON",
+    "datelinelocation": {
+        "city": "London",
+        "countrycode": "GBR",
+        "countryname": "United Kingdom",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                -0.12574,
+                51.50853
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2023 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "UK covid19 inquiry boris johnson coronavirus"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "person": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f6ffc0ec3f804dc6bef43952dc94cf01",
+            "name": "Boris Johnson",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "GOVERNMENT_FIGURE",
+                "PERSON"
+            ],
+            "relevance": 93
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "eccdb96e986244ed8fc4c0f7d5e5d478",
+            "name": "Matt Hancock",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "POLITICIAN",
+                "PERSON"
+            ],
+            "relevance": 42
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "i",
+            "name": "i"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "b17e2751b26d4523a2c99d79e04747ee",
+            "name": "COVID-19 pandemic",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 60
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86aad5207dac100488ecba7fa5283c3e",
+            "name": "Politics",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 47
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Editorial",
+            "editorial_subject": "Health",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "bb2d2c5f441a452cb24bb511a2ab5eea",
+            "name": "World news",
+            "creator": "Editorial",
+            "editorial_subject": "World news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "organisation": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "4bdfabef1bb34b199c33df280bb8e4fc",
+            "name": "United Kingdom government",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 93
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "66219fb07d5b100482e2c076b8e3055c",
+            "name": "United Kingdom",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661850e07d5b100481f4c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "01f56e0e654841eca2e69bf2cbcc0526",
+                "name": "Nation"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -4,
+                    54
+                ]
+            },
+            "relevance": 79,
+            "parentnames": [
+                "Europe"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "661850e07d5b100481f4c076b8e3055c",
+            "name": "Europe",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "associations": {
+        "1": {
+            "altids": {
+                "itemid": "96ff1c7f6ba141c197a6a1c4e1fb57da"
+            },
+            "type": "picture"
+        },
+        "2": {
+            "altids": {
+                "itemid": "f752ba86bc914c56a6943942aa718083"
+            },
+            "type": "picture"
+        },
+        "3": {
+            "altids": {
+                "itemid": "4d63cb6e93fe4ae4a21ccbfa48c3c7eb"
+            },
+            "type": "picture"
+        },
+        "4": {
+            "altids": {
+                "itemid": "326f03a121f5438ca8b05a5d5b2c27c7"
+            },
+            "type": "picture"
+        },
+        "5": {
+            "altids": {
+                "itemid": "424145792fde4d8ea332e774d953e459"
+            },
+            "type": "picture"
+        },
+        "6": {
+            "altids": {
+                "itemid": "adfb367fe411420882a8f2b4d5ecb202"
+            },
+            "type": "picture"
+        },
+        "7": {
+            "altids": {
+                "itemid": "c0bc3134e894459c975d1dde959ef499"
+            },
+            "type": "picture"
+        },
+        "8": {
+            "altids": {
+                "itemid": "517f9c211ce5440b903cc2745a191ede"
+            },
+            "type": "picture"
+        },
+        "9": {
+            "altids": {
+                "itemid": "d0d5985c4fd44aa6a6165afd619a5949"
+            },
+            "type": "picture"
+        },
+        "10": {
+            "altids": {
+                "itemid": "11f86300002d455d9d3b3386f3617267"
+            },
+            "type": "picture"
+        },
+        "11": {
+            "altids": {
+                "itemid": "b82b3692128e404e92e57220edf2eda2"
+            },
+            "type": "picture"
+        },
+        "12": {
+            "altids": {
+                "itemid": "b65824cb3b694b57bde8db59dba8623b"
+            },
+            "type": "picture"
+        },
+        "13": {
+            "altids": {
+                "itemid": "28b19abb4f1f4548a86d1b1f86ab7b85"
+            },
+            "type": "picture"
+        },
+        "14": {
+            "altids": {
+                "itemid": "868fba33ea2b480eba7d6348f875aea6"
+            },
+            "type": "video"
+        }
+    },
+    "body_nitf": "<p>LONDON (AP) \u2014 Former U.K. Prime Minister <a href=\"https://apnews.com/hub/boris-johnson\">Boris Johnson</a> acknowledged Wednesday that his government was too slow to grasp the extent of the <a href=\"https://apnews.com/hub/coronavirus-pandemic\">COVID-19</a> crisis, but skirted questions about whether his indecisiveness had cost thousands of lives.</p><p>Testifying under oath at Britain's COVID-19 public inquiry, Johnson acknowledged that \u201cwe underestimated the scale and the pace of the challenge\u201d when reports of a new virus began to emerge from China in early 2020.</p><p>The \u201cpanic level was not sufficiently high,\u201d he said.</p><p><a href=\"https://apnews.com/article/uk-covid-inquiry-matt-hancock-a5c6a465f41ef6ea430d557888138d6d\">Ex-Health Secretary Matt Hancock</a> told the inquiry last week that he had tried to raise the alarm inside the government, saying thousands of lives could have been saved by putting the country under lockdown a few weeks earlier than the eventual date of March 23, 2020.</p><p>The United Kingdom went on to have one of Europe\u2019s longest and strictest lockdowns, as well as one of the continent's <a href=\"https://apnews.com/article/britain-uk-covid-inquiry-hancock-643c9a9b126de8bbe49b34dd8d382a08\">highest COVID-19 death tolls</a>, with the virus recorded as a cause of death for more than 232,000 people.</p><p>Johnson conceded that the government had \u201cmade mistakes,\u201d but emphasized collective failure rather than his own errors. He said ministers, civil servants and scientific advisers had failed to sound a \u201cloud enough klaxon of alarm\u201d about the virus.</p><p>\u201cI was not being informed that this was something that was going to require urgent and immediate action,\" he said.</p><p>Grilled by inquiry lawyer Hugo Keith, Johnson acknowledged that he didn't attend any of the government\u2019s five crisis meetings on the new virus in February 2020, and only \u201conce or twice\u201d looked at meeting minutes from the government\u2019s scientific advisory group. He said that he relied on \u201cdistilled\u201d advice from his science and medicine advisers.</p><p>Anna-Louise Marsh-Rees, whose father died during the pandemic, said that Johnson came across as \u201ccasual, careless, chaotic, clueless.\u201d</p><p>\u201cIt just feels like he was living under a rock,\u201d she said outside the hearing.</p><p>Johnson started his testimony with an apology \u201cfor the pain and the loss and the suffering of the COVID victims,\u201d though not for any of his own actions. Four people stood up in court as he spoke, holding signs saying: \u201cThe Dead can\u2019t hear your apologies,\" before being escorted out by security staff.</p><p>\u201cInevitably, in the course of trying to handle a very, very difficult pandemic in which we had to balance appalling harms on either side of the decision, we may have made mistakes,\u201d Johnson said. \u201cInevitably, we got some things wrong. I think we were doing our best at the time.\u201d</p><p>The former prime minister had arrived at the west London inquiry venue at daybreak, several hours before he was due to take the stand, avoiding a protest by a group of bereaved relatives, some holding pictures of their loved ones. A banner declared: \u201cLet the bodies pile high\u201d \u2014 a statement attributed to Johnson by an aide. Another sign read: \u201cJohnson partied while people died.\u201d</p><p>Johnson was pushed out of office by his own Conservative Party in mid-2022 after multiple ethics scandals, including the revelation that <a href=\"https://apnews.com/article/boris-johnson-partygate-parliament-lockdown-report-84e0990fa7e58bcb488efbf6c6a5d141\">he and staff members held parties</a> in the prime minister\u2019s Downing Street offices in 2020 and 2021, flouting the government\u2019s lockdown restrictions.</p><p>Johnson agreed in late 2021 to hold a public inquiry after heavy pressure from bereaved families. <a href=\"https://apnews.com/article/covid-britain-coronavirus-pandemic-inquiry-9dd7463ab4450e31e55062786ac06493\">The investigation</a>, led by retired Judge Heather Hallett, is expected to take three years to complete, though interim reports will be issued starting next year.</p><p>The inquiry's goal is to learn lessons rather than assign individual blame, but its revelations could further tarnish Johnson's battered reputation. Former colleagues, aides and advisers have painted an unflattering picture of the former leader and his government during weeks of testimony.</p><p>Former <a href=\"https://apnews.com/article/covid19-pandemic-britain-inquiry-johnson-c5c5e0f119fe33c03c6e9a725c6fe70b\">Chief Scientific Adviser Patrick Vallance</a> said Johnson was \u201cbamboozled\u201d by science. In diaries that have been seen as evidence, Vallance also said Johnson was \u201cobsessed with older people accepting their fate.\u201d Former adviser Dominic Cummings, now a fierce opponent of Johnson, said the then prime minister asked scientists whether blowing a hair dryer up his nose could kill the virus.</p><p>Former senior civil servant Helen McNamara described a \u201ctoxic,\u201d macho culture inside Johnson's government, and Cabinet Secretary Simon Case, the country\u2019s top civil servant, called Johnson and his inner circle \u201cbasically feral.\u201d</p><p>Johnson defended his administration, saying it contained \u201cchallenging\u201d characters \u201cwhose views about each other might not be fit to print, but who got an awful lot done.\u201d</p><p>He said he didn't recognize the chaotic picture painted by other witnesses at the inquiry.</p><p>\"Nobody came to me and said \u2018people have got God complexes and there\u2019s internecine warfare going on here,'\u201d Johnson said.</p><p>Johnson said he was \u201cnot sure\u201d whether his government's decisions had caused excess deaths. He said that deciding when to impose lockdowns and other restrictions had been \u201cpainful\u201d and \u201cincredibly difficult.\"</p><p>Johnson sometimes appeared strained and emotional as he remembered the \u201ctragic year\u201d of 2020 and having to balance public health with the economic damage caused by lockdowns. But he denied allegations \u2014 in messages exchanged between aides at the time \u2014 that he had vacillated wildly about what to do as the virus spread.</p><p>The inquiry can compel witnesses to hand over emails and other communications evidence \u2014 but it hasn't received around 5,000 of Johnson's WhatsApp messages from several key weeks between February and June 2020. They were on a phone Johnson was told to stop using when it emerged that the number had been publicly available online for years. Johnson later said he\u2019d forgotten the password to unlock it.</p><p>Johnson was unable to explain what had happened to the messages, but said he wanted to \"make it absolutely clear I haven\u2019t removed any WhatsApps from my phone.\u201d</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/uk-covid19-inquiry-boris-johnson-coronavirus-00b50f366e3928ead7213a2da5f51f84",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 3,
+            "reason": "The document primarily focuses on Boris Johnson's testimony at the COVID-19 public inquiry, his acknowledgment of mistakes, and the government's handling of the pandemic. While it does touch on health-related issues such as the COVID-19 crisis, lockdowns, and death tolls, the main emphasis is on political and administrative aspects rather than health-specific information or guidance. Therefore, it is somewhat relevant to the topic of health but not highly focused on it."
+        }
+    }
+}

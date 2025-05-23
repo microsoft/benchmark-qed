@@ -1,0 +1,352 @@
+﻿{
+    "altids": {
+        "itemid": "9e368f28febf0e9c32cd2cfe4780442e",
+        "etag": "9e368f28febf0e9c32cd2cfe4780442e_3a6aza0c0",
+        "friendlykey": "960180701456",
+        "referenceid": "US--Carbon Monoxide Poisoning-Yale"
+    },
+    "version": 3,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2024-01-17T23:31:22Z",
+    "firstcreated": "2024-01-17T21:09:57Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "ednote": "Eds: UPDATES: Adds comment and detail from Yale spokesperson.; Updates Media.",
+    "editorialtypes": [
+        "Lead"
+    ],
+    "signals": [
+        "newscontent"
+    ],
+    "title": "US--Carbon Monoxide Poisoning-Yale",
+    "headline": "14 workers, including some renovating a Yale building, hospitalized for carbon monoxide poisoning",
+    "headline_extended": "Fourteen people, including nine construction workers who were renovating a Yale University-owned building, have been hospitalized for carbon monoxide poisoning",
+    "slugline": "BC-US--Carbon Monoxide Poisoning-Yale, 3rd Ld-Writethru",
+    "description_summary": "Fourteen people, including nine construction workers who were renovating a Yale University-owned building, have been hospitalized for carbon monoxide poisoning. New Haven\u2019s emergency operations director says a worker was found unconscious Wednesday outside of the building, a couple of blocks from Yale\u2019s campus. That worker is in critical condition at a New York hospital. When high levels of carbon monoxide were detected in his blood, it signaled a larger problem. Thirteen other people, including five members of the Yale Security Department, were later found to have elevated levels. He says a poorly vented propane-fueled saw was to blame.",
+    "located": "NEW HAVEN, Conn.",
+    "datelinelocation": {
+        "city": "New Haven",
+        "countryareacode": "CT",
+        "countryareaname": "Connecticut",
+        "countrycode": "USA",
+        "countryname": "United States",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                -72.92816,
+                41.30815
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "Yale carbon monoxide construction workers"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "a",
+            "name": "a"
+        },
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "513d0340894b10048a8e87a309043c03",
+            "name": "Building collapses",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 55
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 80
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "75fc9ec07f00100482a7f571351eed07",
+            "name": "Poisoning",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 71
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "1af99ec3cb954ff4b349b32d60d0376d",
+            "name": "Education",
+            "creator": "Editorial",
+            "editorial_subject": "Education",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "8b6bb71c4e6e4b1e843129d144961e36",
+            "name": "New Haven",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "a42dc0a082af100482a7df092526b43e"
+            ],
+            "locationtype": {
+                "code": "9d26a20b35f0484a891740f8189d4c7b",
+                "name": "City"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -72.92816,
+                    41.30815
+                ]
+            },
+            "relevance": 48,
+            "parentnames": [
+                "Connecticut"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "ae0eeb20f56047f6a2f7bb94ba6a0999",
+            "name": "Bronx",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "b836d07082c610048807df092526b43e"
+            ],
+            "locationtype": {
+                "code": "30f6407ef71943d08409c3addcff1179",
+                "name": "Borough"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -73.92357,
+                    40.82732
+                ]
+            },
+            "relevance": 65,
+            "parentnames": [
+                "New York City"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "b836d07082c610048807df092526b43e",
+            "name": "New York City",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "b58f18a082c6100487fbdf092526b43e"
+            ],
+            "locationtype": {
+                "code": "9d26a20b35f0484a891740f8189d4c7b",
+                "name": "City"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -74.00597,
+                    40.71427
+                ]
+            },
+            "relevance": 34,
+            "parentnames": [
+                "New York"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "8762953ee6a64007b8ce41ab05f99ee0",
+            "name": "Brooklyn",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "b836d07082c610048807df092526b43e"
+            ],
+            "locationtype": {
+                "code": "30f6407ef71943d08409c3addcff1179",
+                "name": "Borough"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -73.94958,
+                    40.6501
+                ]
+            },
+            "relevance": 34,
+            "parentnames": [
+                "New York City"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "b58f18a082c6100487fbdf092526b43e",
+            "name": "New York",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -75.4999,
+                    43.00035
+                ]
+            },
+            "relevance": 90,
+            "parentnames": [
+                "United States"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "a42dc0a082af100482a7df092526b43e",
+            "name": "Connecticut",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661850e07d5b100481f5c076b8e3055c",
+            "name": "Latin America and Caribbean",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "associations": {
+        "1": {
+            "altids": {
+                "itemid": "8ae2ed1509444c1692a04cddd6c89a73"
+            },
+            "type": "picture"
+        },
+        "2": {
+            "altids": {
+                "itemid": "65b677bda84d46b4ba04eb1e073c200c"
+            },
+            "type": "picture"
+        },
+        "3": {
+            "altids": {
+                "itemid": "d51e94a8572341bca4140578b7ae8117"
+            },
+            "type": "picture"
+        }
+    },
+    "body_nitf": "<p>NEW HAVEN, Conn. (AP) \u2014 Blood tests of a construction worker who collapsed Wednesday outside a building owned by Yale University led emergency crews to uncover potentially lethal levels of carbon monoxide inside. Another 13 people were hospitalized, but the discovery may have prevented a much larger catastrophe, officials said.</p><p>\u201cThere was a disaster averted here,\u201d said Rick Fontana, New Haven\u2019s emergency operations director. \u201cYou could have had a lot more sick or a lot more death had this gone on for a longer period of time.\u201d</p><p>Emergency crews initially thought they were responding to a \u201cregular medical call\u201d Wednesday morning when they brought the collapsed unconscious man to the hospital, Fontana said. However, an hour-and-a-half later, the hospital informed them that the worker had extremely high levels of carbon monoxide in his bloodstream.</p><p>Crews then returned to the location and found 13 people at the building with elevated carbon monoxide levels and complaining of headaches. It was later determined that the construction workers had been using a propane-fueled saw to cut concrete inside the structure. Even though they were venting it, Fontana said the fumes were not exiting the building.</p><p>Of the 14 people who were hospitalized, nine were construction workers and five were members of Yale Security Department, which is located in the same facility, said a spokesperson for Mayor Justin Elicker.</p><p>The man found lying outside of the building, which is a couple of blocks from Yale's New Haven campus, was taken to Jacobi Medical Center's hyperbaric chamber in the Bronx, New York City, where he was in critical condition, Fontana said. He said another worker was also in \u201cpretty serious condition\u201d but was uncertain where he was taken.</p><p>\u201cThat carbon monoxide, it\u2019s not like you could smell it or see it or feel it,\u201d he said. \u201cEverybody thought that it was being vented properly until we were notified of this group of people.\u201d</p><p>Fontana said a typical home carbon monoxide detector sounds an alarm when it detects 35 parts per million. In this situation, there were 350 parts per million, or 10 times the permissible level.</p><p>Inhaling carbon monoxide fumes hinders the body from properly using oxygen and can harm organs, including the heart and brain.</p><p>The Occupational Safety and Health Administration is investigating the incident. A Yale spokesperson said in an email it took about a half-hour for carbon monoxide levels in the building to reach a safe level. Yale first responders also checked adjacent areas but did not detect any of the gas.</p><p>___</p><p>This story was updated to correct that only nine of the 14 people who were hospitalized are construction workers. The other five are Yale employees. The first victim was taken to a hospital in the Bronx not Brooklyn, N.Y.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/yale-carbon-monoxide-construction-workers-9e368f28febf0e9c32cd2cfe4780442e",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 5,
+            "reason": "The document discusses an incident involving carbon monoxide poisoning, which is a significant health issue. It details the symptoms, the cause of the poisoning, the response by emergency crews, and the potential health impacts of carbon monoxide exposure. This information is directly related to health, particularly occupational health and safety, making the document highly relevant to the topic of health."
+        }
+    }
+}

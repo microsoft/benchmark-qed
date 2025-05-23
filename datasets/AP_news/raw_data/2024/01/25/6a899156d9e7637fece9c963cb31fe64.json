@@ -1,0 +1,293 @@
+﻿{
+    "altids": {
+        "itemid": "6a899156d9e7637fece9c963cb31fe64",
+        "etag": "6a899156d9e7637fece9c963cb31fe64_0a6aza0c0",
+        "friendlykey": "41096149835",
+        "referenceid": "US-MED--Cosmetic Surgery Deaths"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2024-01-25T20:06:01Z",
+    "firstcreated": "2024-01-25T20:06:00Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "US-MED--Cosmetic Surgery Deaths",
+    "headline": "Report finds 93 US deaths after cosmetic surgery in Dominican Republic since 2009",
+    "headline_extended": "U.S. health officials say 93 Americans have died after cosmetic surgery in the Dominican Republic since 2009",
+    "slugline": "AP-US-MED--Cosmetic Surgery Deaths",
+    "description_summary": "U.S. health officials say 93 Americans have died after cosmetic surgery in the Dominican Republic since 2009. Many of the recent deaths involved a procedure known as a Brazilian butt lift. The operation has grown in popularity recently and has led to deaths in other countries as well, including the U.S. The U.S. Embassy in the Dominican Republic requested a health investigation after an escalating number of U.S. women died after visiting the Caribbean nation for liposuctions, breast implants and other cosmetic procedures. The Centers for Disease Control and Prevention on Thursday released the results of the investigation.",
+    "bylines": [
+        {
+            "by": "By MIKE STOBBE",
+            "title": "AP Medical Writer"
+        }
+    ],
+    "located": "NEW YORK",
+    "datelinelocation": {
+        "city": "New York",
+        "countryareacode": "NY",
+        "countryareaname": "New York",
+        "countrycode": "USA",
+        "countryname": "United States",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                -74.00597,
+                40.71427
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "cosmetic surgery deaths Dominican Republic medical tourism"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "a",
+            "name": "a"
+        },
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "468257dba1c848ca93ba314d4ce86539",
+            "name": "Surgery",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 76
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "b4a56cf07e8910048351d7e4e3aa4207",
+            "name": "Plastic and cosmetic surgery",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 92
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e22df6887de410048fc1df092526b43e",
+            "name": "Women's health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 61
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Editorial",
+            "editorial_subject": "Health",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "6619faa87d5b10048224c076b8e3055c",
+            "name": "Dominican Republic",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "6618c9f87d5b10048203c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "01f56e0e654841eca2e69bf2cbcc0526",
+                "name": "Nation"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -70.66667,
+                    19
+                ]
+            },
+            "relevance": 85,
+            "parentnames": [
+                "Caribbean"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "87326b96c818441d86b6d4829dccafd4",
+            "name": "Buffalo",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "b58f18a082c6100487fbdf092526b43e"
+            ],
+            "locationtype": {
+                "code": "9d26a20b35f0484a891740f8189d4c7b",
+                "name": "City"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -78.87837,
+                    42.88645
+                ]
+            },
+            "relevance": 35,
+            "parentnames": [
+                "New York"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cb06ab1082af100482f8df092526b43e",
+            "name": "Florida",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -82.5001,
+                    28.75054
+                ]
+            },
+            "relevance": 51,
+            "parentnames": [
+                "United States"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "b58f18a082c6100487fbdf092526b43e",
+            "name": "New York",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -75.4999,
+                    43.00035
+                ]
+            },
+            "relevance": 35,
+            "parentnames": [
+                "United States"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "661850e07d5b100481f5c076b8e3055c",
+            "name": "Latin America and Caribbean",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "cb06ab1082af100482f8df092526b43e",
+            "name": "Florida",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "associations": {
+        "1": {
+            "altids": {
+                "itemid": "6cf717e4fe6640e4b03ec65c66393890"
+            },
+            "type": "picture"
+        }
+    },
+    "body_nitf": "<p>NEW YORK (AP) \u2014 U.S. health officials say 93 Americans have died after cosmetic surgery in the Dominican Republic since 2009, with many of the recent deaths involving a procedure known as a Brazilian butt lift.</p><p>The operation has grown in popularity recently and has led to deaths in other countries as well, including the U.S. A <a href=\"https://www.cdc.gov/mmwr/volumes/73/wr/mm7303a3.htm?s_cid=mm7303a3_w\">report</a> issued Thursday by the U.S. Centers for Disease Control and Prevention could not say how common these deaths are or whether they are more common in the Dominican Republic.</p><p>The report suggests steps that <a href=\"https://wwwnc.cdc.gov/travel/yellowbook/2024/health-care-abroad/medical-tourism\">medical tourists should consider</a> before traveling to get work done.</p><p>\u201cBe informed about who is doing your surgery, the qualifications of the person doing your surgery, and whether or not the facility is capable of doing the surgery and whether it is capable of providing adequate post-operative care \u2014 which is crucial,\u201d said Dr. Matthew Hudson, the study\u2019s first author.</p><p>A Brazilian butt lift involves injecting fat. The report included details of about two dozen of the deaths, and most were the result of fat or blood clots getting into the lungs or bloodstream.</p><p>Complications from cosmetic surgery are not unique to the Dominican Republic. Reports of deaths after cosmetic surgeries have repeatedly surfaced in the United States, perhaps most often in Florida. The CDC on Thursday issued a separate <a href=\"https://www.cdc.gov/mmwr/volumes/73/wr/mm7303a4.htm?s_cid=mm7303a4_w\">report</a> about 15 cases of bacterial infections in women who went to one Florida cosmetic surgery center in 2022.</p><p>Sporadic reports also have come out of Mexico, including last year when U.S. patients were stricken with fungal meningitis after undergoing cosmetic procedures in the border city of Matamoros. Two clinics were closed and a dozen deaths reported.</p><p>The Dominican Republic is known as a friendly island vacation spot, and some doctors there advertise in the U.S., offering breast implants, liposuction and other operations at lower prices. After an increase in U.S. deaths in 2019 and 2020, the U.S. Embassy contacted the CDC, which investigated along with the Dominican Republic Ministry of Health.</p><p>They tallied 93 cosmetic surgery-related deaths of U.S. citizens in the Dominican Republic from 2009 to 2022, or an average of about seven a year. All but one were women. More than half of the deaths occurred since 2019, coinciding with the increasing popularity of Brazilian butt lifts. In the U.S., nearly 29,000 of those procedures were done in 2022, according to the American Society of Plastic Surgeons.</p><p>The procedure commonly involves liposuction of fat from the hips, lower back, thighs or other areas. The fat is then injected in the buttocks to change the shape or size. Risks include fat being injected too deeply, making its way into the bloodstream and blocking key arteries or veins.</p><p>Autopsy records show that was the cause of death for 11 of 20 deaths, said Hudson, who is now at the State University of New York at Buffalo.</p><p>___</p><p>The Associated Press Health and Science Department receives support from the Howard Hughes Medical Institute\u2019s Science and Educational Media Group. The AP is solely responsible for all content.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/cosmetic-surgery-deaths-dominican-republic-medical-tourism-6a899156d9e7637fece9c963cb31fe64",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 5,
+            "reason": "The document discusses the health implications and risks associated with cosmetic surgery, specifically focusing on the deaths of U.S. citizens after undergoing such procedures in the Dominican Republic. It includes detailed information about the types of complications, the procedures involved, and recommendations for medical tourists. This is highly relevant to the topic of health as it addresses medical risks, public health concerns, and safety recommendations."
+        }
+    }
+}

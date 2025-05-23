@@ -1,0 +1,256 @@
+﻿{
+    "altids": {
+        "itemid": "62683f5889a400e6339f0a83409e3870",
+        "etag": "62683f5889a400e6339f0a83409e3870_0a11aza0c0",
+        "friendlykey": "290807205541",
+        "referenceid": "US-Psychiatric-Patient-Death"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2023-12-20T18:47:43Z",
+    "firstcreated": "2023-12-20T18:47:42Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "US-Psychiatric-Patient-Death",
+    "headline": "Hospital that initially treated Irvo Otieno failed to meet care standards, investigation finds",
+    "headline_extended": "An investigation has found that the hospital that initially treated a man who later died while being admitted to a Virginia psychiatric facility failed to meet care standards while he was in a mental health crisis",
+    "slugline": "AP-US-Psychiatric-Patient-Death",
+    "description_summary": "An investigation has found that the hospital that initially treated a man who later died while being admitted to a Virginia psychiatric facility failed to meet care standards while he was in a mental health crisis. The Richmond Times-Dispatch reports that the state Department of Health led the investigation of Parham Doctors\u2019 Hospital, where Irvo Otieno was briefly held. The 28-year-old Black man died in March after being pressed to the floor of Central State Hospital for about 11 minutes by a group of Henrico County sheriff\u2019s deputies and hospital employees. Inspectors said that Parham staff were \u201cnot in compliance\u201d with health guidelines for hospitals that treat mental health crisis patients.",
+    "located": "RICHMOND, Va.",
+    "datelinelocation": {
+        "city": "Richmond",
+        "countryareacode": "VA",
+        "countryareaname": "Virginia",
+        "countrycode": "USA",
+        "countryname": "United States",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                -77.46026,
+                37.55376
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2023 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "irvo otieno parham doctors hospital investigation"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "f",
+            "name": "f"
+        },
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "a",
+            "name": "a"
+        },
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e231c7187de410048fd7df092526b43e",
+            "name": "Mental health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 61
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 98
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Editorial",
+            "editorial_subject": "Health",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "c8e409f8858510048872ff2260dd383e",
+            "name": "Business",
+            "creator": "Editorial",
+            "editorial_subject": "Business",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "fd3a61b882c710048937df092526b43e",
+            "name": "Richmond",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "eaed376082c71004892cdf092526b43e"
+            ],
+            "locationtype": {
+                "code": "9d26a20b35f0484a891740f8189d4c7b",
+                "name": "City"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -77.46026,
+                    37.55376
+                ]
+            },
+            "relevance": 51,
+            "parentnames": [
+                "Virginia"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "eaed376082c71004892cdf092526b43e",
+            "name": "Virginia",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -77.44675,
+                    37.54812
+                ]
+            },
+            "relevance": 75,
+            "parentnames": [
+                "United States"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "eaed376082c71004892cdf092526b43e",
+            "name": "Virginia",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661850e07d5b100481f5c076b8e3055c",
+            "name": "Latin America and Caribbean",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "body_nitf": "<p>RICHMOND, Va. (AP) \u2014 The hospital that initially treated <a href=\"https://apnews.com/article/psychiatric-hospital-death-asphyxia-irvo-otieno-2ad03053fb589a9847c07988b9a24248\">a man who later died</a> while being admitted to a Virginia psychiatric hospital failed to meet care standards while he was in a mental health crisis, a state investigation found.</p><p>The state Department of Health led the investigation of Parham Doctors' Hospital, where <a href=\"https://apnews.com/article/otieno-death-mental-hospital-deputies-6307e3c95c8d48a400accc3b27f2c5ee\">Irvo Otieno</a> was briefly held, the <a href=\"https://richmond.com/news/local/crime-courts/irvo-otieno-crisis-parham-hospital/article_7cd4a898-9eb1-11ee-90e7-63f5424affea.html#tracking-source=home-top-story\">Richmond Times-Dispatch</a> reported.</p><p>Otieno, a 28-year-old Black man, died in March after being pressed to the floor of Central State Hospital for about 11 minutes by a group of Henrico County sheriff\u2019s deputies and hospital employees. Surveillance video that captured how Otieno was treated at the facility where he was set to receive care sparked outrage across the U.S. and calls for mental health and policing reforms.</p><p>Parham staff were \u201cnot in compliance\u201d with health guidelines for hospitals that treat mental health crisis patients, two inspectors said. The report also said a psychiatrist did not examine Otieno during his six hours in the emergency department.</p><p>\u201cThe facility staff failed to provide stabilizing treatment for one of twenty-five patients after the patient presented to the emergency department with an emergency medical condition,\u201d the report said.</p><p>Parham Doctors' Hospital is working with the Department of Health and has submitted an action plan requested by the agency, said Pryor Green, a spokesperson for Hospital Corporations of America, which owns the facility.</p><p>\u201cWe strive to always provide compassionate, high-quality care to all patients,\u201d Green said.</p><p>Otieno was experiencing mental distress at the time of his initial encounter with law enforcement in suburban Richmond in early March, days before he was taken to the state hospital, his family has said.</p><p>He was first taken into police custody March 3, when he was transported to the local hospital for mental health treatment under an emergency custody order.</p><p>Police have said that while at the local hospital, he \u201cbecame physically assaultive toward officers,\u201d at which point they arrested him and took him to a local jail, a transfer Otieno\u2019s family has said should never have happened.</p><p>Mark Krudys, an attorney for the Otieno family, described his treatment at Parham as \u201cnon-care.\u201d</p><p>\u201cThe very reason that lrvo was brought to the hospital was to stabilize his condition, but that effort was effectively abandoned,\u201d Krudys said Tuesday afternoon in a statement.</p><p>Otieno's death has led to <a href=\"https://apnews.com/article/irvo-otieno-killed-deputies-charged-virginia-hospital-ed9d227abea1bfa6946aa7cade5ced8b\">legal charges</a> and <a href=\"https://apnews.com/article/irvo-otieno-psychiatric-hospital-death-settlement-9528a29372f9cb7989a79a5993772c06\">a wrongful death settlement</a> in addition to a <a href=\"https://apnews.com/article/glenn-youngkin-virginia-mental-health-385aaf752e98a0de5899193ea85d64b8\">pledge from the governor</a> to seek reforms for mental health care.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/irvo-otieno-parham-doctors-hospital-investigation-62683f5889a400e6339f0a83409e3870",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 5,
+            "reason": "The document discusses the failure of a hospital to meet care standards while treating a patient in a mental health crisis, which is directly related to health care quality and standards. It also touches on broader issues of mental health care and the implications of inadequate treatment. These aspects are highly relevant to the topic of health."
+        }
+    }
+}

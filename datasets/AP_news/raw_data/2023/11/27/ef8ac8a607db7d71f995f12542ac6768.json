@@ -1,0 +1,296 @@
+﻿{
+    "altids": {
+        "itemid": "ef8ac8a607db7d71f995f12542ac6768",
+        "etag": "ef8ac8a607db7d71f995f12542ac6768_2a4aza0c0",
+        "friendlykey": "204978911819",
+        "referenceid": "EU-REL--Vatican-Pope"
+    },
+    "version": 2,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2023-11-27T21:28:19Z",
+    "firstcreated": "2023-11-27T09:32:03Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "ednote": "Eds: UPDATES: With AP Audio.",
+    "editorialtypes": [
+        "Lead"
+    ],
+    "signals": [
+        "newscontent"
+    ],
+    "title": "EU-REL--Vatican-Pope",
+    "headline": "Pope Francis getting antibiotics intravenously for lung problem, limiting appointments, Vatican says",
+    "headline_extended": "The Vatican says Pope Francis is receiving antibiotics intravenously to treat a lung inflammation but that he doesn't have pneumonia",
+    "slugline": "BC-EU-REL--Vatican-Pope, 2nd Ld-Writethru",
+    "description_summary": "The Vatican says Pope Francis is receiving antibiotics intravenously to treat a lung inflammation but that he doesn't have pneumonia. Francis himself on Sunday revealed that he was suffering from the inflammation problem, explaining why he didn't keep his weekly window appointment to greet people in St. Peter's Square. The Vatican's press office director, Matteo Bruni, also said in a written statement on Monday that the inflammation was causing some respiratory difficulties, which are now improving. To aid his recovery, the pope is postponing some appointments this week but will keep others. Francis said on Sunday he will fly later this week to Dubai for the upcoming United Nations COP28 climate talks.",
+    "located": "ROME",
+    "datelinelocation": {
+        "city": "Rome",
+        "countrycode": "ITA",
+        "countryname": "Italy",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                12.51133,
+                41.89193
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2023 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "Vatican Pope Francis illness lung inflammation"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "person": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "2fd38d1dee8c4287a13ae64992300d96",
+            "name": "Pope Francis",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 88
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "i",
+            "name": "i"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "026a1118e94443a2aacc08a2e70cc77b",
+            "name": "Religion",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 79
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "49febbc87f0010048246f571351eed07",
+            "name": "Pneumonia",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 56
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 88
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "026a1118e94443a2aacc08a2e70cc77b",
+            "name": "Religion",
+            "creator": "Editorial",
+            "editorial_subject": "Religion",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "bb2d2c5f441a452cb24bb511a2ab5eea",
+            "name": "World news",
+            "creator": "Editorial",
+            "editorial_subject": "World news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "03a6f9d07efe100483e9df092526b43e",
+            "name": "Rome",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "662122b07d5b100482d7c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "9d26a20b35f0484a891740f8189d4c7b",
+                "name": "City"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    12.4839,
+                    41.89474
+                ]
+            },
+            "relevance": 47,
+            "parentnames": [
+                "Italy"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f3e0ed387eff10048539df092526b43e",
+            "name": "Vatican City",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661850e07d5b100481f4c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "01f56e0e654841eca2e69bf2cbcc0526",
+                "name": "Nation"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    12.4533,
+                    41.90225
+                ]
+            },
+            "relevance": 66,
+            "parentnames": [
+                "Europe"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "661effd07d5b100482a1c076b8e3055c",
+            "name": "Paraguay",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661908787d5b10048204c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "01f56e0e654841eca2e69bf2cbcc0526",
+                "name": "Nation"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -57.99639,
+                    -22.99333
+                ]
+            },
+            "relevance": 38,
+            "parentnames": [
+                "South America"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "661850e07d5b100481f4c076b8e3055c",
+            "name": "Europe",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "associations": {
+        "1": {
+            "altids": {
+                "itemid": "c6df2e24708c4588988e911e47477ce6"
+            },
+            "type": "picture"
+        },
+        "2": {
+            "altids": {
+                "itemid": "b9d863123f81475d8721d73b87b87442"
+            },
+            "type": "audio"
+        },
+        "3": {
+            "altids": {
+                "itemid": "cddcfd17d4854a4aa04b70202ea4db1c"
+            },
+            "type": "audio"
+        },
+        "4": {
+            "altids": {
+                "itemid": "4f6f10edcbde44c19b87bf7090c5c574"
+            },
+            "type": "audio"
+        }
+    },
+    "body_nitf": "<p>ROME (AP) \u2014 Pope Francis is receiving antibiotics intravenously to treat a lung inflammation and will scale back some appointments, but he doesn\u2019t have pneumonia or fever, the Vatican said Monday.</p><p>Francis himself on Sunday revealed that <a href=\"https://apnews.com/article/pope-francis-flu-vatican-64a98163770508ad804495cb62f92d64\">he was suffering from the inflammation</a> problem, explaining why he didn\u2019t keep his weekly window appointment to greet people in St. Peter\u2019s Square. Instead, he gave his blessing from the chapel of the hotel on Vatican grounds where he lives.</p><p>Vatican\u2019s press office director, Matteo Bruni, said in a written statement on Monday that the inflammation was causing some respiratory difficulties for Francis, whose 87th birthday is next month.</p><p>\"The condition of the pope is good and stationary, he doesn't have a fever, and the respiratory situation is in clear improvement,'' Bruni said. A CT scan, which the pope underwent on Saturday afternoon at a Rome hospital, ruled out pneumonia, Bruni added.</p><p>To aid the pope's recovery, \u201csome important commitments expected for the next days have been postponed so he can dedicate the time and desired energy\u201d to his recovery, the spokesman said.</p><p>Other appointments, \u201cof institutional character or easier to maintain given the current health conditions, have been maintained,\u201d Bruni added.</p><p>The spokesman didn't spell out which appointments were being put off. Francis on Monday morning received in a private, half-hour-long audience the president of Paraguay, Santiago Pe\u00f1a, at his residence instead of the Apostolic Palace.</p><p>In televised remarks on Sunday, Francis indicated he was going ahead with a three-day trip, beginning on Dec. 1, to the United Arab Emirates, to deliver a speech on climate change at the upcoming United Nations <a href=\"https://apnews.com/article/cop28-dubai-host-benefits-113f2b2c75431d2ab0d3d54be1681239\">COP28</a> climate talks.</p><p>When he gave his blessing on Sunday, a bandage, holding in place a cannula for intravenous treatment, was clearly visible on his right hand.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/vatican-pope-francis-illness-lung-inflammation-ef8ac8a607db7d71f995f12542ac6768",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 5,
+            "reason": "The document discusses Pope Francis's current health condition, specifically his lung inflammation and the treatment he is receiving. It provides details about his symptoms, the medical interventions being undertaken, and the impact on his schedule. This information is directly related to the topic of health, as it focuses on a specific health issue and its management."
+        }
+    }
+}

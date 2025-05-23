@@ -1,0 +1,208 @@
+﻿{
+    "altids": {
+        "itemid": "84bd91f6c51db7bbb334bd18a07e4f3b",
+        "etag": "84bd91f6c51db7bbb334bd18a07e4f3b_2a4aza0c0",
+        "friendlykey": "637087609689",
+        "referenceid": "US-MED--COVID Vaccine"
+    },
+    "version": 2,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2024-02-28T22:06:11Z",
+    "firstcreated": "2024-02-28T19:15:50Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "ednote": "Eds: MAJOR UPDATE: Updates Media. Updates with CDC director signing off on recommendation.",
+    "editorialtypes": [
+        "Lead"
+    ],
+    "signals": [
+        "newscontent"
+    ],
+    "title": "US-MED--COVID Vaccine",
+    "headline": "Older US adults should get another COVID-19 shot, health officials recommend",
+    "headline_extended": "Federal health officials say older U.S. adults who got a COVID-19 shot in the fall should get a booster dose now",
+    "slugline": "AP-US-MED--COVID Vaccine, 2nd Ld-Writethru",
+    "description_summary": "Federal health officials say older U.S. adults who got a COVID-19 shot in the fall should get a booster dose now. People 65 and older should get another dose of the updated vaccine that became available in September \u2014 if at least four months has passed. An expert panel\u2019s proposed the recommendation after a lengthy discussion about whether to say older people \u201cmay\u201d get the shots or if they \u201cshould\u201d do so. That reflects a debate among experts about how necessary a booster is and whether yet another shot recommendation will add to growing vaccine fatigue.",
+    "bylines": [
+        {
+            "by": "By MIKE STOBBE",
+            "title": "AP Medical Writer"
+        }
+    ],
+    "located": "NEW YORK",
+    "datelinelocation": {
+        "city": "New York",
+        "countryareacode": "NY",
+        "countryareaname": "New York",
+        "countrycode": "USA",
+        "countryname": "United States",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                -74.00597,
+                40.71427
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "COVID vaccines shots over 65"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "a",
+            "name": "a"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "ace74e307f00100486cedf092526b43e",
+            "name": "Immunizations",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 73
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 96
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "b17e2751b26d4523a2c99d79e04747ee",
+            "name": "COVID-19 pandemic",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 60
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e237be707de410048fffdf092526b43e",
+            "name": "Medication",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 84
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Editorial",
+            "editorial_subject": "Health",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "b58f18a082c6100487fbdf092526b43e",
+            "name": "New York",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -75.4999,
+                    43.00035
+                ]
+            },
+            "relevance": 31,
+            "parentnames": [
+                "United States"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "661850e07d5b100481f5c076b8e3055c",
+            "name": "Latin America and Caribbean",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "associations": {
+        "1": {
+            "altids": {
+                "itemid": "cb3e3bc09c1c4b168368cdbe86f7929f"
+            },
+            "type": "picture"
+        }
+    },
+    "body_nitf": "<p>NEW YORK (AP) \u2014 Older U.S. adults should roll up their sleeves for another <a href=\"https://apnews.com/article/covid-flu-rsv-health-virus-5b074238b82a08bc6eef9e0ddb20f326\">COVID-19</a> shot, even if they got a booster in the fall, U.S. health officials said Wednesday.</p><p>The Centers for Disease Control and Prevention said Americans 65 and older should get another dose of the updated vaccine that became available in September \u2014 if at least four months has passed since their last shot. In making the recommendation, the agency endorsed guidance proposed by an expert advisory panel earlier in the day.</p><p>\u201cMost COVID-19 deaths and hospitalizations last year were among people 65 years and older. An additional vaccine dose can provide added protection ... for those at highest risk,\u201d CDC Director Dr. Mandy Cohen said in a statement.</p><p>The advisory panel's decision came after a lengthy discussion about whether to say older people \u201cmay\u201d get the shots or if they \u201cshould\" do so. That reflects a debate among experts about how necessary another booster is and whether yet another recommendation would add to the public's growing <a href=\"https://apnews.com/article/vaccines-flu-covid19-rsv-viruses-fall-8ffa6bf0c2c0da1a8842db524aad5006\">vaccine fatigue</a>.</p><p>Some doctors say most older adults are adequately protected by the fall shot, which built on immunity derived from earlier vaccinations and exposure to the virus itself. And preliminary studies so far have shown no substantial waning in <a href=\"https://apnews.com/article/covid19-vaccine-effectiveness-cdc-47a5a5466e95b65216bf2dc6db508a0f\">vaccine effectiveness</a> over six months.</p><p>However, the body\u2019s vaccine-induced defenses tend to fade over time, and that happens faster in seniors than in other adults. The committee had recommended COVID-19 booster doses for older adults in 2022 and 2023.</p><p>COVID-19 remains a danger, especially to older people and those with underlying medical conditions. There are still more than <a href=\"https://covid.cdc.gov/covid-data-tracker/#trends_weeklyhospitaladmissions_select_00\">20,000 hospitalizations</a> and more than <a href=\"https://covid.cdc.gov/covid-data-tracker/#trends_weeklydeaths_select_00\">2,000 deaths</a> each week due to the coronavirus, according to the CDC. And people 65 and older have the <a href=\"https://covid.cdc.gov/covid-data-tracker/#demographicsovertime\">highest hospitalization and death rates</a>.</p><p>Some members of the advisory panel said a \u201cshould\" recommendation is meant to more clearly prod doctors and pharmacists to offer the shots.</p><p>\u201cMost people are coming in either wanting the vaccine or not,\u201d said Dr. Jamie Loehr, a committee member and family doctor in Ithaca, New York. \u201cI am trying to make it easier for providers to say, \u2018Yes, we recommend this.\u2019\u201d</p><p>In September, the government recommended a new <a href=\"https://apnews.com/article/covid-vaccines-booster-shot-coronavirus-fall-21912cf8980ab8a0763625de37cc7704\">COVID-19 shot recipe</a> built against a version of the coronavirus called XBB.1.5. That single-target vaccine replaced combination shots that had been targeting both the original coronavirus strain and a much earlier omicron version.</p><p>The CDC <a href=\"https://apnews.com/article/covid-vaccines-shots-cdc-5bc4db844557120bcc50dc0838c0e044\">recommended the new shots</a> for everyone 6 months and older, and allowed that people with weak immune systems could get a second dose as early as two months after the first.</p><p>Most Americans haven\u2019t listened. According to the latest CDC data, 13% of U.S. children have gotten the shots and about 22% of U.S. adults have. The vaccination rate is higher for adults 65 and older, at nearly 42%.</p><p>\u201cIn each successive vaccine, the uptake has gone down,\u201d said Dr. David Canaday, a Case Western Reserve University infectious diseases expert who studies COVID-19 in older people.</p><p>\u201cPeople are tired of getting all these shots all the time,\u201d said Canaday, who does not serve on the committee. \u201cWe have to be careful about over-recommending the vaccine.\u201d</p><p>But there is a subset of Americans \u2014 those at higher danger of severe illness and death \u2014 who have been asking if another dose is permissible, said Dr. William Schaffner, a Vanderbilt University vaccines expert who serves on a committee workgroup that has been debating the booster question.</p><p>Indeed, CDC survey data suggests that group's biggest worry about the vaccine is whether it's effective enough.</p><p>Agency officials say that among those who got the latest version of the COVID-19 vaccine, 50% fewer will get sick after they come into contact with the virus compared with those who didn't get the fall shot.</p><p>___</p><p>The Associated Press Health and Science Department receives support from the Howard Hughes Medical Institute\u2019s Science and Educational Media Group. The AP is solely responsible for all content.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/covid-vaccines-shots-over-65-84bd91f6c51db7bbb334bd18a07e4f3b",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 5,
+            "reason": "The document is highly relevant to the topic of Health. It discusses recommendations from U.S. health officials regarding COVID-19 vaccinations for older adults, including the rationale behind the recommendations, the effectiveness of the vaccines, and the current state of COVID-19 hospitalizations and deaths. The document also includes expert opinions and statistical data related to health outcomes, which are directly pertinent to the topic."
+        }
+    }
+}

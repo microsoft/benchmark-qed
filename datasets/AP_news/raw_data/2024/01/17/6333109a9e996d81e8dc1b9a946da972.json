@@ -1,0 +1,279 @@
+﻿{
+    "altids": {
+        "itemid": "6333109a9e996d81e8dc1b9a946da972",
+        "etag": "6333109a9e996d81e8dc1b9a946da972_1a5aza0c0",
+        "friendlykey": "893104477012",
+        "referenceid": "AF--Zambia-Cholera Outbreak"
+    },
+    "version": 1,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2024-01-18T01:49:54Z",
+    "firstcreated": "2024-01-17T15:24:13Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "ednote": "Eds: UPDATES: Expands audience, revises headline.",
+    "editorialtypes": [
+        "Lead"
+    ],
+    "signals": [
+        "newscontent"
+    ],
+    "title": "AF--Zambia-Cholera Outbreak",
+    "headline": "A cholera outbreak in Zambia has caused more than 400 deaths and infected 10,000",
+    "headline_extended": "A major cholera outbreak has killed more than 400 people and infected more than 10,000 in Zambia",
+    "slugline": "BC-AF--Zambia-Cholera Outbreak, 1st Ld-Writethru",
+    "description_summary": "A major cholera outbreak has killed more than 400 people and infected more than 10,000 in Zambia. Authorities ordered schools across the southern African country to remain shut after the end-of-year holidays. A large soccer stadium in the capital has been converted into a makeshift treatment facility. The Zambian government is embarking on a mass vaccination program and has committed to providing 2.4 million liters of clean water daily to affected communities. Cholera is caused by a bacteria typically spread by contaminated food or water. The disease is strongly linked to poverty and inadequate access to clean water.",
+    "bylines": [
+        {
+            "by": "By NOEL SICHALWE",
+            "title": "Associated Press"
+        }
+    ],
+    "located": "LUSAKA, Zambia",
+    "datelinelocation": {
+        "city": "Lusaka",
+        "countrycode": "ZMB",
+        "countryname": "Zambia",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                28.28713,
+                -15.40669
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "zambia cholera outbreak health climate"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "i",
+            "name": "i"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "9cce666bb29344b8ba61f3732d971d32",
+            "name": "Disease outbreaks",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 82
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "3b9797c0833849809300a3e134ad34a5",
+            "name": "Cholera",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 95
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 88
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Editorial",
+            "editorial_subject": "Health",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "bb2d2c5f441a452cb24bb511a2ab5eea",
+            "name": "World news",
+            "creator": "Editorial",
+            "editorial_subject": "World news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "organisation": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "89974b388d7410048d158a3c53cbc603",
+            "name": "United Nations Children's Fund",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 46
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "8997c0688d7410048d178a3c53cbc603",
+            "name": "World Health Organization",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 36
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "661ff2007d5b100482bbc076b8e3055c",
+            "name": "Zambia",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661812607d5b100481f1c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "01f56e0e654841eca2e69bf2cbcc0526",
+                "name": "Nation"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    30,
+                    -15
+                ]
+            },
+            "relevance": 68,
+            "parentnames": [
+                "Africa"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "acd337987e3710048931df092526b43e",
+            "name": "Lusaka",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661ff2007d5b100482bbc076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "9d26a20b35f0484a891740f8189d4c7b",
+                "name": "City"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    28.28636,
+                    -15.40809
+                ]
+            },
+            "relevance": 51,
+            "parentnames": [
+                "Zambia"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "661812607d5b100481f1c076b8e3055c",
+            "name": "Africa",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "associations": {
+        "1": {
+            "altids": {
+                "itemid": "eb92d449888a4b7dac59a61c4bea80af"
+            },
+            "type": "picture"
+        },
+        "2": {
+            "altids": {
+                "itemid": "450fd26facca4f31af2adada59e88e9f"
+            },
+            "type": "picture"
+        },
+        "3": {
+            "altids": {
+                "itemid": "1915e9501f6c4529812320744e630581"
+            },
+            "type": "picture"
+        }
+    },
+    "body_nitf": "<p>LUSAKA, Zambia (AP) \u2014 Zambia is reeling from a major <a href=\"https://apnews.com/hub/cholera\">cholera</a> outbreak that has killed more than 400 people and infected more than 10,000, leading authorities to order schools across the country to remain shut after the end-of-year holidays.</p><p>A large soccer stadium in the capital city has been converted into a treatment facility.</p><p>The Zambian government is embarking on a mass vaccination program and says it's providing clean water \u2014 2.4 million liters a day \u2014 to communities that are affected across the southern African nation.</p><p>The national disaster management agency has been mobilized.</p><p>Cholera is an acute diarrhea infection caused by a bacteria that is typically spread via contaminated food or water. The disease is strongly linked to poverty and inadequate access to clean water.</p><p>The outbreak in Zambia began in October and 412 people have died and 10,413 cases have been recorded, according to the latest count on Wednesday from the Zambia Public Health Institute, the government body that deals with health emergencies.</p><p>The Health Ministry says cholera has been detected in nearly half of the country's districts and nine out of 10 provinces, and the nation of about 20 million people has been recording more than 400 cases a day.</p><p>\u201cThis outbreak continues to pose a threat to the health security of the nation,\u201d Health Minister Sylvia Masebo said, outlining it was a nationwide problem.</p><p>The United Nations Children's Fund, UNICEF, called the fatality rate of around 4% in the three-month outbreak \u201ca devastatingly high number.\u201d When treated, cholera typically has a death rate of less than 1%.</p><p>There have been recent cholera outbreaks in other southern African nations including Malawi, Mozambique and <a href=\"https://apnews.com/article/cholera-death-health-zimbabwe-who-8c1212df6fe97f5c1f04840a62f251f3\">Zimbabwe</a>. More than 200,000 cases and over 3,000 deaths have been reported in southern Africa since the start of 2023, UNICEF said.</p><p>Malawi had its <a href=\"https://apnews.com/article/health-disease-outbreaks-malawi-cholera-0ed56f497973a3c451e4c1f1165e9287\">worst cholera outbreak in decades</a> in 2023. Last year, the World Health Organization reported that about 30 countries globally, also including Nigeria and Uganda in Africa, suffered <a href=\"https://apnews.com/article/africa-health-pandemics-coronavirus-pandemic-covid-19-pandemic-c70dc26dcbf399072c806d085f231260\">serious outbreaks</a> in the last few years.</p><p>Cholera barely affects countries in the developed world and can be easily treated but can be quickly fatal if not treated.</p><p>More than half \u2014 229 \u2014 of the victims in the Zambian outbreak died before being admitted to a health facility, the public health institute said.</p><p>Zambia has had several major cholera outbreaks since the 1970s but this one is the worst for 20 years in terms of the caseload, according to Dr. Mazyanga Mazaba, the director of public health policy and communication at the public health institute.</p><p>The cholera bacteria can also survive longer in warmer weather and unusually heavy rains and storms in southern Africa have contributed to recent outbreaks, experts say.</p><p>WHO said last year that while <a href=\"https://apnews.com/article/sudan-fighting-cholera-dengue-outbreaks-9ddbd342ff00e4a4f170b93b5142ef62\">poverty and conflict</a> remain the main drivers for cholera, <a href=\"https://apnews.com/article/choleraclimate-changetropical-storms-51f676fd50f70f48ea34fe0b9699c0eb\">climate change has contributed</a> to the disease's upsurge in many places across the globe since 2021 by making storms wetter and more frequent. A cyclone sparked <a href=\"https://apnews.com/article/cholera-mozambique-cyclone-freddy-c8e581aa44699a621baa3f72c1be65fe\">a spiraling cholera outbreak</a> in Mozambique last year.</p><p>Heavy rains and flash flooding in Zambia have converted some neighborhoods into soggy or waterlogged areas.</p><p>The Zambian government announced in early January that schools \u2014 which were meant to open for the year on Jan. 8 \u2014 will only open on Jan. 29. Parents and children were urged to make use of education programs on public TV and radio, a situation that had echoes of the COVID-19 pandemic.</p><p>The education minister ordered schools to be cleaned and inspected.</p><p>Zambia's Disaster Management and Mitigation Unit was mobilized and it was delivering large water tanks and trucking in clean water to some neighborhoods daily. Granulated chlorine to treat water was also being provided, it said.</p><p>The majority of cases are in the capital, Lusaka, where a 60,000-seat national soccer stadium has been converted into a treatment center and is dealing with around 500 patients at any one time, the health minister said.</p><p>She said Zambia had received around 1.4 million doses of the oral cholera vaccine from the WHO and expected more than 200,000 more to arrive soon. Zambian government officials, including Masebo, took a vaccine publicly to encourage others to also do so.</p><p>Health experts have previously warned that the numerous cholera outbreaks globally have strained the supply of vaccines, which are mostly distributed to poor countries through an international body run by the U.N. and partners. Vaccines alliance Gavi predicted that the vaccine shortage could last until 2025.</p><p>___</p><p>AP Africa news: <a href=\"https://apnews.com/hub/africa\">https://apnews.com/hub/africa</a></p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/zambia-cholera-outbreak-health-climate-6333109a9e996d81e8dc1b9a946da972",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 5,
+            "reason": "The document is highly relevant to the topic of Health. It discusses a significant cholera outbreak in Zambia, detailing the number of deaths and infections, the government's response, and the impact on public health infrastructure. The document also provides context on cholera as a disease, its causes, and its treatment, as well as mentioning other recent outbreaks in the region. All these points are directly related to health issues and public health responses."
+        }
+    }
+}

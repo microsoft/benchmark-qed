@@ -1,0 +1,209 @@
+﻿{
+    "altids": {
+        "itemid": "6d5800a05782c00b4f196e39ff19e543",
+        "etag": "6d5800a05782c00b4f196e39ff19e543_0a2aza0c0",
+        "friendlykey": "468591235862",
+        "referenceid": "MD-XGR--Immigrants-Health-Insurance-Maryland"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2024-03-08T20:08:29Z",
+    "firstcreated": "2024-03-08T20:08:28Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "MD-XGR--Immigrants-Health-Insurance-Maryland",
+    "headline": "Maryland Senate passes bill to let people buy health insurance regardless of immigration status",
+    "headline_extended": "People would be able to buy health insurance through Maryland\u2019s health care exchange, regardless of their immigration status, under a bill approved by the state Senate",
+    "slugline": "AP-MD-XGR--Immigrants-Health-Insurance-Maryland",
+    "description_summary": "People would be able to buy health insurance through Maryland\u2019s health care exchange, regardless of their immigration status, under a bill approved by the state Senate. Senators voted 34-13 on Friday for the measure. The Maryland House already passed a similar version of the legislation. Each chamber would need to vote to approve the other\u2019s to send the legislation to Gov. Wes Moore. The measure would require the Maryland Health Benefit Exchange to submit a federal waiver application by July 1, 2025, to implement the program.",
+    "located": "ANNAPOLIS, Md.",
+    "datelinelocation": {
+        "city": "Annapolis",
+        "countryareacode": "MD",
+        "countryareaname": "Maryland",
+        "countrycode": "USA",
+        "countryname": "United States",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                -76.49184,
+                38.97859
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "health insurance maryland immigration status"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "person": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "42f4ce82352d4c4595098658e41dc967",
+            "name": "Wes Moore",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "NEWSMAKER",
+                "PERSON",
+                "POLITICIAN"
+            ],
+            "relevance": 46
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86c1b8807dac10048990ba7fa5283c3e",
+            "name": "Legislation",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 41
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86aad5207dac100488ecba7fa5283c3e",
+            "name": "Politics",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 71
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "3b752ab07d701004847eba7fa5283c3e",
+            "name": "Immigration",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 56
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Editorial",
+            "editorial_subject": "Health",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "b0fa317082b3100484dbdf092526b43e",
+            "name": "Maryland",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -76.74997,
+                    39.00039
+                ]
+            },
+            "relevance": 87,
+            "parentnames": [
+                "United States"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "b0fa317082b3100484dbdf092526b43e",
+            "name": "Maryland",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "body_nitf": "<p>ANNAPOLIS, Md. (AP) \u2014 People would be able to buy health insurance through Maryland's health care exchange, regardless of their immigration status, under a bill approved by the state Senate on Friday.</p><p>Supporters say the measure would reduce uncompensated hospital care costs and improve emergency room wait times.</p><p>The Senate voted 34-13 for <a href=\"https://mgaleg.maryland.gov/mgawebsite/Legislation/Details/SB0705?ys=2024RS\">the measure</a>. The Maryland House already passed a similar version of the legislation. Each chamber would need to vote to approve the other's before the legislation can be sent to Gov. Wes Moore.</p><p>The measure would require the Maryland Health Benefit Exchange to submit a federal waiver application by July 1, 2025, to implement the program. The waiver is needed because of federal restrictions on immigrants lacking permanent legal status using the marketplace. The program in Maryland could start as early as 2026, if a waiver is granted.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/health-insurance-maryland-immigration-status-6d5800a05782c00b4f196e39ff19e543",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 5,
+            "reason": "The document discusses a bill passed by the Maryland Senate that allows people to buy health insurance regardless of their immigration status. This directly pertains to the topic of health as it involves health insurance, healthcare access, and potential impacts on hospital care costs and emergency room wait times. The document provides specific details about the legislative process and the requirements for implementing the program, which are all relevant to the topic of health."
+        }
+    }
+}

@@ -1,0 +1,293 @@
+﻿{
+    "altids": {
+        "itemid": "4ac038b546bee74133b2a47756bb060f",
+        "etag": "4ac038b546bee74133b2a47756bb060f_4a17aza0c0",
+        "friendlykey": "395105389270",
+        "referenceid": "US--EBay Settlement-Pill Presses"
+    },
+    "version": 4,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2024-02-01T00:21:36Z",
+    "firstcreated": "2024-01-31T15:58:26Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "ednote": "Eds: UPDATES: deletes extra word in lede, adds time element.",
+    "editorialtypes": [
+        "Lead"
+    ],
+    "signals": [
+        "newscontent"
+    ],
+    "title": "US--EBay Settlement-Pill Presses",
+    "headline": "EBay will pay $59 million settlement over pill presses sold online as US undergoes overdose epidemic",
+    "headline_extended": "The e-commerce giant eBay will pay a $59 million in a settlement with the Justice Department over thousands of pill press machines sold on the the platform",
+    "slugline": "AP-US--EBay Settlement-Pill Presses, 4th Ld-Writethru",
+    "description_summary": "The e-commerce giant eBay will pay a $59 million in a settlement with the Justice Department over thousands of pill press machines sold on the the platform. Federal authorities said Wednesday the machines can be used to manufacture counterfeit pills that look just like prescription pills but instead are laced with substances like fentanyl, a synthetic opioid drug largely fueling the deadliest overdose crisis in U.S. history. The Justice Department says eBay failed to follow laws requiring verification buyers\u2019 identities and people who bought pill presses there have been charged in drug trafficking cases. EBay maintains it did not break the law and also took its own steps to remove pill-making equipment.",
+    "bylines": [
+        {
+            "by": "By LINDSAY WHITEHURST",
+            "title": "Associated Press"
+        }
+    ],
+    "located": "WASHINGTON",
+    "datelinelocation": {
+        "city": "Washington",
+        "countryareacode": "DC",
+        "countryareaname": "District of Columbia",
+        "countrycode": "USA",
+        "countryname": "United States",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                -77.03637,
+                38.89511
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "eBay fentanyl counterfeit pills"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "f",
+            "name": "f"
+        },
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "w",
+            "name": "w"
+        },
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "fb629770cf154f91964e1789d2dd836e",
+            "name": "Opioids",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 78
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "9c750296cbfa4fdd89e9a32848825b29",
+            "name": "Prescription drugs",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 97
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 97
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "c8e409f8858510048872ff2260dd383e",
+            "name": "Business",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 86
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Editorial",
+            "editorial_subject": "Health",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "c8e409f8858510048872ff2260dd383e",
+            "name": "Business",
+            "creator": "Editorial",
+            "editorial_subject": "Business",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "organisation": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "9989d6c0892110048b7ddcd60602cf03",
+            "name": "U.S. Department of Justice",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 68
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "898f52e08921100480efba0a2b2ca13e",
+            "name": "United States government",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "499824e9adf840409293c94e57298108",
+            "name": "eBay Inc",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "symbols": [
+                {
+                    "ticker": "EBAY",
+                    "exchange": "NASDAQ",
+                    "instrument": "NASDAQ:EBAY"
+                }
+            ],
+            "relevance": 91
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "661850e07d5b100481f5c076b8e3055c",
+            "name": "Latin America and Caribbean",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "d2f8d8a882c710048915df092526b43e",
+            "name": "Vermont",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "62532b5882c7100488cedf092526b43e",
+            "name": "Tennessee",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "789fdd8882af10048263df092526b43e",
+            "name": "California",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "associations": {
+        "1": {
+            "altids": {
+                "itemid": "9507d1e09a6742709f014f399d61d10a"
+            },
+            "type": "picture"
+        },
+        "2": {
+            "altids": {
+                "itemid": "fd06da4bcd92401f985b59fbe902da15"
+            },
+            "type": "picture"
+        }
+    },
+    "body_nitf": "<p>WASHINGTON (AP) \u2014 The e-commerce giant <a href=\"https://apnews.com/hub/ebay-inc\">eBay</a> will pay $59 million in a settlement with the Justice Department over thousands of pill press machines sold on the platform, the Justice Department said Wednesday.</p><p>The machines can be used to manufacture counterfeit pills that look just like prescription pills but instead can be laced with substances like fentanyl, a <a href=\"https://apnews.com/hub/opioids\">synthetic opioid drug</a> that is largely fueling the deadliest overdose crisis in U.S. history.</p><p>The company failed to verify buyers\u2019 identities and keep records required by law, and many people who bought pill presses on eBay have been prosecuted in connection with trafficking illegal counterfeit pills, the Justice Department said.</p><p>EBay, headquartered in San Jose, California, provides a platform for people to make their own online sales. It said it agreed to the settlement to avoid long-running litigation but maintained it didn't break the law.</p><p>The company said it had removed pill-making equipment on its own and blocked \u201ctens of thousands\u201d of listings before the Justice Department got involved.</p><p>\u201cGovernment officials have repeatedly commended eBay for our partnership with law enforcement and efforts to support investigations into illegal pill press usage,\u201d eBay said.</p><p>Still, the Justice Department says there were thousands of cases where people bought pill presses on eBay, including high-capacity presses capable of producing thousands of pills per hour. Hundreds of those buyers also got counterfeit molds or dies that allowed them to make pills mimicking legitimate prescription pills, authorities said.</p><p>Ebay failed to meet requirements that sellers of pharmaceutical manufacturing equipment verify buyers\u2019 identities, keep records, and report to the Drug Enforcement Administration to make sure the machines are traceable and not used illegally, federal prosecutors said.</p><p>\u201cCounterfeit pills laced with fentanyl are a significant contributor to the deadly overdose epidemic,\u201d said Associate Attorney General Vanita Gupta.</p><p>More than 100,000 deaths were linked to drug overdoses in 2022, according to the U.S. Centers for Disease Control and Prevention, and over than two-thirds of those involved fentanyl or similar synthetic drugs. The crisis at first centered on prescription painkillers that gained more acceptance in the 1990s, and later heroin. Over the past decade, the death toll has reached an all-time high, and the biggest killers have been synthetic opioids such as fentanyl that are in the supply of many street drugs.</p><p>\u201cThrough its website, eBay made it easy for individuals across the country to obtain the type of dangerous machines that are often used to make counterfeit pills,\" said U.S. Attorney Nikolas Kerest of Vermont.</p><p>The company has agreed to step up its compliance program on sales of pill presses as well as counterfeit molds, stamps and dies, and encapsulating machines, which are used to fill pills.</p><p>EBay's failure to follow \u201cbasic reporting and record keeping requirements\u201d allowed people to \"set up pill factories in their homes and to do so without detection,\u201d said U.S. Attorney Henry Leventis for the Middle District of Tennessee.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/ebay-fentanyl-counterfeit-pills-4ac038b546bee74133b2a47756bb060f",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 5,
+            "reason": "The document discusses eBay's settlement with the Justice Department over the sale of pill press machines, which are linked to the production of counterfeit pills laced with fentanyl. This directly relates to the health topic as it addresses the overdose epidemic in the U.S., the role of synthetic opioids like fentanyl in this crisis, and the public health implications of counterfeit drugs. The document provides detailed information on the impact of these machines on public health and the measures being taken to mitigate the issue."
+        }
+    }
+}

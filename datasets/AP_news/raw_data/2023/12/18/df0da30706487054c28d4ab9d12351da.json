@@ -1,0 +1,326 @@
+﻿{
+    "altids": {
+        "itemid": "df0da30706487054c28d4ab9d12351da",
+        "etag": "df0da30706487054c28d4ab9d12351da_0a2aza0c0",
+        "friendlykey": "571988339312",
+        "referenceid": "TX--Editorial Rdp"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Opinion",
+    "language": "en",
+    "versioncreated": "2023-12-18T17:06:15Z",
+    "firstcreated": "2023-12-18T17:06:13Z",
+    "editorialrole": "FullStory",
+    "fixture": {
+        "code": "21ea4067bb274c3b805353fb2b99ba70",
+        "name": "Editorial Roundup"
+    },
+    "pubstatus": "usable",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "TX--Editorial Rdp",
+    "headline": "Editorial Roundup: Texas",
+    "slugline": "AP-TX--Editorial Rdp",
+    "bylines": [
+        {
+            "by": "By The Associated Press"
+        }
+    ],
+    "copyrightnotice": "Copyright 2023 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "Editorial Rdp"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "person": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "1e7a517b4d97453d931bb1159cdc97ae",
+            "name": "Ken Paxton",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "POLITICIAN",
+                "PERSON"
+            ],
+            "relevance": 36
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "de647e295a4b4747a6cafd352695d4d5",
+            "name": "Greg Abbott",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "POLITICIAN",
+                "PERSON"
+            ],
+            "associatedstates": [
+                {
+                    "code": "6e92d9b882c7100488e5df092526b43e",
+                    "name": "Texas"
+                }
+            ],
+            "relevance": 41
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "42fcd5108d2610048a34f7ae5e3ffd3e",
+            "name": "Joe Biden",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "POLITICIAN",
+                "PERSON"
+            ],
+            "relevance": 50
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "6e2e052049fd457f841be9023fe385c5",
+            "name": "Drug crimes",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 76
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 70
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86aad5207dac100488ecba7fa5283c3e",
+            "name": "Politics",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 64
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "organisation": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "179e0819bf1f43a6a8c30567398915fc",
+            "name": "Mexico government",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 40
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "898f52e08921100480efba0a2b2ca13e",
+            "name": "United States government",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 32
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "661af0c07d5b10048239c076b8e3055c",
+            "name": "Mexico",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "6618c9f87d5b10048204c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "01f56e0e654841eca2e69bf2cbcc0526",
+                "name": "Nation"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -102,
+                    23
+                ]
+            },
+            "relevance": 57,
+            "parentnames": [
+                "Central America"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "7478826082c7100488f7df092526b43e",
+            "name": "Houston",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "6e92d9b882c7100488e5df092526b43e"
+            ],
+            "locationtype": {
+                "code": "9d26a20b35f0484a891740f8189d4c7b",
+                "name": "City"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -95.36327,
+                    29.76328
+                ]
+            },
+            "relevance": 47,
+            "parentnames": [
+                "Texas"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e427079081d610048a4edf092526b43e",
+            "name": "Arizona",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -111.50098,
+                    34.5003
+                ]
+            },
+            "relevance": 40,
+            "parentnames": [
+                "United States"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "6e92d9b882c7100488e5df092526b43e",
+            "name": "Texas",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -99.25061,
+                    31.25044
+                ]
+            },
+            "relevance": 90,
+            "parentnames": [
+                "United States"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "6e92d9b882c7100488e5df092526b43e",
+            "name": "Texas",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "body_nitf": "<p>Dallas Morning News. December 12, 2023.</p><p>Editorial: Texas has a chance to be a climate leader in carbon capture technology</p><p>The environmental push against carbon capture is stunningly shortsighted.</p><p>For years, some environmentalists trumpeted the benefits of carbon capture and storage to significantly reduce greenhouse gas emissions associated with climate change.</p><p>The irony though is that as major energy companies and the state of Texas embrace the emerging technology, some <a href=\"https://www.textise.net/showText.aspx?strURL=https%3A%2F%2Fwww.washingtonpost.com%2Fnation%2F2023%2F06%2F22%2Fbiden-carbon-capture-climate-environmentalists%2F\">environmentalists</a> argue that the technology isn\u2019t ready for prime time, is too expensive, is a red herring to allow energy companies to delay transitions from fossil fuel production, and that Texas\u2019 history of cozy regulation of the energy industry would pose the potential for safety and other abuses.</p><p>This <a href=\"https://www.textise.net/showText.aspx?strURL=https%3A%2F%2Fwww.ciel.org%2Forganizations-demand-policymakers-reject-carbon-capture-and-storage%2F\">opposition has been brewing</a> since 2021 when 500 environmental organizations in the United States and Canada, many of whom had backed carbon capture technology previously, turned against its use in a letter to the two governments. Since then, some environmentalists in <a href=\"https://www.textise.net/showText.aspx?strURL=https%3A%2F%2Fcastro.house.gov%2Fimo%2Fmedia%2Fdoc%2Fcastro-doggett-epa-letter.pdf\">Texas and in Washington</a> have sought to slow-walk reviews and adoption of carbon capture technologies. Both Washington and Texas have to do a better job of reviewing carbon capture and storage proposals in a timely manner.</p><p>We hear the concerns, but think it\u2019s time for some pragmatism. Given that fossil fuels will be part of energy production for years to come, Texas, private industry and the federal government are right to pursue the development of additional carbon capture and storage facilities.</p><p><a href=\"https://www.textise.net/showText.aspx?strURL=https%3A%2F%2Fwww.ipcc.ch%2Freport%2Fcarbon-dioxide-capture-and-storage%2F\">Carbon capture technology</a> has support from many Democrats and Republicans, including President Joe Biden, as well as most energy companies. Earlier this year, the U.S. Department of Energy announced up to $1.2 billion to advance the development of two commercial-scale direct air capture facilities in Texas and Louisiana, an initiative that the Biden administration describes as the world\u2019s largest investment in engineered carbon removal.</p><p>This investment, and opportunities for federal tax credits to support carbon capture projects, could significantly jumpstart public and private sector investments in what could be a multitrillion industry to address the climate crisis. And it\u2019s not just a benefit for energy companies, but also for steel, cement, refineries and chemical firms that produce carbon emissions.</p><p>Texas has an <a href=\"https://www.textise.net/showText.aspx?strURL=https%3A%2F%2Fwww.theguardian.com%2Fenvironment%2F2023%2Fsep%2F12%2Fcarbon-capture-texas-worlds-biggest-will-it-work\">opportunity to be at the epicenter of a carbon reduction industry</a> that allows major energy companies to establish carbon capture and storage operations next to onshore gas wells or obtain offshore leases that would allow them to store carbon dioxide in <a href=\"https://www.textise.net/showText.aspx?strURL=https%3A%2F%2Fwww.texastribune.org%2F2023%2F09%2F20%2Ftexas-carbon-capture-storage-gulf-of-mexico%2F\">the Gulf of Mexico</a>. For example, ExxonMobil, which has the largest owned and operated carbon dioxide pipeline network in the country, <a href=\"https://www.textise.net/showText.aspx?strURL=https%3A%2F%2Fcorporate.exxonmobil.com%2Fnews%2Fnews-releases%2F2023%2F1102_exxonmobil-completes-acquisition-of-denbury\">recently acquired Denbury Inc.</a>, a sequestration firm, as part of its broader commercial and industrial carbon reduction strategy.</p><p>The world needs to embrace wind, solar and other technologies to reduce the carbon footprint. However, oil and gas production is integral to the world economy and can\u2019t be abandoned overnight without cratering the global economy.</p><p>Carbon capture and storage technologies aren\u2019t the sole answers to the challenges of climate change and carbon emissions but have to be part of the solution.</p><p>___</p><p>Fort Worth Star Telegram. December 13, 2023.</p><p>Editorial: Kate Cox\u2019s complicated pregnancy shows why Texas needs to change abortion law</p><p>The complications that Texas\u2019 abortion law created for a pregnant mother in Dallas have put the state in a national spotlight \u2014 and not in a good way.</p><p>Kate Cox <a href=\"https://www.textise.net/showText.aspx?strURL=https%3A%2F%2Fwww.star-telegram.com%2Fnews%2Fstate%2Ftexas%2Farticle282926678.html\">left the state to get an abortion</a> at 20 weeks because it wasn\u2019t clear that, despite grave risks to her health and a pregnancy almost certain to end in the baby\u2019s quick death, doctors could legally perform the procedure.</p><p>We err on the side of life and think that it\u2019s ethical, healthy and consistent to promote a culture of life in society, but scenarios like this fall into a gray area and demonstrates that our current law is somehow both too vague and too narrow . It must be amended.</p><p>According to a <a href=\"https://www.textise.net/showText.aspx?strURL=https%3A%2F%2Freproductiverights.org%2Fwp-content%2Fuploads%2F2023%2F12%2FCox-v.-Texas-original-petition-FINAL.pdf\">court filing</a>, Cox, 31, and her husband were excited to expand their family of four. However, after finding out through extensive testing that her baby had <a href=\"https://www.textise.net/showText.aspx?strURL=https%3A%2F%2Fwww.star-telegram.com%2Fnews%2Fstate%2Ftexas%2Farticle282829428.html\">full trisomy 18</a>, among many other severe health problems, and was unlikely to survive long past birth, if at all, the couple grew concerned. As Cox\u2019s health deteriorated, they became increasingly worried about carrying the pregnancy to term.</p><p>Cox\u2019s physicians told her her pregnancy would pose risks to her health and \u201cfuture fertility, including uterine rupture and hysterectomy.\u201d She is at \u201cincreased risk of gestational hypertension, gestational diabetes, fetal macrosomia, cesarean delivery, post-operative infections, and anesthesia complication.\u201d The justices of the Texas Supreme Court contended her doctor did not argue persuasively that Cox\u2019s life was at risk, as Texas\u2019 strict ban requires to allow an abortion.</p><p>Though an Austin-based judge granted her an abortion based on the medical emergency exception in the law, the Texas Supreme Court halted it. Worse, Attorney General Ken Paxton informed Cox\u2019s attorneys and medical providers that none of them would be insulated from prosecution or civil suits if she went forward with her abortion.</p><p>We are concerned about the optics of this case and the merits affecting the health, fertility, and lives of Texas women who want to have children here.</p><p>In their <a href=\"https://www.textise.net/showText.aspx?strURL=https%3A%2F%2Fwww.txcourts.gov%2Fmedia%2F1457645%2F230994pc.pdf\">opinion, the nine Republican Supreme Court justices</a> said that Cox\u2019s doctor \u201cdid not assert that Ms. Cox has a \u2018life-threatening physical condition\u2019 or that, in (the doctor\u2019s) reasonable medical judgment, an abortion is necessary because Ms. Cox has the type of condition the exception requires.\u201d</p><p>The Supreme Court opinion acknowledges that the law does not require pregnant mothers seeking an abortion to be \u201cwithin an inch of death.\u201d But in the same breath, the justices assert that Cox\u2019s physician presented only \u201ca good faith belief\u201d that Cox meets the exception\u2019s requirements, not \u201creasonable medical\u201d judgment. The opinion acknowledges that not every doctor would reach the same medical conclusions about what is life-threatening and yet eschews this particular doctor\u2019s judgment on the topic.</p><p>The justices also tacitly admitted that the law needs clarification, urging the Texas Medical Board to step in. But it is unlikely to do so, unless Gov. Greg Abbott approves.</p><p>So, as much as the justices say they do not want to weigh in on medical matters, they have and will continue to do so. It forces women like Cox to visit emergency rooms repeatedly. Having been told that she may not conceive children again if she delivers her baby, Cox had to either wait and see or leave the state for an abortion. She chose the latter.</p><p><a href=\"https://www.textise.net/showText.aspx?strURL=https%3A%2F%2Fwww.star-telegram.com%2Fopinion%2Fnicole-russell%2Farticle282839313.html\">What\u2019s pro-life</a> about this decision? What\u2019s pro-life about a law that is written so vaguely that the Texas Supreme Court thinks even in this complicated scenario, a woman like Cox still doesn\u2019t meet the exception requirements?</p><p>The way this law affects medical professionals in this field isn\u2019t tenable, either. Without further clarification of the existing law, the court system and the Legislature are forcing doctors in complex situations to either risk their careers or, in some cases, violate their consciences to provide care. The ambiguity in this law could further deter valuable health professionals from staying here or coming here to build a career.</p><p>Kate Cox\u2019s situation doesn\u2019t seem engineered to test Texas\u2019 abortion law, but it has. Without wanting to be, she has become the poster-child for showcasing why Texas\u2019 law must be amended. With the advice and counsel of physicians in the field of labor and delivery, OB-GYN\u2019s, and emergency physicians, this law must be amended to reflect the nuances of the medical exception to better serve \u2014 and save the lives \u2014 of both unborn babies and mothers.</p><p>___</p><p>Houston Chronicle. December 17, 2023.</p><p>Editorial: Mexican cartels provide the drugs, we provide the weapons</p><p>Scanning the headline from our sister newspaper, we were tempted to ask, \u201cWhat\u2019s the problem?\u201d After all, <a href=\"https://www.expressnews.com/news/article/gun-trafficking-case-18541729.php\">the alleged gun-smuggling miscreants</a> reside in a state whose governor has chided his fellow Texans for not owning as many guns as their California counterparts. They live in a state where guns are ubiquitous; in stores, in shops, in restaurants, even at church, people are packing heat. (That gospel singer reminds us of a campaign ad then-Attorney General Greg Abbott ran a few years back, the one where he urged his fellow Texans to get more familiar with two things: <a href=\"https://blog.chron.com/texaspolitics/2013/03/abbott-wants-guns-and-bibles-in-schools/\">guns and the Bible</a>. He\u2019s an Abbott two-fer, so to speak.)</p><p>Again, what\u2019s the problem? Don\u2019t the people of Mexico have an even more urgent need than we do to arm themselves? From what we hear, several Mexican towns and cities are under siege by murderous drug cartels; law enforcement is outgunned (or in cahoots with the cartels). Applying the logic of Abbott and his fellow Second Amendment absolutists, it would seem that law-abiding Mexicans need every AR-15 they can get their hands on. Nearly 5,000 assault-style rifles would, in a small way, even the odds.</p><p>On second thought, we realized, of course, that those guns aren\u2019t going to the defenseless besieged. They\u2019re going to the cartels.</p><p>As it turns out, we Americans, we Texans, are their suppliers. We are major exporters, legal and otherwise, of military-style rifles into Mexico. As the Washington Post <a href=\"https://www.washingtonpost.com/graphics/2020/world/mexico-losing-control/mexico-drug-cartels-sniper-rifles-us-gun-policy/\">reported in a 2020 investigation</a>, weapons from America are pouring into a country where \u201cmilitary drug cartels now command arsenals that rival the weaponry of the country\u2019s security forces. In many cases, criminals outgun police.\u201d</p><p>A Mexican government study found that roughly 2.5 million illicit American guns have surfaced in Mexico in the last dozen years. The weapon of choice is not necessarily the well-known AR-15 or the AK-47. It\u2019s the .50-caliber rifle that shoots rounds the size of a cigar, a weapon that can hit targets from nearly 2 miles away. Traffickers in rural Michoac\u00e1n used one a few years ago to shoot down a police helicopter.</p><p>According to the U.S. Bureau of Alcohol, Tobacco, Firearms and Explosives, <a href=\"https://www.gao.gov/products/gao-21-322\">70%</a> of guns found at crime scenes in Mexico between 2014 and 2018 and submitted for tracing were sourced from the United States. Mexico \u2014 \u201cso far from God, so close to the United States,\u201d as the quote attributed to Mexican dictator Porfirio Diaz goes \u2014 is a prime market for this country\u2019s <a href=\"https://www.ibisworld.com/united-states/market-research-reports/guns-ammunition-manufacturing-industry/#:~:text=Guns%20%26%20Ammunition%20Manufacturing%20in%20the%20US%20market%20size%20(2023%2D,estimated%20%2420.8bn%20in%202023.\">$21 billion</a> gun and ammunition manufacturing industry.</p><p>\u201cOn Capitol Hill,\u201d U.S. Rep. Joaquin Castro, D-San Antonio, noted in a speech last week, \u201cmy colleagues across the aisle will turn any conversation about immigration into a warning about the dangers of Mexican cartels, with vivid descriptions of brutal kidnappings and undeniably horrific violence. But in Mexico, there is only one gun store in the entire country. It\u2019s nearly impossible for any civilian to get a gun. When the cartels need weapons, they don\u2019t look within Mexico; they look north of the border, to gun shops in Houston, Dallas, Tucson and Deming.\u201d</p><p>Arizona and Texas are the go-to states, ATF officials told the Post. \u201cGround zero,\u201d the newspaper noted, is the Houston area. We are home to some 5,000 licensed gun stores and dealers. We offer smugglers a huge and unregulated informal market, including gun shows where people can sell guns as their \u201cprivate collection\u201d with no background check for the buyer. It\u2019s no wonder that more weapons recovered in Mexico are traced to Houston and Harris County than anywhere else in the country.</p><p>\u201cAt a time when the United States is pushing Mexico to target cartels more aggressively,\u201d the Post notes, \u201cU.S. laws that make .50-calibers and other destructive weapons easy to buy, along with a lack of enforcement at the border, are enabling those groups to expand their influence and activities in the country.\u201d</p><p>In other words, those smugglers Florida Gov. Ron DeSantis vows to shoot \u201cstone-cold dead\u201d once he becomes president, are carrying made-in-America weapons. The phrase doesn\u2019t translate well into Spanish so any Mexican politician threatening to shoot American gunrunners will need to coin their own.</p><p>Granted, Mexico has its own problems with drug interdiction and law enforcement, but they\u2019re getting little help from this country. Our insatiable drug appetite makes for a huge market for Mexican narcotics traffickers, while the ready availability of American guns keep the cartels as well-armed as a small nation\u2019s military force. \u201cWhat if we did as little to stop drugs as you\u2019re doing to stop guns?\u201d Mexican Defense Secretary Luis Cresencio Sandoval asked his American counterparts during a high-level meeting in 2020, as reported by the Post.</p><p>Consider the irony. Not only are the drug smugglers affiliated with the cartels armed with weapons they acquired from us, but the violence and chaos they ignite are driving out defenseless Mexican residents (as well as residents of other countries in the hemisphere). Faced with living \u2014 and dying \u2014 in merciless thrall to heavily armed gangs that murder, kidnap, torture and decapitate, it\u2019s little wonder that desperate people are willing to risk their lives and the lives of their children on long, dangerous treks to this country. They\u2019re defenseless victims of a vicious drugs-and-guns symbiosis.</p><p>Castro, ranking member of the House Foreign Affairs Committee on the Western Hemisphere, introduced relatively modest legislation earlier this month that\u2019s designed to tighten gun-export regulations and break the deadly link between Mexican drug smuggling and American arms smuggling.</p><p>\u201cNearly four years ago, the Trump administration worked with the National Rifle Association to loosen gun export regulations and unleash a flood of American-made guns on the Western Hemisphere,\u201d the San Antonio Democrat noted in a statement. \u201cAs we work with our allies and partners to address shared regional challenges, including forced migration and drug trafficking, Congress needs to address the role of U.S. gun exports in driving violence and instability abroad.\u201d</p><p>Labeled the Americas Regional Monitoring of Arms Sales <a href=\"https://castro.house.gov/media-center/press-releases/castro-torres-sires-lead-introduction-of-armas-act-to-stem-gun-trafficking-to-latin-america-and-caribbean\">(ARMAS) Act</a>, the legislation would reverse the Trump administration\u2019s decision shortly before the former president left office to transfer authority over small-arms exports from the State Department to the Commerce Department. The NRA <a href=\"https://www.americas1stfreedom.org/content/trump-administration-completes-pro-gun-regulatory-reform/\">pushed for the transfer</a> to allow gun manufacturers \u201cto run more competitively among the global markets,\u201d as they put it.</p><p>Castro maintains that Commerce is not equipped to enforce weapons-export laws and that the transfer has led to huge increases in arms sales throughout Latin America and the Caribbean, in tandem with political suppression, gang violence and human rights violations. His office told the Chronicle editorial board that, in addition to signing up a number of Democratic co-sponsors, he has held \u201cproductive talks\u201d with his Republican colleagues about the ARMAS Act and expects these discussions to continue. \u201cDisarming Mexican cartels shouldn\u2019t be a partisan fight,\u201d he said.</p><p>Meanwhile, the drug-smuggling duo from New Braunfels won\u2019t be enjoying their ill-gotten gain, an estimated $3.5 million over a two-year period. As the two men learned in a court appearance on Thursday, they\u2019re facing up to 20 years in prison.</p><p>One small consolation for the former gospel singer: A number of prisons around the country offer opportunities to join convict choirs.</p><p>___</p><p>___</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/df0da30706487054c28d4ab9d12351da",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 3,
+            "reason": "The document contains three editorials from Texas newspapers, each focusing on different topics. The first editorial discusses Texas' potential leadership in carbon capture technology, which is related to environmental issues rather than health. The second editorial addresses the complications of Texas' abortion law, which is directly related to health, particularly women's health and reproductive rights. The third editorial discusses the issue of gun smuggling and its impact on violence in Mexico, which is not directly related to health. Given that only one of the three editorials is directly relevant to health, the overall relevance of the document to the topic of health is moderate."
+        }
+    }
+}

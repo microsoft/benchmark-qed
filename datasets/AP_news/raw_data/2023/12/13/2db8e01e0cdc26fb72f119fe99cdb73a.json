@@ -1,0 +1,395 @@
+﻿{
+    "altids": {
+        "itemid": "2db8e01e0cdc26fb72f119fe99cdb73a",
+        "etag": "2db8e01e0cdc26fb72f119fe99cdb73a_1a8aza0c0",
+        "friendlykey": "49607470794",
+        "referenceid": "US--Pacific Northwest-Opioids"
+    },
+    "version": 1,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2023-12-13T23:02:29Z",
+    "firstcreated": "2023-12-13T20:24:09Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "ednote": "Eds: UPDATES: Updates summary and body with information from governor's press conference and proposed supplemental budget. Adds byline. Changes dateline. Removes Report for America from bytitle. With AP Photos.",
+    "editorialtypes": [
+        "Lead"
+    ],
+    "signals": [
+        "newscontent"
+    ],
+    "title": "US--Pacific Northwest-Opioids",
+    "headline": "As Pacific Northwest fentanyl crisis surges, officials grapple with how to curb it",
+    "headline_extended": "Oregon and Washington authorities say they are making the war on fentanyl a top priority",
+    "slugline": "AP-US--Pacific Northwest-Opioids, 1st Ld-Writethru",
+    "description_summary": "Oregon and Washington authorities say they are making the war on fentanyl a top priority. The focus comes as the Pacific Northwest battles the fentanyl crisis in schools, jails and on city streets. The region is struggling with an increase in synthetic opioid overdose deaths and visible public drug use in Portland and Seattle. Washington Gov. Jay Inslee wants lawmakers to approve $64 million in additional funding to expand opioid use prevention and treatment programs. Oregon Gov. Tina Kotek has proposed declaring a fentanyl emergency in Portland. Oregon lawmakers created a new committee on addiction to tackle the issue.",
+    "bylines": [
+        {
+            "by": "By CLAIRE RUSH and HALLIE GOLDEN",
+            "title": "Associated Press"
+        }
+    ],
+    "located": "SEATTLE",
+    "datelinelocation": {
+        "city": "Seattle",
+        "countryareacode": "WA",
+        "countryareaname": "Washington",
+        "countrycode": "USA",
+        "countryname": "United States",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                -122.33207,
+                47.60621
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2023 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "fentanyl opioids Oregon Washington Legislature"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "person": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "9689cbc20bfa424ebf75bc464418a89d",
+            "name": "Jay Inslee",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "POLITICIAN",
+                "PERSON"
+            ],
+            "associatedstates": [
+                {
+                    "code": "08a0a00882c810048942df092526b43e",
+                    "name": "Washington"
+                }
+            ],
+            "relevance": 64
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "97cc127c7a40446baf78abb85bee1f07",
+            "name": "Tina Kotek",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "POLITICIAN",
+                "PERSON"
+            ],
+            "relevance": 61
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "a",
+            "name": "a"
+        },
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "936045008844100486a2a28878d48e09",
+            "name": "Addiction and treatment",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 95
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86aad5207dac100488ecba7fa5283c3e",
+            "name": "Politics",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 55
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e237be707de410048fffdf092526b43e",
+            "name": "Medication",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 72
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "fb629770cf154f91964e1789d2dd836e",
+            "name": "Opioids",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 95
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 95
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Editorial",
+            "editorial_subject": "Health",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "08a0a00882c810048942df092526b43e",
+            "name": "Washington",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -120.50147,
+                    47.50012
+                ]
+            },
+            "relevance": 95,
+            "parentnames": [
+                "United States"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "fe016fe882c61004886adf092526b43e",
+            "name": "Oregon",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -120.50139,
+                    44.00013
+                ]
+            },
+            "relevance": 95,
+            "parentnames": [
+                "United States"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "05c59c9082c71004887adf092526b43e",
+            "name": "Portland",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "fe016fe882c61004886adf092526b43e"
+            ],
+            "locationtype": {
+                "code": "9d26a20b35f0484a891740f8189d4c7b",
+                "name": "City"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -122.67621,
+                    45.52345
+                ]
+            },
+            "relevance": 85,
+            "parentnames": [
+                "Oregon"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "08a0a00882c810048942df092526b43e",
+            "name": "Washington",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "fe016fe882c61004886adf092526b43e",
+            "name": "Oregon",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661850e07d5b100481f5c076b8e3055c",
+            "name": "Latin America and Caribbean",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "associations": {
+        "1": {
+            "altids": {
+                "itemid": "ed0c3a5e88bf4c8ca3cb969410ed698b"
+            },
+            "type": "picture"
+        },
+        "2": {
+            "altids": {
+                "itemid": "2c7a9df99b20415eb33e9a6b94643817"
+            },
+            "type": "picture"
+        },
+        "3": {
+            "altids": {
+                "itemid": "2dc702e7d3a940f098697a58abb34258"
+            },
+            "type": "picture"
+        },
+        "4": {
+            "altids": {
+                "itemid": "a894f51df9c14d7baf10794c289f0245"
+            },
+            "type": "picture"
+        },
+        "5": {
+            "altids": {
+                "itemid": "e743ff591cd54e949e7da42f5397b122"
+            },
+            "type": "picture"
+        },
+        "6": {
+            "altids": {
+                "itemid": "0d73b558d7794246856a1bdecc444c30"
+            },
+            "type": "picture"
+        },
+        "7": {
+            "altids": {
+                "itemid": "eaab2e5ba0c54d16a4e6fc86ba449de9"
+            },
+            "type": "picture"
+        },
+        "8": {
+            "altids": {
+                "itemid": "ec79c6335e424faea738866c2f47ef83"
+            },
+            "type": "picture"
+        }
+    },
+    "body_nitf": "<p>SEATTLE (AP) \u2014 The fight against fentanyl is increasingly being waged in schools, jails and on city streets in the Pacific Northwest, where state officials in Oregon and Washington have named it a top issue as overdose deaths rise.</p><p>Washington's Democratic Gov. Jay Inslee plans to ask lawmakers for about $64 million more to treat and prevent opioid use. In Oregon, Democratic Gov. Tina Kotek has proposed declaring a fentanyl emergency in Portland, and lawmakers have created a committee on addiction to get a jump on the issue before the Legislature reconvenes in February.</p><p>\u201cOne pill can now take your life. Fentanyl is the nuclear weapon of drugs and we\u2019ve got to up our game against this scourge,\u201d Inslee said during a press conference on Wednesday.</p><p>A surge in fentanyl deaths, including <a href=\"https://apnews.com/article/portland-oregon-fentanyl-overdoses-children-49349b7a341017e44a8c08b3846cd967\">among children</a>, has marked the latest iteration of the years-long opioid crisis. The most recent provisional figures from the federal Centers for Disease Control and Prevention estimate that more than 78,000 people died from overdoses involving synthetic opioids in the 12 months ending June 2023, accounting for 92% of all opioid overdose deaths during that period.</p><p>One way Oregon and Washington want to reduce fatalities is by more widely distributing opioid overdose reversal medications such as naloxone. Naloxone is most commonly administered as a nasal spray or an injection and helps restore breathing.</p><p>Inslee's office said part of his proposed supplemental budget would go toward equipping first responders with naloxone, and setting up 20 \u201csmart\u201d machines that dispense naloxone and other health supplies in areas of the state with high rates of opioid overdoses.</p><p>Oregon's state health department said it plans to offer free opioid overdose reversal kits to middle and high schools. A bill that has been filed ahead of Washington's short legislative session, which starts in January, would require all school districts to make such medication available in its high schools. Current law only requires districts with at least 2,000 students to do so.</p><p>Native Americans and Alaska Natives in Washington have been especially affected, dying from opioid overdoses at four times the state average, according to the proposed budget. Inslee wants some funds to go to a campaign to spread awareness in tribes about opioids, including how to find treatment and use naloxone.</p><p>Another key goal is expanding access to treatment, including in jails. The majority of inmates meet the criteria for drug dependence or abuse, studies have found, and they are more likely to die in their first weeks after release. Overdose is a leading cause of death for people newly released, partly because their tolerance decreases when they're not using behind bars.</p><p>The federal government is planning to allow states to use money from Medicaid, the joint federal-state health insurance program for low-income people, <a href=\"https://apnews.com/article/health-center-camden-prisons-f9db003d4ee9ce41c252552c6d2d6797\">to pay for medications that help curb opioid use</a> in state jails and prisons. The plan represents a major shift for the program; when launched in 1965, it banned using the funds to help incarcerated people.</p><p>Until the federal Medicaid dollars become available, Inslee wants to equip all city, county and tribal jails across the state with medications for opioid use disorder, increasing the number from the 19 locations currently providing it.</p><p>His state's <a href=\"https://www.hca.wa.gov/assets/program/WashingtonStateOpioidandOverdoseResponsePlan-final-2021.pdf\">opioid response plan</a> also seeks to expand treatment by allowing jails to start administering medication that reduces cravings and withdrawal symptoms to people who weren't taking it before incarceration. Only 19% of U.S. jails initiate such treatment for people without prior prescriptions, <a href=\"https://bjs.ojp.gov/document/oudstlj19.pdf\">the federal Bureau of Justice Statistics found</a> in analyzing data from 2019.</p><p>According to the same report, only 24% of jails continue to provide medication to curb withdrawal symptoms and opioid cravings to people who had prescriptions before incarceration.</p><p>The U.S. Food and Drug Administration has approved three drugs for treating opioid dependence: buprenorphine, methadone and naltrexone.</p><p>Authorities also want to curb public drug use, which has become more visible in major cities such as Portland and Seattle due to growing homelessness.</p><p>Kotek, Oregon's governor, this week released a proposal that calls for the state, Multnomah County and the city of Portland each to declare a 90-day fentanyl emergency and establish a command center to improve coordination between law enforcement, outreach workers and service providers. She has also urged providers to expand their hours.</p><p>When the Legislature convenes for its short session in February, Kotek also wants lawmakers to consider outlawing public drug use.</p><p>Banning public use has been a major talking point among Portland officials and lawmakers in recent months. Portland City Council approved such a ban in September, but it's contingent on state law changing.</p><p>Law enforcement officials have advocated for such a measure, saying a 2020 ballot initiative that decriminalized possession of small drug amounts has made it difficult to stop public use.</p><p>\u201cConfronting our most pressing challenges requires the hope and fortitude of an entire community,\u201d Kotek said.</p><p>___</p><p>Rush reported from Portland, Oregon.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/fentanyl-opioids-oregon-washington-legislature-2db8e01e0cdc26fb72f119fe99cdb73a",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 5,
+            "reason": "The document discusses the fentanyl crisis in the Pacific Northwest, focusing on the health implications of opioid overdoses and the measures being taken to address the issue. It includes information on overdose deaths, the distribution of naloxone, treatment programs, and public health initiatives. These topics are directly related to health, particularly public health and substance abuse treatment."
+        }
+    }
+}

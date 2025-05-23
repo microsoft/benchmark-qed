@@ -1,0 +1,316 @@
+﻿{
+    "altids": {
+        "itemid": "232727ed76c58ad1f7692aa8b119e66a",
+        "etag": "232727ed76c58ad1f7692aa8b119e66a_2a4aza0c0",
+        "friendlykey": "285347206676",
+        "referenceid": "EU-REL--Vatican-Pope"
+    },
+    "version": 2,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2024-03-28T01:22:05Z",
+    "firstcreated": "2024-03-27T13:01:41Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "ednote": "Eds: UPDATES: Adds more photos and video.",
+    "editorialtypes": [
+        "Lead"
+    ],
+    "signals": [
+        "newscontent"
+    ],
+    "title": "EU-REL--Vatican-Pope",
+    "headline": "Pope appears in better health, praises Israeli and Arab fathers who both lost daughters in conflict",
+    "headline_extended": "Pope Francis appears in better health, walking into the Vatican audience hall on his own with a cane for his weekly audience and delivering his prepared text with a clear voice",
+    "slugline": "AP-EU-REL--Vatican-Pope, 2nd Ld-Writethru",
+    "description_summary": "Pope Francis appears in better health, walking into the Vatican audience hall on his own with a cane for his weekly audience and delivering his prepared text with a clear voice. The pope\u2019s appearance on Wednesday was the first since Palm Sunday mass in St. Peter\u2019s Square, when he decided at the last minute to skip his homily, avoiding the speech at the start of a busy Holy Week that will test his increasingly fragile health. In recent weeks, the 87-year-old Pontiff has often shown difficulties in walking and has been heard breathing heavily during public events. The Holy Week schedule is challenging for popes even under the best of circumstances.",
+    "located": "VATICAN CITY",
+    "datelinelocation": {
+        "city": "Vatican City",
+        "countrycode": "VAT",
+        "countryname": "Vatican City",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                12.4533,
+                41.90225
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "pope health audience mideast conflict fathers"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "person": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "2fd38d1dee8c4287a13ae64992300d96",
+            "name": "Pope Francis",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 92
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "i",
+            "name": "i"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "7cf243908830100481e9ae2ac3a6923e",
+            "name": "War and unrest",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 43
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "084d88a87f00100481c3f571351eed07",
+            "name": "Common cold",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 32
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "026a1118e94443a2aacc08a2e70cc77b",
+            "name": "Religion",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 87
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "026a1118e94443a2aacc08a2e70cc77b",
+            "name": "Religion",
+            "creator": "Editorial",
+            "editorial_subject": "Religion",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "bb2d2c5f441a452cb24bb511a2ab5eea",
+            "name": "World news",
+            "creator": "Editorial",
+            "editorial_subject": "World news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "661850e07d5b100481f6c076b8e3055c",
+            "name": "Middle East",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "locationtype": {
+                "code": "424cdfcd69d64fa6869055f7ebf10be4",
+                "name": "World region"
+            },
+            "relevance": 56
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f3e0ed387eff10048539df092526b43e",
+            "name": "Vatican City",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661850e07d5b100481f4c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "01f56e0e654841eca2e69bf2cbcc0526",
+                "name": "Nation"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    12.4533,
+                    41.90225
+                ]
+            },
+            "relevance": 68,
+            "parentnames": [
+                "Europe"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "661850e07d5b100481f4c076b8e3055c",
+            "name": "Europe",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "associations": {
+        "1": {
+            "altids": {
+                "itemid": "222f3f1b59d24a38932fb93300d3ba4b"
+            },
+            "type": "audio"
+        },
+        "2": {
+            "altids": {
+                "itemid": "1fecd71fe72b4e0b9713062ea95ff4b0"
+            },
+            "type": "audio"
+        },
+        "3": {
+            "altids": {
+                "itemid": "bef90401cb164b94b6f1846bd5932bf4"
+            },
+            "type": "video"
+        },
+        "4": {
+            "altids": {
+                "itemid": "4c4a843bdfbe48978631daf3b7597b41"
+            },
+            "type": "picture"
+        },
+        "5": {
+            "altids": {
+                "itemid": "cab383e22f94493a8df38daa51a5f515"
+            },
+            "type": "picture"
+        },
+        "6": {
+            "altids": {
+                "itemid": "7a583a1f37394918804056dbe37e7772"
+            },
+            "type": "picture"
+        },
+        "7": {
+            "altids": {
+                "itemid": "2ca32a49a949492b9460c8f5048e4caa"
+            },
+            "type": "picture"
+        },
+        "8": {
+            "altids": {
+                "itemid": "ff0eab6d95a44dd2923ac667057f1bd5"
+            },
+            "type": "picture"
+        },
+        "9": {
+            "altids": {
+                "itemid": "971e34ec55f5433e87b392ceb7283761"
+            },
+            "type": "picture"
+        },
+        "10": {
+            "altids": {
+                "itemid": "38a9fdbee1bd498c89f39e87c13c20bb"
+            },
+            "type": "picture"
+        },
+        "11": {
+            "altids": {
+                "itemid": "5e49d914b71e41f9840376ac2578825e"
+            },
+            "type": "picture"
+        },
+        "12": {
+            "altids": {
+                "itemid": "b6e38ec161a241caa13d1cd6a598ad39"
+            },
+            "type": "picture"
+        },
+        "13": {
+            "altids": {
+                "itemid": "b0b5b5b3b7114487b07115b33b2a8454"
+            },
+            "type": "picture"
+        },
+        "14": {
+            "altids": {
+                "itemid": "51fb7e17f3f146548340323ffc00ecff"
+            },
+            "type": "picture"
+        }
+    },
+    "body_nitf": "<p>VATICAN CITY (AP) \u2014 <a href=\"https://apnews.com/hub/pope-francis\">Pope Francis</a> appeared in better health on Wednesday, walking into the Vatican audience hall on his own with a cane for his weekly general audience and delivering his prepared text with a clear voice.</p><p>The encounter was Francis' first public event since <a href=\"https://apnews.com/article/vatican-pope-palm-sunday-ukraine-gaza-ab758834cb0f99887b6f58a2c771fcc5\">Palm Sunday Mass in St. Peter\u2019s Square, when he decided at the last minute to skip his homily</a>, avoiding the speech at the start of a busy Holy Week that will test his increasingly fragile health.</p><p>In recent weeks, the 87-year-old Pontiff has often shown increased difficulties in walking, has asked an aide to read aloud his remarks and has been heard breathing heavily during public events.</p><p>The Holy Week schedule is challenging for popes even under the best of circumstances. But that is especially true this year for Francis, who has been battling on and off all winter what he and the Vatican have described as a case of the <a href=\"https://apnews.com/article/pope-health-flu-audience-cancelled-vatican-0f3e2c1e6db190883a5f9a5c63927dc0\">flu, bronchitis or a cold</a>.</p><p>As Francis discussed the virtue of patience during his Wednesday audience, he renewed his appeal for peace and an immediate stop in ongoing conflicts.</p><p>The pope also noted that there were two people in the Vatican's Paul VI audience hall \u2014 \u201ctwo fathers\u201d \u2014 and that one was Palestinian, the other Israeli.</p><p>He said that both of them had lost their daughters over the course of the Middle East conflict, \u201cand they are both friends.\u201d</p><p>\u201cThey do not look at the enmity of war,\u201d Francis said. \u201cThey look to the friendship of two men who care about each other and have experienced the same crucifixion.\u201d</p><p>The Vatican press office said Bassam Aramin's daughter Abir was killed in 2007 by an Israeli soldier as she left school; Rami Elhanan's daughter Smadar was killed in 1997 in an attack in Jerusalem.</p><p>The two men\u2019s story of friendship was told in the novel <a href=\"https://apnews.com/general-news-4448f5ea9f82896d733fbedefa77b971\">\u201cApeirogon\u201d by Colum McCann</a>, a winner of the Terzani Prize who met with Francis during an audience with artists on June 23, 2023.</p><p>\u201cLet us think of the beautiful witness of these two people who have suffered the war in the Holy Land in the loss of their daughters,\u201d the pope said.</p><p>Francis met with both men in private before the general audience and then warmly greeted the two men at the end.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/pope-health-audience-mideast-conflict-fathers-232727ed76c58ad1f7692aa8b119e66a",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 4,
+            "reason": "The document provides detailed information about Pope Francis' health, including his recent struggles with walking, breathing, and his battle with flu, bronchitis, or a cold. It also mentions his improved condition as he walked with a cane and delivered his speech clearly. While the document also covers other topics, such as his appeal for peace and the story of two fathers who lost their daughters, the health aspect of Pope Francis is a significant part of the content."
+        }
+    }
+}

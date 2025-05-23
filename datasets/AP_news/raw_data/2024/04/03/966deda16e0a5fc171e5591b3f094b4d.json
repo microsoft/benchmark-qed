@@ -1,0 +1,341 @@
+﻿{
+    "altids": {
+        "itemid": "966deda16e0a5fc171e5591b3f094b4d",
+        "etag": "966deda16e0a5fc171e5591b3f094b4d_3a8aza0c0",
+        "friendlykey": "613568979303",
+        "referenceid": "US--Biden-Sanders"
+    },
+    "version": 3,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2024-04-03T21:57:37Z",
+    "firstcreated": "2024-04-03T17:01:18Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "ednote": "Eds: UPDATES: Adds response from pharmaceutical lobby.",
+    "editorialtypes": [
+        "Lead"
+    ],
+    "signals": [
+        "newscontent"
+    ],
+    "title": "US--Biden-Sanders",
+    "headline": "Biden and Sen. Bernie Sanders join forces to promote lower health care costs, including for inhalers",
+    "headline_extended": "President Joe Biden has teamed up with Sen. Bernie Sanders to promote the administration\u2019s efforts to lower the cost of inhalers and other health care needs",
+    "slugline": "AP-US--Biden-Sanders, 3rd Ld-Writethru",
+    "description_summary": "President Joe Biden has teamed up with Sen. Bernie Sanders to promote the administration\u2019s efforts to lower the cost of inhalers and other health care needs. Both men on Wednesday touted the lower health care costs that have come through the Democrats\u2019 sweeping climate, health care and tax package that Biden signed into law in 2022. It caps various health care costs for those on Medicare, including $35 a month for insulin and $2,000 a year for prescription drugs. Sanders, a Vermont independent, and Biden were rivals for the Democratic presidential nomination in 2020. Biden told Sanders at the White House event that they've been fighting for this for 25 years.",
+    "bylines": [
+        {
+            "by": "By DARLENE SUPERVILLE",
+            "title": "Associated Press"
+        }
+    ],
+    "located": "WASHINGTON",
+    "datelinelocation": {
+        "city": "Washington",
+        "countryareacode": "DC",
+        "countryareaname": "District of Columbia",
+        "countrycode": "USA",
+        "countryname": "United States",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                -77.03637,
+                38.89511
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "joe biden white house bernie sanders"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "person": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "7e9ac529c086430593dd3542e3435ade",
+            "name": "Bernie Sanders",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "POLITICIAN",
+                "PERSON"
+            ],
+            "associatedstates": [
+                {
+                    "code": "d2f8d8a882c710048915df092526b43e",
+                    "name": "Vermont"
+                }
+            ],
+            "relevance": 82
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "42fcd5108d2610048a34f7ae5e3ffd3e",
+            "name": "Joe Biden",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "POLITICIAN",
+                "PERSON"
+            ],
+            "relevance": 85
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "w",
+            "name": "w"
+        },
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "9c750296cbfa4fdd89e9a32848825b29",
+            "name": "Prescription drugs",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 82
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86aad5207dac100488ecba7fa5283c3e",
+            "name": "Politics",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 74
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "5354d579ab614d9eb693ab2956f66611",
+            "name": "2020 United States presidential election",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "39a5551883591004893adf092526b43e",
+            "name": "Health care costs",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Editorial",
+            "editorial_subject": "Health",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "abfca78268874726966cdad8c35c4ae3",
+            "name": "Washington news",
+            "creator": "Editorial",
+            "editorial_subject": "Washington news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "organisation": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "898f52e08921100480efba0a2b2ca13e",
+            "name": "United States government",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 52
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "c05dca58760d10048f93e6e7a0f4673e",
+            "name": "U.S. Democratic Party",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 34
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "788b364882f110048df3df092526b43e",
+            "name": "District of Columbia",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "9d26a20b35f0484a891740f8189d4c7b",
+                "name": "City"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -77.00025,
+                    38.91706
+                ]
+            },
+            "relevance": 46,
+            "parentnames": [
+                "United States"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "661850e07d5b100481f5c076b8e3055c",
+            "name": "Latin America and Caribbean",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "788b364882f110048df3df092526b43e",
+            "name": "District of Columbia",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "d2f8d8a882c710048915df092526b43e",
+            "name": "Vermont",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "associations": {
+        "1": {
+            "altids": {
+                "itemid": "3c562dfc3dfd46abafbae9d1e1ba4b36"
+            },
+            "type": "picture"
+        },
+        "2": {
+            "altids": {
+                "itemid": "97d624535ac04c9fa69f360d74f50b41"
+            },
+            "type": "picture"
+        },
+        "3": {
+            "altids": {
+                "itemid": "ee6383aaf15c4d3084e7a3cb3cc6e51c"
+            },
+            "type": "picture"
+        },
+        "4": {
+            "altids": {
+                "itemid": "94f024ec798444ec85453fe311ef72b2"
+            },
+            "type": "picture"
+        },
+        "5": {
+            "altids": {
+                "itemid": "bd0917c384a14229999c8d9dddc6f39b"
+            },
+            "type": "audio"
+        },
+        "6": {
+            "altids": {
+                "itemid": "34479b94747e46229fb872375947d804"
+            },
+            "type": "audio"
+        }
+    },
+    "body_nitf": "<p>WASHINGTON (AP) \u2014 President <a href=\"https://apnews.com/hub/joe-biden\">Joe Biden</a> teamed up with Sen. <a href=\"https://apnews.com/hub/bernie-sanders\">Bernie Sanders</a> on Wednesday to promote his administration\u2019s efforts to lower the cost of inhalers and other health care needs, as the White House continues its effort to highlight Biden\u2019s legislative achievements to voters ahead of the November elections.</p><p>\u201cBernie, you and I have been fighting this for 25 years,\u201d Biden said to Sanders during an event in the Eisenhower Executive Office Building next door to the White House. \u201cFinally, finally we beat <a href=\"https://apnews.com/hub/health-care-industry\">Big Pharma</a>. Finally.\u201d</p><p>Both men touted the lower health care costs that come through the <a href=\"https://apnews.com/article/biden-signs-climate-health-bill-9a7f349fa7b07387d20ad603f2ff4875\">Democrats\u2019 sweeping climate, health care and tax package</a> that Biden signed into law in 2022. It caps various health care costs for those on Medicare, including $35 a month for insulin and $2,000 a year for prescription drugs. No Republican lawmakers voted for the law.</p><p>His aides and Democratic officials say Biden\u2019s achievements such as lowering health care costs are popular with the public, yet the incumbent president <a href=\"https://apnews.com/article/biden-poll-survey-economy-trump-election-dca1b60f6749d5eb50bc0e7600814855\">hasn\u2019t yet gotten the credit</a> from voters. Sanders has a loyal following that supports his calls to reign in medical costs in the U.S. and give the government more control over the health care industry.</p><p>The top drugmaker lobby called Biden\u2019s comments Wednesday a \u201cmissed opportunity,\u201d saying he failed to address how some other industries, like health insurance companies, are also driving up the cost of medications.</p><p>Both Biden and Sanders also promoted their recent efforts to pressure most major inhaler manufacturers to cap the costs of the devices to no more than $35 a month. Otherwise, the purchase price of inhalers ranges somewhere between $200 to $600 without insurance, according to the White House. Manufacturers have said the price changes will take effect later this year or at the beginning of next year.</p><p>\u201cI want to thank President Biden for what he has done on this issue up to now, and I look forward to working with the president as we go forward,\u201d Sanders said.</p><p>Sanders, a Vermont independent, and Biden were rivals for the Democratic presidential nomination in 2020. After Sanders ended his bid, his aides worked with Biden campaign officials to craft a party policy platform that would reflect Sanders\u2019 influence.</p><p>---</p><p>Associated Press writers Seung Min Kim and Amanda Seitz contributed to this report.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/joe-biden-white-house-bernie-sanders-966deda16e0a5fc171e5591b3f094b4d",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 5,
+            "reason": "The document discusses President Joe Biden and Senator Bernie Sanders' efforts to lower health care costs, specifically focusing on inhalers and other health care needs. It highlights legislative achievements related to health care costs, including capping costs for insulin and prescription drugs. The document also mentions the impact on Medicare and the involvement of major inhaler manufacturers. All these points are directly related to the topic of health."
+        }
+    }
+}

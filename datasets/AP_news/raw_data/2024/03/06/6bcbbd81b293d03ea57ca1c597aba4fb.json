@@ -1,0 +1,294 @@
+﻿{
+    "altids": {
+        "itemid": "6bcbbd81b293d03ea57ca1c597aba4fb",
+        "etag": "6bcbbd81b293d03ea57ca1c597aba4fb_4a4aza0c0",
+        "friendlykey": "512830382111",
+        "referenceid": "EU-REL--Vatican-Pope"
+    },
+    "version": 4,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2024-03-06T14:06:54Z",
+    "firstcreated": "2024-03-06T12:30:42Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "ednote": "Eds: UPDATES: Adds links",
+    "editorialtypes": [
+        "Lead"
+    ],
+    "signals": [
+        "newscontent"
+    ],
+    "title": "EU-REL--Vatican-Pope",
+    "headline": "Pope appears unable to climb a few steps as respiratory and mobility problems take their toll",
+    "headline_extended": "Lingering respiratory and mobility problems are continuing to take their toll on the Pope",
+    "slugline": "AP-EU-REL--Vatican-Pope, 4th Ld-Writethru",
+    "description_summary": "Lingering respiratory and mobility problems are continuing to take their toll on the Pope. Francis presided over his weekly general audience on Wednesday. But he had an aide read his catechism lesson, as he has done for the past several days. He also appeared unable to climb up the few steps to board his popemobile at the end of his audience. He then greeted the crowd before being wheeled out of the piazza. Late last year, Francis underwent a CAT scan that ruled out pneumonia. Francis has also been suffering from a fracture in the knee and inflammation of its ligaments that pushed starting in 2022 him to use a wheelchair.",
+    "located": "VATICAN CITY",
+    "datelinelocation": {
+        "city": "Vatican City",
+        "countrycode": "VAT",
+        "countryname": "Vatican City",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                12.4533,
+                41.90225
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "vatican pope francis health italy"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "person": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "2fd38d1dee8c4287a13ae64992300d96",
+            "name": "Pope Francis",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 55
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "i",
+            "name": "i"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "c9469c808b6b10048d8ba385cd5ce603",
+            "name": "Medical diagnostic technology",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 47
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 85
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "49febbc87f0010048246f571351eed07",
+            "name": "Pneumonia",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 67
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "5934f1087e87100487e3df092526b43e",
+            "name": "Injuries",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 47
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "bb2d2c5f441a452cb24bb511a2ab5eea",
+            "name": "World news",
+            "creator": "Editorial",
+            "editorial_subject": "World news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "026a1118e94443a2aacc08a2e70cc77b",
+            "name": "Religion",
+            "creator": "Editorial",
+            "editorial_subject": "Religion",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f3e0ed387eff10048539df092526b43e",
+            "name": "Vatican City",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661850e07d5b100481f4c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "01f56e0e654841eca2e69bf2cbcc0526",
+                "name": "Nation"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    12.4533,
+                    41.90225
+                ]
+            },
+            "relevance": 35,
+            "parentnames": [
+                "Europe"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "661850e07d5b100481f4c076b8e3055c",
+            "name": "Europe",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "associations": {
+        "1": {
+            "altids": {
+                "itemid": "e9c8ef60da694e52b7061655f464d081"
+            },
+            "type": "picture"
+        },
+        "2": {
+            "altids": {
+                "itemid": "9163fa13a4f046178658a422264634bc"
+            },
+            "type": "picture"
+        },
+        "3": {
+            "altids": {
+                "itemid": "6ee824991367452eab755b35baa97ba0"
+            },
+            "type": "picture"
+        },
+        "4": {
+            "altids": {
+                "itemid": "afe9b0df634c471f9a17f29e6e074dd3"
+            },
+            "type": "picture"
+        },
+        "5": {
+            "altids": {
+                "itemid": "f9beec57d11549a0a1f2244efb6e18d7"
+            },
+            "type": "picture"
+        },
+        "6": {
+            "altids": {
+                "itemid": "65026403182b431484357f0ca082109f"
+            },
+            "type": "picture"
+        },
+        "7": {
+            "altids": {
+                "itemid": "35a34fdbd34144a48587a81b59661aef"
+            },
+            "type": "picture"
+        },
+        "8": {
+            "altids": {
+                "itemid": "d854009b5873444b92b47ba8108237a2"
+            },
+            "type": "picture"
+        },
+        "9": {
+            "altids": {
+                "itemid": "c4380e04b7b34973a287945d20c15aa0"
+            },
+            "type": "picture"
+        },
+        "10": {
+            "altids": {
+                "itemid": "6f4c480b24214ef7a701b8a5a077d5d1"
+            },
+            "type": "audio"
+        },
+        "11": {
+            "altids": {
+                "itemid": "f6789dac5a9444839d15c832be9a8a99"
+            },
+            "type": "video"
+        }
+    },
+    "body_nitf": "<p>VATICAN CITY (AP) \u2014 Pope Francis <a href=\"https://apnews.com/article/vatican-pope-francis-health-flu-gender-ideology-3b83706d19aa42b7998055f17f965927\">again asked an aide to read his remarks</a> and was unable to get back onto his popemobile Wednesday, as lingering respiratory and mobility problems continued to take their toll on the 87-year-old pontiff.</p><p>Francis presided over his weekly general audience, held outside for the first time this year in a chilly St. Peter\u2019s Square. But he had an aide read his catechism lesson, as he has done for the past several days.</p><p>Last Wednesday, Francis <a href=\"https://apnews.com/article/italy-pope-vatican-illness-landmines-peace-middle-east-ukraine-c9af33a0b467b1a134e9a4da96754e47\">went to the hospital</a> for unspecified diagnostic tests, the results of which have not been released. He has been suffering on and off this winter from what he and the Vatican have said was a cold, bouts of bronchitis and the flu.</p><p>Late last year, Francis underwent a CAT scan that ruled out pneumonia, but the pope was still forced to call off a trip to the Gulf because of a bad bout of acute, infectious bronchitis.</p><p>Francis has also been <a href=\"https://apnews.com/article/pope-health-flu-audience-cancelled-vatican-0f3e2c1e6db190883a5f9a5c63927dc0\">suffering</a> from a fracture in the knee and inflammation of its ligaments that starting in 2022 pushed him to use a wheelchair. But he has usually managed to get around with a cane or walker and the help of aides to get him to a standing position.</p><p>On Wednesday, however, Francis appeared unable to climb up the few steps to board his popemobile at the end of his audience, even while grasping onto the handrails. Aides quickly brought back his wheelchair and he sat back down. He then greeted the crowd before being wheeled out of the piazza.</p><p>The Argentine pope had part of one lung removed as a young man because of a respiratory infection, and he often speaks in a whisper even when not sick. In 2021, he had a chunk of his colon removed and last year had surgery to repair an abdominal hernia and remove intestinal scar tissue.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/vatican-pope-francis-health-italy-6bcbbd81b293d03ea57ca1c597aba4fb",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 5,
+            "reason": "The document provides detailed information about Pope Francis's health issues, including his respiratory and mobility problems, recent hospital visits, and past surgeries. These details are directly related to the topic of health, making the document highly relevant."
+        }
+    }
+}

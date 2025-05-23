@@ -1,0 +1,213 @@
+﻿{
+    "altids": {
+        "itemid": "3ba39ec946dced8141c77858b257bcf0",
+        "etag": "3ba39ec946dced8141c77858b257bcf0_2a4aza0c0",
+        "friendlykey": "140692426791",
+        "referenceid": "AF--Liberia-Tanker Explosion"
+    },
+    "version": 2,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2023-12-28T20:11:04Z",
+    "firstcreated": "2023-12-28T17:07:15Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "ednote": "Eds: UPDATES: to remove garble in first paragraph. With AP Photos.",
+    "editorialtypes": [
+        "Lead"
+    ],
+    "signals": [
+        "newscontent"
+    ],
+    "title": "AF--Liberia-Tanker Explosion",
+    "headline": "More than 40 dead in Liberia after leaking fuel tanker exploded as people tried to collect gas",
+    "headline_extended": "Authorities in Liberia say a leaking fuel tanker exploded this week as people gathered to collect the gasoline, leaving more than 40 dead",
+    "slugline": "AP-AF--Liberia-Tanker Explosion, 2nd Ld-Writethru",
+    "description_summary": "Authorities in Liberia say a leaking fuel tanker exploded this week as people gathered to collect the gasoline, leaving more than 40 dead. Officials say the blast on Tuesday also injured at least 83 people in the town of Totota in the central part of the West African country. One health official says many of the dead were buried in a mass grave because their remains were unrecognizable. Health authorities say an exact death toll was difficult to confirm because of how badly the bodies were burned. Similar deadly accidents have occurred elsewhere in Africa.",
+    "bylines": [
+        {
+            "by": "By MARK N. MENGONFIA",
+            "title": "Associated Press"
+        }
+    ],
+    "located": "MONROVIA, Liberia",
+    "datelinelocation": {
+        "city": "Monrovia",
+        "countrycode": "LBR",
+        "countryname": "Liberia",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                -10.7969,
+                6.30054
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2023 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "Liberia tanker explosion"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "person": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cbcdcf930075434e8ad577e4828234a5",
+            "name": "Jewel Howard-Taylor",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "POLITICIAN",
+                "PERSON"
+            ],
+            "relevance": 50
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "i",
+            "name": "i"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86aad5207dac100488ecba7fa5283c3e",
+            "name": "Politics",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 67
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "5f7ebcc082b4100485cfdf092526b43e",
+            "name": "Accidents",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 49
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "bb2d2c5f441a452cb24bb511a2ab5eea",
+            "name": "World news",
+            "creator": "Editorial",
+            "editorial_subject": "World news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "66206b187d5b100482c5c076b8e3055c",
+            "name": "Liberia",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661812607d5b100481f1c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "01f56e0e654841eca2e69bf2cbcc0526",
+                "name": "Nation"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -9.5,
+                    6.5
+                ]
+            },
+            "relevance": 86,
+            "parentnames": [
+                "Africa"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "661812607d5b100481f1c076b8e3055c",
+            "name": "Africa",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "associations": {
+        "1": {
+            "altids": {
+                "itemid": "2364ec862541459e8e781c584bed943e"
+            },
+            "type": "picture"
+        }
+    },
+    "body_nitf": "<p>MONROVIA, Liberia (AP) \u2014 A leaking fuel tanker exploded earlier this week as people gathered to collect the gasoline, leaving more than 40 dead, authorities in <a href=\"https://apnews.com/hub/liberia\">Liberia</a> said Thursday.</p><p>The blast on Tuesday also injured at least 83 people in the town of Totota in the central part of the West African country, health officials said.</p><p>Many of the dead were buried in a mass grave on Wednesday because their remains were unrecognizable, said health official Dr. Cynthia Blapook in Bong County. Health authorities said an exact death toll was difficult to confirm because of how badly the bodies were burned.</p><p>Liberian Vice President Jewel Howard-Taylor attended the mass funeral.</p><p>\u201cWe never expected to start the new year like this,\u201d Howard-Taylor said.</p><p>Health officials said the number of injured could rise as they were not certain everyone had been brought in for care. A doctor at one hospital treating the injured urged the Liberian government to deploy a disaster management team and to have one in each county to respond to emergencies.</p><p>Dr. Minnie Sankawolo-Rocks also pleaded with people not to approach fuel tankers in the hope of collecting much-needed gasoline. <a href=\"https://apnews.com/article/tanker-ondo-accident-explosion-gasoline-ce60f8389e4cc74e9f1ae03dac3c7986\">Similar deadly accidents</a> have occurred elsewhere in Africa.</p><p>\u201cPlease, I am begging you,\" she said.</p><p>Sankawolo-Rocks said people did not listen to police instructions to keep away before the tanker exploded.</p><p>___</p><p>AP Africa news: <a href=\"https://apnews.com/hub/africa\">https://apnews.com/hub/africa</a></p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/liberia-tanker-explosion-3ba39ec946dced8141c77858b257bcf0",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 3,
+            "reason": "The document primarily focuses on a tragic incident involving a fuel tanker explosion in Liberia, resulting in numerous deaths and injuries. While it does touch on health-related aspects, such as the number of injured people, the involvement of health officials, and the need for disaster management teams, the main focus is on the event itself rather than health issues. Therefore, it is somewhat relevant to the topic of health but not highly focused on it."
+        }
+    }
+}

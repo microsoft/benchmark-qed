@@ -1,0 +1,260 @@
+﻿{
+    "altids": {
+        "itemid": "c0d3c111d5774557b4b5329e7e1ba9d5",
+        "etag": "c0d3c111d5774557b4b5329e7e1ba9d5_3a8aza0c0",
+        "friendlykey": "299706143483",
+        "referenceid": "US--Fatal Subway Shove"
+    },
+    "version": 3,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2024-03-27T00:45:52Z",
+    "firstcreated": "2024-03-26T13:16:27Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "ednote": "Eds: UPDATES: Adds additional comments from the mayor about mental illness, more quotes from subway riders, and more background on the city's efforts to address people experiencing mental illness within the transit system. Updates headline.",
+    "editorialtypes": [
+        "Lead"
+    ],
+    "signals": [
+        "newscontent"
+    ],
+    "title": "US--Fatal Subway Shove",
+    "headline": "NYC subway rider is fatally pushed onto tracks, reviving discussion about mental illness in system",
+    "headline_extended": "A man accused of fatally shoving another person into the path of an oncoming New York City subway train has been described by his mother and officials as experiencing mental health issues",
+    "slugline": "BC-US--Fatal Subway Shove, 3rd Ld-Writethru",
+    "description_summary": "A man accused of fatally shoving another person into the path of an oncoming New York City subway train has been described by his mother and officials as experiencing mental health issues. The death revived discussion Tuesday about how the city should respond to people experiencing mental health crises within the transit system. The shoving victim was pushed onto the tracks inside an East Harlem subway station shortly before 7 p.m. Monday. Police say the operator of an oncoming train was unable to stop. The suspected shover is a 24-year-old who has been arrested on a murder charge. No information about an attorney for the suspect was available Tuesday.",
+    "bylines": [
+        {
+            "by": "By KAREN MATTHEWS and CEDAR ATTANASIO",
+            "title": "Associated Press"
+        }
+    ],
+    "located": "NEW YORK",
+    "datelinelocation": {
+        "city": "New York",
+        "countryareacode": "NY",
+        "countryareaname": "New York",
+        "countrycode": "USA",
+        "countryname": "United States",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                -74.00597,
+                40.71427
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "new york city subway fatal shove"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "person": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "c3ba4c5a42054de4818ea01587134771",
+            "name": "Eric Adams",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "POLITICIAN",
+                "PERSON"
+            ],
+            "relevance": 64
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "a",
+            "name": "a"
+        },
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e231c7187de410048fd7df092526b43e",
+            "name": "Mental health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 53
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "877cb3c0899a10048abbd56c852d093e",
+            "name": "Transportation",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 63
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "04a1c837360043328029663c5c53d8a1",
+            "name": "Mass transit",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 92
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "b836d07082c610048807df092526b43e",
+            "name": "New York City",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "b58f18a082c6100487fbdf092526b43e"
+            ],
+            "locationtype": {
+                "code": "9d26a20b35f0484a891740f8189d4c7b",
+                "name": "City"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -74.00597,
+                    40.71427
+                ]
+            },
+            "relevance": 79,
+            "parentnames": [
+                "New York"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "b836d07082c610048807df092526b43e",
+            "name": "New York City",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "b58f18a082c6100487fbdf092526b43e",
+            "name": "New York",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661850e07d5b100481f5c076b8e3055c",
+            "name": "Latin America and Caribbean",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "associations": {
+        "1": {
+            "altids": {
+                "itemid": "454a873b83e645a88f2b057dbe4e874c"
+            },
+            "type": "audio"
+        },
+        "2": {
+            "altids": {
+                "itemid": "16d08c845c1c46dab83d6fb12fa59593"
+            },
+            "type": "picture"
+        },
+        "3": {
+            "altids": {
+                "itemid": "07bcc22cccc84d2d8ef602e2940c63f2"
+            },
+            "type": "picture"
+        }
+    },
+    "body_nitf": "<p>NEW YORK (AP) \u2014 A man accused of fatally shoving another person into the path of an oncoming New York City subway train was described Tuesday by his mother and officials as having psychological issues, reviving discussion about how the city should respond to people experiencing mental health crises within the transit system.</p><p>The shoving victim, who has not been identified by authorities, was pushed onto the tracks inside an East Harlem subway station shortly before 7 p.m. Monday, police said. The operator of an oncoming train was unable to stop and the person was killed, police said.</p><p>The suspected shover, Carlton McPherson, 24, was arrested on a murder charge, a police spokesperson said. McPherson was awaiting arraignment in Manhattan criminal court Tuesday. No information about a defense attorney was available. A call to a Legal Aid attorney who has represented McPherson in a pending assault case in Brooklyn was not returned.</p><p>McPherson\u2019s mother, Octavia Scouras, <a href=\"https://www.nytimes.com/2024/03/26/nyregion/subway-shove-manhattan.html\">told The New York Times</a> her son had been hospitalized for mental health treatment at least twice.</p><p>While violence in the nation's largest transit system is rare, being shoved from a subway station's narrow platform onto the track has long loomed large in riders' fears.</p><p>The infrequent instances received <a href=\"https://apnews.com/article/new-york-89a06f0c88a7babe263104214858dfbe\">heightened attention</a> following a spike in crime during the COVID-19 pandemic, <a href=\"https://apnews.com/article/health-kathy-hochul-new-york-city-queens-01a2d995ba2947853c74dcae6550d262\">as the city debated</a> how best to address homelessness and mental illness in the streets and underground.</p><p>Mayor Eric Adams renewed that discussion Tuesday, saying at a City Hall news conference that New York City still has a \u201csevere mental health illness problem\u201d that \u201cplayed out on 125th Street and Lexington Avenue at the subway station.\u201d</p><p>After taking office in 2022, Adams launched an effort to <a href=\"https://apnews.com/article/kathy-hochul-business-new-york-homelessness-nyc-state-wire-51dc929aa2059528af4bae9e45d8e4cd\">tackle crime and homelessness</a> on the subway, sending more police, mental health and social service outreach workers into the system. His plan included <a href=\"https://apnews.com/article/health-new-york-city-mental-government-and-politics-21d32260d21bee4ac87a81a55234ba11\">involuntarily hospitalizing people</a>, a move <a href=\"https://apnews.com/article/politics-new-york-city-mental-health-united-states-government-eric-adams-e9a1c39d5ab6f19efe98f9755c4548bf\">fiercely opposed</a> by advocates for people with mental illness.</p><p>On Tuesday, he said city officials are still working to get homeless people with mental health issues into treatment. Nearly 7,000 people have checked into shelters since the push began, officials said.</p><p>\u201cWe\u2019re there engaging people. Getting people connected to shelter,\" said Anne Williams-Isom, Adams\u2019 deputy mayor for health and human services. \"It\u2019s this concept of keeping them in shelter and getting them the support that they need so they\u2019re not spiraling in and out of the system.\u201d</p><p>Adams argued that the state should further expand 1999's Kendra\u2019s Law, which allows courts to order defendants with mental health issues to complete treatment. The law was named for Kendra Webdale, who died after being pushed onto the subway tracks by a man with a history of mental illness.</p><p>Adams said that although acts of violence like the fatal shove fuel the perception of lawlessness, subway crime is down nearly 6% since he took office in 2022.</p><p>\u201cWe hear this over and over again: The city\u2019s out of control. It\u2019s just not true,\u201d Adams, a former transit police officer, said at the news conference.</p><p>Monday's fatal push happened on the same day that <a href=\"https://apnews.com/article/new-york-subway-fare-evasion-policing-crackdown-7c004e19a41a4739af12103366486082\">New York City officials announced a plan</a> to send 800 more police officers into the subway system to crack down on fare evasion and an hour after <a href=\"https://apnews.com/article/police-officer-killed-nypd-queens-f39e97096760106567d3a9e139ef2335\">a city police officer was fatally shot</a> during a traffic stop, the first member of the department to be killed in the line of duty in two years.</p><p>With subway ridership still lagging after the pandemic, a fall 2023 <a href=\"https://new.mta.info/document/131806\">study by the Metropolitan Transportation Authority</a> found many customers said they'd be more satisfied if the agency addressed \u201cquality of life\u201d concerns such as panhandling, as well as if there were fewer people \u201cbehaving erratically in the system.\u201d</p><p>A smaller portion, around 30%, listed a more visible security presence as a top need. For some commuters, having more police officers around really makes a difference.</p><p>When a woman started yelling at Shanita Jones on her daily commute, an officer happened to be on the train.</p><p>\u201cShe was upset with me because I sat right next to her,\u201d said Jones, who rides the subways seven days a week for her two jobs as a spa attendant and a home healthcare aide. \u201cI told the officer, \u2018I think she had a bad day.\u2019\u201d</p><p>In an effort to keep people off the tracks, the MTA has also recently been testing hip-high metal barriers at a handful of subway stations, though the fences have large gaps to allow travelers to get on and off trains.</p><p>John O\u2019Callaghan, a commuter who works in the textiles industry, lamented the lack of platform safety features present in cities he visits for business, like Hong Kong, where plexiglass walls prevent access onto the tracks.</p><p>\u201cI stand with my back to the beams, and that\u2019s it,\u201d O\u2019Callaghan said.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/new-york-city-subway-fatal-shove-c0d3c111d5774557b4b5329e7e1ba9d5",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 3,
+            "reason": "The document primarily discusses a tragic incident in the NYC subway system where a man with mental health issues fatally pushed another person onto the tracks. While the article does touch on mental health and the city's response to mental health crises, the main focus is on the incident itself, public safety, and the measures being taken to address crime and homelessness in the subway system. The connection to the broader topic of health is present but not central. Therefore, the document is somewhat relevant but not highly focused on health as a primary topic."
+        }
+    }
+}

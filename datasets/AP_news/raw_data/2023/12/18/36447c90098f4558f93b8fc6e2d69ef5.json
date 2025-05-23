@@ -1,0 +1,221 @@
+﻿{
+    "altids": {
+        "itemid": "36447c90098f4558f93b8fc6e2d69ef5",
+        "etag": "36447c90098f4558f93b8fc6e2d69ef5_0a2aza0c0",
+        "friendlykey": "337992544022",
+        "referenceid": "WI--Abortion-Wisconsin"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2023-12-18T20:21:16Z",
+    "firstcreated": "2023-12-18T20:21:15Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "WI--Abortion-Wisconsin",
+    "headline": "Planned Parenthood of Wisconsin to resume abortions at its Sheboygan clinic within days",
+    "headline_extended": "Planned Parenthood of Wisconsin says it will resume offering abortions at its clinic in Sheboygan on Dec. 28",
+    "slugline": "AP-WI--Abortion-Wisconsin",
+    "description_summary": "Planned Parenthood of Wisconsin says it will resume offering abortions at its clinic in Sheboygan on Dec. 28. The group stopped offering abortions in June 2022 after the U.S. Supreme Court overturned its ruling in Roe v. Wade. Clinics in Madison and Milwaukee resumed providing abortions in September, after a judge said the state's 173-year-old abortion ban outlaws killing fetuses but does not prohibit consensual medical abortions. The same judge issued a final ruling earlier this month, and Planned Parenthood promised to resume abortions at the Sheboygan clinic as soon as possible. Conservatives have vowed to appeal the ruling.",
+    "located": "MADISON, Wis.",
+    "datelinelocation": {
+        "city": "Madison",
+        "countryareacode": "WI",
+        "countryareaname": "Wisconsin",
+        "countrycode": "USA",
+        "countryname": "United States",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                -89.40123,
+                43.07305
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2023 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "planned parenthood wisconsin abortion services sheboygan"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e22e35087de410048fc2df092526b43e",
+            "name": "Abortion",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 89
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86aad5207dac100488ecba7fa5283c3e",
+            "name": "Politics",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 32
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Editorial",
+            "editorial_subject": "Health",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        }
+    ],
+    "organisation": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "9511d139da5646cfb0fbcce4d2ee1bad",
+            "name": "Planned Parenthood",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 60
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "1bc1bc3082c81004896cdf092526b43e",
+            "name": "Wisconsin",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -90.00041,
+                    44.50024
+                ]
+            },
+            "relevance": 60,
+            "parentnames": [
+                "United States"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "044c2e4a3974459d953c03183ecafd4b",
+            "name": "Sheboygan",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "1bc1bc3082c81004896cdf092526b43e"
+            ],
+            "locationtype": {
+                "code": "9d26a20b35f0484a891740f8189d4c7b",
+                "name": "City"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -87.71453,
+                    43.75083
+                ]
+            },
+            "relevance": 48,
+            "parentnames": [
+                "Wisconsin"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "1bc1bc3082c81004896cdf092526b43e",
+            "name": "Wisconsin",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "body_nitf": "<p>MADISON, Wis. (AP) \u2014 Planned Parenthood of Wisconsin announced Monday that it will resume offering abortions at its Sheboygan location on Dec. 28.</p><p>The group promised earlier this month to restart abortion services at the clinic \u201cas soon as possible\u201d after a judge on Dec. 5 reaffirmed her ruling that <a href=\"https://apnews.com/article/abortion-ban-wisconsin-dane-county-judge-ruling-b9992fc2a162bc4b5201936a69d00eec\">state law permits abortions</a>.</p><p>Planned Parenthood providers <a href=\"https://apnews.com/article/abortion-us-supreme-court-wisconsin-madison-planned-parenthood-01f50d58b62f1f9b6ac87b0f1faff587\">stopped offering abortions</a> in the state in June 2022 immediately after the U.S. Supreme Court overturned its decision in Roe v. Wade. Clinics in Milwaukee and Madison <a href=\"https://apnews.com/article/wisconsin-abortion-resume-planned-parenthood-bd3db37582c732910798a5898060d511\">resumed offering abortions</a> in September, leaning on an initial ruling from Dane County Circuit Judge Diane Schlipper that said Wisconsin's 173-year-old abortion ban outlaws killing fetuses but <a href=\"https://apnews.com/article/abortion-wisconsin-ban-challenge-lawsuit-866eed85d2918113bfe644459e62171a\">does not ban</a> consensual medical abortions.</p><p>Schlipper's final ruling earlier this month boosted Planned Parenthood leaders' confidence that they could restart abortion services at the Sheboygan clinic, too.</p><p>Sheboygan County District Attorney Joel Urmanski, a Republican, acknowledged that he is obligated to comply with the ruling but <a href=\"https://apnews.com/article/wisconsin-abortion-ban-appeal-ruling-court-fd61709980eef70654fff9b20af10e6c\">promised to appeal it</a>. The case is likely to end up before the Wisconsin Supreme Court, which recently <a href=\"https://apnews.com/article/wisconsin-supreme-court-liberal-8800fc9d37e6194f777c2fed261c5d37\">flipped to liberal control</a>. Urmanski's attorney did not immediately respond to an email sent Monday seeking comment.</p><p>\u201cWhile we are grateful to be resuming medication abortion care at the Sheboygan Health Center, there is more to be done,\u201d Planned Parenthood of Wisconsin President Tanya Atkinson said. \u201cWe will continue essential work to help protect and expand reproductive freedom in Wisconsin so that everyone who needs comprehensive reproductive health care in our state can get the nonjudgmental and compassionate care they deserve.\u201d</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/planned-parenthood-wisconsin-abortion-services-sheboygan-36447c90098f4558f93b8fc6e2d69ef5",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 5,
+            "reason": "The document discusses the resumption of abortion services at a Planned Parenthood clinic in Wisconsin, which is directly related to reproductive health. It includes details about legal rulings, the impact on services, and statements from health officials, all of which are pertinent to the topic of health. The focus on reproductive health services and legal aspects affecting them makes the document highly relevant to the topic of health."
+        }
+    }
+}

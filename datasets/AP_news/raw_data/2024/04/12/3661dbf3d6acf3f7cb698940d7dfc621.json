@@ -1,0 +1,214 @@
+﻿{
+    "altids": {
+        "itemid": "3661dbf3d6acf3f7cb698940d7dfc621",
+        "etag": "3661dbf3d6acf3f7cb698940d7dfc621_3a4aza0c0",
+        "friendlykey": "681315942729",
+        "referenceid": "LT--Mexico-Fentanyl"
+    },
+    "version": 3,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2024-04-13T00:17:52Z",
+    "firstcreated": "2024-04-12T20:23:53Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "ednote": "Eds: UPDATES: Revises headline. Adds details from a 2023 U.S. Department of State's report on fentanyl seized.",
+    "editorialtypes": [
+        "Lead"
+    ],
+    "signals": [
+        "newscontent"
+    ],
+    "title": "LT--Mexico-Fentanyl",
+    "headline": "Mexico, a leading producer of illicit fentanyl, can't get enough for medical use, study finds",
+    "headline_extended": "A new report by the Mexican government says the country is facing a dire shortage of fentanyl for medical use, even as Mexican cartels pump out tons of the illicit narcotic",
+    "slugline": "AP-LT--Mexico-Fentanyl, 3rd Ld-Writethru",
+    "description_summary": "A new report by the Mexican government says the country is facing a dire shortage of fentanyl for medical use, even as Mexican cartels pump out tons of the illicit narcotic. The paradox was reported Friday in a study by Mexico's National Commission on Mental Health and Addictions. The study did not give a reason for the shortage of the synthetic opioid, which is needed for anesthesia in hospitals, but claimed it was a world-wide problem. The commission said fentanyl had to be imported, and that imports fell by more than 50% between 2022 and 2023. Nonetheless, Mexican cartels import tons of precursor chemicals to make illicit fentanyl.",
+    "located": "MEXICO CITY",
+    "datelinelocation": {
+        "city": "Mexico City",
+        "countrycode": "MEX",
+        "countryname": "Mexico",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                -99.12766,
+                19.42847
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "Mexico fentanyl shortage US medical use"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "i",
+            "name": "i"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 82
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "fb629770cf154f91964e1789d2dd836e",
+            "name": "Opioids",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 97
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Editorial",
+            "editorial_subject": "Health",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "bb2d2c5f441a452cb24bb511a2ab5eea",
+            "name": "World news",
+            "creator": "Editorial",
+            "editorial_subject": "World news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "organisation": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "179e0819bf1f43a6a8c30567398915fc",
+            "name": "Mexico government",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 48
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "661af0c07d5b10048239c076b8e3055c",
+            "name": "Mexico",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "6618c9f87d5b10048204c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "01f56e0e654841eca2e69bf2cbcc0526",
+                "name": "Nation"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -102,
+                    23
+                ]
+            },
+            "relevance": 65,
+            "parentnames": [
+                "Central America"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "661850e07d5b100481f5c076b8e3055c",
+            "name": "Latin America and Caribbean",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "associations": {
+        "1": {
+            "altids": {
+                "itemid": "2127daacad064333856d7b21f0d3e442"
+            },
+            "type": "picture"
+        }
+    },
+    "body_nitf": "<p>MEXICO CITY (AP) \u2014 A report released by the Mexican government Friday says the country is facing a dire shortage of fentanyl for medical use, even as Mexican cartels <a href=\"https://apnews.com/article/mexico-fentanyl-shortage-us-medical-use-3661dbf3d6acf3f7cb698940d7dfc621\">pump out tons of the illicit narcotic</a>.</p><p>The paradox was reported in a study by Mexico\u2019s National Commission on Mental Health and Addictions. The study did not give a reason for the shortage of the synthetic opioid, which is needed for anesthesia in hospitals, but claimed it was a worldwide problem.</p><p>The commission said fentanyl had to be imported, and that imports fell by more than 50% between 2022 and 2023.</p><p>Nonetheless, Mexican cartels appear to be having no problem importing tons of precursor chemicals and making their own fentanyl, which they smuggle into the United States. The report says Mexican seizures of illicit fentanyl rose 1.24 tons in 2020 to 1.85 tons in 2023.</p><p>Some of that is now spilling back across the border, with an increase in illicit fentanyl addiction reported in some Mexican border regions \u2014 <a href=\"https://apnews.com/article/mexico-lopez-obrador-fentanyl-united-states-drugs-3545ba238c3ea3aef4157de94b45705e\">a problem Mexico paradoxically blamed on the United States.</a></p><p>\u201cDespite the limitations of availability in pharmaceutical fentanyl in our country, the excessive use of opiates in recent decades in the United States has had important repercussions on consumption and supply in Mexico,\u201d the report states.</p><p>The report said that requests for addiction treatment in Mexico increased from 72 cases in 2020, to 430 cases in 2023. That sounds like a tiny number compared to the estimated 70,000 annual overdose deaths in the United States in recent years related to synthetic opioids. But in fact, the Mexican government does very little to offer addiction treatment, so the numbers probably don't reflect the real scope of the problem.</p><p>The shortage of medical anesthetic drugs has caused some real problems in Mexico.</p><p>Local problems with the availability of morphine and fentanyl have led anesthesiologists to acquire their own supplies, carry the vials around with them, and administer multiple doses from a single vial to conserve their supply.</p><p>In 2022, anesthetics contaminated by those practices <a href=\"https://apnews.com/article/caribbean-mexico-city-health-medication-92822e20d3dd647b8e929a3c066f7efa\">caused a meningitis outbreak in the northern state of Durango that killed about three dozen people,</a> many of whom were pregnant women given epidurals. Several Americans died because of a similar outbreak after having surgery at clinics in the Mexican border city of Matamoros in 2023.</p><p>The response by the administration of President Andr\u00e9s Manuel L\u00f3pez Obrador to those twin problems \u2014 not enough legal fentanyl, and too much of the illicit stuff \u2014 has been contradictory.</p><p>In 2023, L\u00f3pez Obrador <a href=\"https://apnews.com/article/mexico-fentanyl-drug-policy-us-lopez-obrador-1cafac1124f051e789b02ecfd0f6a39b\">briefly proposed banning fentanyl even for medical use,</a> but has not mentioned that idea lately after it drew a wave of criticism from doctors.</p><p>Meanwhile, the president has steadfastly denied that Mexican cartels produce the drug, despite overwhelming evidence that they import precursor chemicals from Asia and carry out the chemical processes to make fentanyl. L\u00f3pez Obrador claims they only press the drug into pill form.</p><p>According to the U.S. Department of State\u2019s 2023 International Narcotics Control Strategy Report, \u201capproximately 96 percent of all fentanyl seized by CBP originated in Mexico, with only 270 kg reaching the United States from other destinations.\u201d</p><p>___</p><p>Follow AP\u2019s coverage of Latin America and the Caribbean at <a href=\"https://apnews.com/hub/latin-america\">https://apnews.com/hub/latin-america</a></p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/mexico-fentanyl-shortage-us-medical-use-3661dbf3d6acf3f7cb698940d7dfc621",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 5,
+            "reason": "The document discusses the shortage of medical fentanyl in Mexico, which is a significant health issue. It also covers the impact of this shortage on medical practices, such as anesthesiologists having to carry their own supplies and the resulting meningitis outbreak. Additionally, it touches on the broader implications of fentanyl addiction and the Mexican government's response to the crisis. These points are directly related to health, making the document highly relevant to the topic."
+        }
+    }
+}

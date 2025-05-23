@@ -1,0 +1,343 @@
+﻿{
+    "altids": {
+        "itemid": "fc3417c15cdf8e539030d6d4d29087e8",
+        "etag": "fc3417c15cdf8e539030d6d4d29087e8_2a5aza0c0",
+        "friendlykey": "247941804750",
+        "referenceid": "REL--Vatican-Pope"
+    },
+    "version": 2,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2023-12-08T18:28:51Z",
+    "firstcreated": "2023-12-08T16:53:56Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "ednote": "Eds: CORRECTS: day of the week in first paragraph. With AP Photos.",
+    "editorialtypes": [
+        "Lead"
+    ],
+    "signals": [
+        "newscontent"
+    ],
+    "title": "REL--Vatican-Pope",
+    "headline": "Pope Francis makes his first public appearances since being stricken by bronchitis",
+    "headline_extended": "Pope Francis has made his first public appearance outdoors since being stricken by bronchitis two weeks ago, which forced him to cancel a planned trip to the COP-28 climate conference in Dubai",
+    "slugline": "BC-REL-Vatican-Pope, 2nd Ld-Writethru",
+    "description_summary": "Pope Francis has made his first public appearance outdoors since being stricken by bronchitis two weeks ago, which forced him to cancel a planned trip to the COP-28 climate conference in Dubai. The pope has been steadily recovering, and for the Dec. 8 holiday devoted to Mary kept a traditional appointment to pray at the Spanish Steps on Friday. He arrived in a black car, and blessed a crowd of onlookers before taking a seat in a chair facing a statue of the Madonna. Before his appointment at the Spanish Steps, Francis went to the St. Mary Major basilica to pray before one of his favorite icons to Mary. He entered the basilica in a wheelchair.",
+    "located": "ROME",
+    "datelinelocation": {
+        "city": "Rome",
+        "countrycode": "ITA",
+        "countryname": "Italy",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                12.51133,
+                41.89193
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2023 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "vatican pope war bronchitis madonna"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "person": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "2fd38d1dee8c4287a13ae64992300d96",
+            "name": "Pope Francis",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 91
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "i",
+            "name": "i"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 65
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "026a1118e94443a2aacc08a2e70cc77b",
+            "name": "Religion",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 83
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e228bab07de410048fa8df092526b43e",
+            "name": "Lung disease",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 65
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "026a1118e94443a2aacc08a2e70cc77b",
+            "name": "Religion",
+            "creator": "Editorial",
+            "editorial_subject": "Religion",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Editorial",
+            "editorial_subject": "Health",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "bb2d2c5f441a452cb24bb511a2ab5eea",
+            "name": "World news",
+            "creator": "Editorial",
+            "editorial_subject": "World news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "3a251f30ba234d49938aecd7adde1c62",
+            "name": "Dubai",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e09b87d5b10048288c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "9d26a20b35f0484a891740f8189d4c7b",
+                "name": "City"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    55.28,
+                    25.25222
+                ]
+            },
+            "relevance": 34,
+            "parentnames": [
+                "United Arab Emirates"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f3e0ed387eff10048539df092526b43e",
+            "name": "Vatican City",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661850e07d5b100481f4c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "01f56e0e654841eca2e69bf2cbcc0526",
+                "name": "Nation"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    12.4533,
+                    41.90225
+                ]
+            },
+            "relevance": 34,
+            "parentnames": [
+                "Europe"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "662122b07d5b100482d7c076b8e3055c",
+            "name": "Italy",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661850e07d5b100481f4c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "01f56e0e654841eca2e69bf2cbcc0526",
+                "name": "Nation"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    12.833333,
+                    42.833333
+                ]
+            },
+            "relevance": 52,
+            "parentnames": [
+                "Europe"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "661850e07d5b100481f4c076b8e3055c",
+            "name": "Europe",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "associations": {
+        "1": {
+            "altids": {
+                "itemid": "44632ae98bc94c7e937cefcd8750dbaa"
+            },
+            "type": "picture"
+        },
+        "2": {
+            "altids": {
+                "itemid": "9ce4682aeffd4f3cbcf08eca47103080"
+            },
+            "type": "picture"
+        },
+        "3": {
+            "altids": {
+                "itemid": "4c8ac036874446189d0d15e59d3ca273"
+            },
+            "type": "picture"
+        },
+        "4": {
+            "altids": {
+                "itemid": "e14c673f868f459394a63f42b72e0cc2"
+            },
+            "type": "picture"
+        },
+        "5": {
+            "altids": {
+                "itemid": "7b1e72e0f3684453aac6f9f78c2b6404"
+            },
+            "type": "picture"
+        },
+        "6": {
+            "altids": {
+                "itemid": "b4f0369fc1aa48f68cc4c087b3af1493"
+            },
+            "type": "picture"
+        },
+        "7": {
+            "altids": {
+                "itemid": "32ff7535ed4549068b828ce14f6e24b6"
+            },
+            "type": "picture"
+        },
+        "8": {
+            "altids": {
+                "itemid": "0984eb4775ac438bb3c464d05f306e7b"
+            },
+            "type": "picture"
+        },
+        "9": {
+            "altids": {
+                "itemid": "d88bb717b2144fb3815acd933c7e6ff1"
+            },
+            "type": "audio"
+        },
+        "10": {
+            "altids": {
+                "itemid": "7e73e986bda34cd3a04ea5ca043222b3"
+            },
+            "type": "audio"
+        }
+    },
+    "body_nitf": "<p>ROME (AP) \u2014 <a href=\"https://apnews.com/hub/pope-francis\">Pope Francis</a> on Friday made his first public appearance outdoors since being stricken by bronchitis two weeks ago, which forced him to cancel a planned trip to the COP-28 climate conference in Dubai.</p><p>The pope has been steadily recovering, and for the Dec. 8 holiday devoted to Mary kept a traditional appointment to pray at the Spanish Steps. He arrived in a black car, and blessed a crowd of onlookers before taking a seat in a chair facing a statue of the Madonna.</p><p>The pontiff prayed for Mary\u2019s mercy for \u201call the people oppressed by injustice and poverty, tried by war,\u2019\u2019 adding a special <a href=\"https://apnews.com/hub/russia-ukraine\">prayer for \u201cthe tormented Ukrainian people,\u201d</a> as well as <a href=\"https://apnews.com/article/israel-hamas-war-news-12-8-2023-364b8f23ced3704273faede6f2ca6f38\">Palestinians and Israelis</a> \u201cwho have fallen back into a spiral of violence.\u201d</p><p>Francis also addressed violence against women, a topic that has resonated in Italy in recent weeks following the killing last month of a <a href=\"https://apnews.com/article/italy-women-violence-demonstrations-protest-d89c05325c37ee4d80214700533761c8\">22-year-old female student in northern Italy</a>. \u201cMary, we need you as a woman, to entrust all of the women who have suffered violence and those who are still victims in this city, in Italy and in every part of the world,\u2019\u2019 the pope said.</p><p>Before his appointment at the Spanish Steps, Francis went to the St. Mary Major basilica to pray before one of his favorite icons to Mary. He entered the basilica in a wheelchair.</p><p>Francis earlier addressed the faithful from an open window overlooking St. Peter\u2019s Square for the traditional blessing, appearing for the first time to the public since his illness.</p><p>Francis, who turns 87 on Dec. 17, <a href=\"https://apnews.com/article/vatican-pope-francis-illness-lung-inflammation-ef8ac8a607db7d71f995f12542ac6768\">came down with the flu</a> on Nov. 25 and was forced to cancel a planned trip to Dubai to participate in the U.N. climate conference. He later revealed he had been diagnosed with an acute case of infectious bronchitis that made breathing difficult.</p><p>It was the second time this year he has had a serious case of bronchitis; in spring he was hospitalized for three days to receive intravenous antibiotics.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/vatican-pope-war-bronchitis-madonna-fc3417c15cdf8e539030d6d4d29087e8",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 4,
+            "reason": "The document discusses Pope Francis's recent recovery from bronchitis, his public appearances, and the impact of his illness on his schedule, including the cancellation of a planned trip. It provides details about his health condition, diagnosis, and recovery process. While the document also touches on other topics such as his prayers and messages, the primary focus is on his health and recovery. Therefore, it is relevant to the topic of health."
+        }
+    }
+}

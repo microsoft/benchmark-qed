@@ -1,0 +1,230 @@
+﻿{
+    "altids": {
+        "itemid": "b51836d03c64d1bf68f972b6204988c7",
+        "etag": "b51836d03c64d1bf68f972b6204988c7_0a6aza0c0",
+        "friendlykey": "87472252219",
+        "referenceid": "US--Nursing-Home-Sudden-Closure"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2024-02-29T00:11:46Z",
+    "firstcreated": "2024-02-29T00:11:45Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "US--Nursing-Home-Sudden-Closure",
+    "headline": "Owners of St. Louis nursing home that closed abruptly face federal fine of more than $55,000",
+    "headline_extended": "Federal regulators have issued a $55,000 fine after St. Louis\u2019 largest nursing home closed without warning, although experts said the amount collected will likely be smaller",
+    "slugline": "AP-US-Nursing-Home-Sudden-Closure",
+    "description_summary": "Federal regulators have issued a $55,000 fine after St. Louis\u2019 largest nursing home closed without warning, although experts said the amount collected will likely be smaller. The St. Louis Post-Dispatch reported that the U.S. Centers for Medicare and Medicaid Services announced the fine in a letter to the owners of Northview Village. It closed suddenly on Dec. 15 as the company that owned it struggled to meet payroll. Many patients left with nothing but the clothes they were wearing, creating confusion and spurring outrage among residents and their families.",
+    "located": "ST. LOUIS",
+    "datelinelocation": {
+        "city": "St. Louis",
+        "countryareacode": "MO",
+        "countryareaname": "Missouri",
+        "countrycode": "USA",
+        "countryname": "United States",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                -90.19789,
+                38.62727
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "St Louis nursing home closure fine"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "a",
+            "name": "a"
+        },
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "c8e409f8858510048872ff2260dd383e",
+            "name": "Business",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 74
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86aad5207dac100488ecba7fa5283c3e",
+            "name": "Politics",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 37
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "9d046fa8872910048ba5d7c656897a02",
+            "name": "Nursing homes",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 88
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Editorial",
+            "editorial_subject": "Health",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "ffbc9f5882c4100486f2df092526b43e",
+            "name": "St. Louis",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "bd8c35d082c4100486d5df092526b43e"
+            ],
+            "locationtype": {
+                "code": "9d26a20b35f0484a891740f8189d4c7b",
+                "name": "City"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -90.24925,
+                    38.63162
+                ]
+            },
+            "relevance": 62,
+            "parentnames": [
+                "Missouri"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "bd8c35d082c4100486d5df092526b43e",
+            "name": "Missouri",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661850e07d5b100481f5c076b8e3055c",
+            "name": "Latin America and Caribbean",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "body_nitf": "<p>ST. LOUIS (AP) \u2014 Federal regulators have issued a $55,000 fine after St. Louis\u2019 largest nursing home <a href=\"https://apnews.com/article/northview-nursing-home-closure-st-louis-78f24bc169ca7aaeed7aeb776e23dd80\">closed without warning,</a> although experts said the amount collected will likely be smaller.</p><p>The U.S. Centers for Medicare and Medicaid Services announced the fine in a letter to the owners of Northview Village, the St. Louis Post-Dispatch <a href=\"https://www.stltoday.com/news/local/metro/northview-village-nursing-home-hit-with-federal-fine-for-chaotic-overnight-closure/article_b697642c-d5c9-11ee-8abc-cf3c144033cf.html#tracking-source=home-top-story\">reported</a>.</p><p>The 320-bed skilled nursing facility closed suddenly on Dec. 15 as the company that owned it struggled to meet payroll. Starting then and lasting through Dec. 17, when Northview gave up its Medicare and Medicaid contracts, it was \u201cin violation,\u201d documents released this week show.</p><p>The letter from the federal agency says that if Northview waives its rights to a hearing, the $18,770-per-day penalty for that three-day span will be reduced by 35%.</p><p>Richard Mollot, executive director of the Long Term Care Community Coalition, an advocacy group, said that is the norm for the agency's penalties. He said fines frequently are reduced or eliminated.</p><p>\u201cGiven what happened here, I think it\u2019s a fine that\u2019s well below what the egregious behavior of this operator merits,\u201d he said.</p><p>Members of the nursing home\u2019s ownership group did not immediately return calls from the Post-Dispatch or The Associated Press seeking comment Wednesday.</p><p>The closure was chaotic, with many patients left with nothing but the clothes they were wearing, <a href=\"https://apnews.com/article/nursing-home-closure-st-louis-c6021c6ff235ebdbc3e458d8ab7a27b2\">creating confusion and spurring outrage</a> among residents and their families. Some were relocated without their medical records or medication lists.</p><p>One resident with <a href=\"https://apnews.com/article/nursing-home-st-louis-missing-person-d3171cfd56e6709646abf55bb7eb6172\">schizophrenia</a> was missing more than three weeks before he was found.</p><p>Further complicating the closure, Northview housed many residents on Medicaid who couldn\u2019t get into other long-term care facilities, including people with mental health and behavioral problems, advocates for the residents have said.</p><p>\u201cFor everything that happened, it seems low,\u201d said Marjorie Moore, executive director of VOYCE, the regional nursing home ombudsman program.</p><p>Last month, U.S. Rep. Cori Bush, a St. Louis Democrat, called for a federal investigation of the owners as well as a probe of Missouri\u2019s system of overseeing nursing homes.</p><p>As of Wednesday, Bush\u2019s office had not received any response from the U.S. Department of Health and Human Services and was not aware of any other actions taken on Northview.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/st-louis-nursing-home-closure-fine-b51836d03c64d1bf68f972b6204988c7",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 4,
+            "reason": "The document discusses the abrupt closure of a nursing home in St. Louis and the subsequent federal fine imposed on its owners. It details the impact on residents, many of whom were on Medicaid and had mental health issues, and mentions the involvement of federal and state agencies. The topic of 'Health' is relevant here as the document addresses issues related to healthcare facilities, patient care, and regulatory actions in the healthcare sector."
+        }
+    }
+}

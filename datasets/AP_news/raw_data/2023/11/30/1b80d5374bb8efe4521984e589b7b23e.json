@@ -1,0 +1,219 @@
+﻿{
+    "altids": {
+        "itemid": "1b80d5374bb8efe4521984e589b7b23e",
+        "etag": "1b80d5374bb8efe4521984e589b7b23e_0a7aza0c0",
+        "friendlykey": "552485329628",
+        "referenceid": "EU--Britain-Slapping Therapy-Death"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2023-11-30T17:22:03Z",
+    "firstcreated": "2023-11-30T17:22:02Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "EU--Britain-Slapping Therapy-Death",
+    "headline": "Alternative healer faces manslaughter charge over woman's death at a UK slapping therapy workshop",
+    "headline_extended": "An alternative healer who advocates a technique known as \u201cslapping therapy\u201d has been charged over the death of a woman at one of his workshops in England",
+    "headline_seo": ",",
+    "slugline": "AP-EU-Britain-Slapping-Therapy-Death",
+    "description_summary": "An alternative healer who advocates a technique known as \u201cslapping therapy\u201d has been charged over the death of a woman at one of his workshops in England. Hongchi Xiao was charged with manslaughter by gross negligence in the October 2016 death of Danielle Carr-Gomm. He was detained after being extradited from Australia. California-based Xiao promotes paida lajin therapy, in which patients are slapped or slap themselves repeatedly. Carr-Gomm, who was 71, died while attending a workshop to help deal with her diabetes. Police said Xiao is due to appear in court in Salisbury, southwest England, on Friday.",
+    "located": "LONDON",
+    "datelinelocation": {
+        "city": "London",
+        "countrycode": "GBR",
+        "countryname": "United Kingdom",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                -0.12574,
+                51.50853
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2023 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "britain slapping therapy death manslaughter charge"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "i",
+            "name": "i"
+        },
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 82
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e22803187de410048fa3df092526b43e",
+            "name": "Diabetes",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 36
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Editorial",
+            "editorial_subject": "Health",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "df4691387d6b10048fdeba7fa5283c3e",
+            "name": "England",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "66219fb07d5b100482e2c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "d83e15f769714aab9d49a03eab919128",
+                "name": "Constituent country"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -0.70312,
+                    52.16045
+                ]
+            },
+            "relevance": 35,
+            "parentnames": [
+                "United Kingdom"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "661908787d5b10048206c076b8e3055c",
+            "name": "Australia",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661850e07d5b100481f3c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "01f56e0e654841eca2e69bf2cbcc0526",
+                "name": "Nation"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    135,
+                    -25
+                ]
+            },
+            "relevance": 35,
+            "parentnames": [
+                "Oceania"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "661850e07d5b100481f4c076b8e3055c",
+            "name": "Europe",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661812607d5b100481f3c076b8e3055c",
+            "name": "Asia",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "789fdd8882af10048263df092526b43e",
+            "name": "California",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "body_nitf": "<p>LONDON (AP) \u2014 An alternative healer who advocates a technique known as \u201cslapping therapy\u201d was charged Thursday over the death of a woman at one of his workshops in England seven years ago.</p><p>Hongchi Xiao was charged with manslaughter by gross negligence in the October 2016 death of Danielle Carr-Gomm, Wiltshire Police said.</p><p>British police first sought to arrest Xiao in 2019. He was detained after being extradited from Australia.</p><p>Xiao promotes paida lajin therapy, in which patients are slapped or slap themselves repeatedly, ostensibly to release toxins from the body. Patients often end up with bruises or bleeding. The technique has its roots in Chinese medicine, but critics say it has no scientific basis.</p><p>Xiao, who is originally from China and runs the California-based Pailala Institute, has led paida lajin workshops around the world.</p><p>Carr-Gomm, 71, died at Cleeve House country hotel in western England while attending a workshop run by Xiao.</p><p>Carr-Gomm\u2019s son Matthew said after her death that she had sought \u201calternative methods of treating and dealing with her diabetes\u201d because she struggled to inject insulin due to a fear of needles.</p><p>\u201cI know she was desperate to try and cure herself of this disease,\u201d he said. \u201cShe always maintained a healthy lifestyle and was adamant that nothing would stop her from living a full life.\u201d</p><p>Police said Xiao, 60, is due to appear in court in Salisbury, southwest England, on Friday.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/britain-slapping-therapy-death-manslaughter-charge-1b80d5374bb8efe4521984e589b7b23e",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 4,
+            "reason": "The document discusses the death of a woman at a slapping therapy workshop and the subsequent manslaughter charge against the alternative healer who conducted the workshop. It touches on health-related themes such as alternative medicine, the treatment of diabetes, and the potential dangers of unproven medical practices. These aspects are relevant to the topic of health, as they involve medical treatments and their implications on health and safety."
+        }
+    }
+}

@@ -1,0 +1,260 @@
+﻿{
+    "altids": {
+        "itemid": "e58517c830f73e42266d45d45983c12b",
+        "etag": "e58517c830f73e42266d45d45983c12b_4a6aza0c0",
+        "friendlykey": "289869948687",
+        "referenceid": "US--Measles-Chicago"
+    },
+    "version": 4,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2024-03-14T01:52:36Z",
+    "firstcreated": "2024-03-13T17:27:51Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "ednote": "Eds: UPDATES: Raises the number of cases to 10.",
+    "editorialtypes": [
+        "Lead"
+    ],
+    "signals": [
+        "newscontent"
+    ],
+    "title": "US--Measles-Chicago",
+    "headline": "A CDC team joins the response to 8 measles cases in a Chicago shelter for migrants",
+    "headline_extended": "Eight people living at a Chicago shelter for migrants have tested positive for measles since last week",
+    "slugline": "AP-US--Measles-Chicago, 4th Ld-Writethru",
+    "description_summary": "Eight people living at a Chicago shelter for migrants have tested positive for measles since last week. A team from the Centers for Disease Control and Prevention is supporting local officials' response. Measles is a contagious virus still common in many countries outside the U.S. The CDC says cases in the U.S. originate from international travelers, most often Americans who have not been vaccinated. Ten infections have been reported in Chicago since Thursday. The city on Friday publicly reported the first case at the shelter housing around 1,900 people. The other cases quickly followed, including three confirmed Tuesday and two Wednesday.",
+    "bylines": [
+        {
+            "by": "By KATHLEEN FOODY",
+            "title": "Associated Press"
+        }
+    ],
+    "located": "CHICAGO",
+    "datelinelocation": {
+        "city": "Chicago",
+        "countryareacode": "IL",
+        "countryareaname": "Illinois",
+        "countrycode": "USA",
+        "countryname": "United States",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                -87.65005,
+                41.85003
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "measles chicago migrant shelter cdc"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "a",
+            "name": "a"
+        },
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "ace74e307f00100486cedf092526b43e",
+            "name": "Immunizations",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 33
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 64
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "0d3ed308885b1004802dd05694d87601",
+            "name": "Shelters",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e2460e807de410048061df092526b43e",
+            "name": "Measles",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 80
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Editorial",
+            "editorial_subject": "Health",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "5b86bbd082b01004839adf092526b43e",
+            "name": "Chicago",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "2c6a186082b010048379df092526b43e"
+            ],
+            "locationtype": {
+                "code": "9d26a20b35f0484a891740f8189d4c7b",
+                "name": "City"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -87.65005,
+                    41.85003
+                ]
+            },
+            "relevance": 94,
+            "parentnames": [
+                "Illinois"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "2c6a186082b010048379df092526b43e",
+            "name": "Illinois",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661850e07d5b100481f5c076b8e3055c",
+            "name": "Latin America and Caribbean",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "associations": {
+        "1": {
+            "altids": {
+                "itemid": "eafd8a8ea0cd4865ba97346209308f74"
+            },
+            "type": "picture"
+        },
+        "2": {
+            "altids": {
+                "itemid": "cf4594a3853c4451910fd912c2e8a29f"
+            },
+            "type": "picture"
+        },
+        "3": {
+            "altids": {
+                "itemid": "12d9741c9dc84046a108d9e8cb930a90"
+            },
+            "type": "picture"
+        }
+    },
+    "body_nitf": "<p>CHICAGO (AP) \u2014 Eight people living at a Chicago shelter for migrants have tested positive for measles since last week, prompting the arrival of a team with the Centers for Disease Control and Prevention to guide city and state officials' response to the infections, including vaccination efforts.</p><p>Ten infections total have been reported in the city since Thursday, which the Chicago Department of Public Health said was the first instance of measles detected locally since 2019. Two of the cases \u2014 an adult and a child \u2014 were not shelter residents.</p><p>Measles is a <a href=\"https://apnews.com/article/measles-epidemic-children-who-cdc-bb62da765a90bfb7c5c814ef0c2798e6\">contagious virus still common in many countries</a> outside the U.S. Cases in the U.S. originate from international travelers \u2014 most often Americans who have not been vaccinated, according to the CDC.</p><p>The city on Friday publicly reported the first case at the shelter housing around 1,900 people. The other cases at the former warehouse in the city\u2019s Pilsen neighborhood quickly followed, including three confirmed Tuesday and one Wednesday.</p><p>The department said those infected include 5 children and 4 adults. Nearly 900 residents have received vaccines since Thursday night, officials said.</p><p>The vaccine against measles is not recommended during pregnancy or for children younger than 1.</p><p>\u201cWe haven't seen cases of new arrivals coming with measles,\u201d the city\u2019s public health Commissioner Dr. Olusimbo Ige said Wednesday. \"Measles cases were acquired here. And so, we have been working very hard, taking our responsibility to safeguard the health of the new arrivals seriously.\u201d</p><p>The cluster within the city-run shelter highlighted Chicago's multi-layered struggle to respond to the arrival of nearly 37,000 migrants since 2022 when <a href=\"https://apnews.com/article/biden-chicago-united-states-lori-lightfoot-immigration-9ceb1032b1fef2c9ff20e45351a35c14\">Texas Gov. Greg Abbott</a> began sending buses to so-called sanctuary cities.</p><p>Chicago initially used police stations and airports as officials searched for other temporary shelters. On Tuesday, a city dashboard showed more than 11,000 people remain in city-run shelters.</p><p>Providing <a href=\"https://apnews.com/article/immigration-chicago-migrants-health-care-border-e8d649e3a81b53ab39887740f45d467a\">medical care</a> has been part of that effort; from vaccinations to treatment of conditions developed during exhausting journeys to reach the U.S. border with Mexico.</p><p>Many migrants who land in Chicago come from Venezuela where <a href=\"https://apnews.com/article/venezuela-migration-crisis-us-united-nations-805873048d2b0532bfbe53428f4ed2aa\">a social, political and economic crisis</a> has pushed millions into poverty. The situation along with doctor and drug shortages has affected the availability and affordability of routine care, as well as trust in medical institutions. Venezuela has reported one of the world\u2019s <a href=\"https://apnews.com/article/covid-health-venezuela-public-caribbean-93dced67f765654da6d616b534377566\">lowest vaccination rates</a> for children.</p><p><a href=\"https://apnews.com/article/immigration-migrants-border-health-care-us-mexico-79353b08f07933f66961a7f07cf3e397\">Cook County officials opened a clinic</a> to provide immediate care, vaccinations and an entryway into other public health services in 2022.</p><p>Alex Normington, a spokesperson for Cook County Health, said providers offer all essential vaccinations there and more than 73,000 have been given against measles, influenza, COVID-19 and other viruses.</p><p>Providers also rotate through every city shelter and have expanded their hours as the measles cases arose, Normington said.</p><p>But volunteer organizations working with migrants have frequently criticized conditions inside the city's shelters, particularly following the <a href=\"https://apnews.com/article/migrant-shelter-child-death-chicago-9a8c8e44d5970f478f59d7bc59892a3b\">December death of a 5-year-old boy</a> who became ill while staying at the same shelter where the measles cases have been reported.</p><p>They argue the cases are the result of the city, county, state and federal government falling short of supporting new arrivals' health needs.</p><p>\u201cThis is not the new arrivals\u2019 fault \u2014 this is a public health emergency a long time in the making,\" Annie Gomberg, a volunteer, said in a statement. \u201cEveryone arriving here should be screened and vaccinated, just like we did at Ellis Island over 100 years ago. Not put in overcrowded shelters to languish.\u201d</p><p>___</p><p>Associated Press reporters Sophia Tareen in Chicago and Ken Kusmer in Indianapolis and medical writer Mike Stobbe in New York contributed.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/measles-chicago-migrant-shelter-cdc-e58517c830f73e42266d45d45983c12b",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 5,
+            "reason": "The document discusses a measles outbreak in a Chicago shelter for migrants and the response by the CDC and local health officials. It covers various health-related aspects such as vaccination efforts, the spread of the virus, and the challenges faced by the healthcare system in addressing the needs of migrants. The document also touches on broader public health issues and the impact of migration on health services. All these points are directly related to the topic of Health."
+        }
+    }
+}

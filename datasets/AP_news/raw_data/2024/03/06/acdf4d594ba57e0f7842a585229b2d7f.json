@@ -1,0 +1,259 @@
+﻿{
+    "altids": {
+        "itemid": "acdf4d594ba57e0f7842a585229b2d7f",
+        "etag": "acdf4d594ba57e0f7842a585229b2d7f_0a2aza0c0",
+        "friendlykey": "162123150335",
+        "referenceid": "WI--Editorial Rdp"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Opinion",
+    "language": "en",
+    "versioncreated": "2024-03-06T20:59:04Z",
+    "firstcreated": "2024-03-06T20:59:03Z",
+    "editorialrole": "FullStory",
+    "fixture": {
+        "code": "21ea4067bb274c3b805353fb2b99ba70",
+        "name": "Editorial Roundup"
+    },
+    "pubstatus": "usable",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "WI--Editorial Rdp",
+    "headline": "Editorial Roundup: Wisconsin",
+    "slugline": "BC-WI--Editorial Rdp",
+    "bylines": [
+        {
+            "by": "By The Associated Press"
+        }
+    ],
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "Editorial Rdp"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "person": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "6212f8b39a864512834ad1c5b8994e02",
+            "name": "Ronald Johnson",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "POLITICIAN",
+                "PERSON"
+            ],
+            "associatedstates": [
+                {
+                    "code": "1bc1bc3082c81004896cdf092526b43e",
+                    "name": "Wisconsin"
+                }
+            ],
+            "relevance": 64
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "1b29d45f8e8e4c008e8a58fe6f92a753",
+            "name": "Government programs",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 36
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "c8e409f8858510048872ff2260dd383e",
+            "name": "Business",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 57
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "7077b3c88b6b10048b67a385cd5ce603",
+            "name": "Medical technology",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 74
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86aad5207dac100488ecba7fa5283c3e",
+            "name": "Politics",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 67
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "81c65e2c81cd41c6a65fd8c8e9f3b893",
+            "name": "Oshkosh",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "1bc1bc3082c81004896cdf092526b43e"
+            ],
+            "locationtype": {
+                "code": "9d26a20b35f0484a891740f8189d4c7b",
+                "name": "City"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -88.54261,
+                    44.02471
+                ]
+            },
+            "relevance": 46,
+            "parentnames": [
+                "Wisconsin"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "1bc1bc3082c81004896cdf092526b43e",
+            "name": "Wisconsin",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -90.00041,
+                    44.50024
+                ]
+            },
+            "relevance": 85,
+            "parentnames": [
+                "United States"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "662218c87d5b100482f0c076b8e3055c",
+            "name": "China",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661812607d5b100481f3c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "01f56e0e654841eca2e69bf2cbcc0526",
+                "name": "Nation"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    105,
+                    35
+                ]
+            },
+            "relevance": 46,
+            "parentnames": [
+                "Asia"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "1bc1bc3082c81004896cdf092526b43e",
+            "name": "Wisconsin",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "body_nitf": "<p>Eau Claire Leader-Telegram. February 29, 2024.</p><p>Editorial: Workplace fatalities going in the wrong direction</p><p>The Bureau of Labor Statistics released a report Thursday on workplace fatalities in Wisconsin. It\u2019s not good news.</p><p>There were 125 such deaths in 2022, the most recent year for which the BLS has released figures. Three-quarters of the fatalities involved people who were wage or salary employees. The 10-year trend has been for increases aside from a slight dip in 2020-2021.</p><p>Fatal incidents on the job are up nearly 29% since 2013. That\u2019s not the direction things should be going. Only a third of the cases from 2022 involved transportation. That\u2019s probably the easiest source to understand. When people are driving for work, there\u2019s a risk involved. Crashes happen. Some will be fatal, though that trend is generally going the right way.</p><p>The distribution of causes for fatalities is concerning. Almost one out of every five deaths is due to contact with objects or machinery. That\u2019s about five percentage points higher than the U.S. as a whole. Deaths caused by exposure to harmful substances or environments are a bit higher in Wisconsin, too, though that gap isn\u2019t nearly as big.</p><p>Violent deaths, caused either by people or animals accounted for 15 fatalities, a count similar to the national average. Surprisingly, homicides weren\u2019t the biggest source of violent deaths. Suicides were.</p><p>Not to state the painfully obvious, but there is risk in virtually anything people do. Falls, slips and trips accounted for 17 workplace deaths, after all. And some professions have greater inherent risk. There\u2019s a good chance that the state\u2019s agriculture and forestry industries, which accounted for almost 20% of the fatalities, are why Wisconsin was above the national average in deaths from contact with equipment.</p><p>That suspicion has support from one of the lines in the information from the BLS: \u201cOf the 125 fatal work injuries in Wisconsin, 74 percent worked for wages and salaries; the remainder were self-employed. The most frequent fatal event for wage and salary workers was transportation incidents; contact with objects and equipment was the most frequent fatal event for self-employed workers.\u201d Farmers, generally speaking, fall into the self-employed column.</p><p>But it certainly seems like some of these incidents shouldn\u2019t be happening. Homicides are the undeniable example. They are avoidable every single time provided people behave humanely.</p><p>Wisconsin isn\u2019t alone in seeing a rise. The figure was up nationally for 2022 as well, though that increase has been far less consistent than our state\u2019s. Concerningly, it\u2019s not just the absolute number of deaths that\u2019s on the rise in the U.S. It\u2019s also the rate of deaths per 100,000 full-time equivalent workers.</p><p>Unintentional overdoses on materials people encounter at work have been on the rise nationally in each year since 2012. There are rare circumstances in which an uncontrolled release of toxins causes the deaths, but those don\u2019t account for all the lives lost. Other incidents are avoidable.</p><p>Workplace safety is everyone\u2019s responsibility. Employees shouldn\u2019t be needlessly placed in dangerous situations. That\u2019s on employers to ensure. Cutting corners on safety shouldn\u2019t be acceptable for either side.</p><p>Assigning blame isn\u2019t our purpose here. It\u2019s to remind. We can, and should, do better than this. With advances in safety equipment there\u2019s no good reason to still see the rate of deaths rising for American workers.</p><p>The thing about trends is that they change. This can be reversed. It will take everyone paying attention to safety and making sure they aren\u2019t taking unnecessary risks.</p><p>We\u2019ve brought the number of workplace fatalities done before. It can be done again.</p><p>___</p><p>Wisconsin State Journal. March 3, 2024.</p><p>Editorial: Really? 4 years, 10 months and 17 days more of Senator \u2018No\u2019?</p><p>Four more years?</p><p>Unfortunately, that\u2019s how long U.S. Sen. Ron Johnson still has in office.</p><p>Technically, it\u2019s four years, 10 months and 17 days. But who\u2019s counting?</p><p>We are.</p><p>The guy is more grating than ever, having narrowly won the third term he pledged not to seek. Presumably, he doesn\u2019t care what his constituents think because he doesn\u2019t plan to run again in 2028. He\u2019s free to embrace his inner Scrooge.</p><p>Johnson has chronically voted \u201cno\u201d on major, bipartisan legislation that has \u2014 or would have \u2014 helped Wisconsin families and our nation. Just as bad, Johnson seems more obsessed than ever with trashing life-saving vaccines.</p><p>Whatever his phobia is with modern medicine, he needs to get over it and do his job.</p><p>That doesn\u2019t seem likely.</p><p>Johnson last week imagined a \u201c <a href=\"https://www.textise.net/showText.aspx?strURL=https%3A%2F%2Fwww.ronjohnson.senate.gov%2F2024%2F2%2Fmedia-advisory-sen-johnson-to-lead-roundtable-discussion-what-are-federal-health-agencies-and-the-covid-cartel-hiding\">COVID Cartel coverup</a> \u201d in which federal health agencies, pharmaceutical companies, \u201clegacy media\u201d and technology giants are conspiring to censor the truth about public health risks from vaccines.</p><p>Please.</p><p>The <a href=\"https://www.textise.net/showText.aspx?strURL=https%3A%2F%2Fwww.statnews.com%2F2022%2F12%2F13%2Fcovid-vaccines-prevented-3-million-deaths\">most thorough and prestigious medical studies</a> conclude COVID vaccines saved millions of American lives. And because of the skepticism Johnson and others have spread, the measles are <a href=\"https://www.textise.net/showText.aspx?strURL=https%3A%2F%2Fwww.miamiherald.com%2Fnews%2Fhealth-care%2Farticle285976451.html\">coming back</a>. Too many people <a href=\"https://www.textise.net/showText.aspx?strURL=https%3A%2F%2Ftime.com%2F6835635%2Fmeasles-outbreak-2024\">are passing on preventive shots</a> long considered routine.</p><p>We already called for Johnson <a href=\"https://www.textise.net/showText.aspx?strURL=https%3A%2F%2Fmadison.com%2Fopinion%2Feditorial%2F1-year-later-wisconsin-must-remember-shameful-acts-by-scott-fitzgerald-tom-tiffany%2Farticle_29f630a3-6a50-5fdb-83c8-875226a39040.html\">to resign</a> in the wake of the Jan. 6, 2021, attacks on the U.S. Capitol. Johnson helped fuel the destruction and violence by encouraging then-President Donald Trump\u2019s worst instincts and lies.</p><p>Johnson obviously isn\u2019t taking our advice. But we refuse to ignore what a lousy job he\u2019s doing on Wisconsin\u2019s behalf \u2014 and how out of step he is with the Midwestern mainstream.</p><p>Wisconsin\u2019s senior senator said last month he <a href=\"https://www.textise.net/showText.aspx?strURL=https%3A%2F%2Fmadison.com%2Fopinion%2Feditorial%2Four-view-heres-an-easy-win-for-225-000-children-in-wisconsin%2Farticle_b03edbc4-c506-11ee-9a5c-03c352e7df52.html\">\u201cwon\u2019t be supporting\u201d</a> a modest increase in the child tax credit that would have lifted thousands of Wisconsin children out of poverty. He\u2019s opposed even though the vast majority of the Republican-run House voted <a href=\"https://www.textise.net/showText.aspx?strURL=https%3A%2F%2Fclerk.house.gov%2FVotes%2F202430%3FPage%3D2\">357-70</a> in favor.</p><p>Johnson recently voted against military assistance for Ukraine, hurting the cause of freedom abroad. Our brave and outgunned ally desperately needs more ammunition in its heroic fight against totalitarian Russia. Thankfully, 70 of 100 senators \u2014 including 22 of Johnson\u2019s GOP colleagues \u2014 advanced the sensible package to the House.</p><p>Johnson helped kill a bipartisan deal for better security on America\u2019s southern border, saying it wasn\u2019t good enough. Apparently, he prefers nothing to something.</p><p>In recent years, Johnson voted against the most substantial and bipartisan gun safety law in a generation. He voted \u201cno\u201d to the bipartisan Infrastructure Investment and Jobs Act, which is improving Wisconsin\u2019s roads and bridges.</p><p>Johnson even shrugged off losing manufacturing jobs in his hometown of Oshkosh, saying, \u201cIt\u2019s not like we don\u2019t have enough jobs.\u201d With that attitude, no wonder he voted against the bipartisan Chips Act, which will boost the production of semiconductors in America, rather than forcing our nation to rely on China. His own Republican Senate leader and 16 other GOP senators supported it.</p><p>Johnson claims to care about America\u2019s soaring debt. Yet he was happy to approve the tax cut in 2017 that\u2019s added trillions to the pile of IOUs being foisted on our children and grandchildren. Johnson talks tough about blocking spending now that his party is out of power, but he mostly went along with the joyride when Trump was in power.</p><p>Johnson has <a href=\"https://www.textise.net/showText.aspx?strURL=https%3A%2F%2Fthehill.com%2Fhomenews%2Fsenate%2F4031302-here-are-the-senators-who-voted-against-the-bill-to-raise-the-debt-ceiling\">repeatedly voted against</a> raising the nation\u2019s debt ceiling so the government can honor its financial commitments. That\u2019s like refusing to pay your credit card bill after running up lots of charges. He seems to want America to default on its loans.</p><p>Most of his colleagues took the tough votes for him, to keep the economy going.</p><p>The end of Johnson\u2019s third \u2014 and hopefully final \u2014 term can\u2019t come soon enough.</p><p>Wisconsin State Journal editorial board</p><p>The views expressed in the editorials are shaped by the board, independent of news coverage decisions elsewhere in the newspaper.</p><p>END</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/acdf4d594ba57e0f7842a585229b2d7f",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 3,
+            "reason": "The document contains two editorials. The first editorial discusses workplace fatalities in Wisconsin, which is somewhat related to health as it involves safety and risk factors in the workplace. The second editorial focuses on political opinions about Senator Ron Johnson, which is not related to health. Overall, the document has partial relevance to the topic of health due to the first editorial, but the second editorial significantly reduces the overall relevance."
+        }
+    }
+}

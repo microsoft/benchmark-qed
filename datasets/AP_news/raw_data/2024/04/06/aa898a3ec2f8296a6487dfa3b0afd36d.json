@@ -1,0 +1,182 @@
+﻿{
+    "altids": {
+        "itemid": "aa898a3ec2f8296a6487dfa3b0afd36d",
+        "etag": "aa898a3ec2f8296a6487dfa3b0afd36d_0a2aza0c0",
+        "friendlykey": "483422930215",
+        "referenceid": "WV--Firefighting Foam Spill-West Virginia"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2024-04-06T18:44:27Z",
+    "firstcreated": "2024-04-06T18:44:27Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "WV--Firefighting Foam Spill-West Virginia",
+    "headline": "A spill of firefighting foam has been detected in three West Virginia waterways",
+    "headline_extended": "West Virginia regulators say a spill of firefighting foam has been detected in three waterways",
+    "slugline": "BC-WV--Firefighting Foam Spill-West Virginia",
+    "description_summary": "West Virginia regulators say a spill of firefighting foam has been detected in three waterways. The state Department of Environmental Protection says an undetermined amount of the expanding foam spilled from a contractor\u2019s workshop near Sissonville. It was later detected in sections of Tupper Creek, the Pocatalico River and Wolfpen Branch. The contractor had been using the foam at an abandoned coal mine. The agency says no impacts to aquatic life have been observed and significant concentrations of the foam aren't expected to move downstream. Out of caution, potential downstream water intakes have been notified. The foam can cause skin and eye irritation if contact occurs.",
+    "located": "SISSONVILLE, W.Va.",
+    "datelinelocation": {
+        "city": "Sissonville",
+        "countryareacode": "WV",
+        "countryareaname": "West Virginia",
+        "countrycode": "USA",
+        "countryname": "United States",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                -81.63096,
+                38.52815
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "firefighting foam spill West Virginia"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e22524b87de410048f91df092526b43e",
+            "name": "Cancer",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 35
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "c8e409f8858510048872ff2260dd383e",
+            "name": "Business",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 84
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "8783d248894710048286ba0a2b2ca13e",
+            "name": "Climate and environment",
+            "creator": "Editorial",
+            "editorial_subject": "Climate and environment",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "130bcce882c81004895adf092526b43e",
+            "name": "West Virginia",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -80.50009,
+                    38.50038
+                ]
+            },
+            "relevance": 66,
+            "parentnames": [
+                "United States"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "130bcce882c81004895adf092526b43e",
+            "name": "West Virginia",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "body_nitf": "<p>SISSONVILLE, W.Va. (AP) \u2014 A spill of firefighting foam has been detected in three southern West Virginia waterways, and potential downstream intakes have been notified, regulators said Saturday.</p><p>The state Department of Environmental Protection said an undetermined amount of the expanding foam used to suppress fires spilled from a contractor's workshop near Sissonville either late Friday evening or early Saturday. The contractor had been using the foam at an underground fire at an abandoned coal mine in eastern Kanawha County.</p><p>The foam was later detected in sections of Tupper Creek, the Pocatalico River and Wolfpen Branch. Significant concentrations were not expected to move downstream, the agency said in a statement.</p><p>\u201cAt this time, investigators have not observed any impacts to aquatic life, but will continue to actively monitor the areas,\u201d the statement said.</p><p>The DEP said the foam can cause skin and eye irritation if contact occurs. It said the foam didn't contain chemicals belonging to a group known as per- and polyfluoroalkyl substances, <a href=\"https://apnews.com/article/pfas-epa-water-regulations-d2d5052c36a5a95f4e56866f028c9c4f\">known collectively as PFAS</a>. Those compounds, described as \u201cforever chemicals\u201d because they don\u2019t degrade naturally in the environment, have been linked to numerous health problems, including cancer.</p><p>Staff from the agency's Homeland Security Emergency Response unit and Environmental Enforcement section were on scene along with the contractor and the foam\u2019s manufacturer to locate all of the material and decide how to proceed with remediation. The agency's staff will remain on site for the duration of the cleanup, the statement said.</p><p>Out of caution, the state Bureau for Public Health notified potential downstream water intakes, the statement said.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/firefighting-foam-spill-west-virginia-aa898a3ec2f8296a6487dfa3b0afd36d",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 4,
+            "reason": "The document discusses a spill of firefighting foam in West Virginia waterways and its potential impact on the environment and public health. It mentions that the foam can cause skin and eye irritation and clarifies that it does not contain PFAS, which are linked to serious health issues. The involvement of the state Bureau for Public Health and the notification of potential downstream water intakes also highlight the health implications of the spill. Therefore, the document is relevant to the topic of health, though it is not exclusively focused on health-related issues."
+        }
+    }
+}

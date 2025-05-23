@@ -1,0 +1,255 @@
+﻿{
+    "altids": {
+        "itemid": "89e9ca9e72ea60416c53f17733fff33f",
+        "etag": "89e9ca9e72ea60416c53f17733fff33f_0a14aza0c0",
+        "friendlykey": "10425669174",
+        "referenceid": "WV--Measles Case-West Virginia"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2024-04-22T20:21:50Z",
+    "firstcreated": "2024-04-22T20:21:49Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "ednote": "Eds: UPDATES: Updates Media.",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "WV--Measles Case-West Virginia",
+    "headline": "West Virginia confirms first measles case since 2009",
+    "headline_extended": "A West Virginia hospital has confirmed the first known case of measles in the state since 2009",
+    "slugline": "AP-WV--Measles Case-West Virginia",
+    "description_summary": "A West Virginia hospital has confirmed the first known case of measles in the state since 2009. The Monongalia County Health Department says WVU Medicine alerted officials Sunday that an adult patient tested positive for the viral infection. The patient had developed symptoms and sought medical treatment through the WVU Medicine system. Nationwide, measles cases so far this year are nearly double the total for all of last year. Health officials have confirmed measles cases in at least 17 other states.",
+    "bylines": [
+        {
+            "by": "By LEAH WILLINGHAM",
+            "title": "Associated Press"
+        }
+    ],
+    "located": "CHARLESTON, W.Va.",
+    "datelinelocation": {
+        "city": "Charleston",
+        "countryareacode": "WV",
+        "countryareaname": "West Virginia",
+        "countrycode": "USA",
+        "countryname": "United States",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                -81.63262,
+                38.34982
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "West Virginia measles case"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "a",
+            "name": "a"
+        },
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e237be707de410048fffdf092526b43e",
+            "name": "Medication",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 89
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e2460e807de410048061df092526b43e",
+            "name": "Measles",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 70
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Editorial",
+            "editorial_subject": "Health",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "130bcce882c81004895adf092526b43e",
+            "name": "West Virginia",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -80.50009,
+                    38.50038
+                ]
+            },
+            "relevance": 89,
+            "parentnames": [
+                "United States"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "130bcce882c81004895adf092526b43e",
+            "name": "West Virginia",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661850e07d5b100481f5c076b8e3055c",
+            "name": "Latin America and Caribbean",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "b58f18a082c6100487fbdf092526b43e",
+            "name": "New York",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "b836d07082c610048807df092526b43e",
+            "name": "New York City",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "0b394d7082c71004887fdf092526b43e",
+            "name": "Pennsylvania",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "2c6a186082b010048379df092526b43e",
+            "name": "Illinois",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "associations": {
+        "1": {
+            "altids": {
+                "itemid": "eb297a15bf67447592e37a1b509e358e"
+            },
+            "type": "picture"
+        }
+    },
+    "body_nitf": "<p>CHARLESTON, W.Va. (AP) \u2014 A West Virginia hospital has confirmed the <a href=\"https://apnews.com/article/measles-cdc-outbreak-chicago-mmr-vaccine-7ecdfef41e6dbd659c7ac8b80d5de38f\">first known case of measles</a> in the state since 2009, health officials said Monday.</p><p>The Monongalia County Health Department said WVU Medicine alerted officials Sunday that an adult patient living in the county tested positive for the viral infection. Health officials have not pinpointed exactly where and how the patient was exposed but said the person had recently traveled abroad.</p><p>The patient \u2014 who was partially vaccinated against measles, having received one of two doses \u2014 had developed symptoms, sought medical treatment through the WVU Medicine system and was instructed to stay home while awaiting lab results.</p><p>One of the world\u2019s most contagious diseases, measles can lead to potentially serious complications.</p><p>Dr. Brian H. Huggins, the county health department's incoming health officer, said the department is working with the hospital to identify people who came into contact with the patient.</p><p>\u201cWe really want to emphasize that this is an illness that people should take very seriously,\u201d Huggins said.</p><p>Nationwide, measles cases this year already are nearly double the total for all of 2023, raising health experts\u2019 concerns about the preventable, once-common childhood virus. Health officials have <a href=\"https://apnews.com/article/measles-chicago-migrant-shelter-cdc-e58517c830f73e42266d45d45983c12b\">confirmed measles cases</a> in at least 17 other states so far this year, including cases in New York City, Philadelphia and Chicago.</p><p>The U.S. Centers for Disease Control and Prevention documented 113 cases as of April 5. There have been seven outbreaks and most U.S. cases \u2014 73% \u2014 are linked to those flare-ups.</p><p>Still, the count is lower than some recent years: 2014 saw 667 cases and 2019 had 1,274.</p><p>Most U.S. cases are brought into the country by people who traveled where measles is far more common.</p><p>Huggins said West Virginia has not seen a case since 2009 largely due to its strict school vaccination laws. West Virginia is one of a handful of states that allows only medical exemptions to vaccine requirements.</p><p>Last month, Republican Gov. Jim Justice broke with West Virginia\u2019s GOP-majority Legislature <a href=\"https://apnews.com/article/west-virginia-vaccinations-bill-veto-jim-justice-b43a3a98b605c16be380f9a8088f017d\">to veto a bill</a> that would have allowed some students who don\u2019t attend traditional public schools or don't participate in sports and other group extracurricular activities to be exempt from vaccinations typically required for children.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/west-virginia-measles-case-89e9ca9e72ea60416c53f17733fff33f",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 5,
+            "reason": "The document discusses a confirmed case of measles in West Virginia, the first since 2009. It provides details about the patient's vaccination status, the response from health officials, and the broader context of measles cases in the U.S. This information is highly relevant to the topic of health as it pertains to disease outbreaks, vaccination policies, and public health responses."
+        }
+    }
+}

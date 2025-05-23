@@ -1,0 +1,351 @@
+﻿{
+    "altids": {
+        "itemid": "880d83a55993320b19ed54e81b51bc10",
+        "etag": "880d83a55993320b19ed54e81b51bc10_2a3aza0c0",
+        "friendlykey": "843181924965",
+        "referenceid": "WI--Wisconsin-State of State"
+    },
+    "version": 2,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2024-01-24T03:26:39Z",
+    "firstcreated": "2024-01-24T01:56:58Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "ednote": "Eds: UPDATES: Updates to recast the top, edit to tighten. ; Updates Media.",
+    "editorialtypes": [
+        "Lead"
+    ],
+    "signals": [
+        "newscontent"
+    ],
+    "title": "WI--Wisconsin-State of State",
+    "headline": "Evers in State of the State address vows to veto any bill that would limit access to abortions",
+    "headline_extended": "Democratic Wisconsin Gov. Tony Evers vowed in his State of the State speech Tuesday to veto any bill that would limit access to abortions and announced plans to expand access to emergency contraception",
+    "slugline": "AP-WI--Wisconsin-State of State, 2nd Ld-Writethru",
+    "description_summary": "Democratic Wisconsin Gov. Tony Evers vowed in his State of the State speech Tuesday to veto any bill that would limit access to abortions and announced plans to expand access to emergency contraception. Evers also declared 2024 the \u201cYear of the Worker\u201d and called on Republicans and Democrats to work together on addressing workforce issues, including expanding access to affordable housing, child care and paid family leave. Evers also called on the Legislature to release funding to address PFAS pollution. Republican Assembly Speaker Robin Vos derided the address, Evers sixth State of the State, as full of failed ideas.",
+    "bylines": [
+        {
+            "by": "By SCOTT BAUER",
+            "title": "Associated Press"
+        }
+    ],
+    "located": "MADISON, Wis.",
+    "datelinelocation": {
+        "city": "Madison",
+        "countryareacode": "WI",
+        "countryareaname": "Wisconsin",
+        "countrycode": "USA",
+        "countryname": "United States",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                -89.40123,
+                43.07305
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "Wisconsin state of state"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "person": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "00bd3ba9eb4f490a9e72bd4c667c2d51",
+            "name": "Tim Michels",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "POLITICIAN",
+                "PERSON"
+            ],
+            "relevance": 33
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "1dc502af06274725a9b6a9f2c5856e90",
+            "name": "Tony Evers",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "POLITICIAN",
+                "PERSON"
+            ],
+            "relevance": 90
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "p",
+            "name": "p"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e22e35087de410048fc2df092526b43e",
+            "name": "Abortion",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 77
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "b7f42e21a8794c36a178b5eb95d63934",
+            "name": "Child care",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 41
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e22e73887de410048fc3df092526b43e",
+            "name": "Birth control",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 41
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86aad5207dac100488ecba7fa5283c3e",
+            "name": "Politics",
+            "creator": "Editorial",
+            "editorial_subject": "Politics",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "organisation": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "c05dca58760d10048f93e6e7a0f4673e",
+            "name": "U.S. Democratic Party",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 49
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "bf6e2e80760d10048f8ae6e7a0f4673e",
+            "name": "U.S. Republican Party",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "211f453082c810048979df092526b43e",
+            "name": "Madison",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "1bc1bc3082c81004896cdf092526b43e"
+            ],
+            "locationtype": {
+                "code": "9d26a20b35f0484a891740f8189d4c7b",
+                "name": "City"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -89.40123,
+                    43.07305
+                ]
+            },
+            "relevance": 64,
+            "parentnames": [
+                "Wisconsin"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "1bc1bc3082c81004896cdf092526b43e",
+            "name": "Wisconsin",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -90.00041,
+                    44.50024
+                ]
+            },
+            "relevance": 92,
+            "parentnames": [
+                "United States"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "1bc1bc3082c81004896cdf092526b43e",
+            "name": "Wisconsin",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "associations": {
+        "1": {
+            "altids": {
+                "itemid": "f82fcd18bc8941db9671a548a5ffd056"
+            },
+            "type": "picture"
+        },
+        "2": {
+            "altids": {
+                "itemid": "cdf582357d9847e19699ccc7a4008745"
+            },
+            "type": "picture"
+        },
+        "3": {
+            "altids": {
+                "itemid": "f162b5bb008c48188dcbc02fe6850c74"
+            },
+            "type": "picture"
+        },
+        "4": {
+            "altids": {
+                "itemid": "3b18fd7bfa4f45ec807306e4281f1a95"
+            },
+            "type": "picture"
+        },
+        "5": {
+            "altids": {
+                "itemid": "0fa77a06d40044e09304a475a74496a6"
+            },
+            "type": "picture"
+        },
+        "6": {
+            "altids": {
+                "itemid": "eaa9fcd486f14eccb5a8839125cbe1ed"
+            },
+            "type": "picture"
+        },
+        "7": {
+            "altids": {
+                "itemid": "db61417e14f44ed498549037e8042516"
+            },
+            "type": "picture"
+        },
+        "8": {
+            "altids": {
+                "itemid": "b6960decc4ea430290595197a4e71b2f"
+            },
+            "type": "picture"
+        },
+        "9": {
+            "altids": {
+                "itemid": "9c805a298c4a4ca59d438f5ccbe50945"
+            },
+            "type": "picture"
+        },
+        "10": {
+            "altids": {
+                "itemid": "759e57d8dffb4dcdb8b024382cbcaa3c"
+            },
+            "type": "picture"
+        }
+    },
+    "body_nitf": "<p>MADISON, Wis. (AP) \u2014 Democratic Wisconsin Gov. Tony Evers vowed in his State of the State speech Tuesday to veto any bill that would limit access to abortions and announced plans to expand access to emergency contraception.</p><p>Evers also declared 2024 the \u201cYear of the Worker\" and called on Republicans and Democrats to work together on addressing workforce issues, including expanding access to affordable housing, child care and paid family leave.</p><p>Evers also called on the Legislature to release funding to address PFAS pollution.</p><p>Republican Assembly Speaker Robin Vos derided the address, Evers sixth State of the State, as \u201ctypical Tony Evers.\u201d</p><p>\u201cNot a lot of new ideas and a lot of rehashing of old things that have been proposed over the course of the past few years and failed,\u201d Vos said.</p><p>Evers issued his abortion veto pledge even as Republicans <a href=\"https://apnews.com/article/wisconsin-abortion-14-weeks-bill-referendum-b30271e482ffab0b19f50797bde6062c\">move forward with a measure</a> that would let voters weigh in on whether it should be banned after 14 weeks of pregnancy.</p><p>The speech comes as Evers and Republicans who control the Legislature have had some bipartisan successes, but continue to fight over redistricting, abortion, tax cuts, election administration and other key issues in a presidential election year.</p><p>Evers, like many Democrats nationwide, made abortion rights a focus of his winning 2022 campaign, and he returned to that theme again Tuesday. He noted that his opponent, Republican Tim Michels, supported banning abortions and lost.</p><p>\u201cI want to speak directly to women in Wisconsin tonight,\u201d Evers said. \u201cI will veto any bill that takes away your reproductive freedom or makes reproductive health care any less accessible in Wisconsin than it is today. Period.\u201d</p><p>Evers announced that enrollees in the state\u2019s BadgerCare Plus Medicaid program will have access to over-the-counter contraception, including emergency contraception, without a separate prescription. The medication will be provided without any out-of-pocket costs, Evers said.</p><p>Evers said the public\u2019s widespread support of abortion rights as shown in statewide and nationwide polls shows the importance of having legislative maps that fairly reflect the population. The Wisconsin Supreme Court in December <a href=\"https://apnews.com/article/wisconsin-redistricting-supreme-court-republican-democrat-ddaf0fff5a2d91ddbefc4a85a30534ce\">tossed out the current Republican-drawn maps</a> as unconstitutional.</p><p>\u201cWhen elected officials gerrymander themselves into safe seats, they can comfortably ignore the overwhelming majority of Wisconsinites,\u201d Evers said.</p><p>Evers also renewed his pledge to fight efforts to make it more difficult to vote in the battleground state. Evers has vetoed a raft of Republican proposals over the past five years that seek to make changes to election administration in the state.</p><p>Evers said that in coming weeks he will be announcing new steps his administration is taking to increase voter turnout. He didn\u2019t reveal any details.</p><p>Vos said he was disappointed that Evers didn't mention cutting taxes as <a href=\"https://apnews.com/article/wisconsin-republicans-tax-cut-surplus-veto-384bf5ab8d9def710996390ffa7739e2\">Republicans have proposed</a>.</p><p>\u201cWe're going to move forward with our plan and hopefully Gov. Evers once he has a chance to review them will sign them into law,\u201d Vos said.</p><p>Despite the divisions, Evers called on Republicans and Democrats to work together to address <a href=\"https://apnews.com/article/wisconsin-evers-legislature-child-care-special-session-3df1f2fbf34b5c7411d35b775d50c791\">Wisconsin's workforce shortages</a>, declaring 2024 the \"Year of the Worker.\"</p><p>Evers called for expanding paid family leave, an idea the <a href=\"https://apnews.com/article/politics-wisconsin-state-government-us-republican-party-tony-evers-55749595fc3a4908ecf798f13b157492\">Legislature rejected last year</a>, investing more in public education and coming up with a long-term solution to child care shortages. Republicans also rejected a plan from Evers last year to continue the Child Care Counts program, but <a href=\"https://apnews.com/article/wisconsin-child-care-subsidies-evers-d72bed2440d53e60e950577503106946\">he got around them</a> by allocating $170 million in pandemic relief funds to keep it running through June 2025.</p><p>\u201cRepublicans are officially on the clock to make the meaningful investments necessary to prevent the collapse of an industry that\u2019s essential for maintaining our current levels of workforce participation,\u201d Evers said.</p><p>Evers challenged Republicans to come up with alternate plans if they continue to reject his comprehensive workforce proposals as <a href=\"https://apnews.com/article/wisconsin-senate-tax-cut-child-care-e20646b8c78fc9db1d7fc4d475c1e4cd\">they have done twice</a> already.</p><p>\u201cI will work with any legislator, any partner, any stakeholder who\u2019s willing to engage in meaningful conversations on these issues to do the right thing for Wisconsin,\u201d Evers said. \u201cIn the meantime, my administration will continue to pursue every pathway and seek every avenue to address our workforce challenges without legislative action, just as we have for five years.\u201d</p><p>Evers also renewed his call for Republicans to <a href=\"https://apnews.com/article/pfas-pollution-groundwater-standards-dnr-rule-a81f3de671854994a51b89f90a231133\">release $125 million</a> in funding approved in the state budget to fight pollution from so-called forever chemical known as PFAS. He also called on them to spend more on mental health services statewide. Evers announced the creation of a new interagency council designed to reduce barriers and address gaps in mental health services.</p><p>In his speech delivered before lawmakers, members of the state Supreme Court, tribal leaders and others, Evers highlighted bipartisan successes in the past year, including an agreement on a <a href=\"https://apnews.com/article/milwaukee-brewers-american-family-field-repairs-c4a60cddc901fe1d8d5e8a40174837aa\">plan to pay for repairs to the Milwaukee Brewers' stadium</a> that will keep the team in Wisconsin through at least 2050.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/wisconsin-state-of-state-880d83a55993320b19ed54e81b51bc10",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 3,
+            "reason": "The document discusses various topics covered in Wisconsin Gov. Tony Evers' State of the State address, including abortion rights, workforce issues, PFAS pollution, and mental health services. While the document does touch on health-related topics such as abortion rights, access to contraception, and mental health services, these are only a part of the broader range of issues discussed. The primary focus of the document is on the political and legislative aspects of these issues rather than health itself."
+        }
+    }
+}

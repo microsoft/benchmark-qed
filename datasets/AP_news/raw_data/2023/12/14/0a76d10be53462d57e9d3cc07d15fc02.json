@@ -1,0 +1,343 @@
+﻿{
+    "altids": {
+        "itemid": "0a76d10be53462d57e9d3cc07d15fc02",
+        "etag": "0a76d10be53462d57e9d3cc07d15fc02_1a5aza0c0",
+        "friendlykey": "976998580538",
+        "referenceid": "MED--Sickle Cell Therapy-Inequity"
+    },
+    "version": 1,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Feature",
+    "language": "en",
+    "versioncreated": "2023-12-14T21:24:58Z",
+    "firstcreated": "2023-12-14T15:52:38Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "ednote": "Eds: UPDATES: Changed headline",
+    "editorialtypes": [
+        "Lead"
+    ],
+    "signals": [
+        "newscontent"
+    ],
+    "title": "MED--Sickle Cell Therapy-Inequity",
+    "headline": "Sickle cell affects more families in Africa and India, but new gene therapies are out of reach",
+    "headline_extended": "New gene therapies promise a cure for sickle cell disease but experts say they are out of reach in places that need them the most",
+    "slugline": "BC-MED-Sickle-Cell-Therapy-Inequity, 1st Ld-Writethru",
+    "description_summary": "New gene therapies promise a cure for sickle cell disease but experts say they are out of reach in places that need them the most. Vast inequities cut much of the world off from gene therapy in general, a whole new class of treatments that aims to eradicate inherited diseases by changing DNA. Such therapies are among the most expensive in the world. They also can be extremely complex to give patients, requiring specialized equipment and long hospital stays. Many parts of the developing world simply don\u2019t have the resources. The sickle cell treatments were recently approved in Britain, Bahrain and the U.S.",
+    "bylines": [
+        {
+            "by": "By LAURA UNGAR",
+            "title": "AP Science Writer"
+        }
+    ],
+    "copyrightnotice": "Copyright 2023 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "sickle cell gene therapy CRISPR global"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "person": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "af1303f9cdca44e496e56216783d7313",
+            "name": "Narendra Modi",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "POLITICIAN",
+                "PERSON"
+            ],
+            "relevance": 31
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "a",
+            "name": "a"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "7077b3c88b6b10048b67a385cd5ce603",
+            "name": "Medical technology",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 81
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "26cd59a20a2545e1bd23fbc73d7f69d1",
+            "name": "Gene therapy",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 92
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 92
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Editorial",
+            "editorial_subject": "Health",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "661d90a07d5b1004827cc076b8e3055c",
+            "name": "Bahrain",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661850e07d5b100481f6c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "01f56e0e654841eca2e69bf2cbcc0526",
+                "name": "Nation"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    50.5,
+                    26
+                ]
+            },
+            "relevance": 34,
+            "parentnames": [
+                "Middle East"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "7a55e0187eff10048492df092526b43e",
+            "name": "London",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "df4691387d6b10048fdeba7fa5283c3e"
+            ],
+            "locationtype": {
+                "code": "9d26a20b35f0484a891740f8189d4c7b",
+                "name": "City"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -0.12574,
+                    51.50853
+                ]
+            },
+            "relevance": 48,
+            "parentnames": [
+                "England"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "661f3a687d5b100482a7c076b8e3055c",
+            "name": "India",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661812607d5b100481f3c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "01f56e0e654841eca2e69bf2cbcc0526",
+                "name": "Nation"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    77,
+                    20
+                ]
+            },
+            "relevance": 65,
+            "parentnames": [
+                "Asia"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "66219fb07d5b100482e2c076b8e3055c",
+            "name": "United Kingdom",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661850e07d5b100481f4c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "01f56e0e654841eca2e69bf2cbcc0526",
+                "name": "Nation"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -4,
+                    54
+                ]
+            },
+            "relevance": 34,
+            "parentnames": [
+                "Europe"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "535d132082b3100484b3df092526b43e",
+            "name": "New Orleans",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "43fb970882b310048496df092526b43e"
+            ],
+            "locationtype": {
+                "code": "9d26a20b35f0484a891740f8189d4c7b",
+                "name": "City"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -90.07507,
+                    29.95465
+                ]
+            },
+            "relevance": 56,
+            "parentnames": [
+                "Louisiana"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "661812607d5b100481f3c076b8e3055c",
+            "name": "Asia",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "associations": {
+        "1": {
+            "altids": {
+                "itemid": "d75997e2163240f5a93a0650fa04fdf0"
+            },
+            "type": "picture"
+        },
+        "2": {
+            "altids": {
+                "itemid": "d877ca07a6e84187a8714712fdb969b5"
+            },
+            "type": "picture"
+        },
+        "3": {
+            "altids": {
+                "itemid": "aa510eee87684179a0aeb4ea602cbfb0"
+            },
+            "type": "picture"
+        },
+        "4": {
+            "altids": {
+                "itemid": "a93d0632eb104321ad539a6e64749185"
+            },
+            "type": "picture"
+        },
+        "5": {
+            "altids": {
+                "itemid": "120445e41c7d4932bfb106dd34f82039"
+            },
+            "type": "picture"
+        },
+        "6": {
+            "altids": {
+                "itemid": "82d76b19fe6c485883800669adaa6434"
+            },
+            "type": "picture"
+        },
+        "7": {
+            "altids": {
+                "itemid": "1a6617278dfb478caefc7b61cd85bce5"
+            },
+            "type": "picture"
+        }
+    },
+    "body_nitf": "<p>Gautam Dongre\u2019s two children in India and Pascazia Mazeze\u2019s son in Tanzania live with an inherited blood disorder that turns blood cells into instruments of pain.</p><p>Now that new gene therapies promise a cure for their sickle cell disease, Dongre says he's \"praying the treatment should come to us.\u201d</p><p>But experts say the one-time treatment is out of reach in India and Africa \u2014 places where the disease is most common. Vast inequities cut much of the world off from gene therapy in general.</p><p>While access to all sorts of medicine is limited in developing countries, the problem is especially acute with these therapies, which are among the most expensive treatments in the world.</p><p>Beyond their sky-high prices, these therapies are extremely complex to give patients because they require long hospitalizations, sophisticated medical equipment and specially trained doctors and scientists. So far, the two gene therapies for sickle cell have only been approved in wealthier countries: both of them <a href=\"https://apnews.com/article/sickle-cell-fda-approval-vertex-crispr-8d85279d7de0c60888d37afbfa06d39e\">in the U.S</a>., and one <a href=\"https://apnews.com/article/sickle-cell-gene-therapy-treatment-uk-first-9bcf7c7d8b8909fb06e137fee17c767c\">in Britain</a> and Bahrain as well.</p><p>\u201cThe vast, vast majority of patients live in an area where they have no access to this kind of therapy,\u201d said Dr. Benjamin Watkins, who treats sickle cell in New Orleans and is also involved in pediatric work internationally. \u201cWe as medical professionals, and as a society, have to think about that.\u201d</p><p>Access to gene therapies was a major focus of this year\u2019s international summit on human genome editing in London. A <a href=\"https://www.nature.com/articles/d41586-023-01389-z\">subsequent editorial</a> in the journal Nature said high prices leave low- and middle-income countries \u201centirely in the lurch\u201d and could stymie progress across the field.</p><p>Some scientists worry that new cures won\u2019t reach their potential, future treatments may never be invented and the prospect of wiping out diseases like sickle cell will remain a distant dream.</p><p>STRUGGLING FOR BASIC TREATMENT</p><p>For gene therapy to even be an option, people in developing nations must stay alive long enough to get it. There, sickle cell disease is more likely to disable or kill than in wealthy regions. Late diagnosis is common and basic care can be hard to come by.</p><p>While gene therapy \"is a huge leap forward \u2026 we can\u2019t forget about those patients,\u201d said Watkins, of Children\u2019s Hospital New Orleans.</p><p>Sickle cell disease begins its assault on the body at birth, affecting hemoglobin, the protein in red blood cells that carries oxygen. A genetic mutation causes the cells to become crescent-shaped, which can block blood flow and cause problems such as excruciating pain, organ damage and stroke.</p><p>The only other cure is a bone marrow transplant, which must come from a closely matched donor and brings a risk of rejection.</p><p>Global estimates of how many people have the disease vary, but <a href=\"https://www.healthdata.org/research-analysis/library/global-regional-and-national-prevalence-and-mortality-burden-sickle-cell#:~:text=The%20number%20of%20people%20living,9%C2%B72)%20in%202021.\">some researchers</a> put the number between 6 million and 8 million. It\u2019s more common in malaria-prone regions because carrying the sickle cell trait helps protect against severe malaria. More than 1 million people with sickle cell disease live in India, <a href=\"https://www.ncbi.nlm.nih.gov/pmc/articles/PMC10387184/#REF8\">studies show,</a> and more than 5 million are in sub-Saharan Africa.</p><p>Dongre, who lives in Nagpur in central India, has seen the struggles in his own family and among people he\u2019s met as a leader in the National Alliance of Sickle Cell Organizations in India. For many years, awareness of the disease has been lacking, he said, even among some health professionals.</p><p>Dongre recalled how his newborn son Girish cried constantly from stomach and leg pain. Doctors couldn\u2019t figure out what was wrong and didn\u2019t diagnose him with sickle cell for 2 1/2 years. When their daughter Sumedha was born, he and his wife had her tested immediately and learned she had the disease too.</p><p>Other patients go undiagnosed for a decade or more. Lalit Pargi, who lives in Udaipur in northern India, said he wasn\u2019t diagnosed until he was 16 despite having the tell-tale yellow eyes and skin of jaundice, a common sign of sickle cell. That meant a childhood filled with inexplicable pain.</p><p>\u2018GOD AND GOOGLE\u2019</p><p>Available treatments can reduce the bouts of pain known as \u201ccrises.\" Dongre\u2019s children, now 19 and 13, take a medicine called hydroxyurea, a decades-old chemo drug that helps prevent the formation of sickle-shaped red blood cells and control the disease. Both have been hospitalized for pain episodes, especially when they were younger.</p><p>Other patients in rural areas are dying at very young ages without getting the right treatments, Dongre said.</p><p>In July, Indian Prime Minister Narendra Modi <a href=\"https://pib.gov.in/PressReleasePage.aspx?PRID=1936735#:~:text=About%20National%20Sickle%20Cell%20Anaemia,tribal%20populations%20of%20the%20country.\">launched</a> a sickle cell \u201celimination mission\u201d that combines awareness, education, screening, early detection and treatment. Dongre lauded the effort but said the country faces huge obstacles to meet its goals.</p><p>The situation is much the same in East Africa's Tanzania, where the health ministry has partnered with drug company Novartis, which makes sickle cell medicine, to improve access to diagnosis and treatment.</p><p>Mazeze scrambled for information after her son, Ian Harely, was diagnosed.</p><p>\u201cI Googled and Googled and I couldn\u2019t sleep,\u201d said Mazeze, executive director of the Tanzania Sickle Cell Warriors Organization. \u201cAfter that, I was praying. It was God and Google.\u201d</p><p>Her son is now 10 and takes hydroxyurea and folic acid for anemia. They\u2019ve helped, but haven\u2019t eliminated pain episodes like the one that put him in the hospital for two weeks earlier this year.</p><p>Still, Mazeze counts herself lucky she can afford treatment at all.</p><p>\u201cWe have people in Tanzania who can\u2019t even manage folic acid,\u201d she said. \u201cFolic acid for a month is 1,000 Tanzanian shillings \u2013 less than a dollar,\u201d while out-of-pocket costs for hydroxyurea can be more than 35 times that.</p><p>\u2018SIGNIFICANT CHALLENGES'</p><p>Such stark realities make the cost of gene therapies an insurmountable obstacle, experts say. The price tags for the two sickle cell therapies in the U.S. are $3.1 million and $2.2 million although the cost for gene therapies can vary by country.</p><p>The process of giving the therapies is just as big a hurdle.</p><p>Patients must go to the hospital, where stem cells are removed from their blood in a process that requires specialized equipment. One treatment, made by Vertex Pharmaceuticals and CRISPR Therapeutics, involves sending the cells to a lab as quickly as possible to keep them fresh and using a gene-editing tool <a href=\"https://apnews.com/article/nobel-prizes-united-states-technology-science-europe-14ba023fa7a90b34df2d7a6d0314c796\">called CRISPR</a> to knock out a gene. The cells must be sent back in liquid nitrogen so they stay frozen until they\u2019re ready to use.</p><p>The other therapy, made by Bluebird Bio, doesn't use CRISPR but involves the same process for patients. In both cases they must undergo chemotherapy before they get back their altered cells by IV, and spend weeks in the hospital. The process can stretch on for months.</p><p>\u201cThe infrastructure doesn\u2019t exist to make it possible in many parts of the world,\u201d said Dr. David Altshuler, chief scientific officer at Vertex. \u201cThere\u2019s great unmet need, but there are also significant challenges.\u201d</p><p>Not only do many medical centers lack things like specialized equipment, but health care systems themselves are comparatively skeletal. For example, World Health Organization data shows India and Tanzania both have less than a quarter of the per-capita hospital beds the U.S. has.</p><p>Scientists say one possible solution \u2014 though not an immediate fix \u2014 is to develop easier-to-administer versions of the new therapies. Altshuler said Vertex is trying to find ways to provide the same benefits without requiring chemo, which comes with serious risks such as infertility. His team is working on making a pill that wouldn\u2019t edit genes but would have the same goal: helping the body produce a fetal form of hemoglobin since the adult form is defective in people with sickle cell.</p><p>Other scientists are also working on simpler potential cures, including Dr. Stuart Orkin, one of the scientists whose work led to the development of the Vertex therapy.</p><p>Orkin said he's not sure if next-generation treatments like pills will necessarily be affordable.</p><p>\u201cSomeone's going to want to be compensated for the development of that pill,\u201d although foundations could help bring it to the developing world, said the Harvard Medical School pediatrics professor, who is paid by the Howard Hughes Medical Institute, which also supports The Associated Press' Health and Science Department. Experts said governments will likely also be instrumental in getting cures to patients.</p><p>Dongre said he hopes gene therapy for sickle cell eventually makes it to India. If it does, he\u2019d like his children to be among the first to get it. Mazeze said she may wait to see how other patients fare but will consider it for her son too.</p><p>Both agreed that patients in all countries \u2014 rich or poor \u2014 should have the option.</p><p>\u201cWe all are part of one single planet,\u201d Dongre said.</p><p>___</p><p>The Associated Press Health and Science Department receives support from the Howard Hughes Medical Institute\u2019s Science and Educational Media Group. The AP is solely responsible for all content.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/sickle-cell-gene-therapy-crispr-global-0a76d10be53462d57e9d3cc07d15fc02",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 5,
+            "reason": "The document is highly relevant to the topic of Health. It discusses the impact of sickle cell disease on families in Africa and India, the challenges of accessing new gene therapies, and the broader implications for healthcare systems in developing countries. The article covers various aspects of health, including disease prevalence, treatment options, healthcare infrastructure, and the socioeconomic barriers to accessing advanced medical treatments."
+        }
+    }
+}
