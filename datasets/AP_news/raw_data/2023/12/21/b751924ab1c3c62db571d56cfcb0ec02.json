@@ -1,0 +1,279 @@
+﻿{
+    "altids": {
+        "itemid": "b751924ab1c3c62db571d56cfcb0ec02",
+        "etag": "b751924ab1c3c62db571d56cfcb0ec02_0a6aza0c0",
+        "friendlykey": "883806310866",
+        "referenceid": "US--Chicago-Migrant-Child-Death"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2023-12-21T03:07:48Z",
+    "firstcreated": "2023-12-21T03:07:47Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "ednote": "Eds: UPDATES: With AP Photos and video",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "US--Chicago-Migrant-Child-Death",
+    "headline": "Vigil held for 5-year-old migrant boy who died at Chicago shelter",
+    "headline_extended": "Hundreds of migrants and other people have turned out for a vigil held for a 5-year-old migrant boy who died after becoming ill in a Chicago shelter",
+    "slugline": "AP-US--Chicago-Migrant-Child-Death",
+    "description_summary": "Hundreds of migrants and other people have turned out for a vigil held for a 5-year-old migrant boy who died after becoming ill in a Chicago shelter. Jean Carlos Martinez was a resident at a shelter in Chicago\u2019s Pilsen neighborhood when he suffered a medical emergency. He was pronounced dead shortly after arriving at a hospital on Sunday. A social worker who spoke at the vigil Wednesday night said Martinez' death was preventable and predictable. She says migrants \"deserve to be safe and cared for and living in humane conditions.\u201d A Chicago Fire Department spokesperson says six more people living in the shelter have been hospitalized this week.",
+    "located": "CHICAGO",
+    "datelinelocation": {
+        "city": "Chicago",
+        "countryareacode": "IL",
+        "countryareaname": "Illinois",
+        "countrycode": "USA",
+        "countryname": "United States",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                -87.65005,
+                41.85003
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2023 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "Chicago migrant child death vigil"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "a",
+            "name": "a"
+        },
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "0d3ed308885b1004802dd05694d87601",
+            "name": "Shelters",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 37
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "9cce666bb29344b8ba61f3732d971d32",
+            "name": "Disease outbreaks",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 89
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "bb2d2c5f441a452cb24bb511a2ab5eea",
+            "name": "World news",
+            "creator": "Editorial",
+            "editorial_subject": "World news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "5b86bbd082b01004839adf092526b43e",
+            "name": "Chicago",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "2c6a186082b010048379df092526b43e"
+            ],
+            "locationtype": {
+                "code": "9d26a20b35f0484a891740f8189d4c7b",
+                "name": "City"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -87.65005,
+                    41.85003
+                ]
+            },
+            "relevance": 65,
+            "parentnames": [
+                "Illinois"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "661850e07d5b100481f5c076b8e3055c",
+            "name": "Latin America and Caribbean",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "2c6a186082b010048379df092526b43e",
+            "name": "Illinois",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "associations": {
+        "1": {
+            "altids": {
+                "itemid": "1a2be6269cad41a4a56691c7f8e3ae93"
+            },
+            "type": "picture"
+        },
+        "2": {
+            "altids": {
+                "itemid": "8c74d58eafc445bbae9d5b81a869b213"
+            },
+            "type": "picture"
+        },
+        "3": {
+            "altids": {
+                "itemid": "4a9aa2c42dc4424a80bdbee6ed44b56c"
+            },
+            "type": "picture"
+        },
+        "4": {
+            "altids": {
+                "itemid": "8c72303da82f42a4849c48f6fbcee541"
+            },
+            "type": "picture"
+        },
+        "5": {
+            "altids": {
+                "itemid": "12452069789d4b2eb09c11fbafd540dd"
+            },
+            "type": "picture"
+        },
+        "6": {
+            "altids": {
+                "itemid": "73d20285f5c34d0da2f927bff4519754"
+            },
+            "type": "picture"
+        },
+        "7": {
+            "altids": {
+                "itemid": "45cf975656ec49ef86a4b1127a198eeb"
+            },
+            "type": "picture"
+        },
+        "8": {
+            "altids": {
+                "itemid": "c19749c3a2c44fa7a70ea50869dcecbb"
+            },
+            "type": "picture"
+        },
+        "9": {
+            "altids": {
+                "itemid": "ebd4955ab730408f800fd439ccfc0609"
+            },
+            "type": "picture"
+        },
+        "10": {
+            "altids": {
+                "itemid": "87c66a655d78490bad994e1a4c144473"
+            },
+            "type": "picture"
+        },
+        "11": {
+            "altids": {
+                "itemid": "1768ec50cf3f436a804f265472c75b84"
+            },
+            "type": "video"
+        }
+    },
+    "body_nitf": "<p>CHICAGO (AP) \u2014 Hundreds of migrants and other people turned out Wednesday night for a vigil held for a <a href=\"https://apnews.com/article/migrant-shelter-child-death-chicago-9a8c8e44d5970f478f59d7bc59892a3b\">5-year-old migrant boy who died</a> after becoming ill in a Chicago shelter.</p><p>Jean Carlos Martinez was a resident at a warehouse retrofitted as a shelter in Chicago\u2019s Pilsen neighborhood when he suffered a medical emergency, the city said. He was pronounced dead shortly after arriving at a hospital Sunday afternoon.</p><p>Six more people living in the shelter \u2014 four children and two adults \u2014 were hospitalized this week, Chicago Fire Department spokesperson Larry Langford said.</p><p>All had been living in the same shelter as Martinez, whose family arrived in Chicago on Nov. 30. The cause of death was still pending Wednesday, according to Cook County medical examiner records.</p><p>\u201cThis was a preventable death. This was also a predictable death,\u201d said social worker Britt Hodgdon, who spoke at the vigil. \u201cPeople are here. They are our brothers and sisters. They deserve to be safe and cared for and living in humane conditions.\"</p><p>Migrant mothers were crying at the vigil. One young migrant child came to put a candle at the site and wouldn\u2019t stop crying, saying she missed her friend.</p><p>While city officials dismissed on Tuesday the notion of an outbreak at the shelter, there have been clusters of illness at other shelters where people sleep on cots close to each other, including chicken pox and hand, foot and mouth disease. Area doctors are growing increasingly worried about RSV and COVID-19 this winter.</p><p>\u201cThese are hard environments for people to rest and feel good and be able to take care of themselves,\u201d said Dr. Evelyn Figueroa, who recently toured the shelter where the boy was living. She runs a nearby food pantry and has spent most of her medical career working with homeless, immigrant and low-income populations.</p><p>About 2,300 people are staying at the shelter. The space has about 10 isolation rooms for when people get sick, Figueroa said.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/chicago-migrant-child-death-vigil-b751924ab1c3c62db571d56cfcb0ec02",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 4,
+            "reason": "The document discusses the death of a 5-year-old migrant boy in a Chicago shelter and the subsequent vigil held in his memory. It also touches on the health conditions within the shelter, mentioning the hospitalization of other residents and concerns about illnesses such as chicken pox, hand, foot and mouth disease, RSV, and COVID-19. The document highlights the challenges of maintaining health in such environments, which is directly related to the topic of health."
+        }
+    }
+}

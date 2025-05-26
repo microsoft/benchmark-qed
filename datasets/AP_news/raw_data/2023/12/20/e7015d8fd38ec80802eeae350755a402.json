@@ -1,0 +1,259 @@
+﻿{
+    "altids": {
+        "itemid": "e7015d8fd38ec80802eeae350755a402",
+        "etag": "e7015d8fd38ec80802eeae350755a402_1a15aza0c0",
+        "friendlykey": "873519318784",
+        "referenceid": "US-MED--Childhood Vaccinations-Waivers"
+    },
+    "version": 1,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2023-12-20T16:59:04Z",
+    "firstcreated": "2023-12-20T15:49:55Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "ednote": "Eds: UPDATES: Fixes typo in personal in 6th paragraph; tightens quote in 12 paragraph",
+    "editorialtypes": [
+        "Lead"
+    ],
+    "signals": [
+        "newscontent"
+    ],
+    "title": "US-MED--Childhood Vaccinations-Waivers",
+    "headline": "Health officials push to get schoolchildren vaccinated as more US parents opt out",
+    "headline_extended": "Parents are opting out of school vaccinations at the highest rate ever",
+    "slugline": "AP-US-MED--Childhood Vaccinations-Waivers, 1st Ld-Writethru",
+    "description_summary": "Parents are opting out of school vaccinations at the highest rate ever. Last school year, that amounted to 3% of U.S. children entering kindergarten. The highest rate was 12% in Idaho, where a change in state law a few years ago made it easier to opt out. All states require students to have certain vaccines to attend public school, and often private school and day care. Exemptions are given for medical reasons, and sometimes for religious beliefs or personal reasons. Most states saw an increase in exemption rates last year.",
+    "bylines": [
+        {
+            "by": "By DEVI SHASTRI",
+            "title": "AP Health Writer"
+        }
+    ],
+    "copyrightnotice": "Copyright 2023 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "vaccines waivers schools measles Idaho"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "a",
+            "name": "a"
+        },
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "ace74e307f00100486cedf092526b43e",
+            "name": "Immunizations",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 71
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "9cce666bb29344b8ba61f3732d971d32",
+            "name": "Disease outbreaks",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 96
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 83
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "1af99ec3cb954ff4b349b32d60d0376d",
+            "name": "Education",
+            "creator": "Editorial",
+            "editorial_subject": "Education",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Editorial",
+            "editorial_subject": "Health",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "1885b7f082b01004835edf092526b43e",
+            "name": "Idaho",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -114.25118,
+                    44.5002
+                ]
+            },
+            "relevance": 61,
+            "parentnames": [
+                "United States"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a42dc0a082af100482a7df092526b43e",
+            "name": "Connecticut",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -72.66648,
+                    41.66704
+                ]
+            },
+            "relevance": 40,
+            "parentnames": [
+                "United States"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "661850e07d5b100481f4c076b8e3055c",
+            "name": "Europe",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661850e07d5b100481f5c076b8e3055c",
+            "name": "Latin America and Caribbean",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "dec1cce882af10048320df092526b43e",
+            "name": "Georgia",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "a42dc0a082af100482a7df092526b43e",
+            "name": "Connecticut",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "ee324cc082af10048342df092526b43e",
+            "name": "Hawaii",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "1885b7f082b01004835edf092526b43e",
+            "name": "Idaho",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "associations": {
+        "1": {
+            "altids": {
+                "itemid": "1ee8b912371f469f9616dc961e94896f"
+            },
+            "type": "picture"
+        }
+    },
+    "body_nitf": "<p>When Idaho had a <a href=\"https://apnews.com/article/measles-contagious-idaho-case-f3094db6c5e66c948c0e4b22ec9fe077\">rare measles outbreak</a> a few months ago, health officials scrambled to keep it from spreading. In the end, 10 people, all in one family, were infected, all unvaccinated.</p><p>This time, the state was lucky, said the region\u2019s medical director Dr. Perry Jansen. The family quickly quarantined and the children were already taught at home. The outbreak could have been worse if the kids were in public school, given the state\u2019s low vaccination rates, he said.</p><p>In Idaho last year, parents opted out of state-required vaccines for 12% of kids entering kindergarten, the highest rate in the nation.</p><p>\u201cWe tend to forget that diseases like measles and polio used to kill people,\u201d said Jansen, medical director of the Southwest District Health Department, which handled the outbreak in September.</p><p>All states require children to have certain routine vaccines to go to public school, <a href=\"https://www.cdc.gov/vaccines/imz-managers/laws/state-reqs.html\">and often private school and day care</a>, to prevent outbreaks of once-common childhood diseases like measles, mumps, whooping cough, chickenpox and polio. All provide exemptions for children who have a medical reason for avoiding the shots. Most also offer waivers for religious beliefs. Fifteen allow <a href=\"https://www.ncsl.org/health/states-with-religious-and-philosophical-exemptions-from-school-immunization-requirements\">a waiver for any personal belief</a>.</p><p>Last school year, vaccination waivers among kindergartners hit an all-time high: <a href=\"https://apnews.com/article/vaccination-exemptions-children-cdc-951427e55b24c8e7eb3a23b26946f630\">3% in total</a>, according to a recent Centers for Disease Control and Prevention report. Waivers for <a href=\"https://www.cdc.gov/vaccines/imz-managers/coverage/schoolvaxview/data-reports/index.html\">religious or personal beliefs have been on the rise,</a> driven by some states loosening laws, in others by vaccine misinformation and political rhetoric amplified during the COVID-19 pandemic.</p><p>In Idaho, \u201ca parent only has to provide a signed statement,\u201d to get a waiver, the state\u2019s health department said. A change in state law before the 2018-19 school year made it easier to get waivers. The state\u2019s exemption rate that year was 7.7%.</p><p>September\u2019s measles outbreak started when a resident of Nampa, the state\u2019s third largest city, returned home from a trip abroad. Measles is usually brought into the U.S. through travel since widespread vaccination has all but eliminated local spread of the disease.</p><p>It takes a very high level of vaccination \u2014 around 95% \u2014 to protect against the spread of measles and other diseases, experts say. During the pandemic, the national rate for vaccinations among kindergartners dropped to 93%.</p><p>Health experts say interventions on every level are needed to get more kids immunized: doctors talking to parents, social media campaigns, easier access to vaccines in some areas, enforcement by schools in others.</p><p>Last year, most states had an increase in waivers. Hawaii, which allows medical and religious waivers, saw rates double from the previous school year. Nearly 6.5% of kindergartners have an exemption for at least one required vaccine.</p><p>It\u2019s impossible to know the reasons behind a waiver, said Ronald Balajadia, immunization program manager for Hawaii State Department of Health. But misinformation about COVID-19 vaccines \u201chas bled through to routine vaccines\" that people wouldn't normally question, Balajadia said.</p><p>While some states have made it easier to opt out, others have clamped down. Connecticut eliminated its <a href=\"https://apnews.com/article/connecticut-religious-exemption-school-vaccinations-ab9258436372abee7e415e186caf55a4\">longstanding religious waiver for vaccinations in 2021</a>, joining California, West Virginia, New York and Maine in allowing only medical exemptions. The change drew protests and lawsuits. With only a medical waiver now, the kindergartner vaccination rate reached <a href=\"https://www.cdc.gov/vaccines/imz-managers/coverage/schoolvaxview/data-reports/index.html\">97% or above last year;</a> waiver rates dropped to less than 1%.</p><p>The state is still working to get more parents on board by answering their questions \"and not just dismiss them. It\u2019s our best shot at trying to bring people along,\u201d said Dr. Manisha Juthani, commissioner of the Connecticut Department of Public Health.</p><p>Georgia had the second largest drop in vaccine waivers last year \u2014 from 4.7% to 3.8%. State health officials cited a steady post-pandemic return to partnerships between schools, public health and pediatricians as possible reasons for the improvement.</p><p>Dr. Angela Highbaugh-Battle has cared for kids in rural Georgia for 17 years, now in the small coastal community of St. Mary\u2019s. She said she spends more time now talking to parents wary about routine childhood vaccines.</p><p>Every connection, every conversation, is a chance to educate, she said.</p><p>\u201cIt\u2019s not about winning or losing,\u201d she said.</p><p>___</p><p>The Associated Press Health and Science Department receives support from the Robert Wood Johnson Foundation. The AP is solely responsible for all content.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/vaccines-waivers-schools-measles-idaho-e7015d8fd38ec80802eeae350755a402",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 5,
+            "reason": "The document discusses the efforts of health officials to increase vaccination rates among schoolchildren, the impact of vaccination waivers, and the consequences of low vaccination rates, such as outbreaks of diseases like measles. These topics are directly related to public health and the measures taken to protect community health, making the document highly relevant to the topic of Health."
+        }
+    }
+}

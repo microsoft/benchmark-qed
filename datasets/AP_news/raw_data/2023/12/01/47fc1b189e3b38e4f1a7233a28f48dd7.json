@@ -1,0 +1,238 @@
+﻿{
+    "altids": {
+        "itemid": "47fc1b189e3b38e4f1a7233a28f48dd7",
+        "etag": "47fc1b189e3b38e4f1a7233a28f48dd7_0a8aza0c0",
+        "friendlykey": "232315126332",
+        "referenceid": "Pfizer-Obesity Treatment"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2023-12-01T16:13:39Z",
+    "firstcreated": "2023-12-01T16:13:38Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "ednote": "Eds: UPDATES: With AP Photos.",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "Pfizer-Obesity Treatment",
+    "headline": "Pfizer nixes more study of twice-daily obesity pill treatment that made many patients nauseous",
+    "headline_extended": "Pfizer shares sank Friday when the drugmaker announced that it was abandoning a twice-daily obesity treatment after more than half the patients in a clinical trial stopped taking it",
+    "slugline": "BC-Pfizer-Obesity Treatment",
+    "description_summary": "Pfizer shares sank Friday when the drugmaker announced that it was abandoning a twice-daily obesity treatment after more than half the patients in a clinical trial stopped taking it. The New York company will focus instead on a once-daily version of the pill, danuglipron, instead of starting a late-stage study of the other version. Late-stage studies are usually the last and most expensive trials a drugmaker undertakes before seeking regulatory approval. Obesity treatments are one of the hottest and more lucrative areas of medicine. Pfizer rivals Novo Nordisk and Eli Lilly already have injectable drugs on the market.",
+    "bylines": [
+        {
+            "by": "By TOM MURPHY",
+            "title": "AP Health Writer"
+        }
+    ],
+    "copyrightnotice": "Copyright 2023 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "Pfizer obesity treatment"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "f",
+            "name": "f"
+        },
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "a",
+            "name": "a"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "10b753887f3d10048e2adf092526b43e",
+            "name": "Obesity",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 57
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e22e73887de410048fc3df092526b43e",
+            "name": "Birth control",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 32
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f97633087e8610048bcf8087fc32d30c",
+            "name": "Clinical trials",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 77
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 89
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e237be707de410048fffdf092526b43e",
+            "name": "Medication",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 57
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Editorial",
+            "editorial_subject": "Health",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "c8e409f8858510048872ff2260dd383e",
+            "name": "Business",
+            "creator": "Editorial",
+            "editorial_subject": "Business",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        }
+    ],
+    "organisation": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "5c807dd498a24264ac62c20c8f5f0c48",
+            "name": "Pfizer Inc",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "symbols": [
+                {
+                    "ticker": "PFE",
+                    "exchange": "NYSE",
+                    "instrument": "NYSE:PFE"
+                }
+            ],
+            "relevance": 90
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "b58f18a082c6100487fbdf092526b43e",
+            "name": "New York",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -75.4999,
+                    43.00035
+                ]
+            },
+            "relevance": 45,
+            "parentnames": [
+                "United States"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "661850e07d5b100481f5c076b8e3055c",
+            "name": "Latin America and Caribbean",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "associations": {
+        "1": {
+            "altids": {
+                "itemid": "b65b8eb94e55443fa3b25c5d0636b897"
+            },
+            "type": "picture"
+        }
+    },
+    "body_nitf": "<p>Pfizer shares sank Friday when the drugmaker said it would abandon a twice-daily obesity treatment after more than half the patients in a clinical trial stopped taking it.</p><p>The pharmaceutical company said it will focus instead on a once-daily version of the pill, danuglipron, instead of starting a late-stage study of the other version. Late-stage studies are usually the last and most expensive trials a drugmaker undertakes before seeking regulatory approval.</p><p>Obesity treatments are one of the hottest and more lucrative areas of medicine. Pfizer rivals Novo Nordisk and Eli Lilly already have injectable drugs on the market. But Novo and Pfizer <a href=\"https://apnews.com/article/weight-loss-pill-obesity-ozempic-wegovy-2c0f852513994226af456166f65b5e82\">are also trying to develop pill versions</a> that would be easier for patients to take.</p><p>Pfizer said it saw patient discontinuation rates topping 50% across all doses in a mid-stage study of twice-daily danuglipron. That compares to about 40% for the placebo or fake drug.</p><p>The drugmaker also said side effects for the pills were mild but common. Up to 73% of patients experienced nausea and 47% dealt with vomiting.</p><p>Researchers did see statistically significant weight loss in adults with obesity but without type 2 diabetes. It ranged from nearly 7% to more than 11% in patients taking the pills.</p><p>By comparison, obese patients without diabetes lost about 18% of their weight compared to a placebo when taking taking Eli Lilly\u2019s Zepbound in late-stage research.</p><p>The Food and Drug Administration approved <a href=\"https://apnews.com/article/weight-loss-mounjaro-wegovy-tirzepatide-9718480e110eace3e91e0a2bcdc5e536\">Zepbound for obesity</a> last month.</p><p>Pfizer Chief Scientific Officer, Dr. Mikael Dolsten, said in a statement Friday that they believe a once-daily version of danuglipron could play an important role in treating obesity, and the company would focus on that.</p><p>A Pfizer spokeswoman said the company was conducting early-stage research on that version and expected to have results early next year.</p><p>Shares of New York-based Pfizer Inc. slipped nearly 5% to $28.98 in midmorning trading while broader indexes were mixed.</p><p>That drop continued a rough year for the drugmaker. Pfizer shares had already slid 40% before Friday.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/pfizer-obesity-treatment-47fc1b189e3b38e4f1a7233a28f48dd7",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 5,
+            "reason": "The document discusses Pfizer's decision to abandon a twice-daily obesity treatment due to high patient discontinuation rates and side effects, and its focus on a once-daily version. It also mentions the competitive landscape of obesity treatments, including comparisons with other pharmaceutical companies' products. This information is highly relevant to the topic of health as it pertains to obesity treatment, clinical trials, and pharmaceutical developments."
+        }
+    }
+}

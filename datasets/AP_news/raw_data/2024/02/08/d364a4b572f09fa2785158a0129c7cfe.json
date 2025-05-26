@@ -1,0 +1,221 @@
+﻿{
+    "altids": {
+        "itemid": "d364a4b572f09fa2785158a0129c7cfe",
+        "etag": "d364a4b572f09fa2785158a0129c7cfe_1a8aza0c0",
+        "friendlykey": "912435463112",
+        "referenceid": "US-MED--Opioid Antidote-Higher Doses"
+    },
+    "version": 1,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2024-02-08T22:59:43Z",
+    "firstcreated": "2024-02-08T18:30:40Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "ednote": "Eds: UPDATES: Updates with comment from Boston Medical Center addiction specialist.",
+    "editorialtypes": [
+        "Lead"
+    ],
+    "signals": [
+        "newscontent"
+    ],
+    "title": "US-MED--Opioid Antidote-Higher Doses",
+    "headline": "Higher-dose naloxone spray didn't save more lives, researchers find",
+    "headline_extended": "A study finds that a new, higher-dose nasal spray for reversing opioid overdoses didn't save more lives than the standard dose",
+    "slugline": "AP-US-MED--Opioid Antidote-Higher Doses, 1st Ld-Writethru",
+    "description_summary": "A study finds that a new, higher-dose nasal spray for reversing opioid overdoses didn't save more lives than the standard dose. However, it was tied to more vomiting and other side effects. The new study is being called the first to provide real-world data on what kind of difference the 8-milligram spray has made. It found survival was the same, but side effects were twice as common in people who got a higher dose. The study was published Thursday.",
+    "bylines": [
+        {
+            "by": "By MIKE STOBBE",
+            "title": "AP Medical Writer"
+        }
+    ],
+    "located": "NEW YORK",
+    "datelinelocation": {
+        "city": "New York",
+        "countryareacode": "NY",
+        "countryareaname": "New York",
+        "countrycode": "USA",
+        "countryname": "United States",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                -74.00597,
+                40.71427
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "naloxone opioid overdoses"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "a",
+            "name": "a"
+        },
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 97
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "936045008844100486a2a28878d48e09",
+            "name": "Addiction and treatment",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 82
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e237be707de410048fffdf092526b43e",
+            "name": "Medication",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 97
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Editorial",
+            "editorial_subject": "Health",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "b58f18a082c6100487fbdf092526b43e",
+            "name": "New York",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -75.4999,
+                    43.00035
+                ]
+            },
+            "relevance": 50,
+            "parentnames": [
+                "United States"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "661850e07d5b100481f5c076b8e3055c",
+            "name": "Latin America and Caribbean",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "b58f18a082c6100487fbdf092526b43e",
+            "name": "New York",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "b836d07082c610048807df092526b43e",
+            "name": "New York City",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "associations": {
+        "1": {
+            "altids": {
+                "itemid": "4ad5a42217c14acb859ecc6128f131de"
+            },
+            "type": "picture"
+        }
+    },
+    "body_nitf": "<p>NEW YORK (AP) \u2014 A new, higher-dose nasal spray for reversing opioid overdoses did not save more lives than the previous standard dose, but it did cause more vomiting and other side effects, researchers wrote in a study published Thursday.</p><p>The <a href=\"https://apnews.com/article/opioids-business-health-government-and-politics-8263d4b147b3c6b104346b4ca31c28a3\">8-milligram naloxone spray</a> \u2014 twice as potent as the highest dose previously available \u2014 was approved two years ago after pressure from experts and patient advocates who noted lower-dose antidotes often were being given multiple times to people suffering overdoses.</p><p><a href=\"https://www.cdc.gov/mmwr/volumes/73/wr/mm7305a4.htm?s_cid=mm7305a4_w\">The new study</a>, which was limited to more rural parts of New York state, is being called the first to provide real-world data on the differences between the two sprays. The paper was published by the Centers for Disease Control and Prevention, but the federal health agency was not involved in the research.</p><p>The higher-dose \u201cdid not provide added benefit,\u201d the authors wrote.</p><p>\"What was really remarkable was the survival was the same, but the amount of withdrawal symptoms was significantly larger in the people that got the 8-milligram dose,\" said one of the authors, Dr. Michael Dailey of Albany Medical College.</p><p>Dailey said the study did not lead him to endorse one product over another. But, he said, \u201cits important for us to recognize that the potential for increased side effects is real.\u201d</p><p>The researchers worked with the New York State Police, who respond to emergencies along highways and in rural areas.</p><p>Three troops in eastern New York were given 8-milligram sprays. Eight troops based further away from Albany were stocked with 4-milligram doses. The study results were based on 354 instances in which troopers administered naloxone sprays from late March 2022 to mid-August 2023.</p><p>In cases where overdose patients were still alive when troopers arrived, 99% survived after getting naloxone, no matter which dose was given.</p><p>People who got 4-milligram sprays usually got more than one dose \u2014 1.67 doses on average, equivalent to 6.7 milligrams. But so too did those treated with the 8-milligram sprays, who got 1.58 doses, or 12.6 milligrams, on average.</p><p>In both groups, disorientation and lethargy were common when people came to.</p><p>But other problems were significantly more common in the patients who got the higher-dose sprays. About 38% experienced signs and symptoms of withdrawal, including vomiting, abdominal pain, sweating, shaking and diarrhea. Only 19% of those getting the lower dose had those problems, the study found.</p><p>That's a concern because it could actually contribute to future overdose deaths, said Dr. Alexander Walley, a Boston Medical Center addiction specialist who also works with the Massachusetts health department.</p><p>If someone has extra withdrawal symptoms when they are rescued from an overdose, they may remember the pain and discomfort of that experience and \u2014 experts fear \u2014 might actually avoid having someone with naloxone around when they take drugs in the future, Walley said.</p><p>The study is limited and imperfect in how it randomized who got which doses, Walley said, but it's nevertheless \u201cgood quality evidence.\u201d</p><p>\"The solution to a more potent (illicit) drug supply is not necessarily a more potent naloxone,\u201d he said. \u201cIt's having people be witnessed when they use the drugs, and have that witness be someone who can administer naloxone and call for help.\u201d</p><p>___</p><p>The Associated Press Health and Science Department receives support from the Howard Hughes Medical Institute\u2019s Science and Educational Media Group. The AP is solely responsible for all content.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/naloxone-opioid-overdoses-d364a4b572f09fa2785158a0129c7cfe",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 5,
+            "reason": "The document discusses a study on the effectiveness and side effects of a higher-dose naloxone spray used to reverse opioid overdoses. It provides detailed information on the outcomes, side effects, and implications for future use, which are all directly related to health. The study's findings, the methodology, and expert opinions are all relevant to the topic of health, particularly in the context of opioid overdose treatment and public health strategies."
+        }
+    }
+}

@@ -1,0 +1,334 @@
+﻿{
+    "altids": {
+        "itemid": "bf1a6dc340db04a0b3b9fe6dd688a0d9",
+        "etag": "bf1a6dc340db04a0b3b9fe6dd688a0d9_0a12aza0c0",
+        "friendlykey": "115771119383",
+        "referenceid": "Editorial Rdp"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Opinion",
+    "language": "en",
+    "versioncreated": "2023-12-29T12:10:39Z",
+    "firstcreated": "2023-12-28T16:41:25Z",
+    "editorialrole": "FullStory",
+    "fixture": {
+        "code": "21ea4067bb274c3b805353fb2b99ba70",
+        "name": "Editorial Roundup"
+    },
+    "pubstatus": "usable",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "Editorial Rdp",
+    "headline": "Editorial Roundup: New England",
+    "slugline": "BC--Editorial Rdp",
+    "bylines": [
+        {
+            "by": "By The Associated Press"
+        }
+    ],
+    "copyrightnotice": "Copyright 2023 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "-Editorial Rdp"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "person": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "5ba9064e31694e46a1d9d89181c36543",
+            "name": "Elizabeth Warren",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "POLITICIAN",
+                "PERSON"
+            ],
+            "associatedstates": [
+                {
+                    "code": "bed6942882b310048501df092526b43e",
+                    "name": "Massachusetts"
+                }
+            ],
+            "relevance": 60
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "60e26de3c7d6410bb255088b1c6a6abe",
+            "name": "Edward Markey",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "POLITICIAN",
+                "PERSON"
+            ],
+            "associatedstates": [
+                {
+                    "code": "bed6942882b310048501df092526b43e",
+                    "name": "Massachusetts"
+                }
+            ],
+            "relevance": 60
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "4d5634ffdf3a46ada73f7c0e5fbf3e9f",
+            "name": "Maura Healey",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "POLITICIAN",
+                "PERSON"
+            ],
+            "relevance": 53
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "42fcd5108d2610048a34f7ae5e3ffd3e",
+            "name": "Joe Biden",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "POLITICIAN",
+                "PERSON"
+            ],
+            "relevance": 37
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 45
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a37eab90831510048fcfdf092526b43e",
+            "name": "Law enforcement",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 59
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86aad5207dac100488ecba7fa5283c3e",
+            "name": "Politics",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 73
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "organisation": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "eaa2152fab38465898b2746035014e78",
+            "name": "Maine state government",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 38
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "8d2caa7082b3100484b8df092526b43e",
+            "name": "Maine",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -69.24977,
+                    45.50032
+                ]
+            },
+            "relevance": 83,
+            "parentnames": [
+                "United States"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "bed6942882b310048501df092526b43e",
+            "name": "Massachusetts",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -71.10832,
+                    42.36565
+                ]
+            },
+            "relevance": 55,
+            "parentnames": [
+                "United States"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "b58f18a082c6100487fbdf092526b43e",
+            "name": "New York",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -75.4999,
+                    43.00035
+                ]
+            },
+            "relevance": 62,
+            "parentnames": [
+                "United States"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "d2f8d8a882c710048915df092526b43e",
+            "name": "Vermont",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "1bf4bc0882c71004889cdf092526b43e",
+            "name": "Rhode Island",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "a42dc0a082af100482a7df092526b43e",
+            "name": "Connecticut",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "8d2caa7082b3100484b8df092526b43e",
+            "name": "Maine",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "bed6942882b310048501df092526b43e",
+            "name": "Massachusetts",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "9531546082c6100487b5df092526b43e",
+            "name": "New Hampshire",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "body_nitf": "<p>Boston Globe. December 27, 2023.</p><p>Editorial: Warren, Markey shine a much-needed light on prison health care</p><p>Staffing woes, response times faulted as the contract of Massachusetts\u2019 for-profit provider comes up for renewal.</p><p>Since 2018, Massachusetts has outsourced health care services for all of those incarcerated in its prison system \u2014 some 6,000 individuals \u2014 to an out-of-state, for-profit <a href=\"https://www.cnn.com/interactive/2019/06/us/jail-health-care-ccs-invs/\">health services behemoth.</a></p><p>During that time the adequacy of those services and the treatment of the incarcerated has attracted the attention of the US Justice Department, the Disability Law Center, and several prisoners\u2019 rights advocacy groups. Now it is the state\u2019s two US senators who have zeroed in on the role of Wellpath, questioning its role at the national level and adding, \u201cwe are also deeply concerned about Wellpath\u2019s operations in the Commonwealth of Massachusetts in particular.\u201d</p><p><a href=\"https://www.warren.senate.gov/imo/media/doc/2023.12.15%20Wellpath%20letter%20MA.pdf\">The letter,</a> sent by Senators Elizabeth Warren and Ed Markey to Wellpath executives and its private equity owner H.I.G. Capital, and first reported by <a href=\"https://www.masslive.com/news/2023/12/poor-mass-prison-care-inspires-letter-to-healthcare-giant-wellpath-from-warren-markey.html?e=35134a0320afa3b633675a57f5757175&utm_source=Sailthru&utm_medium=email&utm_campaign=Newsletter_breaking&utm_term=Newsletter_breaking_news\">MassLive,</a> comes as state officials face a decision next year (bids are scheduled to be opened Jan. 29, 2024) on whether to renew the contract that has given the firm control over all prison health services since 2018.</p><p>\u201cSome of the most serious complaints against Wellpath include reports of time-sensitive care being delayed; outright denials of care; inadequate staffing; Wellpath staff members\u2019 negligence and failure to follow physician treatment plans or Wellpath\u2019s own policies; and the inappropriate use of restraints and solitary confinement for people with mental health needs,\u201d the senators said in the letter.</p><p>To that end, the senators sent the firm a list of 23 questions about staffing levels, the licensure of its personnel, and how it intends to deal with the needs of the aging population in Massachusetts prisons (some <a href=\"https://www.mass.gov/doc/prison-population-trends-2022/download\">15 percent</a> of those incarcerated by the state are over age 60). It also raised questions about the firm\u2019s possible lobbying efforts and its political contributions. The answers are due Jan. 8, 2024.</p><p>The company said it is \u201cproud of the work it does in Massachusetts and around the country to provide high-quality care to hundreds of thousands of patients every year\u201d in a statement to MassLive. \u201cWe put patients at the center of everything we do and our clients count on us for our professionalism, our innovative approach and our world-class health care providers.\u201d</p><p>But a quick glance at <a href=\"https://wellpathcareers.com/search/\">the firm\u2019s website</a> is revealing. As of Tuesday, the site listed 116 Massachusetts job openings \u2014 nearly all at Department of Correction facilities. (Wellpath also serves prison facilities in Essex and Worcester counties.) Most of the jobs are for mental health staff (34) or nursing staff (54). But state prisons are also seeking two physicians, two dentists, two psychiatrists, and a psychologist. DOC officials told the editorial board that Wellpath has reported to them that 81 percent of its positions are filled.</p><p>Warren and Markey, however, charged that Wellpath \u201croutinely understaffs some of its facilities,\u201d citing in particular MCI-Norfolk, where about a fifth of the population is over age 60. But at various times in 2022 the facility lacked a medical director, a director of nursing, and mental health clinicians, the senators noted.</p><p>At the moment Wellpath is advertising for 20 jobs at the maximum security Souza-Baranowski Correctional Center and for 14 at Bridgewater State Hospital, which serves those with complex mental health needs.</p><p>The Disability Law Center, which monitors Bridgewater at the direction of the Legislature, in a report issued last summer, said it found \u201chealth and safety risks and serious rights violations abound at the Department of Correction facility run by contractor Wellpath.\u201d</p><p>\u201cCommonwealth agencies should not be contracting with entities, like Wellpath, that do not staff to comply with state law on chemical restraint and involuntary medication administration,\u201d the report said.</p><p>The report also faulted Wellpath for denying basic medical care. One man interviewed for the report after his transfer to a Department of Mental Health facility was put on an appropriate diabetic diet and given \u201cthe correct medication for his Type 1 diabetes which BSH had refused to provide due to cost.\u201d Another did not get treatment for his Hepatitis C until his transfer to a DMH hospital, according to the report.</p><p>Reena Kapoor, the independent monitor assigned to oversee DOC\u2019s implement of the settlement agreement with the Justice Department over treatment of incarcerated individuals in mental health crisis, praised the Correction Department\u2019s \u201csubstantial improvements to mental healthcare since the DOJ\u2019s investigation in 2019\u2033 but added, \u201cSignificant work remains to be done.\u201d At the top of her list of \u201cgreatest challenges\u201d was staffing \u2014 both security and mental health. Kapoor found the system \u201cnon-compliant\u201d in providing adequate on-site mental health staff. And that is a Wellpath issue.</p><p>Warren and Markey point to possible alternatives to Wellpath as a provider, citing <a href=\"https://www.newyorker.com/magazine/2019/03/04/the-jail-health-care-crisis\">New York City\u2019s</a> use of a group of nonprofit health care providers that took over services at Rikers after the city ousted its for-profit operator in 2015. In years past, the UMass Chan Medical School and the Massachusetts Partnership for Correctional Health provided services at Massachusetts prisons. ForHealth Consulting, a division of the medical school, helped prepare the bid documents for the next health services contract.</p><p>The window for potential rivals to challenge Wellpath for the contract is a narrow one. And Warren and Markey have now indicated their own interest in the outcome. The status quo clearly isn\u2019t acceptable. It\u2019s ultimately the Commonwealth\u2019s job to make sure those in its care and custody are treated humanely. That\u2019s both a moral and legal obligation \u2014 and that responsibility can\u2019t be outsourced.</p><p>___</p><p>Boston Globe. December 28, 2023.</p><p>Editorial: Mass. has hit the wall \u2013 Healey must amend shelter law</p><p>Gov. Maura Healey has done yeoman\u2019s work tackling the state\u2019s surge in homelessness, exacerbated by continued influxes of immigrants.</p><p>It\u2019s about to get worse \u2013 perhaps to the point where the governor has to make a large \u2013 and difficult decision.</p><p>Her administration has lined up emergency shelter spaces in college dorms, hotels and motels in addition to existing state shelters that are bursting at the seams. Families were even put up at the Transportation Building.</p><p>The shelter cap of 7,500 families was reached, Healey declared a state of emergency, asked for money, asked for more, and the need has not subsided.</p><p>As The Hill reported, a migrant caravan is making its way through Mexico towards the U.S.. The reportedly 6,000-strong caravan is the largest organized group of migrants to form in Tapachula, Mexico since 2022.</p><p>According to reports, the caravan\u2019s leaders are carrying banners calling the movement an \u201cexodus from poverty,\u201d and it is mainly composed of people from Cuba, Haiti and Honduras.</p><p>Migrant rights activist Luis Garcia Villagran, who is accompanying the group, has warned that the caravan could grow to 15,000 people by the time it reaches the border, according to the New York Post.</p><p>They aren\u2019t all going to head to Massachusetts, but it\u2019s a good bet some will. Where will we put them? How will we pay for food, shelter and other care?</p><p>Joe Biden\u2019s off to St. Croix, so while this is no doubt on his radar, it\u2019s not bearing down with the same urgency as it is for Gov. Healey. Biden isn\u2019t hunting down overflow shelter space, stat.</p><p>Healey\u2019s held on for as long as she could, but the writing is not only on the wall, it\u2019s outlined in blinking lights: Massachusetts has to ditch its its current \u201cright to shelter\u201d law.</p><p>It was never designed to guarantee housing for anyone who crossed our border. As the Herald reported, the 1983 law, in defining a resident, states that \u201cany such person who enters the Commonwealth solely for the purposes of obtaining such benefits under this chapter shall not be considered a resident.\u201d</p><p>But application of the law morphed from covering Massachusetts residents to those who entered the state with the intent of becoming a resident.</p><p>Efforts to curtail the overly generous interpretation of the law have sparked outrage. In setting the shelter cap, Healey noted \u201cWe are not ending the right-to-shelter law. We are being very clear, though, that we are not going to be able to guarantee placement for folks who are sent here after the end of this month.\u201d</p><p>Lawyers for Civil Rights filed an emergency request to stop Healey\u2019s move.</p><p>Sen. Ryan C. Fattman, R-Worcester/Hampden, filed an amendment limiting the right-to-shelter law to Massachusetts residents who have resided in the state for at least six months. It was rejected last month.</p><p>Healey has considered ending the right to shelter law, but stopped short when the administration realized it did not have the authority to do so, as <a href=\"https://www.bostonherald.com/2023/09/08/healey-administration-considered-suspending-right-to-shelter-law-but-scrapped-idea-housing-advocate-says/\">the Herald reported</a>.</p><p>Healey can, however, file her own legislation to end or overhaul the law. While Fattman\u2019s amendment was rousted, the notion that yet more migrants are on their way to the U.S. and Mass. cities and towns may have to accommodate them could boost support this time around.</p><p>There is no more room, governor. Do what needs to be done.</p><p>___</p><p>Portland Press Herald. December 24, 2023.</p><p>Editorial: Disaster preparedness must become a policy priority</p><p>Maine, like almost everywhere else on earth, has to get serious about fighting back against extreme weather.</p><p>The extent of the devastation visited on Maine by <a href=\"https://www.pressherald.com/tag/december-2023-storm/\">last week\u2019s storm</a> has highlighted the urgent need for a robust approach to mitigation and adaptation, one that rises to the immense challenge of being faced with \u201c100-year weather events\u201d with far greater frequency.</p><p>According to a May <a href=\"https://link.springer.com/article/10.1007/s10584-023-03545-w\">study</a> published in the journal Climatic Change, the northeastern United States will experience a 51.6% rise in extreme precipitation by 2100.</p><p>We\u2019ve been faced with this <a href=\"https://www.pressherald.com/2023/12/03/changing-climate-brings-more-extreme-rain-and-snow-events-to-maine/\">evidence of climate change</a> for a while.</p><p>In the latest and most challenging example of it in Maine, last Monday\u2019s storm dumped 6 inches of rain on some parts of the state. Flooding and other damage led to the closure of more than 100 state roads. The Maine Department of Transportation took it upon itself to close 36 bridges statewide. Downed wires challenged communication to first responders \u2013 and everybody else.</p><p>Tens of thousands of Mainers spent days without power; by Wednesday night, more than 100,000 Central Maine Power customers were still without. A state of civil emergency was declared in all but two of Maine\u2019s 16 counties.</p><p>2023 had already been a bruising year for extreme weather in Maine. \u201cThe amount of flash flood warnings and flood advisories are almost double the amount of the next-highest year,\u201d meteorologist Derek Schroeter told the Press Herald. The next-highest year was 1998.</p><p>Flooding causes untold damage throughout the U.S.; by one estimate, it accounts for 90% of the damage from natural disasters annually. The Maine Climate Council estimates that climate-related flooding could cost up to $2.4 billion in total building losses and another $2.6 billion a year in jobs. That\u2019s without getting into danger that severe storms pose to the general public.</p><p>Despite the increasing prevalence of stronger and more damaging storms and more devastating flooding, the American approach continues to focus more on remediation than it does on mitigation. When things get really severe, we take action \u2013 the Federal Emergency Management Agency\u2019s Hazard Mitigation Grant Program provided Vermont with $20 million for voluntary buyouts of at-risk homes after its record flooding \u2013 but too often we wait to reach a tipping point, with all of the devastation and misery that brings.</p><p>The Biden administration has shepherded in a meaningful amount of federal funding for investment in infrastructure. The Infrastructure and Jobs Act sets aside more than $50 billion for new spending on water infrastructure. Even then, the Environmental Protection Agency has suggested that is <a href=\"https://www.asce.org/advocacy/policy-statements/ps480---water-infrastructure-and-facilities-construction-funding\">a fraction of the investment needed</a> for \u201cwater, wastewater, and stormwater system enhancement and restoration,\u201d meaning elected representatives in D.C. must push for more. At the local level, stormwater fees should be adjusted to cover the real cost of infrastructure upgrades and the appointment of committees and officials dedicated to this work.</p><p>How do we design for prevention? By investing heavily in planning and civil engineering that identifies the greatest points of weakness in our communities and devises sustainable, appropriate solutions. United States Geological Survey employees were <a href=\"https://www.pressherald.com/2023/12/21/officials-rush-to-document-flooding-along-kennebec-river-in-central-maine-as-outages-fallout-persists/\">hard at work in Maine last week</a> trying to capture \u201ccritical perishable data,\u201d information about where flood lines reached and for how long. As a Kennebec Journal report noted: \u201cWithout good data, good planning and preparation can\u2019t happen.\u201d</p><p>The information they gathered will ultimately be handed over to those afore-mentioned engineers, ideally informing the development of new evacuation routes, specifications for bridges, new building codes and models for better and more accurate forecasting of floods\u2019 likelihood and magnitude. The data will also be used to check the accuracy of existing FEMA flood insurance maps.</p><p>Part of prevention is communication. Last week\u2019s storm didn\u2019t come as a surprise to meteorologists; its severity did. While nobody wants to drop what they\u2019re doing and routinely prepare for the worst, everything we\u2019ve seen recently suggests that \u2013 particularly at certain times of year; snow melt was a major exacerbating factor last week \u2013 it would be better for the authorities, businesses and individuals to act with an abundance of caution.</p><p>Community response matters. As we noted in <a href=\"https://www.pressherald.com/2023/12/23/our-view-devastating-storm-requires-compassionate-response-from-us-all/\">our last editorial</a>, Mainers stepped up to help each other in impressive ways last week. We can take that attitude and apply it to rigorous pursuit of safer environments and better-oiled systems.</p><p>\u201cMaine people, we\u2019re no strangers to hard times,\u201d Gov. Janet Mills said in a midweek address. \u201cWe\u2019ve been through a lot lately, the last few years. \u2026 I know in Maine that the burden is heavy right now, but it is not more than we can carry.\u201d</p><p>___</p><p>Hearst Connecticut Media. December 22, 2023.</p><p>Editorial: As Lamont wisecracks about CT trooper scandal, stakeholders await the punchline</p><p>Connecticut trooper scandal nothing to joke about</p><p>Perhaps Gov. Ned Lamont knows enough about the inner workings of the investigations into Connecticut troopers to be able to <a href=\"https://www.ctinsider.com/politics/article/governor-connecticut-state-police-ticketing-18563470.php\">joke about it</a>.</p><p>The governor, after all, did ask to wait until all the evidence was in before judging troopers accused of falsifying hundreds of tickets.</p><p>\u201cThere are a lot of guys driving around our streets right now like a bat out of hell,\u201d Lamont joked Tuesday. \u201cThat\u2019s what happens when you get the police to stop issuing those fake tickets. Things like that start happening.\u201d</p><p>Lamont made his comments during a Middlesex Chamber of Commerce event with a tradition of inviting such humor, so we don\u2019t want to be too hard on him (though it\u2019s in perhaps worse taste to joke about bad drivers given recent road fatalities in the state). But one way or another, Connecticut won\u2019t have a lot to laugh about when the findings of three probes are done.</p><p>Even if the best outcome is revealed \u2014 that there was zero wrongdoing \u2014 it will come at a hefty financial cost.</p><p>Everyone involved is lawyering up, which is a more reliable barometer of what is likely on the horizon. Connecticut Attorney General William Tong has contracted legal help to assist the governor\u2019s office and the Department of Emergency Services and Public Protection on everything from handling research and paperwork to offering advice and responding to subpoenas. Tong\u2019s contract for such services is worth up to $250,000.</p><p>The troopers\u2019 union is also poised to bring in lawyers as federal investigators begin interviews with individual troopers. The counsel to the union said those sessions would likely occur in mid-January or February.</p><p>The controversy heated up over the summer as an audit revealed the \u201chigh likelihood\u201d that hundreds of Connecticut troopers might have falsified traffic ticket records over the previous decade. The audit cast suspicion that tens of thousand of tickets may be compromised.</p><p>There are three investigations under way: an internal review by state police, a federal grand jury probe and an independent one overseen by former U.S. attorney for Connecticut Deirdre M. Daly. As they continue, a CT Insider analysis of the audit\u2019s data raises some of the questions that need to be answered.</p><p>One example cited in a CT Insider story details how a trooper logged stops of 43 cars over 2\u00bd hours on July 17, 2017, recording a ticket every four minutes. Somehow, the trooper was able to do so in five towns: Middletown, Vernon, Berlin, Glastonbury and Colchester.</p><p>An audit flagged all 43 tickets as \u201cunreliable,\u201d as they had trouble matching them to court records.</p><p>The CT Insider analysis identified similar incidents, a pattern that one of the audit\u2019s authors concluded \u201cjust didn\u2019t pass the smell test.\u201d</p><p>There are several possible explanations. Even if it\u2019s the result of technical glitches, there will need to be reforms. But the primary concern is whether troopers logged tickets without ever making stops. These so-called \u201cghost tickets\u201d are not a phantom theory, as cases of such a work culture have already been identified.</p><p>There are a lot of experts \u2014 including ones from the U.S. Department of Justice and the FBI \u2014 who are seeking the truth. Regardless of the outcome, this won\u2019t end with a punchline.</p><p>___</p><p>Bangor Daily News. December 27, 2023.</p><p>Editorial: Susan Collins on right track with bill to require military to use state red and yellow flag laws</p><p>It can\u2019t be said enough: The horrific mass shooting in Lewiston on Oct. 25 <a href=\"https://www.bangordailynews.com/2023/11/03/opinion/failures-surrounding-lewiston-shooting/\">requires answers and action</a>. Even as <a href=\"https://www.bangordailynews.com/2023/12/15/politics/army-inspector-general-independent-investigation-led-to-lewiston-mass-shooting/\">multiple investigations</a> into the facts involved get underway, it is already quite clear that various <a href=\"https://www.bangordailynews.com/2023/11/01/opinion/editorials/lewiston-mass-shooting-missed-warnings/\">missed warnings, system failures and statutory shortcomings</a> were involved. This points to the need for a multifaceted response at various levels of government.</p><p>As just one example, there needs to be more clarity and stronger requirements about how the U.S. military interacts with state laws designed to temporarily limit firearm access for people demonstrated to be a risk to themselves or others \u2014 like <a href=\"https://www.bangordailynews.com/2023/10/31/news/central-maine/yellow-flag-should-have-been-triggered-lewiston-shooting/\">Maine\u2019s yellow flag law</a> and <a href=\"https://www.bangordailynews.com/2023/11/15/mainefocus/legal-gaps-lewiston-shooter-keep-guns-joam40zk0w/\">New York\u2019s red flag law</a>. Both seemingly could and should have been engaged in the case of Lewiston shooter Robert Card.</p><p>U.S. Sen. Susan Collins is currently working on a bill that would appear to provide the needed clarity and requirements. Without legislative text yet, it is hard to fully evaluate the forthcoming proposal. But reporting on the bill and remarks from Collins\u2019 office are encouraging.</p><p>\u201cBased on press reports, it appears that the military units with which Robert Card was associated had not acted to invoke either New York\u2019s red flag law or Maine\u2019s yellow flag law, despite numerous warning signs that lead to Mr. Card\u2019s hospitalization in a psychiatric hospital in New York, and the Army\u2019s decision to prevent him from having access to weapons, ammunition, and participation in live fire exercises,\u201d Collins spokesperson Annie Clark said in a statement to the Bangor Daily News editorial board last week. \u201cThis led Senator Collins to initiate the request for an (Army inspector general) investigation. In the meantime, she is working on legislation that would require each branch of the military services to fully utilize states\u2019 red and yellow flag laws when appropriate to protect an individual from harming him or herself or others.\u201d</p><p>This is a needed push, as part of a larger conversation about improving systems and laws to prevent other shootings like this. Card\u2019s concerning behavior led him to spend about two weeks in a <a href=\"https://www.bangordailynews.com/2023/11/16/mainefocus/new-york-police-robert-card-voluntary-psychiatric-hospital/\">New York psychiatric facility</a> while in that state for U.S. Army Reserve training. The military had <a href=\"https://www.bangordailynews.com/2023/10/31/news/central-maine/army-prohibited-robert-card-handling-guns-before-lewiston-mass-shooting/\">barred</a> him from handling weapons and live ammunition two months before the shooting. Members of Maine law enforcement were also <a href=\"https://www.bangordailynews.com/2023/12/15/mainefocus/army-reserve-downplayed-warnings-robert-card-dangerous/\">warned</a> about his behavior and the concerns of fellow soldiers. And yet it seems that neither Army nor law enforcement officials fully engaged with the red flag law in New York or yellow flag law in Maine to limit his access to firearms amid the alarming behavior.</p><p>It should go without saying that this failure of systems, and failure to fully engage with existing public safety tools, must not be repeated. As we <a href=\"https://www.bangordailynews.com/2023/11/03/opinion/failures-surrounding-lewiston-shooting/\">said in early November</a>, \u201cIf the U.S. military has determined that <a href=\"https://www.bangordailynews.com/2023/10/31/news/army-prohibited-robert-card-handling-guns-before-lewiston-mass-shooting/\">someone shouldn\u2019t have access to firearms</a> within the service, that person should also then lose access to firearms in civilian life (at least for a period of time, and with proper balance of Second Amendment rights).\u201d It is too soon to know if or how Collins\u2019 bill would match with this goal specifically, but there is good reason to expect that requiring the military to fully pursue the process for state red and yellow flag laws would apply the same general principle.</p><p>The anticipated legislation is one specific piece in a larger conversation, but it is an important piece. As Collins continues to work on this needed and appreciated proposal at the federal level, state lawmakers in Maine and elsewhere also need to be moving toward stronger red flag laws.</p><p>The military element was not the only apparent shortcoming in Card\u2019s case, and we <a href=\"https://www.bangordailynews.com/2023/10/30/opinion/editorials/congress-gun-violence-inaction/\">remain convinced</a> that Maine\u2019s yellow flag law should be updated and strengthened to an actual red flag law to better address barriers for families and law enforcement trying to use it. The tragedy in Lewiston was also a failure of systems and statute, and requires this kind of reassessment at all levels of government.</p><p>END</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/bf1a6dc340db04a0b3b9fe6dd688a0d9",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 3,
+            "reason": "The document contains multiple editorials, but only one of them is directly related to health. The editorial from the Boston Globe on December 27, 2023, discusses the health care services provided to incarcerated individuals in Massachusetts, highlighting issues such as staffing woes, response times, and the adequacy of care. This is highly relevant to the topic of health. However, the other editorials focus on topics such as homelessness, disaster preparedness, a police scandal, and gun control legislation, which are not directly related to health. Therefore, while part of the document is highly relevant, the majority is not."
+        }
+    }
+}

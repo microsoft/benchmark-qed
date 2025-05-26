@@ -1,0 +1,241 @@
+﻿{
+    "altids": {
+        "itemid": "8954832f0fafca8dffaaf9df65af63bc",
+        "etag": "8954832f0fafca8dffaaf9df65af63bc_0a4aza0c0",
+        "friendlykey": "837778868267",
+        "referenceid": "AF--Namibia-President-Cancer"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2024-01-19T16:38:09Z",
+    "firstcreated": "2024-01-19T16:38:08Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "ednote": "Eds: UPDATES: Updates Media.",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "AF--Namibia-President-Cancer",
+    "headline": "Namibian President Hage Geingob will start treatment for cancer, his office says",
+    "headline_extended": "Namibia's president will start treatment for cancer after routine medical checkups and a follow-up biopsy led to the detection of cancerous cells",
+    "slugline": "AP-AF--Namibia-President-Cancer",
+    "description_summary": "Namibia's president will start treatment for cancer after routine medical checkups and a follow-up biopsy led to the detection of cancerous cells. The office of President Hage Geingob says he had a colonoscopy and a gastroscopy on Jan. 8, followed by a biopsy. The statement gave no more details on Geingob's diagnosis but said the 82-year-old would continue to carry out his duties. Geingob, who has been president of the southern African nation since 2015, is due to finish his second and final term in office this year. Namibia will hold elections to choose a new leader in November.",
+    "located": "CAPE TOWN, South Africa",
+    "datelinelocation": {
+        "city": "Cape Town",
+        "countrycode": "ZAF",
+        "countryname": "South Africa",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                18.42322,
+                -33.92584
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "namibia president cancer Hage Geingob"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "person": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "44da3ac1a16a4c3783170e057673440d",
+            "name": "Hage Geingob",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "POLITICIAN",
+                "PERSON"
+            ],
+            "relevance": 93
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "i",
+            "name": "i"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 91
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e22524b87de410048f91df092526b43e",
+            "name": "Cancer",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 63
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "468257dba1c848ca93ba314d4ce86539",
+            "name": "Surgery",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 43
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "bb2d2c5f441a452cb24bb511a2ab5eea",
+            "name": "World news",
+            "creator": "Editorial",
+            "editorial_subject": "World news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "661ff2007d5b100482b8c076b8e3055c",
+            "name": "Namibia",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661812607d5b100481f1c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "01f56e0e654841eca2e69bf2cbcc0526",
+                "name": "Nation"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    17,
+                    -22
+                ]
+            },
+            "relevance": 81,
+            "parentnames": [
+                "Africa"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "96808e787e3710048912df092526b43e",
+            "name": "Cape Town",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661ff2007d5b100482b9c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "9d26a20b35f0484a891740f8189d4c7b",
+                "name": "City"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    18.41667,
+                    -33.91667
+                ]
+            },
+            "relevance": 52,
+            "parentnames": [
+                "South Africa"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "661812607d5b100481f1c076b8e3055c",
+            "name": "Africa",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "associations": {
+        "1": {
+            "altids": {
+                "itemid": "82d76c4abeeb4f6bbf898d67a0e793ad"
+            },
+            "type": "picture"
+        }
+    },
+    "body_nitf": "<p>CAPE TOWN, South Africa (AP) \u2014 Namibian President Hage Geingob will start treatment for cancer after routine medical checkups and a follow-up biopsy led to the detection of cancerous cells, his office said Friday.</p><p>The Namibian Presidency said the 82-year-old had a colonoscopy and a gastroscopy on Jan. 8, followed by a biopsy. Geingob's office gave no more details on his diagnosis but said he would continue to carry out his duties.</p><p>Geingob, who has been president of the southern African nation since 2015, is due to finish his second and final term in office this year. In 2014, he said he had survived prostate cancer.</p><p>\u201cOn the advice of the medical team, President Geingob will undertake appropriate medical treatment to deal with the cancerous cells,\u201d his office said in a statement.</p><p>Namibia will hold elections to choose a new leader in November.</p><p>___</p><p>More AP Africa news: <a href=\"https://apnews.com/hub/africa\">https://apnews.com/hub/africa</a></p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/namibia-president-cancer-hage-geingob-8954832f0fafca8dffaaf9df65af63bc",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 5,
+            "reason": "The document discusses the health condition of Namibian President Hage Geingob, specifically his diagnosis and treatment for cancer. It provides details about his medical checkups, the detection of cancerous cells, and his planned treatment. This information is directly related to the topic of health, as it involves medical procedures, a cancer diagnosis, and treatment plans."
+        }
+    }
+}

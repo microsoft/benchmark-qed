@@ -1,0 +1,230 @@
+﻿{
+    "altids": {
+        "itemid": "166ad4ffea93112ebc5a66740fab1760",
+        "etag": "166ad4ffea93112ebc5a66740fab1760_0a6aza0c0",
+        "friendlykey": "461531551150",
+        "referenceid": "US-Health Care-Florida"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2024-01-18T19:29:27Z",
+    "firstcreated": "2024-01-18T19:29:27Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "US-Health Care-Florida",
+    "headline": "Florida Senate passes bills seeking to expand health care availability",
+    "headline_extended": "Florida will seek to streamline regulations and offer incentives to help make health care more accessible under two bills unanimously passed by the Senate",
+    "slugline": "AP-US-Health Care-Florida",
+    "description_summary": "Florida will seek to streamline regulations and offer incentives to help make health care more accessible under two bills unanimously passed by the Senate. The votes on Thursday quickly pushed forward Republican Senate President Kathleen Passidomo\u2019s top session priority. The bills would make it easier for foreign doctors and out-of-state health care workers to relocate to Florida. They also would create loan programs and other incentives to attract health care providers and services to underserved rural areas. The bills also seek to reduce demand at emergency rooms by strengthening hospitals\u2019 partnerships with nearby urgent care centers.",
+    "located": "TALLAHASSEE, Fla.",
+    "datelinelocation": {
+        "city": "Tallahassee",
+        "countryareacode": "FL",
+        "countryareaname": "Florida",
+        "countrycode": "USA",
+        "countryname": "United States",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                -84.28073,
+                30.43826
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "health care florida government"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "a",
+            "name": "a"
+        },
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "39a5551883591004893adf092526b43e",
+            "name": "Health care costs",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 60
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "d8e6d7087f00100483b5f571351eed07",
+            "name": "Emergency care",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 32
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86aad5207dac100488ecba7fa5283c3e",
+            "name": "Politics",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 47
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 88
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Editorial",
+            "editorial_subject": "Health",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cb06ab1082af100482f8df092526b43e",
+            "name": "Florida",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -82.5001,
+                    28.75054
+                ]
+            },
+            "relevance": 77,
+            "parentnames": [
+                "United States"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "cb06ab1082af100482f8df092526b43e",
+            "name": "Florida",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661850e07d5b100481f5c076b8e3055c",
+            "name": "Latin America and Caribbean",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "body_nitf": "<p>TALLAHASSEE, Fla. (AP) \u2014 Florida will seek to streamline regulations and offer incentives to help make health care more accessible under two bills unanimously passed by the Senate, votes that quickly pushed forward Republican Senate President Kathleen Passidomo's top session priority.</p><p>The bills passed Thursday would make it easier for foreign doctors and out-of-state health care workers to relocate to Florida and would create loan programs and other incentives to attract health care providers to underserved rural areas. They also seek to reduce demand at emergency rooms by strengthening hospitals' partnerships with urgent care centers.</p><p>Republican Senate Health Policy Committee Chair Colleen Burton said Florida is growing by 300,000 people a year, but the influx of new doctors and nurses isn't keeping up.</p><p>\u201cWe have a city's worth of new Floridians every year and there's not a proportionate number of health care providers,\u201d she said.</p><p>The bill still needs House approval.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/health-care-florida-government-166ad4ffea93112ebc5a66740fab1760",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 5,
+            "reason": "The document discusses legislative efforts in Florida aimed at expanding health care availability, including making it easier for foreign doctors and out-of-state health care workers to relocate to Florida, creating loan programs and incentives for health care providers in rural areas, and reducing emergency room demand. These topics are directly related to health care, making the document highly relevant to the topic of health."
+        }
+    }
+}

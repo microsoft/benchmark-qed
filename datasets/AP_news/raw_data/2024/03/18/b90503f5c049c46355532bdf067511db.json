@@ -1,0 +1,264 @@
+﻿{
+    "altids": {
+        "itemid": "b90503f5c049c46355532bdf067511db",
+        "etag": "b90503f5c049c46355532bdf067511db_0a2aza0c0",
+        "friendlykey": "899206476112",
+        "referenceid": "IO--Editorial Rdp"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Opinion",
+    "language": "en",
+    "versioncreated": "2024-03-18T16:37:12Z",
+    "firstcreated": "2024-03-18T16:37:11Z",
+    "editorialrole": "FullStory",
+    "fixture": {
+        "code": "21ea4067bb274c3b805353fb2b99ba70",
+        "name": "Editorial Roundup"
+    },
+    "pubstatus": "usable",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "IO--Editorial Rdp",
+    "headline": "Editorial Roundup: Iowa",
+    "slugline": "BC-IO--Editorial Rdp",
+    "bylines": [
+        {
+            "by": "By The Associated Press"
+        }
+    ],
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "Editorial Rdp"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a37eab90831510048fcfdf092526b43e",
+            "name": "Law enforcement",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 79
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86aad5207dac100488ecba7fa5283c3e",
+            "name": "Politics",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 67
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 88
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "ace74e307f00100486cedf092526b43e",
+            "name": "Immunizations",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 72
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "b78a8726535a4b5c9957e1b6ae20beac",
+            "name": "Cedar Rapids",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "1608ba1082b310048433df092526b43e"
+            ],
+            "locationtype": {
+                "code": "9d26a20b35f0484a891740f8189d4c7b",
+                "name": "City"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -91.64407,
+                    42.00833
+                ]
+            },
+            "relevance": 40,
+            "parentnames": [
+                "Iowa"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "00f8aadd82df4fe0833a713b4cb39e83",
+            "name": "Dubuque",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "1608ba1082b310048433df092526b43e"
+            ],
+            "locationtype": {
+                "code": "9d26a20b35f0484a891740f8189d4c7b",
+                "name": "City"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -90.66457,
+                    42.50056
+                ]
+            },
+            "relevance": 40,
+            "parentnames": [
+                "Iowa"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "34c2d29114604eb3aec062440f14c58c",
+            "name": "Iowa City",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "1608ba1082b310048433df092526b43e"
+            ],
+            "locationtype": {
+                "code": "9d26a20b35f0484a891740f8189d4c7b",
+                "name": "City"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -91.53017,
+                    41.66113
+                ]
+            },
+            "relevance": 61,
+            "parentnames": [
+                "Iowa"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "9b225e0ca9ef4d8881a3d3fdf4bc73ff",
+            "name": "Waterloo",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "1608ba1082b310048433df092526b43e"
+            ],
+            "locationtype": {
+                "code": "9d26a20b35f0484a891740f8189d4c7b",
+                "name": "City"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -92.34296,
+                    42.49276
+                ]
+            },
+            "relevance": 40,
+            "parentnames": [
+                "Iowa"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "1608ba1082b310048433df092526b43e",
+            "name": "Iowa",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "body_nitf": "<p>Dubuque Telegraph Herald. March 17, 2024.</p><p>Editorial: Refusing to vaccinate kids hurts everyone</p><p>Last Sunday\u2019s Telegraph Herald carried an in-depth story about a troubling uptick in the number of families receiving exemptions from childhood vaccines. For the 2023-2024 school year, 3% of students in Iowa have religious exemptions from receiving at least one required vaccination, up from 2.6% in the previous school year and 1.3% in the 2015-2016 school year, according to the Iowa Department of Health and Human Services.</p><p>In Dubuque County, 3.1% of students have religious vaccine exemptions in the current school year, compared to 3.6% in Clayton County, 2.1% in Delaware County and 2.8% in Jackson County.</p><p>That is an increase from the previous year, when the exemption rate was 2.7% in Dubuque County, 3.4% in Clayton County and 1.5% in Delaware County, though Jackson County saw no change in its rate. In the 2021-2022 school year, 2.3% of students had religious exemptions in Dubuque County, while the rate was 3.5% in Clayton County, 1.4% in Delaware County and 3% in Jackson County.</p><p>In other words, just like the national trend, the number of families eschewing childhood vaccines is mostly growing.</p><p>Meanwhile, so are once nearly vanquished childhood illnesses.</p><p>The U.S. has seen 59 cases of measles across 17 states so far this year \u2014 already surpassing last year\u2019s total of 58 cases across 20 states. Nine kids are sick with a measles outbreak at a Florida elementary school.</p><p>It\u2019s not just happening in the U.S. The U.K. is marking a 10-year high in new measles cases with 239 new cases reported since February \u2014 mostly in children.</p><p>The Centers for Disease Control and Prevention and the World Health Organization puts measles, mumps and polio on a list of about two dozen diseases that are preventable with vaccinations. Five of those potentially preventable illnesses have resurfaced largely because of people refusing to vaccinate their children.</p><p>To put the finest point on it: Those who abstain from vaccines because they believe there is something unhealthy about them are now causing a major public health concern.</p><p>The decision to not vaccinate \u2014 typically made by parents who say they are looking out for their child\u2019s best interest \u2014 is putting children at risk.</p><p>The movement to decline vaccinations swelled with the COVID-19 pandemic. But measles, mumps and polio are entirely different animals. No level of population immunity will stop the coronavirus from spreading. The vaccine offers individuals protection and reduces the severity of the virus.</p><p>Childhood illnesses, though, are a different story.</p><p>With those illnesses, vaccinations counteract the entire trend. When most people are vaccinated, a disease cannot gain a foothold. Health care officials refer to this as \u201cherd immunity.\u201d Those who are not vaccinated are protected because the vast majority are vaccinated. However, as the percentage of those who are vaccinated declines, there is a greater risk to everyone.</p><p>The \u201cherd\u201d \u2014 even in the tri-state area \u2014 is growing more vulnerable. As outlined in our front-page story, the number of parents seeking waivers from schools for vaccinations is on the rise. When parents decline vaccines for children, it not only impacts the health of individual children but the nation\u2019s children and adults as well.</p><p>These are not illnesses that will simply run their course with few consequences. Polio paralyzed or killed more than a half million people worldwide every year in the 1940s and \u201950s. Many of these preventable diseases are wildly contagious.</p><p>Even while the actual number of cases remains low, outbreaks suck up public resources. A small measles outbreak in Tucson, Ariz., in 2011 reportedly cost close to $800,000.</p><p>The non-vaccination movement hurts even those who get vaccines because it increases the likelihood that contagious disease will exploit the small opportunities to spread.</p><p>The two-dose vaccine for measles is about 97% effective. Although it prevents diseases in most cases, it\u2019s still possible to be vaccinated and get the disease.</p><p>And for those who received the shot as a child, effectiveness can wane after decades. There also are babies to consider. Children less than a year old do not receive the vaccine because their immune systems are not yet ready.</p><p>Those who refuse vaccinations might be acting with good intentions for their own children, but they are misguided. In today\u2019s interconnected society, the ill-considered decisions of one person can easily harm others. The success of vaccinations \u2014 and the problems that come with a growing anti-vaccination movement \u2014 shows that we\u2019re all in this together.</p><p>___</p><p>Des Moines Register. March 14, 2024.</p><p>Editorial: Iowa should leave police review boards intact and respect local control</p><p>Legislators should leave cities\u2019 citizen review boards intact and be conscientious about revising civil-service provisions instead of falling in line behind a \u201cback the blue\u201d mantra.</p><p>The police\u2019s relationship with the people they protect and serve is unique. Many people are already having one of the worst days of their lives by the time armed police with authority to search and detain them get involved. Some residents and some city leaders reasonably think those dynamics justify policies providing for extraordinary transparency and independent assessment of police actions.</p><p>It\u2019s a difficult balance to strike. Unfortunately, Republicans and Democrats in the Iowa Legislature are advancing legislation that would discard nuance with an outright ban on citizen review boards and make questionable changes to other provisions for how local governments review public safety employees\u2019 conduct. Besides that, the Legislature already meddles far too much in how cities conduct their business. <a href=\"https://www.legis.iowa.gov/legislation/BillBook?ga=90&ba=SF2325\">Senate File 2325</a> in its current form won\u2019t make Iowa better; lawmakers should amend or discard it.</p><p>What are citizen review boards?</p><p>Even the very best police work will still generate grumbling about officers\u2019 actions. Police carry and sometimes use deadly weapons. Unlike most government officials, they can conduct searches and place people under arrest. They have considerable leeway in how they use that power.</p><p>Those facts are some of reasons that have prompted cities in Iowa and elsewhere to set up police review boards, populated by members of the public. The missions of such boards vary \u2013 some make only recommendations; others can make binding policy; some can review confidential information; and others cannot \u2013 but their common thread is directing more sunlight toward the responsibility entrusted to police and seeking to increase public confidence through their reviews of officers\u2019 actions.</p><p>Under Iowa law, most cities with at least 8,000 people must have a <a href=\"https://www.legis.iowa.gov/docs/ico/chapter/400.pdf\">civil service commission</a>, with members of the public appointed by the mayor, that referees employment disputes involving police officers and firefighters. Some critics of existing or proposed police review boards argue that the civil service commissions are a sufficient means of civilian review and that having a second body examining the police is at best confusing and redundant and is at worst unfair to public safety workers.</p><p>Bill to abolish police review boards shuns greater transparency</p><p>That criticism is too dismissive of a critical distinction between a police review board and a civil service commission. A primary purpose of the commission is ensuring that officers and firefighters get a fair shake from their bosses in the city. One benefit of a review board is showing the public that people who complain about law enforcement will get a fair shake, and not an opaque dismissal from colleagues of the police officer or officers in question.</p><p>The legislation that passed the Iowa Senate with bipartisan approval this month and an Iowa House committee last week isn\u2019t interested in that. It implies that residents of a city shouldn\u2019t be able to have influence over the officers who are sworn to protect and serve them, short of voting for city council members.</p><p>\u201cThere should be a way for us to ensure that the citizens have a voice in what goes on in their communities,\u201d said state Rep. Jerome Amos Jr., a Waterloo Democrat. The state has already enhanced protections for police in recent years. In 2021, the Legislature approved a state version of the qualified immunity doctrine, which stifles civil litigation against officers unless litigants can show police knew they were violating an established right.</p><p>\u201cThese are boards that the communities involved decided that they wanted,\u201d said state Sen. Janice Weiner, an Iowa City Democrat. <a href=\"https://www.iowa-city.org/WebLink/0/edoc/1963365/CPRB%20History%20and%20Complaints%20Report.pdf\">Iowa City has had a police review board since the late 1990s.</a> \u201cThe one in my community has really created much more positive relations,\u201d she said.</p><p>Politics obscures the debate over police review boards</p><p>Senate File 2325 would shut down review boards in Cedar Rapids, Coralville, Dubuque, Iowa City and University Heights and ban any new ones. The rest of the bill isn\u2019t great, either. Backers say it would provide standardized procedure for civil service commissions. Most of the bill\u2019s language deals with requiring police and fire chiefs to meet higher burdens to discipline officers and firefighters. Sen. Scott Webster, a Bettendorf Republican, gave little credence to opposing views on the Senate floor.</p><p>\u201cWe\u2019re going to vote to defend our law enforcement from political interventions by citizen review boards and the media frenzy that goes along with them,\u201d he said. \u201cWe\u2019ve all seen how the media frenzy can ignore the truth, ignore the facts, and instead stoke public opinion, leading to unwarranted prosecutions of front-line defenders more akin to witch hunts than real justice.\u201d</p><p>It\u2019s an argument intended to shut down debate, not further it. It can suffice to point out that no civil service commission or citizen review board in Iowa or anywhere else has authority to file criminal charges, and that public opinion cannot force a prosecutor to take any action.</p><p>Attacks on local control have long since grown tiresome</p><p>For over half a century, the <a href=\"https://www.legis.iowa.gov/law/statutory/constitution\">Iowa Constitution</a> has declared that cities \u201care granted home rule power and authority, not inconsistent with the laws of the general assembly, to determine their local affairs and government\u201d except for passing new forms of taxes. However, the Legislature has taken to diminishing the spirit of this amendment by passing laws to make numerous city policies inconsistent with its law.</p><p>This bill would be just another blow, as would the bill to cancel central Iowa\u2019s basic-income pilot project. As would the bill to ban traffic cameras. All could join earlier laws clamping down on cities\u2019 and counties\u2019 landlord regulation, fireworks regulation, gun regulation, hog-confinement regulation and more.</p><p>Different sizes of cities have different needs and should be able to address them instead of being handcuffed by the Legislature at every turn.</p><p>All this gives legislators numerous independent grounds to insist on changes to Senate File 2325. They should leave cities\u2019 citizen review boards intact and be conscientious about revising civil-service provisions instead of falling in line behind a \u201cback the blue\u201d mantra.</p><p>END</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/b90503f5c049c46355532bdf067511db",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 3,
+            "reason": "The document contains two editorials, one of which is highly relevant to the topic of health. The first editorial discusses the impact of refusing childhood vaccinations on public health, including the resurgence of preventable diseases and the concept of herd immunity. This directly relates to health concerns and public health policy. The second editorial, however, focuses on police review boards and local governance, which is not relevant to the topic of health. Given that only part of the document is relevant, the overall rating is moderated."
+        }
+    }
+}

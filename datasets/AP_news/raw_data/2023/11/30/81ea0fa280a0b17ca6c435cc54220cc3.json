@@ -1,0 +1,226 @@
+﻿{
+    "altids": {
+        "itemid": "81ea0fa280a0b17ca6c435cc54220cc3",
+        "etag": "81ea0fa280a0b17ca6c435cc54220cc3_0a2aza0c0",
+        "friendlykey": "567449185342",
+        "referenceid": "LA--Editorial Rdp"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Opinion",
+    "language": "en",
+    "versioncreated": "2023-11-30T12:10:43Z",
+    "firstcreated": "2023-11-30T01:19:14Z",
+    "editorialrole": "FullStory",
+    "fixture": {
+        "code": "21ea4067bb274c3b805353fb2b99ba70",
+        "name": "Editorial Roundup"
+    },
+    "pubstatus": "usable",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "LA--Editorial Rdp",
+    "headline": "Editorial Roundup: Louisiana",
+    "slugline": "BC-LA--Editorial Rdp",
+    "bylines": [
+        {
+            "by": "By The Associated Press"
+        }
+    ],
+    "copyrightnotice": "Copyright 2023 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "Editorial Rdp"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "person": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "17fc75ccd240477889642e4eb16d52f6",
+            "name": "Francis Collins",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "NEWSMAKER",
+                "PERSON"
+            ],
+            "relevance": 53
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "39a5551883591004893adf092526b43e",
+            "name": "Health care costs",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 63
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e237be707de410048fffdf092526b43e",
+            "name": "Medication",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 48
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86aad5207dac100488ecba7fa5283c3e",
+            "name": "Politics",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 56
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 83
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "4dab5f4082b3100484aedf092526b43e",
+            "name": "Baton Rouge",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "43fb970882b310048496df092526b43e"
+            ],
+            "locationtype": {
+                "code": "9d26a20b35f0484a891740f8189d4c7b",
+                "name": "City"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -91.15455,
+                    30.45075
+                ]
+            },
+            "relevance": 38,
+            "parentnames": [
+                "Louisiana"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "43fb970882b310048496df092526b43e",
+            "name": "Louisiana",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -92.0004,
+                    31.00047
+                ]
+            },
+            "relevance": 75,
+            "parentnames": [
+                "United States"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "43fb970882b310048496df092526b43e",
+            "name": "Louisiana",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "body_nitf": "<p>The Advocate. November 29, 2023.</p><p>Editorial: Louisiana leading the way for once. Can U.S. follow the model?</p><p>Louisiana is hardly leading the nation in an arena of vital importance to every human, <a href=\"https://www.nola.com/tncms/asset/editorial/2c174188-8825-11ee-8809-7311cdc963e9/\">health care</a>. But a Louisiana innovation is now being pushed by the White House as a way to tackle the dread disease of hepatitis C.</p><p>Francis Collins, former director of the National Institutes of Health and leader of a national initiative to eliminate hepatitis C, knows of the disease\u2019s ravages from personal experience. His brother-in-law died while awaiting a liver transplant.</p><p>Collins, a physician, <a href=\"https://www.nytimes.com/2023/11/28/opinion/hepatitis-c-eliminate.html\">wrote movingly</a> in The New York Times about the tragedy of a disease that is curable, based on a pill regimen discovered in 2014. \u201cThese medications have cured about a million people in the United States,\u201d he wrote.</p><p>And, perhaps surprisingly to some, he cited Louisiana as a model for how to more widely distribute the life-saving drugs that can prevent 12,000 deaths a year in the United States.</p><p>\u201cThe (U.S.) plan includes an innovative approach to provide broad access to curative medications, modeled on a successful effort in Louisiana. Under this approach, sometimes known as the \u2018Netflix model,\u2019 a drug company or companies agree to provide full access to medications for a population in need in exchange for a set lump sum payment,\u201d Collins said. Doing this allowed our state government to purchase otherwise expensive drugs, which unfortunately in America\u2019s fragmented health care system can be blocked by bureaucracy and perverse profit incentives among providers.</p><p>A New Orleans physician, Rebekah Gee, headed the Louisiana health department that pushed the Netflix model.</p><p>It is good for pharmaceutical companies because Gee\u2019s plan locked in the market for a set period, in the original case five years, so the companies know they have a market for a drug formulation that might be superseded by new research \u2014 but might not.</p><p>And put bluntly, these good-enough drugs are better than none at all. The state desperately wants to curb high rates of hepatitis C in prisons and other settings where taxpayers are responsible for health care.</p><p>\u201cPeople treated for hepatitis C will avoid very expensive downstream medical needs for transplantation and cancer treatment,\u201d Collins argued. \u201cFurthermore, a cured person cannot pass it on to others; as a result, every case treated today means multiple cases averted in the future.\u201d</p><p>The program could save $18 billion over the next decade, with $13.3 billion of that savings accruing to the federal government, he said.</p><p>This should have bipartisan support, although there are many details to be worked out among agencies and interested parties. But a good sign is that one of the authors of a <a href=\"https://jamanetwork.com/journals/jama/article-abstract/2712366\">2018 JAMA article</a> backing the idea is Bill Cassidy, the Republican U.S. senator from Baton Rouge who is ranking member on the committee that oversees health and probably the most influential doctor in Congress.</p><p>Louisiana leads the way. We think that has a great ring to it.</p><p>END</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/81ea0fa280a0b17ca6c435cc54220cc3",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 5,
+            "reason": "The document discusses a health care innovation in Louisiana that is being considered as a model for tackling hepatitis C in the United States. It includes detailed information about the 'Netflix model' for distributing life-saving drugs, the potential benefits of this approach, and the involvement of key health figures. The entire editorial is focused on health-related issues, particularly the management and treatment of hepatitis C, making it highly relevant to the topic of health."
+        }
+    }
+}

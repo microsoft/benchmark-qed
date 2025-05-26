@@ -1,0 +1,221 @@
+﻿{
+    "altids": {
+        "itemid": "6404114a2fef023ae86572114a7c7869",
+        "etag": "6404114a2fef023ae86572114a7c7869_0a2aza0c0",
+        "friendlykey": "793781788955",
+        "referenceid": "FL--Editorial Rdp"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Opinion",
+    "language": "en",
+    "versioncreated": "2024-02-28T12:10:40Z",
+    "firstcreated": "2024-02-27T18:59:42Z",
+    "editorialrole": "FullStory",
+    "fixture": {
+        "code": "21ea4067bb274c3b805353fb2b99ba70",
+        "name": "Editorial Roundup"
+    },
+    "pubstatus": "usable",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "FL--Editorial Rdp",
+    "headline": "Editorial Roundup: Florida",
+    "slugline": "BC-FL--Editorial Rdp",
+    "bylines": [
+        {
+            "by": "By The Associated Press"
+        }
+    ],
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "Editorial Rdp"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "person": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "2496c25a08144ca1a863952c56608e6a",
+            "name": "Manny Diaz",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "POLITICIAN",
+                "PERSON"
+            ],
+            "relevance": 35
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "ed2df5fda6404f7380a4f78d9303c34a",
+            "name": "Ron DeSantis",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "POLITICIAN",
+                "PERSON"
+            ],
+            "associatedstates": [
+                {
+                    "code": "cb06ab1082af100482f8df092526b43e",
+                    "name": "Florida"
+                }
+            ],
+            "relevance": 39
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "9cce666bb29344b8ba61f3732d971d32",
+            "name": "Disease outbreaks",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 88
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "ae58cc50893a1004889eba0a2b2ca13e",
+            "name": "Communism",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 60
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86aad5207dac100488ecba7fa5283c3e",
+            "name": "Politics",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 72
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "organisation": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "484191dd9ab34e1d93484c8c75373f36",
+            "name": "Florida state government",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 54
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cb06ab1082af100482f8df092526b43e",
+            "name": "Florida",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -82.5001,
+                    28.75054
+                ]
+            },
+            "relevance": 90,
+            "parentnames": [
+                "United States"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "cb06ab1082af100482f8df092526b43e",
+            "name": "Florida",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "body_nitf": "<p>South Florida Sun Sentinel. February 23, 2024.</p><p>Editorial: Declaring fetuses to be people would crush abortion rights in Florida</p><p>Floridians are already alarmed about women losing the right to control their own bodies, but <a href=\"https://www.sun-sentinel.com/2024/02/21/bill-allowing-parents-to-sue-over-death-of-unborn-child-advances-in-florida-house/\">what\u2019s happening</a> at the state Capitol is even more terrifying. One by one, House members voted yes this week on legislation declaring fetuses to be people from the moment of conception \u2014 turning wombs into political battlegrounds long before most women know they are pregnant.</p><p>The sponsor of <a href=\"https://myfloridahouse.gov/Sections/Bills/billsdetail.aspx?BillId=79220&SessionId=103\">House Bill 651</a>, Rep. <a href=\"https://www.myfloridahouse.gov/Sections/Representatives/details.aspx?MemberId=4785\">Jenna Persons-Mulicka</a>, R-Fort Myers, did her best to hide the radical nature of her legislation, which creates civil liability for anyone who causes the \u201cwrongful death\u201d of a fetus in utero. But everyone knew exactly what was at stake.</p><p>This proposal would be a shattering blow to what\u2019s left of women\u2019s reproductive independence, beyond <a href=\"https://www.sun-sentinel.com/2024/02/08/let-florida-voters-decide-abortion-rights-question-editorial/\">debates over viability</a> and <a href=\"https://www.sun-sentinel.com/2023/04/11/five-deceptions-in-floridas-new-abortion-ban-editorial/\">banning abortion</a> at a specified number of weeks. HB 651 would kick in at the very start of a pregnancy, creating an easy steppingstone from wrongful deaths (including from abortions) to anything that threatens the health of a fetus, even if it\u2019s meant to benefit the mother\u2019s health.</p><p>Floridians should bombard legislators with messages, telling them that this is far too radical for anyone who cares about freedom. Then they should turn to their congressional representatives and call on them for legislation to shut down this hazardous movement nationally.</p><p>Contact your lawmakers</p><p>They can start by letting lawmakers know they see through this charade. Persons-Mulicka pointed out more than once that the language of her legislation specifically excludes a pregnant person. But that\u2019s a negligible speed bump, especially if the Florida Supreme Court picks up the theme and uses it to obliterate abortion rights in Florida.</p><p>Think they won\u2019t? Think again. Supreme Court Chief Justice Carlos Mu\u00f1iz was already <a href=\"https://news.bloomberglaw.com/litigation/florida-justices-roast-state-argument-against-abortion-amendment\">hinting in that direction</a> during recent oral arguments over a ballot initiative that would, with voters\u2019 approval, explicitly protect abortion rights in Florida.</p><p>But advocates of so-called \u201cfetal personhood\u201d think they\u2019ve found a way around that amendment.</p><p>By declaring a fetus to be a person, the Legislature and/or the courts would at best set up a collision course between two competing interests that just happen to share a body \u2014 along with the well-being of medical personnel being asked to care for both.</p><p>A threat to doctors, nurses</p><p>Persons-Mulicka\u2019s bill does not protect the doctors, nurses and other people who perform abortions, even if the procedure is otherwise legal. Taken in context, that looming threat is clearly a large portion of the intention behind this bill.</p><p>Proclaiming that fetuses are people at very earliest stages of pregnancy would likely have an immediate and potentially deadly consequence.</p><p>In other states that have passed such radical laws, obstetricians are fleeing: \u201cWe would be losing the best and the brightest, and creating maternity deserts,\u201d warned Rep. Kristen Arrington, D-Kissimmee. <a href=\"https://myfloridahouse.gov/Sections/Committees/billvote.aspx?VoteId=72233&IsPCB=0&BillId=79220&SessionId=103\">She voted no in the House Judiciary Committee, as did</a> Rep. Mike Gottlieb, D-Davie. (No Republican lawmakers from Palm Beach or Broward are on the panel).</p><p>This legislation sends a clear message that many Florida lawmakers don\u2019t care about a woman\u2019s freedom to choose her own reproductive fate, and they don\u2019t care whether a pregnancy is the result of rape or incest, whether a woman\u2019s health is at risk, or whether the fetus would ever be viable outside the womb.</p><p>A threat to women\u2019s freedom</p><p>That\u2019s why Floridians should go on offense, vociferously.</p><p>Adopting this legislation would put Florida dangerously close to a society in which women live under the threat of being reduced to mere vessels for pregnancies, whether or not those pregnancies are intentional or wanted. Other lawmakers need to see the very real threat that\u2019s rising behind seemingly mild legislation.</p><p>At Wednesday\u2019s hearing, state Rep. Paula Stark, a Republican from St. Cloud, voted yes. But if the bill reaches the House floor in its current form, she said she would vote no. \u201cThis is just way too over-broad,\u201d Stark said.</p><p>With two weeks to go in the 2024 session, there appears to be no way to fix this legislation. Any step in this direction would be too extreme, and most Floridians can figure that out.</p><p>___</p><p>Tampa Bay Times. February 22, 2024.</p><p>Editorial: Here\u2019s why Florida should teach kids about communism</p><p>Focus on the facts, and the threats posed by despots everywhere.</p><p>Communism is a major economic and political doctrine that has shaped global events for centuries. Learning about it is fundamental to a student\u2019s understanding of history, and of America\u2019s identity and role in the world. That\u2019s why it\u2019s entirely appropriate for Florida to teach about communism in its public schools. The trick is keeping this curriculum from becoming a tool of government propaganda and overreach itself.</p><p>Bills advancing in the Florida <a href=\"https://www.flsenate.gov/Session/Bill/2024/1349/?Tab=RelatedBills\">House</a> and <a href=\"https://www.flsenate.gov/Session/Bill/2024/1264\">Senate</a> would require instruction in grades K-12 on the history of communism, starting in the 2026-27 school year. While the lessons must be age-appropriate, they must cover a range of territory, from the roots of communist thought and its history here and abroad to the atrocities committed under communist rule and conditions that have presaged communist revolutions. The legislation requires particular attention to communism in Cuba, the island nation 90 miles from Florida, and to guerilla movements across Latin America.</p><p>Students need a basic understanding of communist principles \u2014 what it means for a government to replace private property with communal ownership and to control a society\u2019s means of production ostensibly for the collective good. That knowledge will inevitably draw attention to the schism between communist doctrine and communism in practice. And it will expose autocrats and dictators who have appropriated this form of government to oppress their own citizens and terrorize their neighbors.</p><p>In this ever-connected world, Americans need to learn how Lenin, Stalin, Mao, Castro, Pol Pot and others maneuvered into office and held onto power even as their own people suffered. This should foster greater awareness of how western liberal democracies tried (however imperfectly) to maintain global order after World War II. And it will highlight how communist doctrine percolated throughout those societies, as bullies and tyrants exerted state control through surveillance, censorship, imprisonment, torture and outrageously faked elections.</p><p>These K-12 courses will also raise a lens to the autocrats and nationalists in democracies worldwide who wink at these very tactics. No ideology has a monopoly on despots, and if courses on communism illuminate where democracy has fallen short, so much the better. Young Americans can learn from the mistakes and retool our political system in real time.</p><p>Of course, the particulars here would be left largely to Manny Diaz, Florida\u2019s education commissioner, who seems the worst equipped person, given his servile commitment to wage Gov. Ron DeSantis\u2019 culture wars. But the legislation does include time for a wide range of stakeholders to get involved in recommending the curriculum and course materials.</p><p>Allowing the communist record to stand for itself would prove its own damning legacy. For decades during the Cold War, Florida required the teaching of a 30-hour course in public high schools titled Americanism vs. Communism. This is an opportunity \u2014 done right \u2014 to update that instruction and identify where autocrats pose a danger across the ideological spectrum.</p><p>___</p><p>Miami Herald. February 26, 2024.</p><p>Editorial: Is Florida\u2019s surgeon general trying to worsen a measles outbreak? Sure seems like it</p><p>Is there one mainstream piece of public health advice \u2014 no matter how long-standing \u2014 that Florida\u2019s top doctor won\u2019t buck?</p><p>Joseph Ladapo, Gov. Ron DeSantis\u2019 anti-vaxx surgeon general, has spread misinformation about COVID-19 and has advised against coronavirus vaccines, citing debunked claims.</p><p>Perhaps Ladapo saw, in the novelty and divisiveness of the pandemic, an opportunity to become the go-to, Ivy League-educated doctor for vaccine deniers. Now, he\u2019s turned his focus to a long-known virus \u2014 up until now, largely non-controversial, but highly contagious and dangerous for children: measles.</p><p>CASES CONFIRMED</p><p>Following an outbreak at Manatee Bay Elementary in Weston, where six measles cases were confirmed last week, Ladapo sent a letter to parents that pediatricians, immunologists and infectious disease experts have criticized. The letter acknowledged what has been common practice to contain measles outbreaks \u2014 that unvaccinated children or those without immunity should remain home during the incubation period of the virus, or up to 21 days.</p><p>Ladapo, then, however, wrote that, \u201cdue to the high immunity rate in the community,\u201d the Department of Health \u201cis deferring to parents or guardians to make decisions about school attendance.\u201d</p><p>This should have been Ladapo\u2019s opportunity to tell parents, \u201cGet your children vaccinated \u2014 now!\u201d</p><p>The MMR vaccine, approved by the federal government more than 50 years ago, offers 98% protection against measles after two full doses. That\u2019s a widely known statistic that not even Ladapo can deny \u2014 he acknowledges it in his letter but stops short of recommending the vaccines.</p><p>Since Ladapo\u2019s letter, the number of confirmed cases climbed to eight in Broward County, as of Monday.</p><p>NOT IMMUNIZED</p><p>Instead, Florida\u2019s top doctor is telling parents it\u2019s OK to send kids to school sans immunization, even though they could contract a potentially lethal virus or spread it to others who are also not immunized. Worse, the Broward County school outbreak could spread to other communities. The measles virus can live on surfaces or in the air for up to two hours after an infected person coughs or sneezes.</p><p>Ladapo\u2019s letter even notes that \u201cup to 90% of individuals without immunity will contract measles if exposed.\u201d But he knows the administration he works for. Advising children without immunity to stay home would certainly be a bad look for DeSantis, who made his anti-lockdown stance a hallmark of his response to the COVID-19 pandemic and political brand.</p><p>Can you imagine the headlines on Fox News calling the DeSantis administration a Dr. Fauci sellout?</p><p>SURGE IN CASES</p><p>The U.S. declared measles eliminated in 2000 but, in past years, cases have begun to surge, largely because of lower vaccination rates.</p><p>Most of the 23 measles cases the Centers for Disease Control and Prevention identified in the country between December and January were among teens and children who had not been vaccinated.</p><p>The vaccine skepticism that gained force during the pandemic, thanks in part to public figures like DeSantis and Ladapo, is a threat to not only public-health efforts to keep COVID at bay but other diseases we thought belonged in a bygone era.</p><p>In his letter, Ladapo mentions the \u201ccost of healthy children missing school,\u201d but what about the cost of treating a sick child from a disease so easily prevented?</p><p>AT-HOME LEARNING</p><p>Broward County Public Schools, by the way, has offered parents at Manatee Bay Elementary at-home learning options, the Sun Sentinel reported.</p><p>___</p><p>Orlando Sentinel. February 21, 2024.</p><p>Editorial: AI-generated voices of the dead rebuke lawmakers\u2019 inaction on gun violence</p><p>We\u2019ll be the first to admit it: The use of artificial intelligence to recreate the voices of victims of gun violence \u2014 including a student slaughtered on the grounds of Marjory Stoneman Douglas High School six years ago \u2014 feels deeply unsettling. The effort, a joint campaign by nonprofits pushing for sensible restrictions on gun purchases, puts words in the mouths of people who will never again have the ability to speak for themselves. They are speaking words they may never have voiced if they were alive today.</p><p>But that\u2019https://www.orlandosentinel.com/2024/02/14/families-using-re-created-voices-of-gun-violence-victims-to-call-lawmakers/s the point. They aren\u2019t alive. Many never had the chance to even say a final, terrified \u201cI love you\u201d to their families or friends before they were shot down, forever silenced. The use of their voices in direct calls to federal and state lawmakers was authorized by their families, and the fact that the voices were generated by artificial intelligence is part of each script.</p><p>And they have much to say, partic <a href=\"https://www.orlandosentinel.com/2024/01/04/florida-lawmaker-again-seeks-to-lower-rifle-buying-age-to-18/\">ularly to Florida lawmakers who are busy this session</a> rolling back two of the reform laws passed in the stunned, grieving aftermath of the mass shooting in Parkland on Feb. 14, 2018 that claimed 17 lives.</p><p>Hello. I am Joaquin Oliver. Six years ago, I was a senior at Parkland. Many students and teachers were murdered on Valentine\u2019s Day that year by a person using an AR-15.</p><p>Several of those pro-gun bills are set to be heard today in the House Judiciary Committee.</p><p><a href=\"https://www.flsenate.gov/Session/Bill/2024/17\">HB 17</a> would rip a hole in mandatory background checks for firearm purchases, giving law enforcement just three business days to complete a check.</p><p><a href=\"https://www.flsenate.gov/Session/Bill/2024/1223\">HB 1223</a> would reset the age to purchase a rifle, including high-powered assault-style weapons, to 18. The Parkland killer was 19 when he assembled his armory and drove to his former high school, where he opened fire. After Parkland, the Legislature raised the purchase age to 21.</p><p><a href=\"https://www.flsenate.gov/Session/Bill/2024/485\">HB 485</a> would require the return of weapons seized during an arrest unless the weapon was identified as evidence in the pending case. This would put guns back in the hands of people facing serious criminal charges before their cases are resolved.</p><p>I died that day in Parkland. My body was destroyed by a weapon of war. I\u2019m back today because my parents used AI to re-create my voice to call you. Other victims like me will be calling too, again and again, to demand action.</p><p>Joaquin will not be the only one speaking. At an earlier committee stop, House members heard from students worried about being the next ones to be gunned down, from Parkland parents infuriated that the modest changes they wrung from lawmakers in the emotional aftermath of the high-school massacre were now at risk.</p><p>Families of gun-violence victims can take heart in the words of Senate President Kathleen Passidomo, who has said at least one of the proposed bills \u2014 the change in age for gun purchases \u2014 would be a \u201cnon-starter\u201d in the Senate. They can also be proud of the efforts of people like U.S. Rep. Maxwell Alejandro Frost, D-Orlando, who has been fighting since he was a teenager galvanized by the Parkland massacre \u2014 and is now pursuing a bill that would help credit-card companies do a better job of flagging suspicious patterns of gun sales. Joaquin\u2019s voice may be silenced, but Frost is still listening.</p><p>Still, every time a lawmaker prattles on about teenagers\u2019 Second Amendment rights, every \u201cyes\u201d vote on legislation intended to knock down sensible precautions like background checks, must feel like a bullet to the hearts of those still grieving their losses. That number continues to grow. In 2023, Florida saw 30 mass shootings, according to the Gun Violence Archive.</p><p>Among the victims of those furious outbreaks of violence: Spectrum News 13 reporter Dylan Lyons, 9-year-old T\u2019Yonna Major and 38-year-old Nathacha Augustin. The first anniversary of their deaths falls on Thursday, Feb. 22.</p><p>How many calls will it take for you to care? How many dead voices will you hear before you finally listen?</p><p>Joaquin\u2019s eerie, computer-generated voice might be dismissed by some as an attention-generating gimmick. But it should not be ignored, and his death should not be forgotten. If this new campaign helps forward that message, it has done good work.</p><p>___</p><p>Palm Beach Post. February 26, 2024.</p><p>Editorial: The Moon landing puts Earth, Florida in perspective</p><p>When Odysseus touched down on the Moon\u2019s surface Thursday, its successful voyage said so much about mankind.</p><p>Lifting off from Florida\u2019s Kennedy Space Center Feb. 15, when the moon dust settles on its site near the lunar south pole, the robot\u2019s immediate task will be a particularly human one: to look for water. Water would sustain future visits by Earthlings and could be broken down into hydrogen and oxygen to fuel explorations on the Moon and beyond.</p><p>The technology to accomplish this odyssey is so exalted in its depth, detail and layering of centuries of accumulated knowledge, that it can only give us hope as we reach out to grasp our universe.</p><p>But the achievement\u2019s more immediate impact is the perspective it provides from 238,900 miles away, lending hope to efforts to overcome travails at home.</p><p>The news is filled with violence and hope is hard to find. In Europe, Africa, Asia and the Americas, sometimes it seems there\u2019s nowhere to turn for peace. Fleeing hunger and famine, swells of refugees desperate for safety and opportunity attempt their own odysseys.</p><p>Odysseus\u2019 voyage reminds us that if humans can touch the Moon, they must be capable of touching the lives of those who suffer on Earth.</p><p>In that light, Florida is an appropriate launch pad. <a href=\"https://www.palmbeachpost.com/story/news/local/2022/03/04/engines-propelling-artemis-moon-mission-made-jupiter-florida-facility/9225851002/\">No need to look farther than Palm Beach County</a> to see efforts to extend empathy and advance science in service of mankind. Bio-scientists at <a href=\"https://www.palmbeachpost.com/videos/news/2022/10/13/100-million-donation-uf-scripps-biomedical-research-institute-jupiter/10478905002/\">Scripps and Max Planck</a> push the envelopes of knowledge of our inner universe, in search of treatments and cures. In the social services, the angels at St. Ann\u2019s and The Lord\u2019s Place in West Palm Beach ease the hardships of the homeless. Billionaires from across the water in Palm Beach <a href=\"https://www.palmbeachpost.com/story/news/local/westpb/2024/02/21/julia-koch-gives-75m-for-nyu-langone-medical-center-in-west-palm-beach/72617495007/\">reach out to endow</a> all these efforts. But it\u2019s not just the privileged: When the pandemic left thousands of restaurant workers without jobs, many who\u2019d been laid off volunteered their time handing out meals at food banks where lines stretched for blocks.</p><p>So against the bad, there\u2019s a lot of good being done. Often we question whether our better selves will win out and save our species from itself. Well, look up and see what\u2019s possible.</p><p>END</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/6404114a2fef023ae86572114a7c7869",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 3,
+            "reason": "The document contains multiple editorials from different Florida newspapers, covering a range of topics. Only a few of these topics are directly related to health. The editorial from the Miami Herald discusses the actions of Florida\u2019s surgeon general regarding a measles outbreak, which is highly relevant to health. The editorial from the South Florida Sun Sentinel touches on abortion rights, which also has health implications. However, the other editorials focus on topics such as communism education, gun violence, and space exploration, which are not directly related to health. Therefore, while there are relevant sections, the overall document is not predominantly focused on health."
+        }
+    }
+}

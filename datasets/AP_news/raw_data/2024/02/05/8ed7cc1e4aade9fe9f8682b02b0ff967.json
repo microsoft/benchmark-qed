@@ -1,0 +1,250 @@
+﻿{
+    "altids": {
+        "itemid": "8ed7cc1e4aade9fe9f8682b02b0ff967",
+        "etag": "8ed7cc1e4aade9fe9f8682b02b0ff967_4a11aza0c0",
+        "friendlykey": "102610787413",
+        "referenceid": "LT--Brazil-Dengue Outbreaks"
+    },
+    "version": 4,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2024-03-28T18:01:24Z",
+    "firstcreated": "2024-02-05T18:23:28Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "ednote": "Eds: CORRECTS: This story was first published on February 7, 2024. It was updated on March 28, 2024 to remove a claim by the Brazilian health ministry that it was the first to offer a dengue vaccine through its public health system. The Philippines was the first country to do so, in 2016.",
+    "editorialtypes": [
+        "Lead"
+    ],
+    "signals": [
+        "newscontent"
+    ],
+    "title": "LT--Brazil-Dengue Outbreaks",
+    "headline": "Rio de Janeiro declares a dengue health emergency days ahead of Carnival",
+    "headline_extended": "Rio de Janeiro city authorities have declared a public health emergency in the city because of an outbreak of mosquito-borne dengue fever",
+    "slugline": "BC-LT--Brazil-Dengue Outbreaks, 4th Ld-Writethru",
+    "description_summary": "Rio de Janeiro city authorities have declared a public health emergency in the city because of an outbreak of mosquito-borne dengue fever. The announcement came just days before Carnival celebrations kick off across Brazil. But the outbreak wasn\u2019t expected to derail Carnival, which officially starts on Friday evening and runs until Feb. 14. Rio city hall announced the opening of 10 care centers, the creation of an emergency operations center and the allocation of hospital beds for dengue patients. Authorities will also use \u201csmoke cars\u201d in regions with the highest incidence of cases to diffuse an insecticide in the air.",
+    "bylines": [
+        {
+            "by": "By EL\u00c9ONORE HUGHES",
+            "title": "Associated Press"
+        }
+    ],
+    "located": "RIO DE JANEIRO",
+    "datelinelocation": {
+        "city": "Rio De Janeiro",
+        "countrycode": "BRA",
+        "countryname": "Brazil",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                -43.18223,
+                -22.90642
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "brazil dengue rio carnival"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "f",
+            "name": "f"
+        },
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "i",
+            "name": "i"
+        },
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "e",
+            "name": "e"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 77
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "084dafb87f00100481c5f571351eed07",
+            "name": "Dengue fever",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 97
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Editorial",
+            "editorial_subject": "Health",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "16cb0ba3e6d24d97ace39f5a1924669a",
+            "name": "Entertainment",
+            "creator": "Editorial",
+            "editorial_subject": "Entertainment",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "c8e409f8858510048872ff2260dd383e",
+            "name": "Business",
+            "creator": "Editorial",
+            "editorial_subject": "Business",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "bb2d2c5f441a452cb24bb511a2ab5eea",
+            "name": "World news",
+            "creator": "Editorial",
+            "editorial_subject": "World news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "organisation": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "8997c0688d7410048d178a3c53cbc603",
+            "name": "World Health Organization",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 31
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "94e3f52124654ce0869ed3a18bdfba63",
+            "name": "Rio de Janeiro",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661effd07d5b1004829cc076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "9d26a20b35f0484a891740f8189d4c7b",
+                "name": "City"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -43.2075,
+                    -22.90278
+                ]
+            },
+            "relevance": 97,
+            "parentnames": [
+                "Brazil"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "661850e07d5b100481f5c076b8e3055c",
+            "name": "Latin America and Caribbean",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "body_nitf": "<p>RIO DE JANEIRO (AP) \u2014 Rio de Janeiro on Monday has declared a public health emergency because of an outbreak of mosquito-borne dengue fever, the city announced Monday, just days before Carnival celebrations kick off across Brazil.</p><p>The outbreak wasn't expected to derail Carnival, which officially starts Friday evening and runs until Feb. 14, but it has prompted a slew of special measures by the city in hopes of containing the illness.</p><p>Rio city hall announced the opening of 10 care centers, the creation of an emergency operations center and the allocation of hospital beds for dengue patients. Authorities also will use \u201csmoke cars\u201d in regions with the highest incidence of cases, diffusing an insecticide in the air.</p><p>Since the beginning of 2024, the municipality has registered more than 10,000 dengue cases. That is just under half of the total cases \u2014 23,000 \u2014 recorded throughout all of 2023.</p><p>The announcement comes as tourists and revelers are pouring into Rio to take part in street parties and attend the samba schools\u2019 flamboyant parades.</p><p>Among Rio state's operational plans for Carnival, presented by Gov. Cl\u00e1udio Castro on Monday, is the \u201cAgainst Dengue Every Day\u201d campaign. That will entail the distribution of repellents, stickers, bandanas and hats with warnings about the disease to audiences at the Sambadrome, where a 15-second notice about the fight against the infection also will be shown.</p><p>Dengue is a viral infection transmitted to humans through the bite of infected mosquitoes and is more common in tropical climates. Frequent rains and high temperatures, which accelerate the hatching of mosquito eggs and the development of larvae, make the famously hot city of Rio susceptible to dengue outbreaks.</p><p>But the problem is national. The explosion of dengue cases across Brazil has caused at least four states \u2014 Acre, Minas Gerais and Goias, in addition to the Federal District \u2014 to declare public health emergencies.</p><p>On Monday, the Brazilian air force set up a 60-bed field hospital in the Federal District in Ceilandia that was due to begin treating patients.</p><p>\u201cOur objective is to relieve emergency care units in the region, given that today the Federal District accounts for around 20% of dengue cases in the country,\u201d air force commander Lt. Brig. Marcelo Kanitz Damascene said in a statement.</p><p>Most people who get dengue don\u2019t develop symptoms, but if they do these can include high fever, headache, body aches, nausea and a rash, according to the World Health Organization. While most get better after a week or so, some develop a severe form and require hospitalization. In such cases, dengue can be fatal.</p><p>Climate change, which leads to increased temperatures and high rainfall, is associated with a higher risk of dengue, WHO said in December.</p><p>Rio Mayor Eduardo Paes urged \u201ccariocas\u201d \u2014 as the residents of Rio are known \u2014 to eliminate sources of still water, used by mosquitoes as breeding grounds.</p><p>\u201cUnlike the COVID-19 pandemic, in which individual citizens couldn\u2019t do much more than demand that governments get the vaccine, in the case of dengue much depends on the action of each citizen,\u201d Paes said.</p><p>Brazil approved a vaccine against dengue in March of 2023. More than 3 million people were due to receive a jab in 2024.</p><p>\u2014-</p><p>This story was first published on February 7, 2024. It was updated on March 28, 2024 to remove a claim by the Brazilian health ministry that it was the first to offer a dengue vaccine through its public health system. The Philippines was the first country to do so, in 2016.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/brazil-dengue-rio-carnival-8ed7cc1e4aade9fe9f8682b02b0ff967",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 5,
+            "reason": "The document is highly relevant to the topic of Health. It discusses a public health emergency in Rio de Janeiro due to a dengue fever outbreak, detailing the measures taken by the city to contain the illness, the impact on the upcoming Carnival, and the broader national context of dengue cases in Brazil. It also includes information on symptoms, transmission, and prevention of dengue, as well as the role of climate change in the spread of the disease. All these points are directly related to health issues."
+        }
+    }
+}

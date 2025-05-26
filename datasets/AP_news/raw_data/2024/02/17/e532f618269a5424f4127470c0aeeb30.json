@@ -1,0 +1,224 @@
+﻿{
+    "altids": {
+        "itemid": "e532f618269a5424f4127470c0aeeb30",
+        "etag": "e532f618269a5424f4127470c0aeeb30_0a8aza0c0",
+        "friendlykey": "188418242064",
+        "referenceid": "US--Chicago Migrant Child Death"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2024-02-17T02:19:14Z",
+    "firstcreated": "2024-02-17T02:19:13Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "ednote": "Eds: UPDATES: Updates Media.",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "US--Chicago Migrant Child Death",
+    "headline": "5-year-old migrant boy who got sick at a temporary Chicago shelter died from sepsis, autopsy shows",
+    "headline_extended": "An autopsy shows the cause of death for a 5-year-old Venezuelan boy who died in December after becoming ill at a temporary shelter for migrants in Chicago was sepsis and a bacterial infection that causes strep throat",
+    "slugline": "BC-US--Chicago Migrant Child Death",
+    "description_summary": "An autopsy shows the cause of death for a 5-year-old Venezuelan boy who died in December after becoming ill at a temporary shelter for migrants in Chicago was sepsis and a bacterial infection that causes strep throat. The autopsy released Friday by the Cook County Medical Examiner\u2019s Office showed Jean Carlos Martinez died Dec. 17 as a result of sepsis due to streptococcus pyogenes group A infection, which can cause strep throat and other life-threatening illnesses. Contributing factors included COVID-19 and rhinovirus. The city has said the boy was a resident at a warehouse retrofitted as a shelter. The boy\u2019s death revived concerns about conditions at shelters.",
+    "located": "CHICAGO",
+    "datelinelocation": {
+        "city": "Chicago",
+        "countryareacode": "IL",
+        "countryareaname": "Illinois",
+        "countrycode": "USA",
+        "countryname": "United States",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                -87.65005,
+                41.85003
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "death migrant child Chicago shelter"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "a",
+            "name": "a"
+        },
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "0d3ed308885b1004802dd05694d87601",
+            "name": "Shelters",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 57
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 90
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "ec28dcdfc4ca4ac9918d3b61427e65c3",
+            "name": "Race and ethnicity",
+            "creator": "Editorial",
+            "editorial_subject": "Race and ethnicity",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "5b86bbd082b01004839adf092526b43e",
+            "name": "Chicago",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "2c6a186082b010048379df092526b43e"
+            ],
+            "locationtype": {
+                "code": "9d26a20b35f0484a891740f8189d4c7b",
+                "name": "City"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -87.65005,
+                    41.85003
+                ]
+            },
+            "relevance": 73,
+            "parentnames": [
+                "Illinois"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "2c6a186082b010048379df092526b43e",
+            "name": "Illinois",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661850e07d5b100481f5c076b8e3055c",
+            "name": "Latin America and Caribbean",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "6e92d9b882c7100488e5df092526b43e",
+            "name": "Texas",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "associations": {
+        "1": {
+            "altids": {
+                "itemid": "4e3bba09bfd040a0ab4807c70bf1f36c"
+            },
+            "type": "picture"
+        }
+    },
+    "body_nitf": "<p>CHICAGO (AP) \u2014 The cause of death for a 5-year-old Venezuelan boy who died in December after <a href=\"https://apnews.com/article/migrant-shelter-child-death-chicago-9a8c8e44d5970f478f59d7bc59892a3b?utm_source=copy&utm_medium=share\">becoming ill at a temporary shelter</a> for migrants in Chicago was sepsis and a bacterial infection that causes strep throat, an autopsy released Friday shows.</p><p>Jean Carlos Martinez died Dec. 17 as a result of sepsis due to streptococcus pyogenes group A infection, which can cause strep throat and other life-threatening illnesses, the autopsy released by the Cook County Medical Examiner's Office showed.</p><p>Contributing factors in his death were listed as COVID-19, adenovirus and rhinovirus, the autopsy showed.</p><p>The boy was a resident at a warehouse retrofitted as a shelter in Chicago\u2019s Pilsen neighborhood when he suffered a medical emergency, the city has said. He was pronounced dead shortly after arriving at a hospital.</p><p>The boy\u2019s death <a href=\"https://apnews.com/article/migrant-boy-death-child-shelter-chicago-de2d8e7766f418ea52eb5218d519c72c?utm_source=copy&utm_medium=share\">revived concerns</a> about conditions at shelters and questions about how Chicago was responding to an influx of people unaccustomed to <a href=\"https://apnews.com/article/chicago-migrants-asylum-winter-housing-8a09fc5a0cf406a0058a6af4d2f3e088\">the city\u2019s cold winters</a> and with few local contacts.</p><p>Chicago and other northern U.S. cities have <a href=\"https://apnews.com/article/migrants-shelter-toxic-soil-chicago-winter-dfe68b9e80d98f6d35451ecaf89c4ac9\">struggled to find housing for tens of thousands of asylum-seekers</a>, many of whom have been bused from Texas throughout the last year. Earlier this month, hundreds of asylum-seekers still awaited placement at airports and police stations in Chicago, some of them still camped on sidewalks outside precinct buildings.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/death-migrant-child-chicago-shelter-e532f618269a5424f4127470c0aeeb30",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 4,
+            "reason": "The document discusses the death of a 5-year-old migrant boy due to sepsis and a bacterial infection, which are health-related issues. It also mentions contributing factors such as COVID-19, adenovirus, and rhinovirus, which are relevant to health. However, the document also focuses on the conditions at migrant shelters and the challenges faced by cities in housing asylum-seekers, which are not directly related to health. Therefore, while the document contains significant health-related information, it is not solely focused on health."
+        }
+    }
+}

@@ -1,0 +1,218 @@
+﻿{
+    "altids": {
+        "itemid": "6b41bfd5419159b0bedb17a3b3512c87",
+        "etag": "6b41bfd5419159b0bedb17a3b3512c87_0a4aza0c0",
+        "friendlykey": "103719476696",
+        "referenceid": "EU--Britain-Royals-Transcript"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2024-03-22T18:58:36Z",
+    "firstcreated": "2024-03-22T18:58:35Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "EU--Britain-Royals-Transcript",
+    "headline": "Read the transcript of Kate's video announcement about her cancer diagnosis",
+    "headline_extended": "Kate, Princess of Wales, has released a statement saying she has been diagnosed with cancer",
+    "headline_seo": "Read the transcript of Kate's announcement about her cancer diagnosis",
+    "slugline": "AP-EU--Britain-Royals-Transcript",
+    "description_summary": "Kate, Princess of Wales, has released a statement saying she has been diagnosed with cancer. In it she said she wanted to thank people for their messages of support after her abdominal surgery in January. She said her condition was initially thought to be non-cancerous but tests after the operation found cancer. She said she is undergoing \u201cpreventative chemotherapy\u201d for the disease. She asked for \u201ctime, space and privacy while I complete my treatment.\u201d Kate told other people battling cancer: \"Please do not lose faith or hope. You are not alone.\u201d",
+    "located": "LONDON",
+    "datelinelocation": {
+        "city": "London",
+        "countrycode": "GBR",
+        "countryname": "United Kingdom",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                -0.12574,
+                51.50853
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "princess kate cancer video transcript"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "i",
+            "name": "i"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "79f1fae08359100489f8df583201d303",
+            "name": "Chemotherapy",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 63
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "468257dba1c848ca93ba314d4ce86539",
+            "name": "Surgery",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 40
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "90aeac5089ef10048f63d56c852d093e",
+            "name": "Royalty",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e22524b87de410048f91df092526b43e",
+            "name": "Cancer",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 82
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "bb2d2c5f441a452cb24bb511a2ab5eea",
+            "name": "World news",
+            "creator": "Editorial",
+            "editorial_subject": "World news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e293fee87d6b10048fe8ba7fa5283c3e",
+            "name": "Wales",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "66219fb07d5b100482e2c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "d83e15f769714aab9d49a03eab919128",
+                "name": "Constituent country"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -3.5,
+                    52.5
+                ]
+            },
+            "relevance": 75,
+            "parentnames": [
+                "United Kingdom"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "661850e07d5b100481f4c076b8e3055c",
+            "name": "Europe",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "associations": {
+        "1": {
+            "altids": {
+                "itemid": "1af7bad200684950a1bdb49863325b06"
+            },
+            "type": "picture"
+        }
+    },
+    "body_nitf": "<p>LONDON (AP) \u2014 Kate, Princess of Wales, has released a statement saying <a href=\"https://apnews.com/live/kate-middleton-cancer-royals-updates\">she has been diagnosed with cancer</a>.</p><p>In it, she said she wanted to thank people for their messages of support after her abdominal surgery in January. She said her condition was initially thought to be non-cancerous but tests after the operation found cancer.</p><p>She said she is undergoing \u201cpreventative chemotherapy\u201d for the disease.</p><p>Read the full transcript of <a href=\"https://apnews.com/article/kate-middleton-health-cancer-16a5eb5facb79fb1226def11931d41d8\">the video Kate released Friday about her cancer diagnosis</a>:</p><p>____</p><p>\"I wanted to take this opportunity to say thank you, personally, for all the wonderful messages of support and for your understanding whilst I have been recovering from surgery.</p><p>\"It has been an incredibly tough couple of months for our entire family, but I\u2019ve had a fantastic medical team who have taken great care of me, for which I am so grateful.</p><p>\"In January, I underwent major abdominal surgery in London and at the time, it was thought that my condition was non-cancerous. The surgery was successful. However, tests after the operation found cancer had been present. My medical team therefore advised that I should undergo a course of preventative chemotherapy and I am now in the early stages of that treatment.</p><p>\"This of course came as a huge shock, and William and I have been doing everything we can to process and manage this privately for the sake of our young family.</p><p>\"As you can imagine, this has taken time. It has taken me time to recover from major surgery in order to start my treatment. But, most importantly, it has taken us time to explain everything to George, Charlotte and Louis in a way that is appropriate for them, and to reassure them that I am going to be ok.</p><p>\"As I have said to them; I am well and getting stronger every day by focusing on the things that will help me heal; in my mind, body and spirits.</p><p>\"Having William by my side is a great source of comfort and reassurance too. As is the love, support and kindness that has been shown by so many of you. It means so much to us both.</p><p>\"We hope that you will understand that, as a family, we now need some time, space and privacy while I complete my treatment. My work has always brought me a deep sense of joy and I look forward to being back when I am able, but for now I must focus on making a full recovery.</p><p>\"At this time, I am also thinking of all those whose lives have been affected by cancer. For everyone facing this disease, in whatever form, please do not lose faith or hope. You are not alone.\"</p><p>___</p><p>Find more of AP\u2019s coverage at <a href=\"https://apnews.com/hub/royalty\">https://apnews.com/hub/royalty</a></p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/princess-kate-cancer-video-transcript-6b41bfd5419159b0bedb17a3b3512c87",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 5,
+            "reason": "The document is highly relevant to the topic of Health as it discusses Kate, Princess of Wales' cancer diagnosis, her surgery, and her ongoing treatment. It provides detailed information about her medical condition, the impact on her family, and her message to others affected by cancer. The content is directly related to health issues, specifically cancer, which is a significant health topic."
+        }
+    }
+}

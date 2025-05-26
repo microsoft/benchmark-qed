@@ -1,0 +1,307 @@
+﻿{
+    "altids": {
+        "itemid": "206efe9adac9a485253f469908645b7a",
+        "etag": "206efe9adac9a485253f469908645b7a_0a4aza0c0",
+        "friendlykey": "986653027924",
+        "referenceid": "US--Editorial Rdp"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Opinion",
+    "language": "en",
+    "versioncreated": "2023-12-27T17:42:20Z",
+    "firstcreated": "2023-12-27T17:42:19Z",
+    "editorialrole": "FullStory",
+    "fixture": {
+        "code": "21ea4067bb274c3b805353fb2b99ba70",
+        "name": "Editorial Roundup"
+    },
+    "pubstatus": "usable",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "US--Editorial Rdp",
+    "headline": "Editorial Roundup: United States",
+    "slugline": "BC-US--Editorial Rdp",
+    "bylines": [
+        {
+            "by": "By The Associated Press"
+        }
+    ],
+    "copyrightnotice": "Copyright 2023 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "Editorial Rdp"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "person": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "7722bf919d9646ddb9b24c641c26c83c",
+            "name": "Lloyd Austin",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "GOVERNMENT_FIGURE",
+                "PERSON"
+            ],
+            "relevance": 41
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "a",
+            "name": "a"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "c6ae21e2335a47acb3fe5c938213ad1b",
+            "name": "Israel-Hamas war",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 88
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "4626a38a1b52454ca5d01755d14f1dc9",
+            "name": "Legal proceedings",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 67
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86aad5207dac100488ecba7fa5283c3e",
+            "name": "Politics",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 78
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "bb2d2c5f441a452cb24bb511a2ab5eea",
+            "name": "World news",
+            "creator": "Editorial",
+            "editorial_subject": "World news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Editorial",
+            "editorial_subject": "Health",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        }
+    ],
+    "organisation": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "898f52e08921100480efba0a2b2ca13e",
+            "name": "United States government",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 31
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e5cce8588bcc100480a3eb438e258b03",
+            "name": "U.S. National Security Council",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 61
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "962e787a6e964cfba68aec9259217e6d",
+            "name": "Israel government",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 61
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "661dcb387d5b1004827dc076b8e3055c",
+            "name": "Iran",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661850e07d5b100481f6c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "01f56e0e654841eca2e69bf2cbcc0526",
+                "name": "Nation"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    53,
+                    32
+                ]
+            },
+            "relevance": 47,
+            "parentnames": [
+                "Middle East"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cebb72fbc5df4331b9100571853da530",
+            "name": "Gaza",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "662253607d5b100482f3c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "9d26a20b35f0484a891740f8189d4c7b",
+                "name": "City"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    34.46667,
+                    31.5
+                ]
+            },
+            "relevance": 32,
+            "parentnames": [
+                "Gaza Strip"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "661dcb387d5b1004827ec076b8e3055c",
+            "name": "Iraq",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661850e07d5b100481f6c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "01f56e0e654841eca2e69bf2cbcc0526",
+                "name": "Nation"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    44,
+                    33
+                ]
+            },
+            "relevance": 40,
+            "parentnames": [
+                "Middle East"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "661850e07d5b100481f5c076b8e3055c",
+            "name": "Latin America and Caribbean",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "body_nitf": "<p>Excerpts from recent editorials in the United States and abroad:</p><p>Dec. 22</p><p>The Washington Post on the dementia crisis in the US</p><p>The number of Americans over the age of 65 is rising quickly. In the past century, it has grown at nearly <a href=\"https://www.census.gov/library/stories/2023/05/2020-census-united-states-older-population-grew.html#:~:text=The%20U.S.%20population%20age%2065,the%20United%20States%20in%202020.\">five times</a> the rate of the rest of the population and is now approaching 60 million people. That includes about 15.5 million added since 2010. This is good news for the widening community of people who are enjoying happy, healthy golden years.</p><p>And yet, a rise in the number of older Americans also means a rise in the number of people with Alzheimer\u2019s disease and other forms of dementia. More families are struggling with the challenge of caring for them. Recent years have brought a substantial increase in people with dementia residing in assisted-living homes. As a Post <a href=\"https://www.washingtonpost.com/business/interactive/2023/assisted-living-wander-patient-deaths/?itid=lk_inline_manual_4\">investigative series</a> has revealed in appalling detail, these centers aren\u2019t always equipped to provide the special care that people with dementia need.</p><p>To be sure, assisted-living centers were not created as homes for people with dementia or any other serious health problems. Back in the 1980s, when the assisted-living concept began, the expectation was that ill elderly went to nursing homes. Assisted-living centers were for older people who could manage independently, with staff nearby to help them with tasks such as taking medicines.</p><p>As the over-65 demographic has ballooned, however, the number of people experiencing dementia <a href=\"https://www.prb.org/resources/fact-sheet-u-s-dementia-trends/#:~:text=The%20share%20of%20older%20people,frame%20and%20age%20group%20examined.&text=But%20as%20the%20large%20baby,people%20with%20dementia%20will%20rise.\">has risen</a>, too \u2014 to about <a href=\"https://www.prb.org/resources/fact-sheet-u-s-dementia-trends/#:~:text=The%20share%20of%20older%20people,frame%20and%20age%20group%20examined.&text=But%20as%20the%20large%20baby,people%20with%20dementia%20will%20rise.\">7 million</a> as of 2020. The figure could approach 12 million by 2040. Inevitably, people with dementia have become much more prevalent in assisted-living centers. About a third of assisted-living residents have dementia, according to the Alzheimer\u2019s Association. Many are in memory-care units, but more and more can be found in the general assisted-living population. Some are just beginning to experience troubling symptoms. And, too often, assisted living cannot provide the special attention they need.</p><p>The Post <a href=\"https://www.washingtonpost.com/business/interactive/2023/assisted-living-wander-patient-deaths/?itid=lk_inline_manual_9\">reporters found</a> many instances in which assisted-living staff members, often overworked and poorly paid, neglected patients, missed giving them their medicines, skipped scheduled bed checks or ignored alarms. Far worse, they found that in the past five years, some 2,000 residents had been able to walk away from assisted-living homes or were left unattended outdoors. Nearly 100 of them died \u2014 typically from exposure to extreme cold or heat.</p><p>This problem, which threatens to worsen, is already widespread enough to call for systemwide solutions. States should require minimum staff levels according to the patient population size, as the reporters <a href=\"https://www.washingtonpost.com/business/2023/12/17/assisted-living-laws-rules-states/?itid=lk_inline_manual_11\">noted</a>. Only 13 states have such rules. (Unlike nursing homes, which are more largely funded by Medicare and Medicaid, assisted-living centers are not regulated by the federal government.)</p><p>More important, assisted-living staff need to be trained to understand dementia \u2014 including the disorientation, confusion and behavioral changes it causes \u2014 and to work compassionately with residents who have it. This means learning to communicate with them, and to observe them closely enough to recognize when they become bewildered or agitated \u2014 or decide to try to leave the building and set out on their own. Assisted-living staffers need to have enough education, and enough time, to patiently engage with residents and respectfully address their problems. When workers recognize symptoms of dementia and respond appropriately, it <a href=\"https://www.aplaceformom.com/caregiver-resources/articles/memory-care-staff-training#requirements\">reduces stress</a> for residents and caregivers alike.</p><p>Only <a href=\"https://www.washingtonpost.com/business/2023/12/17/assisted-living-laws-rules-states/?itid=lk_inline_manual_15\">half of states require</a> such training for all assisted-living staffers, not just those working in designated memory-care units. And only nine states require at least six hours of instruction for all workers, the amount recommended by the Alzheimer\u2019s Association, The Post reported.</p><p>States should mandate the use of <a href=\"https://thedawnmethod.com/dementia-caregiver-training/\">training courses</a> with <a href=\"https://teepasnow.com/resources/for-professionals/\">proven effectiveness</a>. They should require that assisted-living centers educate all their staff as well as possible to work with people who are diagnosed with or are just developing dementia. They should require that facilities <a href=\"https://www.oregon.gov/odhs/licensing/community-based-care/pages/dementia-training.aspx#:~:text=Each%20direct%20care%20staff%20must,care%20and%20assisted%20living%20facilities.\">document and report</a> the training, as Oregon does.</p><p>The public and private sectors invest billions of dollars <a href=\"https://alzimpact.org/research#:~:text=Following%20a%20%24226%20million%20increase,be%20more%20than%20%243.7%20billion.\">annually</a> to understand dementia, to search for new methods of prevention and early diagnoses, and to <a href=\"https://www.unlv.edu/news/release/alzheimers-drug-development-pipeline-promising-therapies-pharma-investment-drive\">discover</a> pharmaceutical treatments. It is right to provide enormous resources for this work. But the search for a cure will yield results over the long term. In the here and now, there is great urgency to helping the millions already diagnosed with dementia thrive. Society should be equally devoted to ensuring that they get the care, protection and respect they need.</p><p>ONLINE: <a href=\"https://www.washingtonpost.com/opinions/2023/12/22/nursing-home-care-dementia/\">https://www.washingtonpost.com/opinions/2023/12/22/nursing-home-care-dementia/</a></p><p>___</p><p>Dec. 26</p><p>The Wall Street Journal says President Biden endangers US troops</p><p>It was going to happen sooner or later: American service members would be seriously hurt as Iran-backed militias conduct lethal target practice against U.S. bases in the Middle East. When will President Biden do his duty as Commander in Chief and protect Americans deployed abroad?</p><p>Iranian proxies have attacked U.S. forces in the Middle East about 100 times since October, and on Monday an explosive drone made it past U.S. defenses at a base in Iraq. Two Americans were wounded and a third is in critical condition.</p><p>The Administration conducted retaliatory strikes on three facilities used by Kataib Hezbollah, the Iranian proxy group responsible for the attack. Defense secretary Lloyd Austin issued a statement saying his \u201cprayers\u201d are with the wounded. Which is nice, but Mr. Austin isn\u2019t a chaplain. The U.S. defense chief\u2019s job is to deter such attacks and defend his troops from being too-easy targets for Shiite militias.</p><p>The White House response was worse. The National Security Council\u2019s Adrienne Watson issued a statement announcing the reprisal and insisted that the \u201cPresident places no higher priority than the protection of American personnel serving in harm\u2019s way.\u201d</p><p>This is demonstrably false, and the bromide is insulting. Mr. Biden\u2019s highest priority, whispered by the White House every day, is avoiding escalation with Iran or its proxies. Mr. Biden is afraid\u2014we use that word advisedly\u2014of being involved in a larger conflict, which might not be popular in an election year. But that anxiety is now interfering with his core obligation to defend U.S. forces.</p><p>Iranian front groups have been trying to kill U.S. troops for months. Yet Mr. Biden offered the military equivalent of a wrist slap after Americans suffered traumatic brain injuries in attacks this autumn.</p><p>The Administration may want the public to think the latest retaliatory strikes were more substantive than the previous pinpricks on weapons stores. U.S. Central Command took the unusual step Monday night of saying that the strikes \u201clikely killed\u201d a number of militants. But <a href=\"https://apnews.com/article/biden-kataib-hezbollah-drone-strike-us-military-injured-b4b4480e2cae6e7ad26e88eb625ab397\">the Associated Press, citing Iraqi officials, says</a> the U.S. killed all of one militant. Some 18 were wounded.</p><p>Americans who sign up to serve in uniform know the risks, but serving as drone catchers because Washington refuses to deter the enemy isn\u2019t supposed to be among the occupational hazards. And Mr. Biden\u2019s token strikes haven\u2019t deterred Iran\u2019s proxies in Iraq or anywhere else.</p><p>The Houthis, another Iran-backed military, are also unimpressed with the new U.S. coalition to protect commercial shipping in the Red Sea. The terrorists are escalating despite U.S. restraint in response. The U.S. military <a href=\"https://twitter.com/CENTCOM/status/1739470809155227809\">said</a> Tuesday afternoon that American ships and fighter jets had shot down no fewer than 12 drones, three antiship ballistic missiles, and two land attack cruise missiles, ostensibly at multiple targets. All were fired by the Houthis in a 10-hour period.</p><p>Does that sound like an organization worried about how America might respond? The U.S. hasn\u2019t punished the Houthis for taking the world economy hostage, though the U.S. knows the location of Houthi launch sites, radars, weapons and military leadership. The Houthis are betting the U.S. and friends lack the political will to punish their piracy.</p><p>Behind all of this is Iran, though the White House refuses to speak this truth or do much about it. Mr. Biden frets that Iran could accelerate its nuclear program, or further unleash its proxies and create trouble for Iraq\u2019s government that hosts U.S. military trainers and anti-ISIS intelligence assets. Tehran is exploiting the U.S. fear of escalation to its own benefit.</p><p>The irony is that the biggest tonic for disorder in the Middle East would be restoring American deterrence. That would mean warning Tehran that its military and nuclear assets are at risk if it doesn\u2019t call off the proxy dogs. For all the Biden fears of Tehran, the recent empirical record\u2014the U.S. strike that killed Iranian Gen. Qassem Soleimani, for instance\u2014counsels that Iran backs down when it faces severe costs for its assaults.</p><p>Restoring deterrence in the Middle East would require the Biden Administration to admit that its approach to Iran hasn\u2019t worked and demands a course correction. The alternative is a continuing spiral of violence the Administration says it desperately wants to avoid. And sooner or later more Americans will be in critical condition, or dead.</p><p>ONLINE: <a href=\"https://www.wsj.com/articles/u-s-troops-injured-iraq-iran-houthis-strike-biden-administration-4773fa27?mod=editorials_article_pos2\">https://www.wsj.com/articles/u-s-troops-injured-iraq-iran-houthis-strike-biden-administration-4773fa27?mod=editorials_article_pos2</a></p><p>___</p><p>Dec. 20</p><p>The Los Angeles times says former presidents don't get immunity</p><p>After the Senate acquitted Donald Trump at his second impeachment trial, Senate Minority Leader <a href=\"https://www.cnn.com/2021/02/13/politics/mcconnell-remarks-trump-acquittal/index.html\">Mitch McConnell suggested</a> that Trump might still be held accountable for his efforts to overturn the 2020 election that culminated in the Jan. 6, 2021, attack on the U.S. Capitol. \u201cWe have a criminal justice system in this country. We have civil litigation,\u201d said McConnell (R-Ky.). \u201cAnd former presidents are not immune from being held accountable by either one.\u201d</p><p>Indeed, Trump <a href=\"https://www.democracydocket.com/indictments/\">faces criminal charges</a> related to his attempt to overturn the election in both state and federal court, though he has attempted to derail those prosecutions with <a href=\"https://www.washingtonpost.com/documents/3743a495-4b13-48b6-a997-14c70d14e41d.pdf?itid=lk_inline_manual_4\">elaborate but unpersuasive objections</a>, including the assertion that he has immunity from prosecution. It\u2019s vital that the U.S. Supreme Court, which likely would have the last word on Trump\u2019s legal challenges in any case, move quickly to rule on those arguments so Trump can face a jury as soon as possible, and certainly before the November 2024 presidential election.</p><p>Special counsel Jack Smith has asked the justices to <a href=\"https://www.latimes.com/politics/story/2023-12-11/special-counsel-jack-smith-asks-supreme-court-to-rule-quickly-on-whether-trump-can-be-prosecuted\">fast-track a ruling</a> on Trump\u2019s appeal of a federal district judge\u2019s ejection of the former president\u2019s <a href=\"https://www.washingtonpost.com/documents/3743a495-4b13-48b6-a997-14c70d14e41d.pdf?itid=lk_inline_manual_4\">immunity claim</a>, bypassing review by a federal appeals court. Smith also asked the court to consider whether Trump\u2019s acquittal at an impeachment trial protects him from prosecution. The justices should accept Smith\u2019s request, just as their predecessors in 1974 <a href=\"https://www.msnbc.com/opinion/msnbc-opinion/trump-wants-delay-trial-jack-smiths-supreme-court-gamble-rcna129191\">expedited a ruling</a> on whether President Nixon could be forced to turn over Watergate-related tape recordings.</p><p>The court should move equally fast in ruling on a Jan. 6 defendant\u2019s challenge to the applicability \u2014 to him and other defendants, including Trump \u2014 of a federal law enacted after the Enron scandal making it a crime to \u201ccorruptly ... obstruct ... an official proceeding.\u201d Last week the justices <a href=\"https://www.latimes.com/politics/story/2023-12-13/supreme-court-agrees-to-hear-appeal-from-jan-6-defendants\">agreed to hear</a> the appeal of the defendant, Joseph Fischer, a former Pennsylvania police officer. Once the court hears oral arguments, it should resolve this case expeditiously as well.</p><p>U.S. District Judge Tanya S. Chutkan has scheduled Trump\u2019s trial on election-related charges for March 4. In asking the Supreme Court to expedite consideration of Trump\u2019s claim to immunity, Smith wrote: \u201cVindicating that public interest in this case requires immediate resolution of the immunity question to permit the trial to occur on an appropriate timetable.\u201d</p><p>Smith has been faulted for not <a href=\"https://www.washingtonpost.com/opinions/2023/12/12/special-counsel-jack-smith-politicized-prosecution/\">explaining more fully</a> why time is of the essence. But it seems obvious: Delaying Trump\u2019s trial would deny voters the opportunity to consider the outcome of the trial \u2014 be it conviction or acquittal \u2014 in choosing a president in 2024 if he were the Republican nominee.</p><p>There is also the possibility that, if the trial were delayed until after the election and Trump won, he would move to shut down the prosecution and <a href=\"https://www.nbcnews.com/politics/donald-trump/trump-says-pardon-large-portion-jan-6-rioters-rcna83873\">pardon other defendants</a> who have been convicted of charges arising out of the riot at the Capitol. It is not impermissibly \u201cpolitical\u201d for prosecutors \u2014 or judges \u2014 to take the broader public interest into account when dealing with questions of timing or other matters, so long as a defendant\u2019s rights are respected.</p><p>On the merits, Trump\u2019s claim to immunity is unconvincing in the extreme. As Chutkan <a href=\"https://storage.courtlistener.com/recap/gov.uscourts.dcd.258148/gov.uscourts.dcd.258148.171.0.pdf\">noted in her ruling</a>: \u201cWhatever immunities a sitting president may enjoy, the United States has only one chief executive at a time, and that position does not confer a lifelong \u2018get-out-of-jail-free\u2019 pass.\u201d</p><p>Chutkan similarly demolished two other arguments: that the indictment \u201ccriminalized\u201d Trump\u2019s speech in violation of the 1st Amendment and that he couldn\u2019t be prosecuted because he was acquitted at his second impeachment trial. On the contrary, Chutkan held, the Constitution\u2019s language on impeachment \u201cdoes not provide that acquittal by the Senate during impeachment proceedings shields a President from criminal prosecution after he leaves office.\u201d</p><p>The separate argument that Jan. 6 defendants \u2014 and Trump \u2014 cannot be prosecuted for corruptly obstructing an official proceeding is also unpersuasive. The U.S. Court of Appeals for the District Columbia Circuit concluded that federal law authorizes prosecutions for obstructing the counting of electoral votes. The law about obstructing an official proceeding, Circuit Judge <a href=\"https://www.lawfaremedia.org/article/dc-circuit-court-clears-way-obstruction-charges-against-jan-6-rioters\">Florence Y. Pan wrote</a>, is not confined to situations involving tampering with documents, records or other objects, as a <a href=\"https://www.washingtonpost.com/dc-md-va/2022/03/08/judge-tosses-jan-6-obstruction-charge/\">district court judge held</a>.</p><p>Finally, when the Supreme Court takes up issues related to the 2020 election, one justice should not take part: Clarence Thomas, whose wife, Virginia, was involved in efforts to <a href=\"https://apnews.com/article/2022-midterm-elections-biden-us-supreme-court-clarence-thomas-arizona-9e6929dfc81fa53a9b5f9d70b2ba15e8\">overturn that election</a>. In a matter so consequential for the country, Thomas should recuse himself to safeguard public confidence in the court.</p><p>The maxim that \u201cjustice delayed is justice denied\u201d applies not only to criminal defendants such as Trump, but also to the public. The Supreme Court should consider the public interest and move quickly to consider \u2014 and dispose of \u2014 Trump\u2019s objections so that he can face a jury.</p><p>ONLINE: <a href=\"https://www.latimes.com/opinion/story/2023-12-20/editorial-no-immunity-for-trump\">https://www.latimes.com/opinion/story/2023-12-20/editorial-no-immunity-for-trump</a></p><p>___</p><p>Dec. 26</p><p>China Daily says the food crisis in Gaza is unconscionable</p><p>Pointing out that since Hamas-led fighters attacked Israel on Oct 7, high-ranking Israeli officials, including Defense Minister Yoav Gallant, National Security Minister Itamar Ben-Gvir and Energy Minister Israel Katz, have all made public statements admitting that Israel is deliberately depriving civilians in Gaza of food, water and fuel, as reflected in the operations of Israeli forces, Human Rights Watch last week accused the Israeli government of committing a war crime.</p><p>The United Nations is warning that the quantity of food reaching Palestinians in Gaza is just 10 percent of what is needed to feed the territory\u2019s inhabitants amid the Israeli military\u2019s near nonstop bombardment of the Palestinian enclave and its ground operations, which are worsening the humanitarian situation there with each passing day.</p><p>In a report published on Thursday, Integrated Food Security Phase Classification, a partnership of aid organizations, including UN agencies and NGOs, said that the proportion of households in Gaza that are in hunger crisis, or suffering from high levels of acute food insecurity, is the largest ever recorded globally, and it warned that the entire 2.3 million population of Gaza faces the risk of famine.</p><p>On Friday, the United Nations Security Council passed a resolution urging steps to allow \u201csafe, unhindered, and expanded humanitarian access\u201d to Gaza and to realize the \u201cconditions for a sustainable cessation\u201d of the fighting.</p><p>Although it fell short of calling for an immediate cease-fire, given it is the first resolution on Gaza to be passed by the UN Security Council, it should be taken as a crucial step to get urgently needed humanitarian aid into the territory.</p><p>With the humanitarian situation in Gaza becoming increasingly dire, and the Israeli military action indefensible, even the United States, Tel Aviv\u2019s staunchest supporter, has adjusted its attitude, albeit slightly. While still refusing to call for an immediate cease-fire, US officials have said they want and expect Israel to shift its military operations in Gaza to a lower-intensity phase. They have urged Israel to ensure that its military operations are precise and targeted so as to reduce civilian casualties.</p><p>Yet, this has not been enough to stop the Israeli military\u2019s onslaught on Gaza. On Sunday, one Israeli airstrike on the al-Maghazi refugee camp in the central Gaza Strip killed at least 70 Palestinians. There are now fears that the conflict is spilling over to other parts in the Middle East, with Yemeni Houthi militia intensifying their attacks on \u201cIsrael-linked\u201d ships in the Red Sea. In response, the US is organizing an international coalition in the waters to try and protect shipping, which only adds more complexity to the crisis.</p><p>Friday\u2019s resolution called on the warring parties to \u201callow, facilitate and enable the immediate, safe and unhindered delivery of humanitarian assistance\u201d to civilians in Gaza and to \u201ccreate the conditions for a sustainable cessation of hostilities.\u201d</p><p>To avert the looming catastrophe in Gaza and prevent the conflict from escalating further concerted efforts are needed by all parties to ensure the UNSC resolution is now implemented.</p><p>ONLINE: <a href=\"https://www.chinadaily.com.cn/a/202312/26/WS658abf66a31040ac301a9a17.html\">https://www.chinadaily.com.cn/a/202312/26/WS658abf66a31040ac301a9a17.html</a></p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/206efe9adac9a485253f469908645b7a",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 3,
+            "reason": "The document contains multiple editorials on various topics, but only one of them is directly related to health. The Washington Post editorial discusses the dementia crisis in the US, the challenges faced by assisted-living centers, and the need for better training and regulations to care for people with dementia. This section is highly relevant to the topic of health. However, the other editorials focus on political and international issues, which are not related to health. Therefore, the overall relevance of the document to the topic of health is moderate."
+        }
+    }
+}

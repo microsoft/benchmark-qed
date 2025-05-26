@@ -1,0 +1,209 @@
+﻿{
+    "altids": {
+        "itemid": "8a7bba763e7fdb79688dea6b2be79007",
+        "etag": "8a7bba763e7fdb79688dea6b2be79007_0a4aza0c0",
+        "friendlykey": "648484108808",
+        "referenceid": "US-MED--Fruit Pouch-Lead"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2023-12-06T17:28:32Z",
+    "firstcreated": "2023-12-06T17:28:31Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "ednote": "Eds: UPDATES: With AP Photos.",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "US-MED--Fruit Pouch-Lead",
+    "headline": "FDA is inspecting plant in Ecuador that made lead-tainted fruit pouches",
+    "headline_extended": "U.S. health officials have launched an inspection of a plant in Ecuador that made the cinnamon applesauce pouches linked to dozens of cases of acute lead poisoning in U.S. children",
+    "slugline": "BC-US-MED--Fruit Pouch-Lead",
+    "description_summary": "U.S. health officials have launched an inspection of a plant in Ecuador that made the cinnamon applesauce pouches linked to dozens of cases of acute lead poisoning in U.S. children. The U.S. Food and Drug Administration has said that contaminated cinnamon is the likely source of the problem. The agency said Ecuadorian officials found cinnamon at the plant's supplier had higher levels of lead than the country allows. The FDA said this week that at least 64 young children from 27 states have reported illnesses potentially linked to the products, which were recalled in late October.",
+    "bylines": [
+        {
+            "by": "By JONEL ALECCIA",
+            "title": "AP Health Writer"
+        }
+    ],
+    "copyrightnotice": "Copyright 2023 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "WanaBana fruit pouch cinnamon applesauce Ecuador"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "a",
+            "name": "a"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "5238821888e910048f68f8851349f9bd",
+            "name": "Production facilities",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 41
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "c8e409f8858510048872ff2260dd383e",
+            "name": "Business",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 73
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "523699d088e910048f43f8851349f9bd",
+            "name": "Government regulations",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 54
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Editorial",
+            "editorial_subject": "Health",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        }
+    ],
+    "organisation": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e5c917c88bcc1004803aeb438e258b03",
+            "name": "U.S. Food and Drug Administration",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 84
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "70058d54ec4b434ab609fa4cfc286eeb",
+            "name": "Amazon.com Inc",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "symbols": [
+                {
+                    "ticker": "AMZN",
+                    "exchange": "NASDAQ",
+                    "instrument": "NASDAQ:AMZN"
+                }
+            ],
+            "relevance": 31
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "661effd07d5b1004829fc076b8e3055c",
+            "name": "Ecuador",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661908787d5b10048204c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "01f56e0e654841eca2e69bf2cbcc0526",
+                "name": "Nation"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -77.5,
+                    -2
+                ]
+            },
+            "relevance": 54,
+            "parentnames": [
+                "South America"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "661850e07d5b100481f5c076b8e3055c",
+            "name": "Latin America and Caribbean",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "associations": {
+        "1": {
+            "altids": {
+                "itemid": "640f4eeba02f4dfbb4e69b4a994d72a8"
+            },
+            "type": "picture"
+        }
+    },
+    "body_nitf": "<p>U.S. health officials have launched an inspection of a plant in Ecuador that made the cinnamon applesauce pouches linked to dozens of cases of acute lead poisoning in U.S. children.</p><p>The U.S. Food and Drug Administration has said that contaminated cinnamon is the likely source of the lead. An FDA team is collecting samples from the Austrofoods plant that shipped the now recalled applesauce pouches sold widely at Dollar Tree and other stores across the U.S.</p><p>The agency said health officials in Ecuador found that cinnamon from Austrofood's supplier had higher levels of lead than the country allows. The company, Negasmart, is facing sanctions while officials there track down the source of the cinnamon, the FDA reported Tuesday.</p><p>At least 64 children from 27 states have reported illnesses potentially linked to the products, which were recalled in late October, the FDA said. So far, all of the children are aged 6 or younger.</p><p>The recalled applesauce pouches were sold under the brand names WanaBana, Schnucks and Weis. They were sold at the Dollar Tree, on Amazon and in other online outlets.</p><p>The pouches were recalled after officials in <a href=\"https://apnews.com/article/lead-fruit-pouch-recall-schnucks-fda-ff3ade3e5032357e922d6036cff81c8c\">North Carolina first reported</a> cases of young children who posted high blood lead levels after eating pouches found to contain extremely high levels of lead.</p><p>___</p><p>The Associated Press Health and Science Department receives support from the Howard Hughes Medical Institute\u2019s Science and Educational Media Group. The AP is solely responsible for all content.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/wanabana-fruit-pouch-cinnamon-applesauce-ecuador-8a7bba763e7fdb79688dea6b2be79007",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 5,
+            "reason": "The document discusses a health-related issue involving lead contamination in fruit pouches, which has led to cases of acute lead poisoning in children. It details the FDA's inspection of the manufacturing plant in Ecuador, the source of the contamination, and the recall of the affected products. This information is directly relevant to the topic of health as it pertains to food safety, public health concerns, and regulatory actions to protect consumers."
+        }
+    }
+}

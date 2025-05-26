@@ -1,0 +1,242 @@
+﻿{
+    "altids": {
+        "itemid": "3fedfecf4f9c785f81011187fca08b21",
+        "etag": "3fedfecf4f9c785f81011187fca08b21_0a2aza0c0",
+        "friendlykey": "532144002765",
+        "referenceid": "MN--Editorial Rdp"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Opinion",
+    "language": "en",
+    "versioncreated": "2024-04-03T15:41:31Z",
+    "firstcreated": "2024-04-03T15:41:30Z",
+    "editorialrole": "FullStory",
+    "fixture": {
+        "code": "21ea4067bb274c3b805353fb2b99ba70",
+        "name": "Editorial Roundup"
+    },
+    "pubstatus": "usable",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "MN--Editorial Rdp",
+    "headline": "Editorial Roundup: Minnesota",
+    "slugline": "AP-MN--Editorial Rdp",
+    "bylines": [
+        {
+            "by": "By The Associated Press"
+        }
+    ],
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "Editorial Rdp"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f5c099b87e3810048ae6df092526b43e",
+            "name": "Medical research",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 46
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e57b6c907e3810048ae4df092526b43e",
+            "name": "Public health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 40
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "b17e2751b26d4523a2c99d79e04747ee",
+            "name": "COVID-19 pandemic",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 33
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "ace74e307f00100486cedf092526b43e",
+            "name": "Immunizations",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 67
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "42a74195df1645dda692dba5db2416d4",
+            "name": "Schools",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 72
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "organisation": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "c05dca58760d10048f93e6e7a0f4673e",
+            "name": "U.S. Democratic Party",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 54
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "bf6e2e80760d10048f8ae6e7a0f4673e",
+            "name": "U.S. Republican Party",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 54
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "61e91fdac56d48f3a90090949ca7df12",
+            "name": "Center",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "902a5eb082af1004828adf092526b43e"
+            ],
+            "locationtype": {
+                "code": "9d26a20b35f0484a891740f8189d4c7b",
+                "name": "City"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -106.10864,
+                    37.75306
+                ]
+            },
+            "relevance": 48,
+            "parentnames": [
+                "Colorado"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "9f12355082c4100486addf092526b43e",
+            "name": "Minnesota",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -94.25055,
+                    46.25024
+                ]
+            },
+            "relevance": 80,
+            "parentnames": [
+                "United States"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "9f12355082c4100486addf092526b43e",
+            "name": "Minnesota",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "body_nitf": "<p>Minneapolis Star-Tribune. March 29, 2024.</p><p>Editorial: Make a bigger push to improve grad rates</p><p>Minnesota\u2019s high schools need to keep working on attendance issues, struggling students.</p><p>The <a href=\"https://www.startribune.com/minnesotas-graduation-rates-mostly-flat-in-2023-after-pandemic-rebound-look-up-your-schools-results/600354472/#:~:text=Minnesota's%20four%2Dyear%20graduation%20rate,before%20the%20COVID%2D19%20pandemic.\">slight decrease</a> in Minnesota\u2019s 2023 high school graduation rates shows that more must be done to improve student achievement and attendance. And the state and school districts should strive to <a href=\"https://www.startribune.com/reporting-errors-missing-graduates-mar-minnesota-graduation-rate-calculations/600354796/\">keep better track</a> of summer graduates and those who leave the districts where they started secondary school.</p><p>According to results <a href=\"https://content.govdelivery.com/accounts/MNMDE/bulletins/36becfd\">released</a> this week by the Minnesota Department of Education (MDE), about 83.3%, or 58,293, students graduated in 2023. That\u2019s a 0.3 percentage point decrease in the four-year graduation rate compared to the class of 2022.</p><p>Also in 2023, another 3,874 students from earlier classes received their diplomas \u2014 graduating between five and seven years after they began high school.</p><p>The small decrease in the total graduation rate was partly driven by a 0.4% increase in the unknown rate, which tracks students \u201cwho were either incorrectly reported or were not reported as enrolled elsewhere,\u201d the MDE news release explained. In addition, both Minneapolis and St. Paul reported that their summer graduates were not included in the MDE report. (MDE says the districts did not include those students in data they sent to the state.)</p><p>Yet even when those summer students were included, both districts still had lower grad rates than the year prior. That highlights the need for schools to keep track of every student and make sure they\u2019re included in future state assessments. Clearly the state and districts must do a better job of coordinating and reporting student data.</p><p>The graduation data shows small decreases in graduation rates for Black, Asian, Latino and English-learner student groups. Still, it\u2019s an encouraging trend that, while grad rates for Black students declined from a large increase in 2022, the five-year trend for the student group is still trending up \u2014 from 69.9% in 2019 to 72.1% today.</p><p>Other positives: Graduation rates increased slightly for white students and for children of two or more races.</p><p>Another factor that has likely contributed to the dip in grad rates is that just over 30% of the state\u2019s students missed 10% or more of the 2021-22 school year \u2014 double the <a href=\"https://www.startribune.com/minnesota-school-county-leaders-push-for-plans-to-address-chronically-absent-students/600342541/\">chronic absenteeism</a> rate pre-pandemic.</p><p>As a result, welcome efforts are underway to establish a legislative work group to study chronic student absenteeism and how to improve attendance as well track students.</p><p><a href=\"https://centerforschoolchange.org/staff/\">Khalique Rogers</a>, co-director of the St. Paul-based Center for School Change, said in an email his group\u2019s research shows that building on student skills, energy and interest can also increase grad rates. Engaging students in service learning and more hands-on vocational learning \u2014 such as helping youth learn construction skills as they build homes for low-income families \u2014 can boost graduation rates.</p><p>Educators can also place more focus on students who need extra attention. Richfield High School officials <a href=\"https://www.startribune.com/extra-attention-for-students-and-bigger-goals-help-minnesota-schools-shrink-graduation-rate-gap/600279962/\">found</a> that, by tracking student progress regularly, they can intervene quickly to offer extra help such as tutoring. The school also encouraged their students to start college prep by offering more advanced courses. Those efforts proved successful: In 2022, 90% of Black students and 89% of Latino students graduated on time \u2014 up about 15 and more than 20 percentage points, respectively, from the three years before.</p><p>To improve graduation rates, attendance and overall achievement throughout Minnesota schools, more must be done to get data collection in order and target struggling students for additional attention.</p><p>___</p><p>Mankato Free Press. March 27, 2024.</p><p>Editorial: Democracy Political divisiveness may be bad for our heal</p><p>A troubling assessment from the state\u2019s leading epidemiologist should give us pause, if not alarm, about how a politically divided society might come to reject the basic science of health care.</p><p>Dr. Michael Osterholm told the Star Tribune in a recent report that he fears a growing distrust of science will lead to low acceptance and use rate of vaccines.</p><p>The low use rate for the updated COVID vaccine points to a larger problem of a significant portion of our divided society carrying a \u201cdon\u2019t tell me what to do\u201d attitude around things involving public health. While some of that has to do with partisanship, in that Democrats accept vaccines much more than Republicans, the more serious threat are the divides beyond political that have widened the gaps of who believes in public health and science.</p><p>Four years past the start of the pandemic, there appears to be less enthusiasm for getting up to date on COVID vaccines. The latest state report shows just 1% of the high risk 65-year-old and older group getting the latest vaccine as recently recommended by the CDC. Seniors may just need a month to catch up as the new guideline took place only recently, but the overall rate is also low at just 12.5%.</p><p>A recent Pew study showed a widening gap between Democrats and Republicans on getting the vaccine. When vaccines became available in 2020, 93% of Democrats got it while 78% of Republicans did so. The 15 percentage point gap is now about 42 points, with Democrats at 66% and Republicans at 24%. There\u2019s also a 16% gap on the flu shot, according to the study.</p><p>The widening gap is not just about differences between the parties on taxing and spending, but Democrats and Republicans are dividing along lines of gender, race, religiosity and education.</p><p>We see signs of that everywhere with debates about transgender health care, immigration (a proxy for race), teaching of diversity in public schools and book banning. The number of things we divide on are growing and ignited by bad actors.</p><p>As we differ on religiosity and education, experts see that as tracking to discounting and undermining science itself as religion and education are often tied to beliefs about science.</p><p>Osterholm, the director of the University of Minnesota\u2019s Center for Infectious Disease Research and Policy, wrote a 2005 article \u201cPreparing for the Next Pandemic\u201d that shot to the top of the most read list when the pandemic hit in 2020. He notes that its message of supply chain issues and vaccinations would likely fall on deaf ears today.</p><p>\u201cTo get people to buy into public health again isn\u2019t quite as difficult as trying to move the Grand Canyon to southwest Minnesota, but it\u2019s damn near,\u201d Osterholm told the Star Tribune.</p><p>The days of the 1995 Mankato meningitis outbreak \u2014 in which the entire city was vaccinated in four days \u2014 are gone, according to Osterholm who said he couldn\u2019t imagine it today.</p><p>So it seems our divisiveness may just be the thing that kills us.</p><p>What can we do?</p><p>Monica Guzman, author of the book \u201cI Never Thought of It That Way: How to Have Fearlessly Curious Conversations in Dangerously Divided Times\u201d says conversations can be harmful to both sides if each isn\u2019t willing to listen. We should change the question from: \u201cWhy do you believe what you believe?\u201d to: \u201cHow did you come to believe what you believe?\u201d</p><p>Guzman told Minnesota Public Radio that changing that question moves the conversation from a trial-like investigation to wanting to know more about a person\u2019s journey to believe the things they do. Even if they rely on conclusions not drawn from the facts, their story remains true, at least to them, Guzman notes.</p><p>In the end, it may be difficult to change someone\u2019s mind. Osterholm sees that as leading to public health problem that requires a new communication or political strategy to inform and get people to act.</p><p>But with the onslaught of social media and partisan news channels overloading clarity with chaos, the road to putting science at the forefront will be determined by our own willingness to speak the truth.</p><p>END</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/3fedfecf4f9c785f81011187fca08b21",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 3,
+            "reason": "The document contains two editorials. The first editorial focuses on improving high school graduation rates in Minnesota, which is not relevant to the topic of health. The second editorial discusses the impact of political divisiveness on public health, particularly in relation to vaccine acceptance and the broader implications for public health and science. This second editorial is highly relevant to the topic of health as it addresses issues related to public health, vaccine uptake, and the influence of societal factors on health outcomes."
+        }
+    }
+}

@@ -1,0 +1,257 @@
+﻿{
+    "altids": {
+        "itemid": "1bbbc16adec38dc32ff82def7beb0fb8",
+        "etag": "1bbbc16adec38dc32ff82def7beb0fb8_0a2aza0c0",
+        "friendlykey": "724265928374",
+        "referenceid": "PA--Editorial Rdp"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Opinion",
+    "language": "en",
+    "versioncreated": "2024-02-28T12:10:41Z",
+    "firstcreated": "2024-02-27T19:57:08Z",
+    "editorialrole": "FullStory",
+    "fixture": {
+        "code": "21ea4067bb274c3b805353fb2b99ba70",
+        "name": "Editorial Roundup"
+    },
+    "pubstatus": "usable",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "PA--Editorial Rdp",
+    "headline": "Editorial Roundup: Pennsylvania",
+    "slugline": "AP-PA--Editorial Rdp",
+    "bylines": [
+        {
+            "by": "By The Associated Press"
+        }
+    ],
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "Editorial Rdp"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "person": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a6331b54c46e4ca8b79fa40fada95db5",
+            "name": "Donald Trump",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "POLITICIAN",
+                "PERSON"
+            ],
+            "relevance": 42
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "42fcd5108d2610048a34f7ae5e3ffd3e",
+            "name": "Joe Biden",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "POLITICIAN",
+                "PERSON"
+            ],
+            "relevance": 44
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "39a5551883591004893adf092526b43e",
+            "name": "Health care costs",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 58
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "42c5b4aa33fe47f99018a0a7f866bf99",
+            "name": "Fraud",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86aad5207dac100488ecba7fa5283c3e",
+            "name": "Politics",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 68
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "1609d3a082c710048896df092526b43e",
+            "name": "Pittsburgh",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "0b394d7082c71004887fdf092526b43e"
+            ],
+            "locationtype": {
+                "code": "9d26a20b35f0484a891740f8189d4c7b",
+                "name": "City"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -79.99589,
+                    40.44062
+                ]
+            },
+            "relevance": 79,
+            "parentnames": [
+                "Pennsylvania"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "549bba9dd4944549937d61b5e08a811a",
+            "name": "Altoona",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "0b394d7082c71004887fdf092526b43e"
+            ],
+            "locationtype": {
+                "code": "9d26a20b35f0484a891740f8189d4c7b",
+                "name": "City"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -78.39474,
+                    40.51868
+                ]
+            },
+            "relevance": 44,
+            "parentnames": [
+                "Pennsylvania"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "0b394d7082c71004887fdf092526b43e",
+            "name": "Pennsylvania",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -76.90567,
+                    40.27245
+                ]
+            },
+            "relevance": 90,
+            "parentnames": [
+                "United States"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "0b394d7082c71004887fdf092526b43e",
+            "name": "Pennsylvania",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "body_nitf": "<p>Pittsburgh Tribune-Review. February 27, 2024.</p><p>Editorial: Billionaire, small businesses and bipartisan lawmakers sick of pharmacy benefit managers</p><p>So much of American health care can be summed up with drugs.</p><p>We often go to the doctor less to find out what is wrong than we do to get a prescription to fix the symptoms. While the long-term goal may be figuring out the underlying cause, the short-term objective is just to make the pain (or other problem) stop.</p><p>And that means a pill or liquid or some other kind of pharmaceutical. The doctor is just the first stop. The prescription sends you to a pharmacy.</p><p>Now it\u2019s a question of whether your medicine is covered. If it\u2019s not, you blame the insurance company. But should you? Maybe the real culprit is the pharmacy benefit manager (PBM). But do you even know what that is?</p><p>These PBMs are the new boogeyman of health care. While people have spent years grumbling about what hospitals charge for a bandage or the cost of an insurance copay, lately PBMs are getting flak for their role meddling in your treatment.</p><p>They\u2019re nothing new. The first PBM in the U.S. came in 1965. They were created by pharmacists to help navigate the growing presence of insurance companies. Today, they are an inextricable part of the process, taking money from drug manufacturers, creating formularies for insurance and establishing reimbursement for pharmacies.</p><p>While that often leads to questions about how it impacts patient health, it\u2019s now creating concerns about impact on independent pharmacies. (Large pharmacies can have less to worry about. CVS Health and Rite Aid each own their own PBMs.)</p><p>In Southwestern Pennsylvania alone, Health Mart and Mainline pharmacies have announced closings this year. Both have mentioned insurance reimbursements as contributing factors.</p><p>So has Mt. Lebanon native and billionaire Mark Cuban, whose businesses include Cost Plus Drugs, an online pharmacy. In an email exchange with TribLive, he spoke about partnering with independents.</p><p>\u201cThe fact that they are not getting reimbursed for even their out-of-pocket costs for a medication is horrible,\u201d he said.</p><p>Bipartisan legislation from state Sen. Judy Ward, R-Blair, would create a process for hearing and handling complaints about PBMs. It also would ban things like steering patients to particular pharmacies or reimbursing a pharmacy for a low amount but charging the insurer more. Thirty senators of both parties have signed on.</p><p>The Pharmaceutical Care Management Association is opposed. Spokesman Greg Lopes says it will increase costs for Pennsylvanians.</p><p>But when PBMs are creating problems for patients and pharmacies alike, something has to be done. And when that\u2019s obvious to Democrats and Republicans, that says something \u2014 even if it\u2019s a bitter pill for the middle man to swallow.</p><p>___</p><p>Pittsburgh Post-Gazette. February 24, 2024.</p><p>Editorial: Supreme-squashed subpoena allows Pa. to move on, finally, from 2020 election</p><p>Over three years after the 2020 election, Pennsylvania legislators\u2019 claims of voting fraud have finally been put to rest. On Wednesday, the state\u2019s highest court ruled that a subpoena into voter data by a state Senate committee trying to sniff out fraud was simply \u201cunenforceable,\u201d shutting down the entire investigation before it could start wasting taxpayer money. It\u2019s the proper ending for the series of investigations that have proven useless and inflammatory in other states.</p><p>The subpoena was introduced in 2021 by the Republican Intergovernmental Operations Committee tasked with completing a \u201cforensic investigation into election fraud.\u201d The information they requested included nine million Pennsylvania voters\u2019 drivers license data, partial social security numbers, birth dates and addresses. For an enterprise based on the idea the government can\u2019t be trusted to run fair elections, it required a lot of trust in government privacy controls.</p><p>After years of legal battles regarding this data, the state supreme court simply pointed out that the 2021-22 legislative session was long over and shut the book on the process.</p><p>That\u2019s good news for these reckless proceedings, especially because 2020 election fraud has been continuously and exhaustively debunked. According to an Associated Press investigation, Pennsylvania had, at most, 26 suspected cases of voter fraud, a number representing 0.03% of President Biden\u2019s 80,000-vote margin of victory. Two state-run audits also failed to find any discrepancies.</p><p>Other states have showcased what can happen when baseless \u201cforensic audits\u201d move forward. In Arizona, lawmakers hired the embarrassing \u201cCyber Ninjas,\u201d a Florida-based group with zero election experience, to conduct the audit. Their investigation was found to be \u201csloppy\u201d by nonpartisan groups and blew multiple deadlines \u2014 but it succeeded in generating suggestive misinformation to be distributed online, which meant it served its real, cynical purpose.</p><p>Most hilariously of all, when it was all said and done, the \u201caudit\u201d found that Donald Trump received fewer votes than were originally counted.</p><p>It\u2019s good that this radioactive Senate misinformation committee has finally, and quietly, been put to rest. Pennsylvania has already dumped enough official time and taxpayer money into these proceedings.</p><p>It puts an end to the maniacal search for election fraud \u2014 just in time for the next presidential faceoff between Joe Biden and Donald Trump. State officials\u2019 focus should be on ensuring public confidence in the upcoming elections \u2014 not on undermining the results of one that has been repeatedly found to be secure, by Republicans and Democrats alike.</p><p>___</p><p>LNP/LancasterOnline. February 25, 2024.</p><p>Editorial: Lawmakers must help first responders by passing legislation addressing train transport of hazardous materials</p><p>\u201cIt\u2019s frustrating, but unfortunately you get used to it.\u201d</p><p>That\u2019s what Duane Hagelgans, emergency management coordinator for Millersville Borough and Manor Township and a professor of emergency management at Millersville University, said of the lack of transparency over the materials being conveyed by trains traveling through our region.</p><p>First responders shouldn\u2019t have to \u201cget used to it.\u201d</p><p>Politicians like to talk about the sacrifices and bravery of first responders. But in this instance, when elected officials could do something substantive to keep first responders safe, they\u2019ve shamefully dragged their heels.</p><p>Danger is literally barreling down the tracks, but it\u2019s hard to detect any urgency about prioritizing human safety.</p><p>As Rejrat reported, about \u201c135 miles of active rail lines <a href=\"https://lancasteronline.com/news/local/toxic-trains-real-time-hazmat-info-hard-to-get-even-for-lancaster-countys-first-responders/article_8eb195e4-259e-11ee-8bc6-9f99975f5e4e.html\">weave through Lancaster County</a> carrying rail cars that at any point could be filled with hazardous material.\u201d</p><p>A derailment in Lancaster County like the one that occurred in East Palestine could devastate the local community. And if it happened on a track over or even near the Susquehanna River, the downstream effects could be long-ranging and difficult to remedy.</p><p>East Palestine residents told ABC News earlier this month that some community members, having been forced to vacate their homes, still are displaced. And some continue to experience health issues in the derailment\u2019s wake. Research is ongoing into the long-term <a href=\"https://www.pbs.org/newshour/nation/a-year-after-a-train-derailment-in-ohio-spilled-hazardous-chemicals-health-fears-persist-for-east-palestine\">consequences of exposure</a> to the toxins in the industrial chemicals the Norfolk Southern train was transporting.</p><p>Local emergency responders told Rejrat that nothing has changed in terms of how they would respond to a derailment in Lancaster County and the information \u2014 or lack thereof \u2014 available to guide their response.</p><p>Trains carrying hazardous material often have dozens of cars, including tankers, with different toxic chemicals in different cars. Because of the size of some trains, more than one municipality may have to deal with a train derailment. And emergency responders may be unable to access real-time information about any toxic materials that are being released into the air, soil and water.</p><p><a href=\"https://lancasteronline.com/opinion/editorials/railroad-companies-must-be-required-to-keep-emergency-responders-informed-about-whats-on-the-toxic/article_ad035f24-2d86-11ee-ac9e-2f4cdd56f40a.html\">As we noted in an editorial last July</a>, it\u2019s difficult to coordinate a response when you don\u2019t know exactly what you\u2019re dealing with. And not having the ability to effectively respond is a hazard of its own.</p><p>Hagelgans said he has seen no additional training, transparency or outreach to local responders from private train companies.</p><p>This is inexcusable.</p><p><a href=\"https://lancasteronline.com/news/local/one-year-after-east-palestine-train-derailment-not-much-has-changed-for-local-emergency-responders/article_f6fd5614-cf59-11ee-a1ed-637a175d44aa.html\">According to Rejrat\u2019s reporting,</a> Norfolk Southern \u2014 which owns rail lines in Lancaster County and across Pennsylvania \u2014 did bring the company\u2019s \u201csafety train\u201d to Harrisburg in July for three days of training for first responders.</p><p>The specially outfitted train, which includes classroom rail cars and different types of tanker cars, is meant to familiarize first responders with the types of rail cars and equipment they might encounter in an emergency.</p><p>But as Hagelgans rightly pointed out, \u201cYou can\u2019t just have one training like that and expect people to show up and be trained.\u201d</p><p>This training was the least Norfolk Southern could do.</p><p>Doing the bare minimum seems to be part of a pattern: Rejrat reported that prior to July 2023, the safety train was last in Harrisburg in 2021. And the hands-on training has not been offered in Lancaster County since at least 2017.</p><p>Legislation derailed</p><p>The seriousness of the East Palestine derailment should have led to quick legislative action in Harrisburg and Washington, D.C.</p><p>Alas, it did not.</p><p>As Rejrat reported, \u201cProposed legislation that would create databases of hazardous materials and require increased transparency on the part of train companies has stalled in Congress and the state Legislature.\u201d</p><p><a href=\"https://www.legis.state.pa.us/cfdocs/billInfo/billInfo.cfm?sYear=2023&sInd=0&body=H&type=B&bn=1028\">Pennsylvania House Bill 1028</a> proposes \u201ccreating a database of hazardous material traveling on state railways, and that information would be available to emergency management agencies,\u201d she noted.</p><p>The bill passed easily in the state House in early June. But it\u2019s been languishing in the Republican-controlled state Senate Consumer Protection and Professional Licensure Committee since then.</p><p>Unbelievably, three Lancaster County Republicans voted against the bill: Reps. Keith Greiner, David Zimmerman and Tom Jones. Their constituents should ask them why.</p><p>State Sen. Ryan Aument, a West Hempfield Township Republican who not only sits on the relevant committee but is the Senate majority whip, did not immediately respond to Rejrat\u2019s request for comment about the bill\u2019s status. We implore Aument to use his influence to get the bill out of committee.</p><p>In Congress, Pennsylvania U.S. Sens. Bob Casey and John Fetterman joined Ohio Sen. Sherrod Brown and Missouri Sen. Josh Hawley in introducing a pair of bills last March that were combined into the <a href=\"https://www.congress.gov/bill/118th-congress/senate-bill/576\">Railway Safety Act</a>.</p><p>According to Rejrat\u2019s reporting, that legislation would direct federal transportation officials to develop regulations requiring railroads to notify local emergency response groups, fire departments and law enforcement agencies when hazardous materials are moving through their communities. It also would establish a fund, paid for by the companies that ship and convey hazardous materials, to provide emergency responders with needed resources.</p><p>\u201cMost major railroads also would be required to operate with crews of at least two people, and fines for rail safety infractions would increase,\u201d Rejrat noted.</p><p>This all seems sensible and necessary.</p><p>The Railway Safety Act advanced out of committee, but awaits a full U.S. Senate vote. Casey and Fetterman should remind Democratic Senate Majority Leader Chuck Schumer of what\u2019s at stake.</p><p>Lawmakers at both the state and federal level need to take action before a catastrophe occurs. And we\u2019d suggest that they forgo any photo ops with first responders until they do.</p><p>___</p><p>Altoona Mirror. February 23, 2024.</p><p>Editorial: Embracing creative expression</p><p>Meaningful messages do not always come from individuals perceived as experts, or who otherwise boast celebrity status.</p><p>Meaningful messages also come from \u201ccommon people\u201d busy with their daily tasks, or else engaged in activities that allow expression capable of impacting others in a positive way.</p><p>This editorial will focus on two individuals, one now deceased but who for many years enhanced police work in the city of Pittsburgh, while the other continues to be an asset and advocate on behalf of Altoona\u2019s optimistic spirit.</p><p>This local person can usually be seen by hundreds or thousands of people over a span of several hours as he waves at passers-by while dressed in the image of the Statue of Liberty.</p><p>We\u2019ll focus on Altoona\u2019s upbeat messenger first.</p><p>Anyone who saw the Mirror\u2019s Feb. 12 front page could not overlook the large photo of Fred Shields waving to motorists and their passengers along Plank Road, bringing smiles, even to those unhappy for whatever reasons or those experiencing sadness due to some unwanted circumstances or occurrences in their lives.</p><p>\u201cLife\u2019s too short to be miserable,\u201d Shields told Mirror reporter Matt Churella, as he explained why he engages in the mission for which he receives no financial compensation.</p><p>The late Pittsburgh police officer, Victor S. Cianca Sr., was paid for the time he spent directing traffic at busy Steel City intersections during rush hours, but the relationship he forged with residents and workers who converged on Downtown Pittsburgh during workdays remains a legend 41 years after his retirement from the police force and 14 years after his death at the age of 92.</p><p>It would be great today if police work and citizenry retained such a warm relationship.</p><p>On behalf of anyone who never heard of Victor Cianca and his flamboyant style of directing traffic:</p><p>Cianca began his job as a Pittsburgh traffic cop in early 1952, and it didn\u2019t take him long to elevate his work to what one publication characterized as a \u201cchoreographed art.\u201d</p><p>Wearing his usual white gloves, Cianca put to use as many as three limbs at once to keep motorists and pedestrians moving \u2014 regarding pedestrians, those who actually were in the process of going from place to place, not merely present just to gaze at the officer\u2019s comedic gestures.</p><p>For example, Cianca would pretend to be sleeping when he encountered a motorist driving too slowly, or play an imaginary violin when a driver would try making excuses for a traffic violation.</p><p>One of his trademarks was calm during traffic jams, leading the former Pittsburgh Press to comment, upon his retirement, that \u201ca downtown traffic jam without Vic Cianca is a traffic jam with no redeeming qualities.\u201d</p><p>The Sept. 9, 1962, Pittsburgh Press quoted Cianca as saying, \u201cI have a reason for every motion or gesture.\u201d</p><p>Said Shields the other day while noting that he enjoys seeing people smile: \u201cI like to show personality when I do this. I have a lot of fans.\u201d</p><p>Cianca was an ambassador for Pittsburgh; Shields remains an ambassador for Altoona, even in cold temperatures and otherwise bad weather conditions.</p><p>Shields doesn\u2019t carry with him a plaque like the one on the pedestal of the real statue in New York bearing the words \u201cGive me your tired, your poor, your huddled masses yearning to breathe free,\u201d but he delivers an important message nonetheless:</p><p>Free expression is alive and well here.</p><p>END</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/1bbbc16adec38dc32ff82def7beb0fb8",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 3,
+            "reason": "The document contains multiple editorials, but only one of them is directly related to health. The editorial from the Pittsburgh Tribune-Review discusses the role of pharmacy benefit managers (PBMs) in the healthcare system, which is relevant to the topic of health. However, the other editorials focus on unrelated topics such as election fraud investigations, train transport of hazardous materials, and creative expression. Therefore, while part of the document is relevant, a significant portion is not."
+        }
+    }
+}

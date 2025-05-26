@@ -1,0 +1,266 @@
+﻿{
+    "altids": {
+        "itemid": "9bfb3525c07472911631e0ed576b9217",
+        "etag": "9bfb3525c07472911631e0ed576b9217_0a4aza0c0",
+        "friendlykey": "655657880713",
+        "referenceid": "EU-REL--Vatican-Pope"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2023-12-06T09:08:56Z",
+    "firstcreated": "2023-12-06T09:08:55Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "ednote": "Eds: UPDATES: With AP Photos.",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "EU-REL--Vatican-Pope",
+    "headline": "Pope says he's 'much better' after a bout of bronchitis but still gets tired if he speaks too much",
+    "headline_extended": "Pope Francis says he's \u201cmuch better\u201d after a two-week bout of bronchitis but says speaking still makes him tired",
+    "slugline": "BC-EU-REL--Vatican-Pope",
+    "description_summary": "Pope Francis says he's \u201cmuch better\u201d after a two-week bout of bronchitis but says speaking still makes him tired. Francis asked an aide to read his remarks at his weekly general audience Wednesday. Francis turns 87 on Dec. 17 and had part of one lung removed as a young man. He came down with the flu on Nov. 25 and was forced to cancel a planned trip to Dubai to participate in the U.N. climate conference. He later revealed he had been diagnosed with an acute case of infectious bronchitis that made breathing difficult.",
+    "bylines": [
+        {
+            "by": "By NICOLE WINFIELD",
+            "title": "Associated Press"
+        }
+    ],
+    "located": "ROME",
+    "datelinelocation": {
+        "city": "Rome",
+        "countrycode": "ITA",
+        "countryname": "Italy",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                12.51133,
+                41.89193
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2023 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "pope bronchitis climate Vatican"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "person": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "2fd38d1dee8c4287a13ae64992300d96",
+            "name": "Pope Francis",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 89
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "i",
+            "name": "i"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "026a1118e94443a2aacc08a2e70cc77b",
+            "name": "Religion",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 85
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e228bab07de410048fa8df092526b43e",
+            "name": "Lung disease",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 74
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 65
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "026a1118e94443a2aacc08a2e70cc77b",
+            "name": "Religion",
+            "creator": "Editorial",
+            "editorial_subject": "Religion",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "bb2d2c5f441a452cb24bb511a2ab5eea",
+            "name": "World news",
+            "creator": "Editorial",
+            "editorial_subject": "World news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "03a6f9d07efe100483e9df092526b43e",
+            "name": "Rome",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "662122b07d5b100482d7c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "9d26a20b35f0484a891740f8189d4c7b",
+                "name": "City"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    12.4839,
+                    41.89474
+                ]
+            },
+            "relevance": 53,
+            "parentnames": [
+                "Italy"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f3e0ed387eff10048539df092526b43e",
+            "name": "Vatican City",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661850e07d5b100481f4c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "01f56e0e654841eca2e69bf2cbcc0526",
+                "name": "Nation"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    12.4533,
+                    41.90225
+                ]
+            },
+            "relevance": 42,
+            "parentnames": [
+                "Europe"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "661850e07d5b100481f4c076b8e3055c",
+            "name": "Europe",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "associations": {
+        "1": {
+            "altids": {
+                "itemid": "8e413a2b63a54e32bdb98fec739d8301"
+            },
+            "type": "picture"
+        },
+        "2": {
+            "altids": {
+                "itemid": "4d5fd992b6e8422cab49c2f2fcdadb2b"
+            },
+            "type": "picture"
+        },
+        "3": {
+            "altids": {
+                "itemid": "99fd38a738c44033a6e883b1337c4bf5"
+            },
+            "type": "picture"
+        }
+    },
+    "body_nitf": "<p>ROME (AP) \u2014 Pope Francis said Wednesday he was feeling \u201cmuch better\u201d after a <a href=\"https://apnews.com/article/vatican-pope-bronchitis-dubai-climate-1b4042c2f366454b0f92d4251752a538\">two-week bout of bronchitis</a> but again asked an aide to read his remarks.</p><p>Francis, who had part of one lung removed as a young man, told his weekly general audience that he still gets tired if he speaks too much.</p><p>Francis, who turns 87 on Dec. 17, <a href=\"https://apnews.com/article/vatican-pope-francis-illness-lung-inflammation-ef8ac8a607db7d71f995f12542ac6768\">came down with the flu</a> on Nov. 25 and was forced to cancel a planned trip to Dubai to participate in the U.N. climate conference. He later revealed he had been diagnosed with an acute case of infectious bronchitis that made breathing difficult.</p><p>It was the second time this year he has had a serious case of bronchitis; in spring he was hospitalized for three days to receive intravenous antibiotics.</p><p>Francis walked onto the stage of the Vatican audience hall with his cane Wednesday and smiled broadly at the cheering crowd. He appeared in good spirits and received several prelates who came to speak to him individually at the end of the audience.</p><p>Explaining why he would ask his aide to read his remarks, he said: \u201cI\u2019m much better, but I get tired if I speak too much.\u201d</p><p>Francis then made a brief appeal asking for prayers for all those who are suffering from war, including people in Ukraine, Israel and Gaza.</p><p>\u201cWar is always a defeat,\u201d he said. \u201cNo one wins, everyone loses. The only ones who win are the weapons makers.\u201d</p><p>To spare him from temperature changes that might aggravate his condition, Francis has delivered his weekly Sunday blessing for the past two weekends from the Vatican chapel rather than the open window of his studio overlooking St. Peter's Square.</p><p>Nevertheless, the Vatican has confirmed Francis would participate in his annual visit to pray before a statue of the Virgin Mary at Rome's Piazza di Spagna on Friday to mark an important Catholic feast day and officially kick off the Christmas season in Rome.</p><p>The Vatican said Francis is also planning to add on a visit that day, the Immaculate Conception, to Rome's St. Mary Major basilica to pray before one of his favorite icons of Mary.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/pope-bronchitis-climate-vatican-9bfb3525c07472911631e0ed576b9217",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 5,
+            "reason": "The document primarily discusses Pope Francis's recent health issues, including his bout with bronchitis, his history of lung problems, and the impact of his health on his activities. It also mentions his need to have an aide read his remarks due to fatigue from speaking too much. These details are directly related to the topic of health."
+        }
+    }
+}

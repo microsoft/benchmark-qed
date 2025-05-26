@@ -1,0 +1,260 @@
+﻿{
+    "altids": {
+        "itemid": "35533ca9b2aa10d24826dd222deb76d8",
+        "etag": "35533ca9b2aa10d24826dd222deb76d8_0a14aza0c0",
+        "friendlykey": "754976162498",
+        "referenceid": "EU--Britain-King"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2024-02-13T11:25:32Z",
+    "firstcreated": "2024-02-13T11:25:31Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "ednote": "Eds: UPDATES: Updates Media.",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "EU--Britain-King",
+    "headline": "King Charles III returns to London from country retreat for expected cancer treatment",
+    "headline_extended": "King Charles III has returned to London from his country retreat for what is expected to be further treatment following his cancer diagnosis",
+    "slugline": "AP-EU--Britain-King",
+    "description_summary": "King Charles III has returned to London from his country retreat for what is expected to be further treatment following his cancer diagnosis. Charles and his wife Queen Camilla flew by helicopter to Buckingham Palace from the royals\u2019 Sandringham estate in Norfolk, eastern England. The monarch was seen waving to well-wishers as the couple were driven from the palace to nearby Clarence House. Royal officials announced last week that the king was diagnosed with cancer and will suspend public engagements, though he will continue with state business such as signing papers. They did not disclose what form of cancer he has, but said it\u2019s not related to his recent treatment for a benign prostate condition.",
+    "located": "LONDON",
+    "datelinelocation": {
+        "city": "London",
+        "countrycode": "GBR",
+        "countryname": "United Kingdom",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                -0.12574,
+                51.50853
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "King Charles cancer treatment"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "person": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "27d3bc69a271433992a500bc68c4eb60",
+            "name": "Camilla, the queen consort",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "ROYALTY",
+                "PERSON"
+            ],
+            "relevance": 54
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f8955706b58c4b71901d46201750aa48",
+            "name": "King Charles III",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "GOVERNMENT_FIGURE",
+                "PERSON",
+                "ROYALTY"
+            ],
+            "relevance": 85
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "i",
+            "name": "i"
+        },
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "e",
+            "name": "e"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 77
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e22524b87de410048f91df092526b43e",
+            "name": "Cancer",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 46
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "90aeac5089ef10048f63d56c852d093e",
+            "name": "Royalty",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 59
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "16cb0ba3e6d24d97ace39f5a1924669a",
+            "name": "Entertainment",
+            "creator": "Editorial",
+            "editorial_subject": "Entertainment",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "bb2d2c5f441a452cb24bb511a2ab5eea",
+            "name": "World news",
+            "creator": "Editorial",
+            "editorial_subject": "World news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "7a55e0187eff10048492df092526b43e",
+            "name": "London",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "df4691387d6b10048fdeba7fa5283c3e"
+            ],
+            "locationtype": {
+                "code": "9d26a20b35f0484a891740f8189d4c7b",
+                "name": "City"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -0.12574,
+                    51.50853
+                ]
+            },
+            "relevance": 91,
+            "parentnames": [
+                "England"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "661850e07d5b100481f4c076b8e3055c",
+            "name": "Europe",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "associations": {
+        "1": {
+            "altids": {
+                "itemid": "92b6e272758147729fc2500f3ea09e09"
+            },
+            "type": "picture"
+        },
+        "2": {
+            "altids": {
+                "itemid": "62bc990a609746a7a132cb253dd39889"
+            },
+            "type": "picture"
+        },
+        "3": {
+            "altids": {
+                "itemid": "bdba82b048d245b19f21a8126e57df96"
+            },
+            "type": "picture"
+        }
+    },
+    "body_nitf": "<p>LONDON (AP) \u2014 King Charles III returned to London from his country retreat on Tuesday for what is expected to be further treatment following his <a href=\"https://apnews.com/article/king-charles-iii-cancer-britain-e0408a7c9bb86ad2af8754ce4b37d65e\">cancer diagnosis.</a></p><p>Charles, 75, and his wife Queen Camilla flew by helicopter to Buckingham Palace from the royals' Sandringham estate in Norfolk, eastern England. The monarch was seen waving to well-wishers as the couple were driven from the palace to nearby Clarence House.</p><p>Royal officials announced last week that the king was diagnosed with cancer and will suspend public engagements, though he will continue with state business such as signing papers. They did not disclose what form of cancer he has, but said it\u2019s not related to his <a href=\"https://apnews.com/article/uk-princess-kate-abdominal-surgery-5fc9e0e3b59954a2cceb6b1a7edf31a7\">recent treatment</a> for a benign prostate condition.</p><p>The king underwent his first bout of cancer treatment last week. He attended church at Sandringham on Sunday, and thanked the public for the many messages of support he has received.</p><p>Camilla, who has been continuing with her royal diary of engagements, said last week that Charles was \u201cextremely well under the circumstances.\"</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/king-charles-cancer-treatment-35533ca9b2aa10d24826dd222deb76d8",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 5,
+            "reason": "The document discusses King Charles III's return to London for further cancer treatment, including details about his diagnosis, the type of treatment he is undergoing, and his current health status. These aspects are directly related to health, making the document highly relevant to the topic."
+        }
+    }
+}

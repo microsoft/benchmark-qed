@@ -1,0 +1,323 @@
+﻿{
+    "altids": {
+        "itemid": "fda0a1a665606e7a5bba50f715737fea",
+        "etag": "fda0a1a665606e7a5bba50f715737fea_0a12aza0c0",
+        "friendlykey": "277084844102",
+        "referenceid": "Editorial Rdp"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Opinion",
+    "language": "en",
+    "versioncreated": "2024-02-23T18:05:39Z",
+    "firstcreated": "2024-02-23T18:05:38Z",
+    "editorialrole": "FullStory",
+    "fixture": {
+        "code": "21ea4067bb274c3b805353fb2b99ba70",
+        "name": "Editorial Roundup"
+    },
+    "pubstatus": "usable",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "Editorial Rdp",
+    "headline": "Editorial Roundup: New England",
+    "slugline": "AP--Editorial Rdp",
+    "bylines": [
+        {
+            "by": "By The Associated Press"
+        }
+    ],
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "-Editorial Rdp"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "person": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "3ca409bc18bd493f826c19db7d8f7048",
+            "name": "Chellie Pingree",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "POLITICIAN",
+                "PERSON"
+            ],
+            "associatedstates": [
+                {
+                    "code": "8d2caa7082b3100484b8df092526b43e",
+                    "name": "Maine"
+                }
+            ],
+            "relevance": 31
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86aad5207dac100488ecba7fa5283c3e",
+            "name": "Politics",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 46
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "20dbbcf87e4e100488cbd0913b2d075c",
+            "name": "Sports betting",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 59
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "c8e409f8858510048872ff2260dd383e",
+            "name": "Business",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 53
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a328daf6767245f18a263276f2e111f3",
+            "name": "Marijuana",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 85
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "organisation": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "eaa2152fab38465898b2746035014e78",
+            "name": "Maine state government",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 33
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "8d2caa7082b3100484b8df092526b43e",
+            "name": "Maine",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -69.24977,
+                    45.50032
+                ]
+            },
+            "relevance": 78,
+            "parentnames": [
+                "United States"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "661a77a87d5b1004822ac076b8e3055c",
+            "name": "Puerto Rico",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "6618c9f87d5b10048203c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "b7a0766613394ffda1709e3e433f2de2",
+                "name": "Territory"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -66.49989,
+                    18.24829
+                ]
+            },
+            "relevance": 35,
+            "parentnames": [
+                "Caribbean"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "bed6942882b310048501df092526b43e",
+            "name": "Massachusetts",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -71.10832,
+                    42.36565
+                ]
+            },
+            "relevance": 70,
+            "parentnames": [
+                "United States"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "788b364882f110048df3df092526b43e",
+            "name": "District of Columbia",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "9d26a20b35f0484a891740f8189d4c7b",
+                "name": "City"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -77.00025,
+                    38.91706
+                ]
+            },
+            "relevance": 35,
+            "parentnames": [
+                "United States"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "1bf4bc0882c71004889cdf092526b43e",
+            "name": "Rhode Island",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "d2f8d8a882c710048915df092526b43e",
+            "name": "Vermont",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "9531546082c6100487b5df092526b43e",
+            "name": "New Hampshire",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "bed6942882b310048501df092526b43e",
+            "name": "Massachusetts",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "8d2caa7082b3100484b8df092526b43e",
+            "name": "Maine",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "a42dc0a082af100482a7df092526b43e",
+            "name": "Connecticut",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "body_nitf": "<p>Boston Globe. February 22, 2024.</p><p>Editorial: THC-infused gummies shouldn\u2019t be sold without regulation</p><p>Makers of hemp-derived products don\u2019t pay the state\u2019s marijuana taxes, creating unfair competition to legal marijuana dispensaries.</p><p>Massachusetts law tightly regulates marijuana products. So why are THC-infused seltzers and gummies with delta-8 on the shelves in liquor stores, smoke shops, and convenience stores?</p><p>The problem, as documented in recent news stories by <a href=\"https://commonwealthbeacon.org/marijuana/hemp-based-thc-products-are-showing-up-all-over/?utm_source=ActiveCampaign&utm_medium=email&utm_content=Healey+on+board+with+reforms+at+southern+border&utm_campaign=DL+01-24-24\">CommonWealth Beacon</a> and the <a href=\"https://www.bostonglobe.com/2024/01/31/metro/delta-8-cannabis/?p1=Article_Inline_Text_Link\">Boston Globe</a>, is that products made from hemp-derived compounds are falling into a regulatory loophole. While technically illegal, no one is enforcing the laws prohibiting their sale, so drinks, gummies, and other edible products infused with cannabis-derived psychoactive compounds have become readily available. These products can be dangerous and intoxicating and lack the labeling and testing requirements that ensure consumer safety when purchasing state-sanctioned marijuana products. Because they are largely unregulated, unless a town passes a bylaw, there is no specific prohibition on selling them to minors. The products also provide unfair competition to legal marijuana dispensaries since they are sold without paying the state\u2019s marijuana tax.</p><p>\u201cIt\u2019s providing a huge risk to consumers who don\u2019t necessarily know what they\u2019re getting,\u201d said Ryan Dominguez, executive director of the Massachusetts Cannabis Coalition, a trade organization representing the cannabis business in Massachusetts.</p><p>It\u2019s a risk that needs to be eliminated.</p><p>The growth in the new industry was sparked by the federal legalization of hemp in a 2018 farm bill. Hemp is defined as a cannabis plant that has less than 0.3 percent delta-9 THC (the compound that causes a high). A cannabis plant with more THC is considered marijuana. Hemp\u2019s legalization led to the commercial development of products featuring CBD, a compound in hemp that <a href=\"https://www.health.harvard.edu/blog/cannabidiol-cbd-what-we-know-and-what-we-dont-2018082414476\">preliminary research suggests</a> has therapeutic benefits. Companies have also been extracting the small amount of THC and using a chemical process that turns CBD into a synthetic compound called delta-8 THC.</p><p><a href=\"https://www.frontiersin.org/journals/psychiatry/articles/10.3389/fpsyt.2023.1103123/full\">Early research</a> suggests that delta-8 has the same \u201chigh\u201d as other forms of THC and the same potential for side effects, including rare cases of psychosis. According to <a href=\"https://emergency.cdc.gov/han/2021/pdf/CDC_HAN__451.pdf\">a CDC bulletin</a>, between January and July 2021, poison control centers received 660 calls nationwide about exposures to delta-8 THC, of which 18 percent required hospitalization and 39 percent involved kids under 18.</p><p>Without accurate testing and labeling, there is no way to know how much THC is in these products or whether they contain other contaminants like metals or chemicals \u2014 both issues have been raised by independent testing. They can be packaged to look like common junk foods, which can appeal to children.</p><p>Courts <a href=\"https://law.justia.com/cases/federal/appellate-courts/ca9/21-56133/21-56133-2022-05-19.html\">have ruled</a> that hemp-derived delta-8 is legal under the farm bill. But that does not necessarily mean it can be used in food. The US Food and Drug Administration <a href=\"https://www.fda.gov/inspections-compliance-enforcement-and-criminal-investigations/warning-letters/gchnc-llc-dba-hemp-xrgate-city-hemp-dba-hemp-xrallaziya-enterprises-llc-dba-hemp-xr-656057-09282023\">says neither</a> CBD or delta-8 THC have been approved as food additives and <a href=\"https://www.mcguirewoods.com/client-resources/alerts/2023/12/fda-warning-letter-declares-delta-8-and-cbd-gummies-adulterated-foods/#:~:text=FDA%20goes%20so%20far%20as,products%20treat%20or%20cure%20disease.\">recently</a> it has started cracking down on the sale of infused edibles across state lines. But as with marijuana, the compounds are subject to <a href=\"https://www.seattlemet.com/discover/thc-delta/why-is-delta-8-legal/#:~:text=Michigan%3A%20Legal%20to%20possess%20and,8%20THC%20products%20is%20lawful.\">different laws</a> in different states. In Massachusetts, state regulators <a href=\"https://www.mass.gov/guides/hemp-in-massachusetts-faqs#-is-it-legal-to-manufacture-delta-8-thc-from-hemp?-\">have said</a> it is illegal to process or sell hemp-derived delta-8 products, and farmers licensed to grow hemp in Massachusetts cannot use it for <a href=\"https://www.mass.gov/guides/hemp-in-massachusetts-faqs#-will-i-be-allowed-to-cultivate-hemp-for-food,-or-manufacture-edible-products-that-contain-hemp?-\">most edible products</a> (with exceptions for hemp seeds and their derivatives).</p><p>Despite that, state agencies have largely passed the buck and left enforcement to local boards of health, which often lack the resources \u2014 or will \u2014 to crack down on sales. Cheryl Sbarra, executive director of the Massachusetts Association of Health Boards, said many local boards are under-resourced, and catching which retailers are selling a growing range of hemp-derived products is like \u201cplaying whack-a-mole.\u201d</p><p>As a result, products are proliferating, worrying public health officials and frustrating those playing by the rules.</p><p>Laura Beohner, founder of the Massachusetts Hemp Coalition and a licensed hemp processor, pointed out the inconsistency that according to Massachusetts state laws she cannot make edibles, but a nearby gas station can sell unregulated products from other states. \u201cI\u2019m just waiting for regulation to come in,\u201d Beohner said.</p><p>The ideal solution would be for the federal government to provide clear regulations to govern public health and safety for <a href=\"https://www.bostonglobe.com/2024/02/13/opinion/pot-purveyors-plead-come-out-legal-shadows-theyre-right/?p1=Article_Inline_Text_Link\">all cannabis-derived products</a>. Federal regulation is necessary because today, many hemp-derived products that contain THC are sold online and shipped across the country. Online sellers also are increasingly selling cannabis flower that meets the legal definition of hemp, but which, when smoked, becomes identical to marijuana. (This is legal because the farm bill defines hemp based on the amount of delta-9 THC in a plant, but does not regulate the amount of THCA, a compound that only causes a high <a href=\"https://www.leafly.com/learn/consume/edibles/what-is-decarboxylation\">when burned.</a> )</p><p>Massachusetts Attorney General Andrea Campbell signed <a href=\"https://coag.gov/app/uploads/2024/01/Attorneys-General-Letter-Requesting-MJ-Rescheduling-1.pdf\">a letter</a> with 12 attorneys general from states that have legalized marijuana urging the Biden administration to reschedule marijuana, saying that it will make it easier for states to set standards for legal products and work to eliminate the illicit market and the \u201cunregulated intoxicating hemp products that currently operate in interstate commerce.\u201d</p><p>But until the federal government acts, state regulators should establish clear statewide rules for all cannabis-derived products appearing on Massachusetts shelves or being mailed to Massachusetts, including age restrictions and requirements for accurate labeling. It\u2019s not fair to the state\u2019s tax-paying, rule-following businesses to let this loophole persist. A teenager can\u2019t walk into a store and buy alcohol or marijuana. They shouldn\u2019t be able to buy cannabis-infused seltzer either.</p><p>___</p><p>Boston Herald. February 22, 2024.</p><p>Editorial: Is Harvard all talk on antisemitism?</p><p>Another day at Harvard, another antisemitic incident.</p><p>Harvard University pro-Palestine groups recently posted a \u201cdeeply offensive antisemitic\u201d cartoon, the latest in a series of such controversies.</p><p>Over the weekend, <a href=\"https://www.textise.net/showText.aspx?strURL=https%3A%2F%2Fwww.bostonherald.com%2F2024%2F02%2F20%2Fharvard-pro-palestine-groups-under-fire-for-antisemitic-deeply-offensive-cartoon%2F\">according to the Herald</a>, the groups shared the old antisemitic cartoon on social media \u2014 depicting Jews as puppet masters, lynching an Arab person and a Black person. The Jewish hand in the cartoon had a Star of David, and a dollar sign was placed inside the star.</p><p>It\u2019s the typical appalling dreck that titillates small minds and the sort of crass, crude buffoonery that Jew-haters have reveled in for centuries. Society is devolving, and Harvard is a hotspot.</p><p>The student groups that initially posted the cartoon were the Harvard Undergraduate Palestine Solidarity Committee and the African and African American Resistance Organization.</p><p>The university called the post \u201cdespicable\u201d and said it\u2019s investigating the matter.</p><p>This is Harvard\u2019s chance to put its disciplinary actions where its mouth is. Indignant tsks and cries of \u201cdespicable\u201d are not enough. Nor is the public finger-wagging against hate with vows that this must never happen again. The university has said all this before. And here we are.</p><p>The question for Harvard is: are you really serious about fighting antisemitism on your campus? Prove it.</p><p>___</p><p>Rutland Herald. February 17, 2024.</p><p>Editorial: Don\u2019t bet on it</p><p>We bet you were not expecting this: Online sports betting has gotten off to a strong start in Vermont.</p><p>According to a report on Vermont Public, Liquor and Lottery Commissioner Wendy Knight indicated that during the first three weeks of operation after sports betting became legal on Jan. 11, almost $20 million was wagered. The average bet was roughly $23, she said.</p><p>Knight told Vermont Public the state received approximately $1.1 million in revenue, which is considerably more than projections.</p><p>And then there was last weekend \u2014 the tally from which is still being calculated. By all accounts, whether it was viewership or betting \u2014 the 2024 Super Bowl was a big winner.</p><p>Statistics from several states where sports betting is legal are proving that prediction was true. According to published reports, Nevada\u2019s sportsbooks set a record by taking $185.6 million in wagers on the game, in which the Kansas City Chiefs won their second consecutive championship by defeating the San Francisco 49ers, 25-22, in overtime. The books kept $6.8 million as winnings, up from $4.3 million a year ago, the Nevada Gaming Control Board said.</p><p>The total amount of bets at Nevada\u2019s 182 Sportsbooks broke the previous record of $179.8 million from the 2022 Super Bowl between the Los Angeles Rams and the Cincinnati Bengals. The 2023 Super Bowl between the Chiefs and the Philadelphia Eagles brought in $153.1 million worth of bets.</p><p>In New Jersey, the nine Atlantic City casinos, the three horse tracks that take sports bets, and their online partners handled $141.6 million in bets on the Super Bowl, according to the state Division of Gaming Enforcement \u2014 an increase of 30% over last year\u2019s total. This resulted in a win of nearly $8.5 million for the Sportsbooks, down from $12.8 million a year ago.</p><p>In Pennsylvania, $71.5 million was wagered on the Super Bowl, down 15% from last year\u2019s Super Bowl, in which the Philadelphia Eagles lost to the Chiefs.</p><p>Other states with big sports betting markets, including New York and Illinois, had yet to report betting levels for this year\u2019s Super Bowl, and Maine and Vermont were still compiling figures.</p><p>Data released on Monday from GeoComply shows that the number of bet verification checks it carried out over the weekend increased by more than 22% from last year. It processed just over 122 million checks this year in 28 of the 29 states that offer online sports betting, excluding Florida.</p><p>(States require a gambler to be physically located within their borders in order to make online bets. Geolocation technology uses a combination of cellphone data, software, hardware and databases to determine where a phone or laptop trying to make a bet is actually located at a given moment.)</p><p>According to reports, many people waited until the last moment to place bets. Minutes before kick-off, online sports betting services saw a massive spike in traffic, totaling nearly 15,000 transactions per second. It was the highest level ever recorded on GeoComply\u2019s systems, nearly doubling last year\u2019s peak.</p><p>Online sports betting is definitely gaining in popularity nationwide, especially in U.S. states where the tax revenue it generates funds various state resources from roads and highways to public education, law enforcement and gambling addiction programs.</p><p>It has become such a revenue generator that the U.S. Census Bureau\u2019s Quarterly Survey of State and Local Tax Revenue had to add sports betting to the extensive list of state and local tax revenue sources it already tracks.</p><p>It found in the third quarter of 2023, the most recent version of the QTAX, sports betting generated national state level sales tax and gross receipts of $505.96 million, up 20.5% from the same quarter a year before, but down from $571.48 million the second quarter of 2023.</p><p>New York was the state with the largest share of the nation\u2019s tax revenue in the second quarter of 2023: $188.53 million, or more than 37% of total tax revenue and gross receipts from sports betting in the United States. Indiana ($38.6 million) and Ohio ($32.9 million) followed, according to the U.S. Census.</p><p>Sports betting became possible in May 2018 when the Supreme Court struck down the Amateur Sports Protection Act. Since then, 38 states as well as the District of Columbia and Puerto Rico have legalized some form of sports betting, though not all have implemented it. Vermont was the most recent state to legalize it, joining in January.</p><p>According to the National Conference of State Legislatures, the tax rates states have imposed on sports betting vary widely. Most states have tax rates between 5% to 20%. In Pennsylvania, the state gets more than a third of all revenues and a few of the states with lottery-run operations take half of the total profit or more. In general, the tax rates for retail operators and mobile operators are the same.</p><p>Justifications for gaming expansion are often rooted in how the money will be used, and states have been known to direct gambling dollars to important spending categories such as education or retirement programs. However, expenditures in these areas often grow faster, and gambling revenues cannot keep pace.</p><p>According to the the national trade group, \u201cStates looking to close budget gaps with sports betting revenue may be disappointed, especially as more and more states legalize and take their slice of the market.\u201d</p><p>It will be interesting to see what the payoff is for Vermont. Given the fiscal challenges we face as a state, all bets are off.</p><p>___</p><p>Bangor Daily News. February 22, 2024.</p><p>Editorial: Maine should prevent lapse in funding for crime victims, but federal action also needed</p><p>There looks to be widespread, bipartisan support in Augusta for much-needed funding to provide ongoing services to crime victims and survivors. These critical services aid in the recovery from and prevention of some of the worst crimes in our society, like domestic and sexual violence, murder, child and elder abuse, and exploitation.</p><p>A <a href=\"https://www.mainelegislature.org/legis/bills/display_ps.asp?ld=2084&PID=1456&snum=131&sec3\">state bill</a> to provide $6 million for these essential services, LD 2084, has received <a href=\"https://www.wabi.tv/2024/02/07/proposed-bill-ensures-access-support-services-victims-violent-crimes/\">unanimous support</a> from the Maine Legislature\u2019s Judiciary Committee, and Democratic Gov. Janet Mills\u2019 <a href=\"https://www1.maine.gov/governor/mills/news/governor-mills-introduces-supplemental-budget-proposal-2024-02-14#:~\">proposed supplemental budget</a> includes the same amount of funding. This broad initial support, which must carry over to the full Legislature, surely has been bolstered by the <a href=\"https://www.mainelegislature.org/legis/bills/display_ps.asp?ld=2084&PID=1456&snum=131&sec3\">powerful testimony</a> of victims and victims advocates.</p><p>One by one, a long list of Maine people and organizations have explained the vital role that these services play in helping victims and survivors access legal aid, mental health and counseling support, shelter, advocates to help them navigate complicated systems, and other resources.</p><p>\u201cLD 2084 is necessary to prevent such deep cuts to sexual assault advocacy, Children\u2019s Advocacy Centers, domestic violence advocacy, shelter and emergency funding for victims of sex trafficking and exploitation, and legal and other supports for elder abuse victims,\u201d Gabrielle Cooper of Hampden, an employee of Rape Response Services, <a href=\"https://www.mainelegislature.org/legis/bills/getTestimonyDoc.asp?id=10026467\">testified</a> to state lawmakers in late January. \u201cMaine cannot risk losing these essential resources.\u201d</p><p>We agree. This infusion of state funding is needed because of a <a href=\"https://www.bangordailynews.com/2024/01/10/mainefocus/victim-services-maine-60-percent-funding-cut-joam40zk0w/\">looming federal shortfall</a> in the Crime Victims Fund (CVF), which was created as part of the federal Victims of Crime Act of 1984. Until the federal government steps up once again to address this issue, the state must act.</p><p>As a bipartisan group of more than 40 state attorneys general from across the country, including Maine Attorney General Aaron Frey, explained in a <a href=\"https://coag.gov/app/uploads/2024/02/VOCA-Funding-_-Finale.pdf\">letter to congressional leaders</a> in early February, the nationwide awards through the CVF are expected to decline $700 million compared to the previous fiscal year. Such a decline in funding would \u201chave devastating consequences for victims of crime,\u201d according to the group of AGs. <a href=\"https://www.ncja.org/crimeandjusticenews/advocates-fear-sharp-decline-in-u-s-aid-to-crime-victim-agencies\">According to the National Criminal Justice Association</a>, the main driver of this funding issue is the decline in prosecution of white collar crime, which has historically helped fund the CVF through settlements and judgments.</p><p>\u201cCongress recently acknowledged the importance of the VOCA Fund and supplemented its funding sources. In 2021, Congress passed the VOCA Fix Act, which allows monetary recoveries from federal deferred prosecutions and non-prosecution agreements to replenish the balance of the Fund,\u201d the group of AGs wrote. \u201cAll 56 attorneys general argued that such a fix was necessary, and we applaud Congress for its leadership. While the VOCA Fix Act was necessary, it was, unfortunately, not sufficient.\u201d</p><p>One potential idea to address the persistent funding challenges has been offered by a bipartisan group of House members, including Maine Democratic Reps. Chellie Pingree and Jared Golden. This group wants to allow for a one-time infusion of funding into the CVF by using civil penalties collected under the False Claims Act.</p><p>\u201cA one-time infusion of funds of this magnitude would ensure the programs victims depend upon can continue to provide necessary care, support, and assistance,\u201d Pingree, Golden and the bipartisan group <a href=\"https://golden.house.gov/sites/evo-subsites/golden.house.gov/files/evo-media-document/2.15.24%20Wagner%20Letter%20re%20CVF%20FY24.pdf\">wrote in a Feb. 15 letter</a> to House and Senate leaders, along with top appropriators. Given the funding mechanism for this program, which uses sources like criminal fines rather than taxpayer dollars, and the <a href=\"https://www.judiciary.senate.gov/press/dem/releases/senate-passes-critical-bipartisan-house-passed-legislation-to-strengthen-the-victims-of-crime-act\">role that the judiciary committees</a> have had with this issue, House and Senate judiciary leaders should clearly be involved in these much-needed conversations as well.</p><p>\u201cIn Maine and throughout the country, the Crime Victims Fund provides critical support to those who have been a target of a crime, helping individuals overcome substantial financial challenges and recover more quickly,\u201d Sen. Susan Collins, the leading Republican on the Senate Appropriations Committee, said in a statement to the BDN editorial board. \u201cFor years, the Appropriations Committee has been urging the Department of Justice to ensure it is properly funding the CVF and not short-changing victims. I will continue to explore all options \u2014 including new legislation \u2014 to address this issue.\u201d</p><p>Both Collins\u2019 office and the office of independent Sen. Angus King highlighted the VOCA Fix to Sustain the Crime Victims Fund Act of 2021. Collins and King each <a href=\"https://www.congress.gov/bill/117th-congress/senate-bill/611/cosponsors\">cosponsored</a> that legislation.</p><p>\u201cThe programs funded through the Victims of Crime Act (VOCA) and the Crime Victims Fund (CVF) are important and help victims access a variety of services that can be instrumental to their recovery,\u201d King said in a statement. \u201cI know how important the services funded through CVF are to crime victims and I will continue to support these programs during the annual appropriations process as well.\u201d</p><p>King\u2019s office also said he is reviewing the bipartisan House proposal from Pingree, Golden and others to use one-time funds derived from False Claims Act penalties.</p><p><a href=\"undefined\">All four members</a> of Maine\u2019s congressional delegation supported the 2021 fix, an appreciated attempt to shore up the Crime Victims Fund that was surely a step in the right direction. But with states like Maine now having to step up to fill multi-million dollar shortfalls just to continue existing services, it is clear that the \u201cfix\u201d was not an immediate or permanent one. It is encouraging, though not unexpected, that the entirety of Maine\u2019s delegation continues to support the Crime Victims Fund and is willing to explore additional steps to make sure it is properly funded. That willingness must apply across all of Congress, and it must turn into action.</p><p>There has long been strong bipartisan support in Congress for this victims fund, and that must continue. These services are too important to let a looming shortfall go unaddressed, and the federal government must find a way to sufficiently and sustainably fund them. In the meantime, it is prudent and necessary for the state of Maine to ensure that these services continue uninterrupted.</p><p>___</p><p>Barre-Montpelier Times Argus. February 20, 2024.</p><p>Editorial: Seeds of change</p><p>Two months into 2024 and, potentially, we are at that moment where our New Year\u2019s resolutions either stuck or have faded into oblivion.</p><p>Creating (or breaking) habits takes time. Old-timers will tell you three weeks is the timeframe to aim for; others say a month. There is no scientific equation for self-improvement. It really just takes conviction, determination and goals.</p><p>Generally speaking, we have to motivate ourselves toward change. Perhaps we have put on a few pounds, or have gotten lazy. Or we have become reliant on behaviors that are harmful to our well-being, such as too much screen time, overspending, gambling or the like. Or we have slipped into the realm of addiction through smoking, substance abuse or drinking.</p><p>We can be fine with external changes, at least on a temporary basis. When the snow or wind takes out the electricity or the internet, and we cannot use our phones. Or we have to wait to get the driveway clear before we can get to town. Or the weather \u2014 regardless of the season \u2014 derails us from our exercise regimen. But almost four years ago now, many Vermonters lives were changed in truly beneficial and meaningful ways. It is hard to conceive that the pandemic actually had some silver linings.</p><p>A new study, conducted jointly by the University of Vermont and the University of Maine, found that food insecurity and home and wild food production \u2014 gardening, hunting, fishing, foraging and having \u201cbackyard\u201d poultry or livestock \u2014 increased significantly during the COVID-19 pandemic.</p><p>What\u2019s more, the study found that a lot of the lifestyle changes that came from that difficult time have been carried forward, and have become adapted into regular activities.</p><p>The findings were published in a paper in Scientific Reports. The researchers surveyed more than 1,000 individuals in rural Vermont and Maine (the two most rural states in the country) to identify their food security and food sources.</p><p>\u201cThis work is among the first to directly correlate (home and wild food production) during the pandemic with improved food security outcomes for food insecure households,\u201d the report reads. \u201cOur research also demonstrates that, among this sample of respondents \u2026 most live in households that engaged in (home and wild food production) and engagement in these activities continued to grow during the first year of the pandemic, especially among food insecure households.\u201d</p><p>Researchers say they hope that policymakers will consider how home and wild food production might lead to a more resilient food system. Meredith Niles, an associate professor at UVM who led the study, said the data show \u201cit is a potential solution set that has been largely overlooked.\u201d</p><p>According to the researchers, programs that support food production are often overlooked by policymakers, but the research suggests that these activities could bolster food security, especially during ever more frequent crisis situations, including extreme weather events as a result of climate change.</p><p>\u201cEven during normal times, there are many barriers to food access especially for people experiencing poverty. When the COVID-19 pandemic began, there were additional barriers including travel restrictions, stay at home orders and disruptions to the supply chain,\u201d said Rachel Schattman, assistant professor of sustainable agriculture at the University of Maine. \u201cWhile there were a variety of food assistance programs, no one had really looked at how self-provisioning things like hunting, gardening, canning, foraging and raising backyard animals contributed to food security.\u201d</p><p>The report suggests there is anecdotal evidence in the early days of the pandemic about people starting gardens and stories about canning jar shortages. However, this paper brings quantitative data to back up those stories.</p><p>Niles said the researchers were able to show, at a large scale with significant data, that people who did home and wild food production, especially gardening, in the early part of the pandemic, were more likely to be food secure nine to 12 months later.</p><p>\u201cIt\u2019s exciting because we haven\u2019t really seen this scale of data before and over multiple time points to assess this issue,\u201d Niles said.</p><p>Sam Bliss, a postdoctoral fellow at UVM and a researcher for the paper noted, \u201cWe\u2019ve suspected that producing some of your own food through hunting, fishing, foraging, gardening helps people\u2019s food security. This is the best evidence yet that we have that producing your own food makes a difference.\u201d</p><p>Notably, almost 81% of those surveyed said they intended to continue to engage in some kind of home and wild food production in the time after COVID.</p><p>There have been socioeconomic and sociodemographic barriers for some individuals and groups. But much of the research indicates short- and long-term benefits to self-sufficiency and well-being.</p><p>We say: Get out the seed catalogs and start planning for spring. It\u2019s worth planting those seeds of change.</p><p>END</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/fda0a1a665606e7a5bba50f715737fea",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 3,
+            "reason": "The document contains multiple editorials, each focusing on different topics. The first editorial discusses the regulation of THC-infused products, which has some relevance to health due to the potential risks and safety concerns mentioned. The second editorial addresses antisemitism at Harvard, which is not related to health. The third editorial covers online sports betting, which has minimal relevance to health. The fourth editorial discusses funding for crime victim services, which has some indirect relevance to mental health and recovery. The fifth editorial talks about food security and home food production during the pandemic, which is relevant to health in terms of nutrition and food access. Overall, the document has mixed relevance to the topic of health, with some sections being more pertinent than others."
+        }
+    }
+}

@@ -1,0 +1,427 @@
+﻿{
+    "altids": {
+        "itemid": "6b069fd8c14c4c65236d708b347697f0",
+        "etag": "6b069fd8c14c4c65236d708b347697f0_9a10aza0c0",
+        "friendlykey": "384430817614",
+        "referenceid": "US--Election 2024-Biden-Abortion"
+    },
+    "version": 9,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2024-04-24T02:50:07Z",
+    "firstcreated": "2024-04-23T04:19:53Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "ednote": "Eds: UPDATES: Updates Media.; Minor edit.",
+    "editorialtypes": [
+        "Lead"
+    ],
+    "signals": [
+        "newscontent"
+    ],
+    "title": "US--Election 2024-Biden-Abortion",
+    "headline": "Biden blames Trump for Florida's 6-week abortion ban, says women nationwide face health crisis",
+    "headline_extended": "President Joe Biden is blaming Donald Trump for Florida\u2019s upcoming abortion ban and other restrictions across the country that have imperiled access to care for pregnant women",
+    "slugline": "BC-US--Election 2024-Biden-Abortion, 9th Ld-Writethru",
+    "description_summary": "President Joe Biden is blaming Donald Trump for Florida\u2019s upcoming abortion ban and other restrictions across the country that have imperiled access to care for pregnant women. Biden on Tuesday argued that Trump has created a \u201chealthcare crisis for women all over this country.\u201d The president is seeking to capitalize on the unceasing momentum against abortion restrictions nationwide. He's hoping to buoy his reelection bid in battleground states he won in 2020. And he is also going on the offensive against Trump in states that the presumptive Republican nominee won four years ago.",
+    "bylines": [
+        {
+            "by": "By SEUNG MIN KIM",
+            "title": "Associated Press"
+        }
+    ],
+    "located": "TAMPA, Fla.",
+    "datelinelocation": {
+        "city": "Tampa",
+        "countryareacode": "FL",
+        "countryareaname": "Florida",
+        "countrycode": "USA",
+        "countryname": "United States",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                -82.45843,
+                27.94752
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "president joe biden florida donald trump abortion"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "person": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a6331b54c46e4ca8b79fa40fada95db5",
+            "name": "Donald Trump",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "POLITICIAN",
+                "PERSON"
+            ],
+            "relevance": 78
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "42fcd5108d2610048a34f7ae5e3ffd3e",
+            "name": "Joe Biden",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "POLITICIAN",
+                "PERSON"
+            ],
+            "relevance": 78
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "a",
+            "name": "a"
+        },
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "p",
+            "name": "p"
+        },
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "36f9833daec54de29abab6394feacafd",
+            "name": "Health disparities",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 94
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e22e35087de410048fc2df092526b43e",
+            "name": "Abortion",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 66
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e22df6887de410048fc1df092526b43e",
+            "name": "Women's health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 84
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86aad5207dac100488ecba7fa5283c3e",
+            "name": "Politics",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 94
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "24e61d6d4e654ae6bda1f1558c8cc1f3",
+            "name": "2024 United States presidential election",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 74
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "abfca78268874726966cdad8c35c4ae3",
+            "name": "Washington news",
+            "creator": "Editorial",
+            "editorial_subject": "Washington news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Editorial",
+            "editorial_subject": "Health",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86aad5207dac100488ecba7fa5283c3e",
+            "name": "Politics",
+            "creator": "Editorial",
+            "editorial_subject": "Politics",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cb06ab1082af100482f8df092526b43e",
+            "name": "Florida",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -82.5001,
+                    28.75054
+                ]
+            },
+            "relevance": 95,
+            "parentnames": [
+                "United States"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "661850e07d5b100481f5c076b8e3055c",
+            "name": "Latin America and Caribbean",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "cb06ab1082af100482f8df092526b43e",
+            "name": "Florida",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "associations": {
+        "1": {
+            "altids": {
+                "itemid": "52ced25afccd4fc3b4a9eafb966a4cfe"
+            },
+            "type": "picture"
+        },
+        "2": {
+            "altids": {
+                "itemid": "48dd99ec77984eceb97c4a8b98c06551"
+            },
+            "type": "picture"
+        },
+        "3": {
+            "altids": {
+                "itemid": "9fb824177a31492d930d90de8a6a3332"
+            },
+            "type": "picture"
+        },
+        "4": {
+            "altids": {
+                "itemid": "16a396459c9f4e21967d766378436df3"
+            },
+            "type": "picture"
+        },
+        "5": {
+            "altids": {
+                "itemid": "8a7dfdd72ac545bb87f86c969939e5e6"
+            },
+            "type": "picture"
+        },
+        "6": {
+            "altids": {
+                "itemid": "56e68ebc330344648eb1db1a9fe04cc0"
+            },
+            "type": "picture"
+        },
+        "7": {
+            "altids": {
+                "itemid": "9e018677f6354d97a2096afd19714cf4"
+            },
+            "type": "picture"
+        },
+        "8": {
+            "altids": {
+                "itemid": "cd60ac4dd63d47ee8845687d74b46464"
+            },
+            "type": "picture"
+        },
+        "9": {
+            "altids": {
+                "itemid": "7c6292fa70d54933a86b1b53945cdfd9"
+            },
+            "type": "picture"
+        },
+        "10": {
+            "altids": {
+                "itemid": "bc0c68df16e94875ab1a5533addee31e"
+            },
+            "type": "picture"
+        },
+        "11": {
+            "altids": {
+                "itemid": "f02ee8efbace4ced92fd0fca9ea1dab7"
+            },
+            "type": "picture"
+        },
+        "12": {
+            "altids": {
+                "itemid": "8c2483ed4b174480acaaebd82f1e388b"
+            },
+            "type": "picture"
+        },
+        "13": {
+            "altids": {
+                "itemid": "829b567b216b4b5593dca841bb81aa1a"
+            },
+            "type": "picture"
+        },
+        "14": {
+            "altids": {
+                "itemid": "ee6aa19b24f046a9abc494eaf49892b0"
+            },
+            "type": "picture"
+        },
+        "15": {
+            "altids": {
+                "itemid": "2476fa43b60a4e2b8ae6c07e5cea3764"
+            },
+            "type": "picture"
+        },
+        "16": {
+            "altids": {
+                "itemid": "5ed0ae4f650f40dea5cf0151a535f267"
+            },
+            "type": "picture"
+        },
+        "17": {
+            "altids": {
+                "itemid": "2d0c0e04e60640cb99ebfe8735936ab4"
+            },
+            "type": "picture"
+        },
+        "18": {
+            "altids": {
+                "itemid": "e699bf9b5bd34e39aea51567c5e8260c"
+            },
+            "type": "video"
+        },
+        "19": {
+            "altids": {
+                "itemid": "3268371794d8452e8f6964e626e8a6c1"
+            },
+            "type": "audio"
+        },
+        "20": {
+            "altids": {
+                "itemid": "a720f0adb1b9423095296ce4730460e9"
+            },
+            "type": "audio"
+        },
+        "21": {
+            "altids": {
+                "itemid": "92a26625f77344db82b189204531204a"
+            },
+            "type": "audio"
+        }
+    },
+    "body_nitf": "<p>TAMPA, Fla. (AP) \u2014 <a href=\"https://apnews.com/hub/joe-biden\">President Joe Biden</a> on Tuesday blamed Donald Trump for Florida's upcoming abortion ban and other restrictions across the country that have <a href=\"https://apnews.com/article/pregnancy-emergency-care-abortion-supreme-court-roe-9ce6c87c8fc653c840654de1ae5f7a1c\">imperiled access</a> to care for pregnant women, arguing Trump has created a \u201chealthcare crisis for women all over this country.\u201d</p><p>Biden's campaign events at Hillsborough Community College in Tampa placed the president in the epicenter <a href=\"https://apnews.com/article/democrats-abortion-ivf-reproductive-rights-roe-40a80fbe83a99f37d15699c47579636d\">of the latest battle over abortion restrictions</a>. The state\u2019s six-week abortion ban is poised to go into effect May 1 at the same time that <a href=\"https://apnews.com/article/florida-abortion-ban-supreme-court-ruling-6a4949fc7459afe9b5e298086a793126\">Florida voters are gearing up for a ballot measure</a> that would enshrine abortion rights in the state\u2019s constitution. Biden said that millions of women are facing \u201cpain and cruelty.\"</p><p>\u201cBut it\u2019s not inevitable. We can stop it. When you vote, we can stop it,\" he said.</p><p>The president is seeking to capitalize on the unceasing momentum against <a href=\"https://apnews.com/article/abortion-ballot-amendment-ban-protection-states-2024-052ff9846f8416efb725240af22b92ec\">abortion restrictions nationwide</a> to not only buoy his reelection bid in battleground states he won in 2020, but also to go on the offensive against Trump in states that the presumptive Republican nominee won four years ago. <a href=\"https://apnews.com/article/florida-2024-election-donald-trump-joe-biden-ron-desantis-abortion-1f891a163e15d3c8f4fc6ba9bb647b97\">One of those states is Florida</a>, where Biden lost to Trump by 3.3 percentage points.</p><p>On Tuesday, he chronicled increasing medical concerns for women in the two years since the Supreme Court ended federal abortion protections.</p><p>\u201cThere was one person who was responsible for this nightmare,\" Biden said. \u201cAnd he\u2019s acknowledged it and he brags about it \u2014 <a href=\"https://apnews.com/article/abortion-trump-republican-presidential-election-2024-585faf025a1416d13d2fbc23da8d8637\">Donald Trump</a>.\u201d</p><p>Biden said Trump, who has publicly waffled on his abortion views, and of late has said <a href=\"https://apnews.com/article/trump-abortion-2024-ban-7bf06e0856b88a710c79a6eb85cffa6a\">abortion is a matter for states to decide</a>, is concerned voters will now hold him accountable.</p><p>\u201cFolks, the bad news for Trump is that we are going to hold him accountable,\u201d Biden said.</p><p>At the same time, advocates on the ground say support for abortion access cuts across parties. They're intent on making the issue as nonpartisan as possible as they work to scrounge up at least 60% support from voters for the ballot initiative.</p><p>That could mean in some cases, Florida voters would split their tickets, backing GOP candidates while supporting the abortion measure.</p><p>\u201cI think that normal people are aware that a candidate campaign is really different than a ballot initiative,\u201d said Lauren Brenzel, campaign director for Floridians Protecting Freedom, which gathered signatures to put the abortion question before voters. \u201cYou can vote for your preferred candidate of any political party and still not agree with them on every single issue.\"</p><p>Brenzel continued, \u201cThis gives voters an opportunity to have their message heard on one policy platform.\u201d</p><p>On the same day the Florida Supreme Court ruled that the ballot measure could go before voters, it also upheld the state\u2019s 15-week abortion ban. That subsequently cleared the way for the new ban on the procedure after six weeks of pregnancy, which is often before women know they are pregnant, to go into effect next week.</p><p>Organizers of the abortion ballot measure say they collected nearly 1.5 million signatures to put the issue before voters, although the state stopped counting at just under a million. Roughly 891,500 signatures were required. Of the total number of signatures, about 35% were from either registered Republican voters or those not affiliated with a party, organizers said.</p><p>State Rep. Anna Eskamani, a Democrat, said if the abortion ballot initiative becomes branded as a partisan effort, \u201cit just makes it more challenging to reach 60%.\u201d Eskamani, who worked at Planned Parenthood before running for political office, said she is encouraging the Biden administration to focus broadly on the impact of a six-week ban and let the ballot measure speak for itself.</p><p>\u201cAt the end of the day, the ballot initiative is going to be a multimillion-dollar campaign that stands very strongly on its own,\u201d Eskamani said.</p><p>Trump's campaign did not respond to a question on whether the former president, a Florida voter, would oppose or support the ballot measure. In an NBC interview last September, Trump called Florida\u2019s six-week ban \u201cterrible.\u201d But he has repeatedly highlighted the three conservative-leaning justices he chose for the high court who cleared the way to overturn Roe vs. Wade.</p><p>Republicans were dismissive of the Biden campaign and the broader Democratic Party\u2019s efforts to use abortion as a political cudgel, arguing that other issues will matter more with voters in November.</p><p>\u201cBiden must have forgotten that thousands of Americans have fled from extremist Democrat policies to prosperous and pro-life states like Florida,\" said Republican National Committee Chairman Michael Whatley.</p><p>Still, Trump and other Republicans are aware that voter backlash against increasing restrictions could be a serious liability this fall.</p><p>Abortion-rights supporters have won every time the issue has been put before voters, including in solidly conservative states such as Kansas, Kentucky and Ohio. Last month, a <a href=\"https://apnews.com/article/alabama-ivf-abortion-legislature-378c3fa32dcfc2d0401f3893828482af\">Democrat in a suburban state House district in Alabama</a> flipped the seat from Republican control by campaigning on abortion rights, weeks after in vitro fertilization services had been paused in the state.</p><p>Nikki Fried, the chairwoman of the state Democratic Party, said Florida will be a competitive state on the presidential level \u201cbecause of the extremism that has come out of Florida.\u201d No Democrat has won the state on the presidential level since 2012, but state party officials have found some glimmers of political change in vastly smaller races, such as the <a href=\"https://apnews.com/article/jacksonville-florida-first-female-mayor-d6c7b6d64bd2071992670f580c900444\">open Jacksonville mayor\u2019s race</a> last May that saw a Democrat win in what was once a solidly Republican city.</p><p>Florida Gov. Ron DeSantis, a Republican, said at a news conference before the visit that the abortion amendment was written in a way to deliberately mislead voters, an argument that the state Supreme Court disagreed with when it approved the ballot language.</p><p>\u201cAll I can tell you is Floridians are not buying what Joe Biden is selling and in November we\u2019re going to play an instrumental role in sending him back to Delaware where he belongs,\" he said.</p><p>___</p><p>Associated Press writers Brendan Farrington in Tallahassee and Colleen Long in Washington contributed to this report.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/president-joe-biden-florida-donald-trump-abortion-6b069fd8c14c4c65236d708b347697f0",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 3,
+            "reason": "The document primarily focuses on the political implications of abortion laws and the blame game between President Joe Biden and former President Donald Trump. While it does touch on the health crisis for women due to restricted access to abortion, the main thrust of the article is political rather than health-focused. The health aspect is mentioned but not deeply explored or analyzed in detail."
+        }
+    }
+}

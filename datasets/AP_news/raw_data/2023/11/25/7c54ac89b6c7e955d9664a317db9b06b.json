@@ -1,0 +1,198 @@
+﻿{
+    "altids": {
+        "itemid": "7c54ac89b6c7e955d9664a317db9b06b",
+        "etag": "7c54ac89b6c7e955d9664a317db9b06b_0a2aza0c0",
+        "friendlykey": "617104638420",
+        "referenceid": "LA--Mayor-Hunting Crash"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2023-11-25T15:50:25Z",
+    "firstcreated": "2023-11-25T15:50:24Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "LA--Mayor-Hunting Crash",
+    "headline": "Plaquemine mayor breaks ribs, collarbone in 4-wheeler crash",
+    "headline_extended": "The City of Plaquemine says the mayor of the south Louisiana city has undergone surgery for a broken collarbone, ribs and ankle after a hunting accident",
+    "slugline": "AP-LA--Mayor-Hunting Crash",
+    "description_summary": "The City of Plaquemine says the mayor of the south Louisiana city has undergone surgery for a broken collarbone, ribs and ankle after a hunting accident. According to a post shared on the city's Facebook page, Mayor Ed Reeves was hunting Friday morning when his four-wheeler hit a large hole, flipped and landed on top of him. The city's post on Saturday notes that Reeves will be in the hospital for a few days but is expected to fully recover. Reeves has been the mayor of Plaquemine since January 2017 and was previously a member of the Iberville Parish Council and on the Plaquemine Board of Selectmen.",
+    "located": "PLAQUEMINE, La.",
+    "datelinelocation": {
+        "city": "Plaquemine",
+        "countryareacode": "LA",
+        "countryareaname": "Louisiana",
+        "countrycode": "USA",
+        "countryname": "United States",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                -92.21513,
+                30.40298
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2023 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "plaquemine mayor four wheeler crash hunting"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "468257dba1c848ca93ba314d4ce86539",
+            "name": "Surgery",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 37
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "ee483cc088711004894aeb2e0e616f0b",
+            "name": "Social media",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 37
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "43fb970882b310048496df092526b43e",
+            "name": "Louisiana",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -92.0004,
+                    31.00047
+                ]
+            },
+            "relevance": 92,
+            "parentnames": [
+                "United States"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "7a55e0187eff10048492df092526b43e",
+            "name": "London",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "df4691387d6b10048fdeba7fa5283c3e"
+            ],
+            "locationtype": {
+                "code": "9d26a20b35f0484a891740f8189d4c7b",
+                "name": "City"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -0.12574,
+                    51.50853
+                ]
+            },
+            "relevance": 71,
+            "parentnames": [
+                "England"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "43fb970882b310048496df092526b43e",
+            "name": "Louisiana",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "body_nitf": "<p>PLAQUEMINE, La. (AP) \u2014 The mayor of a south Louisiana city underwent surgery Saturday for a broken collarbone, ribs and ankle after a hunting accident.</p><p>Plaquemine Mayor Ed Reeves was hunting Friday morning when his four-wheeler hit a large hole, flipped and landed on top of him, according to a post shared to the city's Facebook page.</p><p>The city noted that Reeves will be in the hospital for a few days.</p><p>\u201cHe is expected to make a full recovery,\u201d the post reads. \u201cWe ask that you keep him in your prayers.\u201d</p><p>Reeves has been the mayor of Plaquemine since January 2017. He previously served as a member of the Iberville Parish Council and on the Plaquemine Board of Selectmen.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/plaquemine-mayor-four-wheeler-crash-hunting-7c54ac89b6c7e955d9664a317db9b06b",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 3,
+            "reason": "The document primarily focuses on an accident involving the mayor of Plaquemine and the injuries he sustained, including a broken collarbone, ribs, and ankle. While it does mention his health status and expected recovery, the main emphasis is on the incident and his role as mayor rather than on health as a broader topic. Therefore, it is somewhat relevant to health but not highly focused on it."
+        }
+    }
+}

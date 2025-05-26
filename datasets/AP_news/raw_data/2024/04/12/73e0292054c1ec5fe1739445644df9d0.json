@@ -1,0 +1,217 @@
+﻿{
+    "altids": {
+        "itemid": "73e0292054c1ec5fe1739445644df9d0",
+        "etag": "73e0292054c1ec5fe1739445644df9d0_2a6aza0c0",
+        "friendlykey": "755744650399",
+        "referenceid": "US--Tainted-IV-Bags"
+    },
+    "version": 2,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2024-04-12T23:48:02Z",
+    "firstcreated": "2024-04-12T22:56:49Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "ednote": "Eds: UPDATES: Links photos",
+    "editorialtypes": [
+        "Lead"
+    ],
+    "signals": [
+        "newscontent"
+    ],
+    "title": "US--Tainted-IV-Bags",
+    "headline": "Dallas doctor convicted of tampering with IV bags linked to coworker's death and other emergencies",
+    "headline_extended": "Federal prosecutors say a Dallas anesthesiologist has been convicted for injecting a nerve-blocking agent and other drugs into bags of intravenous fluid at a surgical center where he worked, which led to the death of a coworker and caused cardiac emergencies for several patients",
+    "slugline": "BC-US--Tainted-IV-Bags, 2nd Ld-Writethru",
+    "description_summary": "Federal prosecutors say a Dallas anesthesiologist has been convicted for injecting a nerve-blocking agent and other drugs into bags of intravenous fluid at a surgical center where he worked, which led to the death of a coworker and caused cardiac emergencies for several patients. A jury convicted 60-year-old Raynaldo Riviera Ortiz Jr. on Friday. A sentencing date has not yet been set for Ortiz, who faces up to 190 years in prison. Prosecutors said that evidence presented at trial showed that numerous patients at Surgicare North Dallas suffered cardiac emergencies during routine medical procedures performed by various doctors between May 2022 and August 2022.",
+    "located": "DALLAS",
+    "datelinelocation": {
+        "city": "Dallas",
+        "countryareacode": "TX",
+        "countryareaname": "Texas",
+        "countrycode": "USA",
+        "countryname": "United States",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                -96.80667,
+                32.78306
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "tainted IV bags dallas doctor convicted"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "a",
+            "name": "a"
+        },
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "468257dba1c848ca93ba314d4ce86539",
+            "name": "Surgery",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 33
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 83
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "77290fe882c7100488fddf092526b43e",
+            "name": "Dallas",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "6e92d9b882c7100488e5df092526b43e"
+            ],
+            "locationtype": {
+                "code": "9d26a20b35f0484a891740f8189d4c7b",
+                "name": "City"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -96.80667,
+                    32.78306
+                ]
+            },
+            "relevance": 56,
+            "parentnames": [
+                "Texas"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "6e92d9b882c7100488e5df092526b43e",
+            "name": "Texas",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661850e07d5b100481f5c076b8e3055c",
+            "name": "Latin America and Caribbean",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "associations": {
+        "1": {
+            "altids": {
+                "itemid": "f9f81031da204c0dae968dc70c092d36"
+            },
+            "type": "picture"
+        },
+        "2": {
+            "altids": {
+                "itemid": "c39ccd072ad640839a6b2e007c86dfcc"
+            },
+            "type": "picture"
+        }
+    },
+    "body_nitf": "<p>DALLAS (AP) \u2014 A Dallas anesthesiologist was convicted Friday for injecting a nerve-blocking agent and other drugs into bags of intravenous fluid at a surgical center where he worked, which led to the death of a coworker and caused cardiac emergencies for several patients, federal prosecutors said.</p><p>A jury convicted Raynaldo Riviera Ortiz Jr., 60, of four counts of tampering with consumer products resulting in serious bodily injury, one count of tampering with a consumer product and five counts of intentional adulteration of a drug, prosecutors said. A sentencing date has not yet been set for Ortiz, who faces up to 190 years in prison.</p><p>\u201cDr. Ortiz cloaked himself in the white coat of a healer, but instead of curing pain, he inflicted it,\u201d U.S. Attorney Leigha Simonton for the northern district of Texas said in a video statement.</p><p>Prosecutors said that evidence presented at trial showed that numerous patients at Surgicare North Dallas suffered cardiac emergencies during routine medical procedures performed by various doctors between May 2022 and August 2022. During that time, an anesthesiologist who had worked at the facility earlier that day died while treating herself for dehydration using an IV bag.</p><p>Prosecutors said Ortiz, <a href=\"https://apnews.com/article/health-texas-arrests-dallas-e198fa582d50f7606bf92823b74f4b28\">who was arrested</a> in September 2022, had surreptitiously placed the tainted IV bags into a warming bin at the facility and waited for them to be used in his colleagues\u2019 surgeries.</p><p>Evidence presented at trial showed that at the time of the emergencies, Ortiz was facing disciplinary action for an alleged medical mistake made in one of his own surgeries, prosecutors said.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/tainted-iv-bags-dallas-doctor-convicted-73e0292054c1ec5fe1739445644df9d0",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 3,
+            "reason": "The document discusses a criminal case involving a Dallas anesthesiologist who tampered with IV bags, leading to the death of a coworker and causing cardiac emergencies for several patients. While the primary focus is on the criminal activities and legal proceedings, the content is related to health as it involves medical procedures, patient safety, and the misuse of medical products. Therefore, it has some relevance to the topic of health, but it is not the main focus."
+        }
+    }
+}

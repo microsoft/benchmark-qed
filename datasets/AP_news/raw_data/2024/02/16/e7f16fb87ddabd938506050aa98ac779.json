@@ -1,0 +1,278 @@
+﻿{
+    "altids": {
+        "itemid": "e7f16fb87ddabd938506050aa98ac779",
+        "etag": "e7f16fb87ddabd938506050aa98ac779_1a5aza0c0",
+        "friendlykey": "555103508350",
+        "referenceid": "LT--Brazil-Dengue Epidemic"
+    },
+    "version": 1,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2024-02-16T08:42:43Z",
+    "firstcreated": "2024-02-16T05:28:45Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "ednote": "Eds: EDITS: Edits headline.",
+    "editorialtypes": [
+        "Lead"
+    ],
+    "signals": [
+        "newscontent"
+    ],
+    "title": "LT--Brazil-Dengue Epidemic",
+    "headline": "Brazil's health agents scour junkyards and roofs for mosquitos to fight dengue epidemic",
+    "headline_extended": "Local public health officials in Rio de Janeiro have been scouring the city's neighborhoods and even its junkyards for signs of standing water where mosquitoes can lay their eggs",
+    "slugline": "BC-LT-Brazil-Dengue-Epidemic, 1st Ld-Writethru",
+    "description_summary": "Local public health officials in Rio de Janeiro have been scouring the city's neighborhoods and even its junkyards for signs of standing water where mosquitoes can lay their eggs. It's part of nationwide efforts to curtail a surge in Brazil of the mosquito-borne illness of dengue fever during the country\u2019s key tourist season that runs through the end of February. So far this year, Brazil has recorded 512,000 cases, nearly four times more than those registered in the same period a year ago.",
+    "bylines": [
+        {
+            "by": "By DIANE JEANTET",
+            "title": "Associated Press"
+        }
+    ],
+    "located": "RIO DE JANEIRO",
+    "datelinelocation": {
+        "city": "Rio De Janeiro",
+        "countrycode": "BRA",
+        "countryname": "Brazil",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                -43.18223,
+                -22.90642
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "dengue fever brazil mosquito el nino health"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "i",
+            "name": "i"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 95
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "c025210087a910048885e9f06a797907",
+            "name": "Insects",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 76
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "084dafb87f00100481c5f571351eed07",
+            "name": "Dengue fever",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 95
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Editorial",
+            "editorial_subject": "Health",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "bb2d2c5f441a452cb24bb511a2ab5eea",
+            "name": "World news",
+            "creator": "Editorial",
+            "editorial_subject": "World news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "94e3f52124654ce0869ed3a18bdfba63",
+            "name": "Rio de Janeiro",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661effd07d5b1004829cc076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "9d26a20b35f0484a891740f8189d4c7b",
+                "name": "City"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -43.2075,
+                    -22.90278
+                ]
+            },
+            "relevance": 96,
+            "parentnames": [
+                "Brazil"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "661850e07d5b100481f5c076b8e3055c",
+            "name": "Latin America and Caribbean",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "associations": {
+        "1": {
+            "altids": {
+                "itemid": "32083832d03047a19ca8469463f5c3b7"
+            },
+            "type": "picture"
+        },
+        "2": {
+            "altids": {
+                "itemid": "b53da964d1c4420d8f7b1f60f1fad63f"
+            },
+            "type": "picture"
+        },
+        "3": {
+            "altids": {
+                "itemid": "cd25285634314c57b4ee5cc4eb2effa9"
+            },
+            "type": "picture"
+        },
+        "4": {
+            "altids": {
+                "itemid": "a6dc203104e64419a4dcbabdf6d6fafe"
+            },
+            "type": "picture"
+        },
+        "5": {
+            "altids": {
+                "itemid": "38a1080764624cc79c2065e4ef4ab652"
+            },
+            "type": "picture"
+        },
+        "6": {
+            "altids": {
+                "itemid": "5e0e23bf1ec54e79beda77b60b57af1f"
+            },
+            "type": "picture"
+        },
+        "7": {
+            "altids": {
+                "itemid": "3db4b44583b346439368d7c3c391387a"
+            },
+            "type": "picture"
+        },
+        "8": {
+            "altids": {
+                "itemid": "d13fc4cbc8c34c4586d786e8a98c1ee8"
+            },
+            "type": "picture"
+        },
+        "9": {
+            "altids": {
+                "itemid": "3bf04ed0631e4bc5b61620b904301263"
+            },
+            "type": "picture"
+        },
+        "10": {
+            "altids": {
+                "itemid": "77d4cb7af9c04fe0b93710c2937d1615"
+            },
+            "type": "picture"
+        },
+        "11": {
+            "altids": {
+                "itemid": "a6bfdca187e14e3eac82a9c111dcca44"
+            },
+            "type": "picture"
+        }
+    },
+    "body_nitf": "<p>RIO DE JANEIRO (AP) \u2014 The small team of state public health workers slalomed between auto parts strewn across a Rio de Janeiro junkyard, looking for standing water where mosquitoes might have laid their eggs.</p><p>They were part of nationwide efforts to curtail a <a href=\"https://apnews.com/article/brazil-dengue-rio-carnival-8ed7cc1e4aade9fe9f8682b02b0ff967\">surge in Brazil of the mosquito-borne illness of dengue fever</a> during the country's key tourist season that runs through the end of February.</p><p>Paulo Cesar Gomes, a 56-year-old entomologist, found some mosquito larvae swimming in shallow rainwater inside a car bumper.</p><p>\u201cWe call this type of location a strategic point\u201d because of the high turnover in items converging from all over, he said. \u201cIt's difficult not to have mosquitoes here.\"</p><p>Earlier in the month, just days before Rio kicked of its <a href=\"https://apnews.com/article/brazil-carnival-king-momo-dengue-security-9cd81dada8eb24d6fd68eae8cb137a9d\">world-famous Carnival festivities</a>, the city joined several states and the country's capital in declaring a public health epidemic over this year's greater-than-normal number of cases of dengue.</p><p>\u201cWe had more cases in January than any other January,\u201d Ethel Maciel, head of health surveillance at Brazil's Health Ministry, said in an interview with The Associated Press.</p><p>So far this year, Brazil has recorded 512,000 cases nationwide, including both confirmed and likely cases \u2014 nearly four times more than those registered in the same period a year ago.</p><p>There have been 425 deaths under investigation for dengue so far this year, with 75 confirmed, as compared with just over 1,000 for all of 2023.</p><p>Dengue is a viral infection transmitted to humans through the bite of infected mosquitoes. Frequent rains and high temperatures, which accelerate the hatching of mosquito eggs and the development of larvae, make the famously hot city of Rio especially susceptible to outbreaks.</p><p>Many who are infected never develop symptoms, but dengue can cause high fever, headache, body aches, nausea and a rash, according to the World Health Organization. While most get better after a week or so, some develop a severe form that requires hospitalization and can be fatal.</p><p>Health workers like Gomes, equipped with masks and plastic gloves, meticulously combed the junkyard on a hot morning, gently kicking and shaking piled up auto parts looking for any trace of the Aedes aegypti mosquito that can spread dengue.</p><p>Whenever he saw standing water Gomes grabbed a hand pipette out of his bag and looked for larvae, which he collected in a white plastic container. Captured mosquitos and larvae are kept alive and brought to a city laboratory to be tested for dengue.</p><p>At locations with positive tests, health agents spray the walls with a product that kills mosquitos and then monitor the location for weeks.</p><p>Maciel, from the Health Ministry, said the first warning about a possible epidemic came in September.</p><p>Brazil\u2019s leading research institute, the state-funded Oswaldo Cruz Foundation, or Fiocruz, came up with several scenarios indicating that Brazil could have as many as 4.2 million cases this year, up from 1.6 million in 2023.</p><p>Maciel said the surge is due to excessive heat and intense rain, both possible effects of climate change or El Ni\u00f1o, a natural, temporary and occasional warming of part of the Pacific that shifts weather patterns across the globe.</p><p>Maciel also cited the circulation of four dengue virus serotypes at the same time, one of which authorities had not seen in 15 years.</p><p>In Rio, more than 80% of mosquito breeding sites are located in residential properties, health officials say. So, efforts to combat dengue must start in homes, and raising awareness is key, said M\u00e1rio S\u00e9rgio Ribeiro, a health surveillance official for Rio de Janeiro state.</p><p>State officials launched a \"10 minutes that save lives\u201d initiative to encourage residents to inspect their homes, offices and places of worship for any standing water.</p><p>Health workers and volunteers went door to door, pacing up and down the narrow streets of Rio's Tabajara working-class neighborhood, or favela, to spread the word. They distributed leaflets and climbed on rooftops, looking for containers with rainwater.</p><p>One elderly woman, Vilza da Costa, told the AP she believes she contracted the disease.</p><p>\u201cIt started with a fever, then my body was itching all over, weakness, and a lot of pain. I was in a very bad way,\" she said. \"There are a lot of mosquitoes here.\u201d</p><p>During Carnival, which ended Wednesday, health employees welcomed visitors with free repellent. A van with a giant crossed off mosquito and the words \u201cAgainst Dengue Everyday\u201d opened and closed the parades several nights, for millions of TV viewers to see.</p><p>Maciel said the effect of Carnival will not be known for another week. Even though dengue is not transmissible from person to person, increased tourism can boost the spread of the disease to locations that had not been affected.</p><p>It's not clear if the cases have reached a peak and now \u201care going to start going down, or if the worst-case scenario is indeed happening,\u201d Maciel said.</p><p>____</p><p>Follow AP\u2019s coverage of Latin America and the Caribbean at <a href=\"https://apnews.com/hub/latin-america\">https://apnews.com/hub/latin-america</a></p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/dengue-fever-brazil-mosquito-el-nino-health-e7f16fb87ddabd938506050aa98ac779",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 5,
+            "reason": "The document is highly relevant to the topic of Health. It discusses the efforts of health agents in Brazil to combat a dengue epidemic, including the methods they use to find and eliminate mosquito breeding sites. The document also provides statistics on the number of dengue cases and deaths, explains the symptoms and transmission of the disease, and mentions the impact of climate factors on the outbreak. Additionally, it highlights public health initiatives and community involvement in addressing the epidemic."
+        }
+    }
+}

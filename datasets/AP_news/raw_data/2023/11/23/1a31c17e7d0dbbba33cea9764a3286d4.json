@@ -1,0 +1,273 @@
+﻿{
+    "altids": {
+        "itemid": "1a31c17e7d0dbbba33cea9764a3286d4",
+        "etag": "1a31c17e7d0dbbba33cea9764a3286d4_3a8aza0c0",
+        "friendlykey": "806791109600",
+        "referenceid": "EU-MED--WHO-China-Pneumonia"
+    },
+    "version": 3,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2023-11-23T19:43:24Z",
+    "firstcreated": "2023-11-23T10:17:25Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "ednote": "Eds: UPDATES: Updates with WHO statement Thursday. With AP Photos.",
+    "editorialtypes": [
+        "Lead"
+    ],
+    "signals": [
+        "newscontent"
+    ],
+    "title": "EU-MED--WHO-China-Pneumonia",
+    "headline": "WHO asks China for more information about rise in illnesses and pneumonia clusters",
+    "headline_extended": "The World Health Organization says it has made an official request to China for information about a potentially worrying spike in respiratory illnesses and clusters of pneumonia in children",
+    "slugline": "BC-EU-MED--WHO-China-Pneumonia, 3rd Ld-Writethru",
+    "description_summary": "The World Health Organization says it has made an official request to China for information about a potentially worrying spike in respiratory illnesses and clusters of pneumonia in children. On Thursday, the U.N. health agency said Chinese officials told them they did not detect any \u201cunusual or novel\u201d diseases. The emergence of new new flu strains or other viruses capable of triggering pandemics, typically starts with undiagnosed clusters of respiratory illness. Both SARS and COVID-19 were reported as unusual types of pneumonia. Outside scientists said the situation warranted close monitoring, but were not convinced that the recent spike in respiratory illnesses in China signaled the start of a new global outbreak.",
+    "bylines": [
+        {
+            "by": "By JAMEY KEATEN and MARIA CHENG",
+            "title": "Associated Press"
+        }
+    ],
+    "located": "GENEVA",
+    "datelinelocation": {
+        "city": "Geneva",
+        "countrycode": "CHE",
+        "countryname": "Switzerland",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                6.14569,
+                46.20222
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2023 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "china pneumonia epidemic who"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "i",
+            "name": "i"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 95
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e228bab07de410048fa8df092526b43e",
+            "name": "Lung disease",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 95
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "49febbc87f0010048246f571351eed07",
+            "name": "Pneumonia",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 81
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "bb2d2c5f441a452cb24bb511a2ab5eea",
+            "name": "World news",
+            "creator": "Editorial",
+            "editorial_subject": "World news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Editorial",
+            "editorial_subject": "Health",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        }
+    ],
+    "organisation": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "8997c0688d7410048d178a3c53cbc603",
+            "name": "World Health Organization",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 33
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "54fa9358892310048056fb7860a2fc03",
+            "name": "United Nations",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 47
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "662218c87d5b100482f0c076b8e3055c",
+            "name": "China",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661812607d5b100481f3c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "01f56e0e654841eca2e69bf2cbcc0526",
+                "name": "Nation"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    105,
+                    35
+                ]
+            },
+            "relevance": 57,
+            "parentnames": [
+                "Asia"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "671629607ec110048cdfdf092526b43e",
+            "name": "Beijing",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "662218c87d5b100482f0c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "9d26a20b35f0484a891740f8189d4c7b",
+                "name": "City"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    116.39723,
+                    39.9075
+                ]
+            },
+            "relevance": 69,
+            "parentnames": [
+                "China"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "661812607d5b100481f3c076b8e3055c",
+            "name": "Asia",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "associations": {
+        "1": {
+            "altids": {
+                "itemid": "75592d28d1cb4995a681d17112783753"
+            },
+            "type": "picture"
+        },
+        "2": {
+            "altids": {
+                "itemid": "7c785aed23ab440898e3f4bda934c37f"
+            },
+            "type": "audio"
+        }
+    },
+    "body_nitf": "<p>GENEVA (AP) \u2014 Chinese officials say they did not detect any \u201cunusual or novel diseases\u201d in the country, the World Health Organization said Thursday, following an official request by the U.N. health agency for information about a potentially worrying spike in respiratory illnesses and clusters of pneumonia in children.</p><p>WHO cited unspecified media reports and a global infectious disease monitoring service as reporting clusters of undiagnosed pneumonia in children in northern China and formally requested more details from China earlier this week.</p><p>Outside scientists said the situation warranted close monitoring, but were not convinced that the recent spike in respiratory illnesses in China signaled the start of a new global outbreak.</p><p>The emergence of new flu strains or other viruses capable of triggering pandemics typically starts with undiagnosed clusters of respiratory illness. Both SARS and COVID-19 were first reported as unusual types of pneumonia.</p><p>WHO noted that authorities at China\u2019s National Health Commission on Nov. 13 reported an increase in respiratory diseases, which they said was due to the lifting of COVID-19 lockdown restrictions. Other countries also saw a jump in respiratory diseases such as <a href=\"https://apnews.com/article/science-health-covid-pandemics-072e11e5e3af77aac19fe95773a69610\">respiratory syncytial virus, or RSV,</a> when pandemic restrictions ended.</p><p>WHO said media reports about a week later reported clusters of undiagnosed pneumonia in children in northern China.</p><p>The U.N. agency said it held a teleconference with Chinese health officials on Thursday, during which the data it requested were provided. Those showed an increase in hospital admissions of children due to diseases including bacterial infection, RSV, influenza and common cold viruses since October.</p><p>\u201cNo changes in the disease presentation were reported by the Chinese health authorities,\u201d WHO said. It added that Chinese officials said the spike in patients had not overloaded the country's hospitals.</p><p>Dr. Paul Hunter, a professor of medicine at Britain's University of East Anglia, doubted the wave of infections was sparked by a new disease.</p><p>\u201cIf it was (a new disease), I would expect to see many more infections in adults,\u201d he said in a statement. \u201cThe few infections reported in adults suggest existing immunity from a prior exposure.\u201d</p><p>Francois Balloux of University College London said China was probably experiencing a significant wave of childhood infections since this was the first winter since lockdown restrictions were lifted, which likely reduced children's immunity to common bugs.</p><p>WHO said that northern China has reported a jump in influenza-like illnesses since mid-October compared to the previous three years. It is rare for the U.N. health agency to publicly ask for more detailed information from countries, as such requests are typically made internally. WHO said it requested further data from China via an international legal mechanism.</p><p>According to internal accounts in China, the outbreaks have swamped some hospitals in northern China, including in Beijing, and health authorities have asked the public to take children with less severe symptoms to clinics and other facilities.</p><p>The average number of patients in the internal medicine department at Beijing Children\u2019s Hospital topped 7,000 per day, exceeding the hospital\u2019s capacity, state-owned China National Radio said in an online article earlier this week.</p><p>China\u2019s National Health Commission, in a written Q&A posted online by the official Xinhua News Agency, suggested Thursday that children with mild symptoms \u201cfirst visit primary healthcare institutions or pediatrics departments of general hospitals\u201d because large hospitals are crowded and have long waiting times.</p><p>WHO said that there was too little information at the moment to properly assess the risk of these reported cases of respiratory illness in children. The agency has previously been stymied by a lack of cooperation from countries when new viruses have emerged - particularly in China.</p><p>After SARS broke out in southern China in 2002, Beijing officials told doctors to hide patients, with some being driven around in ambulances while WHO scientists were visiting the country. That prompted WHO to threaten to close its office in China.</p><p>Nearly two decades later, <a href=\"https://apnews.com/article/fed0f89a3b46cfa401e62ce7386f0cfb\">China stalled</a> on sharing critical details about the coronavirus with the U.N. health agency after the new virus emerged in late 2019. WHO publicly applauded China's commitment to stopping the virus \u2014 weeks before it started causing explosive epidemics worldwide.</p><p>\u201cWhile WHO seeks this additional information, we recommend that people in China follow measures to reduce the risk of respiratory illness,\u201d the agency said, advising people to get vaccinated, isolate if they are feeling ill, wear masks if necessary and get medical care as needed.</p><p>___</p><p>Cheng reported from London. AP researcher Wanqing Chen in Beijing contributed to this report.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/china-pneumonia-epidemic-who-1a31c17e7d0dbbba33cea9764a3286d4",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 5,
+            "reason": "The document discusses a rise in respiratory illnesses and pneumonia clusters in China, the response from the World Health Organization (WHO), and the potential implications for global health. It includes detailed information about the situation, the response from Chinese health officials, and the historical context of similar health issues. This is highly relevant to the topic of Health as it addresses current health concerns, international health monitoring, and disease prevention measures."
+        }
+    }
+}

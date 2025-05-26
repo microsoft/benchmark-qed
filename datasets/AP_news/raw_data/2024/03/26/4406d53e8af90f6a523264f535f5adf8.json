@@ -1,0 +1,476 @@
+﻿{
+    "altids": {
+        "itemid": "4406d53e8af90f6a523264f535f5adf8",
+        "etag": "4406d53e8af90f6a523264f535f5adf8_13a17aza0c0",
+        "friendlykey": "423216355609",
+        "referenceid": "US--Supreme Court-Abortion"
+    },
+    "version": 13,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2024-03-26T22:57:38Z",
+    "firstcreated": "2024-03-26T04:03:57Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "ednote": "Eds: UPDATES: Updates Media.",
+    "editorialtypes": [
+        "Lead"
+    ],
+    "signals": [
+        "newscontent"
+    ],
+    "title": "US--Supreme Court-Abortion",
+    "headline": "Supreme Court seems likely to preserve access to the abortion medication mifepristone",
+    "headline_extended": "The Supreme Court seems likely to preserve access to a medication that was used in nearly two-thirds of all abortions in the U.S. last year, in the court\u2019s first abortion case since conservative justices overturned Roe v. Wade two years ago",
+    "slugline": "AP-US--Supreme Court-Abortion, 13th Ld-Writethru",
+    "description_summary": "The Supreme Court seems likely to preserve access to a medication that was used in nearly two-thirds of all abortions in the U.S. last year, in the court\u2019s first abortion case since conservative justices overturned Roe v. Wade two years ago. In nearly 90 minutes of arguments Tuesday, a consensus appeared to emerge that the abortion opponents who challenged the FDA\u2019s approval of the medication, mifepristone, and subsequent actions to ease access to it lack the legal right, or standing, to sue. Such a decision would leave the current rules in place, including sending the drug through the mail. The election-year decision is expected by early summer. Mifepristone, one of two drugs used in medication abortions, is made by New York-based Danco Laboratories.",
+    "bylines": [
+        {
+            "by": "By MARK SHERMAN",
+            "title": "Associated Press"
+        }
+    ],
+    "located": "WASHINGTON",
+    "datelinelocation": {
+        "city": "Washington",
+        "countryareacode": "DC",
+        "countryareaname": "District of Columbia",
+        "countrycode": "USA",
+        "countryname": "United States",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                -77.03637,
+                38.89511
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "supreme court abortion mifepristone telemedicine"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "person": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a6331b54c46e4ca8b79fa40fada95db5",
+            "name": "Donald Trump",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "POLITICIAN",
+                "PERSON"
+            ],
+            "relevance": 44
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "afe2a4f8b30448b3b919eb34f670fc24",
+            "name": "Brett Kavanaugh",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "GOVERNMENT_FIGURE",
+                "PERSON"
+            ],
+            "relevance": 45
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e5e49965b80e40c3a589f0679e486d45",
+            "name": "Neil Gorsuch",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "GOVERNMENT_FIGURE",
+                "PERSON"
+            ],
+            "relevance": 39
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "9c95b0d5a2ea46e7a5954a209893b1bd",
+            "name": "Amy Coney Barrett",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "GOVERNMENT_FIGURE",
+                "PERSON"
+            ],
+            "relevance": 49
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "42fcd5108d2610048a34f7ae5e3ffd3e",
+            "name": "Joe Biden",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "POLITICIAN",
+                "PERSON"
+            ],
+            "relevance": 52
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "w",
+            "name": "w"
+        },
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "p",
+            "name": "p"
+        },
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86aad5207dac100488ecba7fa5283c3e",
+            "name": "Politics",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 56
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e22e35087de410048fc2df092526b43e",
+            "name": "Abortion",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 93
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86ba17607dac1004894eba7fa5283c3e",
+            "name": "Courts",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 77
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Editorial",
+            "editorial_subject": "Health",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86aad5207dac100488ecba7fa5283c3e",
+            "name": "Politics",
+            "creator": "Editorial",
+            "editorial_subject": "Politics",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "abfca78268874726966cdad8c35c4ae3",
+            "name": "Washington news",
+            "creator": "Editorial",
+            "editorial_subject": "Washington news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        }
+    ],
+    "organisation": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "efa933c0892110048d92fb7860a2fc03",
+            "name": "Supreme Court of the United States",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 96
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "788b364882f110048df3df092526b43e",
+            "name": "District of Columbia",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "9d26a20b35f0484a891740f8189d4c7b",
+                "name": "City"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -77.00025,
+                    38.91706
+                ]
+            },
+            "relevance": 32,
+            "parentnames": [
+                "United States"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "661850e07d5b100481f5c076b8e3055c",
+            "name": "Latin America and Caribbean",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "b58f18a082c6100487fbdf092526b43e",
+            "name": "New York",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "b836d07082c610048807df092526b43e",
+            "name": "New York City",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "6e92d9b882c7100488e5df092526b43e",
+            "name": "Texas",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "associations": {
+        "1": {
+            "altids": {
+                "itemid": "1faf42dc4e664cf89c308579c233279e"
+            },
+            "type": "audio"
+        },
+        "2": {
+            "altids": {
+                "itemid": "72062cc397444fffbb62616f04b0de50"
+            },
+            "type": "audio"
+        },
+        "3": {
+            "altids": {
+                "itemid": "0d25a79b34db44699f5ac0bfe335b512"
+            },
+            "type": "audio"
+        },
+        "4": {
+            "altids": {
+                "itemid": "13d1829d110d481c9f04d9fcd0a22de9"
+            },
+            "type": "audio"
+        },
+        "5": {
+            "altids": {
+                "itemid": "0678043cb88f425999b415cb987c3886"
+            },
+            "type": "audio"
+        },
+        "6": {
+            "altids": {
+                "itemid": "fcbe9eee5e0a4e96875d9180cbadd09f"
+            },
+            "type": "audio"
+        },
+        "7": {
+            "altids": {
+                "itemid": "b7b427fc52b648d684103fa731f787dd"
+            },
+            "type": "audio"
+        },
+        "8": {
+            "altids": {
+                "itemid": "d14d954e0af4486091be0606995a6f6c"
+            },
+            "type": "picture"
+        },
+        "9": {
+            "altids": {
+                "itemid": "42deea4ae02341fda533d617ed59a412"
+            },
+            "type": "picture"
+        },
+        "10": {
+            "altids": {
+                "itemid": "efe8da7f91a34dec831921005d6991f5"
+            },
+            "type": "picture"
+        },
+        "11": {
+            "altids": {
+                "itemid": "47e2ceb64a8840a28ce3045064b06542"
+            },
+            "type": "picture"
+        },
+        "12": {
+            "altids": {
+                "itemid": "3e60f8e03d2547a2975cf69faf2e8c00"
+            },
+            "type": "picture"
+        },
+        "13": {
+            "altids": {
+                "itemid": "2a1bf7793a184e2993c2298028a276c8"
+            },
+            "type": "picture"
+        },
+        "14": {
+            "altids": {
+                "itemid": "931b16e37f2847f2912ced4298e6dd4c"
+            },
+            "type": "picture"
+        },
+        "15": {
+            "altids": {
+                "itemid": "e6e6dad9ad674e4b956c5bc596dac7a6"
+            },
+            "type": "picture"
+        },
+        "16": {
+            "altids": {
+                "itemid": "20bc845e16214e29b4ff72cd4e7cd5af"
+            },
+            "type": "picture"
+        },
+        "17": {
+            "altids": {
+                "itemid": "17259e6e7bf546a8bab4b7be8604aafb"
+            },
+            "type": "picture"
+        },
+        "18": {
+            "altids": {
+                "itemid": "fdd18338724547c9a9f069107ced4347"
+            },
+            "type": "video"
+        },
+        "19": {
+            "altids": {
+                "itemid": "f86e76af7b004ff597f5c93aff7ddb89"
+            },
+            "type": "video"
+        },
+        "20": {
+            "altids": {
+                "itemid": "7f57a5ff7740486485abb28165a99c35"
+            },
+            "type": "video"
+        }
+    },
+    "body_nitf": "<p>WASHINGTON (AP) \u2014 The <a href=\"https://apnews.com/hub/us-supreme-court\">Supreme Court</a> on Tuesday seemed likely to preserve access to a medication that was used in <a href=\"https://apnews.com/article/abortion-pills-mifepristone-supreme-court-27d18f91242eb08c4d805880ddb5bb60\">nearly two-thirds of all abortions</a> in the U.S. last year, in the court\u2019s first abortion case since conservative justices <a href=\"https://apnews.com/article/abortion-supreme-court-decision-854f60302f21c2c35129e58cf8d8a7b0\">overturned Roe v. Wade</a> two years ago.</p><p>In nearly 90 minutes of arguments, a <a href=\"https://apnews.com/article/supreme-court-abortion-pill-arguments-highlights-7fe897ec4f5b3121dc73d5b74b5a0d6d\">consensus appeared to emerge</a> that the abortion opponents who challenged the FDA's approval of the medication, mifepristone, and subsequent actions to ease access to it, lack the legal right or standing to sue.</p><p>Such a decision would leave in place the current rules that allow patients to receive the drug through the mail, without any need for an in-person visit with a doctor, and to take the medication to induce an abortion through 10 weeks of pregnancy. Should the court take the no-standing route, it would avoid the more politically sensitive aspects of the case.</p><p>The high court\u2019s return to the abortion thicket is taking place in a political and regulatory landscape that was reshaped by its abortion decision in 2022 that led many Republican-led states to ban or severely restrict abortion.</p><p>Solicitor General Elizabeth Prelogar, the Biden administration\u2019s top Supreme Court lawyer, said the court should dismiss the case and make clear that anti-abortion doctors and organizations don\u2019t \u201ccome within 100 miles\u201d of having standing.</p><p>Even three justices who were in the majority to overturn Roe posed skeptical questions about standing to the lawyer for the abortion opponents. Justices Amy Coney Barrett, Neil Gorsuch and Brett Kavanaugh are former President Donald Trump\u2019s three Supreme Court appointees.</p><p>Barrett, for example, seemed to doubt that two doctors identified by lawyer Erin Hawley could show that they were actually harmed by the FDA's actions, one of the requirements for showing standing.</p><p>\u201cI think the difficulty here is that, at least to me, these affidavits do read more like the conscience objection is strictly to actually participating in the abortion to end the life of the embryo or fetus. And I don\u2019t read either ... to say that they ever participated in that,\u201d Barrett said.</p><p>Kavanaugh had only one question during the entire session and it too seemed to be focused on the technical issue of standing. He asked Prelogar to confirm that \u201cunder federal law, no doctors can be forced against their consciences to perform or assist in an abortion.\u201d</p><p>Abortion opponents are asking the justices to ratify <a href=\"https://apnews.com/article/abortion-pill-restrictions-appeals-court-402be732d162af449c40ed1315cfb851\">a ruling</a> from a conservative federal appeals court that would limit access to mifepristone, one of two <a href=\"https://apnews.com/article/mifepristone-supreme-court-abortion-d451e14148ffbe6ce4811b1a37651480\">drugs used in medication abortions</a>.</p><p>That ruling had immediate political consequences, and the outcome in the current case, expected by early summer, could affect races for Congress and the White House.</p><p>Another abortion case already is on the docket. Next month, the justices will hear arguments over whether <a href=\"https://apnews.com/article/supreme-court-abortion-medical-emergencies-idaho-8ca89d7de0c1fa9256dcd27d1847e144\">a federal law on emergency treatment</a> at hospitals must include abortions, even in states that have otherwise banned them.</p><p>The scene outside the Supreme Court was lively Tuesday morning, with demonstrators occupying the streets surrounding the court and groups on both sides of the issue marching and chanting. The police blocked traffic surrounding the court as well.</p><p>The practical consequences of a ruling for abortion opponents would be dramatic, including possibly halting the delivery of mifepristone through the mail and at large pharmacy chains, and ending increasingly popular telehealth visits at which the drug can be prescribed.</p><p>President Joe Biden's administration and drug manufacturers warn that such an outcome also could undermine the FDA's drug approval process more widely by inviting judges to second-guess the agency's scientific judgments. The Democratic administration and New York-based Danco Laboratories, which makes mifepristone, say that the <a href=\"https://apnews.com/article/mifepristone-abortion-pill-supreme-court-1d2221251197a391c9bca833918e4554\">drug is among the safest</a> the FDA has ever approved.</p><p>Justice Ketanji Brown Jackson, a Biden appointee who joined the court just after the last abortion case, signaled her agreement with some of those arguments when she asked Jessica Ellsworth, Danco's lawyer, whether she has concerns \u201cabout judges parsing medical and scientific studies.\u201d</p><p>The abortion opponents argue that the FDA's decisions in 2016 and 2021 to relax restrictions on getting the drug were unreasonable and, as Hawley wrote in her clients' main legal brief, \u201cjeopardize women's health across the nation.\u201d She argued Tuesday that she was asking the court to affirm a ruling that \u201cmerely restored longstanding and crucial protections under which millions of women used abortion drugs.\u201d Her husband, Sen. Josh Hawley, R-Mo., and one of their children were in the courtroom to watch her first arguments.</p><p>The mifepristone case began five months after the Supreme Court overturned Roe v. Wade. Abortion opponents initially won a sweeping ruling nearly a year ago from <a href=\"https://apnews.com/article/texas-judge-matthew-kacsmaryk-abortion-pill-fda-75964b777ef09593a1ad948c6cfc0237\">U.S. District Judge Matthew Kacsmaryk</a>, a Trump nominee in Texas, which would have revoked the drug\u2019s approval entirely. The 5th U.S. Circuit Court of Appeals left intact the FDA\u2019s initial approval of mifepristone. But it would reverse changes regulators made in 2016 and 2021 that eased some conditions for administering the drug.</p><p>The Supreme Court put the appeals court\u2019s modified ruling on hold, then agreed to hear the case, though Justices Samuel Alito, the author of the decision overturning Roe, and Clarence Thomas would have allowed some restrictions to take effect while the case proceeded.</p><p>In arguments highly focused on technical legal issues, Alito and Thomas asked some of the few questions Tuesday on the substance of the case, including about sending mifepristone through the mail.</p><p>They referred to the Comstock Act, a rarely used, 151-year-old criminal law that has been revived by anti-abortion advocates seeking to block the delivery of mifepristone through the U.S. mail. Addressing Ellsworth, Thomas said the law is \u201cfairly broad, and it specifically covers drugs such as yours.\u201d</p><p>Even if the court doesn't address the Comstock Act in its ruling, some abortion rights advocates fear that a future administration that favors abortion restrictions could invoke the law to roll back access to mifepristone.</p><p>More than 6 million people have used mifepristone since 2000. It is one of two drugs used in medication abortions. <a href=\"https://apnews.com/article/mifepristone-supreme-court-abortion-d451e14148ffbe6ce4811b1a37651480\">Mifepristone</a> blocks the hormone progesterone, and also primes the uterus to respond to the contraction-causing effect of another drug, misoprostol. <a href=\"https://www.fda.gov/drugs/postmarket-drug-safety-information-patients-and-providers/questions-and-answers-mifepristone-medical-termination-pregnancy-through-ten-weeks-gestation\">The two-drug regimen</a> is used to end a pregnancy through 10 weeks gestation.</p><p>Health care providers have said that if mifepristone is no longer available or is too hard to obtain, they would switch to using only misoprostol, which is somewhat less effective in ending pregnancies.</p><p>___</p><p>Associated Press writers Amanda Seitz and Lindsay Whitehurst contributed to this report.</p><p>___</p><p>Follow the AP's coverage of the U.S. Supreme Court at <a href=\"https://apnews.com/hub/us-supreme-court\">https://apnews.com/hub/us-supreme-court</a>.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/supreme-court-abortion-mifepristone-telemedicine-4406d53e8af90f6a523264f535f5adf8",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 3,
+            "reason": "The document primarily focuses on the legal and political aspects of a Supreme Court case regarding the abortion medication mifepristone. While it does touch on health-related topics such as the safety and usage of mifepristone, the primary emphasis is on the legal proceedings, standing issues, and potential political consequences. Therefore, it is somewhat relevant to health but not primarily focused on it."
+        }
+    }
+}

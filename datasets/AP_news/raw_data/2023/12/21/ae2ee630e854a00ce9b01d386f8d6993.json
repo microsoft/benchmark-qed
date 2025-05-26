@@ -1,0 +1,266 @@
+﻿{
+    "altids": {
+        "itemid": "ae2ee630e854a00ce9b01d386f8d6993",
+        "etag": "ae2ee630e854a00ce9b01d386f8d6993_0a4aza0c0",
+        "friendlykey": "599074710172",
+        "referenceid": "NY--Editorial Rdp"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Opinion",
+    "language": "en",
+    "versioncreated": "2023-12-21T18:18:12Z",
+    "firstcreated": "2023-12-21T18:18:11Z",
+    "editorialrole": "FullStory",
+    "fixture": {
+        "code": "21ea4067bb274c3b805353fb2b99ba70",
+        "name": "Editorial Roundup"
+    },
+    "pubstatus": "usable",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "NY--Editorial Rdp",
+    "headline": "Editorial Roundup: New York",
+    "slugline": "AP-NY--Editorial Rdp",
+    "bylines": [
+        {
+            "by": "By The Associated Press"
+        }
+    ],
+    "copyrightnotice": "Copyright 2023 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "Editorial Rdp"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "person": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e0c066615c3f4bd0b8f2b07ac107774f",
+            "name": "Kathy Hochul",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "POLITICIAN",
+                "PERSON"
+            ],
+            "relevance": 50
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "2447ff59141347969fdde72c3960ca43",
+            "name": "George Pataki",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "POLITICIAN",
+                "PERSON"
+            ],
+            "associatedstates": [
+                {
+                    "code": "b58f18a082c6100487fbdf092526b43e",
+                    "name": "New York"
+                }
+            ],
+            "relevance": 34
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "c819353994389f44b3b961242304f21a",
+            "name": "Elise Stefanik",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "POLITICIAN",
+                "PERSON"
+            ],
+            "associatedstates": [
+                {
+                    "code": "b58f18a082c6100487fbdf092526b43e",
+                    "name": "New York"
+                }
+            ],
+            "relevance": 56
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "39a5551883591004893adf092526b43e",
+            "name": "Health care costs",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "5898d3303b1e4dfc9e4ae39ed34f3378",
+            "name": "Lawsuits",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 52
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "4626a38a1b52454ca5d01755d14f1dc9",
+            "name": "Legal proceedings",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 59
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86aad5207dac100488ecba7fa5283c3e",
+            "name": "Politics",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 59
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "organisation": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "53dc65408d3e1004849bf47b1b321303",
+            "name": "American Civil Liberties Union",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 32
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "bf6e2e80760d10048f8ae6e7a0f4673e",
+            "name": "U.S. Republican Party",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 41
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "b58f18a082c6100487fbdf092526b43e",
+            "name": "New York",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -75.4999,
+                    43.00035
+                ]
+            },
+            "relevance": 90,
+            "parentnames": [
+                "United States"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "b836d07082c610048807df092526b43e",
+            "name": "New York City",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "b58f18a082c6100487fbdf092526b43e",
+            "name": "New York",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "body_nitf": "<p>Albany Times Union. December 14, 2023.</p><p>Editorial: (Gun)smoke and mirrors over Remington Arms\u2019 exit</p><p>No, the firearms manufacturer isn\u2019t leaving for Georgia because of New York\u2019s gun policies.</p><p>To Republicans hungry for political theater, the announcement that Remington Arms will be closing its plant in the Herkimer County village of Ilion must have looked like a plump, juicy peach.</p><p>As if on cue, GOP leaders, including U.S. Rep. Elise Stefanik and state Sen. Mark Walczyk, blamed New York\u2019s \u201cunconstitutional\u201d gun policies as the reason the factory is leaving after more than 200 years, taking 270 jobs with it.</p><p>But this low-hanging political fruit is as fake as the plastic apples and oranges in a department store window display.</p><p>Consider, first, that Remington had been raided by a private equity firm for \u201chundreds of millions\u201d by 2012, according to The New York Times Magazine. Then, in 2022, the firearms manufacturer had to pay out $73 million to settle with the families of those murdered at Sandy Hook Elementary School in Newtown, Conn., in 2012. The killer had used a semiautomatic Remington rifle to slaughter 26 people, including 20 children. It declared bankruptcy in 2018, and again in 2020 \u2014 and would have done so if the plant had been located in Herkimer County or Honolulu.</p><p>In blaming the Remington move on New York gun policies, Mr. Walczyk cited the state\u2019s Gun Industry Liability Law, which allows gunmakers to be sued if they \u201cknowingly or recklessly create, maintain or contribute\u201d to a dangerous condition with their firearms. That\u2019s nonsense: The Sandy Hook lawsuit was filed in 2014, seven years before New York\u2019s liability law was signed.</p><p>To be sure, there\u2019s an entirely different set of New York policies that played into this decision: Georgia has a lower corporate tax rate, and individual tax rates of 1 to 5.75 percent. (New York\u2019s individual rates range from 4 to 10.9 percent.) We\u2019ve seen this show before: A financially struggling company decamps to a southern state that takes less of its earnings.</p><p>Ms. Stefanik\u2019s trite recitation of New York\u2019s \u201cunconstitutional gun-grab policies\u201d ignores the fact that the factory just waded through two years of labor negotiations that had only been settled this summer. Moving those jobs to Georgia gives the company the option of establishing wages based off that state\u2019s Scrooge-worthy $7.25 hourly minimum wage, which is less than half of New York\u2019s. Georgia has the eighth-lowest union membership in the country; New York has the second-highest. As the United Mine Workers of America, which represents the Ilion workers, noted: \u201cThey\u2019re obviously moving to a very nonunion state.\u201d</p><p>Some will argue that we\u2019re missing the forest for the trees, knocking the GOP for blaming the company\u2019s exit on the wrong set of Democratic-driven policies \u2014 not gun laws but the tax structure and a decent minimum wage. Never mind the ramifications of a low-tax state having less to spend on education, economic development and social supports, or the loss of union protections. The real question is whether the laws are fair both for workers and management.</p><p>Don\u2019t be distracted by these peanut-gallery tropes. The central problem with guns, including their manufacture, remains that Congress won\u2019t take the simplest steps to reduce the country\u2019s gut-churning number of mass shootings: Pass universal background checks and an assault weapons ban, which would surely include Remington\u2019s version of the AR-15. Maybe if the company hadn\u2019t produced such a weapon, it wouldn\u2019t have lost $73 million, and maybe 20 children from Newtown would be enjoying the holidays this year.</p><p>___</p><p>Advance Media New York. December 14, 2023.</p><p>Editorial: NY\u2019s public hospitals should stop suing low-income patients over medical debts</p><p>Gov. Kathy Hochul <a href=\"https://www.textise.net/showText.aspx?strURL=https%3A%2F%2Fwww.syracuse.com%2Fnews%2F2023%2F12%2Fmedical-debt-can-no-longer-hurt-your-credit-score-in-new-york.html\">signed a bill last week</a> prohibiting medical debt from appearing on credit reports, which damages patients\u2019 ability to rent an apartment, get a job or buy a car. Over the past two years, Hochul also has banned hospitals and other healthcare providers from placing liens on people\u2019s homes or garnishing their wages over unpaid bills.</p><p><a href=\"https://www.textise.net/showText.aspx?strURL=https%3A%2F%2Fwww.cssny.org%2Fnews%2Fentry%2Ffair-medical-debt-reporting-act-hochul-bill-signing-ceremony\">Advocates praised</a> the governor\u2019s \u201ctremendous leadership in tackling the state\u2019s medical debt crisis.\u201d</p><p>But there\u2019s one abusive debt collection practice the governor could end with the stroke of a pen: a 30-year-old <a href=\"https://www.budget.ny.gov/guide/bprm/k/k-0030.html\">rule</a> that <a href=\"https://www.syracuse.com/health/2023/12/how-ny-state-upstate-medical-haul-thousands-of-sick-and-poor-into-court-for-little-gain.html\">tells state-run hospitals to sue patients over past-due medical bills</a> of $2,500 or higher.</p><p>SUNY Upstate Medical University and other state hospitals accounted for three-fourths of such lawsuits across the state in 2022, according to the nonprofit Community Service Society of New York. University and Community General hospitals have sued more than 4,000 patients since 2020. Other Syracuse hospitals appear to have stopped the practice.</p><p>It\u2019s one thing to go after patients who can afford to pay. The targets of these lawsuits are disproportionately the working poor, who earn too much to qualify for Medicaid but earn too little to afford private health insurance.</p><p>Staff writer Douglass Dowty <a href=\"https://www.syracuse.com/health/2023/12/how-ny-state-upstate-medical-haul-thousands-of-sick-and-poor-into-court-for-little-gain.html\">tells some of their stories:</a> the dying cancer patient who spent his last weeks worrying about how he would fight the hospital\u2019s lawsuit; the tow-truck driver who works all hours to pay what he can for treatment of diabetes that cost him one leg already; the uninsured woman whose emergency room debt entitled the hospital to intercept her state tax refund.</p><p>Medical debt is a fact of life in the United States, where treatment and drug costs are high, and even people with health insurance are saddled with bills they cannot afford to pay. More than half of U.S. adults say they have gone into debt because of medical or dental bills in the past five years, a <a href=\"https://www.npr.org/sections/health-shots/2022/06/16/1104679219/medical-bills-debt-investigation\">Kaiser Family Foundation poll</a> found. Another <a href=\"https://www.syracuse.com/health/2023/10/1-in-4-syracuse-adults-struggle-with-medical-debt-the-most-among-nys-big-cities-study-says.html\">study</a> found that one-fourth of Syracuse adults had overdue medical bills on their credit records.</p><p>Upstate told Dowty that it only sues after it sends three bills with no response from the patient. The hospital provides $10 million in charity care to income-eligible patients and writes off another $40 million in debt. Hospitals in New York state are tax-exempt nonprofits and are obligated to care for anyone who walks in the door, regardless of their ability to pay.</p><p>On the other side of the ledger, Upstate collected $1.5 billion in revenues in 2021. For every dollar the hospital refers to the Attorney General for legal action, it recoups 14 cents. That\u2019s an awful lot of effort \u2014 and grief for patients \u2014 for negligible impact on the institution\u2019s bottom line.</p><p>It doesn\u2019t have to be this way.</p><p>A budget directive from Gov. George Pataki told state hospitals and the state Attorney General to sue patients over unpaid bills. Hochul could simply cancel that obligation and end the practice. We urge the governor to do so as soon as possible.</p><p>If she won\u2019t act, the state Legislature should step up and pass legislation to forbid SUNY hospitals from suing low-income patients over medical debt.</p><p>Or maybe the hospitals and the Attorney General should just stop filing lawsuits. They break no laws by not following the budget directive. Who would object if they don\u2019t?</p><p>To further help patients, proposed legislation would standardize financial aid rules across all hospitals, obligate hospitals to see if patients qualify for free care, and raise income limits to help the working poor.</p><p>As sponsor Assemblywoman Amy Paulin, D-Scarsdale, said, \u201cWe have an ability to choose most debt. We do not have an ability to choose a medical emergency.\u201d</p><p>A medical emergency can send low-income patients already struggling to pay the bills into a financial tailspin. Suing them for money they can\u2019t pay just adds insult to injury.</p><p>___</p><p>The Daily Star. December 15, 2023.</p><p>Editorial: Humane treatment of prisoners is key to rehabilitation</p><p>There are more than a million people living in prisons across America today.</p><p>While there are certainly those who have forfeited their right to live amongst society, many are ordinary people who made a terrible decision. This doesn\u2019t mean they should be deprived of basic human rights and decent treatment.</p><p>The condition of U.S. prisons is a subject that has come under greater scrutiny in recent years but recent legislation in New York has taken steps to address those issues.</p><p>The \u201cRights Behind Bars\u201d bill, introduced last week by state Sen. Julia Salazar and Assemblymember Phara Souffrant Forrest, aims to take action against jail policies that limit the rights of prisoners, while also reigning in instances of those facilities flouting the law.</p><p>A central tenet of the bill is to strengthen the Humane Alternatives to Long-Term (HALT) Solitary Confinement Act which the current prison system has largely ignored.</p><p>Rights Behind Bars would also allow for prisoners to receive care packages from the outside, access to free phone calls and limit impunity for abusive corrections officers.</p><p>There is a misconception among some that modern prisons are akin to hotels and resorts. The truth is that most jails in America are overcrowded, unhealthy and dangerous habitats that don\u2019t do nearly enough to prepare prisoners for their return to the outside world.</p><p>Perhaps the most brutal aspect of the modern prison system is the use of solitary confinement.</p><p>More than 100,000 inmates in federal and state prisons are placed in what is sometimes referred to as \u201crestrictive housing\u201d but more commonly known as solitary confinement. This entails keeping a prisoner in a confined space for 22 or more hours in a given day.</p><p>Contrary to popular belief, solitary confinement is not reserved for the most dangerous criminals but in some cases is instead used to isolate those in pre-trial and interrogation situations.</p><p>Outside contact is restricted or denied altogether despite research showing that interpersonal interactions are crucial to successful rehabilitation efforts.</p><p>Prisoners subjected to months or even years of solitary confinement are set up to fail when returned to the outside world and more likely to wind up back in prison or worse because of the mental and physical effects of their isolation.</p><p>The Rights Behind Bars bill cites international conventions that define prolonged solitary confinement as a form of torture.</p><p>Additionally, the bill would allow a court-like process to allow those accused of infractions to defend themselves before being sentenced to solitary.</p><p>Beyond New York state, legislation titled the End Solitary Confinement Act was introduced earlier this month that would largely ban the use of the practice in federal institutions and give local jurisdictions incentives to do the same.</p><p>Abuse at the hands of corrections officers is also a point of focus for these new reforms.</p><p>An investigation from the Marshall Project uncovered systematic cover-ups and silence when it comes to trying to discipline guards accused of violence toward inmates.</p><p>Over the past decade, there were nearly 300 cases of the New York corrections department attempting to fire individuals accused of physical abuse or covering up abuse. But only 10% of those cases resulted in those involved being fired. Some officers left voluntarily, but many kept their jobs.</p><p>What\u2019s more, researchers estimate that these records likely reflect just a portion of the wrongdoing occurring in prisons. Many prisoners remain silent out of fear of retaliation or not being believed.</p><p>It isn\u2019t just the most heinous acts that serve to deprive prisoners of basic human rights.</p><p>The ACLU of Delaware is suing the state on behalf of those being held in pre-trial detention or convicted of misdemeanors who are unable to vote while in custody.</p><p>According to the ACLU, the state doesn\u2019t allow for in-person voting in prisons, relying instead on absentee ballots.</p><p>Prisoners are people who have made mistakes; they are not animals, and they are entitled to humane treatment that will allow them to reacclimate to society once they\u2019ve paid their debt.</p><p>___</p><p>Dunkirk Evening Observer. December 16, 2023.</p><p>Editorial: New York STATE: Funding follies need attention</p><p>As a major northern Chautauqua County employer that serves 3,200 students deals with potential reductions, a smaller educational entity is rolling in the dough after a vote that included only 125 residents. Last week, the State University of New York at Fredonia announced it would be cutting academic offerings to rightsize a deficit of more than $10 million.</p><p>On the other end of the spectrum is the Brocton Central Schools. This week, it got the go-ahead to do a capital project that costs $16.8 million after 101 voters approved the plan.</p><p>While the cost to Brocton school taxpayers is minimal at best, New York state taxpayers from Buffalo to Long Island are subsidizing more than $15 million of it. Brocton enrollment \u2013 from kindergarten to 12th grade \u2013 is a little more than 550 students.</p><p>Brocton Central Schools is obviously a key cog in the village and town economy. It also is a place where the community can gather to swim, exercise \u2013 or participate in a Christmas festival that will be happening on Sunday.</p><p>All that cannot be discounted. What\u2019s troubling is how simple it was for the district to get the large sum of money. New York state is facing too much fiscal trouble to just be handing out $16.8 million because 101 people said yes.</p><p>That\u2019s far too easy.</p><p>SUNY Fredonia can only wish for a fix like that. In the last 10 days, the students, staff and even the administrators have been dealing with the pains of potential reductions facing an institution that has lost 2,000 students in the last 14 years.</p><p>Priorities in Albany need to change \u2013 with more emphasis being put on local residents having to fork over additional funds to do these major initiatives at small schools. If larger public institutions are faced with drastic decisions like SUNY, smaller public entities must also be held accountable.</p><p>In other words, there needs to be a lot more buy-in from the local community than just votes. It needs to come from the pockets of the local residents of that district.</p><p>___</p><p>New York Post. December 16, 2023.</p><p>Editorial: NY\u2019s exodus won\u2019t stop \u2019til the state reverses its ever-leftward course</p><p>State Comptroller Tom DiNapoli just delivered fresh confirmation of the city\u2019s shrinking pandemic-era population, while a new Census Bureau report shows the state still losing residents even post-COVID.</p><p>Expect the shrinkage to continue until New York reverses its tilt ever-more leftward.</p><p>From April 2020 to July 2022, Gotham\u2019s population fell by nearly a half million people, or 5.3% \u2014 wiping out almost three-quarters of the gains over the previous decade, DiNapoli reports, <a href=\"https://nypost.com/2023/05/18/nyc-lost-5-3-of-its-population-nearly-a-half-million-people-since-covid-with-most-heading-south/\">citing Census figures</a>.</p><p>That was more than double the state\u2019s 2.6% drop, and it came while the nation overall was expanding by 0.6%.</p><p>DiNapoli blames the city\u2019s decline on not enough births and migrants from abroad to make up for \u201cthe relatively large number of residents leaving.\u201d</p><p>Meanwhile, the Census Bureau <a href=\"https://nypost.com/2023/12/20/metro/new-york-lost-more-residents-than-any-other-state-census-bureau/\">reported Tuesday</a> that New York was one of just eight states to see its population dip, by a nation-topping 102,000, in the year ending July 1 \u2014 long after the pandemic ended.</p><p>By contrast, the South \u2014 notably, Florida and Texas, which have no personal incomes taxes \u2014 grew during COVID, and accounted for a whopping 87% of the nation\u2019s growth this year, though it holds just 39% of the population.</p><p>New York, of course, has watched its share of the nation\u2019s population plunge steadily for decades, as it leaned further and further left.</p><p>In the 1940s, the state\u2019s share of the US population translated to 45 House seats; today, it\u2019s just 26.</p><p>Certainly, as DiNapoli notes, the shift to remote work, which enabled employees to leave Gotham, accounts for some of the flight.</p><p>He also highlights the city\u2019s high cost of living and raising a family.</p><p>Yet the drivers of those high costs are New York\u2019s nation-leading <a href=\"https://nypost.com/2023/12/06/opinion/dinapoli-warns-albany-against-killing-the-golden-goose-with-new-tax-hikes/\">and ever-growing</a> tax burden, self-defeating housing rules, onerous business mandates, insane climate laws and so on.</p><p>Add in its crime-fueling policies and failing schools, and it\u2019s beyond obvious that it\u2019s the relentless progressive agenda <a href=\"https://nypost.com/2023/10/30/opinion/nys-taxes-biz-mandates-are-driving-out-its-golden-goose-the-finance-industry/\">that\u2019s driving people away</a>.</p><p>Yet the usual suspects want more of the same: The far-left <a href=\"https://nypost.com/2023/12/18/metro/ny-candidates-pressed-to-support-40-billion-tax-hike-voting-rights-for-asylum-seekers/\">Working Families Party orders</a> candidates seeking its endorsement now to back a mind-blowing $40 billion tax hike, letting non-citizens vote and legalizing drug-injection sites.</p><p>Honey, they shrunk New York \u2014 and if the progs aren\u2019t stopped, they\u2019ll keep bleeding the state and city until they\u2019ve sucked all the life out.</p><p>END</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/ae2ee630e854a00ce9b01d386f8d6993",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 3,
+            "reason": "The document contains multiple editorials, but only two of them are directly related to health. The first relevant editorial discusses the issue of medical debt and the practices of public hospitals in New York, which is highly relevant to the topic of health. The second relevant editorial addresses the humane treatment of prisoners, which includes aspects of mental and physical health, making it somewhat relevant. The other editorials focus on topics such as gun policies, state funding, and population decline, which are not directly related to health."
+        }
+    }
+}

@@ -1,0 +1,225 @@
+﻿{
+    "altids": {
+        "itemid": "12aca006eb50dcc4ad3860fa4b5cbc76",
+        "etag": "12aca006eb50dcc4ad3860fa4b5cbc76_0a2aza0c0",
+        "friendlykey": "512603903425",
+        "referenceid": "IN--Editorial Rdp"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Opinion",
+    "language": "en",
+    "versioncreated": "2024-03-12T17:27:50Z",
+    "firstcreated": "2024-03-12T17:27:49Z",
+    "editorialrole": "FullStory",
+    "fixture": {
+        "code": "21ea4067bb274c3b805353fb2b99ba70",
+        "name": "Editorial Roundup"
+    },
+    "pubstatus": "usable",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "IN--Editorial Rdp",
+    "headline": "Editorial Roundup: Indiana",
+    "slugline": "BC-IN--Editorial Rdp",
+    "bylines": [
+        {
+            "by": "By The Associated Press"
+        }
+    ],
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "Editorial Rdp"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "person": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "926487652e3a403bb5dfb04a95f518f4",
+            "name": "Robert Wood",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "GOVERNMENT_FIGURE",
+                "PERSON"
+            ],
+            "relevance": 31
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "5fc507d5ad8349559767d24cf3a95d30",
+            "name": "Eric Holcomb",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "POLITICIAN",
+                "PERSON"
+            ],
+            "relevance": 46
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e22e73887de410048fc3df092526b43e",
+            "name": "Birth control",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 72
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "d8e6d7087f00100483b7f571351eed07",
+            "name": "Family medicine",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 43
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "4f95136e072e41c6a81e8fa820e26e9c",
+            "name": "Children",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 51
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86aad5207dac100488ecba7fa5283c3e",
+            "name": "Politics",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 63
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "organisation": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "bf6e2e80760d10048f8ae6e7a0f4673e",
+            "name": "U.S. Republican Party",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 35
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "0760000082b2100483c7df092526b43e",
+            "name": "Indiana",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -86.25027,
+                    40.00032
+                ]
+            },
+            "relevance": 87,
+            "parentnames": [
+                "United States"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "0760000082b2100483c7df092526b43e",
+            "name": "Indiana",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "body_nitf": "<p>Indianapolis Business Journal. March 8, 2024.</p><p>Editorial: Stripping access counselor\u2019s authority harms public as well as press</p><p>It\u2019s easy to think of the Office of the Indiana Public Access Counselor as an agency that serves the media. And yes, reporters and media organizations routinely turn to the state\u2019s public access counselor for help in determining whether a public board, elected official or government office is following the state\u2019s public access and open records laws.</p><p>But the public access counselor spends as much or probably more time answering questions from people who aren\u2019t journalists\u2014people in the public trying to get information from local governments or school boards, folks who have been denied access to meetings and elected officials trying to determine whether they are following the law.</p><p>The public access counselor\u2019s goal is to make sure government is open to its constituents\u2014the people who pay for it to exist and the people it\u2019s set up to serve.</p><p>And so it\u2019s a huge concern that the Indiana General Assembly is considering legislation that would reduce what little clout the public access counselor has now.</p><p>House Bill 1138\u2014as amended by the Senate\u2014would limit what the access counselor can use in producing non-binding advisory opinions. The last part of that sentence is key: These are non-binding advisory opinions. The public access counselor can\u2019t order anyone to do anything.</p><p>Still, for the non-binding opinions, the legislation would require that the counselor consider only the \u201cplain text\u201d of the state\u2019s public access laws and court opinions. It removes any ability for the access counselor to interpret those laws or opinions when they don\u2019t speak directly to situations that crop up all the time, maybe because technology has changed or because lawmakers weren\u2019t able to anticipate the type of records that might someday exist.</p><p>Currently, state law directs the access counselor to \u201cinterpret\u201d the state\u2019s open meeting and public records laws, which say they should be \u201cliberally construed.\u201d That\u2019s because the goal is for government to be open.</p><p>The new language restricting the access counselor\u2019s authority comes from state Sen. Aaron Freeman, the Indianapolis Republican who has also pushed to strip Indianapolis of its ability to make some decisions related to traffic rules and ban IndyGo from using dedicated bus lanes.</p><p>He said Public Access Counselor Luke Britt has \u201cissued some opinions I vehemently disagree with.\u201d And so, in addition to the language described above, Freeman also added a provision that makes it easier for a governor to fire the access counselor.</p><p>Under current law, the counselor is appointed for four years and can be fired only \u201cfor cause.\u201d The amended legislation would change the law to say the counselor serves \u201cat the pleasure of the governor.\u201d</p><p>\u201cThat would strip the counselor\u2019s insulation from political processes, leaving the appointee vulnerable to being dismissed after issuing opinions that powerful state leaders dislike,\u201d the Indiana Capital Chronicle reports.</p><p>We agree. We urge lawmakers to reject these provisions, although by the time you read this, the bill could already have passed. If it has, we call on Gov. Eric Holcomb to veto it\u2014not for journalists but for the public who deserves access to government.</p><p>___</p><p>Fort Wayne Journal Gazette. March 8, 2024.</p><p>Editorial: Far from frivolous, Recess is something that needs to be cherished</p><p>As the Indiana General Assembly hurries toward the end of what was supposed to be a quiet session, the supermajority has once again changed the structure of education.</p><p>Senate Bill 1 attempts to address the literacy crisis by cracking down on third-grade student retention, adding additional tests and promoting summer school \u2014 just one year after schools were required to adopt Science of Reading strategies.</p><p>House Bill 1137 would allow students to receive faith-based education for up to two hours per week. Detractors wondered, among other things, where it would fit in an already-crammed schedule.</p><p>In the current educational landscape, where standardized testing, curriculum demands and academic pressures often dominate the discourse, the significance of recess is frequently overlooked.</p><p>\u201cThere\u2019s this huge gap between what we know kids need and what we know is actually good for learning and how much we allot time for that,\u201d William V. Massey, a professor at Oregon State University who studies the impacts of recess, told ABC News last summer.</p><p>Up to 40% of school districts nationwide have reduced or eliminated recess since the mid-2000s. In 2001, Chicago axed recess entirely for more class time in an attempt to boost test scores.</p><p>Yet, recess is not merely a break from the classroom routine but a fundamental aspect of a child\u2019s holistic development.</p><p>Research shows recess is hardly a frivolous indulgence. Indeed, its importance is so fundamental that some state legislatures have created new guidelines.</p><p>Last year, California enacted a law defining recess as a 30-minute \u201cperiod of time during the school day, separate and distinct from physical education courses and mealtimes \u2026 when pupils are given supervised and unstructured time for physical activity, play, organized games, or social engagement with peers.\u201d</p><p>Furthermore, California will not allow administrators to dismiss recess as a punitive measure for bad behavior, much to the dismay of some educators.</p><p>Beginning in the 2006-07 school year, Indiana Code required that \u201cthe governing body of each school corporation shall provide daily physical activity for students in elementary school. The physical activity may include the use of recess.\u201d</p><p>The application is open-ended. Fort Wayne Community Schools, for example, said it is committed to providing daily recess that encourages physical activity whenever possible, said Scott Murray, the district\u2019s communications manager.</p><p>\u201cThese recess breaks are designed to include 20 minutes of supervised activity, ideally conducted outdoors,\u201d he told The Journal Gazette. \u201cDespite potential changes in state mandates and classroom schedules, our intention is to uphold our current recess practices to support the holistic development of our students.\u201d</p><p>The most obvious counterargument is that organized sports do all of this. However, several studies show that sports participation is less common among children from lower-income homes.</p><p>A 2023 study published in BMC Public Health found that sports participation is consistently higher among socioeconomically advantaged individuals. However, group sports showed the lowest relative inequalities. There are sizable inequalities in racket, individual and specialty sports, such as golf, that people can continue to engage in as adults.</p><p>At its core, recess serves as a crucial outlet for addressing the growing concern of sedentary lifestyles among children. According to the Robert Wood Johnson Foundation-funded State of Childhood Obesity, Indiana ranks 19th best in the nation, with an obesity prevalence rate of just more than 15%. According to Centers for Disease Control and Prevention data, Hoosier adults 18-44 have an obesity prevalence rate of 36.5%, the sixth worst in the nation.</p><p>\u201cI think the trend is pretty similar (for northeast Indiana),\u201d Dr. Kanika Jaggi, a family medicine physician for Lutheran Health Network, told The Journal Gazette\u2019s Maya Wilkins for a February story on pediatric obesity. \u201cI am seeing more and more children, not just from toddler age but from infant age, that have obesity.\u201d</p><p>Research indicates that recess plays a crucial role in enhancing children\u2019s attentiveness in the classroom, in cognitive performance, and in reducing behavioral problems. A study conducted on fourth-grade students in Fort Worth, Texas, revealed that students who had 45 minutes of daily recess after returning to school following the COVID-19 lockdown had significantly lower levels of the stress hormone cortisol after three months compared to students who had 30 minutes of recess.</p><p>By recharging their mental batteries through physical activity and play, recess optimizes their capacity for learning and problem-solving.</p><p>Moreover, outdoor play stimulates creativity, imagination and curiosity, fostering a love for exploration and discovery that extends beyond the confines of the classroom walls.</p><p>Though the current session is ending, the Indiana General Assembly should actively delve into the science of recess as part of a summer study group. There\u2019s evidence it can improve fitness, build social skills and enhance the classroom learning process. What\u2019s not to like \u2014 and safeguard \u2014 there?</p><p>___</p><p>Jeffersonville News and Tribune. March 7, 2024.</p><p>Editorial: Governor should sign birth control bill</p><p>As we celebrate Women\u2019s History Month in March, Hoosier women are certainly justified in questioning why their health has historically been an afterthought or a political tool for lawmakers.</p><p>Indiana\u2019s maternal mortality rate has consistently been among the worst in the nation. With most forms of abortion banned in the state, it\u2019s even more important that women and mothers are provided with excellent health care, safe contraceptives and wellness education.</p><p>Yet some with the power to make a difference still resist, even when common sense and data show their claims are misguided.</p><p>State Rep. Rita Fleming, D-Jeffersonville, a retired OB/GYN, has led efforts to protect mothers and to provide women with birth control access and education. Last year, a bill she sponsored allowing pharmacists to prescribe hormonal birth control was approved with bipartisan support.</p><p>This session, Fleming\u2019s House Bill 1426 seeks to increase access to long-acting reversible contraceptives (LARC) for Medicaid recipients. The bill stalled after Republicans balked at the inclusion of intrauterine devices (IUD), falsely claiming that such contraceptives cause abortions. Republicans ultimately stripped that option from the bill in committee.</p><p>Some Democrats and health institutions such as the American College of Obstetrics and Gynecology switched course and quit supporting the legislation as a result of the IUD removal.</p><p>Fleming, likely the only lawmaker voting on the bill who has delivered a baby, rightfully questioned the logic of both sides.</p><p>On Wednesday, after much debate, the bill was approved and heads to Gov. Eric Holcomb for consideration. He should sign it into law.</p><p>The bill is particularly aimed at providing options to mothers during the important postpartum period. Many lower income and young mothers never return for follow-up visits. This bill would require doctors to instruct their patients about contraceptive options during the critical hours after delivery before discharge \u2013 possibly the only time they\u2019ll get the opportunity.</p><p>As Fleming points out in an op-ed, removing the requirement to discuss IUDs as a contraceptive option doesn\u2019t mean hospitals can\u2019t offer IUD implants.</p><p>In the same op-ed, she details her experiences in the delivery room and how IUDs aren\u2019t always a good option for a mother.</p><p>She also responds to the lack of support from medical organizations including the American College of Obstetrics and Gynecology, pointing out that \u201cIt\u2019s on your watch, for the past decades, that maternal and infant mortality has climbed, that more children are born addicted, that sexually transmitted diseases are affecting newborns in record numbers. Whatever you might be doing about those, it\u2019s obviously not working.\u201d</p><p>Opponents of the legislation, following the removal of IUDs from the language, have suggested that the bill really doesn\u2019t accomplish much, and that medical providers \u201ccould\u201d still tell mothers about contraceptive options without a new requirement.</p><p>We all know there\u2019s a big difference between \u201ccould\u201d and \u201cwill.\u201d</p><p>We could do something this March to help mothers and women, especially those who are struggling financially or with addiction. If not, we will continue to see mothers dying during problematic pregnancies or, along with their newborns, battling health issues that could have been prevented.</p><p>END</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/12aca006eb50dcc4ad3860fa4b5cbc76",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 3,
+            "reason": "The document contains three editorials, two of which are not directly related to health. The first editorial discusses the authority of the Indiana Public Access Counselor, which is more about government transparency and public access to information. The second editorial focuses on the importance of recess in schools, which touches on physical activity and child development but is not primarily about health. The third editorial is highly relevant to health as it discusses maternal health, birth control access, and related healthcare policies in Indiana. Given that only one of the three editorials is directly related to health, the overall relevance of the document to the topic of health is moderate."
+        }
+    }
+}

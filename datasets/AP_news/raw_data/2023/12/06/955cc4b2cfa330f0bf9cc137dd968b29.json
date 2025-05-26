@@ -1,0 +1,284 @@
+﻿{
+    "altids": {
+        "itemid": "955cc4b2cfa330f0bf9cc137dd968b29",
+        "etag": "955cc4b2cfa330f0bf9cc137dd968b29_3a4aza0c0",
+        "friendlykey": "16747323251",
+        "referenceid": "AF--Mali-Dengue Fever"
+    },
+    "version": 3,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2023-12-06T15:56:53Z",
+    "firstcreated": "2023-12-06T13:03:59Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "ednote": "Eds: UPDATES: With AP Photos.",
+    "editorialtypes": [
+        "Lead"
+    ],
+    "signals": [
+        "newscontent"
+    ],
+    "title": "AF--Mali-Dengue Fever",
+    "headline": "Dengue fever is on the rise in Mali with more than 20 deaths, health director says",
+    "headline_extended": "Authorities say dengue fever is on the rise in Mali, posing a new threat to the West African nation struggling with extremist attacks and political turbulence",
+    "slugline": "AP-AF--Mali-Dengue Fever, 3rd Ld-Writethru",
+    "description_summary": "Authorities say dengue fever is on the rise in Mali, posing a new threat to the West African nation struggling with extremist attacks and political turbulence. The director general of health and public hygiene tells The Associated Press in an interview that his department had counted 21 deaths and 600 cases of the disease as of Monday. Dengue is a viral infection spread by mosquitoes that mostly causes flu-like illness. There is no specific treatment. A new epidemic of dengue fever risks worsening the humanitarian situation in Mali, especially among the large population of displaced people.",
+    "bylines": [
+        {
+            "by": "By BABA AHMED",
+            "title": "Associated Press"
+        }
+    ],
+    "located": "BAMAKO, Mali",
+    "datelinelocation": {
+        "city": "Bamako",
+        "countrycode": "MLI",
+        "countryname": "Mali",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                -8,
+                12.65
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2023 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "mali dengue fever"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "i",
+            "name": "i"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "084dafb87f00100481c5f571351eed07",
+            "name": "Dengue fever",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 89
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 89
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Editorial",
+            "editorial_subject": "Health",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "bb2d2c5f441a452cb24bb511a2ab5eea",
+            "name": "World news",
+            "creator": "Editorial",
+            "editorial_subject": "World news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "organisation": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "8997c0688d7410048d178a3c53cbc603",
+            "name": "World Health Organization",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 31
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "ac18a2ea71034a5991f916b5b3e113e7",
+            "name": "Associated Press",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 41
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "661ab2407d5b10048231c076b8e3055c",
+            "name": "Chad",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661812607d5b100481f1c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "01f56e0e654841eca2e69bf2cbcc0526",
+                "name": "Nation"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    19,
+                    15
+                ]
+            },
+            "relevance": 62,
+            "parentnames": [
+                "Africa"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "eaa740787e4b10048e6adf092526b43e",
+            "name": "Bamako",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "66206b187d5b100482c6c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "9d26a20b35f0484a891740f8189d4c7b",
+                "name": "City"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -8,
+                    12.65
+                ]
+            },
+            "relevance": 50,
+            "parentnames": [
+                "Mali"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "66206b187d5b100482c6c076b8e3055c",
+            "name": "Mali",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661812607d5b100481f1c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "01f56e0e654841eca2e69bf2cbcc0526",
+                "name": "Nation"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -4,
+                    17
+                ]
+            },
+            "relevance": 78,
+            "parentnames": [
+                "Africa"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "661812607d5b100481f1c076b8e3055c",
+            "name": "Africa",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "associations": {
+        "1": {
+            "altids": {
+                "itemid": "ae2c9bcbf79846c186af4d5b7b2f83ab"
+            },
+            "type": "picture"
+        }
+    },
+    "body_nitf": "<p>BAMAKO, Mali (AP) \u2014 Authorities say dengue fever is on the rise in Mali, posing a new threat to the West African nation struggling with extremist attacks and political turbulence.</p><p>The director general of health and public hygiene, Dr. Cheick Amadou Tidiane Traore, told The Associated Press in an interview Wednesday that his department had counted 21 deaths and 600 cases of the disease as of Monday.</p><p><a href=\"https://apnews.com/article/dengue-mosquitoes-infectious-diseases-honduras-9ecf4ebc8a67937e9db7feb0901c861e\">Dengue is a viral infection</a> spread by mosquitoes that mostly causes flu-like illness. In severe cases, it can cause joint pain, swollen glands, bleeding and death. There is no specific treatment, but two vaccines have been recommended by the World Health Organization for countries that suffer regular outbreaks.</p><p>Mali's government has not officially released any figures on the disease to the public, nor has it announced whether it has requested aid from the WHO.</p><p>With the country in political transition and facing the threat of fighters linked to al-Qaida and the Islamic State group, a new epidemic of dengue fever risks worsening the humanitarian situation especially among the large population of displaced people.</p><p>\u201cDengue fever is also present in Burkina Faso and Senegal, and we need to raise public awareness,\" Traore said.</p><p>The virus typically emerges in more tropical environments but was first detected in comparatively arid Mali in 2008. Reports of the virus reemerged in 2017 and 2019. There is little long-term data on its prevalence.</p><p>In August, the government of Chad reported the country\u2019s first-ever outbreak of dengue, with dozens of confirmed cases in the nation that, like Mali, is located in the vast Sahel region south of the Sahara desert.</p><p>Elsewhere, the WHO has reported record cases of dengue this year in Bangladesh and the Americas, which have seen more than 300,000 cases and 4 million infections respectively.</p><p>___</p><p>Associated Press writer Sam Metz contributed from Rabat, Morocco.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/mali-dengue-fever-955cc4b2cfa330f0bf9cc137dd968b29",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 5,
+            "reason": "The document discusses the rise of dengue fever in Mali, including statistics on deaths and cases, the nature of the disease, and its impact on the country's health situation. It also mentions the broader context of dengue fever in other regions and the lack of official response from the government. This information is highly relevant to the topic of Health as it addresses a significant public health issue, the spread of an infectious disease, and the challenges faced by the healthcare system in Mali."
+        }
+    }
+}

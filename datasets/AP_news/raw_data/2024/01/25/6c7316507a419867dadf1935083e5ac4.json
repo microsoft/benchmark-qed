@@ -1,0 +1,199 @@
+﻿{
+    "altids": {
+        "itemid": "6c7316507a419867dadf1935083e5ac4",
+        "etag": "6c7316507a419867dadf1935083e5ac4_0a4aza0c0",
+        "friendlykey": "746417607530",
+        "referenceid": "CB--Puerto Rico-Strike Averted"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2024-01-25T21:37:06Z",
+    "firstcreated": "2024-01-25T21:37:05Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "CB--Puerto Rico-Strike Averted",
+    "headline": "Puerto Rico averts strike at biggest public health institution after reaching a deal with workers",
+    "headline_extended": "Puerto Rico\u2019s government has narrowly avoided an indefinite strike at the U.S. territory\u2019s biggest public health institution after reaching an agreement with union leaders",
+    "slugline": "AP-CB--Puerto Rico-Strike Averted",
+    "description_summary": "Puerto Rico\u2019s government has narrowly avoided an indefinite strike at the U.S. territory\u2019s biggest public health institution after reaching an agreement with union leaders. The looming strike at the Medical Center was scheduled to start Friday at midnight. It would have been the newest blow to Puerto Rico\u2019s crumbling health system given that the center provides care not available at other institutions on the island. The deal was reached Thursday after health workers who had been demanding better working conditions and a monthly salary increase of up to $2,000 agreed to an increase of up to $800 after months of negotiations.",
+    "located": "SAN JUAN, Puerto Rico",
+    "datelinelocation": {
+        "city": "San Juan",
+        "countrycode": "PRI",
+        "countryname": "Puerto Rico",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                -66.10572,
+                18.46633
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "Puerto Rico Centro Medico strike deal"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "i",
+            "name": "i"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 71
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "5f7806eec29a4884b038a26d799e9326",
+            "name": "Strikes",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 48
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "ec2db49888e810048c93f8851349f9bd",
+            "name": "Labor",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 60
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "c8e409f8858510048872ff2260dd383e",
+            "name": "Business",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 36
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "bb2d2c5f441a452cb24bb511a2ab5eea",
+            "name": "World news",
+            "creator": "Editorial",
+            "editorial_subject": "World news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "661a77a87d5b1004822ac076b8e3055c",
+            "name": "Puerto Rico",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "6618c9f87d5b10048203c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "b7a0766613394ffda1709e3e433f2de2",
+                "name": "Territory"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -66.49989,
+                    18.24829
+                ]
+            },
+            "relevance": 88,
+            "parentnames": [
+                "Caribbean"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "661850e07d5b100481f5c076b8e3055c",
+            "name": "Latin America and Caribbean",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "body_nitf": "<p>SAN JUAN, Puerto Rico (AP) \u2014 Puerto Rico\u2019s government narrowly avoided an indefinite strike at the U.S. territory\u2019s biggest public health institution after reaching an agreement Thursday with union leaders.</p><p>The looming strike at the Medical Center in the capital of San Juan was scheduled to start Friday at midnight. It would have been the newest blow to Puerto Rico\u2019s crumbling health care system given that it provides care not available at other institutions on the island. The center also cares for patients from other Caribbean islands with limited health care infrastructures.</p><p>The deal was reached after health workers, who had been demanding better working conditions and a monthly salary increase of up to $2,000, agreed to an increase of up to $800 following months of negotiations.</p><p>On Wednesday, the government said it had prepared for the strike by canceling all elective surgeries, banning the transfer of patients to the center who did not need urgent care and temporarily transferring health workers from other hospitals.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/puerto-rico-centro-medico-strike-deal-6c7316507a419867dadf1935083e5ac4",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 5,
+            "reason": "The document discusses a significant event related to the health sector in Puerto Rico, specifically focusing on the avoidance of a strike at the largest public health institution. It details the negotiations between the government and health workers, the potential impact on the healthcare system, and the measures taken to prepare for the strike. All these points are directly related to the topic of health."
+        }
+    }
+}

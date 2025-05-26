@@ -1,0 +1,202 @@
+﻿{
+    "altids": {
+        "itemid": "9e4253bcb1bd679c95aef30c2a8db62a",
+        "etag": "9e4253bcb1bd679c95aef30c2a8db62a_0a2aza0c0",
+        "friendlykey": "919658738900",
+        "referenceid": "LA--Flu Death-Louisiana"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2023-12-22T23:19:16Z",
+    "firstcreated": "2023-12-22T23:19:15Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "LA--Flu Death-Louisiana",
+    "headline": "First child flu death of season reported in Louisiana",
+    "headline_extended": "The Louisiana Department of Health on Friday confirmed the state\u2019s first pediatric flu death of the season",
+    "slugline": "AP-LA--Flu Death-Louisiana",
+    "description_summary": "The Louisiana Department of Health on Friday confirmed the state\u2019s first pediatric flu death of the season. WVUE-TV reports the department wouldn\u2019t release the child\u2019s age, name or the region of the state the child was from. It also wouldn\u2019t confirm the date the child died. But the death comes as the nation is witnessing a surge in flu, COVID-19 and RSV cases. According to data from the U.S. Centers for Disease Control and Prevention, Louisiana is one of two states with very high levels of respiratory illnesses. South Carolina is currently seeing the heaviest traffic for respiratory infections in emergency rooms.",
+    "located": "BATON ROUGE, La.",
+    "datelinelocation": {
+        "city": "Baton Rouge",
+        "countryareacode": "LA",
+        "countryareaname": "Louisiana",
+        "countrycode": "USA",
+        "countryname": "United States",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                -91.18747,
+                30.44332
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2023 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "Pediatric flu death Louisiana"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e228bab07de410048fa8df092526b43e",
+            "name": "Lung disease",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 40
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "4f95136e072e41c6a81e8fa820e26e9c",
+            "name": "Children",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 52
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "084e24e87f00100481c7f571351eed07",
+            "name": "Flu",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 65
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 78
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Editorial",
+            "editorial_subject": "Health",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "43fb970882b310048496df092526b43e",
+            "name": "Louisiana",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -92.0004,
+                    31.00047
+                ]
+            },
+            "relevance": 90,
+            "parentnames": [
+                "United States"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "43fb970882b310048496df092526b43e",
+            "name": "Louisiana",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "body_nitf": "<p>BATON ROUGE, La. (AP) \u2014 The Louisiana Department of Health on Friday confirmed the state\u2019s first pediatric flu death of the season.</p><p>The department wouldn't release the child's age, name or the region of the state the child was from, WVUE-TV <a href=\"https://www.fox8live.com/2023/12/22/first-child-flu-death-season-reported-louisiana-days-before-christmas/\">reported.</a> It also wouldn't confirm the date the child died.</p><p>According to the latest national data from the U.S. Centers for Disease Control and Prevention, as of Dec. 16, there have been 14 influenza-related pediatric deaths in the past year compared with 182 the year before.</p><p>The Louisiana death comes as the nation is witnessing a surge in flu, COVID-19, and RSV cases, with concerns mounting over a potential escalation over the holiday season.</p><p>High levels of flu-like illnesses were reported last week in 17 states \u2014 up from 14 the week before, the CDC said Friday. Louisiana has <a href=\"https://www.nola.com/news/healthcare_hospitals/louisiana-flu-cases-among-the-highest-in-the-u-s/article_16af7114-9872-11ee-9978-7f5b6251b06c.html\">led the nation in</a> cases, and it is one of two states reaching level 13, the highest rank for the number of reported illnesses. About one in five flu tests are coming back positive in the state, more than twice the national rate.</p><p>Louisiana is one of two states with very high levels of respiratory illnesses. South Carolina is currently seeing the heaviest traffic for respiratory infections in emergency rooms, according to CDC data.</p><p>At Children\u2019s Hospital New Orleans, the influenza A strain is circulating at a high rate and is joined by other respiratory viruses such as RSV, COVID and influenza B, The Times-Picayune/The New Orleans Advocate <a href=\"https://www.nola.com/news/healthcare_hospitals/child-dies-from-flu-in-louisiana-health-officials-confirm/article_69bb692c-a01e-11ee-a3b0-93f920c8e1c5.html?taid=6585dc79b7f0c900016ba2c8&utm_campaign=trueanthem&utm_medium=social&utm_source=twitter\">reported.</a></p><p>\u201cIt\u2019s sort of the quadruple whammy,\u201d said Dr. Mark Kline, an infectious disease specialist and physician in chief at Children\u2019s Hospital. \u201cWe\u2019ve got a lot of respiratory viruses out there right now.\u201d</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/pediatric-flu-death-louisiana-9e4253bcb1bd679c95aef30c2a8db62a",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 5,
+            "reason": "The document discusses the first pediatric flu death of the season in Louisiana, providing details about the state's flu situation, the national context of flu-related pediatric deaths, and the current surge in respiratory illnesses including flu, COVID-19, and RSV. This information is highly relevant to the topic of Health as it addresses public health concerns, disease statistics, and the impact on healthcare facilities."
+        }
+    }
+}

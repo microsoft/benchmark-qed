@@ -1,0 +1,235 @@
+﻿{
+    "altids": {
+        "itemid": "d86ab85bb1febef891573d85479a1233",
+        "etag": "d86ab85bb1febef891573d85479a1233_1a8aza0c0",
+        "friendlykey": "696163440673",
+        "referenceid": "US--Hospital Shooting-Virginia"
+    },
+    "version": 1,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2023-12-22T15:12:12Z",
+    "firstcreated": "2023-12-22T13:31:06Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "ednote": "Eds: UPDATES: This version adds details and background about violence at other hospitals.",
+    "editorialtypes": [
+        "Lead"
+    ],
+    "signals": [
+        "newscontent"
+    ],
+    "title": "US--Hospital Shooting-Virginia",
+    "headline": "One person was injured in shooting at a Virginia hospital. A suspect is in custody",
+    "headline_extended": "Police said a person was critically injured when a man began shooting inside a Richmond, Virginia hospital",
+    "slugline": "AP-US--Hospital Shooting-Virginia, 1st Ld-Writethru",
+    "description_summary": "Police said a person was critically injured when a man began shooting inside a Richmond, Virginia hospital. Richmond police said that the suspect had come to the hospital for a mental health evaluation when he began shooting around 4 am on Friday. The victim's injuries were critical, but not life-threatening. Richmond Police Chief Rick Edwards said that a Chesterfield police officer who was also at the hospital for an unrelated incident returned fire with his weapon, but the suspect was not injured. Edwards said the suspect was taken into custody when he surrendered.",
+    "located": "RICHMOND, Va.",
+    "datelinelocation": {
+        "city": "Richmond",
+        "countryareacode": "VA",
+        "countryareaname": "Virginia",
+        "countrycode": "USA",
+        "countryname": "United States",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                -77.46026,
+                37.55376
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2023 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "Richmond hospital shooting"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "a",
+            "name": "a"
+        },
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "5018b8f4ded948128561c5af2144ca66",
+            "name": "Shootings",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 59
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 73
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "fd3a61b882c710048937df092526b43e",
+            "name": "Richmond",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "eaed376082c71004892cdf092526b43e"
+            ],
+            "locationtype": {
+                "code": "9d26a20b35f0484a891740f8189d4c7b",
+                "name": "City"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -77.46026,
+                    37.55376
+                ]
+            },
+            "relevance": 89,
+            "parentnames": [
+                "Virginia"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "eaed376082c71004892cdf092526b43e",
+            "name": "Virginia",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -77.44675,
+                    37.54812
+                ]
+            },
+            "relevance": 45,
+            "parentnames": [
+                "United States"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "4b0ce2c82f2f41fdb1b0df183a5f0e43",
+            "name": "Broadcast",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "eaed376082c71004892cdf092526b43e",
+            "name": "Virginia",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661850e07d5b100481f5c076b8e3055c",
+            "name": "Latin America and Caribbean",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "body_nitf": "<p>RICHMOND, Va. (AP) \u2014 One person was injured at a hospital in Virginia when a man who had come to the facility for a mental health evaluation Friday began shooting, police said.</p><p>Richmond Police Chief Rick Edwards <a href=\"https://www.wtvr.com/news/local-news/chippenham-hospital-shooting-dec-22-2023\">told reporters</a> that a 911 call came in at 4:11 a.m. of shots fired at Chippenham Hospital. Officers who were already in the emergency room responded and found one adult male with critical, but not life-threatening, gunshot wounds.</p><p>The suspect surrendered and was taken into custody. Edwards said that a Chesterfield police officer who was also at the hospital for an unrelated reason had returned fire with his weapon during the incident, but the suspect was not injured.</p><p>Edwards said the suspect in the shooting is a 27-year-old man from Glen Allen, Virginia. He had come to the hospital on his own for a mental health evaluation. He was armed and began shooting shortly after he arrived. His motive was unclear.</p><p>\u201cHe was entering a room where he was disrobing and getting into a gown and then without warning starting firing his weapon,\u201d Edwards said. Another patient in a hallway was hit, he said.</p><p>A <a href=\"https://apnews.com/article/hospitals-workplace-violence-shootings-aa6918569ff8f76ff8a15b9813e31686\">wave of gun violence</a> has swept through U.S. hospitals and medical centers, which have struggled to adapt to the growing threats.</p><p>Such attacks have helped make health care one of the nation\u2019s most violent fields. Data shows American health care workers now suffer more nonfatal injuries from workplace violence than workers in any other profession, including law enforcement.</p><p>Similar shootings have played out in hospitals across the country including <a href=\"https://apnews.com/article/new-hampshire-psychiatric-hospital-shooting-686ad90ab38572a8fd69cb0ee9dd72d7\">one in the lobby of New Hampshire state psychiatric hospital</a> last month that left a security guard dead.</p><p>Edwards said the charges would be filed against the man after consulting with prosecutors.</p><p>He said sometimes officers work extra duty at the hospital, but there wasn't one stationed there at the time of the shooting.</p><p>\u201cIt was just luck that we had officers there on an unrelated call and they were able to respond rapidly, \u201d Edwards said.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/richmond-hospital-shooting-d86ab85bb1febef891573d85479a1233",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 3,
+            "reason": "The document primarily focuses on a shooting incident at a hospital in Virginia, detailing the events, the suspect, and the response by law enforcement. While it does touch on the broader issue of violence in healthcare settings and mentions that healthcare workers face significant risks, the main focus is on the specific incident rather than health as a general topic. Therefore, it is somewhat relevant to health due to the context of the incident occurring in a healthcare setting and the mention of workplace violence in healthcare, but it is not highly relevant to the broader topic of health."
+        }
+    }
+}

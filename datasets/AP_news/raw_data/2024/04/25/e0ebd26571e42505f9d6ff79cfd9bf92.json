@@ -1,0 +1,203 @@
+﻿{
+    "altids": {
+        "itemid": "e0ebd26571e42505f9d6ff79cfd9bf92",
+        "etag": "e0ebd26571e42505f9d6ff79cfd9bf92_0a2aza0c0",
+        "friendlykey": "627429072232",
+        "referenceid": "TX--Abortion-Texas"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2024-04-25T22:34:30Z",
+    "firstcreated": "2024-04-25T22:34:29Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "TX--Abortion-Texas",
+    "headline": "New reporting requirements for life-saving abortions worry some Texas doctors",
+    "headline_extended": "Some health lawyers and doctors in Texas say they're worried that proposed requirements could further disincentivize providers from performing medically necessary, but legally risky, abortions",
+    "slugline": "BC-TX--Abortion-Texas",
+    "description_summary": "Some health lawyers and doctors in Texas say they're worried that proposed requirements could further disincentivize providers from performing medically necessary, but legally risky, abortions. The Texas Medical Board proposal would require doctors to document whether there was time to transfer a patient \u201cby any means available\u201d to avoid an abortion. Dallas health care lawyer Rachael Gearing to The Texas Tribune that the proposal creates even more uncertainty for doctors who are already concerned about state abortion laws. Texas\u2019 laws allow abortions to save a patient\u2019s life but doctors have struggled to apply that exception in practice",
+    "bylines": [
+        {
+            "by": "By ELEANOR KLIBANOFF, The Texas Tribune"
+        }
+    ],
+    "located": "AUSTIN, Texas",
+    "datelinelocation": {
+        "city": "Austin",
+        "countryareacode": "TX",
+        "countryareaname": "Texas",
+        "countrycode": "USA",
+        "countryname": "United States",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                -97.74306,
+                30.26715
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "abortion texas pregnancy"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e22e35087de410048fc2df092526b43e",
+            "name": "Abortion",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 79
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 90
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "535d132082b3100484b3df092526b43e",
+            "name": "New Orleans",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "43fb970882b310048496df092526b43e"
+            ],
+            "locationtype": {
+                "code": "9d26a20b35f0484a891740f8189d4c7b",
+                "name": "City"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -90.07507,
+                    29.95465
+                ]
+            },
+            "relevance": 49,
+            "parentnames": [
+                "Louisiana"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "6e92d9b882c7100488e5df092526b43e",
+            "name": "Texas",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -99.25061,
+                    31.25044
+                ]
+            },
+            "relevance": 91,
+            "parentnames": [
+                "United States"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "6e92d9b882c7100488e5df092526b43e",
+            "name": "Texas",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "body_nitf": "<p>AUSTIN, Texas (AP) \u2014 Doctors who perform life-saving abortions may soon be required to document whether they first tried to transfer the patient to another facility to avoid terminating the pregnancy, <a href=\"https://www.texastribune.org/2024/04/25/texas-medical-board-abortion/\">a move some say goes beyond</a> the language of the law.</p><p>Health lawyers and doctors worry this proposed requirement further disincentivizes doctors from performing medically necessary, but legally risky, abortions.</p><p>\u201cThis creates even more uncertainty for doctors who were already concerned,\u201d said Rachael Gearing, a Dallas health care lawyer who represents OB/GYN clinics. \u201cIt\u2019s basically saying, \u2018Well, you should have passed your patient off to someone else who would have held out longer and wouldn\u2019t have done the abortion.\u2019\u201d</p><p>Texas\u2019 laws allow abortions to save a patient\u2019s life, but doctors have struggled to apply that exception in practice, especially when faced with up to life in prison, fines and the loss of their medical license.</p><p>After pressure from the Texas Supreme Court and an official petition, the Texas Medical Board issued guidance in March laying out how the licensing agency would investigate complaints of prohibited abortions. The agency is currently considering public comment and will finalize the proposal at or after its June meeting.</p><p>In addition to requiring doctors to document how they diagnosed the patient as needing an abortion, the board\u2019s proposal requires them to note whether there was \u201cadequate time to transfer the patient, by any means available to a facility or physician with a higher level of care or expertise to avoid performing an abortion.\u201d</p><p>Texas Medical Board President Dr. Sherif Zaafran said this was no different than what doctors are typically expected to do when a patient requires a higher level of care. He said the agency was not trying to \u201csecond guess\u201d doctors, but rather laying out what they might expect to see in documentation if they are called on to investigate a complaint.</p><p>\u201cAll we\u2019re asking for is, you\u2019ve made a determination, you\u2019ve made a diagnosis, you\u2019ve prescribed a treatment plan,\u201d he told The Texas Tribune. \u201cHelp us understand what led you to come up with that diagnosis.\u201d</p><p>But doctors \u2014 and the lawyers who represent them \u2014 say the law\u2019s crushing penalties mean treating complicated pregnancies is vastly different than any other type of medical treatment in Texas.</p><p>\u201cHow can a physician feel protected enough to provide good medical care when the ultimate decision is going to be made by the court, and they may not support the physician?\u201d said Dr. Todd Ivey, a Houston OB/GYN and officer with the Texas chapter of the American College of Obstetricians and Gynecologists. \u201cAnd then suddenly, you\u2019re subject to criminal and civil liabilities?\u201d</p><p>Since Texas banned nearly all abortions in summer 2022, dozens of women have come forward with stories of being unable to access medically necessary abortions because their doctors were unclear on when it was legally safe to intervene.</p><p>Amanda Zurawski, the lead plaintiff in a lawsuit challenging Texas\u2019 abortion bans, was forced to wait until she was in sepsis before her doctors were willing to terminate her pregnancy. She spent three days in the intensive care unit and may be unable to conceive again as a result of the infection.</p><p>Doctors have reported providing alternative, and in some cases, substandard, care to avoid performing an abortion, or waiting to act until patients are \u201con death\u2019s door,\u201d according to one paper about the impacts of Texas\u2019 2021 abortion law.</p><p>\u201cYou sometimes feel like you\u2019re damned if you do, damned if you don\u2019t,\u201d said Ivey. \u201cPatients are in very difficult situations \u2026 and then you have the threat from the other side of civil penalties in addition to criminal penalties, along with the loss of your license and prison time. It\u2019s incredibly frightening.\u201d</p><p>In December, Kate Cox, a 31-year-old Dallas mother, sued to terminate her non-viable pregnancy. The Texas Supreme Court ruled that Cox did not qualify under the medical exception, and called on the Texas Medical Board to \u201cassess various hypothetical circumstances, provide best practices, identify red lines, and the like,\u201d to clarify the laws.</p><p>A month later, Texas lobbyists Steve and Amy Bresnen filed an official petition with the medical board and in March, the agency issued its proposed guidance. The long-awaited proposal mostly pulled together different definitions from across statutes, and reiterated that doctors should rely on their \u201creasonable medical judgment\u201d to decide when an abortion is necessary.</p><p>The main new detail was a list of seven items that must be documented in a patient\u2019s medical record, including how the doctor decided to proceed with an abortion, what diagnostic testing was done, what second opinions were sought, what alternative treatments were attempted and failed, and whether there was time to transfer the patient to another facility to avoid an abortion.</p><p>Doctors, health lawyers and women denied medical care for complicated pregnancies decried the guidance as both insufficiently clarifying and additionally burdensome on providers.</p><p>\u201cPhysicians are already on top of medical documentation, and know what they need to do,\u201d said Gearing, the Dallas lawyer. \u201cThis documentation test lists additional things that they should be doing that they may not typically consider as necessary. \u2026 It shows the reasonable medical judgment standard isn\u2019t just your typical standard.\u201d</p><p>Lawyers and doctors told the Tribune they were particularly concerned about the requirement that doctors document whether there was time to transfer the patient to another facility to prevent an abortion. In a statement, the Bresnens, the lawyers who filed the initial petition for board guidance, said this would delay care and harm pregnant patients.</p><p>\u201cNothing in Texas law requires a female whose pregnancy threatens her life or major bodily functions to be transferred,\u201d they said in a statement to the Tribune this week. \u201cAt any time she meets those criteria, a physician is authorized to perform an abortion and it\u2019s up to her to decide whether the risks of delay outweigh any other consideration.\u201d</p><p>In big Texas cities with multiple hospitals in close proximity, Gearing worries it will always be possible to argue the patient should have been transferred rather than treated.</p><p>\u201cIf you\u2019re at Baylor, and there\u2019s a physician at (another Dallas hospital) who says they would have tried a different treatment, or taken a more invasive approach \u2026 are they going to be under heightened scrutiny that they should have transferred?\u201d</p><p>Ivey, the Houston OB/GYN, said he worries this may encourage overly cautious hospitals or doctors in isolated areas to transfer patients rather than take on the legal risk of terminating the pregnancy.</p><p>\u201cIf I were a practitioner in a rural area, and I had very little support, and I had a situation like this, it may be so overwhelming that you may just want to send (the patient) to somewhere where they have more resources,\u201d he said. \u201cBut that may not be the best thing for the patient.\u201d</p><p>Zaafran said this aspect of the guidance doesn\u2019t mean doctors shouldn\u2019t treat patients experiencing life-threatening emergencies.</p><p>\u201cIf I\u2019ve got a patient dying in front of me, I\u2019m not going to sit there and start talking about why I didn\u2019t transfer the patient,\u201d he said. \u201cThe patient is unstable, and I had to act quickly to save the patient\u2019s life \u2026 You don\u2019t have to say anything else.\u201d</p><p>As for transfers after a patient is stabilized, Zaafran said this was no different than other situations that may require a higher level of care than a hospital is able to provide. He said the board didn\u2019t intend to \u201csit here and second guess\u201d doctors\u2019 decision making, as long as they use their reasonable medical judgment to reach their conclusions.</p><p>\u201cYou can go to two different doctors and get two different treatments, and neither one would be wrong,\u201d he said. \u201cThe medical board, that\u2019s how we\u2019re going to view it.\u201d But, he noted, the medical board has \u201cno control over whether a district attorney somewhere decides to take on the case and and push in a little bit of a different manner.\u201d</p><p>Adding these additional documentation requirements opens the door for greater scrutiny from outside the medical field, Gearing said. Even if the medical board doesn\u2019t see an issue with their choices, doctors found to have violated the state\u2019s abortion laws can face up to 100 years in prison and a fine of $100,000.</p><p>\u201cI think there\u2019s concern that \u2026 even if they do everything right, this is a political battle versus a medical one,\u201d Gearing said. \u201cIf an official wants to make an example, some of my clients don\u2019t feel very confident that their choices would be viewed in a medical context, rather than a more political context.\u201d</p><p>As this guidance is being debated, Texas is in court arguing against a federal law that requires hospitals to screen and stabilize any patient experiencing a medical emergency.</p><p>The federal Emergency Medical Treatment and Labor Act requires stabilizing care, including abortions, if necessary, when the health of a patient is at risk, but Texas law only allows abortions when the patient\u2019s life is at risk.</p><p>The 5th U.S. Circuit Court of Appeals in New Orleans has ruled that Texas\u2019 law supersedes EMTALA, and the Biden administration cannot require hospitals to offer abortions before a patient\u2019s life is at risk. This week, the U.S. Supreme Court heard a similar case out of Idaho, where Elizabeth Prelogar, the U.S. solicitor general, argued that carving abortion out of the law is \u201centirely inconsistent\u201d with federal law.</p><p>\u201cOne of the primary motivators here was to prevent patient dumping,\u201d she told the justices Wednesday. \u201cThe idea was, we do not want people to have to go somewhere else to get their care. You go to the first emergency room in your state, and they have to stabilize you.\u201d</p><p>Zaafran said the medical board\u2019s guidance is in line with hospitals\u2019 EMTALA obligations, as doctors would be expected to stabilize a patient before they try to transfer them.</p><p>But Sara Rosenbaum, an EMTALA legal expert at the Milken School of Public Health at the George Washington University, said the guidance to try to transfer a patient \u201cby any means available,\u201d as the proposal says, has the potential to further confuse doctors about their obligations under state and federal laws.</p><p>\u201cIt\u2019s like you gave a roomful of law students a test, and said, think of all the ways to interfere with EMTALA and still look like you\u2019re trying to comply,\u201d she said. \u201cIt\u2019s a complete perversion.\u201d</p><p>The medical board is taking public comment on the proposed guidance and is considering holding stakeholder meetings to hear directly from impacted parties. At the board\u2019s next meeting in June, it will either introduce changes to the proposal or adopt the guidelines as they exist.</p><p>Ivey, the Houston OB/GYN, said he appreciates the tough spot the board is in trying to address this extremely fraught issue, but he is disappointed they didn\u2019t do more to address doctors\u2019 fears of being criminalized.</p><p>\u201cWe need some way we could allow physicians to practice good medicine without worrying about being criminally prosecuted or having some huge civil action against them,\u201d he said. \u201cWe want to practice good medicine and take care of people within the confines of the law. We need the law to help us, not hinder us.\u201d</p><p>Gearing said she was hoping for more of the \u201cred lines\u201d recommended by the Texas Supreme Court, like saying doctors that got two concurring opinions from fellow physicians could safely proceed.</p><p>Zaafran acknowledged the frustration with what the board has put out so far, saying they were being asked to give a \u201cblack and white answer\u201d that doesn\u2019t exist.</p><p>\u201cThe law is black and white \u2014 you cannot perform an abortion unless there is potential for major bodily injury or permanent organ damage, or death,\u201d Zaafran said. \u201cThe part that is not black and white is determining what is a threat to somebody\u2019s life, or a threat of permanent bodily organ damage or injury \u2026 That\u2019s where the judgment is.\u201d</p><p>___ This story was originally published by The Texas Tribune and distributed through a partnership with The Associated Press.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/abortion-texas-pregnancy-e0ebd26571e42505f9d6ff79cfd9bf92",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 5,
+            "reason": "The document discusses new reporting requirements for life-saving abortions in Texas, focusing on the implications for doctors and patients. It covers legal, medical, and ethical aspects of the issue, which are all pertinent to the broader topic of health. The document provides detailed information on how these requirements could affect medical practice and patient care, making it highly relevant to the topic of health."
+        }
+    }
+}

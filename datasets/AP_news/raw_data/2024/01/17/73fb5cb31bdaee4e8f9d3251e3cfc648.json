@@ -1,0 +1,216 @@
+﻿{
+    "altids": {
+        "itemid": "73fb5cb31bdaee4e8f9d3251e3cfc648",
+        "etag": "73fb5cb31bdaee4e8f9d3251e3cfc648_0a4aza0c0",
+        "friendlykey": "691943571286",
+        "referenceid": "NY--Editorial Rdp"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Opinion",
+    "language": "en",
+    "versioncreated": "2024-01-18T12:10:40Z",
+    "firstcreated": "2024-01-17T08:12:44Z",
+    "editorialrole": "FullStory",
+    "fixture": {
+        "code": "21ea4067bb274c3b805353fb2b99ba70",
+        "name": "Editorial Roundup"
+    },
+    "pubstatus": "usable",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "NY--Editorial Rdp",
+    "headline": "Editorial Roundup: New York",
+    "slugline": "AP-NY--Editorial Rdp",
+    "bylines": [
+        {
+            "by": "By The Associated Press"
+        }
+    ],
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "Editorial Rdp"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "person": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e0c066615c3f4bd0b8f2b07ac107774f",
+            "name": "Kathy Hochul",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "POLITICIAN",
+                "PERSON"
+            ],
+            "relevance": 42
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "523ae37888e910048fa3f8851349f9bd",
+            "name": "Government budgets",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 68
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "c40fab387e891004837ad7e4e3aa4207",
+            "name": "Prenatal care",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 61
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86aad5207dac100488ecba7fa5283c3e",
+            "name": "Politics",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "organisation": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "bf6e2e80760d10048f8ae6e7a0f4673e",
+            "name": "U.S. Republican Party",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 60
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "de1f83b8857310048a4dff2260dd383e",
+            "name": "United States House of Representatives",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "b58f18a082c6100487fbdf092526b43e",
+            "name": "New York",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -75.4999,
+                    43.00035
+                ]
+            },
+            "relevance": 90,
+            "parentnames": [
+                "United States"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "b836d07082c610048807df092526b43e",
+            "name": "New York City",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "b58f18a082c6100487fbdf092526b43e",
+            "name": "New York",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "body_nitf": "<p>Albany Times Union. January 16, 2024.</p><p>Editorial: Disorder in the court</p><p>More can be done to reduce the amount of horrid behavior by New York\u2019s judges, or at least bring it into public view sooner.</p><p>Roughly a third of the people who dispense justice in New York\u2019s judiciary are non-lawyers presiding over town and village courts. Most of them are public servants who comport themselves with civility and propriety. But the state Commission on Judicial Conduct, the system\u2019s watchdog entity, regularly uncovers bad apples who engage in behavior \u2014 boorish, unethical, sexist, racist or all of the above \u2014 that\u2019s corrosive to the reputation of the judiciary and the smooth operation of local courts.</p><p>Just from the past few months, consider the cases of <a href=\"https://www.democratandchronicle.com/story/news/2023/12/21/ny-judge-william-futrell-faces-removal-over-social-media-posts-nazi-imagery-demeaning-women/71999283007/\">William H. Futrell</a>, a Town Court justice in Cayuga County whose Facebook postings included Nazi imagery and \u201clikes\u201d on images of scantily clad women; June Shepardson, who held both a Town and Village Court role in Cayuga County, and resigned while under investigation for allegedly taking more than $6,000 in court funds (she <a href=\"https://www.fingerlakesdailynews.com/local/cayuga/former-moravia-justice-admits-to-stealing-court-funds\">pleaded guilty</a> to grand larceny last month); Edward Mercer, a town justice in Greene County, who gave his own security company <a href=\"https://www.timesunion.com/hudsonvalley/news/article/e-thomas-mercer-athens-judge-ethical-misconduct-18591849.php\">a no-bid $3,300 contract</a> for a camera system, then falsified the invoice; and Randy Hall, a Town Court justice in Broome County, who engaged in workplace behavior and online postings <a href=\"https://www.timesunion.com/news/article/town-judge-broome-county-asked-removed-following-18602466.php\">better suited to a teen sex comedy</a>, tried to use his judicial role during a dispute at a gas station, and made remarks to defendants that sent the clear message he had prejudged their cases.</p><p>All four non-lawyers were recommended for removal by the Judicial Conduct commission. As noted before in this space, that panel performs its duties with a doggedness that outdoes the legislative and executive branches (though that might be seen as damning with faint praise). The only problem: During the investigative process and the back-and-forth of resolving these matters, the commission is a black box that leaves the public in the dark as to whether a jurist is in deep or merely shallow trouble. (Only the Court of Appeals can remove a judge, though the judiciary can take the stopgap action of taking away a judge\u2019s cases in response to a credible complaint.) <a href=\"https://www.nysenate.gov/legislation/bills/2023/S4398\">Legislation passed by the state Senate</a> but so far ignored by the Assembly would make the commission\u2019s findings public as soon as formal charges are filed. In many of the cases listed above, that change would have brought these matters to public light a year earlier.</p><p>And while the numbers ebb and flow every year, roughly two-thirds of the commission\u2019s disciplinary determinations involve non-lawyer judges. Over the disciplinary panel\u2019s 45-year history, more than two-thirds of its dispositions involved town and village courts \u2014 the only venues where non-lawyer judges can serve.</p><p>This accounting is intended in no way to suggest that judges who are lawyers aren\u2019t capable of despicable behavior; the commission\u2019s archives include plenty of those cases, as well. (No less a legal personage that former Chief Judge Janet DiFiore <a href=\"https://queenseagle.com/all/2022/12/2/ethics-investigation-into-former-chief-judge-closes-for-now\">retired while under investigation</a> by the commission.) But there does appear to be an opportunity for non-lawyer judges to benefit from additional training, mentoring or monitoring that might reduce these types of antics. As farcical as some of the behavior listed above might sound, the application of justice is no joke, and it shouldn\u2019t be handled by clowns.</p><p>___</p><p>Oneonta Daily Star. January 12, 2024.</p><p>Editorial: Prenatal care vital in addressing infant mortality trends</p><p>For all of the bad news that seems to crop up on a daily basis, the quality of life of the average American has improved in recent years. By and large, people are living longer and have access to better medical care than ever before.</p><p>But despite this progress, the U.S. has fallen behind the rest of the developed world in one of the most important areas of all: delivering and nurturing healthy babies.</p><p>Infant mortality is one of the telltale signs of how a nation is able to care for its citizens and recent data suggests that America is not coming anywhere close to meeting adequate standards.</p><p>Fortunately, there has been a push to amend this troubling trend in New York state.</p><p>Gov. Kathy Hochul recently proposed legislation that would give pregnant people in the state 40 hours of paid leave to attend prenatal medical appointments.</p><p>This is part of a plan to expand the state\u2019s paid family leave policy and prenatal care in order to prevent the deaths of both mothers and infants.</p><p>New York\u2019s current paid leave policy only applies after a child is born. If the legislation is approved, it would make New York the first state to have blanket coverage for prenatal care.</p><p>It\u2019s a badly needed step considering the frightening infant mortality numbers in New York and the rest of the country.</p><p>The infant mortality rate is a measure of how many babies die before their first birthday. Primary causes include birth defects, preterm births, accidents and injuries, and complications during pregnancy, according to the Center for Disease Control and Prevention.</p><p>In 2022 the United States saw an increase in infant mortality for the first time in more than 20 years.</p><p>A report from the National Center for Health Statistics released in November showed overall infant mortality in the U.S. was 5.6 infant deaths per 1,000 live births, a 3% increase from 2021 to 2022.</p><p>Even without the year-over-year rise, that mortality rate is notably higher than rates seen in regions like Western Europe that are similarly developed.</p><p>Infant mortality is often worse among people of color who are less likely to receive routine medical procedures and often receive lower quality care overall.</p><p>What\u2019s odd is that the overall death rate in the United States fell 5% in 2022, a decrease attributed in part to the waning impact of COVID-19, especially amongst the elderly. The U.S. also saw a decrease in the number of maternal deaths last year.</p><p>However, a November report released by March of Dimes listed the U.S. as one of the most dangerous developed nations for childbirth, assigning a grade of D+ for its preterm birth rate for the second year in a row. This grade takes into account the state of a country\u2019s infant and maternal health.</p><p>One of the biggest reasons why American mothers-to-be are suffering is because many of them don\u2019t have proper access to adequate prenatal care.</p><p>A report from March of Dimes found more than 5 million women in America live in counties with limited or no access to maternity care services. These regions have come to be known as \u201cmaternity care deserts.\u201d</p><p>In the last five years, there has been a 4% increase in these deserts, which are classified as any county that doesn\u2019t have a hospital or birth center that offers obstetric care or has no obstetric providers. It\u2019s an issue that has been especially prevalent in regions such as the South and the Midwest.</p><p>It\u2019s important to note that despite last year\u2019s rise in infant mortality, the rate in the U.S. has gradually improved in recent years. But there are still ways to ensure it heads in the right direction.</p><p>These include extending Medicaid benefits to one year after a child\u2019s birth, expanding mandatory paid parental leave and funding maternal and infant mortality review committees.</p><p>There\u2019s no excuse for the United States to lag behind the rest of the world when it comes to the health of newborn babies. This proposed legislation must represent the beginning of a trend and not an aberration.</p><p>___</p><p>Jamestown Post-Journal. January 17, 2024.</p><p>Editorial: It\u2019s Time For A Real Study Of State\u2019s Population Loss</p><p>There is no one reason why New York is hemorrhaging population.</p><p>Former Gov. Andrew Cuomo may have been partly right when he joked people are moving to warmer climates because they\u2019re tired of the cold and snow in New York. Gov. Kathy Hochul may be partially right when she blames the lack of affordable housing in many communities. Those who point to high taxes, excessive regulations and high costs of living in much of the state may also be partially right.</p><p>The fact that there are so many possible causes \u2013 and zero consensus on possible solutions \u2013 tells us it\u2019s time for Democrats to hop on board with state Republicans\u2019 proposed legislation to create a commission on outmigration that examines why the state is losing population and that offers recommendations to reverse the state\u2019s population trends. The bill is sponsored by state Sen. James Tedisco, R-Clifton Park, and co-sponsored by several Republicans including state Sen. George Borrello, R-Sunset Bay. As proposed the commission would study housing, but Tedisco also wants the commission to study affordability, public safety, education and economic opportunity while holding at least one public hearing in each Economic Development Council region.</p><p>In our view Republicans are on the right track. If the governor is going to make such a big deal of outmigration, then putting all of her eggs in the basket of building more housing is foolish if there is a myriad of reasons leading people to leave the state. It\u2019s time for the state to take a serious look at outmigration in the same way it did Medicaid costs with the Medicaid Redesign Team or the Commission on Local Government Efficiency and Competitiveness chaired by former Lt. Gov. Stan Lundine of Jamestown.</p><p>It\u2019s time for a real and honest discussion of the state\u2019s population loss and a coordinated effort to reverse the trend.</p><p>___</p><p>Adirondack Daily Enterprise. January 12, 2024.</p><p>Editorial: House GOP must make good faith effort on border solutions</p><p>Rep. Elise Stefanik, in a show of spectacular hypocrisy, is among House Republicans who are pushing for the impeachment of Homeland Security Secretary Alejandro Mayorkas over his handling of the migrant crisis at the U.S.-Mexico border.</p><p>This call for an impeachment of a Cabinet secretary is extremely rare. It\u2019s happened only once before in U.S. history, in 1876, after a defense secretary was charged with receiving kickbacks in government contracts.</p><p>Stefanik\u2019s push for Mayorkas\u2019 impeachment comes mere weeks after she voted against the impeachment of the disgraced former GOP Rep. George Santos because, in her own words, it would set a \u201cdangerous precedent.\u201d Santos was the sixth representative to be impeached in history; the first since the Civil War to be expelled without a criminal conviction.</p><p>Santos was charged with 23 federal counts. The evidence supporting those charges continues to mount. Much of his background, which he campaigned on, was completely fabricated. If he were to continue to serve in Congress as Stefanik desired \u2014 effectively keeping Republicans\u2019 majority in the House from getting smaller \u2014 he would have continued to pull a public salary despite his lies and further discredit the important work of the House.</p><p>\u201cEvery day that Joe Biden and Secretary Mayorkas refuse to secure our borders they fail the American people, sacrificing our nation\u2019s safety, security, and sovereignty,\u201d Stefanik said at a press conference in Washington, D.C. this week.</p><p>Mayorkas, a respected attorney and Jewish immigrant whose family fled Cuba to the U.S. after the Cuban Revolution, has been charged with no real crimes by a law enforcement agency. Instead, as a bipartisan effort by Senators aims to negotiate a border security package, Republicans in the House seem to have given up on compromises and good faith negotiations, instead opting to try to push Mayorkas out over a policy dispute. House Republicans are claiming that Mayorkas is not enforcing federal immigration laws. The Department of Homeland Security has called Republicans\u2019 push for Mayorkas\u2019 impeachment \u201cbaseless and pointless.\u201d</p><p>The Constitution specifies that \u201chigh crimes and misdemeanors\u201d warrant impeachment \u2014 is there actual evidence to prove that Mayorkas\u2019 conduct rises to that level? If so, Republicans must make that evidence public and clear.</p><p>Last month, U.S. Border Patrol was expected to take a quarter of a million people entering the U.S. illegally into custody. There were a record number of arrivals at the southern border in December: 300,000. This trend\u2019s genesis spans further back than Biden. After Trump ended his zero-tolerance policy in 2018 following public outrage over migrant children being removed from their families, the Washington Post reports that smugglers \u201cquickly seized on\u201d the attention that the outrage had generated. Despite Trump\u2019s other hard-line policies, annual illegal crossing apprehensions peaked at 851,508 in 2019, a 12-year high, according to the Pew Research Center. But even before Trump was elected, in 2014, the number of migrants turning themselves over to Border Patrol agents had overwhelmed the agency\u2019s resources, prompting the Obama administration to open a new border processing facility with a capacity for 1,500 people \u2014 and the infamous \u201ccages\u201d to hold them, according to the Washington Post. This vexing issue has spanned multiple presidencies and just seems to continue to get worse.</p><p>But until there\u2019s evidence to prove a direct link between Mayorkas\u2019 conduct and the rising illegal crossings, this effort by House Republicans seems a useless, unproductive exercise in bomb throwing.</p><p>Despite what members of the House Freedom Caucus may want to believe, this sort of approach is clearly not working and will not work.</p><p>House Republicans, after ousting their own speaker last year and failing for weeks to agree on a replacement, have become mired by infighting. Last year, under a Republican majority, Congress passed just 27 bills. That makes this Congress the least productive since 1931-33. This is a disgrace to the GOP and not reflective of the party\u2019s great history.</p><p>If Republicans hope to keep control of the House after this year, they must demonstrate to voters that they are effective leaders who can make the sort of compromises necessary to make meaningful progress.</p><p>___</p><p>New York Post. January 16, 2024.</p><p>Editorial: Hochul\u2019s budget isn\u2019t terrible \u2014 but will she stand up to lawmakers who will want to make it so?</p><p>Gov. Hochul just rolled out a characteristically careful budget that points toward fiscal sanity.</p><p>Let\u2019s hope she sticks to her guns against the coming demands from the tax-and-spendaholic Legislature.</p><p>The gov has no new taxes in <a href=\"https://nypost.com/2024/01/16/metro/hochul-proposes-233b-budget-including-1-9b-for-nyc-migrant-crisis/\">her $233 billion budget proposal</a> and vows that if lawmakers push for a hike, she\u2019ll tell them to go take one.</p><p>Good: New York already has the heaviest state- and local-tax burden in the country, <a href=\"https://nypost.com/2023/06/28/high-taxes-are-bleeding-new-yorks-people-and-businesses-to-oblivion/\">and it\u2019s driving people to flee.</a></p><p>And where Albany usually adds billions in new outlays, she aims to keep overall spending roughly flat.</p><p>State-funded outlays rise 4.5%, a bit more than inflation, offsetting drops in federal aid.</p><p>Budget rollbacks would be better: As the Citizens Budget Commission warns, in three years, the state will face a mammoth $15 billion budget gap \u2014 and that\u2019s assuming Albany doesn\u2019t need to help with migrant costs after this year, <a href=\"https://nypost.com/2023/12/27/opinion/the-migrant-crisis-isnt-just-socking-new-yorks-budget-but-its-economy-too/\">a huge risk</a>.</p><p>Hochul also has no specific plans to keep Medicaid from bankrupting the state: It soared 38% over the past three years.</p><p>Yet she does deserve credit for focusing attention on that $27 billion-and-counting money-gobbler, as well as on education costs still soaring amid declining enrollments.</p><p>Her plan calls for slowing the growth of school aid ($35.3 billion) and shifting funds to account for population changes and to favor higher-need districts.</p><p>All commendable \u2014 though Hochul herself notes per-student outlays here blow away those in most other states, and her plans won\u2019t lower those costs one cent.</p><p>Hochul rightly flags the state\u2019s housing shortage, blaming it for fueling outmigration that\u2019s cost the state $6 billion in revenue, and she offered decent ideas to address it.</p><p>One disappointing sign: She failed to utter a word about fixing criminal-justice laws \u2014 cashless bail, Raise the Age \u2014 despite claiming public safety is her \u201cNo. 1 priority.\u201d</p><p>She clearly fears being rebuffed by prog lawmakers. But if she can\u2019t win their backing to address her top priority, how will she resist new tax hikes and added budget bloat?</p><p>Hochul often shows she knows what\u2019s right for New York. Let\u2019s hope that this year she can get lawmakers to go along.</p><p>END</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/73fb5cb31bdaee4e8f9d3251e3cfc648",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 3,
+            "reason": "The document contains multiple editorials on various topics, but only one of them is directly related to health. The editorial from the Oneonta Daily Star discusses prenatal care and infant mortality, which are relevant to health. However, the other editorials focus on judicial conduct, state population loss, border solutions, and budget proposals, which are not related to health. Therefore, while there is some relevant content, it is not the primary focus of the document."
+        }
+    }
+}

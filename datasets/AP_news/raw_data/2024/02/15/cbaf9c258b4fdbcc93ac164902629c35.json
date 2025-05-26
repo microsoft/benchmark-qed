@@ -1,0 +1,208 @@
+﻿{
+    "altids": {
+        "itemid": "cbaf9c258b4fdbcc93ac164902629c35",
+        "etag": "cbaf9c258b4fdbcc93ac164902629c35_1a10aza0c0",
+        "friendlykey": "970204291239",
+        "referenceid": "US-MED--Overdose Deaths-Smoking"
+    },
+    "version": 1,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2024-02-15T21:07:28Z",
+    "firstcreated": "2024-02-15T18:13:10Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "ednote": "Eds: CORRECTS: Corrects spelling of 'Kral' in one instance.",
+    "editorialtypes": [
+        "Lead"
+    ],
+    "signals": [
+        "newscontent"
+    ],
+    "title": "US-MED--Overdose Deaths-Smoking",
+    "headline": "More people die after smoking drugs than injecting them, US study finds",
+    "headline_extended": "A new government study suggests smoking has surpassed injecting as the most common way of taking drugs in U.S. overdose deaths",
+    "slugline": "AP-US-MED-Overdose-Deaths-Smoking, 1st Ld-Writethru",
+    "description_summary": "A new government study suggests smoking has surpassed injecting as the most common way of taking drugs in U.S. overdose deaths. The Centers for Disease Control and Prevention published the study Thursday. It calls it the largest to look at how Americans took the drugs that killed them. Highly-potent illicit fentanyl is involved in more U.S. overdose deaths than any other drug. Both injection and smoking carry a substantial overdose risk. The researchers found that between 2020 and 2022, the percentage of overdose deaths with evidence of smoking rose 74%. Meanwhile, the percentage of deaths with evidence of injection fell 29%.",
+    "bylines": [
+        {
+            "by": "By MIKE STOBBE",
+            "title": "AP Medical Writer"
+        }
+    ],
+    "located": "NEW YORK",
+    "datelinelocation": {
+        "city": "New York",
+        "countryareacode": "NY",
+        "countryareaname": "New York",
+        "countrycode": "USA",
+        "countryname": "United States",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                -74.00597,
+                40.71427
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "smoking injection overdoses fentanyl"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "a",
+            "name": "a"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e237be707de410048fffdf092526b43e",
+            "name": "Medication",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 54
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 84
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "fb629770cf154f91964e1789d2dd836e",
+            "name": "Opioids",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 69
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "936045008844100486a2a28878d48e09",
+            "name": "Addiction and treatment",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 96
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Editorial",
+            "editorial_subject": "Health",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "788b364882f110048df3df092526b43e",
+            "name": "District of Columbia",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "9d26a20b35f0484a891740f8189d4c7b",
+                "name": "City"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -77.00025,
+                    38.91706
+                ]
+            },
+            "relevance": 37,
+            "parentnames": [
+                "United States"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "661850e07d5b100481f5c076b8e3055c",
+            "name": "Latin America and Caribbean",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "associations": {
+        "1": {
+            "altids": {
+                "itemid": "82d596c3dbc8407fb477b85b9ddcfbbe"
+            },
+            "type": "picture"
+        }
+    },
+    "body_nitf": "<p>NEW YORK (AP) \u2014 Smoking has surpassed injecting as the most common way of taking drugs in U.S. overdose deaths, a new government study suggests.</p><p>The Centers for Disease Control and Prevention called its study published Thursday the largest to look at how Americans took the drugs that killed them.</p><p>CDC officials decided to study the topic after seeing reports from California suggesting that smoking fentanyl was becoming more common than injecting it. Potent, illicit versions of the painkiller are involved in more U.S. overdose deaths than any other drug.</p><p>Some early research has suggested that smoking fentanyl is somewhat less deadly than injecting it, and any reduction in injection-related overdose deaths is a positive, said the study\u2019s lead author, Lauren Tanz.</p><p>But \u201cboth injection and smoking carry a substantial overdose risk,\u201d and it\u2019s not yet clear if a shift toward smoking fentanyl reduces U.S. overdose deaths, said Tanz, a CDC scientist who studies overdoses.</p><p>Illicit fentanyl is an infamously powerful drug that, in powder form, increasingly has been cut into heroin or other drugs. In recent years, it's been a primary driver of the U.S. overdose epidemic. Drug overdose deaths in the U.S. went up slightly in 2022 after <a href=\"https://apnews.com/article/overdose-deaths-opioids-fentanyl-8cb302a70ddbb6a435f9e8fbb19f153b\">two big leaps during the pandemic</a>, and provisional data for the first nine months of 2023 suggests it inched up last year.</p><p>For years, fentanyl has mainly been injected, but drug users have increasingly smoked it. People put the powder on tin foil or in a glass pipe, heated from below, and inhale the vapor, explained Alex Kral, a RTI International researcher who studies drug users in San Francisco.</p><p>Smoked fentanyl is not as concentrated as fentanyl in a syringe, but some drug-takers see upsides to smoking, Kral said. Among them: People who inject often deal with pus-filled abscesses on their skin and risk infections with hepatitis and other diseases.</p><p>\u201cOne person showed me his arms and said, \u2018Hey, look at my arm! It looks beautiful! I can now wear T-shirts and I can get a job because I don't have these track marks,'\" Kral said.</p><p>CDC investigators studied the trend by using a national database built from death certificates, toxicology reports and reports from coroners and medical examiners.</p><p>They were able to get suitable data from the District of Columbia and 27 states for the years 2020 to 2022. From those places, they got information on how drugs were taken in about 71,000 of the more than 311,000 total U.S. overdose deaths over those three years \u2014 or about 23%.</p><p>The researchers found that between early 2020 and late 2022, the percentage of overdose deaths with evidence of smoking rose 74% while the percentage of deaths with evidence of injection fell 29%. The number and percentage of deaths with evidence of snorting also increased, though not as dramatically as smoking-related deaths, the study found.</p><p>It\u2019s complicated to map out exact percentages of deaths that occurred after smoking, injecting, snorting or swallowing drugs, experts say. In some cases a person may have used multiple drugs, taken different ways. In other cases, no drug-taking method was identified.</p><p>The study found that in late 2022, of the deaths for which a method was identified, 23% of the deaths occurred after smoking, 16% after injections, 16% after snorting, and 14.5% after swallowing.</p><p>Tanz said she feels the data is nationally representative. Data came from states from every region of the country, and all showed increases in smoking and decreases in injecting. Smoking was the most common route in the West and Midwest, and roughly tied with injecting in the Northeast and South, the report said.</p><p>Kral described the study as \u201cmostly good\u201d but said it has limitations.</p><p>It can be difficult to ascertain the how and why of an overdose death, especially if no witness was present. Injections might be more commonly reported because of injection marks on the body; to detect smoking \"they likely would need to find a pipe or foil on the scene and decide whether to write that down,\u201d he said.</p><p>Kral also noted that many people who smoke fentanyl use a straw to inhale vapors from the burning powder, and it's possible investigators saw a straw and assumed it was snorted.</p><p>___</p><p>The Associated Press Health and Science Department receives support from the Howard Hughes Medical Institute\u2019s Science and Educational Media Group. The AP is solely responsible for all content.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/smoking-injection-overdoses-fentanyl-cbaf9c258b4fdbcc93ac164902629c35",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 5,
+            "reason": "The document discusses a study on drug overdose deaths in the U.S., specifically focusing on the methods of drug intake (smoking vs. injecting) and their impact on health outcomes. It provides detailed information on the trends, risks, and implications of these methods, which are directly related to public health concerns. The study's findings and expert opinions are also included, making it highly relevant to the topic of health."
+        }
+    }
+}

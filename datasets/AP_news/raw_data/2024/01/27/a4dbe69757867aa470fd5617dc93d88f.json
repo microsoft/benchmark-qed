@@ -1,0 +1,223 @@
+﻿{
+    "altids": {
+        "itemid": "a4dbe69757867aa470fd5617dc93d88f",
+        "etag": "a4dbe69757867aa470fd5617dc93d88f_0a8aza0c0",
+        "friendlykey": "810112440578",
+        "referenceid": "US--Hiker-Dead-Zion National Park-Utah"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2024-01-27T20:17:41Z",
+    "firstcreated": "2024-01-27T20:17:41Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "ednote": "Eds: UPDATES: Updates Media.",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "US--Hiker-Dead-Zion National Park-Utah",
+    "headline": "Hiker dies of suspected heart attack in Utah's Zion National Park, authorities say",
+    "headline_extended": "A hiker has died of a suspected heart attack in Utah's Zion National Park",
+    "slugline": "BC-US--Hiker-Dead-Zion National Park-Utah",
+    "description_summary": "A hiker has died of a suspected heart attack in Utah's Zion National Park. The National Park Service said the man was found unresponsive on the West Rim Trail near Scout Lookout on Friday afternoon. Rangers performed CPR and used an automated external defibrillator to deliver electric shocks in a bid to revive him. In spite of their efforts, the man died at the scene. Authorities said the 63-year-old man was from San Diego, California. They said the cause of death is under investigation but appears to be consistent with a heart attack.",
+    "located": "SPRINGDALE, Utah",
+    "datelinelocation": {
+        "city": "Springdale",
+        "countryareacode": "UT",
+        "countryareaname": "Utah",
+        "countrycode": "USA",
+        "countryname": "United States",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                -112.99855,
+                37.18887
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "hiker dead Zion National Park Utah"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "a",
+            "name": "a"
+        },
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "7ef9209261fc46bfb193823b7d2c5581",
+            "name": "Heart attack",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 58
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "68358e28898710048843bc885dbc3010",
+            "name": "Hiking",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 41
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 58
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "c1dff44882c710048903df092526b43e",
+            "name": "Utah",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -111.75103,
+                    39.25024
+                ]
+            },
+            "relevance": 88,
+            "parentnames": [
+                "United States"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "661850e07d5b100481f5c076b8e3055c",
+            "name": "Latin America and Caribbean",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "c1dff44882c710048903df092526b43e",
+            "name": "Utah",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "789fdd8882af10048263df092526b43e",
+            "name": "California",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "associations": {
+        "1": {
+            "altids": {
+                "itemid": "28d9555d2bba484b96fdd0caab210a48"
+            },
+            "type": "picture"
+        }
+    },
+    "body_nitf": "<p>SPRINGDALE, Utah (AP) \u2014 A man died of a suspected heart attack while hiking a strenuous trail in Utah's Zion National Park, authorities said Friday.</p><p>The 63-year-old man from San Diego, California, was found unresponsive on the West Rim Trail on Friday afternoon, the National Park Service said in a statement. Other hikers on the trail performed CPR while awaiting the arrival of rangers, who continued CPR and used a heart monitor and an automated external defibrillator to deliver electric shocks in a bid to revive him.</p><p>More than 20 search and rescue team members and emergency medical personnel responded to the scene, the statement said. But after an hour a half of resuscitation efforts, the man was pronounced dead.</p><p>\u201cAll of us at Zion extend our deepest condolences to this hiker\u2019s family,\u201d park Superintendent Jeff Bradybaugh said in the statement. \u201cWe also want to express thanks to the bystanders who assisted by performing CPR.\u201d</p><p>Authorities said the cause of death is under investigation but appears to be consistent with a heart attack.</p><p>The medical emergency occurred on near Scout Lookout on the West Rim Trail, which the National Park Service describes as strenuous. The trail was has since reopened after being temporarily closed for rescue operations, authorities said.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/hiker-dead-zion-national-park-utah-a4dbe69757867aa470fd5617dc93d88f",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 3,
+            "reason": "The document discusses the death of a hiker due to a suspected heart attack while hiking in Zion National Park. While the primary focus is on the incident and the rescue efforts, it does touch upon a health-related issue, specifically a heart attack. However, it does not delve deeply into health topics or provide broader health information, making it somewhat relevant but not highly so."
+        }
+    }
+}

@@ -1,0 +1,263 @@
+﻿{
+    "altids": {
+        "itemid": "359b25cdadf2510cb42692e2d0158ed0",
+        "etag": "359b25cdadf2510cb42692e2d0158ed0_0a12aza0c0",
+        "friendlykey": "255791043451",
+        "referenceid": "NE--Editorial Rdp"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Opinion",
+    "language": "en",
+    "versioncreated": "2024-03-22T11:10:38Z",
+    "firstcreated": "2024-03-22T05:15:39Z",
+    "editorialrole": "FullStory",
+    "fixture": {
+        "code": "21ea4067bb274c3b805353fb2b99ba70",
+        "name": "Editorial Roundup"
+    },
+    "pubstatus": "usable",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "NE--Editorial Rdp",
+    "headline": "Editorial Roundup: New England",
+    "slugline": "AP-NE--Editorial Rdp",
+    "bylines": [
+        {
+            "by": "By The Associated Press"
+        }
+    ],
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "Editorial Rdp"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "person": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "42fcd5108d2610048a34f7ae5e3ffd3e",
+            "name": "Joe Biden",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "POLITICIAN",
+                "PERSON"
+            ],
+            "relevance": 31
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86b08df87dac1004890cba7fa5283c3e",
+            "name": "Voting",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 56
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e7d1d3f880a910048b8adf092526b43e",
+            "name": "Nursing care",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 36
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86aad5207dac100488ecba7fa5283c3e",
+            "name": "Politics",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 71
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "organisation": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "7439405781e1410e9770b0f8c1a2ccbd",
+            "name": "Vermont state government",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 44
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "8c2aeb56ad914100b434ac87961aac5a",
+            "name": "Massachusetts state government",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 44
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "8d2caa7082b3100484b8df092526b43e",
+            "name": "Maine",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -69.24977,
+                    45.50032
+                ]
+            },
+            "relevance": 88,
+            "parentnames": [
+                "United States"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "bed6942882b310048501df092526b43e",
+            "name": "Massachusetts",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -71.10832,
+                    42.36565
+                ]
+            },
+            "relevance": 81,
+            "parentnames": [
+                "United States"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "a42dc0a082af100482a7df092526b43e",
+            "name": "Connecticut",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "d2f8d8a882c710048915df092526b43e",
+            "name": "Vermont",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "1bf4bc0882c71004889cdf092526b43e",
+            "name": "Rhode Island",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "9531546082c6100487b5df092526b43e",
+            "name": "New Hampshire",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "bed6942882b310048501df092526b43e",
+            "name": "Massachusetts",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "8d2caa7082b3100484b8df092526b43e",
+            "name": "Maine",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "body_nitf": "<p>Boston Globe. March 20, 2024.</p><p>Editorial: Massachusetts needs more nurses and should ease path for out-of-state workers</p><p>Most neighboring states, and 41 US jurisdictions in total, let nurses licensed in one state practice in the others. Joining that compact would give Massachusetts\u2019 employers a better shot at filling thousands of vacancies.</p><p>Nurses fill a vital role in patient care, and Massachusetts\u2019 nursing workforce desperately needs shoring up. Even pre-pandemic, its nursing workforce was older, on average, than the country\u2019s, creating an environment ripe for labor shortages as those nurses retired, according to 2019 data cited by the <a href=\"https://www.mass.gov/doc/evaluation-of-the-commonwealths-entry-into-the-nurse-licensure-compact/download\">Health Policy Commission</a>. Challenging work conditions during the pandemic accelerated burnout and retirements.</p><p>A <a href=\"https://www.mhalink.org/news/massachusetts-healthcare-organizations-urge-passage-of-the-nurse-licensure-compact/\">2022 survey</a> by the Massachusetts Health and Hospital Association estimated that there were 5,100 vacant nursing positions in Massachusetts at the time. The Center for Health Information and Analysis\u2019s newly released <a href=\"https://www.chiamass.gov/assets/2024-annual-report/2024-Annual-Report.pdf\">2024 annual report</a> found that in fiscal 2022, the state\u2019s hospitals spent a staggering $1.2 billion hiring registered nurses working on temporary contracts \u2014 like those hired through an agency to fill immediate staffing needs. That same report cited staffing shortages as a factor leading to the temporary closure of beds in psychiatric and substance abuse units. Hospitals have reported that staffing shortages in home care, rehabilitation facilities, and nursing homes limit their ability to discharge patients.</p><p>The Legislature should, finally, authorize Massachusetts to join the <a href=\"https://www.nursecompact.com/\">Nurse Licensure Compact</a>. The compact is an agreement through which 41 US jurisdictions allow a nurse licensed in their home state to practice in other participating states. Maine, New Hampshire, Rhode Island, and Vermont are all part of the compact.</p><p>Participating in the compact would not entirely solve the state\u2019s nursing shortage. It would let more out-of-state nurses enter Massachusetts to work but would also offer flexibility for Massachusetts-based nurses to travel elsewhere. Yet, as the Massachusetts Health Policy Commission found in a <a href=\"https://www.mass.gov/doc/evaluation-of-the-commonwealths-entry-into-the-nurse-licensure-compact/download\">2021 report</a> evaluating whether Massachusetts should join the compact, there are potential upsides to joining, without major downsides.</p><p>The commission found that joining the compact could help Massachusetts adapt to unforeseen changes in nursing needs that require temporary staffing, like a natural disaster or pandemic or seasonal fluctuations, like an influx of summer visitors to Cape Cod. It would make it easier for nurses who live in neighboring states to work in Massachusetts. (Today, a nurse licensed in another state needs to apply for a reciprocal license to work in Massachusetts.) With the rise of telehealth, joining the compact would make it easier for Massachusetts patients to receive telehealth care from out-of-state nurses and for Massachusetts nurses who care for out-of-state patients to provide follow-up care. This could be important if a New Hampshire resident has surgery in Massachusetts or a Texas resident has an abortion here. It could allow more nurse educators to teach remotely, amid <a href=\"https://www.bostonglobe.com/2023/06/12/opinion/editorial-nursing-education-health-care/#:~:text=Lack%20of%20faculty%20and%20clinical,%2C%202023%2C%204%3A00%20a.m.&text=Massachusetts%20needs%20new%20nurses.,them%20to%20pay%20temporary%20staff.?p1=Article_Inline_Text_Link\">a shortage</a> of nursing faculty.</p><p>Charlene Craven, a registered nurse who works in a Central Massachusetts outpatient practice, said many of her patients live in Rhode Island or Connecticut, and she hesitates to provide advice over the phone in all but the simplest cases. \u201cIf I know that patient is out of state at home, technically I\u2019m not allowed to provide care for them because I\u2019d be acting as a nurse in a jurisdiction where I don\u2019t have a license,\u201d Craven said.</p><p>The nurse licensure compact has its own credentialing requirements, and after a 2018 change to require criminal background checks, some of the compact\u2019s requirements are stricter than Massachusetts\u2019. Massachusetts lawmakers could still set criteria that would apply to every nurse employed here, like requirements for continuing education.</p><p>Carmela Daniello, executive director of the American Nurses Association Massachusetts, a trade association that supports joining the compact, compared a nursing license to a driver\u2019s license. \u201cYou don\u2019t go to every state and get a new driver\u2019s license, but you are responsible for understanding the driving restrictions in a state through which you\u2019re driving,\u201d Daniello said.</p><p>Groups representing nurses are split. The National Council of State Boards of Nursing, which developed the compact, conducted a survey of Massachusetts-licensed nurses in October 2023, which found that 90 percent of nurses support joining the compact, with only 3 percent opposed and 7 percent having no opinion. But compact opponents say the survey is flawed because it did not detail the downsides of joining the compact.</p><p>The Massachusetts Nurses Association, a union representing 25,000 Massachusetts nurses and health care professionals, has long opposed joining the compact.</p><p>MNA President Katie Murphy said Massachusetts already has a pool of in-state nurses, and the reason hospitals struggle to hire and retain them relates to working conditions. Nurses may be uninterested in accepting a part-time or temporary job, or one where they are caring for too many patients. Murphy worries that entering the compact will compromise patient care if it results in more temporary, out-of-state nurses or more reliance on out-of-state nurses to remotely monitor patients.</p><p>The union is right that providers must offer nurses working conditions that make it appealing to work here, and that may become even more important if the compact is approved and makes the labor market more competitive. Employers would have to ensure they use out-of-state nurses wisely without compromising patient care.</p><p>But patient care is compromised now when hospitals can\u2019t find staff, and if the union is worried about nurses being overworked, it should support a measure that would help employers fill vacancies. If joining the compact removes administrative barriers to licensure and provides nurses with more flexibility, while upholding the quality of care, it is worth pursuing.</p><p>___</p><p>Portland Press Herald. March 17, 2024.</p><p>Editorial: Attacks on shield law are nothing more than election-year posturing</p><p>The effort by 16 Republican attorneys general to intimidate Maine out of a sound idea needs to be seen for exactly what it is.</p><p>Since the overturning of Roe v. Wade, individual states have been banding together in response \u2013 and they have been pulling apart.</p><p>More than a year ago, <a href=\"https://www.pressherald.com/2023/02/22/our-view-abortion-pill-case-validates-coordinated-response/\">this editorial board praised Gov. Mills</a> for joining with a group of Democratic state governors in a coalition that undertook to \u201cformalize shared approaches to policymaking, pool information, work together on budgeting strategies and reach some common ground on legal fights breaking out nationwide.\u201d</p><p>Last week, we witnessed a spurious example of the reverse in action.</p><p>A letter sent to the state\u2019s political leaders by a group of 16 Republican attorneys general came down hard on the shield law that Maine Legislature is considering passing into law, <a href=\"https://legislature.maine.gov/LawMakerWeb/summary.asp?ID=280085433\">L.D. 227.</a> The shield law would protect Maine-based health care providers from civil or criminal proceedings if they provide care that has been banned in a patient\u2019s home state.</p><p>About 17 states have passed shield laws. There is nothing \u201cextreme\u201d about this; it\u2019s a safeguard that\u2019s being pursued because of a legitimate threat.</p><p>Shield laws like the one Maine is considering were primarily put forward to allow practitioners to administer abortions without risk of prosecution. Lately, opponents are attempting to deflect attention onto one of the more inflamed questions of 2024: the provision of transgender health care to minors.</p><p><a href=\"https://www.pressherald.com/2024/03/12/republican-ags-from-16-states-attack-maine-bill-protecting-access-to-gender-affirming-care/\">The letter argues</a> that the proposal \u201cseeks to contravene the lawful policy choices of our states\u2019 citizens by imposing on the rest of the country Maine\u2019s views on hotly debated issues such as gender transition surgeries for children.\u201d</p><p>Support for a shield law should not be frustrated by this over-the-top intervention, which puts an inaccurate emphasis on gender-reassignment surgery for minors \u2013 surgery that is not, according to the Maine Hospital Association and MaineHealth, something Maine providers are offering.</p><p>The creation of a shield law is proposed to protect Maine health care providers from these statewide \u201cviews.\u201d The letter uses simplistic language to advance an abstract federalist ideal. At moments, it seems to contradict itself. (The petulant sentence \u201cOne state cannot control another,\u201d features in the closing paragraph.)</p><p>Any exertion of control here is attempted by the Republican states that wish to hunt down their residents and go after Maine health care workers. The attorneys general somehow find it appropriate to complain of \u201ctotalitarian impulses\u201d and faintly threaten that the institution of a shield law in Maine \u201ccould also trigger a rapid tit-for-tat escalation that tears apart our Republic.\u201d Small wonder, again, which parties would be driving such an escalation.</p><p>Elsewhere in the country, legal challenges are already underway, and the constitutionality of the concept will soon be clarified by the courts.</p><p>Until that happens, our legislators should work to pass the shield law and not be taken in by dubious, politically motivated attacks on something that would, if given up on, only expose decent law-abiding Mainers to more politically motivated attacks.</p><p>___</p><p>Bangor Daily News. March 18, 2024.</p><p>Editorial: Answer constitutional questions before a referendum goes to voters</p><p>Once again, it looks like Maine voters will be asked to consider a referendum question that is most likely unconstitutional.</p><p>Last month, Maine\u2019s secretary of state <a href=\"https://www.maine.gov/sos/news/2024/CitizenInitiativeValidFeb22.html\">announced</a> that petitioners had collected enough valid signatures to get an initiative on the ballot that would limit some campaign contributions.</p><p>The <a href=\"https://www.maine.gov/sos/cec/elec/citizens/PAC%20Legislation.pdf\">measure</a> seeks to limit contributions to political action committees (PACs) that make independent expenditures. PACs are groups that collect political contributions and then parcel them out to candidates and campaigns.</p><p>The legislation will first go to the Legislature, where it is likely to be rejected. If that happens, the initiative will appear on the November ballot.</p><p>We are not fans of our current campaign funding system and believe that far too much money is spent trying to influence the outcomes of elections.</p><p>However, the U.S. Supreme Court has taken a dim view of restrictions on campaign spending. In a much criticized <a href=\"https://www.fec.gov/legal-resources/court-cases/citizens-united-v-fec/\">decision</a> in 2010, the court held that campaign spending is essentially free speech and, therefore, cannot be restricted by the government.</p><p>So, restrictions like the ones sought in this proposed ballot question are likely to be deemed unconstitutional.</p><p>Several times in recent years, Maine voters have been asked to consider ballot initiatives that weren\u2019t likely to pass constitutional muster.</p><p>For example, voters <a href=\"https://www.bangordailynews.com/2021/11/02/politics/maine-voters-reject-1b-hydropower-corridor-in-massive-rebuke-to-cmp/?_ga=2.118174028.497158986.1669824084-1400697406.1669824075\">strongly supported</a> a referendum question in 2021 to stop a transmission corridor through western Maine. The Maine Supreme Court <a href=\"https://www.courts.maine.gov/courts/sjc/lawcourt/2022/22me058.pdf\">ruled</a> that question unconstitutional and Central Maine Power has <a href=\"https://www.bangordailynews.com/2023/07/30/business/cmp-corridor-construction-resumes/\">resumed construction</a> of the corridor.</p><p>Last year, voters <a href=\"https://www.bangordailynews.com/2023/11/07/politics/maine-backs-foreign-electioneering-ban-despite-janet-mills-constitutional-concerns/\">overwhelmingly approved</a> a referendum that would limit campaign spending by foreign government entities. It has already been <a href=\"https://www.bangordailynews.com/2024/02/23/state/state-police-courts/maine-foreign-election-interference-law-question-2-lawsuits/\">challenged in court</a> and, on Feb. 29, a federal judge <a href=\"https://www.bangordailynews.com/2024/03/01/politics/state-politics/maine-foreign-electioneering-ban-court-order/\">paused enforcement</a> of the new law, <a href=\"https://drive.google.com/file/d/15nENygnpBgd5egEaA0R-7P4EX8V_pER7/view\">indicating</a> that portions of it were likely unconstitutional. The state of Maine has now <a href=\"https://www.bangordailynews.com/2024/03/18/state/state-police-courts/maine-appeals-ruling-paused-foreign-election-interference-law-question-2/\">appealed</a> that pause.</p><p>The Maine Supreme Court also <a href=\"https://www.bangordailynews.com/2017/05/23/politics/maine-supreme-judicial-court-rules-ranked-choice-voting-unconstitutional/?_ga=2.147048631.1081327692.1661776491-1097813744.1654092562\">invalidated</a> part of the ranked-choice voting referendum <a href=\"http://bangordailynews.com/2016/11/09/politics/maine-backs-ranked-choice-voting-proposal-but-legal-hurdles-remain/\">approved</a> by voters in 2016.</p><p>State law and policy allows questions to appear on the ballot even though they may not later pass constitutional muster.</p><p>This is a practice that lawmakers should strongly reconsider. Adding a provision to state law that allows the Maine secretary of state, after consultation with the state attorney general, to reject initiative petitions that don\u2019t comply with the U.S. or Maine constitutions simply makes sense. A process is already in place that allows petitioners to sue if they believe the secretary of state wrongly rejected a petition. This would put the court challenges on constitutional grounds up front, rather than after a ballot measure had been voted on.</p><p>As we\u2019ve <a href=\"https://www.bangordailynews.com/2022/12/02/opinion/editorials/if-referendums-are-unconstitutional-they-shouldnt-be-on-the-ballot/\">written before</a>, not answering constitutional questions upfront just delays, rather than avoids, court challenges that may invalidate a referendum vote. It can also lead to frustration and distrust among voters who support a ballot question that is later deemed unconstitutional.</p><p>It would be much better if the constitutionality of ballot questions could be determined \u2014 or at least significantly clarified \u2014 <a href=\"https://www.bangordailynews.com/2019/02/11/opinion/room-for-improvement-in-maines-referendum-process/\">before they are put to voters</a>. Such a process could save Maine people, companies, regulators and others a lot of headaches, money, and frustration.</p><p>___</p><p>Rutland Herald. March 20, 2024.</p><p>Editorial: A fairer share</p><p>Reigniting a decades-old debate, President Joe Biden recently called for a wealth tax on the world\u2019s super-rich. Biden said, if reelected in November, he would impose a new \u201cbillionaire tax\u201d \u2014 a 25% tax on Americans with a wealth of more than $100 million. During the State of the Union, he stated: \u201cNo billionaire should pay a lower tax rate than a teacher, a sanitation worker, a nurse.\u201d</p><p>Global finance ministers recently meeting for a G20 summit in Brazil said they were exploring plans for a global minimum tax on the world\u2019s 3,000 billionaires to ensure the super-rich 0.1% pay their fair share to society. Such ideas have the backing of some of the world\u2019s wealthiest, according to published reports.</p><p>In early 2024, a growing network of so-called Patriotic Millionaires signed an open letter to world leaders, calling for higher taxes for the wealthy.</p><p>This week, a group of 23 high-income and wealthy Vermonters sent an open letter to lawmakers, asking them to increase taxes on the wealthy.</p><p>Legislators are considering a bill to enact a 3% surcharge on personal annual income above $500,000, which would raise at least $74 million in state revenue each year. Tuesday\u2019s letter stated explicit support for the proposal, as well as efforts to study legislation to tax unrealized gains of high-net-worth individuals. The group also supports conversations in the legislature to design a proposal for a modest tax on unrealized gains for taxpayers with over $10 million in assets.</p><p>The group includes Ben Cohen and Jerry Greenfield of Ben & Jerry\u2019s Ice Cream; Olympic cross-country skier Hannah Dreissigacker; Phoenix Books co-owner Renee Reiner; green energy entrepreneurs Duane Peterson and David Blittersdorf, and others.</p><p>The letter \u201cstressed the importance of public investment and their willingness to contribute more in taxes to fund public investments necessary to improve the quality of life for all Vermonters,\u201d according to an accompanying news release.</p><p>What follows are excerpts from the letter:</p><p>\u201cAs Vermont taxpayers and community members, we recognize the urgent moment we face. We see an acute housing crisis, chronic underfunding of state services, and a need for immediate investments in our infrastructure and environmental protection. At the same time, as Vermonters who have economically prospered in our state, we believe in contributing our fair share to build a state that works for all people who live here.\u201d</p><p>It goes on: \u201cWe support the Fair Share for Vermont proposals to increase taxes on the wealthiest Vermont residents, and we are willing to pay additional taxes to raise revenue for fundamental government services. We recognize that through public investment, we can improve the quality of life for all people.\u201d</p><p>Furthermore, it states, \u201cVermont is defined by its community spirit. Here in Vermont, we take care of our neighbors and form close relationships that transcend economic circumstances. Public investment, funded through tax revenue, is necessary to amplify these community efforts and fund programs that strengthen our communities. \u2026 We call on the legislature to make fiscally responsible choices to ensure that we are addressing the needs of our residents and ensuring that our state\u2019s revenues are strong and sustainable. And we think it\u2019s important for Vermonters \u2014 especially our state legislators \u2014 to know that many of the people who will pay these taxes support them.\u201d</p><p>Signatory Susanna Penfield, of Strafford, noted, \u201cWhen wealthy people maintain and accumulate wealth far beyond their own needs it comes at the cost of those in our neighborhoods, schools, towns \u2014 as well as at the cost of a sustainable future that will benefit us all.\u201d</p><p>There is no question, such wealth taxes would have an effect. Global wealth inequality has risen significantly over recent years, with the richest 1% holding two-thirds of all new wealth created since 2020, according to Oxfam. (It\u2019s also a statistic we have heard repeatedly from our own U.S. Sen. Bernie Sanders.) The poorest 50% of the global population now own just 2% of total net wealth, while the richest 10% hold 76%. Of that, the wealthiest 1% own around two-thirds.</p><p>Under Biden\u2019s proposals, a 25% tax on those with more than $100 million would raise $500 billion over 10 years to help fund benefits such as child care and paid parental leave. That would lift the average tax rate for America\u2019s 1,000 billionaires from 8.2% and bring it in line with the 25% paid by average American workers. Even a 2% tax on the world\u2019s 2,700 or so known billionaires could raise $250 billion per year, according to a 2023 report from the independent research lab EU Tax Observatory, which backs calls for a global wealth tax.</p><p>A separate Oxfam report in 2023 recently suggested a 5% tax on the world\u2019s multimillionaires and billionaires could raise $1.7 trillion annually \u2014 enough to lift 2 billion people out of poverty.</p><p>Add to the mix a 2024 poll by Patriotic Millionaires that found that more than half (58%) of millionaires from G20 countries back a 2% tax on wealth over $10 million. Three-quarters (74%) said they support higher taxes on the wealthy in general.</p><p>The letter to lawmakers was a pleasant surprise. A fairer share would go a long way.</p><p>\u201cPeople like us value our state\u2019s public investments and quality of life,\u201d the signatories wrote. \u201cWe love living in Vermont and appreciate the public good that taxes provide. ... We want our state to work for all Vermonters, and we want to contribute our fair share to make it happen.\u201d</p><p>___</p><p>Barre-Montpelier Times Argus. March 21, 2024.</p><p>Editorial: A sweet tradition</p><p>Vermont Maple Open House Weekend is this Saturday and Sunday. The annual event is a celebration of the maple sugaring season when sugar makers throw open the doors of their sugarhouses so visitors can experience one of Vermont\u2019s time-honored traditions.</p><p>This year, events and activities \u2014 including pancake breakfasts, sugar-on-snow tastings, sugarhouse tours, maple product samples, and more \u2014 are planned at more than 100 locations around the state, according to the Vermont Maple Sugar Makers\u2019 Association.</p><p>It\u2019s cause for celebration. Like mud season, maple sugaring season is a harbinger of springtime in Vermont \u2014 even if this weekend\u2019s forecast resembles January more than March. As warm days and cold nights get the sap running, hibernating hillsides begin to bustle activity as sap buckets appear and colorful tubes zigzag sugarbushes, collecting every drop. In sugarhouses, smoke pours from chimneys as stoves roar around the clock, boiling that precious liquid gold.</p><p>And gold it surely is. The Green Mountain State holds the distinction as the top maple producer in the nation, generating more than half of all maple syrup produced in the U.S. In 2022, Vermont\u2019s 2,500-plus sugarmakers produced over 2.5 million gallons valued at $84.5 million, or an average of $33.10 per gallon \u2014 a record high, according to the U.S. Department of Agriculture.</p><p>Vermonters take pride in our maple syrup. For many, it\u2019s a treasured pantry staple and healthy natural sweetener that adds flavor to everything, from our pancakes and waffles to salad dressings and cocktails. To be sure, the quickest way to trigger a Vermonter is to offer them generic pancake syrup or \u2014 heaven forbid \u2014 artificially flavored maple syrup.</p><p>In case you didn\u2019t know, we have laws against sort of thing. (Seriously.) Per 6 V.S.A. Chapter 32: \u201cArtificial maple flavored products shall be clearly and conspicuously labeled on their principal display panel or panels with the term \u2018artificial flavor\u2019 shall be of a size equal to, or larger than, other words used to describe the product. It is unlawful to use the terms \u2018maple syrup\u2019 or \u2018maple sugar,\u2019 however modified, to describe an artificially flavored product. Any restaurant menu listing such a product, or any advertising of such a product shall clearly state that the product is artificially flavored.\u201d</p><p>Unfortunately, our sweet syrup may become another victim of climate change before too long. Warming winters and other factors have created new challenges for Vermont sugarmakers, according to Mark Isselhardt, a maple specialist at UVM Extension\u2019s Proctor Maple Research Center, who said in a recent commentary that \u201closs of suitable growing conditions,\u201d such as wetter summers, reduced snowpack and extreme weather events, along with invasive insects and plants are creating \u201creal threats\u201d for the industry.</p><p>\u201cVermont is among the fastest-warming states in the U.S., along with the rest of the Northeast,\u201d stated Isselhardt. \u201cThe biggest short-term threats to maple producers include high wind events, late frost or sudden, extreme warming episodes, such as those seen in 2012 and 2021, which can end the sap run prematurely for the year. Over the long term, the loss of ideal conditions for both recruitment of regeneration and growth of established crop trees, which have made Vermont the top domestic syrup producer and responsible for half of all the syrup made in the United States, will play a significant role in determining whether sugaring remains sustainable long-term.\u201d Remaining sustainable will require sugar makers to adapt, Isselhardt said, noting that new technology has made sap collection more efficient, even in less-than-optimal temperatures earlier in the winter, and incorporating red maple tree into sugarbushes will help mitigate some issues caused by native and invasive pests. While such innovation and ingenuity is a silver lining for the industry as a whole, continued instability caused by climate change may ultimately make it too difficult for small-scale sugar makers to keep the sap boiling. Isselhardt concedes that small producers cannot as easily expand their collection windows and therefore risk losses by only being able to tap in the traditional window.</p><p>It\u2019s a not-so-sweet future we hope doesn\u2019t come to pass. Maple sugaring is part of Vermont\u2019s DNA. Sap runs through our veins as freely as it does through our hillsides. That, one day, all those taps might run.</p><p>END</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/359b25cdadf2510cb42692e2d0158ed0",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 3,
+            "reason": "The document contains multiple editorials, but only one of them is directly related to health. The Boston Globe editorial discusses the nursing shortage in Massachusetts and the potential benefits of joining the Nurse Licensure Compact. This is highly relevant to the topic of health as it addresses healthcare workforce issues, patient care, and healthcare policy. The other editorials cover topics such as election laws, wealth taxes, and maple sugaring, which are not related to health."
+        }
+    }
+}

@@ -1,0 +1,235 @@
+﻿{
+    "altids": {
+        "itemid": "b0ec148b3f8db6b2863aeca02078bd7a",
+        "etag": "b0ec148b3f8db6b2863aeca02078bd7a_9a5aza0c0",
+        "friendlykey": "20347854786",
+        "referenceid": "AS--China-Population"
+    },
+    "version": 9,
+    "type": "text",
+    "urgency": 3,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2024-01-17T13:41:40Z",
+    "firstcreated": "2024-01-17T02:11:51Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "ednote": "Eds: UPDATES: Updates Media.",
+    "editorialtypes": [
+        "Lead"
+    ],
+    "signals": [
+        "newscontent"
+    ],
+    "title": "AS--China-Population",
+    "headline": "China's population falls for a 2nd straight year as births drop even after end of one-child policy",
+    "headline_extended": "China\u2019s population fell by 2 million people in 2023 in the second straight annual decrease as births dropped and deaths jumped",
+    "slugline": "BC-AS-China-Population, 9th Ld-Writethru",
+    "description_summary": "China\u2019s population fell by 2 million people in 2023 in the second straight annual decrease as births dropped and deaths jumped. The government's statistics bureau said Wednesday that the total population was 1.4 billion last year. The number of deaths rose by 690,000 to 11.1 million, more than double last year\u2019s increase. Demographers were expecting a rise in deaths in the early part of last year because of the sudden lifting of China\u2019s COVID-19 restrictions in late 2022. The number of births fell for the seventh year, reflecting a fall in the birth rate that is a long-running economic and societal challenge for China.",
+    "bylines": [
+        {
+            "by": "By KEN MORITSUGU",
+            "title": "Associated Press"
+        }
+    ],
+    "located": "BEIJING",
+    "datelinelocation": {
+        "city": "Beijing",
+        "countrycode": "CHN",
+        "countryname": "China",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                116.39723,
+                39.9075
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "china population births deaths COVID"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "i",
+            "name": "i"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "91017718872a10048e35d7c656897a02",
+            "name": "Birth rates",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 94
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "bb2d2c5f441a452cb24bb511a2ab5eea",
+            "name": "World news",
+            "creator": "Editorial",
+            "editorial_subject": "World news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "organisation": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "06d33d0687ed43678f53f3e4f1038fde",
+            "name": "China government",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 45
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "662218c87d5b100482f0c076b8e3055c",
+            "name": "China",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661812607d5b100481f3c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "01f56e0e654841eca2e69bf2cbcc0526",
+                "name": "Nation"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    105,
+                    35
+                ]
+            },
+            "relevance": 80,
+            "parentnames": [
+                "Asia"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "661812607d5b100481f3c076b8e3055c",
+            "name": "Asia",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "associations": {
+        "1": {
+            "altids": {
+                "itemid": "06d924bb84fb4e4bb14b750560890e1b"
+            },
+            "type": "picture"
+        },
+        "2": {
+            "altids": {
+                "itemid": "83680bb0e47e43289da9c07f1f9a58a6"
+            },
+            "type": "picture"
+        },
+        "3": {
+            "altids": {
+                "itemid": "1aefd12e1f8049a2872edfe1e0bc34f2"
+            },
+            "type": "picture"
+        },
+        "4": {
+            "altids": {
+                "itemid": "f777e2ef713c489bbaea23e01def288d"
+            },
+            "type": "picture"
+        },
+        "5": {
+            "altids": {
+                "itemid": "b570056282f64eccad2c8ea49ebba5cd"
+            },
+            "type": "picture"
+        },
+        "6": {
+            "altids": {
+                "itemid": "7c05fc0105014099946499d424a15956"
+            },
+            "type": "audio"
+        },
+        "7": {
+            "altids": {
+                "itemid": "0ddae18296cc4d5fbc17ea6a8c40c7c3"
+            },
+            "type": "audio"
+        }
+    },
+    "body_nitf": "<p>BEIJING (AP) \u2014 China\u2019s population fell by 2 million people in 2023 in its second straight annual decrease, as births dropped for the seventh straight year and deaths jumped following the end of COVID-19 restrictions, the government said Wednesday.</p><p>The number of deaths rose by 690,000 to 11.1 million, more than double the previous year's increase. Demographers said the rise was driven by the aging of the population and the widespread COVID-19 outbreaks that started in December 2022 and continued into February of last year.</p><p>The total population stood at 1.4 billion, the statistics bureau said. China, long the most populated country in the world, <a href=\"https://apnews.com/article/india-population-china-united-nations-f87956b53ac07436438fd96cd1d12092\">dropped into second place behind India</a> in 2023, according to U.N. estimates.</p><p>The falling births reflect a decline in the fertility rate that is a long-term economic and societal challenge for China. Women are having fewer babies despite government incentives and the easing of its one-child policy in recent years to allow up to three children.</p><p>The lower fertility rate, together with people living longer because of better health care, means China is slowly growing older, something that could slow economic growth over time and challenge the government's finances and its ability to provide for a larger elderly population with fewer workers.</p><p>Experts expect the population decline to continue for decades, even if the fertility rate rebounds.</p><p>Demographer Zuo Xuejin, former executive vice president of the Shanghai Academy of Social Sciences., estimated that the proportion of the population that is 65 or older could double to more than 30% by 2050.</p><p>The government issued guidelines earlier this week on developing the \u201csilver\u201d economy and enhancing the well-being of older people. They included expanding geriatric hospital and nursing care, encouraging the development of clothing, food and other products suitable for older people, cracking down on scams that target the elderly and making it easier to operate a TV.</p><p>The number of births fell by 540,000, or 5.6%, which was smaller than the double-digit percent drops the previous three years. The 9 million babies born in 2023 were less than half the total in 2016. All the figures are estimates based on surveys and do not include Hong Kong and Macao. China conducts a full census every 10 years.</p><p>China, which once sought to control population growth with its one-child policy, is now facing the opposite problem. The government has sought to encourage births since gradually easing the policy over 2014 to 2016 to allow a second child and then <a href=\"https://apnews.com/article/lifestyle-health-china-demographics-52c63f7ef8d1b6048d6c588c5df8b950\">a third child in 2021</a>, but with little success.</p><p>Many people are delaying marriage or choosing not to have children. Even those who do often have only one child because of the high cost of educating children in cities in a highly competitive academic environment. The population of women of child-bearing age has also fallen.</p><p>Local governments are offering incentives for new children. A municipality in China\u2019s Inner Mongolia region has started offering payments of 2,000 yuan ($280) for a second child and 5,000 yuan ($700) for a third, as well as requiring that employers give an extra 60 and 90 days of paid maternity leave for the second and third child respectively, according to an online report by state-owned China National Radio.</p><p>President Xi Jinping told the new leadership of the All-China Women\u2019s Federation last October that it is necessary to strengthen the guidance of young people\u2019s views on marriage, parenthood and family and promote policies that support parenthood and cope with the aging of the population, according to a report on a government website.</p><p>\u201cWe must tell good stories about family customs, guide women to play a unique role in promoting the traditional virtues of the Chinese nation ... and create a new culture of family civilization,\u201d he was quoted as saying.</p><p>The working-age population, defined as those between 16 and 59 years old, fell to 61% of the total population, continuing a gradual decline. The proportion of those aged 60 and older ticked up to 21%. The official retirement age in China is 60 years old for men and 50 or 55 for women.</p><p>It is not clear how many people died from COVID-19 because of the sudden end to China's \u201czero-COVID\u201d restrictions in December 2022. The government has reported about 80,000 COVID-related deaths from early December to mid-February but <a href=\"https://apnews.com/article/zero-covid-exit-china-reopening-investigation-abridged-d7e7cf42b8f4b97e2744b640f431a7df\">experts believe the total was much higher</a>. Studies have estimated deaths could have reached 1.4 million or 1.9 million.</p><p>The drop in population is expected to be less this year, because of the waning effects of the pandemic and the fact that the year of the dragon, which begins in February, is considered an auspicious year to have children, an expert said at a forum earlier this week, according to the English-language state-owned China Daily newspaper.</p><p>But Yuan Xin, a professor at Nankai University and vice-president of the China Population Association, added that \"the downward trend in China\u2019s total population is bound to be long-term and become an inherent characteristic.\u201d</p><p>___</p><p>Associated Press researchers Wanqing Chen and Yu Bing contributed to this report.</p><p>___</p><p>Follow AP's Asia-Pacific coverage at <a href=\"https://apnews.com/hub/asia-pacific\">https://apnews.com/hub/asia-pacific</a></p><p>___</p><p>This story has been corrected to say that 690,000 was the annual increase in the number of deaths, not the total number of deaths, and that the easing of the one-child policy began in 2014.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/china-population-births-deaths-covid-b0ec148b3f8db6b2863aeca02078bd7a",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 3,
+            "reason": "The document primarily discusses China's population decline, the drop in birth rates, and the aging population. While it does touch on health-related aspects such as the impact of COVID-19 on death rates and the aging population's healthcare needs, the main focus is on demographic changes and their societal and economic implications. Therefore, it is somewhat relevant to the topic of health but not highly focused on it."
+        }
+    }
+}

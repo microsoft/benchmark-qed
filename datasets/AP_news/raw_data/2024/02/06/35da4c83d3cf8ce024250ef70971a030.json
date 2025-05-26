@@ -1,0 +1,205 @@
+﻿{
+    "altids": {
+        "itemid": "35da4c83d3cf8ce024250ef70971a030",
+        "etag": "35da4c83d3cf8ce024250ef70971a030_2a15aza0c0",
+        "friendlykey": "770652610217",
+        "referenceid": "US-MED--Listeria Outbreak-Cheese"
+    },
+    "version": 2,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2024-02-07T01:17:03Z",
+    "firstcreated": "2024-02-06T18:21:57Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "ednote": "Eds: UPDATES: Fixes style of decadelong.",
+    "editorialtypes": [
+        "Lead"
+    ],
+    "signals": [
+        "newscontent"
+    ],
+    "title": "US-MED--Listeria Outbreak-Cheese",
+    "headline": "Deadly decadelong listeria outbreak linked to cotija and queso fresco from a California business",
+    "headline_extended": "A California cheese and dairy company is the source of a decadelong outbreak of listeria food poisoning that killed two people and sickened more than two dozen",
+    "slugline": "BC-US-MED--Listeria Outbreak-Cheese, 2nd Ld-Writethru",
+    "description_summary": "A California cheese and dairy company is the source of a decadelong outbreak of listeria food poisoning that killed two people and sickened more than two dozen. The Centers for Disease Control and Prevention made the announcement Tuesday. Rizo-Lopez Foods of Modesto, California, has recalled more than 60 types of soft cheeses, sour cream and yogurt after the bacteria was found in a product. At least 26 people in 11 states have been sickened since 2014. Two people died in Texas and California. The CDC previously investigated the outbreak in 2017 and 2021.",
+    "bylines": [
+        {
+            "by": "By JONEL ALECCIA",
+            "title": "AP Health Writer"
+        }
+    ],
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "listeria outbreak cojita queso fresco cheese"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "f",
+            "name": "f"
+        },
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "a",
+            "name": "a"
+        },
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "9cce666bb29344b8ba61f3732d971d32",
+            "name": "Disease outbreaks",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 61
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "c8e409f8858510048872ff2260dd383e",
+            "name": "Business",
+            "creator": "Editorial",
+            "editorial_subject": "Business",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Editorial",
+            "editorial_subject": "Health",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "789fdd8882af10048263df092526b43e",
+            "name": "California",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -119.75126,
+                    37.25022
+                ]
+            },
+            "relevance": 87,
+            "parentnames": [
+                "United States"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "661850e07d5b100481f5c076b8e3055c",
+            "name": "Latin America and Caribbean",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "6e92d9b882c7100488e5df092526b43e",
+            "name": "Texas",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "789fdd8882af10048263df092526b43e",
+            "name": "California",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "associations": {
+        "1": {
+            "altids": {
+                "itemid": "2ca7edcec11f44629949123f5cfac617"
+            },
+            "type": "picture"
+        }
+    },
+    "body_nitf": "<p>A California cheese and dairy company is the source of a decadelong outbreak of listeria food poisoning that killed two people and sickened more than two dozen, federal health officials said Tuesday.</p><p><a href=\"https://www.cdc.gov/listeria/outbreaks/cheese-02-24/details.html#print\">New lab and inspection evidence</a> linked soft cheeses and other dairy products made by Rizo-Lopez Foods of Modesto, California, to the outbreak, which was first detected in June 2014, the Centers for Disease Control and Prevention said.</p><p>Since then, at least 26 people in 11 states have been sickened. They include a person who died in California in 2017 and one who died in Texas in 2020, CDC officials said.</p><p>On Monday, <a href=\"https://www.prnewswire.com/news-releases/rizo-lopez-foods-inc-voluntarily-recalls-dairy-products-because-of-possible-health-risk-302053958.html\">the company recalled</a> more than 60 soft cheeses, yogurt and sour cream sold under the brands Tio Francisco, Don Francisco, Rizo Bros, Rio Grande, Food City, El Huache, La Ordena, San Carlos, Campesino, Santa Maria, Dos Ranchitos, Casa Cardenas, and 365 Whole Foods Market.</p><p>The CDC previously investigated cases of food poisoning tied to queso fresco and other similar types of cheese in 2017 and 2021, but there was not enough evidence to identify a source.</p><p>New illnesses were reported in December, prompting CDC to reopen the investigation. The strain of listeria linked to the outbreak was found in a cheese sample from Rizo-Lopez Foods. Federal officials confirmed that queso fresco and cotija made by the company were making people sick.</p><p>The recalled products were distributed nationwide at stores and retail deli counters, including El Super, Cardenas Market, Northgate Gonzalez, Superior Groceries, El Rancho, Vallarta, Food City, La Michoacana, and Numero Uno Markets.</p><p>Listeria infections can cause serious illness and, in rare cases, death. People who are pregnant, older than 65 or have weakened immune systems are particularly vulnerable. Symptoms \u2014 like muscle aches, fever and tiredness \u2014 usually start within two weeks after eating contaminated foods, but can start earlier or later.</p><p>The CDC said consumers who have these products should discard them and thoroughly clean the refrigerator, counters and other contact sites. Listeria can survive in the refrigerator and easily contaminate other foods and surfaces.</p><p>___</p><p>The Associated Press Health and Science Department receives support from the Howard Hughes Medical Institute\u2019s Science and Educational Media Group. The AP is solely responsible for all content.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/listeria-outbreak-cojita-queso-fresco-cheese-35da4c83d3cf8ce024250ef70971a030",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 5,
+            "reason": "The document discusses a listeria outbreak linked to dairy products from a California business, which has resulted in deaths and illnesses over a decade. It provides detailed information about the outbreak, the affected products, the recall, and the health risks associated with listeria infections. This information is highly relevant to the topic of health as it pertains to food safety, public health concerns, and the impact of foodborne illnesses."
+        }
+    }
+}

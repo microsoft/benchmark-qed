@@ -1,0 +1,285 @@
+﻿{
+    "altids": {
+        "itemid": "79341477cc1c82d0884055e044f35679",
+        "etag": "79341477cc1c82d0884055e044f35679_1a6aza0c0",
+        "friendlykey": "502219735653",
+        "referenceid": "AF--Mauritius-Cruise Ship"
+    },
+    "version": 1,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2024-02-26T22:47:18Z",
+    "firstcreated": "2024-02-26T21:23:58Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "ednote": "Eds: UPDATES: To link AP audio.",
+    "editorialtypes": [
+        "Lead"
+    ],
+    "signals": [
+        "newscontent"
+    ],
+    "title": "AF--Mauritius-Cruise Ship",
+    "headline": "US cruise ship finally allowed to dock in Mauritius after tests show no cholera aboard",
+    "headline_extended": "A U.S.-owned cruise ship with more than 3,000 passengers and crew onboard was finally allowed to dock in the Indian Ocean island of Mauritius on Monday having been quarantined offshore over fears of an outbreak of the cholera disease onboard",
+    "slugline": "BC-AF--Mauritius-Cruise Ship, 1st Ld-Writethru",
+    "description_summary": "A U.S.-owned cruise ship with more than 3,000 passengers and crew onboard was finally allowed to dock in the Indian Ocean island of Mauritius on Monday having been quarantined offshore over fears of an outbreak of the cholera disease onboard. The Mauritius government cleared the Norwegian Dawn, which is owned and run by the Miami-based Norwegian Cruise Line company, to dock in the capital, Port Louis, after health officials found no traces of cholera in tests conducted on the water on the ship. Mauritius authorities blocked the ship from docking when it arrived on Sunday because they said 15 people onboard were ill with vomiting and diarrhoea.",
+    "bylines": [
+        {
+            "by": "By GERALD IMRAY",
+            "title": "Associated Press"
+        }
+    ],
+    "located": "CAPE TOWN, South Africa",
+    "datelinelocation": {
+        "city": "Cape Town",
+        "countrycode": "ZAF",
+        "countryname": "South Africa",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                18.42322,
+                -33.92584
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "mauritius cruise ship norwegian dawn"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "i",
+            "name": "i"
+        },
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "9cce666bb29344b8ba61f3732d971d32",
+            "name": "Disease outbreaks",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 97
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 97
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "3b9797c0833849809300a3e134ad34a5",
+            "name": "Cholera",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 97
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "bb2d2c5f441a452cb24bb511a2ab5eea",
+            "name": "World news",
+            "creator": "Editorial",
+            "editorial_subject": "World news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "3e6177e07e3510048756df092526b43e",
+            "name": "Port Louis",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661ba8587d5b10048247c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "9d26a20b35f0484a891740f8189d4c7b",
+                "name": "City"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    57.49889,
+                    -20.16194
+                ]
+            },
+            "relevance": 85,
+            "parentnames": [
+                "Mauritius"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "661ba8587d5b10048247c076b8e3055c",
+            "name": "Mauritius",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661812607d5b100481f1c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "01f56e0e654841eca2e69bf2cbcc0526",
+                "name": "Nation"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    57.58333,
+                    -20.3
+                ]
+            },
+            "relevance": 98,
+            "parentnames": [
+                "Africa"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "d8f472e882af1004831adf092526b43e",
+            "name": "Miami",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "cb06ab1082af100482f8df092526b43e"
+            ],
+            "locationtype": {
+                "code": "9d26a20b35f0484a891740f8189d4c7b",
+                "name": "City"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -80.19366,
+                    25.77427
+                ]
+            },
+            "relevance": 68,
+            "parentnames": [
+                "Florida"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "661812607d5b100481f1c076b8e3055c",
+            "name": "Africa",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "cb06ab1082af100482f8df092526b43e",
+            "name": "Florida",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "associations": {
+        "1": {
+            "altids": {
+                "itemid": "ec1999bbcd98434e92c5707678f77983"
+            },
+            "type": "picture"
+        },
+        "2": {
+            "altids": {
+                "itemid": "4b01235c9ecd4b62849a13836a1b363e"
+            },
+            "type": "audio"
+        }
+    },
+    "body_nitf": "<p>CAPE TOWN, South Africa (AP) \u2014 A U.S.-owned luxury cruise ship with more than 3,000 passengers and crew was allowed to dock Monday in the <a href=\"https://apnews.com/hub/mauritius\">Indian Ocean island of Mauritius</a> after being quarantined offshore for a day over fears of a possible cholera outbreak onboard, authorities said.</p><p>The Mauritius government cleared the Norwegian Dawn, which is owned and run by the Miami-based Norwegian Cruise Line company, to dock at the harbor in the capital, Port Louis, after health officials found no traces of cholera in tests conducted on the ship's water.</p><p>Mauritius authorities blocked the ship from docking Sunday because 15 people onboard were ill with vomiting and diarrhea. The Mauritius Ports Authority said it took the decision \u201cin order to avoid any health risks,\" and sent officials onboard to collect samples to test.</p><p>The Mauritius government said the sick passengers who had been isolated after falling ill in fact had mild cases of the viral infection gastroenteritis.</p><p>Norwegian Cruise Line said in a statement that there were \u201ca small number of guests experiencing mild symptoms of a stomach-related illness\u201d and there were \u201cno confirmed cases nor any evidence of cholera.\"</p><p>The Mauritius government \"required testing in an overabundance of caution,\u201d it added.</p><p>Several countries in mainland southern African have experienced <a href=\"https://apnews.com/article/zambia-cholera-outbreak-health-climate-6333109a9e996d81e8dc1b9a946da972\">serious outbreaks of cholera</a> over the last year, possibly leading to the concern from authorities in Mauritius, an island nation of about 1.2 million people off the east coast of Africa that's a popular tourist destination.</p><p>Cruise ships were problematic during the COVID-19 pandemic, with many of them reporting outbreaks of that disease and having to be quarantined at ports.</p><p>The United Nations Office for the Coordination of Humanitarian Affairs says there's a cholera epidemic in southern Africa, with a total of around 188,000 cases and 3,000 deaths in eight countries since January 2023.</p><p>Cholera spreads through food or water contaminated with the bacteria that causes it. Health officials were also testing the food onboard the Norwegian Dawn for cholera. Those tests results hadn't yet come back but authorities said they were satisfied that there was no cholera threat after the water tests were negative.</p><p>There were 2,184 passengers and 1,026 crew members onboard the Norwegian Dawn when it arrived in Mauritius, the ports authority said. Around 2,000 of those passengers were due to disembark in Mauritius and end their cruise and 2,279 new passengers were due to get onboard.</p><p>Everyone leaving the ship would still be screened by health officials, said Dr Bhooshun Ori, the director of health services at the Mauritius ministry of health.</p><p>Norwegian Cruise Line said passengers would now disembark the ship on Tuesday.</p><p>The 294-meter (964-feet) long Norwegian Dawn has 14 decks, with a casino, a theater and a video game arcade among its facilities.</p><p>A regular cabin starts at around $2,000 per person for a 12-day cruise, according to the company's website. For $47,000, you can have a 3-bedroom Garden Villa that comes with a private garden, a hot tub, an outdoor dining area and your own butler service.</p><p>___</p><p>AP Africa news: <a href=\"https://apnews.com/hub/africa\">https://apnews.com/hub/africa</a></p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/mauritius-cruise-ship-norwegian-dawn-79341477cc1c82d0884055e044f35679",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 5,
+            "reason": "The document discusses a health-related incident involving a U.S. cruise ship that was quarantined due to fears of a cholera outbreak. It details the health measures taken by the Mauritius government, the testing for cholera, and the eventual clearance of the ship. The document also provides context about cholera outbreaks in southern Africa and the precautions taken to prevent the spread of the disease. This information is directly related to public health concerns and measures, making the document highly relevant to the topic of Health."
+        }
+    }
+}

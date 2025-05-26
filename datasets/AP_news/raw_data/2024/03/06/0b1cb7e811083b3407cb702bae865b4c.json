@@ -1,0 +1,289 @@
+﻿{
+    "altids": {
+        "itemid": "0b1cb7e811083b3407cb702bae865b4c",
+        "etag": "0b1cb7e811083b3407cb702bae865b4c_0a4aza0c0",
+        "friendlykey": "975178487143",
+        "referenceid": "EU--Norway-King"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2024-03-06T13:04:42Z",
+    "firstcreated": "2024-03-06T13:04:41Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "ednote": "Eds: UPDATES: Updates Media.",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "EU--Norway-King",
+    "headline": "Europe's oldest monarch who fell ill on vacation will get a pacemaker, Norway's palace says",
+    "headline_extended": "The royal palace in Norway says the infection that sent Europe\u2019s oldest monarch to a hospital while traveling in Malaysia is under control, and the implantation of a permanent pacemaker likely can take place early next week",
+    "slugline": "AP-EU--Norway-King",
+    "description_summary": "The royal palace in Norway says the infection that sent Europe\u2019s oldest monarch to a hospital while traveling in Malaysia is under control, and the implantation of a permanent pacemaker likely can take place early next week. The 87-year-old King Harald V fell ill during a private holiday. He underwent surgery on Saturday and received a temporary pacemaker due to a low heart rate. Harald returned to Norway on Sunday and was transferred to an Oslo hospital. The monarch has had frail health in recent years but has repeatedly said he has no plans to abdicate.",
+    "located": "COPENHAGEN, Denmark",
+    "datelinelocation": {
+        "city": "Copenhagen",
+        "countrycode": "DNK",
+        "countryname": "Denmark",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                12.56553,
+                55.67594
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "norway king harald malaysia hospital pacemaker heart"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "person": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "b22af1d7001c42279c31e53c13fb0c18",
+            "name": "Queen Margrethe II",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "GOVERNMENT_FIGURE",
+                "PERSON",
+                "ROYALTY"
+            ],
+            "relevance": 35
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "76f2f7205c8c458b98d1fbb4d51d7492",
+            "name": "Harald V",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "GOVERNMENT_FIGURE",
+                "PERSON"
+            ],
+            "relevance": 44
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "i",
+            "name": "i"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "90aeac5089ef10048f63d56c852d093e",
+            "name": "Royalty",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 45
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86aad5207dac100488ecba7fa5283c3e",
+            "name": "Politics",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 31
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 57
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "bb2d2c5f441a452cb24bb511a2ab5eea",
+            "name": "World news",
+            "creator": "Editorial",
+            "editorial_subject": "World news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "c36108787eff100484d0df092526b43e",
+            "name": "Oslo",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "662161307d5b100482dcc076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "9d26a20b35f0484a891740f8189d4c7b",
+                "name": "City"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    10.74609,
+                    59.91273
+                ]
+            },
+            "relevance": 58,
+            "parentnames": [
+                "Norway"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "661850e07d5b100481f4c076b8e3055c",
+            "name": "Europe",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "locationtype": {
+                "code": "976d112cd5c3497ea180aeecab922c6b",
+                "name": "Continent"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    9.14062,
+                    48.69096
+                ]
+            },
+            "relevance": 77
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "662161307d5b100482dcc076b8e3055c",
+            "name": "Norway",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661850e07d5b100481f4c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "01f56e0e654841eca2e69bf2cbcc0526",
+                "name": "Nation"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    10,
+                    62
+                ]
+            },
+            "relevance": 90,
+            "parentnames": [
+                "Europe"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "661850e07d5b100481f4c076b8e3055c",
+            "name": "Europe",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "associations": {
+        "1": {
+            "altids": {
+                "itemid": "db31d5cf3bdd4b7b9bd00c844f3d2912"
+            },
+            "type": "picture"
+        },
+        "2": {
+            "altids": {
+                "itemid": "61def0c0cf314ea295778ee9d28d7418"
+            },
+            "type": "picture"
+        },
+        "3": {
+            "altids": {
+                "itemid": "053de738c2b04b5eb7799b31d532cc67"
+            },
+            "type": "picture"
+        }
+    },
+    "body_nitf": "<p>COPENHAGEN, Denmark (AP) \u2014 The infection that sent Europe's oldest monarch, King Harald V of Norway, to a hospital while traveling in Malaysia is under control and the implantation of a permanent pacemaker likely can take place early next week, the royal palace said Wednesday.</p><p>\u201cThe king is steadily improving, and the general condition is satisfactory,\u201d the palace said in a brief statement.</p><p>Last week, the 87-year-old king fell ill during a private holiday. He underwent surgery on Saturday and <a href=\"https://apnews.com/article/norway-king-harald-malaysia-hospital-pacemaker-heart-b68e290c6bbfc4c6a055b1137e65ee3b\">received a temporary pacemaker due to a low heart rate.</a></p><p>Harald returned to Norway on Sunday and was transferred to an Oslo hospital.</p><p>The monarch has had frail health in recent years with numerous hospital stays. He had an operation to replace a heart valve in October 2020 after being hospitalized with breathing difficulties.</p><p>Harald repeatedly has said he has no plans to abdicate, unlike his second cousin Queen Margrethe II of Denmark, who <a href=\"https://apnews.com/article/denmark-queen-king-margrethe-frederik-abdication-22d9356ab4bad4b058b2305fa8730a27\">stepped down earlier this year</a>.</p><p>Harald\u2019s duties as Norway\u2019s head of state are ceremonial and he holds no political power. He ascended to the throne following the death of his father, King Olav, in 1991.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/norway-king-harald-malaysia-hospital-pacemaker-heart-0b1cb7e811083b3407cb702bae865b4c",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 5,
+            "reason": "The document discusses the health condition of King Harald V of Norway, including details about his recent illness, surgery, and the implantation of a pacemaker. It also mentions his past health issues and hospital stays. These aspects are directly related to the topic of health."
+        }
+    }
+}

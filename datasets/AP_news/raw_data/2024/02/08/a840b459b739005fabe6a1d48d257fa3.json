@@ -1,0 +1,234 @@
+﻿{
+    "altids": {
+        "itemid": "a840b459b739005fabe6a1d48d257fa3",
+        "etag": "a840b459b739005fabe6a1d48d257fa3_0a8aza0c0",
+        "friendlykey": "468706182727",
+        "referenceid": "EU--Britain-King"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2024-02-08T21:58:05Z",
+    "firstcreated": "2024-02-08T21:58:04Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "EU--Britain-King",
+    "headline": "King Charles III is doing 'extremely well' after cancer diagnosis, queen says at charity event",
+    "headline_extended": "Queen Camilla has described King Charles III as doing well given his cancer diagnosis, adding that he has been touched by the messages of support he\u2019s received from the public",
+    "slugline": "BC-EU--Britain-King",
+    "description_summary": "Queen Camilla has described King Charles III as doing well given his cancer diagnosis, adding that he has been touched by the messages of support he\u2019s received from the public. Camilla traveled from Sandringham House to Salisbury Cathedral on Thursday to attend a concert celebrating the work of local charities. Among the first people she met were workers from Wiltshire Air Ambulance, who offered hope that the king was doing well.",
+    "located": "LONDON",
+    "datelinelocation": {
+        "city": "London",
+        "countrycode": "GBR",
+        "countryname": "United Kingdom",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                -0.12574,
+                51.50853
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "King Charles III Queen Camilla cancer"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "person": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f8955706b58c4b71901d46201750aa48",
+            "name": "King Charles III",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "GOVERNMENT_FIGURE",
+                "PERSON",
+                "ROYALTY"
+            ],
+            "relevance": 61
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "27d3bc69a271433992a500bc68c4eb60",
+            "name": "Camilla, the queen consort",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "ROYALTY",
+                "PERSON"
+            ],
+            "relevance": 87
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "i",
+            "name": "i"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e22524b87de410048f91df092526b43e",
+            "name": "Cancer",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 56
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 56
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "90aeac5089ef10048f63d56c852d093e",
+            "name": "Royalty",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 87
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "bb2d2c5f441a452cb24bb511a2ab5eea",
+            "name": "World news",
+            "creator": "Editorial",
+            "editorial_subject": "World news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "7a55e0187eff10048492df092526b43e",
+            "name": "London",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "df4691387d6b10048fdeba7fa5283c3e"
+            ],
+            "locationtype": {
+                "code": "9d26a20b35f0484a891740f8189d4c7b",
+                "name": "City"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -0.12574,
+                    51.50853
+                ]
+            },
+            "relevance": 38,
+            "parentnames": [
+                "England"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "661850e07d5b100481f4c076b8e3055c",
+            "name": "Europe",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "associations": {
+        "1": {
+            "altids": {
+                "itemid": "3900a55086dc4723a1d203213094e190"
+            },
+            "type": "picture"
+        },
+        "2": {
+            "altids": {
+                "itemid": "0e430a4a30f7432ba524f3b04d958fed"
+            },
+            "type": "picture"
+        }
+    },
+    "body_nitf": "<p>LONDON (AP) \u2014 Queen Camilla said Thursday that King Charles III is doing well given his <a href=\"https://apnews.com/article/king-charles-iii-cancer-britain-e0408a7c9bb86ad2af8754ce4b37d65e\">cancer diagnosis</a>, adding that he has been touched by the messages of support he's received from the public.</p><p>Camilla traveled from Sandringham House to Salisbury Cathedral on Thursday to attend a concert celebrating the work of local charities. Among the first people she met were workers from Wiltshire Air Ambulance, who offered hope that the king was doing well.</p><p>\u201cWell he\u2019s doing extremely well under the circumstances,'' Camilla said. \u201cHe's very touched by all the letters and the messages the public have been sending from everywhere \u2013 that\u2019s very cheering.\u201d</p><p>The British monarch has been recuperating at his Sandringham estate in eastern England following his first treatment for an unspecified type of cancer. Buckingham Palace announced the diagnosis earlier this week.</p><p>___</p><p>Find more of AP\u2019s coverage of King Charles III at <a href=\"https://apnews.com/hub/royalty\">https://apnews.com/hub/royalty</a></p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/king-charles-iii-queen-camilla-cancer-a840b459b739005fabe6a1d48d257fa3",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 5,
+            "reason": "The document discusses King Charles III's health condition, specifically his cancer diagnosis and recovery. It includes details about his treatment, the public's support, and comments from Queen Camilla regarding his well-being. These elements are directly related to the topic of health."
+        }
+    }
+}

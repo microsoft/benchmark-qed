@@ -1,0 +1,250 @@
+﻿{
+    "altids": {
+        "itemid": "dadbb356d51c7640ba480b26916d844d",
+        "etag": "dadbb356d51c7640ba480b26916d844d_0a2aza0c0",
+        "friendlykey": "136840277391",
+        "referenceid": "MI--Editorial Rdp"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Opinion",
+    "language": "en",
+    "versioncreated": "2023-12-25T12:10:39Z",
+    "firstcreated": "2023-12-24T01:45:27Z",
+    "editorialrole": "FullStory",
+    "fixture": {
+        "code": "21ea4067bb274c3b805353fb2b99ba70",
+        "name": "Editorial Roundup"
+    },
+    "pubstatus": "usable",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "MI--Editorial Rdp",
+    "headline": "Editorial Roundup: Michigan",
+    "slugline": "BC-MI--Editorial Rdp",
+    "bylines": [
+        {
+            "by": "By The Associated Press"
+        }
+    ],
+    "copyrightnotice": "Copyright 2023 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "Editorial Rdp"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "person": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "d77e1ff9ba834ca7aa0031cb54e44929",
+            "name": "Larry Nassar",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "NEWSMAKER",
+                "PERSON"
+            ],
+            "relevance": 45
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e770295120ce4ed0a73f6ded5e01ec20",
+            "name": "Gretchen Whitmer",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "POLITICIAN",
+                "PERSON"
+            ],
+            "relevance": 62
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "2bba6ea16dfa4a03be18268f0b0bfae7",
+            "name": "Brian Higgins",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "POLITICIAN",
+                "PERSON"
+            ],
+            "associatedstates": [
+                {
+                    "code": "b58f18a082c6100487fbdf092526b43e",
+                    "name": "New York"
+                }
+            ],
+            "relevance": 38
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "084e24e87f00100481c7f571351eed07",
+            "name": "Flu",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 74
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86aad5207dac100488ecba7fa5283c3e",
+            "name": "Politics",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 65
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 88
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "142410b0cf274e8f9bfc128ef67af06e",
+            "name": "Traverse City",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "6bf49b4082c410048696df092526b43e"
+            ],
+            "locationtype": {
+                "code": "9d26a20b35f0484a891740f8189d4c7b",
+                "name": "City"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -85.62063,
+                    44.76306
+                ]
+            },
+            "relevance": 48,
+            "parentnames": [
+                "Michigan"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "6bf49b4082c410048696df092526b43e",
+            "name": "Michigan",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -85.50033,
+                    44.25029
+                ]
+            },
+            "relevance": 58,
+            "parentnames": [
+                "United States"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "6bf49b4082c410048696df092526b43e",
+            "name": "Michigan",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "body_nitf": "<p>Mining Journal. December 18, 2023.</p><p>Editorial: Flu season is here; don\u2019t forget to get your vaccine</p><p>Although the holiday season is rushing to a conclusion in the near future, flu season just getting started and we\u2019d like to remind everyone of a few things to remember as the illness peaks.</p><p>Typically the flu season peaks in January or February, but with winter arriving with a bang this week, it\u2019s not too soon to to think about the flu.</p><p>Though the start, duration and severity of the season is hard to gage from year to year, it seems the sickness has already begun to spread in the U.P.. But it\u2019s easy for anyone to take steps to prevent getting the flu in the first place.</p><p>The first step is to get a flu shot, anyone 6-years-old and older, that is. The vaccine, which lasts one season, comes in two forms: A shot and a nasal spray for children.</p><p>Doctor\u2019s offices, health departments and many pharmacies offer flu vaccinations and the shots are covered by many insurance companies.</p><p>Another important step to staying healthy is to avoid sick people. Those with the flu should not go to work to avoid spreading the sickness to others. Cover your mouth when coughing or use a tissue.</p><p>Washing your hands with soap regularly can help you avoid spreading the germs and help prevent you from getting flu. The illness is passed through a virus via contact: You can\u2019t get the flu from just going outside when it\u2019s cold. You have to touch an infected door handle or other surface, or come in close proximity with someone who\u2019s already sick.</p><p>If you do get sick with the flu \u2014 symptoms include a high fever, cough, head and body aches, fatigue and a sore throat \u2014 some anti-viral drugs are available that can shorten the duration and ease the symptoms.</p><p>See a doctor as soon as any of these symptoms start. Not only can they make you feel better but they can also prevent flu-related complications like pneumonia.</p><p>We implore you to take these steps to help avoid the flu this season.</p><p>Stay healthy.</p><p>___</p><p>Traverse City Record-Eagle. December 20, 2023.</p><p>Editorial: Transparency is not a matter of \u2018naughty or nice\u2019</p><p>The decision to release thousands of documents in the Larry Nassar case to Michigan Attorney General Dana Nessel\u2019s office came about quickly.</p><p>The agenda item was added an hour before the meeting of the Michigan State University Board of Trustees, according to the Detroit News.</p><p>Trustees cited a need for \u201chealing\u201d on behalf of the victims and the need to rebuild trust in the university by way of \u201ctransparency, accountability, justice and truth.\u201d</p><p>Nessel\u2019s office quickly lauded the decision, calling it \u201clong-owed.\u201d Long, as Nasser was convicted five years ago, and the choice to keep the investigative documents shrouded in darkness has endured that long.</p><p>\u201cI am encouraged to see the MSU Board of Trustees finally make the right decision on a long-promised, and long-delayed, measure of transparency,\u201d Nessel\u2019s statement read.</p><p>Yet her office is fighting transparency on a number of fronts when it comes to its own investigations.</p><p>Close to home, the cases of those accused of plotting to kidnap Gov. Gretchen Whitmer during the COVID-19 pandemic are resolved \u2014 Shawn Fix and Brian Higgins accepted plea agreements with prosecutors and have been sentenced; Eric Molitor, Michael Null and William Null were found not guilty by a jury. The former defendants faced state terrorism-related charges in Antrim County after prosecutors accused them of participating in a plot to kidnap Whitmer from her summer home near Elk Rapids.</p><p>Prosecutors first argued that releasing discovery material to the public could taint the jury pool and infringe on fair trial rights \u2014 an argument Nessel repeated during an April visit to Traverse City for an open government seminar.</p><p>But that story changed when the protection order was lifted:</p><p>\u201cAs the litigation concluded, it is appropriate for the Department to seek the return of the discovery so as to protect the personal identifying information of people that were interviewed during the investigation,\u201d said a spokesman from Nessel\u2019s office.</p><p>Here\u2019s the thing \u2014 transparency is not a gift, and the AG office is not Santa Claus, deciding who is naughty or nice: The nice ones get a Freedom Of Information Act response and the naughty ones get a flat stocking.</p><p>Rather, transparency is a right of the governed public, and a fundamental \u2014 and functional \u2014 part of keeping a democracy working. Instead of making righteous transparency claims, our state officials need to examine their own embrace of transparency to determine what list they\u2019d be on.</p><p>___</p><p>Alpena News. December 21, 2023.</p><p>Editorial: Talk to lawmakers about growing population</p><p>Gov. Gretchen Whitmer\u2019s Growing Michigan Together Council, the team Whitmer tasked with finding ways to turn around the state\u2019s sluggish population growth, has released its final recommendations to some praise and some condemnation.</p><p>Among the council\u2019s recommendations:</p><p>\u2014 Pilot new incentives \u2014 such as help with down payments on a new house, paid workforce training, or tax credits for student loans \u2014 to attract targeted workers to the state.</p><p>\u2014 Offer two years\u2019 tuition-free college.</p><p>\u2014 Develop regional public transit, such as a passenger rail line between Grand Rapids and Detroit.</p><p>\u2014 Invest in \u201cregional innovation districts.\u201d</p><p>The full report can be found online at GrowingMichigan.org.</p><p>The council did not address how it would fund its recommendations, which Republican legislative leaders say could cost billions of dollars.</p><p>Now, it\u2019s up to the Legislature \u2014 currently controlled by Democrats \u2014 to figure if and how to craft the council\u2019s recommendations into policy and put money behind the plan.</p><p>And that means it\u2019s time for you to talk to your lawmakers, dear Northeast Michiganders.</p><p>The state has definitely seen bad trendlines in population, ranking as one of the slowest-growing states in the nation according to U.S. Census Bureau data. Fewer people means less tax revenue for the state and local governments and schools, fewer customers and fewer employees for local businesses.</p><p>If trends continue, the state could lose a congressional seat when seats are next divvied up after the 2030 census. And that means Michigan would have less of a voice in Washington and less of a say in the Electoral College.</p><p>So we have to grow our population if we want to remain competitive.</p><p>But how we do that is important. If we craft the wrong policies, we could drive people away at the worst and waste taxpayer dollars at the least.</p><p>So lawmakers need to hear from you. Do you support the council\u2019s recommendations? Would you tweak them in some way? Would you throw out the recommendations all together and come up with some other plan?</p><p>Let your lawmakers know, Northeast Michigan.</p><p>Whitmer\u2019s office can be reached at 517-335-7858. State Sen. Michele Hoitenga, who represents Northeast Michigan, can be reached at 517-373-7946. State Rep. Cam Cavitt, who also represents Northeast Michigan, can be reached at 517-373-0833.</p><p>Make your voices heard.</p><p>END</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/dadbb356d51c7640ba480b26916d844d",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 3,
+            "reason": "The document contains three editorials, one of which is directly related to health, specifically flu season and the importance of getting a flu vaccine. The other two editorials focus on transparency in government and population growth in Michigan, which are not related to health. Therefore, while the document does contain relevant health information, it is not the primary focus of the entire document."
+        }
+    }
+}

@@ -1,0 +1,203 @@
+﻿{
+    "altids": {
+        "itemid": "521c9f6615d60d6596375a47d6ec3f59",
+        "etag": "521c9f6615d60d6596375a47d6ec3f59_0a2aza0c0",
+        "friendlykey": "882005233744",
+        "referenceid": "AL-Alabama Prisons"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2024-04-26T01:20:41Z",
+    "firstcreated": "2024-04-26T01:20:41Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "AL-Alabama Prisons",
+    "headline": "House approves bill to criminalize organ retention without permission",
+    "headline_extended": "Alabama lawmakers on Thursday advanced a bill making it a crime for medical examiners to retain a deceased person\u2019s organs without family permission",
+    "slugline": "AP-AL-Alabama Prisons",
+    "description_summary": "Alabama lawmakers on Thursday advanced a bill making it a crime for medical examiners to retain a deceased person\u2019s organs without family permission. The bill would make it a felony for a medical examiner to retain a deceased person\u2019s organs without getting that permission from \u201cthe appropriate next of kin.\u201d The legislation was introduced after several families alleged that inmates\u2019 bodies were returned from state autopsies with their hearts or other organs missing. The House of Representatives vote 89-1 for the proposal. The bill now moves to the Alabama Senate.",
+    "located": "MONTGOMERY, Ala.",
+    "datelinelocation": {
+        "city": "Montgomery",
+        "countryareacode": "AL",
+        "countryareaname": "Alabama",
+        "countrycode": "USA",
+        "countryname": "United States",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                -86.29997,
+                32.36681
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "alabama prisons inmates organs"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86c1b8807dac10048990ba7fa5283c3e",
+            "name": "Legislation",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 39
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 61
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86aad5207dac100488ecba7fa5283c3e",
+            "name": "Politics",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 77
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "48612b807c2b4b93bbbacbf54f547ad5",
+            "name": "Crime",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 53
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "organisation": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "72e75e6132bd4425baaa14b0d86ea75e",
+            "name": "Alabama state government",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 70
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "b8099e4881d610048a11df092526b43e",
+            "name": "Alabama",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -86.75026,
+                    32.75041
+                ]
+            },
+            "relevance": 91,
+            "parentnames": [
+                "United States"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "b8099e4881d610048a11df092526b43e",
+            "name": "Alabama",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "body_nitf": "<p>MONTGOMERY, Ala. (AP) \u2014 Alabama lawmakers on Thursday advanced a bill making it a crime for medical examiners to retain a deceased person's organs without permission.</p><p>The legislation was introduced after several families said inmates' bodies came back from autopsies with their hearts or other internal organs missing. The House of Representatives vote 89-1 for the proposal. The bill now moves to the Alabama Senate.</p><p>State law currently requires medical examiners to have permission to retain organs unless it is done for identification or determining a cause of death. The bill would make it a felony for a medical examiner to retain a deceased person\u2019s organs without getting that permission from \u201cthe appropriate next of kin.\u201d</p><p>The families of several men who died while incarcerated filed federal lawsuits alleging that their loved ones' bodies were missing organs when they were returned after state autopsies.</p><p>\"We're just letting people know that we are paying attention, and the law needs to be followed,\" Rep. Chris England, the bill\u2019s sponsor, said.</p><p>England said the issue was not on his \u201cbingo card\u201d for the year, but it became necessary to introduce. The bill was approved with little debate.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/alabama-prisons-inmates-organs-521c9f6615d60d6596375a47d6ec3f59",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 3,
+            "reason": "The document discusses a legislative bill in Alabama that criminalizes the retention of organs by medical examiners without permission. While this topic intersects with health, particularly in the context of medical ethics and legal aspects of medical practice, it is more focused on legal and legislative actions rather than health itself. The primary focus is on the legal ramifications and the legislative process rather than health outcomes or medical practices."
+        }
+    }
+}

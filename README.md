@@ -1,14 +1,40 @@
-# Project
+# BenchmarkQED
 
-> This repo has been populated by an initial template to help get you started. Please
-> make sure to update the content to build a great experience for community-building.
+<!-- >
+TODO: 
+ - Add missing badges
+ - Add blog post final url
+<-->
 
-As the maintainer of this project, please make a few updates:
+👉 [Microsoft Research Blog Post](https://www.microsoft.com/en-us/research/blog/)<br/>
 
-- Improving this README.MD file to provide a great experience
-- Updating SUPPORT.MD with content about this project's support experience
-- Understanding the security reporting process in SECURITY.MD
-- Remove this section from the README
+<div align="left">
+  <a href="https://github.com/microsoft/benchmark-qed/issues">
+    <img alt="GitHub Issues" src="https://img.shields.io/github/issues/microsoft/benchmark-qed">
+  </a>
+  <a href="https://github.com/microsoft/benchmark-qed/discussions">
+    <img alt="GitHub Discussions" src="https://img.shields.io/github/discussions/microsoft/benchmark-qed">
+  </a>
+</div>
+
+## Overview
+
+BenchmarkQED is a suite of tools designed for automated benchmarking of retrieval-augmented generation (RAG) systems, particularly in the context of answering questions over private datasets. It provides components for query generation, evaluation, and dataset preparation to facilitate rigorous testing.
+
+### AutoQ
+
+AutoQ generates synthetic queries ranging from local to global, facilitating consistent benchmarking across datasets without user customization. 
+
+### AutoE
+
+AutoE evaluates answers based on comprehensiveness, diversity, empowerment, and relevance, utilizing the LLM-as-a-Judge method for scaling evaluations.
+
+### AutoD
+The AutoD component ensures consistent dataset sampling and summarization, which aids in creating comparable AutoQ queries and supporting consistent evaluations in AutoE. 
+
+### Datasets
+
+BenchmarkQED also provides access to datasets, including the Behind the Tech podcast transcripts and AP News articles, to support the development of RAG systems and AI question-answering.
 
 ## Contributing
 

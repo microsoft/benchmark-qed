@@ -1,0 +1,289 @@
+﻿{
+    "altids": {
+        "itemid": "807413e1a57dbc7088763436292ad793",
+        "etag": "807413e1a57dbc7088763436292ad793_0a2aza0c0",
+        "friendlykey": "37769135360",
+        "referenceid": "NE--Editorial Rdp"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Opinion",
+    "language": "en",
+    "versioncreated": "2024-02-26T12:10:40Z",
+    "firstcreated": "2024-02-26T02:43:13Z",
+    "editorialrole": "FullStory",
+    "fixture": {
+        "code": "21ea4067bb274c3b805353fb2b99ba70",
+        "name": "Editorial Roundup"
+    },
+    "pubstatus": "usable",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "NE--Editorial Rdp",
+    "headline": "Editorial Roundup: Nebraska",
+    "slugline": "BC-NE--Editorial Rdp",
+    "bylines": [
+        {
+            "by": "By The Associated Press"
+        }
+    ],
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "Editorial Rdp"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "6cd98adfc84d405eadec8ca81bd37df4",
+            "name": "Access to health care",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 42
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "c8e409f8858510048872ff2260dd383e",
+            "name": "Business",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 76
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "1b29d45f8e8e4c008e8a58fe6f92a753",
+            "name": "Government programs",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 56
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "877cb3c0899a10048abbd56c852d093e",
+            "name": "Transportation",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 56
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86aad5207dac100488ecba7fa5283c3e",
+            "name": "Politics",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 37
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 86
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "10b753887f3d10048e2adf092526b43e",
+            "name": "Obesity",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 56
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "4c96e8e92e0441579dbce2f9e8d06493",
+            "name": "Prisons",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 48
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "organisation": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "36610c88892310048f95fb7860a2fc03",
+            "name": "Amtrak",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 55
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "808300b882c610048788df092526b43e",
+            "name": "Nebraska",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -99.75067,
+                    41.50028
+                ]
+            },
+            "relevance": 58,
+            "parentnames": [
+                "United States"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "3677d2f882c810048991df092526b43e",
+            "name": "Cheyenne",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "2fb83d4082c810048984df092526b43e"
+            ],
+            "locationtype": {
+                "code": "9d26a20b35f0484a891740f8189d4c7b",
+                "name": "City"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -104.82025,
+                    41.13998
+                ]
+            },
+            "relevance": 58,
+            "parentnames": [
+                "Wyoming"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "2fb83d4082c810048984df092526b43e",
+            "name": "Wyoming",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -107.5009,
+                    43.00024
+                ]
+            },
+            "relevance": 36,
+            "parentnames": [
+                "United States"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "808300b882c610048788df092526b43e",
+            "name": "Nebraska",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "body_nitf": "<p>Lincoln Journal Star. February 24, 2024.</p><p>Editorial: Big criminal justice issues will need big ideas</p><p>Give Omaha Sen. Justin Wayne credit for finding innovative ways to force the Legislature to take a serious look at Nebraska\u2019s criminal justice system and, particularly, its corrections component.</p><p>Those proposals are contained in a series of bills that Wayne has introduced that may not have a great chance of making it to passage but are worthy of consideration as ways to reform the state\u2019s troubled criminal justice and corrections system.</p><p>Wayne says his bill \u2014 the Safer Towns and Reducing Taxes Plan \u2014 would deliver more than $250 million of annual property tax relief while streamlining judicial processes.</p><p>LB996 would place all county jails under the management and supervision of the state Department of Correctional Services. LB993 would replace the state\u2019s county attorney system with a district attorney system under the purview of the attorney general.</p><p>The plan\u2019s third component (LB25) would authorize judges or juries to award punitive damages in civil cases, the legality of which is disputed under current state law. The proceeds of those judgments would be directed to local school districts, providing additional funding for schools that would lead to property tax relief.</p><p>Moving the jails and county attorneys under the state also would reduce expenses at county level, admittedly adding it at the state level.</p><p>Wayne maintains that putting the county jails under Correctional Services would create efficiencies and increase the capacity of a currently overcrowded system by allowing offenders to be housed in currently underused jails.</p><p>That could not only immediately ease the pressure on the nation\u2019s most overcrowded prison system, but, perhaps, eliminate the need for the construction of new prisons, saving the state millions.</p><p>Not surprisingly, county sheriffs and county officials\u2019 organizations oppose Wayne\u2019s plan. But the ideas contained in those bills should be part of future criminal justice discussions.</p><p>Wayne\u2019s biggest idea, however, is to transfer \u201cgeneral management, control and government\u201d of the Department of Correctional Services to the Legislature, giving senators hiring power over the department\u2019s director.</p><p>The lawmakers, Wayne believes, can make that change under the state constitution\u2019s provision that grants the power to manage \u201call state charitable, mental, reformatory and penal institutions.\u201d</p><p>That transfer, if made in conjunction with Wayne\u2019s other proposals, would put every prison and jail, and thereby incarcerated persons, under the control of the Legislature, which could then implement programming that could aid in reducing overcrowding.</p><p>The Legislature isn\u2019t likely to approve that sort of radical change. And the opposition to the three-bill plan probably will keep it from being considered this session.</p><p>But Wayne\u2019s ideas deserve to be seriously considered going forward. The Legislature has to confront these big issues, and the solutions will involve some big ideas.</p><p>___</p><p>McCook Gazette. February 20, 2024.</p><p>Editorial: LB907 addresses serious health threat of obesity</p><p>State Sen. Merv Riepe\u2019s proposal, Legislative Bill 907, aiming to extend Medicaid coverage to include obesity treatment, is a commendable and much-needed initiative. The prevalence of obesity is not merely a matter of personal lifestyle choices but a complex health issue with profound implications for individuals and society as a whole. LB 907 represents a proactive step toward tackling the root causes of obesity and its associated comorbidities.</p><p>Obesity is not merely a matter of excess weight; it is a chronic disease with numerous comorbidities, ranging from diabetes and heart disease to cancer and mental health disorders. Dr. Brianna Johnson-Rabbett\u2019s testimony underscores the urgent need for comprehensive measures to address this multifaceted health crisis. Excluding anti-obesity medications from Medicaid coverage only serves to exacerbate existing healthcare disparities, further marginalizing vulnerable populations.</p><p>Furthermore, LB 907 is not just about addressing immediate healthcare costs but about investing in long-term public health and economic prosperity. Samantha Pederson rightly points out the potential benefits of investing in obesity treatment, both in terms of improved patient outcomes and reduced long-term healthcare expenditures. By providing access to intensive behavioral therapy and anti-obesity medications, LB 907 empowers individuals to make meaningful lifestyle changes and effectively manage their health conditions.</p><p>Critics may raise concerns about the fiscal implications of LB 907, but these concerns must be weighed against the substantial costs of inaction. The Nebraska Obesity Society\u2019s endorsement of the bill, supported by a coalition of healthcare providers, underscores the consensus within the medical community regarding the urgency of addressing obesity as a public health priority.</p><p>Ultimately, LB 907 represents a proactive and necessary step toward addressing the obesity crisis in Nebraska. By expanding Medicaid coverage to include obesity treatment, we not only alleviate the burden on individuals struggling with this chronic disease but also invest in the health and well-being of our communities. The legislature should move to support this vital piece of legislation, ensuring that all Nebraskans have access to the comprehensive care they need to lead healthy, fulfilling lives.</p><p>___</p><p>North Platte Telegraph. February 20, 2024.</p><p>Editorial: Thinking about Amtrak service where it isn\u2019t</p><p>A story this week in Wyoming\u2019s Cowboy State Daily calls to mind the one transportation mode no longer available on Nebraska\u2019s Great Platte River Road: passenger trains.</p><p>U.S. Federal Railroad Administration officials are taking comments on adding 15 routes to Amtrak\u2019s passenger system, one of them touching the Panhandle.</p><p>North Platte lost its Union Pacific passenger service May 1, 1971. Amtrak took its place nationally. Sort of.</p><p>Nebraska has just one Amtrak route \u2014 and it runs 67 miles south of North Platte, stopping at McCook, along a Burlington Northern Santa Fe line.</p><p>Nebraska could be worse off, though: Wyoming and South Dakota have none.</p><p>The FRA\u2019s plan would remedy that, with three Amtrak trains running in Wyoming alone.</p><p>One would link Cheyenne and Denver with Montana. Another would also tie them to Rapid City, using U.P. east from Cheyenne and then BNSF north from Sidney through Alliance and Chadron.</p><p>The third would reactivate an old Amtrak route that once carried the old U.P. \u201cCity of Los Angeles\u201d train west from Cheyenne through Salt Lake City.</p><p>That train went through North Platte back in the day.</p><p>So why not us?</p><p>It undoubtedly would be tough to return regular passenger service to North Platte, Kearney, Grand Island, Columbus or Fremont, all founded as Union Pacific track-layers moved west.</p><p>U.P. was evolving toward a freight-only service model by 1971. Bailey Yard was the prime reason locally. The 1980s onset of Powder River Basin coal trains further reinforced the change.</p><p>As Bailey grew, downtown track expansions left little room between the U.P. line and Front Street where once stood North Platte\u2019s historic 1918 depot, home to the World War II Canteen.</p><p>Throw in today\u2019s 3-mile-long trains, and one struggles to even imagine where North Platte could put an Amtrak depot if passenger service could be restored.</p><p>And yet there\u2019s a reason to at least mull North Platte\u2019s lack of Amtrak service amid nationwide debates over alternative energy and climate change.</p><p>Imagine public fossil-fuel access being cut off or strictly rationed \u2014 triggered not by either of those issues but by a 1970s-like Middle East oil crisis.</p><p>Gasoline-burning cars well might be sidelined. We don\u2019t have widespread all-ethanol U.S. cars.</p><p>Would there be gasoline or ethanol for hybrids? And what if all-electric cars remain unaffordable and charging stations few and far between?</p><p>Airline service might be grounded or at least dropped for small markets like North Platte. The Platte Valley has intercity bus service, but that, too, might not be a high national priority with a severely restricted fuel supply.</p><p>It\u2019s logical to imagine that single Amtrak line through McCook left as west central Nebraska\u2019s sole means of traveling nationally or internationally.</p><p>If so, McCook won\u2019t be an hour away from North Platte. Ready for a multiday journey by horse and buggy?</p><p>The Cowboy State Daily story says Dan Bilka, leader of the All Aboard Northwest advocacy group, has circulated a map of Amtrak\u2019s current routes with an oblong-shaped figure showing its absence in much of the northern Plains.</p><p>Inside it, he wrote: \u201cPeople live here.\u201d</p><p>Yes, we do.</p><p>END</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/807413e1a57dbc7088763436292ad793",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 3,
+            "reason": "The document contains three editorials, only one of which is directly related to health. The editorial from the McCook Gazette discusses Legislative Bill 907, which aims to extend Medicaid coverage to include obesity treatment. This is highly relevant to the topic of health as it addresses a significant public health issue and proposes a legislative solution to improve healthcare outcomes. The other two editorials focus on criminal justice reform and transportation, which are not relevant to the topic of health."
+        }
+    }
+}

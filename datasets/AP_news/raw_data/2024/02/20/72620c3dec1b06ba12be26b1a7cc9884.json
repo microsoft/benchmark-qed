@@ -1,0 +1,265 @@
+﻿{
+    "altids": {
+        "itemid": "72620c3dec1b06ba12be26b1a7cc9884",
+        "etag": "72620c3dec1b06ba12be26b1a7cc9884_1a8aza0c0",
+        "friendlykey": "176662127752",
+        "referenceid": "AF--Zimbabwe-Polio"
+    },
+    "version": 1,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2024-02-20T16:50:23Z",
+    "firstcreated": "2024-02-20T16:40:21Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "ednote": "Eds: UPDATES: Updates Media.",
+    "editorialtypes": [
+        "Lead"
+    ],
+    "signals": [
+        "newscontent"
+    ],
+    "title": "AF--Zimbabwe-Polio",
+    "headline": "Zimbabwe starts an emergency polio vaccination drive after detecting cases caused by a rare mutation",
+    "headline_extended": "Zimbabwe has started an emergency campaign to inoculate more than 4 million children against polio after health authorities detected three cases caused by a rare mutation of the weakened virus used in oral vaccines",
+    "slugline": "BC-AF--Zimbabwe-Polio, 1st Ld-Writethru",
+    "description_summary": "Zimbabwe has started an emergency campaign to inoculate more than 4 million children against polio after health authorities detected three cases caused by a rare mutation of the weakened virus used in oral vaccines. The health ministry said laboratory tests from samples collected from sewage sites in several areas in the capital late last year showed the presence of a mutated polio virus. In rare instances, the live polio virus in vaccines can mutate into a form capable of sparking new outbreaks, especially in places with poor sanitation and low vaccination levels.",
+    "bylines": [
+        {
+            "by": "By FARAI MUTSAKA",
+            "title": "Associated Press"
+        }
+    ],
+    "located": "HARARE, Zimbabwe",
+    "datelinelocation": {
+        "city": "Harare",
+        "countrycode": "ZWE",
+        "countryname": "Zimbabwe",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                31.05337,
+                -17.82772
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "Zimbabwe polio children virus vaccine"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "i",
+            "name": "i"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "49fe46987f001004823ff571351eed07",
+            "name": "Polio and post-polio syndrome",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 89
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "ace74e307f00100486cedf092526b43e",
+            "name": "Immunizations",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 81
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 98
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e57b6c907e3810048ae4df092526b43e",
+            "name": "Public health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 49
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e237be707de410048fffdf092526b43e",
+            "name": "Medication",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 61
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "bb2d2c5f441a452cb24bb511a2ab5eea",
+            "name": "World news",
+            "creator": "Editorial",
+            "editorial_subject": "World news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Editorial",
+            "editorial_subject": "Health",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "661ff2007d5b100482bcc076b8e3055c",
+            "name": "Zimbabwe",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661812607d5b100481f1c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "01f56e0e654841eca2e69bf2cbcc0526",
+                "name": "Nation"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    29,
+                    -19
+                ]
+            },
+            "relevance": 70,
+            "parentnames": [
+                "Africa"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "af535e807e3710048934df092526b43e",
+            "name": "Harare",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661ff2007d5b100482bcc076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "9d26a20b35f0484a891740f8189d4c7b",
+                "name": "City"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    31.05389,
+                    -17.82935
+                ]
+            },
+            "relevance": 42,
+            "parentnames": [
+                "Zimbabwe"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "661812607d5b100481f1c076b8e3055c",
+            "name": "Africa",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "associations": {
+        "1": {
+            "altids": {
+                "itemid": "29355eddf7a44d6f99ee07e1b7b64905"
+            },
+            "type": "picture"
+        }
+    },
+    "body_nitf": "<p>HARARE, Zimbabwe (AP) \u2014 Zimbabwe began an emergency campaign to inoculate more than 4 million children against polio on Tuesday after health authorities detected three cases caused by the <a href=\"https://apnews.com/article/polio-oral-vaccine-linked-to-rare-infection-risk-db2b278b7e4f9fea9a2df48b8508ed14\">rare mutation of the weakened virus</a> used in oral vaccines, including a 10-year-old girl who was paralyzed in January.</p><p>The health ministry said laboratory tests from samples collected from sewage sites in several areas of the capital, Harare, late last year showed the presence of a mutated polio virus that originated in an oral vaccine used in the global eradication effort.</p><p>In rare instances, the live polio virus in vaccines can mutate into a form capable of sparking new outbreaks, especially in places with poor sanitation and low vaccination levels.</p><p>The number of polio cases globally has dropped by more than 99% since the global effort to wipe out the disease led by the World Health Organization and others began in 1988. But the majority of children being paralyzed by polio <a href=\"https://apnews.com/article/health-united-nations-ap-top-news-pakistan-international-news-7d8b0e32efd0480fbd12acf27729f6a5\">these days</a> are being crippled by a virus that was originally linked to a vaccine.</p><p>Vaccination teams in Zimbabwe are moving from house to house to deliver more doses to protect children, while others will be stationed at health facilities, authorities said.</p><p>Officials said it was the first time Zimbabwe would be using a new oral polio vaccine specifically designed to reduce the risk of the virus within it mutating into a dangerous form.</p><p>Zimbabwe aims to roll out more than 10 million new vaccine doses targeting just over 4 million children below the age of 10 in two rounds in February and March. More than 95% of that population needs to be immunized against polio to stop new outbreaks.</p><p>Last year, the wild polio virus caused a dozen cases in Afghanistan and Pakistan, the only countries that still have that virus. In comparison, polio viruses linked to the vaccine caused more than 500 cases in nearly two dozen countries globally, <a href=\"https://apnews.com/article/polio-and-post-syndrome-world-health-organization-malawi-mozambique-lilongwe-bc93d960e1e4beaa8cffbb2d3f111a51\">mostly in Africa.</a></p><p>Zimbabwe last reported a wild polio virus case in 1986, according to the United Nations children's agency.</p><p>Zimbabwe Health Minister Douglas Mombeshora called the new detection of polio \u201ca serious concern\" but said they were prepared to respond swiftly. The health ministry said it was collaborating with health authorities in at least five other African countries that had recently detected polio viruses through environmental sampling and routine surveillance.</p><p>Polio can cause total paralysis, and children under 5 are especially vulnerable. It is transmitted from person to person, mainly through contact with contaminated feces, water or food, as well as through droplets from a sneeze or cough of an infected person.</p><p>___</p><p>AP Medical Writer Maria Cheng in London contributed to this report.</p><p>___</p><p>AP Africa news: <a href=\"https://apnews.com/hub/africa\">https://apnews.com/hub/africa</a></p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/zimbabwe-polio-children-virus-vaccine-72620c3dec1b06ba12be26b1a7cc9884",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 5,
+            "reason": "The document is highly relevant to the topic of Health. It discusses an emergency polio vaccination drive in Zimbabwe, detailing the detection of polio cases caused by a rare mutation of the virus used in oral vaccines. The document covers various health-related aspects such as the spread of the virus, the vaccination campaign, the impact on children, and the collaboration with other countries to address the issue. All these points are directly related to public health and disease prevention."
+        }
+    }
+}

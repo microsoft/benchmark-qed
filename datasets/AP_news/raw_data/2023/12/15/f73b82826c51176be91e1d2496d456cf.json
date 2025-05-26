@@ -1,0 +1,242 @@
+﻿{
+    "altids": {
+        "itemid": "f73b82826c51176be91e1d2496d456cf",
+        "etag": "f73b82826c51176be91e1d2496d456cf_0a4aza0c0",
+        "friendlykey": "567259499276",
+        "referenceid": "CB-MED--Caribbean-Dengue"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2023-12-15T13:08:28Z",
+    "firstcreated": "2023-12-15T13:08:27Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "CB-MED--Caribbean-Dengue",
+    "headline": "Companies announce partnership to release dengue-fighting mosquitoes in the Caribbean",
+    "headline_extended": "Two private companies have announced a partnership to release mosquitoes across the Caribbean bred with a bacterium that blocks the dengue virus as the region fights a record number of cases",
+    "slugline": "AP-CB-MED--Caribbean-Dengue",
+    "description_summary": "Two private companies have announced a partnership to release mosquitoes across the Caribbean bred with a bacterium that blocks the dengue virus as the region fights a record number of cases. Friday's announcement was made by Orbit Services Partners Inc., a company registered in Barbados, and Verily, a San Francisco-based health technology company. Orbit chairman Anthony Da Silva said the companies have been meeting with government officials in the region in hopes of launching the project early next year. It would target nations including Barbados, Guyana, Jamaica, St. Kitts & Nevis, St. Maarten, St. Martin, Suriname, Dominican Republic and Haiti. Approval is still pending.",
+    "located": "SAN JUAN, Puerto Rico",
+    "datelinelocation": {
+        "city": "San Juan",
+        "countrycode": "PRI",
+        "countryname": "Puerto Rico",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                -66.10572,
+                18.46633
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2023 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "Caribbean dengue mosquitoes Orbit Verily"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "i",
+            "name": "i"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "7077b3c88b6b10048b67a385cd5ce603",
+            "name": "Medical technology",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 54
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "084dafb87f00100481c5f571351eed07",
+            "name": "Dengue fever",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 90
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "c8e409f8858510048872ff2260dd383e",
+            "name": "Business",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 81
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 73
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Editorial",
+            "editorial_subject": "Health",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a394e07888fa1004809aba0a2b2ca13e",
+            "name": "St. Martin",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "6618c9f87d5b10048203c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "2ef4b4210f64440eaaa4ff3dcaf37d35",
+                "name": "Island"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -63.06667,
+                    18.06667
+                ]
+            },
+            "relevance": 35,
+            "parentnames": [
+                "Caribbean"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "bdaf538088fa10048199ba0a2b2ca13e",
+            "name": "Sint Maarten",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "a394e07888fa1004809aba0a2b2ca13e"
+            ],
+            "locationtype": {
+                "code": "d83e15f769714aab9d49a03eab919128",
+                "name": "Constituent country"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -63.06667,
+                    18.06667
+                ]
+            },
+            "relevance": 35,
+            "parentnames": [
+                "St. Martin"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "6619faa87d5b1004821fc076b8e3055c",
+            "name": "Barbados",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "6618c9f87d5b10048203c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "01f56e0e654841eca2e69bf2cbcc0526",
+                "name": "Nation"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -59.53333,
+                    13.16667
+                ]
+            },
+            "relevance": 65,
+            "parentnames": [
+                "Caribbean"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "661850e07d5b100481f5c076b8e3055c",
+            "name": "Latin America and Caribbean",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "body_nitf": "<p>SAN JUAN, Puerto Rico (AP) \u2014 Two private companies announced Friday a partnership to release mosquitoes across the Caribbean bred with a bacterium that blocks the <a href=\"https://apnews.com/hub/dengue-fever\">dengue</a> virus as the region fights a record number of cases.</p><p>Orbit Services Partners Inc., a company registered in Barbados, is partnering with Verily, a San Francisco-based health technology company, for the project. The companies have been meeting with government officials in the region in hopes of launching the project early next year, said Orbit chairman Anthony Da Silva.</p><p>It would target nations including Barbados, Guyana, Jamaica, St. Kitts & Nevis, St. Maarten, St. Martin, Suriname, Dominican Republic and Haiti.</p><p>Similar projects using the Wolbachia bacterium already have been implemented <a href=\"https://apnews.com/article/dengue-mosquitoes-infectious-diseases-honduras-9ecf4ebc8a67937e9db7feb0901c861e\">elsewhere in the world.</a> Mosquitoes are infected with Wolbachia in a laboratory and then released into the wild, where they pass it on to their offspring. The bacterium prevents the dengue virus from replicating inside a mosquito's gut.</p><p>Da Silva said the partnership has been three years in the making and was delayed by the pandemic. The proposal is still pending approval in individual Caribbean nations.</p><p>The Caribbean, along with the Americas, <a href=\"https://apnews.com/article/dengue-deaths-vaccines-western-hemisphere-paho-628eb1247f741c66e34e55b04facf7e2\">has reported more than 4 million dengue cases</a> so far this year, the highest number since record-keeping began in 1980.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/caribbean-dengue-mosquitoes-orbit-verily-f73b82826c51176be91e1d2496d456cf",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 5,
+            "reason": "The document discusses a partnership between two companies to release dengue-fighting mosquitoes in the Caribbean, which is directly related to health as it addresses a method to combat the dengue virus. The document also provides context about the prevalence of dengue cases in the region and the scientific approach being used. This information is highly relevant to the topic of health."
+        }
+    }
+}

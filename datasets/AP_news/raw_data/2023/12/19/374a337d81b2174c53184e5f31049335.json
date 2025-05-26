@@ -1,0 +1,183 @@
+﻿{
+    "altids": {
+        "itemid": "374a337d81b2174c53184e5f31049335",
+        "etag": "374a337d81b2174c53184e5f31049335_0a2aza0c0",
+        "friendlykey": "472422000971",
+        "referenceid": "MN--Editorial Rdp"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Opinion",
+    "language": "en",
+    "versioncreated": "2023-12-20T12:10:41Z",
+    "firstcreated": "2023-12-19T19:45:55Z",
+    "editorialrole": "FullStory",
+    "fixture": {
+        "code": "21ea4067bb274c3b805353fb2b99ba70",
+        "name": "Editorial Roundup"
+    },
+    "pubstatus": "usable",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "MN--Editorial Rdp",
+    "headline": "Editorial Roundup: Minnesota",
+    "slugline": "AP-MN--Editorial Rdp",
+    "bylines": [
+        {
+            "by": "By The Associated Press"
+        }
+    ],
+    "copyrightnotice": "Copyright 2023 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "Editorial Rdp"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f5c099b87e3810048ae6df092526b43e",
+            "name": "Medical research",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 33
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "7077b3c88b6b10048b67a385cd5ce603",
+            "name": "Medical technology",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 73
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86aad5207dac100488ecba7fa5283c3e",
+            "name": "Politics",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 83
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "b63fd1a887a910048224957095691f3e",
+            "name": "Fish",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 33
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "9f12355082c4100486addf092526b43e",
+            "name": "Minnesota",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -94.25055,
+                    46.25024
+                ]
+            },
+            "relevance": 63,
+            "parentnames": [
+                "United States"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "9f12355082c4100486addf092526b43e",
+            "name": "Minnesota",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "body_nitf": "<p>Minneapolis Star Tribune. December 16, 2023.</p><p>Editorial: Keep Minnesota at medicine\u2019s cutting edge</p><p>A less rosy state budget forecast isn\u2019t an excuse for state lawmakers to punt on the University of Minnesota Medical Center\u2019s future.</p><p>State coffers were stuffed with a $17.5 billion surplus when the University of Minnesota <a href=\"https://www.startribune.com/university-of-minnesota-wants-ownership-of-hospital-as-part-of-plan-for-new-medical-center/600242872/?refresh=true\">rolled out</a> aspirations last January to build a $1 billion state-of-the-art Medical Center, one at least partially funded by tax dollars, on its Twin Cities campus.</p><p>Almost a year later, the U is still pursuing this ambitious vision \u2014 and should be. Hospital systems across the nation, particularly those based at universities, <a href=\"https://www.startribune.com/no-time-to-rest-on-us-health-care-laurels/600319081/\">are retooling</a> for next-generation medicine, one that will be shaped by artificial intelligence and other technological leaps. The U\u2019s Medical Center is also at a crossroads after an unsuccessful merger pursued by its clinical partner, Fairview Health, with an out-of-state health system spotlighted Fairview\u2019s finances and tense relations with the U.</p><p>U officials are now back with a more detailed plan, revealed earlier this month, that <a href=\"https://www.startribune.com/university-of-minnesota-wants-ownership-of-hospital-as-part-of-plan-for-new-medical-center/600242872/?refresh=true\">calls for</a> $60 million to $80 million in yearly state funding beginning in fiscal 2025 as part of its long-term plans to improve care and training and modernize facilities. But the state no longer has that historic surplus. Instead, it\u2019s facing a more modest <a href=\"https://www.startribune.com/modest-budget-surplus-calls-for-caution/600326076/\">$2.4 billion surplus</a> requiring careful management.</p><p>Some lawmakers may be tempted to use these tighter purse strings as a reason to punt once again in 2024 on the U Medical Center\u2019s future. That is not acceptable, a point that needs to be driven home as the 2024 legislative session approaches in February.</p><p>This is a state powered by medical care and technology. A thriving academic health center at the U \u2014 one that brings in millions in research grants, fuels medical technology entrepreneurship and is responsible for training 70% of physicians here \u2014 is integral to Minnesota\u2019s future. This is the time to invest to ensure prosperity and good health for generations to come.</p><p>The state\u2019s fresh financial challenges will require innovation on the part of lawmakers and the Walz administration to make this a reality. Fortunately, a gubernatorial <a href=\"https://mn.gov/governor/assets/Executive%20Order%2023-09_tcm1055-586994.pdf\">task force</a> led by Jan Malcolm, one that is aiming to ensure \u201cnation-leading health professions education,\u2033 has been weighing the state\u2019s options.</p><p>The U presented its updated academic health vision at a task force meeting earlier this month. The plan, to its credit, appears to take into account the state\u2019s less rosy financial outlook. It also notes \u201ccurrent levels of Academic Support from Fairview will not continue past 2026,\u201d underscoring the need for swift, farsighted action at the Capitol.</p><p>Fairview acquired the U\u2019s teaching hospitals in 1997, with the terms of the partnership updated periodically. The arrangement has included funding from Fairview to support academic medicine. This year, that support comes to at least $100 million, the Star Tribune <a href=\"https://www.startribune.com/fairview-notifies-university-of-minnesota-it-doesnt-want-to-renew-current-medical-school-partnership/600321250/\">reported</a> in November. That\u2019s vital funding for training medical professionals.</p><p>Fairview has repeatedly stated that it can no longer afford the investment, and in November it <a href=\"https://www.startribune.com/fairview-notifies-university-of-minnesota-it-doesnt-want-to-renew-current-medical-school-partnership/600321250/\">announced</a> that it did not wish to extend the U partnership past 2026. However, talks between Fairview and the U continue, which is commendable.</p><p>The fraught relationship between the two, especially after the proposed merger, made it tempting to urge the U to sever ties with Fairview and replace its longtime partner with a web of new relationships with other providers. But doing so would be a massive undertaking. While the U does need to strengthen its ties to other providers, forging a different path with Fairview is sensible.</p><p>State lawmakers especially need to take heed of Fairview\u2019s affordability warning and urgently consider an updated model to pay for medical education. State involvement is warranted given the U Medical Center\u2019s economic importance and its central role in providing care to Minnesotans.</p><p>The Star Tribune Editorial Board also notes the U hospitals\u2019 public mission as an argument for public dollars. The Medical Center plays a vital role in caring for medical assistance patients, a public service when reimbursement is generally less than that provided by private health plans. In 2022, 31% of the University of Minnesota Medical Center\u2019s patient admissions were enrolled in medical assistance or MinnesotaCare, according to <a href=\"https://docs.google.com/spreadsheets/d/1eaOo6IxtX72PHbAIYhBOr2pRn33HER8F/edit?usp=sharing&ouid=109584949478147450004&rtpof=true&sd=true\">state Health Department data</a>. For comparison, the percentage for Mayo Clinic hospital patients was 11.8%.</p><p>The new U plan admirably lays out some innovative funding options that would supplement state dollars or provide targeted funding. One promising approach would generate additional federal dollars through \u201cintergovernmental transfers.\u201d That would require support from the Minnesota Department of Human Services to implement.</p><p>The U plan also notes that some other states provide higher reimbursements for academic medical providers with high volumes of medical assistance patients. Following that example would help cover the costs of caring for this population while providing the resources for teaching and training.</p><p>Those are worthwhile options to consider. Tapping the state\u2019s provider tax to provide targeted funding for the U Medical Center is a logical consideration as well. So is looking to the state\u2019s private health insurers, which profit from administering medical assistance programs.</p><p>The staunch support of two former governors \u2014 Mark Dayton, a Democrat, and Tim Pawlenty, a Republican \u2014 for a new U hospital and other major capital improvements speaks volumes. High-profile leadership also is needed from Gov. Tim Walz as the state takes crucial next steps to stay at medicine\u2019s cutting edge.</p><p>___</p><p>Mankato Free Press. December 19, 2023.</p><p>Editorial: Environment: State must pick up pace on battling invasive carp</p><p>The recent capture of more than 300 invasive carp in the Mississippi River, downriver from Winona, shows the growing threat from the carp and the need for lawmakers and the Department of Natural Resources to step up efforts to prevent their spread into Minnesota.</p><p>So far those efforts have been insufficient.</p><p>It\u2019s not as if state leaders haven\u2019t had plenty of time to be more aggressive in keeping invasive carp out of Minnesota. The first invasive carp captured in Minnesota was a grass carp in 1991, followed by a bighead carp in 1996 and the first silver carp in 2008.</p><p>Invasive carp harm other fish species and degrade water quality, among other problems.</p><p>Many of the carp have been moving up the Mississippi River. If they are not yet in the Minnesota River \u2014 which connects to the Mississippi in the Twin Cities \u2014 they soon will be.</p><p>Researchers from the Minnesota and Wisconsin natural resources departments have been tracking invasive carp that had been previously caught and tagged, hoping the \u201ctraitor fish\u201d would lead them to hiding spots.</p><p>Late last month they located several tagged carp below Winona and sent in a commercial crew which captured 323 invasive carp using seine nets.</p><p>That included 296 silver carp \u2014 known for jumping out of the water and striking boaters.</p><p>Locating hundreds of carp in one pool is alarming.</p><p>Conservation groups, including the Friends of the Mississippi River and the Stop Carp Coalition, have been pushing for stronger funding to install a bio-acoustic fish fence (bubble barrier) at Lock and Dam 5 near Winona.</p><p>With a record surplus, the last session offered the opportunity for the Legislature to provide the $18.4 million to the DNR that the groups had called for. Instead just $1.7 million was provided to expand carp management programs.</p><p>Meanwhile the DNR opposed a bill to fund a barrier, saying they want to first update their carp plan. But groups have been asking the agency since 2020 to update their out of date plan. The DNR says it will soon have an updated plan.</p><p>The agency and Legislature need to have more urgency in attacking the invasive carp problem before it\u2019s too late.</p><p>END</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/374a337d81b2174c53184e5f31049335",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 3,
+            "reason": "The document contains two editorials, one from the Minneapolis Star Tribune and the other from the Mankato Free Press. The first editorial is highly relevant to the topic of health as it discusses the future of the University of Minnesota Medical Center, funding for medical education, and the importance of maintaining Minnesota's position in medical care and technology. The second editorial, however, is about environmental issues related to invasive carp in Minnesota's rivers and is not relevant to the topic of health. Given that half of the document is highly relevant and the other half is not relevant at all, the overall relevance is moderate."
+        }
+    }
+}

@@ -1,0 +1,402 @@
+﻿{
+    "altids": {
+        "itemid": "5fc9e0e3b59954a2cceb6b1a7edf31a7",
+        "etag": "5fc9e0e3b59954a2cceb6b1a7edf31a7_7a14aza0c0",
+        "friendlykey": "339046233143",
+        "referenceid": "EU--Britain-Royals"
+    },
+    "version": 7,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2024-01-29T22:39:28Z",
+    "firstcreated": "2024-01-29T12:19:46Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "ednote": "Eds: UPDATES: Updates Media.",
+    "editorialtypes": [
+        "Lead"
+    ],
+    "signals": [
+        "newscontent"
+    ],
+    "title": "EU--Britain-Royals",
+    "headline": "King Charles III has been discharged from a London hospital after a prostate procedure",
+    "headline_extended": "King Charles III and daughter-in-law the Princess of Wales have both left a private London hospital following unrelated medical treatments that have made the health of the royal family headlines news in the United Kingdom",
+    "slugline": "BC-EU--Britain-Royals, 7th Ld-Writethru",
+    "description_summary": "King Charles III and daughter-in-law the Princess of Wales have both left a private London hospital following unrelated medical treatments that have made the health of the royal family headlines news in the United Kingdom. The 75-year-old monarch was admitted to The London Clinic where his daughter-in-law the Princess of Wales also recently had abdominal surgery. Charles left the clinic on Monday. The monarch was diagnosed with the benign condition on Jan. 17 after he experienced undisclosed symptoms. Charles canceled engagements and was urged to rest before the procedure which had concluded by Friday afternoon. The king decided to announce the surgery in advance in an effort to encourage other men to have their prostates checked in line with public health advice.",
+    "bylines": [
+        {
+            "by": "By DANICA KIRKA",
+            "title": "Associated Press"
+        }
+    ],
+    "located": "LONDON",
+    "datelinelocation": {
+        "city": "London",
+        "countrycode": "GBR",
+        "countryname": "United Kingdom",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                -0.12574,
+                51.50853
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "uk princess kate abdominal surgery"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "person": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "00f5b3b58e2246bda5876a4b62fe0fbb",
+            "name": "Kate Middleton",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "ROYALTY",
+                "PERSON"
+            ],
+            "relevance": 36
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f8955706b58c4b71901d46201750aa48",
+            "name": "King Charles III",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "GOVERNMENT_FIGURE",
+                "PERSON",
+                "ROYALTY"
+            ],
+            "relevance": 52
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "27d3bc69a271433992a500bc68c4eb60",
+            "name": "Camilla, the queen consort",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "ROYALTY",
+                "PERSON"
+            ],
+            "relevance": 35
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "i",
+            "name": "i"
+        },
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "e",
+            "name": "e"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "90aeac5089ef10048f63d56c852d093e",
+            "name": "Royalty",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 89
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e24779c87de410048069df092526b43e",
+            "name": "Men's health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 39
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 63
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "16cb0ba3e6d24d97ace39f5a1924669a",
+            "name": "Entertainment",
+            "creator": "Editorial",
+            "editorial_subject": "Entertainment",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Editorial",
+            "editorial_subject": "Health",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "bb2d2c5f441a452cb24bb511a2ab5eea",
+            "name": "World news",
+            "creator": "Editorial",
+            "editorial_subject": "World news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e293fee87d6b10048fe8ba7fa5283c3e",
+            "name": "Wales",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "66219fb07d5b100482e2c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "d83e15f769714aab9d49a03eab919128",
+                "name": "Constituent country"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -3.5,
+                    52.5
+                ]
+            },
+            "relevance": 77,
+            "parentnames": [
+                "United Kingdom"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "66219fb07d5b100482e2c076b8e3055c",
+            "name": "United Kingdom",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661850e07d5b100481f4c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "01f56e0e654841eca2e69bf2cbcc0526",
+                "name": "Nation"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -4,
+                    54
+                ]
+            },
+            "relevance": 51,
+            "parentnames": [
+                "Europe"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "7a55e0187eff10048492df092526b43e",
+            "name": "London",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "df4691387d6b10048fdeba7fa5283c3e"
+            ],
+            "locationtype": {
+                "code": "9d26a20b35f0484a891740f8189d4c7b",
+                "name": "City"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -0.12574,
+                    51.50853
+                ]
+            },
+            "relevance": 89,
+            "parentnames": [
+                "England"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "661850e07d5b100481f4c076b8e3055c",
+            "name": "Europe",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "associations": {
+        "1": {
+            "altids": {
+                "itemid": "3cb9ab727e124097a4969545802d0e55"
+            },
+            "type": "picture"
+        },
+        "2": {
+            "altids": {
+                "itemid": "232953ecce4b4e969cfa0a78d015b458"
+            },
+            "type": "picture"
+        },
+        "3": {
+            "altids": {
+                "itemid": "0e7dd578cbf04c2c997cbff2a3b4b121"
+            },
+            "type": "picture"
+        },
+        "4": {
+            "altids": {
+                "itemid": "e3eb9c05b9444828b8995f6edf9d3402"
+            },
+            "type": "picture"
+        },
+        "5": {
+            "altids": {
+                "itemid": "abfff18b7f214281889574972375486c"
+            },
+            "type": "picture"
+        },
+        "6": {
+            "altids": {
+                "itemid": "7f14e592c2754bf0a204a3e14f490617"
+            },
+            "type": "picture"
+        },
+        "7": {
+            "altids": {
+                "itemid": "b2fc95f9739442268752cbc87ea20f7c"
+            },
+            "type": "picture"
+        },
+        "8": {
+            "altids": {
+                "itemid": "5596731aa0964d3bb538dcfb6e408667"
+            },
+            "type": "picture"
+        },
+        "9": {
+            "altids": {
+                "itemid": "5f237c3243f44854b89fffee15442087"
+            },
+            "type": "picture"
+        },
+        "10": {
+            "altids": {
+                "itemid": "236ff5a535b043d59c106efc72051c05"
+            },
+            "type": "audio"
+        },
+        "11": {
+            "altids": {
+                "itemid": "448a4611fb5142bf932e83a993e6d6ff"
+            },
+            "type": "audio"
+        },
+        "12": {
+            "altids": {
+                "itemid": "3a7a67b0391b4a8ebaf27db3821471c9"
+            },
+            "type": "audio"
+        }
+    },
+    "body_nitf": "<p>LONDON (AP) \u2014 <a href=\"https://apnews.com/hub/king-charles-iii\">King Charles III</a> and his daughter-in-law, <a href=\"https://apnews.com/hub/kate-middleton\">the Princess of Wales</a>, have both left a private London hospital following unrelated medical treatments that have made <a href=\"https://apnews.com/article/kate-hospitalized-prince-william-royal-health-wales-b2ea543cfaf7a52b71ac3fbdf4a19cfa\">the health of the royal family</a> headlines news in the United Kingdom.</p><p>The 75-year-old monarch was admitted to the London Clinic on Friday for treatment of <a href=\"https://apnews.com/article/king-charles-iii-enlarged-prostate-a434259aa592692fde6470b9817ed6b7\">an enlarged prostate</a>, which Buckingham Palace described as benign. The princess, formerly Kate Middleton, has been at the hospital in central London for the past two weeks following abdominal surgery for an undisclosed condition.</p><p>Charles walked out of the clinic with his wife, Queen Camilla, at about 3 p.m. local time (1500 GMT; 10 a.m. EST) on Monday, stopping to smile and wave to well-wishers but ignoring shouted questions from reporters. A few hours earlier, the princess\u2019 office said that she had returned home to recuperate, though she wasn\u2019t seen leaving the hospital and details about when she left weren\u2019t released.</p><p>\u201cHis majesty would like to thank the medical team and all those involved in supporting his hospital visit, and is grateful for all the kind messages he has received in recent days.'' Buckingham Palace said in a statement.</p><p>Charles, who ascended the throne 16 months ago, was diagnosed with an enlarged prostate on Jan. 17 after he experienced undisclosed symptoms. He canceled engagements and was urged to rest before the procedure, which was completed on Friday afternoon.</p><p>The king decided to announce the surgery in advance in an effort to encourage other men to have their prostates checked in line with public health advice.</p><p>The princess is \u201cmaking good progress\u201d in her recovery, her office at Kensington Palace said Monday. The wife of Prince William, Charles\u2019 eldest son and heir to the throne, underwent planned surgery on Jan. 16.</p><p>The palace didn't provide further details, but said her condition wasn\u2019t cancerous. The 42-year-old future queen has canceled her public engagements until after Easter.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/uk-princess-kate-abdominal-surgery-5fc9e0e3b59954a2cceb6b1a7edf31a7",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 5,
+            "reason": "The document discusses the health conditions and medical treatments of King Charles III and the Princess of Wales, including details about their diagnoses, procedures, and recoveries. It also mentions the king's effort to raise awareness about prostate health. These aspects are directly related to the topic of health."
+        }
+    }
+}

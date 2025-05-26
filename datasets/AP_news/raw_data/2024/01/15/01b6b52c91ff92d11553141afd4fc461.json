@@ -1,0 +1,268 @@
+﻿{
+    "altids": {
+        "itemid": "01b6b52c91ff92d11553141afd4fc461",
+        "etag": "01b6b52c91ff92d11553141afd4fc461_0a2aza0c0",
+        "friendlykey": "125673487268",
+        "referenceid": "FL--Editorial Rdp"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Opinion",
+    "language": "en",
+    "versioncreated": "2024-01-17T12:10:39Z",
+    "firstcreated": "2024-01-15T21:16:23Z",
+    "editorialrole": "FullStory",
+    "fixture": {
+        "code": "21ea4067bb274c3b805353fb2b99ba70",
+        "name": "Editorial Roundup"
+    },
+    "pubstatus": "usable",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "FL--Editorial Rdp",
+    "headline": "Editorial Roundup: Florida",
+    "slugline": "AP-FL--Editorial Rdp",
+    "bylines": [
+        {
+            "by": "By The Associated Press"
+        }
+    ],
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "Editorial Rdp"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "person": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a6331b54c46e4ca8b79fa40fada95db5",
+            "name": "Donald Trump",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "POLITICIAN",
+                "PERSON"
+            ],
+            "relevance": 49
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "ed2df5fda6404f7380a4f78d9303c34a",
+            "name": "Ron DeSantis",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "POLITICIAN",
+                "PERSON"
+            ],
+            "associatedstates": [
+                {
+                    "code": "cb06ab1082af100482f8df092526b43e",
+                    "name": "Florida"
+                }
+            ],
+            "relevance": 75
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "ace74e307f00100486cedf092526b43e",
+            "name": "Immunizations",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 55
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86aad5207dac100488ecba7fa5283c3e",
+            "name": "Politics",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 78
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "ec28dcdfc4ca4ac9918d3b61427e65c3",
+            "name": "Race and ethnicity",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 61
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "c94763b88b6b10048dc5a385cd5ce603",
+            "name": "Artificial intelligence",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 49
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "organisation": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "484191dd9ab34e1d93484c8c75373f36",
+            "name": "Florida state government",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 46
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e5c917c88bcc1004803aeb438e258b03",
+            "name": "U.S. Food and Drug Administration",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 32
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "1608ba1082b310048433df092526b43e",
+            "name": "Iowa",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -93.50049,
+                    42.00027
+                ]
+            },
+            "relevance": 64,
+            "parentnames": [
+                "United States"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cb06ab1082af100482f8df092526b43e",
+            "name": "Florida",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -82.5001,
+                    28.75054
+                ]
+            },
+            "relevance": 88,
+            "parentnames": [
+                "United States"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "cb06ab1082af100482f8df092526b43e",
+            "name": "Florida",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "body_nitf": "<p>Palm Beach Post. January 12, 2024.</p><p>Editorial: Don\u2019t weaken Florida gun laws</p><p>It took the spilled blood of far too many to convince even a minimum of Florida lawmakers that changes to our gun laws were needed.</p><p><a href=\"https://www.palmbeachpost.com/story/news/crime/2023/10/25/man-who-cyberstalked-father-of-parkland-shooting-victim-sentenced-to-prison/71298237007/\">Mass shootings</a> in Colorado, Connecticut and in dozens of other states didn\u2019t do it. It took the murders in our own backyard, in Parkland, and the grieving efforts of parents, siblings and schoolmates that followed, to stir just enough shame to overcome stalwart gun defenders and bring modest reforms in 2018.</p><p>But now, just a few seasons distant, a winter legislative session brings with it the chill of efforts at repeal.</p><p>House Bill 1223 would lower the age limit to buy rifles and other long guns back to 18, from 21. Another bill, HB 1619, also filed by a House Republican, would make it legal to carry weapons openly. Just last April, Gov. Ron DeSantis signed HB 543, which let Floridians carry concealed weapons without a permit.</p><p>It seems unbelievable that, given the horrors that left 17 dead and 17 injured almost six years ago at Marjory Stoneman Douglas High School, not to mention the 49 killed and 53 wounded eight years ago at Orlando\u2019s Pulse nightclub, and the many multiple-fatality shootings since then in Florida and around the nation, that anyone would call for weakening laws that even slightly restrain the American killing culture.</p><p>And yet.</p><p>It\u2019s as if they think we\u2019ve forgotten.</p><p>We haven\u2019t had a chance to forget.</p><p>According to the <a href=\"https://everystat.org/\">Every Town for Gun Safety</a> website: \u201cIn an average year, 2,849 people die and 5,267 are wounded by guns in Florida. Florida has the 19th-highest rate of gun violence in the US.\u201d The rate of gun deaths rose 15 percent from 2011 to 2020, while the rate of gun homicides rose 40 percent.</p><p>But by all means, let\u2019s lower the purchase age and let everyone walk around strapped \u2015 except in the Florida Capitol in Tallahassee, of course, where our brave legislators take up these bills.</p><p>We recognize that age limits, licensing requirements and even bans on bump stocks and semi-automatic rifles won\u2019t stop the most sinister, deranged or determined mass murderers, any more than licensing drivers makes I-95 accident-free.</p><p>But a combination of legal restraints, red flag law enforcement and enhanced availability of mental health care at least gives us a chance to counter the normalization of death sprees.</p><p>Sadly the Legislature\u2019s Republican supermajority has come untethered from the checks and balances of political opposition. Only voters can rein them in.</p><p>Our sympathies go out to those in Perry, Iowa, who saw one 11-year-old killed and four other students and school staff members injured Jan. 4, before the 17-year-old who shot them killed himself. The shooting occurred at a time when the nation\u2019s eyes already were on Iowa, in advance of the caucusing for the Republican primary, in which two Florida residents are contending.</p><p>Gov. Ron DeSantis, interviewed by the Associated Press, attributed the blame for such incidents mostly on \u201can underlying sickness in society\u201d that requires addressing mental health issues but not \u201cconstitutional rights.\u201d</p><p>Former President Donald Trump offered his prayers and \u201cdeepest sympathies,\u201d at an Iowa gathering a day after the shooting. \u201cThat\u2019s just horrible,\u201d he said. \u201cBut we have to get over it. We have to move forward.\u201d</p><p>No worries. A poll conducted by Florida Atlantic University and Mainstreet Research in October and November asked respondents, \u201cWhich personality trait do you value the most in a presidential candidate?\u201d The options: integrity, leadership, intelligence, stability and empathy. Empathy came in dead last, at 4 percent. So DeSantis and Trump are well-positioned.</p><p>And Florida lawmakers moved forward indeed, filing their bills days after the Iowa shooting, to weaken our state\u2019s gun laws.</p><p>They\u2019d like nothing better than for us to get over it, too. But there is no \u201cit.\u201d It\u2019s more of a \u201cthem,\u201d when it\u2019s happening every day, eight gun deaths a day across Florida, sometimes in a school near you.</p><p>___</p><p>Orlando Sentinel. January 10, 2024.</p><p>Editorial: State of the state? Delusional, according to DeSantis</p><p>Gov. Ron DeSantis brought his <a href=\"https://www.orlandosentinel.com/2024/01/09/desantis-returns-to-iowa-campaign-trail-as-storm-pummels-florida/\">failing presidential campaign</a> back to Florida Tuesday in the guise of his annual State of the State speech, delivered to a joint session of the Legislature and dozens of other dignitaries.</p><p>The setting was the state Capitol in Tallahassee and the audience included most of the state\u2019s political infrastructure. But DeSantis could have been giving his stump speech to a Rotary Club in Iowa, which holds the first-in-the-nation nominating caucuses next Monday night.</p><p>Most mentions of Florida were mere puffery, with little indication of what DeSantis intends to accomplish. In full-on campaign mode, DeSantis bashed the Biden administration\u2019s immigration policy, the size of the national debt, and high taxes and urban decay in New York, Illinois and California.</p><p>By contrast, he said Florida is \u201ca refuge for freedom and sanity.\u201d</p><p>As we\u2019ve seen before, DeSantis has different definitions for those words than many Floridians do.</p><p>Where is DeSantis headed?</p><p>The governor\u2019s annual speech (which you <a href=\"https://thefloridachannel.org/videos/1-9-24-state-of-the-state-address-by-governor-ron-desantis/\">can view here</a> ) formally kicks off the 60-day legislative session. It has traditionally been both a self-congratulatory look back and a table-setting talk that sets the agenda for the challenges ahead.</p><p>The latter got short shrift. DeSantis repeatedly glossed over Florida\u2019s worst problems in ways the national media would not be likely to catch.</p><p>Nowhere was that on greater display than when DeSantis talked about the needs of Florida\u2019s children. He twittered on about protecting children from the evils of social media (which is the prerogative of parents and not the state\u2019s job) and claimed he\u2019d made it \u201ctax free\u201d to raise a child, which is a ludicrous claim \u2014 a handful of sales-tax breaks do not change the fact that <a href=\"https://itep.org/whopays-7th-edition/\">Florida\u2019s tax burden falls disproportionately on the shoulders</a> of its lowest income families.</p><p>He barely mentioned health care access, and certainly didn\u2019t acknowledge that more than 750,000 Floridians have been dropped from Medicaid rolls via disenrollment. Nearly 300,000 of those are children. Federal officials say many of those who were dropped were still eligible for coverage, yet Florida is the only state that didn\u2019t ask for more time before giving them the boot. DeSantis didn\u2019t attempt to explain, let alone fix, that.</p><p>He boasted about his efforts to strip \u201cwoke ideology\u201d from public schools and universities and bragged about \u201cprotecting\u201d children, but didn\u2019t mention that nearly two-thirds of fourth graders are not proficient in reading. And while DeSantis brags about boosting access to school-choice vouchers (but not the $4 billion price tag that benefits many families that could easily afford private-school tuition on their own), he ignored the crisis in child-care affordability for low-income families. Child care can carve more than 25% out of a single mother\u2019s income, but only 15% of Florida families poor enough to be eligible for child-care vouchers get them.</p><p>House Speaker Paul Renner acknowledged the cruel effects of Florida\u2019s failure to provide resources for children and families in need of mental health care. And Senate President Kathleen Passidomo <a href=\"https://www.orlandosentinel.com/2023/12/07/florida-senate-wants-to-expand-health-care-access-but-not-medicaid/\">offered plans to improve access to healthcare</a> and recruit more providers to Florida, but it was disheartening to hear her flat-out reject the idea that Florida would expand Medicaid to low-income working Floridians.</p><p>They, at least, are admitting reality. In too many areas, the state of the state is sacrificed \u2014 along with Florida\u2019s children, its low-income working families and its vulnerable seniors \u2014 on the altar of political expediency, through culture-war sideshows and attacks on academic freedom, school books, transgender teens and LGBTQ people.</p><p>Other big issues missing</p><p>The deepening property insurance crisis received only a single passing reference: \u201cLet\u2019s reduce the cost,\u201d he said, without explaining how. Skyrocketing car insurance rates? Never mentioned. Neither was a housing crisis that makes Florida increasingly unaffordable for millions of people.</p><p>DeSantis also boasted about Florida\u2019s abortion restrictions, a concealed-carry gun law, a crackdown on diversity, equity and inclusion policies, restrictions on social activism on college campuses and sending 100 Florida Highway Patrol troopers to Texas to help that state fight illegal immigration.</p><p>None of these are the state\u2019s job, and nobody was crying out for them.</p><p>The governor also cited as a point of pride that Florida has the fewest full-time state employees per capita of any state (82 employees for each 10,000 residents, he said). That may explain why DeSantis had to assign hundreds of National Guard troops to keep order at state prisons staffed by too few correctional officers, why so many underpaid adjunct instructors are teaching at Florida\u2019s universities, and why motorists seldom see a state trooper on its interstates and expressways.</p><p>On the positive side, DeSantis spoke of raising teacher pay, importing cheaper prescription drugs from Canada, and expanding workforce education and environmental protection \u2014 all laudable goals.</p><p>It was clear that the governor who was re-elected in 2022 by an astounding 19 percentage points is now a diminished figure. He still wields a veto pen, a powerful political tool, but he can\u2019t expect people to fall in line for fear of offending the next president of the United States. Meanwhile, he\u2019s done little to articulate a realistic road map for the next 59 days of the legislative session \u2014 leaving Floridians, including the Legislature, in the dark about what he plans to do as governor now that it seems likely he\u2019ll be sticking around for another two years.</p><p>___</p><p>Tampa Bay Times. January 12, 2024.</p><p>Editorial: Here\u2019s why the courts should settle the Andrew Warren-Ron DeSantis case now</p><p>Hillsborough voters deserve to have a state attorney they elect.</p><p>A federal appeals court took a big step in righting a terrible wrong by <a href=\"https://www.textise.net/showText.aspx?strURL=https%3A%2F%2Fwww.tampabay.com%2Fnews%2Fbreaking-news%2F2024%2F01%2F10%2Fandrew-warren-appeal-hillsborough-tampa-florida-state-attorney%2F\">opening a door to reinstate</a> suspended Hillsborough State Attorney Andrew Warren. The lower court judge who presided over the case and who already found that Gov. Ron DeSantis abused his authority should move quickly to uphold the rule of law and the interests of Hillsborough voters.</p><p>In a <a href=\"https://www.textise.net/showText.aspx?strURL=https%3A%2F%2Fmedia.ca11.uscourts.gov%2Fopinions%2Fpub%2Ffiles%2F202310459.op2.pdf\">59-page opinion</a> Wednesday, the 11th Circuit Court of Appeals directed U.S. District Judge Robert Hinkle to reconsider his 2023 ruling that he lacked the authority to reinstate Warren, whom DeSantis suspended in 2022 for \u201cneglect of duty\u201d and \u201cincompetence.\u201d Hinkle, who presided over Warren\u2019s legal challenge to the ouster, wrote in his own <a href=\"https://www.textise.net/showText.aspx?strURL=https%3A%2F%2Fwww.tampabay.com%2Fnews%2Fflorida-politics%2F2023%2F01%2F20%2Fjudge-says-desantis-was-wrong-declines-restore-andrew-warren-office%2F\">59-page ruling</a> that the suspension stemmed from \u201cpolicy differences\u201d between the Republican governor and Democratic state attorney. \u201cThe controlling motivations for the suspension were the interest in bringing down a reform prosecutor \u2014 a prosecutor whose performance did not match the governor\u2019s law-and-order agenda,\u201d Hinkle wrote, finding that DeSantis\u2019 actions violated both the Florida and U.S. constitutions.</p><p><a href=\"https://www.textise.net/showText.aspx?strURL=https%3A%2F%2Fwww.tampabay.com%2Fnews%2Fflorida-politics%2F2022%2F08%2F04%2Fdesantis-suspends-hillsborough-county-state-attorney-andrew-warren%2F\">DeSantis suspended Warren</a> on Aug. 4, 2022, alleging the steps and statements he advanced on abortion, transgender care and low-level crimes amounted to \u201cblanket policies\u201d against prosecuting violations of Florida law. But Hinkle found the governor\u2019s claim that Warren had blanket policies against certain prosecutions was false. \u201cThe record includes not a hint of misconduct by Mr. Warren,\u201d Hinkle wrote in his ruling. Rather, the judge found, DeSantis used the allegations as a \u201cpretext\u201d to violate Warren\u2019s First Amendment free speech rights.</p><p>Yet Hinkle also concluded he lacked the authority under the U.S. Constitution to restore Warren to office. But the three-judge appeals panel dismissed that concern this week. \u201cWe reject this argument,\u201d the opinion, written by U.S. Circuit Judge Jill Pryor, added in a footnote. \u201cThe Eleventh Amendment permits federal courts to remedy First Amendment violations.\u201d</p><p>That should clear the jurisdictional fog and enable the courts to directly, quickly and finally resolve the core question: Was the governor\u2019s suspension lawful?</p><p>Importantly, the 11th circuit contributed to the record this week by finding that \u201cDeSantis lacked probable cause to believe Warren neglected his duty or was incompetent.\u201d That wording is key, as \u201cneglect of duty\u201d and \u201cincompetence\u201d are among the enumerated causes for removal allowed under the state constitution, and the very language that DeSantis used to justify his suspension of Warren. As such, the appeals court built on Hinkle\u2019s earlier ruling. \u201c(Warren) had no blanket non-prosecution policies. Any minimally competent inquiry would have confirmed this,\u201d Hinkle wrote last year. \u201cThe assertion that Mr. Warren neglected his duty or was incompetent is incorrect. This factual issue is not close.\u201d</p><p>The federal courts have brought clarity and moral authority to this case and they cannot stop now. Warren has been in limbo too long. The outcome here could affect whether the twice-elected Warren runs again in November, and indeed, whether any candidate \u2014 Democrat or Republican \u2014 takes on the consuming task of challenging <a href=\"https://www.textise.net/showText.aspx?strURL=https%3A%2F%2Fwww.tampabay.com%2Fnews%2Fhillsborough%2F2024%2F01%2F04%2Fappointed-by-desantis-suzy-lopez-shores-up-support-bid-hillsborough-state-attorney%2F\">Suzy Lopez,</a> whom the governor installed in the post.</p><p>Hillsborough residents have already been robbed a full term of a reform-minded prosecutor <a href=\"https://www.textise.net/showText.aspx?strURL=https%3A%2F%2Fenr.electionsfl.org%2FHIL%2F2772%2FSummary%2F\">they voted for overwhelmingly</a>. Allowing DeSantis to run out the clock with legal maneuvering and effectively dictate another election for state attorney would compound an injustice and deny any remedy for this democratic assault.</p><p>___</p><p>South Florida Sun Sentinel. January 10, 2024.</p><p>Editorial: Ladapo\u2019s reckless fear-mongering on vaccines</p><p>Nowhere besides Florida have we heard of any public health expert urging people <a href=\"https://www.sun-sentinel.com/2024/01/04/florida-surgeon-general-calls-to-pause-covid-19-mrna-vaccines-citing-discredited-theory/\">not to get the COVID-19</a> vaccinations that have saved millions of lives.</p><p>But in Florida, Dr. Joseph Ladapo, Gov. Ron DeSantis\u2019 quack surgeon general, is doing precisely that.</p><p>It\u2019s impossible to know whether he really believes the deadly misinformation he\u2019s dishing out or is simply saying what the governor wants. Either way, he\u2019s a menace to the public health that he\u2019s supposed to protect.</p><p>So, it must be said, is the governor who chose him and should have fired him long ago.</p><p>He was right, then wrong</p><p>DeSantis\u2019 initial reactions to the pandemic were correct. He declared a state of emergency, called for masking, social distancing and \u2014 later than most governors \u2014 lockdowns. He also acted swiftly to distribute vaccines when they became available.</p><p>But he pivoted sharply on all of that and placed himself far to the right of everyone else, especially former President Donald Trump, whom he intended to oppose for the 2024 Republican presidential nomination.</p><p>DeSantis the candidate courted the votes of people whose idea of \u201cfreedom\u201d is their right to risk the lives of others along with their own. DeSantis the governor prostituted the state of Florida to that strategy.</p><p>When he recruited Ladapo from California, it demonstrated the governor\u2019s newfound opposition to vaccine and masking mandates. Ladapo\u2019s oddball views were well known, sharply contrasting with those of Scott Rivkees, the qualified surgeon general who had been silenced by the governor\u2019s office.</p><p>Worse, DeSantis and Ladapo turned to attacking the vaccines themselves. Co-opting even the Florida Supreme Court, DeSantis got it to create a statewide grand jury to investigate the manufacture and distribution of the life-saving formulations. That witch hunt hasn\u2019t been heard from yet.</p><p>No jabs for children</p><p>Ladapo eventually opposed vaccines for children and urged healthy Floridians under 65 to avoid the latest ones that were targeted to the newest COVID subvariant.</p><p>He was <a href=\"https://www.politico.com/news/2023/04/24/florida-surgeon-general-covid-vaccine-00093510\">caught distorting data</a> to say that the shots caused an increase in heart disease in young men. The suppressed data actually showed a greater risk from not being vaccinated.</p><p>Now, he\u2019s gone all in against the mRNA COVID-19 vaccines \u2014 the ones made by Pfizer-BioNTech and Moderna \u2014 because ingredients might infect recipients\u2019 DNA. Might. There is only one other vaccine the CDC recommends.</p><p>\u201cThese vaccines are not appropriate for use in human beings,\u201d Ladapo said.</p><p>That is conjecture, a gambit that has no place in medicine or any other science. \u201cMight\u201d wouldn\u2019t cut it for a first-year medical student.</p><p>Refuted by the FDA</p><p>Ladapo did that despite having received a stern, two-page letter from the FDA refuting his concerns. The agency made the letter public.</p><p>\u201cIt is quite implausible,\u201d wrote Peter Marks, director of the FDA Center for Biologics Evaluation and Research, that any fragments of the vaccine DNA \u201ccould find their way into the nucleus through the nuclear membrane present in intact cells and then be incorporated into chromosomal DNA.\u201d</p><p>With more than a billion mRNA vaccine doses having been administered, \u201cno safety concerns related to residual DNA have been identified,\u201d Marks said.</p><p>\u201cWe stand firmly behind our regulatory decision-making,\u201d he said, noting that the vaccines \u201chave a highly favorable safety profile and \u2026 have saved, and continue to save, many lives.</p><p>\u201cThe challenge we face,\u201d he said, is the ongoing proliferation of misinformation and disinformation about these vaccines,\u201d which he said contributes to the \u201ccontinued death and serious toll of COVID-19.\u201d</p><p>Marks explained in detail why Ladapo\u2019s objections were scientifically implausible, but Ladapo countered that the FDA had not made the proper assessments.</p><p>Millions of lives saved</p><p>Recent estimates of lives saved by the vaccines in the U.S. alone range from 2.4 million to 3.2 million, compared to 1.1 million lost due to COVID-19. But vaccination rates have become disturbingly low, and some 1,200 Americans still die from COVID-19 every week. That\u2019s as if four big jetliners crashed every seven days.</p><p>In a way, the vaccines are victims of their own success. COVID-19 no longer seems to be a menace in people\u2019s minds other than among those unfortunate enough to get sick or die from it.</p><p>It still makes utter good sense for everyone to keep their vaccinations and boosters up to date. They can take their guidance from the overwhelming numbers of physicians and public health officials who recommend it, or they can believe an outlier like Ladapo. It bears remembering that lives hang in the balance.</p><p>The July edition of JAMA Internal Medicine cited data from Florida and Ohio that in 2021 the \u201cexcess death rate\u201d \u2014 that is, attributable to COVID \u2014was 43% higher among Republican voters than Democrats after the vaccines became available.</p><p>The study acknowledged that health factors other than political preferences might have contributed to the disparity and called for further research. But what they did find means that DeSantis and Ladapo should not be making things worse.</p><p>___</p><p>Miami Herald. January 11, 2024.</p><p>Editorial: Politicians are are using AI to mislead voters. Florida has a chance to act</p><p>The political ad aired in Iowa ahead of the country\u2019s first Republican primary. It had audio of Donald Trump attacking the state\u2019s popular Republican governor. To the unsuspecting viewer, the audio may sound like Trump\u2019s voice, but it was a fabrication by a pro-Ron DeSantis super PAC using artificial intelligence.</p><p>If fake news is a problem in America politics, AI might take \u201calternative facts\u201d to a new dystopian level. Luckily, Florida is among the states that are considering regulating the use of this technology. Lawmakers have filed at least three bills ahead of the 2024 legislative session starting this month.</p><p>The most consequential of them would be <a href=\"undefined\">Senate Bill 850</a>. It would require that political ads using AI \u201cto depict a real person performing an action that did not actually occur\u201d state \u201cprominently\u201d that the ad was created \u201cin whole or in part with the use of generative artificial intelligence (AI).\u201d</p><p>The Legislature could try to ban such ads but that would likely run into free speech challenges under the First Amendment.</p><p>Lawmakers have filed other legislation to create a statewide AI advisory council and make people liable if they use AI to depict someone in a \u201cfalse light.\u201d</p><p>Don\u2019t wait for Congress</p><p>Ideally, Congress should pass nationwide legislation to regulate the use of AI, especially with the 2024 elections around the corner. A group of Democratic U.S. senators introduced a bill similar to SB 850 in May. Given the inaction that normally afflicts a divided Congress, it will likely be up to states to crack down on technology that can further undermine Americans\u2019 trust in what they hear or see online and on TV. While AI has its many positive uses, it jeopardizes our understanding of what reality and facts \u2014 already on shaky ground \u2014 are.</p><p>In the past five years, 30 states have passed more than 50 laws addressing AI in some capacity, according to the <a href=\"https://www.textise.net/showText.aspx?strURL=https%3A%2F%2Fwww.brennancenter.org%2Four-work%2Fresearch-reports%2Fstates-take-lead-regulating-artificial-intelligence\">Brennan Center for Justice.</a> Last year, Michigan\u2019s Democratic-controlled Legislature passed a law similar to SB 850. While the Florida bill was filed by Republican Sen. Nick DiCeglie, and its House version was filed by Hialeah Republican Rep. Alex Rizo, it is unclear whether it will advance in the GOP-controlled Florida Legislature. No legislative committees have heard the legislation.</p><p>The ad attacking Trump by the pro-DeSantis super PAC Never Back Down was not the only time Republicans have used AI. The Republican National Committee in April released an <a href=\"https://www.textise.net/showText.aspx?strURL=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DkLMMxgtxQ1Y%26t%3D16s\">AI-generated ad</a> that depicted America\u2019s future under President Joe Biden.</p><p>Prominent disclaimers</p><p>There were fake but realistic photos of boarded-up storefronts and military patrols in the streets. There was a disclaimer that the ad was \u201cbuilt entirely with AI imagery\u201d but it was small, probably on purpose. SB 850 would require those disclaimers be prominent but what that means exactly seems to be up for debate.</p><p>Given the political advantages of using AI, what, then, is the incentive for Florida Republicans to pass SB 850 when they control state government without much competition from Democrats? Certainly, they must do the right thing and protect voters from fake but realistic images and audio. But the best appeal to them may be that if they can use AI in their own ads, AI also may be used against them in ads from opponents.</p><p>Americans have caught a glimpse of where the intersection of AI and politics can lead the county. The Florida Legislature has a chance to take action. The time to prevent the most nefarious uses of this technology is now.</p><p>END</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/01b6b52c91ff92d11553141afd4fc461",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 3,
+            "reason": "The document contains multiple editorials, some of which touch on health-related topics. Specifically, the South Florida Sun Sentinel editorial discusses COVID-19 vaccines and public health misinformation, and the Orlando Sentinel editorial briefly mentions health care access and Medicaid disenrollment. However, the majority of the document focuses on political issues, gun laws, and other non-health-related topics. Therefore, while there are relevant sections, the overall document is not primarily focused on health."
+        }
+    }
+}

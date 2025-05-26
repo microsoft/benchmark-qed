@@ -1,0 +1,190 @@
+﻿{
+    "altids": {
+        "itemid": "56b93b12072be4168e559bfe321e328a",
+        "etag": "56b93b12072be4168e559bfe321e328a_0a2aza0c0",
+        "friendlykey": "631300785027",
+        "referenceid": "MI--Editorial Rdp"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Opinion",
+    "language": "en",
+    "versioncreated": "2024-03-11T11:10:08Z",
+    "firstcreated": "2024-03-11T05:08:00Z",
+    "editorialrole": "FullStory",
+    "fixture": {
+        "code": "21ea4067bb274c3b805353fb2b99ba70",
+        "name": "Editorial Roundup"
+    },
+    "pubstatus": "usable",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "MI--Editorial Rdp",
+    "headline": "Editorial Roundup: Michigan",
+    "slugline": "AP-MI--Editorial Rdp",
+    "bylines": [
+        {
+            "by": "By The Associated Press"
+        }
+    ],
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "Editorial Rdp"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e23fd8a87de41004803adf092526b43e",
+            "name": "Hospice care",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 81
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "d76cb930886d10048599eb2e0e616f0b",
+            "name": "Freedom of information",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 39
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "7ef0c27882c4100486a7df092526b43e",
+            "name": "Detroit",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "6bf49b4082c410048696df092526b43e"
+            ],
+            "locationtype": {
+                "code": "9d26a20b35f0484a891740f8189d4c7b",
+                "name": "City"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -83.04575,
+                    42.33143
+                ]
+            },
+            "relevance": 56,
+            "parentnames": [
+                "Michigan"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "6bf49b4082c410048696df092526b43e",
+            "name": "Michigan",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -85.50033,
+                    44.25029
+                ]
+            },
+            "relevance": 56,
+            "parentnames": [
+                "United States"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "6bf49b4082c410048696df092526b43e",
+            "name": "Michigan",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "body_nitf": "<p>Traverse City Record-Eagle. March 9, 2024.</p><p>Editorial: Hiding behind fees isn\u2019t what FOIA is for</p><p>Governments are people and, from time to time, people do embarrassing things. Things they\u2019d rather not display \u2014 like a mural on the side of a big Detroit skyscraper.</p><p>However, in the matter of a half-dozen such large-scale murals, and the investigation into whether the deal was on the up-and-up, exorbitant Freedom of Information Act fees are acting as a shroud.</p><p>Detroit Free Press reporters are looking into how the $215,000 \u201cDetroit Be the Change\u201d murals were contracted and approved, after online backlash erupted about using artists from far-flung places like Australia, Germany, Nigeria and France instead of local artists in the hometown-pride campaign.</p><p>Detroit\u2019s director of planning and development executed the contracts after the art was done, and the Freep filed a FOIA request for four months of emails regarding the process.</p><p>They received a $17,000 quote \u2014 for emails already created on the public dime about how further dimes are spent on projects, not only in the public interest but in full public view.</p><p>Michigan\u2019s FOIA law allows agencies to recoup costs spent on mailing, photocopies, finding and separating records. But the quote said the search and separation will require 12.5 hours of attorney time and 315 hours of staff time at hourly rates of $30 and $39, plus benefits.</p><p>If your jaw isn\u2019t on the floor, consider this \u2014 FOIA is how taxpayers access their government. All taxpayers.</p><p>Journalists are just a fraction of FOIA users \u2014 only 7.6 percent, according to a 2017 study by Columbia Journalism Review. More requests come from businesses (39 percent), individuals (20 percent) and law firms (16.7 percent).</p><p>If journalists are experiencing this, likely others are, too.</p><p>\u201cIt\u2019s one of the big problems with Michigan FOIA that allows public bodies to hide behind excessive fee demands to keep the public in the dark about its own business,\u201d Herschel Fink, Free Press legal counsel, said in a Freep story.</p><p>The story also noted the news outlet is working with the city on the request to get costs down.</p><p>But the FOIA fees issue \u2014 widespread in Michigan and certainly experienced at the Record-Eagle \u2014 still remains.</p><p>Lisa McGraw, Michigan Press Association spokesperson, said the group is lobbying for better FOIA response times, and on the attitude in general.</p><p>\u201cThe biggest overarching issue with transparency and government officials is that they see it as a burden, not an essential service that they would provide to the citizens,\u201d McGraw told the Freep.</p><p>This comes through in the delays, fees, and other shoo-fly experiences that come with Michigan FOIA. Widespread governmental discomfort shows that, even when missteps aren\u2019t intentional, they can appear to be.</p><p>And this story won\u2019t be shooed-away. Detroit City Council members canceled the artist group contract, which may come back on the city. And then there\u2019s the matter of the \u201cDetroit Be the Change\u201d murals themselves, a visual reminder that good government needs openness, transparency and accountability. Not shrouds.</p><p>___</p><p>Alpena News. March 7, 2024.</p><p>Editorial: Volunteer for hospice</p><p>Hospice of Michigan provides a meaningful and important service, helping to ensure compassionate end-of-life care for patients.</p><p>To do that, Hospice depends on teams of volunteers to spend time with patients to make sure their final days are filled with companionship.</p><p>Now, News staff writer Mike Gonzalez reported recently, Hospice is in urgent need of additional volunteers to work with patients in Presque Isle County.</p><p>The group needs one to three volunteers to serve in each of Posen, Rogers City, Presque Isle, and Millersburg, the group told Gonzalez.</p><p>Currently, volunteers from the Alpena area drive long distances to spend time with patients in those places. Hospice would like volunteers from patients\u2019 communities.</p><p>No special skills are needed, just a willingness to spend time with someone who will appreciate it.</p><p>\u201cCompanionship volunteering can really look different depending on the person,\u201d Kathy Lietaert, the statewide manager of volunteer services for Hospice of Michigan, told Gonzalez. \u201cIt might look like conversations with patients and family members, reading to patients, or even listening to music together. We do have musicians for patients, but it could be something as simple as playing something on your phone.\u201d</p><p>We urge anyone who has the time and the heart to do the work to visit hom.org or call Lietaert at 231-779-5409.</p><p>\u201cIf you\u2019re considering hospice volunteering, please make the leap,\u201d Lietaert said. \u201cYou will receive so much in return when you can help patients and families at end of life. If you\u2019re compassionate and have a desire to help others, this is the volunteering job for you.\u201d</p><p>END</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/56b93b12072be4168e559bfe321e328a",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 3,
+            "reason": "The document contains two editorials. The first editorial discusses issues related to the Freedom of Information Act (FOIA) fees in Michigan, which is not related to health. The second editorial is about volunteering for hospice care, which is directly related to health as it involves end-of-life care and the need for volunteers to support patients. Given that only part of the document is relevant to the topic of health, the overall relevance is moderate."
+        }
+    }
+}

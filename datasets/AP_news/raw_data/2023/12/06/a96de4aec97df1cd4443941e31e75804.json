@@ -1,0 +1,193 @@
+﻿{
+    "altids": {
+        "itemid": "a96de4aec97df1cd4443941e31e75804",
+        "etag": "a96de4aec97df1cd4443941e31e75804_0a2aza0c0",
+        "friendlykey": "480324424165",
+        "referenceid": "MN--Editorial Rdp"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Opinion",
+    "language": "en",
+    "versioncreated": "2023-12-06T12:10:43Z",
+    "firstcreated": "2023-12-06T05:04:54Z",
+    "editorialrole": "FullStory",
+    "fixture": {
+        "code": "21ea4067bb274c3b805353fb2b99ba70",
+        "name": "Editorial Roundup"
+    },
+    "pubstatus": "usable",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "MN--Editorial Rdp",
+    "headline": "Editorial Roundup: Minnesota",
+    "slugline": "BC-MN--Editorial Rdp",
+    "bylines": [
+        {
+            "by": "By The Associated Press"
+        }
+    ],
+    "copyrightnotice": "Copyright 2023 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "Editorial Rdp"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e2460e807de410048061df092526b43e",
+            "name": "Measles",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 78
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "ace74e307f00100486cedf092526b43e",
+            "name": "Immunizations",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 61
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 69
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e237be707de410048fffdf092526b43e",
+            "name": "Medication",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 38
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "4f95136e072e41c6a81e8fa820e26e9c",
+            "name": "Children",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 38
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "9f12355082c4100486addf092526b43e",
+            "name": "Minnesota",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -94.25055,
+                    46.25024
+                ]
+            },
+            "relevance": 93,
+            "parentnames": [
+                "United States"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "9f12355082c4100486addf092526b43e",
+            "name": "Minnesota",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "body_nitf": "<p>Minneapolis Star Tribune. December 4, 2023.</p><p>Editorial: Mend cracks in defense against measles</p><p>A new report shows cases and deaths rose worldwide as vaccination coverage declined. Minnesota legislators should end nonmedical exemptions.</p><p>One of the COVID-19 pandemic\u2019s lasting lessons is how quickly a pathogen can circumnavigate the globe.</p><p>Distance isn\u2019t a defense when air travel routinely narrows the gap between continents to mere hours. An outbreak in a far-flung location can become a public health crisis in the United States with frightening speed.</p><p>That\u2019s why a new <a href=\"https://www.cdc.gov/mmwr/volumes/72/wr/mm7246a3.htm\">report</a> on measles from the World Health Organization (WHO) and the U.S. Centers for Disease Control and Prevention (CDC) is cause for alarm. Measles cases and deaths rose significantly worldwide from 2021 to 2022, a disturbing trend fueled by declining vaccination rates.</p><p>Boosting vaccination rates is an urgent world health challenge, particularly in the low-income countries hit hardest by measles\u2019 resurgence. But action is imperative in Minnesota as well.</p><p>Parents need to ensure their children are protected against measles, which can cause serious illness. State lawmakers also have a role to play, with the upcoming session a chance to pass an overdue reform to stem sliding vaccination coverage here.</p><p>Unfortunately, there are some who misguidedly dismiss measles as a little more than a childhood rash. The reality is far more sobering.</p><p>The WHO dubs measles one of the world\u2019s <a href=\"https://www.who.int/news-room/fact-sheets/detail/measles#:~:text=Transmission,for%20up%20to%20two%20hours.\">most contagious diseases</a>, making it very difficult to protect the unvaccinated. Measles is spread by contact with secretions sneezed or coughed out by someone infected. But it can also be contracted just by \u201cbreathing the air that was breathed by someone with measles,\u201d the agency states.</p><p>Measles is also contagious four days before a rash appears, meaning someone who doesn\u2019t know they\u2019re ill can spread it.</p><p>There is no specific treatment once someone is infected, other than symptom care. About 1 in 5 people infected is hospitalized, according to the CDC. Complications include pneumonia and encephalitis, which in turn can leave a child deaf or with intellectual disabilities. While deaths are rare in the United States, the same is not true in other countries.</p><p>The new WHO/CDC findings underscore this tragic reality. From 2021 to 2022, estimated measles cases rose 18%, from 7.8 million to 9.2 million. Estimated measles deaths rose 43% during the same time period, from 95,000 to 136,200.</p><p>Unsurprisingly, the agencies found that measles vaccine coverage worldwide is at its lowest since 2008. From 2000-2019, global coverage for a first dose of measles vaccine rose from 72% to 86%. It declined to 81% in 2021, the lowest coverage in more than a decade. A likely factor: the COVID-19 pandemic, which disrupted public health vaccination efforts.</p><p>Fortunately, measles cases in the U.S. have not mirrored the global increase. Forty-one cases have been reported nationally in 2023, <a href=\"https://www.cdc.gov/measles/cases-outbreaks.html\">according to CDC stats</a>. There were 121 cases in 2022 and 49 cases in 2021. But the U.S. isn\u2019t immune from larger outbreaks. In 2019, 1,274 cases were confirmed in 31 states.</p><p>Unfortunately, <a href=\"https://www.cdc.gov/vaccines/imz-managers/coverage/schoolvaxview/data-reports/index.html\">CDC data</a> indicates that U.S. vaccination trends are heading in the wrong direction. Measles vaccination coverage for kindergartners in the 2011-12 school year was 94.7%. In the 2022-23 school year, it was 93.1%.</p><p>Drilling into CDC data for Minnesota-specific information gives more cause for concern. A decade ago, 96.3% of the state\u2019s kindergartners were vaccinated against measles. For the 2022-23 school year, it was 87.6%. That\u2019s bigger drop than seen nationally, one that leaves children at risk. Measles remains relative rare thanks to vaccination, but the global figures show how quickly this virus can resurface and spread if defenses continue to weaken.</p><p>\u201cNot getting kids vaccinated is the equivalent of putting them in the back seat without buckling them up, driving 90 miles an hour and running red lights,\u201d Minnesota infectious disease expert Michael Osterholm told an editorial writer.</p><p>Again, families have a responsibility to seek out credible information about vaccinations. That means talking to a medical provider. But state lawmakers could take another vital step: ending the state\u2019s \u201d <a href=\"https://www.ncsl.org/health/states-with-religious-and-philosophical-exemptions-from-school-immunization-requirements\">personal belief\u201d exemption</a>.</p><p>The policy allows parents to opt out of school-aged vaccinations for nonmedical reasons. That puts other kids at risk, particularly those with weakened immune systems or babies who aren\u2019t yet old enough to have gotten all their shots.</p><p>The Legislature <a href=\"https://www.startribune.com/minnesota-s-disgraceful-do-nothing-session-on-measles-vaccine/508972482/\">previously considered ending</a> this exemption but backed off after protests by the state\u2019s small, loud and well-funded anti-vaccine lobby. Minnesota\u2019s sliding measles vaccine coverage is further evidence that lawmakers need to find the fortitude to act.</p><p>___</p><p>Mankato Free Press. December 5, 2023.</p><p>Editorial: State must get serious about nitrate pollution</p><p>Federal officials this month put Minnesota agencies on notice that they have not done enough to prevent nitrates \u2014 a toxic byproduct of fertilizers and livestock manure \u2014 from getting into people\u2019s drinking water, particularly in southeast Minnesota.</p><p>Now a legislative leader has a plan to pay for cleaning up the mess \u2014 a \u201cpolluters tax\u201d paid by adding a fee on fertilizers.</p><p>Rep. Rick Hansen, DFL-South St. Paul, said at a committee hearing recently that \u201cThere has to be a \u2018polluter pays\u2019 model. Once the general public picks up these costs there will be no incentive for change. Why would anything change if someone else will be cleaning up the mess?\u201d</p><p>The idea has merit.</p><p>The U.S. Environmental Protection Agency told the Minnesota Department of Agriculture, the Minnesota Pollution Control Agency and the Minnesota Department of Health that the agencies were not doing enough to identify and assist people with nitrate in their water.</p><p>If the state doesn\u2019t properly address the problem and hold farmers accountable the feds can take emergency enforcement action.</p><p>The state has had rather limited success in increasing regulations in the face of the powerful farm lobby.</p><p>Southeast Minnesota is dominated by a terrain that lets water \u2014 and fertilizer and manure pollutants \u2014 move easily from the surface to underground drinking water.</p><p>While a fertilizer fee would be paid by everyone across the state, the nitrate problem is not limited to southeastern Minnesota. Citizens are more and more aware that the state\u2019s valuable water resources are under threat and need to be protected and, when necessary, cleaned up.</p><p>END</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/a96de4aec97df1cd4443941e31e75804",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 5,
+            "reason": "The document contains two editorials, both of which are relevant to health. The first editorial discusses the rise in measles cases and the importance of vaccination, which is directly related to public health. The second editorial addresses nitrate pollution in drinking water, which also has significant health implications. Both topics are pertinent to the broader topic of health, making the document highly relevant."
+        }
+    }
+}

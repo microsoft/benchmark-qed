@@ -1,0 +1,221 @@
+﻿{
+    "altids": {
+        "itemid": "11c358a462082f3291b8ca91d6e4aad4",
+        "etag": "11c358a462082f3291b8ca91d6e4aad4_2a3aza0c0",
+        "friendlykey": "543908026787",
+        "referenceid": "AL--Medical Marijuana"
+    },
+    "version": 2,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2024-01-05T02:34:12Z",
+    "firstcreated": "2024-01-04T21:57:12Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "ednote": "Eds: UPDATES: Adds a quote from court ruling and additional background",
+    "editorialtypes": [
+        "Lead"
+    ],
+    "signals": [
+        "newscontent"
+    ],
+    "title": "AL--Medical Marijuana",
+    "headline": "Alabama judge puts a temporary hold on medical marijuana companies",
+    "headline_extended": "A judge has temporarily blocked Alabama from issuing licenses to medical marijuana facilities amid an ongoing legal battle over how the state selected the winning companies",
+    "slugline": "BC-AL--Medical Marijuana, 2nd Ld-Writethru",
+    "description_summary": "A judge has temporarily blocked Alabama from issuing licenses to medical marijuana facilities amid an ongoing legal battle over how the state selected the winning companies. Montgomery Circuit Judge James Anderson issued a temporary restraining order late Wednesday to stop the Alabama Medical Cannabis Commission from issuing licenses for \u201cintegrated\u201d facilities that grow, transport and sell medical marijuana. Companies that were not selected to receive the licenses have challenged the selection process used by the commission. Anderson said he is sympathetic to concerns about delaying the availability of medical marijuana but said a pause on the licenses is merited.",
+    "located": "MONTGOMERY, Ala.",
+    "datelinelocation": {
+        "city": "Montgomery",
+        "countryareacode": "AL",
+        "countryareaname": "Alabama",
+        "countrycode": "USA",
+        "countryname": "United States",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                -86.29997,
+                32.36681
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "medical marijuana Alabama"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "f",
+            "name": "f"
+        },
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86aad5207dac100488ecba7fa5283c3e",
+            "name": "Politics",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 32
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a328daf6767245f18a263276f2e111f3",
+            "name": "Marijuana",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 97
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "c8e409f8858510048872ff2260dd383e",
+            "name": "Business",
+            "creator": "Editorial",
+            "editorial_subject": "Business",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "b8099e4881d610048a11df092526b43e",
+            "name": "Alabama",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -86.75026,
+                    32.75041
+                ]
+            },
+            "relevance": 76,
+            "parentnames": [
+                "United States"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "bb79610881d610048a1ddf092526b43e",
+            "name": "Montgomery",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "b8099e4881d610048a11df092526b43e"
+            ],
+            "locationtype": {
+                "code": "9d26a20b35f0484a891740f8189d4c7b",
+                "name": "City"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -86.29997,
+                    32.36681
+                ]
+            },
+            "relevance": 49,
+            "parentnames": [
+                "Alabama"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "b8099e4881d610048a11df092526b43e",
+            "name": "Alabama",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "body_nitf": "<p>MONTGOMERY, Ala. (AP) \u2014 A judge has temporarily blocked Alabama from issuing licenses to medical marijuana facilities amid an ongoing <a href=\"https://apnews.com/article/alabama-medical-marijuana-licenses-128907aec43de60773821339ca0458a8\">legal battle</a> over how the state selected the winning companies.</p><p>Montgomery Circuit Judge James Anderson issued a temporary restraining order late Wednesday to stop the <a href=\"https://amcc.alabama.gov/\">Alabama Medical Cannabis Commission</a> from issuing licenses for \u201cintegrated\u201d facilities that grow, transport and sell medical marijuana. The coveted licenses will be on hold while he hears a challenge to the selection process.</p><p>Companies that were not selected to receive one of the five available integrated licenses have challenged the selection process, saying the commission violated its own rules when selecting winners. The commission has attempted to award the licenses three times and rescinded the first two selections during the legal dispute.</p><p>Anderson said he is sympathetic to concerns about delaying the availability of medical marijuana but said a pause on the licenses is merited.</p><p>\"While the court understands those parties\u2019 frustrations, the court also notes that all three rounds of awards have been challenged as legally infirm: the first two rounds of awards were abandoned by action of the Commission itself, and now there is a serious question as to whether the third round is also invalid,\u201d Anderson wrote.</p><p>The restraining order is the latest development in a legal battle that has plagued the start of Alabama\u2019s medical marijuana program. Alabama lawmakers <a href=\"https://apnews.com/article/alabama-health-marijuana-medical-marijuana-government-and-politics-4cdbc66232a19708a16146b274d43e93\">voted to allow medical marijuana</a> in the state in 2021. Commission officials are aiming <a href=\"https://apnews.com/article/medical-marijuana-alabama-f539fe2f4548f2355eaceacc6aea9778\">to make the products available</a> in 2024 after a series of delays.</p><p>\u201cWe remain determined and hopeful that the availability of medical cannabis products, recommended by certified physicians to qualified Alabama patients, is right around the corner,\" Alabama Medical Cannabis Commission Director John McMillan said in a statement.</p><p>The Wednesday order only affects the licenses for the facilities that perform multiple functions from \u201cseed to sale.\u201d The judge last week put a hold on licenses for dispensaries in order to hear a similar challenge. The commission has issued licenses for growers, processors, transportation companies and laboratory testing.</p><p>McMillan said the delay on having any licensed dispensaries to sell medical marijuana products also delays the ability of Alabama doctors to get certified to recommend medical cannabis to patients. He said the Alabama Board of Medical Examiners requires the issuance of at least one cultivator, processor, secure transporter, and dispensary license before the board will issue medical cannabis certification permits to physicians.</p><p>\u201cWe remain hopeful that the Court will swiftly permit the issuance of all licenses awarded by the Commission,\u201d McMillan said.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/medical-marijuana-alabama-11c358a462082f3291b8ca91d6e4aad4",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 3,
+            "reason": "The document discusses a legal battle over the issuance of medical marijuana licenses in Alabama, which affects the availability of medical cannabis products. While the primary focus is on the legal and regulatory aspects, the implications for health are significant as the availability of medical marijuana impacts patient care and treatment options. Therefore, the document is relevant to the topic of health, but not exclusively focused on health-related outcomes or medical details."
+        }
+    }
+}

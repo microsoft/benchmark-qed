@@ -1,0 +1,252 @@
+﻿{
+    "altids": {
+        "itemid": "95c754bbc98c82970adda4e3f5f82a48",
+        "etag": "95c754bbc98c82970adda4e3f5f82a48_1a6aza0c0",
+        "friendlykey": "347357315477",
+        "referenceid": "EU--WHO-Dengue"
+    },
+    "version": 1,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2023-12-22T16:39:25Z",
+    "firstcreated": "2023-12-22T15:02:54Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "ednote": "Eds: UPDATES: to link audio and expand summary. With AP Photos.",
+    "editorialtypes": [
+        "Lead"
+    ],
+    "signals": [
+        "newscontent"
+    ],
+    "title": "EU--WHO-Dengue",
+    "headline": "UN health agency cites tenfold increase in reported cases of dengue over the last generation",
+    "headline_extended": "The U.N. health agency says reported cases of dengue globally increased tenfold over the last generation",
+    "slugline": "AP-EU--WHO-Dengue, 1st Ld-Writethru",
+    "description_summary": "The U.N. health agency says reported cases of dengue globally increased tenfold over the last generation. The World Health Organization said Friday that reported cases soared to a record 5.2 million in 2019, up from 500,000 in 2000, across 129 countries worldwide, figures that likely understate the actual toll. The agency says climate change and the growing spread of virus-carrying mosquitoes were partly to blame for the transmission that remains mostly prevalent in the Americas. In January, WHO warned that dengue posed a pandemic threat and was the world\u2019s fastest spreading mosquito-borne disease. It says more than 5 million cases and over 5,000 dengue-related deaths have been reported this year.",
+    "located": "GENEVA",
+    "datelinelocation": {
+        "city": "Geneva",
+        "countrycode": "CHE",
+        "countryname": "Switzerland",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                6.14569,
+                46.20222
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2023 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "dengue cases increase world mosquitoes"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "i",
+            "name": "i"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "084dafb87f00100481c5f571351eed07",
+            "name": "Dengue fever",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "bb2d2c5f441a452cb24bb511a2ab5eea",
+            "name": "World news",
+            "creator": "Editorial",
+            "editorial_subject": "World news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Editorial",
+            "editorial_subject": "Health",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        }
+    ],
+    "organisation": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "8997c0688d7410048d178a3c53cbc603",
+            "name": "World Health Organization",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 40
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "54fa9358892310048056fb7860a2fc03",
+            "name": "United Nations",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 72
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "661effd07d5b100482a2c076b8e3055c",
+            "name": "Peru",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661908787d5b10048204c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "01f56e0e654841eca2e69bf2cbcc0526",
+                "name": "Nation"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -76,
+                    -10
+                ]
+            },
+            "relevance": 52,
+            "parentnames": [
+                "South America"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "661850e07d5b100481f4c076b8e3055c",
+            "name": "Europe",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661850e07d5b100481f5c076b8e3055c",
+            "name": "Latin America and Caribbean",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661812607d5b100481f3c076b8e3055c",
+            "name": "Asia",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "associations": {
+        "1": {
+            "altids": {
+                "itemid": "429015a2963b43e78ba83e5ea7ca8a43"
+            },
+            "type": "picture"
+        },
+        "2": {
+            "altids": {
+                "itemid": "37ec402ca7404e4f8454be0f98ba4e39"
+            },
+            "type": "audio"
+        },
+        "3": {
+            "altids": {
+                "itemid": "a36abba74aec49eda6c58dbb8aab1641"
+            },
+            "type": "audio"
+        },
+        "4": {
+            "altids": {
+                "itemid": "c2c1a905ffee457a885372651be2297d"
+            },
+            "type": "audio"
+        }
+    },
+    "body_nitf": "<p>GENEVA (AP) \u2014 The U.N. health agency said Friday that reported <a href=\"https://apnews.com/hub/dengue-fever\">cases of dengue</a> globally increased tenfold over the last generation, with <a href=\"https://apnews.com/climate-and-environment\">climate change</a> and the growing spread of virus-carrying mosquitoes partly to blame for transmission that remains mostly prevalent in the Americas.</p><p>The World Health Organization said reported cases <a href=\"https://apnews.com/article/dengue-deaths-vaccines-western-hemisphere-paho-628eb1247f741c66e34e55b04facf7e2\">soared</a> to a record 5.2 million in 2019, up from 500,000 in 2000, across 129 countries worldwide, figures that likely understate the actual toll.</p><p>In January, WHO warned that dengue posed a pandemic threat and was the world\u2019s fastest spreading mosquito-borne disease. While there are vaccines and <a href=\"https://apnews.com/article/dengue-mosquitoes-infectious-diseases-honduras-9ecf4ebc8a67937e9db7feb0901c861e\">specially bred mosquitoes containing a bacteria called Wolbachia</a> to fight dengue, there are no specific treatments for the virus once someone becomes infected.</p><p>This year, more than 5 million cases and over 5,000 dengue-related deaths were reported, WHO said. Changing distribution patterns of the mosquitoes that spread dengue, together with higher rainfall, humidity and heat linked to climate change, have been factors in the rise.</p><p>Weaker health systems and poor surveillance have also played a part.</p><p>Most cases of dengue don\u2019t cause symptoms or cause mild illness, though some infections can result in shock, severe bleeding and organ impairment \u2013 symptoms that typically emerge after fever has faded, WHO said.</p><p>Warning signs include intense abdominal pain, persistent vomiting, bleeding gums, fluid accumulation, lethargy or restlessness, and liver enlargement, the agency said. Repeat infections can result in severe disease, which can cause hemorrhaging and death.</p><p>Dengue swept <a href=\"https://apnews.com/article/dengue-deaths-vaccines-western-hemisphere-paho-628eb1247f741c66e34e55b04facf7e2\">across the Western hemisphere this year</a>. It isn\u2019t established in Europe, though some locally spread cases have turned up in the southern part of the continent since 2010.</p><p>Regions including the Americas, the Caribbean and <a href=\"https://apnews.com/article/bangladesh-record-dengue-outbreak-c91bffe828798e71fded4386308f0890\">Bangladesh</a> have reported record numbers of cases in 2023.</p><p>The Americas, which has about four-fifths of the world's dengue cases, broke the previous regional record for dengue earlier this year, with Brazil, Argentina, Paraguay and Peru reporting the most cases worldwide. Peru <a href=\"https://apnews.com/article/2c4c267c414f28e70b13466fa26231a1\">declared a state of emergency in some areas</a> after reporting a historic number of cases.</p><p>There are two licensed <a href=\"https://apnews.com/article/health-b3387e30b9b0dceaac24f08c72be8805\">vaccines</a> for dengue, although experts say one of them should only be used in people who have previously been infected, otherwise they could face a risk of more severe disease.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/dengue-cases-increase-world-mosquitoes-95c754bbc98c82970adda4e3f5f82a48",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 5,
+            "reason": "The document is highly relevant to the topic of Health. It discusses the significant increase in dengue cases globally, the factors contributing to this rise, the impact on health systems, and the symptoms and risks associated with the disease. It also mentions the role of climate change and mosquito distribution in the spread of dengue, as well as the availability of vaccines and the challenges in treating the disease. All these points are directly related to health concerns and public health issues."
+        }
+    }
+}

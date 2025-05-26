@@ -1,0 +1,211 @@
+﻿{
+    "altids": {
+        "itemid": "34d80a0eaf9e51b2ed00c0eb6d7d1b81",
+        "etag": "34d80a0eaf9e51b2ed00c0eb6d7d1b81_0a2aza0c0",
+        "friendlykey": "322337697660",
+        "referenceid": "MO--Editorial Rdp"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Opinion",
+    "language": "en",
+    "versioncreated": "2024-04-16T21:56:26Z",
+    "firstcreated": "2024-04-16T21:56:25Z",
+    "editorialrole": "FullStory",
+    "fixture": {
+        "code": "21ea4067bb274c3b805353fb2b99ba70",
+        "name": "Editorial Roundup"
+    },
+    "pubstatus": "usable",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "MO--Editorial Rdp",
+    "headline": "Editorial Roundup: Missouri",
+    "slugline": "AP-MO--Editorial Rdp",
+    "bylines": [
+        {
+            "by": "By The Associated Press"
+        }
+    ],
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "Editorial Rdp"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "person": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "5eaf2bc3e0824b2699415ada7268b755",
+            "name": "Mike Parson",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "POLITICIAN",
+                "PERSON"
+            ],
+            "relevance": 42
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "1b29d45f8e8e4c008e8a58fe6f92a753",
+            "name": "Government programs",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 43
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "6cd98adfc84d405eadec8ca81bd37df4",
+            "name": "Access to health care",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 63
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e22e35087de410048fc2df092526b43e",
+            "name": "Abortion",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 73
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "organisation": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "9511d139da5646cfb0fbcce4d2ee1bad",
+            "name": "Planned Parenthood",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 60
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "bf6e2e80760d10048f8ae6e7a0f4673e",
+            "name": "U.S. Republican Party",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 31
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "bd8c35d082c4100486d5df092526b43e",
+            "name": "Missouri",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -92.50046,
+                    38.25031
+                ]
+            },
+            "relevance": 92,
+            "parentnames": [
+                "United States"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "bd8c35d082c4100486d5df092526b43e",
+            "name": "Missouri",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "body_nitf": "<p>St. Louis Post-Dispatch. April 12, 2024.</p><p>Editorial: Having won on abortion, Missouri GOP just can\u2019t stop attacking women\u2019s health care</p><p>Not content with having already imposed the first statewide abortion ban in America in half a century (and one of the most draconian), Missouri\u2019s Republican leaders are demonstrating once again that they are nowhere near done stripping women of health care access. This time, they\u2019re specifically targeting poor women.</p><p>They say that\u2019s not their intent, but it will be the effect of movement in Jefferson City to <a href=\"https://missouriindependent.com/2024/04/10/missouri-planned-parenthood-abortion-medicaid-reimbusements\">block Medicaid reimbursement funds</a> from going to Planned Parenthood facilities in the state.</p><p>Planned Parenthood doesn\u2019t provide abortion services in Missouri \u2014 by state law, it can\u2019t. But its affiliation with out-of-state entities that do is being used to justify hampering low-income women\u2019s access to cancer screenings, birth control, STI testing and other crucial health services that have nothing to do with abortion.</p><p>The measure passed the state Senate Wednesday after an 11-hour filibuster by Democrats. It now returns to the House for a final vote. It is expected to pass; Gov. Mike Parson will almost certainly sign it. And health care options for thousands of women who can\u2019t afford private health insurance will be dramatically narrowed.</p><p>In floor debate, state Sen. Tracy McCreery, D-St. Louis County, accurately condemned the measure as a \u201cbizarre quest to just continue to punish Planned Parenthood.\u201d In reality, she noted, \u201cThis is hurting our very own constituents.\u201d</p><p>Even from a strict anti-abortion rights standpoint, there\u2019s no rational policy value here beyond expressing legislative malice toward an organization whose name has become synonymous with abortion rights \u2014 but which actually provides much more than that to women.</p><p>Planned Parenthood\u2019s two Missouri affiliates serve some 20,000 women annually. About one in five of those women qualify for Medicaid, the state-federal health care funding system for low-income Americans.</p><p>Legislative Republicans have previously tried to use the state budgetary process to prevent Planned Parenthood from accessing Medicaid reimbursement for treating those low-income patients, but the courts have nixed that roundabout play.</p><p>The current legislation would prohibit any public funds from going to any entity affiliated with an abortion provider, even if that provider is in another state.</p><p>Unsurprisingly, the measure is spearheaded by Sen. Mary Elizabeth Coleman. The Arnold Republican has <a href=\"https://www.stltoday.com/opinion/editorial/editorial-bill-seeks-to-enforce-missouri-anti-abortion-law-in-other-states/article_164dee9a-35aa-5eb6-b40c-54e3915ced53.html\">previously sponsored</a> legislation seeking to make it a crime to help women leave Missouri for out-of-state abortions, to the point of censoring internet sites and billboards. Those ideas were as plainly unconstitutional as Coleman\u2019s attempt to punish out-of-state doctors who treat Missouri women.</p><p>Coleman shruggingly suggested in floor debate this week that low-income women on Medicaid have plenty of other options for health care in Missouri. But in fact, there\u2019s already a shortage of such services.</p><p>As reported by the <a href=\"https://www.columbiamissourian.com/news/state_news/bill-ending-medicaid-reimbursements-to-planned-parenthood-clears-missouri-senate/article_91dfdb80-f754-11ee-976f-63d666916627.html\">Columbia Missourian</a>, surveys from the Missouri Family Health Council Inc. have found that appointment wait times at clinics in the state that take Medicaid patients are fairly low at Planned Parenthood \u2014 between one to three days \u2014 while those trying to get into other clinics generally wait five to seven weeks.</p><p>That Coleman and her GOP colleagues are willing to burden already-struggling poor women like this speaks to their continuing, single-minded fixation on abortion, to the point of curtailing even non-abortion health care access. The House Democratic minority is unlikely to stop the bill, but they should use the debate to spotlight just how malicious the Legislature\u2019s anti-choice brigade has become, even in victory.</p><p>END</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/34d80a0eaf9e51b2ed00c0eb6d7d1b81",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 5,
+            "reason": "The document is highly relevant to the topic of health as it discusses legislative actions in Missouri that directly impact women's health care access. It covers the implications of blocking Medicaid reimbursement funds to Planned Parenthood, which affects services such as cancer screenings, birth control, and STI testing. The document also highlights the broader context of health care access for low-income women in Missouri, making it very pertinent to the topic of health."
+        }
+    }
+}

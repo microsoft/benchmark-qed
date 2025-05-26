@@ -1,0 +1,366 @@
+﻿{
+    "altids": {
+        "itemid": "5385ba528d86e6461441aa0e8b11dc25",
+        "etag": "5385ba528d86e6461441aa0e8b11dc25_0a4aza0c0",
+        "friendlykey": "662150895658",
+        "referenceid": "US--Editorial Rdp"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Opinion",
+    "language": "en",
+    "versioncreated": "2024-04-16T23:08:09Z",
+    "firstcreated": "2024-04-16T23:08:09Z",
+    "editorialrole": "FullStory",
+    "fixture": {
+        "code": "21ea4067bb274c3b805353fb2b99ba70",
+        "name": "Editorial Roundup"
+    },
+    "pubstatus": "usable",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "US--Editorial Rdp",
+    "headline": "Editorial Roundup: United States",
+    "slugline": "AP-US--Editorial Rdp",
+    "bylines": [
+        {
+            "by": "By The Associated Press"
+        }
+    ],
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "Editorial Rdp"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "person": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "c18905f889ba43789a6cb42a4828600a",
+            "name": "Joschka Fischer",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "GOVERNMENT_FIGURE",
+                "PERSON"
+            ],
+            "relevance": 32
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "850c8ab4e24d4c128250621e377c83dd",
+            "name": "Nancy Pelosi",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "POLITICIAN",
+                "PERSON"
+            ],
+            "associatedstates": [
+                {
+                    "code": "789fdd8882af10048263df092526b43e",
+                    "name": "California"
+                }
+            ],
+            "relevance": 41
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a992f76adba4495ca400e7ab5dfeab94",
+            "name": "Chris Van Hollen",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "POLITICIAN",
+                "PERSON"
+            ],
+            "associatedstates": [
+                {
+                    "code": "b0fa317082b3100484dbdf092526b43e",
+                    "name": "Maryland"
+                }
+            ],
+            "relevance": 41
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "8d88432a0d344d86ab29d6eb4e2955bb",
+            "name": "Benjamin Netanyahu",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "POLITICIAN",
+                "PERSON"
+            ],
+            "relevance": 62
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "a",
+            "name": "a"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e2460e807de410048061df092526b43e",
+            "name": "Measles",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 53
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "4e9940d87de6100481e3df092526b43e",
+            "name": "International agreements",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86aad5207dac100488ecba7fa5283c3e",
+            "name": "Politics",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 86
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 53
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "organisation": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e5cce8588bcc100480a3eb438e258b03",
+            "name": "U.S. National Security Council",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 55
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "898f52e08921100480efba0a2b2ca13e",
+            "name": "United States government",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 70
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "661be2f07d5b10048250c076b8e3055c",
+            "name": "Japan",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661812607d5b100481f3c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "01f56e0e654841eca2e69bf2cbcc0526",
+                "name": "Nation"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    139.75309,
+                    35.68536
+                ]
+            },
+            "relevance": 33,
+            "parentnames": [
+                "Asia"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "662218c87d5b100482f0c076b8e3055c",
+            "name": "China",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661812607d5b100481f3c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "01f56e0e654841eca2e69bf2cbcc0526",
+                "name": "Nation"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    105,
+                    35
+                ]
+            },
+            "relevance": 39,
+            "parentnames": [
+                "Asia"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "788b364882f110048df3df092526b43e",
+            "name": "District of Columbia",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "9d26a20b35f0484a891740f8189d4c7b",
+                "name": "City"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -77.00025,
+                    38.91706
+                ]
+            },
+            "relevance": 39,
+            "parentnames": [
+                "United States"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "661dcb387d5b1004827fc076b8e3055c",
+            "name": "Israel",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661850e07d5b100481f6c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "01f56e0e654841eca2e69bf2cbcc0526",
+                "name": "Nation"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    34.75,
+                    31.5
+                ]
+            },
+            "relevance": 72,
+            "parentnames": [
+                "Middle East"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "661850e07d5b100481f5c076b8e3055c",
+            "name": "Latin America and Caribbean",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "body_nitf": "<p>Excerpts from recent editorials in the United States and abroad:</p><p>April 12</p><p>The New York Times on aid to Israel</p><p>The suffering of civilians in Gaza \u2014 <a href=\"https://reliefweb.int/report/occupied-palestinian-territory/there-are-no-more-words-six-months-israels-total-siege-and-bombardment-gaza-leaves-tens-thousands-dead-healthcare-system-ruins-and-starving-population\">tens of thousands dead</a>, many of them children; hundreds of thousands <a href=\"https://www.reuters.com/world/middle-east/gaza-families-flee-again-shrinking-overcrowded-pocket-land-2023-12-05/\">homeless</a>, <a href=\"https://www.nytimes.com/live/2024/04/11/world/israel-gaza-war-news-hamas\">many at risk of starvation</a> \u2014 has become more than a growing number of Americans can abide. And yet Prime Minister Benjamin Netanyahu of Israel and his ultranationalist allies in government have defied American calls for more restraint and humanitarian help.</p><p>The U.S. commitment to Israel \u2014 including $3.8 billion a year in <a href=\"https://www.nytimes.com/2024/04/06/us/politics/israel-us-weapons.html\">military aid</a>, the largest outlay of American foreign aid to any one country in the world \u2014 is a reflection of the exceptionally close and enduring relationship between the two countries. A bond of trust, however, must prevail between donors and recipients of lethal arms from the United States, which supplies arms according to formal conditions that reflect American values and the obligations of international law.</p><p>Mr. Netanyahu and the hard-liners in his government have broken that bond, and until it is restored, America cannot continue, as it has, to supply Israel with the arms it has been using in its war against Hamas.</p><p>The question is not whether Israel has the right to defend itself against an enemy sworn to its destruction. It does. The Hamas attack of Oct. 7 was an atrocity no nation could leave unanswered, and by hiding behind civilian fronts, Hamas violates international law and bears a major share of responsibility for the suffering inflicted on the people in whose name it purports to act. In the immediate aftermath of that attack, President Biden rushed to demonstrate America\u2019s full sympathy and support in Israel\u2019s agony. That was the right thing to do.</p><p>It is also not a question whether the United States should continue to help Israel defend itself. America\u2019s commitments to Israel\u2019s defense are long term, substantial, mutually beneficial and essential. No president or Congress should deny the only state on earth with a Jewish majority the means to ensure its survival. Nor should Americans ever lose sight of the threat that Hamas, a terrorist organization, poses to the security of the region and to any hope of peace between Palestinians and Israelis.</p><p>But that does not mean the president should allow Mr. Netanyahu to keep playing his cynical double games. The Israeli leader is fighting for his political survival against growing anger from his electorate. He knows that, should he leave office, he will risk going on trial for <a href=\"https://www.nytimes.com/2022/11/03/world/middleeast/netanyahu-corruption-charges-israel.html#:~:text=material%20and%20intangible.-,Mr.,two%20leading%20Israeli%20news%20outlets.\">serious charges of corruption</a>. He has, until recently, resisted diplomatic efforts for a cease-fire that might have led to a release of hostages still in the custody of Hamas. He has used American armaments to go after Hamas but has been deaf to repeated demands from Mr. Biden and his national security team to do more to protect civilians in Gaza from being harmed by those armaments. Even worse, Mr. Netanyahu has turned defiance of America\u2019s leadership into a political tool, indulging and encouraging the hard-liners in his cabinet, who <a href=\"https://www.timesofisrael.com/ministers-call-for-resettling-gazas-palestinians-building-settlements-in-strip/\">pledge to reoccupy Gaza</a> and reject any notion of a Palestinian state \u2014 exactly the opposite of U.S. policy.</p><p>Thanks in part to the bombs and other heavy weapons supplied by the United States, the Israeli military now faces little armed resistance in most of Gaza. But Mr. Netanyahu has ignored his obligations to provide food and medicine to the civilian population in the territory that Israel now controls. In fact, Israel has made it <a href=\"https://www.nytimes.com/2024/04/10/world/middleeast/aid-pledges-gaza-israel.html\">difficult for anyone else to provide humanitarian aid to Gaza</a>. The United States has had to take extraordinary steps, including airdrops and <a href=\"https://www.nytimes.com/live/2024/03/07/world/israel-hamas-war-gaza-news\">building a pier</a>, to overcome Israeli obstacles to providing humanitarian aid. Last week\u2019s <a href=\"https://www.nytimes.com/live/2024/04/02/world/israel-hamas-war-gaza-news\">attack on a World Central Kitchen convoy in Gaza</a>, which killed seven aid workers and which Israel acknowledged was a mistake, underscores the enormous danger facing the international aid agencies that are stepping in to help.</p><p>This cannot continue.</p><p>Israel recently announced a <a href=\"https://www.nytimes.com/2024/04/07/world/middleeast/israel-troops-gaza.html\">pullback of troops from southern Gaza</a>. But this is neither a formal cease-fire nor an end to the war, and it is incumbent on the Biden administration to persevere in its efforts to help end the fighting, free the hostages and protect Palestinian civilians.</p><p><a href=\"https://www.nytimes.com/2024/03/12/us/politics/democrats-biden-israel-letter.html\">A growing number of senators</a>, led by Chris Van Hollen, Democrat of Maryland, have been urging Mr. Biden to consider pausing military transfers to Israel, which the executive branch can do without congressional approval. They were right to push for this action.</p><p>Last week, Representative Nancy Pelosi was among 40 House Democrats to <a href=\"https://www.nytimes.com/2024/04/05/us/politics/democrats-israel-aid.html\">sign a letter</a> to the president and the secretary of state urging them to ensure that military assistance to Israel is in compliance with U.S. and international law. The mechanism to do that is already in place. In February, <a href=\"https://www.whitehouse.gov/briefing-room/presidential-actions/2024/02/08/national-security-memorandum-on-safeguards-and-accountability-with-respect-to-transferred-defense-articles-and-defense-services/\">Mr. Biden signed a national security memorandum</a> (NSM-20) that directed the secretary of state to obtain \u201ccredible and reliable\u201d written assurances from recipients of American weapons that those weapons would be used in accordance with international law and that recipients would not impede the delivery of American assistance. Failure to fulfill those measures could lead to suspension of further arms transfers.</p><p>NSM-20 did not break ground. Many of its requirements are already law under the Foreign Assistance Act and other measures, and they apply to armaments supplied to other countries, including Ukraine. NSM-20 specifically excludes air defense systems and others used for strictly defensive purposes, but that still leaves many offensive weapons whose delivery the United States could pause. But NSM-20 is notable. It affirms the president\u2019s authority to use military aid as a lever in ensuring the nation\u2019s weapons are used responsibly.</p><p>The administration has tried many forms of pressure and admonition, including public statements, reported expressions of frustration and U.N. Security Council resolutions. None of them, so far, have proved effective with Mr. Netanyahu. Military aid is the one lever Mr. Biden has been reluctant to use, but it is a <a href=\"https://www.washingtonpost.com/world/2024/03/12/israel-united-states-military-aid-leverage/\">significant one he has at his disposal</a> \u2014 perhaps the last one \u2014 to persuade Israel to open the way for urgent assistance to Gaza.</p><p>Pausing the flow of weapons to Israel would not be an easy step for Mr. Biden to take; his devotion and commitment to the Jewish state go back decades. But the war in Gaza has taken an enormous toll in human lives, with a cease-fire still out of reach and <a href=\"https://www.nytimes.com/2024/02/06/world/middleeast/israel-gaza-hostages-dead.html\">many hostages still held captive</a>. The eroding international support for its military campaign has made Israel more insecure. Confronted with that suffering, the United States cannot remain beholden to an Israeli leader fixated on his own survival and the approval of the zealots he harbors.</p><p>The United States has had Israel\u2019s back, diplomatically and militarily, through decades of wars and crises. Alliances are not one-way relationships, and most Israelis, including Israel\u2019s senior military commanders, are aware of that. Yet Mr. Netanyahu has turned his back on America and its entreaties, creating a crisis in U.S.-Israeli relations when Israel\u2019s security, and the stability of the entire region, is at stake.</p><p>ONLINE: <a href=\"https://www.nytimes.com/2024/04/13/opinion/israel-military-aid.html\">https://www.nytimes.com/2024/04/13/opinion/israel-military-aid.html</a></p><p>___</p><p>April 12</p><p>The Washington Post on the measles outbreak in the United States</p><p>This year is not yet one-third over, yet measles cases in the United States are <a href=\"https://www.washingtonpost.com/health/2024/03/25/measles-cases-outbreak-united-states/?itid=lk_inline_manual_2\">on track to be the worst</a> since a massive outbreak in 2019. At the same time, anti-vaccine activists are recklessly sowing doubts and encouraging vaccine hesitancy. Parents who leave their children unvaccinated are risking not only their health but also the well-being of those around them.</p><p>Measles is <a href=\"https://apnews.com/article/measles-cdc-outbreak-chicago-mmr-vaccine-7ecdfef41e6dbd659c7ac8b80d5de38f\">one of the most contagious</a> human viruses \u2014 more so than the <a href=\"https://www.washingtonpost.com/coronavirus/?itid=lk_inline_manual_4\">coronavirus</a> \u2014 and is spread through direct or airborne contact when an infected person breathes, coughs or sneezes. The virus can hang in the air for up to two hours after an infected person has left an area. It can cause serious complications, including pneumonia, encephalitis and death, especially in unvaccinated people. According to the Centers for Disease Control and Prevention, <a href=\"https://emergency.cdc.gov/han/2024/han00504.asp\">one person infected with measles can infect 9 out of 10 unvaccinated individuals</a> with whom they come in close contact.</p><p>But measles can be prevented with the measles, mumps and rubella vaccine; two doses are 97 percent effective. When 95 percent or more of a community is vaccinated, herd immunity protects the whole. Unfortunately, vaccination rates are falling. The <a href=\"https://www.who.int/news/item/16-11-2023-global-measles-threat-continues-to-grow-as-another-year-passes-with-millions-of-children-unvaccinated\">global vaccine coverage rate</a> of the first dose, at 83 percent, and second dose, at 74 percent, are well under the 95 percent level. <a href=\"https://www.cdc.gov/measles/cases-outbreaks.html\">Vaccination coverage among U.S. kindergartners</a> has slipped from 95.2 percent during the 2019-2020 school year to 93.1 percent in the 2022-2023 school year, according to the CDC, leaving approximately 250,000 kindergartners at risk each year over the past three years.</p><p>The virus is slipping through the gaps. According to the World Health Organization, in 2022, <a href=\"https://www.who.int/news/item/16-11-2023-global-measles-threat-continues-to-grow-as-another-year-passes-with-millions-of-children-unvaccinated\">37 countries experienced large or disruptive measles outbreaks</a> compared with 22 countries in 2021. In the United States, there have been <a href=\"https://www.cdc.gov/measles/cases-outbreaks.html\">seven outbreaks so far this year</a>, with 121 cases in 18 jurisdictions. Most are children. Many of the outbreaks in the United States appear to have been triggered by <a href=\"https://emergency.cdc.gov/han/2024/han00504.asp\">international travel</a> or contact with a traveler. Disturbingly, 82 percent of those infected <a href=\"https://www.cdc.gov/measles/cases-outbreaks.html\">were unvaccinated</a> or their status unknown.</p><p>The largest toll has been in Illinois, followed by Florida. But when an outbreak hit the Manatee Bay Elementary School in Broward County in early March, Florida\u2019s top public health official, state Surgeon General Joseph A. Ladapo, <a href=\"https://www.washingtonpost.com/opinions/2024/03/05/florida-measles-outbreak-surgeon-general-ladapo/?itid=lk_inline_manual_10\">did not follow the standard recommendation</a> that parents of unvaccinated children keep them home for 21 days to avoid getting the disease. Instead, <a href=\"https://www.documentcloud.org/documents/24439728-file_1664\">Dr. Ladapo said</a>, Florida would be \u201cdeferring to parents or guardians to make decisions about school attendance.\u201d This means allowing children without protection to go to school. Dr. Ladapo\u2019s letter was an unnecessarily reckless act of pandering to an anti-vaccine movement with increasing political influence.</p><p>Vaccine hesitancy is being encouraged by activists who warn of government coercion, using social media to amplify irresponsible claims. An article published March 20 on the website of Robert F. Kennedy Jr.\u2019s Children\u2019s Health Defense organization is headlined, <a href=\"https://childrenshealthdefense.org/defender/cdc-big-media-fear-measles-outbreaks/\">\u201cBe Very Afraid? CDC, Big Media Drum Up Fear of \u2018Deadly\u2019 Measles Outbreaks.\u201d</a> The author, Alan Cassels, claims that the news media is advancing a \u201ca fear-mongering narrative,\u201d and adds, \u201cThose of us born before 1970 with personal experience pretty much all agree that measles is a big \u2018meh.\u2019 We all had it ourselves and so did our brothers, sisters and school friends. We also had chicken pox and mumps and typically got a few days off school. The only side effect of those diseases was that my mom sighed heavily and called work to say she had to stay home to look after a kid with spots.\u201d</p><p>Today, he adds, \u201cBig media and government overhyping the nature of an illness, which history has shown us can be a precursor to some very bad public health policies such as mandatory vaccination programs and other coercive measures.\u201d</p><p>This is just wrong. The <a href=\"https://www.cdc.gov/measles/about/history.html\">CDC reports</a> that, in the decade before the measles vaccine became available in 1963, the disease killed 400 to 500 people, hospitalized 48,000 and gave 1,000 people encephalitis in the United States every year \u2014 and that was just among reported cases. The elimination of measles in the United States in 2000, driven by a safe and effective vaccine, was a major public health success. Although the elimination status still holds, <a href=\"https://www.cdc.gov/mmwr/volumes/73/wr/mm7314a1.htm#:~:text=During%20January%201%2C%202020%E2%80%93March%2028%2C%202024%2C%20CDC,first%20quarter%20of%202020%E2%80%932023.\">the U.S. situation has deteriorated.</a> The nation has been below 95 percent two-dose coverage for three consecutive years, and 12 states and the District below 90 percent. At the same time, the rest of the world must also strive to boost <a href=\"https://www.who.int/news/item/16-11-2023-global-measles-threat-continues-to-grow-as-another-year-passes-with-millions-of-children-unvaccinated\">childhood vaccination rates</a>, which slid backward during the covid-19 pandemic. According to the WHO, low-income countries \u2014 with the highest risk of death from measles \u2014 continue to have the lowest vaccination rates, only 66 percent.</p><p>The battle against measles requires a big \u2014 not a meh \u2014 effort.</p><p>ONLINE: <a href=\"https://www.washingtonpost.com/opinions/2024/04/14/measles-cases-rise-danger-vaccine/\">https://www.washingtonpost.com/opinions/2024/04/14/measles-cases-rise-danger-vaccine/</a></p><p>___</p><p>April 16</p><p>The Wall Street Journal on the U.S. Capitol riot and the Supreme Court</p><p>The people who breached the U.S. Capitol on Jan. 6, 2021, are being held accountable, and attempts to rebrand them as patriotic choirboys are a sign of the bizarre political times. Yet is it unduly stretching the law to prosecute Jan. 6 rioters using the Sarbanes-Oxley Act of 2002?</p><p>The Supreme Court will consider this Tuesday in Fischer v. U.S., and rooting for the government to lose requires no sympathy for the MAGA mob. Joseph Fischer says in his brief that he arrived late to the Capitol, spent four minutes inside, then \u201cexited,\u201d after \u201cthe weight of the crowd\u201d pushed him toward a police line, where he was pepper sprayed. The feds tell an uglier tale.</p><p>Mr. Fischer was a local cop in Pennsylvania. \u201cTake democratic congress to the gallows,\u201d he wrote in a text message. \u201cCan\u2019t vote if they can\u2019t breathe..lol.\u201d The government says he \u201ccrashed into the police line\u201d after charging it. Mr. Fischer was indicted for several crimes, including assaulting a federal officer. If true, perhaps he could benefit from quiet time in a prison library reading the 2020 court rulings dismantling the stolen election fantasy.</p><p>Sarbanes-Oxley, though? Congress enacted Sarbox, as it\u2019s often called, in the wake of Enron and other corporate scandals. One section makes it a crime to shred or hide documents \u201ccorruptly\u201d with an intent to impair their use in a federal court case or a Congressional investigation. That provision is followed by catchall language punishing anybody who \u201cotherwise obstructs, influences, or impedes\u201d such a proceeding. Now watch, as jurists with Ivy degrees argue about the meaning of the word \u201cotherwise.\u201d</p><p>In Mr. Fischer\u2019s view, the point of this law is to prohibit \u201cevidence spoliation,\u201d so the \u201cotherwise\u201d prong merely covers unmentioned examples. The government\u2019s position is that the catchall can catch almost anything, \u201cto ensure complete coverage of all forms of corrupt obstruction.\u201d The feds won 2-1 at the D.C. Circuit Court of Appeals.</p><p>Yet two judges were worried how far this reading would permit prosecutors to go. Judge Justin Walker, who joined the majority, said his vote depended on a tight rule for proving defendants acted \u201ccorruptly.\u201d</p><p>Judge Gregory Katsas filed the vigorous dissent. The government \u201cdubiously reads otherwise to mean \u2018in a manner different from,\u2019 rather than \u2018in a manner similar to,\u2019\u201d he argued. The obstruction statute \u201chas been on the books for two decades and charged in thousands of cases \u2014 yet until the prosecutions arising from the January 6 riot, it was uniformly treated as an evidence-impairment crime.\u201d</p><p>A win for the feds, Judge Katsas warned, could \u201csupercharge comparatively minor advocacy, lobbying, and protest offenses into 20-year felonies.\u201d For example: \u201cA protestor who demonstrates outside a courthouse, hoping to affect jury deliberations, has influenced an official proceeding (or attempted to do so, which carries the same penalty).\u201d Or how about a Congressman (Rep. Jamaal Bowman) who pulls a fire alarm that impedes a House vote?</p><p>Special counsel Jack Smith has charged <a href=\"https://www.wsj.com/topics/person/donald-trump\">Donald Trump</a> with obstructing a Congressional proceeding, and he says Mr. Trump\u2019s \u201cfraudulent electoral certifications\u201d in 2020 are covered by Sarbox, regardless of what the Supreme Court does in Fischer. The other piece of context is that prosecutors going after Jan. 6 rioters have charged obstruction in hundreds of cases. But if those counts are in jeopardy, don\u2019t blame the Supreme Court.</p><p>Presumably many of those defendants could be on the hook for disorderly conduct or other crimes, and the feds can throw the book at them. What prosecutors can\u2019t do is rewrite the law to create crimes Congress didn\u2019t.</p><p>ONLINE: <a href=\"https://www.wsj.com/articles/jan-6-riot-sarbanes-oxley-act-supreme-court-joseph-fischer-51ff9bf7?mod=editorials_article_pos7\">https://www.wsj.com/articles/jan-6-riot-sarbanes-oxley-act-supreme-court-joseph-fischer-51ff9bf7?mod=editorials_article_pos7</a></p><p>___</p><p>April 10</p><p>The Guardian on smartphones and children</p><p>The principle that some products are available to adults and not children is uncontroversial. Access to weapons, alcohol and pornography is curtailed in this way because a level of maturity is the precondition for access (but not a guarantee of responsible use).</p><p>Until recently, few people put smartphones in that category. The idea of an age restriction on sales would be dismissed as luddism or state-control freakery. But ministers are reported to be <a href=\"https://www.theguardian.com/technology/2024/apr/10/uk-ministers-considering-banning-sale-of-smartphones-to-under-16s\">considering just such a ban</a> for under-16s. Opinion polls suggest that it could be popular with parents. Government guidance already calls for a de facto ban on mobile phone use in schools in England and Wales. Many headteachers had already imposed rules to that effect. If there is not yet a consensus that young people\u2019s use of smartphones needs stricter regulation, that is the trajectory.</p><p>The smartphone is a recent enough innovation (the first iPhone was launched in 2007) to limit firm conclusions about effects of its use. But there is <a href=\"https://www.afterbabel.com/p/international-mental-illness-part-one\">evidence of sudden, steep rises</a> in depression, anxiety and other mental health problems in the first generation to pass through adolescence in a state of digital saturation.</p><p>Correlation doesn\u2019t prove causation. There might be many reasons why young people are increasingly lonely and lacking in self-esteem. But there is plausible culpability in the simultaneous mass dissemination of platforms and devices that dissolve notions of privacy, are engineered to be addictive and turn social interaction into something akin to a competitive video game. There is no obvious other candidate to account for a pattern that is replicated in so many different countries. The connection is credible enough that societies might not want to wait for definitive confirmation before intervening.</p><p>One counterview is that phones are the wrong target. It is the apps and the content they channel that harm young people. The hardware is neutral. Another objection is that the phone is an essential tool of modern life, with benefits that outweigh disadvantages. The task is to teach safe use, or empower parents <a href=\"https://www.theguardian.com/lifeandstyle/2024/feb/01/screen-time-phones-kids-limit\">to enforce it</a>. In that view, the state cannot hold back a social revolution, nor should it want to. The tortured evolution of the recent <a href=\"https://www.theguardian.com/technology/2023/jan/17/age-checks-trolls-and-deepfakes-whats-in-the-online-safety-bill\">online safety bill</a> shows the immense complexity of regulation in a rapidly evolving realm.</p><p>ONLINE: <a href=\"https://www.theguardian.com/commentisfree/2024/apr/10/the-guardian-view-on-smartphones-and-children-a-compelling-case-for-action\">https://www.theguardian.com/commentisfree/2024/apr/10/the-guardian-view-on-smartphones-and-children-a-compelling-case-for-action</a></p><p>___</p><p>April 15</p><p>China Daily says Tokyo, Manila follow U.S.</p><p>The two US officials visiting Beijing from Sunday to Tuesday will have found themselves at the forefront of the United States\u2019 \u201cefforts to maintain open lines of communication and to responsibly manage competition\u201d, as the US State Department described the nature of their trip.</p><p>That is because Assistant Secretary of State for East Asian and Pacific Affairs Daniel J. Kritenbrink and National Security Council Senior Director for China Affairs Sarah Beran will have been quizzed by Beijing about the markedly heightened security cooperation among the US and Japan and the Philippines after their first trilateral summit in Washington last week. The leaders of the three countries have made no bones about China being the rationale for what promises to be a bigger military footprint in the East and South China seas and intensified provocations.</p><p>The trilateral mischief-making clique is just the latest in a series engineered by Washington with the aim of containing China. It joins the Quad, AUKUS and Five Eyes in bringing countries together for that purpose. For the US, it is taking comfort in numbers. For the Philippines, it is an attempt to curry favor with the US in the hope of receiving some largesse. As evidenced by Philippine President Ferdinand Marcos Jr. repeatedly calling on the US to invest in the Philippines.</p><p>What Tokyo covets is Japan gaining the status of a \u201cnormal\u201d country, which it thinks it can achieve by hitching itself to the US\u2019 \u201cIndo-Pacific\u201d strategy. Japanese Prime Minister Fumio Kishida couldn\u2019t hide his satisfaction with the upgraded Treaty of Mutual Cooperation and Security between the United States and Japan, the main outcome of his meeting with US President Joe Biden on Wednesday.</p><p>Compared with Manila\u2019s shortsighted opportunism, Tokyo\u2019s scheming deserves much more vigilance from regional countries, as well as the US, something Kritenbrink and Beran should be urged to realize, because if realized, it will pose a grave challenge to peace and stability in the region and beyond.</p><p>Kishida has warmly welcomed the newly upgraded defense treaty with the US, which covers technology, command coordination, space and intelligence, as technically it puts Japan on a quasi equal footing with the US in security affairs, representing a solid step forward for Japan to not only end its subordination to the US but also become a global power.</p><p>The US intends its security alliance with Japan to become the focal point from which its other regional security mechanisms \u2014 including its envisioned \u201cIndo-Pacific NATO\u201d \u2014 radiate.</p><p>Thus the US military command in Japan is to be restructured to strengthen operational planning and military exercises involving the two countries\u2019 armed forces. This will ensure their security cooperation evolves into the core of the \u201cIndo-Pacific\u201d wing of the US\u2019 security network, with Tokyo helping to dovetail it with the transatlantic wing.</p><p>In this way, Japan is taking a ride on the US\u2019 strategy to contain China using the pretext of shared values.</p><p>That being said, it was interesting to hear Kishida stress in Washington that Japan will cooperate with China \u201con common challenges\u201d and that Tokyo envisions a \u201cstable Japan-China relationship\u201d on all levels.</p><p>That leaves one wondering whether saying one thing and doing the other is something Tokyo has learned from Washington or it is the other way round.</p><p>ONLINE: <a href=\"https://www.chinadaily.com.cn/a/202404/15/WS661d25c2a31082fc043c2147.html\">https://www.chinadaily.com.cn/a/202404/15/WS661d25c2a31082fc043c2147.html</a></p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/5385ba528d86e6461441aa0e8b11dc25",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 3,
+            "reason": "The document contains multiple editorials on various topics, but only one of them is directly related to health. The Washington Post editorial discusses the measles outbreak in the United States, vaccine hesitancy, and the importance of vaccination. This section is highly relevant to the topic of health. However, the other editorials cover topics such as U.S. aid to Israel, the U.S. Capitol riot, smartphones and children, and geopolitical issues involving the U.S., Japan, and the Philippines, which are not relevant to health. Therefore, while part of the document is highly relevant, the overall document has mixed relevance to the topic of health."
+        }
+    }
+}

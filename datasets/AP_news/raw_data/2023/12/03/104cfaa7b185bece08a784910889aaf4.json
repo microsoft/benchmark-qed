@@ -1,0 +1,293 @@
+﻿{
+    "altids": {
+        "itemid": "104cfaa7b185bece08a784910889aaf4",
+        "etag": "104cfaa7b185bece08a784910889aaf4_0a9aza0c0",
+        "friendlykey": "413651296168",
+        "referenceid": "EU-REL--Vatican-Pope"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2023-12-03T12:17:38Z",
+    "firstcreated": "2023-12-03T12:17:38Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "ednote": "Eds: UPDATES: With AP Photos.",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "EU-REL--Vatican-Pope",
+    "headline": "Pope Francis says he's doing better but again skips his window appearance facing St. Peter's Square",
+    "headline_extended": "An ailing Pope Francis has skipped his popular window appearance to the public in St. Peter's Square for a second Sunday but said in televised remarks that he's doing better",
+    "slugline": "BC-EU-REL-Vatican-Pope",
+    "description_summary": "An ailing Pope Francis has skipped his popular window appearance to the public in St. Peter's Square for a second Sunday but said in televised remarks that he's doing better. Francis delivered very brief remarks from the chapel of the Vatican hotel where he lives and where he is recovering from what he has said is infectious bronchitis. Francis, whose 87th birthday is later this month, also said he is following from afar the workings of the U.N. climate conference in Dubai. The pontiff was due to go to the COP28 conference on Friday, and speak to the gathering in person. But instead he canceled his trip following his doctors' orders.",
+    "bylines": [
+        {
+            "by": "By FRANCES D'EMILIO",
+            "title": "Associated Press"
+        }
+    ],
+    "located": "VATICAN CITY",
+    "datelinelocation": {
+        "city": "Vatican City",
+        "countrycode": "VAT",
+        "countryname": "Vatican City",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                12.4533,
+                41.90225
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2023 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "Pope Francis illness bronchitis"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "person": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "2fd38d1dee8c4287a13ae64992300d96",
+            "name": "Pope Francis",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 92
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "i",
+            "name": "i"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 71
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e228bab07de410048fa8df092526b43e",
+            "name": "Lung disease",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 47
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "6cd98adfc84d405eadec8ca81bd37df4",
+            "name": "Access to health care",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 61
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "c6ae21e2335a47acb3fe5c938213ad1b",
+            "name": "Israel-Hamas war",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 98
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "026a1118e94443a2aacc08a2e70cc77b",
+            "name": "Religion",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 88
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "026a1118e94443a2aacc08a2e70cc77b",
+            "name": "Religion",
+            "creator": "Editorial",
+            "editorial_subject": "Religion",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "bb2d2c5f441a452cb24bb511a2ab5eea",
+            "name": "World news",
+            "creator": "Editorial",
+            "editorial_subject": "World news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "organisation": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "54fa9358892310048056fb7860a2fc03",
+            "name": "United Nations",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 44
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "943c51b72eea4d1a825098c1a6fb409e",
+            "name": "Hamas",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 36
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f3e0ed387eff10048539df092526b43e",
+            "name": "Vatican City",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661850e07d5b100481f4c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "01f56e0e654841eca2e69bf2cbcc0526",
+                "name": "Nation"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    12.4533,
+                    41.90225
+                ]
+            },
+            "relevance": 50,
+            "parentnames": [
+                "Europe"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "661850e07d5b100481f4c076b8e3055c",
+            "name": "Europe",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "associations": {
+        "1": {
+            "altids": {
+                "itemid": "cbdd884f99914366bcbc475a08483b03"
+            },
+            "type": "picture"
+        },
+        "2": {
+            "altids": {
+                "itemid": "b5f58f3d8c2744baa9e1cbdf6a949507"
+            },
+            "type": "picture"
+        },
+        "3": {
+            "altids": {
+                "itemid": "47881db885344da9a5fd2265f0d3b4a9"
+            },
+            "type": "picture"
+        },
+        "4": {
+            "altids": {
+                "itemid": "1732b39f4170423984b18560b57c7ba4"
+            },
+            "type": "picture"
+        },
+        "5": {
+            "altids": {
+                "itemid": "c9dcb9105d0f4c6d9d34b9d3de1f4c37"
+            },
+            "type": "picture"
+        }
+    },
+    "body_nitf": "<p>VATICAN CITY (AP) \u2014 For a second Sunday, an ailing Pope Francis <a href=\"https://apnews.com/article/pope-francis-flu-vatican-64a98163770508ad804495cb62f92d64\">skipped his popular window appearance</a> to the public in St. Peter\u2019s Square, but in televised remarks said he\u2019s doing better even though his voice wouldn't let him read all his comments aloud.</p><p>As he did a week earlier, Francis delivered very brief remarks from the chapel of the Vatican hotel where he lives and where he is recovering from what he has said is infectious bronchitis. Thousands of people in the square followed his words from giant screens set up outdoors.</p><p>Francis, whose 87th birthday is later this month, also said he is following from afar the workings of <a href=\"https://apnews.com/article/climate-health-ab2a64170501124239db9efaf11d3f77\">the U.N. climate conference in Dubai.</a> The pontiff was due to go to the COP28 conference on Friday to address the gathering.</p><p>During his first chapel appearance on Nov. 26, he insisted he would make the trip despite his illness. He instead <a href=\"https://apnews.com/article/pope-cancels-trip-health-cop28-climate-ae58e784596ec4815a6bfe01668a2bc7\">canceled it</a> following his doctors\u2019 orders and stayed at the Vatican, where he has received antibiotics intravenously.</p><p>\u201cDear brothers and sisters, good day. Also today, I won't be able to read everything. I'm getting better, but the voice still isn't\u201d enough to read everything, Francis said. He then passed the microphone to a priest who read prepared remarks, including about the end of the truce in the Israeli-Hamas war.</p><p>\u201cIt's painful that the truce has been broken,'' Francis said in the remarks read by the priest. \u201dThat means death, destruction and misery,'' the pontiff said. He called for the release of the remaining hostages who were seized from Israel in the Hamas' Oct. 7 attack, and lamented the lack of basic necessities of life in Gaza after Israel launched its war against Hamas.</p><p>On Thursday, Francis told an audience of health care workers that he was advised against making the Dec. 1-3 trip to the United Arab Emirates because \"it\u2019s very hot there, and you go from heat to air conditioning,\u201d Of his current illness, Francis told that audience: \u201cThank God it wasn\u2019t pneumonia. <a href=\"https://apnews.com/article/vatican-pope-bronchitis-dubai-climate-1b4042c2f366454b0f92d4251752a538\">It\u2019s a very acute, infectious bronchitis.\u201d</a></p><p>Previously the Vatican had said <a href=\"https://apnews.com/article/pope-francis-vatican-audiences-flu-600fd34afaa58bbe2447546c3a0deaeb\">Francis was suffering from a lung inflammation and the flu</a>. Francis had a previous case of acute bronchitis in the spring, when he was hospitalized for three days so he could <a href=\"https://apnews.com/article/vatican-pope-francis-illness-lung-inflammation-ef8ac8a607db7d71f995f12542ac6768\">receive intravenous antibiotics</a>.</p><p>Francis said that \u201ceven from a distance, I am following with great attention the work of COP28 in Dubai. I am close\u201d to the conference. He said he was renewing his appeal so that \u201cclimate change is answered by concrete political change.\"</p><p>In his Sunday remarks about climate change, Francis urged the end of what he called \u201cbottlenecks\u201d caused by nationalism, and \u201cpatterns of the past.\" He added: \"let's embrace a common vision, committing all of us and now, without delay, to a necessary global ecological conversion.\u201d</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/pope-francis-illness-bronchitis-104cfaa7b185bece08a784910889aaf4",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 5,
+            "reason": "The document primarily discusses Pope Francis's health condition, including his infectious bronchitis, his recovery process, and how it has affected his public appearances and travel plans. It also mentions his previous health issues and the medical advice he has received. While the document also touches on other topics such as the U.N. climate conference and the Israeli-Hamas conflict, the main focus remains on the Pope's health. Therefore, it is highly relevant to the topic of health."
+        }
+    }
+}

@@ -1,0 +1,421 @@
+﻿{
+    "altids": {
+        "itemid": "05668d241d1a67b51b2a91c302c38985",
+        "etag": "05668d241d1a67b51b2a91c302c38985_12a12aza0c0",
+        "friendlykey": "496999598690",
+        "referenceid": "US--Biden-Physical"
+    },
+    "version": 12,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2024-02-29T01:33:53Z",
+    "firstcreated": "2024-02-28T14:06:34Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "ednote": "Eds: UPDATES: Adds comment from outside doctor.",
+    "editorialtypes": [
+        "Lead"
+    ],
+    "signals": [
+        "newscontent"
+    ],
+    "title": "US--Biden-Physical",
+    "headline": "Biden 'continues to be fit for duty,' his doctor says, after president undergoes annual physical",
+    "headline_extended": "President Joe Biden's doctor says he \u201ccontinues to be fit for duty\u201d after conducting an annual physical that will be closely watched as the 81-year-old seeks reelection",
+    "slugline": "BC-US--Biden-Physical, 12th Ld-Writethru",
+    "description_summary": "President Joe Biden's doctor says he \u201ccontinues to be fit for duty\u201d after conducting an annual physical that will be closely watched as the 81-year-old seeks reelection. \u201cPresident Biden is a healthy, active, robust, 81-year-old male who remains fit to successfully execute the duties of the presidency,\u201d Dr. Kevin O\u2019Connor has concluded in a six-page memo on the president\u2019s health, following a physical that took him to Walter Reed National Military Medical Center for more than 2 1/2 hours. The memo added that Biden, \u201cfeels well and this year\u2019s physical identifies no new concerns.\u201d The oldest U.S. president's annual physical was closely watched.",
+    "bylines": [
+        {
+            "by": "By DARLENE SUPERVILLE and WILL WEISSERT",
+            "title": "Associated Press"
+        }
+    ],
+    "located": "BETHESDA, Md.",
+    "datelinelocation": {
+        "city": "Bethesda",
+        "countryareacode": "MD",
+        "countryareaname": "Maryland",
+        "countrycode": "USA",
+        "countryname": "United States",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                -77.10026,
+                38.98067
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "biden physical health oldest president reelection Trump"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "person": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a6331b54c46e4ca8b79fa40fada95db5",
+            "name": "Donald Trump",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "POLITICIAN",
+                "PERSON"
+            ],
+            "relevance": 68
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "42fcd5108d2610048a34f7ae5e3ffd3e",
+            "name": "Joe Biden",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "POLITICIAN",
+                "PERSON"
+            ],
+            "relevance": 89
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "a",
+            "name": "a"
+        },
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "p",
+            "name": "p"
+        },
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86aad5207dac100488ecba7fa5283c3e",
+            "name": "Politics",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 84
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 94
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86aee4307dac10048901ba7fa5283c3e",
+            "name": "Elections",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 69
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Editorial",
+            "editorial_subject": "Health",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86aad5207dac100488ecba7fa5283c3e",
+            "name": "Politics",
+            "creator": "Editorial",
+            "editorial_subject": "Politics",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "abfca78268874726966cdad8c35c4ae3",
+            "name": "Washington news",
+            "creator": "Editorial",
+            "editorial_subject": "Washington news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "organisation": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a72dbbe4a1784355b5e61c80b7aae867",
+            "name": "Hungary government",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 70
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "898f52e08921100480efba0a2b2ca13e",
+            "name": "United States government",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 63
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "5f36c12adb1447fa971c2f6d4d272333",
+            "name": "Turkey government",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 32
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "b0fa317082b3100484dbdf092526b43e",
+            "name": "Maryland",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -76.74997,
+                    39.00039
+                ]
+            },
+            "relevance": 42,
+            "parentnames": [
+                "United States"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "661af0c07d5b10048239c076b8e3055c",
+            "name": "Mexico",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "6618c9f87d5b10048204c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "01f56e0e654841eca2e69bf2cbcc0526",
+                "name": "Nation"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -102,
+                    23
+                ]
+            },
+            "relevance": 42,
+            "parentnames": [
+                "Central America"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "661e09b87d5b10048287c076b8e3055c",
+            "name": "Turkey",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661850e07d5b100481f6c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "01f56e0e654841eca2e69bf2cbcc0526",
+                "name": "Nation"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    35,
+                    39
+                ]
+            },
+            "relevance": 42,
+            "parentnames": [
+                "Middle East"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "661850e07d5b100481f5c076b8e3055c",
+            "name": "Latin America and Caribbean",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "b0fa317082b3100484dbdf092526b43e",
+            "name": "Maryland",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "associations": {
+        "1": {
+            "altids": {
+                "itemid": "293d8af2810f47abad3c82020ef20ec1"
+            },
+            "type": "picture"
+        },
+        "2": {
+            "altids": {
+                "itemid": "4392a81463034b908f5f66f9a8ee5351"
+            },
+            "type": "picture"
+        },
+        "3": {
+            "altids": {
+                "itemid": "775fa20e4c7745a3bf864063c5783e50"
+            },
+            "type": "picture"
+        },
+        "4": {
+            "altids": {
+                "itemid": "23c16d6f0160482a8530bed2a4bf0090"
+            },
+            "type": "picture"
+        },
+        "5": {
+            "altids": {
+                "itemid": "767bcb0f021c479eb2cfe3d9158547e5"
+            },
+            "type": "picture"
+        },
+        "6": {
+            "altids": {
+                "itemid": "206c0e1281db4a6e95a1f2f4aa0cd386"
+            },
+            "type": "picture"
+        },
+        "7": {
+            "altids": {
+                "itemid": "31940c1a6e78415db242e1b540dc203b"
+            },
+            "type": "picture"
+        },
+        "8": {
+            "altids": {
+                "itemid": "44214834109541c0a39134310425ba36"
+            },
+            "type": "audio"
+        },
+        "9": {
+            "altids": {
+                "itemid": "07af6cc4e5ed4f3bb0de9047a4f9f3d6"
+            },
+            "type": "audio"
+        }
+    },
+    "body_nitf": "<p>BETHESDA, Md. (AP) \u2014 President <a href=\"https://apnews.com/hub/joe-biden\">Joe Biden</a> \u201ccontinues to be fit for duty,\u201d his doctor wrote Wednesday after conducting an annual physical that is being closely watched as the 81-year-old <a href=\"https://apnews.com/article/joe-biden-election-2024-president-democrats-trump-9c72115656855da89a41cac3f79aa65b#:~:text=WASHINGTON%20(AP)%20%E2%80%94%20President%20Joe,president%20for%20another%20four%20years.\">seeks reelection</a> in November.</p><p>Dr. Kevin O\u2019Connor, Biden's physician, wrote that the president is adjusting well to a new device that helps control his sleep apnea and has experienced some hip discomfort but also works out five times per week.</p><p>\u201cPresident Biden is a healthy, active, robust, 81-year-old male who remains fit to successfully execute the duties of the presidency,\u201d O\u2019Connor said in a six-page memo on the president\u2019s health, following a physical that took Biden to Walter Reed National Military Medical Center for more than 2 1/2 hours.</p><p>His memo added that Biden \u201cfeels well and this year's physical identifies no new concerns.\u201d</p><p>The oldest president in U.S. history, Biden would be 86 by the end of a second term, should he win one. His latest physical mirrored one he had in February last year when O'Connor described Biden as <a href=\"https://apnews.com/article/biden-politics-united-states-government-health-bdce6c15df6186e06710f2d903a3513e\">\u201chealthy, vigorous\u201d and \u201cfit\u201d</a> to handle his White House duties.</p><p>Still, voters are approaching this year\u2019s election with <a href=\"https://apnews.com/article/biden-donald-trump-government-and-politics-ede57ce56fdf7958addec2cf9ef5e0de\">misgivings about Biden\u2019s age</a>, having scrutinized his gaffes, his coughing, his slow walking and even a <a href=\"https://apnews.com/article/biden-us-secret-service-jill-delaware-government-and-politics-d039291d372a38982b533d05d18d7a6f\">tumble off his bicycle</a>.</p><p>After he returned to the White House on Wednesday, Biden attended an event on combating crime and suggested that when it came to his health \u201ceverything is squared away\u201d and \"there is nothing different than last year.\u201d</p><p>He also joked about his age and people thinking \"I look too young.\u201d</p><p>Former President <a href=\"https://apnews.com/hub/donald-trump\">Donald Trump</a>, 77, is the favorite to lock up the Republican nomination later this month, which would bring him closer to a November rematch against Biden. Trump was 70 when he took office in 2017, which made him the oldest American president to be inaugurated \u2014 until Biden broke his record by being inaugurated at 78 in 2021.</p><p>O'Connor's report said that Biden\u2019s stiff walking was no worse than last year and was the result of arthritic changes in his spine. He said the president also noted \u201csome increased left hip discomfort.\u201d There were no signs of stroke, multiple sclerosis, Parkinson\u2019s or other similar conditions in what the report called an \u201cextremely detailed neurologic exam.\u201d</p><p>Biden, last summer, began using a continuous positive airway pressure, or CPAP, machine at night to help with sleep apnea, and O'Connor wrote that the president had responded well to that treatment and is \u201cdiligently compliant\" about using it.</p><p>A recent <a href=\"https://apnews.com/article/biden-hur-garland-classified-documents-836b99fe9cbef9ba7d32602f4928efec\">special counsel\u2019s report on the investigation into Biden's handling of classified documents</a> repeatedly derided Biden's memory, calling it \u201chazy,\u201d \u201cfuzzy,\u201d \u201cfaulty,\u201d \u201cpoor\u201d and having \u201csignificant limitations.\u201d It also noted that Biden could not recall defining milestones in his own life such as when his son Beau died or when he served as vice president.</p><p>Still, addressing reporters the evening of the report's release, Biden said \"my memory is fine\u201d and grew visibly angry as he denied forgetting when his son <a href=\"https://apnews.com/general-news-d8f69eb645d74b7886387f713981b739\">died of brain cancer in 2015</a> at the age of 46.</p><p>White House press secretary Karine Jean-Pierre said that O\u2019Connor was one of a team of 20 different medical specialists who helped complete the physical.</p><p>Asked why Biden wasn't undergoing a cognitive test as part of the physical, Jean-Pierre said that O'Connor and Biden's neurologist \u201cdon't believe he needs one.\u201d</p><p>\u201cHe passes a cognitive test every day, every day as he moves from one topic to another topic, understanding the granular level of these topics,\u201d Jean-Pierre said, noting that Biden tackled such diverse issues as Wednesday's crime prevention event before his planned <a href=\"https://apnews.com/article/white-house-joe-biden-immigration-border-trump-2024-734b45dd77b70a41471c9c843c36cc49\">trip to the U.S.-Mexico border</a> on Thursday and next week's State of the Union address.</p><p>\u201cThis is a very rigorous job,\" she added.</p><p>That picture of the president doesn\u2019t reflect the type of struggles with routine tasks that might indicate the need for further tests, said Dr. Michael Rosenbloom, a neurologist at the University of Washington School of Medicine.</p><p>\u201cConstantly questioning older folks who may have an occasional lapse is a form of ageism,\u201d Rosenbloom said.</p><p>From sleep apnea to arthritis, Biden\u2019s health report \u201cseems pretty run of the mill for an 81-year-old person,\u201d said Dr. Jeffrey A. Linder, chief of general internal medicine at Northwestern University\u2019s Feinberg School of Medicine.</p><p>\u201cHis doctors are in a unique position to assess his cognitive ability on a daily basis,\u201d Linder said. \"These doctors are able to see how he\u2019s functioning day to day. That\u2019s much more useful\u201d than a cognitive assessment.</p><p>Many Americans, including Democrats, have <a href=\"https://apnews.com/article/ap-norc-poll-biden-2024-presidential-prospects-c843c5af6775b4c8a0cff8e2b1db03f6\">expressed reservations about Biden</a> seeking a second term during this fall's election. Only 37% of Democrats say Biden should pursue reelection, down from 52% before the 2022 midterm elections, according to a poll from The Associated Press-NORC Center for Public Affairs Research.</p><p>Biden counters that his age brings wisdom, and he has begun to criticize Trump for the former president\u2019s recent public gaffes.</p><p>The president <a href=\"https://apnews.com/article/biden-seth-meyers-donors-2024-3ba258c294d0697f2f2963f3025dd529\">joked</a> that his age was classified information and suggested during a taping in New York on Monday of <a href=\"https://apnews.com/article/seth-meyers-late-night-10-years-237f12c227cd2de1f25528b3249bd61e\">\u201cLate Night With Seth Meyers</a> \u2033 that Trump mistakenly called his wife Melania, \u201cMercedes\u201d during a weekend speech at the Conservative Political Action Conference -- though the Trump campaign says he was correctly referring to political commentator Mercedes Schlapp.</p><p>Trump has indeed had his share of <a href=\"https://apnews.com/article/election-2024-age-biden-trump-gaffes-flubs-c46427d30471f79ee695d3e76f4d17f4\">verbal miscues</a>, mixing up the city and state where he was campaigning, calling Hungarian Prime Minister Viktor Orb\u00e1n the leader of Turkey and repeatedly mispronouncing the militant group Hamas as \u201chummus.\u201d More recently, he <a href=\"https://apnews.com/article/nikki-haley-trump-mental-fitness-pelosi-522c3cddcaf7b85df5a64658c5041e96\">confused</a> his Republican primary rival Nikki Haley with former Democratic House Speaker Nancy Pelosi.</p><p>While he was president, Trump's annual physical in 2019 revealed that he had gained weight and was up to 243 pounds. With his 6-foot, 3-inch frame, that meant Trump's Body Mass Index was 30.4. An index rating of 30 is the level at which doctors consider someone obese under this commonly used formula.</p><p>Wednesday's report listed Biden as 6-foot tall and weighing 178 pounds.</p><p>___</p><p>Weissert reported from Washington. AP Medical Writer Carla K. Johnson in Washington state contributed.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/biden-physical-health-oldest-president-reelection-trump-05668d241d1a67b51b2a91c302c38985",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 5,
+            "reason": "The document is highly relevant to the topic of health as it provides detailed information about President Joe Biden's annual physical examination, his overall health status, and specific health conditions such as sleep apnea and hip discomfort. It also includes expert opinions on his cognitive abilities and general health for his age. The document discusses the implications of his health on his ability to perform presidential duties and addresses public concerns about his age and fitness. All these aspects are directly related to the topic of health."
+        }
+    }
+}

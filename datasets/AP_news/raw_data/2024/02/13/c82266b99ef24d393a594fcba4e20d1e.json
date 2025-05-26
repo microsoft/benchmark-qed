@@ -1,0 +1,250 @@
+﻿{
+    "altids": {
+        "itemid": "c82266b99ef24d393a594fcba4e20d1e",
+        "etag": "c82266b99ef24d393a594fcba4e20d1e_0a12aza0c0",
+        "friendlykey": "69852427535",
+        "referenceid": "US--Alaskapox Death"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2024-02-13T03:15:59Z",
+    "firstcreated": "2024-02-13T03:15:58Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "US--Alaskapox Death",
+    "headline": "Elderly Alaska man is first reported person to die of recently discovered Alaskapox virus",
+    "headline_extended": "Alaska state health officials say an elderly man has died from Alaskapox",
+    "slugline": "AP-US--Alaskapox Death",
+    "description_summary": "Alaska state health officials say an elderly man has died from Alaskapox. It's the first known fatality from the recently discovered virus. A bulletin issued last week says the man died in late January. He lived in the forest in the remote Kenai Peninsula. Alaskapox, also known as AKPV, is related to smallpox. Symptoms can include a rash, swollen lymph nodes and joint or muscle pain. Alaska health officials say only seven cases have been confirmed since 2015. All the others involved people in the Fairbanks area, 300 miles from the Kenai Peninsula. The other patients recovered without being hospitalized. But health officials says the patient who died had a compromised immune system from cancer treatments.",
+    "located": "ANCHORAGE, Alaska",
+    "datelinelocation": {
+        "city": "Anchorage",
+        "countryareacode": "AK",
+        "countryareaname": "Alaska",
+        "countrycode": "USA",
+        "countryname": "United States",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                -149.90028,
+                61.21806
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "First Alaskapox death"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "a",
+            "name": "a"
+        },
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "32f6ce4087aa10048a5be9f06a797907",
+            "name": "Forests",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 58
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "49ff58087f001004824bf571351eed07",
+            "name": "Smallpox",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 42
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a89f0ca887a9100481f8957095691f3e",
+            "name": "Animals",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 58
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e0053d4887a910048945e9f06a797907",
+            "name": "Mice and rats",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 34
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 89
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e22524b87de410048f91df092526b43e",
+            "name": "Cancer",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 42
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Editorial",
+            "editorial_subject": "Health",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cbb727a881d610048a29df092526b43e",
+            "name": "Alaska",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -150.00028,
+                    64.00028
+                ]
+            },
+            "relevance": 98,
+            "parentnames": [
+                "United States"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "cbb727a881d610048a29df092526b43e",
+            "name": "Alaska",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661850e07d5b100481f5c076b8e3055c",
+            "name": "Latin America and Caribbean",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "body_nitf": "<p>ANCHORAGE, Alaska (AP) \u2014 An elderly man has died from Alaskapox, the first known fatality from the recently discovered virus, state health officials said.</p><p>The man, who lived in the remote Kenai Peninsula, was hospitalized last November and died in late January, according to a <a href=\"https://epi.alaska.gov/bulletins/docs/b2024_02.pdf?utm_medium=email&utm_source=govdelivery\">bulletin</a> last week from Alaska public health officials.</p><p>The man was undergoing cancer treatment and had a suppressed immune system because of the drugs, which may have contributed to the severity of his illness, the bulletin said. It described him as elderly but didn't provide his age.</p><p>Alaskapox, also known as AKPV, is related to smallpox, cowpox and mpox, health officials said. Symptoms can include a rash, swollen lymph nodes and joint or muscle pain.</p><p>Only six other cases of the virus have been reported to Alaska health officials since the first one in 2015. All involved people were living in the Fairbanks area, more than 300 miles (483 kilometers) from the Kenai Peninsula, health officials said.</p><p>All had mild cases and recovered without being hospitalized.</p><p>The man who died \u201cresided alone in a forested area and reported no recent travel and no close contacts with recent travel, illness, or similar lesions,\u201d the health bulletin said.</p><p>It's unclear how AKPV is transmitted but researchers say it may be zoonotic, meaning it can jump from animals to humans. The bulletin said that tests found evidence of current or previous infection in several species of small mammals in the Fairbanks area, including red-backed voles, and at least one domestic pet.</p><p>The man said he had cared for a stray cat at his home, the bulletin said.</p><p>The cat tested negative for the virus but it \u201cregularly hunted small mammals and frequently scratched the patient,\u201d the bulletin said.</p><p>That opens the possibility that the cat had the virus on its claws when it scratched him. The bulletin said a \"notable\" scratch near the armpit area where the first symptom \u2014 a red lesion \u2014 was noted.</p><p>Health officials said there hasn't been any documented cases of humans passing on the virus but they recommended people with skin lesions possibly caused by Alaskapox to cover the affected area with a bandage.\u201d</p><p>Other suggestions are thoroughly washing hands, avoid sharing clothing that might have touched the lesions and to launder clothing and sheets separately from other household items.</p><p>Health authorities also urged Alaskans to follow federal health precautions when around wildlife to avoid potential Alaskapox infections.</p><p>The <a href=\"https://www.cdc.gov/healthypets/pets/wildlife.html#tabs-1-3\">U.S. Centers for Disease Control and Prevention</a> recommends washing hands with soap and water after contacting wild animals or their feces. Hunters should always wear gloves when handling dead animals, even if they are freshly killed, the agency suggests.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/first-alaskapox-death-c82266b99ef24d393a594fcba4e20d1e",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 5,
+            "reason": "The document discusses the first reported death from the Alaskapox virus, providing detailed information about the virus, its symptoms, transmission, and preventive measures. It includes statements from health officials and references to health bulletins and guidelines from the U.S. Centers for Disease Control and Prevention. The content is highly relevant to the topic of health as it addresses a public health issue, the characteristics of a virus, and recommendations for preventing infection."
+        }
+    }
+}

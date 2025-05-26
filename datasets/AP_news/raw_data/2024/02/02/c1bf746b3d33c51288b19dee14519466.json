@@ -1,0 +1,302 @@
+﻿{
+    "altids": {
+        "itemid": "c1bf746b3d33c51288b19dee14519466",
+        "etag": "c1bf746b3d33c51288b19dee14519466_1a9aza0c0",
+        "friendlykey": "175265073628",
+        "referenceid": "ML--Sudan"
+    },
+    "version": 1,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2024-02-02T18:59:05Z",
+    "firstcreated": "2024-02-02T18:43:21Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "ednote": "Eds: UPDATES: to add locator map. Updates Media.",
+    "editorialtypes": [
+        "Lead"
+    ],
+    "signals": [
+        "newscontent"
+    ],
+    "title": "ML--Sudan",
+    "headline": "UN food agency says it has reports of people dying from starvation amid the conflict in Sudan",
+    "headline_extended": "The U.N. food agency says it has received reports of people dying from starvation in Sudan, where raging fighting between rival generals is hampering the distribution of aid and food supplies to those most hungry",
+    "slugline": "AP-ML-Sudan, 1st Ld-Writethru",
+    "description_summary": "The U.N. food agency says it has received reports of people dying from starvation in Sudan, where raging fighting between rival generals is hampering the distribution of aid and food supplies to those most hungry. The 10 months of clashes between the Sudanese military, led by Gen. Abdel Fattah Burhan, and the Rapid Support Forces, a powerful paramilitary group commanded by Gen. Mohammed Hamdan Dagalo, has decimated vast swaths of the northeastern Africa country. The conflict erupted last April in the capital, Khartoum, and quickly spread to other areas of the country. World Food Program said that some 18 million people across Sudan currently face acute hunger, with the most desperate trapped behind the front lines of the conflict.",
+    "bylines": [
+        {
+            "by": "By JACK JEFFERY",
+            "title": "Associated Press"
+        }
+    ],
+    "located": "CAIRO",
+    "datelinelocation": {
+        "city": "Cairo",
+        "countrycode": "EGY",
+        "countryname": "Egypt",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                31.24967,
+                30.06263
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "sudan burhan dagalo conflict hunger"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "f",
+            "name": "f"
+        },
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "i",
+            "name": "i"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86aad5207dac100488ecba7fa5283c3e",
+            "name": "Politics",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 69
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "7cf243908830100481e9ae2ac3a6923e",
+            "name": "War and unrest",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 42
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "c8e409f8858510048872ff2260dd383e",
+            "name": "Business",
+            "creator": "Editorial",
+            "editorial_subject": "Business",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Editorial",
+            "editorial_subject": "Health",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "bb2d2c5f441a452cb24bb511a2ab5eea",
+            "name": "World news",
+            "creator": "Editorial",
+            "editorial_subject": "World news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "organisation": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "54fa9358892310048056fb7860a2fc03",
+            "name": "United Nations",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 31
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f68f78e635214d0b9f684de77c17f545",
+            "name": "Sudan government",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 88
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "4d1de3c07e37100488afdf092526b43e",
+            "name": "Khartoum",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b1004828dc076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "9d26a20b35f0484a891740f8189d4c7b",
+                "name": "City"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    32.53361,
+                    15.54665
+                ]
+            },
+            "relevance": 52,
+            "parentnames": [
+                "Sudan"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "661e48387d5b1004828dc076b8e3055c",
+            "name": "Sudan",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661850e07d5b100481f6c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "01f56e0e654841eca2e69bf2cbcc0526",
+                "name": "Nation"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    30,
+                    15
+                ]
+            },
+            "relevance": 78,
+            "parentnames": [
+                "Middle East"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "661812607d5b100481f1c076b8e3055c",
+            "name": "Africa",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "locationtype": {
+                "code": "976d112cd5c3497ea180aeecab922c6b",
+                "name": "Continent"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    21.09375,
+                    7.1881
+                ]
+            },
+            "relevance": 52
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "661850e07d5b100481f6c076b8e3055c",
+            "name": "Middle East",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661812607d5b100481f1c076b8e3055c",
+            "name": "Africa",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "associations": {
+        "1": {
+            "altids": {
+                "itemid": "bb787a93866f49e5afd8ec5ec4748b1e"
+            },
+            "type": "picture"
+        }
+    },
+    "body_nitf": "<p>CAIRO (AP) \u2014 The U.N. food agency said Friday it has received reports of people dying from starvation in Sudan, where raging <a href=\"https://apnews.com/article/sudan-war-military-rsf-burhan-dagalo-igad-4bc7a44bfb808d3b85be9d6921e4f856\">fighting between rival generals</a> is hampering the distribution of aid and food supplies to those most hungry.</p><p>The 10 months of clashes between the Sudanese military, led by Gen. Abdel Fattah Burhan, and the Rapid Support Forces, a powerful paramilitary group commanded by Gen. Mohammed Hamdan Dagalo, has decimated vast swaths of the northeastern Africa country.</p><p>The conflict erupted last April in the capital, Khartoum, and quickly spread to other areas of the country, after months of simmering tensions between the two forces.</p><p>World Food Program said that some 18 million people across Sudan currently face acute hunger, with the most desperate trapped behind the front lines of the conflict.</p><p>The hotspots include Khartoum, the western Darfur region, and the provinces of Kordofan and Gezira \u2014 areas where roadblocks, taxation demands and security threats endanger supplies.</p><p>\"Life-saving assistance is not reaching those who need it the most, and we are already receiving reports of people dying of starvation,\u201d said Eddie Rowe, WFP's director for Sudan.</p><p>The United Nations says at least 12,000 people have been killed in the conflict, although local doctors groups say the true toll is far higher. Over 10.7 million people have been displaced, according to the U.N. migration agency.</p><p>Dagalo's paramilitary forces appear to have had the upper hand in the conflict over the past three months, with their fighters advancing to the east and north across Sudan\u2019s central belt. Both sides have been <a href=\"https://apnews.com/article/un-icc-sudan-military-paramilitary-darfur-crimes-a782e1376ab91a2f7b9dcbd276d379f9\">accused of war crimes by rights groups</a>.</p><p>Regional partners in Africa have been trying to mediate an end the conflict, along with Saudi Arabia and the United States, which facilitated several rounds of unsuccessful, indirect talks between the warring parties. Burhan and Dagalo are yet to meet in person since the conflict began.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/sudan-burhan-dagalo-conflict-hunger-c1bf746b3d33c51288b19dee14519466",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 5,
+            "reason": "The document discusses the severe impact of the conflict in Sudan on food distribution and the resulting starvation, which directly affects the health of the population. It mentions acute hunger, people dying from starvation, and the inability to deliver life-saving assistance. These points are highly relevant to the topic of health as they address critical issues related to nutrition and mortality."
+        }
+    }
+}

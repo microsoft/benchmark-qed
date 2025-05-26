@@ -1,0 +1,243 @@
+﻿{
+    "altids": {
+        "itemid": "6db909167cff68718a49ed1865132d55",
+        "etag": "6db909167cff68718a49ed1865132d55_1a4aza0c0",
+        "friendlykey": "263692070326",
+        "referenceid": "EU--Italy-Virus-Investigation"
+    },
+    "version": 1,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2023-11-24T01:13:22Z",
+    "firstcreated": "2023-11-23T18:00:34Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "ednote": "Eds: EDITS: Fixes style on COVID-19.",
+    "editorialtypes": [
+        "Lead"
+    ],
+    "signals": [
+        "newscontent"
+    ],
+    "title": "EU--Italy-Virus-Investigation",
+    "headline": "Prosecutors ask to effectively close case against top Italian, WHO officials over COVID-19 response",
+    "headline_extended": "Rome prosecutors have asked a judge to archive an investigation into Italian and U.N. health officials over Italy\u2019s 2020 COVID-19 response",
+    "slugline": "BC-EU--Italy-Virus-Investigation, 1st Ld-Writethru",
+    "description_summary": "Rome prosecutors have asked a judge to archive an investigation into Italian and U.N. health officials over Italy\u2019s 2020 COVID-19 response. The request from Rome prosecutors essentially closes the investigation without any charges. The investigation had focused on whether delayed lockdowns and Italy's overall preparedness contributed to the toll. Already prosecutors had closed their case without filing charges against three of Italy\u2019s past health ministers. On Thursday, they asked a judge to archive the case against nine other officials, including a former top official at the World Health Organization, Dr. Ranieri Guerra.",
+    "located": "ROME",
+    "datelinelocation": {
+        "city": "Rome",
+        "countrycode": "ITA",
+        "countryname": "Italy",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                12.51133,
+                41.89193
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2023 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "italy covid pandemic investigation"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "i",
+            "name": "i"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "b17e2751b26d4523a2c99d79e04747ee",
+            "name": "COVID-19 pandemic",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 45
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86aad5207dac100488ecba7fa5283c3e",
+            "name": "Politics",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 62
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "190245e5bb61478b8771dd1f86cbf424",
+            "name": "Indictments",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 45
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "bb2d2c5f441a452cb24bb511a2ab5eea",
+            "name": "World news",
+            "creator": "Editorial",
+            "editorial_subject": "World news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Editorial",
+            "editorial_subject": "Health",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        }
+    ],
+    "organisation": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "54fa9358892310048056fb7860a2fc03",
+            "name": "United Nations",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 35
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "03a6f9d07efe100483e9df092526b43e",
+            "name": "Rome",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "662122b07d5b100482d7c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "9d26a20b35f0484a891740f8189d4c7b",
+                "name": "City"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    12.4839,
+                    41.89474
+                ]
+            },
+            "relevance": 70,
+            "parentnames": [
+                "Italy"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "662122b07d5b100482d7c076b8e3055c",
+            "name": "Italy",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661850e07d5b100481f4c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "01f56e0e654841eca2e69bf2cbcc0526",
+                "name": "Nation"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    12.833333,
+                    42.833333
+                ]
+            },
+            "relevance": 88,
+            "parentnames": [
+                "Europe"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "661850e07d5b100481f4c076b8e3055c",
+            "name": "Europe",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "body_nitf": "<p>ROME (AP) \u2014 Rome prosecutors asked a judge Thursday to effectively close an investigation into Italian and U.N. health officials over Italy\u2019s 2020 COVID-19 response without charges, on the grounds that no crimes were committed, a lawyer said.</p><p>Rome prosecutors Claudia Terracina and Paolo Ielo asked to archive the investigation that had grabbed headlines given Italy\u2019s huge toll as t <a href=\"https://apnews.com/article/pandemics-europe-italy-health-coronavirus-pandemic-f71955b0327aa9f7a0c2e44b9f485475\">he first epicenter of the pandemic in Europe.</a> While the judge can override the request, such a decision is highly unlikely.</p><p>Already prosecutors had closed their case without filing charges against three of Italy\u2019s past health ministers. On Thursday, they asked a judge to archive the case against nine other officials, including a former top official at the World Health Organization, Dr. Ranieri Guerra, said his lawyer Roberto De Vita.</p><p>The investigation initially focused on whether delayed lockdowns in the hard-hit northern city of Bergamo contributed to the toll, but expanded to include whether Italy\u2019s <a href=\"https://apnews.com/article/pandemics-health-rome-italy-coronavirus-pandemic-77aefd37fc1425f7ed6fbb0f763288f0\">overall preparedness going into the crisis played a role.</a></p><p>Included was controversy over a WHO report into Italy\u2019s response that was published by the U.N. health agency in May 2020 and then taken down a day later and never republished.</p><p>A former WHO official, Francesco Zambon, had suggested that <a href=\"https://apnews.com/article/technology-europe-italy-coronavirus-pandemic-united-nations-36170835a5c7ca888894022f31a38c85\">WHO spiked the report</a> to spare the Italian government criticism that its pandemic preparedness plan hadn\u2019t been updated. WHO said it was pulled because it contained inaccuracies and was published prematurely.</p><p>Guerra had been the former head of the department of prevention in the Italian health ministry until 2017 and was a WHO envoy to Italy during the pandemic. De Vita said prosecutors determined the pandemic plan was in the process of being updated.</p><p>He welcomed the decision to archive the case, saying it should have been closed two years ago as soon as Guerra provided documentation to prosecutors showing he had acted correctly.</p><p>In a statement, Guerra said his reputation had been \u201cgravely\u201d harmed by the controversy and lashed out at those who had accused him of not protecting Italy.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/italy-covid-pandemic-investigation-6db909167cff68718a49ed1865132d55",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 5,
+            "reason": "The document discusses the legal proceedings related to the COVID-19 response by Italian and WHO officials. It includes details about the investigation into Italy's preparedness and response to the pandemic, which are directly related to public health issues. The document also touches on the controversy surrounding a WHO report on Italy's pandemic preparedness. These aspects are highly relevant to the topic of health, particularly in the context of public health policy and crisis management."
+        }
+    }
+}

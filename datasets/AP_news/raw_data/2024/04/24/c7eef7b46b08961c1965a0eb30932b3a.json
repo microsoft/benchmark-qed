@@ -1,0 +1,204 @@
+﻿{
+    "altids": {
+        "itemid": "c7eef7b46b08961c1965a0eb30932b3a",
+        "etag": "c7eef7b46b08961c1965a0eb30932b3a_1a8aza0c0",
+        "friendlykey": "248760803868",
+        "referenceid": "US-MED--Bird Flu-Milk"
+    },
+    "version": 1,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2024-04-24T01:21:41Z",
+    "firstcreated": "2024-04-24T00:12:12Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "ednote": "Eds: UPDATES: Adds more background, comment from dairy industry.",
+    "editorialtypes": [
+        "Lead"
+    ],
+    "signals": [
+        "newscontent"
+    ],
+    "title": "US-MED--Bird Flu-Milk",
+    "headline": "Remnants of bird flu virus found in pasteurized milk, FDA says",
+    "headline_extended": "U.S. health officials say samples of pasteurized milk have tested positive for remnants of the bird flu virus that has infected dairy cows",
+    "slugline": "BC-US-MED--Bird Flu-Milk, 1st Ld-Writethru",
+    "description_summary": "U.S. health officials say samples of pasteurized milk have tested positive for remnants of the bird flu virus that has infected dairy cows. The Food and Drug Administration stressed Tuesday that the material is inactivated and that the findings \u201cdo not represent actual virus that may be a risk to consumers.\u201d Officials added that they\u2019re continuing to study the issue. FDA officials didn\u2019t indicate how many samples they tested or where they were obtained. The announcement comes nearly a month after an avian influenza virus that has sickened millions of wild and commercial birds was detected in U.S. dairy cows",
+    "bylines": [
+        {
+            "by": "By JONEL ALECCIA",
+            "title": "AP Health Writer"
+        }
+    ],
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "bird flu milk virus pasteurization"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "f",
+            "name": "f"
+        },
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "a",
+            "name": "a"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 79
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a08c0c7c1dc34b8198a8c200df2799ac",
+            "name": "Bird flu",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 91
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "c8e409f8858510048872ff2260dd383e",
+            "name": "Business",
+            "creator": "Editorial",
+            "editorial_subject": "Business",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Editorial",
+            "editorial_subject": "Health",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        }
+    ],
+    "organisation": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e5c917c88bcc1004803aeb438e258b03",
+            "name": "U.S. Food and Drug Administration",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 71
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "6e92d9b882c7100488e5df092526b43e",
+            "name": "Texas",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -99.25061,
+                    31.25044
+                ]
+            },
+            "relevance": 36,
+            "parentnames": [
+                "United States"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "661850e07d5b100481f5c076b8e3055c",
+            "name": "Latin America and Caribbean",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "associations": {
+        "1": {
+            "altids": {
+                "itemid": "591c1d161a784e649f35418828b4d869"
+            },
+            "type": "picture"
+        }
+    },
+    "body_nitf": "<p>The U.S. Food and Drug Administration said Tuesday that samples of pasteurized milk had tested positive for remnants of the bird flu virus that has <a href=\"https://apnews.com/article/bird-avian-flu-chickens-eggs-03793b5b1cb7429ce293e8577aef0358\">infected dairy cows</a>.</p><p>The agency stressed that the material is inactivated and that the findings \u201cdo not represent actual virus that may be a risk to consumers.\u201d Officials added that they're continuing to study the issue.</p><p>\u201cTo date, we have seen nothing that would change our assessment that the commercial milk supply is safe,\u201d the FDA said in a statement.</p><p><a href=\"https://www.fda.gov/food/alerts-advisories-safety-information/updates-highly-pathogenic-avian-influenza-hpai\">The announcement</a> comes nearly a month after an avian influenza virus that has sickened millions of wild and commercial birds in recent years was detected in dairy cows in at least eight states. The Agriculture Department says 33 herds have been affected to date.</p><p>FDA officials didn't indicate how many samples they tested or where they were obtained. The agency has been evaluating milk during processing and from grocery stores, officials said. Results of additional tests are expected in \u201cthe next few days to weeks.\u201d</p><p>The PCR lab test the FDA used would have detected viral genetic material even after live virus was killed by pasteurization, or heat treatment, said Lee-Ann Jaykus, an emeritus food microbiologist and virologist at North Carolina State University</p><p>\u201cThere is no evidence to date that this is infectious virus and the FDA is following up on that,\u201d Jaykus said.</p><p>Officials with the FDA and the USDA had previously said milk from affected cattle did not enter the commercial supply. Milk from sick animals is supposed to be diverted and destroyed. Federal regulations require milk that enters interstate commerce to be pasteurized.</p><p>Because the detection of the bird flu virus known as Type A H5N1 in dairy cattle is new and the situation is evolving, no studies on the effects of pasteurization on the virus have been completed, FDA officials said. But past research shows that pasteurization is \u201cvery likely\u201d to inactivate heat-sensitive viruses like H5N1, the agency added.</p><p>Matt Herrick, a spokesman for the International Dairy Foods Association, said that time and temperature regulations for pasteurization ensure that the commercial U.S. milk supply is safe. Remnants of the virus \u201chave zero impact on human health,\u201d he wrote in an email.</p><p>Scientists confirmed the H5N1 virus in dairy cows in March after weeks of reports that cows in Texas were suffering from a mysterious malady. The cows were lethargic and saw a dramatic reduction in milk production. Although the H5N1 virus is lethal to commercial poultry, most infected cattle seem to recover within two weeks, experts said.</p><p>To date, two people in U.S. have been infected with bird flu. <a href=\"https://apnews.com/article/bird-flu-texas-cows-355f1e288e72df8b81b0e2efd8b3ae2f\">A Texas dairy worker</a> who was in close contact with an infected cow recently developed a mild eye infection and has recovered. In 2022, a prison inmate in a work program <a href=\"https://apnews.com/article/business-health-environment-colorado-b98906e0a1899bb1f92da30a7b1dbe28\">caught it</a> while killing infected birds at a Colorado poultry farm. His only symptom was fatigue, and he recovered.</p><p>___</p><p>The Associated Press Health and Science Department receives support from the Howard Hughes Medical Institute\u2019s Science and Educational Media Group. The AP is solely responsible for all content.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/bird-flu-milk-virus-pasteurization-c7eef7b46b08961c1965a0eb30932b3a",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 5,
+            "reason": "The document discusses the detection of remnants of the bird flu virus in pasteurized milk, the safety of the commercial milk supply, and the implications for public health. It includes statements from the FDA, USDA, and experts on the potential risks and safety measures in place. This information is directly related to health concerns, particularly in the context of food safety and infectious diseases."
+        }
+    }
+}

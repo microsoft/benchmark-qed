@@ -1,0 +1,232 @@
+﻿{
+    "altids": {
+        "itemid": "8b190c5272ec096868679ed74f6bdeb1",
+        "etag": "8b190c5272ec096868679ed74f6bdeb1_0a4aza0c0",
+        "friendlykey": "786471681339",
+        "referenceid": "AS--Japan-LGBTQ"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2024-02-07T15:19:30Z",
+    "firstcreated": "2024-02-07T15:19:29Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "AS--Japan-LGBTQ",
+    "headline": "Japan court approves a transgender man's request for legal recognition without needing surgery",
+    "headline_extended": "A court in western Japan has approved a transgender man\u2019s request to have his gender changed in official records without undergoing sterilization surgery",
+    "slugline": "AP-AS--Japan-LGBTQ",
+    "description_summary": "A court in western Japan has approved a transgender man\u2019s request to have his gender changed in official records without undergoing sterilization surgery. It's the first known ruling of its kind since the country\u2019s top court struck down a surgery requirement for such record changes. The Okayama Family Court\u2019s Tsuyama Branch said on Wednesday that 50-year-old Tacaquito Usui could get the gender listed for him in his family registry updated. Usui first applied for the revision five years ago, but the request was rejected. Japan\u2019s Supreme Court ruled in October that a provision of a 20-year-old law that made the removal of reproductive organs a precondition for gender changes in official documents was unconstitutional.",
+    "bylines": [
+        {
+            "by": "By MARI YAMAGUCHI",
+            "title": "Associated Press"
+        }
+    ],
+    "located": "TOKYO",
+    "datelinelocation": {
+        "city": "Tokyo",
+        "countrycode": "JPN",
+        "countryname": "Japan",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                139.69171,
+                35.6895
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "Japan transgender change surgery requirement"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "i",
+            "name": "i"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "570831e088701004882deb2e0e616f0b",
+            "name": "Gender",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 43
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "838cac99285a42d69ac6ab7a8ed70377",
+            "name": "LGBTQ people",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 43
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86ba17607dac1004894eba7fa5283c3e",
+            "name": "Courts",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 91
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "468257dba1c848ca93ba314d4ce86539",
+            "name": "Surgery",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 78
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "bb2d2c5f441a452cb24bb511a2ab5eea",
+            "name": "World news",
+            "creator": "Editorial",
+            "editorial_subject": "World news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "7ab435e87ec110048cf8df092526b43e",
+            "name": "Tokyo",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661be2f07d5b10048250c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "9d26a20b35f0484a891740f8189d4c7b",
+                "name": "City"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    139.5813,
+                    35.61488
+                ]
+            },
+            "relevance": 32,
+            "parentnames": [
+                "Japan"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "661be2f07d5b10048250c076b8e3055c",
+            "name": "Japan",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661812607d5b100481f3c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "01f56e0e654841eca2e69bf2cbcc0526",
+                "name": "Nation"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    139.75309,
+                    35.68536
+                ]
+            },
+            "relevance": 68,
+            "parentnames": [
+                "Asia"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "661812607d5b100481f3c076b8e3055c",
+            "name": "Asia",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "body_nitf": "<p>TOKYO (AP) \u2014 A court in western Japan on Wednesday approved a transgender man's request to have his gender changed in official records without undergoing sterilization surgery, the first known ruling of its kind since the country's top court <a href=\"https://apnews.com/article/japan-lgbtq-transgender-ruling-gender-change-decdbdca9c8dd3658ae86b63ec40c53d\">struck down a surgery requirement</a> for such record changes.</p><p>The Okayama Family Court\u2019s Tsuyama Branch said Tacaquito Usui, 50, could get the gender listed for him in his family registry updated to male. Usui original application for the revision was rejected five years ago.</p><p>\u201cIt's like I'm standing at the start line of my new life,\u201d he said during a televised news conference after Wednesday's ruling came out. \u201cI'm so excited.\u201d</p><p>Japan's Supreme Court ruled in October that a provision of a 20-year-old law that made the removal of reproductive organs a precondition for the legal recognition of gender changes was unconstitutional. The ruling, however, only applied to the sterilization provision and did not address the constitutionality of requiring other procedures.</p><p>The Okayama court found that the hormone therapy Usui received made him eligible for gender affirmation. Usui welcomed the recognition, saying he thinks the law in Japan might be evolving faster than the public awareness.</p><p>Many LGBTQ+ people in Japan still hide their sexual orientations and gender identities due to fear of discrimination at work and schools. The country remains the only Group of Seven member that does not allow same-sex marriages.</p><p>Activists have pressed for greater rights and protections. But change has come slowly in a country of conformity with a conservative government that sticks to traditional paternalistic values and is reluctant to accept gender, sexual and family diversity,</p><p>The law that the Supreme Court addressed in its ruling took effect in 2004. It stated that individuals who wanted to register a gender change needed to have reproductive organs, including testes or ovaries, removed. They also were required to have a body that \u201cappears to have parts that resemble the genital organs\u201d of their expressed gender.</p><p>More than 10,000 Japanese have since had their genders officially changed, according to court documents from <a href=\"https://apnews.com/article/japan-court-ruling-transgender-surgery-unconstitutional-94ded50a02d0f8f0a65992e7c7314aed\">another court case</a>. A court in central Japan noted in last year's case that sterilization surgery was not required in most of the approximately 50 European and central Asian countries that have laws that allow gender changes on official documents.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/japan-transgender-change-surgery-requirement-8b190c5272ec096868679ed74f6bdeb1",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 3,
+            "reason": "The document primarily discusses a legal ruling in Japan regarding the recognition of a transgender man's gender without requiring surgery. While it touches on aspects of health, such as hormone therapy and the implications of sterilization surgery, the main focus is on legal and social issues rather than health itself. Therefore, it is somewhat relevant to the topic of health but not highly focused on it."
+        }
+    }
+}

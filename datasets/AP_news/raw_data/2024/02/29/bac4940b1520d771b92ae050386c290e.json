@@ -1,0 +1,241 @@
+﻿{
+    "altids": {
+        "itemid": "bac4940b1520d771b92ae050386c290e",
+        "etag": "bac4940b1520d771b92ae050386c290e_0a16aza0c0",
+        "friendlykey": "318074843109",
+        "referenceid": "US--WeightWatchers-Oprah"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2024-02-29T17:13:29Z",
+    "firstcreated": "2024-02-29T17:13:29Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "ednote": "Eds: UPDATES: Updates Media.",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "US--WeightWatchers-Oprah",
+    "headline": "Winfrey leaving WeightWatchers board, donating all of her interest in the company to a museum",
+    "headline_extended": "Former talk show host Oprah Winfrey is leaving WeightWatchers board of directors and donating all of her interest in the company to a museum",
+    "slugline": "BC-US--WeightWatchers-Oprah",
+    "description_summary": "Former talk show host Oprah Winfrey is leaving WeightWatchers board of directors and donating all of her interest in the company to a museum. Shares of WW International Inc. tumbled more than 23% in Thursday morning trading. Winfrey, who told People magazine in December that she was using a weight-loss medication, has served on the company\u2019s board since 2015. She will not stand for re-election at WeightWatchers annual meeting in May.",
+    "bylines": [
+        {
+            "by": "By MICHELLE CHAPMAN",
+            "title": "AP Business Writer"
+        }
+    ],
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "WeightWatchers Oprah"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "person": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "246cb8abcc614646a437e1b00ab56298",
+            "name": "Oprah Winfrey",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "TV_PERSONALITY",
+                "ENTERTAINMENT_FIGURE",
+                "PERSON"
+            ],
+            "relevance": 51
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "f",
+            "name": "f"
+        },
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "e",
+            "name": "e"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "9c750296cbfa4fdd89e9a32848825b29",
+            "name": "Prescription drugs",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 43
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a2ba8398898a100488b2d56c852d093e",
+            "name": "Weight management",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 66
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "c8e409f8858510048872ff2260dd383e",
+            "name": "Business",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 89
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "16cb0ba3e6d24d97ace39f5a1924669a",
+            "name": "Entertainment",
+            "creator": "Editorial",
+            "editorial_subject": "Entertainment",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "c8e409f8858510048872ff2260dd383e",
+            "name": "Business",
+            "creator": "Editorial",
+            "editorial_subject": "Business",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        }
+    ],
+    "organisation": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "b11a3da9f2a54e14863104d3d66bbe25",
+            "name": "Weight Watchers International Inc",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "industries": [
+                {
+                    "code": "02c8de008b301004867cbd945080b03e",
+                    "name": "Professional services"
+                }
+            ],
+            "symbols": [
+                {
+                    "ticker": "WW",
+                    "exchange": "NASDAQ",
+                    "instrument": "NASDAQ:WW"
+                }
+            ],
+            "relevance": 90
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "b58f18a082c6100487fbdf092526b43e",
+            "name": "New York",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -75.4999,
+                    43.00035
+                ]
+            },
+            "relevance": 42,
+            "parentnames": [
+                "United States"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "661850e07d5b100481f5c076b8e3055c",
+            "name": "Latin America and Caribbean",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "associations": {
+        "1": {
+            "altids": {
+                "itemid": "8ccad238035b4896a5488b4399d621d4"
+            },
+            "type": "picture"
+        }
+    },
+    "body_nitf": "<p>Former talk show host Oprah Winfrey is leaving WeightWatchers board of directors and donating all of her interest in the company to a museum.</p><p>Shares of <a href=\"https://apnews.com/634335d95ce34be69737b29cfabe70d9\">WW International</a> Inc. tumbled more than 23% in Thursday morning trading.</p><p>Winfrey, who told People magazine in December that she was using a weight-loss medication, has served on the company's board since 2015. She will not stand for re-election at WeightWatchers annual meeting in May.</p><p>WW International said in a regulatory filing that Winfrey's decision \u201cwas not the result of any disagreement with the company on any matter relating to the company\u2019s operations, policies or practices.\u201d The size of its board will go from 10 to nine members following its annual meeting, the New York company added.</p><p>\u201cI look forward to continuing to advise and collaborate with WeightWatchers and CEO Sima Sistani in elevating the conversation around recognizing obesity as a chronic condition, working to reduce stigma, and advocating for health equity,\u201d <a href=\"https://apnews.com/celebrity-0379945b7b964a928cd5cf9b034b6c86\">Winfrey</a> said.</p><p>According to FactSet, Winfrey's stake of about 1.1 million shares made her the company's largest individual shareholder, with a stake of 1.43%.</p><p>Winfrey said that she will donate her interest in WeightWatchers to the National Museum of African American History and Culture, part of the Smithsonian Institution in Washington. The company said that it supports Winfrey's decision to donate all of her stake to the museum during WeightWatchers upcoming trading window in March.</p><p>\u201cMs. Winfrey is making the donation to support the NMAAHC\u2019s goal to promote and highlight the contributions of African Americans and to eliminate any perceived conflict of interest around her taking weight loss medications,\u201d the company said. \u201cIn addition, Ms. Winfrey intends to donate the proceeds from any future exercises of her WW stock options to NMAAHC.\u201d</p><p>Nearly a year ago, WeightWatchers said it too was getting into the <a href=\"https://apnews.com/article/weightwatchers-obesity-drugs-sequence-buyout-5e6629433b9beb10ffeaf1cd50a1512f\">prescription drug weight loss business</a> with a $106 million deal to buy Sequence, a telehealth provider with annual revenue of about $25 million and about 24,000 members.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/weightwatchers-oprah-bac4940b1520d771b92ae050386c290e",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 3,
+            "reason": "The document primarily focuses on Oprah Winfrey's departure from the WeightWatchers board and her donation of her interest in the company to a museum. While there are some mentions of health-related topics, such as Winfrey using a weight-loss medication and WeightWatchers' involvement in the prescription drug weight loss business, the main focus is on corporate and philanthropic actions rather than health itself. Therefore, the document is only somewhat relevant to the topic of health."
+        }
+    }
+}

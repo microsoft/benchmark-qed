@@ -1,0 +1,231 @@
+﻿{
+    "altids": {
+        "itemid": "2b3babf56ffaa748fe7a8a82f7ca8f47",
+        "etag": "2b3babf56ffaa748fe7a8a82f7ca8f47_0a2aza0c0",
+        "friendlykey": "385381951442",
+        "referenceid": "SC--Editorial Rdp"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Opinion",
+    "language": "en",
+    "versioncreated": "2024-01-25T12:10:40Z",
+    "firstcreated": "2024-01-24T18:55:57Z",
+    "editorialrole": "FullStory",
+    "fixture": {
+        "code": "21ea4067bb274c3b805353fb2b99ba70",
+        "name": "Editorial Roundup"
+    },
+    "pubstatus": "usable",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "SC--Editorial Rdp",
+    "headline": "Editorial Roundup: South Carolina",
+    "slugline": "AP-SC--Editorial Rdp",
+    "bylines": [
+        {
+            "by": "By The Associated Press"
+        }
+    ],
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "Editorial Rdp"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "person": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f693073df0e5421cbd7ffa11489cc2fc",
+            "name": "Thomas Davis",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "POLITICIAN",
+                "PERSON"
+            ],
+            "relevance": 44
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "5c7eb71792d41e43af78264dd43dc9eb",
+            "name": "Brad Hutto",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "POLITICIAN",
+                "PERSON"
+            ],
+            "associatedstates": [
+                {
+                    "code": "29d11ec082c7100488aedf092526b43e",
+                    "name": "South Carolina"
+                }
+            ],
+            "relevance": 58
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "60a31c1888f91004804d8503ef5018bd",
+            "name": "Financial markets",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 46
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "6cd98adfc84d405eadec8ca81bd37df4",
+            "name": "Access to health care",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 46
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "1b29d45f8e8e4c008e8a58fe6f92a753",
+            "name": "Government programs",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 65
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "c8e409f8858510048872ff2260dd383e",
+            "name": "Business",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 60
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "organisation": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "565160fec6fe4e58b2835ce813b126f0",
+            "name": "South Carolina state government",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 54
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "29d11ec082c7100488aedf092526b43e",
+            "name": "South Carolina",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -81.00009,
+                    34.00043
+                ]
+            },
+            "relevance": 82,
+            "parentnames": [
+                "United States"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "29d11ec082c7100488aedf092526b43e",
+            "name": "South Carolina",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "body_nitf": "<p>Index-Journal. January 18, 2024.</p><p>Editorial: Hutto proposal has appeal, but needs vetting</p><p>State Sen. Brad Hutto has an interesting proposal, one he made a couple of years ago too, as a means of luring medical doctors into the Palmetto State\u2019s rural areas. Cover a portion of the doctors\u2019 medical school bills.</p><p>The concept is nothing new, really. Rural school districts have floated dollar incentives to lure good teachers to areas where they might not otherwise go. People can have their higher education in military schools covered in exchange for years of military service.</p><p>Hutto proposes paying up to $30,000 of a student\u2019s medical school bills, beginning in their final year of clinical studies, with the caveat that the student commit to working full time for two years in rural areas or with underserved patients in urban areas. If they work in the community less than 36 hours a week, they would be required to commit to four years there.</p><p>Certainly the proposal has an appeal, one that frankly is be more appealing than a federal plan that wipes out student loan debt with few, if any, caveats. The big question, however, is where will the money come from to support such a move? We know the answer. Our tax dollars. So, can it be done without raising taxes on the people?</p><p>Would the return on investment be worthwhile? At least the doctors would have skin in the game as opposed to a free ride.</p><p>Hutto\u2019s proposal has some rationale to support it. Before it\u2019s given a \u201cyes\u201d vote, however, the details need to be worked out. There needs to be transparency in how the state will foot the bill, what impact it would have on other existing state budget expense columns and clear enforceable accountability guidelines to prevent doctors from reneging on the obligation.</p><p>___</p><p>Post and Courier. January 20, 2024.</p><p>Editorial: SC lenders blocked ban on 300% interest. So let\u2019s just ban predatory marketing.</p><p>There\u2019s a whole industry out there that makes a living by taking advantage of people who are desperate or unsophisticated or both, luring them into what look like easy loans that trap them in a cycle of perpetual debt because they have to keep taking out new loans, with added fees, to pay off the old ones.</p><p>In South Carolina, we have more than our fair share of such people, who find themselves unable to pay for unexpected car repairs or roof repairs or medical bills and assume that their only option is a payday lender or title lender or what\u2019s called an installment lender \u2014 an assumption that often is tragically incorrect.</p><p>So it\u2019s no surprise that we have more than our fair share of people who are struggling under the burden of loans they couldn\u2019t afford to repay in the first place and certainly can\u2019t afford once each new round of fees is added. The <a href=\"https://scdailygazette.com/2024/01/10/sc-senator-wants-to-stop-payday-lenders-from-marketing-to-poor-communities/\">South Carolina Daily Gazette</a>, an online news organization affiliated with the nonprofit States Newsroom, reports that South Carolinians had $2.8 billion in high-interest loan debt in 2022, with $650 million of that two months past due; an estimated 400,000 South Carolinians are struggling to repay these loans.</p><p>It\u2019s hard to get a handle on precisely how many states restrict a particular type of predatory loan, but it\u2019s clear that South Carolina coddles these lenders more than most other states, which have stricter regulations. Georgia and North Carolina, for instance, have banned payday lending.</p><p>South Carolina did put some restrictions on payday lenders back in 2009, but those businesses are still thriving, as is the industry as a whole, thanks not only to high interest rates but also to predatory lending practices.</p><p>For years now, religious leaders and other advocates for the poor have joined with credit unions to try to convince the Legislature to cap the annualized rate of interest on non-conventional loans at 36% \u2014 the amount the federal government caps loans to members of our armed services. And for years, the lenders have fought off those efforts.</p><p>This year, Sen. Tom Davis has joined the effort and brought <a href=\"https://www.southcarolinapublicradio.org/sc-news/2024-01-10/south-carolina-lawmakers-are-considering-whether-nonbank-lenders-are-violating-fair-trade-laws\">a new approach</a>: Instead of limiting interest rates \u2014 which a lot of people believe isn\u2019t the government\u2019s business \u2014 <a href=\"https://www.scstatehouse.gov/sess125_2023-2024/bills/910.htm\">his S.910</a> would outlaw predatory practices. Among the most egregious is sending what are called \u201ccourtesy\u201d or live checks to consumers in hopes that they\u2019ll cash them and in so doing lock themselves into a loan with a triple-digit interest rate.</p><p>If the check-mailing scheme sounds familiar, it\u2019s because <a href=\"https://www.postandcourier.com/opinion/editorials/editorial-accident-victims-shouldnt-be-victimized-again-with-sc-court-blessing/article_53883f44-d973-11ed-b631-e7e91ce9859e.html\">shady financial companies</a> have been doing that to trick people who have suffered traumatic brain injuries and other particularly vulnerable people into trading millions of dollars in future payments from personal injury lawsuits for a few thousand dollars; the Legislature outlawed that practice last year.</p><p>Sen. Davis\u2019 bill also would outlaw making a loan without first conducting an analysis of the borrower\u2019s ability to repay it, making a loan that the analysis shows the borrower doesn\u2019t have the ability to pay off, flipping some types of loans and flipping others beyond a limited number of times.</p><p>There are provisions in the bill that free-market advocates legitimately object to \u2014 notably a provision that would outlaw marketing to low-income communities. That\u2019s not the case for most of the provisions.</p><p>Although a lot of legislators object on principle to laws designed to protect people from themselves \u2014 at least when it comes to financial matters \u2014 we already have laws in place to protect people with regular paychecks who use traditional financial institutions. This would extend those protections to institutions that market to people who can\u2019t imagine they could get a loan from traditional institutions.</p><p>And by providing a little consumer protection to some of our most vulnerable neighbors, the Legislature could reduce the chance that they\u2019d get suckered into an unending cycle of debt that drives them further into poverty and the need for public assistance.</p><p>___</p><p>Times and Democrat. January 20, 2024.</p><p>Editorial: Trafficking in humans is threat here too</p><p>The flood of people crossing the southern U.S. border will have a far-reaching impact on the country. Not the least of the problems is the criminal element involved in smuggling people.</p><p>Make no mistake, however, human trafficking is a nationally problem even if border issues are resolved today.</p><p>How bad is it in the United States?</p><p>The National Human Trafficking Hotline and others estimate that between 15,000 and 50,000 women and children are forced into sexual slavery in the United States every year. Of the more than 365,000 missing children in the country each year, 30% are being trafficked.</p><p>South Carolina and Orangeburg are not immune.</p><p>State Attorney General Alan Wilson, chair of the South Carolina Human Trafficking Task Force, recently released an annual report detailing the magnitude of human trafficking here.</p><p>In 2023, the South Carolina Law Enforcement Division reported opening 357 cases that included nearly 500 potential victims, most of those minors being sex trafficked. SLED\u2019s data also showed that human trafficking cases were opened in 40 counties, with only six not reporting any cases.</p><p>The counties with the most cases in 2023 are Richland (43), Greenville (34), Horry and Aiken (24 each), Berkeley (23), Charleston, Spartanburg, and Lexington (21 each), Dorchester (18), and York (13).</p><p>The National Human Trafficking Hotline data show that two counties tied for the most incidents reported to the hotline. Greenville and Horry ranked number one, Charleston County was second, followed by Richland and Spartanburg tied for third. Aiken ranked fourth.</p><p>Orangeburg and Lexington counties tied for fifth place.</p><p>\u201cHuman trafficking continues to grow in South Carolina, just as it does around the country and the world. Last year, we saw an increase in the number of victims. That shows that we need to continue our work and do everything we can to raise awareness of this crime so the public can know what to look for and report what they see,\u201d Wilson said.</p><p>Of note, Wilson and the task force announced the launch of TravelWatchSC during this National Human Trafficking Awareness Month. The campaign has begun at three major airports: Columbia Metropolitan Airport, Greenville-Spartanburg International Airport and Myrtle Beach International Airport.</p><p>The airports began running digital signs featuring the National Human Trafficking Hotline contact information. Each location will also share hotline posters and stickers as well as educational brochures that include information about regional task forces.</p><p>Awareness of the trafficking threat \u2013 especially affecting children \u2013 is vital.</p><p>In Wilson\u2019s words, \u201cHuman trafficking happens in our back yards. Most of the time, it\u2019s not far off in exotic places, but in our local communities. Raising awareness is critical to fighting human trafficking.\u201d</p><p>END</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/2b3babf56ffaa748fe7a8a82f7ca8f47",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 3,
+            "reason": "The document contains three editorials, two of which are somewhat related to health. The first editorial discusses a proposal to incentivize medical doctors to work in rural areas by covering a portion of their medical school bills, which is directly related to healthcare access and workforce distribution. The second editorial addresses predatory lending practices, which can indirectly affect health by impacting financial stability and stress levels but is not primarily focused on health. The third editorial discusses human trafficking, which, while a serious issue, is not directly related to health. Overall, the document has some relevance to health but also includes significant content on unrelated topics."
+        }
+    }
+}

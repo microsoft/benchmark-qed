@@ -1,0 +1,235 @@
+﻿{
+    "altids": {
+        "itemid": "d0909e4cd5df41e9d508a6d93dc54c98",
+        "etag": "d0909e4cd5df41e9d508a6d93dc54c98_2a6aza0c0",
+        "friendlykey": "198528305547",
+        "referenceid": "US--Winter Weather-Memphis Water"
+    },
+    "version": 2,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2024-01-23T23:21:23Z",
+    "firstcreated": "2024-01-23T21:01:02Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "ednote": "Eds: UPDATES: Updates weather-related fatalities. Minor edits.",
+    "editorialtypes": [
+        "Lead"
+    ],
+    "signals": [
+        "newscontent"
+    ],
+    "title": "US--Winter Weather-Memphis Water",
+    "headline": "Memphis utility lifts boil-water advisory after 5 days following deep freeze that burst pipes",
+    "headline_extended": "Memphis\u2019 water company has lifted a boil-water advisory for more than 600,000 people that was in place for five days due to freezing temperatures that caused pipes to break throughout the southern city",
+    "slugline": "AP-US--Winter Weather-Memphis Water, 2nd Ld-Writethru",
+    "description_summary": "Memphis\u2019 water company has lifted a boil-water advisory for more than 600,000 people that was in place for five days due to freezing temperatures that caused pipes to break throughout the southern city. Memphis Light, Gas and Water issued the notice on Friday after snowfall and sub-freezing temperatures caused pipes in homes and water mains to burst, leading to low water pressure that could allow harmful bacteria to contaminate the water supply. Residents were asked to boil water for three minutes before drinking it or using it to brush their teeth and prepare food. It was the third time in the last three years that a winter storm prompted a boil-water advisory.",
+    "bylines": [
+        {
+            "by": "By ADRIAN SAINZ",
+            "title": "Associated Press"
+        }
+    ],
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "winter weather freezing temperatures Memphis water"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "a",
+            "name": "a"
+        },
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "15a6f6325374234b9a7329631b4a5e07",
+            "name": "Utilities",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 57
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a3873a7c19cf4f4fbe88bafef8990d8a",
+            "name": "Winter weather",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 76
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "5fc806a87df7100483ebdf092526b43e",
+            "name": "Weather",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 37
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Editorial",
+            "editorial_subject": "Health",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "68e7964882c7100488dfdf092526b43e",
+            "name": "Memphis",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "62532b5882c7100488cedf092526b43e"
+            ],
+            "locationtype": {
+                "code": "9d26a20b35f0484a891740f8189d4c7b",
+                "name": "City"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -90.04898,
+                    35.14953
+                ]
+            },
+            "relevance": 95,
+            "parentnames": [
+                "Tennessee"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "661850e07d5b100481f5c076b8e3055c",
+            "name": "Latin America and Caribbean",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "62532b5882c7100488cedf092526b43e",
+            "name": "Tennessee",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "associations": {
+        "1": {
+            "altids": {
+                "itemid": "883fa55f02004a02b666bd5817942e88"
+            },
+            "type": "picture"
+        },
+        "2": {
+            "altids": {
+                "itemid": "a8ce28c979e842ec9171d1a16bb277e7"
+            },
+            "type": "picture"
+        },
+        "3": {
+            "altids": {
+                "itemid": "30517c8c021f4b36b4b429b9fc082c15"
+            },
+            "type": "video"
+        }
+    },
+    "body_nitf": "<p>Memphis' water company lifted <a href=\"https://apnews.com/article/winter-weather-freezing-temperatures-cold-421dbc91409af283eaff2a673bcfae20\">a boil-water advisory</a> for more than 600,000 people Tuesday that was in place for five days due to freezing temperatures that caused pipes to break throughout the southern city.</p><p>Memphis Light, Gas and Water said water quality tests have met state and federal standards, and home and business customers no longer will be asked to boil water for three minutes before drinking it or using it to brush their teeth and prepare food.</p><p>The utility issued the notice on Friday after snowfall and sub-freezing temperatures caused pipes in homes and water mains to burst, leading to low water pressure that could have allowed harmful bacteria to contaminate the water supply.</p><p>It was the third time in the last three years that a winter storm prompted a boil-water advisory.</p><p>Memphis was the largest, but not the only, water system in Tennessee to experience problems from the unusually cold weather, which has caused dozens of deaths around the U.S. this month, many <a href=\"https://apnews.com/article/winter-weather-hypothermia-black-ice-dddee43bda5a30bfb40513f0ce05358c\">involving hypothermia or road accidents</a>. The Tennessee Department of Health reported 36 weather-related fatalities across the state as of Tuesday.</p><p>More than two dozen water systems were under boil water notices and 19 counties were reporting operational issues with their water utilities, the Tennessee Emergency Management Agency has said.</p><p>Water infrastructure in the South is not built for heavy snow, large ice accumulations and days of subfreezing temperatures, said Sarah Houston, executive director of Protect Our Aquifer.</p><p>\u201cOur water lines are not buried beneath the frost line. They\u2019re not insulated. And, they\u2019re old,\u201d she said. \u201cIf we had building codes like up North, they bury the lines deeper. Everyone\u2019s plumbing is in the center of the house. Everything is insulated.\u201d</p><p>Meanwhile, in rural Tipton County east of Memphis, residents of the town of Mason still had no running water on Tuesday after losing the service last week. The town's fire department said there was no timetable for water restoration.</p><p>Annie Christmas Cocke, a 36-year-old real estate agent, lives in Mason with her husband, two young sons, their dog Cricket and a collection of goats and horses. They lost all water service on Jan. 16.</p><p>Cocke and her family had stockpiled gallons of water because Mason, northeast of Memphis, has lost water service in the past, and she wanted to be ready. She has also traveled to the homes of family and friends who have water, to fill up containers.</p><p>\u201cIt\u2019s been very difficult,\u201d she said. \u201cDue to the snow, no stores had water either. Luckily, I was prepared, but I didn\u2019t know it was going to be this ... It\u2019s been a mess.\u201d</p><p>Mason has had a history of financial mismanagement, including <a href=\"https://apnews.com/article/mason-financial-takeover-ford-32e6ab3a03526e4e2f7d884fb7e6f195\">charges of official misconduct</a> against former city leaders, Cocke noted.</p><p>\u201cThis is due to years and years of misuse of funds and not using our tax dollars to do the necessary maintenance and improvements,\u201d she said.</p><p>Justin Hanson served two terms as mayor of the Tipton County city of Covington, from 2014 to 2022. Covington has not been placed under a boil water advisory, so he has let Cocke come to his house to refill water containers.</p><p>Hanson said leaders of rural governments must prioritize investment in infrastructure. State funds can be accessed to help with infrastructure maintenance, with a minimal local match, he said.</p><p>Generally, infrastructure problems don\u2019t develop overnight, and they can\u2019t be fixed overnight, Hanson said.</p><p>\u201cYou either pay now and make the investment now, and stay ahead of any looming problems, or you pay a lot more later in repair,\u201d Hanson said.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/winter-weather-freezing-temperatures-memphis-water-d0909e4cd5df41e9d508a6d93dc54c98",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 4,
+            "reason": "The document discusses a boil-water advisory in Memphis due to freezing temperatures that caused pipes to burst, leading to potential contamination of the water supply. It mentions the health implications of low water pressure allowing harmful bacteria to enter the water system, which directly relates to public health concerns. Additionally, it touches on the broader impact of the cold weather on water systems and the importance of infrastructure in maintaining safe water, which also has health implications. However, the document also includes details about infrastructure and financial mismanagement, which are less directly related to health."
+        }
+    }
+}

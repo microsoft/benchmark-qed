@@ -1,0 +1,403 @@
+﻿{
+    "altids": {
+        "itemid": "a4c4979fb71070daa1fde2038aa41f2b",
+        "etag": "a4c4979fb71070daa1fde2038aa41f2b_7a10aza0c0",
+        "friendlykey": "728654478115",
+        "referenceid": "US--Election 2024-Harris"
+    },
+    "version": 7,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2024-03-14T21:05:20Z",
+    "firstcreated": "2024-03-14T02:40:14Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "ednote": "Eds: UPDATES: Adds new details on clinic visit and adds subsequent campaign event. New hed",
+    "editorialtypes": [
+        "Lead"
+    ],
+    "signals": [
+        "newscontent"
+    ],
+    "title": "US--Election 2024-Harris",
+    "headline": "In a first, Vice President Harris visits Minnesota abortion clinic to blast \u2018immoral\u2019 restrictions",
+    "headline_extended": "Vice President Kamala Harris has toured a Minnesota Planned Parenthood clinic that performs abortions and provides other reproductive care",
+    "slugline": "AP-US--Election 2024-Harris, 7th Ld-Writethru",
+    "description_summary": "Vice President Kamala Harris has toured a Minnesota Planned Parenthood clinic that performs abortions and provides other reproductive care. Harris' office says it's the first time a president or vice president has been to a reproductive health clinic. Thursday's visit is part of Harris' election year focus on the rollback of abortion rights across the United States. Democrats hope the issue will spur voters to reelect President Joe Biden. Harris began a nationwide tour in January to draw attention to the fallout after the Supreme Court overturned its landmark ruling that legalized abortion nationwide. At a campaign event in St. Paul, Harris blamed Donald Trump for a health care crisis caused by abortion restrictions.",
+    "bylines": [
+        {
+            "by": "By DARLENE SUPERVILLE",
+            "title": "Associated Press"
+        }
+    ],
+    "located": "ST. PAUL, Minn.",
+    "datelinelocation": {
+        "city": "St. Paul",
+        "countryareacode": "MN",
+        "countryareaname": "Minnesota",
+        "countrycode": "USA",
+        "countryname": "United States",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                -93.09327,
+                44.94441
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "Harris abortion Minnesota women election"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "person": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a6331b54c46e4ca8b79fa40fada95db5",
+            "name": "Donald Trump",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "POLITICIAN",
+                "PERSON"
+            ],
+            "relevance": 56
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "42fcd5108d2610048a34f7ae5e3ffd3e",
+            "name": "Joe Biden",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "POLITICIAN",
+                "PERSON"
+            ],
+            "relevance": 60
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "b0cf739893af4834b3f59261552eb440",
+            "name": "Kamala Harris",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "POLITICIAN",
+                "PERSON"
+            ],
+            "relevance": 83
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "a",
+            "name": "a"
+        },
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "p",
+            "name": "p"
+        },
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86aad5207dac100488ecba7fa5283c3e",
+            "name": "Politics",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 77
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e22e35087de410048fc2df092526b43e",
+            "name": "Abortion",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 85
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86aee4307dac10048901ba7fa5283c3e",
+            "name": "Elections",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 55
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "24e61d6d4e654ae6bda1f1558c8cc1f3",
+            "name": "2024 United States presidential election",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 70
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "abfca78268874726966cdad8c35c4ae3",
+            "name": "Washington news",
+            "creator": "Editorial",
+            "editorial_subject": "Washington news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Editorial",
+            "editorial_subject": "Health",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86aad5207dac100488ecba7fa5283c3e",
+            "name": "Politics",
+            "creator": "Editorial",
+            "editorial_subject": "Politics",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        }
+    ],
+    "organisation": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "efa933c0892110048d92fb7860a2fc03",
+            "name": "Supreme Court of the United States",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 38
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "898f52e08921100480efba0a2b2ca13e",
+            "name": "United States government",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 51
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "9511d139da5646cfb0fbcce4d2ee1bad",
+            "name": "Planned Parenthood",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 38
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "9f12355082c4100486addf092526b43e",
+            "name": "Minnesota",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -94.25055,
+                    46.25024
+                ]
+            },
+            "relevance": 95,
+            "parentnames": [
+                "United States"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "661850e07d5b100481f5c076b8e3055c",
+            "name": "Latin America and Caribbean",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "9f12355082c4100486addf092526b43e",
+            "name": "Minnesota",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "associations": {
+        "1": {
+            "altids": {
+                "itemid": "270d75956c0d454bba2e29774e741272"
+            },
+            "type": "audio"
+        },
+        "2": {
+            "altids": {
+                "itemid": "a1209b9218c54fbaae382865f56b5a07"
+            },
+            "type": "audio"
+        },
+        "3": {
+            "altids": {
+                "itemid": "8ea91b32b1914f1496c294bd583bd6cd"
+            },
+            "type": "video"
+        },
+        "4": {
+            "altids": {
+                "itemid": "75f96c44cca6461e8351c300fbd41b48"
+            },
+            "type": "picture"
+        },
+        "5": {
+            "altids": {
+                "itemid": "7f1b02295df442b2a221a199db1540fe"
+            },
+            "type": "picture"
+        },
+        "6": {
+            "altids": {
+                "itemid": "ed26714fc15141ea9c54dfc8000bc999"
+            },
+            "type": "picture"
+        },
+        "7": {
+            "altids": {
+                "itemid": "66de57c2bf1444b989faa2c4ca4c3349"
+            },
+            "type": "picture"
+        },
+        "8": {
+            "altids": {
+                "itemid": "e9242183bac948789e7742711024f60c"
+            },
+            "type": "picture"
+        },
+        "9": {
+            "altids": {
+                "itemid": "07fc31ec90a24d9e9994caa0000163aa"
+            },
+            "type": "picture"
+        },
+        "10": {
+            "altids": {
+                "itemid": "54464cd54fdf4e02b29a9f6e1600445b"
+            },
+            "type": "picture"
+        },
+        "11": {
+            "altids": {
+                "itemid": "e6f0878d36ff4a9cbac2a4ac477122fd"
+            },
+            "type": "picture"
+        }
+    },
+    "body_nitf": "<p>ST. PAUL, Minn. (AP) \u2014 Vice President <a href=\"https://apnews.com/hub/kamala-harris\">Kamala Harris</a> visited a Planned Parenthood clinic on Thursday, marking what her office said was the first time a president or vice president has toured a facility that performs abortions, as the White House escalates its defense of reproductive rights in this year's election.</p><p>\u201cRight now, in our country, we are facing a very serious health crisis,\u201d Harris said. \u201cAnd the crisis is affecting many, many people in our country, most of whom are, frankly, silently suffering.\u201d</p><p>The clinic, nestled in an industrial area near the city line between St. Paul and Minneapolis, has been a beacon for many women in the region. Although Democratic leaders in Minnesota have protected abortion access, neighboring states have banned or severely restricted the procedure with policies that Harris described as \u201cimmoral.\u201d</p><p>\u201cHow dare these elected leaders believe they are in a better position to tell women what they need,\u201d Harris said. \u201cWe have to be a nation that trusts women.\u201d</p><p>Harris said she met two dozen health care workers at the clinic who had created an environment where patients can \u201cbe safe\u201d and \u201cfree from judgement.\u201d</p><p>Dr. Sarah Traxler, chief medical officer of Planned Parenthood North Central States, introduced herself as \u201ca proud abortion provider\u201d and called Harris' visit a \u201chistoric moment.\u201d She said the number of patients visiting the clinic from out of state has doubled.</p><p>\"Everyone should have the right to access health care,\" Traxler said.</p><p>Protesters gathered across the street, holding signs that said \u201clife is a human right\u201d and \u201cabortion kills a human being.\u201d</p><p>Cathy Blaeser, the co-executive director of the anti-abortion group Minnesota Citizens Concerned for Life, said, \u201cThe vice president\u2019s visit shows the Biden administration\u2019s full-blown devotion to extreme abortion policies.\u201d She added that \u201cMinnesotans don\u2019t want to be known for abortion tourism.\"</p><p>The White House has few options to protect access to abortion after the U.S. Supreme Court overturned Roe v. Wade two years ago, clearing the way for Republican-led states to enact limitations or bans on the procedure. But the visit reflected Democrats' <a href=\"https://apnews.com/article/roe-biden-abortion-reproductive-rights-election-3d184285cc6edbe733311b26445db2a0\">intense focus on reproductive rights</a> to rally their voters to reelect President Joe Biden in a likely rematch with Donald Trump, the presumptive Republican nominee.</p><p>Harris, the first woman elected vice president, <a href=\"https://apnews.com/article/kamala-harris-abortion-biden-2024-election-560bc2bbdf036c18b6601ced44a62b50\">has led</a> the White House's outreach, and her trip to the Minneapolis-St. Paul area is part of a <a href=\"https://apnews.com/article/kamala-harris-abortion-election-2024-9ed95b8363236078e8769c362177bd8a\">nationwide tour she began in January</a>.</p><p>The decision to make a historic visit to a clinic showcased her more aggressive approach to the issue than Biden. While Biden has vowed to restore Roe v. Wade's protections if Democrats regain full control of Congress, <a href=\"https://apnews.com/article/abortion-biden-2024-reproductive-rights-harris-494af752992ba88fa6e3d53fbd54f716\">he tends to talk about the \u201cright to choose\u201d instead of saying \u201cabortion.\u201d</a></p><p>During her visit, Harris spoke plainly about women's health needs and the clinic's role in providing birth control and preventative care.</p><p>\u201cEveryone get ready for the language \u2014 uterus,\u201d Harris said. \u201cThat part of the body needs a lot of medical care from time to time.\"</p><p>After visiting the clinic, Harris spoke at a campaign event held at the Coven, a coworking space that caters to women in St. Paul. She said Minnesota had \u201conce again demonstrated to our nation just how much progress a Democratic trifecta can make,\u201d a reference to the party's control of the governor's office and both legislative chambers.</p><p>Democrats harnessed that power in January 2023 by rushing through legislation that enshrined in state law the right to abortion and other kinds of reproductive health care. There are <a href=\"https://apnews.com/article/abortion-politics-minnesota-state-government-timothy-walz-11c3b1d5269c929e442b979ff1bac73b\">no restrictions on abortion at any stage of pregnancy in Minnesota</a>.</p><p>Meanwhile, <a href=\"https://www.plannedparenthoodaction.org/abortion-access-tool/US\">abortion is currently illegal in more than a dozen states</a>, including Minnesota neighbors North Dakota and South Dakota, and is restricted in Iowa and Wisconsin. Harris blamed Trump for the erosion of abortion rights and called him the \"architect of a health care crisis.\u201d</p><p>\u201cLet us all recognize who is to blame,\u201d she said. \u201cThe former president, Donald Trump, handpicked three members of the United States Supreme Court with the intention that they would overturn Roe. He intended for them to take your freedoms. And he brags about it.\u201d</p><p>Trump touted his role in eliminating the nationwide right to abortion during a recent Fox News town hall, saying, \u201cI'm proud to have done it.\u201d During his term, he tipped the ideological balance on the high court by nominating three conservative justices, paving the way for the Dobbs v. Jackson Women\u2019s Health Organization, which overturned Roe v. Wade.</p><p>Since then, Democrats have felt encouraged by electoral victories in 2022 and 2023 when abortion access was on the ballot. And in his State of the Union address last week, Biden vowed that \u201cwe'll win again in 2024.\u201d He also said that if voters \u201csend me a Congress that supports the right to choose, I promise you I will restore Roe v. Wade as the law of the land again.\u201d</p><p>Before the flight back to Washington on Thursday, Harris surprised Central High School\u2019s girl\u2019s varsity and junior varsity softball teams at practice. As she watched, Harris told the players, \u2019I\u2019m impressed.\u201d</p><p>____</p><p>Associated Press writer Chris Megerian contributed from Washington.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/harris-abortion-minnesota-women-election-a4c4979fb71070daa1fde2038aa41f2b",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 3,
+            "reason": "The document primarily focuses on Vice President Kamala Harris's visit to a Minnesota abortion clinic and her stance on reproductive rights. While it does touch on health-related issues, such as women's health needs and the provision of birth control and preventative care, the main emphasis is on political and social aspects of abortion rights rather than broader health topics. Therefore, it is somewhat relevant to health but not highly focused on it."
+        }
+    }
+}

@@ -1,0 +1,243 @@
+﻿{
+    "altids": {
+        "itemid": "b4b821bf6c038e2815c788a092279aff",
+        "etag": "b4b821bf6c038e2815c788a092279aff_2a11aza0c0",
+        "friendlykey": "461932603083",
+        "referenceid": "US--Quaker Oats-Salmonella Recall"
+    },
+    "version": 2,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2023-12-16T21:59:27Z",
+    "firstcreated": "2023-12-16T16:45:02Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "ednote": "Eds: UPDATES: With AP Photos.",
+    "editorialtypes": [
+        "Lead"
+    ],
+    "signals": [
+        "newscontent"
+    ],
+    "title": "US--Quaker Oats-Salmonella Recall",
+    "headline": "Quaker Oats recalls granola products over concerns of salmonella contamination",
+    "headline_extended": "Quaker Oats has recalled several of its granola products because it says the foods could be contaminated with salmonella",
+    "slugline": "BC-US--Quaker Oats-Salmonella Recall, 2nd Ld-Writethru",
+    "description_summary": "Quaker Oats has recalled several of its granola products because it says the foods could be contaminated with salmonella. The company is asking customers to throw out certain types of granola bars and granola cereals to avoid infection. As of Friday, Quaker said it had not received any reports of salmonella infections related to the recalled foods. Salmonella infections can cause fever, diarrhea, nausea and vomiting. In rare cases, the bacterial disease can be fatal. Customers are being asked to report their recalled products to the company by phone or online for more information and reimbursement.",
+    "located": "CHICAGO",
+    "datelinelocation": {
+        "city": "Chicago",
+        "countryareacode": "IL",
+        "countryareaname": "Illinois",
+        "countrycode": "USA",
+        "countryname": "United States",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                -87.65005,
+                41.85003
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2023 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "quaker oats granola recall salmonella"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "f",
+            "name": "f"
+        },
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "a",
+            "name": "a"
+        },
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "49ff30f87f0010048248f571351eed07",
+            "name": "Salmonella infections",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 70
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 90
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "c8e409f8858510048872ff2260dd383e",
+            "name": "Business",
+            "creator": "Editorial",
+            "editorial_subject": "Business",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Editorial",
+            "editorial_subject": "Health",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        }
+    ],
+    "organisation": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "fdfd1c660b9f4946b2971e61c044fe6b",
+            "name": "PepsiCo Inc",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "symbols": [
+                {
+                    "ticker": "PEP",
+                    "exchange": "NASDAQ",
+                    "instrument": "NASDAQ:PEP"
+                }
+            ],
+            "relevance": 79
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "2c6a186082b010048379df092526b43e",
+            "name": "Illinois",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661850e07d5b100481f5c076b8e3055c",
+            "name": "Latin America and Caribbean",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "associations": {
+        "1": {
+            "altids": {
+                "itemid": "1e1cdf7519b744bfa16b5c0751cfe95a"
+            },
+            "type": "picture"
+        },
+        "2": {
+            "altids": {
+                "itemid": "1cb97abf67fe41939ea95aa94c4ad4a3"
+            },
+            "type": "audio"
+        },
+        "3": {
+            "altids": {
+                "itemid": "fc112bca6c154ba2bb90f7c9edb26b59"
+            },
+            "type": "audio"
+        }
+    },
+    "body_nitf": "<p>CHICAGO (AP) \u2014 Quaker Oats on Friday recalled several of its granola products, including granola bars and cereals, saying the foods could be contaminated with salmonella.</p><p><a href=\"https://apnews.com/article/mexico-salmonella-cantaloupes-outbreak-9a32fba45d330f89fd0f7565d1fcbc10\">Salmonella infections</a> can cause fever, diarrhea, nausea, vomiting and stomach pain, according to the Food and Drug Administration. In rare cases, the bacterial disease can be fatal.</p><p>Quaker, which is owned by PepsiCo, said in a news release that it has not received any reports of salmonella infections related to the recalled granola products. The <a href=\"https://www.fda.gov/safety/recalls-market-withdrawals-safety-alerts/quaker-recalls-granola-bars-and-granola-cereals-due-possible-health-risk#recall-announcement\">full list</a> of recalled foods includes granola oats cereals and Quaker Chewy Bars, which are also sold in PepsiCo's snack mixes.</p><p>The affected products have been sold in all 50 U.S. states, as well as U.S. territories, Quaker said. The company is asking customers with recalled products to throw them away and contact its customer support line or visit the <a href=\"https://www.quakergranolarecall.com/\">recall website</a> for more information and reimbursement.</p><p>According to estimates from the Centers for Disease Control and Prevention, roughly 1.35 million cases of salmonella infection occur in the U.S. each year, causing approximately 26,500 hospitalizations and 420 deaths.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/quaker-oats-granola-recall-salmonella-b4b821bf6c038e2815c788a092279aff",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 5,
+            "reason": "The document discusses a recall of Quaker Oats granola products due to potential salmonella contamination, which is a significant health concern. It provides details on the symptoms of salmonella infection, the scope of the recall, and the actions consumers should take. This information is directly related to public health and safety, making the document highly relevant to the topic of Health."
+        }
+    }
+}

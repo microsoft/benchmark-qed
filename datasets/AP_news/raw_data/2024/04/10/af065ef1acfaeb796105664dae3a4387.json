@@ -1,0 +1,230 @@
+﻿{
+    "altids": {
+        "itemid": "af065ef1acfaeb796105664dae3a4387",
+        "etag": "af065ef1acfaeb796105664dae3a4387_0a2aza0c0",
+        "friendlykey": "681666345499",
+        "referenceid": "LA--Editorial Rdp"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Opinion",
+    "language": "en",
+    "versioncreated": "2024-04-11T11:10:37Z",
+    "firstcreated": "2024-04-10T05:01:59Z",
+    "editorialrole": "FullStory",
+    "fixture": {
+        "code": "21ea4067bb274c3b805353fb2b99ba70",
+        "name": "Editorial Roundup"
+    },
+    "pubstatus": "usable",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "LA--Editorial Rdp",
+    "headline": "Editorial Roundup: Louisiana",
+    "slugline": "BC-LA--Editorial Rdp",
+    "bylines": [
+        {
+            "by": "By The Associated Press"
+        }
+    ],
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "Editorial Rdp"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 44
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "6cd98adfc84d405eadec8ca81bd37df4",
+            "name": "Access to health care",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 64
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "1b29d45f8e8e4c008e8a58fe6f92a753",
+            "name": "Government programs",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 37
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "394e30d2e3154229adc5f260b483adaa",
+            "name": "Premature births",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 58
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e2305bd07de410048fcfdf092526b43e",
+            "name": "Pregnancy and childbirth",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 51
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86aad5207dac100488ecba7fa5283c3e",
+            "name": "Politics",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 92
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "535d132082b3100484b3df092526b43e",
+            "name": "New Orleans",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "43fb970882b310048496df092526b43e"
+            ],
+            "locationtype": {
+                "code": "9d26a20b35f0484a891740f8189d4c7b",
+                "name": "City"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -90.07507,
+                    29.95465
+                ]
+            },
+            "relevance": 76,
+            "parentnames": [
+                "Louisiana"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "43fb970882b310048496df092526b43e",
+            "name": "Louisiana",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -92.0004,
+                    31.00047
+                ]
+            },
+            "relevance": 83,
+            "parentnames": [
+                "United States"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "43fb970882b310048496df092526b43e",
+            "name": "Louisiana",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "body_nitf": "<p>The Advocate. April 9, 2024.</p><p>Editorial: Lawmakers can, and should, address Louisiana\u2019s maternal and infant mortality crisis</p><p>Of all the \u201cbad\u201d rankings on which Louisiana leads the nation, none are more heartbreaking \u2014 or damning \u2014 than those reflecting the risks associated with childbirth.</p><p>Here\u2019s one such measure: In the decade prior to the pandemic, babies in Louisiana were 65% more likely to <a href=\"https://www.nola.com/tncms/asset/editorial/47418d1a-6467-11ee-a2ff-736ae014c706/\">die from preterm birth and low birth weight</a> than those in the rest of the country, according to an analysis of Centers of Disease Control and Prevention data by The Times-Picayune ' The Advocate.</p><p>Here\u2019s a related one: Louisiana had the fifth-highest <a href=\"https://www.nola.com/tncms/asset/editorial/0b1914b2-3dec-11ee-b8c4-477345007335/\">maternal death rate</a> among all states from 2018 to 2021, according to the health care research outlet KFF.</p><p>Many factors contribute to the crisis, including preexisting health issues affecting women who get pregnant and the difficulty navigating care for Louisiana moms whose pregnancies are covered by Medicaid.</p><p>So we\u2019re glad to see that, this session, the Legislature is considering a number of bills aimed at making childbearing less dangerous.</p><p>We urge lawmakers to act on behalf of the moms and kids who desperately need better outcomes. Among the bills filed:</p><p><a href=\"https://www.legis.la.gov/Legis/BillInfo.aspx?s=24RS&b=SB135&sbi=y\">Senate Bill 135</a> by Sen. Royce Duplessis, D-New Orleans, would allow more women whose pregnancies are covered by Medicaid to keep their coverage for a year beyond childbirth. Advocates note that a majority of Louisiana\u2019s pregnancy-associated deaths happen in the 12 months following delivery. The bill would give this benefit to an additional 8,000 women each year whose incomes are currently above the cutoff.</p><p><a href=\"https://www.legis.la.gov/Legis/BillInfo.aspx?s=24RS&b=HB860&sbi=y\">House Bill 860</a> by Rep. Michael Echols, R-Monroe, would require newborn nurse home visits to be covered by Medicaid. This would expand a pilot program now underway in New Orleans that\u2019s been linked to fewer emergency room visits, lower rates of child protective services investigations and reduced reports of postpartum depression and anxiety.</p><p><a href=\"https://www.legis.la.gov/Legis/BillInfo.aspx?s=24RS&b=SB190&sbi=y\">Senate Bill 190</a> by Sen. Gerald Boudreaux, D-Lafayette, would increase Medicaid reimbursement for services that impact maternal health outcomes.</p><p><a href=\"https://www.legis.la.gov/Legis/BillInfo.aspx?s=24RS&b=HB489&sbi=y\">House Bill 489</a> by Rep. Jason Hughes, D-New Orleans, along with <a href=\"https://www.legis.la.gov/Legis/BillInfo.aspx?s=24RS&b=SB300&sbi=y\">Senate Bill 300</a> by Duplessis, would mandate that postpartum services such as lactation and dietary consulting be covered.</p><p>And <a href=\"https://www.legis.la.gov/Legis/BillInfo.aspx?s=24RS&b=HB702&sbi=y\">House Bill 702</a> by Rep. Matthew Willard, D-New Orleans, and <a href=\"https://www.legis.la.gov/Legis/BillInfo.aspx?s=24RS&b=SB142&sbi=y\">Senate Bill 142</a> by Sen. Regina Barrow, D-Baton Rouge, aim to standardize coverage of doula services.</p><p>These proposals are among those supported by a broad coalition that includes the March of Dimes, the Louisiana Public Health Institute, the Louisiana Partnership for Children & Families, the New Orleans Health Department and other organizations.</p><p>We\u2019re encouraged that several of these bills have made it through the initial committee process with little pushback, and hope that lawmakers unite to prioritize this vital cause.</p><p>As New Orleans Health Director Dr. Jennifer Avegno pointed out, the bad outcomes happen in all corners of our state, from the big cities to the rural areas.</p><p>\u201cWe have a state that\u2019s more than 60% Medicaid births,\u201d she said. \u201cThat\u2019s everybody\u2019s constituents.\u201d</p><p>More than that. It\u2019s all of our children.</p><p>END</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/af065ef1acfaeb796105664dae3a4387",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 5,
+            "reason": "The document is highly relevant to the topic of Health. It discusses the maternal and infant mortality crisis in Louisiana, providing statistics and analysis on the issue. The editorial also outlines specific legislative measures being considered to address these health concerns, including bills related to Medicaid coverage, postpartum services, and doula services. The focus on health outcomes, healthcare access, and legislative efforts to improve maternal and infant health directly aligns with the topic of Health."
+        }
+    }
+}

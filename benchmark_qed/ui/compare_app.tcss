@@ -1,0 +1,57 @@
+
+AnswerPairWidget {
+    layout: grid;
+    grid-size: 8;
+    grid-columns: 1fr;
+    grid-rows: 1fr 8fr;
+    height: 24;
+}
+
+ReasoningWidget {
+    height: 8;
+}
+
+#reasoning {
+    height: 8;
+}
+
+#condition_1 {
+    column-span: 4;
+}
+
+#condition_2 {
+    column-span: 4;
+}
+
+#answer_1 {
+    column-span: 4;
+}
+
+#answer_2 {
+    column-span: 4;
+}
+
+SummaryInfoWidget {
+    layout: grid;
+    grid-size: 3;
+    grid-columns: 1fr;
+    grid-rows: 1fr;
+    height: 2;
+}
+
+SelectorWidget {
+    layout: grid;
+    grid-size: 4;
+    grid-columns: 1fr;
+    grid-rows: 1fr 3fr;
+    height: 6;
+}
+
+
+#select-question {
+    column-span: 2
+}
+
+#question-label {
+    column-span: 2
+}

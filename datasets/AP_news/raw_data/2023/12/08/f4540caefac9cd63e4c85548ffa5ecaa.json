@@ -1,0 +1,250 @@
+﻿{
+    "altids": {
+        "itemid": "f4540caefac9cd63e4c85548ffa5ecaa",
+        "etag": "f4540caefac9cd63e4c85548ffa5ecaa_1a4aza0c0",
+        "friendlykey": "442351913262",
+        "referenceid": "US-MED--Mammograms After Cancer"
+    },
+    "version": 1,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2023-12-08T21:12:32Z",
+    "firstcreated": "2023-12-08T13:19:39Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "ednote": "Eds: UPDATES: With AP Photos. Adds AP audio.",
+    "editorialtypes": [
+        "Lead"
+    ],
+    "signals": [
+        "newscontent"
+    ],
+    "title": "US-MED--Mammograms After Cancer",
+    "headline": "Breast cancer survivors may not need so many mammograms after surgery, UK study suggests",
+    "headline_extended": "A large British study finds that less frequent screening is just as good as annual mammograms for certain breast cancer survivors",
+    "slugline": "BC-US-MED--Mammograms After Cancer, 1st Ld-Writethru",
+    "description_summary": "A large British study finds that less frequent screening is just as good as annual mammograms for certain breast cancer survivors. The findings are being discussed at the San Antonio Breast Cancer Symposium. Until now, there wasn\u2019t solid evidence for when women could ease back on yearly mammograms after cancer surgery. This research suggests after three years, women age 50 and older can get by with a mammogram every other year or every third year. The study was funded by the research arm of the U.K.\u2019s National Health Service. One expert says more research will be needed to change U.S. guidelines.",
+    "bylines": [
+        {
+            "by": "By CARLA K. JOHNSON",
+            "title": "AP Medical Writer"
+        }
+    ],
+    "copyrightnotice": "Copyright 2023 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "breast cancer mammograms screening research"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "a",
+            "name": "a"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "c9469c808b6b10048d8ba385cd5ce603",
+            "name": "Medical diagnostic technology",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 77
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e22563387de410048f92df092526b43e",
+            "name": "Breast cancer",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 97
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 87
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f5c099b87e3810048ae6df092526b43e",
+            "name": "Medical research",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 64
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Editorial",
+            "editorial_subject": "Health",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "9a86e93fa31a43f28838f519291ac948",
+            "name": "San Antonio",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "6e92d9b882c7100488e5df092526b43e"
+            ],
+            "locationtype": {
+                "code": "9d26a20b35f0484a891740f8189d4c7b",
+                "name": "City"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -98.49363,
+                    29.42412
+                ]
+            },
+            "relevance": 35,
+            "parentnames": [
+                "Texas"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "66219fb07d5b100482e2c076b8e3055c",
+            "name": "United Kingdom",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661850e07d5b100481f4c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "01f56e0e654841eca2e69bf2cbcc0526",
+                "name": "Nation"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -4,
+                    54
+                ]
+            },
+            "relevance": 49,
+            "parentnames": [
+                "Europe"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "661850e07d5b100481f4c076b8e3055c",
+            "name": "Europe",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "associations": {
+        "1": {
+            "altids": {
+                "itemid": "78d88d2085e24178ad5f0ad8880617fb"
+            },
+            "type": "picture"
+        },
+        "2": {
+            "altids": {
+                "itemid": "ef1515759ab847bb89a940a353ad93ad"
+            },
+            "type": "audio"
+        },
+        "3": {
+            "altids": {
+                "itemid": "a365bd9cbc12472f8e003517692bc623"
+            },
+            "type": "audio"
+        },
+        "4": {
+            "altids": {
+                "itemid": "12424c34dac84cc8941342306a276050"
+            },
+            "type": "audio"
+        },
+        "5": {
+            "altids": {
+                "itemid": "2f8bd42c32254b37b23283993efd37bc"
+            },
+            "type": "audio"
+        },
+        "6": {
+            "altids": {
+                "itemid": "83a4d616b3f64af5ac16d588e0932fea"
+            },
+            "type": "audio"
+        }
+    },
+    "body_nitf": "<p>Annual <a href=\"https://apnews.com/article/mammograms-dense-breast-cancer-fda-acbcb47633ff69301e2985537128aa7c\">mammograms</a> are recommended indefinitely for breast cancer survivors in many countries, including the U.S., but a large British study finds that less frequent screening is just as good.</p><p>Yearly screening is meant to monitor whether cancer has come back. All that testing causes anxiety for patients and costs money.</p><p>Until now, there wasn\u2019t solid evidence for when women could ease back on yearly mammograms, said Janet Dunn of the University of Warwick, who led the study funded by the research arm of the U.K.\u2019s National Health Service.</p><p>The study showed less frequent mammograms are just as good as a yearly schedule for breast cancer survivors 50 and older.</p><p>\u201cIt\u2019s really all about giving the ladies the all-clear a bit earlier if you can,\u201d Dunn said. The findings were being discussed Friday at the San Antonio Breast Cancer Symposium. The unpublished study has not yet gone through a full peer review.</p><p>Researchers followed more than 5,200 women. The participants were 50 and older, and had undergone successful breast cancer surgery, mostly lumpectomies. After three years of annual screening, half were randomly assigned to get mammograms every year and the other half to get less frequent ones.</p><p>Both groups did well, with remarkably similar results. Six years later, 95% of both groups were still cancer free. Breast cancer survival was 98% in both groups.</p><p>\u201cThis is an eye-opening study,\u201d said breast cancer specialist Dr. Laura Esserman of the University of California, San Francisco who was not involved in the new study but is <a href=\"https://www.thewisdomstudy.org/learn-more/\">leading research</a> on a personalized approach to screening. \u201cI think people will be very surprised.\u201d</p><p>The new study is \u201cvery strong,\u201d but more research will be needed to change U.S. guidelines, said Corinne Leach of Moffitt Cancer Center in Tampa, Florida. She led the development of a 2015 <a href=\"https://www.cancer.org/health-care-professionals/american-cancer-society-survivorship-guidelines/breast-cancer-survivorship-care-guidelines.html\">U.S. guideline</a> that calls for indefinite annual screening for these kinds of patients.</p><p>\u201cOne study alone typically does not move the needle on guidelines,\u201d Leach said. \u201cThis study inspires other researchers to do more work in this area. And that is what could lead to a change.\u201d</p><p>In the new study, most women in both groups followed their assigned screening schedule. Some in the annual group missed screenings and some in the less frequent group were screened ahead of schedule. When the researchers analyzed the findings based on what the women actually did, the conclusions remained the same.</p><p>Survivors \u201ccan breathe easily\u201d three years after surgery as they resume a less frequent mammogram schedule, Dunn said. The findings are likely to change practice in the U.K. and \u201cwill be influential globally,\u201d she said.</p><p>How often is less frequent? In the study, it depended on the type of surgery.</p><p>In the less-frequent screening group, women who\u2019d had mastectomies had a mammogram once every three years. Those who\u2019d had lumpectomies, also called breast conservation surgery, had mammograms every two years.</p><p>The findings do not apply to younger breast cancer survivors, who were excluded from the study and tend to have more aggressive cancers. And women who have both breasts removed don't need mammograms.</p><p>\u201cIt\u2019s high time that we have a more personalized approach to screening, not just for women who\u2019ve never had breast cancer, but for those who\u2019ve had breast cancer,\u201d Esserman said.</p><p>___</p><p>The Associated Press Health and Science Department receives support from the Howard Hughes Medical Institute\u2019s Science and Educational Media Group. The AP is solely responsible for all content.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/breast-cancer-mammograms-screening-research-f4540caefac9cd63e4c85548ffa5ecaa",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 5,
+            "reason": "The document discusses a study on the frequency of mammograms for breast cancer survivors, which is directly related to health. It covers the implications of the study, the methodology, and expert opinions, all of which are pertinent to the topic of health. The content is highly relevant as it addresses a significant health concern and provides insights that could influence medical guidelines and patient care."
+        }
+    }
+}

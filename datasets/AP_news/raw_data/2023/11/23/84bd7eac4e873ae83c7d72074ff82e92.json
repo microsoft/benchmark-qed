@@ -1,0 +1,248 @@
+﻿{
+    "altids": {
+        "itemid": "84bd7eac4e873ae83c7d72074ff82e92",
+        "etag": "84bd7eac4e873ae83c7d72074ff82e92_1a4aza0c0",
+        "friendlykey": "721481818057",
+        "referenceid": "AF--West Africa-Diphtheria"
+    },
+    "version": 1,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2023-11-23T20:40:30Z",
+    "firstcreated": "2023-11-23T19:14:31Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "ednote": "Eds: UPDATES: With AP Photos. Hyperlinks.",
+    "editorialtypes": [
+        "Lead"
+    ],
+    "signals": [
+        "newscontent"
+    ],
+    "title": "AF--West Africa-Diphtheria",
+    "headline": "West Africa responds to huge diphtheria outbreaks by targeting unvaccinated populations",
+    "headline_extended": "Authorities in several West African countries are trying to manage their huge diphtheria outbreaks",
+    "slugline": "BC-AF--West Africa-Diphtheria, 1st Ld-Writethru",
+    "description_summary": "Authorities in several West African countries are trying to manage their huge diphtheria outbreaks. A top health official in Nigeria said Thursday that millions are being vaccinated to cover wide gaps in immunity against the disease. At least 573 people out of the 11,640 diagnosed with the disease in Nigeria have died since the current outbreak started in December 2022. Niger has reported the deaths of 37 people out of the 865 cases as of October while Guinea has reported 58 deaths out of 497. French medical organization Doctors Without Borders says that a major driver of the high rate of infection in the region has been a historically wide vaccination gap.",
+    "bylines": [
+        {
+            "by": "By CHINEDU ASADU",
+            "title": "Associated Press"
+        }
+    ],
+    "located": "ABUJA, Nigeria",
+    "datelinelocation": {
+        "city": "Abuja",
+        "countrycode": "NGA",
+        "countryname": "Nigeria",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                7.49508,
+                9.05785
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2023 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "west africa diphtheria vaccination nigeria guinea niger"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "i",
+            "name": "i"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "9cce666bb29344b8ba61f3732d971d32",
+            "name": "Disease outbreaks",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 62
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 83
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "ace74e307f00100486cedf092526b43e",
+            "name": "Immunizations",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 49
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Editorial",
+            "editorial_subject": "Health",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "bb2d2c5f441a452cb24bb511a2ab5eea",
+            "name": "World news",
+            "creator": "Editorial",
+            "editorial_subject": "World news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "organisation": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "3dbdd1b0892210048dcafb7860a2fc03",
+            "name": "Doctors Without Borders",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 42
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "6620a9987d5b100482c8c076b8e3055c",
+            "name": "Nigeria",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661812607d5b100481f1c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "01f56e0e654841eca2e69bf2cbcc0526",
+                "name": "Nation"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    8,
+                    10
+                ]
+            },
+            "relevance": 96,
+            "parentnames": [
+                "Africa"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "661812607d5b100481f1c076b8e3055c",
+            "name": "Africa",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "associations": {
+        "1": {
+            "altids": {
+                "itemid": "36d2f6506eef4efbb5da5acc666163be"
+            },
+            "type": "picture"
+        },
+        "2": {
+            "altids": {
+                "itemid": "f0d1ffac0dda4d4e9289f363f2acd3ba"
+            },
+            "type": "picture"
+        },
+        "3": {
+            "altids": {
+                "itemid": "2865d7a2cd544fd7a93471cc198c6eca"
+            },
+            "type": "picture"
+        },
+        "4": {
+            "altids": {
+                "itemid": "972e733ab00941869588e202018527e7"
+            },
+            "type": "picture"
+        }
+    },
+    "body_nitf": "<p>ABUJA, Nigeria (AP) \u2014 Authorities in several West African countries are trying to manage their huge diphtheria outbreaks, including in <a href=\"https://apnews.com/hub/nigeria\">Nigeria</a> where a top health official said Thursday that millions are being vaccinated to cover wide gaps in immunity against the disease.</p><p>At least 573 people out of the 11,640 diagnosed with the disease in Nigeria have died since the current outbreak started in December 2022, though officials estimate the toll \u2014 now on the decline because of treatment efforts \u2014 could be much higher across states unable to detect many cases.</p><p>In Niger 37 people had died out of the 865 cases as of October, while Guinea has reported 58 deaths out of 497 since its outbreak started in June.</p><p>\u201cAs far as the history that I am aware of, this is the largest outbreak that we have had,\u201d Ifedayo Adetifa, head of the Nigeria Centre for Disease Control, told The Associated Press.</p><p>The highly contagious bacterial infection has been reported in 20 of Nigeria's 36 states so far.</p><p>A major driver of the high rate of infection in the region has been a historically wide vaccination gap, the French medical organization Doctors Without Borders, or MSF, said in a statement on Tuesday.</p><p>In Nigeria, only 42% of children under 15 years old are fully protected from diphtheria, according to a government survey, while Guinea has a 47% immunization rate \u2014 both far below the 80\u201385% rate recommended by the World Health Organization to maintain community protection.</p><p>The fate of the affected countries is worsened by the global shortages of the diphtheria vaccine as demand has increased to respond to outbreaks, the MSF said.</p><p>\u201cWe\u2019re not seeing vaccination happen, not at the scale that is needed,\u201d said Dr. Dagemlidet Tesfaye Worku, emergency medical program manager for MSF in Abidjan, Ivory Coast. \u201cWhat is needed is a truly massive scale-up of vaccination, as soon as possible.\u201d</p><p>The Nigerian government is ramping up vaccination for targeted populations while assisting states to boost their capacity to detect and manage cases, said Adetifa, the Nigeria CDC head.</p><p>But several states continue to struggle, including Kano, which accounts for more than 75% of cases in Nigeria but has only two diphtheria treatment centers, according to Abubakar Labaran Yusuf, the state\u2019s top health official.</p><p>\u201cOnce people have to travel or move significant distances to access treatment, that becomes a challenge,\u201d Adetifa said.</p><p>____</p><p>Follow AP\u2019s Africa coverage at: <a href=\"https://apnews.com/hub/africa\">https://apnews.com/hub/africa</a></p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/west-africa-diphtheria-vaccination-nigeria-guinea-niger-84bd7eac4e873ae83c7d72074ff82e92",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 5,
+            "reason": "The document discusses a significant health issue, specifically diphtheria outbreaks in West Africa, and the efforts to manage and contain these outbreaks through vaccination. It provides detailed information on the number of cases, deaths, and the challenges faced due to low vaccination rates and vaccine shortages. This is highly relevant to the topic of health as it addresses disease outbreaks, public health responses, and vaccination efforts."
+        }
+    }
+}

@@ -1,0 +1,262 @@
+﻿{
+    "altids": {
+        "itemid": "645b8803d58c019615f2820b415a565a",
+        "etag": "645b8803d58c019615f2820b415a565a_0a4aza0c0",
+        "friendlykey": "961422020665",
+        "referenceid": "EU--Norway-Royals"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2024-01-31T10:29:55Z",
+    "firstcreated": "2024-01-31T10:29:54Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "ednote": "Eds: UPDATES: Updates Media.",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "EU--Norway-Royals",
+    "headline": "Norway\u2019s aging king, Harald V, is on sick leave because of a respiratory infection",
+    "headline_extended": "Norway\u2019s aging king, Harald V, is on sick leave until Feb. 2 because of a respiratory infection",
+    "slugline": "BC-EU--Norway-Royals",
+    "description_summary": "Norway\u2019s aging king, Harald V, is on sick leave until Feb. 2 because of a respiratory infection. The Norwegian palace made the announcement Wednesday. The 86-year-old monarch, who has repeatedly said he has no plans to abdicate unlike his second cousin Queen Margrethe II of Denmark, has been hospitalized several times in recent months. In December, he was admitted to a hospital with an infection and was treated with intravenous antibiotics. The heir to the throne, Crown Prince Haakon, has stepped in and taken over his father\u2019s duties, the royal household said. Harald\u2019s duties as Norway\u2019s head of state are ceremonial and he holds no political power.",
+    "located": "COPENHAGEN, Denmark",
+    "datelinelocation": {
+        "city": "Copenhagen",
+        "countrycode": "DNK",
+        "countryname": "Denmark",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                12.56553,
+                55.67594
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "norway king sick harald infection"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "person": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "76f2f7205c8c458b98d1fbb4d51d7492",
+            "name": "Harald V",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "GOVERNMENT_FIGURE",
+                "PERSON"
+            ],
+            "relevance": 53
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "b22af1d7001c42279c31e53c13fb0c18",
+            "name": "Queen Margrethe II",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "GOVERNMENT_FIGURE",
+                "PERSON",
+                "ROYALTY"
+            ],
+            "relevance": 50
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "i",
+            "name": "i"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "90aeac5089ef10048f63d56c852d093e",
+            "name": "Royalty",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 51
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 63
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86aad5207dac100488ecba7fa5283c3e",
+            "name": "Politics",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 35
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "bb2d2c5f441a452cb24bb511a2ab5eea",
+            "name": "World news",
+            "creator": "Editorial",
+            "editorial_subject": "World news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "662161307d5b100482dcc076b8e3055c",
+            "name": "Norway",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661850e07d5b100481f4c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "01f56e0e654841eca2e69bf2cbcc0526",
+                "name": "Nation"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    10,
+                    62
+                ]
+            },
+            "relevance": 91,
+            "parentnames": [
+                "Europe"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "6620e8187d5b100482d0c076b8e3055c",
+            "name": "Denmark",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661850e07d5b100481f4c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "01f56e0e654841eca2e69bf2cbcc0526",
+                "name": "Nation"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    10,
+                    56
+                ]
+            },
+            "relevance": 75,
+            "parentnames": [
+                "Europe"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "661850e07d5b100481f4c076b8e3055c",
+            "name": "Europe",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "associations": {
+        "1": {
+            "altids": {
+                "itemid": "10f5bb6fa4504d34a830a8a953be517c"
+            },
+            "type": "picture"
+        },
+        "2": {
+            "altids": {
+                "itemid": "357279418bab4ca38abe06f488ed764d"
+            },
+            "type": "picture"
+        }
+    },
+    "body_nitf": "<p>COPENHAGEN, Denmark (AP) \u2014 Norway\u2019s aging king, Harald V, is on sick leave until Feb. 2 because of a respiratory infection, the Norwegian palace said in a brief statement Wednesday.</p><p>The 86-year-old monarch, who has repeatedly said he has no plans to abdicate unlike his second cousin Queen Margrethe II of Denmark, has been hospitalized several times in recent months. In December, he was admitted to a hospital with an infection and was treated with intravenous antibiotics. He also was hospitalized last August with a fever.</p><p>Harald, who has been seen using crutches in recent years, had an operation to replace a heart valve in October 2020 after being hospitalized with breathing difficulties.</p><p>The heir to the throne, Crown Prince Haakon, has stepped in and taken over his father\u2019s duties, the royal household said.</p><p>Harald\u2019s duties as Norway\u2019s head of state are ceremonial and he holds no political power. He ascended to the throne following the death of his father, King Olav, in 1991.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/norway-king-sick-harald-infection-645b8803d58c019615f2820b415a565a",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 5,
+            "reason": "The document discusses the health condition of Norway's King Harald V, specifically focusing on his respiratory infection and recent hospitalizations. It provides details about his medical history, including past infections and surgeries. This information is directly related to the topic of health."
+        }
+    }
+}
