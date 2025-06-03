@@ -58,7 +58,9 @@ def download(
         for subdir in ["graphrag_global", "lazygraphrag", "vector_rag"]:
             response = requests.get(f"{api_url}/{subdir}", timeout=60)
             contents = response.json()
-            _download_folder(contents, output_dir / subdir)
+            output_subdir = output_dir / subdir
+            output_subdir.mkdir(parents=True, exist_ok=True)
+            _download_folder(contents, output_subdir)
     else:
         api_url = f"https://api.github.com/repos/microsoft/benchmark-qed/contents/datasets/{dataset}"
         response = requests.get(api_url, timeout=60)
