@@ -24,7 +24,7 @@ plugins:
   - search
   - exclude-search:
       exclude:
-        - "example_notebooks/autoe_example_data/**"
+        - "notebooks/example_answers/**"
       exclude_unreferenced: true
   - mkdocs-jupyter:
       execute: false
