@@ -7,7 +7,6 @@ from typing import Annotated
 
 import requests
 import typer
-from rich.progress import Progress
 
 app: typer.Typer = typer.Typer(pretty_exceptions_show_locals=False)
 
@@ -40,8 +39,6 @@ def download(
         abort=True,
     )
 
-    output_dir.mkdir(parents=True, exist_ok=True)
-
     match dataset:
         case Dataset.EXAMPLE_ANSWERS:
             api_url = f"https://raw.githubusercontent.com/microsoft/benchmark-qed/refs/heads/main/docs/notebooks/{dataset}/raw_data.zip"
@@ -50,7 +47,7 @@ def download(
             output_file.write_bytes(response.content)
 
         case Dataset.AP_NEWS | Dataset.PODCAST:
-            api_url = f"https://raw.githubusercontent.com/microsoft/benchmark-qed/refs/heads/main/datasets{dataset}/raw_data.zip"
+            api_url = f"https://raw.githubusercontent.com/microsoft/benchmark-qed/refs/heads/main/datasets/{dataset}/raw_data.zip"
             response = requests.get(api_url, timeout=60)
             output_file = output_dir / f"{dataset}.zip"
             output_file.write_bytes(response.content)
