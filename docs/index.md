@@ -23,23 +23,24 @@ Install [Python 3.11+](https://www.python.org/downloads/)
 
 To get started with BenchmarkQED, you have two options:
 
-1. Install from pypi: 
+1. [Install from PyPI](https://pypi.org/project/benchmark-qed/): 
 ```sh
 pip install benchmark-qed
 ```
 2. [Use it from source](./developing.md)
 
 ## Usage
-
-The following describes in more detail the 3 components of BenchmarkQED, including: AutoQ, AutoE, and AutoD. It also provides end-to-end examples for using the AutoQ and AutoE components, using the install from pypi option.
+The sections below describe the three main components of BenchmarkQED—AutoQ, AutoE, and AutoD. You will also find step-by-step examples demonstrating how to use AutoQ and AutoE, using the Install from PyPI option.
 
 ### AutoQ
 ![AutoQ diagram](images/AutoQ.png)
 
 The AutoQ component generates four synthetic query classes based on the scope and source of the dataset. 
+
 - *Query Scope*: the extent of the dataset that the question addresses
     - *Local* queries targeting specific details of a text corpus (e.g., *"What are the public health implications of the Alaskapox virus in Alaska?"*)
     - *Global* queries targeting general aspects of a text corpus such as common themes, trends, concerns (e.g., *"Across the dataset, what are the main public health initiatives mentioned that target underserved communities?"*)
+
 - *Query Source*: the information used to generated local and global queries
     - *Data-driven* queries based on text sampled from the overall corpus
     - *Activity-driven* queries based on potential activities consistent with the data
@@ -81,7 +82,7 @@ For detailed instructions on configuring and running AutoQ from the command line
 To learn more about the query synthesis process and using AutoQ programmatically, refer to the [AutoQ Notebook Example](notebooks/autoq.ipynb).
 
 ### AutoE
-The AutoE component automates the evaluation of RAG methods using the LLM-as-a-Judge approach. AutoE evaluates RAG-generated answers over a set of queries, which can be generated from AutoQ or from other sources. For each query, AutoE presents an LLM with pairs of answers, along with the query and target metric, in a counterbalanced order, and the model judges whether the first answer wins, loses, or ties with the second. Aggregating these judgments across multiple queries and trials yields **win rates** for each method. By default, AutoE compares RAG answers using four quality metrics: relevance, comprehensiveness, diversity, and empowerment, while also supporting user-defined metrics.
+The AutoE component automates the evaluation of RAG methods using the LLM-as-a-Judge approach. AutoE evaluates RAG-generated answers over a set of queries, which can be generated from AutoQ or from other sources. For each query, AutoE presents an LLM with pairs of answers (along with the query and target metric) in a counterbalanced order, and the model judges whether the first answer wins, loses, or ties with the second. Aggregating these judgments across multiple queries and trials yields **win rates** for each method. By default, AutoE compares RAG answers using four quality metrics: relevance, comprehensiveness, diversity, and empowerment, while also supporting user-defined metrics.
 
 When reference answers (such as ground truth or "gold standard" responses) are available, AutoE can evaluate RAG-generated answers against these references using metrics like correctness, completeness, or other user-defined criteria on a customizable scoring scale.
 
