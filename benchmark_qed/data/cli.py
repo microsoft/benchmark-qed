@@ -43,7 +43,7 @@ def download(
         case Dataset.EXAMPLE_ANSWERS:
             api_url = f"https://raw.githubusercontent.com/microsoft/benchmark-qed/refs/heads/main/docs/notebooks/{dataset}/raw_data.zip"
             response = requests.get(api_url, timeout=60)
-            output_file = output_dir / dataset
+            output_file = output_dir / f"{dataset}.zip"
             output_file.write_bytes(response.content)
 
         case Dataset.AP_NEWS | Dataset.PODCAST:
