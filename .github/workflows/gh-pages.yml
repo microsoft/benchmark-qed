@@ -1,0 +1,46 @@
+name: gh-pages
+on:
+  push:
+    branches: 
+      - main
+permissions:
+  contents: write
+
+env:
+  UV_VERSION: 0.6.17
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      PYTHON_VERSION: '3.12'
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python ${{ env.PYTHON_VERSION}}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION}}
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v6
+        with:
+          version: ${{ env.UV_VERSION }}
+
+      - name: Install Dependencies
+        run: uv sync --locked --all-packages
+  
+      - name: mkdocs build
+        shell: bash
+        run: uv run poe build_docs
+
+      - name: List Docsite Contents
+        run: find site
+
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4.6.4
+        with:
+          branch: gh-pages
+          folder: site
+          clean: true
