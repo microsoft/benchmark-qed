@@ -20,19 +20,6 @@ class Dataset(StrEnum):
     EXAMPLE_ANSWERS = "example_answers"
 
 
-def _download_folder(contents: list[dict], output_dir: Path) -> None:
-    with Progress() as progress:
-        task = progress.add_task("Downloading files...", total=len(contents))
-        for item in contents:
-            item_name = item["name"]
-            download_url = item["download_url"]
-            if item["type"] == "file":
-                file_response = requests.get(download_url, timeout=60)
-                (output_dir / item_name).write_bytes(file_response.content)
-                typer.echo(f"Downloaded {item_name}")
-            progress.update(task, advance=1)
-
-
 @app.command()
 def download(
     dataset: Annotated[
@@ -53,16 +40,17 @@ def download(
         abort=True,
     )
 
-    if dataset == Dataset.EXAMPLE_ANSWERS:
-        api_url = f"https://api.github.com/repos/microsoft/benchmark-qed/contents/docs/notebooks/{dataset}"
-        for subdir in ["graphrag_global", "lazygraphrag", "vector_rag"]:
-            response = requests.get(f"{api_url}/{subdir}", timeout=60)
-            contents = response.json()
-            output_subdir = output_dir / subdir
-            output_subdir.mkdir(parents=True, exist_ok=True)
-            _download_folder(contents, output_subdir)
-    else:
-        api_url = f"https://api.github.com/repos/microsoft/benchmark-qed/contents/datasets/{dataset}"
-        response = requests.get(api_url, timeout=60)
-        contents = response.json()
-        _download_folder(contents, output_dir)
+    output_dir.mkdir(parents=True, exist_ok=True)
+
+    match dataset:
+        case Dataset.EXAMPLE_ANSWERS:
+            api_url = f"https://raw.githubusercontent.com/microsoft/benchmark-qed/refs/heads/main/docs/notebooks/{dataset}/raw_data.zip"
+            response = requests.get(api_url, timeout=60)
+            output_file = output_dir / dataset
+            output_file.write_bytes(response.content)
+
+        case Dataset.AP_NEWS | Dataset.PODCAST:
+            api_url = f"https://raw.githubusercontent.com/microsoft/benchmark-qed/refs/heads/main/datasets{dataset}/raw_data.zip"
+            response = requests.get(api_url, timeout=60)
+            output_file = output_dir / f"{dataset}.zip"
+            output_file.write_bytes(response.content)
