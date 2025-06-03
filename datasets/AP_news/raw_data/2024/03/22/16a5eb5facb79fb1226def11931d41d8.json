@@ -1,0 +1,432 @@
+﻿{
+    "altids": {
+        "itemid": "16a5eb5facb79fb1226def11931d41d8",
+        "etag": "16a5eb5facb79fb1226def11931d41d8_10a12aza0c0",
+        "friendlykey": "842186376385",
+        "referenceid": "EU--Britain-Royals"
+    },
+    "version": 10,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2024-03-22T21:25:56Z",
+    "firstcreated": "2024-03-22T18:05:23Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "ednote": "Eds: UPDATES: Changes lead photo.; Updates Media.",
+    "editorialtypes": [
+        "Lead"
+    ],
+    "signals": [
+        "newscontent"
+    ],
+    "title": "EU--Britain-Royals",
+    "headline": "Kate, Princess of Wales, reveals she has cancer and is undergoing chemotherapy",
+    "headline_extended": "Kate, the Princess of Wales, reveals she has cancer and is undergoing chemotherapy",
+    "slugline": "BC-EU--Britain-Royals, 10th Ld-Writethru",
+    "description_summary": "Kate, the Princess of Wales, reveals she has cancer and is undergoing chemotherapy. The stunning video announcement Friday came after weeks of speculation spread on social media about her whereabouts and health since she was hospitalized in January for unspecified abdominal surgery. Kate, 42, hadn\u2019t been seen publicly since Christmas until video surfaced this week of her with her husband, Prince William, heir to the throne, walking from a farm shop near their Windsor home. Kensington Palace had given little detail about Kate\u2019s condition beyond saying it wasn\u2019t cancer-related, the surgery was successful and recuperation would keep the princess away from public duties until April.",
+    "bylines": [
+        {
+            "by": "By BRIAN MELLEY and JILL LAWLESS",
+            "title": "Associated Press"
+        }
+    ],
+    "located": "LONDON",
+    "datelinelocation": {
+        "city": "London",
+        "countrycode": "GBR",
+        "countryname": "United Kingdom",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                -0.12574,
+                51.50853
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "kate middleton health cancer"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "person": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "1b145ec16d324e31a17d0741aa228c12",
+            "name": "Prince Harry",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "GOVERNMENT_FIGURE",
+                "PERSON",
+                "ROYALTY"
+            ],
+            "relevance": 42
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f8955706b58c4b71901d46201750aa48",
+            "name": "King Charles III",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "GOVERNMENT_FIGURE",
+                "PERSON",
+                "ROYALTY"
+            ],
+            "relevance": 46
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "l",
+            "name": "l"
+        },
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "i",
+            "name": "i"
+        },
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "e",
+            "name": "e"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "468257dba1c848ca93ba314d4ce86539",
+            "name": "Surgery",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 57
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e22524b87de410048f91df092526b43e",
+            "name": "Cancer",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 70
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 93
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "90aeac5089ef10048f63d56c852d093e",
+            "name": "Royalty",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 93
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "79f1fae08359100489f8df583201d303",
+            "name": "Chemotherapy",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 93
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "3e37e4b87df7100483d5df092526b43e",
+            "name": "Lifestyle",
+            "creator": "Editorial",
+            "editorial_subject": "Lifestyle",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "16cb0ba3e6d24d97ace39f5a1924669a",
+            "name": "Entertainment",
+            "creator": "Editorial",
+            "editorial_subject": "Entertainment",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "bb2d2c5f441a452cb24bb511a2ab5eea",
+            "name": "World news",
+            "creator": "Editorial",
+            "editorial_subject": "World news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "organisation": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "4bdfabef1bb34b199c33df280bb8e4fc",
+            "name": "United Kingdom government",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 32
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "7a55e0187eff10048492df092526b43e",
+            "name": "London",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "df4691387d6b10048fdeba7fa5283c3e"
+            ],
+            "locationtype": {
+                "code": "9d26a20b35f0484a891740f8189d4c7b",
+                "name": "City"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -0.12574,
+                    51.50853
+                ]
+            },
+            "relevance": 50,
+            "parentnames": [
+                "England"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e293fee87d6b10048fe8ba7fa5283c3e",
+            "name": "Wales",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "66219fb07d5b100482e2c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "d83e15f769714aab9d49a03eab919128",
+                "name": "Constituent country"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -3.5,
+                    52.5
+                ]
+            },
+            "relevance": 85,
+            "parentnames": [
+                "United Kingdom"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "661850e07d5b100481f4c076b8e3055c",
+            "name": "Europe",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "associations": {
+        "1": {
+            "altids": {
+                "itemid": "4c35092fdc654d28a1cc293177119ba0"
+            },
+            "type": "video"
+        },
+        "2": {
+            "altids": {
+                "itemid": "380cb34e3eab4184a890d58e408d5594"
+            },
+            "type": "video"
+        },
+        "3": {
+            "altids": {
+                "itemid": "19af37c79a6a4f68a926832fcbe123c4"
+            },
+            "type": "audio"
+        },
+        "4": {
+            "altids": {
+                "itemid": "640195b483c14265a4f998baa0a471bc"
+            },
+            "type": "audio"
+        },
+        "5": {
+            "altids": {
+                "itemid": "b57469a65e8d40199d4b3d71aa6b7f08"
+            },
+            "type": "audio"
+        },
+        "6": {
+            "altids": {
+                "itemid": "82d56c02407d4e578899192f81b55995"
+            },
+            "type": "audio"
+        },
+        "7": {
+            "altids": {
+                "itemid": "2f89c625a3ea472b84f7b69a21009f6a"
+            },
+            "type": "audio"
+        },
+        "8": {
+            "altids": {
+                "itemid": "ce6507d3caa64776aec8eee2e9359d54"
+            },
+            "type": "audio"
+        },
+        "9": {
+            "altids": {
+                "itemid": "53494ca4e85d46c08470413d0ae802f9"
+            },
+            "type": "picture"
+        },
+        "10": {
+            "altids": {
+                "itemid": "3d87a007b40c43e3ad12673582169d21"
+            },
+            "type": "picture"
+        },
+        "11": {
+            "altids": {
+                "itemid": "30e9d26880db418da68e00cf396ace47"
+            },
+            "type": "picture"
+        },
+        "12": {
+            "altids": {
+                "itemid": "f101c592a4db4e62a486975c3cdb6bd2"
+            },
+            "type": "picture"
+        },
+        "13": {
+            "altids": {
+                "itemid": "47bba7de4d884d7e8d9b56ea02d6d8dd"
+            },
+            "type": "picture"
+        },
+        "14": {
+            "altids": {
+                "itemid": "29bd1cecf1a34d97a81e6cd9ea2a920f"
+            },
+            "type": "picture"
+        },
+        "15": {
+            "altids": {
+                "itemid": "a4965ce14bdf487d821ec596f8cca019"
+            },
+            "type": "picture"
+        },
+        "16": {
+            "altids": {
+                "itemid": "3c57838a4d4a41eebae98640dc4d6c5e"
+            },
+            "type": "picture"
+        },
+        "17": {
+            "altids": {
+                "itemid": "cc7357e71fd24d3593a850e81cd8c4e9"
+            },
+            "type": "picture"
+        }
+    },
+    "body_nitf": "<p>LONDON (AP) \u2014 Kate, <a href=\"https://apnews.com/article/kate-middleton-princess-wales-britain-photos-2a53e8ed0cb5107ada54461d61ffd964\">the Princess of Wales</a>, has cancer and is undergoing chemotherapy, she revealed Friday in <a href=\"https://apnews.com/article/kate-middleton-princess-wales-profile-cancer-6060f1d86cbba06eea8404d0f3c8b6cb\">a stunning announcement</a> that followed weeks of speculation about her health and whereabouts.</p><p>The princess disclosed <a href=\"https://apnews.com/article/kate-middleton-cancer-diagnosis-what-we-know-edefdc8674d100c8d6eb4619c85561d5\">her condition</a> in a video message recorded Wednesday in Windsor and broadcast Friday. It came after relentless speculation on social media ever since January, when she was hospitalized for unspecified <a href=\"https://apnews.com/article/kate-princess-of-wales-operation-uk-royals-eea1a111a295152b8820b94fd257c12d\">abdominal surgery</a>.</p><p>Kate asked for \u201ctime, space and privacy\u201d while she is treated for an unspecified type of cancer that was discovered after what she described as \u201cmajor\u201d surgery.</p><p>Wearing a casual striped sweater and jeans, Kate sat on a wooden bench in front of a lawn dotted with daffodils. The flowers, which bloom in early spring, are often used as a symbol of hope for people fighting cancer.</p><p>\u201cI am well,\" she said. \"I am getting stronger every day by focusing on the things that will help me heal.\u201d</p><p>Kate, 42, hadn\u2019t been seen publicly since Christmas until <a href=\"https://apnews.com/article/kate-william-uk-royals-prince-shopping-video-c7f3483e8850b859845897a1433b60c0\">video surfaced this week</a> of her with her husband, Prince William, heir to the throne. It showed them walking from a shop that sells produce grown on the royal family's Windsor estate.</p><p>The news is another jolt for the royal family since the announcement last month that <a href=\"https://apnews.com/article/king-charles-iii-cancer-britain-e0408a7c9bb86ad2af8754ce4b37d65e\">King Charles III</a> was being treated for an unspecified type of cancer that was discovered while undergoing a procedure for a benign enlarged prostate.</p><p>Charles said he is \u201cso proud of Catherine for her courage in speaking as she did,\u201d according to a statement released by Buckingham Palace. The king, who received prostate treatment in the same hospital and at the same time Kate had her surgery, remained in the \u201cclosest contact with his beloved daughter-in-law\" in the past weeks.</p><p>The king and Queen Camilla \u201cwill continue to offer their love and support to the whole family through this difficult time,\" the palace said.</p><p>Prince Harry and his wife Meghan, who have been estranged from William and Kate since their move to California in 2020, wished the princess well.</p><p>\u201cWe wish health and healing for Kate and the family, and hope they are able to do so privately and in peace,\" they said in a statement.</p><p>Before Friday, Kensington Palace had given little detail about Kate\u2019s condition beyond saying it wasn\u2019t cancer-related, the surgery was successful and recuperation would keep the princess away from public duties until April. Kate said it had been thought that her condition was non-cancerous until post-surgery tests revealed the diagnosis.</p><p>\u201cThis of course came as a huge shock, and William and I have been doing everything we can to process and manage this privately for the sake of our young family,\" she said.</p><p>By choosing to speak directly to the country and the world about her condition, rather than issuing a statement through the palace, Kate offered a level of intimacy and transparency atypical of a member of the royal family and may help tamp down runaway conjecture. The king\u2019s disclosure of his condition was also notably open by royal standards.</p><p>Kate said it had taken her time to recover from the surgery before starting \u201cpreventative\u201d treatment, which she said was in the early stages.</p><p>Dr. Shivan Sivakumar, associate professor in oncology at the University of Birmingham, said it\u2019s unclear what the princess meant by \u201cpreventative\u201d chemotherapy but he presumed that it\u2019s what is known as \u201cadjuvant\u201d chemotherapy in the medical profession.</p><p>\u201cThis is chemotherapy after an operation to prevent recurrence,\u201d he said. \u201cThis is to attempt to destroy any circulating cancer cells.\u201d</p><p>Kate said it has been \u201can incredibly tough couple of months\u201d for her family. She said it had taken time to tell her three children Prince George, Princess Charlotte and Prince Louis in a way \u201cappropriate for them\u201d and reassure them she will be OK.</p><p>The announcement came after the start of the Easter holidays, which will shield the children from media coverage of the news.</p><p>British Prime Minister Rishi Sunak said in a statement that Kate \u201chas shown tremendous bravery.\u201d\u201d</p><p>\u201cWe are incredibly sad to hear of the news,\u201d said White House Press Secretary Karine Jean-Pierre, who opened her briefing with reporters moments after news of cancer treatment broke. \u201cWe are taking this in, this terrible news, as all of you are.\u201d</p><p>Charles, 75, has withdrawn from public duties while he has cancer treatment, though he's appeared frequently in photos carrying on meetings with government officials and dignitaries and was even seen going to church.</p><p>Kate, on the other hand, had been out of view instead of appearing at charity events and promoting causes such as supporting children early in life, leading to weeks of <a href=\"https://apnews.com/article/kate-princess-of-wales-trooping-color-britain-d55d1e8bbf1a9357b116e8b38a16e92d\">speculation and gossip</a>. Attempts to put rumors to bed by releasing a photo of her on Mother's Day in the U.K. surrounded by her three smiling children backfired when The Associated Press and other news agencies retracted the image because it had been manipulated.</p><p>Kate <a href=\"https://apnews.com/article/princess-kate-manipulated-photo-482fda64281b4a63ccf30364d96b2622\">issued a statement</a> the next day acknowledging she liked to \u201cexperiment with editing\u201d and apologizing for \u201cany confusion\u201d the photo had caused. But that did little to quell the speculation.</p><p>Even the footage published by The Sun and TMZ that appeared to show Kate and William shopping sparked a new flurry of rumor-mongering, with some armchair sleuths refusing to believe the video showed Kate at all.</p><p>Earlier this week, a British privacy watchdog said it was investigating a report that staff at the private London hospital where she was treated tried to snoop on her medical records while she was a patient for <a href=\"https://apnews.com/article/kate-princess-of-wales-operation-uk-royals-eea1a111a295152b8820b94fd257c12d\">abdominal surgery.</a></p><p>The former Kate Middleton, who married William in a fairy-tale wedding in 2011, has boosted the popularity and appeal of the British monarchy worldwide more than any royal since Princess Diana.</p><p>The princess is the oldest of three children brought up in a well-to-do neighborhood in Berkshire, west of London. The Middletons have no aristocratic background, and the British press often referred to Kate as a \u201ccommoner\u201d marrying into royalty.</p><p>Her brother James Middleton posted on Instagram: \u201cOver the years, we have climbed many mountains together. As a family, we will climb this one with you too.\u201d</p><p>Kate attended the private school Marlborough College and then University of St. Andrews in Scotland, where she met William around 2001. Friends and housemates at first, their relationship became widely publicized when they were pictured together on a skiing holiday in Switzerland in 2004.</p><p>Kate graduated in 2005 with a degree in art history and a budding relationship with the prince.</p><p>___</p><p>Pan Pylas in London and Chris Megerian in Washington, contributed to this report.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/kate-middleton-health-cancer-16a5eb5facb79fb1226def11931d41d8",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 5,
+            "reason": "The document is highly relevant to the topic of health as it discusses Kate, Princess of Wales, revealing her cancer diagnosis and undergoing chemotherapy. It provides detailed information about her medical condition, treatment, and the impact on her family and public duties. The document also includes expert opinions on her treatment and reactions from public figures, which are all pertinent to the topic of health."
+        }
+    }
+}

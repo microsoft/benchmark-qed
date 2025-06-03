@@ -1,0 +1,247 @@
+﻿{
+    "altids": {
+        "itemid": "0f3e2c1e6db190883a5f9a5c63927dc0",
+        "etag": "0f3e2c1e6db190883a5f9a5c63927dc0_2a8aza0c0",
+        "friendlykey": "896931832274",
+        "referenceid": "EU--REL-Vatican-Pope-Flu"
+    },
+    "version": 2,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2024-02-24T17:53:15Z",
+    "firstcreated": "2024-02-24T09:25:08Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "ednote": "Eds: UPDATES: This story has been updated with comment from a Vatican spokesman comment, background on Francis' health and possible future steps, and to add a byline.; Updates Media.",
+    "editorialtypes": [
+        "Lead"
+    ],
+    "signals": [
+        "newscontent"
+    ],
+    "title": "EU--REL-Vatican-Pope-Flu",
+    "headline": "Pope Francis cancels a meeting with Rome deacons because of mild flu, the Vatican says",
+    "headline_extended": "The Vatican says that Pope Francis has canceled an audience as a precaution after coming down with mild flu",
+    "slugline": "BC-EU--REL-Vatican-Pope-Flu, 2nd Ld-Writethru",
+    "description_summary": "The Vatican says that Pope Francis has canceled an audience as a precaution after coming down with mild flu. Francis was scheduled to meet with Rome deacons on Saturday morning. Vatican spokesman Matteo Bruni said that the pope\u2019s weekly Sunday Angelus address was still to be confirmed. No further health updates were expected for the day. The 87-year-old pontiff has had several health problems in recent years. He was forced to cancel some of his activities and an international trip in late November because of breathing problems. A scan at the time ruled out lung complications. Francis had a part of one lung removed when he was young and still living in his native Argentina.",
+    "bylines": [
+        {
+            "by": "By GIADA ZAMPANO",
+            "title": "Associated Press"
+        }
+    ],
+    "located": "VATICAN CITY",
+    "datelinelocation": {
+        "city": "Vatican City",
+        "countrycode": "VAT",
+        "countryname": "Vatican City",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                12.4533,
+                41.90225
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "Pope health flu audience cancelled Vatican"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "person": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "2fd38d1dee8c4287a13ae64992300d96",
+            "name": "Pope Francis",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 89
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "i",
+            "name": "i"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "026a1118e94443a2aacc08a2e70cc77b",
+            "name": "Religion",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 89
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "084e24e87f00100481c7f571351eed07",
+            "name": "Flu",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 43
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 57
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "bb2d2c5f441a452cb24bb511a2ab5eea",
+            "name": "World news",
+            "creator": "Editorial",
+            "editorial_subject": "World news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Editorial",
+            "editorial_subject": "Health",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "026a1118e94443a2aacc08a2e70cc77b",
+            "name": "Religion",
+            "creator": "Editorial",
+            "editorial_subject": "Religion",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f3e0ed387eff10048539df092526b43e",
+            "name": "Vatican City",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661850e07d5b100481f4c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "01f56e0e654841eca2e69bf2cbcc0526",
+                "name": "Nation"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    12.4533,
+                    41.90225
+                ]
+            },
+            "relevance": 57,
+            "parentnames": [
+                "Europe"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "661850e07d5b100481f4c076b8e3055c",
+            "name": "Europe",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "associations": {
+        "1": {
+            "altids": {
+                "itemid": "d646267087b843d6aab868effd86bddc"
+            },
+            "type": "picture"
+        },
+        "2": {
+            "altids": {
+                "itemid": "adfe7b8fd86a4242be16a50fc44e0e4c"
+            },
+            "type": "audio"
+        }
+    },
+    "body_nitf": "<p>VATICAN CITY (AP) \u2014 Pope Francis has canceled an audience scheduled for Saturday as a precaution after coming down with mild flu, the Vatican press office said in a short statement, without adding further details.</p><p>Francis was scheduled to meet with Rome deacons in the morning.</p><p>Vatican spokesman Matteo Bruni said later Saturday that the pope\u2019s weekly Sunday Angelus address was still to be confirmed, and that no further health updates were expected for the day.</p><p>The 87-year-old pontiff has had several health problems in recent years. In late November, he was forced to cancel some of his activities and an international trip because of breathing problems. A scan at the time ruled out lung complications. Francis had a part of one lung removed when he was young and still living in his native Argentina.</p><p>In April, the pope spent three days at Rome's Gemelli hospital for what the Vatican said was bronchitis. He was discharged after receiving intravenous antibiotics.</p><p>Francis also spent 10 days at the same hospital in July 2021 following intestinal surgery for narrowing of the bowel. He was readmitted in June 2023 for <a href=\"https://apnews.com/article/vatican-pope-health-758c3d7b07e6d6f242c4a5ea6f2de154\">an operation</a> to repair an abdominal hernia and remove scarring from previous surgeries.</p><p>When asked about his health in a recent television interview, Francis quipped what has become his standard line: \u201cStill alive, you know.\u201d</p><p>Over the past two years, Francis has indicated several times that he would be ready to step down, following the example of his predecessor, Benedict XVI, if his health deteriorates to the point that it becomes an impediment to him leading the Catholic Church. However, in a TV interview last month, he said he felt in good health and denied immediate plans to resign.</p><p>Speculation about Francis\u2019 health and the future of his pontificate has risen following Benedict's death in late 2022. Benedict's resignation in 2013 marked a turning point for the church, as he became the first pontiff in six centuries to step down.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/pope-health-flu-audience-cancelled-vatican-0f3e2c1e6db190883a5f9a5c63927dc0",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 5,
+            "reason": "The document discusses Pope Francis canceling a meeting due to mild flu and provides detailed information about his recent health issues, including past hospitalizations and surgeries. It also touches on the potential impact of his health on his role as the pontiff. The content is highly relevant to the topic of health as it focuses on the health status and medical history of a significant public figure."
+        }
+    }
+}

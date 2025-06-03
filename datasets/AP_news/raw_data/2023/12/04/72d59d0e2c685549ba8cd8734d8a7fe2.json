@@ -1,0 +1,277 @@
+﻿{
+    "altids": {
+        "itemid": "72d59d0e2c685549ba8cd8734d8a7fe2",
+        "etag": "72d59d0e2c685549ba8cd8734d8a7fe2_0a4aza0c0",
+        "friendlykey": "636432450175",
+        "referenceid": "AS--North Korea-More Babies"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2023-12-04T08:56:18Z",
+    "firstcreated": "2023-12-04T08:56:16Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "ednote": "Eds: UPDATES: With AP Photos.",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "AS--North Korea-More Babies",
+    "headline": "The North Korean leader calls for women to have more children to halt a fall in the birthrate",
+    "headline_extended": "North Korean leader Kim Jong Un says it is a duty of women to halt a fall in the country\u2019s birthrate",
+    "slugline": "AP-AS-North-Korea-More-Babies",
+    "description_summary": "North Korean leader Kim Jong Un says it is a duty of women to halt a fall in the country\u2019s birthrate. He described it as crucial for the \u201cstrengthening of national power and progress of the revolution,\u201d state media said Monday. It was the latest in a series of government statements calling for people to have more children. While getting a detailed read on North Korea\u2019s population trends is difficult because of the limited statistics it discloses, South Korea\u2019s government assesses that the North\u2019s birthrate has declined steadily for the past 10 years. That is a concerning development for a country that mainly depends on mobilized labor to help keep afloat its broken, heavily sanctioned economy.",
+    "bylines": [
+        {
+            "by": "By KIM TONG-HYUNG and HYUNG-JIN KIM",
+            "title": "Associated Press"
+        }
+    ],
+    "located": "SEOUL, South Korea",
+    "datelinelocation": {
+        "city": "Seoul",
+        "countrycode": "KOR",
+        "countryname": "South Korea",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                126.9784,
+                37.566
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2023 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "north korea kim jong un birthrate"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "person": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "06f7ac59a9604ecdada76911bc49fdb2",
+            "name": "Kim Jong-un",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "POLITICIAN",
+                "PERSON"
+            ],
+            "relevance": 70
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "i",
+            "name": "i"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "91017718872a10048e35d7c656897a02",
+            "name": "Birth rates",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 96
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86aad5207dac100488ecba7fa5283c3e",
+            "name": "Politics",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 38
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "bb2d2c5f441a452cb24bb511a2ab5eea",
+            "name": "World news",
+            "creator": "Editorial",
+            "editorial_subject": "World news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "organisation": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "9d7a49379d0e421799151c2b38f81f54",
+            "name": "North Korea government",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 65
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "993327ccec064b6087c1699c1b5f9410",
+            "name": "South Korea government",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 65
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "661be2f07d5b10048252c076b8e3055c",
+            "name": "South Korea",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661812607d5b100481f3c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "01f56e0e654841eca2e69bf2cbcc0526",
+                "name": "Nation"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    127.5,
+                    37
+                ]
+            },
+            "relevance": 83,
+            "parentnames": [
+                "Asia"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "661be2f07d5b10048251c076b8e3055c",
+            "name": "North Korea",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661812607d5b100481f3c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "01f56e0e654841eca2e69bf2cbcc0526",
+                "name": "Nation"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    127,
+                    40
+                ]
+            },
+            "relevance": 97,
+            "parentnames": [
+                "Asia"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "661812607d5b100481f3c076b8e3055c",
+            "name": "Asia",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "associations": {
+        "1": {
+            "altids": {
+                "itemid": "7a1d558613064a8d9746d4ecc32cc6d1"
+            },
+            "type": "picture"
+        },
+        "2": {
+            "altids": {
+                "itemid": "ca94f3050d2148299df7a3ce8d09f5f0"
+            },
+            "type": "picture"
+        },
+        "3": {
+            "altids": {
+                "itemid": "5c92be8a3fe7443e8890897e2eedba6a"
+            },
+            "type": "picture"
+        },
+        "4": {
+            "altids": {
+                "itemid": "fc64fc158a3346deafc7fabe5234512f"
+            },
+            "type": "picture"
+        }
+    },
+    "body_nitf": "<p>SEOUL, South Korea (AP) \u2014 North Korean leader Kim Jong Un has said it is a duty of women to halt a fall in the country\u2019s births in order to strengthen national power, state media said Monday, as his government steps up the call for the people to have more children.</p><p>While getting a detailed read on North Korea\u2019s population trends is extremely difficult because of the limited statistics it discloses, South Korea\u2019s government assesses that the North\u2019s fertility rate has declined steadily for the past 10 years. That is a concerning development for a country that depends on mobilized labor to help keep its broken, heavily sanctioned economy afloat.</p><p>Kim's latest appeal for women to have more children was made Sunday during the country\u2019s National Mothers Meeting, the first of its kind in 11 years.</p><p>\u201cStopping the decline in birthrates and providing good child care and education are all our family affairs that we should solve together with our mothers,\" Kim said in his opening speech.</p><p>According to South Korea\u2019s government statistics agency, North Korea\u2019s total fertility rate, or the average number of babies expected to be born to a woman over her lifetime, was at 1.79 in 2022, down from 1.88 in 2014. The decline is still slower than its wealthier rival South Korea, whose fertility rate last year was 0.78, down from 1.20 in 2014.</p><p>South Korea's fertility rate, the lowest in the developed world, is believed to be due to a potent cocktail of reasons discouraging people from having babies, including a decaying job market, a brutally competitive school environment for children, traditionally weak child care assistance and a male-centered corporate culture where many women find it impossible to combine careers and family.</p><p>While North Korea is one of the poorest nations in the world, the change in its demographic structure is similar to that of rich countries, some observers say.</p><p>\u201cMany families in North Korea also don't intend to have more than one child these days as they know they need lots of money to raise their kids, send them to school and help them get jobs,\u201d said Ahn Kyung-su, head of DPRKHEALTH.ORG, a website focusing on health issues in North Korea.</p><p>Ahn, who has interviewed many North Korean defectors, said the smuggling of a vast amount of South Korean TV dramas and movies in the past 20 years that showed an elevated social status for women has also likely influenced women in North Korea not to have many children.</p><p>North Korea implemented birth control programs in the 1970-80s to slow a postwar population growth. The country\u2019s fertility rate recorded a major decline following a famine in the mid-1990s that was estimated to have killed hundreds of thousands of people, the Seoul-based Hyundai Research Institute said in a report in August.</p><p>\u201cGiven North Korea lacks resources and technological advancements, it could face difficulties to revive and develop its manufacturing industry if sufficient labor forces are not provided,\u201d the institute report said.</p><p>According to North Korean state media reports this year, the country has introduced a set of benefits for families with three or more children, including preferential free housing arrangements, state subsidies, free food, medicine and household goods and educational perks for children.</p><p>South Korea\u2019s statistics agency estimates the North\u2019s population at 25.7 million. The Hyundai institute report said that North Korea was expected to experience a population shrink from 2034 and forecast its population would decrease to 23.7 million by 2070.</p><p>Ahn, the website head, said that Kim Jong Un's repeated public appearances with his young daughter, Ju Ae, are also likely be efforts to encourage families. Other experts said the daughter's appearances were more likely an attempt to show she's her father's heir.</p><p>___ Associated Press writer Jiwon Song contributed to this report.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/north-korea-kim-jong-un-birthrate-72d59d0e2c685549ba8cd8734d8a7fe2",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 3,
+            "reason": "The document primarily discusses the demographic and socio-political aspects of North Korea's declining birthrate and the government's efforts to encourage women to have more children. While it touches on health-related issues such as child care and the impact of economic conditions on family planning, the main focus is not on health per se but rather on population trends and national policy. Therefore, it is somewhat relevant to health but not highly focused on it."
+        }
+    }
+}

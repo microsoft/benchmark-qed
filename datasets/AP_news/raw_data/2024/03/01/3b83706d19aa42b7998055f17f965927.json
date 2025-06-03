@@ -1,0 +1,221 @@
+﻿{
+    "altids": {
+        "itemid": "3b83706d19aa42b7998055f17f965927",
+        "etag": "3b83706d19aa42b7998055f17f965927_0a4aza0c0",
+        "friendlykey": "616452989884",
+        "referenceid": "EU--REL-Vatican-Pope-Health"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2024-03-01T13:30:10Z",
+    "firstcreated": "2024-03-01T13:30:09Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "ednote": "Eds: UPDATES: Updates Media.",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "EU--REL-Vatican-Pope-Health",
+    "headline": "Pope asks an aide to read a speech aloud for him, raising further concerns over his health",
+    "headline_extended": "Pope Francis, who has been suffering from the flu, asked an aide to read out his prepared speech at a conference in the Vatican Friday, saying he was not yet well and becomes fatigued",
+    "slugline": "BC-EU--REL-Vatican-Pope-Health",
+    "description_summary": "Pope Francis, who has been suffering from the flu, asked an aide to read out his prepared speech at a conference in the Vatican Friday, saying he was not yet well and becomes fatigued. The 87-year-old Pontiff was taken to a Roman hospital on Wednesday for diagnostic testing after having to cancel some public audiences. He spoke off the cuff at the start of the conference on the roles of men and women in the church, blasting what he called \u201cgender ideology\u201d as the \u201cugliest danger.\u201d However, he passed his speech to an aid, saying that reading fatigues him. His health troubles have raised concern about his capacity to continue leading the church.",
+    "located": "VATICAN CITY",
+    "datelinelocation": {
+        "city": "Vatican City",
+        "countrycode": "VAT",
+        "countryname": "Vatican City",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                12.4533,
+                41.90225
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "Vatican Pope Francis health flu gender ideology"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "person": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "2fd38d1dee8c4287a13ae64992300d96",
+            "name": "Pope Francis",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 59
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "i",
+            "name": "i"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "026a1118e94443a2aacc08a2e70cc77b",
+            "name": "Religion",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 85
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "084e24e87f00100481c7f571351eed07",
+            "name": "Flu",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 37
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 70
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "026a1118e94443a2aacc08a2e70cc77b",
+            "name": "Religion",
+            "creator": "Editorial",
+            "editorial_subject": "Religion",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "bb2d2c5f441a452cb24bb511a2ab5eea",
+            "name": "World news",
+            "creator": "Editorial",
+            "editorial_subject": "World news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f3e0ed387eff10048539df092526b43e",
+            "name": "Vatican City",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661850e07d5b100481f4c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "01f56e0e654841eca2e69bf2cbcc0526",
+                "name": "Nation"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    12.4533,
+                    41.90225
+                ]
+            },
+            "relevance": 36,
+            "parentnames": [
+                "Europe"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "661850e07d5b100481f4c076b8e3055c",
+            "name": "Europe",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "associations": {
+        "1": {
+            "altids": {
+                "itemid": "a5e039f1e4f44d058b8324107a52e5b4"
+            },
+            "type": "picture"
+        }
+    },
+    "body_nitf": "<p>VATICAN CITY (AP) \u2014 Pope Francis, who has been <a href=\"https://apnews.com/article/pope-health-flu-cancelled-audiences-vatican-4b3b90eb2ee71f7ddf98a54c56c39c14\">suffering from the flu</a>, asked an aide to read out his prepared speech at a conference in the Vatican Friday, saying he has not yet fully recovered from his latest ailment that has raised concerns about his capacity to continue leading the Roman Catholic Church.</p><p>The 87-year-old Pontiff, who was <a href=\"https://apnews.com/article/italy-pope-vatican-illness-landmines-peace-middle-east-ukraine-c9af33a0b467b1a134e9a4da96754e47\">taken to a Roman hospital</a> on Wednesday for diagnostic testing after having to cancel some public audiences, handed his speech to his aide, Mons. Filippo Ciampanelli.</p><p>\u201cI still have a cold and I get fatigued after reading for a while,\u201d he said. Francis, who has been hospitalized three times since becoming pope in 2013, began using a wheelchair and cane to walk after suffering knee trouble last year.</p><p>Speaking off the cuff at the opening of the two-day conference, entitled \u201cMan-Woman Image of God - For an Anthropology of Vocations,\u201d he blasted what he called \u201cgender ideology\u201d as the \u201cugliest danger\u201d.</p><p>\u201cIt is very important that this meeting is taking place, this encounter between men and women,\u201d he told the audience.</p><p>\u201cBecause the ugliest danger today is the gender ideology \u2026 I have asked for studies to be done on this ugly ideology of our time, which cancels out differences and makes everything the same. To cancel difference is to cancel humanity,\u201d he said.</p><p>The pontiff had canceled appointments last Saturday and Monday due to a persistent, but \u201cmild flu,\u201d but appeared as usual for the Sunday blessing from a window overlooking St. Peter\u2019s Square.</p><p>Last week, Francis coughed repeatedly as he presided over Ash Wednesday services at a Roman church, and opted not to participate in the traditional procession that inaugurates the church\u2019s Lenten season.</p><p>Over the past few months, Francis had to cancel a few activities and one international trip due to his <a href=\"https://apnews.com/article/pope-hospital-health-intestine-64750f0392511ea6dc6824b8f8db4f5a\">fragile health</a>, which has recently raised worries over his capacity to continue to lead the Catholic Church.</p><p>The Argentine pope had part of one lung removed as a young man because of a respiratory infection, and in 2021 had a chunk of his colon removed because of an intestinal inflammation. He has been using a wheelchair and cane since last year because of strained knee ligaments and a small knee fracture that have made walking and standing difficult.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/vatican-pope-francis-health-flu-gender-ideology-3b83706d19aa42b7998055f17f965927",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 5,
+            "reason": "The document is highly relevant to the topic of health. It provides detailed information about Pope Francis's current health issues, including his recent flu, hospitalization, and ongoing health challenges such as knee trouble and past surgeries. The document also discusses the impact of his health on his ability to perform his duties, which directly relates to the topic of health."
+        }
+    }
+}

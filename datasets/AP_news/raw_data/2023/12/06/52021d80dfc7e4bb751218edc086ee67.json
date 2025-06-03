@@ -1,0 +1,200 @@
+﻿{
+    "altids": {
+        "itemid": "52021d80dfc7e4bb751218edc086ee67",
+        "etag": "52021d80dfc7e4bb751218edc086ee67_0a2aza0c0",
+        "friendlykey": "727224220497",
+        "referenceid": "WV--Editorial Rdp"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Opinion",
+    "language": "en",
+    "versioncreated": "2023-12-07T12:10:39Z",
+    "firstcreated": "2023-12-06T21:43:56Z",
+    "editorialrole": "FullStory",
+    "fixture": {
+        "code": "21ea4067bb274c3b805353fb2b99ba70",
+        "name": "Editorial Roundup"
+    },
+    "pubstatus": "usable",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "WV--Editorial Rdp",
+    "headline": "Editorial Roundup: West Virginia",
+    "slugline": "BC-WV--Editorial Rdp",
+    "bylines": [
+        {
+            "by": "By The Associated Press"
+        }
+    ],
+    "copyrightnotice": "Copyright 2023 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "Editorial Rdp"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "48612b807c2b4b93bbbacbf54f547ad5",
+            "name": "Crime",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 37
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "4c96e8e92e0441579dbce2f9e8d06493",
+            "name": "Prisons",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 59
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "6cd98adfc84d405eadec8ca81bd37df4",
+            "name": "Access to health care",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 84
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "130bcce882c81004895adf092526b43e",
+            "name": "West Virginia",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -80.50009,
+                    38.50038
+                ]
+            },
+            "relevance": 72,
+            "parentnames": [
+                "United States"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "16a0c31882c810048966df092526b43e",
+            "name": "Charleston",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "130bcce882c81004895adf092526b43e"
+            ],
+            "locationtype": {
+                "code": "9d26a20b35f0484a891740f8189d4c7b",
+                "name": "City"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -81.63262,
+                    38.34982
+                ]
+            },
+            "relevance": 40,
+            "parentnames": [
+                "West Virginia"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "130bcce882c81004895adf092526b43e",
+            "name": "West Virginia",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "body_nitf": "<p>Charleston Gazette-Mail. December 6, 2023.</p><p>Editorial: Something is rotten at WV\u2019s Southern Regional Jail</p><p>The Southern Regional Jail, in Raleigh County, is emerging as the embodiment of everything that is wrong with the criminal justice system in West Virginia and, possibly, beyond.</p><p>In late November, six correctional officers at the jail were indicted on various charges related to last year\u2019s death of inmate Quantez Burks, 37. Officers are accused of taking Burks to various locations in the facility, including \u201cblind spots\u201d (areas not visible to security cameras) and allegedly beating him while he was handcuffed. Burks died during the assault, but his cause of death was listed as heart disease. Coincidentally, or perhaps not, 17 other inmates who have died at the facility over the past three years have heart disease listed as the cause of death.</p><p>Burks\u2019 family claims an investigation they funded found that Burks suffered a heart attack during the beating. All six officers are charged with trying to cover up the incident, with some allegedly coercing witnesses to say Burks was being combative and the resulting use of force wasn\u2019t excessive. Earlier in November, two other Southern Regional Jail correctional officers pleaded guilty to conspiracy charges connected to Burks\u2019 death.</p><p>This is just one of several incidents at the Southern Regional that have raised red flags about just what is happening inside the jail\u2019s walls. Nineteen inmates have died at the facility between 2021 and 2023, according to documents obtained by the Gazette-Mail. Roughly 1-in-5 of all inmate deaths in West Virginia going back to 2009 have occurred at Southern Regional.</p><p>A civil lawsuit, alleging unsanitary conditions at the jail led to inmate deaths, recently was settled. But not before a federal magistrate judge issued a ruling stating that the preponderance of missing documents from high-ranking state officials left no conclusion other than deliberate destruction of records. The lawsuit also alleged officials at Southern Regional Jail had inmates move hard-copy files of complaints so that federal investigators wouldn\u2019t be able to find them.</p><p>It doesn\u2019t take a criminal justice system expert to see there are serious problems at the Southern Regional Jail and the larger West Virginia Division of Corrections. This can\u2019t help but be exacerbated by the staffing shortages and overcrowding that caused Gov. Jim Justice to declare a state of emergency and mobilize the National Guard more than a year ago. The Guard is still on the job at corrections facilities around the state.</p><p>The Justice administration canned two state officials after the allegations that records were deliberately destroyed surfaced, but that\u2019s unlikely to resolve the apparent sprawling and systemic dysfunction in West Virginia\u2019s correctional facilities.</p><p>___</p><p>Parkersburg News and Sentinel. December 6, 2023.</p><p>Editorial: Medicaid: Check eligibility and make sure you\u2019re covered</p><p>West Virginia\u2019s Medicaid eligibility review has booted approximately 100,000 off the rolls so far. But according to a report by WDTV, many may remain eligible but did not respond to paperwork requests or may have a new address.</p><p>Renate Pore, health care policy consultant for West Virginians for Affordable Healthcare, told WDTV that will mean fewer resources for some of our most vulnerable residents.</p><p>\u201cThe 100,000 people who no longer have Medicaid coverage,\u201d Pore told the station, \u201cmay not even know they no longer have Medicaid coverage until they go to a doctor\u2019s office and find out that, indeed, their coverage has dropped.\u201d</p><p>Such a large reduction in Medicaid recipients doesn\u2019t just take away resources from some individuals who may need it, it means a 5% loss in federal funding for the program\u2019s operation and reimbursements, Pore said.</p><p>But what can be done about it?</p><p>Well, for starters, if you know someone who might need to check their status or start the Medicaid renewal process, direct them online to www.wvpath.wv.gov. They can call 877-716-1212 or visit a local Department of Health and Human Resources office.</p><p>Imagine needing medical attention and not being aware you were no longer on the Medicaid rolls until you went to the doctor.</p><p>During this season in which we\u2019re all working a little harder to look out for one another, check in with anyone you know who might need a nudge to help avoid such a nasty surprise.</p><p>___</p><p>The Herald-Dispatch. December 1, 2023.</p><p>Editorial: Homeless camp sweeps are a fix, not a solution</p><p>When people who are homeless through circumstance or through choice separate themselves and stay in their camps out of sight, they are out of mind. When their behavior bothers or scares other people, public officials and social service agencies act. When they set up camps in highly visible places and intrude on the lives of others, or when their camps cause problems with public safety or public health, something has to be done.</p><p>An Associated Press story on Page 1A of The Herald-Dispatch on Thursday shows the problem on a national scale.</p><p>\u201cRecords obtained by The Associated Press show attempts to clear encampments increased in cities from Los Angeles to New York as public pressure grew to address what are dangerous and unsanitary living conditions. But despite tens of millions of dollars spent in recent years, there appears to be little reduction in the number of tents propped up on sidewalks, in parks and by freeway off-ramps,\u201d the article, which carried the bylines of three reporters, said. It also said, \u201cEncampments are also generating more controversy because of homeless people with severe mental illness and drug addictions who refuse treatment or don\u2019t have access to programs.\u201d</p><p>This part of West Virginia has had problems of its own. The encampment sweeps described in the AP article have happened here, too. Huntington police have removed homeless camps on the Ohio River bank between Harris Riverfront Park and the Robert C. Byrd Bridge but when the police leave the campers return. As long as they bother no one, no one is worried.</p><p>Last year, Charleston officials rounded up homeless people and shipped them to other cities before crowds arrived for the Sternwheel Regatta.</p><p>Conventional wisdom says a large part of the homeless population would not have been living in the streets 50 years ago. They would have been committed to mental health institutions \u2014 also known as lunatic asylums \u2014 where they would have been warehoused in conditions modern people consider abhorrent and unacceptable. A hundred years ago, people with epilepsy were also taken from society and placed in institutions \u2014 for the good of themselves and for society, people said at that time.</p><p>But as the principle of personal freedom and the court-ordered \u201cleast restrictive environment\u201d approach took hold, people who were once put away, out of sight and out of mind, now are among us in Huntington, Charleston, Parkersburg and anywhere that they can find the environment to support their life choices. Some of those people can be a nuisance or a danger to themselves or others, and that\u2019s where the problem lies.</p><p>Even the language we use gives away how we view the problem and thus how we approach solving or not solving it. The old words of \u201cbum,\u201d \u201chobo\u201d and \u201ctramp\u201d have fallen out of favor. Putting the article \u201cthe\u201d before \u201chomeless\u201d to create the phrase \u201cthe homeless\u201d says we consider them to be different from us \u2014 another group. One recent attempt to alter our perceptions of homeless people through language has been calling them the \u201cunhoused population,\u201d which carries interpretations of its own.</p><p>Some homeless people consider the word \u201csweep\u201d offensive, according to the AP article.</p><p>\u201cThe word \u2018sweep\u2019 that they use ... that\u2019s kind of how it feels, like being swept like trash,\u201d said David Sjoberg, 35. \u201cI mean we\u2019re not trash; we\u2019re people.\u201d</p><p>The problem of homelessness is like that of substance abuse, teen pregnancy, tobacco use, high school dropouts and many more \u2014 it will always be with us, and until something happens in society to create a fundamental change, it must be managed with an eye toward public safety and public health. Are sweeps the answer? They may be necessary at some times, but they are more of a temporary fix than a permanent solution.</p><p>END</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/52021d80dfc7e4bb751218edc086ee67",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 3,
+            "reason": "The document contains three editorials, two of which are somewhat related to health. The first editorial discusses issues at the Southern Regional Jail, including inmate deaths and unsanitary conditions, which can be tangentially related to health. The second editorial is directly related to health, focusing on Medicaid eligibility and the impact of losing coverage on vulnerable populations. The third editorial discusses homelessness and public safety, which has indirect implications for health but is not primarily focused on health. Overall, the document has some relevance to health but is not entirely focused on the topic."
+        }
+    }
+}

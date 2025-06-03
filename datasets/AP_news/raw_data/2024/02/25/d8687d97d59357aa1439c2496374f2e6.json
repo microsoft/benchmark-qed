@@ -1,0 +1,239 @@
+﻿{
+    "altids": {
+        "itemid": "d8687d97d59357aa1439c2496374f2e6",
+        "etag": "d8687d97d59357aa1439c2496374f2e6_0a9aza0c0",
+        "friendlykey": "79135530124",
+        "referenceid": "EU-REL--Vatican-Pope"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2024-02-25T12:26:13Z",
+    "firstcreated": "2024-02-25T12:26:12Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "ednote": "Eds: UPDATES: Updates Media.",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "EU-REL--Vatican-Pope",
+    "headline": "The pope delivers Sunday prayers from the Vatican window a day after suffering a mild flu",
+    "headline_extended": "Pope Francis was well enough to celebrate his weekly Angelus prayer from the Vatican window overlooking St. Peter\u2019s Square, a day after cancelling his engagements because of a mild flu",
+    "slugline": "BC-EU-REL-Vatican-Pope",
+    "description_summary": "Pope Francis was well enough to celebrate his weekly Angelus prayer from the Vatican window overlooking St. Peter\u2019s Square, a day after cancelling his engagements because of a mild flu. Francis over the past few months had to cancel some of his activities and one international trip due to fragile health. He appeared in good shape on Sunday as he concluded his Angelus prayer with his usual salutes to the waving crowd. In his address, Francis remembered \u201cwith sorrow\u201d the second anniversary of the start of what he called \u201ca large-scale war in Ukraine.\u201d",
+    "located": "VATICAN CITY",
+    "datelinelocation": {
+        "city": "Vatican City",
+        "countrycode": "VAT",
+        "countryname": "Vatican City",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                12.4533,
+                41.90225
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "Pope Francis health Angelus prayer"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "person": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "2fd38d1dee8c4287a13ae64992300d96",
+            "name": "Pope Francis",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 90
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "i",
+            "name": "i"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "084e24e87f00100481c7f571351eed07",
+            "name": "Flu",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 71
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "701697654d3a435a8076fead5991392a",
+            "name": "Physical fitness",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 41
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "026a1118e94443a2aacc08a2e70cc77b",
+            "name": "Religion",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 86
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "026a1118e94443a2aacc08a2e70cc77b",
+            "name": "Religion",
+            "creator": "Editorial",
+            "editorial_subject": "Religion",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "bb2d2c5f441a452cb24bb511a2ab5eea",
+            "name": "World news",
+            "creator": "Editorial",
+            "editorial_subject": "World news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "661cd9087d5b10048265c076b8e3055c",
+            "name": "Ukraine",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661850e07d5b100481f4c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "01f56e0e654841eca2e69bf2cbcc0526",
+                "name": "Nation"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    32,
+                    49
+                ]
+            },
+            "relevance": 52,
+            "parentnames": [
+                "Europe"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "661850e07d5b100481f4c076b8e3055c",
+            "name": "Europe",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "associations": {
+        "1": {
+            "altids": {
+                "itemid": "7f1a330f99b842f2874830fd9e502bd3"
+            },
+            "type": "picture"
+        },
+        "2": {
+            "altids": {
+                "itemid": "0e344c85771a45928fcf4160ba469888"
+            },
+            "type": "picture"
+        },
+        "3": {
+            "altids": {
+                "itemid": "aba71e5428ca4780b93b70d5d274881e"
+            },
+            "type": "picture"
+        },
+        "4": {
+            "altids": {
+                "itemid": "6fb82a6f0c904b8483d7810dd1c4e3e3"
+            },
+            "type": "picture"
+        }
+    },
+    "body_nitf": "<p>VATICAN CITY (AP) \u2014 Pope Francis was well enough on Sunday to celebrate his weekly Angelus prayer from the Vatican window overlooking St. Peter\u2019s Square, a day after <a href=\"https://apnews.com/article/pope-health-flu-audience-cancelled-vatican-0f3e2c1e6db190883a5f9a5c63927dc0\">cancelling his engagements</a> because of a mild flu.</p><p>A brief announcement on Saturday from the Vatican press office said the 87-years-old pontiff was forced to scrap a planned audience with the Roman deacons as a precautionary measure due to a \u201cmild, flu-like condition.\u201d</p><p>On Sunday, Francis, who over the past few months had to cancel some of his activities and one international trip due to <a href=\"https://apnews.com/article/vatican-pope-health-758c3d7b07e6d6f242c4a5ea6f2de154\">fragile health,</a> concluded his Angelus prayer with his usual salutes to the waving crowd.</p><p>In his address, Francis remembered \u201cwith sorrow\u201d <a href=\"https://apnews.com/article/russia-ukraine-war-second-anniversary-65088ba9eb9bd729cf8c677e2115cb35\">the second anniversary</a> of the start of what he called \u201ca large-scale war in Ukraine.\u201d</p><p>\u201cSo many victims, wounded, destruction, distress, tears in a period that is becoming terribly long and whose end is not yet in sight,\u201d the pope said.</p><p>\u201cIt is a war that is not only devastating that region of Europe, but also unleashing a global wave of fear and hatred,\u201d he added. \u201cI plead for that little bit of humanity to be found to create the conditions for a diplomatic solution in the search for a just and lasting peace.\u201d</p><p>The pontiff also prayed for those involved in the Israeli-Palestinian conflict and \u201cfor so many war-torn people, and to concretely help those who suffer. ... Let us think of so much suffering, let us think of the wounded, innocent children.\u201d</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/pope-francis-health-angelus-prayer-d8687d97d59357aa1439c2496374f2e6",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 4,
+            "reason": "The document discusses Pope Francis's health, specifically mentioning that he had a mild flu which caused him to cancel engagements. It also touches on his fragile health over the past few months. While the document also covers other topics such as the war in Ukraine and the Israeli-Palestinian conflict, the primary focus on the Pope's health makes it relevant to the topic of health."
+        }
+    }
+}

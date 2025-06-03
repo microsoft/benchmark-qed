@@ -1,0 +1,239 @@
+﻿{
+    "altids": {
+        "itemid": "f690b5ae3c4de647f684b5c405ec8a13",
+        "etag": "f690b5ae3c4de647f684b5c405ec8a13_1a4aza0c0",
+        "friendlykey": "975248495148",
+        "referenceid": "EU--Britain-Royals"
+    },
+    "version": 1,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2024-03-26T13:54:28Z",
+    "firstcreated": "2024-03-26T12:22:33Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "ednote": "Eds: UPDATES: with details. New headline, summary",
+    "editorialtypes": [
+        "Lead"
+    ],
+    "signals": [
+        "newscontent"
+    ],
+    "title": "EU--Britain-Royals",
+    "headline": "King Charles III will attend Easter Sunday service in his first major appearance since diagnosis",
+    "headline_extended": "Buckingham Palace officials say King Charles III and Queen Camilla will attend an Easter service at the chapel at Windsor Castle on Sunday",
+    "slugline": "AP-EU--Britain-Royals, 1st Ld-Writethru",
+    "description_summary": "Buckingham Palace officials say King Charles III and Queen Camilla will attend an Easter service at the chapel at Windsor Castle on Sunday. It will be the first major appearance for the 75-year-old king since he was diagnosed with cancer in February. Officials say Charles and Camilla will be accompanied by members of the royal family at St. George\u2019s Chapel. The event is expected to be smaller than usual. Prince William and Kate, the Princess of Wales, who announced last week that she is also undergoing cancer treatment, are not expected to attend.",
+    "located": "LONDON",
+    "datelinelocation": {
+        "city": "London",
+        "countrycode": "GBR",
+        "countryname": "United Kingdom",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                -0.12574,
+                51.50853
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "britain royals charles camilla"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "person": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "032e347ae7114fe985f118b17ce73ae3",
+            "name": "Rishi Sunak",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "POLITICIAN",
+                "PERSON"
+            ],
+            "relevance": 32
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f8955706b58c4b71901d46201750aa48",
+            "name": "King Charles III",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "ROYALTY",
+                "PERSON"
+            ],
+            "relevance": 92
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "i",
+            "name": "i"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 51
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "90aeac5089ef10048f63d56c852d093e",
+            "name": "Royalty",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 90
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "bb2d2c5f441a452cb24bb511a2ab5eea",
+            "name": "World news",
+            "creator": "Editorial",
+            "editorial_subject": "World news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e293fee87d6b10048fe8ba7fa5283c3e",
+            "name": "Wales",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "66219fb07d5b100482e2c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "d83e15f769714aab9d49a03eab919128",
+                "name": "Constituent country"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -3.5,
+                    52.5
+                ]
+            },
+            "relevance": 69,
+            "parentnames": [
+                "United Kingdom"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "661850e07d5b100481f4c076b8e3055c",
+            "name": "Europe",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "associations": {
+        "1": {
+            "altids": {
+                "itemid": "c12a8efcf13d4442a1c5020069764451"
+            },
+            "type": "picture"
+        },
+        "2": {
+            "altids": {
+                "itemid": "2d3accfc4dc44c208cd6a80305ffdde8"
+            },
+            "type": "picture"
+        },
+        "3": {
+            "altids": {
+                "itemid": "f2762fada0ce47ea840c45c68f5fbefb"
+            },
+            "type": "picture"
+        },
+        "4": {
+            "altids": {
+                "itemid": "dd9845161e934aa29eaa6fc1b528d3ca"
+            },
+            "type": "picture"
+        }
+    },
+    "body_nitf": "<p>LONDON (AP) \u2014 King Charles III and Queen Camilla will attend an Easter service at the chapel at Windsor Castle on Sunday, Buckingham Palace officials said Tuesday, in the first major appearance for the 75-year-old king since he was <a href=\"https://apnews.com/article/king-charles-iii-cancer-britain-e0408a7c9bb86ad2af8754ce4b37d65e\">diagnosed with cancer</a> in February.</p><p>Officials said Charles and Camilla will be accompanied by members of the royal family at St. George's Chapel. The event is expected to be smaller than usual. Prince William and <a href=\"https://apnews.com/article/kate-middleton-health-cancer-16a5eb5facb79fb1226def11931d41d8\">Kate, the Princess of Wales</a>, who announced last week that she is also undergoing cancer treatment, are not expected to attend.</p><p>The king is undergoing treatment and has suspended almost all his public engagements since his diagnosis. Officials didn\u2019t disclose what form of cancer Charles has but said it\u2019s not related to his <a href=\"https://apnews.com/article/uk-princess-kate-abdominal-surgery-5fc9e0e3b59954a2cceb6b1a7edf31a7\">recent treatment</a> for a benign prostate condition.</p><p>Officials have said the monarch is continuing with state business, including regular weekly meetings with Prime Minister Rishi Sunak, and won't be handing over his constitutional role as head of state.</p><p>On Tuesday, Charles was shown meeting community and faith leaders from across the U.K. at Buckingham Palace to hear about their work of boosting social cohesion amid heightened international tensions.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/britain-royals-charles-camilla-f690b5ae3c4de647f684b5c405ec8a13",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 4,
+            "reason": "The document discusses King Charles III's attendance at an Easter service, but a significant portion of the content is dedicated to his recent cancer diagnosis and ongoing treatment. It also mentions the health condition of Kate, the Princess of Wales. These health-related details are central to the document, making it relevant to the topic of health."
+        }
+    }
+}

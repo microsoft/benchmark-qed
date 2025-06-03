@@ -1,0 +1,208 @@
+﻿{
+    "altids": {
+        "itemid": "f371e953b8034d16b1b0a1aba294d18c",
+        "etag": "f371e953b8034d16b1b0a1aba294d18c_1a5aza0c0",
+        "friendlykey": "237530366773",
+        "referenceid": "EU--WHO-COVID"
+    },
+    "version": 1,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2024-01-11T01:58:00Z",
+    "firstcreated": "2024-01-10T17:10:34Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "ednote": "Eds: UPDATES: Revises headline and summary.; With AP Photos.",
+    "editorialtypes": [
+        "Lead"
+    ],
+    "signals": [
+        "newscontent"
+    ],
+    "title": "EU--WHO-COVID",
+    "headline": "Nearly 10,000 died from COVID-19 last month, fueled by holiday gatherings and new variant, WHO says",
+    "headline_extended": "The head of the U.N. health agency says holiday gatherings and the spread of the most prominent variant globally led to increased transmission of COVID-19 last month",
+    "slugline": "BC-EU--WHO-COVID, 1st Ld-Writethru",
+    "description_summary": "The head of the U.N. health agency says holiday gatherings and the spread of the most prominent variant globally led to increased transmission of COVID-19 last month. Tedros Adhanom Ghebreyesus says nearly 10,000 deaths were reported in December, while hospital admissions during the month jumped 42% in nearly 50 countries \u2014 mostly in Europe and the Americas \u2014 that shared such trend information. He says the JN.1 variant is now the most prominent in the world and it's certain that COVID cases are rising in countries that didn't report data to WHO. Agency officials expect COVID and other respiratory diseases to continue spreading through the northern hemisphere's winter.",
+    "located": "GENEVA",
+    "datelinelocation": {
+        "city": "Geneva",
+        "countrycode": "CHE",
+        "countryname": "Switzerland",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                6.14569,
+                46.20222
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "COVID flu respiratory winter holiday World Health Organization Tedros"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "i",
+            "name": "i"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 89
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "b17e2751b26d4523a2c99d79e04747ee",
+            "name": "COVID-19 pandemic",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 73
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Editorial",
+            "editorial_subject": "Health",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "bb2d2c5f441a452cb24bb511a2ab5eea",
+            "name": "World news",
+            "creator": "Editorial",
+            "editorial_subject": "World news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "organisation": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "54fa9358892310048056fb7860a2fc03",
+            "name": "United Nations",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 42
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "661850e07d5b100481f4c076b8e3055c",
+            "name": "Europe",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "locationtype": {
+                "code": "976d112cd5c3497ea180aeecab922c6b",
+                "name": "Continent"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    9.14062,
+                    48.69096
+                ]
+            },
+            "relevance": 40
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "661850e07d5b100481f4c076b8e3055c",
+            "name": "Europe",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "associations": {
+        "1": {
+            "altids": {
+                "itemid": "8993cca621e14efd852c11237c1c65f5"
+            },
+            "type": "picture"
+        }
+    },
+    "body_nitf": "<p>GENEVA (AP) \u2014 The head of the U.N. health agency said Wednesday holiday gatherings and the spread of the most prominent variant globally led to increased transmission of COVID-19 last month.</p><p>Tedros Adhanom Ghebreyesus said nearly 10,000 deaths were reported in December, while hospital admissions during the month jumped 42% in nearly 50 countries \u2014 mostly in Europe and <a href=\"https://apnews.com/article/flu-covid19-cdc-holidays-028cab262ca8ec817cc7ff745a83387f#:~:text=Health-,Flu%20and%20COVID%20infections%20got%20worse%20over%20the%20holidays,more%20misery%20expected%2C%20CDC%20says&text=NEW%20YORK%20(AP)%20%E2%80%94%20The,a%20likely%20spike%20in%20illnesses.\">the Americas</a> \u2014 that shared such trend information.</p><p>\"Although 10,000 deaths a month is far less than the peak of the pandemic, this level of preventable deaths is not acceptable,\" the World Health Organization director-general told reporters from its headquarters in Geneva.</p><p>He said it was \u201ccertain\u201d that cases were on the rise in other places that haven't been reporting, calling on governments to keep up surveillance and provide continued access to treatments and vaccines.</p><p>Tedros said the JN.1 variant was now the most prominent in the world. It is an <a href=\"https://apnews.com/article/science-health-travel-covid-ce0a33a3eb7185184310d2b7b5df19e2\">omicron variant</a>, so current vaccines should still provide some protection.</p><p>Maria Van Kerkhove, technical lead at WHO for COVID-19, cited an increase in respiratory diseases across the globe due to the coronavirus but also flu, rhinovirus and pneumonia.</p><p>\u201cWe expect those trends to continue into January through the winter months in the northern hemisphere,\u201d she said, while noting increases in COVID-19 in the southern hemisphere \u2014 where it's now summer.</p><p>While bouts of coughs, sniffling, fever and fatigue in the winter are nothing new, Van Kerkhove said this year in particular, \"we are seeing co-circulation of many different types of pathogens.\u201d</p><p>WHO officials recommend that people get vaccinated when possible, wear masks, and make sure indoor areas are well ventilated.</p><p>\u201cThe vaccines may not stop you being infected, but the vaccines are certainly reducing significantly your chance of being hospitalized or dying,\u201d said Dr. Michael Ryan, head of emergencies at WHO.</p><p>___</p><p>The Associated Press Health and Science Department receives support from the Howard Hughes Medical Institute\u2019s Science and Educational Media Group. The AP is solely responsible for all content.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/covid-flu-respiratory-winter-holiday-world-health-organization-tedros-f371e953b8034d16b1b0a1aba294d18c",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 5,
+            "reason": "The document discusses the impact of COVID-19, including the number of deaths, hospital admissions, and the spread of a new variant. It also includes statements from WHO officials about the importance of vaccinations and other preventive measures. These topics are directly related to health, making the document highly relevant to the given topic."
+        }
+    }
+}

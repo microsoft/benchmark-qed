@@ -1,0 +1,230 @@
+﻿{
+    "altids": {
+        "itemid": "054e67f7495845804f801c57a1ae2522",
+        "etag": "054e67f7495845804f801c57a1ae2522_6a14aza0c0",
+        "friendlykey": "255833500882",
+        "referenceid": "ENT--Matthew Perry"
+    },
+    "version": 6,
+    "type": "text",
+    "urgency": 3,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2023-12-16T01:53:27Z",
+    "firstcreated": "2023-12-15T21:34:38Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "ednote": "Eds: EDITS: Minor edit to remove repeated word. With AP Photos.",
+    "editorialtypes": [
+        "Lead"
+    ],
+    "signals": [
+        "newscontent"
+    ],
+    "title": "ENT--Matthew Perry",
+    "headline": "Matthew Perry died from the effects of ketamine, autopsy report says",
+    "headline_extended": "An autopsy report on \u201cFriends\u201d star Matthew Perry says he died from the acute effects of the drug ketamine",
+    "slugline": "AP-ENT--Matthew Perry, 6th Ld-Writethru",
+    "description_summary": "An autopsy report on \u201cFriends\u201d star Matthew Perry says he died from the acute effects of the drug ketamine. The Los Angeles County Department of Medical Examiner said in the autopsy report released Friday that Perry also drowned in the heated end of his pool, but said that was a secondary factor in his death deemed an accident. The report says coronary artery disease also contributed. Perry was declared dead at age 54 after being found unresponsive at his home in the Pacific Palisades area of Los Angeles on Oct. 28. Investigators performed an autopsy the following day.",
+    "bylines": [
+        {
+            "by": "By ANDREW DALTON",
+            "title": "AP Entertainment Writer"
+        }
+    ],
+    "located": "LOS ANGELES",
+    "datelinelocation": {
+        "city": "Los Angeles",
+        "countryareacode": "CA",
+        "countryareaname": "California",
+        "countrycode": "USA",
+        "countryname": "United States",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                -118.24368,
+                34.05223
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2023 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "matthew perry death cause"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "e",
+            "name": "e"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "8979136dd0dc43758bb2a892b695f666",
+            "name": "Vascular disease",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 36
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "b0cb0494819a4a8b928c8a353468695d",
+            "name": "Drownings",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 80
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 96
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e237be707de410048fffdf092526b43e",
+            "name": "Medication",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 64
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "16cb0ba3e6d24d97ace39f5a1924669a",
+            "name": "Entertainment",
+            "creator": "Editorial",
+            "editorial_subject": "Entertainment",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "8345b5f082af10048280df092526b43e",
+            "name": "Los Angeles",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "789fdd8882af10048263df092526b43e"
+            ],
+            "locationtype": {
+                "code": "9d26a20b35f0484a891740f8189d4c7b",
+                "name": "City"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -118.24368,
+                    34.05223
+                ]
+            },
+            "relevance": 39,
+            "parentnames": [
+                "California"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "789fdd8882af10048263df092526b43e",
+            "name": "California",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661850e07d5b100481f5c076b8e3055c",
+            "name": "Latin America and Caribbean",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "associations": {
+        "1": {
+            "altids": {
+                "itemid": "213effb31b984e70a76640095d770412"
+            },
+            "type": "picture"
+        },
+        "2": {
+            "altids": {
+                "itemid": "c6b08501ebec46fca596455456c01cad"
+            },
+            "type": "picture"
+        },
+        "3": {
+            "altids": {
+                "itemid": "b1947e66d1674d3782ef311e9c0d8b40"
+            },
+            "type": "picture"
+        }
+    },
+    "body_nitf": "<p>LOS ANGELES (AP) \u2014 <a href=\"https://apnews.com/article/matthew-perry-dead-drowning-friends-f2963e83691d2bd2a8626d85a69c73cb\">Matthew Perry</a> died from the acute effects of the anesthetic ketamine, according to the results of an autopsy on the 54-year-old \u201cFriends\u201d actor released Friday.</p><p>The Los Angeles County Department of Medical Examiner said in the autopsy report that Perry also drowned in \u201cthe heated end of his pool,\u201d but that it was a secondary factor in his Oct. 28 death, deemed an accident.</p><p>People close to Perry told investigators that he was undergoing <a href=\"https://apnews.com/article/ketamine-pain-drugs-psychedelic-fda-2c67eeac1932962a7b0affc07d24c09a\">ketamine infusion therapy, an experimental treatment</a> used to treat depression and anxiety. But the medical examiner said the levels of ketamine in Perry\u2019s body were in the range used for general anesthesia during surgery, and that his last treatment 1 1/2 weeks earlier wouldn\u2019t explain those levels. The drug is typically metabolized in a matter of hours.</p><p>The report says coronary artery disease and buprenorphine, which is used to treat opioid use disorder, also contributed.</p><p>The amount of ketamine detected \u201cwould be enough to make him lose consciousness and lose his posture and his ability to keep himself above the water,\u201d said Dr. Andrew Stolbach, a medical toxicologist with Johns Hopkins Medicine who reviewed the autopsy report at the request of The Associated Press.</p><p>\u201cUsing sedative drugs in a pool or hot tub, especially when you\u2019re alone, is extremely risky and, sadly, here it\u2019s fatal,\u201d said Stolbach, who noted that both ketamine and buprenorphine can be used safely.</p><p>Perry was declared dead after being found unresponsive at his home in the Pacific Palisades area of Los Angeles. Investigators performed the autopsy the following day.</p><p>The actor had taken drugs in the past but had been \u201creportedly clean for 19 months,\" according to the report.</p><p>Perry had played pickleball earlier in the day, the report says, and his assistant, who lives with him, found him face down in the pool after returning from errands.</p><p>The assistant told investigators Perry had not been sick, had not made any health complaints, and had not shown evidence of recent alcohol or drug use.</p><p>Postmortem blood tests showed \u201chigh levels\u201d of ketamine in his system, which could have raised his blood pressure and heart rate and dulled his impulse to breathe.</p><p>Buprenorphine, commonly used in opioid addiction and found in therapeutic levels in Perry\u2019s blood, could have contributed to the breathing problem, the autopsy said. It would have been risky to mix the central nervous system depressant with ketamine \u201cdue to the additive respiratory effects when present with high levels of ketamine,\" according to the autopsy report.</p><p>The report said his coronary artery disease would have made him more susceptible to the drugs' effects.</p><p>Perry was among the biggest television stars of his generation when he played Chandler Bing alongside Jennifer Aniston, Courteney Cox, Lisa Kudrow, Matt LeBlanc and David Schwimmer for 10 seasons from 1994 to 2004 on <a href=\"https://apnews.com/article/matthew-perry-china-friends-fandom-0876bc8bf20b613c336d8c684eb5524f\">NBC's megahit sitcom \u201cFriends.\u201d</a></p><p>His castmates, like many of his friends, family and fans, were stunned by his death, and <a href=\"https://apnews.com/article/matthew-perry-friends-castmasts%20mourn-580686c8f9e5fb9031e4cf56ed7b00c2\">paid him loving tribute</a> in the weeks that followed.</p><p>Perry was open about <a href=\"https://apnews.com/article/matthew-perry-foundation-death-addiction-aa74b3e424c652a4325166231057ecd4\">discussing his struggles with addiction</a> dating back to his time on \u201cFriends.\"</p><p>\"I loved everything about the show but I was struggling with my addictions which only added to my sense of shame,\u201d he wrote in his 2022 memoir. \u201cI had a secret and no one could know.\u201d</p><p>A woman whose name is redacted in the autopsy report told investigators that Perry had been in good spirits when she spoke to him a few days earlier, but had been taking testosterone shots which she said were making him \u201cangry and mean.\u201d She said he had quit smoking two weeks earlier.</p><p>The woman said he had been receiving the ketamine infusions for his mental health, and that his doctor had been giving them to him less often because he had been feeling well.</p><p><a href=\"https://apnews.com/article/8f1a189bfde14cbf91179a60b900a81a\">Ketamine is a powerful anesthetic</a> approved by U.S. health regulators for use during surgery, but in the past decade it has emerged as an experimental treatment for a range of psychiatric and hard-to-treat conditions, including depression, anxiety and chronic pain.</p><p>While not approved by regulators, doctors are free to prescribe drugs for these alternate uses if they think their patients could benefit, and hundreds of clinics across the U.S. offer ketamine infusions and other formulations for various health conditions.</p><p>___</p><p>AP Medical Writer Carla K. Johnson in Washington state, Health Writer Matthew Perrone in Washington, D.C., and Ryan J. Foley in Iowa City, Iowa, contributed reporting.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/matthew-perry-death-cause-054e67f7495845804f801c57a1ae2522",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 4,
+            "reason": "The document discusses the death of actor Matthew Perry, focusing on the medical and toxicological aspects of his autopsy report. It details the effects of ketamine and buprenorphine on his health, his use of ketamine infusion therapy for mental health treatment, and the risks associated with these drugs. While the primary focus is on Perry's death, the document provides significant information on health-related topics such as drug interactions, the use of ketamine for psychiatric conditions, and the impact of coronary artery disease. Therefore, it is relevant to the topic of health, though not exclusively focused on it."
+        }
+    }
+}

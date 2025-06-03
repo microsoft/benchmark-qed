@@ -1,0 +1,334 @@
+﻿{
+    "altids": {
+        "itemid": "f9d36bed05cf75a5ad507ecfb8ecba87",
+        "etag": "f9d36bed05cf75a5ad507ecfb8ecba87_0a8aza0c0",
+        "friendlykey": "969584915908",
+        "referenceid": "CB--Early Dengue"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2024-03-28T19:04:20Z",
+    "firstcreated": "2024-03-28T19:04:19Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "ednote": "Eds: UPDATES: Updates Media.",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "CB--Early Dengue",
+    "headline": "Dengue is sweeping through the Americas early this year",
+    "headline_extended": "Dengue is surging across the Americas early this year from Puerto Rico to Brazil",
+    "slugline": "AP-CB--Early Dengue",
+    "description_summary": "Dengue is surging across the Americas early this year from Puerto Rico to Brazil. Officials said Thursday that 3.5 million cases of the tropical disease had been reported in the region as of this week. The regional office of the World Health Organization say that's three times more cases than reported at this point last year. More than 80% of current cases are in Brazil, followed by Paraguay, Argentina, Peru and Colombia. Usually dengue spikes during the wet season which is still months away. The dengue virus is spread to people when they are bitten by infected mosquitoes.",
+    "bylines": [
+        {
+            "by": "By D\u00c1NICA COTO",
+            "title": "Associated Press"
+        }
+    ],
+    "located": "SAN JUAN, Puerto Rico",
+    "datelinelocation": {
+        "city": "San Juan",
+        "countrycode": "PRI",
+        "countryname": "Puerto Rico",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                -66.10572,
+                18.46633
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "Dengue virus mosquitoes"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "i",
+            "name": "i"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 98
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "084dafb87f00100481c5f571351eed07",
+            "name": "Dengue fever",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 98
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Editorial",
+            "editorial_subject": "Health",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "bb2d2c5f441a452cb24bb511a2ab5eea",
+            "name": "World news",
+            "creator": "Editorial",
+            "editorial_subject": "World news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "organisation": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "8997c0688d7410048d178a3c53cbc603",
+            "name": "World Health Organization",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 35
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "550bcda07f4e10048ef0df092526b43e",
+            "name": "San Juan",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661a77a87d5b1004822ac076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "9d26a20b35f0484a891740f8189d4c7b",
+                "name": "City"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -66.10572,
+                    18.46633
+                ]
+            },
+            "relevance": 51,
+            "parentnames": [
+                "Puerto Rico"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "661effd07d5b100482a2c076b8e3055c",
+            "name": "Peru",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661908787d5b10048204c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "01f56e0e654841eca2e69bf2cbcc0526",
+                "name": "Nation"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -76,
+                    -10
+                ]
+            },
+            "relevance": 40,
+            "parentnames": [
+                "South America"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "661effd07d5b1004829cc076b8e3055c",
+            "name": "Brazil",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661908787d5b10048204c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "01f56e0e654841eca2e69bf2cbcc0526",
+                "name": "Nation"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -55,
+                    -10
+                ]
+            },
+            "relevance": 63,
+            "parentnames": [
+                "South America"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "661a77a87d5b1004822ac076b8e3055c",
+            "name": "Puerto Rico",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "6618c9f87d5b10048203c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "b7a0766613394ffda1709e3e433f2de2",
+                "name": "Territory"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -66.49989,
+                    18.24829
+                ]
+            },
+            "relevance": 75,
+            "parentnames": [
+                "Caribbean"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "661850e07d5b100481f5c076b8e3055c",
+            "name": "Latin America and Caribbean",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "associations": {
+        "1": {
+            "altids": {
+                "itemid": "a75128d4dc7949eba9bcf885a2f8ae9d"
+            },
+            "type": "picture"
+        },
+        "2": {
+            "altids": {
+                "itemid": "5a9fc672469348539b4fae74ed272318"
+            },
+            "type": "picture"
+        },
+        "3": {
+            "altids": {
+                "itemid": "28d9d998e4f0486e9041fad05d8dc62f"
+            },
+            "type": "picture"
+        },
+        "4": {
+            "altids": {
+                "itemid": "a2c63568f3eb469a89a60c5a5a71b264"
+            },
+            "type": "picture"
+        },
+        "5": {
+            "altids": {
+                "itemid": "03c6d2711f274763931fa2860aa8eb5d"
+            },
+            "type": "picture"
+        },
+        "6": {
+            "altids": {
+                "itemid": "1e8975f634d546809ed804a64add2c9c"
+            },
+            "type": "picture"
+        },
+        "7": {
+            "altids": {
+                "itemid": "1e78337b1b43411cad01b07c86ba4987"
+            },
+            "type": "picture"
+        }
+    },
+    "body_nitf": "<p>SAN JUAN, Puerto Rico (AP) \u2014 Dengue is surging across the Americas early this year from Puerto Rico to Brazil, with 3.5 million cases of the tropical disease reported so far, health officials said Thursday.</p><p>That tally is three times the number of cases reported at this point last year, said Dr. Jarbas Barbosa, director of the Pan American Health Organization, the regional office of the World Health Organization in the Americas.</p><p>Last year, <a href=\"https://apnews.com/article/dengue-deaths-vaccines-western-hemisphere-paho-628eb1247f741c66e34e55b04facf7e2\">there were a record 4.5 million cases</a> in the region, and PAHO officials said they expect this year will set a new record.</p><p>Usually dengue spikes during the wet season, which is still months away. And some areas are reporting dengue for the first time, officials said.</p><p>The dengue virus is spread to people when they are bitten by infected mosquitoes. Driving the surge are rising temperatures, rapid urbanization, droughts and floods linked to climate change, and poor sanitation and a lack of robust health systems in some countries, health officials said.</p><p>The virus can cause crushing headaches, fever, vomiting, a rash and other symptoms. While most infected people don\u2019t get symptoms, severe cases can lead to death. There's no specific treatment other than pain medications.</p><p>Most of the current cases are in the Southern Hemisphere, with more than 80% in Brazil, followed by Paraguay, Argentina, Peru and Colombia. Some 1,000 deaths have been reported in the Americas so far this year.</p><p>In the Caribbean alone, more than 25,000 cases have been reported, with French Guiana, Martinique, Guadeloupe, Puerto Rico and the Dominican Republic most affected, said Dr. Rhonda Sealey-Thomas, PAHO\u2019s assistant director.</p><p>On Monday, <a href=\"https://apnews.com/article/puerto-rico-dengue-public-health-emergency-dfaecf752677c736082cbb9e801457bc\">Puerto Rico\u2019s health secretary declared an epidemic</a>, with more than 540 cases, with at least 341 people hospitalized. The numbers are concerning because parts of the island are currently under a moderate drought, and the rainiest month isn\u2019t until August.</p><p>The surge in cases forced <a href=\"https://apnews.com/article/brazil-dengue-science-mosquitoes-health-rio-pilot-9e1eecd29a74649e834db65919210074\">Rio de Janeiro to declare a public health emergency last month</a> ahead of Carnival. <a href=\"https://apnews.com/article/peru-piura-denge-epidemic-mosquitoes-el-nino-377507e8ced020f770d8fd9f36925321\">Peru did the same for most of its provinces</a>, and others have followed suit.</p><p>There are four different dengue viruses circulating in the Americas, said the PAHO's Dr. Sylvain Aldighieri. \u201cWe have to be prepared for this.\u201d</p><p>Some countries have released specially bred mosquitoes <a href=\"https://apnews.com/article/dengue-mosquitoes-infectious-diseases-honduras-9ecf4ebc8a67937e9db7feb0901c861e\">that contain a bacteria called Wolbachia that fights dengue</a>.</p><p>Last month, Josian Bruno, who lives in the San Juan capital of Puerto Rico, developed a fever and body aches. A lab test confirmed that the 38-year-old had kidney failure because of severe dehydration. He spent six days in the hospital, and the day after being released, his test results came back positive for dengue.</p><p>\u201cWhen they tell you it\u2019s renal failure, that\u2019s scary,\u201d he said.</p><p>A month has passed, and Bruno still has difficulty moving his arms and walking, and he hasn\u2019t been able to resume his thrice-weekly runs.</p><p>While a new dengue vaccine is available in limited supply, it requires two doses with a three-month interval. Barbosa said officials are monitoring how well it actually works. He said a single-shot vaccine won\u2019t be available until next year.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/dengue-virus-mosquitoes-f9d36bed05cf75a5ad507ecfb8ecba87",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 5,
+            "reason": "The document discusses the surge of dengue cases across the Americas, detailing the number of cases, affected regions, and contributing factors such as climate change and poor sanitation. It also covers the symptoms, treatment, and efforts to combat the disease, including the development of vaccines. This information is highly relevant to the topic of Health as it addresses a significant public health issue, its impact, and the measures being taken to address it."
+        }
+    }
+}

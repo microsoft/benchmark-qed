@@ -1,0 +1,213 @@
+﻿{
+    "altids": {
+        "itemid": "7257a61652461951d2c36227a3c1d4c6",
+        "etag": "7257a61652461951d2c36227a3c1d4c6_0a2aza0c0",
+        "friendlykey": "731663467502",
+        "referenceid": "MS--Editorial Rdp"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Opinion",
+    "language": "en",
+    "versioncreated": "2024-02-21T22:39:00Z",
+    "firstcreated": "2024-02-21T22:38:59Z",
+    "editorialrole": "FullStory",
+    "fixture": {
+        "code": "21ea4067bb274c3b805353fb2b99ba70",
+        "name": "Editorial Roundup"
+    },
+    "pubstatus": "usable",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "MS--Editorial Rdp",
+    "headline": "Editorial Roundup: Mississippi",
+    "slugline": "AP-MS--Editorial Rdp",
+    "bylines": [
+        {
+            "by": "By The Associated Press"
+        }
+    ],
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "Editorial Rdp"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e22e73887de410048fc3df092526b43e",
+            "name": "Birth control",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 32
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "39a5551883591004893adf092526b43e",
+            "name": "Health care costs",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 32
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e237be707de410048fffdf092526b43e",
+            "name": "Medication",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 32
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e7d1d3f880a910048b8adf092526b43e",
+            "name": "Nursing care",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 58
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e22e35087de410048fc2df092526b43e",
+            "name": "Abortion",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 32
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86aad5207dac100488ecba7fa5283c3e",
+            "name": "Politics",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 71
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "4c96e8e92e0441579dbce2f9e8d06493",
+            "name": "Prisons",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 58
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "b3dfffa882c4100486c3df092526b43e",
+            "name": "Mississippi",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -89.75036,
+                    32.75041
+                ]
+            },
+            "relevance": 86,
+            "parentnames": [
+                "United States"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "b3dfffa882c4100486c3df092526b43e",
+            "name": "Mississippi",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "body_nitf": "<p>Greenwood Commonwealth. February 20, 2024.</p><p>Editorial: Keep An Eye On These Three Bills</p><p>We\u2019ll know in a couple of weeks, specifically by a March 5 deadline, how serious Mississippi lawmakers are about addressing the problems of unwanted pregnancies and holding mentally ill people in county jails.</p><p>Pregnancies first. Rep. Beckie Currie, R-Brookhaven, has introduced a bill that would require the state Department of Health to have a nurse practitioner at every county\u2019s health department at least one day a week in order to provide or prescribe contraceptives. Patients would pay based on their income.</p><p>House Bill 32 would authorize nurse practitioners to provide contraceptives or information about them to any minor who is a parent, who is married, who has the consent of a parent or guardian, or who has been referred for the service by specific workers including a physician, nurse practitioner or a clergyman. Right now only physicians can provide the contraceptives.</p><p>Currie\u2019s bill died in a House committee last year. It deserves consideration. It recognizes that the state\u2019s budget cuts to its county health departments have reduced medical care in many of Mississippi\u2019s rural counties. If approved, it should give women a better chance to get medical clearance to prevent a pregnancy.</p><p>It is true that abstention is the best contraceptive available, but the Legislature and health officials must deal with the world we live in, not the one we wish we had.</p><p>Having a nurse practitioner at a health department once a week isn\u2019t a perfect solution, but it\u2019s a start. Mississippi won its abortion case at the U.S. Supreme Court in 2022 and has imposed much stricter laws on abortion than were in place under the Roe vs. Wade ruling.</p><p>Having done that, the state now should make greater efforts to prevent unwanted pregnancies, which is the reason most women consider abortion. It\u2019s up to Currie to convince lawmakers that rural counties would benefit from this, and that nurse practitioners are qualified to assess these women\u2019s needs.</p><p>Now to the mentally ill. Rep. Kevin Felsher, R-Biloxi, has introduced two bills that put greater restrictions on counties when dealing with mentally ill residents who are in the process of being committed by a judge for treatment.</p><p>One of Felsher\u2019s bills, according to the Mississippi Today website, would prohibit counties from jailing most patients who are in the commitment process but who face no criminal charges. Jail detentions of up to 72 hours would be allowed if the resident is awaiting transportation to a treatment facility and if a judge rules that detention is necessary for protection.</p><p>Felsher\u2019s other bill would require counties to pay for psychiatric care for an indigent resident who has been ordered by a judge into a treatment program if no publicly funded space is available. The bill caps the cost to the county at the Medicaid reimbursement rate, and it prohibits counties from jailing someone simply because they cannot pay for their care.</p><p>Felsher is keeping a promise by introducing bills to set stricter limits on the practice of holding mentally ill people in a county jail when there\u2019s nowhere else to keep them. One report in 2023 said this happens to hundreds of people each year in Mississippi.</p><p>Aside from a lack of space to hold such patients safely, this problem often involves finances. Time in jail is relatively inexpensive compared to holding someone in a hospital before they are committed for treatment.</p><p>But people under consideration for mental health commitment have enough problems. Being held in a jail cannot help them. This practice demands much stricter limitations.</p><p>END</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/7257a61652461951d2c36227a3c1d4c6",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 5,
+            "reason": "The document discusses two main issues: unwanted pregnancies and the treatment of mentally ill individuals in Mississippi. Both topics are directly related to health. The first part of the document focuses on a bill that aims to provide contraceptives through nurse practitioners, which is a health-related issue. The second part addresses the treatment and care of mentally ill individuals, another significant health concern. Both topics are relevant to the broader topic of health, making the document highly relevant."
+        }
+    }
+}

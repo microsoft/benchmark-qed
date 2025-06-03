@@ -1,0 +1,230 @@
+﻿{
+    "altids": {
+        "itemid": "4a1a116020e117f4d090adc2b434449b",
+        "etag": "4a1a116020e117f4d090adc2b434449b_0a6aza0c0",
+        "friendlykey": "242891344118",
+        "referenceid": "US--South Carolina Governor-Health"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2023-12-14T22:32:00Z",
+    "firstcreated": "2023-12-14T22:31:59Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "ednote": "Eds: UPDATES: With AP Photos.",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "US--South Carolina Governor-Health",
+    "headline": "South Carolina's 76-year-old governor McMaster to undergo procedure to fix minor irregular heartbeat",
+    "headline_extended": "South Carolina Gov. Henry McMaster plans to be put under anesthesia Friday to fix a minor irregular heartbeat",
+    "slugline": "AP-US--South Carolina Governor-Health",
+    "description_summary": "South Carolina Gov. Henry McMaster plans to be put under anesthesia Friday to fix a minor irregular heartbeat. The governor is being treated for atrial fibrillation where some chambers of the heart beat out of sync with others. His office says McMaster underwent a similar procedure nearly two years ago. His cardiologist says McMaster has undergone extensive tests that show his heart appears otherwise normal. McMaster has informed Lt. Gov. Pamela Evette. According to the state constitution, the lieutenant governor can act as the governor in an emergency if the governor is temporarily disabled. McMaster is the third-oldest governor in the U.S.",
+    "bylines": [
+        {
+            "by": "By JEFFREY COLLINS",
+            "title": "Associated Press"
+        }
+    ],
+    "located": "COLUMBIA, S.C.",
+    "datelinelocation": {
+        "city": "Columbia",
+        "countryareacode": "SC",
+        "countryareaname": "South Carolina",
+        "countrycode": "USA",
+        "countryname": "United States",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                -81.03481,
+                34.00071
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2023 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "south carolina governor mcmaster heart procedure"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "person": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "8d07beb7a3a94ccab607dbe602499543",
+            "name": "Henry McMaster",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "POLITICIAN",
+                "PERSON"
+            ],
+            "relevance": 93
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "a",
+            "name": "a"
+        },
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 72
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "c401bb8c13fb4888a3044f4e8008f5c5",
+            "name": "Heart disease",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 49
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "29d11ec082c7100488aedf092526b43e",
+            "name": "South Carolina",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -81.00009,
+                    34.00043
+                ]
+            },
+            "relevance": 88,
+            "parentnames": [
+                "United States"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "29d11ec082c7100488aedf092526b43e",
+            "name": "South Carolina",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661850e07d5b100481f5c076b8e3055c",
+            "name": "Latin America and Caribbean",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "associations": {
+        "1": {
+            "altids": {
+                "itemid": "42293acf130844bbb21bb0dcf8ae033b"
+            },
+            "type": "picture"
+        }
+    },
+    "body_nitf": "<p>COLUMBIA, S.C. (AP) \u2014 South Carolina Gov. Henry McMaster plans to be put under anesthesia Friday to fix a minor irregular heartbeat, his office said.</p><p>The 76-year-old governor is being treated for atrial fibrillation where some chambers of the heart beat out of sync with the others, his office said in a statement Thursday afternoon.</p><p>McMaster underwent <a href=\"https://apnews.com/article/south-carolina-henry-mcmaster-09a5fa1e4c0ffbe249441a65124b7452\">a similar procedure</a> nearly two years ago. His cardiologist Dr. Amy Rawl Epps said the elective procedure should take about two to three hours.</p><p>She called it relatively simple and said the governor has undergone extensive tests that show his heart appears normal and has \u201cno evidence of significant coronary artery disease,\u201d according to a statement from McMaster's office.</p><p>If the procedure is successful, McMaster can return home in hours, the doctor said.</p><p>But since he is being put under, McMaster is letting Lt. Gov. Pamela Evette know. According to the state constitution, the lieutenant governor can act as the governor in an emergency if the governor is temporarily disabled.</p><p>The heart problem was first detected in April 2022 when McMaster was scheduled for arthroscopic knee surgery after suffering a slight meniscus tear while playing tennis with his wife. A pre-operation electrocardiogram discovered the condition.</p><p>McMaster is the oldest governor in South Carolina history and the third-oldest governor who is current serving in the U.S.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/south-carolina-governor-mcmaster-heart-procedure-4a1a116020e117f4d090adc2b434449b",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 5,
+            "reason": "The document discusses South Carolina Governor Henry McMaster's upcoming medical procedure to address a minor irregular heartbeat, including details about his condition, the procedure, and his medical history. This information is directly related to health, specifically cardiovascular health and medical procedures."
+        }
+    }
+}

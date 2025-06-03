@@ -1,0 +1,551 @@
+﻿{
+    "altids": {
+        "itemid": "e0408a7c9bb86ad2af8754ce4b37d65e",
+        "etag": "e0408a7c9bb86ad2af8754ce4b37d65e_12a11aza0c0",
+        "friendlykey": "350270917218",
+        "referenceid": "EU--Britain-King"
+    },
+    "version": 12,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2024-02-06T03:51:08Z",
+    "firstcreated": "2024-02-05T18:08:25Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "ednote": "Eds: UPDATES: Expands audience.",
+    "editorialtypes": [
+        "Lead"
+    ],
+    "signals": [
+        "newscontent"
+    ],
+    "title": "EU--Britain-King",
+    "headline": "King Charles III is being treated for cancer and will temporarily halt his public duties",
+    "headline_extended": "Britain's King Charles III has been diagnosed with cancer and has begun treatment",
+    "slugline": "BC-EU--Britain-King, 12th Ld-Writethru",
+    "description_summary": "Britain's King Charles III has been diagnosed with cancer and has begun treatment. Buckingham Palace said Monday the cancer is not related to the king\u2019s recent treatment for a benign prostate condition. It did not say what form of cancer the 75-year-old monarch has. The statement said Charles \u201cremains wholly positive about his treatment and looks forward to returning to full public duty as soon as possible.\u201d He is being treated as an outpatient and will continue to undertake paperwork and other business as head of state. The palace said Charles shared his diagnosis to prevent speculation and assist public understanding of others affected by cancer.",
+    "bylines": [
+        {
+            "by": "By JILL LAWLESS",
+            "title": "Associated Press"
+        }
+    ],
+    "located": "LONDON",
+    "datelinelocation": {
+        "city": "London",
+        "countrycode": "GBR",
+        "countryname": "United Kingdom",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                -0.12574,
+                51.50853
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "King Charles III cancer Britain"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "person": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "1b145ec16d324e31a17d0741aa228c12",
+            "name": "Prince Harry",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "GOVERNMENT_FIGURE",
+                "PERSON",
+                "ROYALTY"
+            ],
+            "relevance": 45
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "32a9a5d70fa74aaf92411d557a06d031",
+            "name": "Prince Andrew",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "GOVERNMENT_FIGURE",
+                "PERSON",
+                "ROYALTY"
+            ],
+            "relevance": 31
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f8955706b58c4b71901d46201750aa48",
+            "name": "King Charles III",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "GOVERNMENT_FIGURE",
+                "PERSON",
+                "ROYALTY"
+            ],
+            "relevance": 74
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "0010ef208f0610048ca1a55c96277d3e",
+            "name": "Queen Elizabeth II",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "GOVERNMENT_FIGURE",
+                "PERSON",
+                "ROYALTY"
+            ],
+            "relevance": 33
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "l",
+            "name": "l"
+        },
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "i",
+            "name": "i"
+        },
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "e",
+            "name": "e"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86aad5207dac100488ecba7fa5283c3e",
+            "name": "Politics",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 41
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "90aeac5089ef10048f63d56c852d093e",
+            "name": "Royalty",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 95
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 71
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e22524b87de410048f91df092526b43e",
+            "name": "Cancer",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 78
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "16cb0ba3e6d24d97ace39f5a1924669a",
+            "name": "Entertainment",
+            "creator": "Editorial",
+            "editorial_subject": "Entertainment",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "3e37e4b87df7100483d5df092526b43e",
+            "name": "Lifestyle",
+            "creator": "Editorial",
+            "editorial_subject": "Lifestyle",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "bb2d2c5f441a452cb24bb511a2ab5eea",
+            "name": "World news",
+            "creator": "Editorial",
+            "editorial_subject": "World news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "789fdd8882af10048263df092526b43e",
+            "name": "California",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -119.75126,
+                    37.25022
+                ]
+            },
+            "relevance": 58,
+            "parentnames": [
+                "United States"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e293fee87d6b10048fe8ba7fa5283c3e",
+            "name": "Wales",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "66219fb07d5b100482e2c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "d83e15f769714aab9d49a03eab919128",
+                "name": "Constituent country"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -3.5,
+                    52.5
+                ]
+            },
+            "relevance": 31,
+            "parentnames": [
+                "United Kingdom"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "7a55e0187eff10048492df092526b43e",
+            "name": "London",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "df4691387d6b10048fdeba7fa5283c3e"
+            ],
+            "locationtype": {
+                "code": "9d26a20b35f0484a891740f8189d4c7b",
+                "name": "City"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -0.12574,
+                    51.50853
+                ]
+            },
+            "relevance": 49,
+            "parentnames": [
+                "England"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "90a1c9c082c6100487b0df092526b43e",
+            "name": "Las Vegas",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "8bb89dd082c61004879fdf092526b43e"
+            ],
+            "locationtype": {
+                "code": "9d26a20b35f0484a891740f8189d4c7b",
+                "name": "City"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -115.13722,
+                    36.17497
+                ]
+            },
+            "relevance": 31,
+            "parentnames": [
+                "Nevada"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "66219fb07d5b100482e2c076b8e3055c",
+            "name": "United Kingdom",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661850e07d5b100481f4c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "01f56e0e654841eca2e69bf2cbcc0526",
+                "name": "Nation"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -4,
+                    54
+                ]
+            },
+            "relevance": 88,
+            "parentnames": [
+                "Europe"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "661850e07d5b100481f4c076b8e3055c",
+            "name": "Europe",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "associations": {
+        "1": {
+            "altids": {
+                "itemid": "725b81c098364dd7a1cc9eaf377d7674"
+            },
+            "type": "video"
+        },
+        "2": {
+            "altids": {
+                "itemid": "e4b86e657bfb4197800fbe1bdb5f324b"
+            },
+            "type": "audio"
+        },
+        "3": {
+            "altids": {
+                "itemid": "19b6c0e236434dd7aa8b2b2b149e0256"
+            },
+            "type": "audio"
+        },
+        "4": {
+            "altids": {
+                "itemid": "39177e958e394edb8f8f3ec582f31bdc"
+            },
+            "type": "audio"
+        },
+        "5": {
+            "altids": {
+                "itemid": "3585c7c9bc6342ffbf8be92f7ad3bc11"
+            },
+            "type": "audio"
+        },
+        "6": {
+            "altids": {
+                "itemid": "f91a951b6a1f495996070898fddbb710"
+            },
+            "type": "picture"
+        },
+        "7": {
+            "altids": {
+                "itemid": "8b1ba88876234d28b27ebd6d042a1676"
+            },
+            "type": "picture"
+        },
+        "8": {
+            "altids": {
+                "itemid": "6a55dac7d453424d8fe0d3dc7c7b54b5"
+            },
+            "type": "picture"
+        },
+        "9": {
+            "altids": {
+                "itemid": "9c63cd7909c84ebc91b6ade3c55b3eac"
+            },
+            "type": "picture"
+        },
+        "10": {
+            "altids": {
+                "itemid": "747868a6df0a414981c180d2d405b7ac"
+            },
+            "type": "picture"
+        },
+        "11": {
+            "altids": {
+                "itemid": "9d87b83c6c0f4ce49d0a9e78710d41ef"
+            },
+            "type": "picture"
+        },
+        "12": {
+            "altids": {
+                "itemid": "b5b40db7d5414a0d8470515c1e47d057"
+            },
+            "type": "picture"
+        },
+        "13": {
+            "altids": {
+                "itemid": "8e3897c797524ccfbed1c01a44d838b5"
+            },
+            "type": "picture"
+        },
+        "14": {
+            "altids": {
+                "itemid": "3a96bf07fffb4288934ff0681faa3a0f"
+            },
+            "type": "picture"
+        },
+        "15": {
+            "altids": {
+                "itemid": "985aa613a1654f98b4eb2949541b4fdc"
+            },
+            "type": "picture"
+        },
+        "16": {
+            "altids": {
+                "itemid": "73596f60c47b473dbd78c1c84b8ffc70"
+            },
+            "type": "picture"
+        },
+        "17": {
+            "altids": {
+                "itemid": "8ec0885b76fd40e8936af1ce6db4bdd8"
+            },
+            "type": "picture"
+        },
+        "18": {
+            "altids": {
+                "itemid": "f098071fa75d4d87babe08d7ba6fa9a4"
+            },
+            "type": "picture"
+        },
+        "19": {
+            "altids": {
+                "itemid": "65201d1bf5c0431a89925edc81b50f31"
+            },
+            "type": "picture"
+        },
+        "20": {
+            "altids": {
+                "itemid": "fc2e4f07e3ea4fa68e3fd618d548a06a"
+            },
+            "type": "picture"
+        },
+        "21": {
+            "altids": {
+                "itemid": "246823b7965a465cae57ab9eebbe05e8"
+            },
+            "type": "picture"
+        },
+        "22": {
+            "altids": {
+                "itemid": "57f00ad99b2a4e3aa6886980e479e71b"
+            },
+            "type": "picture"
+        }
+    },
+    "body_nitf": "<p>LONDON (AP) \u2014 Britain's <a href=\"https://apnews.com/article/king-charles-iii-birthday-monarchy-ff1d632d43b9fd7924ffe0008585770e\">King Charles III</a> has been diagnosed with cancer and has begun treatment, Buckingham Palace said Monday. Less than 18 months into his reign, the 75-year-old monarch will suspend public engagements but will continue with state business, and won't be handing over his constitutional roles as head of state.</p><p>The palace didn't disclose what form of cancer the king has, but said it's not related to his <a href=\"https://apnews.com/article/uk-princess-kate-abdominal-surgery-5fc9e0e3b59954a2cceb6b1a7edf31a7\">recent treatment</a> for a benign prostate condition.</p><p>The palace said \u201ca separate issue of concern was noted\u201d during Charles' treatment for an enlarged prostate last month, when he spent <a href=\"https://apnews.com/article/uk-princess-kate-abdominal-surgery-5fc9e0e3b59954a2cceb6b1a7edf31a7\">three nights in a London hospital</a>.</p><p>\u201cDiagnostic tests have identified a form of cancer,\u201d it said in a statement.</p><p>\u201cHis Majesty has today commenced a schedule of regular treatments, during which time he has been advised by doctors to postpone public-facing duties,\u201d the palace said. \"Throughout this period, His Majesty will continue to undertake State business and official paperwork as usual.\"</p><p>The king is being treated as an outpatient, the palace said.</p><p>It said Charles, <a href=\"https://apnews.com/article/king-charles-health-history-covid-sports-injuries-a75e0eed8f8537d59789b8333828b088\">who has generally enjoyed good health</a>, \u201cremains wholly positive about his treatment and looks forward to returning to full public duty as soon as possible.\u201d</p><p>The palace added that the king \"has chosen to share his diagnosis to prevent speculation and in the hope it may assist public understanding for all those around the world who are affected by cancer.\u201d</p><p>Charles became king in September 2022 when his mother, <a href=\"https://apnews.com/article/queen-elizabeth-ii-health-update-b2578aa91c3fef9c5d6ad4a557bf63e4\">Queen Elizabeth II</a>, died at the age of 96 after 70 years on the throne.</p><p>News of the king's diagnosis comes as his daughter-in-law Kate, Princess of Wales, recovers from abdominal surgery that saw her hospitalized for about two weeks.</p><p>Kate is still taking a break from royal duties as she recovers. Her husband, Prince William, who is heir to the throne, also took time off to help look after the couple's three children, but is due to preside over an investiture ceremony at Windsor Castle and a charity dinner on Wednesday.</p><p>Charles took the throne intending to preside over a slimmer monarchy with fewer <a href=\"https://apnews.com/article/uk-monarchy-line-of-succession-king-charles-f8c61815db305632f51ad51b3d4eab93\">senior royals</a> carrying out ceremonial public duties. But with Charles and Kate both temporarily sidelined, Prince Harry self-exiled to California and Prince Andrew largely banished from view because of his friendship with sex offender Jeffrey Epstein, the royal \u201cFirm\u201d risks becoming severely overstretched.</p><p>The king personally called both William and Harry \u2014 as well as his siblings Princess Anne, Prince Andrew and Prince Edward \u2014 to share news of his health.</p><p>Harry, who quit royal duties in 2020, has spoken to his father about the diagnosis and \u201cwill be traveling to U.K. to see His Majesty in the coming days,\u201d said the office of Harry and his wife, Meghan.</p><p>U.K. political leaders sent messages of support. Prime Minister Rishi Sunak tweeted: \u201cWishing His Majesty a full and speedy recovery. I have no doubt he\u2019ll be back to full strength in no time and I know the whole country will be wishing him well.\u201d</p><p>U.S. President Joe Biden, traveling in Las Vegas on Monday, said he had just learned about Charles\u2019s diagnosis and said he hopes to speak with him, \u201cGod willing.\u201d</p><p>\u201cI\u2019m concerned about him,\u201d Biden told reporters.</p><p>The president later posted on X, formerly known as Twitter: \u201cNavigating a cancer diagnosis, treatment, and survivorship takes hope and absolute courage. Jill and I join the people of the United Kingdom in praying that His Majesty experiences a swift and full recovery.\"</p><p>Charles departed from royal tradition with his openness about <a href=\"https://apnews.com/article/kate-hospitalized-prince-william-royal-health-wales-b2ea543cfaf7a52b71ac3fbdf4a19cfa\">his prostate condition.</a> For centuries Britain's royal family remained tight-lipped about health matters.</p><p>When U.K. monarchs had real power, news of illness was withheld for fear it might weaken their authority. The habit of secrecy lingered after royals became constitutional figureheads.</p><p>The British public wasn\u2019t told that Charles\u2019 grandfather, King George VI, had lung cancer before his death in February 1952 at the age of 56, and some historians have claimed that the king himself wasn\u2019t told he was terminally ill.</p><p>In the final years of Elizabeth's life, the public was told only that the queen was suffering from \u201cmobility issues.\u201d The cause of her death was listed on the death certificate simply as \u201cold age.\u201d</p><p>Pat Price, founder of the Catch Up With Cancer campaign, said millions shared the \u201ccollective concern\u201d for the king's health.</p><p>\u201cThe king\u2019s openness about his battle with cancer is a powerful reminder that one in two of us may face cancer at some point in our lives,\" Price said.</p><p>___</p><p>Associated Press writers Sylvia Hui and Brian Melley in London, Danica Kirka in Helsinki and Darlene Superville in Las Vegas contributed to this report.</p><p>___</p><p>This version has corrected that the investiture being held Wednesday is at Windsor Castle not Buckingham Palace.</p><p>___</p><p>Find more of AP's coverage of King Charles III at <a href=\"https://apnews.com/hub/royalty\">https://apnews.com/hub/royalty</a></p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/king-charles-iii-cancer-britain-e0408a7c9bb86ad2af8754ce4b37d65e",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 5,
+            "reason": "The document is highly relevant to the topic of health as it discusses King Charles III's cancer diagnosis, his treatment plan, and the impact on his public duties. It also touches on the health history of other royal family members and the broader implications of his openness about his health condition. The document provides detailed information about the king's medical condition, treatment, and the public and political reactions to his diagnosis, all of which are pertinent to the topic of health."
+        }
+    }
+}

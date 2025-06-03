@@ -1,0 +1,229 @@
+﻿{
+    "altids": {
+        "itemid": "b9a0d91283ad81e6b6fd0b14f19962d8",
+        "etag": "b9a0d91283ad81e6b6fd0b14f19962d8_0a2aza0c0",
+        "friendlykey": "237248759334",
+        "referenceid": "LA--Editorial Rdp"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Opinion",
+    "language": "en",
+    "versioncreated": "2024-04-04T11:10:08Z",
+    "firstcreated": "2024-04-03T18:30:16Z",
+    "editorialrole": "FullStory",
+    "fixture": {
+        "code": "21ea4067bb274c3b805353fb2b99ba70",
+        "name": "Editorial Roundup"
+    },
+    "pubstatus": "usable",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "LA--Editorial Rdp",
+    "headline": "Editorial Roundup: Louisiana",
+    "slugline": "BC-LA--Editorial Rdp",
+    "bylines": [
+        {
+            "by": "By The Associated Press"
+        }
+    ],
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "Editorial Rdp"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "person": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "785236760fee4b24a5cbc2b1c25ffe61",
+            "name": "Bobby Jindal",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "POLITICIAN",
+                "PERSON"
+            ],
+            "associatedstates": [
+                {
+                    "code": "43fb970882b310048496df092526b43e",
+                    "name": "Louisiana"
+                }
+            ],
+            "relevance": 45
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "dfccfcdf61444b20a833564dbdc0f594",
+            "name": "Kathleen Blanco",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "POLITICIAN",
+                "PERSON"
+            ],
+            "relevance": 46
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "d898d5388628100482f2ff2260dd383e",
+            "name": "Head injuries",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 34
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 59
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "5934f1087e87100487e3df092526b43e",
+            "name": "Injuries",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 34
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "3c105048882f100489fd9528eb155503",
+            "name": "Automotive accidents",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 34
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86aad5207dac100488ecba7fa5283c3e",
+            "name": "Politics",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 69
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "43fb970882b310048496df092526b43e",
+            "name": "Louisiana",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -92.0004,
+                    31.00047
+                ]
+            },
+            "relevance": 79,
+            "parentnames": [
+                "United States"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "43fb970882b310048496df092526b43e",
+            "name": "Louisiana",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "body_nitf": "<p>The Advocate. April 2, 2024.</p><p>Editorial: Motorcycle helmets make riders -- and everyone else on the road -- safer</p><p>If the current legislative debate over whether <a href=\"https://www.nola.com/news/politics/legislature/louisiana-might-let-people-ride-motorcycles-without-helmets/article_316e372e-e7a5-11ee-a972-43fe56a1b382.html?utm_medium=social&utm_source=twitter&utm_campaign=user-share\">motorcyclists should be required to wear helmets</a> seems familiar, it\u2019s because Louisiana has been down this road before.</p><p>More than two decades ago, at the persistent urging of governor and motorcycle enthusiast Mike Foster, the Legislature did away with the requirement. Not long after Foster left office, Gov. Kathleen Blanco wisely signed a bill reinstating it. Lawmakers later rejected a push by Gov. Bobby Jindal to eliminate it, following frightening committee testimony by emergency room doctors.</p><p>But now a new version of this bad idea is before lawmakers. <a href=\"https://www.legis.la.gov/legis/BillInfo.aspx?i=245955\">House Bill 317</a> by state Rep. Rodney Schamerhorn, R-Hornbeck, would repeal the requirement once more, under certain circumstances.</p><p>Arguing for the bill, which was approved 60-43 by the House late last month, Schamerhorn cited the \u201cpersonal privilege to be able to do what you want to do with your life.\u201d But removing the helmet mandate doesn\u2019t just affect individual riders who choose to take ill-advised chances.</p><p>We urge senators to apply the brakes and take a hard look at the historical data.</p><p>The most important metric is a stark one: In the three years after the last time lawmakers got rid of the helmet requirement, Louisiana saw 196 motorcyclist fatalities \u2014 up from 102 in the three years preceding the change.</p><p>Some safeguards were amended into HB 317 to make it more palatable. In its current form, the bill would require riders who don\u2019t want to wear helmets to carry insurance covering up to $100,000 for bodily injury, to give up the right to recover damages for head injuries suffered in an accident and to take a motorcycle safety course. Riders who choose this option must be at least 21 years old; the law\u2019s prior incarnation applied to riders over 18.</p><p>We appreciate that some lawmakers worked to blunt the proposal\u2019s bad effects, but the changes don\u2019t alter the bottom line: One person\u2019s freedom to ride without a helmet still affects others negatively.</p><p>Even if the rider complies with the liability requirement \u2014 a big if in this state \u2014 a lifetime of care following a traumatic head injury will likely cost far more than $100,000, and someone has to pay.</p><p>Then there are broader safety concerns for drivers who share the road; the potential trauma to survivors and to others involved in accidents that could have been far less serious; and the likelihood that policies encouraging unnecessary risk-taking could send the state\u2019s high insurance rates even higher.</p><p>The times and political makeup of the Legislature have changed since the last time Louisiana had this debate, but the common sense answer remains.</p><p>Along with sensible regulations like seat belt laws and bans on driving while intoxicated, the current helmet law is doing its part to make all who use Louisiana\u2019s roads safer.</p><p>There\u2019s no good reason to get rid of it.</p><p>END</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/b9a0d91283ad81e6b6fd0b14f19962d8",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 4,
+            "reason": "The document discusses the legislative debate over motorcycle helmet laws in Louisiana, emphasizing the safety and health implications of wearing helmets. It provides statistical data on motorcyclist fatalities and the potential health care costs associated with head injuries. These points are directly related to public health and safety, making the document relevant to the topic of health."
+        }
+    }
+}

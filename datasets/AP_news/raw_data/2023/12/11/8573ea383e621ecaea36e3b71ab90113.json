@@ -1,0 +1,256 @@
+﻿{
+    "altids": {
+        "itemid": "8573ea383e621ecaea36e3b71ab90113",
+        "etag": "8573ea383e621ecaea36e3b71ab90113_0a2aza0c0",
+        "friendlykey": "796713763321",
+        "referenceid": "MI--Editorial Rdp"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Opinion",
+    "language": "en",
+    "versioncreated": "2023-12-11T12:10:39Z",
+    "firstcreated": "2023-12-11T04:48:26Z",
+    "editorialrole": "FullStory",
+    "fixture": {
+        "code": "21ea4067bb274c3b805353fb2b99ba70",
+        "name": "Editorial Roundup"
+    },
+    "pubstatus": "usable",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "MI--Editorial Rdp",
+    "headline": "Editorial Roundup: Michigan",
+    "slugline": "AP-MI--Editorial Rdp",
+    "bylines": [
+        {
+            "by": "By The Associated Press"
+        }
+    ],
+    "copyrightnotice": "Copyright 2023 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "Editorial Rdp"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "person": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a6331b54c46e4ca8b79fa40fada95db5",
+            "name": "Donald Trump",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "POLITICIAN",
+                "PERSON"
+            ],
+            "relevance": 51
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "45fc84338d9a4da6be5fc4dcc8eba782",
+            "name": "Ronna Romney McDaniel",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "POLITICIAN",
+                "PERSON"
+            ],
+            "relevance": 42
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f0a9c7974e6f4fe58700584431637714",
+            "name": "Peter Hoekstra",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "POLITICIAN",
+                "PERSON"
+            ],
+            "relevance": 46
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "084e24e87f00100481c7f571351eed07",
+            "name": "Flu",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 78
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 69
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "ace74e307f00100486cedf092526b43e",
+            "name": "Immunizations",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 58
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "organisation": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "bf6e2e80760d10048f8ae6e7a0f4673e",
+            "name": "U.S. Republican Party",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 38
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "142410b0cf274e8f9bfc128ef67af06e",
+            "name": "Traverse City",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "6bf49b4082c410048696df092526b43e"
+            ],
+            "locationtype": {
+                "code": "9d26a20b35f0484a891740f8189d4c7b",
+                "name": "City"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -85.62063,
+                    44.76306
+                ]
+            },
+            "relevance": 50,
+            "parentnames": [
+                "Michigan"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "6bf49b4082c410048696df092526b43e",
+            "name": "Michigan",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -85.50033,
+                    44.25029
+                ]
+            },
+            "relevance": 90,
+            "parentnames": [
+                "United States"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "6bf49b4082c410048696df092526b43e",
+            "name": "Michigan",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "body_nitf": "<p>Detroit News. December 9, 2023.</p><p>Editorial: Michigan GOP needs an intervention</p><p>The Republican National Committee must intervene to help stabilize the Michigan Republican Party, which is heading into the presidential campaign season financially broke and wracked by internal feuds.</p><p>The state GOP has all but disappeared under the leadership of Chair Kristina Karamo. The Detroit News <a href=\"https://www.detroitnews.com/story/news/politics/2023/12/06/draft-report-claims-michigan-gop-is-on-brink-of-bankruptcy/71831436007/\">reported</a> that a draft report from a group opposed to Karamo\u2019s leadership found the state GOP\u2019s main fundraising account had just $315,000 in it as of Nov. 30.</p><p>The party also owes about $509,000 on its longstanding line of credit with Comerica Bank, along with $110,000 for a speaker at the Mackinac Leadership Conference in September.</p><p>With three weeks until the beginning of 2024 \u2014 a pivotal election year \u2014 the state\u2019s GOP is essentially bankrupt.</p><p>Karamo raised just $186,000 from March through October of this year, according to the document. By comparison, the party raised $1.3 million during the same period in 2021 under former chairman Ron Weiser.</p><p>In further proof of the party\u2019s desperate condition, The Detroit News <a href=\"https://www.detroitnews.com/story/news/politics/2023/12/08/michigan-republican-party-lawsuit-kristina-karamo-headquarters-building-comerica-bank-gop-trust/71857271007/\">reported</a> exclusively Karamo filed suit against the former chairs who control the trust that owns its Lansing headquarters. She wants to sell the building to settle the current debt.</p><p>RNC staffers are reportedly coming to Michigan next week to meet with GOP donors and assess the situation here.</p><p>Meanwhile, 39 members of the state executive committee have scheduled a meeting Dec. 27 to consider unseating Karamo. That move would require 75% of the state committee, which has about 100 members. Or, with two-thirds of the committee it could change the bylaws to lower the threshold.</p><p>If the dissidents are successful in dumping Karamo, the challenge will be finding a successor who can appeal to both the Trump-sotted grassroots and the traditional donor base.</p><p>Former Congressman Pete Hoekstra of Grand Rapids says he\u2019d take the job under the right circumstances. He\u2019d be the perfect choice.</p><p>If Karamo can be replaced, the next steps will be up to the RNC. The national committee must recognize the new chair as the official Republican leader in Michigan and make sure he or she is credentialed by the RNC as the official representative of Michigan.</p><p>The new chair will need help rebuilding a fundraising structure and crafting a plan for managing the debt. The revamped state party will need considerable assistance from the RNC in paying for its presidential nominating caucuses in March, as well as in organizing the vote.</p><p>How much direct financial aid the national party can give is uncertain. It has had fundraising struggles of its own due to former President Donald Trump siphoning off a large number of donors to fund his campaign.</p><p>Because of the disarray in Michigan, the RNC has not placed a state director or field staff here to assist in its national efforts, as it typically would.</p><p>RNC Chair Ronna Romney McDaniel still lives in Michigan and must be aware of the state of emergency in the Michigan Republican Party. She also knows the critical role this state will play in next year\u2019s presidential race and the battle for control of Congress.</p><p>The RNC must take an active role in reestablishing political order in a state that is vital to its 2024 ambitions.</p><p>___</p><p>Traverse City Record-Eagle. December 10, 2023.</p><p>Editorial: The tide that lifts all boats</p><p>A historic $11 billion in federal funds, allocated for Michigan through the Bipartisan Infrastructure Law passed in November 2021, is going to pay for projects aimed at expanding access to high-speed internet, rebuilding the state\u2019s roads and bridges, and improving water and sewer systems, public transportation and public parks.</p><p>To put the amount in context, the state\u2019s annual budget for fiscal year 2024 is about $81 billion, so an infusion of an additional $11 billion will have a significant impact. In effect, it\u2019s a funding tide that will lift all boats.</p><p>And, boy, do we need it \u2013 especially when we have the state administration throwing $20 million at an ad campaign targeting young college graduates in other states and the Growing Michigan Together Council floating the idea of paying people to move to Michigan.</p><p>That\u2019s no tide lifting anything. Instead, it feels like we\u2019re circling the drain. It\u2019ll be interesting to see the council\u2019s Dec. 15 recommendations.</p><p>In the meantime, what seems most uplifting, oddly enough, is what the U.S. Congress has done for us.</p><p>In October, we reported on the Traverse City Cherry Capital Airport receiving both an Airport Improvement Grant and funding from the Airport Terminal Program to expand the terminal ramp to the east and west, and to replace three passenger jet bridges.</p><p>That\u2019s part of this federal largesse \u2014 and it\u2019s being invested right in the heart of the Traverse City area.</p><p>This is the first major infrastructure spending in the U.S. in more than a decade. When adjusted for inflation, the $550-billion legislation is the equivalent of building the interstate highway system, according to a report in The New York Times.</p><p>Total infrastructure spending as a percentage of GDP has been declining since about 1970, when the rate of investment was 1.15%. The level fell as low as 0.7% in 2019, according to a study by Yale University. This infrastructure bill brought it back up to about 1.2%, a level of investment only exceeded by the New Deal at 1.4%.</p><p>As Michigan motorists know, failing to invest in crumbling roads and bridges costs more in the long run, not to mention the wear and tear on our vehicles. Roads that have to be rebuilt from a poor condition cost more to repair than those rated somewhat higher yet still need replacement.</p><p>U.S. Transportation Administration data shows, as of this spring, there were 1,219 road bridges and 7,345 miles of highway in poor condition. Michigan is expected to receive $7.3 billion toward road replacement and repair and $563 million for road bridge work. About $3.1 billion of those funds have been, or will soon be, allocated.</p><p>For our region, we\u2019ll see a $29 million investment in pavement reconstruction on I-75 from Levering Road to Cheboygan County; $4.5 million to improve M-72 in Kalkaska and Crawford counties; $273,679 to chip and seal a portion of M-32 in Atlanta; and $1.1 million to reconstruct and add drainage to a portion of M-22 in Leelanau County.</p><p>Other general allocations for Michigan include about $1 billion toward public transportation \u2014 and not just the airport \u2013 bus, rail, car and passenger ferry infrastructure will receive funds for upgrades. Another $1.3 billion is earmarked to improve water infrastructure, and $110 million for electric vehicle infrastructure, including charging stations.</p><p>One of the largest outlays of the federal infrastructure funding in the state, at $1.56 billion, is a plan to ensure residents\u2019 access to a high-speed internet connection. That will benefit many people in our rural areas.</p><p>The key to attracting growth, and doing it wisely, is to piggyback off these projects and extend them by magnifying the impact of the federal funds that much more. The members of that Growing Michigan Together Council should reconvene, mark all of these federal projects on a big map of Michigan and figure out how they can springboard some enhancement off each one of the initiatives.</p><p>Use state funds to make federal investment in infrastructure count for a nearby town, a nature trail, a township park, an educational institution or an arts and entertainment venue.</p><p>The answer is staring them in the face: Invest in Michigan.</p><p>Build it up and they will come.</p><p>___</p><p>Iron Mountain Daily News. December 5, 2023.</p><p>Editorial: \u2019Tis the week \u2014 and the season \u2014 to get that flu shot</p><p>While this is National Influenza Vaccination Week, truth is flu season already appears to be in full swing in parts of the U.S., with 11 states reporting high levels of flu-like illnesses Friday, mostly in the South and Southwest, according to the Associated Press.</p><p>So the Michigan Department of Health and Human Services is urging Michigan residents to get flu, COVID-19 and RSV vaccines. All three can help protect against respiratory illnesses and can be given at the same time, MDHHS stated in a news release.</p><p>\u201cVaccines against respiratory illnesses are the best way to protect yourself and your families against the anticipated surge of these illnesses over winter months,\u201d said Dr. Natasha Bagdasarian, chief medical executive. \u201cIt is not too late to get vaccinated this season \u2014 please get your flu, COVID-19 and RSV vaccines (if eligible) today to prevent yourself from the potentially severe consequences of influenza and other respiratory illnesses this holiday season and to help prevent further burden on our health care system.\u201d</p><p>While it is ideal to get a flu vaccine before flu starts spreading \u2014 usually in October each year \u2014 getting vaccinated is beneficial anytime flu viruses are circulating, according to the MDHHS. Respiratory virus activity is beginning to increase nationally, which is why getting vaccinated now can still provide protection. Flu activity usually peaks in February but significant flu activity can continue into May.</p><p>The Centers for Disease Control and Prevention recommends annual influenza vaccination for all persons ages 6 months and older with rare exceptions. According to data from the Michigan Care Improvement Registry, as of Nov. 18 approximately 2.2 million people in Michigan have received their flu vaccine for the 2023-2024 flu season, which is 55% towards the state\u2019s goal of reaching 4 million doses of flu vaccine administered this season.</p><p>For people younger than 65 years, CDC recommends any flu vaccine available during the 2023-2024 flu season. Options for this age group include inactivated flu vaccine, recombinant flu vaccine or live-attenuated flu vaccine for those ages 2 to 49.</p><p>Vaccination is particularly important for individuals at higher risk of developing serious flu complications, including young children, adults ages 65 years and older, people with certain chronic medical conditions and pregnant persons. Some children ages 6 months through 8 years will need two doses of flu vaccine this season to be fully protected. Individuals should speak with their health care provider to determine which vaccine is best for them.</p><p>Since it takes about two weeks after the vaccine is administered before the body builds up enough immunity to protect from severe illness from the flu, now is an ideal time to get the shots to be ready when families and friends begin to gather for the holidays later this month.</p><p>The Michigan Department of Insurance and Financial Services also reminds Michiganders that flu shots are an essential health benefit under the Affordable Care Act and are covered with no out-of-pocket costs by most health plans in Michigan.</p><p>\u201cAs the weather gets colder and Michiganders spend more time inside, getting a flu shot can help keep you and your family healthy without missing time from work or school,\u201d DIFS Director Anita Fox said. Most health plans cover flu shots at no cost, so I urge you to get your vaccine and to make sure that your kids and other family members are also protected.\u201d</p><p>Michiganders with questions about their health insurance can contact DIFS at 877-999-6442 8 a.m. to 5 p.m. Monday through Friday or online at Michigan.gov/HealthInsurance.</p><p>Flu vaccines are widely available now at local health departments, physician offices and pharmacies around the state. Go online Michigan.gov/flu for more information or to IVaccinate.org to find answers to vaccine questions.</p><p>For updates on flu and respiratory illnesses in Michigan, go to Michigan.gov/CovidFluRSV and Michigan.gov/flufocus.</p><p>END</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/8573ea383e621ecaea36e3b71ab90113",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 3,
+            "reason": "The document contains three editorials, only one of which is directly related to health. The editorial from the Iron Mountain Daily News discusses the importance of getting flu, COVID-19, and RSV vaccines, which is highly relevant to the topic of health. The other two editorials focus on political issues within the Michigan GOP and infrastructure funding, which are not relevant to the health topic."
+        }
+    }
+}

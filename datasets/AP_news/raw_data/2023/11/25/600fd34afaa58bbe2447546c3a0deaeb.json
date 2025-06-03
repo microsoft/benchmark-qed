@@ -1,0 +1,224 @@
+﻿{
+    "altids": {
+        "itemid": "600fd34afaa58bbe2447546c3a0deaeb",
+        "etag": "600fd34afaa58bbe2447546c3a0deaeb_3a13aza0c0",
+        "friendlykey": "183507491374",
+        "referenceid": "EU-REL--Vatican-Pope"
+    },
+    "version": 3,
+    "type": "text",
+    "urgency": 3,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2023-11-25T17:37:40Z",
+    "firstcreated": "2023-11-25T09:18:03Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "ednote": "Eds: UPDATES: to link audio. With AP Photos.",
+    "editorialtypes": [
+        "Lead"
+    ],
+    "signals": [
+        "newscontent"
+    ],
+    "title": "EU-REL--Vatican-Pope",
+    "headline": "Pope Francis has a hospital checkup after coming down with the flu",
+    "headline_extended": "The Vatican says Pope Francis went to the hospital for tests after he came down with the flu",
+    "slugline": "BC-EU-REL-Vatican-Pope, 3rd Ld-Writethru",
+    "description_summary": "The Vatican says Pope Francis went to the hospital for tests after he came down with the flu. The results ruled out any respiratory problems. Francis, who had part of one lung removed as a young man, underwent a CAT scan, Vatican spokesman Matteo Bruni said. Earlier Saturday, the Vatican said the pope had canceled his audiences because of the flu. Francis is due to travel on Friday to Dubai for the COP28 conference on climate change. Bruni provided no information about any change in his plans. Francis, who turns 87 next month, has had a number of health problems in recent times.",
+    "located": "ROME",
+    "datelinelocation": {
+        "city": "Rome",
+        "countrycode": "ITA",
+        "countryname": "Italy",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                12.51133,
+                41.89193
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2023 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "Pope Francis Vatican audiences flu"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "person": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "2fd38d1dee8c4287a13ae64992300d96",
+            "name": "Pope Francis",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 55
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "i",
+            "name": "i"
+        },
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "a",
+            "name": "a"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "084e24e87f00100481c7f571351eed07",
+            "name": "Flu",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 52
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 89
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "026a1118e94443a2aacc08a2e70cc77b",
+            "name": "Religion",
+            "creator": "Editorial",
+            "editorial_subject": "Religion",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f3e0ed387eff10048539df092526b43e",
+            "name": "Vatican City",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661850e07d5b100481f4c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "01f56e0e654841eca2e69bf2cbcc0526",
+                "name": "Nation"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    12.4533,
+                    41.90225
+                ]
+            },
+            "relevance": 71,
+            "parentnames": [
+                "Europe"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "661850e07d5b100481f4c076b8e3055c",
+            "name": "Europe",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "associations": {
+        "1": {
+            "altids": {
+                "itemid": "05c46bf04b13492fb081bd3238f88e07"
+            },
+            "type": "picture"
+        },
+        "2": {
+            "altids": {
+                "itemid": "d08948fc09c242fb848fbbedfe1b7bcb"
+            },
+            "type": "picture"
+        },
+        "3": {
+            "altids": {
+                "itemid": "c8defd16183d44888b1c6f735323043d"
+            },
+            "type": "picture"
+        },
+        "4": {
+            "altids": {
+                "itemid": "1351b6d75c5f47cea99ce86a2831319d"
+            },
+            "type": "audio"
+        },
+        "5": {
+            "altids": {
+                "itemid": "847bbeb893aa48e0bee8ea8f475af54d"
+            },
+            "type": "audio"
+        }
+    },
+    "body_nitf": "<p>ROME (AP) \u2014 Pope Francis went to the hospital Saturday for tests after he came down with the flu, but the results ruled out any respiratory problems, the Vatican said.</p><p>Francis, who had part of one lung removed as a young man, underwent a CAT scan, Vatican spokesman Matteo Bruni said.</p><p>The test at Rome\u2019s Gemelli hospital, where Francis was treated for a respiratory infection earlier this year, was done to rule out any possible respiratory problems and came back negative, Bruni said in a statement.</p><p>Earlier Saturday, the Vatican said the pope had canceled his audiences because of the flu.</p><p>Francis is due to travel on Friday to Dubai for the <a href=\"https://apnews.com/climate-and-environment\">COP28 conference on climate change</a>. Bruni provided no information about any change in his plans and the Vatican on Saturday gave new details about his itinerary, suggesting the trip was still on.</p><p>Francis, who will turn 87 next month, spent three days at Gemelli in April for what the Vatican said was bronchitis after he had trouble breathing. He was discharged after receiving intravenous antibiotics.</p><p>Francis spent 10 days at the same hospital in July 2021 following intestinal surgery for a bowel narrowing. He was readmitted in June of this year for <a href=\"https://apnews.com/article/vatican-pope-health-758c3d7b07e6d6f242c4a5ea6f2de154\">an operation</a> to repair an abdominal hernia and remove scarring from previous surgeries.</p><p>When asked about his health in a recent interview, Francis quipped in reply what has become his standard line \u2014 \u201cStill alive, you know.\u201d</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/pope-francis-vatican-audiences-flu-600fd34afaa58bbe2447546c3a0deaeb",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 5,
+            "reason": "The document discusses Pope Francis's recent hospital visit due to the flu, his medical history, and the results of his tests. It provides detailed information about his health conditions, treatments, and upcoming plans, which are directly related to the topic of health."
+        }
+    }
+}

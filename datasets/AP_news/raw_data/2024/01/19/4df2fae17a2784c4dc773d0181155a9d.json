@@ -1,0 +1,312 @@
+﻿{
+    "altids": {
+        "itemid": "4df2fae17a2784c4dc773d0181155a9d",
+        "etag": "4df2fae17a2784c4dc773d0181155a9d_1a6aza0c0",
+        "friendlykey": "110840055173",
+        "referenceid": "US--California-Oyster Illnesses"
+    },
+    "version": 1,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2024-01-20T00:26:12Z",
+    "firstcreated": "2024-01-19T22:36:25Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "ednote": "Eds: UPDATES: Adds background, details. Edits story, headline and summary. Trims.",
+    "editorialtypes": [
+        "Lead"
+    ],
+    "signals": [
+        "newscontent"
+    ],
+    "title": "US--California-Oyster Illnesses",
+    "headline": "California officials warn people to not eat raw oysters from Mexico which may be linked to norovirus",
+    "headline_extended": "Health officials are warning people in Southern California to avoid eating raw oysters imported from many parts of Mexico believed to be carrying the norovirus",
+    "slugline": "AP-US--California-Oyster Illnesses, 1st Ld-Writethru",
+    "description_summary": "Health officials are warning people in Southern California to avoid eating raw oysters imported from many parts of Mexico believed to be carrying the norovirus. The California Department of Public Health says raw oysters harvested from several locations on the Baja California peninsula and the mainland state of Sonora are believed to be behind more than 200 cases of the gastrointestinal illness. Los Angeles County has reported more than 150 suspected cases, and San Diego County has had 69. Health officials say more are being reported in Orange, Riverside, San Bernardino and Ventura counties. Common symptoms of norovirus include diarrhea, vomiting, nausea and stomach pain.",
+    "located": "LOS ANGELES",
+    "datelinelocation": {
+        "city": "Los Angeles",
+        "countryareacode": "CA",
+        "countryareaname": "California",
+        "countrycode": "USA",
+        "countryname": "United States",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                -118.24368,
+                34.05223
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "California Mexico imported raw oysters norovirus"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "a",
+            "name": "a"
+        },
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 79
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Editorial",
+            "editorial_subject": "Health",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "661af0c07d5b10048239c076b8e3055c",
+            "name": "Mexico",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "6618c9f87d5b10048204c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "01f56e0e654841eca2e69bf2cbcc0526",
+                "name": "Nation"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -102,
+                    23
+                ]
+            },
+            "relevance": 62,
+            "parentnames": [
+                "Central America"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "8345b5f082af10048280df092526b43e",
+            "name": "Los Angeles",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "789fdd8882af10048263df092526b43e"
+            ],
+            "locationtype": {
+                "code": "9d26a20b35f0484a891740f8189d4c7b",
+                "name": "City"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -118.24368,
+                    34.05223
+                ]
+            },
+            "relevance": 50,
+            "parentnames": [
+                "California"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "09497c1afcf644e2bdb0653d2b31a8b5",
+            "name": "San Bernardino",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "789fdd8882af10048263df092526b43e"
+            ],
+            "locationtype": {
+                "code": "9d26a20b35f0484a891740f8189d4c7b",
+                "name": "City"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -117.28977,
+                    34.10834
+                ]
+            },
+            "relevance": 32,
+            "parentnames": [
+                "California"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "603b57cc12944739a1bb2ed5ca1f1421",
+            "name": "Riverside",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "789fdd8882af10048263df092526b43e"
+            ],
+            "locationtype": {
+                "code": "9d26a20b35f0484a891740f8189d4c7b",
+                "name": "City"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -117.39616,
+                    33.95335
+                ]
+            },
+            "relevance": 32,
+            "parentnames": [
+                "California"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "789fdd8882af10048263df092526b43e",
+            "name": "California",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -119.75126,
+                    37.25022
+                ]
+            },
+            "relevance": 87,
+            "parentnames": [
+                "United States"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "789fdd8882af10048263df092526b43e",
+            "name": "California",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661850e07d5b100481f5c076b8e3055c",
+            "name": "Latin America and Caribbean",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "body_nitf": "<p>LOS ANGELES (AP) \u2014 Health officials in Southern California are warning people to avoid eating raw oysters from parts of Mexico after more than 200 people recently fell ill with suspected cases of norovirus.</p><p>The Los Angeles County Department of Public Health has <a href=\"http://publichealth.lacounty.gov/phcommon/public/media/mediapubhpdetail.cfm?prid=4614#:~:text=The%20Los%20Angeles%20County%20Department,oysters%2C%20likely%20caused%20by%20norovirus.\">reported</a> more than 150 suspected cases of gastrointestinal illness linked to raw oysters, while in San Diego County, health officials said Thursday that they had 69 confirmed and probable cases. Other cases were reported in Orange, Riverside, San Bernardino and Ventura counties.</p><p>The U.S. Food and Drug Administration issued an initial advisory Jan. 11 regarding oysters from one site in the Mexican state of Sonora, which is located along the Gulf of California. That was based, at least in part, on the findings of an investigation conducted by San Diego County health officials.</p><p>On Wednesday the FDA issued another advisory for oysters from Laguna De Guerrero Negro and Laguna Manuela, both on the Pacific Coast of Baja California, Mexico. That same day the agency also updated its initial Sonora advisory to include a second harvest location, Estero Morua.</p><p>The California Department of Public Health <a href=\"https://www.cdph.ca.gov/Programs/OPA/Pages/SN24-001.aspx\">warned consumers</a> that raw oysters harvested from those locations may be contaminated with the norovirus, which can cause diarrhea, vomiting, nausea and stomach pain. Other symptoms include fever, headache and body aches, according to FDA.</p><p>Health officials are recommending that restaurants throw away any oysters imported from locations in Mexico until further notice \u201cgiven the expanding number of harvest locations associated with illness and the potential of other sites to be involved,\u201d San Diego County said in a statement.</p><p>The norovirus cases included both restaurant patrons and consumers who bought oysters at shops and ate them at home.</p><p>People are advised to ask where oysters came from before consuming them and to wash hands and surfaces that may have come into contact with contaminated oysters.</p><p>All of the implicated oysters were harvested in December, and none since then have been distributed to food venues in San Diego from those locations, according to the county statement.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/california-mexico-imported-raw-oysters-norovirus-4df2fae17a2784c4dc773d0181155a9d",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 5,
+            "reason": "The document discusses a health warning issued by California officials regarding the consumption of raw oysters from Mexico due to a potential norovirus outbreak. It includes detailed information about the number of cases, affected areas, advisories from health departments, and recommendations for consumers and restaurants. This is directly related to the topic of health as it concerns public health advisories, disease prevention, and food safety."
+        }
+    }
+}

@@ -1,0 +1,325 @@
+﻿{
+    "altids": {
+        "itemid": "dc786ed53e66b6081515474b5b310525",
+        "etag": "dc786ed53e66b6081515474b5b310525_2a5aza0c0",
+        "friendlykey": "283321958563",
+        "referenceid": "CB--Haiti-Health Crisis"
+    },
+    "version": 2,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2024-04-23T11:34:17Z",
+    "firstcreated": "2024-04-23T04:05:32Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "ednote": "Eds: UPDATES: adds hyperlinks.",
+    "editorialtypes": [
+        "Lead"
+    ],
+    "signals": [
+        "newscontent"
+    ],
+    "title": "CB--Haiti-Health Crisis",
+    "headline": "Haiti health system nears collapse as medicine dwindles, gangs attack hospitals and ports stay shut",
+    "headline_extended": "Life-saving medication and equipment is dwindling or altogether absent at hospitals and clinics across Haiti's capital as brutal gangs tighten their grip on Port-au-Prince and beyond",
+    "slugline": "BC-CB-Haiti-Health-Crisis, 2nd Ld-Writethru",
+    "description_summary": "Life-saving medication and equipment is dwindling or altogether absent at hospitals and clinics across Haiti's capital as brutal gangs tighten their grip on Port-au-Prince and beyond. They have blocked roads, forced the closure of the main international airport in early March and paralyzed operations at the country\u2019s largest seaport, where containers filled with key supplies remain stuck. Dr. Rachel Lavigne of Doctors Without Borders says that \u201ceverything is crashing.\u201d Haiti\u2019s health system has long been fragile, but it\u2019s now nearing total collapse after gangs launched coordinated attacks on Feb. 29, targeting critical state infrastructure in the capital and beyond.",
+    "bylines": [
+        {
+            "by": "By D\u00c1NICA COTO",
+            "title": "Associated Press"
+        }
+    ],
+    "located": "PORT-AU-PRINCE, Haiti",
+    "datelinelocation": {
+        "city": "Port-au-prince",
+        "countrycode": "HTI",
+        "countryname": "Haiti",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                -72.33881,
+                18.54349
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "Haiti medical crisis gangs medicine shortage"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "i",
+            "name": "i"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e237be707de410048fffdf092526b43e",
+            "name": "Medication",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 67
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 95
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Editorial",
+            "editorial_subject": "Health",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "bb2d2c5f441a452cb24bb511a2ab5eea",
+            "name": "World news",
+            "creator": "Editorial",
+            "editorial_subject": "World news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "organisation": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "3dbdd1b0892210048dcafb7860a2fc03",
+            "name": "Doctors Without Borders",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 57
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc2f02007f151004892edf092526b43e",
+            "name": "Port-au-Prince",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661a39287d5b10048226c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "9d26a20b35f0484a891740f8189d4c7b",
+                "name": "City"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -72.335,
+                    18.53917
+                ]
+            },
+            "relevance": 80,
+            "parentnames": [
+                "Haiti"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "661a39287d5b10048226c076b8e3055c",
+            "name": "Haiti",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "6618c9f87d5b10048203c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "01f56e0e654841eca2e69bf2cbcc0526",
+                "name": "Nation"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -72.41667,
+                    19
+                ]
+            },
+            "relevance": 95,
+            "parentnames": [
+                "Caribbean"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "661850e07d5b100481f5c076b8e3055c",
+            "name": "Latin America and Caribbean",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "associations": {
+        "1": {
+            "altids": {
+                "itemid": "e8ff08fe0e1a421a8af6e0c6868e8bb5"
+            },
+            "type": "picture"
+        },
+        "2": {
+            "altids": {
+                "itemid": "beb95ddc785546afa7d9a46d31fddd54"
+            },
+            "type": "picture"
+        },
+        "3": {
+            "altids": {
+                "itemid": "7931bde578624594925467b1118f930d"
+            },
+            "type": "picture"
+        },
+        "4": {
+            "altids": {
+                "itemid": "f20e9e10b1bc4b37b26fc4f333f48f93"
+            },
+            "type": "picture"
+        },
+        "5": {
+            "altids": {
+                "itemid": "435026c34fde40caa6eb04051bcc7255"
+            },
+            "type": "picture"
+        },
+        "6": {
+            "altids": {
+                "itemid": "332b3845adb64b7e95d958161f319fdc"
+            },
+            "type": "picture"
+        },
+        "7": {
+            "altids": {
+                "itemid": "d83bde58cb4e43da869e1a8340b63240"
+            },
+            "type": "picture"
+        },
+        "8": {
+            "altids": {
+                "itemid": "088b9a524e724931b274404c8fa9fd47"
+            },
+            "type": "picture"
+        },
+        "9": {
+            "altids": {
+                "itemid": "83e2c7b9343e4d92ad0b531268029bfe"
+            },
+            "type": "picture"
+        },
+        "10": {
+            "altids": {
+                "itemid": "1a08e1fc6daf428dac0974a4f5c3b4ea"
+            },
+            "type": "picture"
+        },
+        "11": {
+            "altids": {
+                "itemid": "7cbea7e3600b4b24b211c03e35d7013b"
+            },
+            "type": "picture"
+        },
+        "12": {
+            "altids": {
+                "itemid": "79716877ba5747af98ffacd131840ed7"
+            },
+            "type": "picture"
+        },
+        "13": {
+            "altids": {
+                "itemid": "22e6161463484419b96d3d2dac96bf5e"
+            },
+            "type": "picture"
+        },
+        "14": {
+            "altids": {
+                "itemid": "2fe40a792ec249edb9580b3d0214bab7"
+            },
+            "type": "video"
+        }
+    },
+    "body_nitf": "<p>PORT-AU-PRINCE, Haiti (AP) \u2014 On a recent morning at a hospital in the heart of gang territory in Haiti\u2019s capital, a woman began convulsing before her body went limp as a doctor and two nurses raced to save her.</p><p>They stuck electrodes to her chest and flipped on an oxygen machine while keeping their eyes on a computer screen that reflected a dangerously low oxygen level of 84%.</p><p>No one knew what was wrong with her.</p><p>Even more worrisome, the Doctors Without Borders hospital in the Cite Soleil slum was <a href=\"https://apnews.com/article/haiti-gangs-medical-care-hospitals-5ef37965e250b7a202aa6621b5b54df0\">running low on key medicine</a> to treat convulsions.</p><p>\u201cThe medication she really needs, we barely have,\u201d said Dr. Rachel Lavigne, a physician with the medical aid group.</p><p>It\u2019s a familiar scene repeated daily at hospitals and clinics across Port-au-Prince, where life-saving medication and equipment is dwindling or altogether absent as brutal gangs <a href=\"https://apnews.com/article/haiti-gangs-violence-142c57f868c5f8b0cdf01627b3f5350b\">tighten their grip</a> on the capital and beyond. They have blocked roads, forced the closure of the main international airport in early March and <a href=\"https://apnews.com/article/haiti-gangs-violence-portauprince-airport-418c2a9fa54ea42c4d980917e146be3d\">paralyzed operations</a> at the country\u2019s largest seaport, where containers filled with key supplies remain stuck.</p><p>\u201cEverything is crashing,\u201d Lavigne said.</p><p>Haiti\u2019s health system has long been fragile, but it\u2019s now nearing total collapse after gangs <a href=\"https://apnews.com/article/haiti-gangs-violence-barbecue-police-prime-minister-c275da3b420f018a95099c9e6539e61f\">launched coordinated attacks</a> on Feb. 29, targeting critical infrastructure in the capital and beyond.</p><p>The violence has forced several medical institutions and dialysis centers to close, including Haiti\u2019s largest public hospital. Located in <a href=\"https://apnews.com/article/haiti-cap-haitien-capital-gangs-violence-3e101149ced94ce0da41d9621234f41c\">downtown Port-au-Prince</a>, the Hospital of the State University of Haiti was supposed to reopen on April 1 after closing when the attack began, but gangs have infiltrated it.</p><p>One of the few institutions still operating is Peace University Hospital, located south of the shuttered airport. From Feb. 29 to April 15, the hospital treated some 200 patients with gunshot wounds, and its beds remain full.</p><p>\u201cWe urgently need fuel because we operate using generators. Otherwise we run the risk of closing our doors,\u201d hospital director Dr. Paul Junior Fontilus said in a statement.</p><p>More than 2,500 people <a href=\"https://apnews.com/article/haiti-gangs-violence-report-e13627aa486cb932492be03094f7415a\">were killed or wounded</a> across Haiti from January to March, a more than 50% increase compared with the same period last year, according to a recent U.N. report.</p><p>Even if a hospital is open, sometimes there is little or no medical staff because gang violence erupts daily in Port-au-Prince, forcing doctors and nurses to stay at home or turn around if they encounter blocked roads manned by heavily armed men.</p><p>The spiraling chaos has left a growing number of patients with cancer, AIDS and other serious illnesses with little to no recourse, with gangs also looting and setting fire to pharmacies in the capital\u2019s downtown area.</p><p>Doctors Without Borders itself has run out of many medications used to treat diabetes and high blood pressure, and asthma inhalers that help prevent deadly attacks are nowhere to be found in the capital, Lavigne said.</p><p>At the Doctors Without Borders hospital, medical staff recently tried to save a boy with a severe asthma attack by giving him oxygen, she said. That didn\u2019t work, and neither did another type of medication. Finally, they ended up injecting him with adrenaline, which is used in emergencies to treat anaphylactic shock.</p><p>\u201cWe improvise and we do our best for the people here,\u201d Lavigne said.</p><p>People\u2019s health is worsening because the daily medication they need for their chronic conditions is not available, warned Doctors Without Borders project coordinator Jacob Burns.</p><p>\u201cIt becomes acute and then they run out of options,\u201d he said. \u201cFor certain people, there are very, very few options right now.\u201d</p><p>Despite the pressing need for medical care, the Doctors Without Borders hospital in Cite Soleil has been forced to cut the number of outpatients it treats daily from 150 to 50, Burns said, though all emergencies are attended to.</p><p>Scores of people line up outside the hospital each day and risk being shot by gang members who control the area as they await medical care.</p><p>Everyone is allowed to enter the hospital compound, but medical staff set up a triage to determine which 50 people will be seen. Those with less urgent needs are asked to return another day, Burns said.</p><p>On Friday morning, 51-year-old Jean Marc Baptiste shuffled into the emergency room with a bloody bandage on his right hand. He said police in an armored vehicle shot him the previous day as he was collecting wood to sell as kindling in an area controlled by gangs.</p><p>Once inside, nurses removed the bandage to reveal a gaping wound in his thumb as he cried out in pain. Lavigne told him he needed a plastic surgeon, which the hospital does not have, and ordered X-rays to ensure there was no fracture.</p><p>On average, the Cite Soleil hospital sees three wounded people a day, but sometimes it\u2019s up to 14 now, staff said.</p><p>Recently, five people wounded by bullets arrived at the hospital after spending all night inside a public bus that couldn\u2019t move because of heavy gunfire, Burns said.</p><p>\u201cCite Soleil was long the epicenter of violence,\u201d he said. \u201cAnd now violence is so widespread that it\u2019s become a problem for everyone.\u201d</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/haiti-medical-crisis-gangs-medicine-shortage-dc786ed53e66b6081515474b5b310525",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 5,
+            "reason": "The document is highly relevant to the topic of Health. It provides detailed information about the current state of the health system in Haiti, including the shortage of medicine, the impact of gang violence on hospitals, and the challenges faced by medical staff and patients. The document discusses specific health issues such as the lack of medication for chronic conditions, the treatment of emergency cases, and the overall collapse of the healthcare infrastructure. All these points are directly related to the health topic."
+        }
+    }
+}

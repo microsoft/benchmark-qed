@@ -1,0 +1,328 @@
+﻿{
+    "altids": {
+        "itemid": "b8f580bd6bdbc5c146dab2b279adab54",
+        "etag": "b8f580bd6bdbc5c146dab2b279adab54_5a10aza0c0",
+        "friendlykey": "596646267544",
+        "referenceid": "EU--Britain-Royals"
+    },
+    "version": 5,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2024-03-31T15:47:46Z",
+    "firstcreated": "2024-03-31T09:16:32Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "ednote": "Eds: UPDATES: Adds comment from member of the public; Updates Media.",
+    "editorialtypes": [
+        "Lead"
+    ],
+    "signals": [
+        "newscontent"
+    ],
+    "title": "EU--Britain-Royals",
+    "headline": "King Charles shakes hands, chats with crowd at most significant public outing since cancer diagnosis",
+    "headline_extended": "King Charles III shook hands and chatted with onlookers after attending an Easter service at Windsor Castle in his most significant public outing since being diagnosed with cancer last month",
+    "slugline": "BC-EU-Britain-Royals, 5th Ld-Writethru",
+    "description_summary": "King Charles III shook hands and chatted with onlookers after attending an Easter service at Windsor Castle in his most significant public outing since being diagnosed with cancer last month. The king, dressed in a dark overcoat and shiny blue tie, smiled as he made his way along a rope line outside St. George\u2019s Chapel for about five minutes, reaching into the crowd to greet well-wishers who waved get-well cards and snapped photos on a chilly early spring day. As Charles and Queen Camilla entered the church earlier, one spectator shouted \u201cHappy Easter,\u201d with the king responding, \u201cAnd to you.\u201d",
+    "bylines": [
+        {
+            "by": "By DANICA KIRKA",
+            "title": "Associated Press"
+        }
+    ],
+    "located": "LONDON",
+    "datelinelocation": {
+        "city": "London",
+        "countrycode": "GBR",
+        "countryname": "United Kingdom",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                -0.12574,
+                51.50853
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "britain charles camilla kate easter"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "person": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "0010ef208f0610048ca1a55c96277d3e",
+            "name": "Queen Elizabeth II",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "GOVERNMENT_FIGURE",
+                "PERSON",
+                "ROYALTY"
+            ],
+            "relevance": 39
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f8955706b58c4b71901d46201750aa48",
+            "name": "King Charles III",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "ROYALTY",
+                "PERSON"
+            ],
+            "relevance": 85
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "i",
+            "name": "i"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "90aeac5089ef10048f63d56c852d093e",
+            "name": "Royalty",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 96
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Editorial",
+            "editorial_subject": "Health",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "bb2d2c5f441a452cb24bb511a2ab5eea",
+            "name": "World news",
+            "creator": "Editorial",
+            "editorial_subject": "World news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e293fee87d6b10048fe8ba7fa5283c3e",
+            "name": "Wales",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "66219fb07d5b100482e2c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "d83e15f769714aab9d49a03eab919128",
+                "name": "Constituent country"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -3.5,
+                    52.5
+                ]
+            },
+            "relevance": 39,
+            "parentnames": [
+                "United Kingdom"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "7a55e0187eff10048492df092526b43e",
+            "name": "London",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "df4691387d6b10048fdeba7fa5283c3e"
+            ],
+            "locationtype": {
+                "code": "9d26a20b35f0484a891740f8189d4c7b",
+                "name": "City"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -0.12574,
+                    51.50853
+                ]
+            },
+            "relevance": 39,
+            "parentnames": [
+                "England"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "661850e07d5b100481f4c076b8e3055c",
+            "name": "Europe",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "associations": {
+        "1": {
+            "altids": {
+                "itemid": "ac7f841c84544763823db5d2cd7021d2"
+            },
+            "type": "video"
+        },
+        "2": {
+            "altids": {
+                "itemid": "262792ad925344df9c483f10ffd96e6a"
+            },
+            "type": "audio"
+        },
+        "3": {
+            "altids": {
+                "itemid": "4ec1b883e5e845e0aebd149454a8e7e3"
+            },
+            "type": "audio"
+        },
+        "4": {
+            "altids": {
+                "itemid": "6eaddac65dc8499ca23c9715a186f396"
+            },
+            "type": "picture"
+        },
+        "5": {
+            "altids": {
+                "itemid": "6c8c013463ce464e9e26e672c5ea5de5"
+            },
+            "type": "picture"
+        },
+        "6": {
+            "altids": {
+                "itemid": "67d683d3c5aa448e97970f73e1de0036"
+            },
+            "type": "picture"
+        },
+        "7": {
+            "altids": {
+                "itemid": "0265aad119e24d4fb14de4c95107764f"
+            },
+            "type": "picture"
+        },
+        "8": {
+            "altids": {
+                "itemid": "2536a67dc3014f6cb364305f5983adce"
+            },
+            "type": "picture"
+        },
+        "9": {
+            "altids": {
+                "itemid": "ed79e979fbb94fb2904daf4553a80d50"
+            },
+            "type": "picture"
+        },
+        "10": {
+            "altids": {
+                "itemid": "7cdfd21da08f470a93007d876db19bd9"
+            },
+            "type": "picture"
+        },
+        "11": {
+            "altids": {
+                "itemid": "52c476f8e40643d68427d22dd3989426"
+            },
+            "type": "picture"
+        },
+        "12": {
+            "altids": {
+                "itemid": "0d33d5f0e4ed4883b535461df9f9929b"
+            },
+            "type": "picture"
+        },
+        "13": {
+            "altids": {
+                "itemid": "5da0fd9563c64de3a314f2327579a1fd"
+            },
+            "type": "picture"
+        }
+    },
+    "body_nitf": "<p>LONDON (AP) \u2014 King Charles III shook hands and chatted with onlookers after attending an Easter service at Windsor Castle on Sunday in his most significant public outing since being <a href=\"https://apnews.com/article/king-charles-iii-cancer-britain-e0408a7c9bb86ad2af8754ce4b37d65e\">diagnosed with cancer</a> last month.</p><p>The king, dressed in a dark overcoat and shiny blue tie, smiled as he made his way along a rope line outside St. George's Chapel for about five minutes, reaching into the crowd to greet supporters who waved get-well cards and snapped photos on a chilly early spring day. \u201cYou\u2019re very brave to stand out here in the cold,\u201d Charles told them.</p><p>\u201cKeep going strong,\u201d one member of the crowd shouted as Charles and Queen Camilla walked by.</p><p>The 75-year-old monarch\u2019s appearance was seen as an effort to reassure the public after Charles stepped back from public duties in early February following an announcement by Buckingham Palace that he was undergoing treatment for an unspecified type of cancer.</p><p><a href=\"https://apnews.com/article/britain-king-charles-cancer-diagnosis-f787d38ddbb436186c5427e839fd055b\">The king has continued fulfilling his state duties</a>, such as reviewing government papers and meeting with the prime minister. But his attendance at a traditional royal event like the Easter service is seen as a sign that he is beginning a managed return to public life. British media reported last week that Charles would slowly increase his public appearances after Easter.</p><p>The service itself was smaller than usual as <a href=\"https://apnews.com/article/kate-middleton-health-cancer-16a5eb5facb79fb1226def11931d41d8\">Kate, the Princess of Wales</a>, is also being treated for cancer and has paused public duties. The princess, her husband Prince William, and their children did not attend.</p><p>Kate's <a href=\"https://apnews.com/article/kate-middleton-health-cancer-16a5eb5facb79fb1226def11931d41d8\">shock announcement</a> that she, too, had cancer was made on March 22, after weeks of speculation about her health and whereabouts following major abdominal surgery in February.</p><p>Charles\u2019 enforced absence from public life has been a setback for a man who is <a href=\"https://apnews.com/article/king-charles-iii-prince-william-cancer-challenges-85b71186a7553fc5f54589a42a886b1f\">eager to put his stamp on the monarchy</a> after waiting almost 74 years \u2014 longer than any previous heir \u2014 to become king.</p><p>When he <a href=\"https://apnews.com/article/king-charles-iii-british-throne-ab21181c92dbb154a29bad12075662e9\">succeeded his mother, Queen Elizabeth II</a>, Charles faced the daunting task of demonstrating that the 1,000-year-old monarchy remains relevant in a modern nation whose citizens come from all corners of the globe. After less than two years on the throne, the king is still defining himself with the public as he tries to persuade young people and members of minority communities that the royal family can represent them.</p><p>\u201cHe knows that being seen by the public and having public goodwill is really what's at the core of a successful monarchy,'' royal commentator Jennie Bond told the BBC. \u201dHe needs to have that interaction and I think he quite enjoys it, actually.''</p><p>Some members of the public seemed reassured. Anne Daley, 65, from Cardiff, Wales, held up a Welsh flag to the former Prince of Wales.</p><p>\u201cDid you see the smile (Charles) gave me? He pointed at my flag,\u201d she said. \u201cHe had a lovely smile. He looked well. I think he was happy that we\u2019ve all come.\u201d</p><p>Although the duties of a constitutional monarch are largely ceremonial, the job of being a royal can be exhausting.</p><p>Besides the occasional procession in full royal regalia, there are meetings with political leaders, dedication ceremonies and events honoring the accomplishments of British citizens. That added up to 161 days of royal engagements during Charles\u2019s first year on the throne.</p><p>The palace has worked hard to keep the king in the public eye \u2014 even as he sought to limit contacts to reduce his risk of infection while receiving treatment. Videos of the king reading get-well cards and an audience with Prime Minister Rishi Sunak were released. He also attended a session of the Privy Council, an assembly of senior advisers.</p><p>While he skipped a pre-Easter service on Thursday, Charles released a prerecorded audio message in which he expressed his regret at missing an occasion traditionally attended by the monarch.</p><p>The king also reaffirmed his coronation pledge \u201cnot to be served, but to serve.\u201d</p><p>\u201cThat I have always tried to do and continue to do, with my whole heart,\u201d he said.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/britain-charles-camilla-kate-easter-b8f580bd6bdbc5c146dab2b279adab54",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 5,
+            "reason": "The document discusses King Charles III's public appearance following his cancer diagnosis, his ongoing treatment, and the impact on his public duties. It also mentions Kate, the Princess of Wales, who is also undergoing cancer treatment. These details are directly related to health, specifically the health conditions of prominent public figures and their management of these conditions. The document provides substantial information on the health status and implications for their roles, making it highly relevant to the topic of health."
+        }
+    }
+}

@@ -1,0 +1,188 @@
+﻿{
+    "altids": {
+        "itemid": "bfb3c260c71747dbc435bbe5e0b85672",
+        "etag": "bfb3c260c71747dbc435bbe5e0b85672_0a2aza0c0",
+        "friendlykey": "443592511853",
+        "referenceid": "MS--Mississippi-Medical Marijuana"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2023-12-27T23:44:04Z",
+    "firstcreated": "2023-12-27T23:44:03Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "MS--Mississippi-Medical Marijuana",
+    "headline": "Mississippi health department says some medical marijuana products are being retested for safety",
+    "headline_extended": "The Mississippi State Department of Health says \u201ca large number\u201d of medical marijuana products are on hold so they can be retested",
+    "slugline": "AP-MS--Mississippi-Medical Marijuana",
+    "description_summary": "The Mississippi State Department of Health says \u201ca large number\u201d of medical marijuana products are on hold so they can be retested. The department first issued the hold on Dec. 21. In a news release Wednesday, the department said the products are being retested \u201cto validate results related to the use of pesticides and presence of mycotoxins,\u201d which are produced by fungi. No illnesses from the products have been reported. Cannabis flower or bud was being tested first because it is the base for many of products, followed by concentrates and infused products. The department said as batches of products are cleared, the hold on those will be lifted.",
+    "located": "JACKSON, Miss.",
+    "datelinelocation": {
+        "city": "Jackson",
+        "countryareacode": "MS",
+        "countryareaname": "Mississippi",
+        "countrycode": "USA",
+        "countryname": "United States",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                -90.18481,
+                32.29876
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2023 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "mississippi medical marijuana cannabis"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a328daf6767245f18a263276f2e111f3",
+            "name": "Marijuana",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 88
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "b74affa882c4100486d0df092526b43e",
+            "name": "Jackson",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "b3dfffa882c4100486c3df092526b43e"
+            ],
+            "locationtype": {
+                "code": "9d26a20b35f0484a891740f8189d4c7b",
+                "name": "City"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -90.18481,
+                    32.29876
+                ]
+            },
+            "relevance": 36,
+            "parentnames": [
+                "Mississippi"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "b3dfffa882c4100486c3df092526b43e",
+            "name": "Mississippi",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -89.75036,
+                    32.75041
+                ]
+            },
+            "relevance": 60,
+            "parentnames": [
+                "United States"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "b3dfffa882c4100486c3df092526b43e",
+            "name": "Mississippi",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "body_nitf": "<p>JACKSON, Miss. (AP) \u2014 The Mississippi State Department of Health said Wednesday that \u201ca large number\u201d of medical marijuana products are on hold so they can be retested.</p><p>The department first issued the hold on Dec. 21.</p><p>A news release from the department said the products are being retested \u201cto validate results related to the use of pesticides and presence of mycotoxins,\" which are produced by fungi. No illnesses from the products have been reported, the department said.</p><p>The department is overseeing the new testing of the medical cannabis products in licensed testing facilities.</p><p>\u201cThrough the state\u2019s seed-to-sale tracking system, the agency can isolate the batch and lot numbers associated with this administrative hold and expedite the retesting,\" said Laura Goodson, director of the Mississippi Medical Cannabis Program. \u201cThe tracking system is an invaluable tool to assist with regulatory compliance and overall product safety.\u201d</p><p>Retesting is prioritized based on the type of medical cannabis products. Cannabis flower or bud was being tested first because it is the base for many of products, followed by concentrates and infused products.</p><p>The department said as batches of products are cleared, the hold on those will be lifted and the products will be back on the market.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/mississippi-medical-marijuana-cannabis-bfb3c260c71747dbc435bbe5e0b85672",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 5,
+            "reason": "The document discusses the Mississippi State Department of Health's actions regarding the retesting of medical marijuana products for safety concerns, specifically focusing on the presence of pesticides and mycotoxins. This directly pertains to public health and safety, making it highly relevant to the topic of health."
+        }
+    }
+}

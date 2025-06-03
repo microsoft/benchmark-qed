@@ -1,0 +1,236 @@
+﻿{
+    "altids": {
+        "itemid": "995192ff38b63eb9ee5f15715a95a90a",
+        "etag": "995192ff38b63eb9ee5f15715a95a90a_0a2aza0c0",
+        "friendlykey": "359396685444",
+        "referenceid": "NE--Editorial Rdp"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Opinion",
+    "language": "en",
+    "versioncreated": "2024-03-18T16:29:04Z",
+    "firstcreated": "2024-03-18T16:29:03Z",
+    "editorialrole": "FullStory",
+    "fixture": {
+        "code": "21ea4067bb274c3b805353fb2b99ba70",
+        "name": "Editorial Roundup"
+    },
+    "pubstatus": "usable",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "NE--Editorial Rdp",
+    "headline": "Editorial Roundup: Nebraska",
+    "slugline": "AP-NE--Editorial Rdp",
+    "bylines": [
+        {
+            "by": "By The Associated Press"
+        }
+    ],
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "Editorial Rdp"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "person": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "24e5815e579cea43934a8663b1888f1c",
+            "name": "Pete Ricketts",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "POLITICIAN",
+                "PERSON"
+            ],
+            "associatedstates": [
+                {
+                    "code": "808300b882c610048788df092526b43e",
+                    "name": "Nebraska"
+                }
+            ],
+            "relevance": 52
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "81324d2dc57f41f8b0792aff17e3d3ae",
+            "name": "Jim Pillen",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "POLITICIAN",
+                "PERSON"
+            ],
+            "relevance": 76
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 87
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "ace74e307f00100486cedf092526b43e",
+            "name": "Immunizations",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 73
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e2460e807de410048061df092526b43e",
+            "name": "Measles",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 61
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "b836d07082c610048807df092526b43e",
+            "name": "New York City",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "b58f18a082c6100487fbdf092526b43e"
+            ],
+            "locationtype": {
+                "code": "9d26a20b35f0484a891740f8189d4c7b",
+                "name": "City"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -74.00597,
+                    40.71427
+                ]
+            },
+            "relevance": 38,
+            "parentnames": [
+                "New York"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "808300b882c610048788df092526b43e",
+            "name": "Nebraska",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -99.75067,
+                    41.50028
+                ]
+            },
+            "relevance": 52,
+            "parentnames": [
+                "United States"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "808300b882c610048788df092526b43e",
+            "name": "Nebraska",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "body_nitf": "<p>Journal Star. March 17, 2024.</p><p>Editorial: Alberts\u2019 departure should prompt some introspection</p><p>Nebraska got the shocking news Wednesday that Nebraska athletic director Trev Alberts was leaving to take the same position at Texas A&M.</p><p>Alberts\u2019 departure, just four months after he received an eight-year contract extension, baffled and surprised all involved with Nebraska Athletics \u2014 coaches, athletes, administrators, media and fans alike.</p><p>And it led to speculation about why Alberts would leave. His salary was $1.7 million a year, making him one of the nation\u2019s highest-paid athletics directors. So money likely wasn\u2019t the major factor in his departure. Nor would a lack of facilities or public support have sent him to College Station.</p><p>Shock quickly gave way to finger-pointing regarding Alberts\u2019 decision.</p><p>Gov. Jim Pillen put the blame for Alberts\u2019 departure on university leadership, specifically targeting the Board of Regents for failure to find a replacement for NU President Ted Carter, who left the university last year.</p><p>Others, however, pushed that blame back toward Pillen and state legislators.</p><p>\u201cTalented people (Ted Carter, Ronnie Green, Trev Alberts) leave a team when the leadership above them loses sight of the team\u2019s purpose,\u201d former NU volleyball coach Terry Pettit wrote in a widely-circulated Facebook post. \u201cThe team is the University. When the leadership cuts funding and undermines the team\u2019s purpose with political dogma, they leave.\u201d</p><p>Specifically, Pettit and others directly link the departures of former University of Nebraska-Lincoln Chancellor Green, who retired in June 2023, Carter, and now Alberts to the administrations of Pillen and former Gov. Pete Ricketts and the Legislature not fully funding \u2014 or at least coming closer to fully funding \u2014 the university\u2019s budget requests.</p><p>Carter\u2019s departure then left Alberts without his strongest supporter and athletics partner and advocate. And it leaves Matt Rhule, hired by Alberts, in an unenviable spot.</p><p>The stunning departure of Alberts, deeply rooted in Nebraska as a former player and longtime University of Nebraska-Omaha athletics director, is being cast by some as a betrayal, a money grab and a lack of loyalty.</p><p>All of those are unfair to Alberts, who like anyone in any job is free to pursue more money or a better opportunity.</p><p>But there is a lot of good going on in Nebraska, including the hiring of Rhule, the record-setting Volleyball Day in Nebraska, the completion of the new athletic training complex and a new $300 million media rights deal, not to mention men\u2019s and women\u2019s basketball teams with breakthrough seasons this year. It\u2019s disappointing that all that and good money couldn\u2019t keep him.</p><p>Of immediate concern is the possibility that Alberts\u2019 leaving could delay or even scuttle plans for a $450 million renovation of Memorial Stadium.</p><p>The regents and UNL administration are now in something of a bind. Carter\u2019s replacement needs to be found, perhaps before a new athletic director can be hired. But a lengthy delay in the AD hire would not be good for the department and Nebraska Athletics.</p><p>And the issues raised by the departures of Green, Carter and Alberts must be addressed by the regents, the governor, senators and, pivotally, Husker fans, university supporters and the public as a whole.</p><p>If not, the churn of university leadership and Husker ADs will continue as it has for two decades.</p><p>___</p><p>McCook Gazette. March 15, 2024.</p><p>Editorial: Protect our community: Vaccinate for measles</p><p>In recent years, the United States has witnessed a concerning resurgence in measles cases, with 45 reported cases across 16 states and New York City as of last week alone. While Nebraska has thus far avoided this troubling trend, it is imperative that we remain vigilant and proactive in safeguarding our communities against this highly contagious and potentially life-threatening disease.</p><p>Measles, once endemic in the U.S. prior to the introduction of the measles vaccine in 1963, posed a significant public health threat, resulting in thousands of hospitalizations and hundreds of deaths annually. Thanks to widespread vaccination efforts, the incidence of measles drastically declined, sparing countless lives and preventing unnecessary suffering. However, recent outbreaks serve as a stark reminder that our collective immunity against this preventable disease is not guaranteed.</p><p>The most effective way to protect against measles is through vaccination. The MMR vaccine, which immunizes against measles, mumps, and rubella, is safe, highly effective, and readily available. Yet, misconceptions and misinformation surrounding vaccines persist, leading some individuals to forego immunization for themselves or their children. It is crucial to dispel these myths and emphasize the importance of vaccination in safeguarding not only individual health but also the well-being of the entire community.</p><p>The benefits of vaccination extend beyond personal protection. By achieving high vaccination rates within our communities, we establish a robust barrier against the spread of infectious diseases, effectively shielding those who are unable to receive vaccines due to medical reasons or age, such as immunocompromised individuals and infants. Vaccination is not just a personal choice; it is a collective responsibility to uphold the health and safety of our society as a whole.</p><p>In light of the recent uptick in measles cases nationwide, we urge all Nebraskans to take proactive measures to ensure they and their families are up to date with their vaccinations. If uncertain about vaccination status, individuals should consult their healthcare providers to review medical records and receive necessary immunizations. Additionally, it is vital to remain informed about the signs and symptoms of measles and seek prompt medical attention if exposure is suspected.</p><p>As a community, let us prioritize public health and unity by embracing vaccination as a cornerstone of disease prevention. By working together and prioritizing science-based interventions, we can mitigate the risk of measles outbreaks and safeguard the health and well-being of all Nebraskans.</p><p>Remember, when we vaccinate, we not only protect ourselves but also our neighbors, our loved ones, and the most vulnerable members of our society. Let us stand united in our commitment to promoting health, preventing disease, and ensuring a safer, healthier future for all.</p><p>END</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/995192ff38b63eb9ee5f15715a95a90a",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 3,
+            "reason": "The document contains two editorials. The first editorial is about the departure of Nebraska athletic director Trev Alberts and its implications for the university's leadership and athletics department. This part is not relevant to the topic of health. The second editorial, however, is highly relevant to health as it discusses the importance of vaccination to prevent measles outbreaks, the benefits of the MMR vaccine, and the need for community-wide immunization efforts. Given that half of the document is directly related to health, the overall relevance is moderate."
+        }
+    }
+}

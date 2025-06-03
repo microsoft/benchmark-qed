@@ -1,0 +1,256 @@
+﻿{
+    "altids": {
+        "itemid": "893ce4247711eddca1a1047c31cbad1a",
+        "etag": "893ce4247711eddca1a1047c31cbad1a_1a2aza0c0",
+        "friendlykey": "997765576773",
+        "referenceid": "CA--Laguna Beach-Sewage Spill"
+    },
+    "version": 1,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2023-11-30T00:08:44Z",
+    "firstcreated": "2023-11-29T21:45:00Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "ednote": "Eds: UPDATES: With AP Photos.",
+    "editorialtypes": [
+        "Lead"
+    ],
+    "signals": [
+        "newscontent"
+    ],
+    "title": "CA--Laguna Beach-Sewage Spill",
+    "headline": "Sewage spill closes 2-mile stretch of coastline at Southern California's Laguna Beach",
+    "headline_extended": "California health officials say nearly 95,000 gallons of sewage have spilled in Laguna Beach",
+    "slugline": "AP-CA--Laguna Beach-Sewage Spill, 1st Ld-Writethru",
+    "description_summary": "California health officials say nearly 95,000 gallons of sewage have spilled in Laguna Beach. The spill on Wednesday led to the closure of more than 2 miles of Southern California coastline to swimmers and surfers. The Orange County Health Care Agency\u2019s environmental division says the spill occurred following a break in a main sewer line. The closure affects much of the coastline in the upscale beach city about 50 miles southeast of Los Angeles. The health agency says the area will be closed until water quality tests meet acceptable standards. Officials have not said where exactly the break occurred.",
+    "located": "LAGUNA BEACH, Calif.",
+    "datelinelocation": {
+        "city": "Laguna Beach",
+        "countryareacode": "CA",
+        "countryareaname": "California",
+        "countrycode": "USA",
+        "countryname": "United States",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                -117.78311,
+                33.54225
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2023 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "Laguna Beach sewage spill"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "54df6c687df7100483dedf092526b43e",
+            "name": "Sports",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 47
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 31
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "8783d248894710048286ba0a2b2ca13e",
+            "name": "Climate and environment",
+            "creator": "Editorial",
+            "editorial_subject": "Climate and environment",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Editorial",
+            "editorial_subject": "Health",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "organisation": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "14876f722356453b959d12c5f2e12e60",
+            "name": "Southern California Trojans",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 61
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "789fdd8882af10048263df092526b43e",
+            "name": "California",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -119.75126,
+                    37.25022
+                ]
+            },
+            "relevance": 87,
+            "parentnames": [
+                "United States"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "8345b5f082af10048280df092526b43e",
+            "name": "Los Angeles",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "789fdd8882af10048263df092526b43e"
+            ],
+            "locationtype": {
+                "code": "9d26a20b35f0484a891740f8189d4c7b",
+                "name": "City"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -118.24368,
+                    34.05223
+                ]
+            },
+            "relevance": 74,
+            "parentnames": [
+                "California"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "789fdd8882af10048263df092526b43e",
+            "name": "California",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "associations": {
+        "1": {
+            "altids": {
+                "itemid": "c50deb6d408347d08e914cb7ccc95a8d"
+            },
+            "type": "picture"
+        },
+        "2": {
+            "altids": {
+                "itemid": "02d153d7990f49e29cc91e6880a6ec3a"
+            },
+            "type": "picture"
+        },
+        "3": {
+            "altids": {
+                "itemid": "1947d72d0af94875bf1da9aa26a87ff1"
+            },
+            "type": "picture"
+        }
+    },
+    "body_nitf": "<p>LAGUNA BEACH, Calif. (AP) \u2014 Nearly 95,000 gallons (360,000 liters) of sewage spilled in Laguna Beach on Wednesday, leading to the closure of more than 2 miles (3.2 km) of Southern California coastline to swimmers and surfers, health officials said.</p><p>The Orange County Health Care Agency\u2019s environmental division said the spill occurred following a break in a main sewer line.</p><p>The closure affects much of the coastline in the upscale beach city about 50 miles (80 km) southeast of Los Angeles.</p><p>\u201cThe affected bay water area will remain closed to ocean water-contact sports until the results of follow-up water quality monitoring meet acceptable standards,\u201d the agency said in a statement.</p><p>Officials didn't immediately say where exactly the break occurred.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/laguna-beach-sewage-spill-893ce4247711eddca1a1047c31cbad1a",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 4,
+            "reason": "The document discusses a sewage spill in Laguna Beach, which has led to the closure of a significant stretch of coastline. This event has direct implications for public health, as the spill affects water quality and poses risks to swimmers and surfers. The involvement of the Orange County Health Care Agency and the focus on water quality monitoring further emphasize the health-related aspects of the incident."
+        }
+    }
+}

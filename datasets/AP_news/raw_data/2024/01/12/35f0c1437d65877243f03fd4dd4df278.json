@@ -1,0 +1,277 @@
+﻿{
+    "altids": {
+        "itemid": "35f0c1437d65877243f03fd4dd4df278",
+        "etag": "35f0c1437d65877243f03fd4dd4df278_1a6aza0c0",
+        "friendlykey": "317620883180",
+        "referenceid": "US--Water-Woes-Mississippi"
+    },
+    "version": 1,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2024-01-12T04:04:57Z",
+    "firstcreated": "2024-01-12T00:23:03Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "ednote": "Eds: UPDATES: Adds AP Audio. With AP Photos.",
+    "editorialtypes": [
+        "Lead"
+    ],
+    "signals": [
+        "newscontent"
+    ],
+    "title": "US--Water-Woes-Mississippi",
+    "headline": "Mississippi's capital is under a boil water order after E. coli bacteria is found in city's supply",
+    "headline_extended": "State health officials have told residents in Mississippi\u2019s capital to boil their tap water after traces of E",
+    "slugline": "BC-US--Water-Woes-Mississippi, 1st Ld-Writethru",
+    "description_summary": "State health officials have told residents in Mississippi\u2019s capital to boil their tap water after traces of E. coli bacteria were found in the city\u2019s supply. The manager of Jackson\u2019s long-troubled water system disputed the test results while calling Thursday's boil water order a setback for rebuilding public trust. The boil water notice, which officials also imposed in the Jackson suburb of Flowood, was issued days before the expected arrival of a blast of cold weather that could disrupt the water infrastructure. The order will last at least two full days as officials collect new samples for testing.",
+    "bylines": [
+        {
+            "by": "By MICHAEL GOLDBERG",
+            "title": "Associated Press/Report for America"
+        }
+    ],
+    "located": "JACKSON, MISS.",
+    "datelinelocation": {
+        "city": "Jackson",
+        "countryareacode": "MS",
+        "countryareaname": "Mississippi",
+        "countrycode": "USA",
+        "countryname": "United States",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                -90.18481,
+                32.29876
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "jackson mississippi water boil order"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "a",
+            "name": "a"
+        },
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "8783d248894710048286ba0a2b2ca13e",
+            "name": "Climate and environment",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 52
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "084dd6c87f00100481c6f571351eed07",
+            "name": "E. Coli",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 65
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "ccc363a0882f10048140ae2ac3a6923e",
+            "name": "Explosions",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 37
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "8783d248894710048286ba0a2b2ca13e",
+            "name": "Climate and environment",
+            "creator": "Editorial",
+            "editorial_subject": "Climate and environment",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "b74affa882c4100486d0df092526b43e",
+            "name": "Jackson",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "b3dfffa882c4100486c3df092526b43e"
+            ],
+            "locationtype": {
+                "code": "9d26a20b35f0484a891740f8189d4c7b",
+                "name": "City"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -90.18481,
+                    32.29876
+                ]
+            },
+            "relevance": 87,
+            "parentnames": [
+                "Mississippi"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "b3dfffa882c4100486c3df092526b43e",
+            "name": "Mississippi",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -89.75036,
+                    32.75041
+                ]
+            },
+            "relevance": 98,
+            "parentnames": [
+                "United States"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "661850e07d5b100481f5c076b8e3055c",
+            "name": "Latin America and Caribbean",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "b3dfffa882c4100486c3df092526b43e",
+            "name": "Mississippi",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "associations": {
+        "1": {
+            "altids": {
+                "itemid": "925a516c96c548428150664b99ea4b54"
+            },
+            "type": "picture"
+        },
+        "2": {
+            "altids": {
+                "itemid": "3696b90bafdb4c068773e75754bef3be"
+            },
+            "type": "audio"
+        },
+        "3": {
+            "altids": {
+                "itemid": "458afbe4b92c415c8f1c2a401cbfe16d"
+            },
+            "type": "audio"
+        }
+    },
+    "body_nitf": "<p>JACKSON, MISS. (AP) \u2014 Mississippi health officials told residents in the state's capital to boil their tap water Thursday after traces of E. coli bacteria were found in the city\u2019s supply \u2014 a result the manager of Jackson\u2019s <a href=\"https://apnews.com/article/floods-mississippi-tate-reeves-jackson-climate-and-environment-3cc65dd4bdc83e8c48a7aeee8b76bd8d\">long-troubled water system</a> disputed while calling it a devastating setback for rebuilding public trust.</p><p>The boil water notice, which officials also imposed in the Jackson suburb of Flowood, was issued just days before the expected arrival of a blast of cold weather that could further disrupt the local <a href=\"https://apnews.com/article/biden-mississippi-tate-reeves-jackson-climate-and-environment-2018b4568bd707d0feea48a10c474df8\">water infrastructure</a>. The bacteria\u2019s presence indicates that the water may be contaminated with human or animal waste, the state health department said.</p><p>Residents of the two Mississippi cities were advised to boil their water for one minute before using it. The precaution will last at least two full days as officials collect new samples for testing.</p><p>Ted Henifin, Jackson's interim water manager, said at a news conference that state officials refused to validate the lab results before issuing the boil water notice, and suggested there may have been false positive tests. He also said it was unlikely that samples from Jackson and Flowood would be contaminated at the same time since the cities\u2019 water systems are not connected.</p><p>\u201cThis is tragic,\" Henifin said. \"This is setting us back maybe a year. It\u2019s taken everything we can do to get a few more people in this city to drink tap water and have trust in it.\"</p><p>Officials at the state health department\u2019s lab don\u2019t believe there was any contamination of the samples, and the results are not false positives, the health department said in a news release after Henifin\u2019s news conference.</p><p>A federal judge <a href=\"https://apnews.com/article/health-mississippi-jackson-merrick-garland-climate-and-environment-82a86c6d18dfbcca7c5ccf6839689413\">appointed</a> Henifin in November 2022 to oversee reforms to Jackson's water system after infrastructure breakdowns during the late summer of that year caused many city residents to go days and weeks without safe running water.</p><p>Rebuilding trust in the water system after years of dysfunction has been a central goal of Henifin's tenure in Jackson, where many residents have grown accustomed to relying on bottled water during repeated boil water notices.</p><p>Henifin has focused on <a href=\"https://apnews.com/article/jackson-water-crisis-federal-intervention-173ae30f9e087ace8fb45c7eac3d3924\">numerous improvement projects</a>, such as fixing broken pipes and introducing a new proposal for how the city charges for water.</p><p>The boil water notices sent local officials scrambling to collect samples from 120 locations. Henifin said he expected the advisory might not be lifted until Monday, the same day temperatures in the area are expected to drop to frigid lows as an \u201carctic blast\u201d moves across the state. <a href=\"https://apnews.com/article/disaster-planning-and-response-jackson-mississippi-water-shortages-united-states-government-3369a315fcc562adc8d1833062f5d230\">Cold snaps</a> in 2021 and 2022 caused frozen pipes and drops in water pressure across Jackson.</p><p>Henifin said he expected city leaders to be prepared for the extreme weather. But Thursday's boil water notice could have far-reaching consequences, he said.</p><p>\u201cWe have made amazing progress, and to not have at least the benefit of a validation of the results really puts us back into that old school of Jackson fearing the drinking water,\u201d Henifin said.</p><p>___</p><p>Michael Goldberg is a corps member for the Associated Press/Report for America Statehouse News Initiative. Report for America is a nonprofit national service program that places journalists in local newsrooms to report on undercovered issues. Follow him at <a href=\"https://twitter.com/mikergoldberg\">@mikergoldberg</a>.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/jackson-mississippi-water-boil-order-35f0c1437d65877243f03fd4dd4df278",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 5,
+            "reason": "The document is highly relevant to the topic of Health. It discusses a public health issue involving the detection of E. coli bacteria in the water supply of Jackson, Mississippi, which has led to a boil water order. The presence of E. coli indicates potential contamination with human or animal waste, posing a significant health risk to residents. The document also covers the response of health officials, the impact on public trust, and the measures being taken to address the issue. All these points are directly related to public health concerns."
+        }
+    }
+}

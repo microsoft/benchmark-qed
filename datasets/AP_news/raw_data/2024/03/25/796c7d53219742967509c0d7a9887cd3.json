@@ -1,0 +1,339 @@
+﻿{
+    "altids": {
+        "itemid": "796c7d53219742967509c0d7a9887cd3",
+        "etag": "796c7d53219742967509c0d7a9887cd3_0a6aza0c0",
+        "friendlykey": "528066519492",
+        "referenceid": "US--Editorial Rdp"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Opinion",
+    "language": "en",
+    "versioncreated": "2024-03-25T21:01:50Z",
+    "firstcreated": "2024-03-25T21:01:50Z",
+    "editorialrole": "FullStory",
+    "fixture": {
+        "code": "21ea4067bb274c3b805353fb2b99ba70",
+        "name": "Editorial Roundup"
+    },
+    "pubstatus": "usable",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "US--Editorial Rdp",
+    "headline": "Editorial Roundup: United States",
+    "slugline": "AP-US--Editorial Rdp",
+    "bylines": [
+        {
+            "by": "By The Associated Press"
+        }
+    ],
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "Editorial Rdp"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "person": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "67b0fa227a6b4897be4c13f4064b2e70",
+            "name": "Mike Johnson",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "POLITICIAN",
+                "PERSON"
+            ],
+            "relevance": 32
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "ca2fc27dc7bc3241bdb97cbf0d226914",
+            "name": "Brittney Griner",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "PROFESSIONAL_ATHLETE",
+                "SPORTS_FIGURE",
+                "PERSON"
+            ],
+            "teams": [
+                {
+                    "code": "b24b0dd200d1467b882c16a9785a56d3",
+                    "name": "Phoenix Mercury"
+                }
+            ],
+            "relevance": 34
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "00c2ac4a0d1d4f4eaa78a0e094858753",
+            "name": "Evan Gershkovich",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "NEWSMAKER",
+                "PERSON",
+                "JOURNALIST"
+            ],
+            "relevance": 52
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "91ef0dc08d9c10048a18a55c96277d3e",
+            "name": "Vladimir Putin",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "POLITICIAN",
+                "PERSON"
+            ],
+            "relevance": 54
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "a",
+            "name": "a"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "26f2da8f387f4b6891fcbaa64c135e45",
+            "name": "Climate change",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 60
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a86239008b6d1004897db5b842854103",
+            "name": "Electric vehicles",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 66
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e22e35087de410048fc2df092526b43e",
+            "name": "Abortion",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86aad5207dac100488ecba7fa5283c3e",
+            "name": "Politics",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 84
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "bb2d2c5f441a452cb24bb511a2ab5eea",
+            "name": "World news",
+            "creator": "Editorial",
+            "editorial_subject": "World news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        }
+    ],
+    "organisation": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "bf6e2e80760d10048f8ae6e7a0f4673e",
+            "name": "U.S. Republican Party",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 56
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "898f52e08921100480efba0a2b2ca13e",
+            "name": "United States government",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 40
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "bd9b30b52cad4bc69d18d3403e599580",
+            "name": "India government",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 40
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "661f3a687d5b100482a7c076b8e3055c",
+            "name": "India",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661812607d5b100481f3c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "01f56e0e654841eca2e69bf2cbcc0526",
+                "name": "Nation"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    77,
+                    20
+                ]
+            },
+            "relevance": 34,
+            "parentnames": [
+                "Asia"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "6eb1a6212e604ada8713a2fda165e8d8",
+            "name": "Kazan",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661c9a887d5b10048262c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "9d26a20b35f0484a891740f8189d4c7b",
+                "name": "City"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    49.1248,
+                    55.7877
+                ]
+            },
+            "relevance": 51,
+            "parentnames": [
+                "Russia"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "661850e07d5b100481f5c076b8e3055c",
+            "name": "Latin America and Caribbean",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661850e07d5b100481f4c076b8e3055c",
+            "name": "Europe",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661812607d5b100481f3c076b8e3055c",
+            "name": "Asia",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "body_nitf": "<p>Excerpts from recent editorials in the United States and abroad:</p><p>March 23</p><p>The Washington Post on SCOTUS and abortion</p><p>The Supreme Court declared nearly two years ago, when it overruled Roe v. Wade, that the rules on <a href=\"https://www.washingtonpost.com/abortion/?itid=lk_inline_manual_2\">abortion</a> were now up to the states \u2014 but as the justices hear a critical case this week regarding the pill mifepristone, reproductive rights rest yet again in their hands. The good news is, this isn\u2019t a hard one.</p><p><a href=\"https://www.washingtonpost.com/politics/2023/12/13/abortion-drug-supreme-court-mifepristone-fda/?itid=lk_inline_manual_4\">The court agreed to hear FDA v. Alliance for Hippocratic Medicine</a> after two panels of judges on the U.S. Court of Appeals for the 5th Circuit <a href=\"https://www.washingtonpost.com/politics/2023/08/16/abortion-pill-mifepristone-court-ruling-appeal/?itid=lk_inline_manual_4\">ruled to impose significant restrictions</a> on health providers prescribing mifepristone \u2014 the first part of the two-drug regimen <a href=\"https://www.washingtonpost.com/politics/2024/03/19/abortion-medication-mifepristone-63-percent/?itid=lk_inline_manual_4\">used in more than half of all abortions in the United States</a>. Whether patients can access mifepristone at all isn\u2019t at stake; courts have agreed that the statute of limitations is up to challenge the FDA\u2019s 2000 approval of the drug. But when and how they can do so is still challengeable: The 5th Circuit nixed changes the agency made in the past eight years that made it possible for women to obtain mifepristone more easily \u2014 later on in their pregnancies, for example, or by mail or without three separate visits to health facilities.</p><p>The Supreme Court must now consider whether to side with the 5th Circuit judges or with the doctors and scientists at the FDA on a subject about which judges generally know little and doctors and scientists a lot. But before the justices even reach that debate, they must settle another: Does the litigant in this case even have standing, the legal right to sue? <a href=\"https://www.washingtonpost.com/opinions/2023/04/21/supreme-court-abortion-pill-decision/?itid=lk_inline_manual_5\">Resolving this question is simpler than it sounds</a>.</p><p>To have standing, the Alliance for Hippocratic Medicine must show existing or imminently impending injury caused by the broader availability of mifepristone. Yet they, emergency room doctors, neither use nor prescribe mifepristone. <a href=\"https://www.brennancenter.org/our-work/analysis-opinion/supreme-courts-abortion-pill-case-exposes-double-standard-standing\">So they\u2019ve settled on claiming hypothetical injury</a>: If some unspecified member of their group has to treat patients who have taken mifepristone, that member could suffer harm. It should be no great harm to doctors, who have sworn to care for those in need, to treat those suffering side effects from any duly prescribed medication.</p><p>The speculative injury the Alliance for Hippocratic Medicine claims is even more dubious considering complications from mifepristone are exceedingly rare. For this same reason, the plaintiffs\u2019 case is weak \u2014 even if the Supreme Court does decide that they have standing to challenge the FDA. The 5th Circuit, agreeing in part with U.S. District Judge <a href=\"https://www.washingtonpost.com/politics/2023/02/25/texas-judge-abortion-pill-decision/?itid=lk_inline_manual_10\">Matthew Kacsmaryk</a>, said the FDA violated crucial safeguards when it loosened regulations on mifepristone. The FDA says it has merely updated the approved conditions of use for a drug deemed safe and effective for almost a quarter century, and for millions of patients.</p><p><a href=\"https://www.washingtonpost.com/business/2023/08/17/why-abortion-pill-mifepristone-is-at-center-of-court-fights/8cd0677c-3d2d-11ee-aefd-40c039a855ba_story.html?itid=lk_inline_manual_11\">The science, unsurprisingly, is on the scientists\u2019 side</a>. Study upon study has shown that fewer than 1 percent of mifepristone patients need hospitalization. The FDA has received reports of 28 deaths out of the 5.6 million who have used the drug between its 2000 approval and last summer, and even these can\u2019t be confidently attributed to the drug. The rest of the world has been engaged in similarly rigorous research and has come to the same conclusion. <a href=\"https://www.washingtonpost.com/world/2023/04/19/abortion-pill-mifepristone-global-approved/?itid=lk_inline_manual_11\">At least 94 countries</a> have approved the pill, and increasingly they\u2019re putting it on their essential medication lists.</p><p>Indeed, patients seeking abortions are in more danger without mifepristone than with it. Terminating a pregnancy with mifepristone\u2019s usual companion pill, misoprostol, is possible \u2014 but results in more cramping and bleeding. The risk of severe complication from childbirth, meanwhile, <a href=\"https://www.commonwealthfund.org/publications/issue-briefs/2021/oct/severe-maternal-morbidity-united-states-primer#:~:text=Approximately%20140%20of%2010%2C000%20women,severe%20maternal%20morbidity%20every%20year.\">hovers around 1.4 percent</a>, according to the Centers for Disease Control and Prevention.</p><p>Compare the methodology underlying these conclusions, established by the global community carefully and over ample time, to the <a href=\"https://www.washingtonpost.com/health/2023/04/13/abortion-pill-safety/?itid=lk_inline_manual_15\">methods Judge Kacsmaryk relied on in his ruling</a> that the 5th Circuit reviewed: Much of his data came from an antiabortion group whose very mission is to undermine the FDA\u2019s policy. To prove that \u201cchemical abortion\u201d provokes a \u201cnegative change\u201d in patients, he cited a study that relied on a collection of anonymous blog posts from \u2014 yes, really \u2014 <a href=\"https://yourabortionexperience.org/en\">abortionchangesyou.org</a>.</p><p>The Supreme Court pronounced less than two years ago that courts have little business meddling in democratically decided abortion rules. Now, its justices are asked to decide whether courts have any business overruling the scientific judgment of an executive agency \u2014 and, in so doing, curb patients\u2019 ability to access mifepristone regardless of their states\u2019 laws. The answer should be obvious.</p><p>ONLINE: <a href=\"https://www.washingtonpost.com/opinions/2024/03/24/supreme-court-abortion-mifepristone/\">https://www.washingtonpost.com/opinions/2024/03/24/supreme-court-abortion-mifepristone/</a></p><p>___</p><p>March 22</p><p>The New York Times on Putin silencing dissent</p><p>The Committee to Protect Journalists has <a href=\"https://cpj.org/reports/2024/01/2023-prison-census-jailed-journalist-numbers-near-record-high-israel-imprisonments-spike/\">documented that at least 320 members of the press</a> were behind bars around the globe as 2024 began. In Vladimir Putin\u2019s police state, at <a href=\"https://cpj.org/europe/russia/\">least 22 journalists</a> are jailed, most for committing that most elemental of journalistic duties, speaking the truth. Two of them are American reporters. One of them, Evan Gershkovich of The Wall Street Journal, will soon mark a year in the infamous <a href=\"https://www.washingtonpost.com/world/interactive/2023/lefortovo-prison-evan-gershkovich/\">Lefortovo prison</a>, awaiting trial on charges of espionage. The other, <a href=\"https://www.nytimes.com/2023/10/19/world/europe/russia-journalist-detain-alsu-kurmasheva.html\">Alsu Kurmasheva</a>, an editor for Radio Free Europe/Radio Liberty, was arrested while visiting her mother and has been in detention since October.</p><p>The charges against both are a travesty. Their incarceration is a violation of their rights and an assault on foreign journalists that is even more egregious than what transpired under Soviet rule. The Biden administration should continue to do all in its power to secure their freedom.</p><p>Mr. Gershkovich, now 32, is not a spy, and his accusers know it. He is a reporter, a correspondent for The Wall Street Journal who worked in Moscow with official accreditation from the Russian government until he was taken prisoner by a <a href=\"https://www.wsj.com/articles/fsb-evan-gershkovich-russia-security-force-dkro-e9cf9a49\">secretive police unit</a> in Yekaterinburg on March 29, 2023.</p><p>The reason for the arrest may be known only to Mr. Putin. Perhaps it was to send a signal that foreign correspondents are no safer from the reach of the Kremlin\u2019s police than Russian reporters. For some time now, and especially since the invasion of Ukraine two years ago, the Kremlin under Mr. Putin has dealt ruthlessly with any opposition, as demonstrated most starkly by the sudden death last month of Aleksei Navalny, Mr. Putin\u2019s most prominent opponent.</p><p>Perhaps Mr. Gershkovich was seized as a pawn to swap for Russians held in the West, as the American basketball player <a href=\"https://www.nytimes.com/2022/12/09/us/politics/brittney-griner-prisoner-swap.html\">Brittney Griner was in 2022</a>. Perhaps it was because Mr. Gershkovich\u2019s parents are Russian Jews who emigrated in the 1970s, so Mr. Putin views him, as he views Ukraine, as within his sphere of repression.</p><p>As the first anniversary of Mr. Gershkovich\u2019s incarceration approaches, there is no evidence of a potential trade, though Mr. Putin did suggest last month that it could happen. And there is no indication that a trial is imminent. Instead, Mr. Gershkovich will soon have spent a year at <a href=\"https://www.wsj.com/articles/evan-gershkovich-lefortovo-russian-prison-detainment-ae4d9414\">Lefortovo</a>, which was built in the 19th century and was notorious in the Soviet era as an interrogation center for political prisoners, who are typically held in solitary confinement. Human contact is strictly limited: Only lawyers are usually allowed to visit.</p><p>Ms. Kurmasheva, a dual Russian and American citizen, lived with her husband and two daughters in Prague and worked there as an editor for R.F.E./R.L.\u2019s Tatar-Bashkir service. She traveled to the Russian city of Kazan last May to visit her ailing mother but was prevented from leaving, purportedly for failing to register her American passport. On Oct. 18 she was detained for failing to register as a \u201cforeign agent,\u201d and she has been held since.</p><p>Introduced in 2012, the <a href=\"https://www.nytimes.com/2012/07/03/world/europe/russia-introduces-law-limiting-aid-for-nonprofits.html\">foreign agent law</a> has been a central feature of Mr. Putin\u2019s efforts to portray the West as a devious enemy seeking to undermine Russia. The law requires <a href=\"https://www.nytimes.com/2019/12/02/world/europe/russia-foreign-agents-law.html\">any organization or individual</a> in Russia who receives money from abroad to register as a \u201cforeign agent,\u201d a phrase that, in Russian, carries a clear connotation of espionage. In December, authorities in Kazan began yet another investigation of Ms. Kurmasheva, this one for spreading false information about the Russian Army, and on Feb. 1, her pretrial detention was extended for two months.</p><p>Her husband, Pavel Butorin, who also works for R.F.E./R.L., <a href=\"https://www.reuters.com/world/russian-court-extends-pre-trial-detention-us-journalist-kurmasheva-2024-02-01/\">has said he suspects</a> the new case involves a <a href=\"https://docs.rferl.org/ru-BA/2022/11/15/083e0000-0a00-0242-f497-08dac7296e43.pdf\">book</a> that Ms. Kurmasheva and her colleagues coedited called \u201cSaying No to War: 40 Stories of Russians Who Oppose the Russian Invasion of Ukraine,\u201d a collection of radio interviews with Russian people who expressed their antiwar feelings in different ways. (One of them said she was arrested for braiding a green ribbon in her hair.) Opposing the war is a crime in Russia, and R.F.E./R.L. itself has been branded an \u201cundesirable organization,\u201d putting Russians at risk for any connection with it.</p><p>Mr. Butorin and a host of press organizations have been campaigning for the State Department to declare that Ms. Kurmasheva has been wrongfully detained \u2014 a finding that would allow her to receive intensified attention by the president\u2019s special presidential envoy for hostage affairs. Mr. Gershkovich\u2019s case was so categorized soon after he was detained, as was that of another American being held in Russia, <a href=\"https://www.nytimes.com/2020/06/15/world/europe/paul-whelan-russia-spy-guilty.html\">Paul Whelan</a>, who was convicted in 2020 of spying and sentenced to 16 years of incarceration. The State Department has yet to officially assign similar urgency to Ms. Kurmasheva\u2019s case, but it should.</p><p>However different the details of Mr. Gershkovich\u2019s and Ms. Kurmasheva\u2019s cases, they both have their origins in Mr. Putin\u2019s personal vindictiveness. In the waning years of the Soviet Union, the rules of officially acceptable behavior for foreign journalists were fairly clear and the consequences for violating them were rarely more serious than expulsion. Mr. Putin\u2019s approach to the international media \u2014 now among the only sources of independent news in the country \u2014 has become steadily more malevolent and capricious as his war on Ukraine has dragged on.</p><p>Mr. Putin, having yet again consolidated his power as Russia\u2019s leader, is unlikely to be moved by the American government\u2019s pressure or censure about his treatment of journalists. Yet it remains incumbent on the United States government and on institutions of the free press to explore every avenue to win the release of Ms. Kurmasheva and Mr. Gershkovich and to continue to insist, using whatever diplomatic tools are available to them, that Mr. Putin cease intimidating journalists.</p><p>Journalists in Russia who are working to break through the obstacles and traps he has set are performing a critical service in shedding light on his authoritarian and expansionist project. He fears them for a reason, and for that same reason they deserve the unflagging support of all those who cherish freedom.</p><p>ONLINE: <a href=\"https://www.nytimes.com/2024/03/22/opinion/gershkovich-kurmasheva-russia-putin.html\">https://www.nytimes.com/2024/03/22/opinion/gershkovich-kurmasheva-russia-putin.html</a></p><p>___</p><p>March 24</p><p>The Wall Street Journal on the shrinking GOP majority</p><p>Democrats are lapping Republicans in this year\u2019s election fund-raising, and could that be because GOP donors are wondering what they get for their money? Donors, both small-dollar and large, helped Republicans retake the House in 2022, and all they\u2019ve received in return is a majority that revels in operating like a functional minority.</p><p>Soon it may not even be a majority at all. Wisconsin Rep. Mike Gallagher, one of the GOP\u2019s best Members, announced on Friday that he\u2019s resigning from the House on April 19. Colorado Rep. Ken Buck\u2019s last day was Friday. You can criticize both for leaving early, but who can blame anyone sane for wanting to do something more useful with his life than serving in this House of horribles?</p><p>Their departures take the GOP majority down to 217-213, which means the party is a heart attack and absences or flipped votes away from putting Democratic leader Hakeem Jeffries in charge. In some sense Mr. Jeffries already is in charge. Speaker Mike Johnson can\u2019t pass legislation the usual way through the Rules Committee and then onto the floor with a simple majority. Every sensible majority that wants to govern packs the Rules Committee with Speaker loyalists. Not this crowd.</p><p>The anti-governing wing of the House GOP insisted on three of their own for Rules as one price of voting for Kevin McCarthy as Speaker in January 2023. They refuse to vote for Mr. Johnson\u2019s inevitable compromises with Senate Democrats, so Mr. Johnson has to move legislation via the suspension calendar, which requires a two-thirds vote to pass anything. This means he needs Democratic votes, and a lot of them, because Republicans prefer to make futile gestures of opposition rather than vote to fund the government.</p><p>The practical effect is to reduce Republican leverage in a divided government and make it harder to achieve conservative policy victories. But then the same Members who undercut the majority boast on the House floor and social media that they are the only honest conservatives in Washington. They\u2019re posers masquerading as principled, and they\u2019re treating the voters at home like rubes.</p><p>Georgia Rep. Marjorie Taylor Greene\u2019s motion Friday to oust Mr. Johnson as Speaker exposes the deception behind the coup against Mr. McCarthy. After we criticized that October coup as destructive and self-serving, Florida Rep. Matt Gaetz wrote us a letter saying that in electing Mr. Johnson the GOP now had a real conservative as leader.</p><p>So what\u2019s wrong with Mr. Johnson now? Apparently because he\u2019s not willing to indulge kamikaze acts like shutting down the government, Mr. Johnson is a sellout too.</p><p>Conservatives have long had a strong anti-Washington impulse, which is useful given the federal government\u2019s relentless drive to expand its own power. But breaking that drive, and rolling back that power, requires calculation and often incremental gains. All the more so in a divided government.</p><p>ONLINE: <a href=\"https://www.wsj.com/articles/honey-we-shrunk-the-gop-majority-house-republicans-55506c32?mod=editorials_article_pos5\">https://www.wsj.com/articles/honey-we-shrunk-the-gop-majority-house-republicans-55506c32?mod=editorials_article_pos5</a></p><p>___</p><p>March 20</p><p>The Los Angeles Times</p><p>It may be tempting to look at new rules finalized Wednesday by the Biden administration <a href=\"https://www.latimes.com/environment/story/2024-03-20/biden-administration-speeds-transition-to-electric-vehicles\">boosting sales of electric vehicles</a> as a big step toward slashing climate-changing pollution.</p><p>But the Environmental Protection Agency rules are more an incremental move, too weak and slow to respond appropriately to the gravity of the unfolding environmental crisis. And that\u2019s a shame, because with a divided Congress, administrative action is the only way for the federal government to do big things such as protect the public from climate change and pollution.</p><p>The administration blew this opportunity by <a href=\"https://www.latimes.com/opinion/story/2024-02-27/editorial-biden-doesnt-need-to-weaken-ev-rules-to-get-reelected\">caving to pressure</a> from powerful interests during an election year and settling on a watered-down plan that will allow automakers to build more gas-guzzling vehicles for longer and slow down urgently needed pollution cuts. We\u2019re in the race of our lifetime against climate change and President Biden is driving way below the speed limit.</p><p><a href=\"https://www.epa.gov/regulations-emissions-vehicles-and-engines/final-rule-multi-pollutant-emissions-standards-model\">The final rules</a> impose greenhouse gas pollution limits that will force automakers to ramp up sales of new zero-emission cars and light-duty trucks from about 7% of vehicles sold today to more than 67% by 2032. That\u2019s good, of course, but it\u2019s a more gradual requirement than the EPA first proposed, delaying the steepest increases in electric vehicle sales until after 2030 and granting loopholes that make it easier for manufacturers to comply. That\u2019s a mistake at a time when the climate crisis is smacking us in the face, with February marking the <a href=\"https://www.latimes.com/environment/story/2024-03-07/global-hot-streak-continues-february-was-warmest-on-record\">ninth consecutive month</a> of record-setting heat on the planet.</p><p>Speed matters, after all, in preventing catastrophic climate impacts, and the longer we wait to toughen these standards, the more cumulative carbon dioxide emissions we spew into the atmosphere.</p><p>The administration\u2019s softening of its vehicle emissions proposal is an election-year gift to the auto industry, which has pushed to weaken the rules so it can keep making more money from gas-fueled models. It\u2019s also a concession to organized labor, including auto industry workers who are understandably fearful about the move to electric vehicles shifting jobs to nonunion factories with lower wages.</p><p>The powerful United Auto Workers union praised the version released Wednesday as a \u201cmore feasible emissions rule that protects workers building (internal combustion engine) vehicles, while providing a path forward for automakers to implement the full range of automotive technologies to reduce emissions.\u201d</p><p>But there are better ways to support workers than by blunting the federal government\u2019s most powerful tool to address pollution from transportation, now the largest source of emissions. Protecting good-paying, union jobs should not have to come at the expense of protecting the environment. The administration should look to other ways to smooth the transition, like building on the slew of clean manufacturing incentives that have begun rolling out under the Inflation Reduction Act, and working to build out the nation\u2019s lackluster vehicle charging network.</p><p>Climate change is such an existential threat that even taking one of the biggest federal actions to date to cut emissions can be viewed as a failure for lacking the necessary ambition. Biden should be doing all he can to get ahead of the climate crisis and dominate the clean energy economy of the future, not easing off the accelerator in hopes that it could help him win reelection.</p><p>ONLINE: <a href=\"https://www.latimes.com/opinion/story/2024-03-20/biden-electric-car-rules\">https://www.latimes.com/opinion/story/2024-03-20/biden-electric-car-rules</a></p><p>___</p><p>March 22</p><p>China Daily on U.S. poison pill for India</p><p>By inaugurating the Sela Tunnel in China\u2019s Zangnan, or the southern part of the Xizang autonomous region, which India calls \u201cArunachal Pradesh\u201d, Indian Prime Minister Narendra Modi risks playing with fire, by offending a friendly neighbor.</p><p>Weeks before the move, China and India had just held the 21st round of commander-level talks over border issues, in which both sides agreed to keep up communications through military and diplomatic channels to improve the situation in the border area. But Modi\u2019s move ruins that precious mutual trust.</p><p>Muddying the waters further is the US Department of State, which claimed it recognizes \u201cArunachal Pradesh\u201d as Indian territory.</p><p>While it\u2019s easy and costs nothing for the United States to try and drive a wedge between China and India, for as low as a blank-check-style statement, it could prove costly for India to accept that wedge. Taking such a provocative move means offending a neighbor five times its economic size, while all the support it gets from the distant \u201csupporter\u201d is a statement.</p><p>The peoples of China and India have shared a long history of friendship. However, recent years have seen certain politicians, influenced by colonialism ideologies, causing tensions that overshadow this bond. It\u2019s essential to question whether the Indian government aims to maintain friendly relations and mutual development or insists on unilateral actions at the expense of its neighbors.</p><p>Similarly, some US politicians that sow discord must consider how their actions contribute to fostering friendly relations and safeguarding global interests. China values peace but remains unafraid in the face of external provocations.</p><p>ONLINE: <a href=\"https://www.chinadaily.com.cn/a/202403/22/WS65fd544ea31082fc043be356.html\">https://www.chinadaily.com.cn/a/202403/22/WS65fd544ea31082fc043be356.html</a></p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/796c7d53219742967509c0d7a9887cd3",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 3,
+            "reason": "The document contains multiple editorials on various topics, but only one of them is directly related to health. The Washington Post editorial discusses the Supreme Court case involving the abortion pill mifepristone, which is relevant to reproductive health and medication access. The other editorials cover topics such as political issues in the GOP, U.S.-Russia relations, climate change policies, and India-China border tensions, which are not related to health. Therefore, the document has some relevance to health but is not predominantly focused on it."
+        }
+    }
+}

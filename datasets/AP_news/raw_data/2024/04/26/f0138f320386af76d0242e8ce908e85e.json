@@ -1,0 +1,232 @@
+﻿{
+    "altids": {
+        "itemid": "f0138f320386af76d0242e8ce908e85e",
+        "etag": "f0138f320386af76d0242e8ce908e85e_1a4aza0c0",
+        "friendlykey": "274105630378",
+        "referenceid": "CN--Canada-Drug Use"
+    },
+    "version": 1,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2024-04-27T01:03:34Z",
+    "firstcreated": "2024-04-26T23:46:12Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "ednote": "Eds: EDITS: fixes typo in first paragraph",
+    "editorialtypes": [
+        "Lead"
+    ],
+    "signals": [
+        "newscontent"
+    ],
+    "title": "CN--Canada-Drug Use",
+    "headline": "Canadian province will make changes to try to stop drug use in public places, premier says",
+    "headline_extended": "The British Columbia government is making changes to its drug decriminalization policy to stop drug use in public places",
+    "slugline": "AP-CN--Canada-Drug Use, 1st Ld-Writethru",
+    "description_summary": "The British Columbia government is making changes to its drug decriminalization policy to stop drug use in public places. Premier David Eby said the province is asking the federal government to make illicit drug use illegal in all public spaces, including inside hospitals, on transit and in parks. Eby said the government still believes \u201caddiction is a health issue. It\u2019s not a criminal laws issue.\u201d Possession of small amounts of opioids, cocaine, methamphetamine and MDMA, also called ecstasy, was decriminalized in B.C. last January after the federal government issued an exemption to the province to try to stem the overdose death toll.",
+    "located": "VANCOUVER, British Columbia",
+    "datelinelocation": {
+        "city": "Vancouver",
+        "countryareacode": "BC",
+        "countryareaname": "British Columbia",
+        "countrycode": "CAN",
+        "countryname": "Canada",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                -123.11934,
+                49.24966
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "canada british columbia public drug use"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "i",
+            "name": "i"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "fb629770cf154f91964e1789d2dd836e",
+            "name": "Opioids",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 43
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "6e2e052049fd457f841be9023fe385c5",
+            "name": "Drug crimes",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 81
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "936045008844100486a2a28878d48e09",
+            "name": "Addiction and treatment",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 73
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86aad5207dac100488ecba7fa5283c3e",
+            "name": "Politics",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 65
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "bb2d2c5f441a452cb24bb511a2ab5eea",
+            "name": "World news",
+            "creator": "Editorial",
+            "editorial_subject": "World news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "c5a0dbf082f010048d9ddf092526b43e",
+            "name": "Vancouver",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "b945c20882f010048d94df092526b43e"
+            ],
+            "locationtype": {
+                "code": "9d26a20b35f0484a891740f8189d4c7b",
+                "name": "City"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -123.11934,
+                    49.24966
+                ]
+            },
+            "relevance": 59,
+            "parentnames": [
+                "British Columbia"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "b945c20882f010048d94df092526b43e",
+            "name": "British Columbia",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b1004828fc076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "84828d1850104a78bb35f5726b8c49aa",
+                "name": "Province"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -125.0032,
+                    53.99983
+                ]
+            },
+            "relevance": 92,
+            "parentnames": [
+                "Canada"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "661850e07d5b100481f5c076b8e3055c",
+            "name": "Latin America and Caribbean",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "body_nitf": "<p>VANCOUVER, British Columbia (AP) \u2014 The government of the Canadian province of British Columbia is making changes to its drug decriminalization policy to stop drug use in public places.</p><p>Premier David Eby told a news conference Friday the province is asking the federal government to make illicit drug use illegal in all public spaces, including inside hospitals, on transit and in parks.</p><p>Eby said the government still believes \u201caddiction is a health issue. It\u2019s not a criminal laws issue.\"</p><p>\u201cBut the compassion for people who are struggling does not mean anything goes,\u201d he said.</p><p>Possession of small amounts of opioids, cocaine, methamphetamine and MDMA, also called ecstasy, was decriminalized in B.C. last January after the federal government issued an exemption to the province to try to stem the overdose death toll.</p><p>The program was possible through an exemption granted by Health Canada under the Controlled Drugs and Substances Act which allowed for open drug use in some public spaces.</p><p>More than 14,000 people have died in B.C. since the government declared a public health emergency in April 2016 due to illicit opioid overdoses.</p><p>The government faced repeated criticisms about the decriminalization polices from local politicians, health workers and police about open drug use in public spaces.</p><p>The province tried to make drug use illegal in public places with its own legislation, but a B.C. Supreme Court judge put in place an injunction preventing that. Eby said they\u2019ve now asked for the same changes from Health Canada.</p><p>Under the proposed changes, police will have the power to ask a person to leave an area, seize drugs \u201cwhen necessary\u201d or arrest a person if required.</p><p>Drug use will still be allowed in a private residence or place where someone is legally sheltering, or at overdose prevention sites and drug checking locations.</p><p>Fiona Wilson, the Vancouver Police Department\u2019s deputy chief, said businesses, families and individuals have expressed concerns about public drug use.</p><p>\u201cWe remain committed to a compassionate and health led approach that supports people living with substance use disorder while also addressing the very real concerns in our communities related to problematic drug use,\" said.</p><p>Dana Larsen, a Vancouver drug activist, said there needs to be more safe places for people to do drugs.</p><p>\u201cI understand people\u2019s concerns,\u201d said Larsen. \u201cTo me the solution is to create safe, legal spaces where you are allowed to do it.\"</p><p>Brittany Graham, executive director of the Vancouver Area Network of Drug Users (VANDU) said the changes would adversely affect people on low income.</p><p>\u201cWhat would have been more beneficial is building more housing, having more shelters, having more overdose prevention services, as well of having a plan for uncontaminated drugs in this province,\u201d she said.</p><p>Eby was asked if the changes will stand up to court scrutiny.</p><p>\u201cWe believe we have the authority to regulate provincially,\u201d he said. \u201cWe believe the federal government had the authority. Well defend that if this does happen.\u201d</p><p>Eby expects drug decriminalization will be an issue in the Oct. 19 provincial election.</p><p>Oregon, the first U.S. state to decriminalize illicit drugs, recently reversed course and reinstated criminal penalties for use and possession.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/canada-british-columbia-public-drug-use-f0138f320386af76d0242e8ce908e85e",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 5,
+            "reason": "The document discusses changes to drug decriminalization policies in British Columbia, focusing on the public health implications of drug use and overdose deaths. It includes statements from government officials, health workers, and activists about the health impacts of drug use and the need for safe consumption spaces. The document is highly relevant to the topic of health as it addresses addiction as a health issue, public health emergencies, and the need for health-led approaches to substance use disorders."
+        }
+    }
+}

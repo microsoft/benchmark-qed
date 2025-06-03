@@ -1,0 +1,259 @@
+﻿{
+    "altids": {
+        "itemid": "1d519afeb31d840ed084e356f968fdc7",
+        "etag": "1d519afeb31d840ed084e356f968fdc7_1a5aza0c0",
+        "friendlykey": "996023064096",
+        "referenceid": "EU--Britain-Cancer Crisis"
+    },
+    "version": 1,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Feature",
+    "language": "en",
+    "versioncreated": "2024-03-06T13:06:24Z",
+    "firstcreated": "2024-03-06T05:01:55Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "ednote": "Eds: UPDATES: edits headline.",
+    "editorialtypes": [
+        "Lead"
+    ],
+    "signals": [
+        "newscontent"
+    ],
+    "title": "EU--Britain-Cancer Crisis",
+    "headline": "King Charles\u2019 cancer diagnosis highlights the long waiting times many people in the UK face",
+    "headline_extended": "Waiting times to diagnose and treat cancer across the U.K. have worsened in recent years and are at near record highs",
+    "slugline": "BC-EU--Britain-Cancer Crisis, 1st Ld-Writethru",
+    "description_summary": "Waiting times to diagnose and treat cancer across the U.K. have worsened in recent years and are at near record highs. Experts say too many cancers are diagnosed too late, and survival for common cancers in the U.K. consistently lags behind countries with similar universal health care systems. Palace officials\u2019 recent announcement that King Charles III has been diagnosed with cancer has put a sharp focus on the issue. The 76-year-old monarch\u2019s decision to openly share his cancer diagnosis was widely praised. But many couldn\u2019t help comparing the swift treatment Charles received with how ordinary Britons fare at public hospitals. Experts say years of underinvestment and staff shortages must be tackled.",
+    "bylines": [
+        {
+            "by": "By SYLVIA HUI",
+            "title": "Associated Press"
+        }
+    ],
+    "located": "LONDON",
+    "datelinelocation": {
+        "city": "London",
+        "countrycode": "GBR",
+        "countryname": "United Kingdom",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                -0.12574,
+                51.50853
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "UK cancer waiting times King Charles"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "person": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f8955706b58c4b71901d46201750aa48",
+            "name": "King Charles III",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "GOVERNMENT_FIGURE",
+                "PERSON",
+                "ROYALTY"
+            ],
+            "relevance": 74
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "i",
+            "name": "i"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e22524b87de410048f91df092526b43e",
+            "name": "Cancer",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 93
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 93
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "90aeac5089ef10048f63d56c852d093e",
+            "name": "Royalty",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 54
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Editorial",
+            "editorial_subject": "Health",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "bb2d2c5f441a452cb24bb511a2ab5eea",
+            "name": "World news",
+            "creator": "Editorial",
+            "editorial_subject": "World news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "66219fb07d5b100482e2c076b8e3055c",
+            "name": "United Kingdom",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661850e07d5b100481f4c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "01f56e0e654841eca2e69bf2cbcc0526",
+                "name": "Nation"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -4,
+                    54
+                ]
+            },
+            "relevance": 78,
+            "parentnames": [
+                "Europe"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "661850e07d5b100481f4c076b8e3055c",
+            "name": "Europe",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "associations": {
+        "1": {
+            "altids": {
+                "itemid": "0c71d892f46246c987b7eba94fe51b29"
+            },
+            "type": "picture"
+        },
+        "2": {
+            "altids": {
+                "itemid": "50485af0771749aab273663dd63e7752"
+            },
+            "type": "picture"
+        },
+        "3": {
+            "altids": {
+                "itemid": "2509799804a549629a6f680d6e4d0640"
+            },
+            "type": "picture"
+        },
+        "4": {
+            "altids": {
+                "itemid": "6fda006e0ece477eb8bded5fe8d18e10"
+            },
+            "type": "picture"
+        },
+        "5": {
+            "altids": {
+                "itemid": "c722deb95c18442da7bf7984b1c3841a"
+            },
+            "type": "picture"
+        }
+    },
+    "body_nitf": "<p>LONDON (AP) \u2014 For Anna Gittins, three months would have spelled the difference between life and death.</p><p>The elementary school principal from Hereford in western England was shocked when she found out she had advanced colorectal cancer in 2022. But when she contacted her local hospital, she was told no one would be able to see her for three months \u201cdue to high demand and low capacity of senior doctors.\"</p><p>\u201cI've just been diagnosed with stage 4 bowel cancer, metastasized to my liver. I don't have three months to wait,\u201d she said, using another term for colorectal cancer. She was just 46.</p><p>Gittins had access to private health care and has since undergone surgery and chemotherapy. \u201cI consider myself so lucky, but there are so many people who will die needlessly when more prompt treatment would help them,\u201d she said. \u201cAnd that's not fair. Not in a country like ours.\u201d</p><p>Gittins is among thousands of people with cancer let down by <a href=\"https://apnews.com/video/united-kingdom-wales-london-polio-and-post-polio-syndrome-covid-19-pandemic-92dc514f9b054aeaaf8e5d20825afab1\">Britain's National Health Service</a>, a once revered institution <a href=\"https://apnews.com/video/united-kingdom-wales-london-polio-and-post-polio-syndrome-covid-19-pandemic-92dc514f9b054aeaaf8e5d20825afab1\">now widely seen to be in acute crisis</a> due to years of underfunding and staff shortages.</p><p>Waiting times to diagnose and treat cancer across the U.K. have worsened in recent years and are near record highs \u2014 and experts say too many cancers are diagnosed too late. Experts warn the burden of cancer will grow as the country\u2019s population ages.</p><p>Palace officials' recent announcement that King Charles III has been diagnosed with cancer has highlighted the issue. Officials didn't say what form of cancer Charles has, only that it was discovered during a recent <a href=\"https://apnews.com/article/king-charles-iii-prostate-operation-2d8675a579112447194b17e47683233d\">corrective procedure for an enlarged prostate</a>.</p><p>The 76-year-old monarch's decision to openly share his cancer diagnosis was widely praised, and experts said it was a powerful reminder that cancer affects 1 in 2 people in the U.K. The news triggered a \u201cKing Charles effect\" \u2014 immediately boosting visits to cancer information and support websites nationwide.</p><p>But many couldn't help compare the swift treatment Charles received, days after he was diagnosed, with how ordinary Britons fare at public hospitals.</p><p>Public health officials aim for 75% of patients with suspected cancer to receive a diagnosis within four weeks of a doctor's urgent referral. They also say 85% of cancer patients should wait less than two months for their first cancer treatment.</p><p>But the last time all such waiting time targets were met in England was in 2015, experts say, and the delays are even worse in poorer parts of the country like Northern Ireland.</p><p>One in three patients in the U.K. are waiting more than two months to start treatment after an urgent referral for cancer assessment, according to the independent think tank Nuffield Trust. In total, 225,000 people have waited too long since 2020, Radiotherapy U.K. says.</p><p>Survival for common cancers in the U.K. consistently lags behind countries with similar universal health care systems and per capita spending on public health, a <a href=\"https://www.cancerresearchuk.org/sites/default/files/cancer_in_the_uk_overview_2024.pdf\">recent report</a> by the charity Cancer Research U.K. found.</p><p>Apart from longer waits, people with cancer in the U.K. also received less chemotherapy and radiotherapy treatment than countries such as Canada, Australia, Denmark and Norway, <a href=\"https://news.cancerresearchuk.org/2024/02/27/how-does-cancer-treatment-in-the-uk-measure-up/\">another study by the charity</a> said.</p><p>\u201cIt's quite worrying that we treat less in the U.K. than in comparable countries. For lung cancer, for example, 28% of patients get chemo in the U.K. In Norway it's 45%,\u201d said Naser Turabi, director of evidence and implementation at Cancer Research U.K.</p><p>Turabi pointed to lack of investment in both equipment and specialist staff in the past 15 years, resulting in the U.K. ranking near the bottom among 36 developed countries for its number of CT and MRI scanners.</p><p>\u201cWe know we have an aging population, but there's no specific commitment from the government to meet the demand that we know is coming,\u201d he said. \"We can\u2019t even provide online bookings for screening appointments. The digital infrastructure is 20 years out of date.\"</p><p>Kathy McAllister, a cancer survivor, is so frustrated with the NHS inefficiencies that she has retrained as a cancer awareness campaigner.</p><p>The former marketing director from Belfast, Northern Ireland, said she waited at least two months to start treatment after she was diagnosed with late-stage colorectal cancer in 2019. She added that she only managed to secure a follow-up scan after treatment because she persisted in chasing it down with hospital bosses.</p><p>\u201cIt's just a wait at every stage,\u201d said McAllister, 53. \u201cYou expect cancer should be such a priority, that once you see a doctor they\u2019re going to put arms around you, you\u2019re going to be looked after, but you\u2019re not. You're just another number because they're so overwhelmed.\u201d</p><p>Cancer care isn't the only part of the NHS that's in crisis. Millions struggle to book appointments with their general practitioners or dentists, hospital emergency departments are regularly overwhelmed, and record numbers of people are stuck on waiting lists for routine treatments.</p><p>The COVID-19 pandemic worsened the situation, but the NHS \u2014 a huge institution employing more than 1 million people \u2014 has long struggled to cope as public funding shrinks and life expectancy grows. <a href=\"https://apnews.com/article/britain-doctors-strike-nhs-inflation-crisis-52d9263d28566da80a98858dcd289b85\">Many blame the crisis on the austerity policies</a> of successive Conservative governments, which have cut budgets in health, social welfare and education during 14 years in power.</p><p>Asked about the delays in cancer care, NHS England said more people than ever are being diagnosed at an early stage of cancer and more treatment options are available. Over the past year, nearly 3 million people received potentially lifesaving cancer checks, compared to 1.6 million a decade ago, it said in a statement.</p><p>Prime Minister Rishi Sunak, who has made cutting waiting times a key priority, has blamed an unprecedented series <a href=\"https://apnews.com/article/britain-doctors-strike-nhs-54cb023c1bae5d92674edf7624c5f319\">of doctors' and nurses' strikes</a> for the lack of progress.</p><p>Tens of thousands of doctors have walked off their jobs multiple times since late 2022 to protest deteriorating conditions and demand better pay, which unions say does not keep pace with surging inflation. Last month junior doctors staged a strike for six days, the longest such disruption in NHS history.</p><p>McAllister, the cancer survivor, wants cancer care to be a focal point ahead of Britain\u2019s general election, expected to take place this year. She's calling on the government to draw up a cancer plan and devote as much focus and urgency to cancer as they did to the COVID-19 pandemic.</p><p>\u201cIt\u2019s just shocking every time cancer waiting times come out they get almost ignored. We've become a bit numb to those statistics,\" she said. \u201cWe need people to stand up and say, 'It isn't good enough.'\u201d</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/uk-cancer-waiting-times-king-charles-1d519afeb31d840ed084e356f968fdc7",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 5,
+            "reason": "The document discusses various aspects of health, particularly focusing on cancer diagnosis and treatment within the UK's National Health Service (NHS). It highlights the challenges faced by patients, including long waiting times, underfunding, and staff shortages. The document also mentions the impact of King Charles III's cancer diagnosis on public awareness. These points are directly related to the topic of health, making the document highly relevant."
+        }
+    }
+}

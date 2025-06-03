@@ -1,0 +1,97 @@
+extend-include = ["*.ipynb"]
+
+# Assume Python 3.11
+target-version = "py311"
+
+[format]
+docstring-code-format = true
+docstring-code-line-length = 20
+
+[lint]
+select = [
+    "F", # pyflakes
+    "E", # pycodestyle errors
+    "W", # pycodestyle warnings
+    "C90", # mccabe 90
+    "I", # isort
+    "N", # pep8-naming
+    "D", # pydocstyle
+    "UP", # pyupgrade
+    "YTT", # flake8-2020
+    "ANN", # flake8-annotations
+    "ASYNC", # flake8-async
+    "S", # flake8-bandit
+    "BLE", # flake8-blind-except
+    "FBT", # flake8-boolean-trap
+    "B", # flake8-bugbear
+    "A", # flake8-builtins
+    #b "COM", # flake8-commas (conflicts with formatter)
+    "CPY", # flake8-copyright
+    "C4", # flake8-comprehensions
+    "DTZ", # flake8-datetimez
+    "T10", # flake8-debugger
+    # "DJ", # flake8-django (N/A)
+    "EM", # flake8-error-message
+    "EXE", # flake8-executable
+    # "FA", # flake8-future-annotations (we're not worried about back-compat this deep)
+    # "ISC", # flake8-implicit-str-contact (conflicts with formatter)
+    "ICN", # flake8-import-conventions
+    "LOG", # flake8-logging
+    "G", # flake8-logging-format
+    "INP", # flake8-no-pep420
+    "PIE", # flake8-pie
+    "T20", # flake8-print
+    "PYI", # flake8-pyi
+    "PT", # flake8-pytest
+    "Q",  # flake8-quotes
+    "RSE", # flake8-raise
+    "RET", # flake8-return
+    "SLF", # flake8-self
+    "SLOT", # flake8-slots
+    "SIM", # flake8-simplify
+    "TID", # flake8-tidy-imports
+    "TC", # flake8-type-checking
+    "INT", # flake8-gettext 
+    "ARG", # flake8-unused-argument
+    "PTH", # flake8-use-pathlib
+    "TD", # flake8-todos
+    # "FIX", # flake8-fixme (throws on all todos)
+    "ERA", # flake8-eradicate
+    "PD", # pandas-vet
+    "PGH", # pygrep-hooks
+    # "PL", # pylint (this is popping a lot of issues)
+    "TRY", # tryceratops
+    "FLY", # flynt
+    "NPY", # numpy-specific-rules
+    # "FAST", # fastAPI (n/a)
+    # "AIR", # airflow (n/a)
+    "PERF", # perflint
+    "FURB", # refurb
+    # "DOC", # pydoclint (need to document returns
+    "RUF", # ruff-specific rules
+    
+]
+ignore = [
+    "E501", # Line too long, handled by formatter    
+    "ANN401", # Disable typing.Any; this is used a fair amount
+    "ARG002", # Conflicts with interface argument checking
+    "RUF031", # Avoid parentheses with tuples; this causes issues with some networkx edge lookups
+    "TC006", # Use quotes in casted types; this is kind of weird and seems like it would affect refactoring
+    "TD003", # We're not tracking TODOs as issues ,
+    "PGH003", # Use specific rule when ignoring issue - need a way to by bypass Pylint checks; this raises on type: ignore
+    "FBT001", "FBT002", # Disable default positional boolean.
+]
+
+[lint.per-file-ignores]
+"tests/*" = ["S", "D", "ANN", "T201", "ASYNC", "ARG", "PTH", "TRY", "SLF001", "DOC"]
+"*.ipynb" = ["T201"]
+
+[lint.mccabe]
+# The default here is 10, and we should try to bring this down. 27 is pretty high.
+max-complexity = 27
+
+[lint.flake8-builtins]
+builtins-ignorelist = ["input", "id", "bytes"]
+
+[lint.pydocstyle]
+convention = "numpy"

@@ -1,0 +1,226 @@
+﻿{
+    "altids": {
+        "itemid": "355f1e288e72df8b81b0e2efd8b3ae2f",
+        "etag": "355f1e288e72df8b81b0e2efd8b3ae2f_3a20aza0c0",
+        "friendlykey": "8923111892",
+        "referenceid": "US-MED--Bird Flu-Livestock"
+    },
+    "version": 3,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2024-04-01T20:41:47Z",
+    "firstcreated": "2024-04-01T17:28:20Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "ednote": "Eds: EDITS: Minor edits.",
+    "editorialtypes": [
+        "Lead"
+    ],
+    "signals": [
+        "newscontent"
+    ],
+    "title": "US-MED--Bird Flu-Livestock",
+    "headline": "Person is diagnosed with bird flu after being in contact with cows in Texas",
+    "headline_extended": "A person in Texas has been diagnosed with bird flu \u2014 an infection tied to the recent discovery of the virus in dairy cows",
+    "slugline": "AP-US-MED--Bird Flu-Livestock, 3rd Ld-Writethru",
+    "description_summary": "A person in Texas has been diagnosed with bird flu \u2014 an infection tied to the recent discovery of the virus in dairy cows. The only reported symptom was eye redness, and the patient is recovering. Texas health officials announced the case Monday. Federal health officials say it marks the first known instance globally of a person catching this version of bird flu from a mammal. Health officials say the person had been contact with cows presumed to be infected, and the risk to the public remains low. More than 460 people have died in the past two decades from bird flu infections.",
+    "bylines": [
+        {
+            "by": "By MIKE STOBBE",
+            "title": "AP Medical Writer"
+        }
+    ],
+    "located": "ATLANTA",
+    "datelinelocation": {
+        "city": "Atlanta",
+        "countryareacode": "GA",
+        "countryareaname": "Georgia",
+        "countrycode": "USA",
+        "countryname": "United States",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                -84.38798,
+                33.749
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "bird flu Texas cows"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "a",
+            "name": "a"
+        },
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 98
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a08c0c7c1dc34b8198a8c200df2799ac",
+            "name": "Bird flu",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 59
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a89f0ca887a9100481f8957095691f3e",
+            "name": "Animals",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 72
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Editorial",
+            "editorial_subject": "Health",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "6e92d9b882c7100488e5df092526b43e",
+            "name": "Texas",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -99.25061,
+                    31.25044
+                ]
+            },
+            "relevance": 87,
+            "parentnames": [
+                "United States"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "6e92d9b882c7100488e5df092526b43e",
+            "name": "Texas",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "1e8c5a7082b310048450df092526b43e",
+            "name": "Kansas",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "6bf49b4082c410048696df092526b43e",
+            "name": "Michigan",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661850e07d5b100481f5c076b8e3055c",
+            "name": "Latin America and Caribbean",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "associations": {
+        "1": {
+            "altids": {
+                "itemid": "d46ff51fbfea41528fc727374933b870"
+            },
+            "type": "picture"
+        }
+    },
+    "body_nitf": "<p>ATLANTA (AP) \u2014 A person in Texas has been diagnosed with <a href=\"https://apnews.com/hub/bird-flu\">bird flu</a>, an infection tied to the recent discovery of the virus in dairy cows, health officials said Monday.</p><p>The patient was being treated with an antiviral drug and their only reported symptom was eye redness, <a href=\"https://www.dshs.texas.gov/news-alerts/dshs-reports-first-human-case-avian-influenza-texas\">Texas health officials said</a>. Health officials say the person had been in contact with cows presumed to be infected, and the risk to the public remains low.</p><p>It marks the first known instance globally of a person catching this version of bird flu from a mammal, federal health officials said.</p><p>However, there\u2019s no evidence of person-to-person spread or that anyone has become infected from milk or meat from livestock, said Dr. Nirav Shah, principal deputy director of the Centers for Disease Control and Prevention. Genetic tests don\u2019t suggest that the virus suddenly is spreading more easily or that it is causing more severe illness, Shah said. And current antiviral medications still seem to work, he added.</p><p>Last week, dairy cows in Texas and Kansas <a href=\"https://apnews.com/article/bird-flu-dairy-cattle-usda-kansas-texas-c3040bb31a9a8293717d47362f006902\">were reported</a> to be infected with bird flu \u2014 and federal agriculture officials later confirmed infections in a Michigan dairy herd that had recently received cows from Texas. None of the hundreds of affected cows have died, Shah said.</p><p>Since 2020, a bird flu virus has been spreading among <a href=\"https://apnews.com/article/disease-outbreaks-hong-kong-health-bird-flu-animals-75e5d058e0fda23b5359f66cafb74cdf\">more animal species</a> \u2013 including dogs, cats, skunks, bears and even <a href=\"https://apnews.com/article/seals-bird-flu-deaths-oceans-80184a8793fbcc21fab01b1c90b0d71b\">seals</a> and porpoises \u2013 in scores of countries. However, the detection in U.S. livestock is an \u201cunexpected and problematic twist,\u201d said Dr. Ali Khan, a former CDC outbreak investigator who is now dean of the University of Nebraska\u2019s public health college.</p><p>This bird flu was first identified as a threat to people during a 1997 outbreak in Hong Kong. More than 460 people have died in the past two decades from bird flu infections, according to the World Health Organization.</p><p>The vast majority of infected people got it directly from birds, but scientists have been on guard for any sign of spread among people.</p><p>Texas officials didn\u2019t identify the newly infected person, nor release any details about what brought them in contact with the cows.</p><p>The CDC does not recommend testing for people who have no symptoms. Roughly a dozen people in Texas who did have symptoms were tested in connection with the dairy cow infections, but only the one person came back positive, Shah said.</p><p>It's only the second time a person in the United States has been diagnosed with what\u2019s known as Type A H5N1 virus. In 2022, a prison inmate in a work program <a href=\"https://apnews.com/article/business-health-environment-colorado-b98906e0a1899bb1f92da30a7b1dbe28\">picked it up</a> while killing infected birds at a poultry farm in Montrose County, Colorado. His only symptom was fatigue, and he recovered.</p><p>___</p><p>The Associated Press Health and Science Department receives support from the Howard Hughes Medical Institute\u2019s Science and Educational Media Group. The AP is solely responsible for all content.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/bird-flu-texas-cows-355f1e288e72df8b81b0e2efd8b3ae2f",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 5,
+            "reason": "The document discusses a health-related incident involving a person diagnosed with bird flu after contact with infected cows in Texas. It provides details about the symptoms, treatment, and the broader context of bird flu infections in animals and humans. The information is directly related to health, including public health implications, the spread of the virus, and measures taken by health officials. Therefore, it is highly relevant to the topic of health."
+        }
+    }
+}

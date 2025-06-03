@@ -1,0 +1,241 @@
+﻿{
+    "altids": {
+        "itemid": "a67b0b0eee93dac15ee5b0fb728f5d75",
+        "etag": "a67b0b0eee93dac15ee5b0fb728f5d75_2a6aza0c0",
+        "friendlykey": "802062688772",
+        "referenceid": "US--Child Care Death"
+    },
+    "version": 2,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2023-12-02T20:54:26Z",
+    "firstcreated": "2023-12-02T16:40:06Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "ednote": "Eds: CORRECTS: Links photo. With AP Photos.",
+    "editorialtypes": [
+        "Lead"
+    ],
+    "signals": [
+        "newscontent"
+    ],
+    "title": "US--Child Care Death",
+    "headline": "Vermont day care provider convicted of causing infant's death with doses of antihistamine",
+    "headline_extended": "A Vermont jury has found a child care provider accused of sedating an infant guilty of manslaughter",
+    "slugline": "AP-US--Child Care Death, 2nd Ld-Writethru",
+    "description_summary": "A Vermont jury has found a child care provider accused of sedating an infant guilty of manslaughter. A jury on Friday convicted of Stacey Vaillancourt of manslaughter and child cruelty in the 2019 death of Harper Rose Briar. The 6-month-old was found unresponsive while in Vaillancourt\u2019s care, and an autopsy determined she had high concentrations of diphenhydramine, an ingredient in over-the-counter antihistamines including Benadryl. Vaillancourt\u2019s defense attorney said there was no evidence to prove Vaillancourt sedated the infant, but the prosecutor told jurors that no one else could have done it.",
+    "located": "RUTLAND, Vt.",
+    "datelinelocation": {
+        "city": "Rutland",
+        "countryareacode": "VT",
+        "countryareaname": "Vermont",
+        "countrycode": "USA",
+        "countryname": "United States",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                -72.97261,
+                43.61062
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2023 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "Vermont infant death manslaughter antihistamine"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "a",
+            "name": "a"
+        },
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 72
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e237be707de410048fffdf092526b43e",
+            "name": "Medication",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 88
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "48612b807c2b4b93bbbacbf54f547ad5",
+            "name": "Crime",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 43
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86bb09907dac10048956ba7fa5283c3e",
+            "name": "Juries",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 53
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "4ed9034d028b44b1875d74a3157e1d63",
+            "name": "Child endangerment",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 33
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "d2f8d8a882c710048915df092526b43e",
+            "name": "Vermont",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -72.74983,
+                    44.00034
+                ]
+            },
+            "relevance": 53,
+            "parentnames": [
+                "United States"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "d2f8d8a882c710048915df092526b43e",
+            "name": "Vermont",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661850e07d5b100481f5c076b8e3055c",
+            "name": "Latin America and Caribbean",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "associations": {
+        "1": {
+            "altids": {
+                "itemid": "870f070867b04dabbedc9b2739a57782"
+            },
+            "type": "picture"
+        }
+    },
+    "body_nitf": "<p>RUTLAND, Vt. (AP) \u2014 A child care provider accused of sedating an infant with an antihistamine was convicted of manslaughter, and faces up to 25 years in prison when she's sentenced.</p><p>A jury on Friday convicted of Stacey Vaillancourt of manslaughter and child cruelty in the 2019 death of Harper Rose Briar in Vaillancourt's home in Rutland.</p><p>The 6-month-old was found unresponsive while in Vaillancourt's care, and an autopsy determined she had high concentrations of diphenhydramine, the sedating ingredient in some over-the-counter antihistamines including the brand Benadryl. The drug is not recommended for infants without a doctor's order, and there was no such order for Harper.</p><p>Vaillancourt\u2019s defense attorney said there was no evidence to prove Vaillancourt sedated the infant, but the prosecutor told jurors that no one else could have done it.</p><p>Vaillancourt, who denied giving the infant anything that wasn't provided by her parents, was released on an unsecured appearance bond. Her attorney didn't immediately return a message seeking comment on Saturday.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/vermont-infant-death-manslaughter-antihistamine-a67b0b0eee93dac15ee5b0fb728f5d75",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 3,
+            "reason": "The document discusses a legal case involving a day care provider convicted of manslaughter for causing an infant's death by administering an antihistamine. While the document touches on the misuse of a medication, which is a health-related issue, the primary focus is on the legal proceedings and the criminal aspect of the case rather than health information or health-related advice. Therefore, it is somewhat relevant to the topic of health but not highly focused on it."
+        }
+    }
+}

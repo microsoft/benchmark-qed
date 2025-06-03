@@ -1,0 +1,299 @@
+﻿{
+    "altids": {
+        "itemid": "4ad233c320916814baeae06783f9b789",
+        "etag": "4ad233c320916814baeae06783f9b789_0a8aza0c0",
+        "friendlykey": "89974552072",
+        "referenceid": "US--Congress-Parkinson's-Wexton"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2023-12-14T20:57:26Z",
+    "firstcreated": "2023-12-14T20:57:25Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "ednote": "Eds: UPDATES: With AP Photos.",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "US--Congress-Parkinson's-Wexton",
+    "headline": "Virginia lawmaker with Parkinson's helps lead the charge in creating panel to fight the illness",
+    "headline_extended": "Members of the House have introduced a bill, likely the last of the year, they hope may one day stomp out Parkinson's disease",
+    "slugline": "AP-US--Congress-Parkinson's-Wexton",
+    "description_summary": "Members of the House have introduced a bill, likely the last of the year, they hope may one day stomp out Parkinson's disease. The bill is named for Virginia Rep. Jennifer Wexton, who has the disease, and Florida Rep. Gus Bilirakis' brother, who passed away in May after a long battle with it. Wexton helped lead the charge for passing the bill. She suffers from a particularly aggressive form of the illness, so much so that a colleague read her speech for her. Her statement says that \u201cif there\u2019s one thing we can all agree on is that we can and must do better to fight these terrible diseases.\u201d",
+    "bylines": [
+        {
+            "by": "By KEVIN FREKING",
+            "title": "Associated Press"
+        }
+    ],
+    "located": "WASHINGTON",
+    "datelinelocation": {
+        "city": "Washington",
+        "countryareacode": "DC",
+        "countryareaname": "District of Columbia",
+        "countrycode": "USA",
+        "countryname": "United States",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                -77.03637,
+                38.89511
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2023 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "Parkinsons disease congress bill Wexton"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "person": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "1b1130c957be4beba8d32df5752b2c02",
+            "name": "Gus Bilirakis",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "POLITICIAN",
+                "PERSON"
+            ],
+            "associatedstates": [
+                {
+                    "code": "cb06ab1082af100482f8df092526b43e",
+                    "name": "Florida"
+                }
+            ],
+            "relevance": 80
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "839afc68f4b94c68ae550b9d2379466f",
+            "name": "Paul Tonko",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "POLITICIAN",
+                "PERSON"
+            ],
+            "associatedstates": [
+                {
+                    "code": "b58f18a082c6100487fbdf092526b43e",
+                    "name": "New York"
+                }
+            ],
+            "relevance": 49
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "w",
+            "name": "w"
+        },
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "76ea76507f68100489cadf092526b43e",
+            "name": "Parkinson's disease",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 77
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 94
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Editorial",
+            "editorial_subject": "Health",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "abfca78268874726966cdad8c35c4ae3",
+            "name": "Washington news",
+            "creator": "Editorial",
+            "editorial_subject": "Washington news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cb06ab1082af100482f8df092526b43e",
+            "name": "Florida",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -82.5001,
+                    28.75054
+                ]
+            },
+            "relevance": 39,
+            "parentnames": [
+                "United States"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "eaed376082c71004892cdf092526b43e",
+            "name": "Virginia",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -77.44675,
+                    37.54812
+                ]
+            },
+            "relevance": 56,
+            "parentnames": [
+                "United States"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "661850e07d5b100481f5c076b8e3055c",
+            "name": "Latin America and Caribbean",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "eaed376082c71004892cdf092526b43e",
+            "name": "Virginia",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "cb06ab1082af100482f8df092526b43e",
+            "name": "Florida",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "associations": {
+        "1": {
+            "altids": {
+                "itemid": "b7eafc9fdf2a428c863db61261eed683"
+            },
+            "type": "picture"
+        }
+    },
+    "body_nitf": "<p>WASHINGTON (AP) \u2014 With a nod to a colleague struggling with an aggressive form of Parkinson's disease, members of the House saved, for likely the last vote of the year, a bill they hope may one day help stomp out the debilitating illness.</p><p>The bill is named for Democratic Virginia Rep. Jennifer Wexton, who has <a href=\"https://apnews.com/article/jennifer-wexton-parkinsons-disease-virginia-democrat-823e9ee7ca2691a8ed1ab624a6a463ab\">the disease</a>, and Republican Florida Rep. Gus Bilirakis' brother, who passed away in May after a long battle with it.</p><p>The legislation sets up an advisory council of public health experts and others in the private sector who will provide an annual report evaluating efforts to prevent, treat and cure Parkinson's. Bilirakis and Rep. Paul Tonko, D-N.Y., are the lead sponsors of the legislation.</p><p>Thursday\u2019s vote was hardly controversial, passing by a vote of 407-9, but it was emotional.</p><p>Wexton, now serving her third term representing a Northern Virginia district, has physically deteriorated so rapidly this year that colleague Jennifer McClellan, D-Va., read <a href=\"https://www.c-span.org/video/?532392-2/house-session-part-1\">Wexton's floor speech</a> for her the day before the vote. It was a haunting self-portrayal of what she has endured.</p><p>She noted as recently as last year, she got up every morning to go to the gym. And just this year, she could stride confidently through the House chamber. She began using walking sticks in the summer and now relies heavily on a walker.</p><p>\u201cMy husband and I were supposed to be getting to the good part and were looking forward to enjoying our empty nest as our younger son went off to join his brother in college,\" Wexton said in her statement. \"Instead he will be a caregiver.\"</p><p>\u201cInstead of scuba diving together in the morning and sitting under a palm tree playing Scrabble in the afternoon, we will not enjoy a leisurely retirement a decade plus from now,\" she added.</p><p>Nearly 1 million people in the U.S. are living with Parkinson\u2019s disease. Wexton said she knows her family is not alone and called the legislation a historic step toward a world where \u201cno family has to endure what ours has.\u201d</p><p>\u201cIf there's one thing we can all agree on is that we can and must do better to fight these terrible diseases,\" she said.</p><p>Wexton, 55, has <a href=\"https://apnews.com/article/wexton-congress-parkinsons-election-adb9db9dd6c8b92e17a9599924ae4170\">announced</a> she won't be seeking reelection next year. She said she had to come to terms with having to give up what she loves doing, but she would continue the fight on behalf of the broader Parkinson's community for as long as she is able.</p><p>McClellan said she served with Wexton in the Virginia General Assembly before being elected to the House. She told colleagues of how she saw Wexton turn other's pain into progress.</p><p>\u201cAnd now I am honored to serve with her as she does that with her own pain \u2014 turns it into progress, to fight for those who cannot fight for themselves,\" McClellan said.</p><p>Several lawmakers speaking for the bill recounted in emotional terms how family members battled the neurological disease. Rep. Russ Fulcher, R-Idaho, said his father, grandfather and brother fell prey to the disease. He addressed Wexton personally.</p><p>\u201cThis bill would not be possible without Representative Wexton, so I'll close by saying to you, my friend and colleague, there is hope,\" Fulcher said. \u201cThis disease may touch you physically, but it can never touch your soul.\u201d</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/parkinsons-disease-congress-bill-wexton-4ad233c320916814baeae06783f9b789",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 5,
+            "reason": "The document is highly relevant to the topic of Health. It discusses a legislative effort to combat Parkinson's disease, a significant health issue. The article details the creation of an advisory council to evaluate efforts to prevent, treat, and cure Parkinson's, which directly pertains to public health initiatives. Additionally, it includes personal stories of individuals affected by the disease, highlighting the human impact and the importance of health-related legislation."
+        }
+    }
+}

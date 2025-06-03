@@ -1,0 +1,226 @@
+﻿{
+    "altids": {
+        "itemid": "b43b400d3d4dd9e1d6259df06690b1f8",
+        "etag": "b43b400d3d4dd9e1d6259df06690b1f8_0a6aza0c0",
+        "friendlykey": "21203911594",
+        "referenceid": "US--Inmate Dies-Lawsuit-Minnesota"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2024-01-23T23:49:41Z",
+    "firstcreated": "2024-01-23T23:49:40Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "US--Inmate Dies-Lawsuit-Minnesota",
+    "headline": "Lawsuit says Minnesota jail workers ignored pleas of man before he died of perforated bowel",
+    "headline_extended": "A lawsuit alleges that Minnesota jail workers ignored the pleas of a 41-year-old man who died of a perforated bowel after spending days begging to be taken to a hospital, with pain so severe that he was forced to crawl on the floor of his cell",
+    "slugline": "AP-US--Inmate Dies-Lawsuit-Minnesota",
+    "description_summary": "A lawsuit alleges that Minnesota jail workers ignored the pleas of a 41-year-old man who died of a perforated bowel after spending days begging to be taken to a hospital, with pain so severe that he was forced to crawl on the floor of his cell. The suit filed Tuesday against Hennepin County and Hennepin Healthcare in the U.S. District Court in Minneapolis said Lucas Bellamy was treated like \u201che was subhuman, like he was an animal.\" The Hennepin County Sheriff\u2019s Office, which operates the jail, and Hennepin Healthcare declined to comment on the litigation.",
+    "located": "MINNEAPOLIS",
+    "datelinelocation": {
+        "city": "Minneapolis",
+        "countryareacode": "MN",
+        "countryareaname": "Minnesota",
+        "countrycode": "USA",
+        "countryname": "United States",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                -93.26384,
+                44.97997
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "Minnesota jail inmate death Lucas Bellamy"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "a",
+            "name": "a"
+        },
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "d8e79a587f00100483bff571351eed07",
+            "name": "Pain management",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "5898d3303b1e4dfc9e4ae39ed34f3378",
+            "name": "Lawsuits",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 74
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "aebb360082c4100486bedf092526b43e",
+            "name": "Minneapolis",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "9f12355082c4100486addf092526b43e"
+            ],
+            "locationtype": {
+                "code": "9d26a20b35f0484a891740f8189d4c7b",
+                "name": "City"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -93.26384,
+                    44.97997
+                ]
+            },
+            "relevance": 88,
+            "parentnames": [
+                "Minnesota"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "9f12355082c4100486addf092526b43e",
+            "name": "Minnesota",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -94.25055,
+                    46.25024
+                ]
+            },
+            "relevance": 61,
+            "parentnames": [
+                "United States"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "9f12355082c4100486addf092526b43e",
+            "name": "Minnesota",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661850e07d5b100481f5c076b8e3055c",
+            "name": "Latin America and Caribbean",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "body_nitf": "<p>MINNEAPOLIS (AP) \u2014 Minnesota jail workers ignored the pleas of a 41-year-old man who died of a perforated bowel after spending days begging to be taken to a hospital, with pain so severe that he was forced to crawl on the floor of his cell, according to a lawsuit filed Tuesday.</p><p>Lucas Bellamy was treated like \u201che was subhuman, like he was an animal,\u201d according to the suit filed against Hennepin County and Hennepin Healthcare in the U.S. District Court in Minneapolis.</p><p>The Hennepin County Sheriff\u2019s Office, which operates the jail, offered condolences to the family in a written statement but declined to comment on the lawsuit because it was just filed and is ongoing. Hennepin Healthcare said in a statement that it doesn't comment on pending litigation.</p><p>It all started on July 18, 2022, when Lucas Bellamy was arrested on charges of fleeing police in a suspected stolen vehicle and possession of brass knuckles, The Minneapolis Star Tribune <a href=\"https://www.startribune.com/louis-bellamy-penumbra-theatres-founder-sues-hcmc-and-the-county-over-his-sons-death-in-jail/600337839/?utm_source=newsletter&utm_medium=email&utm_campaign=talkers&refresh=true\">reports</a>.</p><p>During jail intake, he told staff that he had ingested a bag of drugs and was taken to Hennepin County Medical Center, known as HCMC, the suit said. He was monitored and returned to jail with instructions to return to the emergency department if he exhibited any concerning symptoms.</p><p>The Bellamy family\u2019s attorney, Jeff Storms, showed the news media video of Lucas\u2019 interactions with nurses and jail guards. The last clip revealed him just behind his cell door, the lower half of his body slowly moving about until he went still and died.</p><p>His father, Louis Bellamy, who is a director and founded the Penumbra Theatre in St. Paul, said in a briefing that he has seen tragedy on the stage. But he noted he \u201ccould not have built anything more callous, more disrespectful to \u2026 humanity, human existence than what I witnessed on that tape.\u201d</p><p>The lawsuit alleges that Bellamy\u2019s death was among 15 at the jail since 2015, including eight within the past two years. It alleges that checks on inmate well-being have fallen short of standards, and such was the case with Bellamy.</p><p>Storms, the attorney, said he is calling on Minnesota Attorney General Keith Ellison to investigate.</p><p>\u201cLucas could have been saved with proper treatment,\u201d the suit said. \u201cInstead, he endured a real-life nightmare and died.\u201d</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/minnesota-jail-inmate-death-lucas-bellamy-b43b400d3d4dd9e1d6259df06690b1f8",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 3,
+            "reason": "The document primarily focuses on a lawsuit regarding the death of a man in a Minnesota jail due to a perforated bowel. While the document does touch on health-related issues, such as the man's medical condition and the alleged neglect of his health needs by jail staff, the main focus is on the legal and human rights aspects of the case rather than health itself. Therefore, it is somewhat relevant to the topic of health but not highly focused on it."
+        }
+    }
+}

@@ -1,0 +1,273 @@
+﻿{
+    "altids": {
+        "itemid": "6c0067cbd3ee1ab3dec2017fadb2946b",
+        "etag": "6c0067cbd3ee1ab3dec2017fadb2946b_0a10aza0c0",
+        "friendlykey": "580313574295",
+        "referenceid": "US--Oregon-Medication Tampering"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2024-01-04T02:32:00Z",
+    "firstcreated": "2024-01-04T02:31:59Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "US--Oregon-Medication Tampering",
+    "headline": "Oregon police confirm investigation into medication theft amid report hospital patients died",
+    "headline_extended": "Oregon police and medical officials have confirmed that they are investigating the theft of medications prescribed to patients at a hospital in the southern part of the state",
+    "slugline": "BC-US--Oregon-Medication Tampering",
+    "description_summary": "Oregon police and medical officials have confirmed that they are investigating the theft of medications prescribed to patients at a hospital in the southern part of the state. That follows a news report that two died and others were sickened after a nurse replaced fentanyl intravenous drips with tap water. The Medford Police Department said Wednesday that officials at Asante Rogue Regional Medical Center reported last month that they believed a former employee had stolen medication and \u201cthere was concern that this behavior resulted in adverse patient care.\" The Oregon Health Authority said it is also investigating reports of tampering that may have caused infections which severely injured or killed several patients.",
+    "bylines": [
+        {
+            "by": "By CLAIRE RUSH",
+            "title": "The Associated Press"
+        }
+    ],
+    "located": "PORTLAND, Ore.",
+    "datelinelocation": {
+        "city": "Portland",
+        "countryareacode": "OR",
+        "countryareaname": "Oregon",
+        "countrycode": "USA",
+        "countryname": "United States",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                -122.67621,
+                45.52345
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "fentanyl hospital tampering medication"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "a",
+            "name": "a"
+        },
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "fb629770cf154f91964e1789d2dd836e",
+            "name": "Opioids",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 52
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 83
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e237be707de410048fffdf092526b43e",
+            "name": "Medication",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 42
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "d8e79a587f00100483bff571351eed07",
+            "name": "Pain management",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 52
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Editorial",
+            "editorial_subject": "Health",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "20a372bdea6b41ada698e99a929af656",
+            "name": "Medford",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "fe016fe882c61004886adf092526b43e"
+            ],
+            "locationtype": {
+                "code": "9d26a20b35f0484a891740f8189d4c7b",
+                "name": "City"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -122.87559,
+                    42.32652
+                ]
+            },
+            "relevance": 83,
+            "parentnames": [
+                "Oregon"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "fe016fe882c61004886adf092526b43e",
+            "name": "Oregon",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -120.50139,
+                    44.00013
+                ]
+            },
+            "relevance": 99,
+            "parentnames": [
+                "United States"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "661850e07d5b100481f5c076b8e3055c",
+            "name": "Latin America and Caribbean",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "fe016fe882c61004886adf092526b43e",
+            "name": "Oregon",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "1885b7f082b01004835edf092526b43e",
+            "name": "Idaho",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "08a0a00882c810048942df092526b43e",
+            "name": "Washington",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "body_nitf": "<p>PORTLAND, Ore. (AP) \u2014 Authorities are investigating the theft of medication prescribed to patients at a southern Oregon hospital, police and state medical officials confirmed Wednesday, following a local news report that two people died and others were sickened after a nurse replaced fentanyl intravenous drips with tap water.</p><p>Officials at Asante Rogue Regional Medical Center in Medford reported to police early last month that they believed a former employee had stolen medication, Medford Police Lt. Geoff Kirkpatrick said in a statement.</p><p>\u201cThere was concern that this behavior resulted in adverse patient care, though the extent of the impact on those patients is yet to be determined,\u201d the statement said.</p><p>In a phone interview, Kirkpatrick declined to confirm whether deaths resulted from the medication theft or tampering, saying, \u201cWe\u2019re investigating whether or not that behavior led to adverse patient care, which could be death, could be all sorts of other forms or things. ... We don't know that that resulted in deaths.\u201d</p><p>The police statement said the department received numerous calls from individuals asking if they or a family member might have been affected. Asante told police it had identified any patients who were and has notified or is notifying them or their families, the department said.</p><p>Neither the hospital nor police would provide further information, and there were no indications an arrest had been made.</p><p>\u201cWe were distressed to learn of this issue,\" Asante said in a statement. \"We reported it to law enforcement and are working closely with them.\u201d</p><p>The Oregon Health Authority said Wednesday in a statement that it was aware of reports of an Asante nurse \u201calleged to have tampered with pharmaceutical fentanyl used to treat severe pain and introduced tap water in patients' intravenous lines.\u201d It also confirmed it was investigating \u201creports that the incidents led to health care-associated infections that severely injured, and may have caused the deaths of, several patients.\u201d</p><p>The Rogue Valley Times <a href=\"https://www.rv-times.com/localstate/updated-police-investigate-patient-death-at-asante-rogue-regional-medical-center/article_4dd127b4-a7fe-11ee-85c3-1b4df3bd25d2.html\">reported this week</a> that the families of two patients \u2014 36-year-old Samuel Allison, who died in November 2022, and 74-year-old Barry Samsten, who died in July \u2014 said hospital officials notified them that the deaths were due to infections resulting from their pain medication being replaced with non-sterile tap water.</p><p>Relatives of Allison and Samsten did not immediately respond to interview requests from The Associated Press.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/fentanyl-hospital-tampering-medication-6c0067cbd3ee1ab3dec2017fadb2946b",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 5,
+            "reason": "The document discusses a serious health-related incident involving the theft and tampering of medication at a hospital, which led to adverse patient outcomes, including potential deaths. This directly pertains to health as it involves patient safety, medication integrity, and healthcare-associated infections. The investigation by police and health authorities further underscores the health implications of the incident."
+        }
+    }
+}

@@ -1,0 +1,247 @@
+﻿{
+    "altids": {
+        "itemid": "29fb11325db1d4fcbd154024a2cdd837",
+        "etag": "29fb11325db1d4fcbd154024a2cdd837_0a12aza0c0",
+        "friendlykey": "407144053252",
+        "referenceid": "Editorial Rdp"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Opinion",
+    "language": "en",
+    "versioncreated": "2024-03-15T11:10:37Z",
+    "firstcreated": "2024-03-14T01:39:10Z",
+    "editorialrole": "FullStory",
+    "fixture": {
+        "code": "21ea4067bb274c3b805353fb2b99ba70",
+        "name": "Editorial Roundup"
+    },
+    "pubstatus": "usable",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "Editorial Rdp",
+    "headline": "Editorial Roundup: New England",
+    "slugline": "AP--Editorial Rdp",
+    "bylines": [
+        {
+            "by": "By The Associated Press"
+        }
+    ],
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "-Editorial Rdp"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 64
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "15e7f570660c43e19222e1257a4e23fd",
+            "name": "Privacy",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86aad5207dac100488ecba7fa5283c3e",
+            "name": "Politics",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 82
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86aee4307dac10048901ba7fa5283c3e",
+            "name": "Elections",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 57
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "organisation": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "de1f83b8857310048a4dff2260dd383e",
+            "name": "United States House of Representatives",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 38
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "8d2caa7082b3100484b8df092526b43e",
+            "name": "Maine",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -69.24977,
+                    45.50032
+                ]
+            },
+            "relevance": 77,
+            "parentnames": [
+                "United States"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "bed6942882b310048501df092526b43e",
+            "name": "Massachusetts",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -71.10832,
+                    42.36565
+                ]
+            },
+            "relevance": 45,
+            "parentnames": [
+                "United States"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "d2f8d8a882c710048915df092526b43e",
+            "name": "Vermont",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "1bf4bc0882c71004889cdf092526b43e",
+            "name": "Rhode Island",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "9531546082c6100487b5df092526b43e",
+            "name": "New Hampshire",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "bed6942882b310048501df092526b43e",
+            "name": "Massachusetts",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "8d2caa7082b3100484b8df092526b43e",
+            "name": "Maine",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "a42dc0a082af100482a7df092526b43e",
+            "name": "Connecticut",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "body_nitf": "<p>Rutland Herald. March 12, 2024.</p><p>Editorial: Dial into civics</p><p>A week ago, voters across Vermont sent some clear messages to elected officials.</p><p>Mostly, it came in the form of rejecting school budgets, but a few municipal budgets also failed at the polls. In addition, some elections will send communities and school districts on different courses.</p><p>That is what makes the democratic process so great.</p><p>What is important now is that voters pay attention to the \u201cwhat\u2019s next?\u201d In communities and school districts where budgets were voted down, it will be important to be paying attention to what the revised proposed budgets will look like. The window for the process will be a short one, in order to get warnings posted, ballots printed and to beat the June 30 end of the fiscal year.</p><p>This year will be a crash course in civics. While politics \u2014 and the lead-up to elections \u2014 can induce indigestion and anxiety at times, that, too, is part of the process. It comes down to having all the information you need before you head to the polls.</p><p>Town Meeting Day on March 5 was the first opportunity in 2024. (It doubled as the presidential primary for Vermont.) In a matter of weeks, many communities will be heading back to the polls to have their say on the next round of budgets. Because this is an election year for statewide office holders, our representative to the House of Representatives, and lawmakers, there will be a statewide primary in early August. Once that slate of candidates is set, we press on to a November General Election, when we will also be choosing the President of the United States.</p><p>Choosing the president is its own journey in civics. Invariably, as has been the case in the last several elections, we are likely to see challenges, recounts, intervention, and even obligations of the U.S. Supreme Court or the U.S. House of Representatives.</p><p>That is the reason civics is so important. It is about understanding the process as set out constitutionally.</p><p>Consider that the 12th Amendment to the Constitution requires that presidential and vice presidential candidates gain \u201ca majority of the whole number of Electors appointed\u201d in order to win election. What would happen if no candidate won a majority (270) of electoral votes? The 12th Amendment provides that the U.S. House of Representatives would elect the president, and the U.S. Senate would elect the vice president, in a procedure known as \u201ccontingent election.\u201d It has been implemented twice in the nation\u2019s history under the 12th Amendment: first, to elect the president in 1825, and second, the vice president in 1837.</p><p>Civics plays a crucial role in our American education. Or it should.</p><p>That is why we are tipping our hat to Secretary of State Sarah Copeland Hanzas, who is leading a celebration of Civic Learning Week, March 11-15. (As you may note from yesterday\u2019s editorial, it is also Sunshine Week, a nonpartisan collaboration that shines a light on the importance of public records and open government.)</p><p>Copeland Hanzas is joining a nationwide effort that brings together students, educators, policymakers, and leaders in the public and private sectors to highlight and promote the movement for civic education in communities nationwide.</p><p>In a news release on the civics push here in Vermont, she notes, \u201cWhile civic engagement is so much more than voting, the focus on this year\u2019s presidential primaries and election provides an unparalleled opportunity to shine a light on the importance of civic education and how it can be a unifying force in 2024 and beyond.\u201d</p><p>\u201cCivics is more than dry facts about the three branches of government. Civics is also about being able to affect change, solve problems and make life better for all of us,\u201d said Copeland Hanzas, who served as a lawmaker. \u201cIndividuals can only do so much on their own. Working together through civic participation allows us to accomplish more than any one person can do themselves.\u201d</p><p>Copeland Hanzas has made civics education a tenet of her work since being elected to the post in 2022. She re-started the office\u2019s civics program and created an Education and Civic Engagement Coordinator position in April 2023. Since then, the office has convened a Teacher Advisory Group to provide feedback and help develop K-12 civic education materials, partnered with the YMCA to administer a Youth Civic Health Survey at schools across the state.</p><p>Because getting kids interested and understanding civics early is critical.</p><p>The Center for Information & Research on Civic Learning and Engagement at Tufts University points out that \u201cAmong students who strongly agreed that they had high school experiences in which they felt their voices and opinions mattered, 81% said they are extremely likely to vote in the 2024 election. That\u2019s nearly 25 points higher than the 57% of all youth in our survey who considered themselves extremely likely to vote, and almost double the 44% of youth who strongly disagreed they had student voice experiences and said they were likely to vote.\u201d</p><p>Students who strongly recalled student voice experiences in high school also had a strong \u201ccivic engagement score,\u201d measured by their responses on whether they\u2019ve taken civic actions like volunteering, attending a protest, or running for office, according to CIRCLE.</p><p>Notably, these positive relationships between having student voice experiences in high school, likelihood to vote, and civic action were observed across all subgroups of youth, and remained strong even after controlling for race/ethnicity, gender, college experience and age, CIRCLE stated.</p><p>Those are the kinds of results we are looking for.</p><p>Go to <a href=\"http://sos.vermont.gov/secretary-of-state-services/civics\">sos.vermont.gov/secretary-of-state-services/civics</a> to find out more about the Vermont Secretary of State\u2019s Civics Program.</p><p>___</p><p>Barre-Montpelier Times Argus. March 12, 2024.</p><p>Editorial: Sunshine Week</p><p>It\u2019s Sunshine Week.</p><p>While The Times Argus and Rutland Herald staffs certainly appreciate this weekend\u2019s return of daylight saving time (not as much the snow), that\u2019s not the type of sunshine we are celebrating from March 10-16.</p><p>Instead, we are honoring transparency and democracy.</p><p>Sunshine Week is a nonpartisan collaboration that \u201cshines a light on the importance of public records and open government,\u201d according to <a href=\"http://sunshineweek.org/\">sunshineweek.org</a>. After the Florida Society of Newspaper Editors started Sunshine Sunday in 2002, it grew into a national, weeklong awareness campaign that brings together journalists, government officials, educators, citizens and many others dedicated to democracy.</p><p>It\u2019s timed to correspond with the March 16 birthday of fourth U.S. president and \u201cFather of the Constitution\u201d James Madison, known for his staunch defense of open government.</p><p>Just like the return of daylight saving time brings more light into our lives, Sunshine Week champions federal and state sunshine laws and the Freedom of Information Act, which help keep the government from working under the cover of darkness where corruption can breed.</p><p>Journalists and local newspapers are at the forefront of Sunshine Week and the frontlines of Freedom of Information. And Sample News Group journalists and newspapers are committed to keeping readers informed and elected officials accountable.</p><p>What are sunshine laws? Sunshine laws are intended to promote government accountability. You may not even realize how these laws can be found in your everyday life.</p><p>These guidelines govern those who govern you, providing the rules that public agencies such as your local borough council or school board \u2014 up through higher levels of government \u2014 must follow when it comes to open meetings.</p><p>When you read a public notice about an upcoming meeting \u2014 such as a hearing to potentially close a school \u2014 that\u2019s part of the sunshine law.</p><p>Here\u2019s another: The Freedom of Information Act governs the public\u2019s right to request information from federal agencies. These open records are a way for citizens to stay informed and hold elected officials accountable. There are nine exemptions to this law, for reasons such as national security, privacy concerns and trade secrets.</p><p>To learn more about FOIA, including what applies and how to make a request from a federal agency, visit <a href=\"http://www.foia.gov/faq.html\">www.foia.gov/faq.html</a>.</p><p>Just as the Sunshine Week tagline says, \u201cyou have a right to know\u201d \u2014 how the government is spending your money, how and why decisions are being made, and that your elected officials are acting in your best interest.</p><p>According to the Medill School of Journalism, which conducts periodic State of Local News reports, the closure of a newspaper affects the community in a variety of negative ways.</p><p>\u201cThe loss of local journalism has been accompanied by the malignant spread of misinformation and disinformation, political polarization, eroding trust in media, and a yawning digital and economic divide among citizens,\u201d the 2022 report reads. \u201cIn communities without a credible source of local news, voter participation declines, corruption in both government and business increases, and local residents end up paying more in taxes and at checkout.\u201d</p><p>We hope you take the time to celebrate your local newspaper for the role it plays in keeping government in check.</p><p>When nothing is allowed to fester undisturbed in the dark corners, your whole community is a healthier and happier place. And that\u2019s best for everyone.</p><p>For a detailed look at the open records laws in Vermont, visit <a href=\"http://www.vlct.org/topics/vermonts-open-meeting-law\">www.vlct.org/topics/vermonts-open-meeting-law</a>.</p><p>___</p><p>Boston Globe. March 13, 2024.</p><p>Editorial: Mold and mistreatment: The problems at Bridgewater State Hospital call for major changes</p><p>Massachusetts remains an outlier in how it runs mental health services for its prison population.</p><p>Abdul was being held in a locked interview room at Bridgewater State Hospital when he was ordered into seclusion. At the height of what followed, four staffers designated as Therapeutic Safety Technicians \u2014 an Orwellian title if ever there was one \u2014 dragged him into a seclusion room as nine other staffers, including one with a hand-held video camera, looked on. In the seclusion room, the four \u201ctechnicians\u201d held him face down on a four-point restraint bed and pulled down his pants.</p><p>\u201cHe screamed as a nurse administered multiple intramuscular injections into his buttocks,\u201d according to a report slated for release to the public on Wednesady by the Disability Law Center. He was secured to the bed for the next hour. \u201cThroughout the altercation, Abdul often screamed and cried,\u201d the report stated, and he had cuts and abrasions on his hands and arms from his \u201ctherapeutic\u201d encounter.</p><p>DLC monitors Bridgewater \u2014 a men\u2019s prison mental health hospital run by the state Department of Correction but staffed largely by the private prison health care giant Wellpath \u2014 on behalf of the Legislature. Its most recent report is replete with stories like Abdul\u2019s (the report uses pseudonyms for the men) and of the \u201cregular use of violent force by staff in the administration of involuntary medication\u201d of the men housed there. DLC used on-site visits and interviews \u2014 along with what it called the \u201cextremely delayed\u201d release of 10 DOC-produced videos \u2014 to report on the \u201coften dehumanizing experiences\u201d of dealing with the Therapeutic Safety Technicians. Those technicians are Wellpath security staffers who enter cells dressed in riot gear and wielding plexiglass shields.</p><p>Bridgewater is a medium-security facility, one where increasingly its designation as a \u201chospital\u201d for those criminally charged or civilly committed seems more euphemism than reality. Staff have tough, dangerous jobs, and there are sometimes legitimate reasons for use of force \u2014 but the report flags incidents that appear excessive.</p><p>Frank, described as a \u201csmall, older man\u201d had been walking around his room, gesturing and talking to himself, for about 20 minutes. Then he kicked his room door, \u201csat down on his bed and, after five minutes, got under the covers facing the wall in a fetal position,\u201d according to the DLC report. He remained under the covers even after the \u201ctherapeutic\u201d technician team arrived. According to the report, all four technicians held him on his side as a nurse administered the drug cocktail that constitutes chemical restraint. \u201cFrank appears to be crying and in distress, and he lies there coiled up in bed after he is left alone in his room,\u201d the report states.</p><p>As DLC points out, in instances when the \u201cemergency\u201d used to justify chemical restraint has passed \u2014 as in Frank\u2019s case \u2014 medical restraint actually violates the law.</p><p>\u201cWhat can possibly be the justification for men in riot gear to rush in at that point and give him a shot,\u201d said Tatum Pritchard, director of litigation for DLC. \u201cThis wouldn\u2019t happen at a Department of Mental Health facility.\u201d</p><p>Singled out as being particularly problematic for their treatment of those newly arrived at the facility were units Bradford 1 and 2, where many men are sent for court-ordered mental competency evaluations. Now keep in mind these people have not yet been found guilty of anything.</p><p>They included people like Jamie, in his late teens and newly arrived from a county jail. He described himself as being on the autism spectrum and had been living at a group home for individuals with developmental disabilities when he was arrested for assault based on allegations by a staff member. \u201cJamie stood at the door of his locked room, stiff and seemingly nervous, quietly telling DLC that it was so loud here he couldn\u2019t sit still\u201d and that he was largely ignored by staff.</p><p>Those particular units have generally come under criticism for offering little in the way of treatment and far too little out-of-cell time, with many men confined for well beyond 11 waking hours a day. \u201cThis is inconceivable in a supposed psychiatric hospital setting,\u201d the report said.</p><p>In response to an advance copy of the report, Correction Commissioner Carol Mici wrote in a letter to DLC that the department has retained a Qualified Mental Health Professional to oversee \u201cdelivery of day to day services\u201d and \u201cis dedicated to those currently being treated at BSH.\u201d She also noted that Wellpath, which is under contract to run services within the hospital through June 30, 2026, had \u201csubmitted revisions to the Seclusion and Restraint Policy and Involuntary Psychotropic Medication Policy to ensure\u201d they are \u201cas closely aligned as possible\u201d with the law and Department of Mental Health policies.</p><p>That in turns begs a question: Why not just turn the facility over to DMH \u2014 or better yet build a new one better suited to the delivery of mental health care in a secure setting, similar to the forensic unit at the Worcester Recovery Center and Hospital run by DMH?</p><p>\u201cDMH has secure facilities,\u201d Pritchard said. \u201cThey can and do manage pretty much the same populations as Bridgewater. Keep in mind there\u2019s no DOC hospital for women. They go to a DMH hospital.\u201d</p><p>The Bridgewater facility itself, where some buildings date to 1974, cries out for a replacement in the wake of ongoing documentation by a consultant retained by DLC of \u201cabnormal and unacceptable mold growth\u201d in nearly all of the buildings, including the medical building. (The mold was first reported by the same consultant in 2019.) The consultant also reported \u201cfilthy HVAC system ductwork\u201d in most of the buildings, which continued to spread \u201cblack dust\u201d from dirty basements upward.</p><p>DOC, which will soon be under the leadership of a new commissioner (Mici has announced her retirement), has not been a good steward of the facility or the patients it serves. The idea of turning the care of its population over to DMH isn\u2019t a new one. But it has gathered steam during this legislative session.</p><p>\u201cSuch a legislative change would place Massachusetts in line with the rest of the nation,\u201d according to a recent <a href=\"https://www.mamh.org/assets/files/BSH-History-10-2-23.pdf\">report</a> prepared for the Massachusetts Association for Mental Health. \u201cIn nearly every other US state, the maximum-security forensic hospital is operated by the state mental health agency.\u201d</p><p>Massachusetts, which was <a href=\"https://apps.bostonglobe.com/spotlight/the-desperate-and-the-dead/series/timeline/?p1=Spotlight_MI_Story_Recirc&p1=Article_Inline_Text_Link\">a pioneer</a> in the delivery of mental health services, should be no exception. Today it has a real opportunity to do better by those totally dependent on the state for their care. They must not be forgotten.</p><p>___</p><p>Bangor Daily News. March 12, 2024.</p><p>Editorial: Maine lawmakers should support outdoor recreation, send trail bond to voters</p><p>Maine has a long tradition of outdoor recreation. Hunting, fishing, hiking, paddling, skiing, snowmobiling, biking and other outdoor pursuits are part of the state\u2019s brand.</p><p>Increasingly, these activities draw people to Maine, both to visit and to live.</p><p>These activities are also a vital part of the state\u2019s economy. Outdoor recreation <a href=\"https://drive.google.com/file/d/1JP7rd7aSI1wIavpfM6hAZ5jfI32QeMOB/view?usp=sharing\">contributes</a> $3 billion a year to the state\u2019s economy and supports 41,000 jobs.</p><p>Maine ranks <a href=\"https://www.bea.gov/news/2023/outdoor-recreation-satellite-account-us-and-states-2022#:~:text=At%20the%20state%20level%2C%20value,Columbia%20(state%20table%201).\">fifth in the nation</a> based on the portion of state gross domestic product that comes from outdoor recreation, according to federal government data. Economic benefits from this activity, including total employment and wages, grew faster than the economy as a whole in 2022. That year, employment in outdoor recreation in Maine grew by more than 7 percent.</p><p>This growth doesn\u2019t happen on its own. Recreational opportunities and amenities are needed to draw people and to ensure that they can safely participate in outdoor activities.</p><p>Trails \u2014 for snowmobiling, ATV riding, hiking, cross country skiing, biking and other ventures \u2014 are an essential part of this equation.</p><p>For the first time, Maine lawmakers have the opportunity to show support for a significant state investment in recreational trails.</p><p><a href=\"https://legislature.maine.gov/LawMakerWeb/summary.asp?ID=280087382\">LD 1156</a>, which was held over from last year\u2019s legislative session, proposes a bond for $30 million for trails, for non-motorized and motorized recreation. The funds, which would require matching money, would be administered by the Maine Bureau of Parks and Lands. The funds would be awarded on a competitive basis, with an emphasis on multiple use trails and projects that emphasize accessibility and sustainability. All trails must be open to the public.</p><p>If LD 1156 is passed by the Legislature, voters would then be asked to approve the bond. Nearly every year, voters have approved bonds for road work. Increasingly, recreational trails are also essential infrastructure.</p><p>Maine is home to many noteworthy trails, including the Appalachian Trail, <a href=\"https://sunrisetrail.org/\">Down East Sunrise Trail</a>, <a href=\"https://www.easterntrail.org/eastern-trail-maps/\">Eastern Trail</a> and an extensive <a href=\"https://www.mainesnowmobileassociation.com/the-its-map/\">Interconnected Trail System</a> for snowmobiles. But, communities and other groups from one end of the state to the other would like to maintain and build more trails, and to make existing ones better accessible to people with a full range of abilities.</p><p>Take Skowhegan, for example. The town is investing in outdoor recreation infrastructure and providing free outdoor activities and gear to our local community members. It is building Maine\u2019s first whitewater park and planning for 50 miles of multi-use trails, which would be interconnected with the town\u2019s business district.</p><p>\u201cHaving the opportunity to apply for trail funding via this bond would help Skowhegan continue to realize our vision for becoming an outdoor recreation mecca,\u201d Kristina Cannon, the Executive Director of Main Street Skowhegan, told lawmakers in <a href=\"https://www.mainelegislature.org/legis/bills/getTestimonyDoc.asp?id=173011\">testimony</a> in support of the bond last year.</p><p>Last year, the Bangor Daily News reported on the <a href=\"https://www.bangordailynews.com/2023/01/30/central-maine/skowhegan-investment-surge-joam40zk0w/\">$650 million in investment</a> that is anticipated over the next few years in Skowhegan.</p><p>\u201cThis is because people know that outdoor recreation infrastructure will attract new talent, businesses, residents, and tourists \u2014 all of whom will support their investments,\u201d Cannon told members of the Legislature\u2019s Appropriations Committee.</p><p>The trail bond bill, which has bipartisan sponsorship, is <a href=\"https://drive.google.com/file/d/1qcCxcZ9M8hBJgndIkxhwrDAqOpLwfdcZ/view?usp=sharing\">supported by</a> more than 500 groups, from town to outdoor retailers to diverse sporting groups. A <a href=\"https://docs.google.com/presentation/d/1UP0NTcZAhwSzRmsKgnIGlZuXmR9X2Cqi/edit?usp=sharing&ouid=104640208764872835202&rtpof=true&sd=true\">2019 poll</a> found that nearly three-quarters of Mainers supported a bond to build and expand recreational trails in the state.</p><p>With so much agreement and support, lawmakers should pass LD 1156. Two-thirds support is needed to put the bond on the ballot, where Maine people will ultimately decide whether to support these investments in trails and outdoor recreation.</p><p>END</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/29fb11325db1d4fcbd154024a2cdd837",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 3,
+            "reason": "The document contains multiple editorials from different newspapers in New England, covering a variety of topics. Only one of the editorials, from the Boston Globe, discusses health-related issues, specifically the mental health services at Bridgewater State Hospital. This section is highly relevant to the topic of health as it addresses the treatment of mental health patients, the conditions of the facility, and the need for systemic changes. However, the other editorials focus on civics education, transparency in government, and outdoor recreation, which are not related to health. Therefore, while there is some relevant content, it is not the primary focus of the document."
+        }
+    }
+}

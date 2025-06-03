@@ -1,0 +1,236 @@
+﻿{
+    "altids": {
+        "itemid": "0b264ffa98f3ecbbe83fee0f0e20a2be",
+        "etag": "0b264ffa98f3ecbbe83fee0f0e20a2be_1a8aza0c0",
+        "friendlykey": "965465525010",
+        "referenceid": "US--Body Found-Reservoir"
+    },
+    "version": 1,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2024-03-20T00:29:12Z",
+    "firstcreated": "2024-03-19T23:33:05Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "ednote": "Eds: UPDATES: Updates with Rochester schools closing Wednesday.",
+    "editorialtypes": [
+        "Lead"
+    ],
+    "signals": [
+        "newscontent"
+    ],
+    "title": "US--Body Found-Reservoir",
+    "headline": "Body found in western New York reservoir leads to boil-water advisory",
+    "headline_extended": "A human body has been found in a western New York reservoir that supplies drinking water to parts of Rochester, prompting a boil-water advisory for several neighborhoods",
+    "slugline": "AP-US--Body Found-Reservoir, 1st Ld-Writethru",
+    "description_summary": "A human body has been found in a western New York reservoir that supplies drinking water to parts of Rochester, prompting a boil-water advisory for several neighborhoods. Workers with the city\u2019s Water Bureau discovered the body Tuesday morning in the Highland Park Reservoir. Officials say the reservoir was immediately disconnected from the public water supply, with plans to drain and clean it before resuming its use. The city says testing showed the water was safe, and the boil-water advisory was a precaution. Authorities say police divers removed an adult male's body from the water. The circumstances of the death were not immediately clear. Police are investigating.",
+    "located": "ROCHESTER, N.Y.",
+    "datelinelocation": {
+        "city": "Rochester",
+        "countryareacode": "NY",
+        "countryareaname": "New York",
+        "countrycode": "USA",
+        "countryname": "United States",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                -77.61556,
+                43.15478
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "body found reservoir rochester new york water"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "a",
+            "name": "a"
+        },
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a37eab90831510048fcfdf092526b43e",
+            "name": "Law enforcement",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 46
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Editorial",
+            "editorial_subject": "Health",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "75b2bb208c4810048252a13d9888b73e",
+            "name": "Rochester",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "b58f18a082c6100487fbdf092526b43e"
+            ],
+            "locationtype": {
+                "code": "9d26a20b35f0484a891740f8189d4c7b",
+                "name": "City"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -77.61556,
+                    43.15478
+                ]
+            },
+            "relevance": 85,
+            "parentnames": [
+                "New York"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "b58f18a082c6100487fbdf092526b43e",
+            "name": "New York",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -75.4999,
+                    43.00035
+                ]
+            },
+            "relevance": 65,
+            "parentnames": [
+                "United States"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "b58f18a082c6100487fbdf092526b43e",
+            "name": "New York",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "b836d07082c610048807df092526b43e",
+            "name": "New York City",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661850e07d5b100481f5c076b8e3055c",
+            "name": "Latin America and Caribbean",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "body_nitf": "<p>ROCHESTER, N.Y. (AP) \u2014 A human body was found Tuesday in a western New York reservoir that supplies drinking water to parts of Rochester, prompting city officials to advise residents to boil their water before consuming.</p><p>Workers with the city's Water Bureau discovered the body in the Highland Park Reservoir at around 8 a.m. while doing routine rounds, officials said. The reservoir was immediately disconnected from the public water supply, with plans to drain and clean it.</p><p>Police divers removed the body of an adult male from the water, authorities said. The circumstances of the death were not immediately clear. Police were investigating, and the medical examiner's office was working to identify the person.</p><p>Testing indicated the water was safe, the city said in a notice to residents. The boil water advisory was issued to several neighborhoods as a precaution, officials said, and the reservoir will not be returned to service until after it is drained and cleaned.</p><p>\u201cThis is a very, very sad situation,\u201d Mayor Malik Evans said at a news conference. \u201cBut it compounds that being that this happened near our water supply it's important that we exercise this abundance of caution.\u201d</p><p>Officials with the Rochester City School District ordered all schools to close Wednesday because of the boil-water advisory.</p><p>The city advised residents to bring tap water to a rolling boil, boil for one minute and cool before using. It said boiled or bottled water should be used for drinking, making ice, washing dishes, brushing teeth and preparing food until further notice.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/body-found-reservoir-rochester-new-york-water-0b264ffa98f3ecbbe83fee0f0e20a2be",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 5,
+            "reason": "The document discusses a situation where a body was found in a reservoir that supplies drinking water, leading to a boil-water advisory. This has direct implications for public health, as it involves potential contamination of drinking water and the necessary precautions to ensure safety. The document also mentions the impact on local schools and provides guidelines for residents on how to safely use water during the advisory. These aspects are highly relevant to the topic of health."
+        }
+    }
+}

@@ -1,0 +1,332 @@
+﻿{
+    "altids": {
+        "itemid": "4cc6a2105f4641efe17e10a5b75f78a5",
+        "etag": "4cc6a2105f4641efe17e10a5b75f78a5_1a4aza0c0",
+        "friendlykey": "932651523214",
+        "referenceid": "AF--Zambia-Drought National Disaster"
+    },
+    "version": 1,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2024-02-29T18:17:59Z",
+    "firstcreated": "2024-02-29T18:14:06Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "ednote": "Eds: EDITS: Restores bytitle.",
+    "editorialtypes": [
+        "Lead"
+    ],
+    "signals": [
+        "newscontent"
+    ],
+    "title": "AF--Zambia-Drought National Disaster",
+    "headline": "Fresh from a deadly cholera outbreak, Zambia declares drought a national emergency",
+    "headline_extended": "Zambia\u2019s president Hakainde Hichilema has declared the country\u2019s debilitating drought a national disaster and emergency",
+    "slugline": "AP-AF--Zambia-Drought National Disaster, 1st Ld-Writethru",
+    "description_summary": "Zambia\u2019s president Hakainde Hichilema has declared the country\u2019s debilitating drought a national disaster and emergency. In an address to the nation Thursday, Hakainde Hichilema said 84 of the country\u2019s 116 districts are affected by the prolonged drought. The declaration provides a legal basis to mobilize more resources to fight the humanitarian disaster. The drought has also affected electricity generation, said the president. Other countries in southern Africa are also in a dire situation because El Nino weather patterns have affected rainfall, according to the U.N agency, the World Food Program.",
+    "bylines": [
+        {
+            "by": "By FARAI MUTSAKA",
+            "title": "Associated Press"
+        }
+    ],
+    "located": "HARARE, Zimbabwe",
+    "datelinelocation": {
+        "city": "Harare",
+        "countrycode": "ZWE",
+        "countryname": "Zimbabwe",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                31.05337,
+                -17.82772
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "drought national disaster emergency electricity"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "person": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "b140a3f0c288460394289ea04477def9",
+            "name": "Hakainde Hichilema",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "POLITICIAN",
+                "PERSON"
+            ],
+            "relevance": 74
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "i",
+            "name": "i"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "9cce666bb29344b8ba61f3732d971d32",
+            "name": "Disease outbreaks",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 94
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "3b9797c0833849809300a3e134ad34a5",
+            "name": "Cholera",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 90
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "6c6281d0882f10048fa88bb2970c7204",
+            "name": "Droughts",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 52
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "3b6ef8c07d7010048463ba7fa5283c3e",
+            "name": "Disaster planning and response",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 71
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "44bf7f3091b110048468a55c96277d3e",
+            "name": "Water shortages",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 52
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "5fc806a87df7100483ebdf092526b43e",
+            "name": "Weather",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 52
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86aad5207dac100488ecba7fa5283c3e",
+            "name": "Politics",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 83
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "8783d248894710048286ba0a2b2ca13e",
+            "name": "Climate and environment",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 64
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "bb2d2c5f441a452cb24bb511a2ab5eea",
+            "name": "World news",
+            "creator": "Editorial",
+            "editorial_subject": "World news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "organisation": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "50cf338c0a554131ba7a9981c10baf14",
+            "name": "Zimbabwe government",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 36
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "024b49a11bb4453cb9a55caae900c75c",
+            "name": "World Food Programme",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 46
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "54fa9358892310048056fb7860a2fc03",
+            "name": "United Nations",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 36
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "661ff2007d5b100482bbc076b8e3055c",
+            "name": "Zambia",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661812607d5b100481f1c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "01f56e0e654841eca2e69bf2cbcc0526",
+                "name": "Nation"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    30,
+                    -15
+                ]
+            },
+            "relevance": 79,
+            "parentnames": [
+                "Africa"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "af535e807e3710048934df092526b43e",
+            "name": "Harare",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661ff2007d5b100482bcc076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "9d26a20b35f0484a891740f8189d4c7b",
+                "name": "City"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    31.05389,
+                    -17.82935
+                ]
+            },
+            "relevance": 40,
+            "parentnames": [
+                "Zimbabwe"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "661812607d5b100481f1c076b8e3055c",
+            "name": "Africa",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "associations": {
+        "1": {
+            "altids": {
+                "itemid": "c33aed5a99cf41f18b1caa574bff024f"
+            },
+            "type": "picture"
+        }
+    },
+    "body_nitf": "<p>HARARE, Zimbabwe (AP) \u2014 Zambian President Hakainde Hichilema Thursday declared the country\u2019s debilitating drought a national disaster and emergency, saying it has devastated food production and electricity generation as the nation battles to recover from a recent <a href=\"https://apnews.com/article/zambia-cholera-outbreak-health-climate-6333109a9e996d81e8dc1b9a946da972\">deadly cholera outbreak</a>.</p><p>Like <a href=\"https://apnews.com/article/zimbabwe-hunger-food-aid-el-nino-climate-aa25b4d2ee6405a792d75a0d4d12d505\">some of its neighbors</a>, the southern African country is suffering a severe drought as the <a href=\"https://apnews.com/article/winter-snow-warmer-climate-change-forecast-el-nino-e5c450e1cb51d186d68aaae1b259b311\">El Nino weather pattern worsens</a> harsh weather conditions attributed in part to climate change.</p><p>In an address to the nation, Hichilema said he has instructed security forces to focus more on food production in the largely peaceful country.</p><p>He said 84 of the country\u2019s 116 districts are affected by the prolonged drought and authorities will take food from areas where there is an excess and distribute it to needy areas. In addition, the country plans more food imports and is mobilizing United Nations agencies and local businesses to assist.</p><p>The drought has destroyed about 1 million hectares (2.5 million acres) of the 2.2 million hectares (5.4 million acres) planted with the staple maize crop, he said.</p><p>\u201cThis drought has devastating consequences on many sectors such as agriculture, water availability and energy supply, risking our national food security and the livelihoods of millions of our people. The dry spell is projected to continue even into the month of March, affecting over 1 million of our farming households,\u201d said Hichilema.</p><p>Electricity generation has not been spared, with the country expecting a power deficit of about 430 megawatts \u201cpotentially reaching 520 megawatts by December,\u201d he said, as water levels decline at the country\u2019s major source of hydro power, the Kariba Dam, which it shares with neighbor, Zimbabwe.</p><p>To cope, the country will import electricity and also ration supplies to its approximately 20 million people, he said.</p><p>Zambia was recently hit by one of its worst cholera outbreaks that killed more than 400 people and infected more than 10,000.</p><p>Some Zambians, weary of continued crises, have coined songs labeling the outbreaks of coronavirus and cholera as well as the current drought as a \u201ctriple tragedy,\u201d said Hichilema.</p><p>Although many countries in southern Africa are yet to declare a national disaster, they are also in a dire situation because of the <a href=\"https://apnews.com/article/wildlife-drought-climate-change-zimbabwe-africa-94a63855745dc1bfb5708c42d6b3fe01\">influence of El Nino weather patterns</a>, according to the U.N agency, the World Food Program.</p><p>Parts of Zambia, Zimbabwe and Botswana are experiencing the driest February in the past 40 years, while severe rainfall shortages have been recorded in southern Malawi, eastern Angola and parts of Mozambique, said the WFP in a bulletin this week.</p><p>The United States Agency for International Development, the U.S. government\u2019s foreign aid agency, has estimated through its Famine Early Warning Systems Network that 20 million people in southern Africa will need food relief between January and March.</p><p>Many people in the areas of highest concern such as Zimbabwe, southern Malawi, parts of Mozambique and southern Madagascar will be unable to feed themselves into early 2025 due to El Nino, USAID said.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/drought-national-disaster-emergency-electricity-4cc6a2105f4641efe17e10a5b75f78a5",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 3,
+            "reason": "The document primarily focuses on the drought in Zambia and its impact on food production, electricity generation, and national security. While it does mention a recent cholera outbreak and the broader health implications of the drought, the main emphasis is on the environmental and economic aspects rather than health. The health-related content is secondary to the primary topic of the drought and its consequences."
+        }
+    }
+}

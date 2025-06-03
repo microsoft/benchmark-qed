@@ -1,0 +1,247 @@
+﻿{
+    "altids": {
+        "itemid": "80fbefd07042f1a74c264d09c26447cb",
+        "etag": "80fbefd07042f1a74c264d09c26447cb_0a2aza0c0",
+        "friendlykey": "976138468232",
+        "referenceid": "TN--Editorial Rdp"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Opinion",
+    "language": "en",
+    "versioncreated": "2024-02-08T12:10:07Z",
+    "firstcreated": "2024-02-07T19:34:55Z",
+    "editorialrole": "FullStory",
+    "fixture": {
+        "code": "21ea4067bb274c3b805353fb2b99ba70",
+        "name": "Editorial Roundup"
+    },
+    "pubstatus": "usable",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "TN--Editorial Rdp",
+    "headline": "Editorial Roundup: Tennessee",
+    "slugline": "AP-TN--Editorial Rdp",
+    "bylines": [
+        {
+            "by": "By The Associated Press"
+        }
+    ],
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "Editorial Rdp"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "c7544ceb29c7442c842ec6be185c620a",
+            "name": "Smoking",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 77
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86aad5207dac100488ecba7fa5283c3e",
+            "name": "Politics",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 70
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "39a5551883591004893adf092526b43e",
+            "name": "Health care costs",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 32
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "46061d008b2f10048416bd945080b03e",
+            "name": "Hospitality and leisure industry",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 32
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "74bbae4a3d914703acc9581f89305a62",
+            "name": "Black people",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 32
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "62532b5882c7100488cedf092526b43e",
+            "name": "Tennessee",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -86.25027,
+                    35.75035
+                ]
+            },
+            "relevance": 88,
+            "parentnames": [
+                "United States"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "b7ca58c2d28843bb99e8470b02d4f9e7",
+            "name": "Johnson City",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "62532b5882c7100488cedf092526b43e"
+            ],
+            "locationtype": {
+                "code": "9d26a20b35f0484a891740f8189d4c7b",
+                "name": "City"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -82.35347,
+                    36.31344
+                ]
+            },
+            "relevance": 66,
+            "parentnames": [
+                "Tennessee"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "68e7964882c7100488dfdf092526b43e",
+            "name": "Memphis",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "62532b5882c7100488cedf092526b43e"
+            ],
+            "locationtype": {
+                "code": "9d26a20b35f0484a891740f8189d4c7b",
+                "name": "City"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -90.04898,
+                    35.14953
+                ]
+            },
+            "relevance": 57,
+            "parentnames": [
+                "Tennessee"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "62532b5882c7100488cedf092526b43e",
+            "name": "Tennessee",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "body_nitf": "<p>Kingsport Times News. February 3, 2024.</p><p>Editorial: Tennessee is failing to curb smoking</p><p>In 1998, 52 state and territory attorneys general signed a master settlement agreement (MSA) with the four largest tobacco companies to settle dozens of state lawsuits brought to recover billions of dollars in health care costs associated with treating smoking-related illnesses.</p><p>Eventually, more than 45 tobacco companies settled. Under the terms of the settlement, Tennessee and other states receive annual payments that help defray the cost of health care for smoking-related illnesses.</p><p>Although the MSA does not require states to spend settlement payments on tobacco control programs, many anti-smoking and health care observers are concerned that states are not using enough of the MSA payments to enhance their tobacco prevention and control efforts.</p><p>Among them is Tennessee.</p><p>As we recently reported, the state just received an overall failing grade from the American Lung Association for its tobacco control policies.</p><p>In its 22nd annual \u201cState of Tobacco Control\u201d report, the association gives Tennessee an \u201cF\u201d for the state government\u2019s level of funding for tobacco prevention and cessation programs, as well as for its efforts to provide access to smoking cessation programs, policies to discourage the sale of flavored tobacco products, and for the amount of taxes the state levies on the sale of tobacco products.</p><p>The report also gives Tennessee a grade of \u201cD\u201d for promoting smoke-free spaces.</p><p>While state law prohibits smoking in government workplaces, child care facilities and restaurants, it is allowed in private workplaces with three or fewer employees and in restaurants and bars where persons under the age of 21 are not allowed to enter.</p><p>Tennessee joined Texas, North Carolina, Mississippi and West Virginia as the only states with four \u201cF\u201d grades and one \u201cD\u201d grade.</p><p>Given the hundreds of millions of dollars Tennessee has received under the MSA, it is inexcusable that it has failed to meet the full recommendations of the American Lung Association, which include:</p><p>\u2022 Support local comprehensive smoke-free laws covering age-restricted venues that include e-cigarettes.</p><p>\u2022 Increase funding for the state\u2019s tobacco prevention and cessation program to $13 million by allocating Juul (e-cigarette) settlement funds that Tennessee will receive over a six-year period. The state should also see that the funds for that program are spent based on the best practices for such comprehensive tobacco control efforts as set by the U.S. Centers for Disease Control and Prevention.</p><p>\u2022 Require all tobacco retail businesses to obtain licenses and make sure that efforts to oversee enforcement measures are sufficiently funded.</p><p>The state should also establish a meaningful penalty structure for dealing with underage sales violations.</p><p>In 2007, the state finally prohibited smoking in enclosed public places, but that legislation was full of exemptions, including non-enclosed areas of public places, venues that restrict access to persons who are 21 years of age or older, private businesses with three or fewer employees, private clubs, smoking rooms in hotels and motels, retail tobacco stores that prohibit minors, nursing homes and long-term care facilities.</p><p>Last April, Tennessee received its latest annual payment under the MSA, $163.9 million.</p><p>To date, the state has received $3.8 billion.</p><p>It is well past time more of that money was used as other states are doing to protect children and curb adult smoking.</p><p>___</p><p>Johnson City Press. February 2, 2024.</p><p>Editorial: Black history abounds in Tennessee</p><p>It\u2019s hard to pay the proper respect to all the contributions Black Americans have made to history in 29 days \u2014 thank you for the extra day, leap year \u2014 but that is exactly what we are attempting to do this month. February is Black History Month, and we here in Tennessee are fortunate to have had so many from our state help shape it.</p><p>One such homegrown legend is W.C. Handy, who gave a national voice to the blues. In 1909, Handy and his band moved to Memphis where they made Beale Street their headquarters. One of Handy\u2019s most famous compositions was originally written as a campaign song for E.H. \u201cBoss\u201d Crump, who was running for mayor of Memphis. The title of the song, \u201cMr. Crump,\u201d was changed later to \u201cMemphis Blues.\u201d</p><p>Today, Handy is known as the \u201cFather of the Blues\u201d for single-handedly introducing this style of music to the world.</p><p>We also are fortunate to have had many local Black residents who have made history.</p><p>Many of these individuals have played important roles in religion, education and local government. One of the earliest pioneers in this regard was Dr. Hezekiah B. Hankal, a renowned physician, who was elected to what was then Johnson City\u2019s Board of Mayor and Aldermen in the late 1880s.</p><p>Hankal fought against institutionalized barriers to become a respected leader in this community.</p><p>The Washington County Health Department Building in Johnson City was named for Hankal in 2014 to honor this extraordinary man for his many contributions to our community.</p><p>There have been other Black trailblazers in local politics. One of them was Ernest McKinney, who was elected as Jonesborough\u2019s first Black alderman on April 4, 1968 \u2014 the same day that Dr. Martin Luther King Jr. was assassinated in Memphis. McKinney, who died in 2009, would later become a longtime member of the Washington County Board of Education.</p><p>Years later, his son, Kevin, followed in his father\u2019s political footsteps when he was elected as Jonesborough\u2019s first Black mayor.</p><p>As we take this month to celebrate the contributions of Black Americans, Tennesseans and Johnson Citians, also consider the persistent obstacles still standing in the way of true equality and how we can eliminate them.</p><p>END</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/80fbefd07042f1a74c264d09c26447cb",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 3,
+            "reason": "The document contains two editorials. The first editorial is highly relevant to the topic of health as it discusses Tennessee's failing efforts to curb smoking, the state's tobacco control policies, and the health implications of smoking. The second editorial, however, focuses on Black history in Tennessee and does not relate to health. Given that half of the document is highly relevant to health, the overall relevance is moderate."
+        }
+    }
+}

@@ -1,0 +1,223 @@
+﻿{
+    "altids": {
+        "itemid": "218c8f95828d0c9f889785ad5994b5f1",
+        "etag": "218c8f95828d0c9f889785ad5994b5f1_0a2aza0c0",
+        "friendlykey": "308466102155",
+        "referenceid": "GA--Editorial Rdp"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Opinion",
+    "language": "en",
+    "versioncreated": "2024-03-28T11:10:40Z",
+    "firstcreated": "2024-03-26T20:03:11Z",
+    "editorialrole": "FullStory",
+    "fixture": {
+        "code": "21ea4067bb274c3b805353fb2b99ba70",
+        "name": "Editorial Roundup"
+    },
+    "pubstatus": "usable",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "GA--Editorial Rdp",
+    "headline": "Editorial Roundup: Georgia",
+    "slugline": "BC-GA--Editorial Rdp",
+    "bylines": [
+        {
+            "by": "By The Associated Press"
+        }
+    ],
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "Editorial Rdp"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86aee4307dac10048901ba7fa5283c3e",
+            "name": "Elections",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 36
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e237be707de410048fffdf092526b43e",
+            "name": "Medication",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 43
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86aad5207dac100488ecba7fa5283c3e",
+            "name": "Politics",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 72
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "4f95136e072e41c6a81e8fa820e26e9c",
+            "name": "Children",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 57
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "9cce666bb29344b8ba61f3732d971d32",
+            "name": "Disease outbreaks",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 62
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e2460e807de410048061df092526b43e",
+            "name": "Measles",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 80
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 92
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "ace74e307f00100486cedf092526b43e",
+            "name": "Immunizations",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 62
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "dec1cce882af10048320df092526b43e",
+            "name": "Georgia",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -83.50018,
+                    32.75042
+                ]
+            },
+            "relevance": 54,
+            "parentnames": [
+                "United States"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "dec1cce882af10048320df092526b43e",
+            "name": "Georgia",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "body_nitf": "<p>Valdosta Daily Times. March 22, 2024.</p><p>Editorial: Vaccination key to measles eradication</p><p>After the millions of Covid-19 cases reported during the pandemic, 58 cases of measles in three months doesn\u2019t seem to qualify as an outbreak, but after nearly eradicating the disease in the United States, health officials are concerned by its reemergence.</p><p>The Georgia Department of Public Health issued a statement Friday urging parents to make sure their children are up to date with measles vaccinations.</p><p>\u201cMeasles vaccination is important for all children to prevent measles infection and reduce the risk of community transmission,\u201d the DPH statement said, \u201cbut it is especially important for families with children planning to travel outside of the United States.\u201d</p><p>Among 58 measles cases reported in the U.S. so far in 2024, 54 (93%) were linked to international travel, the DPH said. Most cases reported this year have been among children over the age of 12 months who had not received MMR vaccine.</p><p>In Georgia, there have been two reported cases of measles in 2024. The individuals were unvaccinated, from the same family, and had traveled outside of the country.</p><p>Measles is very contagious and spreads through the air when an infected person coughs or sneezes. The measles virus can stay in the air for up to 2 hours after an infected person is there so you can become infected by simply being in a room where an infected person once was.</p><p>Measles symptoms usually appear 7 to 14 days (sometimes up to 21 days) after contact with the virus. Symptoms include high fever, cough, runny nose, and watery eyes, followed by a rash of tiny, red spots that starts at the head and spreads to the rest of the body. Individuals infected with measles are contagious from 4 days before the rash starts through 4 days afterward.</p><p>The Mayo Clinic warns that measles can be serious and even fatal for small children. Worldwide, the disease still kills more than 200,000 people a year, mostly children. The Centers for Disease Control and Prevention says it\u2019s linked to brain swelling that can cause deafness or intellectual disability, as well as to pneumonia, which is the leading cause of death from measles. It can also cause serious complications for pregnant women.</p><p>Measles can be prevented with the MMR vaccine, which is safe and highly effective. The DPH said two doses of MMR vaccine are 97% effective against measles; one dose is 93% effective.</p><p>The CDC recommends children receive their first dose of MMR vaccine between 12-15 months of age and a second dose between 4-6 years old. At least two weeks before traveling internationally, infants aged 6 to 11 months should have one dose of MMR vaccine and children aged 12 months and older should have two doses of MMR vaccine. Parents should consult with their child\u2019s healthcare provider to ensure they are up to date with their MMR vaccines and any other vaccines that may be needed.</p><p>Many years ago, America led the world in eradicating smallpox. We were on our way to doing so with measles, and the key to both campaigns was vaccinations.</p><p>Even with the latest outbreak, measles is on the ropes in America. Make sure your children are vaccinated so we can finish the job.</p><p>___</p><p>Brunswick News. March 23, 2024.</p><p>Editorial: PSC election challenge helps those who voted for rate hike</p><p>Voters in Georgia are losing the right to decide in a timely manner who goes and who stays on the state\u2019s five-member Public Service Commission. The elections of the five have been pushed back following an unsuccessful attempt to change how the vote is held in Georgia\u2019s 159 counties to put them in office.</p><p>Consequently, all five members will serve more years in office without having to face the electorate at the ballot box. It may even prove beneficial to them following the PSC\u2019s vote to maintain the profits of Georgia Power with their decision to pay for billions of dollars in cost overruns during the expansion of Plant Vogtle on the backs of ratepayers.</p><p>The extended terms of office for PSC members began with the filing of a legal challenge by four Black residents in Fulton County to the way the five members are elected. They claimed that electing members statewide diluted Black voting strength and made it difficult for Black voters to elect the candidate of their choice. Therefore, those behind the lawsuit claimed, the election of PSC members was in violation of the Voting Rights Act.</p><p>The election of PSC members remained in limbo until the 11th Circuit U.S. Court of Appeals overturned the decision by the lower court last autumn, clearing the way for the state to continue to hold the election of commission members on a statewide basis.</p><p>Unfortunately for voters, an injunction issued by the lower federal court remained in place, compelling the state to cancel the scheduled 2022 and 2024 elections of PSC members.</p><p>It is unlikely that those PSC members who were planning to seek re-election mind very much. After all, it gives them some distance from their vote to jack up the cost of electricity provided by Georgia Power.</p><p>The timing could not have been worse for everyone. Higher bills for electricity usage hit individuals, families and businesses at a time inflation was climbing toward new heights. It added to the shrinkage of paychecks.</p><p>New election dates for PSC members already have been approved by the state House and Senate. The term of PSC member Fitz Johnson, set to expire in 2022, was extended four years to 2026. Tricia Pridemore\u2019s term was to end in 2024, but the legislature extended hers to 2026. The terms of Lauren \u201cBubba\u201d McDonald and Jason Shaw were to end in 2026 but will remain in effect until 2028.</p><p>Tim Echols, whose term was due to expire in 2022, was extended three years. His district will be on the ballot in May 2025 in conjunction with municipal election primaries.</p><p>END</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/218c8f95828d0c9f889785ad5994b5f1",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 3,
+            "reason": "The document contains two editorials. The first editorial from the Valdosta Daily Times is highly relevant to the topic of health as it discusses the importance of vaccination in eradicating measles, provides information on the current measles situation in Georgia, and emphasizes the need for children to be vaccinated. The second editorial from the Brunswick News, however, is not relevant to the topic of health as it focuses on the election challenges related to the Public Service Commission in Georgia and does not discuss health-related issues. Given that only part of the document is relevant to the topic, the overall rating is moderated."
+        }
+    }
+}

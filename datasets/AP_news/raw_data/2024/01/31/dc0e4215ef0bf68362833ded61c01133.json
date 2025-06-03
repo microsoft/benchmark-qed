@@ -1,0 +1,259 @@
+﻿{
+    "altids": {
+        "itemid": "dc0e4215ef0bf68362833ded61c01133",
+        "etag": "dc0e4215ef0bf68362833ded61c01133_0a2aza0c0",
+        "friendlykey": "834594838027",
+        "referenceid": "WI--Editorial Rdp"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Opinion",
+    "language": "en",
+    "versioncreated": "2024-01-31T20:55:16Z",
+    "firstcreated": "2024-01-31T20:55:15Z",
+    "editorialrole": "FullStory",
+    "fixture": {
+        "code": "21ea4067bb274c3b805353fb2b99ba70",
+        "name": "Editorial Roundup"
+    },
+    "pubstatus": "usable",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "WI--Editorial Rdp",
+    "headline": "Editorial Roundup: Wisconsin",
+    "slugline": "BC-WI--Editorial Rdp",
+    "bylines": [
+        {
+            "by": "By The Associated Press"
+        }
+    ],
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "Editorial Rdp"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "c7544ceb29c7442c842ec6be185c620a",
+            "name": "Smoking",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 66
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86ba17607dac1004894eba7fa5283c3e",
+            "name": "Courts",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 48
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86aad5207dac100488ecba7fa5283c3e",
+            "name": "Politics",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 61
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "organisation": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "6e0b05441ec8446aa403fa26a423260b",
+            "name": "Wisconsin state government",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 56
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "bf6e2e80760d10048f8ae6e7a0f4673e",
+            "name": "U.S. Republican Party",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 49
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "c05dca58760d10048f93e6e7a0f4673e",
+            "name": "U.S. Democratic Party",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 32
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "211f453082c810048979df092526b43e",
+            "name": "Madison",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "1bc1bc3082c81004896cdf092526b43e"
+            ],
+            "locationtype": {
+                "code": "9d26a20b35f0484a891740f8189d4c7b",
+                "name": "City"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -89.40123,
+                    43.07305
+                ]
+            },
+            "relevance": 79,
+            "parentnames": [
+                "Wisconsin"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "1bc1bc3082c81004896cdf092526b43e",
+            "name": "Wisconsin",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -90.00041,
+                    44.50024
+                ]
+            },
+            "relevance": 94,
+            "parentnames": [
+                "United States"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "1608ba1082b310048433df092526b43e",
+            "name": "Iowa",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -93.50049,
+                    42.00027
+                ]
+            },
+            "relevance": 74,
+            "parentnames": [
+                "United States"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "1bc1bc3082c81004896cdf092526b43e",
+            "name": "Wisconsin",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "body_nitf": "<p>Eau Claire Leader-Telegram. January 29, 2024.</p><p>Editorial: Good news on smoking cessation</p><p>Every now and then there\u2019s something that isn\u2019t a particularly big headline, but it\u2019s interesting enough to catch our attention. A new study from the University of Wisconsin-Madison fits that category.</p><p>The UW system has studied tobacco use for some time through its Center for Tobacco research and Intervention. A new study broke more than 400 smokers into two groups. All of the people were trying to quit smoking, but the groups were given different strategies. In one group, people who started smoking again were instructed to wait one month before making another attempt. The other group was told to go right back to their efforts to quit.</p><p>Most of the people in both groups did indeed make another attempt to quit smoking. But the group that was told to try again immediately was far more likely to seek treatment in the form of medicine and counseling. Eight out of 10 did so, compared to only 56% of those who were advised to wait a month.</p><p>It\u2019s probably not surprising, then, that the people who fell off the wagon and tried to hop back on without a delay eventually had an easier time quitting and spent less on tobacco as they did.</p><p>The days when tobacco companies had doctors as spokesmen are long gone, but there was a time that was fairly common. In 1930, Lucky Strikes said doctors endorsed their cigarettes as less irritating to smokers\u2019 throats. R.J. Reynolds Tobacco Company claimed in 1946 that \u201cmore doctors smoke Camels\u201d than their competitors.</p><p>Those ads faded as evidence of smoking\u2019s harm grew. The U.S. Surgeon General\u2019s 1964 report linking it to cancer and chronic bronchitis effectively put an end to them. Smoking rates have declined thanks in part to successive reports, the end of televised ads, and smoking itself becoming less socially acceptable.</p><p>The downward trend has been in place for decades. The year after the first surgeon general\u2019s report on smoking, about 42% of Americans smoked. The figure fell below 20% in 2009. As of 2021 the Centers for Disease Control found only 11.5% of American adults smoked, though the rate of decline has slowed.</p><p>The data also suggests most smokers want to quit. The CDC says just less than 70% of smokers say they want to stop. And, though the process is notoriously difficult, better than 70% of those who try to quit eventually succeed in doing so.</p><p>That\u2019s where this new study offers some real hope. Quitting an addiction isn\u2019t usually as simple as just deciding that you won\u2019t partake anymore. Some people can pull that off, but not most. Breaking an addiction is a tough process that generally includes missteps and setbacks. That\u2019s ok. What the new research suggests is that people should view those slips as transient and immediately resume their efforts.</p><p>Honestly, that\u2019s not bad advice for a lot of things. It\u2019s tempting to think failure is permanent. It absolves you of responsibility. It\u2019s easy.</p><p>The rewards of persistence are real. Most things worth doing take multiple attempts to get right. We learn from failure and we improve our next attempt as a result. Eventually, we get the hang of the new skill or behavior, and it becomes second nature.</p><p>Amid the concerns about vaping and tobacco use that isn\u2019t related to cigarettes, it\u2019s good to see a headline that speaks to the clear interest in quitting. It\u2019s not easy. But we can\u2019t think of anyone who has succeeded who looks back and regrets it.</p><p>___</p><p>Wisconsin State Journal. January 29, 2024.</p><p>Editorial: Iowa model for fair maps is still the answer because court ruling could quickly revert</p><p>The solution to Republican lawmakers gerrymandering voting districts across Wisconsin isn\u2019t for Democrats or a liberal-leaning high court to skew the maps to the Democrats\u2019 advantage.</p><p>The fix must be a neutral and permanent map-making process that both major political parties \u2014 and more important, the voting public \u2014 can accept.</p><p>The answer is still the <a href=\"https://madison.com/opinion/editorial/our-view-at-long-last-fair-maps-finally-get-a-public-hearing-today/article_aede7de6-6de2-11ee-a013-531b1ab40312.html\">Iowa model</a> for nonpartisan redistricting. Both Democrats and <a href=\"https://madison.com/opinion/editorial/wisconsin-fair-maps/article_488d2942-5e2f-11ee-a687-372b51c737dc.html\">Republicans now claim to support it</a>. So let\u2019s get it done, rather than relying on the court to pick or draw a map that could easily be overturned in little more than a year. If a <a href=\"https://madison.com/news/state-regional/government-politics/wisconsin-brad-schimel/article_2713f674-8ed1-11ee-8793-3bf872082835.html\">conservative jurist</a> captures the Supreme Court seat now held by <a href=\"https://www.wicourts.gov/courts/supreme/justices/bradley.htm\">Justice Ann Walsh Bradley</a> in April 2025, you can be sure the maps will revert.</p><p><a href=\"https://madison.com/opinion/editorial/robin-vos-got-slap-on-hand-that-he-deserved/article_9c97f27a-5ada-5681-96f6-895088acb36d.html\">Elected officials have spent millions of tax dollars</a> on high-priced lawyers to battle in court for decades over where the lines of voting districts should go. Adding insult to financial injury for voters, gerrymandering reduces the number of candidates and competition for legislative and congressional seats.</p><p>The hypocritical and expensive political games need to end. The constant battling over redistricting \u2014 which is only supposed to occur once every decade following each major census \u2014 distracts state leaders from Wisconsin\u2019s many challenges, including its <a href=\"https://madison.com/opinion/editorial/our-view-speed-path-from-prison-to-paycheck/article_85122e05-b408-5288-a6f7-d140ff7b3da4.html\">worker shortage</a>, <a href=\"https://madison.com/opinion/editorial/our-view-deer-hunters-dont-need-ar-15s-to-bag-a-buck/article_b682de20-7fcb-11ee-9308-6fe4b18fe31d.html\">gun violence</a> and opioid scourge.</p><p>Democrats long favored the Iowa model, only for most of them to <a href=\"https://madison.com/podcast/robin-vos-flips-the-script-on-fair-maps-center-stage-with-milfred-and-hands-podcast/article_21edf0fe-76d1-11ee-b4ec-47b3a9642bb2.html\">quibble over details</a> of a Republican-backed version \u2014 even after it was amended to address the bulk of the Democrats\u2019 concerns. Now the <a href=\"https://madison.com/news/state-regional/government-politics/wisconsin-senate-maps-redistricting-evers-legislature-districts/article_34774072-b97a-11ee-ac30-f7447c8980df.html\">Republicans seem to have abandoned</a> their newfound support for nonpartisan redistricting.</p><p>The state Senate abruptly took up the Iowa model last week and replaced it with maps similar to those drawn by Democratic Gov. Tony Evers \u2014 but with changes to protect GOP incumbents. It appears to be a last-ditched and failed attempt by GOP leaders to avoid a court decision that damages their political interests.</p><p>None of the politicians should be drawing the lines. The Iowa model, which has worked well in the Hawkeye State for close to a half century, would assign to the nonpartisan Wisconsin Legislative Reference Bureau the task of reshaping districts to account for population changes. The bureau would be forbidden from considering past voting results, partisan implications or even where incumbents live. Instead, the respected bureau, which is insulated from politics, would be directed to draw compact districts that run along municipal and county lines instead of snaking into odd shapes for unfair advantage.</p><p>One of several skewed maps proposed to the high court recently <a href=\"https://madison.com/news/state-regional/government-politics/wisconsin-court-redistricting/article_4150441e-b494-11ee-8cf6-07eecc94f9a1.html\">stretches a voting district from Madison\u2019s Isthmus all the way to Oconomowoc</a> in Waukesha County, an absurd and tortured attempt at divvy up Madison\u2019s many liberal voters into more districts for competitive advantage. Another map, drawn by conservatives, would continue to grant Republicans a lock on legislative power \u2014 even withstanding a Democratic landslide.</p><p>The Democrats have to accept that they have a natural disadvantage at winning legislative control. That\u2019s because much of their base of supporters is packed into major cities including Madison. For their part, Republicans must recognize that their days of rigging maps are over, at least until the next high-court election.</p><p>Now should be the time to finally adopt fair maps that respect Wisconsin voters of all political stripes. It\u2019s time to move forward, as our state motto commands.</p><p>Iowa\u2019s proven model has worked no matter which political party has held power there. Here in Wisconsin, v <a href=\"https://www.wisdc.org/images/images/redistricting/FairMapsCounties_ResRefs57-32-purple-muni-medium1.jpg\">oters</a> and <a href=\"https://madison.com/opinion/editorial/editorial-rural-county-that-favored-trump-and-walker-demands-end-to-gerrymandering-of-voting-districts/article_694b8755-be1d-5ef4-961c-9d935c46eec5.html\">local elected officials</a> across the state have endorsed it in advisory referendums and resolutions.</p><p>No matter what the high court does, our leaders should listen to the people and enshrine this fair process into state law and the Wisconsin constitution.</p><p>END</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/dc0e4215ef0bf68362833ded61c01133",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 3,
+            "reason": "The document contains two editorials. The first editorial from the Eau Claire Leader-Telegram is highly relevant to the topic of health as it discusses a study on smoking cessation, the effectiveness of different strategies to quit smoking, and the historical context of smoking rates and public health campaigns. The second editorial from the Wisconsin State Journal, however, is not relevant to the topic of health as it focuses on political issues related to gerrymandering and redistricting in Wisconsin. Given that only part of the document is relevant to health, the overall relevance is moderate."
+        }
+    }
+}

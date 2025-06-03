@@ -1,0 +1,248 @@
+﻿{
+    "altids": {
+        "itemid": "b391480e90c2fa8314c6bb8fd740253f",
+        "etag": "b391480e90c2fa8314c6bb8fd740253f_0a2aza0c0",
+        "friendlykey": "667608350701",
+        "referenceid": "FL--Editorial Rdp"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Opinion",
+    "language": "en",
+    "versioncreated": "2024-01-24T12:10:41Z",
+    "firstcreated": "2024-01-24T00:50:26Z",
+    "editorialrole": "FullStory",
+    "fixture": {
+        "code": "21ea4067bb274c3b805353fb2b99ba70",
+        "name": "Editorial Roundup"
+    },
+    "pubstatus": "usable",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "FL--Editorial Rdp",
+    "headline": "Editorial Roundup: Florida",
+    "slugline": "AP-FL--Editorial Rdp",
+    "bylines": [
+        {
+            "by": "By The Associated Press"
+        }
+    ],
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "Editorial Rdp"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "person": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "ed2df5fda6404f7380a4f78d9303c34a",
+            "name": "Ron DeSantis",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "POLITICIAN",
+                "PERSON"
+            ],
+            "associatedstates": [
+                {
+                    "code": "cb06ab1082af100482f8df092526b43e",
+                    "name": "Florida"
+                }
+            ],
+            "relevance": 63
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a6331b54c46e4ca8b79fa40fada95db5",
+            "name": "Donald Trump",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "POLITICIAN",
+                "PERSON"
+            ],
+            "relevance": 31
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "936045008844100486a2a28878d48e09",
+            "name": "Addiction and treatment",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 64
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86aad5207dac100488ecba7fa5283c3e",
+            "name": "Politics",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 57
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a37eab90831510048fcfdf092526b43e",
+            "name": "Law enforcement",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 64
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "organisation": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "484191dd9ab34e1d93484c8c75373f36",
+            "name": "Florida state government",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 39
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "d238ec4082af10048315df092526b43e",
+            "name": "Jacksonville",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "cb06ab1082af100482f8df092526b43e"
+            ],
+            "locationtype": {
+                "code": "9d26a20b35f0484a891740f8189d4c7b",
+                "name": "City"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -81.65565,
+                    30.33218
+                ]
+            },
+            "relevance": 42,
+            "parentnames": [
+                "Florida"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cb06ab1082af100482f8df092526b43e",
+            "name": "Florida",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -82.5001,
+                    28.75054
+                ]
+            },
+            "relevance": 89,
+            "parentnames": [
+                "United States"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "cb06ab1082af100482f8df092526b43e",
+            "name": "Florida",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "body_nitf": "<p>Palm Beach Post. January 18, 2024.</p><p>Editorial: Keep key addiction recovery reform to hold treatment providers accountable</p><p>Imagine a state agency that has been content to sit on the sidelines for too long in overseeing <a href=\"https://www.palmbeachpost.com/story/news/state/2023/09/21/the-florida-shuffle-dcf-fails-people-seeking-addiction-treatment/69923427007/\">Florida\u2019s troubled addiction recovery industry</a> now promising to go \u201call-in\u201d on addressing a big <a href=\"https://www.palmbeachpost.com/story/news/2024/01/12/addiction-treatment-investigation-by-palm-beach-violations-prompt-legislation-would-be-posted-by-dcf/72153171007/\">problem</a> that has led to patient deaths due to shoddy care.</p><p><a href=\"https://www.myfloridahouse.gov/Sections/Bills/billsdetail.aspx?BillId=79716\">HB 1065</a> and <a href=\"https://www.flsenate.gov/Session/Bill/2024/1180\">SB 1180</a> has language requiring the <a href=\"https://www.myflfamilies.com/\">Florida Department of Children & Families</a> to prominently post information regarding complaints, inspections and investigative reports on addiction treatment programs to help those who need it find competent care. Unfortunately, that language might be lifted because of the department\u2019s promises to post the information without any legal requirements.</p><p>\u201cWe have absolute guarantees from the secretary,\u201d <a href=\"https://www.flsenate.gov/Senators/S31\">Sen. Gayle Harrell</a>, R.-Stuart, said of her talk with DCF. \u201cWe have the word of the secretary that there\u2019s going to be transparency.\u201d</p><p>The \u201cword of the secretary?\u201d Sorry, the Post Editorial Board doesn\u2019t buy it and neither should lawmakers hoping to rid the state of what has become our national shame of dubious and often fraudulent addiction recovery care. We also don\u2019t believe DCF is the right state agency to oversee Florida\u2019s network of problematic addiction treatment providers.</p><p>Addiction treatment involves medical and psychiatric procedures but the department doesn\u2019t have the medical staff capable of locating information needed to respond to violations. The agency still relies on the addiction treatment providers to promote their credentials, address problems and correct lapses. Until that changes, all the assurances of change from DCF remain worthless.</p><p>Palm Beach Post continues to raise concerns about \u2018Florida Shuffle.\u2019</p><p>The <a href=\"https://www.palmbeachpost.com/story/news/2015/07/30/county-s-1-billion-gold/6798776007/\">\u201cFlorida Shuffle,\u201d</a> is the moniker that describes what has become a national problem fueled by the state\u2019s failure to oversee addiction treatment. That failure has resulted in too many patients who flock to Florida seeking help and sobriety receiving inadequate care that puts their lives at risk.</p><p>Last September, The Palm Beach Post published the results of a major investigation <a href=\"https://www.palmbeachpost.com/story/news/state/2023/09/21/the-florida-shuffle-dcf-fails-people-seeking-addiction-treatment/69923427007/\">detailing DCF dysfunction and dereliction</a> in its oversight of addiction treatment. The months-long probe by Post investigative reporter Antigone Barton revealed a revolving door of unsuspecting patients lured by unscrupulous and unqualified providers marketing treatment that fails to meet medical standards.</p><p>The bottom line: While the Florida Department of Children and Families is responsible for regulating addiction treatment programs, an industry riddled with abuse, fraud and negligence, the agency lacks the medically qualified staff to evaluate the addiction programs it licenses. The onus to make sure such programs are credible and competently run too often falls on addicted patients.</p><p>To address the paper\u2019s findings and the community\u2019s concerns, the Post is holding a forum today, Jan. 17, at the <a href=\"https://www.palmbeachstate.edu/\">Palm Beach State College</a> Lake Worth Beach campus. The \u201c <a href=\"https://www.palmbeachpost.com/story/news/state/2023/09/21/the-florida-shuffle-dcf-fails-people-seeking-addiction-treatment/69923427007/\">Fixing the Florida Shuffle</a> \u2013 Next Steps\u201d forum will feature a panel moderated by Barton that includes representatives from the Palm Beach County State Attorney\u2019s office, the Health Care District of Palm Beach County, the county\u2019s Addiction Recovery Task Force and a patient whose experiences with addiction treatment in the county contributed to the Post\u2019s investigation. The forum runs from 6:15 p.m. to 8:30 p.m.</p><p>The Post\u2019s Editorial Board has made its position on the Florida Shuffle clear. We believe the state\u2019s monitoring of addiction treatment is at best irresponsible and at worst, criminal. We also believe that AHCA is the more appropriate agency to provide that oversight. It already regulates medical services, including nursing homes, outpatient clinics and home healthcare programs, which makes it a far better fit to regulate addiction recovery than DCF ever could be.</p><p>Kudos to Harrell and Rep. Mike Caruso, R-West Palm Beach for crafting legislation that promises real reform to drug addiction treatment. But that change won\u2019t come until the Legislature either gives AHCA the job or provides DCF the staff and resources to properly monitor addiction recovery.</p><p>Change certainly won\u2019t come by removing the bill\u2019s language that would make both drug treatment providers operating in Florida and the state agency now monitoring them more accountable.</p><p>___</p><p>Orlando Sentinel. January 23, 2024.</p><p>Editorial: Ron DeSantis can regain the hearts of Floridians by putting their needs first</p><p><a href=\"https://www.orlandosentinel.com/2024/01/21/desantis-drops-out-of-presidential-race-endorses-trump/\">Gov. Ron DeSantis returned Monday</a> to the job Floridians elected him to do. Now all Floridians are wondering what\u2019s in store for them as DeSantis serves the last two years of a term that was really an extended campaign for the presidency.</p><p>Welcome back, Governor. Time to get to work on their behalf.</p><p>Start with the obvious: DeSantis should drop the <a href=\"https://www.orlandosentinel.com/2024/01/22/with-desantis-back-in-florida-will-culture-war-battles-return/\">culture-war mentality</a> that fueled attacks on LGBTQ Floridians, African-Americans who want to talk about their own history\u2019s relevance, and true academic, governmental and corporate freedom to deal with issues of diversity and inclusion on their own terms. Essentially, any of his initiatives that were launched despite a near-total lack of public outcry for changes in state policy.</p><p>It\u2019s probably too much to expect him to acknowledge that he was wrong. But stopping the attacks and doing his best to repair the damage would speak volumes.</p><p>Meanwhile, he should act quickly and decisively on the issues that Floridians say are important.</p><p>Those needs are clear, and many of them align with the priorities DeSantis first ran on in 2018. Addressing them in effective, innovative ways will give the governor the chance to wrap up this chapter of his life with a strong fourth-quarter surge of advocacy on behalf of the Floridians he swore an oath \u2014 twice \u2014 to serve.</p><p>Plenty of challenges</p><p>Those priorities include preparing the state to meet the challenges of climate change and the <a href=\"https://www.news-journalonline.com/story/news/environment/2019/01/12/desantis-wants-state-on-war-footing-in-water-fight-but-lawmakers-may-settle-for-skirmish/6311716007/\">availability of clean, fresh drinking water</a> \u2014 a case that will be tougher to make than it was six years ago, but one that is imperative to Florida\u2019s future prosperity and cannot wait.</p><p>It will be a tougher sell, because Floridians are focused on the disasters that are playing out right now as they struggle to find affordable housing and insurance to protect them against catastrophes. Many households are <a href=\"https://flhousing.org/wp-content/uploads/2022/08/Home-Matters-Report-2022.pdf\">paying more than half their income</a> just to keep roofs over their heads. And they are the lucky ones. Across Florida, there are reports of workers sleeping in their cars because they can\u2019t afford rent or a mortgage.</p><p>Meanwhile, the unstable insurance market hasn\u2019t responded to any of the giveaways showered upon it by the Legislature and unchecked by DeSantis\u2019 apparent indifference. Unleashing his ire on an industry that has treated Florida like an ATM for years would be a refreshing change of pace and a win for Florida\u2019s beleaguered consumers.</p><p>DeSantis should also urge Florida lawmakers to reverse course on the billions in federal funding he and the Legislature have rejected. As the <a href=\"https://www.orlandosentinel.com/2024/01/05/desantis-led-florida-has-rejected-11-billion-in-federal-funding-in-recent-years/\">Sentinel\u2019s Jeffrey Schweers reported earlier this month, the total likely exceeds $11 billion</a>. Though many deadlines have passed, including a Jan. 1 deadline to request $248 million for a summer food program that would sustain 2 million children, it\u2019s likely that federal officials would give Florida a shot at changing its mind if the governor asks. The same goes for $320 million in federal funds for road improvements and measures intended to reduce carbon emissions. DeSantis has already made a tentative move by asking for $1.7 million in the upcoming year\u2019s state budget that could draw down at least a portion of Florida\u2019s allotted $346 million in federal energy-efficiency rebates. That money could help many residents who are struggling to rebuild storm-ravaged homes or protect themselves from skyrocketing utility bills.</p><p>There are many other ways the governor could demonstrate that he can fight just as aggressively (and more effectively) on behalf of Floridians as he did for a spot as a distant runner-up to the juggernaut that is Donald Trump.</p><p>The right fights at last</p><p>If he takes these opportunities, DeSantis could ease the pain of the countless volunteers, small-dollar donors and loyal supporters who first rallied to his cause, many of whom held out hope until the bitter end. When DeSantis announced Sunday that he was suspending his presidential campaign, their sorrow was palpable across social media platforms.</p><p>A strong record of last-term achievement would force people to rethink the legacy of \u201closer.\u201d Far more importantly, it could prove DeSantis sees Floridians as more than backdrops for endless photo shoots.</p><p>By returning to fight for them, and all Floridians \u2014 instead of targeting marginalized groups to generate pointless, painful controversy \u2014 he could reclaim a measure of the popularity he once took for granted, and restore the air of optimism that marked his first months as governor.</p><p>___</p><p>South Florida Sun Sentinel. January 19, 2024.</p><p>Editorial: Legislature\u2019s attack on local police oversight boards is wrong</p><p>People in Florida want to trust their local police, and in many communities, that trust is bolstered by citizen oversight boards that review police shootings and evaluate residents\u2019 complaints against individual officers.</p><p>So why do some state legislators in Tallahassee want to strip these boards of their ability to monitor, investigate and advise police departments on complaints \u2014 often serious ones \u2014 about the conduct of specific officers?</p><p>It\u2019s a question one lawmakers\u2019 constituents should ask. From what we\u2019re seeing, it seems more about protecting bad officers by stripping away transparency, and once again trampling on local officials\u2019 ability to address local needs firsthand.</p><p>A few justifications surfaced at Friday\u2019s meeting of the House Local Administration, Federal Affairs and Special Districts Subcommittee, where <a href=\"https://myfloridahouse.gov/Sections/Bills/billsdetail.aspx?BillId=79178&SessionId=103\">House Bill 601</a> made its second stop. But they ring hollow.</p><p>The basics of oversight</p><p>These boards have no power to discipline officers and must comply with the Florida Police Officers\u2019 Bill of Rights, which spells out officers\u2019 claims to due process and safeguards against self-incrimination. Yet they make a difference for the better.</p><p>Many residents will take complaints to a board of fellow citizens that they would be afraid to take to the police chief or an internal affairs division. Boards can look at trends and make suggestions to bridge gaps between police agencies and minority groups that have often felt victimized.</p><p>St. Petersburg was the first city to set up a citizen oversight board in 1991. Orlando and Fort Lauderdale soon followed. Currently, 20 cities have police review boards, including Delray Beach and West Palm Beach.</p><p>The bill\u2019s sponsor, state Rep. Wyman Duggan, R-Jacksonville, said he was seeking uniform standards for police. He also claimed that he wasn\u2019t really gutting the ability of oversight boards to serve the public. After all, he noted, they could still examine trends and gauge community law enforcement needs.</p><p>The FOP speaks out</p><p>Lisa Henning, a lobbyist for the Florida State Fraternal Order of Police, was more negative: \u201cYou\u2019re reinvestigating an officer that\u2019s already been investigated twice and cleared and now you\u2019re pulling them back before a group of people who have no expertise in the job,\u201d she told House members.</p><p>The FOP\u2019s support is highly coveted by legislative candidates. The union\u2019s extreme hostility to citizen oversight boards might explain why a Legislature filled with people looking for their endorsement is so interested in the bill.</p><p>Both Duggan and Henning ignored the reality that most law enforcement officers already have ample protection, and that citizen oversight boards often find complaints to be unfounded. Citizens can often feel defenseless. They have heard too many stories about complaints fading into oblivion, or drawing retaliation. That fear is often amplified in marginalized communities.</p><p>Burbeth Foster, senior counsel of Community Justice Partners, said investigations of individual claims of misconduct lead to far more significant insight into bigger problems. Agencies also benefit from improved relationships with the communities they serve.</p><p>Removing the bad apples</p><p>But the most important thing she had to say was this: These boards help good officers by removing bad apples who taint the reputation of their departments, and by having their backs when complaints are unfounded.</p><p>This is backed up by a study last year by the Leroy Collins Institute, which found that communities with oversight boards see less disparity in arrests of marginalized populations, fewer clashes between police and the public and safer communities. Why? Because people in those cities are more apt to trust the police.</p><p>They are far less likely to trust law enforcement when their complaints are cloaked in secrecy, investigated by the departments who instinctively protect their own or are punted to the far-flung Florida Department of Law Enforcement (FDLE) or the state Attorney General.</p><p>This oversight has been particularly helpful in Florida\u2019s largest cities, most of which have review boards. But this is an option that should remain available to any local government that has seen flare-ups in tension between the police and the public.</p><p>It\u2019s understandable that many lawmakers struggled with this bill, including Rep. Mike Gottlieb, D-Davie, a criminal defense lawyer who acknowledged the difficulty in recruiting good officers. He suggested a compromise: A bill to set standards and training requirements for police oversight boards, while preserving their ability to conduct individual reviews.</p><p>As this legislation advances, lawmakers should consider Gottlieb\u2019s proposal. This is about more than \u201cbacking the blue.\u201d It\u2019s about cutting off the ability of city officials who see a rift between their police departments and their residents \u2014 and the need to address growing tensions before anger, distrust and fear erupt into violence.</p><p>___</p><p>Miami Herald. January 22, 2024.</p><p>Editorial: Back to reality in Florida, DeSantis better drop the culture wars and get to work</p><p>It\u2019s time for Ron DeSantis to go back to his real job, the one Floridians reelected him to do just months before he announced his presidential bid.</p><p>DeSantis tried to sell his accomplishments in Florida to Republican primary voters in other parts of the country. He had a litany of signature laws he pushed through the Legislature, but most of them required more state control over private businesses like Disney or public school classrooms or women\u2019s reproductive rights \u2014 all in the name of fighting some made-up threat to American values.</p><p>The past two years have been full of posturing and fabricated cultural outrage to pace with whatever issues right-wing Twitter-sphere and Fox News amped up.</p><p>After <a href=\"https://www.textise.net/showText.aspx?strURL=https%3A%2F%2Fwww.miamiherald.com%2Fopinion%2Feditorials%2Farticle284389660.html\">dropping out of the GOP race on Sunday</a>, DeSantis is no longer under pressure to make a name for himself. It\u2019s time for him to quit performative politics and heavy-handed government interference and seriously address issues for the people who actually did elect him. We\u2019re talking about things like rising property and auto insurance rates and housing prices.</p><p>Home prices and rental costs in South Florida have skyrocketed like never before in recent years. Unlike California or New York, Florida has had a reputation for being affordable. That\u2019s slipping away, despite lawmakers\u2019 unusual effort last year to address the issue with sweeping legislation called the Live Local Act.</p><p>The 2024 legislative session that began this month already has some DeSantis-esque bills, such as one that would <a href=\"undefined\">ban government employees and contractors from using gender pronouns</a> that don\u2019t correspond with their biological sex. But the Republican primary showed that, while culture-war issues might be popular among conservatives, they failed to move the needle for the governor. Voters are more outraged over inflation than \u201ccritical race theory\u201d and they aren\u2019t going to abandon Donald Trump because DeSantis barred transgender teens from getting gender-affirming care.</p><p>There is at least one sign that Republicans are trying to rein in some of their excesses of the last two years. The GOP-controlled House has advanced a bill to <a href=\"https://www.textise.net/showText.aspx?strURL=https%3A%2F%2Fwww.politico.com%2Fnews%2F2024%2F01%2F19%2Fflorida-book-challenges-fees-00136409%3Fnname%3Dflorida-playbook%26nid%3D0000014f-1646-d88f-a1cf-5f46b4500000%26nrid%3De362d498-2c3f-4129-864b-55de7cf0eb06%26nlid%3D630310\">curb frivolous book challenges</a> by allowing schools to charge some people a $100 fees if they submit more than five objections.</p><p>Egged on by the governor, lawmakers previously made it easier for parents and activists to challenge schools books, creating a logistical mess for school districts. The Escambia County School District in the Panhandle <a href=\"https://www.textise.net/showText.aspx?strURL=https%3A%2F%2Fwww.nbcnews.com%2Fnews%2Fus-news%2Fflorida-school-district-pulls-1600-books-review-possibly-banned-dictio-rcna133436\">pulled for review 1,600 titles from its libraries</a>, including Webster\u2019s Dictionary for Students, to ensure the books follow a new state law that restricts topics related to sex. Other districts have banned classics by authors like Nobel Prize winner Toni Morrison.</p><p>The new legislation won\u2019t stop districts from making knee-jerk decisions to remove books from shelves out of fear of running afoul of the law\u2019s vague new requirements. But it might keep in check groups like Moms for Liberty that have ridden the \u201cparental rights\u201d movement into book-ban frenzy.</p><p>The movement picked up steam during the pandemic, when many parents were angered by school closures and teachings to which they objected. DeSantis capitalized on that when he vowed to remove leftist \u201cwoke\u201d indoctrination from schools.</p><p>Now, though, there are no pandemic restrictions left for DeSantis to fight against. And even he realized that there was little interest in the dangers of \u201cwoke\u201d culture, which he mentioned less and less as his presidential bid waned.</p><p>DeSantis will have to find new signature issues, though we doubt he\u2019ll suddenly have a change of heart and focus only on addressing problems that don\u2019t drive the conservative media and the social media world, like transgender women using bathrooms designated for women. He needs to remain relevant if he wants to run again in 2028.</p><p>As governor of the nation\u2019s third largest state \u2014 where hurricanes and sea-level rise are an existential threat, where residents are leaving the state because they can no longer afford another homeowners\u2019 insurance premium hike \u2014 DeSantis has a lot of work left in the next three years of his term.</p><p>So, drop the \u201cwoke,\u201d governor, and get to work.</p><p>END</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/b391480e90c2fa8314c6bb8fd740253f",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 3,
+            "reason": "The document contains multiple editorials, but only one of them is directly related to health. The Palm Beach Post editorial discusses addiction recovery reform and the oversight of addiction treatment providers in Florida, which is highly relevant to the topic of health. The other editorials focus on political issues, local police oversight, and Governor Ron DeSantis' political actions, which are not relevant to the health topic."
+        }
+    }
+}

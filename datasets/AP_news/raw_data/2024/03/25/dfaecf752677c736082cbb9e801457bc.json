@@ -1,0 +1,231 @@
+﻿{
+    "altids": {
+        "itemid": "dfaecf752677c736082cbb9e801457bc",
+        "etag": "dfaecf752677c736082cbb9e801457bc_1a4aza0c0",
+        "friendlykey": "258548100308",
+        "referenceid": "CB--Puerto Rico-Dengue"
+    },
+    "version": 1,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2024-03-26T01:22:14Z",
+    "firstcreated": "2024-03-25T22:35:59Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "editorialtypes": [
+        "Lead"
+    ],
+    "signals": [
+        "newscontent"
+    ],
+    "title": "CB--Puerto Rico-Dengue",
+    "headline": "Puerto Rico has declared an epidemic following a spike in dengue cases",
+    "headline_extended": "Puerto Rico has declared an epidemic following a spike in dengue cases",
+    "slugline": "AP-CB--Puerto Rico-Dengue, 1st Ld-Writethru",
+    "description_summary": "Puerto Rico has declared an epidemic following a spike in dengue cases. The U.S. territory of 3.2 million people has reported at least 549 cases so far this year, compared with a total of 1,293 cases for all of last year. The island\u2019s health department says more than 340 people have been hospitalized for the mosquito-borne virus. Officials said Monday that the majority of cases have been reported in the capital of San Juan. More than 5 million dengue cases were reported worldwide last year, with nearly 80% of them occurring in the Western Hemisphere, according the World Health Organization.",
+    "located": "SAN JUAN, Puerto Rico",
+    "datelinelocation": {
+        "city": "San Juan",
+        "countrycode": "PRI",
+        "countryname": "Puerto Rico",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                -66.10572,
+                18.46633
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "Puerto Rico dengue public health emergency"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "i",
+            "name": "i"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "084dafb87f00100481c5f571351eed07",
+            "name": "Dengue fever",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 91
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Editorial",
+            "editorial_subject": "Health",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "bb2d2c5f441a452cb24bb511a2ab5eea",
+            "name": "World news",
+            "creator": "Editorial",
+            "editorial_subject": "World news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "550bcda07f4e10048ef0df092526b43e",
+            "name": "San Juan",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661a77a87d5b1004822ac076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "9d26a20b35f0484a891740f8189d4c7b",
+                "name": "City"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -66.10572,
+                    18.46633
+                ]
+            },
+            "relevance": 60,
+            "parentnames": [
+                "Puerto Rico"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "661a77a87d5b1004822ac076b8e3055c",
+            "name": "Puerto Rico",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "6618c9f87d5b10048203c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "b7a0766613394ffda1709e3e433f2de2",
+                "name": "Territory"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -66.49989,
+                    18.24829
+                ]
+            },
+            "relevance": 42,
+            "parentnames": [
+                "Caribbean"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "661850e07d5b100481f5c076b8e3055c",
+            "name": "Latin America and Caribbean",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "body_nitf": "<p>SAN JUAN, Puerto Rico (AP) \u2014 Puerto Rico's health secretary declared an epidemic on Monday following a spike in dengue cases.</p><p>The U.S. territory of 3.2 million people has reported at least 549 cases so far this year, compared with a total of 1,293 cases for all of last year. The majority of cases have been reported in the capital of San Juan.</p><p>More than 340 people have been hospitalized for the mosquito-borne virus, according to the island\u2019s health department.</p><p>Puerto Rico last declared a dengue epidemic in 2012.</p><p>More than 5 million dengue cases were reported worldwide last year, <a href=\"https://apnews.com/article/dengue-deaths-vaccines-western-hemisphere-paho-628eb1247f741c66e34e55b04facf7e2\">with nearly 80% of them occurring in the Western Hemisphere</a>, according the World Health Organization. The region has reported some 3 million cases so far this year, with health officials noting that higher rainfall along with humidity and heat linked to climate change have contributed to a rise in cases.</p><p>The virus can cause crushing headaches, fever, vomiting, a rash and other symptoms. While most infected people don\u2019t get symptoms, severe cases can lead to plasma leakage and death.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/puerto-rico-dengue-public-health-emergency-dfaecf752677c736082cbb9e801457bc",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 5,
+            "reason": "The document discusses a health-related issue, specifically the declaration of a dengue epidemic in Puerto Rico. It provides detailed information about the number of cases, hospitalizations, and the impact of climate change on the spread of the virus. The document also includes historical context and global statistics on dengue, which are relevant to the topic of health."
+        }
+    }
+}

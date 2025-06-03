@@ -1,0 +1,479 @@
+﻿{
+    "altids": {
+        "itemid": "f787d38ddbb436186c5427e839fd055b",
+        "etag": "f787d38ddbb436186c5427e839fd055b_12a11aza0c0",
+        "friendlykey": "441746532200",
+        "referenceid": "EU--Britain-King"
+    },
+    "version": 12,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2024-02-07T03:17:06Z",
+    "firstcreated": "2024-02-06T08:31:33Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "ednote": "Eds: UPDATES: Adds fresh video.",
+    "editorialtypes": [
+        "Lead"
+    ],
+    "signals": [
+        "newscontent"
+    ],
+    "title": "EU--Britain-King",
+    "headline": "Prince Harry arrives in London after his father, King Charles III, is diagnosed with cancer",
+    "headline_extended": "Britain's prime minister says that King Charles III\u2019s cancer was caught early and the monarch will \u201ccrack on\u201d with his constitutional duties",
+    "slugline": "BC-EU--Britain-King, 12th Ld-Writethru",
+    "description_summary": "Britain's prime minister says that King Charles III\u2019s cancer was caught early and the monarch will \u201ccrack on\u201d with his constitutional duties. The remarks came as Prince Harry flew in from California on Tuesday for a rare visit with his father. Royal officials announced Monday that the 75-year-old king has been diagnosed with an undisclosed form of cancer and is receiving treatment as an outpatient. Less than 18 months into the reign that he\u2019d famously waited decades to begin, Charles suspended public engagements but will continue with state business and won\u2019t be handing over his constitutional roles as head of state. On Tuesday afternoon, Harry could seen arriving at the king\u2019s Clarence House residence in a black SUV after an overnight flight.",
+    "bylines": [
+        {
+            "by": "By JILL LAWLESS",
+            "title": "Associated Press"
+        }
+    ],
+    "located": "LONDON",
+    "datelinelocation": {
+        "city": "London",
+        "countrycode": "GBR",
+        "countryname": "United Kingdom",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                -0.12574,
+                51.50853
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "Britain king charles cancer diagnosis"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "person": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "032e347ae7114fe985f118b17ce73ae3",
+            "name": "Rishi Sunak",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "POLITICIAN",
+                "PERSON"
+            ],
+            "relevance": 49
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f8955706b58c4b71901d46201750aa48",
+            "name": "King Charles III",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "GOVERNMENT_FIGURE",
+                "PERSON",
+                "ROYALTY"
+            ],
+            "relevance": 64
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "27d3bc69a271433992a500bc68c4eb60",
+            "name": "Camilla, the queen consort",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "ROYALTY",
+                "PERSON"
+            ],
+            "relevance": 40
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "1b145ec16d324e31a17d0741aa228c12",
+            "name": "Prince Harry",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "GOVERNMENT_FIGURE",
+                "PERSON",
+                "ROYALTY"
+            ],
+            "relevance": 78
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "l",
+            "name": "l"
+        },
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "i",
+            "name": "i"
+        },
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "e",
+            "name": "e"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e24779c87de410048069df092526b43e",
+            "name": "Men's health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 49
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e22524b87de410048f91df092526b43e",
+            "name": "Cancer",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 61
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "90aeac5089ef10048f63d56c852d093e",
+            "name": "Royalty",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 95
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "16cb0ba3e6d24d97ace39f5a1924669a",
+            "name": "Entertainment",
+            "creator": "Editorial",
+            "editorial_subject": "Entertainment",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "3e37e4b87df7100483d5df092526b43e",
+            "name": "Lifestyle",
+            "creator": "Editorial",
+            "editorial_subject": "Lifestyle",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "bb2d2c5f441a452cb24bb511a2ab5eea",
+            "name": "World news",
+            "creator": "Editorial",
+            "editorial_subject": "World news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "organisation": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "4bdfabef1bb34b199c33df280bb8e4fc",
+            "name": "United Kingdom government",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 45
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "7a55e0187eff10048492df092526b43e",
+            "name": "London",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "df4691387d6b10048fdeba7fa5283c3e"
+            ],
+            "locationtype": {
+                "code": "9d26a20b35f0484a891740f8189d4c7b",
+                "name": "City"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -0.12574,
+                    51.50853
+                ]
+            },
+            "relevance": 85,
+            "parentnames": [
+                "England"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "789fdd8882af10048263df092526b43e",
+            "name": "California",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -119.75126,
+                    37.25022
+                ]
+            },
+            "relevance": 74,
+            "parentnames": [
+                "United States"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "66219fb07d5b100482e2c076b8e3055c",
+            "name": "United Kingdom",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661850e07d5b100481f4c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "01f56e0e654841eca2e69bf2cbcc0526",
+                "name": "Nation"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -4,
+                    54
+                ]
+            },
+            "relevance": 95,
+            "parentnames": [
+                "Europe"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "661850e07d5b100481f4c076b8e3055c",
+            "name": "Europe",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "associations": {
+        "1": {
+            "altids": {
+                "itemid": "406e1e85e13a4f14862d068d583b1be1"
+            },
+            "type": "picture"
+        },
+        "2": {
+            "altids": {
+                "itemid": "fc6e03c027bc4a2ca356b487eb321c2c"
+            },
+            "type": "picture"
+        },
+        "3": {
+            "altids": {
+                "itemid": "728316e350004b8aa8af1aa5a1f832b8"
+            },
+            "type": "picture"
+        },
+        "4": {
+            "altids": {
+                "itemid": "5cd5087aa872465688dd14beded967ab"
+            },
+            "type": "picture"
+        },
+        "5": {
+            "altids": {
+                "itemid": "43b7d0b4aaa540919f62a6f6857b38d3"
+            },
+            "type": "picture"
+        },
+        "6": {
+            "altids": {
+                "itemid": "aca1b08c0a704925a540de6cf990ff40"
+            },
+            "type": "picture"
+        },
+        "7": {
+            "altids": {
+                "itemid": "3288b9cef90947848ace98f710c400db"
+            },
+            "type": "picture"
+        },
+        "8": {
+            "altids": {
+                "itemid": "fed07b15371743ce8b0661dccbc60cee"
+            },
+            "type": "picture"
+        },
+        "9": {
+            "altids": {
+                "itemid": "c628ac4f3662429a81b04d504a47789e"
+            },
+            "type": "picture"
+        },
+        "10": {
+            "altids": {
+                "itemid": "3273a5f618944f6b957a8f4cd6fef5bf"
+            },
+            "type": "picture"
+        },
+        "11": {
+            "altids": {
+                "itemid": "35de60ba9fc242e0b370c37209ed025a"
+            },
+            "type": "picture"
+        },
+        "12": {
+            "altids": {
+                "itemid": "11de5d4f5d364215b914d5b424708bdd"
+            },
+            "type": "picture"
+        },
+        "13": {
+            "altids": {
+                "itemid": "0181e4ff7f6b4d53832da28847470066"
+            },
+            "type": "picture"
+        },
+        "14": {
+            "altids": {
+                "itemid": "3eaf53fc63314fbba4cc900cdf23e9a4"
+            },
+            "type": "video"
+        },
+        "15": {
+            "altids": {
+                "itemid": "1827863371cd4877aff1c3e845efa3d5"
+            },
+            "type": "video"
+        },
+        "16": {
+            "altids": {
+                "itemid": "1600f2c8d2e14e178e3b383c5384f8e4"
+            },
+            "type": "audio"
+        },
+        "17": {
+            "altids": {
+                "itemid": "f7f975df41dc4efeba2cad98b8e5496a"
+            },
+            "type": "audio"
+        },
+        "18": {
+            "altids": {
+                "itemid": "9c58af3cb2534852b854dc23e78ce3a5"
+            },
+            "type": "audio"
+        },
+        "19": {
+            "altids": {
+                "itemid": "91010a3ec3f64353978aa25570bbe6a4"
+            },
+            "type": "audio"
+        }
+    },
+    "body_nitf": "<p>LONDON (AP) \u2014 <a href=\"https://apnews.com/article/king-charles-iii-cancer-britain-e0408a7c9bb86ad2af8754ce4b37d65e\">King Charles III\u2019s cancer</a> was caught early and the monarch will \u201ccrack on\u201d with his constitutional duties, Britain's prime minister said Tuesday, as Prince Harry flew in from California for a rare visit with his father.</p><p>Royal officials announced Monday that <a href=\"https://apnews.com/article/king-charles-iii-birthday-monarchy-ff1d632d43b9fd7924ffe0008585770e\">the 75-year-old king</a> has been diagnosed with an undisclosed form of cancer and is receiving treatment as an outpatient.</p><p>Less than 18 months into the reign that he\u2019d famously waited decades to begin, Charles <a href=\"https://apnews.com/article/king-charles-health-official-role-duties-de092ed5c12ca2c5f9e9da49f5a42627\">suspended public engagements</a> but will continue with state business \u2014 including weekly meetings with Prime Minister Rishi Sunak \u2014 and won\u2019t be handing over his constitutional roles as head of state.</p><p>On Tuesday afternoon, Harry could seen arriving at the king's Clarence House residence in a black SUV after an overnight flight.</p><p>The two have a troubled relationship, and Harry has seen his father infrequently since the prince <a href=\"https://apnews.com/article/prince-harry-ap-top-news-international-news-celebrities-north-america-d6710051fc250a094f23febc304eddb6\">quit royal duties in 2020</a> and moved to Los Angeles with his wife, Meghan, citing what they said was the unbearable intrusions and racist attitudes of the British media.</p><p>Harry, 39, has since detailed his rocky relationship with his family and his royal inheritance in TV interviews, a documentary and <a href=\"https://apnews.com/article/prince-harry-spare-book-revelations-0f60db708cfc266e247c1efa7c98877b\">a memoir, \u201cSpare.\u201d</a></p><p>About an hour after Harry arrived, Charles and Queen Camilla were driven from their residence to nearby Buckingham Palace in a royal Bentley. The couple waved to tourists and well-wishers gathered outside the palace gates. They then traveled by helicopter to Sandringham, the monarch's rural residence in eastern England.</p><p>Buckingham Palace said the king's cancer was found during Charles' <a href=\"https://apnews.com/article/uk-princess-kate-abdominal-surgery-5fc9e0e3b59954a2cceb6b1a7edf31a7\">recent hospital treatment</a> for an enlarged prostate but is a \u201cseparate issue\u201d and not prostate cancer.</p><p>\u201cThankfully, this has been caught early,\u201d Sunak told BBC radio, adding: \u201cWe\u2019ll crack on with everything.\u201d</p><p>\u201cMany families around the country listening to this will have been touched by the same thing and they know what it means to everyone,\u201d Sunak said. \u201cSo we\u2019ll just be willing him on and hopefully we get through this as quickly as possible.\u201d</p><p>The palace said Charles, <a href=\"https://apnews.com/article/king-charles-health-history-covid-sports-injuries-a75e0eed8f8537d59789b8333828b088\">who has generally enjoyed good health</a>, \u201cremains wholly positive about his treatment and looks forward to returning to full public duty as soon as possible.\u201d</p><p>Charles became king in September 2022 when his mother, <a href=\"https://apnews.com/article/queen-elizabeth-ii-health-update-b2578aa91c3fef9c5d6ad4a557bf63e4\">Queen Elizabeth II</a>, died at the age of 96 after 70 years on the throne.</p><p>News of the king\u2019s diagnosis comes as his daughter-in-law Kate, Princess of Wales, recovers from abdominal surgery that saw her hospitalized for about two weeks.</p><p>Kate is taking a break from royal duties as she recovers. Her husband, Prince William, <a href=\"https://apnews.com/article/king-charles-cancer-who-next-line-succession-d054f86ba17fe280bc7481a42921f3db\">who is heir to the throne</a>, also took time off to help look after her and the couple\u2019s three children, but is due to preside over a ceremony at Windsor Castle and a charity dinner on Wednesday.</p><p>Charles departed from royal tradition with his openness about <a href=\"https://apnews.com/article/kate-hospitalized-prince-william-royal-health-wales-b2ea543cfaf7a52b71ac3fbdf4a19cfa\">his prostate condition</a>. For centuries Britain\u2019s royal family remained tight-lipped about health matters.</p><p>Disclosing information about his cancer diagnosis \u2014 albeit in a limited way \u2014 is another break with tradition.</p><p>When U.K. monarchs had real power, news of illness was withheld for fear it might weaken their authority. The habit of secrecy lingered after royals became constitutional figureheads.</p><p>The British public wasn\u2019t told that Charles\u2019 grandfather, King George VI, had lung cancer before his death in February 1952 at the age of 56, and some historians have claimed that the king himself wasn\u2019t told he was terminally ill.</p><p>In the final years of Elizabeth\u2019s life, the public was told only that the queen was suffering from \u201cmobility issues\u201d when she began to miss public appearances towards the end of her life. The cause of her death was listed on the death certificate simply as \u201cold age.\u201d</p><p>When and how much to disclose about illness remains a difficult subject for many public figures. U.S. Defense Secretary Lloyd Austin <a href=\"https://apnews.com/article/austin-pentagon-cancer-secret-hospital-313255a7126a0482a67ec18b7474a8c1\">has been criticized</a> for not telling President Joe Biden or other key leaders that that he was being treated for prostate cancer, even when he was hospitalized in intensive care in January for post-surgery complications.</p><p>Buckingham palace said that the king \u201chas chosen to share his diagnosis to prevent speculation and in the hope it may assist public understanding for all those around the world who are affected by cancer.\u201d</p><p>Charles took the throne intending to preside over a slimmer monarchy with fewer <a href=\"https://apnews.com/article/uk-monarchy-line-of-succession-king-charles-f8c61815db305632f51ad51b3d4eab93\">senior royals</a> carrying out ceremonial public duties. But with Charles and Kate both temporarily sidelined, Harry self-exiled to California and Prince Andrew largely banished from view because of his association with sex offender Jeffrey Epstein, the royal \u201cFirm\u201d risks becoming severely overstretched.</p><p>William and Camilla are both expected to take on extra public engagements during the king\u2019s treatment.</p><p>There are no current plans to call on the \u201ccounsellors of state\u201d \u2014 senior royals, including the queen and the heir to the throne \u2014 to deputize for the monarch on constitutional duties such as signing legislation and receiving ambassadors.</p><p>___</p><p>Associated Press writer Danica Kirka contributed to this story.</p><p>___</p><p>Find more of AP\u2019s coverage of King Charles III at <a href=\"https://apnews.com/hub/royalty\">https://apnews.com/hub/royalty</a></p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/britain-king-charles-cancer-diagnosis-f787d38ddbb436186c5427e839fd055b",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 5,
+            "reason": "The document primarily discusses the health condition of King Charles III, specifically his recent cancer diagnosis and its implications. It also touches on the health of other royal family members, such as Kate, Princess of Wales, who is recovering from surgery. The document provides detailed information about the king's diagnosis, treatment, and the impact on his duties, which are all directly related to the topic of health."
+        }
+    }
+}

@@ -1,0 +1,84 @@
+site_name: BenchmarkQED
+
+theme:
+  name: material
+  icon:
+    logo: octicons/ai-model-24
+  palette:
+    - scheme: default
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+
+    - scheme: slate
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  features:
+    - content.code.copy
+    - content.code.select
+    - navigation.footer
+    - navigation.tabs
+
+plugins:
+  - search
+  - exclude-search:
+      exclude:
+        - "example_notebooks/autoe_example_data/**"
+      exclude_unreferenced: true
+  - mkdocs-jupyter:
+      execute: false
+  - mkdocs-typer2:
+      pretty: true
+
+nav: 
+  - Home: 
+    - Welcome: index.md
+    - Developing: developing.md
+  - CLI:
+    - AutoQ: cli/autoq.md
+    - AutoE: cli/autoe.md
+    - LLM Configuration: cli/llm_config.md
+    - Config Init: cli/config_init.md
+  - Notebooks:
+    - AutoQ: notebooks/autoq.ipynb
+    - AutoE: notebooks/autoe.ipynb
+    - AutoD: notebooks/autod.ipynb
+  - Datasets: datasets.md
+  
+repo_url: https://github.com/microsoft/benchmark-qed
+repo_name: benchmark-qed
+copyright: >
+  &copy; 2025 Microsoft&nbsp;|&nbsp;
+  <a href="https://go.microsoft.com/fwlink/?LinkId=521839">Privacy</a>&nbsp;|&nbsp;
+  <a href="https://go.microsoft.com/fwlink/?LinkId=2259814">Consumer Heath Privacy</a>&nbsp;|&nbsp;
+  <a onclick="window.manageConsent();">Cookies</a>&nbsp;|&nbsp;
+  <a href="https://go.microsoft.com/fwlink/?LinkID=206977">Terms of Use</a>&nbsp;|&nbsp;
+  <a href="https://www.microsoft.com/trademarks">Trademarks</a>
+
+extra:
+  polyfills:
+    - "https://wcpstatic.microsoft.com/mscc/lib/v2/wcp-consent.js"
+    
+extra_javascript:
+  - "scripts/create_cookie_banner.js"
+
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - attr_list
+  - md_in_html
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.tabbed:
+      alternate_style: true
+      combine_header_slug: true
+      slugify: !!python/object/apply:pymdownx.slugs.slugify
+        kwds:
+          case: lower

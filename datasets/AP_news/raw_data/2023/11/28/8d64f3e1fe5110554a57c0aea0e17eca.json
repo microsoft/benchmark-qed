@@ -1,0 +1,230 @@
+﻿{
+    "altids": {
+        "itemid": "8d64f3e1fe5110554a57c0aea0e17eca",
+        "etag": "8d64f3e1fe5110554a57c0aea0e17eca_2a4aza0c0",
+        "friendlykey": "763215020296",
+        "referenceid": "EU--France-Smoking"
+    },
+    "version": 2,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2023-11-28T18:13:22Z",
+    "firstcreated": "2023-11-28T11:37:52Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "ednote": "Eds: UPDATES: Fixes typo. With AP Photos.",
+    "editorialtypes": [
+        "Lead"
+    ],
+    "signals": [
+        "newscontent"
+    ],
+    "title": "EU--France-Smoking",
+    "headline": "France to ban smoking on beaches as it seeks to avoid 75,000 tobacco-related deaths per year",
+    "headline_extended": "France's government plans to ban smoking on all beaches, in public parks, forests and some other public areas",
+    "slugline": "AP-EU--France-Smoking, 2nd Ld-Writethru",
+    "description_summary": "France's government plans to ban smoking on all beaches, in public parks, forests and some other public areas. The measures are part of a national anti-tobacco plan presented by the health minister, who says tobacco products cause 75,000 avoidable deaths a year in France. He says the government will introduce legislation next year to enlarge the scope of places where fines can be levied for smoking. He says bans on smoking on beaches and parks will become \u201ca general rule.\u201d Legislators are also looking to ban single-use disposable e-cigarettes, with an initial vote on a draft law to outlaw them scheduled in the National Assembly next month.",
+    "located": "PARIS",
+    "datelinelocation": {
+        "city": "Paris",
+        "countrycode": "FRA",
+        "countryname": "France",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                2.3488,
+                48.85341
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2023 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "france smoking ban tobacco health"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "i",
+            "name": "i"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "32f6ce4087aa10048a5be9f06a797907",
+            "name": "Forests",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 55
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "48612b807c2b4b93bbbacbf54f547ad5",
+            "name": "Crime",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 64
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86aad5207dac100488ecba7fa5283c3e",
+            "name": "Politics",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 74
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Editorial",
+            "editorial_subject": "Health",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "bb2d2c5f441a452cb24bb511a2ab5eea",
+            "name": "World news",
+            "creator": "Editorial",
+            "editorial_subject": "World news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "organisation": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e82ba7e7a58c4920be15a27488152f49",
+            "name": "France government",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 46
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "6620e8187d5b100482d3c076b8e3055c",
+            "name": "France",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661850e07d5b100481f4c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "01f56e0e654841eca2e69bf2cbcc0526",
+                "name": "Nation"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    2,
+                    46
+                ]
+            },
+            "relevance": 86,
+            "parentnames": [
+                "Europe"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "661850e07d5b100481f4c076b8e3055c",
+            "name": "Europe",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "associations": {
+        "1": {
+            "altids": {
+                "itemid": "f0171c1b916a4dd4a6b80f9f3bd0334f"
+            },
+            "type": "picture"
+        },
+        "2": {
+            "altids": {
+                "itemid": "f61a36c007c64d37b32534549261e3d8"
+            },
+            "type": "picture"
+        }
+    },
+    "body_nitf": "<p>PARIS (AP) \u2014 France will <a href=\"https://apnews.com/article/france-law-banning-smoking-forests-climate-4dfd808f27f7fcb70408a8a7809c19de\">ban smoking</a> on all beaches, in public parks, forests and some other public areas as part of a national anti-tobacco plan presented by the health minister on Tuesday.</p><p>Tobacco products cause 75,000 avoidable deaths a year in France, Minister of Health and Prevention Aur\u00e9lien Rousseau said on BFM television. The government will introduce legislation at the start of next year to enlarge the scope of places where fines can be levied for smoking, he said.</p><p>\u201cBeaches, parks, around schools -\u2013 lots of places had started these experiments and now, it\u2019s true, we\u2019re heading to a general rule to show our determination,\u201d he said.</p><p>Legislators also intend to outlaw <a href=\"https://apnews.com/article/france-ban-disposable-vapes-cb78aecdebd14bd47266bdf9f8cc4ce6\">single-use disposable e-cigarettes</a>, with an initial vote on a draft law to ban them expected in the National Assembly next month.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/france-smoking-ban-tobacco-health-8d64f3e1fe5110554a57c0aea0e17eca",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 5,
+            "reason": "The document discusses France's new anti-tobacco measures, including banning smoking on beaches and other public areas, as well as plans to outlaw single-use disposable e-cigarettes. These measures are directly related to public health, aiming to reduce the 75,000 tobacco-related deaths per year in France. The focus on legislation to improve health outcomes makes the document highly relevant to the topic of Health."
+        }
+    }
+}

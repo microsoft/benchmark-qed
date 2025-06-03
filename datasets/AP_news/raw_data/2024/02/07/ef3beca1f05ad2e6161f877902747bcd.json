@@ -1,0 +1,354 @@
+﻿{
+    "altids": {
+        "itemid": "ef3beca1f05ad2e6161f877902747bcd",
+        "etag": "ef3beca1f05ad2e6161f877902747bcd_4a8aza0c0",
+        "friendlykey": "647476301928",
+        "referenceid": "EU--Britain-Royals"
+    },
+    "version": 4,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2024-02-08T04:35:46Z",
+    "firstcreated": "2024-02-07T13:35:40Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "ednote": "Eds: UPDATES: Adds video and more photos.",
+    "editorialtypes": [
+        "Lead"
+    ],
+    "signals": [
+        "newscontent"
+    ],
+    "title": "EU--Britain-Royals",
+    "headline": "Prince William thanks public for messages to King Charles and Kate, says they mean 'a great deal'",
+    "headline_extended": "Prince William has returned to royal duties for the first time since his father King Charles III announced his cancer diagnosis and his wife, Kate, was hospitalized for abdominal surgery",
+    "slugline": "BC-EU--Britain-Royals, 4th Ld-Writethru",
+    "description_summary": "Prince William has returned to royal duties for the first time since his father King Charles III announced his cancer diagnosis and his wife, Kate, was hospitalized for abdominal surgery. William performed an investiture ceremony at Windsor Castle on Wednesday before attending a gala fundraising dinner for London\u2019s Air Ambulance Charity. The 41-year-old prince thanked the public for their messages of support for Charles and Kate, saying they \u201cmeant a great deal to us all.\u201d William had temporarily retreated from public-facing duties to help care for his wife and their children following his wife\u2019s operation. But the king is stepping back from his task of being among his subjects to focus on getting better. And William's presence is needed more than ever.",
+    "bylines": [
+        {
+            "by": "By DANICA KIRKA",
+            "title": "Associated Press"
+        }
+    ],
+    "located": "LONDON",
+    "datelinelocation": {
+        "city": "London",
+        "countrycode": "GBR",
+        "countryname": "United Kingdom",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                -0.12574,
+                51.50853
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "prince william king charles iii cancer royals"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "person": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f8955706b58c4b71901d46201750aa48",
+            "name": "King Charles III",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "GOVERNMENT_FIGURE",
+                "PERSON",
+                "ROYALTY"
+            ],
+            "relevance": 58
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "00f5b3b58e2246bda5876a4b62fe0fbb",
+            "name": "Kate Middleton",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "ROYALTY",
+                "PERSON"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "00f3318c4bae4a8da43016d8573c28be",
+            "name": "Tom Cruise",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "MOVIE_ACTOR",
+                "ENTERTAINMENT_FIGURE",
+                "PERSON"
+            ],
+            "relevance": 35
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "1b145ec16d324e31a17d0741aa228c12",
+            "name": "Prince Harry",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "GOVERNMENT_FIGURE",
+                "PERSON",
+                "ROYALTY"
+            ],
+            "relevance": 84
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "i",
+            "name": "i"
+        },
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "e",
+            "name": "e"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 45
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "90aeac5089ef10048f63d56c852d093e",
+            "name": "Royalty",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 96
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "16cb0ba3e6d24d97ace39f5a1924669a",
+            "name": "Entertainment",
+            "creator": "Editorial",
+            "editorial_subject": "Entertainment",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Editorial",
+            "editorial_subject": "Health",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "bb2d2c5f441a452cb24bb511a2ab5eea",
+            "name": "World news",
+            "creator": "Editorial",
+            "editorial_subject": "World news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e293fee87d6b10048fe8ba7fa5283c3e",
+            "name": "Wales",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "66219fb07d5b100482e2c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "d83e15f769714aab9d49a03eab919128",
+                "name": "Constituent country"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -3.5,
+                    52.5
+                ]
+            },
+            "relevance": 67,
+            "parentnames": [
+                "United Kingdom"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "661850e07d5b100481f4c076b8e3055c",
+            "name": "Europe",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "associations": {
+        "1": {
+            "altids": {
+                "itemid": "d4a301e9183a4864a9b372782b0bd199"
+            },
+            "type": "video"
+        },
+        "2": {
+            "altids": {
+                "itemid": "81ce1f22aeb24580be1d54bc6197772a"
+            },
+            "type": "picture"
+        },
+        "3": {
+            "altids": {
+                "itemid": "567453347d7e426e837562f2d305b91b"
+            },
+            "type": "picture"
+        },
+        "4": {
+            "altids": {
+                "itemid": "3c8e1476b95c4d9abeeeb97e4b9bb060"
+            },
+            "type": "picture"
+        },
+        "5": {
+            "altids": {
+                "itemid": "d121d1d303344f9a9f1268e4bdbc129a"
+            },
+            "type": "picture"
+        },
+        "6": {
+            "altids": {
+                "itemid": "fc406a493e7340edaab7eaafc685d2e8"
+            },
+            "type": "picture"
+        },
+        "7": {
+            "altids": {
+                "itemid": "2139bbd39ffa4a8ca78ce5e9335af29a"
+            },
+            "type": "picture"
+        },
+        "8": {
+            "altids": {
+                "itemid": "18dbb17af04f4892b4583988f2853db6"
+            },
+            "type": "picture"
+        },
+        "9": {
+            "altids": {
+                "itemid": "43f0fab790ae444c9ff82bbdcb16e3b9"
+            },
+            "type": "picture"
+        },
+        "10": {
+            "altids": {
+                "itemid": "11420da8933e4abfa3d82096f6df304b"
+            },
+            "type": "picture"
+        },
+        "11": {
+            "altids": {
+                "itemid": "845a6cbf74ed41edbc1a07b4f0786e63"
+            },
+            "type": "picture"
+        },
+        "12": {
+            "altids": {
+                "itemid": "533429a242b84972841aeedce582b294"
+            },
+            "type": "picture"
+        }
+    },
+    "body_nitf": "<p>LONDON (AP) \u2014 <a href=\"https://apnews.com/hub/prince-william\">Prince William</a> returned to royal duties Wednesday for the first time since his father, <a href=\"https://apnews.com/hub/king-charles-iii\">King Charles III</a>, announced <a href=\"https://apnews.com/article/king-charles-iii-prince-william-cancer-challenges-85b71186a7553fc5f54589a42a886b1f\">his cancer diagnosis</a> and his wife, Kate, was <a href=\"https://apnews.com/article/uk-princess-kate-abdominal-surgery-5fc9e0e3b59954a2cceb6b1a7edf31a7\">hospitalized for abdominal surgery</a>.</p><p>Speaking about his families' health scares in public for the first time, the 41-year-old heir to the throne thanked the public for their \u201ckind messages of support\" at a charity gala dinner. Earlier in the day, he performed an investiture ceremony at Windsor Castle.</p><p>\u201cI\u2019d like to take this opportunity to say thank you for the kind messages of support for Catherine and for my father, especially in recent days,\" William told the gala dinner for London's Air Ambulance Charity. \u201cIt means a great deal to us all.\u201d</p><p>\u201cIt\u2019s fair to say the past few weeks have had a rather medical focus, so I thought I\u2019d come to an air ambulance function to get away from it all,\" he added jokingly.</p><p>The royal, who is a former air ambulance helicopter pilot, met fellow pilots and chatted with guests including Hollywood star Tom Cruise at the black-tie event.</p><p>William temporarily stepped away from public duties last month to help care for Kate and their three young children following her operation for an undisclosed condition. The Princess of Wales, formerly <a href=\"https://apnews.com/article/entertainment-arts-and-entertainment-prince-philip-london-europe-a1668accc67638478e993b10e7824840\">Kate Middleton</a>, isn\u2019t expected to resume public duties until April.</p><p>Charles\u2019 cancer diagnosis earlier this week is putting <a href=\"https://apnews.com/video/royalty-united-kingdom-london-wales-queen-elizabeth-ii-1827863371cd4877aff1c3e845efa3d5\">extra pressure on the royal family</a>, with the king suspending his public appearances to focus on treatment and recovery. While receiving treatment for an unspecified form of cancer, Charles will continue with behind-the-scenes work such as reviewing and signing state papers.</p><p>\u201cHis absence is putting a lot of pressure on the other members of the royal family, who are certainly up to it,\u201d said Sally Bedell Smith, author of \u201cPrince Charles: The Passions and Paradoxes of an Improbable Life.\u201d \u201cAnd having one of the great stars of the royal family, the Princess of Wales, in recuperation from a surgery\u201d magnifies those strains.</p><p>Prime Minister Rishi Sunak is expected to call the king Wednesday evening to wish him well as he recovers. In-person audiences are expected to resume later this month.</p><p>Charles\u2019 illness comes at an awkward time for the House of Windsor.</p><p>The king, who <a href=\"https://apnews.com/article/king-charles-iii-british-throne-ab21181c92dbb154a29bad12075662e9\">ascended the throne</a> just 17 months ago, has pledged to reduce the cost of the monarchy, in part by keeping a lid on the number of \u201cworking royals\u201d whose public duties are supported by taxpayer funds.</p><p>But with two of the most visible family members out sick, it will be more challenging for the family to keep up.</p><p>In addition to the widely publicized pomp and ceremony of royal processions and state visits, the Windsors attend hundreds of little-known events every year to recognize the accomplishments of the general public and mark local events such as the opening of libraries and community centers. Hundreds of charities cherish royal appearances, which give visibility and credibility to their good work among potential donors.</p><p><a href=\"https://apnews.com/article/king-charles-iii-birthday-monarchy-ff1d632d43b9fd7924ffe0008585770e\">The 75-year-old king</a> was seen in public for the first time since his cancer diagnosis when he left his offices at Clarence House on Tuesday after a brief reunion with his younger son, Prince Harry.</p><p><a href=\"https://apnews.com/article/britain-king-charles-cancer-diagnosis-f787d38ddbb436186c5427e839fd055b\">Harry arrived in London from California</a> less than 24 hours after Buckingham Palace announced the king\u2019s cancer diagnosis. The meeting has raised hopes that the pair can repair their troubled relationship after Harry publicly criticized the royal family for unconscious racism and complained about the way his American biracial wife, former actor Meghan Markle, was treated by palace officials.</p><p>Harry and Meghan, once seen as stars of the royal family who could help the Windsors connect with a younger generation, walked away from royal duties in 2020 and now live in California.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/prince-william-king-charles-iii-cancer-royals-ef3beca1f05ad2e6161f877902747bcd",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 4,
+            "reason": "The document primarily focuses on the royal family's recent health issues, including King Charles III's cancer diagnosis and Kate Middleton's abdominal surgery. It also discusses the impact of these health issues on their public duties and the additional pressure on other family members. While the document includes some information about royal duties and public appearances, the central theme revolves around health-related matters affecting the royal family."
+        }
+    }
+}

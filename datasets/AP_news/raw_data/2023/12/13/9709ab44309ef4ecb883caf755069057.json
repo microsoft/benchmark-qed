@@ -1,0 +1,202 @@
+﻿{
+    "altids": {
+        "itemid": "9709ab44309ef4ecb883caf755069057",
+        "etag": "9709ab44309ef4ecb883caf755069057_0a2aza0c0",
+        "friendlykey": "574714640805",
+        "referenceid": "MO--Opioids-Database-Missouri"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2023-12-13T22:56:40Z",
+    "firstcreated": "2023-12-13T22:56:40Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "MO--Opioids-Database-Missouri",
+    "headline": "Missouri launches a prescription drug database to help doctors spot opioid addictions",
+    "headline_extended": "Missouri now has a statewide database to help doctors track opioid prescriptions",
+    "slugline": "AP-MO--Opioids-Database-Missouri",
+    "description_summary": "Missouri now has a statewide database to help doctors track opioid prescriptions. The program launched Wednesday. It's aimed at helping health care providers identify possible prescription drug addiction. Doctors and pharmacists can check the database to see if patients have been receiving painkillers and other opioids from multiple providers. Prescription information in the database can only be used for patient care and cannot be shared with law enforcement. Missouri in 2021 became the last state to adopt a statewide prescription drug monitoring program. It's taken about two years to implement.",
+    "located": "JEFFERSON CITY, Mo.",
+    "datelinelocation": {
+        "city": "Jefferson City",
+        "countryareacode": "MO",
+        "countryareaname": "Missouri",
+        "countrycode": "USA",
+        "countryname": "United States",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                -92.17352,
+                38.5767
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2023 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "opioids painkillers Missouri prescription drug addiction"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "fb629770cf154f91964e1789d2dd836e",
+            "name": "Opioids",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 52
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "9c750296cbfa4fdd89e9a32848825b29",
+            "name": "Prescription drugs",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 90
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 90
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e237be707de410048fffdf092526b43e",
+            "name": "Medication",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 71
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Editorial",
+            "editorial_subject": "Health",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "bd8c35d082c4100486d5df092526b43e",
+            "name": "Missouri",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -92.50046,
+                    38.25031
+                ]
+            },
+            "relevance": 91,
+            "parentnames": [
+                "United States"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "bd8c35d082c4100486d5df092526b43e",
+            "name": "Missouri",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "body_nitf": "<p>JEFFERSON CITY, Mo. (AP) \u2014 Missouri on Wednesday launched a statewide database of opioid prescriptions aimed at helping doctors identify possible addiction.</p><p>Under the program, pharmacists now must report when they provide drugs listed as controlled substances. The information is collected in a database that doctors and other pharmacists can check to see if patients have been receiving opioids from multiple providers.</p><p>Prescription information in the database can only be used for patient care and cannot be shared with law enforcement.</p><p>The Missouri Legislature in 2021 <a href=\"https://apnews.com/article/michael-brown-health-medication-government-and-politics-6b6a5493a559b2c4441eceacdcd50d97\">passed a law</a> creating the program after years of <a href=\"https://apnews.com/5c4b9508e5b866a32dc27206bc5a2c16\">resistance</a> from a small number of skeptical lawmakers who raised concerns about sensitive patient data being misused.</p><p>Missouri was the last state to adopt such a database statewide.</p><p>Most Missouri health care providers had already been sharing controlled substance information with a St. Louis County database following local buy-in from 75 cities and other municipalities.</p><p>Advocates argued that a more expansive program would give lawmakers greater oversight and prevent people from loading up on painkillers in uncovered areas.</p><p>The St. Louis County database now will be absorbed into the statewide system.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/opioids-painkillers-missouri-prescription-drug-addiction-9709ab44309ef4ecb883caf755069057",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 5,
+            "reason": "The document discusses the launch of a statewide prescription drug database in Missouri aimed at helping doctors identify opioid addiction. This is directly related to health as it involves measures to monitor and control the prescription of controlled substances, which is a significant public health issue. The document also touches on legislative actions and the integration of local databases into a statewide system, all of which are relevant to the topic of health."
+        }
+    }
+}

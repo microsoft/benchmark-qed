@@ -1,0 +1,203 @@
+﻿{
+    "altids": {
+        "itemid": "6a8ba93dbc34e5ce59b1a918a8932d5e",
+        "etag": "6a8ba93dbc34e5ce59b1a918a8932d5e_0a2aza0c0",
+        "friendlykey": "493118422211",
+        "referenceid": "MN--Editorial Rdp"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Opinion",
+    "language": "en",
+    "versioncreated": "2024-04-24T11:10:40Z",
+    "firstcreated": "2024-04-23T15:38:24Z",
+    "editorialrole": "FullStory",
+    "fixture": {
+        "code": "21ea4067bb274c3b805353fb2b99ba70",
+        "name": "Editorial Roundup"
+    },
+    "pubstatus": "usable",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "MN--Editorial Rdp",
+    "headline": "Editorial Roundup: Minnesota",
+    "slugline": "BC-MN--Editorial Rdp",
+    "bylines": [
+        {
+            "by": "By The Associated Press"
+        }
+    ],
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "Editorial Rdp"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "6acadae087b51004859b957095691f3e",
+            "name": "Recycling",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 43
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "31f4c0688adb10048f839a38be1dd83e",
+            "name": "Consumer products and services",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 55
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "1b29d45f8e8e4c008e8a58fe6f92a753",
+            "name": "Government programs",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 81
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "4f95136e072e41c6a81e8fa820e26e9c",
+            "name": "Children",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 36
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "c8e409f8858510048872ff2260dd383e",
+            "name": "Business",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 63
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e231c7187de410048fd7df092526b43e",
+            "name": "Mental health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 72
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "9f12355082c4100486addf092526b43e",
+            "name": "Minnesota",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -94.25055,
+                    46.25024
+                ]
+            },
+            "relevance": 90,
+            "parentnames": [
+                "United States"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "9f12355082c4100486addf092526b43e",
+            "name": "Minnesota",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "body_nitf": "<p>Minneapolis Star Tribune. April 20, 2024.</p><p>Editorial: Minnesota is losing the race on mental health care</p><p>A new state study concludes that reimbursement provided by medical programs hasn\u2019t kept pace with the cost of providing care. So it makes zero sense to let a cut passed in 2023 take effect.</p><p>There\u2019s probably never a good time to cut reimbursement to Minnesota\u2019s mental health providers. But there are particularly precipitous times to do so, and this is one of them.</p><p>From 2005 to 2023, the number of licensed beds in children\u2019s residential treatment facilities statewide decreased from 2,474 to 1,586, according to <a href=\"https://www.aspiremn.org/\">AspireMN</a>, a St. Paul-based advocacy organization. Earlier this week, a physician with Children\u2019s Minnesota, the state\u2019s largest pediatric health system, made clear the decline\u2019s harmful consequences at a news conference.</p><p>\u201cIn 2023, 12,000 children statewide boarded in hospitals. Kids boarding at Children\u2019s Minnesota collectively spent more than 1,600 days stuck because the appropriate mental health treatment setting was not available to them,\u201d said Dr. Gigi Chawla, vice president and chief of general pediatrics at Children\u2019s.</p><p>Adult mental health providers are also struggling, with North Memorial Health <a href=\"https://www.startribune.com/north-memorial-laying-off-103-workers-cutting-outpatient-mental-health-in-robbinsdale/600352627/\">recently announcing</a> it will close outpatient mental health services August at its Robbinsdale medical center.</p><p>Unless Minnesota lawmakers take action this session, an ill-advised reimbursement cut passed last year will soon exacerbate this care crisis. That\u2019s an outcome they should swiftly work to avoid.</p><p>The state needs more care options for those suffering from mental illnesses, not fewer. But that\u2019s the likely outcome if the mistake lawmakers made in 2023 isn\u2019t remedied.</p><p>The error came when legislators passed a policy that too swiftly sunsets critical access payments for mental health clinics and providers. The changes kick in Jan. 1, 2025, and total more than $25 million over three years, according to the <a href=\"https://www.mnpsych.org/index.php?option=com_dailyplanetblog&view=entry&year=2014&month=01&day=30&id=103:the-mental-health-legislative-network\">Minnesota Mental Health Legislative Network</a>, a consortium of about 30 state providers and advocacy groups.</p><p>The rate add-on has been in place since 2007 and is considered a policy Band-Aid to address a chronic problem: low reimbursement rates for patients enrolled in Medicaid, the joint federal-state medical assistance program for the poor. In Minnesota, the programs are known as Medical Assistance and MinnesotaCare.</p><p>While low reimbursement is an issue for all medical services for public program enrollees, it\u2019s especially acute when it comes to mental health.</p><p>Many people eligible for Medicaid struggle with mental illness or addiction. \u201cNearly 40% of the nonelderly adult Medicaid population (13.9 million enrollees) had a mental health or substance use disorder (SUD) in <a href=\"https://www.kff.org/medicaid/issue-brief/demographics-and-health-insurance-coverage-of-nonelderly-adults-with-mental-illness-and-substance-use-disorders-in-2020/\">2020</a>,\u201d reports KFF, a respected nonpartisan health policy organization.</p><p>In turn, that makes Medicaid \u201cthe single-largest payer for mental health services in the United States,\u201d according to federal officials.</p><p><a href=\"https://files.kff.org/attachment/fact-sheet-medicaid-state-MN\">KFF estimates</a> Minnesota\u2019s Medicaid enrollment at 1.4 million. So the sunset cut would be felt widely by mental health providers, whose operating margins are already thin because their clientele includes many Medicaid enrollees. That puts the onus on state lawmakers, who set reimbursements, to delay or eliminate the 2023 sunset.</p><p>\u201cMental health care provider organizations like ours depend on critical access payments to fund current program-related costs. This includes wages, benefits and other program-related costs, such as interpreters,\u201d the CEOs of six Minnesota mental health providers said in statement provided to an editorial writer this week.</p><p>The Minnesota Hospital Association (MHA) also weighed in, noting that inaction would have consequences for the entire state health care system. The trade organization notes that the scarcity of community-based mental health treatment makes the state\u2019s nonprofit health care systems \u201cprimary providers of mental health services,\u201d which in turn results in long wait times for care, boarding crises in emergency rooms and increased risks to staff who care for patients in a setting not intended for this type of care.</p><p>To be fair, lawmakers in 2023 <a href=\"https://www.startribune.com/minnesota-lawmakers-set-to-send-mayo-friendly-health-budget-nurse-staffing-bills-to-governor/600276887/\">did pass a 3% rate boost</a> to mental health providers for state program enrollees. But it was hardly sufficient to cover providers\u2019 shortfall between care costs and reimbursement.</p><p>The apparent logic behind the critical access funding sunset was that lawmakers would come back in 2024 after the release of a state report on mental health care rates and make further fixes based on the report\u2019s findings.</p><p>That <a href=\"https://mn.gov/dhs/assets/Final%20Rate%20Study%20Report_tcm1053-610638.pdf\">report</a> came out in January. It makes clear that reimbursement provided by the state hasn\u2019t kept pace with inflation and doesn\u2019t cover the cost of providing care, sometimes not even close. In one case, the study recommended nearly tripling the reimbursement for residential care provided to those struggling with addiction.</p><p>But adjusting the rates as the study recommends comes with a massive price tag. Implementation, if it began in 2025, would cost the state about $820 million over three years, the state Department of Human Services estimates. After implementation, these costs would run about $300 million to $400 million per year.</p><p>That price tag is likely a key reason why broader rate reform isn\u2019t happening this year when belt-tightening has been a priority. It will take fortitude to tackle in future sessions.</p><p>Until then, it makes no sense to cut mental health care rates further. At a minimum, the sunset should be delayed or eliminated, or other workarounds found, with additional emergency relief for mental health providers given serious consideration.</p><p>___</p><p>Mankato Free Press. April 23, 2024.</p><p>Editorial: Legislation on recycling electronics makes sense</p><p>We produce a lot of electronic waste \u2014 from old computers and smartphones to TV monitors and printers.</p><p>China, the United States and India are the top producers of electronic waste and Minnesotans contribute mightily, with more than 266 million pounds of electronic waste every year.</p><p>As we celebrated Earth Day this week, it\u2019s a good time to consider ways we can reuse and recycle electronics.</p><p>According to a study last year, only about 24% of Minnesota electronics waste gets captured for recycling.</p><p>It\u2019s estimated that there is $2.8 billion worth of metals in Minnesota\u2019s electronic waste stream every year.</p><p>A bill being debated at the Minnesota Capitol would boost recycling and help keep e-waste from going to landfills. The bill would update the state\u2019s current electronics waste law, which was passed back in 2007. That bill focused mostly on televisions and computers.</p><p>The proposed bill would cover 100% of electronic waste and make recycling electronics free for all Minnesotans. To pay for the program, it would add a 3.2% retail fee on most electronics when they are sold. Cell phones would have a flat 90-cent fee. While those options make sense as user fees, other reasonable options should also be considered.</p><p>That would prevent the problem of Minnesotans taking electronics to recycling sites and then finding out they have to pay a fee to have them accepted for recycling. Too often people then simply decide to throw the old electronics in the trash rather than paying the fee.</p><p>Electronics make up 2% of the total material going into landfills. There are electronics recyclers in the state that remove lots of valuable metals from devices and they can handle all the electronic waste in the state.</p><p>That\u2019s better than throwing electronics in landfills or incinerators where they send toxic materials into the air or possibly groundwater.</p><p>The proposed legislation makes sense. Properly caring for electronics when they\u2019re at the end of their life costs money. Discarding them improperly causes pollution to the air and water.</p><p>Paying a small tax or using other reasonable funding options when purchasing electronics to ensure we can recycle them when they are no longer usable is good legislation.</p><p>Charging people to throw away electronic waste can discourage them from properly disposing of it.</p><p>END</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/6a8ba93dbc34e5ce59b1a918a8932d5e",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 4,
+            "reason": "The document contains two editorials, one of which is highly relevant to the topic of health. The first editorial discusses the mental health care crisis in Minnesota, including issues with reimbursement rates, the impact on mental health providers, and the consequences for patients. This is directly related to the topic of health. The second editorial, however, focuses on legislation regarding the recycling of electronic waste, which is not relevant to the topic of health. Given that a significant portion of the document is highly relevant to health, but not all of it, the overall rating should reflect this balance."
+        }
+    }
+}

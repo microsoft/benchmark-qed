@@ -1,0 +1,216 @@
+﻿{
+    "altids": {
+        "itemid": "88461569ff1c8a56281992be434bec28",
+        "etag": "88461569ff1c8a56281992be434bec28_0a4aza0c0",
+        "friendlykey": "267410386507",
+        "referenceid": "LT--Mexico-Drugstores Fentanyl"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2023-12-08T22:59:30Z",
+    "firstcreated": "2023-12-08T22:59:29Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "LT--Mexico-Drugstores Fentanyl",
+    "headline": "Mexico raids and closes 31 pharmacies in Ensenada that were selling fentanyl-laced pills",
+    "headline_extended": "Mexican authorities have raided and closed 31 drug stores in the Baja California coastal city of Ensenada, after they were detected selling false or fentanyl-laced pills",
+    "slugline": "BC-LT--Mexico-Drugstores Fentanyl",
+    "description_summary": "Mexican authorities have raided and closed 31 drug stores in the Baja California coastal city of Ensenada, after they were detected selling false or fentanyl-laced pills. Marines and health inspection authorities seized 4,681 boxes of medications. The pills may have been offered for sale without proper safeguards, may have been faked or may contain fentanyl. The Health Department said tests are being conducted on the merchandise. It represented one of the first times Mexican authorities have acknowledged what researchers pointed out almost a year ago: that Mexican pharmacies were offering controlled medications like Oxycodone, Xanax or Adderall, but the pills were often fentanyl-laced fakes.",
+    "located": "MEXICO CITY",
+    "datelinelocation": {
+        "city": "Mexico City",
+        "countrycode": "MEX",
+        "countryname": "Mexico",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                -99.12766,
+                19.42847
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2023 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "Mexico fentanyl ensenada pharmacies raids"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "i",
+            "name": "i"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "fb629770cf154f91964e1789d2dd836e",
+            "name": "Opioids",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 97
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e237be707de410048fffdf092526b43e",
+            "name": "Medication",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 97
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 97
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "bb2d2c5f441a452cb24bb511a2ab5eea",
+            "name": "World news",
+            "creator": "Editorial",
+            "editorial_subject": "World news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "71071d107f4f10048f70df092526b43e",
+            "name": "Mexico City",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661af0c07d5b10048239c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "9d26a20b35f0484a891740f8189d4c7b",
+                "name": "City"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -99.12766,
+                    19.42847
+                ]
+            },
+            "relevance": 40,
+            "parentnames": [
+                "Mexico"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "661af0c07d5b10048239c076b8e3055c",
+            "name": "Mexico",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "6618c9f87d5b10048204c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "01f56e0e654841eca2e69bf2cbcc0526",
+                "name": "Nation"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -102,
+                    23
+                ]
+            },
+            "relevance": 67,
+            "parentnames": [
+                "Central America"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "661850e07d5b100481f5c076b8e3055c",
+            "name": "Latin America and Caribbean",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "body_nitf": "<p>MEXICO CITY (AP) \u2014 Mexican authorities said Friday they have raided and closed 31 pharmacies in Baja California\u2019s coastal city of Ensenada, after they were detected selling fake or fentanyl-laced pills.</p><p>Marines and health inspection authorities seized 4,681 boxes of medications that may have been offered for sale without proper safeguards, may have been faked and may contain <a href=\"https://apnews.com/hub/synthetic-opioids\">fentanyl</a>.</p><p>\u201cThis measure was taken due to the irregular sales of medications contaminated with fentanyl, which represents a serious public health risk,\u201d the Navy said in a press statement.</p><p>Mexico's health authorities are conducting tests on the seized merchandise. Ensenada is located about 60 miles (100 kms) south of the border city of Tijuana.</p><p>The announcement represents one of the first times Mexican authorities have acknowledged what U.S. researchers pointed out almost a year ago: that Mexican pharmacies were offering controlled medications like Oxycodone, Xanax or Adderall, but the pills were often fentanyl-laced fakes.</p><p>Authorities inspected a total of 53 pharmacies, and found the suspected fakes in 31 of them. They slapped temporary suspension signs on the doors of those businesses.</p><p>Sales of the pills are apparently aimed at tourists.</p><p>In August, <a href=\"https://apnews.com/article/mexico-pharmacies-dangerous-pills-sold-tourists-bb64a0f5ff23bf087cf40a8a22f94084\">Mexico shuttered 23 pharmacies</a> at Caribbean coast resorts after authorities inspected 55 drug stores in a four-day raid that targeted establishments in Cancun, Playa del Carmen and Tulum.</p><p>The Navy said the pharmacies usually offered the pills only to tourists, advertised them and even offered home-delivery services for them.</p><p>The Navy did not say whether the pills seized in August contained fentanyl, but said it found outdated medications and some for which there was no record of the supplier, as well as blank or unsigned prescription forms.</p><p>In March, the U.S. State Department <a href=\"https://apnews.com/article/fentanyl-mexico-drugs-travel-warning-us-2b51560cfed89d7cb8245dd2d4051c26\">issued a travel warning about sales of such pills</a>, and the practice appears to be widespread.</p><p>In February, the University of California, Los Angeles, announced that researchers there had found that 68% of the 40 Mexican pharmacies visited in four northern Mexico cities sold Oxycodone, Xanax or Adderall, and that 27% of those pharmacies were selling fake pills.</p><p>UCLA said the study, published in January, found that \u201cbrick and mortar pharmacies in Northern Mexican tourist towns are selling counterfeit pills containing fentanyl, heroin, and methamphetamine. These pills are sold mainly to U.S. tourists, and are often passed off as controlled substances such as Oxycodone, Percocet, and Adderall.\u201d</p><p>\u201cThese counterfeit pills represent a serious overdose risk to buyers who think they are getting a known quantity of a weaker drug,\u201d Chelsea Shover, assistant professor-in-residence of medicine at the David Geffen School of Medicine at UCLA, said in February.</p><p>The U.S. State Department travel warning in March said the counterfeit pills being sold at pharmacies in Mexico \u201cmay contain deadly doses of fentanyl.\u201d</p><p>Fentanyl is a synthetic opioid far more powerful than morphine, and it has been blamed for about <a href=\"https://apnews.com/article/mexico-fentanyl-epidemic-overdoses-26f735a54ee0ba075c394ce85aef03d0\">70,000 overdose deaths per year in the United States</a>. Mexican cartels produce it from precursor chemicals smuggled in from China, and then often press it into pills designed to look like other medications.</p><p>____</p><p>Follow AP\u2019s coverage of Latin America and the Caribbean at <a href=\"https://apnews.com/hub/latin-america\">https://apnews.com/hub/latin-america</a></p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/mexico-fentanyl-ensenada-pharmacies-raids-88461569ff1c8a56281992be434bec28",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 5,
+            "reason": "The document discusses the closure of pharmacies in Mexico that were selling fentanyl-laced pills, which poses a significant public health risk. It details the actions taken by Mexican authorities, the health risks associated with fentanyl, and the impact on tourists. The document also references studies and warnings related to the health dangers of counterfeit medications. Given the focus on public health risks, drug safety, and regulatory actions, the document is highly relevant to the topic of Health."
+        }
+    }
+}

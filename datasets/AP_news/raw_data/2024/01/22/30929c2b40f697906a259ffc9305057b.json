@@ -1,0 +1,207 @@
+﻿{
+    "altids": {
+        "itemid": "30929c2b40f697906a259ffc9305057b",
+        "etag": "30929c2b40f697906a259ffc9305057b_0a2aza0c0",
+        "friendlykey": "576765035349",
+        "referenceid": "WV--Virus Outbreak-West Virginia"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2024-01-22T20:15:45Z",
+    "firstcreated": "2024-01-22T20:15:44Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "ednote": "Eds: UPDATES: With AP Photos.",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "WV--Virus Outbreak-West Virginia",
+    "headline": "Former West Virginia health official pleads guilty in COVID-19 payment investigation",
+    "headline_extended": "A former West Virginia health official has pleaded guilty to lying about whether he verified a vendor's claims that they conducted COVID-19 tests for the state",
+    "slugline": "BC-WV--Virus Outbreak-West Virginia",
+    "description_summary": "A former West Virginia health official has pleaded guilty to lying about whether he verified a vendor's claims that they conducted COVID-19 tests for the state. Timothy Priddy admitted in federal court Monday that he made a false statement to investigators. He had been set to go to trial Tuesday. The indictment charged Priddy with lying to federal agents when he said he verified invoices for COVID-19 tests before approving them. Prosecutors say Priddy knew his statements were false. He faces up to five years in prison. Sentencing was set for May 9.",
+    "bylines": [
+        {
+            "by": "By JOHN RABY",
+            "title": "Associated Press"
+        }
+    ],
+    "located": "CHARLESTON, W.Va.",
+    "datelinelocation": {
+        "city": "Charleston",
+        "countryareacode": "WV",
+        "countryareaname": "West Virginia",
+        "countrycode": "USA",
+        "countryname": "United States",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                -81.63262,
+                38.34982
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "West Virginia COVID19 Priddy guilty"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "190245e5bb61478b8771dd1f86cbf424",
+            "name": "Indictments",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 53
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "b17e2751b26d4523a2c99d79e04747ee",
+            "name": "COVID-19 pandemic",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86aad5207dac100488ecba7fa5283c3e",
+            "name": "Politics",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 63
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Editorial",
+            "editorial_subject": "Health",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "130bcce882c81004895adf092526b43e",
+            "name": "West Virginia",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -80.50009,
+                    38.50038
+                ]
+            },
+            "relevance": 89,
+            "parentnames": [
+                "United States"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "130bcce882c81004895adf092526b43e",
+            "name": "West Virginia",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "associations": {
+        "1": {
+            "altids": {
+                "itemid": "d43af75d0c194dd8a54bc6f7aac7acdf"
+            },
+            "type": "picture"
+        }
+    },
+    "body_nitf": "<p>CHARLESTON, W.Va. (AP) \u2014 A former West Virginia state health official pleaded guilty Monday to lying about whether or not he verified vendor invoices from a company claiming to have conducted COVID-19 tests for the state.</p><p>In federal court Monday, Timothy Priddy admitted making a false statement to investigators in a case that had been set to go to trial Tuesday.</p><p>An <a href=\"https://apnews.com/article/covid-west-virginia-indictment-98bc93ce2268e1f325f382c0f3c344d3\">indictment filed in October</a> charged Priddy with lying to federal agents in August 2022 when he said he verified a vendor\u2019s invoices for performing COVID-19 tests as part of a back-to-school program before approving them. Priddy knew his statements were false because he made no such verification efforts, according to prosecutors.</p><p>Priddy faces up to five years in prison and a $250,000 fine. Sentencing was set for May 9.</p><p>Priddy, who held various managerial positions with the state Bureau for Public Health\u2019s Center for Threat Preparedness, left his job the day the indictment was announced.</p><p>Prosecutors said federal investigators were trying to determine whether one or more vendors providing COVID-19 tests and mitigation services to the state overbilled or otherwise received federal payments they shouldn't have through the state Department of Health and Human Resources.</p><p>Prosecutors said the vendor involved in Priddy's case reported the results of about 49,000 COVID-19 tests between October 2020 and March 2022 but submitted invoices reflecting the cost of about 518,000 test kits. The indictment did not name the vendor, but said the company was from out of state and provided test kits, laboratory analysis and held community testing events throughout West Virginia.</p><p>Vendors were required to report test results so officials would have accurate information about the number of COVID-19 infections and any geographical hot spots, the indictment said.</p><p>The West Virginia health department has said a contract with the company ended in October 2022 and that the agency cooperated fully with federal investigators.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/west-virginia-covid19-priddy-guilty-30929c2b40f697906a259ffc9305057b",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 3,
+            "reason": "The document discusses a legal case involving a former West Virginia health official who pleaded guilty to lying about verifying vendor invoices related to COVID-19 testing. While the document is primarily focused on the legal and investigative aspects of the case, it does touch upon health-related topics such as COVID-19 testing, the role of the state health department, and the importance of accurate health data reporting. However, the main focus is not on health itself but on the misconduct and legal proceedings. Therefore, it is somewhat relevant to the topic of health but not highly focused on health issues or information."
+        }
+    }
+}

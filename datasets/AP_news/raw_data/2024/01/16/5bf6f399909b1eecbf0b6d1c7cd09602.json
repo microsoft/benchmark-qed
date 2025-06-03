@@ -1,0 +1,276 @@
+﻿{
+    "altids": {
+        "itemid": "5bf6f399909b1eecbf0b6d1c7cd09602",
+        "etag": "5bf6f399909b1eecbf0b6d1c7cd09602_0a2aza0c0",
+        "friendlykey": "905070694843",
+        "referenceid": "PA--Editorial Rdp"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Opinion",
+    "language": "en",
+    "versioncreated": "2024-01-16T12:10:37Z",
+    "firstcreated": "2024-01-16T00:17:16Z",
+    "editorialrole": "FullStory",
+    "fixture": {
+        "code": "21ea4067bb274c3b805353fb2b99ba70",
+        "name": "Editorial Roundup"
+    },
+    "pubstatus": "usable",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "PA--Editorial Rdp",
+    "headline": "Editorial Roundup: Pennsylvania",
+    "slugline": "BC-PA--Editorial Rdp",
+    "bylines": [
+        {
+            "by": "By The Associated Press"
+        }
+    ],
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "Editorial Rdp"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "person": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "8823d62ebb8748e4a6cccf14219df9a5",
+            "name": "Robert F. Kennedy Jr.",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "NEWSMAKER",
+                "PERSON"
+            ],
+            "relevance": 36
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "6f94c2a64ce742b1b29723e11f7ccac7",
+            "name": "Josh Shapiro",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "POLITICIAN",
+                "PERSON"
+            ],
+            "relevance": 43
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a6331b54c46e4ca8b79fa40fada95db5",
+            "name": "Donald Trump",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "POLITICIAN",
+                "PERSON"
+            ],
+            "relevance": 42
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "9cce666bb29344b8ba61f3732d971d32",
+            "name": "Disease outbreaks",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 60
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86aad5207dac100488ecba7fa5283c3e",
+            "name": "Politics",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 74
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86aee4307dac10048901ba7fa5283c3e",
+            "name": "Elections",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 48
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "523699d088e910048f43f8851349f9bd",
+            "name": "Government regulations",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 41
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "organisation": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "d4b82a78857310048a38ff2260dd383e",
+            "name": "United States Senate",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 34
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "bf6e2e80760d10048f8ae6e7a0f4673e",
+            "name": "U.S. Republican Party",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 74
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "661981907d5b10048215c076b8e3055c",
+            "name": "Samoa",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661850e07d5b100481f3c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "01f56e0e654841eca2e69bf2cbcc0526",
+                "name": "Nation"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -172.17831,
+                    -13.8031
+                ]
+            },
+            "relevance": 50,
+            "parentnames": [
+                "Oceania"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "0b394d7082c71004887fdf092526b43e",
+            "name": "Pennsylvania",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -76.90567,
+                    40.27245
+                ]
+            },
+            "relevance": 90,
+            "parentnames": [
+                "United States"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "0b394d7082c71004887fdf092526b43e",
+            "name": "Pennsylvania",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "body_nitf": "<p>LNP/LancasterOnline. January 10, 2024.</p><p>Editorial: Amos Miller isn\u2019t a hero fighting for \u2018food freedom.\u2019 He\u2019s a serial violator of essential food safety rules that other farmers follow.</p><p>Amos Miller is not a heroic David to the government\u2019s Goliath. He is a serial violator of federal and state health and safety regulations.</p><p>\u2014 He has slaughtered animals without the requisite Federal Grant of Inspection issued to slaughtering operations by the U.S. Department of Agriculture\u2019s Food Safety and Inspection Service. This was in violation of the Federal Meat Inspection Act, as was his selling of misbranded meat and poultry products.</p><p>\u2014 He has sold raw milk containing the bacteria known as listeria. Listeria can cause an infection called listeriosis, which is particularly dangerous for pregnant women and their newborns, older adults and people with weakened immune systems. <a href=\"https://lancasteronline.com/news/local/feds-tainted-raw-milk-from-lancaster-co-farm-linked-to-1-death-in-florida-1/article_08886782-ed51-11e5-a177-1b97efcfcb7e.html\">In 2016, raw milk from Miller\u2019s Organic Farm</a> was linked to the 2014 death of a person in Florida.</p><p>\u2014 His retail operation is unlicensed. He does not even have the required state permit to sell raw milk.</p><p>Miller is not a champion of liberty \u2014 he\u2019s someone who seems to believe that the rules and regulations to which other farmers adhere don\u2019t apply to him. There\u2019s a word for that, and it\u2019s arrogance, not courage. And it\u2019s an arrogance that puts others at serious risk.</p><p>Miller\u2019s disdain for government regulation makes him a threat not just to consumers, but to other farmers. An outbreak of foodborne illness caused by raw milk, for instance, could harm the businesses of other Lancaster County dairy farmers, who are operating on thin profit margins and couldn\u2019t withstand a hit to the county\u2019s reputation as a producer of safe and healthy foods.</p><p>There\u2019s a very good reason why the nation\u2019s food supply is subject to government regulation \u2014 so that people don\u2019t die.</p><p>Miller clearly understands marketing, because he labeled his farm \u201corganic,\u201d which appeals to consumers seeking minimally processed foods.</p><p>But if he marketed his eggnog as \u201cE. coli Eggnog,\u201d would anyone buy it? Of course not. So he shouldn\u2019t be able to sell raw eggnog containing Shiga toxin-producing E. coli.</p><p>Two things: Shiga toxin-producing E. coli, according to the <a href=\"https://www.cdc.gov/ecoli/general/index.html\">Centers for Disease Control and Prevention</a>, can cause severe stomach cramps, bloody diarrhea and a type of kidney failure. And E. coli, as LNP ' LancasterOnline\u2019s Nephin reported, \u201calmost always originate in feces.\u201d</p><p>In the wake of Miller\u2019s most recent clash with authorities, more than 1,600 people have given more than $115,000 to <a href=\"https://lancasteronline.com/news/local/latest-government-action-against-upper-leacock-farmer-amos-miller-prompts-floods-of-donations-again/article_f0fb5018-ac0e-11ee-80e6-c3eaef6abb2e.html?itm_source=parsely-api&utm_source=general&utm_medium=list&utm_campaign=People%20Are%20Reading\">an online</a> site raising funds for the farmer. Would those folks willingly drink Miller\u2019s eggnog despite the risk? We fear that some would, because they\u2019ve gotten <a href=\"https://lancasteronline.com/opinion/editorials/not-bound-by-facts-tucker-carlson-turns-a-lancaster-county-farmer-into-a-conservative-hero/article_f6f4493a-2b0d-11ed-9d0c-e7636fcbfbf0.html\">drunk on the twisted narrative</a> that Miller is <a href=\"https://lancasteronline.com/news/local/embattled-amish-farmers-saga-with-usda-becomes-grist-for-conservative-media/article_ad97b98e-2630-11ed-bf68-172014e8a0c1.html\">a folk hero</a> fighting for \u201cfood freedom\u201d in the face of evil regulators and their annoying insistence on adherence to the science of food safety.</p><p>The Pennsylvania Department of Agriculture <a href=\"https://lancasteronline.com/news/local/pa-ag-department-wants-farmer-amos-miller-to-succeed-but-frustrated-at-failure-to-follow/article_08907eca-af3d-11ee-94a1-6b0c86b65c9b.html\">has given Miller plenty of chances to comply</a>.</p><p>Nevertheless, the false narrative persists. And this is a tragedy, because, as we\u2019ve seen in recent years, the rejection of science has led to so much unnecessary suffering and death.</p><p>Consider the use of hydroxychloroquine, which was promoted as a COVID-19 treatment by former President Donald Trump despite the reservations of infectious disease experts. <a href=\"https://scrippsnews.com/stories/drug-trump-touted-as-miracle-covid-treatment-linked-to-17-000-deaths/\">As Scripps News reported</a> this week, a new study by French researchers suggests that the use of that anti-malaria drug in COVID-19 patients from March to July 2020 was associated with an 11% increase in patients\u2019 mortality rate and an estimated 16,990 deaths across six countries. (The drug was briefly approved for emergency use by the U.S. Food and Drug Administration in 2020, but that authorization was revoked after a few months.)</p><p>The Philadelphia region now is dealing with <a href=\"https://www.inquirer.com/opinion/editorials/mmr-vaccines-measles-outbreak-antivaxxers-health-children-20240109.html\">a measles outbreak</a>. In 2019, an outbreak of measles in the tiny South Pacific island nation of Samoa killed 83 people, most of them children. Independent presidential candidate Robert F. Kennedy Jr. was among the anti-vaccination activists who <a href=\"https://lancasteronline.com/opinion/editorials/parents-in-samoa-are-burying-their-children-who-have-died-from-measles-please-vaccinate-your/article_d2e9ca4e-1560-11ea-a800-ffa9d969ab2c.html\">shamelessly ginned up baseless fears</a> about the measles, mumps and rubella vaccine, and discouraged parents in Samoa \u2014 and across the United States \u2014 from immunizing their children against measles and other vaccine-preventable diseases.</p><p>When officials from the Pennsylvania Department of Agriculture, and their counterparts in the USDA, do their job well, they do it almost invisibly. We don\u2019t often stop to laud them for working to ensure the safety of the food we consume. But they\u2019re doing essential work and we ought to be thankful.</p><p>As demonstrated at the Pennsylvania Farm Show, which is now underway in Harrisburg, so much goes into the process of getting food from fields and barns to our tables. Testing food for dangerous pathogens and holding food producers to account for safety lapses are part of that process.</p><p>Responsible farmers appreciate the need for food safety, because they care about their customers. They don\u2019t see sensible regulation as harassment. Because it isn\u2019t.</p><p>___</p><p>Pittsburgh Post-Gazette. January 12, 2024.</p><p>Editorial: Pennsylvania GOP should thank Shapiro for voter registration expansion</p><p>The Pennsylvania Republican Party may have to eat some crow \u2014 and thank Gov. Josh Shapiro for an electoral boost. It\u2019s been roughly four months since Mr. Shapiro made voter registration at PennDOT Drivers License Centers an automatic \u201copt-out\u201d system, and the results are in: Registrations spiked 65% compared to the same period last year, a healthy bump brought on by a reasonable policy.</p><p>And, contrary to Republican hysterics, it was independents who nabbed the most new voters, not Democrats. And the GOP came in second.</p><p>To break it down, approximately 13,800 new registrants opted to remain independent, followed by 13,200 for the Republicans and 12,200 for the Democrats. These results showcase a broad-based boost in registrations that match the state\u2019s purple politics \u2014 and show that Republicans need not fear making it easier to vote.</p><p>The results, of course, make the immediate GOP outcry against Mr. Shapiro\u2019s policy look rather silly. State Sen. Cris Dush, R-Jefferson, labeled the move tyrannical, while former President Donald Trump claimed the measure was \u201ca disaster for the Election of Republicans.\u201d Which says something unflattering about his own confidence in winning over the American people fair and square.</p><p>The Republican reaction also reveals that the party doesn\u2019t understand its own voter base. Preoccupied with the notion that all younger voters lean left, are more likely to be unregistered and will be swept up by an automatic voter policy, it was blind to opportunity.</p><p>After all, the current GOP strategy is based in driving turnout among people, especially in overlooked blue-collar towns and neighborhoods, who feel disenfranchised by the political system \u2014 and are among the most likely to be unregistered, and to get registered while renewing their license.</p><p>Despite the impression made by online echo chambers, real-world voters aren\u2019t as neatly categorized, predictable or hyper-partisan. Most don\u2019t align comfortably with either main party. Rather than fighting pro-voting measures, the GOP should be trying to win these votes \u2014 many, if not most, of which should be naturals for what is functionally the anti-establishment party.</p><p>This is a replay of the GOP\u2019s self-sabotaging reaction to the expansion of mail-in voting, here and elsewhere. Instead of trying to win mail-in votes, Republican leaders actively dissuaded their voters from participating, and raised doubts about the system\u2019s security. As a result, Democrats now lock in millions more early votes, while Republicans play catch-up \u2014 and pray for good weather on Election Day.</p><p>Only in recent months has the party changed course and begun encouraging mail-in voting, but it\u2019s years behind the competition.</p><p>As for Mr. Shapiro\u2019s voter registration policy, simply said, it worked: By giving voters a subtle nudge toward civic engagement, more people registered to vote. And despite the Republican Party\u2019s cynical reaction, it has benefitted them most of all.</p><p>But the governor probably shouldn\u2019t expect a thank you card.</p><p>___</p><p>Pittsburgh Tribune Review. January 12, 2024.</p><p>Editorial: Pennsylvania will flood with campaign cash in 2024</p><p>We knew it was coming.</p><p>The 2024 election year was bound to be some rough weather for Pennsylvania. It\u2019s a presidential year, after all, which means national campaign funds and political action committee money will fall like rain.</p><p>Presidential years also mean state and federal representatives will be on the ballot. Let\u2019s not forget state senate seats. Some of those will be shuffled or face new contenders after the 2020 census results and the periodic redrawing of legislative maps.</p><p>But Pennsylvania has another cloud on the horizon \u2014 the U.S. Senate race.</p><p>Just two years after a free-for-all that pitted unconventional political star John Fetterman against surgeon-turned-talk show host Mehmet Oz, the state will now be at the mercy of the fight for its second U.S. Senate seat.</p><p>Incumbent and Pennsylvania legacy politician Bob Casey Jr., D-Scranton, is seeking reelection. He has a challenger in Pittsburgh engineer Blaine Forkner for the Democratic nomination.</p><p>On the Republican side, former hedge fund CEO Dave McCormick is making a second run at the Senate after a strong showing against Oz in 2022 came down to a photo finish, court challenges and ultimately a McCormick concession. Two other Republicans announced, but neither Tariq Parvez or Cory Widmann are the kind of prominent GOP names who were drawn to the last race. There is still time, though \u2014 the filing deadline isn\u2019t until Feb. 13.</p><p>So far, Casey and McCormick are the ones accumulating cash \u2014 and that\u2019s what we foresaw in November when U.S. Sen. Joe Manchin, D-W.Va., announced he would not seek reelection.</p><p>\u201cLiterally, as goes Manchin, so goes the Senate. But without Manchin, the math becomes uncertain, and that makes the future of the Pennsylvania seat all the more important,\u201d we said at the time, predicting a tsunami of campaign money and, therefore, campaign ads in 2024.</p><p>That\u2019s being proven as McCormick reports $5.4 million in donations in the last quarter of 2023, plus $1 million of his own cash, for a $6.4 million total. That\u2019s the highest of any Senate candidate so far.</p><p>Casey\u2019s campaign apparatus has been in place far longer and is steadily chugging along with $3.6 million in the last quarter of 2023. That seems a lot smaller but is added to $3.2 million in the third quarter and $4 million in the second.</p><p>And none of that includes the real blizzard of cash that can blanket the airwaves and mailboxes with ads \u2014 the third-party PACs.</p><p>Brace yourself. It\u2019s going to be a long year.</p><p>___</p><p>Scranton Times-Tribune. January 14, 2024.</p><p>Editorial: Pa. needs to adequately fund indigent defense</p><p>A report issued this week by the Wren Collective is direct in its title: \u201cUnder-resourced And Ignored: Indigent Defense in Schuylkill County.\u201d</p><p>The 20-page report says it found \u201cmajor deficiencies\u201d in the county\u2019s indigent defense system \u2014 or its ability to provide legal representation to defendants who cannot afford it.</p><p>The report is further evidence that funding for public defenders is inadequate, and, as the Wren group notes, it\u2019s a phenomenon found not just in Schuylkill County, but throughout \u201crural counties\u201d in Pennsylvania.</p><p>Wren\u2019s report was timed to celebrate the 60th anniversary of Gideon v. Wainwright, a unanimous 1963 U.S. Supreme Court ruling that says the Sixth Amendment of the Constitution requires that states provide a lawyer to anyone facing criminal charges who can\u2019t afford one.</p><p>The report\u2019s key findings are that the county needs more resources for attorneys and support staff for the public defender office; that the office lacks adequate technology and funding for defense experts; that it lacks resources to provide immigration consultations; and that it needs resources to provide attorneys at arraignments.</p><p>On the latter, the report noted how it\u2019s common for a defendant to be \u201calone\u201d at a preliminary arraignment, which isn\u2019t illegal but is certainly concerning for a moment \u201cwhen the accused\u2019s liberty is at stake,\u201d as the Wren group put it.</p><p>___</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/5bf6f399909b1eecbf0b6d1c7cd09602",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 3,
+            "reason": "The document contains multiple editorials, but only one of them is directly related to health. The editorial from LNP/LancasterOnline discusses food safety violations by Amos Miller, including the sale of raw milk containing listeria and other health risks associated with his practices. This is highly relevant to the topic of health. The other editorials focus on political issues, voter registration, campaign funding, and indigent defense, which are not related to health."
+        }
+    }
+}

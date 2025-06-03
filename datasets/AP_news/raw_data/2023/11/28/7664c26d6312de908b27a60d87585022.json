@@ -1,0 +1,262 @@
+﻿{
+    "altids": {
+        "itemid": "7664c26d6312de908b27a60d87585022",
+        "etag": "7664c26d6312de908b27a60d87585022_0a2aza0c0",
+        "friendlykey": "719046184187",
+        "referenceid": "IL--Editorial Rdp"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Opinion",
+    "language": "en",
+    "versioncreated": "2023-11-28T17:24:49Z",
+    "firstcreated": "2023-11-28T17:24:48Z",
+    "editorialrole": "FullStory",
+    "fixture": {
+        "code": "21ea4067bb274c3b805353fb2b99ba70",
+        "name": "Editorial Roundup"
+    },
+    "pubstatus": "usable",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "IL--Editorial Rdp",
+    "headline": "Editorial Roundup: Illinois",
+    "slugline": "BC-IL--Editorial Rdp",
+    "bylines": [
+        {
+            "by": "By The Associated Press"
+        }
+    ],
+    "copyrightnotice": "Copyright 2023 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "Editorial Rdp"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "394e30d2e3154229adc5f260b483adaa",
+            "name": "Premature births",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 84
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "91017718872a10048e35d7c656897a02",
+            "name": "Birth rates",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 56
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "6cd98adfc84d405eadec8ca81bd37df4",
+            "name": "Access to health care",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86aad5207dac100488ecba7fa5283c3e",
+            "name": "Politics",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 64
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "organisation": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "c05dca58760d10048f93e6e7a0f4673e",
+            "name": "U.S. Democratic Party",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 33
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "ba51939a3d4a4555852d27ad8a15ce28",
+            "name": "Atlantic Ocean",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "8f378274236c4df79f481d1fbccac174"
+            ],
+            "locationtype": {
+                "code": "0bd52df049f3428ba5cf170e2037d13d",
+                "name": "Ocean"
+            },
+            "relevance": 39,
+            "parentnames": [
+                "Bodies of water"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "3ed491d1fc0f450a9894ce39f306ede4",
+            "name": "Lake Michigan",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "8f378274236c4df79f481d1fbccac174"
+            ],
+            "locationtype": {
+                "code": "23137ef0d0904c9f97f0ef95ab57e378",
+                "name": "Lake"
+            },
+            "relevance": 39,
+            "parentnames": [
+                "Bodies of water"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "788b364882f110048df3df092526b43e",
+            "name": "District of Columbia",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "9d26a20b35f0484a891740f8189d4c7b",
+                "name": "City"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -77.00025,
+                    38.91706
+                ]
+            },
+            "relevance": 73,
+            "parentnames": [
+                "United States"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "2c6a186082b010048379df092526b43e",
+            "name": "Illinois",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -89.25037,
+                    40.00032
+                ]
+            },
+            "relevance": 91,
+            "parentnames": [
+                "United States"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "2c6a186082b010048379df092526b43e",
+            "name": "Illinois",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "body_nitf": "<p>Champaign News-Gazette. November 26, 2023.</p><p>Editorial: PAC\u2019s shenanigans another sign of political class\u2019 disrespect for law, Illinois</p><p>No one is ever going to brag about the effective oversight of campaign spending in Illinois. Campaign disclosure rules were written to be ineffective, and the Illinois State Board of Elections designed to be pretty much toothless.</p><p>But the board does do its job within the limits of its authority. The Chicago Tribune recently reported what can happen when it does.</p><p>Connected Democrats funded a political action committee \u2014 All for Justice \u2014 to elect two Democrats to the seven-member Illinois Supreme Court.</p><p>The PAC spent more than $7.3 million to put Justices Elizabeth Rochford and Mary Kay O\u2019Brien in office.</p><p>But it failed to disclose the millions it spent until nearly three months after the November 2022 general election.</p><p>As a consequence, the PAC faced substantial fines for its violations of state law.</p><p>The committee responded by transferring nearly $150,000 to another committee, the Chicago Independent Alliance.</p><p>The Tribune story reported that the committees have the same address as the Andreou & Casson law firm, which was founded by Luke Casson.</p><p>Who is Casson? State election records show he\u2019s the chairman and treasurer of All for Justice. He\u2019s further identified as counsel for Senate President Don Harmon and the political director of Oak Park\u2019s Democratic Party, \u201cHarmon\u2019s political base,\u201d according to the Tribune.</p><p>Casson was considerably less than forthcoming when contacted by the Tribune. His responses included, \u201cI didn\u2019t know,\u201d \u201cI had no knowledge (of the fines)\u201d and \u201cThat\u2019s none of your business.\u201d</p><p>Asked if he made the transfer to avoid what turned out to be a $99,500 fine for noncompliance, he said, \u201cIt wasn\u2019t. I just said we don\u2019t have any comment.\u201d</p><p>Campaign disclosure rules are intended to allow voters to find out who\u2019s backing whom in our costly election process.</p><p>All for Justice spent more than $7 million on behalf of two candidates, roughly a third of total campaign expenditures.</p><p>Spending on that level obviously contributed to the wins by Rochford and O\u2019Brien. Rochford collected 55 percent of the vote in her race while O\u2019Brien won narrowly with 51.1 percent.</p><p>The elections board isn\u2019t giving up on collecting the fine. It contends that administrative rules make PAC officers \u2014 in this case Casson \u2014 \u201cpersonally liable\u201d for payment.</p><p>People will just have to wait and see how that works out. But the transfer speaks volumes about the committee leaders\u2019 desire to follow the law.</p><p>Millions of dollars flowed into All for Justice from organized labor, lawyers and lawyer groups and Democratic politics. But Harmon, Casson\u2019s political buddy, was among the biggest donors, contributing $700,000 from campaign committees he controls.</p><p>Harmon declined to answer questions about the fine-dodging transfer. But he did issue a bold statement saying \u201call political committees\u201d have a \u201cresponsibility\u201d and \u201cduty\u201d to comply with the law.</p><p>Politics is, by its nature, a tough and sometimes dirty business. But the transfer ploy demonstrates a level of clever sleaze and evasion showing \u2014 once again \u2014 how little respect the political class has for both the law and the people of Illinois.</p><p>___</p><p>Chicago Sun-Times. November 27, 2023.</p><p>Editorial: Thousands of babies born prematurely in Illinois are part of a deadly national trend</p><p>A new report by the March of Dimes underscores the need for elected officials, government and the healthcare system to do more to save lives, especially Black women and babies.</p><p>263.</p><p>That\u2019s the number of women in Illinois who died during pregnancy or within one year of giving birth over a three-year period, <a href=\"https://dph.illinois.gov/content/dam/soi/en/web/idph/publications/idph/topics-and-services/life-stages-populations/maternal-child-family-health-services/maternal-health/mmmr/maternal-morbidity-mortality-report2023.pdf\">according to a recent state report</a>.</p><p>718.</p><p>That\u2019s the number of infants who died in Illinois in 2022, <a href=\"https://www.cdc.gov/nchs/data/vsrr/vsrr033.pdf\">according to data released earlier this month by the U.S. Centers for Disease Control and Prevention</a>. Nationwide, there were 20,538 deaths last year, a 3% increase over 2021 \u2014 the largest percentage increase in infant mortality in more than two decades.</p><p>If that\u2019s not enough evidence we are failing pregnant mothers and their babies, <a href=\"https://www.marchofdimes.org/peristats/reports/united-states/report-card\">a new report by the March of Dimes</a> offers still more sobering figures. The report gives Illinois a grade of D+ for the number of preterm births in 2022. Out of 128,315 births last year, 10.57% \u2014 or 12,139 babies \u2014 were born prematurely, putting our state\u2019s youngest residents and their mothers at risk for all sorts of health issues, not to mention premature death.</p><p>And these numbers continue to be even more alarming for women and babies of color, especially Black women and infants. The preterm birth rate for Black women in Illinois is 1.6 times higher than the rate among all other women, according to the March of Dimes report.</p><p>\u201cIt\u2019s unfortunate that we only see a modest improvement\u201d in pre-births nationally and locally, Elizabeth Oladeinde, director of maternal and child health for the March of Dimes\u2019 Chicago office, told us. \u201cWe know more work needs to be done.\u201d</p><p>A major reason Illinois received such low marks for preterm births: Too many pregnant women lack access to health care, Oladeinde said.</p><p>Hospitals closing in the Chicago area have made it harder for women, particularly women of color, to regularly see health providers throughout their pregnancy \u2014 a key way to keep pregnant women healthy, leading to far fewer preterm births. Other hospitals \u2014 <a href=\"https://chicago.suntimes.com/business/2019/6/21/18700978/jackson-park-hospital-obstetrics-unit-closing\">Jackson Park Hospital and Medical Center</a>, St. Bernard Hospital and Advocate South Suburban Hospital \u2014 have reduced or eliminated maternal health services, Oladeinde notes.</p><p>Too little access to health care</p><p>\u201cYou have these (health care) deserts, and lack of care for the population in and around that area,\u201d forcing women to travel farther distances, making it harder for them to get the regular care they need, she said. Another factor: the ongoing staffing shortage among nurses, midwives and other health care providers, Oladeinde adds.</p><p>There is some good news about how we\u2019re doing: Illinois is one of 37 states, along with the District of Columbia, that has extended Medicaid health insurance coverage to low-income women from 60 days to one year postpartum. And Illinois is one of 39 states, plus Washington, D.C., to have adopted the Medicaid expansion, which allows expectant mothers greater access to preventive care during pregnancy.</p><p>Also, the state is one of 44 that has a federally funded mortality review committee that analyzes each maternal death to better understand and address the causes. The state\u2019s most recent report on these deaths, which covered 2018 through 2020, concluded that 91% of pregnancy-related deaths might have been preventable, <a href=\"https://chicago.suntimes.com/2023/11/2/23932253/pregnancy-mortality-rates-black-women-illinois-report\">our WBEZ colleague Kristen Schorsch reported this month</a>.</p><p>The March of Dimes\u2019 Oladeinde is right \u2014 \u201cwe are ahead of the game\u201d in these areas \u2014 but there is much more elected officials in Illinois and state government should be doing to improve the dismal numbers.</p><p>The state has said it will help pay for doula care, joining 11 states and D.C. that already reimburse non-medical companions who physically and emotionally support a woman throughout childbirth.</p><p>Another way the state can bring down the alarming number of mother and infant deaths is for the Illinois General Assembly to approve and Gov. J.B. Pritzker to sign a law that provides for paid family leave.</p><p>And the health care system \u2014 hospitals, licensing bodies, medical schools and others \u2014 should make tackling implicit bias a top priority by offering robust training and engaging in regular conversation about why some patients\u2019 health conditions routinely go undiagnosed or underdiagnosed. More awareness and action means more lives saved.</p><p>While the problem of preterm births and maternal and infant deaths may seem insurmountable, advocates like Oladeinde are right to remain optimistic.</p><p>\u201cWe have to keep moving ahead,\u201d she said. \u201cPreventing just one death is a win.\u201d</p><p>Saving women and babies\u2019 lives should be an easy goal to prioritize. Too many lives are depending on it.</p><p>___</p><p>Chicago Tribune. November 26, 2023.</p><p>Editorial: Wind farms in Lake Michigan make no economic sense. Springfield ought to sink that idea.</p><p>There\u2019s a bill floating around in Springfield that would establish a wind farm in the waters of Lake Michigan.</p><p>Residents in high-rises with lake views need not be alarmed. Nothing being envisioned poses a visual threat to their vistas. The turbines would go on the Far South Side, nearest to heavy industrial areas that aren\u2019t known for being picturesque.</p><p>The idea ought to be killed anyway for reasons having nothing to do with aesthetics. It\u2019s unneeded, prohibitively expensive and would be funded by hiking your electric bills, which already are considerably higher than they were a few years ago.</p><p>But let\u2019s start at the beginning.</p><p>Democratic state Sen. Robert Peters and state Rep. Marcus C. Evans Jr., both South Side lawmakers, last year introduced the measure, which would require the state to contract with the developers of the new wind power facility and have utilities charge customers accordingly. They argued the project, which would feature up to 12 turbines and generate up to 150 megawatts of power, would help the environment and also create jobs for the economically disadvantaged South Side.</p><p>The bill had some momentum in the spring session, passing the House on a convincing 85-21 vote. Ultimately, it stalled in the Senate.</p><p>So the General Assembly did what lawmakers do when they don\u2019t want to just say no to their colleagues. They passed a law requiring the Illinois Power Agency, the state body tasked with negotiating power procurement on behalf of utility customers, to study the issue along with several other energy projects wanting state help.</p><p>That report is due in March.</p><p>Lawmakers no doubt will wait for the IPA to weigh in before making any final decisions. But, unless they ignore economic rationality \u2014 something they\u2019ve been known to do, especially when it comes to energy policy \u2014 they will take a pass. The economics of offshore wind power, already poor when the bill surfaced, have grown considerably worse since then.</p><p>Consider that several major offshore wind projects planned in the Atlantic, off this nation\u2019s East Coast, have been deep-sixed or gone on life support in recent months. The problems are essentially the same in all cases. Costs have ballooned far higher than originally projected thanks to supply-chain snarls and sharply higher interest rates.</p><p>Danish wind power giant Orsted last month canceled two large developments planned off the southern coast of New Jersey, prompting Gov. Phil Murphy to accuse the company of breaking promises and jeopardizing its credibility.</p><p>Other planned projects off New York and Massachusetts either are tottering or returning to the drawing board.</p><p>In Massachusetts, developers of two massive wind farms have gone so far as to pay the state $108 million to free them of power-purchase contracts that had become financially infeasible. They intend to rebid with the state, at considerably higher prices.</p><p>There\u2019s a lot of debate right now about the future of wind power off the East Coast. Is the industry merely enduring a hiccup or are these issues killing Atlantic offshore wind in the cradle?</p><p>Most likely, wind farms in the Atlantic eventually will happen. The Biden administration is banking on substantial ocean development to meet its carbon goals. The Great Lakes are another story.</p><p>To date, there are no wind farms in the Midwestern portion of the Great Lakes. A relatively small 20-megawatt project proposed off Cleveland in Lake Erie is struggling to obtain financing and may need to be rethought.</p><p>There are simple reasons the oceans are a far better bet for siting wind power than the Great Lakes. First, saltwater doesn\u2019t freeze nearly as quickly as fresh water. Frozen lake waters add substantially to the cost of wind power and also hinder operations, making them potentially less efficient.</p><p>Then there\u2019s public acceptance. Oceanic wind farms can be located far enough out to sea that they can\u2019t be seen from the shore. That\u2019s not the case in Lake Michigan.</p><p>More generally in terms of energy policy, state lawmakers have resorted again and again over the past decade to promoting various clean-energy initiatives \u2014 typically in the form of electric-bill surcharges financing nuclear plant bailouts, utility-run energy efficiency programs, renewable energy, social equity in energy policy, etc. \u2014 that the last thing we need is yet another add-on to your monthly ComEd bill bankrolling something that provides so little bang for the buck.</p><p>The economics are so crummy that even some environmental groups oppose the bill. The Environmental Law & Policy Center in Chicago estimates the Lake Michigan project would require power prices of at least 20 cents per kilowatt-hour. Onshore wind power in Illinois is economic at prices more like 2 or 3 cents. That\u2019s quite the markup.</p><p>ELPC also believes, since the lake bed is held in public trust, that allowing it to be used for private gain potentially violates the law.</p><p>The economic development case for wind is poor as well. Wind power, once in operation, is a low employment industry. There are construction jobs, of course, but those are temporary. The industry\u2019s real job-creation engine is in manufacturing the turbines.</p><p>More practically, Illinois has lots of open land where more wind power can be installed far more cost effectively as the state strives to meet its ambitious clean-energy goals.</p><p>In Europe, where offshore wind has been a reality for years, domestic energy sources are less abundant, making the case for offshore wind more compelling.</p><p>Windmills in the lake are an idea whose time hasn\u2019t come. There\u2019s plenty of green-energy opportunity without messing with Lake Michigan.</p><p>END</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/7664c26d6312de908b27a60d87585022",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 3,
+            "reason": "The document contains three editorials, only one of which is directly related to health. The editorial from the Chicago Sun-Times discusses maternal and infant health issues in Illinois, including preterm births, maternal mortality, and healthcare access. This section is highly relevant to the topic of health. However, the other two editorials focus on political campaign finance issues and the economic feasibility of wind farms in Lake Michigan, which are not related to health. Therefore, while part of the document is highly relevant, the overall document includes significant content that is not relevant to the topic of health."
+        }
+    }
+}

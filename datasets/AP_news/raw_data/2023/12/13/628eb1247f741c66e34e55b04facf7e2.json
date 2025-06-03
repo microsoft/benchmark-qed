@@ -1,0 +1,353 @@
+﻿{
+    "altids": {
+        "itemid": "628eb1247f741c66e34e55b04facf7e2",
+        "etag": "628eb1247f741c66e34e55b04facf7e2_0a4aza0c0",
+        "friendlykey": "956755624351",
+        "referenceid": "CB--Caribbean-Latin America-Dengue Record"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2023-12-13T05:02:01Z",
+    "firstcreated": "2023-12-13T05:02:00Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "ednote": "Eds: UPDATES: With AP Photos.",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "CB--Caribbean-Latin America-Dengue Record",
+    "headline": "Millions infected with dengue this year in new record as hotter temperatures cause virus to flare",
+    "headline_extended": "Dengue is sweeping across the Western Hemisphere in numbers not seen since record-keeping began in 1980 as experts warn that rising temperatures and rapid urbanization are accelerating the pace of infections",
+    "headline_seo": "Millions infected with dengue as hotter temperatures cause virus to flare",
+    "slugline": "BC-CB--Caribbean-Latin America-Dengue Record",
+    "description_summary": "Dengue is sweeping across the Western Hemisphere in numbers not seen since record-keeping began in 1980 as experts warn that rising temperatures and rapid urbanization are accelerating the pace of infections. A record more than 4 million cases have been reported throughout the Americas and Caribbean so far this year, surpassing a previous record set in 2019. More than 2,000 deaths in that region also have been reported. Worldwide, more than 4.5 million cases of dengue have been reported. Experts believe that a global record set in 2019 of 5.2 million cases could be surpassed this year.",
+    "bylines": [
+        {
+            "by": "By D\u00c1NICA COTO",
+            "title": "Associated Press"
+        }
+    ],
+    "located": "SAN JUAN, Puerto Rico",
+    "datelinelocation": {
+        "city": "San Juan",
+        "countrycode": "PRI",
+        "countryname": "Puerto Rico",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                -66.10572,
+                18.46633
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2023 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "dengue deaths vaccines western hemisphere paho"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "i",
+            "name": "i"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "084dafb87f00100481c5f571351eed07",
+            "name": "Dengue fever",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 92
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 92
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Editorial",
+            "editorial_subject": "Health",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "8783d248894710048286ba0a2b2ca13e",
+            "name": "Climate and environment",
+            "creator": "Editorial",
+            "editorial_subject": "Climate and environment",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "bb2d2c5f441a452cb24bb511a2ab5eea",
+            "name": "World news",
+            "creator": "Editorial",
+            "editorial_subject": "World news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "organisation": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "8997c0688d7410048d178a3c53cbc603",
+            "name": "World Health Organization",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 32
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "6618c9f87d5b10048203c076b8e3055c",
+            "name": "Caribbean",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661850e07d5b100481f5c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "424cdfcd69d64fa6869055f7ebf10be4",
+                "name": "World region"
+            },
+            "relevance": 61,
+            "parentnames": [
+                "Latin America and Caribbean"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "661effd07d5b100482a2c076b8e3055c",
+            "name": "Peru",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661908787d5b10048204c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "01f56e0e654841eca2e69bf2cbcc0526",
+                "name": "Nation"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -76,
+                    -10
+                ]
+            },
+            "relevance": 35,
+            "parentnames": [
+                "South America"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "596f37d1c9a44a70a3ece634e6deb5a1",
+            "name": "Caribbean Sea",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "8f378274236c4df79f481d1fbccac174"
+            ],
+            "locationtype": {
+                "code": "61bb9878082348469a42017d7ec5533b",
+                "name": "Sea"
+            },
+            "relevance": 61,
+            "parentnames": [
+                "Bodies of water"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "6619faa87d5b1004821ec076b8e3055c",
+            "name": "Bahamas",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "6618c9f87d5b10048203c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "01f56e0e654841eca2e69bf2cbcc0526",
+                "name": "Nation"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -76,
+                    24
+                ]
+            },
+            "relevance": 35,
+            "parentnames": [
+                "Caribbean"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "661effd07d5b1004829cc076b8e3055c",
+            "name": "Brazil",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661908787d5b10048204c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "01f56e0e654841eca2e69bf2cbcc0526",
+                "name": "Nation"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -55,
+                    -10
+                ]
+            },
+            "relevance": 35,
+            "parentnames": [
+                "South America"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "661850e07d5b100481f5c076b8e3055c",
+            "name": "Latin America and Caribbean",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "associations": {
+        "1": {
+            "altids": {
+                "itemid": "0667af52d4f648e6925c95fdb36dde86"
+            },
+            "type": "picture"
+        },
+        "2": {
+            "altids": {
+                "itemid": "6d4d984e59bd4ed994fcc89d8a250f6a"
+            },
+            "type": "picture"
+        },
+        "3": {
+            "altids": {
+                "itemid": "14fc04f7f0724b11b6433c8e636488b7"
+            },
+            "type": "picture"
+        },
+        "4": {
+            "altids": {
+                "itemid": "31ea8dcfd59a4622a64dd768e0938fce"
+            },
+            "type": "picture"
+        },
+        "5": {
+            "altids": {
+                "itemid": "6c95d94c611e44b894963409ef7b54b4"
+            },
+            "type": "picture"
+        },
+        "6": {
+            "altids": {
+                "itemid": "00d917c702604f179f108333844d1a39"
+            },
+            "type": "picture"
+        }
+    },
+    "body_nitf": "<p>SAN JUAN, Puerto Rico (AP) \u2014 <a href=\"https://apnews.com/hub/dengue-fever\">Dengue</a> is sweeping across the Western Hemisphere in numbers not seen since record-keeping began more than four decades ago, with experts warning that rising temperatures and rapid urbanization are accelerating the pace of infections.</p><p>A record more than 4 million cases have been reported throughout the Americas and Caribbean so far this year, surpassing a previous record set in 2019, with officials from the Bahamas to Brazil warning of crowded clinics and new infections daily. More than 2,000 deaths in that region also have been reported.</p><p>\u201cThis year is the year we\u2019ve been seeing the most dengue in recorded history,\u201d said Thais dos Santos, adviser on surveillance and control of arboviral diseases with the Pan American Health Organization, the regional office of the World Health Organization in the Americas. She noted that record keeping began in 1980. \u201cVector borne diseases, especially these diseases that are transmitted by mosquitoes \u2026 provide us a really good sentinel of what is happening with climate change.\"</p><p>Poor sanitation and a lack of robust health systems have contributed to a rise in cases, but experts say droughts and floods linked to climate change are causing greater transmission of the virus, with stored water and heavy rains attracting mosquitoes.</p><p>Dr. Gabriela Paz-Bailey, chief of the dengue branch for the U.S. Centers for Disease Control and Prevention in Puerto Rico, noted that higher temperatures also are extending the mosquito's habitat and helping the virus develop faster inside the mosquito, leading to higher viral loads and higher probability of transmission.</p><p>\u201cThese infections are a symptom of some big underlying trends happening in the world,\u201d Dr. Jeremy Farrar, chief scientist of the World Health Organization, said in an interview. \u201cClimate change is seemingly so difficult to address, and so many countries are now becoming urbanized, I can see dengue and the other diseases\u2026becoming increasingly frequent and increasingly complex to deal with.\u201d</p><p>Dos Santos said officials are seeing \u201clots of new things\u201d as dengue spikes, including record temperatures, extended seasons and the spread of dengue farther north and south than usual. California, for example, reported its first two locally-acquired dengue cases this year, and Florida 138 such cases \u2014 a record for the state. Last year, Florida reported 65 cases, Paz-Bailey said.</p><p><a href=\"https://apnews.com/article/un-hottest-summer-climate-change-b7c7936070952da781af01288607b1f1\">This year\u2019s Northern Hemisphere summer was the hottest ever</a>, with August some 1.5 degrees Celsius (2.7 degrees Fahrenheit) warmer than pre-industrial averages. And so far, 2023 is the second hottest year on record, according to Copernicus, the European climate service.</p><p>Worldwide, more than 4.5 million cases of dengue had been reported as of early November, with more than 4,000 deaths reported in 80 countries. Farrar believes that a global record set in 2019 of 5.2 million cases could be surpassed this year.</p><p>\u201cDengue is something that the Americas need to be increasingly concerned about, but it\u2019s almost a global phenomenon now,\u201d he said.</p><p><a href=\"https://apnews.com/article/bangladesh-record-dengue-outbreak-c91bffe828798e71fded4386308f0890\">Countries like Bangladesh</a> are seeing a record number of cases and deaths. The government in the South Asian country has reported more than 313,700 cases and more than 1,600 deaths, the majority of them occurring within three days of hospitalization, according to published data.</p><p>The mosquito that carries dengue also has been identified in 22 European countries, with local spread of the disease seen in France, Italy and Spain. In August, the central African country of Chad reported its first-ever dengue outbreak.</p><p>Dengue affects some 129 countries, with roughly half the world\u2019s population at risk, according to the World Health Organization. The virus is transmitted mainly by infected female Aedes aegypti mosquitoes, which bites hosts to obtain protein for its eggs. The virus can cause crushing headaches, fever, vomiting, a rash and other symptoms. While most infected people don\u2019t get symptoms, severe cases can lead to plasma leakage and death.</p><p>What\u2019s worse, experts say, repeated infections means a higher risk of developing severe dengue.</p><p>While the mosquito that carries dengue also spreads chikungunya and the Zika virus, there is less circulation of the other two viruses because of past immunity, Paz-Bailey said, adding that it's very rare for a mosquito to carry two viruses at once.</p><p>In January, the World Health Organization warned that dengue poses a pandemic threat and is the world\u2019s fastest spreading mosquito-borne disease. While there are vaccines and <a href=\"https://apnews.com/article/dengue-mosquitoes-infectious-diseases-honduras-9ecf4ebc8a67937e9db7feb0901c861e\">specially bred mosquitoes containing a bacteria called Wolbachia</a> to fight dengue, there are no specific treatments for the virus once someone becomes infected.</p><p>It's unclear how many countries, if any, have requested vaccines from manufacturers, but the Pan American Health Organization said its immunization technical advisory group recently met to talk about dengue vaccines and would publish recommendations once they're finalized.</p><p>The Americas broke the previous regional record for dengue earlier this year, with Brazil, Argentina, Paraguay and Peru reporting the most cases worldwide. Peru <a href=\"https://apnews.com/article/2c4c267c414f28e70b13466fa26231a1\">declared a state of emergency in some areas</a> after reporting a historic number of cases.</p><p>The Caribbean also is battling a surge in cases, with the region reporting a 15% increase in confirmed cases by early October compared with the same period last year, according to the Caribbean Public Health Agency.</p><p>Officials on the French Caribbean islands of Guadeloupe and Martinique declared an epidemic in August that is still ongoing. Martinique, for example, is reporting an average of 800 cases a week on the island of some 394,000 inhabitants.</p><p>Meanwhile, Jamaica and the Bahamas declared an outbreak in September followed by Barbados in October.</p><p>\u201cThe associated risks and ripple effects must not be underestimated as outbreaks of dengue and other mosquito-borne diseases \u2026 pose a significant threat to health, tourism, as well as social and economic development,\u201d the Caribbean Public Health Agency said in a statement.</p><p>Impoverished countries struggle the most with dengue, with poor sanitation creating fertile breeding grounds for infected mosquitoes, a lack of air conditioning and screened windows allowing the insects to roam freely and rickety health systems groaning under a growing caseload.</p><p>Farrar, chief scientist for the World Health Organization, said dengue is very difficult to treat in part because patients often delay in seeking medical care and because the virus can progress so quickly. Caring for patients is tricky because staff must ensure they receive the correct amount of fluid, which requires a lot of time and monitoring, he said.</p><p>\u201cImagine that you have a thousand people like that requiring all that delicate clinical care. It can very quickly overwhelm a system,\u201d he said.</p><p>Claude Burton, a 70-year-old retiree who lives in Jamaica, knows first-hand about the strain on medical facilities. Last month, he began to feel increasingly worse until he finally visited a doctor.</p><p>After testing positive, he took a taxi for an hourlong ride from Ocho Rios to Kingston after the doctor advised he be hospitalized. The first hospital he visited turned him away, with staff telling him no beds were available. Then at the second hospital he went to, Burton spent two nights in a wheelchair until a bed freed up.</p><p>\u201cI was really bad,\u201d he recalled, adding that he had blood in his urine and ended up spending four nights at the hospital.</p><p>Dr. Georgiana Gordon-Strachan, director of the Tropical Metabolism Research Unit at the University of the West Indies in Jamaica, said the island\u2019s summer of 2023 provided the perfect conditions for its newest outbreak.</p><p>\u201cHeat is one of the drivers of dengue fever,\u201d she said.</p><p>Most worrisome is that the second strain of dengue \u2014 the most severe out of all four \u2014 is the dominant one currently circulating in Jamaica, she said.</p><p>To fight the virus, trucks are rumbling across Jamaica, Barbados and other Caribbean islands and fogging areas with a product that contains small amounts of insecticide. Health officials also keep urging people to discard old tires, plastic containers and other recipients that collect rainwater, as well as to sleep with netting over their beds and wear pants and long-sleeved shirts.</p><p>\u201cIt\u2019s really important that we talk more proactively about dengue since it\u2019s becoming such an important public health threat,\u201d Paz-Bailey said.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/dengue-deaths-vaccines-western-hemisphere-paho-628eb1247f741c66e34e55b04facf7e2",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 5,
+            "reason": "The document is highly relevant to the topic of Health. It discusses the widespread outbreak of dengue fever, a significant health issue, and provides detailed information on the number of cases, deaths, and the contributing factors such as climate change and urbanization. The document also covers the impact on healthcare systems, the symptoms and severity of the disease, and the measures being taken to combat it. All these aspects are directly related to public health concerns."
+        }
+    }
+}

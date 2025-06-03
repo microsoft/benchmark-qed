@@ -1,0 +1,295 @@
+﻿{
+    "altids": {
+        "itemid": "67ac67b4fed8434c5908ae89ca2a01f9",
+        "etag": "67ac67b4fed8434c5908ae89ca2a01f9_0a13aza0c0",
+        "friendlykey": "221747175181",
+        "referenceid": "US--California Governor-Abortion"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2024-02-25T21:36:43Z",
+    "firstcreated": "2024-02-25T21:36:42Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "US--California Governor-Abortion",
+    "headline": "California governor launches ads to fight abortion travel bans",
+    "headline_extended": "California Gov. Gavin Newsom has announced an ad campaign urging voters in several Republican-controlled states to speak up against laws designed to prohibit out-of-state travel for abortions",
+    "slugline": "BC-US--California Governor-Abortion",
+    "description_summary": "California Gov. Gavin Newsom has announced an ad campaign urging voters in several Republican-controlled states to speak up against laws designed to prohibit out-of-state travel for abortions. The multistate campaign will launch Monday with a TV commercial about a measure under consideration in Tennessee. The so-called \u201cabortion trafficking\u201d bill sponsored by GOP state legislators would make it a felony for an adult to recruit, harbor or transport a minor to get an abortion without parental consent. Newsom says the campaign is designed to boost Joe Biden and other Democrats who believe their support for access to abortion can be a winning issue at the polls.",
+    "located": "SACRAMENTO, Calif.",
+    "datelinelocation": {
+        "city": "Sacramento",
+        "countryareacode": "CA",
+        "countryareaname": "California",
+        "countrycode": "USA",
+        "countryname": "United States",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                -121.4944,
+                38.58157
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "California governor Newsom abortion politics travel"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "person": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "2fe690579a4042f5bbee491a75dfdc62",
+            "name": "Gavin Newsom",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "POLITICIAN",
+                "PERSON"
+            ],
+            "associatedstates": [
+                {
+                    "code": "789fdd8882af10048263df092526b43e",
+                    "name": "California"
+                }
+            ],
+            "relevance": 81
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "42fcd5108d2610048a34f7ae5e3ffd3e",
+            "name": "Joe Biden",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "POLITICIAN",
+                "PERSON"
+            ],
+            "relevance": 54
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "a",
+            "name": "a"
+        },
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "p",
+            "name": "p"
+        },
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86aad5207dac100488ecba7fa5283c3e",
+            "name": "Politics",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 68
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e22e35087de410048fc2df092526b43e",
+            "name": "Abortion",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 85
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86aad5207dac100488ecba7fa5283c3e",
+            "name": "Politics",
+            "creator": "Editorial",
+            "editorial_subject": "Politics",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Editorial",
+            "editorial_subject": "Health",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "organisation": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "496ed67ad179489a888a5b0900cf1c59",
+            "name": "California state government",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 47
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a683071898064531b69ad754d7bf12dd",
+            "name": "Tennessee state government",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 60
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "789fdd8882af10048263df092526b43e",
+            "name": "California",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -119.75126,
+                    37.25022
+                ]
+            },
+            "relevance": 98,
+            "parentnames": [
+                "United States"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "789fdd8882af10048263df092526b43e",
+            "name": "California",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "1885b7f082b01004835edf092526b43e",
+            "name": "Idaho",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "62532b5882c7100488cedf092526b43e",
+            "name": "Tennessee",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "associations": {
+        "1": {
+            "altids": {
+                "itemid": "04c12f341e384b1a8864e0d54c187eef"
+            },
+            "type": "picture"
+        }
+    },
+    "body_nitf": "<p>SACRAMENTO, Calif. (AP) \u2014 California Gov. Gavin Newsom on Sunday announced an advertising campaign to combat proposals in several Republican-controlled states to prohibit out-of-state travel for abortions and other reproductive care.</p><p>The multistate ad campaign and an online petition effort will launch Monday, beginning with a TV commercial about a measure under consideration in Tennessee. The so-called \u201cabortion trafficking\u201d bill sponsored by GOP state legislators would make it a felony offense for an adult to recruit, harbor or transport a minor to get an abortion without parental consent.</p><p>Newsom told NBC's \u201cMeet the Press\u201d that similar restrictions modeled on a law that has already passed in Idaho are also being proposed in Oklahoma and Mississippi.</p><p>\u201cThe conditions are much more pernicious than they even appear,\" Newsom said. \"These guys are not just restricting the rights, self-determination to bear a child for a young woman. But they\u2019re also determining their fate as it relates to their future in life by saying they can\u2019t even travel.\u201d</p><p>People who support the Tennessee measure say it could criminalize not only driving a minor to get an abortion, but also providing information about nearby abortion services or passing along which states have looser abortion laws.</p><p>Republican state Rep. Jason Zachary, who is co-sponsoring the proposal, has called it \u201csimply a parental rights bill.\u201d</p><p>Since the <a href=\"https://apnews.com/article/abortion-dobbs-roe-anniversary-rally-ff6196c80112b7c9d5e6822b1807bf3e\">U.S. Supreme Court overturned Roe v. Wade in 2022</a>, anti-abortion advocates have pushed states to ban abortion and find ways to block pregnant women and girls from crossing state lines to obtain the procedure.</p><p><a href=\"https://apnews.com/article/idaho-abortion-ban-doctors-leaving-f34e901599f5eabed56ae96599c0e5c2\">Idaho has already enacted</a> a so-called \u201cabortion trafficking\u201d law. The first-of-its-kind measure made it illegal to obtain abortion pills for a minor or help them leave the state for an abortion without parental knowledge and consent.</p><p>Newsom, a Democrat widely seen as a future presidential candidate, said his RightToTravel.org effort will be paid for by a national political action committee he launched last spring with $10 million from his state campaign funds. The effort, dubbed, the \u201cCampaign for Democracy,\u201d is designed to boost Joe Biden and other Democrats and the conservative Republican agenda, he said.</p><p>Democrats and left-leaning interest groups <a href=\"https://apnews.com/article/election-ivf-embryos-ruling-republicans-campaign-democrats-5fa61803333ab1ec1062835397c15570\">have banked on abortion rights as a major motivator</a> for voters in the upcoming presidential election and fight for control of Congress.</p><p>They believe supporting access to abortion <a href=\"https://apnews.com/article/abortion-2024-elections-republicans-ohio-virginia-90255a62d83ad9f1d86b407c9455bb0a\">can be a winning issue</a> as the debate widens to include increasing concerns over miscarriage care, access to medication, access to emergency care and in vitro fertilization treatments. A <a href=\"https://apnews.com/article/alabama-supreme-court-from-embryos-161390f0758b04a7638e2ddea20df7ca\">ruling this week by the Alabama Supreme Court</a> jeopardized future access to IVF.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/california-governor-newsom-abortion-politics-travel-67ac67b4fed8434c5908ae89ca2a01f9",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 4,
+            "reason": "The document discusses California Governor Gavin Newsom's campaign against abortion travel bans in several states. While the primary focus is on political actions and legal measures related to abortion, it also touches on broader health-related issues such as access to reproductive care, miscarriage care, and in vitro fertilization treatments. These topics are relevant to the broader category of health, particularly reproductive health. However, the document is more politically oriented than medically oriented, which slightly reduces its direct relevance to the health topic."
+        }
+    }
+}

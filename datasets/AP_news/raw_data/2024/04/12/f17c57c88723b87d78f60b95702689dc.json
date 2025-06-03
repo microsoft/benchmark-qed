@@ -1,0 +1,253 @@
+﻿{
+    "altids": {
+        "itemid": "f17c57c88723b87d78f60b95702689dc",
+        "etag": "f17c57c88723b87d78f60b95702689dc_0a12aza0c0",
+        "friendlykey": "953633356258",
+        "referenceid": "Editorial Rdp"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Opinion",
+    "language": "en",
+    "versioncreated": "2024-04-12T16:44:16Z",
+    "firstcreated": "2024-04-12T16:44:15Z",
+    "editorialrole": "FullStory",
+    "fixture": {
+        "code": "21ea4067bb274c3b805353fb2b99ba70",
+        "name": "Editorial Roundup"
+    },
+    "pubstatus": "usable",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "Editorial Rdp",
+    "headline": "Editorial Roundup: New England",
+    "slugline": "AP--Editorial Rdp",
+    "bylines": [
+        {
+            "by": "By The Associated Press"
+        }
+    ],
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "-Editorial Rdp"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "person": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "4a958288c5994ffca266f1e346eda07d",
+            "name": "Janet Mills",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "POLITICIAN",
+                "PERSON"
+            ],
+            "relevance": 53
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "39a5551883591004893adf092526b43e",
+            "name": "Health care costs",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 76
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "d8e6d7087f00100483b7f571351eed07",
+            "name": "Family medicine",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 88
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 88
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "organisation": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "8c2aeb56ad914100b434ac87961aac5a",
+            "name": "Massachusetts state government",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 45
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "bed6942882b310048501df092526b43e",
+            "name": "Massachusetts",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -71.10832,
+                    42.36565
+                ]
+            },
+            "relevance": 56,
+            "parentnames": [
+                "United States"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "8d2caa7082b3100484b8df092526b43e",
+            "name": "Maine",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -69.24977,
+                    45.50032
+                ]
+            },
+            "relevance": 56,
+            "parentnames": [
+                "United States"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "d2f8d8a882c710048915df092526b43e",
+            "name": "Vermont",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "1bf4bc0882c71004889cdf092526b43e",
+            "name": "Rhode Island",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "9531546082c6100487b5df092526b43e",
+            "name": "New Hampshire",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "bed6942882b310048501df092526b43e",
+            "name": "Massachusetts",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "8d2caa7082b3100484b8df092526b43e",
+            "name": "Maine",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "a42dc0a082af100482a7df092526b43e",
+            "name": "Connecticut",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "body_nitf": "<p>Portland Press Herald. April 7, 2024.</p><p>Editorial: Digital privacy should not be a state-level priority</p><p>A bill that would place novel limits on digital marketing in the name of consumer protection could do more harm than good.</p><p>Increasingly predatory means of profiling and tracking consumers online must be cracked down on \u2013 any basic expectation of privacy requires it. The relentless collection and sale of personal data has rightly spurred lawmakers the world over into action.</p><p>So too here in Maine, where a <a href=\"https://www.pressherald.com/2023/10/17/maine-advocates-call-for-strict-digital-privacy-protections-but-businesses-object/\">complex data privacy bill</a> wending its way through the Legislature \u2013 L.D. 1977 \u2013 has been described as \u201cunique.\u201d</p><p>The bill seeks to place limits on what information companies can collect and use via the internet. If passed, it will place major restrictions on doing business online, altering the landscape for Maine consumers and creating hardship for the companies opposed to the proposal, large and small. (Elements of digital marketing and data use that are targeted by <a href=\"https://legislature.maine.gov/bills/display_ps.asp?PID=1456&snum=131&paper=HP1270\">L.D. 1977</a> are tied to the business model of the Maine Trust for Local News, of which this newspaper is a part.)</p><p>The proposal is reportedly the product of many hours of work during 11 separate work sessions of the Judiciary Committee, a remarkable number (which itself speaks to the highly ambitious nature of the undertaking). \u201cI\u2019ve never seen a committee dig into something like this,\u201d one member told <a href=\"https://mainemorningstar.com/2024/03/28/maine-lawmakers-advance-what-could-be-one-of-nations-toughest-data-privacy-laws/\">Maine Morning Star.</a></p><p>We\u2019d prefer if the committee had invested the time elsewhere. The most workable and reliable data protection legislation won\u2019t come from any amount of hard work at the state level \u2013 it will come from the federal government, which has so far failed miserably in this respect, \u201cleaving it up to individual states.\u201d For many regulatory concerns, states can and must go it alone. We do not believe that course of action is sensible here.</p><p>The most robust and conspicuous data protection regulation in the world right now is European Union-wide and took years to craft. The definitions and requirements of the <a href=\"https://gdpr.eu/what-is-gdpr/\">General Data Protection Regulation,</a> or GDPR, changed everything for the FAANGs of the world (that\u2019s Facebook, Amazon, Apple, Netflix, Google and their ilk) when it went into effect almost six years ago. Violations carry exorbitant fines. The strength of the law is in its wide, widely known and understood application. It tends to place control in the hands of European consumer, wherever she is.</p><p>If the Maine Legislature decides to press ahead with its own version, our law will enjoy none of that standardized strength.</p><p>It\u2019s more than understandable for advocates to be dissatisfied with the federal regulatory picture and to be impatient for protections. In setting Maine apart, however, the potential downsides for business of a \u201ccomprehensive\u201d state-level attempt at data privacy seem to us outweigh the potential upsides.</p><p>___</p><p>Bangor Daily News. April 11, 2024.</p><p>Editorial: Janet Mills should sign carefully crafted paramilitary training ban</p><p>One of the beautiful things about America is that everyone has a right to their own beliefs, even the ugly beliefs.</p><p>The Constitution is supposed to protect everyone equally, regardless of ideology. Those protections apply even to the most disgusting views, like the hate inherent in Nazism. The same protections allow us to express our disgust freely.</p><p>Ultimately, freedom is meaningless if it is only extended to the people with whom we, or the government, agree.</p><p>So after a neo-Nazi drew statewide attention for his <a href=\"https://www.bangordailynews.com/2023/08/07/penobscot/known-neo-nazi-building-training-ground-in-springfield-joam40zk0w/\">abandoned attempt to establish a training facility in Springfield</a>, and as Maine lawmakers have considered a bill to ban unauthorized paramilitary training, we have <a href=\"https://www.bangordailynews.com/2023/08/14/opinion/editorials/neo-nazis-not-welcome-maine/\">consistently highlighted</a> the importance of focusing on actions, not beliefs. Ugly words, disgusting beliefs and the choice to associate with people who espouse them are constitutionally protected. The same is not necessarily true when it comes to actions that impact others, when hateful beliefs become hateful activities that target other Mainers and Americans.</p><p>It bears repeating: Weapons training can help people better prepare to protect themselves and their communities. But when such training is done with the intent to cause civil disorder, it by definition becomes a threat to the community. <a href=\"https://www.mainelegislature.org/legis/bills/display_ps.asp?ld=2130&PID=1456&snum=131#\">LD 2130</a>, recently ( <a href=\"https://www.bangordailynews.com/2024/04/03/politics/state-politics/maine-house-vote-paramilitary-training-ban/\">and narrowly</a> ) passed by lawmakers, would ban the latter type of training while continuing to allow the former.</p><p>After Democratic Rep. Laurie Osher of Orono submitted this bill to ban unauthorized paramilitary training, groups like the American Civil Liberties Union (ACLU) of Maine and others <a href=\"https://www.mainelegislature.org/legis/bills/getTestimonyDoc.asp?id=10027566\">raised concerns</a> and made suggestions about how to amend the bill with constitutional protections in mind. Language around intent was improved and penalties were reduced. The resulting legislation, after much deliberation and adjustment to address the thoughtful concerns, has achieved the <a href=\"https://www.bangordailynews.com/2024/02/28/opinion/editorials/maine-should-ban-paramilitary-training/\">needed balance</a> of targeting dangerous actions while continuing to protect individual liberties.</p><p>Anyone, whether they are a member of the <a href=\"https://www.bangordailynews.com/2023/11/01/penobscot/neo-nazi-mainers-too-dangerous-springfield-joam40zk0w/\">neo-Nazi group Blood Tribe</a> or the <a href=\"https://www.bangordailynews.com/2021/07/09/bangor/rise-of-the-moors-group-was-going-to-bangor-area-before-armed-standoff-on-mass-highway/\">militia group Rise of the Moors</a>, has a constitutional right to their beliefs. But the Constitution does not shield them from accountability when their actions cause disorder in society.</p><p>Despite what some opponents have argued, we are confident that <a href=\"https://www.mainelegislature.org/legis/bills/display_ps.asp?ld=2130&PID=1456&snum=131#\">LD 2130 as amended</a> is appropriately centered around actions, not beliefs.</p><p>All that remains is for Gov. Janet Mills to sign the bill, and she should. Like the Legislature, she should carefully review the legislation and its implications. We believe that after such a review, the governor and all Mainers can be confident that this bill is a measured, balanced and needed response to strengthen Maine\u2019s <a href=\"https://www.bangordailynews.com/2023/08/12/penobscot/maine-paramilitary-activity-laws-joam40zk0w/\">existing anti-militia laws</a>.</p><p>The situation in Springfield highlighted the need to strengthen those laws, as <a href=\"https://www.bangordailynews.com/2024/02/21/politics/state-politics/maine-would-become-27th-state-to-ban-paramilitary-training-under-bill-passed-by-house/\">more than half the country</a> already has. But the need goes beyond one particular training facility or one particular ideology.</p><p>As Greater Bangor Area Branch NAACP President Michael Alpert wrote in a letter to the Bangor Daily News last year, this issue really speaks to a basic role of government.</p><p>\u201cProtecting the public from violence is a basic obligation of government,\u201d Alpert wrote in an <a href=\"https://www.bangordailynews.com/2023/08/23/opinion/letters/letter-condemn-nazism-racism/\">August letter</a> responding to news about the Springfield facility. \u201cCurrent Maine statutes might not be adequate to control the threat posed by an organized hate group\u2019s armed militia. Our laws and regulations must be reviewed and, where appropriate, strengthened.\u201d</p><p>Lawmakers have found an appropriate way to do just that with this bill. It should become law with the governor\u2019s signature.</p><p>___</p><p>Rutland Herald. April 6, 2024.</p><p>Editorial: Awe factor</p><p>Over the last month, in the ramp-up to the April 8 solar eclipse, it has been interesting to see our state\u2019s reaction.</p><p>As we pulled together the pullout section in this Weekender, the various writers and contributors were offering their unique expertise. It was a pleasant reminder that we are capable of coming together just to be curious.</p><p>Last week, in an online media briefing with SciLine, one of the three presenters told editors and reporters from around the globe about how events such as this eclipse have both a physiological and sociological impact on us. Experiencing a natural phenomenon with others \u2014 something that produces awe and positive feelings \u2014 has a ripple effect that spreads well beyond the event itself.</p><p>It comes down to the energy (enthusiasm, curiosity, excitement) we give off. We pick up on the cues, the signals we each give off, and our bodies respond with contagious positivity. The \u201cAwe Factor\u201d teaches us to be present and engage in the wonder of the world around us.</p><p>That is easy to say, but it is not easy to put into practice. It is not every day that we can experience an event \u2014 live and not on a screen \u2014 with millions of others. In fact, what we often experience is inversely proportionate to the Awe Factor: Something bad happens, and we all react to it glumly, feeling that collective negativity.</p><p>In the interview with Fairbanks Planetarium Director Mark Breen, he explains why this particular astronomical event is so exciting: timing, path, proximity and more. An article by Lauren Milideo peels back the layers of what University of Vermont students and faculty will be studying and observing during the eclipse \u2014 much of which will not be happening in the sky. They will be observing effects in the ecosystem and broader scientific effects on the natural (and human) world.</p><p>As our coverage this week has shown, even grade school and high school students have been learning the basics about an eclipse, but it has led to broader discussions about math, physics and even art and history.</p><p>Speaking of which, historian Paul Heller\u2019s glimpse back at news coverage of previous eclipses across Vermont demonstrates just how important those moments (without internet or TV) were shaping science and perceptions (and misperceptions). Students and professors were testing hypotheses and scrambling to collect data, even something as simple as changes in weather and the natural environment.</p><p>With each eclipse, each repetition, time has passed and with it growth in technology and science. We believe the tools we are using in 2024 to observe and study the solar eclipse are so far advanced from the \u201ctools\u201d used in 1932 and at other times. Yet we have no idea \u2014 none \u2014 what resources will be used when studying the next eclipse over Vermont in 2381.</p><p>Creative types \u2014 artists, writers, philosophers and intellectuals \u2014 have the avenues to tap into the wonder of a moment and then produce something tangible from it, whether it is a painting or sculpture, music or prose, an idea or theory. They dare to connect to the moment in something more than just a passing fancy or fad. Their station becomes the long reminder that leads to more discussions, more ideas, more interpretations.</p><p>A lot has been made about the congestion across Vermont, and the people from away heading to the Green Mountains to have a look at a rare event. Yes, people want to see a total solar eclipse with their own eyes. As Paul Piff, the associate professor of psychological science at the University of California, Berkeley, told the media last week: People benefit from being eyewitnesses to history.</p><p>Piff went so far as to hint that one of the most interesting things to watch during an eclipse is the people around you. People watching (and gauging responses) has scientific value, too.</p><p>We know there will be those who are frustrated that businesses are closed to allow their employees to join their families and friends to watch the eclipse. There will be those who are frustrated with more vehicles on the road, and the fact it will take longer to get around.</p><p>We would suggest that instead of resisting or rejecting the moment, you take the time to embrace it and allow yourself (and those around you) to experience awe. Allow yourself the long moment to be curious, and then to reflect on its impact \u2014 great or small \u2014 on you.</p><p>Norwich University Professor C.N. Barber witnessed the total solar eclipse in 1932 and was so curious about what \u201cmight happen\u201d that he enlisted individuals from around Vermont to record air temperatures for him during the duration of the eclipse \u2014 not just the totality.</p><p>Lester Freer, of Groton, mailed the professor a note with his results, which reflected a 10-degree dip in temperature.</p><p>\u201cTrusting this information will be of value to you,\u201d Freer wrote. No doubt that it was.</p><p>It pays to be curious. More importantly, it pays to take the time to be curious. Make the time Monday.</p><p>___</p><p>Boston Globe. April 11, 2024.</p><p>Editorial: Massachusetts isn\u2019t using a tool that could help tackle its shortage of primary care doctors</p><p>Most states use Medicaid money to help pay for doctors\u2019 residencies. Massachusetts doesn\u2019t and has left millions of dollars in potential federal matching grants on the table as a result.</p><p>When Massachusetts is a national outlier in any policy, it\u2019s worth asking why and whether that policy still makes sense.</p><p>Massachusetts today is one of <a href=\"https://store.aamc.org/downloadable/download/sample/sample_id/590/#:~:text=One%20of%20the%20seven%20states,highest%20number%20of%20physician%20residents.&text=In%202022%2C%20federal%20and%20state,reaching%20nearly%20%247.39%20billion.\">only seven states</a> that does not use Medicaid money to fund medical residencies, which provide the clinical training of new doctors after they complete medical school. Among the 10 states with the most teaching hospitals and physician residents, it is the only one that does not use Medicaid money to support graduate medical education, or GME, <a href=\"https://store.aamc.org/medicaid-graduate-medical-education-payments-results-from-the-2022-50-state-survey.html#:~:text=One%20of%20the%20seven%20states,grow%2C%20reaching%20nearly%20%247.39%20billion.\">according to</a> the Association of American Medical Colleges.</p><p>The main reason appears to be cost: Massachusetts did have a program, but policy makers cut it in 2010, according to the Executive Office of Health and Human Services, amid budget shortfalls due to the 2008 recession and as state officials prioritized implementing universal health insurance coverage.</p><p>Today, cost remains a barrier to reinstating the program. Yet given the shortage of primary care physicians, lawmakers should consider reinstating Medicaid GME in a targeted way that shores up needed services like primary care, behavioral health care, and community health centers.</p><p>Without the Medicaid money, residencies are mostly paid for by Medicare, which <a href=\"https://crsreports.congress.gov/product/pdf/IF/IF10960\">gave $16.2 billion</a> in fiscal 2020 to GME programs nationwide.</p><p>Although it may seem like an arcane distinction, there are two good reasons to use Medicaid money to fund residencies beyond those funded by Medicare. One is that the federal government would match the state contribution, drawing new federal money. The second is that the state can narrowly tailor a Medicaid program to decide how much money to spend \u2014 and how to spend it.</p><p>This flexibility means state lawmakers could target money for residencies in specific specialties that Massachusetts needs more of.</p><p>There is a dire need to train more primary care physicians and keep them in Massachusetts. <a href=\"https://www.bostonglobe.com/2024/03/12/metro/primary-care-physicians-crisis-wait-times/?p1=Article_Inline_Text_Link\">People are struggling</a> to find doctors. Wait times at community health centers, which see many Medicaid patients, have recently been as long as 80 days for a new patient and up to 40 days for an existing patient, according to Michael Curry, president and CEO of the Massachusetts League of Community Health Centers.</p><p>According to the Milbank Memorial Fund\u2019s <a href=\"https://www.milbank.org/primary-care-scorecard/\">primary care scorecard</a>, 16.7 percent of adults in Massachusetts and 5.4 percent of children in 2021 lacked a usual source of health care, numbers that had grown since 2011. According to survey <a href=\"https://www.chiamass.gov/assets/docs/r/pubs/2023/MA-PC-Dashboard-2023.pdf\">data from</a> Massachusetts Health Quality Partners and the Center for Health Information and Analysis, adults were having <a href=\"https://www.mhqp.org/2024/02/13/patient-experience-scores-for-adults-improve-since-before-the-pandemic-except-in-one-key-area-access/\">a harder time</a> accessing primary care in 2022 than in 2019. Massachusetts has a higher rate of doctors leaving primary care <a href=\"https://www.chiamass.gov/assets/docs/r/pubs/2023/MA-PC-Dashboard-2023.pdf\">than the nation overall</a>. One-third of Massachusetts doctors in 2020 were over 60 and fewer than <a href=\"https://www.chiamass.gov/assets/docs/r/pubs/2023/MA-PC-Dashboard-2023.pdf\">one-quarter</a> of Massachusetts medical school graduates are entering primary care, according to MHQP.</p><p>When someone cannot get an appointment with a primary care physician, they are more likely to become seriously ill and go to the emergency department, at a time when hospitals are experiencing capacity crunches.</p><p>Funding more residency training slots through Medicaid would not magically solve the problem. Seriously addressing the primary care shortage will require paying primary care doctors more and addressing the administrative burden that makes primary care such a hard job. Massachusetts officials are taking other steps to address the problem, like establishing student loan repayment programs.</p><p>But reestablishing Medicaid GME could allow hospitals and community health centers to train more doctors to work in badly needed fields. Because specialty care is more lucrative, without the added Medicaid incentive, hospitals are more likely to create residencies in specialty fields than primary care.</p><p>Multiple <a href=\"https://malegislature.gov/Bills/193/S765\">bills</a> to reestablish Medicaid GME payments are pending in legislative committees, with advocacy by the League of Community Health Centers and the Massachusetts Health and Hospital Association. The details differ, but the basic idea is to pay for residencies in fields with shortages, including primary care and behavioral health care, in hospitals and community health centers. (Like primary care, behavioral health care is a field where <a href=\"https://www.bostonglobe.com/2022/02/15/metro/clinicians-are-leaving-their-jobs-mental-health-centers-amid-rising-demand-survey-finds/?p1=Article_Inline_Text_Link\">worker shortages</a> are severely impacting people\u2019s ability to get timely care.) A program could also potentially fund training for non-physician clinicians, like nursing students.</p><p>The League of Community Health Centers is asking for $50 million in Medicaid funding over three years, half of which would be reimbursed by the federal government. According to the organization, that level of funding would pay to graduate 23 new family medicine doctors annually (with funding for three years of residency) and to fund 69 residency slots each year for nurse practitioners, assuming a cost of $185,000 per physician resident and $120,000 per nursing resident.</p><p>Most states use general fund money to pay for Medicaid GME, though some rely on municipal tax money or taxes on hospitals. Lawmakers will have to determine the best funding source.</p><p>But the money is likely to be a smart investment, and it will draw in federal money that the state is leaving on the table now. And if increased funding for residencies means more doctors go into primary or behavioral health care in Massachusetts, patients will be seen sooner and will get the care they need to remain healthy, lowering costs in the long term.</p><p>END</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/f17c57c88723b87d78f60b95702689dc",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 3,
+            "reason": "The document contains multiple editorials, but only one of them is directly related to health. The editorial from the Boston Globe discusses the shortage of primary care doctors in Massachusetts and the potential use of Medicaid funds to support medical residencies, which is highly relevant to the topic of health. The other editorials focus on digital privacy, paramilitary training, and the solar eclipse, which are not related to health."
+        }
+    }
+}

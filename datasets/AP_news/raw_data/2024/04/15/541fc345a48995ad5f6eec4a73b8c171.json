@@ -1,0 +1,199 @@
+﻿{
+    "altids": {
+        "itemid": "541fc345a48995ad5f6eec4a73b8c171",
+        "etag": "541fc345a48995ad5f6eec4a73b8c171_0a2aza0c0",
+        "friendlykey": "540016113886",
+        "referenceid": "MI--Editorial Rdp"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Opinion",
+    "language": "en",
+    "versioncreated": "2024-04-15T11:10:40Z",
+    "firstcreated": "2024-04-15T03:39:15Z",
+    "editorialrole": "FullStory",
+    "fixture": {
+        "code": "21ea4067bb274c3b805353fb2b99ba70",
+        "name": "Editorial Roundup"
+    },
+    "pubstatus": "usable",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "MI--Editorial Rdp",
+    "headline": "Editorial Roundup: Michigan",
+    "slugline": "BC-MI--Editorial Rdp",
+    "bylines": [
+        {
+            "by": "By The Associated Press"
+        }
+    ],
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "Editorial Rdp"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "person": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "4fd3af5cf6b44713a4666c4e47a58f08",
+            "name": "John Engler",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "POLITICIAN",
+                "PERSON"
+            ],
+            "relevance": 60
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "ace74e307f00100486cedf092526b43e",
+            "name": "Immunizations",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 45
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e2460e807de410048061df092526b43e",
+            "name": "Measles",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 45
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86ba17607dac1004894eba7fa5283c3e",
+            "name": "Courts",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 89
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "48612b807c2b4b93bbbacbf54f547ad5",
+            "name": "Crime",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 33
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "6bf49b4082c410048696df092526b43e",
+            "name": "Michigan",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -85.50033,
+                    44.25029
+                ]
+            },
+            "relevance": 75,
+            "parentnames": [
+                "United States"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "6bf49b4082c410048696df092526b43e",
+            "name": "Michigan",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "body_nitf": "<p>Detroit News. April 13, 2024.</p><p>Editorial: Michigan should restore inmate good time credits</p><p>A ballot drive to return good time prison sentence reductions to Michigan is failing, but there\u2019s a chance to revive the idea with a twist that could make the corrections system more effective in returning inmates to society prepared to lead productive lives.</p><p>Michigan voters ended the practice of granting time off for good behavior with their passage of a ballot proposal in 1978. Twenty years later, then-Gov. John Engler signed a bill requiring all convicts to serve at least their minimum sentence before becoming eligible for parole.</p><p>Since then, a 10-year minimum sentence, for example, meant a convict would spend a full 10 years behind bars, regardless of how well they used their incarceration time.</p><p>The prison reform group Michigan Justice Advocacy is seeking to restore good time credits with a ballot initiative, but the effort is not taking hold. As of last month, the sponsors had gathered just 15,700 of the 356,958 signatures needed to get the proposal on the ballot.</p><p>While the petition drive will continue through the end of this month, the group acknowledged success is not likely.</p><p>That shouldn\u2019t be the end of the sentencing reform effort.</p><p>Michigan Justice Advocacy\u2019s proposal was perhaps too aggressive to gain broad public support. It would have cut 30 days off a sentence for every 30 days an inmate stayed out of trouble. That could have cut a minimum sentence in half.</p><p>A more palatable version is pending in the state Legislature, and the focus now should be on getting it passed.</p><p>That bill, introduced by Rep. Tyrone Carter, D-Detroit, would cut minimum sentences by up to 20% if an inmate completes skills training. Parole boards would have to agree, and the most violent convicts would not be included in the program.</p><p>The so-called productivity credits are aimed at encouraging inmates to use their time behind bars to gain skills and education that will lessen the likelihood of returning to prison.</p><p>The credits would also be a valuable prison management tool, since they provide a tangible incentive for good behavior.</p><p>Roughly 60% of the current inmate population would be eligible to earn productivity credits.</p><p>Passage of the bill would be an important signal that Michigan views its corrections system as more than a vehicle for punishing wrongdoers.</p><p>An equal priority should be rehabilitating prisoners and giving them the skills and confidence they need to lead a productive life after their release.</p><p>The reality is that most of those who go to prison will return home someday. It is in society\u2019s interest to assure that when they do come back to their communities, they are prepared to be law-abiding citizens.</p><p>The additional benefit of moving rehabilitated inmates out of prison early is the savings to taxpayers. It costs $48,000 a year to house an inmate in a Michigan facility. The state has about 32,000 people in its state prisons.</p><p>Lawmakers should adopt the productivity credits law. Savings that come with enacting an early release policy should be poured into assuring all prisons have robust training programs.</p><p>It makes no sense to promise incentives for participating in activities that don\u2019t exist.</p><p>Michigan should offer prisoners the incentive to not just behave themselves behind bars, but to also improve themselves.</p><p>___</p><p>Traverse City Record Eagle. April 14, 2024.</p><p>Editorial: Public court files need to remain public</p><p>A new rule in state court will require records to be deemed nonpublic after they\u2019re bound over to circuit court.</p><p>Like some kind of game of switcheroo with felony files, the records will be closed in district court on bind-over to circuit court, then closed in circuit if the case is remanded back to district.</p><p>The Michigan Supreme Court amended the rules at the behest of the State Court Administrator\u2019s Office to restrict access to public records. This change will ostensibly create a centralized sort of \u201cone-stop shopping\u201d for court records, they say.</p><p>We think not.</p><p>Fundamentally, what this change really means is that district court \u2013 often called \u201cthe people\u2019s court\u201d\u2013 will no longer provide the people with access to the records of more serious felony cases after those cases are bound over to circuit court.</p><p>Is there some sort of contagious thinking going on that spread from the Michigan State Police, who say their refusal to release names of victims of crashes is a service to the public? Now we have the state court administrator saying this change in handling court files will make it easier for the public to obtain them.</p><p>The underlying reason for amending this particular court rule was based on the expungement package put in place several years ago. Once convictions were set aside, the court records connected to those cases were supposed to be made nonpublic. The effort to make expungement cases nonpublic led to the idea that all case filings \u2013 even ones not affected by expungement \u2013 could be centralized.</p><p>Yet these rule changes we\u2019re identifying seem to be chip, chip, chipping away at what was once considered part of the public purview.</p><p>In response to our objection about this change, court officials can say, \u201cOn the contrary, the file is still public, we\u2019re just moving it to a different venue.\u201d But what they fail to see is that they are removing a key access point and adding unnecessary complexity to a system that will only serve to discourage public engagement in the process.</p><p>That\u2019s just what our democracy doesn\u2019t need right now. Some people are intimidated by courts, the process and protocol. Some who ask for these documents may be victims of crimes. So, when they request files at the district court, they will be told those particular records are no longer public and, if they want to see them, they will have to go elsewhere.</p><p>We won\u2019t even try to speculate about the impact this operational change will have on clerks or the handling of the files themselves.</p><p>Justice David Viviano, who disagreed with this amendment, said he opposed it \u201cbecause it impedes access to court records and imposes an unnecessary burden on court clerks and staff. The new requirements will make it more difficult to obtain court records that have always been accessible to the public up until now. This Court has a duty to ensure that court records are easily accessible by members of the public.\u201d</p><p>\u201cFor many Michiganders,\u201d Viviano said, \u201clocal district or municipal courts may be the easiest place to access a court record. ... I see no good reason to force individuals wishing to access information about a felony case to obtain that information from the circuit court. If the case is public and the local court has the relevant records or information sought, the public should have a right to access it at that court.\u201d</p><p>He\u2019s got that right: These proceedings in \u201cthe people\u2019s court\u201d should be accessible to the people.</p><p>Here\u2019s another part of the court\u2019s rule change that will add to the difficulty: If that case in circuit court is remanded back to district court, then those records in the circuit court will become nonpublic. This will only serve to complicate access to files even further and, invariably, make more work for the clerks who have to keep tabs on them.</p><p>These changes were adopted by a majority of the state Supreme Court earlier this month and they\u2019re supposed to take effect July 2.</p><p>Is this a change that will improve court operations and make them more accessible to people?</p><p>We think not.</p><p>But those officials who approved it appeared to think not at all.</p><p>___</p><p>Iron Mountain Daily News. April 11, 2024.</p><p>Editorial: Protection available to guard against measles outbreak</p><p>An area health care provider is warning residents about the resurgence of measles in the United States \u2014 and recommending getting the vaccine that can guard against the virus.</p><p>As of March 21, 64 cases of measles had been reported across the U.S. in 17 states. Several have happened in the Midwest, including 28 cases in Illinois, three in Minnesota and one in Michigan, according to Wausau, Wis.-based Aspirus Health, which operates the Iron River hospital along with several facilities in the Upper Peninsula.</p><p>With this in mind, Aspirus Health in a news release urged parents and caregivers to be proactive in preventing the potential spread of measles, stating that vaccination remains the most effective measure to protect against measles and other preventable diseases.</p><p>\u201cKeeping up with your shots is very, very important,\u201d said Dr. Jason Chan, a pediatrician with Aspirus Health. \u201cGetting your shots protects yourself, but it also protects others around you who can\u2019t get the shots, including babies and women who are pregnant.\u201d</p><p>Medical experts recommend the MMR vaccine, which is a vaccine that protects against three infectious diseases: measles, mumps, and rubella. It is typically administered as a series of two doses during childhood, with the first dose given at about 12 to 15 months of age and the second dose between ages 4 and 6.</p><p>According to Aspirus, the MMR vaccine is 97% effective in protecting people from getting sick from the measles.</p><p>About 1 in 5 unvaccinated people in the U.S. who get measles are hospitalized, according to the CDC. In children, as many as 1 in 20 children with measles gets pneumonia, the most common cause of death from measles in children.</p><p>Pregnant women who have not had the MMR vaccine have higher rates of premature birth and a higher risk for a low-birth-weight baby, Aspirus advises.</p><p>\u201cThis vaccine has been in use for decades and we know it is safe and exceedingly effective,\u201d Chan said.</p><p>Aspirus Health encourages parents and caregivers to consult with their providers regarding vaccination schedules for their children and ensure they are adequately protected. Additionally, adults of any age who have not received two doses of MMR vaccine are candidates for the vaccine as well.</p><p>For more information about vaccine recommendations per age groups, contact your primary care provider. To learn more about measles and the MMR vaccine, the CDC\u2019s website offers the \u201cTop Things Parents Need To Know\u201d at <a href=\"https://www.cdc.gov/measles/about/parents-top4.html.\">https://www.cdc.gov/measles/about/parents-top4.html.</a></p><p>END</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/541fc345a48995ad5f6eec4a73b8c171",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 3,
+            "reason": "The document contains three editorials, only one of which is directly related to health. The editorial from the Iron Mountain Daily News discusses the resurgence of measles and the importance of vaccination, which is highly relevant to the topic of health. The other two editorials focus on prison reform and public access to court records, which are not related to health. Therefore, the document has partial relevance to the topic of health."
+        }
+    }
+}

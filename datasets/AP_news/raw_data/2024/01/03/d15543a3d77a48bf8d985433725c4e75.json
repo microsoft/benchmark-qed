@@ -1,0 +1,310 @@
+﻿{
+    "altids": {
+        "itemid": "d15543a3d77a48bf8d985433725c4e75",
+        "etag": "d15543a3d77a48bf8d985433725c4e75_2a13aza0c0",
+        "friendlykey": "927603081448",
+        "referenceid": "US--MED--Winter Viruses"
+    },
+    "version": 2,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2024-01-04T03:45:15Z",
+    "firstcreated": "2024-01-03T23:30:51Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "ednote": "Eds: UPDATES: Links audio. With AP Photos.; AP Video.",
+    "editorialtypes": [
+        "Lead"
+    ],
+    "signals": [
+        "newscontent"
+    ],
+    "title": "US--MED--Winter Viruses",
+    "headline": "More hospitals are requiring masks as flu and COVID-19 cases surge",
+    "headline_extended": "More U.S. hospitals are requiring masks and limiting visitors as health officials face a post-holiday spike in flu and other illnesses",
+    "slugline": "AP-US--MED--Winter Viruses, 2nd Ld-Writethru",
+    "description_summary": "More U.S. hospitals are requiring masks and limiting visitors as health officials face a post-holiday spike in flu and other illnesses. New York City last week instituted a mask mandate for the city\u2019s 11 public hospitals. Similar measures were ordered at some hospitals in Los Angeles and Massachusetts. Flu and COVID-19 infections have been increasing for weeks, with high levels of flu-like illness reported in 31 states just before Christmas. Updated national numbers are to be released Friday, but health officials predict infections will grow in many states well into January.",
+    "bylines": [
+        {
+            "by": "By MIKE STOBBE",
+            "title": "AP Medical Writer"
+        }
+    ],
+    "located": "NEW YORK",
+    "datelinelocation": {
+        "city": "New York",
+        "countryareacode": "NY",
+        "countryareaname": "New York",
+        "countrycode": "USA",
+        "countryname": "United States",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                -74.00597,
+                40.71427
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "covid flu hospital masks"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "a",
+            "name": "a"
+        },
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "084e24e87f00100481c7f571351eed07",
+            "name": "Flu",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 81
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 96
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "b17e2751b26d4523a2c99d79e04747ee",
+            "name": "COVID-19 pandemic",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 69
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Editorial",
+            "editorial_subject": "Health",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "8345b5f082af10048280df092526b43e",
+            "name": "Los Angeles",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "789fdd8882af10048263df092526b43e"
+            ],
+            "locationtype": {
+                "code": "9d26a20b35f0484a891740f8189d4c7b",
+                "name": "City"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -118.24368,
+                    34.05223
+                ]
+            },
+            "relevance": 52,
+            "parentnames": [
+                "California"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "bed6942882b310048501df092526b43e",
+            "name": "Massachusetts",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -71.10832,
+                    42.36565
+                ]
+            },
+            "relevance": 52,
+            "parentnames": [
+                "United States"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "661850e07d5b100481f5c076b8e3055c",
+            "name": "Latin America and Caribbean",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "b58f18a082c6100487fbdf092526b43e",
+            "name": "New York",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "b836d07082c610048807df092526b43e",
+            "name": "New York City",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "bed6942882b310048501df092526b43e",
+            "name": "Massachusetts",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "789fdd8882af10048263df092526b43e",
+            "name": "California",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "associations": {
+        "1": {
+            "altids": {
+                "itemid": "ce86b8a59c1e4313ba5fad5791d794b5"
+            },
+            "type": "picture"
+        },
+        "2": {
+            "altids": {
+                "itemid": "6aa812d8362243c58a5a80fe02f48d3c"
+            },
+            "type": "picture"
+        },
+        "3": {
+            "altids": {
+                "itemid": "a4f9660d1ed548d995c2d5c3d63f4aeb"
+            },
+            "type": "video"
+        },
+        "4": {
+            "altids": {
+                "itemid": "13410a58c63d45a2861532744b7b086b"
+            },
+            "type": "audio"
+        },
+        "5": {
+            "altids": {
+                "itemid": "eff53d58d4eb42c0a49a1d49e90f1702"
+            },
+            "type": "audio"
+        },
+        "6": {
+            "altids": {
+                "itemid": "9a30719cd2fd484fa0e92075df0c3c9b"
+            },
+            "type": "audio"
+        }
+    },
+    "body_nitf": "<p>NEW YORK (AP) \u2014 More U.S. hospitals are requiring masks and limiting visitors as health officials face an expected but still nasty post-holiday spike in flu, COVID-19 and other illnesses.</p><p>While many experts say this season likely won\u2019t prove to be as deadly as some other recent winters, it still could mean hundreds of thousands of hospitalizations and many thousands of deaths across the country.</p><p>New York City last week instituted a mask mandate for the city\u2019s 11 public hospitals. Similar measures were ordered last week at some hospitals in Los Angeles and Massachusetts. Some hospitals reinstated masking rules for employees months ago, in anticipation of a seasonal rush of sick people.</p><p>Flu and COVID-19 infections have been increasing for weeks, with high levels of flu-like illness reported in 31 states just before Christmas. Updated national numbers are to be released Friday, but health officials predict infections will grow in many states well into January.</p><p>\u201cWhat we're seeing right now, in the first week of January, is really an acceleration \u2014 of flu cases, in particular,\u201d said Dr. Mandy Cohen, director of the Centers for Disease Control and Prevention.</p><p>There is some good news. Flu and COVID-19 cases may peak by the end of the month and then drop, Cohen said. Though the flu has been skyrocketing, this year's cases are being caused by a strain that usually doesn\u2019t cause as many deaths and hospitalizations as some other versions. What\u2019s more, signs suggest current flu vaccines are well-matched to the strain.</p><p>\u201cI don't think it's going to be overwhelming,\u201d said Dr. William Schaffner, Vanderbilt University infectious diseases expert. He deemed the current season \u201cmoderately severe.\u201d</p><p>The CDC is pointing the public to an agency <a href=\"https://www.cdc.gov/respiratory-viruses/index.html\">website</a> where people can look up their county, which can help them make decisions about whether to wear masks or take other precautions. Cohen urged people to get vaccinated and to seek treatment for flu and COVID-19.</p><p>Vaccinations are down this year, officials say. About 44% of U.S. adults had gotten flu shots by Dec. 23, according to the most recently available CDC vaccination survey data. Only about 19% of U.S. adults were reported to have received an updated COVID-19 shot as of early December.</p><p>COVID-19 cases are causing more severe disease than the flu but have been rising less dramatically. Health officials are keeping an eye on JN.1, a new version of the ever-evolving coronavirus. The omicron variant was first detected in the U.S. in September and just before Christmas accounted for an estimated 44% of COVID-19 cases.</p><p>The JN.1 variant may spread easier or be better at evading our immune systems, but there is no evidence that it causes more severe disease than other recent variants, health officials say. Current evidence indicates vaccines and antiviral medications work against it.</p><p>The CDC also has reported disappointing vaccination rates against another seasonal bug, respiratory syncytial virus, or RSV. That is a common cause of mild cold-like symptoms, but it can be dangerous for infants and older people. RSV cases rose in the fall but appear to have plateaued and are even going down in some places, according to the latest data.</p><p>At Hillsdale Hospital in southern Michigan, a 65% increase in respiratory illness activity in late December triggered a limitation to visitors in the birthing center. Only a spouse, a support person and grandparents can visit. They all must wear a mask and not show symptoms of sickness.</p><p>The restriction is common for the hospital around this time of year, said Dr. Nichole Ellis, a pediatrician who is the hospital's medical chief of staff. But it\u2019s more difficult this season, she added.</p><p>\u201cIn the past, we would have one \u2026 disease that we were tracking or monitoring at one time,\u201d Ellis said. \u201cBut now, babies and children will have multiple diseases at the same time. It\u2019s not that they just have RSV \u2026 but they\u2019re getting RSV and COVID at the same time, or influenza and RSV at the same time because all of the diseases are prevalent in our community.\u201d</p><p>___</p><p>Kenya Hunter in Atlanta contributed.</p><p>___</p><p>The Associated Press Health and Science Department receives support from the Howard Hughes Medical Institute\u2019s Science and Educational Media Group and the Robert Wood Johnson Foundation. The AP is solely responsible for all content.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/covid-flu-hospital-masks-d15543a3d77a48bf8d985433725c4e75",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 5,
+            "reason": "The document discusses the increase in mask requirements and visitor limitations in hospitals due to a surge in flu, COVID-19, and other illnesses. It provides detailed information on the current state of these health issues, vaccination rates, and the impact on hospital policies. This is highly relevant to the topic of health as it covers current health concerns, preventive measures, and public health responses."
+        }
+    }
+}

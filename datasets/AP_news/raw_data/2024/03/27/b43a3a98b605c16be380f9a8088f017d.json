@@ -1,0 +1,306 @@
+﻿{
+    "altids": {
+        "itemid": "b43a3a98b605c16be380f9a8088f017d",
+        "etag": "b43a3a98b605c16be380f9a8088f017d_1a6aza0c0",
+        "friendlykey": "635970472750",
+        "referenceid": "US--Vaccine Bill-West Virginia"
+    },
+    "version": 1,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2024-03-28T00:32:52Z",
+    "firstcreated": "2024-03-27T21:53:57Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "ednote": "Eds: EDITS: Edits headline",
+    "editorialtypes": [
+        "Lead"
+    ],
+    "signals": [
+        "newscontent"
+    ],
+    "title": "US--Vaccine Bill-West Virginia",
+    "headline": "West Virginia Gov. Justice vetoes bill that would have loosened school vaccine policies",
+    "headline_extended": "West Virginia Republican Gov. Jim Justice broke with the GOP-majority Legislature to veto a bill that would have loosened one of the country\u2019s strictest school vaccination policies",
+    "slugline": "BC-US--Vaccine Bill-West Virginia, 1st Ld-Writethru",
+    "description_summary": "West Virginia Republican Gov. Jim Justice broke with the GOP-majority Legislature to veto a bill that would have loosened one of the country\u2019s strictest school vaccination policies. West Virginia is only one of a handful of states in the U.S. that offers only medical exemptions to vaccine requirements. The bill, vetoed Wednesday, would have allowed some students who don\u2019t attend traditional public institutions or participate in group extracurriculars like sports to be exempt from vaccinations typically required for children starting day care or school. In a letter explaining the veto, Justice said kids are the state's future and its most important resource.",
+    "bylines": [
+        {
+            "by": "By LEAH WILLINGHAM",
+            "title": "Associated Press"
+        }
+    ],
+    "located": "CHARLESTON, W.Va.",
+    "datelinelocation": {
+        "city": "Charleston",
+        "countryareacode": "WV",
+        "countryareaname": "West Virginia",
+        "countrycode": "USA",
+        "countryname": "United States",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                -81.63262,
+                38.34982
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "West Virginia vaccinations bill veto Jim Justice"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "person": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "027e168ecd3847e180d13be3dad5bc61",
+            "name": "Joe Manchin",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "POLITICIAN",
+                "PERSON"
+            ],
+            "associatedstates": [
+                {
+                    "code": "130bcce882c81004895adf092526b43e",
+                    "name": "West Virginia"
+                }
+            ],
+            "relevance": 36
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "5117a24e3ad444a2b1d3e76af9e5f21e",
+            "name": "Jim Justice",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "POLITICIAN",
+                "PERSON"
+            ],
+            "relevance": 82
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "a",
+            "name": "a"
+        },
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "4f95136e072e41c6a81e8fa820e26e9c",
+            "name": "Children",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 52
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86aad5207dac100488ecba7fa5283c3e",
+            "name": "Politics",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 58
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 81
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e237be707de410048fffdf092526b43e",
+            "name": "Medication",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 68
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "ace74e307f00100486cedf092526b43e",
+            "name": "Immunizations",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 88
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Editorial",
+            "editorial_subject": "Health",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        }
+    ],
+    "organisation": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "bf6e2e80760d10048f8ae6e7a0f4673e",
+            "name": "U.S. Republican Party",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 42
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "130bcce882c81004895adf092526b43e",
+            "name": "West Virginia",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -80.50009,
+                    38.50038
+                ]
+            },
+            "relevance": 95,
+            "parentnames": [
+                "United States"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "661850e07d5b100481f5c076b8e3055c",
+            "name": "Latin America and Caribbean",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "130bcce882c81004895adf092526b43e",
+            "name": "West Virginia",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "associations": {
+        "1": {
+            "altids": {
+                "itemid": "5270ef6bee974b0983de1e8d138911ab"
+            },
+            "type": "picture"
+        }
+    },
+    "body_nitf": "<p>CHARLESTON, W.Va. (AP) \u2014 Republican Gov. Jim Justice on Wednesday broke with West Virginia's GOP-majority Legislature to veto <a href=\"https://apnews.com/article/vaccination-west-virginia-student-private-schools-73c0b996458a89f22d41ed0b0245df68\">a bill</a> that would have loosened one of the country's strictest school vaccination policies.</p><p>West Virginia is only one of a handful of states in the U.S. that offers only medical exemptions to vaccine requirements. The bill would have allowed some students who don\u2019t attend traditional public institutions or participate in group extracurriculars like sports to be exempt from vaccinations typically required for children starting day care or school.</p><p>\u201cOur kids are our future,\" Justice said in a letter explaining the veto. \u201cThey are our most important resource, and I will protect them with everything I have.\u201d</p><p>The governor said \u201cWest Virginia is way ahead of the pack\u201d in protecting children from preventable diseases like measles because of its school vaccine policy. He said he had to defer to the licensed medical professionals who \u201coverwhelmingly\u201d spoke out in opposition to the legislation.</p><p>\u201cI hear how strongly people believe in one side or the other on this subject, and I respect all opinions,\u201d he said. \u201cBut I must follow the guidance of our medical experts on this subject.\u201d</p><p>Justice, who is running for Democrat U.S. Sen. Joe Manchin's seat, received immense pressure to reject the bill from health care leaders, educators and parents. He refused to answer whether or not he planned to sign it before Wednesday's veto, saying he needed time to think through the decision.</p><p>The veto came on the last day before a key deadline that would have allowed the bill to go into law without Justice's signature.</p><p>The bill, which received majority support in both legislative chambers even with an overwhelming lack of support from health care leaders, would have exempted private and parochial schools from state law and allowed them to develop and enforce their own policies on vaccinations. Virtual-only public school students would also have been exempt.</p><p>All students participating in West Virginia school activities that result in competition, including but not limited to sports, would still have needed to be vaccinated.</p><p>The bill was publicly opposed by the head of the state\u2019s two teachers unions, the West Virginia Hospital Association and the West Virginia Medical Association, among other organizations.</p><p>Dr. Clay Marsh, West Virginia University\u2019s vice president and executive dean for health sciences, also urged Justice to vote against the bill. As COVID-19 Czar for the State of West Virginia, Marsh was tapped as a trusted advisor when it came to preventing spread of the virus in the state.</p><p>Justice was hailed by state health care leaders for his pro-vaccine stance during the coronavirus pandemic. When the COVID-19 vaccine was developed, Justice was among the first top elected officials in the country to receive a shot, even <a href=\"https://www.youtube.com/watch?v=_pm4tBKmqr8\">livestreaming the inoculation</a> on social media.</p><p>Before Justice vetoed the bill, Kanawha-Charleston Health Officer Dr. Steven Eshenaur said he was deeply worried about the consequences that could come from the legislation being made law.</p><p>\u201cYes, personal freedom is vital to our way of life in West Virginia and America, and I am all for it,\u201d he said in a statement. \u201cBut not when the lives of children are in danger.\u201d</p><p>Eshenaur said state leaders owe it to children to keep them safe, healthy and free of disability if it\u2019s in their power to do so.</p><p>\u201cHear this on repeat: If you are anti-vaccination, you are pro-disease. It\u2019s as simple as that,\u201d he said.</p><p>West Virginia law requires children to receive vaccines for chickenpox, hepatitis-b, measles, meningitis, mumps, diphtheria, polio, rubella, tetanus and whooping cough, unless they receive a medical exemption. West Virginia does not require COVID-19 vaccinations.</p><p>Health care leaders say other states have used West Virginia\u2019s immunization requirements as a model to strengthen their immunization requirements after experiencing measles outbreaks. West Virginia, along with California, Connecticut, Maine and New York, are the only states without nonmedical vaccination requirements.</p><p>But a growing number of parents in the state have expressed frustration with the state's policy and say they should have the freedom to make their own decisions about their children's vaccination status.</p><p>West Virginia University School of Medicine Professor Dr. Alvin Moss was one of a handful of doctors supportive of the bill, arguing before the Senate Health Committee that the state\u2019s current compulsory vaccination policy is medically unethical because it doesn\u2019t allow informed consent.</p><p>In 2017, the anti-vaccine requirement group West Virginians for Health Freedom had 300 families as members. The organization has grown to at least 3,000 members in 2024, Moss said.</p><p>The <a href=\"https://apnews.com/article/west-virginia-religious-vaccine-child-exemption-bef3ebaf90c28b5f83979e096c029aa6\">bill\u2019s original intent</a>, as introduced in the state House of Delegates, was to eliminate vaccine requirements for students in public virtual schools. It was expanded in a House committee to allow private schools to set their own vaccination standards, unless a student participates in sanctioned athletics.</p><p>The bill also created a religious exemption for any child whose parents or guardians present a letter stating the child cannot be vaccinated for religious reasons. That was taken out in the Senate.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/west-virginia-vaccinations-bill-veto-jim-justice-b43a3a98b605c16be380f9a8088f017d",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 5,
+            "reason": "The document discusses a bill related to school vaccination policies in West Virginia, including the governor's veto of the bill, the implications for public health, and the opinions of various health care leaders and organizations. The content is highly relevant to the topic of health as it addresses vaccination requirements, public health policies, and the protection of children from preventable diseases."
+        }
+    }
+}

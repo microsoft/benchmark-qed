@@ -1,0 +1,225 @@
+﻿{
+    "altids": {
+        "itemid": "de7f4d2af81cf94ecf1d8cde5802fcec",
+        "etag": "de7f4d2af81cf94ecf1d8cde5802fcec_1a8aza0c0",
+        "friendlykey": "629752957543",
+        "referenceid": "EU--Italy-Abortion"
+    },
+    "version": 1,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2024-04-23T18:36:24Z",
+    "firstcreated": "2024-04-23T12:31:20Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "ednote": "Eds: UPDATES: top two paragraphs, summary with the provision passing in the Senate.",
+    "editorialtypes": [
+        "Lead"
+    ],
+    "signals": [
+        "newscontent"
+    ],
+    "title": "EU--Italy-Abortion",
+    "headline": "Abortion returns to the spotlight in Italy, 46 years after it was legalized",
+    "headline_extended": "Italian Premier Giorgia Meloni\u2019s far-right-led government has scored a victory with the Senate approving a law allowing anti-abortion groups access to women considering ending their pregnancies",
+    "slugline": "BC-EU--Italy-Abortion, 1st Ld-Writethru",
+    "description_summary": "Italian Premier Giorgia Meloni\u2019s far-right-led government has scored a victory with the Senate approving a law allowing anti-abortion groups access to women considering ending their pregnancies. Tuesday's development revives tensions around the issue of abortion in Italy, 46 years after it was legalized in the overwhelmingly Catholic country. Meloni campaigned on a slogan of \u201cGod, fatherland and family\" but has insisted she won\u2019t roll back the 1978 law legalizing abortion and that she merely wants to implement it fully. But she's also prioritized encouraging women to have babies to reverse Italy\u2019s demographic crisis. Italy\u2019s birthrate, already one of the lowest in the world, reached a record low last year. The left-wing opposition fears abortion rights are threatened.",
+    "bylines": [
+        {
+            "by": "By NICOLE WINFIELD",
+            "title": "Associated Press"
+        }
+    ],
+    "located": "ROME",
+    "datelinelocation": {
+        "city": "Rome",
+        "countrycode": "ITA",
+        "countryname": "Italy",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                12.51133,
+                41.89193
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "italy abortion meloni"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "person": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "5d1d01c3cb4b4e7ab24774792c9625cb",
+            "name": "Giorgia Meloni",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "POLITICIAN",
+                "PERSON"
+            ],
+            "relevance": 81
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "i",
+            "name": "i"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86aad5207dac100488ecba7fa5283c3e",
+            "name": "Politics",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 63
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e22e35087de410048fc2df092526b43e",
+            "name": "Abortion",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "bb2d2c5f441a452cb24bb511a2ab5eea",
+            "name": "World news",
+            "creator": "Editorial",
+            "editorial_subject": "World news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "organisation": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "9668ea3df71d4afd8a6e2dd8ccd9c5e5",
+            "name": "Italy government",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 87
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "662122b07d5b100482d7c076b8e3055c",
+            "name": "Italy",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661850e07d5b100481f4c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "01f56e0e654841eca2e69bf2cbcc0526",
+                "name": "Nation"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    12.833333,
+                    42.833333
+                ]
+            },
+            "relevance": 96,
+            "parentnames": [
+                "Europe"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "661850e07d5b100481f4c076b8e3055c",
+            "name": "Europe",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "associations": {
+        "1": {
+            "altids": {
+                "itemid": "e225e204c21c401fae806fd0f8459ca0"
+            },
+            "type": "picture"
+        }
+    },
+    "body_nitf": "<p>ROME (AP) \u2014 Italian Premier Giorgia Meloni\u2019s far-right-led government scored a victory Tuesday with the Senate approving a law allowing anti-abortion groups access to women considering ending their pregnancies. The development revives tensions around the issue of abortion in Italy, 46 years after it was legalized in the overwhelmingly Catholic country.</p><p>The Senate, where the government has a majority, voted 95-68, giving final approval to legislation tied to European Union COVID-19 recovery funds that included an amendment sponsored by Meloni\u2019s Brothers of Italy party.</p><p>The law, already passed by the lower Chamber of Deputies, allows regions to permit groups \u201cwith a qualified experience supporting motherhood\u201d to have access to public support centers where women who are considering abortions go to receive counseling.</p><p>For the right, the amendment merely fulfills the original intent of the 1978 law legalizing abortion, known as Law 194, which includes provisions to prevent the procedure and support motherhood.</p><p>For the left-wing opposition, it chips away at abortion rights that opponents had <a href=\"https://apnews.com/article/abortion-elections-marriage-italy-808172ad84f4f3d35feef3645633bd06\">warned would follow Meloni\u2019s 2022 election</a>.</p><p>\u201cThe government should realize that they keep saying they absolutely do not want to boycott or touch Law 194, but the truth is that the right-wing opposes women\u2019s reproductive autonomy, fears women\u2019s choices regarding motherhood, sexuality, and abortion,\u201d Cecilia D\u2019Elia, a Democratic Party senator, said <a href=\"https://apnews.com/video/rome-italy-government-abortion-italy-giorgia-meloni-805ce4f65d5a492daca20eef8bfa0199\">at a protest this week against the legislation</a>.</p><p>Under the 1978 law, Italy allows abortion on request in the first 12 weeks of pregnancy, or later if a woman\u2019s health or life is in danger. It provides for publicly funded counseling centers to advise pregnant women of their rights and services offered if they want to terminate the pregnancies.</p><p>But easy access to abortion isn't always guaranteed. The law allows health care personnel to register as conscientious objectors and refuse to perform abortions, and many have \u2014 meaning women sometimes have to travel far to have the procedure.</p><p>Meloni, who campaigned on a slogan of \u201cGod, fatherland and family,\u201d has insisted she won\u2019t roll back the 1978 law and merely wants to implement it fully. But she has also prioritized encouraging women to have babies <a href=\"https://apnews.com/article/italy-vatican-pope-demographics-children-72644b8c2436ad2682e074ac194a068f\">to reverse Italy\u2019s demographic crisis</a>.</p><p>Italy\u2019s birthrate, already one of the lowest in the world, has been falling steadily for about 15 years and reached a record low last year with 379,000 babies born. Meloni\u2019s conservative forces, backed strongly by the Vatican, have mounted a campaign to encourage at least 500,000 births annually by 2033, a rate that demographers say is necessary to prevent the economy from collapsing under the weight of Italy's aging population.</p><p>Meloni has called the left-wing opposition to the proposed amendment \u201cfake news,\u201d recalling that Law 194 provides for measures to prevent abortions, which would include counselling pregnant women about alternatives. The amendment specifically allows anti-abortion groups, or groups \"supporting motherhood,\" to be among the volunteer groups that can work in the counseling centers.</p><p>\u201cI think we have to guarantee a free choice,\u201d Meloni said recently. \u201cAnd to guarantee a free choice you have to have all information and opportunities available. And that\u2019s what the Law 194 provides.\u201d</p><p>The new tensions over abortion in Italy come against the backdrop of developments elsewhere in <a href=\"https://apnews.com/article/europe-abortion-rights-constitution-france-f65ef0c520bfbb43d4c201cfc443ca54\">Europe going somewhat in the opposite direction</a>. France marked International Women's Day by inscribing the guaranteed right to abortion into its constitution. Last year, overwhelmingly Catholic Malta voted to ease the strictest abortion laws in the EU. Polish lawmakers moved forward with proposals to lift a near-total ban on abortion enacted by the country's previous right-wing government.</p><p>At the same time, Italy's left fears the country might go the way of the U.S., where states are restricting access after the <a href=\"https://apnews.com/article/abortion-supreme-court-decision-854f60302f21c2c35129e58cf8d8a7b0\">U.S. Supreme Court struck down landmark legislation</a> that had guaranteed access to abortion nationwide.</p><p>Elly Schlein, head of Italy's opposition Democratic Party, told a conference on women on Tuesday that the country needs to establish an obligatory percentage of doctors willing to perform abortions in public hospitals, \u201cotherwise these rights remain on paper only.\u201d</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/italy-abortion-meloni-de7f4d2af81cf94ecf1d8cde5802fcec",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 5,
+            "reason": "The document discusses the recent legislative changes in Italy regarding abortion, a significant health issue. It covers the implications of the new law, the political context, and the potential impact on women's reproductive health and rights. The document also touches on related demographic concerns and comparisons with other countries' abortion laws. Given that abortion is a critical aspect of women's health, the document is highly relevant to the topic of health."
+        }
+    }
+}

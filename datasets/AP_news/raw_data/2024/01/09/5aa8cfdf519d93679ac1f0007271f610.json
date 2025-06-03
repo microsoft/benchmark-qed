@@ -1,0 +1,251 @@
+﻿{
+    "altids": {
+        "itemid": "5aa8cfdf519d93679ac1f0007271f610",
+        "etag": "5aa8cfdf519d93679ac1f0007271f610_0a4aza0c0",
+        "friendlykey": "584743249750",
+        "referenceid": "EU--Spain-Mandatory Face Masks"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2024-01-09T10:41:06Z",
+    "firstcreated": "2024-01-09T10:41:04Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "ednote": "Eds: UPDATES: With AP Photos.",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "EU--Spain-Mandatory Face Masks",
+    "headline": "Spain makes face masks mandatory in hospitals and clinics after a spike in respiratory illnesses",
+    "headline_extended": "Spain\u2019s government says face masks will be mandatory in hospitals and healthcare centers starting Wednesday due to a surge in respiratory illnesses",
+    "slugline": "BC-EU--Spain-Mandatory Face Masks",
+    "description_summary": "Spain\u2019s government says face masks will be mandatory in hospitals and healthcare centers starting Wednesday due to a surge in respiratory illnesses. Health Minister M\u00f3nica Garc\u00eda said late Monday that it was a simple and necessary measure. Spain\u2019s hospitals have come under immense pressure in recent weeks following a spike in cases of flu, COVID-19 and other bronchial problems. Garc\u00eda\u2019s ministry decided to impose the measure after failing to reach an agreement with regional health authorities, many of whom argued that mask use should be recommended but not obligatory. Six regions have already introduced the measure and masks have been commonly used on streets and public transport and in health centers in recent months.",
+    "located": "MADRID",
+    "datelinelocation": {
+        "city": "Madrid",
+        "countrycode": "ESP",
+        "countryname": "Spain",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                -3.70256,
+                40.4165
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "spain face masks mandatory covid respiratory hospitals"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "i",
+            "name": "i"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 89
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e228bab07de410048fa8df092526b43e",
+            "name": "Lung disease",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 73
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86aad5207dac100488ecba7fa5283c3e",
+            "name": "Politics",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 32
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Editorial",
+            "editorial_subject": "Health",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "bb2d2c5f441a452cb24bb511a2ab5eea",
+            "name": "World news",
+            "creator": "Editorial",
+            "editorial_subject": "World news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "organisation": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "6fe4642d163a4f24a987ae5b1c5570ee",
+            "name": "Spain government",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 51
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "662161307d5b100482dfc076b8e3055c",
+            "name": "Spain",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661850e07d5b100481f4c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "01f56e0e654841eca2e69bf2cbcc0526",
+                "name": "Nation"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -4,
+                    40
+                ]
+            },
+            "relevance": 90,
+            "parentnames": [
+                "Europe"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "661850e07d5b100481f4c076b8e3055c",
+            "name": "Europe",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "associations": {
+        "1": {
+            "altids": {
+                "itemid": "a0f8028459e04cf4bcc5f2a8362fa462"
+            },
+            "type": "picture"
+        },
+        "2": {
+            "altids": {
+                "itemid": "6f2edb8b540f468988dcf5d3bc2bfdda"
+            },
+            "type": "picture"
+        },
+        "3": {
+            "altids": {
+                "itemid": "ca042cc1b13a4833b47f866127ce252f"
+            },
+            "type": "picture"
+        },
+        "4": {
+            "altids": {
+                "itemid": "49816643daa042ab8c0dd41e7c755ad2"
+            },
+            "type": "picture"
+        },
+        "5": {
+            "altids": {
+                "itemid": "b5fab09c480d4e69b2f672eeaeb520da"
+            },
+            "type": "picture"
+        },
+        "6": {
+            "altids": {
+                "itemid": "7cb0602a753948569bce0f542d207626"
+            },
+            "type": "picture"
+        }
+    },
+    "body_nitf": "<p>MADRID (AP) \u2014 Face masks will be mandatory in hospitals and healthcare centers in Spain starting Wednesday due to a surge in respiratory illnesses, the Health Ministry said.</p><p>The new leftist minority coalition government is imposing the measure despite opposition from most of Spain's 17 autonomous regions.</p><p>\u201cWe are talking about putting on a mask when you enter a health center and taking it off when you leave,\u201d Health Minister M\u00f3nica Garc\u00eda told Cadena Ser radio late Monday.</p><p>\u201cI don\u2019t think it is any drama. It is a basic and simple measure of the first order,\" she added.</p><p>Spain\u2019s hospitals have come under immense pressure in recent weeks following a spike in cases of flu, COVID-19 and other respiratory illnesses.</p><p>Garc\u00eda\u2019s ministry decided to impose the measure after failing to reach an agreement with regional health authorities, many of whom argued that mask use should be recommended but not obligatory.</p><p>Regional governments are in charge of healthcare although the central government can intervene if it deems it necessary.</p><p>Six regions have already introduced the measure and masks have been commonly used on streets and public transport and in health centers in recent months.</p><p>Spain declared a formal end to the health crisis caused by the COVID-19 pandemic last July, saying people no longer needed to wear masks in health and care centers and pharmacies. Over the previous two years, Spain had gradually ended mandatory mask wearing, first in public and then on public transport.</p><p>The country registered more than 14 million cases and some 120,000 deaths from the coronavirus.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/spain-face-masks-mandatory-covid-respiratory-hospitals-5aa8cfdf519d93679ac1f0007271f610",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 5,
+            "reason": "The document discusses the implementation of mandatory face masks in hospitals and healthcare centers in Spain due to a surge in respiratory illnesses. It provides details on the government's decision, the opposition from regional authorities, and the context of recent health measures in Spain. This information is directly related to the topic of Health, as it addresses public health policies, respiratory illnesses, and the healthcare system's response to a health crisis."
+        }
+    }
+}

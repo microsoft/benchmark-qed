@@ -1,0 +1,275 @@
+﻿{
+    "altids": {
+        "itemid": "72ed3b023240dbaffc49e4b228fb358e",
+        "etag": "72ed3b023240dbaffc49e4b228fb358e_0a7aza0c0",
+        "friendlykey": "497214047521",
+        "referenceid": "EU--Britain-King-Prince Harry"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2024-02-16T14:17:26Z",
+    "firstcreated": "2024-02-16T14:17:25Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "ednote": "Eds: UPDATES: Updates Media.",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "EU--Britain-King-Prince Harry",
+    "headline": "Prince Harry says he jumped on a plane to London after learning of King Charles III's cancer",
+    "headline_extended": "Prince Harry says he immediately arranged to go to London after his father, King Charles III, called to tell him he had cancer",
+    "slugline": "BC-EU--Britain-King-Prince Harry",
+    "description_summary": "Prince Harry says he immediately arranged to go to London after his father, King Charles III, called to tell him he had cancer. Harry arrived from California less than 48 hours after Buckingham Palace announced on Feb. 5 that the king had cancer and had begun treatment. \u201cI love my family. The fact that I was able to get on a plane and go see and spend any time with him, I\u2019m grateful for that,\u2019\u2019 Harry told the news program \u201cGood Morning America\u201d on Friday. The palace hasn't revealed the type of cancer the 75-year-old king has, and the prince wouldn\u2019t reveal any details about his father\u2019s prognosis.",
+    "located": "LONDON",
+    "datelinelocation": {
+        "city": "London",
+        "countrycode": "GBR",
+        "countryname": "United Kingdom",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                -0.12574,
+                51.50853
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "Prince Harry King Charles cancer family"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "person": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "27d3bc69a271433992a500bc68c4eb60",
+            "name": "Camilla, the queen consort",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "ROYALTY",
+                "PERSON"
+            ],
+            "relevance": 34
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f8955706b58c4b71901d46201750aa48",
+            "name": "King Charles III",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "GOVERNMENT_FIGURE",
+                "PERSON",
+                "ROYALTY"
+            ],
+            "relevance": 52
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "1b145ec16d324e31a17d0741aa228c12",
+            "name": "Prince Harry",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "GOVERNMENT_FIGURE",
+                "PERSON",
+                "ROYALTY"
+            ],
+            "relevance": 90
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "i",
+            "name": "i"
+        },
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "e",
+            "name": "e"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "90aeac5089ef10048f63d56c852d093e",
+            "name": "Royalty",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 77
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 66
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e22524b87de410048f91df092526b43e",
+            "name": "Cancer",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 51
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "16cb0ba3e6d24d97ace39f5a1924669a",
+            "name": "Entertainment",
+            "creator": "Editorial",
+            "editorial_subject": "Entertainment",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "bb2d2c5f441a452cb24bb511a2ab5eea",
+            "name": "World news",
+            "creator": "Editorial",
+            "editorial_subject": "World news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "7a55e0187eff10048492df092526b43e",
+            "name": "London",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "df4691387d6b10048fdeba7fa5283c3e"
+            ],
+            "locationtype": {
+                "code": "9d26a20b35f0484a891740f8189d4c7b",
+                "name": "City"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -0.12574,
+                    51.50853
+                ]
+            },
+            "relevance": 89,
+            "parentnames": [
+                "England"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "661850e07d5b100481f4c076b8e3055c",
+            "name": "Europe",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "associations": {
+        "1": {
+            "altids": {
+                "itemid": "26f6d01538ef4989901789dfb0174988"
+            },
+            "type": "picture"
+        },
+        "2": {
+            "altids": {
+                "itemid": "39c80fb4c88f450e8747172f7ea1df1b"
+            },
+            "type": "picture"
+        },
+        "3": {
+            "altids": {
+                "itemid": "6aee37afe74845c3b19d15804c6db7d2"
+            },
+            "type": "picture"
+        }
+    },
+    "body_nitf": "<p>LONDON (AP) \u2014 Prince Harry said Friday that he immediately arranged to go to London after his father, King Charles III, called to tell him <a href=\"https://apnews.com/video/united-kingdom-royalty-cancer-wales-california-5e02a47c72fe400db670718358611a21\">he had cancer</a>.</p><p>\u201cI jumped on a plane and went to go see him as soon as I could,\" Harry told the news program \u201cGood Morning America.\u201d \u201cI love my family. The fact that I was able to get on a plane and go see and spend any time with him, I\u2019m grateful for that.\u2019\u2019</p><p>Harry <a href=\"https://apnews.com/article/britain-king-charles-cancer-diagnosis-f787d38ddbb436186c5427e839fd055b\">arrived from California</a> less than 48 hours after Buckingham Palace announced on Feb. 5 that the king had cancer and had begun treatment.</p><p>The visit between the monarch and his <a href=\"https://apnews.com/article/king-charles-cancer-who-next-line-succession-d054f86ba17fe280bc7481a42921f3db\">younger son</a> at Clarence House was relatively brief, as Charles and his wife, Queen Camilla, were seen leaving about an hour later.</p><p>The palace has <a href=\"https://apnews.com/article/king-charles-health-history-covid-sports-injuries-a75e0eed8f8537d59789b8333828b088\">not revealed</a> the type of cancer the 75-year-old king has, saying only that it was discovered during a treatment for an enlarged prostate but isn't prostate cancer.</p><p>The Duke of Sussex wouldn\u2019t reveal any details about his father\u2019s prognosis. \u201cThat stays between me and him,\u201d he said.</p><p>Harry has had a troubled relationship with his family since he <a href=\"https://apnews.com/article/prince-harry-ap-top-news-international-news-celebrities-north-america-d6710051fc250a094f23febc304eddb6\">quit royal duties in 2020</a> and moved to Los Angeles with his wife, Meghan, citing what they said were the unbearable intrusions and racist attitudes of the British media. He showed up alone for his father's coronation in May but left as soon as the ceremony ended to return to California for his son's birthday.</p><p>Asked if the illness could help reunify his family, Harry, speaking at an Invictus Games event near Vancouver, said, \u201cYeah, I'm sure.\" He said he has witnessed that type of galvanizing effect among the wounded service members who compete in the games the prince founded in 2014.</p><p>\u201cThroughout all these families, I see it on a day to day basis,\u201d he said. \"You know, again, the strength of the family unit coming together.\u201d</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/prince-harry-king-charles-cancer-family-72ed3b023240dbaffc49e4b228fb358e",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 4,
+            "reason": "The document discusses King Charles III's cancer diagnosis and treatment, which is directly related to health. It also mentions the impact of the diagnosis on family dynamics, which can be considered a secondary health-related topic. However, the document also includes significant details about Prince Harry's actions and family relationships, which are not directly related to health. Therefore, while the primary focus is on a health issue, the document contains a mix of other topics as well."
+        }
+    }
+}

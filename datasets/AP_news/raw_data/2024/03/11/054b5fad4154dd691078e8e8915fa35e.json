@@ -1,0 +1,272 @@
+﻿{
+    "altids": {
+        "itemid": "054b5fad4154dd691078e8e8915fa35e",
+        "etag": "054b5fad4154dd691078e8e8915fa35e_0a2aza0c0",
+        "friendlykey": "600430100024",
+        "referenceid": "IL--Editorial Rdp"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Opinion",
+    "language": "en",
+    "versioncreated": "2024-03-12T11:10:36Z",
+    "firstcreated": "2024-03-11T19:01:20Z",
+    "editorialrole": "FullStory",
+    "fixture": {
+        "code": "21ea4067bb274c3b805353fb2b99ba70",
+        "name": "Editorial Roundup"
+    },
+    "pubstatus": "usable",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "IL--Editorial Rdp",
+    "headline": "Editorial Roundup: Illinois",
+    "slugline": "AP-IL--Editorial Rdp",
+    "bylines": [
+        {
+            "by": "By The Associated Press"
+        }
+    ],
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "Editorial Rdp"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "person": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a6331b54c46e4ca8b79fa40fada95db5",
+            "name": "Donald Trump",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "POLITICIAN",
+                "PERSON"
+            ],
+            "relevance": 53
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "b1d550d087874a0393ebfa85dab5ea0a",
+            "name": "Barack Obama",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "POLITICIAN",
+                "PERSON"
+            ],
+            "relevance": 69
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "332962a084d11004895b91f43387513e",
+            "name": "John McCain",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "POLITICIAN",
+                "PERSON"
+            ],
+            "associatedstates": [
+                {
+                    "code": "e427079081d610048a4edf092526b43e",
+                    "name": "Arizona"
+                }
+            ],
+            "relevance": 63
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e23f21107de410048036df092526b43e",
+            "name": "Death and dying",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 62
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "2f716c987f3b10048c27df092526b43e",
+            "name": "Assisted suicide and euthanasia",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 36
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86aee4307dac10048901ba7fa5283c3e",
+            "name": "Elections",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 52
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86aad5207dac100488ecba7fa5283c3e",
+            "name": "Politics",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 77
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "organisation": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "08526c041a1d4b9ab7357a854b6f0669",
+            "name": "Illinois state government",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 33
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "788b364882f110048df3df092526b43e",
+            "name": "District of Columbia",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "9d26a20b35f0484a891740f8189d4c7b",
+                "name": "City"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -77.00025,
+                    38.91706
+                ]
+            },
+            "relevance": 38,
+            "parentnames": [
+                "United States"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "2c6a186082b010048379df092526b43e",
+            "name": "Illinois",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -89.25037,
+                    40.00032
+                ]
+            },
+            "relevance": 88,
+            "parentnames": [
+                "United States"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "2c6a186082b010048379df092526b43e",
+            "name": "Illinois",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "body_nitf": "<p>Arlington Heights Daily Herald. March 8, 2024.</p><p>Editorial: Demand the truth</p><p>Remember when John McCain and Barack Obama stuck to the issues during their presidential run? A grassroots organization wants to see that type of campaigning again. Associated Press</p><p>More candidates should agree to campaign ethically. More voters should demand it.</p><p>Think of all the stomach-turning direct-mail election ads, TV ads and radio spots that paint candidates in an unfair light. You\u2019re probably seeing a lot fewer of them during this primary election season, but not because more candidates are taking the high road.</p><p>It\u2019s because there are fewer contested races. For years we\u2019ve see erosion of both the number of people seeking election and the number of people going to the polls.</p><p>Sure, it\u2019ll be different in November when there will be plenty of congressional contests, statehouse and county races. And voters are sure to come out in droves for the marquee matchup of Trump v. Biden.</p><p>Cynicism is on the rise across the country. Potential voters are turned off by lies, insults, ad hominem attacks and character assassination. Good candidates in many cases forego running for office because they don\u2019t want to be subjected to the ugliness of it all.</p><p>With fewer good candidates and less interest in voting, we are losing that which makes this nation special. It\u2019s a vicious cycle that keeps going in the wrong direction. Illinois does not require you to play fair and tell the truth if you\u2019re running for office. And those who fight dirty often win.</p><p>Enter the Citizens for Ethical Campaigns, a new grass-roots organization looking to turn that around.</p><p>\u201cIf the people of Illinois want to see less corruption in government, they must demand that the candidates they elect be steadfast in their values of honesty and decency,\u201d said Denyse Stoneback, who along with other activists started the group. \u201cThat starts with their campaign.\u201d</p><p>Stoneback was a one-term state representative in the 16th House District, which serves Skokie and neighboring communities. The longtime gun control advocate was moved to make things better after her reelection campaign was scuttled by negative campaigning that painted her as a gun control opponent.</p><p>\u201cI didn\u2019t want other candidates to experience what I did,\u201d she said. \u201cWe can make democracy better by making politics better.\u201d</p><p>Late in her term, Stoneback introduced legislation known as the Truth in Politics Act, which never made it to a floor vote. It would have required honest campaigning. But then she learned Illinois passed a Code of Fair Campaign Practices in 1989 that, while voluntary, encourages candidates at all levels to follow basic principles of decency, honesty and fair play.</p><p>She was reminded of the time when then-presidential candidate John McCain corrected a woman in a crowd who insisted that Barack Obama was a Muslim. He pointed out that he and Obama merely disagreed on some policy issues.</p><p>\u201cWe need to get back to that,\u201d Stoneback said.</p><p>Citizens For Ethical Campaigns urges candidates for all levels of government to agree to follow the principles of the Code of Fair Campaign Practices. The group noted in a news release this week that 58 candidates have signed on. More candidates should be familiar with the code, and voters should insist on supporting candidates who pledge to conduct campaigns that focus on policy positions and not unfair smears of their opponents.</p><p>If candidates could be better trusted to tell the truth, we as voters could make decisions based on policy positions.</p><p>It\u2019s telling that Illinois can\u2019t seem to agree that telling the truth is important. Many other states do. We urge the General Assembly to reintroduce the bill and make it a requirement.</p><p>If we\u2019re ever to have truly fair elections, telling the truth ought to be part of it</p><p>Check out the organizations website at <a href=\"https://www.textise.net/showText.aspx?strURL=https%3A%2F%2Furl.us.m.mimecastprotect.com%2Fs%2FYfT-C1w7ozunPMplTp2spO%3Fdomain%3Dcitizensforethicalcampaigns.org\">citizensforethicalcampaigns.org</a>.</p><p>___</p><p>Chicago Tribune. March 8, 2024.</p><p>Editorial: \u2018Right to die\u2019 debate comes to Illinois. Both sides have merit, but we would vote no.</p><p>At the Editorial Board, we\u2019re used to hearing from passionate advocates on both sides of an issue. Certainly, there are many subjects put before us that feel like matters of life and death, especially when war or gun violence is involved. Still, nothing fully prepared us for what we heard when talking to those on both sides of the rising movement calling for Illinois to join the 10 other states (and the District of Columbia) that allow terminally ill adults to choose when and how they want to end their own lives.</p><p>\u201cI\u2019m going to die, and I\u2019m going to die soon,\u201d cancer patient Deb Robertson told us in one of our sessions. Robertson, a courageous woman, was part of a group of advocates for the so-called End of Life Options Act, which would allow eligible patients the right to access life-ending prescription medication or, to put that another way, to get the benefit of suicide assisted by a physician. The so-called right-to-die debate, which is under consideration in the Illinois legislature, has picked up steam in recent years, much like the debate over abortion rights erupted with new vigor after the Supreme Court\u2019s decision in 2022 to overturn Roe v. Wade. In these semiotically sophisticated times, even the name of the debate depends on which side you are on. Those who support it refer to a \u201cright to die.\u201d Those who oppose it prefer it be called \u201cphysician assisted suicide.\u201d</p><p>Robertson is in the former group.</p><p>Robertson, a Lombard resident, was a youth social worker before she was diagnosed last year with terminal neuroendocrine carcinoma, an aggressive form of cancer. She retired from her job of counseling teens, she said, and now has become an activist for the right of the terminally ill to choose.</p><p>\u201cHow I\u2019m going to die is what I\u2019m concerned about,\u201d she said, arguing that her ability to make that choice should be a fundamental human right for any terminally ill American.</p><p>End-of-life care has progressed in many ways for the better since the days when the shadowy figure of Dr. Jack Kevorkian earned the nickname \u201cDr. Death\u201d with his portable euthanasia services. Kevorkian, who famously said that \u201cdying is not a crime\u201d and yet was himself convicted of second-degree murder in 1999, died in 2011. Between his being granted parole and his death, he was legally obligated not even to broach the subject, let alone continue to participate in the cause.</p><p>These days, the public knows more about, and has become far more supportive of, the advantages of hospice and palliative care. Broadly speaking, that\u2019s treatment seeking not to cure a medical situation so much as provide relief from the pain and other symptoms of a serious illness, as well as to help patients cope with side effects. And, despite widely held concerns, the availability of palliative care does not always depend on whether your condition can be cured. In general, albeit with some exceptions, the end-of-life comforts available to most of us in the last months or weeks of our lives have greatly improved from what was offered to our family members and other loved ones in the past.</p><p>That said, palliative care may simply not be enough for some patients for whom pain can still persist. And, beyond even that, is the simple, fundamental desire of Americans, among other humans, to feel and be free even as our bodies fail. As Robertson put it, \u201cIt\u2019s about me having the choice to be able to die the way I want to die.\u201d She made a most persuasive case.</p><p>___</p><p>Chicago Sun-Times. March 9, 2024.</p><p>Editorial: Here\u2019s how Illinois can better help relatives who take in foster-care children</p><p>The state gives smaller reimbursements to relatives who provide kinship care than it does to parents who are not related to the children. The Legislature can, and should, fix that.</p><p>Illinois\u2019 foster care rules historically have been set up with the expectation that children removed from their homes will be cared for by unrelated licensed foster parents. But in Illinois, the Department of Children & Family Services now places more than half of those children with relatives, and that percentage is higher in Chicago.</p><p>More needs to be done to assist relatives who take those children in.</p><p>Foster parents who are not related to the children they take in must undergo weeks of training before they are licensed. Those foster parents are reimbursed by the state at a higher level than relatives who suddenly are asked to take in children. That\u2019s not an ideal system, because it\u2019s often a smoother transition for children to be cared for by relatives they already know, a system called kinship care.</p><p>As Nora Collins-Mandeville, director of Systems Reform Policy for the ACLU of Illinois, says, \u201cThe outcomes are much better with relatives.\u201d</p><p>Moreover, relatives who take in children often are more likely to be living at or near their budget limits, Collins-Mandeville said. They need the extra money.</p><p>Of course, relatives can take the licensing training, too, but they might not be able to qualify as licensed foster parents for other reasons. For example, they might not have a separate bedroom for each child. Only 40% of relatives in Illinois who have taken in children are receiving the higher reimbursement rates granted to licensed foster parents.</p><p>Uncertified relatives get a monthly stipend of $388 per child. Licensed foster parents get $544 for a child under five, $611 for children aged five to eight and $656 for child nine or older, according to Mark Testa, distinguished professor emeritus in the School of Social Work at the University of North Carolina at Chapel Hill.</p><p>Under a new federal rule pushed by U.S. Rep. Danny Davis, D-Ill., that was finalized in October, Illinois is now permitted \u2014 starting this month \u2014 to submit a plan to give relatives the same resources that licensed foster parents get, provided those relatives meet some standards, such as passing a background check.</p><p>Making the change would benefit the state because under the new federal policy, the state will be reimbursed for half of what it pays for reimbursements and administrative costs, which will put millions of dollars in state coffers.</p><p>Bills in the House and Senate would authorize the state to make this change, while also dealing with other issues. The Legislature should put relatives on a par with licensed foster parents.</p><p>As Dan Kotowski, president and CEO of Kids Above All, a nonprofit dedicated to building better lives for children and families, says about caring for children in general, \u201cThe real conversation should be what is best for the child.\u201d</p><p>Kotowski is absolutely correct. The Legislature should pay attention and do the right thing.</p><p>END</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/054b5fad4154dd691078e8e8915fa35e",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 3,
+            "reason": "The document contains three editorials, each focusing on different topics. The first editorial discusses ethical campaigning in politics, which is not related to health. The second editorial addresses the 'right to die' debate, which is directly related to health as it involves end-of-life care and physician-assisted suicide. The third editorial discusses foster care and kinship care, which has some relevance to health in terms of the well-being of children but is more focused on social services and policy. Overall, the second editorial is the most relevant to the topic of health, but the other two are not. Therefore, the document has partial relevance to the topic of health."
+        }
+    }
+}

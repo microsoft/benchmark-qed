@@ -1,0 +1,275 @@
+﻿{
+    "altids": {
+        "itemid": "a4c08b114e3ee16534ff0c94a13c4fc7",
+        "etag": "a4c08b114e3ee16534ff0c94a13c4fc7_1a20aza0c0",
+        "friendlykey": "924581055140",
+        "referenceid": "US--Cruise-Sick-Outbreak"
+    },
+    "version": 1,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2024-02-08T00:29:15Z",
+    "firstcreated": "2024-02-08T00:19:27Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "ednote": "Eds: UPDATES: Links photo. AP Photos.",
+    "editorialtypes": [
+        "Lead"
+    ],
+    "signals": [
+        "newscontent"
+    ],
+    "title": "US--Cruise-Sick-Outbreak",
+    "headline": "CDC is investigating gastrointestinal sickness on luxury cruise ship Queen Victoria",
+    "headline_extended": "The Centers for Disease Control and Prevention is investigating an outbreak on a luxury cruise ship where more than 150 people have reported gastrointestinal illness",
+    "slugline": "AP-US--Cruise-Sick-Outbreak, 1st Ld-Writethru",
+    "description_summary": "The Centers for Disease Control and Prevention is investigating an outbreak on a luxury cruise ship where more than 150 people have reported gastrointestinal illness. The major symptoms are diarrhea and vomiting. The CDC says the cause is unknown. The Queen Victoria is operated by Cunard Cruise Line. It departed San Francisco Wednesday on its way from Florida to Hawaii. The ship is carrying 1,800 passengers and nearly 970 crew members. Cunard told the CDC that the ship increased cleaning and disinfection, and isolated ill passengers and crew.",
+    "located": "SAN FRANCISCO",
+    "datelinelocation": {
+        "city": "San Francisco",
+        "countryareacode": "CA",
+        "countryareaname": "California",
+        "countrycode": "USA",
+        "countryname": "United States",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                -122.41942,
+                37.77493
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "cruise queen victoria outbreak"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "a",
+            "name": "a"
+        },
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "9cce666bb29344b8ba61f3732d971d32",
+            "name": "Disease outbreaks",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 84
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 69
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "ee324cc082af10048342df092526b43e",
+            "name": "Hawaii",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -156.50028,
+                    20.75028
+                ]
+            },
+            "relevance": 33,
+            "parentnames": [
+                "United States"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cb06ab1082af100482f8df092526b43e",
+            "name": "Florida",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -82.5001,
+                    28.75054
+                ]
+            },
+            "relevance": 33,
+            "parentnames": [
+                "United States"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "8531ce8082af10048285df092526b43e",
+            "name": "San Francisco",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "789fdd8882af10048263df092526b43e"
+            ],
+            "locationtype": {
+                "code": "9d26a20b35f0484a891740f8189d4c7b",
+                "name": "City"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -122.41942,
+                    37.77493
+                ]
+            },
+            "relevance": 33,
+            "parentnames": [
+                "California"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "661850e07d5b100481f4c076b8e3055c",
+            "name": "Europe",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "cb06ab1082af100482f8df092526b43e",
+            "name": "Florida",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "789fdd8882af10048263df092526b43e",
+            "name": "California",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "ee324cc082af10048342df092526b43e",
+            "name": "Hawaii",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "associations": {
+        "1": {
+            "altids": {
+                "itemid": "d337c189c30f46dc92854ae8e160c3bf"
+            },
+            "type": "picture"
+        }
+    },
+    "body_nitf": "<p>SAN FRANCISCO (AP) \u2014 The Centers for Disease Control and Prevention is investigating an outbreak on a luxury cruise ship where more than 150 people have reported gastrointestinal illness, including diarrhea and vomiting.</p><p>The Queen Victoria, operated by Cunard Cruise Line, departed San Francisco Wednesday on its way from Florida to Hawaii. The ship is carrying 1,800 passengers and 970 crew members.</p><p>The cause is unknown. Cunard told the CDC that the ship increased cleaning and disinfection, and isolated ill passengers and crew.</p><p>The reported cases are totals for the entire voyage and do not represent how many people are actively sick at any one time, the CDC said.</p><p>The company did not immediately respond to an email from The Associated Press seeking more details.</p><p>The ship originated in Germany Jan. 9 and departed Florida Jan. 22, according to ship tracker Cruise Mapper. Its next stop is Honolulu, Hawaii, on Feb. 12 and ends in Australia next month.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/cruise-queen-victoria-outbreak-a4c08b114e3ee16534ff0c94a13c4fc7",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 5,
+            "reason": "The document discusses an investigation by the CDC into an outbreak of gastrointestinal illness on a cruise ship, which involves health-related issues such as diarrhea and vomiting. The measures taken to address the outbreak, such as increased cleaning and disinfection, are also mentioned. These aspects are directly related to the topic of health."
+        }
+    }
+}

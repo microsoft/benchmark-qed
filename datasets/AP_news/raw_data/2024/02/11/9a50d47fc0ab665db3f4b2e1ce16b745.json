@@ -1,0 +1,346 @@
+﻿{
+    "altids": {
+        "itemid": "9a50d47fc0ab665db3f4b2e1ce16b745",
+        "etag": "9a50d47fc0ab665db3f4b2e1ce16b745_4a7aza0c0",
+        "friendlykey": "130471496145",
+        "referenceid": "EU--Britain-King"
+    },
+    "version": 4,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2024-02-11T21:41:11Z",
+    "firstcreated": "2024-02-11T10:08:44Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "ednote": "Eds: UPDATES: Updates Media.",
+    "editorialtypes": [
+        "Lead"
+    ],
+    "signals": [
+        "newscontent"
+    ],
+    "title": "EU--Britain-King",
+    "headline": "UK's King Charles III attends church for first time since revealing he has cancer",
+    "headline_extended": "King Charles III cheerfully waved to well-wishers on Sunday as he left church services near his country estate in eastern England, making his first public appearance since his cancer diagnosis was announced last week",
+    "slugline": "AP-EU--Britain-King, 4th Ld-Writethru",
+    "description_summary": "King Charles III cheerfully waved to well-wishers on Sunday as he left church services near his country estate in eastern England, making his first public appearance since his cancer diagnosis was announced last week. Walking beside Queen Camilla, Charles arrived at St. Mary Magdalene Church, close to Sandringham House in eastern England where he retreated to recuperate following his first treatment for an unspecified form of cancer. The appearance came a day after he expressed thanks for the messages of support he has received from the public. In a statement issued late Saturday, the monarch said that such thoughts are \u201cthe greatest comfort and encouragement.\u201d",
+    "bylines": [
+        {
+            "by": "By DANICA KIRKA",
+            "title": "Associated Press"
+        }
+    ],
+    "located": "LONDON",
+    "datelinelocation": {
+        "city": "London",
+        "countrycode": "GBR",
+        "countryname": "United Kingdom",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                -0.12574,
+                51.50853
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "King Charles III Britain cancer"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "person": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f8955706b58c4b71901d46201750aa48",
+            "name": "King Charles III",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "GOVERNMENT_FIGURE",
+                "PERSON",
+                "ROYALTY"
+            ],
+            "relevance": 92
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "i",
+            "name": "i"
+        },
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "e",
+            "name": "e"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e247b8487de41004806adf092526b43e",
+            "name": "Prostate cancer",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 43
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 79
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e22524b87de410048f91df092526b43e",
+            "name": "Cancer",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 59
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "90aeac5089ef10048f63d56c852d093e",
+            "name": "Royalty",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 97
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "bb2d2c5f441a452cb24bb511a2ab5eea",
+            "name": "World news",
+            "creator": "Editorial",
+            "editorial_subject": "World news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "16cb0ba3e6d24d97ace39f5a1924669a",
+            "name": "Entertainment",
+            "creator": "Editorial",
+            "editorial_subject": "Entertainment",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "7a55e0187eff10048492df092526b43e",
+            "name": "London",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "df4691387d6b10048fdeba7fa5283c3e"
+            ],
+            "locationtype": {
+                "code": "9d26a20b35f0484a891740f8189d4c7b",
+                "name": "City"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -0.12574,
+                    51.50853
+                ]
+            },
+            "relevance": 33,
+            "parentnames": [
+                "England"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "66219fb07d5b100482e2c076b8e3055c",
+            "name": "United Kingdom",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661850e07d5b100481f4c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "01f56e0e654841eca2e69bf2cbcc0526",
+                "name": "Nation"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -4,
+                    54
+                ]
+            },
+            "relevance": 61,
+            "parentnames": [
+                "Europe"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "661850e07d5b100481f4c076b8e3055c",
+            "name": "Europe",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "associations": {
+        "1": {
+            "altids": {
+                "itemid": "82e270b24d9c4bc28a9bcacd37a28086"
+            },
+            "type": "picture"
+        },
+        "2": {
+            "altids": {
+                "itemid": "bdcd2c8046ac4a26b1bed7865cbc06aa"
+            },
+            "type": "picture"
+        },
+        "3": {
+            "altids": {
+                "itemid": "289eb3d62eb94a99b2bd23d637c9f7f9"
+            },
+            "type": "picture"
+        },
+        "4": {
+            "altids": {
+                "itemid": "28d163a2130e4ea796a1b79b3e0fe797"
+            },
+            "type": "picture"
+        },
+        "5": {
+            "altids": {
+                "itemid": "bb5affe24d2c4f36badf3e938a844f41"
+            },
+            "type": "picture"
+        },
+        "6": {
+            "altids": {
+                "itemid": "753108a8fb7d43a5909a46b3d4be1d7e"
+            },
+            "type": "picture"
+        },
+        "7": {
+            "altids": {
+                "itemid": "c84ac7bd6ba24c23af274dc454a80a2d"
+            },
+            "type": "picture"
+        },
+        "8": {
+            "altids": {
+                "itemid": "33a53de5cfa644259c6838ca5ba229fd"
+            },
+            "type": "picture"
+        },
+        "9": {
+            "altids": {
+                "itemid": "7e0cc3571a8b494ea47c8f500b30c460"
+            },
+            "type": "picture"
+        },
+        "10": {
+            "altids": {
+                "itemid": "24d48ab1783c4a84a51aef4d50619dda"
+            },
+            "type": "video"
+        },
+        "11": {
+            "altids": {
+                "itemid": "aa90b620171643b0bd88bc7a232390ac"
+            },
+            "type": "audio"
+        },
+        "12": {
+            "altids": {
+                "itemid": "1ab1cfd38fbe442480a5fdd54e7d4509"
+            },
+            "type": "audio"
+        }
+    },
+    "body_nitf": "<p>LONDON (AP) \u2014 King Charles III cheerfully waved to well-wishers on Sunday as he left church services near his country estate in eastern England, making his first public appearance since his cancer diagnosis was announced last week.</p><p>Wearing a tan overcoat against the February chill and carrying a rolled-up umbrella, Charles was joined by Queen Camilla at St. Mary Magdalene Church, just a few hundred yards from Sandringham House where the king is recuperating after his first treatment for an unspecified form of cancer.</p><p>The 20,000-acre Sandringham estate, some 110 miles (180 kilometers) north of London, is a favorite refuge of the king\u2019s and offers a place of shelter where he can isolate from the risk of infection.</p><p>The appearance came a day after Charles expressed thanks for the messages of support he has received from the public. In a statement issued late Saturday, the monarch said that such thoughts are \u201cthe greatest comfort and encouragement.\u201d</p><p>\u201cIt is equally heartening to hear how sharing my own diagnosis has helped promote public understanding and shine a light on the work of all those organizations which support cancer patients and their families across the U.K. and wider world,\u201d he said in a statement, signed Charles R.</p><p>\u201cMy lifelong admiration for their tireless care and dedication is all the greater as a result of my own personal experience.\u201d</p><p>Buckingham Palace announced the king\u2019s diagnosis on Monday, less than three weeks after he was treated for an enlarged prostate. While palace officials didn\u2019t disclose the type of cancer, they said it wasn\u2019t prostate cancer.</p><p>On Sunday, a crowd of about 100 gathered outside the gates of the estate to show their support for the king. Charles and Camilla greeted a priest as they walked into the Anglican church, and waved to the crowd as they left.</p><p>St. Mary Magdalene is a medieval stone church that was restored in the 19th century. Protected as a historic building, the church includes memorials to the royal family stretching from Princess Alice in 1879 to King George VI, Charles\u2019 grandfather, in 1952.</p><p>Nearby Sandringham House, the private home of the past six British monarchs, sits amid parkland, gardens and working farms. It has been owned by the royal family since 1862.</p><p>Charles has visited the estate regularly since he was a child, when he would run through the halls playing tag and hide-and-seek with his mother, according to biographer Jonathan Dimbleby. In later years he has retreated to the estate on the north coast of Norfolk to enjoy hunting and nature walks through the windswept countryside.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/king-charles-iii-britain-cancer-9a50d47fc0ab665db3f4b2e1ce16b745",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 4,
+            "reason": "The document discusses King Charles III's first public appearance since his cancer diagnosis, including details about his health condition, treatment, and public response. It also touches on the impact of his diagnosis on public awareness of cancer. While the document includes some historical and biographical information about the king and the Sandringham estate, the primary focus is on his health and related public reactions."
+        }
+    }
+}

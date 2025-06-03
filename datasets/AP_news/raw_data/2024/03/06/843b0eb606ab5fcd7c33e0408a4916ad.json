@@ -1,0 +1,237 @@
+﻿{
+    "altids": {
+        "itemid": "843b0eb606ab5fcd7c33e0408a4916ad",
+        "etag": "843b0eb606ab5fcd7c33e0408a4916ad_0a2aza0c0",
+        "friendlykey": "697560879522",
+        "referenceid": "FL--Editorial Rdp"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Opinion",
+    "language": "en",
+    "versioncreated": "2024-03-06T20:04:55Z",
+    "firstcreated": "2024-03-06T20:04:54Z",
+    "editorialrole": "FullStory",
+    "fixture": {
+        "code": "21ea4067bb274c3b805353fb2b99ba70",
+        "name": "Editorial Roundup"
+    },
+    "pubstatus": "usable",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "FL--Editorial Rdp",
+    "headline": "Editorial Roundup: Florida",
+    "slugline": "AP-FL--Editorial Rdp",
+    "bylines": [
+        {
+            "by": "By The Associated Press"
+        }
+    ],
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "Editorial Rdp"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "person": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "3af86b4b5e9742c88f085b08735f49bb",
+            "name": "Trey Radel",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "POLITICIAN",
+                "PERSON"
+            ],
+            "associatedstates": [
+                {
+                    "code": "cb06ab1082af100482f8df092526b43e",
+                    "name": "Florida"
+                }
+            ],
+            "relevance": 46
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "ed2df5fda6404f7380a4f78d9303c34a",
+            "name": "Ron DeSantis",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "POLITICIAN",
+                "PERSON"
+            ],
+            "associatedstates": [
+                {
+                    "code": "cb06ab1082af100482f8df092526b43e",
+                    "name": "Florida"
+                }
+            ],
+            "relevance": 72
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 78
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86c1b8807dac10048990ba7fa5283c3e",
+            "name": "Legislation",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 56
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86aad5207dac100488ecba7fa5283c3e",
+            "name": "Politics",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 63
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "organisation": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "b3986cff727b4a91b73599783f688c69",
+            "name": "Cuba government",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 36
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "484191dd9ab34e1d93484c8c75373f36",
+            "name": "Florida state government",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 46
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cb06ab1082af100482f8df092526b43e",
+            "name": "Florida",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -82.5001,
+                    28.75054
+                ]
+            },
+            "relevance": 89,
+            "parentnames": [
+                "United States"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "cb06ab1082af100482f8df092526b43e",
+            "name": "Florida",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "body_nitf": "<p>South Florida Sun Sentinel. March 4, 2024.</p><p>Editorial: Florida anti-free speech bill would chill robust debate</p><p>There are no lessons learned in the Florida Legislature.</p><p>Prodded by their hostility toward the \u201cliberal media,\u201d lawmakers tried last year to pass a bill that would have made it easier to sue for defamation. It was conservative media owners who realized this \u201cown the libs\u201d measure would have adverse effects.</p><p>Corporate media \u2014 a term of choice for Gov. Ron DeSantis, who supported <a href=\"https://myfloridahouse.gov/Sections/Bills/billsdetail.aspx?BillId=77769\">last year\u2019s legislation (HB 991)</a> \u2014 have resources to fight expensive lawsuits. Small local radio stations and online publications \u2014 and your local Rush Limbaughs who might get too loose with facts \u2014 do not.</p><p>This year, the measure is back in a different version. An unlikely coalition of liberal-leaning groups like the American Civil Liberties Union and libertarian <a href=\"https://www.wmfe.org/politics/2024-02-06/americans-for-prosperity-oppose-media-defamation-bill\">Americans for Prosperity</a>, founded by the billionaire Koch brothers, is fighting it.</p><p>Bad for consumers, too</p><p>Even the Better Business Bureau, the apolitical nonprofit known for rating businesses and publishing customer complaints, opposes it.</p><p>With only a few days left in the 2024 session, prospects for passage thankfully appear dim.</p><p><a href=\"https://myfloridahouse.gov/Sections/Bills/billsdetail.aspx?BillId=79383&SessionId=103\">House Bill 757</a> is an affront to free speech and is probably unconstitutional, a mechanism for public figures to silence negative coverage with the threat of litigation. Sponsor Rep. Alex Andrade, R-Pensacola, says he wants to hold people accountable for publishing false information.</p><p>But his bill clearly goes much further than that.</p><p>Lowering the bar for lawsuits</p><p>In a nutshell, HB 757 would lower the bar for filing defamation lawsuits. The bar was set in the landmark 1964 U.S. Supreme Court ruling in <a href=\"https://www.uscourts.gov/about-federal-courts/educational-resources/supreme-court-landmarks/new-york-times-v-sullivan-podcast\">New York Times v. Sullivan</a>. To win a libel case, a public figure must prove \u201cactual malice\u201d \u2014 that the statement about them was made \u201cwith knowledge that it was false or with reckless disregard for the truth.\u201d</p><p>This standard was meant to protect public debate even if someone publishes information that contains errors.</p><p>Andrade\u2019s bill would automatically assume malice if a statement about a public figure is proven false \u2014 no matter how small the error \u2014 and it came from one anonymous source. This could force journalists to decide between revealing their anonymous sources, and potentially endangering them, or face legal ramifications.</p><p>Perhaps the strongest rebuke to the legislation came from a grilling that Andrade received by a known conservative radio host. As <a href=\"https://www.tallahassee.com/story/news/politics/2024/02/13/conservative-media-comes-out-against-florida-defamation-legislation/72577201007/\">Trey Radel, a former GOP congressman from southwest Florida, said</a>, the impact on anonymous sources would create \u201ca chilling effect out there for the next person who wants to expose the (Department of Justice, FBI and IRS),\u201d USA Today Network reported.</p><p>\u2018Veracity hearings\u2019</p><p>The bill also would force publishers of information into a \u201cveracity hearing,\u201d where they would have to prove their statements are truthful.</p><p>Those hearings would happen within 60 days of a motion being filed, giving defendants little time to prepare and forcing them to spend larger amounts of money to defend themselves, which could force smaller news operations or individuals who post something on social media into bankruptcy, Bobby Block, executive director of the First Amendment Foundation, told The Miami Herald Editorial Board.</p><p>As The Better Business Bureau wrote in a Feb. 13 letter to legislative leaders, an unscrupulous business unhappy with its ratings could force BBBs to \u201crush to court in remote jurisdictions without sufficient time for investigation and discovery.\u201d</p><p>HB 757 allowed public figures to go \u201ccourt shopping\u201d by allowing libel suits based on materials posted online to be filed in any court in the state \u2014 in other words, jurisdictions that are more friendly to a public figure\u2019s case.</p><p>After facing backlash, Andrade proposed <a href=\"https://myfloridahouse.gov/Sections/Documents/loaddoc.aspx?FileName=070899.docx&DocumentType=Amendments&BillNumber=0757&Session=2024\">an amendment</a> to prohibit lawsuits from being filed \u201cin a venue that does not possess a reasonable connection\u201d to the case.</p><p>Andrade contends it\u2019s already against the law to sue people for simply exercising their free-speech rights. But his critics point out that by lowering defamation standards, the legislation weakens such protections against baseless lawsuits. The Better Business Bureau wrote that the veracity hearings might allow plaintiffs to \u201cescape the burden of establishing\u201d a good faith basis for their claim.</p><p>What is the purpose of this legislation, then \u2014 other than to allow public figures to quash information they don\u2019t like?</p><p>___</p><p>Tampa Bay Times. March 5, 2024.</p><p>Editorial: Texting while driving? Why doesn\u2019t Florida ban holding a phone while driving?</p><p>Distracted driving, including texting while driving, is a major contributor to traffic crashes and fatalities.</p><p>Florida legislators have a chance to make our roads a lot safer. They can ban drivers from holding cellphones behind the wheel.</p><p>It\u2019s common sense that drivers with one hand on their smartphones and maybe one on the wheel are distracted, whether they are texting, talking or looking at their calendar, weather apps or the latest sports scores. People know better but do it anyway.</p><p>Under <a href=\"https://www.textise.net/showText.aspx?strURL=https%3A%2F%2Fwww.flsenate.gov%2FSession%2FBill%2F2024%2F1469%23%3A%7E%3Atext%3DHands%252Dfree%2520Driving%253B%2520Prohibits%2520person%2Cuntil%2520such%2520use%2520is%2520terminated%253B\">HB 1469</a>, drivers would be restricted to hands-free (basically Bluetooth) phone use. They could touch their phone to start or end a call or to fire up Waze or other navigational apps but not interact with the phone in other ways. There are exceptions to report an emergency or a crime. It has passed three House committees and is on the House calendar, awaiting action in the Senate.</p><p>It\u2019s time, and here\u2019s why. There were almost 400,000 crashes on Florida roads last year; nearly 3,400 people were killed. Distracted driving, which has skyrocketed since the advent of the smartphone, is a major culprit. Cambridge Mobile Telematics, which works with insurance companies and safety organizations to track phone use behind the wheel, collects anonymized smartphone data, including this stunning statistic: More than a third of drivers who crashed were interacting with their smartphone in the minute before impact. Yes, there\u2019s a big problem.</p><p>Let\u2019s do some math. There were more than 14,800 crashes last year in Pinellas County, and 110 people were killed. Hillsborough County had 27,465 crashes and 233 deaths. If more than a third of those drivers were distracted by their smartphones, that would account for 5,000 crashes in Pinellas and more than 9,000 in Hillsborough alone last year. Those are just the crashes, not the close calls.</p><p>Each number is a person. That\u2019s why the Senate companion bill, <a href=\"https://www.textise.net/showText.aspx?strURL=https%3A%2F%2Fwww.flsenate.gov%2FSession%2FBill%2F2024%2F1408\">SB 1408</a>, is named the \u201cAnthony Branca and Anita Neal Act.\u201d Neal was the sister of Sen. Tracie Davis, a co-sponsor of the bill. She was killed by a distracted driver while jogging, leaving behind a teenage daughter. Anthony Branca, also killed by a distracted driver, was the son of Demetrius Branca, who is tirelessly pushing the Legislature to adopt this commonsense safety legislation. He laid out his heartfelt campaign in <a href=\"https://www.textise.net/showText.aspx?strURL=https%3A%2F%2Fwww.tampabay.com%2Fopinion%2F2024%2F03%2F02%2Fdistracted-driver-killed-my-son-florida-should-ban-holding-phone-while-driving%2F\">a column</a> in these pages a few days ago.</p><p>It\u2019s already against the law to text while driving, but the rule is nearly impossible to enforce. A driver can simply claim he was doing something other than texting while holding his phone. Study after study shows that any use of a smartphone while driving is a distraction. This bill would acknowledge that fact and allow the police to pull over and ticket drivers who are holding their phones and using them. That makes enforcement simpler and would make our roads safer.</p><p>It\u2019s time for Florida to join the vast majority of states that already have similar laws. While there are only a few days left in this legislative session, there is still time to pass this legislation. What is more important than acting on a bill that could save so many lives and prevent so many injuries? It\u2019s time to keep drivers\u2019 hands on the wheel and off their phones.</p><p>___</p><p>Orlando Sentinel. March 1, 2024.</p><p>Editorial: The Florida Legislature\u2019s obsession with communism is so 1952</p><p>Pending legislation would require all Florida schoolchildren to be indoctrinated on the evils of communism. Yes, even those still young enough to believe in Santa Claus, the Easter Bunny and the Tooth Fairy.</p><p>Two bills make the history of communism and its \u201catrocities\u201d a major requirement of the curriculum through 12th grade.</p><p>Only <a href=\"https://myfloridahouse.gov/Sections/Bills/billsdetail.aspx?BillId=80073&SessionId=103\">the House bill (HB 1349)</a> specifies that the instruction must be \u201cage appropriate and developmentally appropriate.\u201d When the Senate version ( <a href=\"https://www.flsenate.gov/Session/Bill/2024/1264\">SB 1264</a> ), cleared its last committee stop, Democrats in the voting minority objected that it was unnecessary, but it\u2019s actually worse than that.</p><p>To their credit, <a href=\"https://www.flsenate.gov/Session/Bill/2024/1264/Vote/2024-02-27%200900AM~S01264%20Vote%20Record.PDF\">all six Democrats</a> on the Senate Fiscal Policy Committee voted no: Sens. Rosalind Osgood from Broward, Lori Berman from Palm Beach, Shevrin Jones from Miami-Dade, and Linda Stewart, Geraldine Thompson and Victor Torres Jr. from Orlando.</p><p>Keep politics out of classrooms</p><p>The issue isn\u2019t how old kids should be when the state scares them with political bogeymen. It\u2019s about the bill itself. No legislature ever should command any subject to be taught in the slanted way these bills prescribe. Politicians are the last people who should be dictating classroom content.</p><p>Not only that, but they overlook what should be taught.</p><p>They\u2019re also fighting the wrong battle, as politicians often do. It\u2019s another diversion \u2014 some would say a cynical one \u2014 from the real dangers to democracy in the United States.</p><p>Communism faded away in the 1940s as a political influence anywhere in the U.S., despite Joseph McCarthy\u2019s overblown and highly destructive anti-Communist crusade in the early 1950s. It is no threat to our politics or economy, even if some young people have unquestioningly embraced communism\u2019s hammer-and-sickle symbol.</p><p>Capitalism in China</p><p>Abroad, only China, Laos, Cuba, Vietnam and North Korea still profess to be communist. Even China has taken on the trappings of capitalism.</p><p>Russia, where it all began, is now run by a capitalist oligarchy that looted the former communist state\u2019s assets. Aleksei Navalny lost his life fighting the corruption.</p><p>The new threats to freedom are personified by authoritarians like Vladimir Putin in Russia, Viktor Orban in Hungary, and Recep Tayyip Erdogan in Turkey and by a deadly serious antidemocratic movement here at home.</p><p>Former President Donald Trump openly admires and cultivates those foreign dictators, repudiates the Republican Party\u2019s historic defense of democracy wherever it is threatened, and makes repulsive jokes about being a dictator \u201conly on Day One\u201d if he\u2019s elected again.</p><p>His beguiling influence over so many Americans, worst of all his toadies in Congress, exposes an alarming indifference bordering on contempt for the importance of democracy.</p><p>Beating a dead horse</p><p>The Legislature should be ensuring that schools teach the positive values of democracy, rather than beating a dead horse.</p><p>Statism is the contemporary enemy of humanity. It does not matter under which economic theory it travels; democracy is the antidote.</p><p>Freedom House, a nongovernmental agency that has been defending liberty since the rise of Nazi Germany, has been tracking the decline of democracy worldwide for 17 years. The U.S. made the backsliders list because of what the agency describes as our \u201cunequal treatment for people of color, the outsized influence of special interests in politics, and partisan polarization.\u201d</p><p>An organization called Lawyers Defending American Democracy <a href=\"https://ldad.org/letters-briefs/compendium\">has documented anti-democratic trends</a> in Florida, Arizona, Iowa, Tennessee and Texas.</p><p>The report faulted Florida for curbing voting by mail; anti-diversity policies in schools and universities; infringing on teaching race, sexism and slavery; crackdowns on undocumented immigrants and gender-related medical care; 15-week and 6-week abortion bans; siphoning public school students into less accountable, tax-subsidized private schools; Gov. Ron DeSantis\u2019 \u201cDon\u2019t Say Gay\u201d law restricting how schools deal with LBGTQ issues; the takeover of New College of Sarasota; legislation encouraging book-banning; bans on mandatory mask and vaccination rules; the surgeon general\u2019s demonizing of vaccinations; blanket secrecy over university presidential searches and on the governor\u2019s travel; and the governor\u2019s unprecedented claim that he has an \u201cexecutive privilege\u201d to keep secret anything he chooses, despite Florida\u2019s public records law.</p><p>The Legislature is equally responsible for all of that. It should look to its own disloyalty to democracy rather than to indoctrinating school children on any other \u201c-ism,\u201d especially one that\u2019s no more of a threat than those imaginary monsters under their beds.</p><p>The communism education bills serve only the insatiable need of some Cuban \u00e9migr\u00e9 legislators to flog the corpse of Fidel Castro. They are also useful for forcing opponents \u2014 only Democrats so far \u2014 to cast votes that may return to haunt them in attack ads. (\u201cSenator so-and-so is pro-Communist!\u201d)</p><p><a href=\"https://www.flsenate.gov/Committees/BillSummaries/2022/html/2814#:~:text=The%20bill%20requires%20the%20Governor,communist%20regimes%20across%20the%20world.\">A law DeSantis signed in 2022</a> already requires schools to observe \u201cVictims of Communism Day\u201d every Nov. 7. Current state academic standards for social studies incorporate communism in the requirements for grades 7 and 9-12. That\u2019s plenty.</p><p>___</p><p>Miami Herald. March 1, 2024.</p><p>Editorial: DeSantis is right about social media ban. This misguided idea deserves his veto</p><p>Give Gov. Ron DeSantis some credit. He\u2019s at least being consistent with his criticism of the Florida Legislature\u2019s attempt to ban minors from social media.</p><p>If lawmakers gave parents the power to remove books and sue schools for talking about things like sexual orientation and race in ways that make them uncomfortable, shouldn\u2019t they also give parents a say on the types of websites their child can access?</p><p>Just hours before the Legislature passed the bill to keep children under 16 from platforms that have \u201caddicting features,\u201d DeSantis said there were \u201clegitimate issues that gotta be worked out\u201d and that parents should be allowed to override the state\u2019s heavy-handed ban.</p><p>The Legislature defied the governor and approved House Bill 1 anyway because it\u2019s a priority of the House speaker.</p><p>DeSantis should veto HB 1, and not just to show lawmakers he\u2019s still the dominant governor who\u2019s controlled their agenda for the past two years \u2014 though there are questions on whether DeSantis has lost some of his power, and the Legislature could embarrass him by overriding his veto.</p><p>The legislation is a well-intended but misguided way to tackle the very real dangers that social media present to teens. It\u2019s a no-brainer that those platforms deserve scrutiny, especially after a whistle-blower told Congress in 2021 that Meta, which owns Facebook and Instagram, knew its content harmed kids. But HB 1\u2019s lack of \u201cparental rights,\u201d a concept that drove much of the legislation coming out of Florida recently, isn\u2019t the only problem.</p><p>The U.S. Supreme Court is already listening to another Florida law that prohibited social media platforms from removing political candidates \u2014 and so far, justices appear skeptical of the law\u2019s constitutionality.</p><p>If signed into law, HB 1 will no doubt also be headed to court, with social media companies arguing it is unconstitutional, costing taxpayer dollars to defend these lengthy lawsuits. Similar laws from other states have not fared well under legal scrutiny, with all of them blocked by judges.</p><p>That raises a valid point: Aren\u2019t children and teens allowed freedom of expression under the First Amendment, especially if their parents allow it? There is no doubt that social media perpetuates unattainable beauty standards that hurt young girls\u2019 self-esteem, makes cyberbullying more pervasive and that it is designed for non-stop scrolling. But social media also helps kids connect in ways that previous generations didn\u2019t. It\u2019s where they can find communities of like-minded people they might not have at home or school. Social media isn\u2019t just for socializing; it\u2019s an essential business tool that many kids will need to learn to enter the job market one day.</p><p>And, then, there is the question of the legislation\u2019s practicality. For one, Republican House Speaker Paul Renner has said not all platforms would be affected by the ban unless they use \u201caddicting features\u201d \u2014 including infinite scrolling, displaying personal metrics such as likes, auto-playing video and livestreaming \u2014 but lawmakers have not said which sites would be affected. The most popular social media sites like Instagram and TikTok contain these same features.</p><p>___</p><p>Palm Beach Post. March 3, 2024.</p><p>Editorial: With Dr. Joseph Ladapo\u2019s anti-vaccine stance failing, Florida needs a new surgeon general</p><p>Here we go again: Florida facing another dangerous virus, while the state\u2019s top health official <a href=\"https://www.palmbeachpost.com/story/news/education/2024/02/19/measles-cases-in-broward-school-whats-happening-in-south-florida/72657634007/\">thumbs his nose</a> at conventional medical wisdom. Florida Surgeon General <a href=\"https://www.floridahealth.gov/about/ssg/index.html\">Dr. Joseph Ladapo</a> is drawing warranted criticism for his <a href=\"https://www.palmbeachpost.com/story/opinion/editorials/2024/02/27/floridas-top-health-official-gives-anti-vax-response-tmeasles-outbreak-prompts-anti-vaxxers-response/72744877007/\">initial lax response</a> to the state\u2019s measles outbreak. Instead of urging parents to vaccinate their children, he waffled, leaving the decision to the parents with a hint at an anti-vax stance that made him infamous during COVID-19.</p><p>Ladapo\u2019s response is the latest in what has been a three-year string of controversy that has undermined the surgeon general\u2019s office and the Florida Department of Health. Whether it\u2019s altering a medical study to support fringe thinking or <a href=\"https://www.palmbeachpost.com/story/news/politics/state/2021/10/27/sen-tina-polsky-seeks-bipartisanship-breast-cancer-gets-threats/6174746001/\">ignoring a request</a> to put on a mask during the height of the pandemic by state <a href=\"https://flsenate.gov/Senators/S30\">Sen. Tina Polsky</a>, D. Boca Raton, whose breast cancer made her susceptible to COVID. The Ladapo era in Florida must end.</p><p>Florida deserves a credible public health leader, not an ongoing embarrassment. Right now, the state is stuck with a political appointee who\u2019s taking up space but not taking the job or his craft seriously. The Palm Beach Post editorial board believes it\u2019s time for a change. The Governor, and more importantly the state, needs a new surgeon general.</p><p>Up until now, Gov. Ron DeSantis seems OK with his appointee\u2019s performance. The Governor <a href=\"https://www.palmbeachpost.com/story/news/columns/2021/09/25/desantis-appoints-radical-doctor-joseph-ladapo-florida-surgeon-general/5845307001/\">needed a shill</a> to buttress an <a href=\"https://www.palmbeachpost.com/story/news/nation/2024/01/04/florida-surgeon-general-dr-joseph-ladapo-covid-vaccine/72107931007/\">anti-COVID mandate schtick</a> that became part of DeSantis\u2019 ill-fated presidential campaign. Meanwhile more than 81,000 Floridians died from COVID. Will the Governor make the change? Probably not, unless the spread of measles forces his hand. It shouldn\u2019t have to come to that. Ladapo\u2019s performance is enough to justify replacement.</p><p>Measles spread helped by misinformation</p><p>Prior to the 1963 Measles Mumps and Rubella vaccine, nearly every child living in the U.S. had measles by the time they reached 15, according to the federal Centers for Disease Control and Prevention.. CDC data showed between 3 million to 4 million people were affected each year, with 500 dying and 48,000 persons hospitalized.</p><p>Why measles is making a comeback isn\u2019t a head-scratcher. It only takes two doses of the MMR vaccine, which is 97% effective, to prevent the disease, and there are many more vaccinated against measles in Florida than not. It\u2019s the contagion of misinformation undermining proven medical vaccines that has taken a toll on the nation\u2019s progress toward eradicating dangerous diseases. In his role, Ladapo has done more than enough to become modern medicine\u2019s chief cheerleader of misinformation.</p><p>Gov. DeSantis selected Ladapo from the University of California David Geffen School of Medicine in 2021, to replace former Surgeon General Scott Rivkees. The appointment came with $250,000 in pay to head the Florida Department of Health and another $262,000 as a professor of medicine at the University of Florida. It was a controversial pick to say the least.</p><p>Ladapo\u2019s association with America\u2019s Frontline Doctors, a controversial group of physicians known for questionable cures drew criticism, as has his constant criticism of COVID vaccines and masks as effective treatments. His quick appointment to the university, along with an inability to produce grants, ultimately drew the ire of his UF colleagues. As surgeon general, he altered a state study last year to suggest that some COVID-19 doses pose higher health risks for young men than what\u2019s been established by the medical community. In January, he called on the federal government to halt using the mRNA vaccine, describing it as the \u201canti-Christ\u201d of all products.</p><p>The surgeon general\u2019s initial response to the <a href=\"https://www.palmbeachpost.com/story/news/healthcare/2024/02/19/what-is-measles-symptoms-measles-vaccine-and-red-rash/72659578007/\">measles outbreak</a> was a muddled equivocation of <a href=\"https://www.washingtonpost.com/documents/d561ec38-808a-471f-bf7a-dbe67a224434.pdf\">a Feb. 20 advisory</a> to Broward County parents that careened from acknowledging what \u201cis normally recommended\u201d to deferring any decision regarding school attendance to the parents. Ambiguity isn\u2019t the typical response to a potential public-health crisis. Under normal circumstances, public health officials would follow federal guidelines in urging unvaccinated children to either get a MMR shot or stay at home until any symptoms subside without medication.</p><p>Ladapo\u2019s pandemic track record and his more recent response regarding measles vaccinations leave us wondering if he will ever shake off the anti-vaccination pandering to do his job as a public health official effectively. We\u2019re not convinced he will. For those reasons, we believe Florida would be better off with a new surgeon general.</p><p>END</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/843b0eb606ab5fcd7c33e0408a4916ad",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 3,
+            "reason": "The document contains multiple editorials from different Florida newspapers, covering a variety of topics. Only a few sections are directly related to health, such as the editorial on the Florida Surgeon General's stance on vaccines and the measles outbreak, and the editorial on distracted driving and its impact on public safety. However, the majority of the document discusses political, legal, and educational issues that are not directly related to health. Therefore, while there is some relevant content, it is not the primary focus of the document."
+        }
+    }
+}

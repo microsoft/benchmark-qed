@@ -1,0 +1,242 @@
+﻿{
+    "altids": {
+        "itemid": "0280e65b90a3ced4eb0d7eece19154a4",
+        "etag": "0280e65b90a3ced4eb0d7eece19154a4_1a10aza0c0",
+        "friendlykey": "368219763615",
+        "referenceid": "US-MED--Hearing Loss-Demographics"
+    },
+    "version": 1,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2024-01-24T23:51:32Z",
+    "firstcreated": "2024-01-24T23:36:17Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "ednote": "Eds: UPDATES: Adds photos. With AP Photos.",
+    "editorialtypes": [
+        "Lead"
+    ],
+    "signals": [
+        "newscontent"
+    ],
+    "title": "US-MED--Hearing Loss-Demographics",
+    "headline": "New estimate shows rural Americans and men are more likely to suffer from hearing loss",
+    "headline_extended": "A new estimate shows hearing loss affects approximately 37.9 million Americans and is more common in rural areas than urban ones",
+    "slugline": "BC-US-MED--Hearing Loss-Demographics, 1st Ld-Writethru",
+    "description_summary": "A new estimate shows hearing loss affects approximately 37.9 million Americans and is more common in rural areas than urban ones. The study by NORC at the University of Chicago and published Wednesday is The Lancet Regional Health-Americas Journal is the first to estimate rates of hearing loss at the state and county level. Experts say many rural Americans need better access to hearing screenings and specialists. Working with loud machinery and hunting can damage hearing in a short time. The study found men were more likely than women to have hearing loss, with the highest rates among non-Hispanic white people and those 65 and older.",
+    "bylines": [
+        {
+            "by": "By DEVI SHASTRI",
+            "title": "AP Health Writer"
+        }
+    ],
+    "located": "MILWAUKEE",
+    "datelinelocation": {
+        "city": "Milwaukee",
+        "countryareacode": "WI",
+        "countryareaname": "Wisconsin",
+        "countrycode": "USA",
+        "countryname": "United States",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                -87.90647,
+                43.0389
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "hearing loss rural health hunting farming"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "a",
+            "name": "a"
+        },
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "5b4b7cf56c68466499b1607a138648a6",
+            "name": "Hispanics",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 40
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "2bf6af5a179b43f9974edf18fb23f7b2",
+            "name": "Hearing loss and deafness",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 88
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Editorial",
+            "editorial_subject": "Health",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "5b86bbd082b01004839adf092526b43e",
+            "name": "Chicago",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "2c6a186082b010048379df092526b43e"
+            ],
+            "locationtype": {
+                "code": "9d26a20b35f0484a891740f8189d4c7b",
+                "name": "City"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -87.65005,
+                    41.85003
+                ]
+            },
+            "relevance": 42,
+            "parentnames": [
+                "Illinois"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "2bec0c142d4d4a74ab28e48abb436084",
+            "name": "Mediterranean Sea",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "8f378274236c4df79f481d1fbccac174"
+            ],
+            "locationtype": {
+                "code": "61bb9878082348469a42017d7ec5533b",
+                "name": "Sea"
+            },
+            "relevance": 77,
+            "parentnames": [
+                "Bodies of water"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "661850e07d5b100481f5c076b8e3055c",
+            "name": "Latin America and Caribbean",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "1bc1bc3082c81004896cdf092526b43e",
+            "name": "Wisconsin",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "2c6a186082b010048379df092526b43e",
+            "name": "Illinois",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "b0fa317082b3100484dbdf092526b43e",
+            "name": "Maryland",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "associations": {
+        "1": {
+            "altids": {
+                "itemid": "9e93bcc818994c34841d7eb64d02ca53"
+            },
+            "type": "picture"
+        },
+        "2": {
+            "altids": {
+                "itemid": "d71c5f53ef114bc39a6a9346f1c8e3f7"
+            },
+            "type": "picture"
+        }
+    },
+    "body_nitf": "<p>MILWAUKEE (AP) \u2014 A new estimate shows hearing loss affects approximately 37.9 million Americans and is <a href=\"https://soundcheckmap.org/\">more common in rural areas than urban ones</a> and in men than women.</p><p>The study, published Wednesday in The Lancet Regional Health-Americas Journal, is the first to estimate hearing loss rates at the state and county level, and was led by <a href=\"https://www.norc.org/\">NORC at the University of Chicago</a>. The estimates are for 2019 and only include people who have hearing loss in both ears.</p><p>While the study could not explain the reason for the geographic divide, experts who treat hearing loss say there are two factors to consider: how loud noises are and how often people hear them.</p><p>A person who rides the subway in a bustling city could, in theory, go six to eight hours before being at risk of hearing loss, said audiologist Nicholas Reed, an assistant professor of epidemiology at Johns Hopkins University who co-authored the study. On the other hand, hunters who don\u2019t wear protection can damage their hearing with just a few pulls of the trigger.</p><p>Experts say rural Americans need better access to hearing screenings and specialists. Many jobs in rural areas may use loud machinery. Popular leisure activities in these areas, like hunting, woodworking and riding all-terrain vehicles, also put hearing at risk.</p><p>The study also found men were more likely than women to have hearing loss, starting at 35, which is in line with previous estimates. The highest rates were among non-Hispanic white people and those 65 and older.</p><p>\u201cThe number one risk factor for hearing loss is age,\u201d said David Rein, director of NORC's public health analytics program and the paper's lead author.</p><p>Audiologist Melanie Buhr-Lawler, a clinical professor at the University of Wisconsin-Madison, said she saw the threats to hearing health growing up on a farm in rural Wisconsin and later researching hearing loss in rural residents.</p><p>\u201cPeople who live in rural areas have a hearing health double-whammy,\" said Buhr-Lawler, who was not involved with the study. \"So they\u2019re more exposed to high noise levels through their work, be it mining or farming or other rural occupations, but also through leisure activities.\u201d</p><p>For years, her research team handed out thousands of ear plugs at a tractor pull in Tomah, Wisconsin, to raise awareness.</p><p>The U.S. Centers for Disease Control and Prevention funded the study.</p><p>___</p><p>The Associated Press Health and Science Department receives support from the Robert Wood Johnson Foundation. The AP is solely responsible for all content.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/hearing-loss-rural-health-hunting-farming-0280e65b90a3ced4eb0d7eece19154a4",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 5,
+            "reason": "The document discusses a new estimate on hearing loss in the United States, focusing on its prevalence in rural areas and among men. It includes information on the study's findings, risk factors, and the need for better access to hearing screenings and specialists in rural areas. The document is highly relevant to the topic of health as it addresses a specific health issue (hearing loss), its demographic and geographic distribution, and potential interventions to mitigate the problem."
+        }
+    }
+}

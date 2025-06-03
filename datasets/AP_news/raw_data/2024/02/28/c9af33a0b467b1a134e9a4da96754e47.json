@@ -1,0 +1,340 @@
+﻿{
+    "altids": {
+        "itemid": "c9af33a0b467b1a134e9a4da96754e47",
+        "etag": "c9af33a0b467b1a134e9a4da96754e47_6a10aza0c0",
+        "friendlykey": "132293720808",
+        "referenceid": "EU-REL--Vatican Pope"
+    },
+    "version": 6,
+    "type": "text",
+    "urgency": 3,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2024-02-28T19:09:25Z",
+    "firstcreated": "2024-02-28T10:47:16Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "ednote": "Eds: UPDATES: to add AP video",
+    "editorialtypes": [
+        "Lead"
+    ],
+    "signals": [
+        "newscontent"
+    ],
+    "title": "EU-REL--Vatican Pope",
+    "headline": "Pope Francis had diagnostic tests in a Rome hospital after his weekly audience",
+    "headline_extended": "Pope Francis was taken briefly to a hospital in central Rome after the papal audience on Wednesday",
+    "slugline": "BC-EU-REL-Vatican-Pope, 6th Ld-Writethru",
+    "description_summary": "Pope Francis was taken briefly to a hospital in central Rome after the papal audience on Wednesday. The Vatican said it was for diagnostic testing without elaborating. The 87-year-old pope, who has been suffering from the flu, made regular appearances to the faithful on Sunday and Wednesday, but has canceled appointments on other days. He arrived at the Gemelli Hospital on Tiber Island in a small white Fiat 500 and left under escort in the same car after a short visit.",
+    "bylines": [
+        {
+            "by": "By PAOLO SANTALUCIA"
+        }
+    ],
+    "located": "VATICAN CITY",
+    "datelinelocation": {
+        "city": "Vatican City",
+        "countrycode": "VAT",
+        "countryname": "Vatican City",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                12.4533,
+                41.90225
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "italy pope vatican illness landmines peace middle east ukraine"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "person": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "2fd38d1dee8c4287a13ae64992300d96",
+            "name": "Pope Francis",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 46
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "i",
+            "name": "i"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "084e24e87f00100481c7f571351eed07",
+            "name": "Flu",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 44
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "026a1118e94443a2aacc08a2e70cc77b",
+            "name": "Religion",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 85
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 85
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "bb2d2c5f441a452cb24bb511a2ab5eea",
+            "name": "World news",
+            "creator": "Editorial",
+            "editorial_subject": "World news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "026a1118e94443a2aacc08a2e70cc77b",
+            "name": "Religion",
+            "creator": "Editorial",
+            "editorial_subject": "Religion",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f3e0ed387eff10048539df092526b43e",
+            "name": "Vatican City",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661850e07d5b100481f4c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "01f56e0e654841eca2e69bf2cbcc0526",
+                "name": "Nation"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    12.4533,
+                    41.90225
+                ]
+            },
+            "relevance": 57,
+            "parentnames": [
+                "Europe"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "03a6f9d07efe100483e9df092526b43e",
+            "name": "Rome",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "662122b07d5b100482d7c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "9d26a20b35f0484a891740f8189d4c7b",
+                "name": "City"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    12.4839,
+                    41.89474
+                ]
+            },
+            "relevance": 73,
+            "parentnames": [
+                "Italy"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "661850e07d5b100481f4c076b8e3055c",
+            "name": "Europe",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "associations": {
+        "1": {
+            "altids": {
+                "itemid": "6506e7f636d744b0821dc6f141e8ffbf"
+            },
+            "type": "picture"
+        },
+        "2": {
+            "altids": {
+                "itemid": "fce460b071644d3ba7e07aadf88dc828"
+            },
+            "type": "picture"
+        },
+        "3": {
+            "altids": {
+                "itemid": "0ad1487f0cac493db110ec205d2d031d"
+            },
+            "type": "picture"
+        },
+        "4": {
+            "altids": {
+                "itemid": "a5e039f1e4f44d058b8324107a52e5b4"
+            },
+            "type": "picture"
+        },
+        "5": {
+            "altids": {
+                "itemid": "0d38d4e73bf340ec836c4f459d2dbcb3"
+            },
+            "type": "picture"
+        },
+        "6": {
+            "altids": {
+                "itemid": "1552e5968f6d47028dd2167cd6243323"
+            },
+            "type": "picture"
+        },
+        "7": {
+            "altids": {
+                "itemid": "c196d5ee9c9f42b497d86060c37c073b"
+            },
+            "type": "picture"
+        },
+        "8": {
+            "altids": {
+                "itemid": "00df3501acc049c59ddb50c89ac43fe0"
+            },
+            "type": "picture"
+        },
+        "9": {
+            "altids": {
+                "itemid": "cdeeab0e1d1b47d195b4418b4f73e0c0"
+            },
+            "type": "picture"
+        },
+        "10": {
+            "altids": {
+                "itemid": "fb330087f94a4579bc499bb2c7a4ca91"
+            },
+            "type": "picture"
+        },
+        "11": {
+            "altids": {
+                "itemid": "d74e8224613c4512ac54136502edcc2a"
+            },
+            "type": "picture"
+        },
+        "12": {
+            "altids": {
+                "itemid": "dd2cda60d517423d9625202774f14e60"
+            },
+            "type": "picture"
+        },
+        "13": {
+            "altids": {
+                "itemid": "12670c89002e491fac644e26de3ba9f5"
+            },
+            "type": "picture"
+        },
+        "14": {
+            "altids": {
+                "itemid": "3e35b41597214ab48d642235ee3ba0b7"
+            },
+            "type": "video"
+        },
+        "15": {
+            "altids": {
+                "itemid": "b5403850d6ca4128ac590d6ecd901da4"
+            },
+            "type": "video"
+        }
+    },
+    "body_nitf": "<p>VATICAN CITY (AP) \u2014 Pope Francis, who recently had <a href=\"https://apnews.com/article/pope-health-flu-audience-cancelled-vatican-0f3e2c1e6db190883a5f9a5c63927dc0\">the flu</a>, was brought to a hospital in Rome for diagnostic testing after the papal audience Wednesday, the Vatican said, without giving further details.</p><p>The pope arrived at the Gemelli Hospital on Tiber Island in a small white Fiat 500, leaving again under escort in the same car after a short visit.</p><p>Earlier in the day, the 87-year-old pope was pushed in a wheelchair into the audience hall at the Vatican, appearing weary as he dropped heavily into his seat. In recent weeks he has walked the short distance to his chair, but he has been struggling with mild flu symptoms the past week.</p><p>The pope also canceled appointments Saturday and Monday due to the flu, but appeared as usual for the Sunday blessing from a window overlooking St. Peter's Square.</p><p>Last week, Francis coughed repeatedly as he presided over Ash Wednesday services at a Roman church, and opted not to participate in the traditional procession that inaugurates the church\u2019s Lenten season.</p><p>This time of year in 2020, just as the coronavirus pandemic was starting to hit Italy, Francis also suffered a bad cold that <a href=\"https://apnews.com/article/virus-outbreak-ap-top-news-international-news-pope-francis-europe-c857823e5212f4da2bf6ed3b451ba3c2\">forced him to cancel</a> several days of official audiences and his participation in the Vatican\u2019s annual spiritual retreat. The Vatican had already scrubbed the retreat for this year in favor of personal spiritual exercises</p><p>The Argentine pope had part of <a href=\"https://apnews.com/article/pope-hospital-health-intestine-64750f0392511ea6dc6824b8f8db4f5a\">one lung removed</a> as a young man because of a respiratory infection, and in 2021 had a chunk of his colon removed because of an intestinal inflammation. He has been using a wheelchair and cane since last year because of strained knee ligaments and a small knee fracture that have made walking and standing difficult.</p><p>The Pope used his brief words at the end of Wednesday's audience to mark the 25th anniversary of the ratification of the Anti-Personnel Mines Convention, expressing his \u201ccloseness to the numerous victims of these insidious devices that remind us of the dramatic cruelty of war.\u201d</p><p>He also appealed for peace in the Middle East, Ukraine and prayed for the victims of attacks in Burkina Faso and Haiti.</p><p>At the end of the audience, the pope spent about an hour greeting the faithful from his wheelchair, stopping to talk, bless babies and exchange gifts.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/italy-pope-vatican-illness-landmines-peace-middle-east-ukraine-c9af33a0b467b1a134e9a4da96754e47",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 5,
+            "reason": "The document is highly relevant to the topic of health as it provides detailed information about Pope Francis's recent health issues, including his flu symptoms, diagnostic tests, and past medical history. It also mentions his use of a wheelchair and cane due to knee problems, and his previous surgeries. The document focuses extensively on the Pope's health status and related events."
+        }
+    }
+}

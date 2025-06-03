@@ -1,0 +1,229 @@
+﻿{
+    "altids": {
+        "itemid": "bd18703cb62b5494a2b7b19892526e9a",
+        "etag": "bd18703cb62b5494a2b7b19892526e9a_2a4aza0c0",
+        "friendlykey": "812052349590",
+        "referenceid": "EU--Poland-Walesa-COVID-19"
+    },
+    "version": 2,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2023-12-05T20:53:04Z",
+    "firstcreated": "2023-12-05T18:39:03Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "ednote": "Eds: UPDATES: Links AP Photos. With AP Photos.",
+    "editorialtypes": [
+        "Lead"
+    ],
+    "signals": [
+        "newscontent"
+    ],
+    "title": "EU--Poland-Walesa-COVID-19",
+    "headline": "Poland's former President Lech Walesa, 80, hospitalized with COVID-19",
+    "headline_extended": "An aide says that Poland's former president and Nobel Peace Prize winner, 80-year-old Lech Walesa has been hospitalized with a bad case of COVID-19",
+    "slugline": "AP-EU--Poland-Walesa-COVID-19, 2nd Ld-Writethru",
+    "description_summary": "An aide says that Poland's former president and Nobel Peace Prize winner, 80-year-old Lech Walesa has been hospitalized with a bad case of COVID-19. A post on Walesa's Facebook Tuesday shows him on hospital bed with an oxygen mask on. The aide said he's seriously ill, but under good care in a hospital in Gdansk. It's Walesa's second bout of COVID. Strting in 1980, Walesa spearheaded Poland's pro-democracy Solidarity movement that nine years later led to the peaceful ouster of communism from Poland and inspired other countries to shed Moscow's domination. In 1983 he was awarded the Nobel Peace Prize. In 1990-95 he served as democratic Poland's first popularly elected president.",
+    "located": "WARSAW, Poland",
+    "datelinelocation": {
+        "city": "Warsaw",
+        "countrycode": "POL",
+        "countryname": "Poland",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                21.01178,
+                52.22977
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2023 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "poland walesa covid hospital solidarity expresident"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "person": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "6812b7171b80446eac960ce9e0ab767c",
+            "name": "Lech Walesa",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "POLITICIAN",
+                "PERSON"
+            ],
+            "relevance": 87
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "i",
+            "name": "i"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "b17e2751b26d4523a2c99d79e04747ee",
+            "name": "COVID-19 pandemic",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 47
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 47
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86aad5207dac100488ecba7fa5283c3e",
+            "name": "Politics",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 65
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "bb2d2c5f441a452cb24bb511a2ab5eea",
+            "name": "World news",
+            "creator": "Editorial",
+            "editorial_subject": "World news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "organisation": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "0aa1b82affdc44bfb3bef19c9af48c29",
+            "name": "Poland government",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 82
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "661c9a887d5b10048260c076b8e3055c",
+            "name": "Poland",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661850e07d5b100481f4c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "01f56e0e654841eca2e69bf2cbcc0526",
+                "name": "Nation"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    20,
+                    52
+                ]
+            },
+            "relevance": 91,
+            "parentnames": [
+                "Europe"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "661850e07d5b100481f4c076b8e3055c",
+            "name": "Europe",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "associations": {
+        "1": {
+            "altids": {
+                "itemid": "997dabdb7741486093287b7a834f7beb"
+            },
+            "type": "picture"
+        }
+    },
+    "body_nitf": "<p>WARSAW, Poland (AP) \u2014 Lech Walesa, Poland's 80-year-old former president and Nobel Peace Prize winner, has been hospitalized with a bad case of COVID-19, an aide said Tuesday.</p><p>A post on Walesa\u2019s Facebook shows him on a hospital bed with an oxygen mask on, with a caption that says \u201cI have been hit by Covid.\u201d The aide, Marek Kaczmar, told Polish media that Walesa is seriously ill, but under good care in a hospital in Gdansk, the Baltic port city where he lives.</p><p>It\u2019s Walesa\u2019s second bout of COVID.</p><p>Starting in 1980, Walesa spearheaded Poland\u2019s pro-democracy Solidarity movement that nine years later led to the peaceful ouster of communism from Poland and inspired other countries to shed Moscow\u2019s domination.</p><p>In 1983 he was awarded the Nobel Peace Prize. In 1990-95 he served as democratic Poland\u2019s first popularly elected president.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/poland-walesa-covid-hospital-solidarity-expresident-bd18703cb62b5494a2b7b19892526e9a",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 4,
+            "reason": "The document discusses the hospitalization of Poland's former President Lech Walesa due to a severe case of COVID-19. It provides details about his current health condition, his history with the disease, and his treatment. While the document also includes some historical context about Walesa's political achievements, the primary focus is on his health status and COVID-19, which is directly relevant to the topic of Health."
+        }
+    }
+}

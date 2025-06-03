@@ -1,0 +1,271 @@
+﻿{
+    "altids": {
+        "itemid": "2b1e6f5c9343a87d7c86722f45950709",
+        "etag": "2b1e6f5c9343a87d7c86722f45950709_0a2aza0c0",
+        "friendlykey": "821479151212",
+        "referenceid": "FL--Editorial Rdp"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Opinion",
+    "language": "en",
+    "versioncreated": "2024-04-10T11:10:39Z",
+    "firstcreated": "2024-04-09T17:39:11Z",
+    "editorialrole": "FullStory",
+    "fixture": {
+        "code": "21ea4067bb274c3b805353fb2b99ba70",
+        "name": "Editorial Roundup"
+    },
+    "pubstatus": "usable",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "FL--Editorial Rdp",
+    "headline": "Editorial Roundup: Florida",
+    "slugline": "BC-FL--Editorial Rdp",
+    "bylines": [
+        {
+            "by": "By The Associated Press"
+        }
+    ],
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "Editorial Rdp"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "person": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "ed2df5fda6404f7380a4f78d9303c34a",
+            "name": "Ron DeSantis",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "POLITICIAN",
+                "PERSON"
+            ],
+            "associatedstates": [
+                {
+                    "code": "cb06ab1082af100482f8df092526b43e",
+                    "name": "Florida"
+                }
+            ],
+            "relevance": 51
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e22e35087de410048fc2df092526b43e",
+            "name": "Abortion",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 60
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86ba17607dac1004894eba7fa5283c3e",
+            "name": "Courts",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 87
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86aad5207dac100488ecba7fa5283c3e",
+            "name": "Politics",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 68
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "organisation": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "efa933c0892110048d92fb7860a2fc03",
+            "name": "Supreme Court of the United States",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 38
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "484191dd9ab34e1d93484c8c75373f36",
+            "name": "Florida state government",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 38
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "6429117882c610048770df092526b43e",
+            "name": "Montana",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -109.75102,
+                    47.00025
+                ]
+            },
+            "relevance": 78,
+            "parentnames": [
+                "United States"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cf6cb89882af10048310df092526b43e",
+            "name": "Tallahassee",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "cb06ab1082af100482f8df092526b43e"
+            ],
+            "locationtype": {
+                "code": "9d26a20b35f0484a891740f8189d4c7b",
+                "name": "City"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -84.28073,
+                    30.43826
+                ]
+            },
+            "relevance": 53,
+            "parentnames": [
+                "Florida"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cb06ab1082af100482f8df092526b43e",
+            "name": "Florida",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -82.5001,
+                    28.75054
+                ]
+            },
+            "relevance": 89,
+            "parentnames": [
+                "United States"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "cb06ab1082af100482f8df092526b43e",
+            "name": "Florida",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "body_nitf": "<p>Palm Beach Post. April 9, 2024.</p><p>Editorial: It shouldn\u2019t take 2024 storm season to prompt Florida insurers to address climate change</p><p>Well, well, well. On the eve of <a href=\"https://www.palmbeachpost.com/story/opinion/2024/03/28/floridas-homeowner-insurance-crisis-opinions-on-solutions-costs/73106052007/\">another hurricane season</a>, the insurance industry finally came out and said what almost everyone in Florida expected. Industry experts recently acknowledged that insurers may be forced to raise the property insurance premiums of Sunshine State customers to protect themselves from major storms.</p><p>\u201cWhen most of the modelers are indicating it\u2019s going to be (a) very active season, that\u2019s going to trigger the global reinsurance markets to reassess risk,\u201d Mark Friedlander, the <a href=\"https://www.iii.org/\">Insurance Information Institute\u2019</a> s spokesman said after Colorado State University released its preseason hurricane forecast and climate\u2019s impact on reinsurance rates.</p><p>Uh, duh!</p><p>It\u2019s too easy to chastise an industry that\u2019s focused so heavily on fraud and litigation, while the state soft-pedals how the warming climate is impacting storms and the seas surrounding Florida. Last week\u2019s admission, however, could \u2014 and should \u2014 start a new approach in addressing climate change and providing property insurance. The Palm Beach Post Editorial Board has urged government officials to think outside the box in developing new ideas. The property insurance industry \u2014 instead of just scaling back coverage, dropping customers and hiking premiums as much as 100% \u2014 should do the same.</p><p>Insurance crisis isn\u2019t exactly news</p><p>It\u2019s not like the precariousness of <a href=\"https://www.palmbeachpost.com/story/opinion/letters/2024/03/19/floridas-property-insurance-crisis-needs-better-government-oversight-to-help-homeowners/72988402007/\">Florida\u2019s insurance market is new</a>. In recent years, the state has seen shifts in the market due to rising claims costs and reinsurance expenses. This has prompted a growing number of homeowners to explore alternative options, including going without coverage.</p><p>The property insurance crisis isn\u2019t just a Florida problem, either. One in 13 homeowners across the U.S. is uninsured, according to a <a href=\"https://consumerfed.org/reports/exposed-a-report-on-1-6-trillion-dollars-of-uninsured-american-homes/\">recent study</a> by the Consumer Federation of America. For years, government officials and the industry have walled off Florida, leaving it largely to the state and its residents to figure out ways to cope with the risks and the impact of ever-higher insurance premiums. It\u2019s time to admit the crisis is much bigger than Florida.</p><p>How can the industry help? Releasing better data on access to coverage and on coverage gaps would be a good start. It\u2019s not like our elected officials, here and elsewhere, have the information that would produce better policies to help homeowners. Rising premiums, an ongoing concern here for tens of thousands of frustrated homeowners from Palm Beach to Pensacola, is a national one that will call for a far wider effort to address than simply passing it off as a \u201cFlorida problem.\u201d</p><p>Last year <a href=\"https://www.palmbeachpost.com/story/opinion/editorials/2024/03/19/floridas-home-citizens-property-insurance-crisis/72986600007/\">we asked Insurance Information Institute officials</a> how long might it take before our state\u2019s homeowners would see reductions in their premiums. Florida lawmakers after holding two special sessions to address the problems had promised changes within two years. Industry officials weren\u2019t that optimistic.</p><p>\u201cYears,\u201d Sean Kevelighan, the institute\u2019s president and CEO said after a brief silence and a bit of prodding.</p><p>Litigation, Kevelighan and his colleagues contend, remains the big problem, despite the fact that, after two special sessions of the Florida Legislature in 2022 and again in the 2023 regular session, the industry pretty much got everything it said it needed to reduce the impact of lawsuits, which supposedly would lead to lower rates.</p><p>That hasn\u2019t happened.</p><p>Now the problem is re-insurance, the a form of insurance insurers have, to protect them from financial risks. Re-insurers obviously get skittish with the likelihood of any events that threaten payouts. Nerves frayed when Colorado State predicted an extremely high number of storms \u2014 23 named storms compared to the average season of 14 \u2014 for the upcoming 2024 hurricane season.</p><p>\u201cIt is a very ominous forecast, and certainly one of the most significant in terms of potential events that we\u2019ve ever seen in April,\u201d Friedlander said during an interview with WJXT-TV in Jacksonville.</p><p>There\u2019s no doubt, at least here in Florida, that the insurance industry has the clout to get the preferred policies that it wants out of government. For years, the industry has gotten its way with the Florida Legislature and the Governor\u2019s office, in curbing what many policyholders see as normal remedies in pursuing claims. It shouldn\u2019t take another scary storm-season prediction to get the industry to take both climate change and its customers more seriously.</p><p>___</p><p>South Florida Sun Sentinel. April 8, 2024.</p><p>Editorial: Democracy delayed is democracy denied</p><p>There can\u2019t be a more diabolical gerrymander than what Gov. Ron DeSantis contrived to strip Black voters across North Florida of their ability to re-elect <a href=\"https://www.sun-sentinel.com/2022/04/15/the-consequences-of-one-man-rule-in-black-and-white-steve-bousquet/\">Democratic U.S. Rep. Al Lawson</a> of Tallahassee.</p><p>It\u2019s even worse because the Legislature\u2019s original congressional redistricting plan, based on the 2020 census, had respected the Florida Constitution by preserving Lawson\u2019s District 5.</p><p>But DeSantis vetoed it and the Legislature played dead.</p><p>The gerrymander scattered Lawson\u2019s 370,000 Black constituents among four districts, a plan contrived to elect more white Republicans. Sure enough, most people in the heavily Democratic and racially diverse capital city are illogically represented by <a href=\"https://dunn.house.gov/our-district\">a white Republican from Panama City</a>, more than 100 miles away.</p><p>Partisanship at its worst</p><p>It was partisan politics at its worst, with Black voters as victims, which makes it so offensive that a three-judge federal court recently upheld it.</p><p>The court rationalized that the Legislature wasn\u2019t motivated by racism but by obedience to the governor. Even if his motives were impure, the panel said, \u201cthe unlawful motivations of others \u2014 whether constituents, the Governor, or even a single member of the body itself \u2014 do not become those of the decision-making body as a whole.\u201d</p><p>That lack of common sense has been absent from Florida\u2019s courts, too. At Tallahassee, the First District Court of Appeal upheld DeSantis\u2019 vote-stealing despite its clear violation of <a href=\"https://www.commoncause.org/florida/our-work/ensure-fair-districts-reflective-democracy/fair-districts/\">the Fair Districts initiatives</a> that voters put in the Constitution in 2010.</p><p>Under Fair Districts, no district, state or federal, shall be drawn to favor one party or another, and none may be designed \u201cwith the intent or result of denying or abridging\u201d the ability of racial or language minorities to elect representatives of their choice.</p><p>In other words, even if the governor and Legislature had acted out of pristine motives, which they didn\u2019t, the result was wrong.</p><p>The state court case, filed by Common Cause and others, is on appeal to the Florida Supreme Court, where the ill-fated Congressional District 5 won the court\u2019s blessing a decade ago.</p><p>A graveyard for precedents</p><p>It should be a slam dunk, but DeSantis\u2019 right-wing appointments have made the high court a graveyard for its own precedents. Moreover, it has been in no hurry to decide the case in time for this year\u2019s election, having just granted Secretary of State Cord Byrd\u2019s lawyers an unwarranted 30-day extension to file their brief. The reason? The attorneys say they face \u201cmultiple competing deadlines.\u201d</p><p>So let democracy wait.</p><p>The federal panel\u2019s ruling, which could \u2014 and should \u2014 be appealed to the U.S. Supreme Court, is yet another reminder that our \u201cgovernment of the people, for the people, by the people,\u201d as Abraham Lincoln memorably defined it, does not even guarantee the right to vote.</p><p>The Constitution originally left voting eligibility to states. Four subsequent amendments said voting could not be denied on account of race, sex or failure to pay poll taxes, and lowered the voting age to 18.</p><p>But none of these defined voting as an inalienable right \u2014 which it should be \u2014 and left the states free to find ingenious schemes to undermine it.</p><p>A weakened Voting Rights Act</p><p>Gerrymandering leads the way. The U.S. Supreme Court refuses to interfere and has weakened the Voting Rights Act, making it easier to disenfranchise minorities by rigging districts and by creating roadblocks to voting.</p><p>But not in Montana, where the state Supreme Court recently rejected four laws that state\u2019s Republican legislature had enacted to interfere with registering and voting. The court majority said voting is \u201ca clear and unequivocal fundamental right under the Montana Constitution,\u201d quoting a passage that says \u201cAll elections shall be free and open.\u201d</p><p>Regrettably, no such language is found in Florida\u2019s Constitution; only a declaration that \u201call political power is inherent in the people.\u201d</p><p>But even that should be enough for any court to establish voting as an inalienable right in Florida.</p><p>Treating it as such, the Montana court threw out a 2021 law denying absentee ballots to voters under 18 who would mark that birthday before election day. It restored same-day voter registration, which Republicans had eliminated despite Montana voters having defeated a referendum to abolish it. It restored student IDs as valid for registering, and overturned part of a law that barred anyone being paid to collect and submit absentee ballots, which it found had been a common and necessary practice in rural areas, especially on Indian reservations.</p><p>\u201cThis court,\u201d said Montana\u2019s state Supreme Court, \u201ccan diverge from the minimal protections offered by the United States Constitution when the Montana Constitution clearly affords greater protection \u2014 or even when the provision is nearly identical.\u201d</p><p>That used to be the rule in Florida, too, before our Supreme Court voted 6-1 a week ago <a href=\"https://slate.com/news-and-politics/2024/04/florida-supreme-court-abortion-ruling-indefensible.html\">to reverse the precedent unanimously set</a> by its more enlightened predecessors in 1989 that Florida\u2019s constitutional guarantee of personal privacy protects abortion.</p><p>But unlike the privacy provision, the Fair Districts amendments are unmistakably specific. The DeSantis gerrymander was unquestionably unconstitutional. That\u2019s how the court should rule, and the sooner the better.</p><p>Democracy delayed is democracy denied.</p><p>___</p><p>Tampa Bay Times. April 3, 2024.</p><p>Editorial: On abortion, Floridians have chance to remedy Supreme Court\u2019s tortured logic</p><p>The November referendum is a rare chance for Floridians to enshrine reproductive rights in the state constitution.</p><p>The Florida Supreme Court ruling on abortion Monday marks an uncertain future for reproductive rights and privacy more generally. While the court allowed a statewide referendum on abortion to proceed, it cleared the way to further restrict the procedure while overturning decades of precedence on privacy protections. The November ballot measure was already poised to be defining; the court\u2019s decision only raises the stakes.</p><p>The justices ruled 6-1 that the privacy provision in Florida\u2019s constitution did not protect access to abortion, letting stand a 15-week abortion ban enacted in 2022. But the conservative court\u2019s ruling has far greater implications. By finding the existing restrictions legal, the court triggered a new six-week ban enacted last year to take effect by May 1. And its sweeping dismissal of the state\u2019s privacy clause could put other personal freedoms under legal jeopardy.</p><p>Florida voters added a privacy clause to the state constitution in 1980, which states in part: \u201cEvery natural person has the right to be let alone and free from governmental intrusion into the person\u2019s private life.\u201d The Florida Supreme Court first ruled in 1989 that the provision applied to abortion, and in 2012, Florida voters rejected a Republican-sponsored ballot amendment that would have narrowed the state\u2019s abortion-rights guarantee.</p><p>But in the ruling April 1, the court majority wrote that Florida voters did not understand abortion would be included in the privacy amendment the state adopted in 1980. \u201cIt would require an analytical leap,\u201d the opinion held, to associate \u201cthe right to be let alone\u201d with access to abortion. Moreover, the majority added, the Florida courts erred in the wake of the U.S. Supreme Court\u2019s 1973 decision in Roe v. Wade, which guaranteed a constitutional right to abortion, by reading \u201cadditional rights\u201d into Florida\u2019s privacy clause \u201cbeyond what the text could reasonably bear.\u201d</p><p>The court\u2019s ruling was hardly surprising; Republican Gov. Ron DeSantis, who signed both the 15-week and six-week abortion bans into law, appointed five of the court\u2019s seven members, and the justices have shown their comfort in acting as legislators in robes. But the opinion exposed the political lens this court takes toward controversial policy issues and its willingness to pluck arguments from the ether to justify its decisions.</p><p>The majority opinion, for example, noted that the phrase \u201cright to privacy\u201d gained \u201cnew connotations\u201d after the Roe decision in 1973, including \u201cthe choice to have an abortion.\u201d But the majority also dismissed the impact this association between a right to privacy and the Roe decision had on the decision by Florida voters to adopt their own privacy clause. In other words, Florida\u2019s top court appeared to conveniently forget that Florida voters knew full well that enshrining a right to privacy into the state constitution in 1980 would protect abortion rights. Justice Jorge Labarga, the lone vote against, called out this stretch of the imagination in his dissent.</p><p>\u201cThe public understood the right of privacy to encompass the right to an abortion,\u201d Labarga wrote in a 30-page opinion. \u201cRoe and its extensive coverage informed legislators and their constituents that the right of privacy under the U.S. Constitution protected the right to an abortion.\u201d Labarga called the majority decision \u201can affront to this state\u2019s tradition of embracing a broad scope of the right to privacy.\u201d</p><p>In a footnote, the majority noted that its opinion did not address privacy protections \u201coutside of the abortion context.\u201d But Labarga expressed concern this could be the court\u2019s next logical step. \u201cThe majority\u2019s reasoning,\u201d he warned, could spur attempts by future litigants \u201cto undermine the broad privacy protections that are extended in the medical context.\u201d</p><p>That\u2019s why the court\u2019s other decision to clear an abortion-rights amendment for the November ballot is so helpful in potentially balancing the fallout. The measure would bar any law that prohibits, penalizes, delays or restricts abortion \u201cbefore viability,\u201d usually around 24 weeks. But the court approved that referendum by the slimmest 4-3 majority possible, and state Republican leaders have vowed to work against it. Florida voters have a rare chance this November to enshrine reproductive rights before the governor, legislature and high court erode even more of our privacy protections.</p><p>___</p><p>Orlando Sentinel. April 4, 2024.</p><p>Editorial: Supreme Court smashed silly arguments over recreational pot</p><p>For Floridians caught up in the emotional and legal tumult of Monday\u2019s conflicting duo of Supreme Court abortion rulings, we have a suggestion: Take a break, and have some pot.</p><p>Or at least take the time to peruse the equally complex \u2014 but far more amusing \u2014 ruling that will let voters weigh in on whether marijuana should be legalized for all Floridians over the age of 21. (The question, designated Amendment 3, authorizes adults to buy up to three ounces of marijuana for personal use, even if they don\u2019t have a medical condition that qualifies them.)</p><p>Monday\u2019s pot ruling: LOL</p><p>In her majority opinion, Justice Jamie Grosshans provided a judicial smackdown of epic proportions. She didn\u2019t restrict herself to needling Attorney General Ashley Moody, who asked the court to block the marijuana amendment from the 2024 ballot. In a separate concurring opinion, Grosshans effectively trolled her fellow justices who tried in vain to shore up Moody\u2019s argument.</p><p>From the start, Moody\u2019s case for knocking the marijuana amendment off the ballot were weak. She and the \u201cfriend of the court\u201d groups who backed her challenge tried and failed to nitpick the ballot question to death. Among their arguments: Florida voters might not understand that marijuana is still illegal under federal law, or that the state will have to write the rules under which pot can be obtained by Floridians over the age of 21.</p><p>Grosshans\u2019 response: Perhaps you might want to invest in a dictionary. (She actually recommends a few.) Voters are perfectly capable of figuring this one out for themselves, she wrote, using the common meaning of words like \u201callow\u201d and \u201clicense.\u201d She swept aside another frankly idiotic argument that the amendment doesn\u2019t meet the single-subject requirement because it talks about the sale and use of pot: \u201cAllowing businesses to distribute personal-use marijuana, and authorizing individuals to possess it, are logically and naturally related,\u201d she wrote. \u201cLegalization of marijuana presumes the product will be available for the consumer.\u201d</p><p>She didn\u2019t conclude with \u201cWell, DUH.\u201d But did she really need to?</p><p>The weedy reality</p><p>Nor did she need to recap marijuana\u2019s current status in Florida: Recreational pot is available right now, for anyone with the money and time to pursue it and the moral ambiguity to evade the intent of the amendment.</p><p>Ironically that means voters were essentially hoodwinked in 2016, when they signed off on a supposedly highly restrictive amendment allowing very sick Floridians to buy medical marijuana under tightly controlled conditions.</p><p>That\u2019s \u2026 not how things worked out.</p><p>That\u2019s not the fault of voters, or the organizers of the 2016 ballot question. It\u2019s entirely the fault of state regulators and legislators who determinedly looked the other way as Florida\u2019s medical-marijuana industry cranked into high gear. Instead, state leaders focused almost entirely on what they saw as the real issue with medical marijuana \u2014 which powerful interests would be allowed to get rich first, and how much they could rake in.</p><p>Meanwhile, nobody was paying attention to how the guardrails on the 2016 ballot question were being flattened. That amendment required pot users to get a signoff from a doctor that they met the requirements specified in the amendment, which included debilitating health conditions including cancer, multiple sclerosis and legitimate cases of post-traumatic stress disorder. The 2026 amendment left one loophole, by including ailments \u201cof a similar kind or class.\u201d</p><p>At first timid and then bold, the industry stretched that phrase to the breaking point. As we observed in a July editorial: \u201cQuestions like \u2018Do you have cancer? Multiple sclerosis? Parkinson\u2019s?\u2019 gave way to \u2018Do you have depression? Anxiety? Stress? Uh \u2026 writer\u2019s cramp?\u2019\u201d</p><p>The majority opinion didn\u2019t really go into that, but Florida voters are capable of seeing that reality for themselves. That makes voter approval of the 2024 amendment likely, and further underscores the court\u2019s ruling that voters have a right to expand protections to recreational pot usage.</p><p>___</p><p>Miami Herald. April 4, 2024.</p><p>Editorial: Creators of Florida\u2019s extreme abortion bans now mislead the public on ballot amendment</p><p>The same state leaders who banned abortions after 15 weeks of pregnancy \u2014 without exceptions for rape and incest \u2014 and barely waited a year to pass a six-week ban, are now calling a ballot referendum to restore reproductive rights \u201cextreme.\u201d</p><p>That makes no sense. Constitutional Amendment 4, on the ballot in the November elections, would mostly return abortion rights to what they were for decades in Florida, before the U.S. Supreme Court reversed Roe v. Wade in 2022 and the Florida Legislature passed one of the strictest laws in the nation.</p><p>And yet, as the Herald reported Tuesday, this is how House Speaker Paul Renner, who ushered in the passage of the six-week ban, characterized the ballot item: \u201cThis amendment goes far far beyond where most Floridians would land on the issue and is extreme in its scope\u201d</p><p>The standard for nearly 50 years \u2014 which is popular with Floridians, according to polls \u2014 is not extreme. Banning abortions before most women even know they are pregnant is. Even Donald Trump called the six-week ban a \u201cterrible mistake\u201d last year.</p><p>The Florida Supreme Court approved the language of Amendment 4 on Monday. On the same day, it ruled in favor of Florida\u2019s 15-week ban, which will trigger the six-week ban starting May 1.</p><p>The amendment will reverse the ban if it\u2019s approved by at least 60% of voters. The measure states: \u201cNo law shall prohibit, penalize, delay or restrict abortion before viability,\u201d which is a fetus\u2019 ability to survive outside the womb, usually around 24 weeks of gestation.</p><p>When the U.S. Supreme Court ruled on Roe v. Wade in 1973, it also concluded that states couldn\u2019t restrict abortion access until viability.</p><p>Under Florida\u2019s Amendment 4, abortions could only happen after viability \u201cwhen necessary to protect the patient\u2019s health, as determined by the patient\u2019s healthcare provider.\u201d Again, that\u2019s similar to what was allowed under Roe v. Wade.</p><p>Unlike Roe, the amendment would preserve a Florida law that requires parental consent for minors to get an abortion. How radical!</p><p>Attorney General Ashley Moody unsuccessfully tried to convince the state Supreme Court that voters would be confused by Amendment 4\u2019s viability provision. Now Republicans are confusing voters. They know the amendment has a strong chance of approval.</p><p>END</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/2b1e6f5c9343a87d7c86722f45950709",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 3,
+            "reason": "The document contains multiple editorials from different Florida newspapers, covering a range of topics including climate change, insurance, democracy, gerrymandering, abortion, and marijuana legalization. While some of these topics touch on health-related issues, such as the impact of climate change on health, the insurance crisis affecting access to healthcare, and the abortion rights debate, the overall focus of the document is not primarily on health. The health-related content is interspersed with other political and social issues, making the document only moderately relevant to the topic of health."
+        }
+    }
+}

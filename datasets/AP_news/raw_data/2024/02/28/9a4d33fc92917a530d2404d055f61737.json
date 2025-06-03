@@ -1,0 +1,279 @@
+﻿{
+    "altids": {
+        "itemid": "9a4d33fc92917a530d2404d055f61737",
+        "etag": "9a4d33fc92917a530d2404d055f61737_0a16aza0c0",
+        "friendlykey": "953733696312",
+        "referenceid": "US--Transgender-Health-Indiana"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2024-02-28T02:05:26Z",
+    "firstcreated": "2024-02-28T02:05:25Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "ednote": "Eds: UPDATES: With AP Photo.",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "US--Transgender-Health-Indiana",
+    "headline": "Ban on gender-affirming care for minors allowed to take effect in Indiana",
+    "headline_extended": "Indiana's ban on gender-affirming care for minors is being allowed to take effect by a federal appeals court in Chicago",
+    "slugline": "BC-US--Transgender-Health-Indiana",
+    "description_summary": "Indiana's ban on gender-affirming care for minors is being allowed to take effect by a federal appeals court in Chicago. The order was issued Tuesday by a panel of justices on the 7th Circuit Court of Appeals. It removes a preliminary injunction against the ban that a federal judge in Indiana issued in June. The American Civil Liberties Union of Indiana had filed the challenge to the ban on behalf of four youths undergoing gender-affirming treatments and an Indiana doctor who provides such care. The ACLU said it's considering next steps following the appeals court's ruling.",
+    "bylines": [
+        {
+            "by": "By ISABELLA VOLMERT",
+            "title": "Associated Press"
+        }
+    ],
+    "located": "INDIANAPOLIS",
+    "datelinelocation": {
+        "city": "Indianapolis",
+        "countryareacode": "IN",
+        "countryareaname": "Indiana",
+        "countrycode": "USA",
+        "countryname": "United States",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                -86.15804,
+                39.76838
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "Appeals court Indiana genderaffirming care minors"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "a",
+            "name": "a"
+        },
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "570831e088701004882deb2e0e616f0b",
+            "name": "Gender",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 97
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86aad5207dac100488ecba7fa5283c3e",
+            "name": "Politics",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 60
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Editorial",
+            "editorial_subject": "Health",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "organisation": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "53dc65408d3e1004849bf47b1b321303",
+            "name": "American Civil Liberties Union",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 48
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "1076829118f44cf8b4fc2b40b7045433",
+            "name": "American Athletic Conference",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 32
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "0760000082b2100483c7df092526b43e",
+            "name": "Indiana",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -86.25027,
+                    40.00032
+                ]
+            },
+            "relevance": 87,
+            "parentnames": [
+                "United States"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "5b86bbd082b01004839adf092526b43e",
+            "name": "Chicago",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "2c6a186082b010048379df092526b43e"
+            ],
+            "locationtype": {
+                "code": "9d26a20b35f0484a891740f8189d4c7b",
+                "name": "City"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -87.65005,
+                    41.85003
+                ]
+            },
+            "relevance": 71,
+            "parentnames": [
+                "Illinois"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "661850e07d5b100481f5c076b8e3055c",
+            "name": "Latin America and Caribbean",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "2c6a186082b010048379df092526b43e",
+            "name": "Illinois",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "0760000082b2100483c7df092526b43e",
+            "name": "Indiana",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "associations": {
+        "1": {
+            "altids": {
+                "itemid": "9400998c8b5040bc83baa75dc4865945"
+            },
+            "type": "picture"
+        }
+    },
+    "body_nitf": "<p>INDIANAPOLIS (AP) \u2014 A federal appeals court on Tuesday allowed Indiana's ban on gender-affirming care to go into effect, removing a temporary injunction a judge issued last year.</p><p>The ruling was handed down by a panel of justices on the 7th Circuit Court of Appeals in Chicago. It marked the latest decision in <a href=\"https://apnews.com/article/transgender-genderaffirming-care-ban-indiana-lawsuit-72f73ee4f2224ba7a09cecaccbcfd7f8\">a legal challenge</a> the American Civil Liberties Union of Indiana filed against the ban, <a href=\"https://apnews.com/article/indiana-legislature-trans-ban-holcomb-6ae70d4334befadcf899cbf0f9a723c8\">enacted last spring</a> amid a national push by GOP-led legislatures to curb LGBTQ+ rights.</p><p>The law was slated to go into effect on July 1, 2023. But the month before, U.S. District Court Judge James Patrick Hanlon issued an injunction preventing most of it from taking effect. Hanlon blocked the state from prohibiting minors\u2019 access to <a href=\"https://apnews.com/article/science-health-mental-ce8f5a9ee53768af03c3c65d5331045b\">hormone therapies and puberty blockers</a>, but allowed the law\u2019s prohibition on gender-affirming surgeries to take effect.</p><p>Hanlon\u2019s order also blocked provisions that would prohibit Indiana doctors from communicating with out-of-state doctors about gender-affirming care for their patients younger than 18.</p><p>In a written statement Tuesday, the ACLU of Indiana called the appeals court's ruling \u201cheartbreaking\u201d for transgender youth, their doctors and families.</p><p>\u201cAs we and our clients consider our next steps, we want all the transgender youth of Indiana to know this fight is far from over,\" the statement read. \"We will continue to challenge this law until it is permanently defeated and Indiana is made a safer place to raise every family.\u201d</p><p>The three-judge panel that issued Tuesday's order comprises two justices appointed by Republican presidents and one by a Democrat. The late Republican President Ronald Reagan appointed Kenneth F. Ripple; former Republican President Donald Trump appointed Michael B. Brennan; and current Democratic President Joe Biden appointed Candace Jackson-Akiwumi.</p><p>The ACLU of Indiana brought the lawsuit on behalf of four youths undergoing gender-affirming treatments and an Indiana doctor who provides such care. The lawsuit argued the ban would violate the U.S. Constitution\u2019s equal protection guarantees and trampled upon the rights of parents to decide medical treatment for their children.</p><p>Every major medical group, including the <a href=\"https://apnews.com/article/transgender-genderaffirming-care-pediatricians-176134f1b6ee1f2c146fef9a40cf351e\">American Academy of Pediatrics</a> and the American Medical Association, has opposed the restrictions enacted by at least 23 states and has said that gender-affirming care for minors is safe if administered properly.</p><p>Representatives from Indiana University Health Riley Children\u2019s Hospital, the state\u2019s sole hospital-based gender health program, told legislators earlier last year that doctors don't perform or provide referrals for genital surgeries for minors. IU Health was not involved in the ACLU\u2019s lawsuit.</p><p>Indiana Attorney General Todd Rokita called the state law \u201ccommonsense\u201d in a post on X, formally known as Twitter, Tuesday evening.</p><p>Most of the bans on gender-affirming care for minors that have been enacted across the U.S. have been challenged with lawsuits. A federal judge <a href=\"https://apnews.com/article/politics-arkansas-gender-lgbtq-legislation-us-news-2a0d032f4e4f3195c180d879239e6521\">struck down Arkansas\u2019 ban</a> as unconstitutional. Judges\u2019 orders are in place temporarily blocking enforcement of the bans in Idaho and Montana.</p><p>The states that have enacted laws restricting or banning gender-affirming medical care for transgender minors are: Alabama, Arkansas, Arizona, Florida, Georgia, Idaho, Indiana, Iowa, Kentucky, Louisiana, Mississippi, Missouri, Montana, Nebraska, North Carolina, North Dakota, Ohio, Oklahoma, South Dakota, Tennessee, Texas, Utah and West Virginia.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/appeals-court-indiana-genderaffirming-care-minors-9a4d33fc92917a530d2404d055f61737",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 4,
+            "reason": "The document discusses a legal decision regarding a ban on gender-affirming care for minors in Indiana. It includes details about the court ruling, the legal challenge by the ACLU, and the implications for transgender youth and their families. The topic of health is relevant here as the document addresses medical treatments such as hormone therapies, puberty blockers, and gender-affirming surgeries, which are significant health-related issues. However, the document also heavily focuses on the legal and political aspects of the ban, which slightly dilutes the direct relevance to health alone."
+        }
+    }
+}

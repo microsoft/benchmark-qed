@@ -1,0 +1,234 @@
+﻿{
+    "altids": {
+        "itemid": "bc33b82a23fe60c27c113e72bc05ce32",
+        "etag": "bc33b82a23fe60c27c113e72bc05ce32_1a20aza0c0",
+        "friendlykey": "620490555039",
+        "referenceid": "US--Oregon-Bubonic Plague"
+    },
+    "version": 1,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2024-02-13T02:04:06Z",
+    "firstcreated": "2024-02-13T01:52:20Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "ednote": "Eds: CORRECTS: This story has been updated to correct that the report was from Wednesday, Feb. 7, not Monday, Feb. 12.",
+    "editorialtypes": [
+        "Lead"
+    ],
+    "signals": [
+        "newscontent"
+    ],
+    "title": "US--Oregon-Bubonic Plague",
+    "headline": "Oregon officials report bubonic plague in local resident. They say there's little risk to community",
+    "headline_extended": "Public health officials in Oregon have reported a case of bubonic plague in a local resident",
+    "slugline": "AP-US--Oregon-Bubonic Plague, 1st Ld-Writethru",
+    "description_summary": "Public health officials in Oregon have reported a case of bubonic plague in a local resident. They said last week the person likely contracted it from a pet cat. Deschutes County health officials say all close contacts of the person and the cat have been contacted and provided medication. The county says the case has been identified and treated in its early stages. Officials say it poses little risk to the community. Symptoms of bubonic plague include the sudden onset of fever, nausea, weakness, chills and muscle aches. Symptoms begin two to eight days after exposure to an infected animal or flea.",
+    "located": "BEND, Oregon",
+    "datelinelocation": {
+        "city": "Bend",
+        "countryareacode": "OR",
+        "countryareaname": "Oregon",
+        "countrycode": "USA",
+        "countryname": "United States",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                -121.31531,
+                44.05817
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "oregon bubonic plague"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "a",
+            "name": "a"
+        },
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "084d13787f00100481bff571351eed07",
+            "name": "Plague",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 60
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e02e4bd0898310048339bc885dbc3010",
+            "name": "Pets",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 43
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 91
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Editorial",
+            "editorial_subject": "Health",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "fe016fe882c61004886adf092526b43e",
+            "name": "Oregon",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -120.50139,
+                    44.00013
+                ]
+            },
+            "relevance": 77,
+            "parentnames": [
+                "United States"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "fe016fe882c61004886adf092526b43e",
+            "name": "Oregon",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "08a0a00882c810048942df092526b43e",
+            "name": "Washington",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "1885b7f082b01004835edf092526b43e",
+            "name": "Idaho",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661850e07d5b100481f5c076b8e3055c",
+            "name": "Latin America and Caribbean",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "body_nitf": "<p>BEND, Oregon (AP) \u2014 Public health officials in Oregon have reported a case of <a href=\"https://apnews.com/hub/bubonic-plague\">bubonic plague</a> in a local resident who they said likely contracted it from a pet cat.</p><p>All close contacts of the person and the cat have been contacted and provided medication, Dr. Richard Fawcett, the health officer for Deschutes County, said in a statement last week.</p><p>The county said Wednesday the case was identified and treated in its early stages and poses little risk to the community.</p><p>Symptoms of bubonic plague include the sudden onset of fever, nausea, weakness, chills and muscle aches, county health services said. Symptoms begin two to eight days after exposure to an infected animal or flea.</p><p>Bubonic plague can lead to bloodstream and lung infections if it is not diagnosed early. These forms of the disease are more severe and difficult to treat.</p><p>The <a href=\"https://apnews.com/666ea2a6d5cd4d0db8944cb09d6b03d2/oregon-public-health-officials-teen-girl-has-bubonic-plague\">last time Oregon reported a case</a> of bubonic plague was 2015.</p><p>___</p><p>This story has been updated to correct that the report was from Wednesday, Feb. 7, not Monday, Feb. 12.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/oregon-bubonic-plague-bc33b82a23fe60c27c113e72bc05ce32",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 5,
+            "reason": "The document discusses a recent case of bubonic plague in Oregon, including details about the infection, symptoms, and public health response. This information is directly related to the topic of health, as it involves a disease, its transmission, symptoms, and public health measures. The document provides relevant and specific information that would be of interest to those concerned with health issues."
+        }
+    }
+}

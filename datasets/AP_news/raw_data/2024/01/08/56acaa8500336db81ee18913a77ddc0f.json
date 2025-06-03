@@ -1,0 +1,396 @@
+﻿{
+    "altids": {
+        "itemid": "56acaa8500336db81ee18913a77ddc0f",
+        "etag": "56acaa8500336db81ee18913a77ddc0f_5a16aza0c0",
+        "friendlykey": "809368167171",
+        "referenceid": "EU-REL--Vatican-Pope"
+    },
+    "version": 5,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2024-01-09T00:23:09Z",
+    "firstcreated": "2024-01-08T10:20:03Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "ednote": "Eds: UPDATES: Expands audience.; With AP Photos.",
+    "editorialtypes": [
+        "Lead"
+    ],
+    "signals": [
+        "newscontent"
+    ],
+    "title": "EU-REL--Vatican-Pope",
+    "headline": "Pope Francis calls for a universal ban on surrogacy. He says it exploits mother and child",
+    "headline_extended": "Pope Francis is calling for a universal ban on what he calls the \u201cdespicable\u201d practice of surrogate motherhood",
+    "slugline": "BC-EU-REL-Vatican-Pope, 5th Ld-Writethru",
+    "description_summary": "Pope Francis is calling for a universal ban on what he calls the \u201cdespicable\u201d practice of surrogate motherhood. He included what he called the \u201ccommercialization\u201d of pregnancy in an annual speech to ambassadors accredited to the Holy See. The speech listed the threats to global peace and human dignity, including Russia\u2019s war in Ukraine, the Israel-Gaza war, migration and climate crises and the \u201cimmoral\u201d production of nuclear and conventional weapons. But he also listed smaller-scale issues that he said were threats to human dignity, including surrogacy.",
+    "bylines": [
+        {
+            "by": "By NICOLE WINFIELD",
+            "title": "Associated Press"
+        }
+    ],
+    "located": "ROME",
+    "datelinelocation": {
+        "city": "Rome",
+        "countrycode": "ITA",
+        "countryname": "Italy",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                12.51133,
+                41.89193
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "Pope surrogacy Vatican Russia Israel Ukraine"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "person": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "2fd38d1dee8c4287a13ae64992300d96",
+            "name": "Pope Francis",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 82
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "l",
+            "name": "l"
+        },
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "i",
+            "name": "i"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "026a1118e94443a2aacc08a2e70cc77b",
+            "name": "Religion",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 71
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "c671a756daf54813b295abe00d6d495c",
+            "name": "Russia Ukraine war",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 87
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "c6ae21e2335a47acb3fe5c938213ad1b",
+            "name": "Israel-Hamas war",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 95
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "7cf243908830100481e9ae2ac3a6923e",
+            "name": "War and unrest",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 59
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "3e37e4b87df7100483d5df092526b43e",
+            "name": "Lifestyle",
+            "creator": "Editorial",
+            "editorial_subject": "Lifestyle",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "bb2d2c5f441a452cb24bb511a2ab5eea",
+            "name": "World news",
+            "creator": "Editorial",
+            "editorial_subject": "World news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Editorial",
+            "editorial_subject": "Health",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "026a1118e94443a2aacc08a2e70cc77b",
+            "name": "Religion",
+            "creator": "Editorial",
+            "editorial_subject": "Religion",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "661c9a887d5b10048262c076b8e3055c",
+            "name": "Russia",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661850e07d5b100481f4c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "01f56e0e654841eca2e69bf2cbcc0526",
+                "name": "Nation"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    100,
+                    60
+                ]
+            },
+            "relevance": 55,
+            "parentnames": [
+                "Europe"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f3e0ed387eff10048539df092526b43e",
+            "name": "Vatican City",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661850e07d5b100481f4c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "01f56e0e654841eca2e69bf2cbcc0526",
+                "name": "Nation"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    12.4533,
+                    41.90225
+                ]
+            },
+            "relevance": 80,
+            "parentnames": [
+                "Europe"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "661dcb387d5b1004827fc076b8e3055c",
+            "name": "Israel",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661850e07d5b100481f6c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "01f56e0e654841eca2e69bf2cbcc0526",
+                "name": "Nation"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    34.75,
+                    31.5
+                ]
+            },
+            "relevance": 36,
+            "parentnames": [
+                "Middle East"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "662253607d5b100482f3c076b8e3055c",
+            "name": "Gaza Strip",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "662253607d5b100482f2c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "ccaa3b23a3964e57af945798a8a551ee",
+                "name": "Disputed territory"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    34.33333,
+                    31.41667
+                ]
+            },
+            "relevance": 36,
+            "parentnames": [
+                "Palestinian territories"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "661cd9087d5b10048265c076b8e3055c",
+            "name": "Ukraine",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661850e07d5b100481f4c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "01f56e0e654841eca2e69bf2cbcc0526",
+                "name": "Nation"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    32,
+                    49
+                ]
+            },
+            "relevance": 49,
+            "parentnames": [
+                "Europe"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "661850e07d5b100481f4c076b8e3055c",
+            "name": "Europe",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "associations": {
+        "1": {
+            "altids": {
+                "itemid": "c977db5acb724f83829acce46cdc3ff5"
+            },
+            "type": "picture"
+        },
+        "2": {
+            "altids": {
+                "itemid": "569fa84d5f1e4b3d9837bb991f910bf6"
+            },
+            "type": "audio"
+        },
+        "3": {
+            "altids": {
+                "itemid": "f63a9b1fd715467f82caebfb9c95d3ab"
+            },
+            "type": "audio"
+        },
+        "4": {
+            "altids": {
+                "itemid": "c11051da20204ba3a2fed14ee864ac64"
+            },
+            "type": "audio"
+        }
+    },
+    "body_nitf": "<p>ROME (AP) \u2014 <a href=\"https://apnews.com/hub/pope-francis\">Pope Francis</a> called Monday for a universal ban on what he called the \u201cdespicable\u201d practice of surrogate motherhood, as he included the \u201ccommercialization\u201d of pregnancy in an annual speech listing threats to global peace and human dignity.</p><p>In a foreign policy address to ambassadors accredited to the Holy See, Francis lamented that 2024 had dawned at a time in which peace is \u201cincreasingly threatened, weakened and in some part lost.\u201d</p><p>Citing <a href=\"https://apnews.com/hub/russia-ukraine\">Russia\u2019s war in Ukraine</a>, the <a href=\"https://apnews.com/hub/israel-hamas-war\">Israel-Hamas war</a>, <a href=\"https://apnews.com/hub/migration\">the issue of migration</a>, <a href=\"https://apnews.com/article/vatican-pope-climate-dubai-un-c5cb4096202a117b34ca3d2d4a1b9e72\">climate crises</a> and the \u201cimmoral\u201d production of nuclear and conventional weapons, Francis delivered a list of the ills afflicting humanity and the increasing violation of international humanitarian law that allows them.</p><p>But Francis also listed smaller-scale issues that he said were threats to peace and human dignity, including surrogacy. He said the life of the unborn child must be protected and not \u201csuppressed or turned into an object of trafficking.\u201d</p><p>\u201cI consider despicable the practice of so-called surrogate motherhood, which represents a grave violation of the dignity of the woman and the child, based on the exploitation of situations of the mother\u2019s material needs,\u201d he said.</p><p>Saying a child is a gift and \u201cnever the basis of a commercial contract,\u201d he called for a global ban on surrogacy \"to prohibit this practice universally.\u201d</p><p>Vatican teaching opposes in vitro fertilization, and Francis has previously voiced the Roman Catholic Church\u2019s opposition to surrogacy, or what he has called \u201cuterus for rent.\" At the same time, however, the Vatican\u2019s doctrine office has made clear that same-sex parents who resort to surrogacy can have their children baptized.</p><p>While commercial surrogacy contracts are common in the United States, including protections for the mothers, guarantees of independent legal representation and medical coverage, they are banned in parts of Europe, including Spain and Italy.</p><p>Russia\u2019s war in Ukraine, and the threat to babies born to surrogate Ukrainian mothers, exposed the country\u2019s thriving industry. Ukraine is one of the few countries that allow surrogacy for foreigners.</p><p>Critics say commercial surrogacy targets women who are poor and from vulnerable communities. Supporters say surrogacy gives women a chance to provide children to childless couples, and that commercial contracts protect both the surrogates and the intended parents.</p><p>On Monday, the U.S. Conference of Catholic Bishops quoted Francis' words in explaining why the Catholic Church teaches that surrogacy \u201cis not morally permissible.\u201d</p><p>\"Instead, we should pray for, and work towards, a world that upholds the profound dignity of every person, at every stage and in every circumstance of life,\u201d spokesperson Chieko Noguchi said.</p><p>In his geopolitical roundup, Francis <a href=\"https://apnews.com/article/pope-russia-ukraine-war-vatican-imperial-b82bfb9185f0fc8062c43927a2b058b0\">singled out Russia by name</a> in noting the \u201clarge-scale war waged by the Russian Federation against Ukraine.\" It marked an unusual break with Francis\u2019 usual tendency to spare Moscow direct and public blame for the invasion when expressing solidarity with the Ukrainian people.</p><p>Francis was more balanced in his <a href=\"https://apnews.com/article/pope-francis-israel-hostages-palestinian-prisoners-deal-cffb5f90396c4f410b6af8cd954df0dd\">lament of Israel\u2019s ongoing war in Gaza,</a> condemning Hamas\u2019 Oct. 7 assault on southern Israel \u201cand every instance of terrorism and extremism.\u201d At the same time, he said the attack provoked a \u201cstrong Israeli military response\u201d that had left thousands dead and created a humanitarian crisis in Gaza.</p><p>He called for an immediate cease-fire, including in Lebanon, and the liberation of hostages held in Gaza, and reiterated the Holy See\u2019s position seeking a two-state solution for Israel and the Palestinians and an internationally guaranteed special status for Jerusalem.</p><p>In other comments, Francis:</p><p>\u2014 Lamented various humanitarian and refugee crises in Africa, and without naming names blasted military coups and elections in several African countries marked by \u201ccorruption, intimidation and violence.\u201d</p><p>\u2014 Called for a \u201crespectful diplomatic dialogue\u201d with the Nicaraguan government to resolve what he called a \u201cprotracted crisis.\u201d The government\u2019s <a href=\"https://apnews.com/article/religion-caribbean-nicaragua-daniel-ortega-a445a59fd605f8089c5e661cb66c2773\">crackdown on the Catholic Church</a> has resulted in the detention of dozens of priests and bishops. The government has accused the church of aiding popular protests against his administration that he considered an attempted coup.</p><p>\u2014 Called for the resumption, as early as possible, of <a href=\"https://apnews.com/article/iran-nuclear-program-enriched-uranium-1ec34491e5500afdb6f7ed964790d8fa\">Iran nuclear talks</a> \u201cto ensure a safer future for all.\u201d Last month, the International Atomic Energy Agency said Iran had increased the rate at which it is producing near-weapons-grade uranium, reversing a previous slowdown.</p><p>Francis also said that the \u201cmanufacturing\u201d of nuclear weapons was just as immoral as the possession and use of them. Francis has already changed church teaching to include the possession of nuclear weapons as inadmissible, but on Monday he included the production of such weapons as part of his overall criticism of the weapons industry.</p><p>\u201cPerhaps we need to realize more clearly that civilian victims are not \u2018collateral damage\u2019 (of war) but men and women, with names and surnames, who lost their lives,\u201d he said. \u201cThey are children who are orphaned and deprived of their future.\u201d</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/pope-surrogacy-vatican-russia-israel-ukraine-56acaa8500336db81ee18913a77ddc0f",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 3,
+            "reason": "The document primarily focuses on Pope Francis' call for a universal ban on surrogacy, which he argues exploits both mother and child. While this topic touches on aspects of health, particularly reproductive health and the ethical considerations surrounding surrogacy, the document is more centered on the moral, ethical, and geopolitical implications of surrogacy and other global issues. The broader context includes discussions on wars, humanitarian crises, and nuclear weapons, which are not directly related to health. Therefore, while there is some relevance to health, it is not the primary focus of the document."
+        }
+    }
+}

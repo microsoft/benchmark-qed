@@ -1,0 +1,245 @@
+﻿{
+    "altids": {
+        "itemid": "1d96f6624eec6e77d6f73bb3d0a4efca",
+        "etag": "1d96f6624eec6e77d6f73bb3d0a4efca_2a4aza0c0",
+        "friendlykey": "165825025113",
+        "referenceid": "US--Defense Secretary"
+    },
+    "version": 2,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2024-02-13T23:12:23Z",
+    "firstcreated": "2024-02-13T20:52:38Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "ednote": "Eds: UPDATES: With details from his doctors and the Pentagon.",
+    "editorialtypes": [
+        "Lead"
+    ],
+    "signals": [
+        "newscontent"
+    ],
+    "title": "US--Defense Secretary",
+    "headline": "Defense Secretary Austin discharged from hospital, ending second stay since cancer treatment",
+    "headline_extended": "The Pentagon says Defense Secretary Lloyd Austin has been released from Walter Reed National Military Medical Center and resumed his full duties",
+    "slugline": "AP-US--Defense Secretary, 2nd Ld-Writethru",
+    "description_summary": "The Pentagon says Defense Secretary Lloyd Austin has been released from Walter Reed National Military Medical Center and resumed his full duties. Austin, who is 70, has had ongoing health issues since undergoing surgery in December to treat prostate cancer. He was taken back to Walter Reed on Sunday for a bladder issue and admitted to intensive care for a second time since the surgery. He underwent a non-surgical procedure under general anesthesia on Monday. His doctors said the bladder issue was related to the surgery and \u201cwill have no effect on his excellent cancer prognosis.\u201d He is expected to host a virtual meeting Wednesday of about 50 countries who meet monthly to coordinate military aid for Ukraine.",
+    "bylines": [
+        {
+            "by": "By TARA COPP",
+            "title": "Associated Press"
+        }
+    ],
+    "located": "WASHINGTON",
+    "datelinelocation": {
+        "city": "Washington",
+        "countryareacode": "DC",
+        "countryareaname": "District of Columbia",
+        "countrycode": "USA",
+        "countryname": "United States",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                -77.03637,
+                38.89511
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "Austin hospital cancer prostate Pentagon"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "person": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "7722bf919d9646ddb9b24c641c26c83c",
+            "name": "Lloyd Austin",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "GOVERNMENT_FIGURE",
+                "PERSON"
+            ],
+            "relevance": 84
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "w",
+            "name": "w"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e247b8487de41004806adf092526b43e",
+            "name": "Prostate cancer",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 71
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e24779c87de410048069df092526b43e",
+            "name": "Men's health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 80
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "468257dba1c848ca93ba314d4ce86539",
+            "name": "Surgery",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 61
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e22524b87de410048f91df092526b43e",
+            "name": "Cancer",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 52
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 88
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "abfca78268874726966cdad8c35c4ae3",
+            "name": "Washington news",
+            "creator": "Editorial",
+            "editorial_subject": "Washington news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "661cd9087d5b10048265c076b8e3055c",
+            "name": "Ukraine",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661850e07d5b100481f4c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "01f56e0e654841eca2e69bf2cbcc0526",
+                "name": "Nation"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    32,
+                    49
+                ]
+            },
+            "relevance": 39,
+            "parentnames": [
+                "Europe"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "661850e07d5b100481f5c076b8e3055c",
+            "name": "Latin America and Caribbean",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "associations": {
+        "1": {
+            "altids": {
+                "itemid": "d2aba07f0f084ca9bb7df194dc7d3929"
+            },
+            "type": "picture"
+        }
+    },
+    "body_nitf": "<p>WASHINGTON (AP) \u2014 Defense Secretary Lloyd Austin was released from Walter Reed National Military Medical Center on Tuesday, ending his second stay since surgery to treat prostate cancer, and he has resumed his full duties, the Pentagon said.</p><p>Austin, 70, has had ongoing health issues since undergoing surgery in December. He was <a href=\"https://apnews.com/article/defense-secretary-austin-hospitalized-bladder-83e7184212e9dad1c86fe4686347f60b\">taken back to Walter Reed</a> on Sunday for a bladder issue and admitted to intensive care for a second time. He underwent a non-surgical procedure under general anesthesia on Monday.</p><p>Austin\u2019s doctors said Tuesday that his bladder issue was related to the surgery.</p><p>\u201cThe bladder issue was not related to his cancer diagnosis and will have no effect on his excellent cancer prognosis,\u201d Dr. John Maddox, trauma medical director, and Dr. Gregory Chesnut, director of the Center for Prostate Disease Research at the Murtha Cancer Center, said in a statement.</p><p>On their advice, Austin will work from home before returning to the Pentagon later this week. His home has \u201cfull access to the unclassified and classified communications systems necessary to perform his duties,\u201d the Pentagon said in a statement.</p><p>Austin is expected to host a virtual meeting Wednesday of about 50 countries who meet monthly to coordinate military aid for Ukraine.</p><p>He had been scheduled to travel to Brussels on Tuesday for that Ukraine meeting, followed by a quarterly meeting with NATO defense ministers on Thursday. The U.S. ambassador to NATO, Julie Smith, will represent Austin in Brussels instead.</p><p>In January, Austin was hospitalized for two weeks at Walter Reed after he experienced complications from the surgery.</p><p>His Walter Reed doctors had said they did not anticipate he would be in the hospital this time for a prolonged period.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/austin-hospital-cancer-prostate-pentagon-1d96f6624eec6e77d6f73bb3d0a4efca",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 5,
+            "reason": "The document discusses the health status of Defense Secretary Lloyd Austin, including his recent hospitalization, surgery for prostate cancer, and subsequent bladder issue. It provides detailed information about his medical condition, treatments, and recovery process. This information is directly related to the topic of health."
+        }
+    }
+}

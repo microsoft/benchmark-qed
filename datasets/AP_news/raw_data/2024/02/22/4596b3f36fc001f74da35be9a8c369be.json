@@ -1,0 +1,229 @@
+﻿{
+    "altids": {
+        "itemid": "4596b3f36fc001f74da35be9a8c369be",
+        "etag": "4596b3f36fc001f74da35be9a8c369be_0a2aza0c0",
+        "friendlykey": "874152805583",
+        "referenceid": "SC--Editorial Rdp"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Opinion",
+    "language": "en",
+    "versioncreated": "2024-02-22T17:47:40Z",
+    "firstcreated": "2024-02-22T17:47:39Z",
+    "editorialrole": "FullStory",
+    "fixture": {
+        "code": "21ea4067bb274c3b805353fb2b99ba70",
+        "name": "Editorial Roundup"
+    },
+    "pubstatus": "usable",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "SC--Editorial Rdp",
+    "headline": "Editorial Roundup: South Carolina",
+    "slugline": "BC-SC--Editorial Rdp",
+    "bylines": [
+        {
+            "by": "By The Associated Press"
+        }
+    ],
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "Editorial Rdp"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "person": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f693073df0e5421cbd7ffa11489cc2fc",
+            "name": "Thomas Davis",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "POLITICIAN",
+                "PERSON"
+            ],
+            "relevance": 32
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "fb629770cf154f91964e1789d2dd836e",
+            "name": "Opioids",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 42
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86aad5207dac100488ecba7fa5283c3e",
+            "name": "Politics",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 73
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a328daf6767245f18a263276f2e111f3",
+            "name": "Marijuana",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 88
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "6e2e052049fd457f841be9023fe385c5",
+            "name": "Drug crimes",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 56
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "d8e79a587f00100483bff571351eed07",
+            "name": "Pain management",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 80
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e237be707de410048fffdf092526b43e",
+            "name": "Medication",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 35
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "29d11ec082c7100488aedf092526b43e",
+            "name": "South Carolina",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -81.00009,
+                    34.00043
+                ]
+            },
+            "relevance": 67,
+            "parentnames": [
+                "United States"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "29d11ec082c7100488aedf092526b43e",
+            "name": "South Carolina",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "body_nitf": "<p>Post and Courier. February 17, 2024.</p><p>Editorial: Medical marijuana can relieve needless suffering; SC bill can make it safe</p><p>If you\u2019re looking for a losing strategy for persuading the South Carolina Legislature to legalize the medicinal use of marijuana, check out the <a href=\"https://www.postandcourier.com/columbia/marijuana-legalization-sc-statehouse-bills-probable-cause/article_eae47dbc-b56e-11ee-a639-e315be476048.html?utm_medium=social&utm_source=email&utm_campaign=user-share\">\u201cS.C. Cannabis Supporters United\u201d rally</a> last month at the Statehouse, which advocated for what supporters called \u201csensible decriminalization\u201d of marijuana.</p><p>Although the state chapter of the National Organization for the Reform of Marijuana Laws called for \u201cNo fine, no jail time and no court costs\u201d for possession of the drug and the repeal of a law that lets police search vehicles when they smell marijuana, speakers said their priority was legalizing medical marijuana.</p><p>With friends like that, who needs enemies?</p><p>Our legislators appropriately reject the idea of turning South Carolina into Colorado. That\u2019s why it was such a relief when the S.C. chapter of NORML dissolved earlier this year.</p><p>Our legislators are also appropriately concerned that legalizing medical marijuana could morph into de facto legalization for recreational use if, like other states, we don\u2019t tightly regulate it.</p><p>But legislators who consider those objections sufficient to continue to deny pain relief to people who need it are wrong.</p><p>It\u2019s not accurate to say we can\u2019t legalize the medicinal use of cannabis without opening the doors to further recreational use \u2014 just as it\u2019s not accurate to say we should ban prescription opioids because some people use them illegally and others become addicted to legal opioids, then graduate to illegal ones.</p><p>To the contrary, the fact that prescription opioids are so addictive that they turn law-abiding citizens into criminals is one of the big reasons it\u2019s so important to find a way to legalize medicinal marijuana. So too is the deadly effect of using those opioids even under a doctor\u2019s supervision: The Centers for Disease Control and Prevention reports that more than <a href=\"https://www.cdc.gov/drugoverdose/deaths/prescription/maps.html\">16,000 Americans died in 2020</a> from prescription opioids; in comparison, it notes that a <a href=\"https://www.cdc.gov/marijuana/faqs.htm\">fatal overdose of marijuana is \u201cunlikely.\u201d</a></p><p>Opponents to medical marijuana overlook two important considerations.</p><p>First, the choice for people with debilitating pain isn\u2019t always between using marijuana or suffering \u2014 although that is the choice for some, and it\u2019s a morally difficult one to justify when there are relatively safe alternatives. The choice is more often between marijuana and opioids, which can often be less effective but are always more dangerous.</p><p>Second, the Congress has included language in the federal budget since 2015 to prohibit the Justice Department from interfering with states that allow the medicinal use of marijuana. That\u2019s not the same as prohibiting federal agents from arresting people for selling or using medical marijuana, but it is a legally binding acceptance of medical marijuana by the Congress and the president.</p><p>Sen. Tom Davis\u2019 Compassionate Care Act is the best effort we\u2019ve seen to date to provide needed pain relief while preventing any expansion of recreational use.</p><p>As The Post and Courier\u2019s <a href=\"https://www.postandcourier.com/politics/south-carolina-medical-marijuana-cannabis-senate/article_302ec2b2-c5fd-11ee-8f3f-732866d4a9ff.html\">Nick Reynolds reports,</a> smoking the drug would remain illegal under the bill senators passed Wednesday; patients could only use oil, salves, patches or vaporizers \u2014 which would make it a lot easier for police to distinguish legal from illegal use, without having to worry about forged prescriptions.</p><p><a href=\"https://www.scstatehouse.gov/sess125_2023-2024/bills/423.htm\">S.423 would allow</a> marijuana to be used to treat only a tiny list of illnesses, primarily cancer, multiple sclerosis, glaucoma, sickle cell anemia, autism and some post-traumatic stress disorder diagnoses. And it would have to be obtained through specially regulated pharmacies, in doses of only two weeks at a time, after physicians meet with patients in person. Employers could ban their workers from using the drug even for medical purposes, and the entire law would last for only five years, after which the program would continue only if the Legislature passed a new law.</p><p>If additional protections are needed, the House should add them. What the House should not do is refuse to debate legislation that would help provide safer and more effective pain relief than South Carolinians can legally access today, without opening a Pandora\u2019s box that law enforcement understandably fears.</p><p>END</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/4596b3f36fc001f74da35be9a8c369be",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 5,
+            "reason": "The document is highly relevant to the topic of Health. It discusses the potential health benefits of legalizing medical marijuana, particularly in providing pain relief and offering a safer alternative to opioids. The editorial also addresses the legislative efforts in South Carolina to regulate medical marijuana use, which is directly related to health policy and patient care. The arguments presented focus on the health implications and the need for safe and effective pain management options."
+        }
+    }
+}

@@ -1,0 +1,271 @@
+﻿{
+    "altids": {
+        "itemid": "377507e8ced020f770d8fd9f36925321",
+        "etag": "377507e8ced020f770d8fd9f36925321_0a9aza0c0",
+        "friendlykey": "836353752961",
+        "referenceid": "LT--Peru-Dengue"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2024-03-01T23:25:25Z",
+    "firstcreated": "2024-03-01T23:25:24Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "ednote": "Eds: UPDATES: Updates Media.",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "LT--Peru-Dengue",
+    "headline": "Dengue cases in Peru are surging, fueled by mosquitoes and high temperatures brought by El Ni\u00f1o",
+    "headline_extended": "Peru is suffering a growing problem of dengue cases",
+    "slugline": "AP-LT--Peru-Dengue",
+    "description_summary": "Peru is suffering a growing problem of dengue cases. One of the most affected cities is Piura, in the country's north. With 5,275 dengue cases, Piura was by Friday the second most affected Peruvian city by dengue. But few days ago, it was the first one. Peru has registered more than 34,000 cases in the first seven weeks of this year, twice as high as in the same period in 2023, according to the health ministry. The government declared a health emergency in most of its provinces on Monday due to the growing number of cases, which come at a time of high temperatures caused by El Ni\u00f1o",
+    "bylines": [
+        {
+            "by": "By C\u00c9SAR BARRETO",
+            "title": "Associated Press"
+        }
+    ],
+    "located": "PIURA, Peru",
+    "datelinelocation": {
+        "city": "Piura",
+        "countrycode": "PER",
+        "countryname": "Peru",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                -80.33333,
+                -5
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "peru piura denge epidemic mosquitoes el nino"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "i",
+            "name": "i"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "084dafb87f00100481c5f571351eed07",
+            "name": "Dengue fever",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 98
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 98
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Editorial",
+            "editorial_subject": "Health",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "bb2d2c5f441a452cb24bb511a2ab5eea",
+            "name": "World news",
+            "creator": "Editorial",
+            "editorial_subject": "World news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "organisation": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "8997c0688d7410048d178a3c53cbc603",
+            "name": "World Health Organization",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 32
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "661effd07d5b100482a2c076b8e3055c",
+            "name": "Peru",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661908787d5b10048204c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "01f56e0e654841eca2e69bf2cbcc0526",
+                "name": "Nation"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -76,
+                    -10
+                ]
+            },
+            "relevance": 75,
+            "parentnames": [
+                "South America"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "661850e07d5b100481f5c076b8e3055c",
+            "name": "Latin America and Caribbean",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "associations": {
+        "1": {
+            "altids": {
+                "itemid": "d0594b425efe4ab49b9b1a5a3f2d1720"
+            },
+            "type": "picture"
+        },
+        "2": {
+            "altids": {
+                "itemid": "563c477bb01143799594651b16d13063"
+            },
+            "type": "picture"
+        },
+        "3": {
+            "altids": {
+                "itemid": "04da43b71b364c018d23d382abc24edc"
+            },
+            "type": "picture"
+        },
+        "4": {
+            "altids": {
+                "itemid": "50217fc22dda4bd9a0dc267fef9be0db"
+            },
+            "type": "picture"
+        },
+        "5": {
+            "altids": {
+                "itemid": "87b49cd5e2cf4225b4eee3f8631c4e8d"
+            },
+            "type": "picture"
+        },
+        "6": {
+            "altids": {
+                "itemid": "8f902aaafe2442f38f74224acb3881e2"
+            },
+            "type": "picture"
+        },
+        "7": {
+            "altids": {
+                "itemid": "14b02898762647b083e1c3f121c92a36"
+            },
+            "type": "picture"
+        },
+        "8": {
+            "altids": {
+                "itemid": "42f35324d6074ce6ac1686e84e7da95f"
+            },
+            "type": "picture"
+        },
+        "9": {
+            "altids": {
+                "itemid": "a2c63568f3eb469a89a60c5a5a71b264"
+            },
+            "type": "picture"
+        },
+        "10": {
+            "altids": {
+                "itemid": "28d9d998e4f0486e9041fad05d8dc62f"
+            },
+            "type": "picture"
+        }
+    },
+    "body_nitf": "<p>PIURA, Peru (AP) \u2014 Residents of Pedregal Grande, a poor neighborhood in the Peruvian city of Piura, receive water for only 30 minutes a day because of shortages, forcing them to collect it in plastic tanks that have become breeding grounds for mosquitoes.</p><p>Scorching temperatures and a lack of air conditioning force people out of their homes and they say the mosquitoes descend on them, fueling an alarming spread of dengue in this city and the South American country.</p><p>\"You go out to get some air and the mosquitoes arrive suddenly and attack you,\u201d said Segundo Ramos, a Peruvian driver who got the disease several days ago.</p><p>\u201cMy neighbor has dengue, over there they also have dengue,\u201d said Ramos, sitting in his one-story house, shirtless, with shorts and sandals as he endures the 97 degree (36 degree Celsius) temperature. \u201cThere are three or four sick neighbors within 100 meters.\u201d</p><p>With 5,275 dengue cases, Piura was by Friday the second hardest-hit city in Peru. A few days ago, it was the hardest hit. In total, Peru has registered more than 34,000 cases of dengue in the first eight weeks of this year, twice as high as in the same period in 2023, according to the nation\u2019s health ministry.</p><p>Peru's government declared a health emergency in most of its provinces on Monday due to the rising number of cases, which come amid higher than normal temperatures caused by the El Ni\u00f1o weather pattern.</p><p>Authorities in Piura have begun setting up specials areas in hospitals to receive dengue patients.</p><p>A dengue epidemic last year put Peru\u2019s public health system under strain as thousands sought care in emergency rooms. But while last year's epidemic killed 21 people in Peru, dengue has claimed the lives of 44 Peruvians in the first two months of this year alone.</p><p>Santiago Valdez, a specialist in tropical diseases sent to Piura, said the water shortage and storage practices are fueling the disease, which is spread by Aedes Aegypti, a mosquito that reproduces in hot and humid conditions.</p><p>\u201cPeople are forced to collect (water) and no matter how much one tries to have closed containers, there is always carelessness and the mosquitoes take the opportunity to lay their eggs and reproduce,\u201d he said.</p><p>Although most dengue cases present light symptoms, the disease can cause severe headaches, fevers and muscle pains.</p><p>In December, the World Health Organization said that Peru\u2019s 2023 dengue epidemic was linked to rains and hot temperatures that helped mosquito populations to grow, especially in the north of the country.</p><p>Health Minister C\u00e9sar V\u00e1squez acknowledged on Thursday that dengue \u201cis not under control\u201d and the cases \u201cwill continue to grow.\u201d</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/peru-piura-denge-epidemic-mosquitoes-el-nino-377507e8ced020f770d8fd9f36925321",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 5,
+            "reason": "The document discusses the surge in dengue cases in Peru, detailing the factors contributing to the outbreak, such as high temperatures and water shortages. It also covers the impact on the public health system, the government's response, and the symptoms and spread of the disease. All these points are directly related to health, making the document highly relevant to the topic."
+        }
+    }
+}

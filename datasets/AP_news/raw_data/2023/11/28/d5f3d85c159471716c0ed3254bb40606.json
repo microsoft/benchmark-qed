@@ -1,0 +1,265 @@
+﻿{
+    "altids": {
+        "itemid": "d5f3d85c159471716c0ed3254bb40606",
+        "etag": "d5f3d85c159471716c0ed3254bb40606_2a6aza0c0",
+        "friendlykey": "319696852295",
+        "referenceid": "US--Mayo Clinic Expansion"
+    },
+    "version": 2,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2023-11-28T19:54:05Z",
+    "firstcreated": "2023-11-28T17:13:29Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "ednote": "Eds: UPDATES: This story has been updated with comments from the announcement ceremony, more background on funding plans. With AP Photos.",
+    "editorialtypes": [
+        "Lead"
+    ],
+    "signals": [
+        "newscontent"
+    ],
+    "title": "US--Mayo Clinic Expansion",
+    "headline": "Mayo Clinic announces $5 billion expansion of Minnesota campus",
+    "headline_extended": "The Mayo Clinic has announced a $5 billion expansion plan that includes new buildings designed so they can evolve and expand as patient needs change over the coming decades",
+    "slugline": "BC-US--Mayo Clinic Expansion, 2nd Ld-Writethru",
+    "description_summary": "The Mayo Clinic has announced a $5 billion expansion plan that includes new buildings designed so they can evolve and expand as patient needs change over the coming decades. The project is part of a Mayo strategy to transform both patient care and its flagship campus in Rochester, Minnesota. Central to the plan is the creation of \u201cneighborhoods\u201d within the new facilities organized around particular conditions. Mayo CEO Dr. Gianrico Farrugia says the idea is to blur the traditional lines between inpatient and outpatient care.",
+    "bylines": [
+        {
+            "by": "By STEVE KARNOWSKI",
+            "title": "Associated Press"
+        }
+    ],
+    "located": "MINNEAPOLIS",
+    "datelinelocation": {
+        "city": "Minneapolis",
+        "countryareacode": "MN",
+        "countryareaname": "Minnesota",
+        "countrycode": "USA",
+        "countryname": "United States",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                -93.26384,
+                44.97997
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2023 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "mayo clinic new campus expansion minnesota"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "a",
+            "name": "a"
+        },
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "26cd59a20a2545e1bd23fbc73d7f69d1",
+            "name": "Gene therapy",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 32
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "7077b3c88b6b10048b67a385cd5ce603",
+            "name": "Medical technology",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 77
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 64
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Editorial",
+            "editorial_subject": "Health",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "743b1360b91a49749e5929840a472016",
+            "name": "Rochester",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "9f12355082c4100486addf092526b43e"
+            ],
+            "locationtype": {
+                "code": "9d26a20b35f0484a891740f8189d4c7b",
+                "name": "City"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -92.4699,
+                    44.02163
+                ]
+            },
+            "relevance": 90,
+            "parentnames": [
+                "Minnesota"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "9f12355082c4100486addf092526b43e",
+            "name": "Minnesota",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -94.25055,
+                    46.25024
+                ]
+            },
+            "relevance": 54,
+            "parentnames": [
+                "United States"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "9f12355082c4100486addf092526b43e",
+            "name": "Minnesota",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661850e07d5b100481f5c076b8e3055c",
+            "name": "Latin America and Caribbean",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "associations": {
+        "1": {
+            "altids": {
+                "itemid": "d6a6eaf58e8a45639612b88c479936fe"
+            },
+            "type": "picture"
+        }
+    },
+    "body_nitf": "<p>MINNEAPOLIS (AP) \u2014 The Mayo Clinic announced a $5 billion expansion plan for its flagship campus Tuesday that includes new buildings designed so they can evolve and expand as patient needs change over the coming decades.</p><p>The project is part of a Mayo strategy to transform both patient care and its campus in downtown Rochester, about 80 miles (130 kilometers) southeast of Minneapolis. This <a href=\"https://www.pbs.org/kenburns/the-mayo-clinic/a-short-history-of-the-mayo-clinic\">storied hospital</a> is known for its patient care as well as scientific breakthroughs in cancer and gene therapies. It draws <a href=\"https://apnews.com/c93d1c414fb8d11e9a894db8318a02c7\">patients from around the world.</a></p><p>A key to it will be the creation of \u201cneighborhoods\u201d within the new facilities, where patients can go for all the services they need for their particular condition, such as cancer, without needing to be shuttled between various departments. Another component of that strategy will be integrating in-person and virtual visits, and taking advantage of <a href=\"https://apnews.com/article/ai-chatbots-racist-medicine-chatgpt-bard-6f2a330086acd0a1f8955ac995bdde4d\">artificial intelligence</a>, including to accelerate the development of new cures.</p><p>The idea is to blur the traditional lines between inpatient and outpatient care, and between digital and in-person care, Dr. <a href=\"https://apnews.com/6cbd1d20b52642b3a82ca2f6cdb2b9d0\">Gianrico Farrugia, Mayo's CEO,</a> said in an interview. That requires rethinking how the buildings themselves are designed, he said.</p><p>\u201cThis is not about making a nicer facility,\" Farrugia said. \"This is making a place that will give a better outcome.\u201d</p><p>Announcing the project in a ceremony in Rochester Tuesday, Farrugia called it Mayo's biggest and most ambitious investment in a 160-year history of innovation. He said their vision is for more than just creating better spaces for patients and staff.</p><p>\u201cWe know that for overall health care transformation, indeed even for digital innovation to thrive in health care, we also need new types of health care buildings,\" he said at the ceremony attended by Gov. Tim Walz. \"Across the country we\u2019re providing 21st century care in 20th century buildings. It is simply, by far, not good enough.\u201d</p><p>Mayo will add five new buildings with 2.4 million square feet (223,000 square meters) of space as part of the project. They\u2019ll be designed so their spaces can be easily converted to new uses when needs change, such as from patient rooms to operating rooms.</p><p>Much of that space will be in two new clinical buildings at the center of campus. Each will have nine floors but they'll be as tall as a more conventional 16-story building, and they'll be designed strong enough so that more floors could be added in the future. Skyways and tunnels will connect the new facilities with existing buildings.</p><p>\u201cWe\u2019re not building buildings with the purpose of putting bricks and mortar together,\" Dr. Craig Daniels, the initiative leader, said at the ceremony. \"We make this investment to continue our mission, to serve the needs of our patients by being their source of hope and healing.\u201d</p><p>Mayo, an independent nonprofit, is funding the project with its own revenue sources as part of its long-term plans and will not ask for government money, Farrugia said in the interview. Most construction will begin in early 2024. Some facilities are expected to begin operating as early as 2028, with completion projected for 2030.</p><p>Farrugia said Mayo hopes the new facilities will \"serve as an example for what a global health care facility should look like.\u201d</p><p>Walz praised the plan, saying Mayo's investment will foster \u201cbold innovation\u201d that will extend \u201cworld-class health care to every corner of the globe.\u201d</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/mayo-clinic-new-campus-expansion-minnesota-d5f3d85c159471716c0ed3254bb40606",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 5,
+            "reason": "The document discusses a significant expansion of the Mayo Clinic's Minnesota campus, focusing on improvements in patient care, integration of new technologies like artificial intelligence, and the creation of new healthcare facilities. These topics are directly related to health, as they involve advancements in healthcare infrastructure, patient services, and medical innovation. The document provides detailed information on how these changes aim to transform healthcare delivery, which is highly relevant to the topic of health."
+        }
+    }
+}

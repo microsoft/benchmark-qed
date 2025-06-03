@@ -1,0 +1,388 @@
+﻿{
+    "altids": {
+        "itemid": "7518534f7ae8deccec6836f6b5d0a9af",
+        "etag": "7518534f7ae8deccec6836f6b5d0a9af_0a4aza0c0",
+        "friendlykey": "795248590101",
+        "referenceid": "Not-Real-News"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Analysis",
+    "language": "en",
+    "versioncreated": "2024-01-19T16:50:48Z",
+    "firstcreated": "2024-01-19T16:50:47Z",
+    "editorialrole": "FullStory",
+    "fixture": {
+        "code": "384befa3d90e4e2db11d99e2a275e982",
+        "name": "AP Fact Check"
+    },
+    "pubstatus": "usable",
+    "ednote": "Eds: UPDATES: Updates Media.",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "Not-Real-News",
+    "headline": "NOT REAL NEWS: A look at what didn't happen this week",
+    "headline_extended": "Social media users shared a range of false claims this week",
+    "slugline": "BC-Not-Real-News",
+    "description_summary": "Social media users shared a range of false claims this week. Here are the facts: A contagion known as Disease X is not real. It is the name given to a hypothetical pathogen that is being used to help plan for future health crises. A New York City high school was used to house migrants during a storm, but only for one night. In-person learning resumed after classes were remote for one day. Watermelon mugs being sold by Starbucks are part of its U.K. summer promotion, not a sign of the company's support for Palestinians amid the Israel-Hamas war. They went on sale in May.",
+    "bylines": [
+        {
+            "by": "By MELISSA GOLDIN",
+            "title": "Associated Press"
+        }
+    ],
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "fact check misinformation disease X migrants watermelon"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "person": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "c3ba4c5a42054de4818ea01587134771",
+            "name": "Eric Adams",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "POLITICIAN",
+                "PERSON"
+            ],
+            "relevance": 33
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "a",
+            "name": "a"
+        },
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "065a58daaec54ecfa0c62988b73f8e2b",
+            "name": "Zika virus",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 31
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "c8e409f8858510048872ff2260dd383e",
+            "name": "Business",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 77
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "c6ae21e2335a47acb3fe5c938213ad1b",
+            "name": "Israel-Hamas war",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 92
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "ee483cc088711004894aeb2e0e616f0b",
+            "name": "Social media",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 68
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "52352e8888e910048f21f8851349f9bd",
+            "name": "Marketing and advertising",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 31
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "8783d248894710048286ba0a2b2ca13e",
+            "name": "Climate and environment",
+            "creator": "Editorial",
+            "editorial_subject": "Climate and environment",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "organisation": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "943c51b72eea4d1a825098c1a6fb409e",
+            "name": "Hamas",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 60
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "fb0d105df9784b49a4c10ae5f0adb062",
+            "name": "Starbucks Corp",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "symbols": [
+                {
+                    "ticker": "SBUX",
+                    "exchange": "NASDAQ",
+                    "instrument": "NASDAQ:SBUX"
+                }
+            ],
+            "relevance": 72
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cf4760ca71884000913cb9e399f9c55b",
+            "name": "X Corp.",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "industries": [
+                {
+                    "code": "6fd7e1aa975ef14a80f93a1da7d78c3a",
+                    "name": "Information technology"
+                }
+            ],
+            "relevance": 42
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "661effd07d5b1004829cc076b8e3055c",
+            "name": "Brazil",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661908787d5b10048204c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "01f56e0e654841eca2e69bf2cbcc0526",
+                "name": "Nation"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -55,
+                    -10
+                ]
+            },
+            "relevance": 43,
+            "parentnames": [
+                "South America"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "66219fb07d5b100482e2c076b8e3055c",
+            "name": "United Kingdom",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661850e07d5b100481f4c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "01f56e0e654841eca2e69bf2cbcc0526",
+                "name": "Nation"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -4,
+                    54
+                ]
+            },
+            "relevance": 49,
+            "parentnames": [
+                "Europe"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "661dcb387d5b1004827fc076b8e3055c",
+            "name": "Israel",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661850e07d5b100481f6c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "01f56e0e654841eca2e69bf2cbcc0526",
+                "name": "Nation"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    34.75,
+                    31.5
+                ]
+            },
+            "relevance": 55,
+            "parentnames": [
+                "Middle East"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "b836d07082c610048807df092526b43e",
+            "name": "New York City",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "b58f18a082c6100487fbdf092526b43e"
+            ],
+            "locationtype": {
+                "code": "9d26a20b35f0484a891740f8189d4c7b",
+                "name": "City"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -74.00597,
+                    40.71427
+                ]
+            },
+            "relevance": 70,
+            "parentnames": [
+                "New York"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "b836d07082c610048807df092526b43e",
+            "name": "New York City",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "associations": {
+        "1": {
+            "altids": {
+                "itemid": "9d617273156d4ecb980f3cf72df5c416"
+            },
+            "type": "picture"
+        },
+        "2": {
+            "altids": {
+                "itemid": "cc2a4b072fd94c53a8a44ce26d391f9f"
+            },
+            "type": "picture"
+        },
+        "3": {
+            "altids": {
+                "itemid": "98883ca615b74d3680e7066fe79aa9b8"
+            },
+            "type": "picture"
+        }
+    },
+    "body_nitf": "<p>A roundup of some of the most popular but completely untrue stories and visuals of the week. None of these are legit, even though they were shared widely on social media. The Associated Press checked them out.</p><p>___</p><p><a href=\"https://apnews.com/article/fact-check-disease-x-davos-world-economic-forum-496804566435\">A panel of healthcare experts discussed \u2018Disease X\u2019 at Davos. But it\u2019s only a hypothetical illness</a></p><p>CLAIM: A deadly contagion known as Disease X is emerging and under discussion at the World Economic Forum\u2019s 2024 annual meeting in Davos, Switzerland.</p><p>THE FACTS: Disease X is not real. It is the name given to a hypothetical pathogen that is being used to help plan for future health crises. Global healthcare experts this week spoke on <a href=\"https://www.weforum.org/events/world-economic-forum-annual-meeting-2024/sessions/preparing-for-a-disease-x/\">a WEF panel</a> called \u201cPreparing for Disease X.\u201d The name was coined by the World Health Organization in 2018. In the days leading up to Wednesday\u2019s panel on the topic, social media users began sharing a range of posts misrepresenting Disease X as real, and portraying it as an imminent threat to society. \u201cDisease X is the mystery contagion that the World Economic Forum is having a meeting about TODAY!\u201d reads one Instagram post that had received more than 2,000 likes as of Thursday before it was deleted. \u201cApparently it \u2018could have 20 times more fatalities than COVID.\u2019 Remember\u2026 they always tell us what\u2019s coming.\u201d But Disease X is not an actual illness. The WHO introduced the concept as part of its 2018 <a href=\"https://www.who.int/activities/prioritizing-diseases-for-research-and-development-in-emergency-contexts\">list of diseases</a> that pose the greatest public health risk. The information helps guide global research and development in areas such as vaccines, tests and treatments. Disease X represents a hypothetical pathogen that could one day cause an epidemic or pandemic, according to a 2022 announcement about the WHO\u2019s intent to update its list. An <a href=\"https://cdn.who.int/media/docs/default-source/blue-print/first-annual-review-of-diseases-prioritized-under-r-and-d-blueprint.pdf?sfvrsn=1f6b5da0_4\">initial version</a> of the list, which did not include Disease X, was published in 2017 and another update is planned for <a href=\"https://www.who.int/teams/blueprint/who-r-and-d-blueprint-for-epidemics\">the first half of 2024</a>. Actual diseases on the current list include COVID-19, Zika, Ebola and SARS, among others. \u201cTargeting priority pathogens and virus families for research and development of countermeasures is essential for a fast and effective epidemic and pandemic response,\u201d Dr. Michael Ryan, executive director of the WHO\u2019s Health Emergencies Programme, said in the 2022 press release. Asked for comment on false claims about Disease X, the WHO sent The Associated Press an updated copy of the release, which was nearly identical to the one from 2022. The Davos <a href=\"https://www.weforum.org/events/world-economic-forum-annual-meeting-2024/sessions/preparing-for-a-disease-x/\">panel</a> discussing Disease X on Wednesday featured global healthcare leaders, including WHO Director-General Tedros Adhanom Ghebreyesus; N\u00edsia Trindade, Brazil\u2019s minister of health; and Nancy Brown, CEO of the American Heart Association.</p><p>___</p><p><a href=\"https://apnews.com/article/fact-check-house-migrants-school-shut-down-673190116310\">Migrants in NYC were temporarily housed in a local school during a storm. The school has not shut down</a></p><p>CLAIM: A New York City high school was shut down to house migrants who entered the U.S. illegally.</p><p>THE FACTS: News that migrants living in a temporary shelter at Floyd Bennett Field, a former airport, <a href=\"https://apnews.com/article/new-york-migrants-brooklyn-floyd-bennett-field-5a1c7c5b31b60731150d81e7b456e55c\">would wait out out a storm</a> at James Madison High School led to false claims on social media that the move would be long term. Nearly 2,000 migrants housed in tents at the Brooklyn shelter <a href=\"https://apnews.com/article/new-york-migrants-brooklyn-floyd-bennett-field-5a1c7c5b31b60731150d81e7b456e55c\">were moved temporarily</a> to the high school in the borough\u2019s Midwood neighborhood on the evening of Jan. 9. All of the migrants <a href=\"https://twitter.com/Fabien_Levy/status/1745068800989376954\">had left the school</a> by early the next morning. Classes were <a href=\"https://www.facebook.com/JMHSBklyn/posts/pfbid0fAYERuQR6hcG4SiSyEg3fubfjbtyjujBy9XFDqkNWct22g5BVZAxhCBhSgVdFWGcl\">held remotely</a> on Jan. 10 and <a href=\"https://www.facebook.com/JMHSBklyn/posts/pfbid035MZTrMatRwzcD97M9cTcK5PFtKHgbRoaCDJgLiWM5SiiL7eNEJHrpiyVjRQas3Rgl\">resumed in person</a> the next day. \u201c(Heart)BREAKING: New York has shut down a highschool so that it can become a shelter for illegal aliens,\u201d reads one post on X, formerly Twitter. But the move <a href=\"https://www.nyc.gov/site/em/about/press-releases/20240109_pr_nycem-NYCEM-Updates-Travel-Advisory-For-Winter-Storm.page\">was temporary</a>, the migrants were at James Madison High School for less than 12 hours. \u201cTo be clear, this relocation is a proactive measure being taken out of an abundance of caution to ensure the safety and well-being of individuals working and living at the center,\u201d Kayla Mamelak, a spokesperson for New York City Mayor Eric Adams, <a href=\"https://apnews.com/article/immigration-migrant-families-nyc-hotels-eviction-2695569da82a91c9f802108919b28c71\">said in a statement</a> on Jan. 9, referencing the Floyd Bennett Field shelter. \u201cThe relocation will continue until any weather conditions that may arise have stabilized and the facility is once again fit for living.\u201d Aries Dela Cruz, a spokesperson for the New York City Office of Emergency Management, told The Associated Press that migrants began loading onto buses at Floyd Bennett Field at about 4:50 p.m. on Jan. 9 and arrived at the school starting about 5:30 p.m. The last buses arrived about 8 p.m. Some families arrived on their own after hearing about the relocation. The agency wrote on X that the migrants <a href=\"https://twitter.com/nycemergencymgt/status/1745030840470389101\">had all returned</a> to Floyd Bennett Field by 4:27 a.m. on Wednesday, after winds had subsided. Fabien Levy, another Adams spokesperson, <a href=\"https://twitter.com/Fabien_Levy/status/1745068800989376954\">wrote on X</a> Wednesday that \u201cas the rain died down early this AM, we were able to move all the migrants out of James Madison High School by 4:15 this morning, and all headed back to Floyd Bennett Field.\u201d James Madison High School wrote in a Facebook post late Tuesday that <a href=\"https://www.facebook.com/JMHSBklyn\">all classes would be remote</a> the next day. Regular in-person instruction resumed the next day. The decision to house migrants at James Madison High School led to widespread anger, including <a href=\"https://www.brooklynpaper.com/midwood-high-school-migrant-shelter-protest/\">a protest</a> outside the school and a bomb threat directed at the institution. But Adams stressed at a press conference on Jan. 10 that using schools in emergency situations <a href=\"https://twitter.com/NYCMayor/status/1745160394040037407\">was nothing new</a>.</p><p>___</p><p><a href=\"https://apnews.com/article/fact-check-starbucks-watermelon-mug-palestinians-boycott-845661004904\">Starbucks\u2019 watermelon mug was part of its UK summer collection, not a show of support for Palestinians</a></p><p>CLAIM: Starbucks has begun selling a watermelon mug to signal its support for Palestinians amid the Israel-Hamas war and appease those boycotting the chain.</p><p>THE FACTS: The mug was part of Starbucks\u2019 U.K. summer collection, which launched in May 2023, months before the conflict broke out, a company spokesperson told The Associated Press. Starbucks, as well as many customers, featured the mug in <a href=\"https://www.facebook.com/starbucksuk/posts/pfbid02s64SMrbzpbKQ9QM3fJN84FgkJxFTbXHdBm6ZtjjNxXc2kcSWt26Sd9RxS8toueUxl\">social</a><a href=\"https://www.instagram.com/reel/Cr2vJKzsqJf/?utm_source=ig_web_copy_link\">media</a><a href=\"https://www.tiktok.com/@groetjes.tamara/video/7244959708619050267?_r=1&_t=8j71mIYjt1P&social_sharing=0\">posts</a> around that time. While fighting continues in the third month of the <a href=\"https://apnews.com/hub/israel-hamas-war\">Israel-Hamas war</a>, some on social media are falsely claiming that Starbucks is selling the watermelon mug to mitigate damage caused by <a href=\"https://apnews.com/article/starbucks-war-palestinians-israel-boycott-labor-3b1165fc74ed181a4a5dad2106779922\">a boycott</a> of the company over the conflict. Posts spreading online include photos and videos of the mug, which features a watermelon design on each side \u2014 green on the bottom with a white stripe through the middle and red with black seeds near the rim. \u201cit\u2019s giving \u2018we\u2019re so sorry pls come\u2019,\u201d reads one post on X, formerly Twitter, that had received approximately 58,000 likes and more than 18,600 shares as of Friday. \u201cy\u2019all ain\u2019t fooling us. we still boycotting.\u201d But the mug has nothing to do with the Israel-Hamas war and was launched months before the fighting began, according to Jaci Anderson, a Starbucks spokesperson. Any stores still selling the product would simply have leftover stock from its May 2023 release, Anderson said. The mug can be seen in social media posts from around the time it became available for purchase. A June 22 post on Starbucks\u2019 U.K. Facebook page, for example, shows the mug as part of a <a href=\"https://www.facebook.com/photo/?fbid=10160981968114254&set=pcb.10160981970374254\">beach picnic</a>. Multiple TikTok users <a href=\"https://www.tiktok.com/@chelsea.salt/video/7229606863178845445?q=starbucks%20summer%20merch&t=1705522115312\">posted</a><a href=\"https://www.tiktok.com/@groetjes.tamara/video/7244959708619050267?_r=1&_t=8j71mIYjt1P&social_sharing=0\">videos</a>, starting in May, that showed the watermelon mug among the company\u2019s other summer merchandise. Colors found in a slice of watermelon, the green and white rind, red pulp and black seeds, also appear in the Palestinian flag. For years watermelon has been used as a sign of defiance against Israeli actions. Watermelon imagery has more recently <a href=\"https://apnews.com/article/israel-palestinians-gaza-watermelon-symbol-protests-832c9a21b82015356f0ef99d17df2633\">become a symbol of solidarity</a> in protests against the Israel-Hamas war, particularly where displaying the flag has been banned. In October, Starbucks <a href=\"https://apnews.com/article/starbucks-workers-united-union-lawsuit-israel-palestinian-f212a994fef67f122854a4df7e5d13f5\">sued Workers United</a> \u2014 the union organizing its employees \u2014 over a pro-Palestinian message on social media that used Starbucks\u2019 name and a circular green logo resembling that of the coffee chain, saying that customers might be confused about its origin. <a href=\"https://stories.starbucks.com/uploads/2023/12/Starbucks-v.-Workers-United-First-Amended-Complaint.pdf\">The lawsuit</a> was refiled in November, adding language about workers\u2019 rights to express political views and emphasizing a desire to protect worker safety and Starbucks\u2019 reputation. Starbucks has not taken an official stance on the conflict, but those boycotting the chain have said they <a href=\"https://apnews.com/article/starbucks-war-palestinians-israel-boycott-labor-3b1165fc74ed181a4a5dad2106779922\">see this</a> as a failure to offer more support to the people of Gaza. <a href=\"https://stories.starbucks.com/press/2023/what-has-starbucks-said-about-the-conflict-in-israel-and-gaza/\">The company says</a> of its position on the war: \u201c Starbucks stands for humanity. We condemn violence, the loss of innocent life and weaponized speech. Despite false statements spread through social media, we have no political agenda.\u201d</p><p>___</p><p>Find AP Fact Checks here: <a href=\"https://apnews.com/APFactCheck\">https://apnews.com/APFactCheck</a></p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/fact-check-misinformation-disease-x-migrants-watermelon-7518534f7ae8deccec6836f6b5d0a9af",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 3,
+            "reason": "The document contains multiple fact-checks on various topics, but only one section is directly related to health. This section discusses 'Disease X,' a hypothetical pathogen used for planning future health crises. While this part is relevant to health, the rest of the document covers unrelated topics such as migrants in NYC and a Starbucks mug. Therefore, the overall relevance to the health topic is limited."
+        }
+    }
+}

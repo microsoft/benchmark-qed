@@ -1,0 +1,201 @@
+﻿{
+    "altids": {
+        "itemid": "aa2bd7fda0b88b5883ad1e0fe2e02d76",
+        "etag": "aa2bd7fda0b88b5883ad1e0fe2e02d76_0a2aza0c0",
+        "friendlykey": "576421281622",
+        "referenceid": "WI--Editorial Rdp"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Opinion",
+    "language": "en",
+    "versioncreated": "2024-01-24T12:10:41Z",
+    "firstcreated": "2024-01-24T03:39:58Z",
+    "editorialrole": "FullStory",
+    "fixture": {
+        "code": "21ea4067bb274c3b805353fb2b99ba70",
+        "name": "Editorial Roundup"
+    },
+    "pubstatus": "usable",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "WI--Editorial Rdp",
+    "headline": "Editorial Roundup: Wisconsin",
+    "slugline": "AP-WI--Editorial Rdp",
+    "bylines": [
+        {
+            "by": "By The Associated Press"
+        }
+    ],
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "Editorial Rdp"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "person": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "1dc502af06274725a9b6a9f2c5856e90",
+            "name": "Tony Evers",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "POLITICIAN",
+                "PERSON"
+            ],
+            "relevance": 49
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a328daf6767245f18a263276f2e111f3",
+            "name": "Marijuana",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 58
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86aad5207dac100488ecba7fa5283c3e",
+            "name": "Politics",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 74
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "organisation": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "d4b82a78857310048a38ff2260dd383e",
+            "name": "United States Senate",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 38
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "bf6e2e80760d10048f8ae6e7a0f4673e",
+            "name": "U.S. Republican Party",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 38
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "1bc1bc3082c81004896cdf092526b43e",
+            "name": "Wisconsin",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -90.00041,
+                    44.50024
+                ]
+            },
+            "relevance": 87,
+            "parentnames": [
+                "United States"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "1bc1bc3082c81004896cdf092526b43e",
+            "name": "Wisconsin",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "body_nitf": "<p>Eau Claire Leader-Telegram. January 21, 2024.</p><p>Editorial: Start negotiating</p><p>Earlier this session it appeared the Wisconsin Legislature had come around on the concept of medical marijuana. It\u2019s something that is overwhelmingly favored by Wisconsin residents, and the public support isn\u2019t fading.</p><p>Legislative support? That may be a different question. Now we have a standoff between Assembly Speaker Robin Vos and Senate Majority Leader Devin LeMahieu.</p><p>Vos supports a proposal he said was the result of \u201cmonths and months of negotiations\u201d which includes state-run dispensaries for medical marijuana. He says it has the votes to pass.</p><p>LeMahieu called the dispensaries a \u201cnonstarter,\u201d vowing state-owned facilities are a dealbreaker in advancing any legislation to a Senate vote.</p><p>Both Vos and LeMahieu are Republicans and the party has strong control over the Legislature. This isn\u2019t an inter-party dispute between Republicans and Democrats. In fact, Democratic Gov. Tony Evers appears prepared to sign the bill despite the fact it falls far short of what he has publicly called for.</p><p>Our message to the Republican leadership is simple: Guys, don\u2019t muck this up.</p><p>Wisconsin is already an outlier compared to the rest of the nation on this issue. Some 38 states allow medical marijuana. That\u2019s three-quarters of the country. That, interestingly, is the same high bar required for passage of a Constitutional amendment.</p><p>We\u2019re not suggesting such an amendment here. We\u2019re referencing that process only to display how far out of synch Wisconsin is right now with the rest of the states.</p><p>But being out of step with the other states on an issue like this isn\u2019t necessarily a problem for politicians. Being out of step with constituents is another matter, and the legislators blocking bills along these lines are definitely in that territory.</p><p>It\u2019s tempting to see this standoff as yet another instance of politicians drawing a line in the sand and saying \u201cIf I don\u2019t get everything I want, nobody gets anything.\u201d We\u2019re not sure it goes to quite that length, but it\u2019s uncomfortably close to such a stance.</p><p>This isn\u2019t, at least publicly, negotiation. It\u2019s not even really a discussion. It\u2019s two powerful figures setting forth their positions with little indication they\u2019re willing to budge.</p><p>It\u2019s not the way students are taught government works, either. In those lessons, one side of the legislature passes a bill, sending it to the other. That bill is debated, possibly amended, and voted on. If the bill is unchanged and passes, it goes to the executive for a signature or veto. If an amended version passes the two bodies try to hammer out an agreement and, if one is reached, that new bill is sent to both sides for a vote. If the bill is approved on one side but not the other, in either scenario, it\u2019s dead.</p><p>Nowhere in those classroom lessons was there a suggestion that good government depends on the whims of a single person, or that both sides have to approve of a bill before it can be presented by either chamber.</p><p>We would suggest the question Vos and LeMahieu should be asking is not whether the dispensaries should be state-owned and run. It\u2019s whether they value being seen as officials who are capable of behaving as if they\u2019re capable of leading. Emphasizing an all-or-nothing approach fails that test.</p><p>Our system of government inevitably leads to some legislative leaders occupying powerful positions. That\u2019s built in. But when those people lose sight of the very concept of compromise, the system ceases to function well. We\u2019ve seen that in ongoing fighting between parties. We don\u2019t need to see it expand to preventing the parties themselves from functioning.</p><p>END</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/aa2bd7fda0b88b5883ad1e0fe2e02d76",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 3,
+            "reason": "The document discusses the political standoff in the Wisconsin Legislature regarding the legalization of medical marijuana. While medical marijuana is a health-related issue, the focus of the document is primarily on the political dynamics and negotiations between legislative leaders rather than on health aspects or implications of medical marijuana itself. Therefore, the document is somewhat relevant to the topic of health but not highly focused on it."
+        }
+    }
+}

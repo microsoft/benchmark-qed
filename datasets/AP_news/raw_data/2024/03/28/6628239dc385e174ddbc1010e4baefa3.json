@@ -1,0 +1,271 @@
+﻿{
+    "altids": {
+        "itemid": "6628239dc385e174ddbc1010e4baefa3",
+        "etag": "6628239dc385e174ddbc1010e4baefa3_1a13aza0c0",
+        "friendlykey": "273187778601",
+        "referenceid": "US--Fort Wayne Mayor-Cancer"
+    },
+    "version": 1,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2024-03-29T02:18:01Z",
+    "firstcreated": "2024-03-28T21:32:24Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "ednote": "Eds: MAJOR UPDATE: Updates with Henry' death. Expands audience. UPDATES: Updates Media.",
+    "editorialtypes": [
+        "Lead"
+    ],
+    "signals": [
+        "newscontent"
+    ],
+    "title": "US--Fort Wayne Mayor-Cancer",
+    "headline": "Fort Wayne Mayor Tom Henry dies after medical emergency amid cancer battle",
+    "headline_extended": "Fort Wayne Mayor Tom Henry has died a day after after experiencing a medical emergency related to his stomach cancer",
+    "slugline": "BC-US--Fort Wayne Mayor-Cancer, 1st Ld-Writethru",
+    "description_summary": "Fort Wayne Mayor Tom Henry has died a day after after experiencing a medical emergency related to his stomach cancer. He was 72. The announcement from his office that he had \u201cpassed away peacefully\u201d Thursday came just hours after Henry\u2019s family issued a statement saying he had entered hospice care after suffering a medical emergency. Henry announced his diagnosis of late-stage stomach cancer on Feb. 26 during a news conference. He began chemotherapy at the beginning of March. Henry was elected in November to his fifth term as mayor of Indiana\u2019s second most populous city with about 270,000 residents. Henry\u2019s wife, Cindy, died at age 67 on Jan. 20 after battling pancreatic cancer for more than a year.",
+    "located": "FORT WAYNE, Ind.",
+    "datelinelocation": {
+        "city": "Fort Wayne",
+        "countryareacode": "IN",
+        "countryareaname": "Indiana",
+        "countrycode": "USA",
+        "countryname": "United States",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                -85.12886,
+                41.1306
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "Fort Wayne mayor hospice medical emergency"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "person": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "4478dc024dc543f38b3c3b4234d03d80",
+            "name": "Tom Henry",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "POLITICIAN",
+                "PERSON"
+            ],
+            "relevance": 94
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "a",
+            "name": "a"
+        },
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "p",
+            "name": "p"
+        },
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "79f1fae08359100489f8df583201d303",
+            "name": "Chemotherapy",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 37
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 77
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86aad5207dac100488ecba7fa5283c3e",
+            "name": "Politics",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 51
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e22524b87de410048f91df092526b43e",
+            "name": "Cancer",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 63
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "86aad5207dac100488ecba7fa5283c3e",
+            "name": "Politics",
+            "creator": "Editorial",
+            "editorial_subject": "Politics",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "fb2205e7c39c457e98571d5245d22a46",
+            "name": "Fort Wayne",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "0760000082b2100483c7df092526b43e"
+            ],
+            "locationtype": {
+                "code": "9d26a20b35f0484a891740f8189d4c7b",
+                "name": "City"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -85.12886,
+                    41.1306
+                ]
+            },
+            "relevance": 89,
+            "parentnames": [
+                "Indiana"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "0760000082b2100483c7df092526b43e",
+            "name": "Indiana",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "dcb000c082c610048843df092526b43e",
+            "name": "Ohio",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661850e07d5b100481f5c076b8e3055c",
+            "name": "Latin America and Caribbean",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "associations": {
+        "1": {
+            "altids": {
+                "itemid": "b9a43b27cfeb4dbab3b54a3f3a1cfe23"
+            },
+            "type": "picture"
+        }
+    },
+    "body_nitf": "<p>FORT WAYNE, Ind. (AP) \u2014 Fort Wayne Mayor Tom Henry died Thursday, a day after after experiencing a medical emergency related to his stomach cancer. He was 72.</p><p>The announcement from his office that the Democratic mayor had \u201cpassed away peacefully\u201d came just hours after Henry\u2019s family issued a statement saying he had entered hospice care after suffering a medical emergency.</p><p>\u201cMayor Henry was a man of the highest character \u2013 a true servant leader who devoted his entire adult life to the betterment of Fort Wayne and its residents. He was also the best dad a son or daughter could ask for,\u201d the announcement from his spokesperson John Perlich said.</p><p>The earlier announcement from Henry's family said he was privately transported to a hospital where the mayor and his family consulted at length with his medical team, including his oncologist.</p><p>\u201cAfter careful consideration of the risks associated with surgical intervention, Mayor Henry has opted for comfort measures at this time. He is resting comfortably under the care of extremely skilled hospice nurses,\u201d the statement said.</p><p>Henry announced his diagnosis of late-stage stomach cancer on Feb. 26 during a news conference. He began chemotherapy at the beginning of March.</p><p>\u201cMy initial scans have shown that the cancer is currently spreading through my lymph nodes and other organs,\u201d Henry said at the time. \u201cTherefore, my prognosis is not exactly encouraging.\u201d</p><p>Henry was elected in November to his fifth term as mayor of Indiana\u2019s second most populous city with about 270,000 residents. Henry\u2019s wife, Cindy, died at age 67 on Jan. 20 after battling pancreatic cancer for more than a year.</p><p>Henry pleaded guilty in November 2022 to operating a vehicle while intoxicated endangering a person, had his license suspended for 90 days and received <a href=\"https://apnews.com/article/indiana-fort-wayne-tom-henry-government-and-politics-3f31dab7e6286b079ca98c97955fd8a3\">a suspended one-year jail sentence</a>. He was arrested the month before with a blood-alcohol nearly twice Indiana\u2019s legal limit.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/fort-wayne-mayor-hospice-medical-emergency-6628239dc385e174ddbc1010e4baefa3",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 3,
+            "reason": "The document primarily focuses on the death of Fort Wayne Mayor Tom Henry, his battle with stomach cancer, and his recent medical emergency. While it does touch on health-related issues such as cancer diagnosis, treatment, and hospice care, the main focus is on the personal and political aspects of his life and death rather than health information or advice. Therefore, it is somewhat relevant to the topic of health but not highly so."
+        }
+    }
+}

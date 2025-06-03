@@ -1,0 +1,217 @@
+﻿{
+    "altids": {
+        "itemid": "f64c03f6af3c63b1066d6c5991209147",
+        "etag": "f64c03f6af3c63b1066d6c5991209147_0a2aza0c0",
+        "friendlykey": "662802855105",
+        "referenceid": "SC--Editorial Rdp"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Opinion",
+    "language": "en",
+    "versioncreated": "2023-12-07T12:10:40Z",
+    "firstcreated": "2023-12-06T23:06:26Z",
+    "editorialrole": "FullStory",
+    "fixture": {
+        "code": "21ea4067bb274c3b805353fb2b99ba70",
+        "name": "Editorial Roundup"
+    },
+    "pubstatus": "usable",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "SC--Editorial Rdp",
+    "headline": "Editorial Roundup: South Carolina",
+    "slugline": "BC-SC--Editorial Rdp",
+    "bylines": [
+        {
+            "by": "By The Associated Press"
+        }
+    ],
+    "copyrightnotice": "Copyright 2023 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "Editorial Rdp"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 60
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "6cd98adfc84d405eadec8ca81bd37df4",
+            "name": "Access to health care",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 40
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "c01d179082c610048813df092526b43e",
+            "name": "North Carolina",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -80.00032,
+                    35.50069
+                ]
+            },
+            "relevance": 52,
+            "parentnames": [
+                "United States"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "788b364882f110048df3df092526b43e",
+            "name": "District of Columbia",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "9d26a20b35f0484a891740f8189d4c7b",
+                "name": "City"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -77.00025,
+                    38.91706
+                ]
+            },
+            "relevance": 74,
+            "parentnames": [
+                "United States"
+            ]
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "29d11ec082c7100488aedf092526b43e",
+            "name": "South Carolina",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -81.00009,
+                    34.00043
+                ]
+            },
+            "relevance": 90,
+            "parentnames": [
+                "United States"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "29d11ec082c7100488aedf092526b43e",
+            "name": "South Carolina",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "body_nitf": "<p>The State. December 6, 2023.</p><p>Editorial: On healthcare, NC has accepted what SC lawmakers continue to reject</p><p>As a long-time physician and public health advocate in Rock Hill, S.C., I am looking to our northern neighbors with envy. On Dec. 1, North Carolina closed the coverage gap and expanded Medicaid so that nearly 600,000 more people can now access affordable, quality healthcare.</p><p>South Carolina should take a cue from the Tar Heel state and follow in line as soon as possible.</p><p>As a South Carolina doctor who treated patients and worked in small hospital emergency rooms for over 35 years, I have witnessed the terrible impacts felt by our state\u2019s failure to close the coverage gap. Many of the people I\u2019ve treated fell into the gap because they earned too little to afford insurance and too much to qualify for Medicaid.</p><p>In fact, less than half of South Carolina employers offer health insurance to employees. These are hard-working people like church pastors, truck drivers, childcare workers, restaurant cooks and mental health therapists, who all want to support themselves and their families.</p><p>When I think back to my time working in the Chesterfield General Hospital emergency department, I think of the family who came in the middle of the night to have their 1-year-old treated for a painful ear infection and high fever. They delayed care for the child due to not having insurance. This caused a danger to the child and a financial burden to the hospital for having to cover the expensive overnight bill.</p><p>I also think of the construction worker who couldn\u2019t afford preventive care. He came in with a stroke-in-progress because his blood pressure was so high. A simple physical could\u2019ve caught his high blood pressure and treated him accordingly, without him ever having a stroke. Instead, he left the hospital disabled and unable to work anymore, due to never having access to care.</p><p>The resistance to closing the coverage gap in South Carolina is costing us all. Patients will have worse outcomes that still require care. Not to mention, our federal tax dollars currently fund Medicaid in other states without any of it benefiting our deserving people in the Palmetto State.</p><p>With North Carolina set to expand Medicaid, they will see hundreds of thousands of people gain access to crucial screenings that could catch cancer or diabetes early, cover ongoing treatments and save lives. It also means rural North Carolina hospitals have a better chance of staying open, now that patients have more coverage.</p><p>It means North Carolina stands to gain tens of thousands of jobs. And it means hundreds of thousands of people, many of them veterans, now have access to crucial mental health care.</p><p>These are all benefits North Carolina has accepted that South Carolina lawmakers continue to reject. That\u2019s why I am volunteering with the American Cancer Society Cancer Action Network and other health partners to advocate to close the coverage gap in our state.</p><p>___</p><p>Post and Courier. December 2, 2023.</p><p>Editorial: All wet? SC and its cities need a better grip on stormwater ponds</p><p>No one knows how many stormwater ponds are scattered across South Carolina, much less what condition they\u2019re in, whether they pose any health or environmental threat to their neighbors or whether they\u2019re not functioning as they should be as far as retaining stormwater runoff, if that\u2019s what they were designed to do in the first place.</p><p>Some were excavated before any permitting requirements, and the vast majority are on private property, though some have been well-maintained through homeowners associations or other groups given the authority to raise money for their occasional dredging and care.</p><p>That reality will not change overnight, but it should change over time, especially as these man-made ponds age. Specifically, state and municipal officials should start by compiling an inventory. This not only would provide an informed basis for future decisions on whether taxpayer dollars should be spent on assessing the ponds\u2019 conditions \u2014 particularly as far as their effect on local drainage, water quality and public health \u2014 but also would help determine how much public money, if any, should be spent to help fix problems with ponds that can be an essential part of public stormwater management.</p><p>When it comes to these ponds, it\u2019s been sort of the Wild West, but more people are seeking law and order. And their voices are expected to grow louder.</p><p>That\u2019s clear from two recent reports by The Post and Courier\u2019s Jonah Chester, who noted that the earliest of these ponds \u2014 created before today\u2019s permitting laws \u2014 exist in a <a href=\"https://www.postandcourier.com/rising-waters/oldest-sc-retention-ponds-unregulated/article_2b1d2230-6e98-11ee-a07a-0b10ee41ad6f.html\">regulatory no-man\u2019s land</a>, not unlike septic systems built on private property. Those septic systems need a permit from the state, but there\u2019s no follow-up as far as their proper maintenance and functioning, even as their effectiveness slowly erodes.</p><p>Many ponds were built before 1991, when South Carolina first adopted standards for them; 15 years later, larger local governments began to adopt their own regulations to comply with the federal Clean Water Act. A decade-old estimate from the South Carolina Sea Grant Consortium found more than 9,000 development-related stormwater ponds in the state\u2019s coastal counties, and the actual number is surely higher now. And that estimate sheds no light on their condition or relative importance in preventing flood damage during a heavy rain.</p><p>These ponds will continue to pose a greater challenge to their neighbors, particularly in situations where there is not an effective system in place to ensure regular maintenance. At some point, there might be a role for cities, even counties and the state, to address the most problematic conditions. But before that happens, they must know a lot more about what they might be getting into. What they do for one neighborhood\u2019s pond they must be willing to do for all other similar ponds in their jurisdiction.</p><p>The city of Charleston is right to proceed cautiously as far as helping with residents\u2019 request for dredging Lake Sandhurst in West Ashley. Again, <a href=\"https://www.postandcourier.com/environment/charleston-officials-navigate-murky-jurisdictional-waters-in-lake-sandhurst/article_778dd070-6910-11ee-b905-17632f6c79b2.html\">as Mr. Chester reported</a>, residents around Lake Sandhurst, which was created in the 1960s by building an earthen dam between a creek and the Ashley River, are facing a costly bill to dredge it and remove the soil that has eroded into it over time. The lake is privately owned and has been privately maintained to this point.</p><p>It\u2019s unclear whether dredging all of that lake or just part of it to enable stormwater to exit more quickly to the river, or gradually converting it from a lake to a wetland with native plants, would make the most sense. It\u2019s even less clear whether city government should pay for any of the above, partly because we know so little about what else is out there.</p><p>Today, developers are using other flood-control measures, including dry ponds (which only hold water after it rains), bioswales and rain gardens. All these are easier to maintain, as they don\u2019t involve dredging, drying out the spoil and hauling it off.</p><p>An inventory of stormwater ponds would be a good start on getting a handle on the size and scope of the current problem and provide a basis for future decisions.</p><p>___</p><p>Times and Democrat. December 5, 2023.</p><p>Editorial: S.C., 21 other states get bad news on obesity</p><p>Just in time for the holiday season, South Carolinians have some bad news on obesity.</p><p>The U.S. Centers for Disease Control and Prevention reports that new population data from 2022 show South Carolina and 21 other states have an adult obesity prevalence at or above 35%, compared to 19 states in 2021.</p><p>The other states with an adult obesity prevalence at or above 35% are: Alabama, Arkansas, Delaware, Georgia, Indiana, Iowa, Kansas, Kentucky, Louisiana, Mississippi, Missouri, Nebraska, North Dakota, Ohio, Oklahoma, South Dakota, Tennessee, Texas, Virginia, West Virginia and Wisconsin.</p><p>Just 10 years ago, no state had an adult obesity prevalence at or above 35%.</p><p>The 2022 data show that obesity impacts some groups more than others. There are notable differences by race and ethnicity, as shown by combined data from 2020-22. Among geographic groups (states, territories, or DC) with enough data, the number with an adult obesity prevalence of 35% or higher, by race/ethnicity, is:</p><p>\u2022 American Indian or Alaska Native adults: 33 (among 47 states)</p><p>\u2022 Asian adults: 0 (among 37 states, 1 territory, and DC)</p><p>\u2022 Black adults: 38 (among 48 states and DC)</p><p>\u2022 Hispanic adults: 32 (among 49 states, 2 territories, and DC</p><p>\u2022 White adults: 14 (among 49 states, 1 territory, and DC)</p><p>State-based adult obesity prevalence by race, ethnicity, and location is based on self-reported height and weight data from the Behavioral Risk Factor Surveillance System.</p><p>Adults with obesity are at increased risk for many other serious health conditions, including as heart disease, stroke, type 2 diabetes, some cancers, severe outcomes from COVID-19, and poor mental health. Additionally, people with obesity report being stigmatized because of their weight.</p><p>Dieting and watching what you eat may be the last topics about which you want to read during the holidays, but the advice by a veteran nutritional and biochemical expert in the U.S. health industry is worthy of note.</p><p>Dr. Susie Rockway says sticking to a low-calorie diet every day to lose weight is very difficult \u2013 and you may not have to.</p><p>She offers insight as a decades-long health industry expert. She has worked for multiple companies in executive capacities, including as an executive director of product development, a director of research and a manager for science developing health and wellness products, where she communicated nutrition and new science updates to consumers. She has also designed testing strategies for clinical efficacy studies.</p><p>\u201cStudies show you can lose 10 to 30 pounds in eight weeks through alternate-day fasting,\u201d Rockway says. \u201cEvery other day, dieters in the study ate only lunch \u2013 no breakfast or dinner \u2013 between noon and 2 p.m. The following day, they could eat whatever they wanted. Not only did they not \u2018gorge\u2019 as expected on the feed days, most had an easier time sticking with it.\u201d</p><p>In the alternate-day fast studies conducted by Dr. Krista Varady of the University of Illinois at Chicago, participants on average consumed only 110% of their energy needs on feed days, Rockway says. Lunch on fast days was 400 to 500 calories for women and 500 to 600 calories for men.</p><p>So here\u2019s advice on indulging your taste buds this holiday season while losing weight or maintaining a healthy weight.</p><p>Eat your bigger meals earlier in the day. Avoiding large meals at dinnertime is effective in helping to lose weight, particularly abdominal fat.</p><p>Don\u2019t belly up to a buffet bar. Whether it\u2019s a cheat meal or a cheat day, throw all those studies out the window if you gorge on huge quantities of food. Eat controlled portions of healthy, nutritious foods.</p><p>Include plenty of fiber and water (stay hydrated!). Unlike most nutrients in foods, we don\u2019t absorb fiber. It passes through our digestive tract, and if it\u2019s soluble fiber, it can help us feel full since it forms viscous gels. High-fiber foods include legumes, beans, avocados, nuts, whole fruits (vs. juice), and whole-grain foods such as whole wheat spaghetti. On a cheat day, you may splurge on a higher-fat hamburger or fries.</p><p>Healthy eating. Plan meals that are higher in lean protein and lower in simple carbohydrates. This will help you avoid a sugar spike that will leave you feeling hungry soon afterward. It also stabilizes your insulin levels, and protein foods are the most satiating.</p><p>There you have it. Eat up (kinda!) during the holiday season \u2013 but not every day during the season.</p><p>END</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/f64c03f6af3c63b1066d6c5991209147",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 4,
+            "reason": "The document contains three editorials, two of which are highly relevant to the topic of health. The first editorial discusses the healthcare coverage gap in South Carolina and the benefits of Medicaid expansion, which directly relates to health policy and access to healthcare. The third editorial addresses the issue of obesity in South Carolina and provides advice on weight management, which is also directly related to health. The second editorial, however, focuses on stormwater ponds and their management, which is not relevant to the topic of health. Despite this, the overall content of the document is predominantly focused on health-related issues."
+        }
+    }
+}

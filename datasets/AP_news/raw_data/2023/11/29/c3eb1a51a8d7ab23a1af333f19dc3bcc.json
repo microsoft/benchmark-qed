@@ -1,0 +1,261 @@
+﻿{
+    "altids": {
+        "itemid": "c3eb1a51a8d7ab23a1af333f19dc3bcc",
+        "etag": "c3eb1a51a8d7ab23a1af333f19dc3bcc_0a17aza0c0",
+        "friendlykey": "844152325195",
+        "referenceid": "US--Train Derailment-Kentucky"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2023-11-29T21:43:54Z",
+    "firstcreated": "2023-11-29T21:43:53Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "ednote": "Eds: UPDATES: With AP Photos.",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "US--Train Derailment-Kentucky",
+    "headline": "Lawsuit alleges negligence in train derailment and chemical fire that forced residents from homes",
+    "headline_extended": "A lawsuit filed in federal court is alleging negligence by CSX Transportation caused a train derailment and chemical fire that forced residents of a Kentucky town from their homes just before the Thanksgiving holiday",
+    "slugline": "BC-US--Train Derailment-Kentucky",
+    "description_summary": "A lawsuit filed in federal court is alleging negligence by CSX Transportation caused a train derailment and chemical fire that forced residents of a Kentucky town from their homes just before the Thanksgiving holiday. The train derailed Nov. 22 near Livingston, and residents who evacuated could only return to their homes that Thursday after the fire was extinguished. A CSX investigation found the derailment occurred after a wheel bearing on a train car failed. The lawsuit filed Wednesday said the derailment could have been prevented if CSX had monitored the train\u2019s wheel bearings more closely. CSX said it is reviewing the allegations.",
+    "bylines": [
+        {
+            "by": "By REBECCA REYNOLDS",
+            "title": "Associated Press"
+        }
+    ],
+    "located": "LOUISVILLE, Ky.",
+    "datelinelocation": {
+        "city": "Louisville",
+        "countryareacode": "KY",
+        "countryareaname": "Kentucky",
+        "countrycode": "USA",
+        "countryname": "United States",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                -85.75941,
+                38.25424
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2023 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "train derailment chemical fire rockcastle county"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "f",
+            "name": "f"
+        },
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "a",
+            "name": "a"
+        },
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "6aa161b575f64c62993bc3e9cd82bb69",
+            "name": "Rail accidents",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 96
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "8783d248894710048286ba0a2b2ca13e",
+            "name": "Climate and environment",
+            "creator": "Editorial",
+            "editorial_subject": "Climate and environment",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Editorial",
+            "editorial_subject": "Health",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "c8e409f8858510048872ff2260dd383e",
+            "name": "Business",
+            "creator": "Editorial",
+            "editorial_subject": "Business",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 75
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "2f6e294082b310048474df092526b43e",
+            "name": "Kentucky",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -84.87762,
+                    38.20042
+                ]
+            },
+            "relevance": 66,
+            "parentnames": [
+                "United States"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "2f6e294082b310048474df092526b43e",
+            "name": "Kentucky",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661850e07d5b100481f5c076b8e3055c",
+            "name": "Latin America and Caribbean",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "dcb000c082c610048843df092526b43e",
+            "name": "Ohio",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "cb06ab1082af100482f8df092526b43e",
+            "name": "Florida",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "associations": {
+        "1": {
+            "altids": {
+                "itemid": "9f3f2f4cde5b47e7ab1c18fd1f18e6a5"
+            },
+            "type": "picture"
+        },
+        "2": {
+            "altids": {
+                "itemid": "b0efbb9d314542428aa3e960dc506470"
+            },
+            "type": "picture"
+        }
+    },
+    "body_nitf": "<p>LOUISVILLE, Ky. (AP) \u2014 A lawsuit filed Wednesday in federal court alleges negligence by CSX Transportation caused a train <a href=\"https://apnews.com/article/train-derailment-chemical-spill-kentucky-livingston-csx-100c6581176e7e47ff13d8a664e03471\">derailment and ensuing chemical fire</a> that forced residents of a small Kentucky town out of their homes for more than a day, including most of Thanksgiving.</p><p>The train derailed on Nov. 22 around 2:30 p.m. that Wednesday near the remote town of Livingston. Residents were advised to evacuate just a day before the Thanksgiving holiday and were only cleared to return to their homes that Thursday after the fire was put out.</p><p>An investigation by the railroad company found that the <a href=\"https://apnews.com/article/train-derailment-chemical-spill-kentucky-livingston-csx-9335e2d502da05e195e43ccc4476c8bf\">derailment occurred after a wheel bearing</a> on a train car failed.</p><p>Morgan & Morgan filed the lawsuit seeking class-action status on behalf of the town\u2019s affected residents, saying the derailment could have been prevented if CSX had monitored the train\u2019s wheel bearings more closely and had placed trackside detectors that sound an alarm when wheel bearings overheat closer together.</p><p>\u201cBecause of CSX\u2019s alleged recklessness and negligence in monitoring the train\u2019s wheel bearings, they\u2019ve created a potentially deadly environment for all residents living in the surrounding area of Rockcastle County,\u201d Morgan & Morgan attorney Jean Martin said.</p><p>CSX said in a statement that it is reviewing the lawsuit's allegations and that it continues to support affected residents.</p><p>\u201cWe pride ourselves on being a safe railroad and in the rare occurrence of an incident like the one in Livingston, KY we respond quickly, prioritizing safety and supporting recovery of the community,\" the statement said.</p><p>Two of the 16 cars that derailed carried molten sulfur, which caught fire after the cars were breached. No other hazardous materials were released. The Federal Railroad Administration said an investigation is ongoing.</p><p>According to the <a href=\"https://www.epa.gov/so2-pollution/sulfur-dioxide-basics\">Environmental Protection Agency website</a>, sulfur dioxide can cause respiratory problems, depending on the concentration and length of exposure.</p><p>A spokesman for the railroad said Monday that crews were able to repair the tracks and trains resumed running through the area on Sunday. All 16 railcars involved in the derailment have been taken from the site, and crews removed the spilled chemical and 2,500 tons of impacted soil and replaced it with clean material, CSX said.</p><p>A CSX spokesman, Bryan Tucker, said no sulfur dioxide had been detected in the area since the fire was extinguished.</p><p>Tucker said the bearing that failed didn\u2019t get hot enough to trigger an alarm from the last one of the railroad\u2019s trackside detectors that the train passed, so the crew didn\u2019t get any warning before the derailment. A wheel bearing has to be at least 170 degrees hotter than the ambient temperature to trigger an alarm.</p><p>The train traveled about 21 miles (33 kilometers) after the last detector and was two miles (3 kilometers) away from the next one along the tracks. Across all of CSX\u2019s networks in the eastern United States, those detectors are an average of 14.9 miles (24 kilometers) apart, but on less-traveled tracks that don\u2019t include passenger traffic the detectors can be farther apart. Tucker said that was the case here.</p><p>Those <a href=\"https://apnews.com/article/railroad-safety-ohio-derailment-hazardous-materials-74d7aec638500c52d1eb9fda0acf9f26\">trackside detectors</a> that railroads rely on to help spot defects before they can cause derailments received a lot of attention earlier this year after an overheating wheel bearing caused a <a href=\"https://apnews.com/article/pennsylvania-ohio-evacuations-fires-5d399dc745f51ef746e22828083d8591\">fiery derailment</a> on a different railroad in eastern Ohio in February. In that Norfolk Southern derailment, the <a href=\"https://apnews.com/article/politics-pete-buttigieg-evacuations-ohio-explosions-64908a6416662b5866809387f210aee5\">crew did get a warning</a> but it didn\u2019t come soon enough for them to be able to stop the train before it derailed in East Palestine.</p><p>That derailment and several others since then have <a href=\"https://apnews.com/article/railroad-safety-derailments-tank-car-ohio-minnesota-c60f33b64e9c7dc05768a78ae20f3ce5\">put the spotlight</a> on <a href=\"https://apnews.com/article/palestinian-territories-ohio-canada-business-accidents-d57651e17b2f9e0163c50298106950a3\">railroad safety</a> nationwide, but the reforms proposed afterward have <a href=\"https://apnews.com/article/east-palestine-train-derailment-safety-regulations-railroad-4db52c68daf68da05425b5b70363fb0a\">largely stalled</a> in Congress, and regulators have also made <a href=\"https://apnews.com/article/railroad-safety-derailments-anonymous-hotline-dc509efa21aa51554078998964ba4ea6\">little progress</a>.</p><p>The Kentucky lawsuit named two plaintiffs but seeks class-action status for all residents affected and asked the court for medical monitoring, injunctive and declaratory relief, punitive damages, damages related to emotional distress, loss of property value, and increased risks of future illness.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/train-derailment-chemical-fire-rockcastle-county-c3eb1a51a8d7ab23a1af333f19dc3bcc",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 3,
+            "reason": "The document primarily focuses on a lawsuit alleging negligence in a train derailment and chemical fire. While it does mention health-related concerns such as the potential respiratory problems caused by sulfur dioxide and the request for medical monitoring for affected residents, the main emphasis is on the legal and safety aspects of the incident. Therefore, the document is somewhat relevant to the topic of health but not highly focused on it."
+        }
+    }
+}

@@ -1,0 +1,245 @@
+﻿{
+    "altids": {
+        "itemid": "813287fe3c02c95fbdfbd6017281421d",
+        "etag": "813287fe3c02c95fbdfbd6017281421d_0a2aza0c0",
+        "friendlykey": "318090740684",
+        "referenceid": "NC--Editorial Rdp"
+    },
+    "version": 0,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Opinion",
+    "language": "en",
+    "versioncreated": "2023-12-06T12:10:39Z",
+    "firstcreated": "2023-12-06T05:23:33Z",
+    "editorialrole": "FullStory",
+    "fixture": {
+        "code": "21ea4067bb274c3b805353fb2b99ba70",
+        "name": "Editorial Roundup"
+    },
+    "pubstatus": "usable",
+    "signals": [
+        "newscontent"
+    ],
+    "title": "NC--Editorial Rdp",
+    "headline": "Editorial Roundup: North Carolina",
+    "slugline": "BC-NC--Editorial Rdp",
+    "bylines": [
+        {
+            "by": "By The Associated Press"
+        }
+    ],
+    "copyrightnotice": "Copyright 2023 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "Editorial Rdp"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "person": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "4e102c18b6fa4f5482f7056bc63cf71b",
+            "name": "Pat McCrory",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "POLITICIAN",
+                "PERSON"
+            ],
+            "associatedstates": [
+                {
+                    "code": "c01d179082c610048813df092526b43e",
+                    "name": "North Carolina"
+                }
+            ],
+            "relevance": 50
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "867ee8fe3b03c547a20ac8da825aa9c4",
+            "name": "Phil Berger",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "types": [
+                "POLITICIAN",
+                "PERSON"
+            ],
+            "associatedstates": [
+                {
+                    "code": "c01d179082c610048813df092526b43e",
+                    "name": "North Carolina"
+                }
+            ],
+            "relevance": 50
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "n",
+            "name": "n"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "d8e6d7087f00100483b7f571351eed07",
+            "name": "Family medicine",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 63
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f5fe1e5883581004891cdf092526b43e",
+            "name": "Cervical cancer",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 45
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "39a5551883591004893adf092526b43e",
+            "name": "Health care costs",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 63
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e22df6887de410048fc1df092526b43e",
+            "name": "Women's health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 45
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 76
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "e22563387de410048f92df092526b43e",
+            "name": "Breast cancer",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 45
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "a4677d70863b4012b846a1b00f5079f5",
+            "name": "U.S. news",
+            "creator": "Editorial",
+            "editorial_subject": "U.S. news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "c01d179082c610048813df092526b43e",
+            "name": "North Carolina",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661e48387d5b10048291c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "0ae5eb8e00e04295a4fc209c94bfe6ef",
+                "name": "State"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    -80.00032,
+                    35.50069
+                ]
+            },
+            "relevance": 85,
+            "parentnames": [
+                "United States"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f5b16ea8760d10048047e6e7a0f4673e",
+            "name": "State",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "c01d179082c610048813df092526b43e",
+            "name": "North Carolina",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "body_nitf": "<p>Greensboro News and Record. December 1, 2023.</p><p>Editorial: Maybe we should make Dec. 1 a holiday: Medicaid Expansion Day</p><p>Tomorrow begins today.</p><p>At long last, Medicaid expansion becomes a reality in this state, so you\u2019ll likely hear some facts and figures that have become familiar over the years:</p><p>\u2014 600,000: The estimated number of North Carolinians who will become eligible for health insurance.</p><p>\u2014 14,000: The approximate share of those people who are military veterans.</p><p>\u2014 78.2: The percentage of North Carolinians who support Medicaid expansion.</p><p>\u2014 69: The percentage of Republicans who support Medicaid expansion in North Carolina.</p><p>\u2014 $1.6 billion: The amount of the federal bonus North Carolina will receive as result of expansion.</p><p>\u2014 Not one penny: The amount of funding Medicaid expansion will require from the state.</p><p>There are more good reasons to expand Medicaid where these came from \u2014 a veritable mountain of them from virtually day one.</p><p>But the most compelling argument is the tremendous good it will do, one person at a time.</p><p>And for what that looks, and feels, like, we\u2019ll revisit an open letter from someone who ought to know: a longtime family physician from a Triad community who was anguished by the unnecessary pain and suffering he saw. Here\u2019s some of what he had to say: \u201cThere is good reason that nearly every industrialized country in the world provides a basic level of health care for all. For more than 30 years I have watched my patients with no insurance pay a terrible price.</p><p>\u201cI\u2019ve seen women die of invasive breast cancer and cervical cancer when they couldn\u2019t afford mammograms and preventive checkups.</p><p>\u201cI\u2019ve hospitalized patients who stopped their medicines so they could pay other bills.</p><p>\u201cI\u2019ve spoken to the next of kin in funeral homes about symptoms regretfully ignored by those afraid of the cost of evaluation.</p><p>\u201cYou name just about any cancer or serious disease, and I can tell you about uninsured patients who delayed coming to see me, often with disastrous results.\u201d</p><p>The physician who wrote these words, Stephen Luking, addressed them to then-Gov. Pat McCrory and state Senate leader Phil Berger (who, like Luking, is from Rockingham County) \u2026 in 2016.</p><p>Added Luking, who has since retired: \u201cLike any family doctor who has practiced for 30 years, I know what it\u2019s like to make a decision that leads to the death of a patient. The appropriate intervention gone badly, the symptom after consideration mistakenly reassured. ... I can tell you, it cuts like a knife. You face the family and fight back the tears. You wake up in the middle of the night in a cold sweat and wish you had that moment back.</p><p>\u201cAnd sometimes one night leads to a dozen. My wife will tell you, it\u2019s a load to carry.</p><p>\u201cGov. McCrory and Sen. Berger, you now carry that same weight, whether you will admit it or not. Welcome to this our unfortunate fraternity: those who carry the blood of others on our hands. Like it or not, we are all three members.</p><p>\u201cSome in Rockingham County will surely die \u2014 if some haven\u2019t already \u2014 because of your partisan decision to reject Medicaid expansion.</p><p>\u201cPlease embrace our shared humanity. The two of you have the power to get this done.\u201d</p><p>Thankfully, it did get done, even if took nearly eight more years.</p><p>Now more than half a million low-income North Carolinians, most of them working poor, will be eligible for health coverage. What that means for the Triad is thousands of changed lives and saved lives.</p><p>According to state DHHS estimates, some 35,000 Guilford County residents are expected to be enrolled over the next two years, 25,000 in Forsyth. Among other Triad communities DHHS projects 6,000 enrollees in Rockingham County and as many as 3,000 apiece in Stokes, Yadkin and Davie counties.</p><p>It means not having to choose between paying the rent and paying for health care.</p><p>It means scheduled doctor\u2019s visits instead of panicked trips to an emergency department.</p><p>It means more access to treatment for opioid addiction and behavioral illnesses.</p><p>And it means critical revenue for hospitals, especially rural ones.</p><p>This is why today matters so much, even if did take much too long to get here.</p><p>Maybe we should celebrate this date every year, Dec. 1, when North Carolina lawmakers finally proved that they have both the brains and the hearts to heed the data, listen to their constituents and do what is right and compassionate.</p><p>Even if they did take their time.</p><p>END</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/813287fe3c02c95fbdfbd6017281421d",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 5,
+            "reason": "The document is an editorial discussing the expansion of Medicaid in North Carolina, which directly relates to health. It provides detailed information on the number of people who will benefit, the financial implications, and the positive impact on individuals' health outcomes. The editorial also includes personal anecdotes from a physician, emphasizing the importance of health coverage. Given the focus on health insurance, access to medical care, and the overall health benefits for the population, the document is highly relevant to the topic of health."
+        }
+    }
+}

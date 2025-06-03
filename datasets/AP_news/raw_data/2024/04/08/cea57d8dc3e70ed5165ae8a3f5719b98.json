@@ -1,0 +1,219 @@
+﻿{
+    "altids": {
+        "itemid": "cea57d8dc3e70ed5165ae8a3f5719b98",
+        "etag": "cea57d8dc3e70ed5165ae8a3f5719b98_5a10aza0c0",
+        "friendlykey": "306126068149",
+        "referenceid": "AF--Mozambique-Ferry Accident"
+    },
+    "version": 5,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2024-04-08T21:14:06Z",
+    "firstcreated": "2024-04-08T05:32:47Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "ednote": "Eds: UPDATES: with detail from state television showing boat pulled up on a beach; changes wording from sank to capsized. Links additional AP photo",
+    "editorialtypes": [
+        "Lead"
+    ],
+    "signals": [
+        "newscontent"
+    ],
+    "title": "AF--Mozambique-Ferry Accident",
+    "headline": "Overcrowded ferry capsizes off Mozambique's coast, leaving at least 98 dead, media reports say",
+    "headline_extended": "Media outlets in Mozambique say that a makeshift ferry overcrowded with residents reportedly fleeing a feared cholera outbreak has capsized off the country's northern coast, killing at least 98 people including children",
+    "slugline": "BC-AF-Mozambique-Ferry-Accident, 5th Ld-Writethru",
+    "description_summary": "Media outlets in Mozambique say that a makeshift ferry overcrowded with residents reportedly fleeing a feared cholera outbreak has capsized off the country's northern coast, killing at least 98 people including children. The ferry with an estimated 130 people aboard capsized Sunday after it departed the southeastern African nation\u2019s coast for the nearby Island of Mozambique. State-run Radio Mozambique quoted island administrator Silv\u00e9rio Nauaito as saying that at least 11 people were hospitalized. The Noticias newspaper quoted Nauaito as saying most of the dead were recovered Sunday, but an additional seven bodies were found Monday, bringing the death toll from 91 to 98.",
+    "bylines": [
+        {
+            "by": "By FARAI MUTSAKA",
+            "title": "Associated Press"
+        }
+    ],
+    "located": "HARARE, Zimbabwe",
+    "datelinelocation": {
+        "city": "Harare",
+        "countrycode": "ZWE",
+        "countryname": "Zimbabwe",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                31.05337,
+                -17.82772
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "ferry accident mozambique dead children cholera rumors"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "i",
+            "name": "i"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "3b9797c0833849809300a3e134ad34a5",
+            "name": "Cholera",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 93
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "b0cb0494819a4a8b928c8a353468695d",
+            "name": "Drownings",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 64
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "bb2d2c5f441a452cb24bb511a2ab5eea",
+            "name": "World news",
+            "creator": "Editorial",
+            "editorial_subject": "World news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "f25af2d07e4e100484f5df092526b43e",
+            "name": "General news",
+            "creator": "Editorial",
+            "editorial_subject": "General news",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 50
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "661ba8587d5b10048249c076b8e3055c",
+            "name": "Mozambique",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "parentids": [
+                "661812607d5b100481f1c076b8e3055c"
+            ],
+            "locationtype": {
+                "code": "01f56e0e654841eca2e69bf2cbcc0526",
+                "name": "Nation"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    35,
+                    -18.25
+                ]
+            },
+            "relevance": 80,
+            "parentnames": [
+                "Africa"
+            ]
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "661812607d5b100481f1c076b8e3055c",
+            "name": "Africa",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "associations": {
+        "1": {
+            "altids": {
+                "itemid": "fbbb23a3e4bf45b191765a5b4d7272aa"
+            },
+            "type": "picture"
+        },
+        "2": {
+            "altids": {
+                "itemid": "247af99e927241f39baf1fe5ab516955"
+            },
+            "type": "picture"
+        },
+        "3": {
+            "altids": {
+                "itemid": "eeb159808661449bb05ed2162061d6c8"
+            },
+            "type": "picture"
+        }
+    },
+    "body_nitf": "<p>HARARE, Zimbabwe (AP) \u2014 A makeshift ferry overcrowded with residents reportedly fleeing a feared cholera outbreak capsized off Mozambique's northern coast, killing at least 98 people including children, local media said Monday.</p><p>The ferry with an estimated 130 people aboard capsized Sunday after it departed the southeastern African nation's coast for the nearby Island of Mozambique and at least 11 people were hospitalized, state-run Radio Mozambique quoted island administrator Silv\u00e9rio Nauaito as saying.</p><p>Most of the dead were recovered Sunday, but an additional seven bodies were found Monday, bringing the death toll from 91 to 98, the Noticias newspaper quoted Nauaito as saying. State TV showed what they said was the vessel pulled up on a beach a day after the tragedy, though it wasn\u2019t immediately clear how it had been brought ashore.</p><p>Maritime authorities continued to search for additional survivors, Nauaito told the radio station, adding that \u201cit is not easy to say with precision how many remain missing.\u201d Government officials were heading to the accident site Monday to get more precise information, he said.</p><p>The Nampula provincial authority released a statement attributing the accident to the \u201cuse of a vessel unsuitable for transporting passengers and overcrowding,\u201d Radio Mozambique reported.</p><p>Noticias, one of the country's main and oldest newspapers, said the boat ordinarily was used as a fishing vessel and that residents of the town of Lunga were trying to flee what they believed was a flare-up in cases of cholera that the country has suffered in recent months.</p><p>They wanted to reach the Island of Mozambique and departed \u201cin a stampede\u201d using boats \u201cunsuitable for navigation,\" the newspaper reported. The boat capsized before it could reach the island.</p><p>Some people still managed to reach the island's shore but died there after not being able to get medical help on time, the newspaper said. The country\u2019s national public broadcaster, Television of Mozambique, said two bodies of children remained uncollected in a morgue.</p><p>Authorities in Mozambique and neighboring southern African countries have been trying to contain a deadly cholera outbreak that spread in recent months.</p><p>Mozambique, one of the world\u2019s poorest countries, has recorded 32 deaths from about 15,000 cholera cases since late last year. Nampula is the worst affected province with over 5,000 cholera cases, including 12 deaths, according to government data.</p><p>Many areas of Mozambique are only accessible by boats, which are often overcrowded. The country has a poor road network and some areas are unreachable by land or air.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/ferry-accident-mozambique-dead-children-cholera-rumors-cea57d8dc3e70ed5165ae8a3f5719b98",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 4,
+            "reason": "The document discusses a tragic ferry accident off the coast of Mozambique, which resulted in the deaths of at least 98 people. While the primary focus is on the accident and its immediate aftermath, the document also mentions that the passengers were fleeing a feared cholera outbreak. Additionally, it provides context about the ongoing cholera outbreak in Mozambique and neighboring countries, including statistics on cholera cases and deaths. This information is relevant to the topic of health, particularly in the context of public health crises and disease outbreaks."
+        }
+    }
+}

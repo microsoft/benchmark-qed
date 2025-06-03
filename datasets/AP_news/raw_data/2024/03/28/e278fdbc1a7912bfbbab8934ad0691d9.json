@@ -1,0 +1,204 @@
+﻿{
+    "altids": {
+        "itemid": "e278fdbc1a7912bfbbab8934ad0691d9",
+        "etag": "e278fdbc1a7912bfbbab8934ad0691d9_4a4aza0c0",
+        "friendlykey": "185316080967",
+        "referenceid": "US-MED--Tuberculosis"
+    },
+    "version": 4,
+    "type": "text",
+    "urgency": 4,
+    "profile": "Spot Development",
+    "language": "en",
+    "versioncreated": "2024-03-28T19:15:44Z",
+    "firstcreated": "2024-03-28T17:16:40Z",
+    "editorialrole": "FullStory",
+    "pubstatus": "usable",
+    "ednote": "Eds: UPDATES: Removes extra word from headline. With AP Photos, Audio.",
+    "editorialtypes": [
+        "Lead"
+    ],
+    "signals": [
+        "newscontent"
+    ],
+    "title": "US-MED--Tuberculosis",
+    "headline": "US tuberculosis cases were at the highest level in a decade in 2023",
+    "headline_extended": "The U.S. saw the most tuberculosis illnesses in a decade in 2023",
+    "slugline": "AP-US-MED--Tuberculosis, 4th Ld-Writethru",
+    "description_summary": "The U.S. saw the most tuberculosis illnesses in a decade in 2023. That's according to a new report from the Centers for Disease Control and Prevention that was published Thursday. More than 9,600 cases were reported, which is a 16% increase from 2022. Forty states reported an increase, and rates were up among all age groups. Cases declined sharply at the beginning of the COVID-19 pandemic but have been rising since. The 2023 count was the highest reported since 2013.",
+    "bylines": [
+        {
+            "by": "By MIKE STOBBE",
+            "title": "AP Medical Writer"
+        }
+    ],
+    "located": "NEW YORK",
+    "datelinelocation": {
+        "city": "New York",
+        "countryareacode": "NY",
+        "countryareaname": "New York",
+        "countrycode": "USA",
+        "countryname": "United States",
+        "geometry_geojson": {
+            "type": "Point",
+            "coordinates": [
+                -74.00597,
+                40.71427
+            ]
+        }
+    },
+    "copyrightnotice": "Copyright 2024 The Associated Press. All rights reserved. This material may not be published, broadcast, rewritten or redistributed without permission.",
+    "usageterms": [
+        "This content is intended for editorial use only. For other uses, additional clearances may be required."
+    ],
+    "keywords": [
+        "TB tuberculosis CDC US"
+    ],
+    "provider": "AP",
+    "infosource": [
+        {
+            "name": "AP",
+            "type": "AP"
+        }
+    ],
+    "subject": [
+        {
+            "rels": [
+                "category"
+            ],
+            "creator": "Editorial",
+            "code": "a",
+            "name": "a"
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "b17e2751b26d4523a2c99d79e04747ee",
+            "name": "COVID-19 pandemic",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 69
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 97
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "49ff7f187f001004824df571351eed07",
+            "name": "Tuberculosis",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 97
+        },
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "cc7a76087e4e10048482df092526b43e",
+            "name": "Health",
+            "creator": "Editorial",
+            "editorial_subject": "Health",
+            "rels": [
+                "direct"
+            ],
+            "relevance": 99
+        }
+    ],
+    "place": [
+        {
+            "scheme": "http://cv.ap.org/id/",
+            "code": "661850e07d5b100481f4c076b8e3055c",
+            "name": "Europe",
+            "creator": "Machine",
+            "rels": [
+                "direct"
+            ],
+            "locationtype": {
+                "code": "976d112cd5c3497ea180aeecab922c6b",
+                "name": "Continent"
+            },
+            "geometry_geojson": {
+                "type": "Point",
+                "coordinates": [
+                    9.14062,
+                    48.69096
+                ]
+            },
+            "relevance": 48
+        }
+    ],
+    "audiences": [
+        {
+            "code": "82c6a4c46fa0446090a7acaf93159e4c",
+            "name": "Print",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "9add4649b53b4702ba7d9de5d4fa607a",
+            "name": "Online",
+            "type": "AUDPLATFORM"
+        },
+        {
+            "code": "f43adc08760d10048040e6e7a0f4673e",
+            "name": "National",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "f4ecf9b0760d10048044e6e7a0f4673e",
+            "name": "International",
+            "type": "AUDSCOPE"
+        },
+        {
+            "code": "661850e07d5b100481f5c076b8e3055c",
+            "name": "Latin America and Caribbean",
+            "type": "AUDGEOGRAPHY"
+        },
+        {
+            "code": "661e48387d5b10048291c076b8e3055c",
+            "name": "United States",
+            "type": "AUDGEOGRAPHY"
+        }
+    ],
+    "associations": {
+        "1": {
+            "altids": {
+                "itemid": "82ed549c5b6143478d190798e4a2df49"
+            },
+            "type": "audio"
+        },
+        "2": {
+            "altids": {
+                "itemid": "1c2c34311cbf44f983c09cb37bba9f08"
+            },
+            "type": "picture"
+        },
+        "3": {
+            "altids": {
+                "itemid": "1d4559776a294ec29eb369502de6f5e4"
+            },
+            "type": "picture"
+        }
+    },
+    "body_nitf": "<p>NEW YORK (AP) \u2014 The number of U.S. tuberculosis cases in 2023 were the highest in a decade, according to a new government report.</p><p>Forty states reported an <a href=\"https://apnews.com/article/health-pandemics-covid-world-organization-tuberculosis-a446ab60cbb40dac92dcbd956303cbc1\">increase in TB</a>, and rates were up among all age groups, the Centers for Disease Control and Prevention said Thursday. More than 9,600 cases were reported, a 16% increase from 2022 and the highest since 2013.</p><p>Cases declined sharply at the beginning of the COVID-19 pandemic, but have been rising since.</p><p>Most U.S. TB cases are diagnosed in people born in other countries. Experts say the 2023 number is in part a combination of a surge in TB cases internationally \u2014 the World Health Organization said TB was behind only COVID-19 in infectious fatal diseases worldwide in 2022. And there are also increases in migration and post-pandemic international travel.</p><p>But other factors are also at play, including other illnesses that weaken the immune system and allow latent TB infections to emerge.</p><p>CDC officials expected TB numbers would rise, but the 2023 count \u201cwas a little more than was expected,\u201d said Dr. Philip LoBue, director of the agency's Division of Tuberculosis Elimination.</p><p>Despite the jump, the number and rate of new TB cases each year remains smaller than it was in the past, and the U.S. has a lower rate of new TB cases than most countries.</p><p>Tuberculosis is caused by bacteria that usually attack the lungs, and is spread through the air when an infectious person coughs or sneezes. If not treated properly, it can be fatal. In the late 1800s, TB killed one out of every seven people living in the United States and Europe. But the development of antibiotics and public health efforts succeeded in treating infections and tracking down those they infected, leading to cases falling for decades.</p><p>The new CDC statistics are not a count of how many people were newly infected in 2023, but rather of how many people developed a cough or other symptoms and were diagnosed.</p><p>An estimated 85% of the people counted in 2023 were infected at least a year or two earlier and had what\u2019s called latent TB, when the bacteria enters the body and hibernates in the lungs or other parts of the body. Experts estimate as many as 13 million Americans have latent TB and are not contagious.</p><p>When the immune system is weakened \u2014 by certain medications or other illnesses like diabetes and HIV \u2014 the TB wakes up, so to speak. Nicole Skaggs said she was infected in 2020, but didn\u2019t develop symptoms until 2022 \u2014 after she got sick from COVID-19.</p><p>\u201cAnything that can take out or lower your immune system can put you at risk,\u201d said Skaggs, 41, a property manager in Bothell, Washington.</p><p>CDC officials called the idea that COVID-19 has played a role in increased reactivation of TB \u201can important question.\" Scientists are still learning what causes latent TB to reactivate and \"I would consider it an unknown at this point,\u201d LoBue said.</p><p>\u201cIt\u2019s too early to tell\u201d what will happen to TB trends in the next few years, he also said.</p><p>There are TB vaccines being developed, and public health workers that were focused on COVID are now back to trying new approaches to preventing TB. New York City, which saw cases jump 28% last year, is hiring TB case managers and community health workers and increasingly using video monitoring of patients taking medications to keep treatment rates high, said Dr. Ashwin Vasan, the city\u2019s health commissioner.</p><p>On the other hand, federal TB funding for state and local health department efforts has been flat, and one of the key antibiotics used against TB has been in short supply in recent years. Plus, drug-resistant TB infections have popped up in a fraction of cases.</p><p>___</p><p>The Associated Press Health and Science Department receives support from the Howard Hughes Medical Institute\u2019s Science and Educational Media Group. The AP is solely responsible for all content.</p>",
+    "textformat": "bx",
+    "links": [
+        {
+            "href": "https://apnews.com/article/tb-tuberculosis-cdc-us-e278fdbc1a7912bfbbab8934ad0691d9",
+            "rel": "canonical"
+        }
+    ],
+    "topics": {
+        "Health": {
+            "relevance_score": 5,
+            "reason": "The document discusses the rise in tuberculosis cases in the U.S. in 2023, providing detailed statistics, causes, and implications for public health. It includes information from the CDC, mentions the impact of COVID-19, and discusses efforts to manage and prevent TB. All these points are directly related to the topic of health."
+        }
+    }
+}
