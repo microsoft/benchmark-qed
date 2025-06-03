@@ -30,7 +30,7 @@ Follow these steps to generate synthetic queries using AutoQ:
     ```
     Place your input files inside the `./input` directory. To get started, you can use the AP News dataset provided in the [datasets folder](https://github.com/microsoft/benchmark-qed/tree/main/datasets/AP_news/raw_data). To download this example dataset directly into your `input` folder, run:
     ```sh
-    uv benchmark-qed data download AP_news input
+    uv run benchmark-qed data download AP_news input
     ```
 
 3. **Initialize the configuration:**
@@ -63,7 +63,7 @@ Follow these steps to compare RAG answer pairs using the pairwise scoring pipeli
     ```
     Copy your RAG answer files into the `./input` directory. To get started, you can use the example RAG answers available in the [example data folder](https://github.com/microsoft/benchmark-qed/tree/main/docs/notebooks/example_answers). To download this example dataset directly into your `input` folder, run:
     ```sh
-    uv benchmark-qed data download example_answers input
+    uv run benchmark-qed data download example_answers input
     ```
 
 3. **Create a configuration file for pairwise comparison:**
@@ -95,7 +95,7 @@ Follow these steps to score RAG answers against reference answers using example 
     ```
     Copy your RAG answers and reference answers into the `input` directory. To get started, you can use the example RAG answers available in the [example data folder](https://github.com/microsoft/benchmark-qed/tree/main/docs/notebooks/example_answers). To download this example dataset directly into your `input` folder, run:
     ```sh
-    uv benchmark-qed data download example_answers input
+    uv run benchmark-qed data download example_answers input
     ```
 
 3. **Create a configuration file for reference scoring:**
