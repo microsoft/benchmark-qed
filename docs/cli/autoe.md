@@ -1,15 +1,20 @@
 ## Pairwise Scoring Configuration
 
-This document describes the configuration schema for scoring a set of conditions using a language model. It includes definitions for conditions, evaluation criteria, and model configuration. For more information about how to configure the LLM check: [LLM Configuration](llm_config.md)
+This section describes the configuration schema for performing relative comparisons of RAG methods using the LLM-as-a-Judge approach. It includes definitions for conditions, evaluation criteria, and model configuration. For more information about how to configure the LLM, please refer to: [LLM Configuration](llm_config.md)
 
-To generate a template configuration file you can run:
+To create a template configuration file, run:
 
 ```sh
-benchmark_qed config init autoe_pairwise local/autoe_pairwise/settings.yaml
+benchmark-qed config init autoe_pairwise local/pairwise_test/settings.yaml
 ```
 
-See more about the config init command: [Config Init CLI](config_init.md)
+To perform pairwise scoring with your configuration file, use:
 
+```sh
+benchmark-qed autoe pairwise-scores local/pairwise_test/settings.yaml local/pairwise_test/output
+```
+
+For information about the `config init` command, refer to: [Config Init CLI](config_init.md)
 
 ---
 
@@ -51,29 +56,28 @@ Top-level configuration for scoring a set of conditions.
 
 ### YAML Example
 
-Below is an example of how this configuration might be represented in a YAML file. The API key is referenced using an environment variable.
-
-Save the following yaml file as autoe_pairwise_settings.yaml and use with the command:
-
-```sh
-benchmark_qed autoe pairwise-scores autoe_pairwise_settings.yaml local/output_test
-```
-
-To run autoe with our [generated answers](https://github.com/microsoft/benchmark-qed/docs/example_notebooks/example_answers). See the CLI Reference section for more options.
-
+Below is an example showing how this configuration might be represented in a YAML file. The API key is referenced using an environment variable.
 
 ```yaml
 base:
   name: vector_rag
-  answer_base_path: example_answers/vector_rag
+  answer_base_path: input/vector_rag
+
 others:
   - name: lazygraphrag
-    answer_base_path: example_answers/lazygraphrag
+    answer_base_path: input/lazygraphrag
   - name: graphrag_global
-    answer_base_path: example_answers/graphrag_global
+    answer_base_path: input/graphrag_global
+
 question_sets:
   - activity_global
   - activity_local
+
+# Optional: Custom Evaluation Criteria
+# You may define your own list of evaluation criteria here. If this section is omitted, the default criteria will be used.
+# criteria: 
+#   - name: "criteria name"
+#     description: "criteria description"
 trials: 4
 llm_config:
   auth_type: api_key
@@ -93,16 +97,21 @@ OPENAI_API_KEY=your-secret-api-key-here
 
 ## Reference-Based Scoring Configuration
 
-This document describes the configuration schema for evaluating generated answers against a reference set using a language model. It includes definitions for reference and generated conditions, scoring criteria, and model configuration. For more information about how to configure the LLM check: [LLM Configuration](llm_config.md)
+This section explains how to configure reference-based scoring, where generated answers are evaluated against a reference set using the LLM-as-a-Judge approach. It covers the definitions for reference and generated conditions, scoring criteria, and model configuration. For details on LLM configuration, see: [LLM Configuration](llm_config.md)
 
-To generate a template configuration file you can run:
+To create a template configuration file, run:
 
 ```sh
-benchmark_qed config init autoe_reference local/autoe_reference/settings.yaml
+benchmark-qed config init autoe_reference local/reference_test/settings.yaml
 ```
 
-See more about the config init command: [Config Init CLI](config_init.md)
+To perform reference-based scoring with your configuration file, run:
 
+```sh
+benchmark-qed autoe reference-scores local/reference_test/settings.yaml local/reference_test/output
+```
+
+For information about the `config init` command, see: [Config Init CLI](config_init.md)
 
 ---
 
@@ -147,26 +156,23 @@ Top-level configuration for scoring generated answers against a reference.
 
 Below is an example of how this configuration might be represented in a YAML file. The API key is referenced using an environment variable.
 
-Save the following yaml file as autoe_reference_settings.yaml and use with the command:
-
-```sh
-benchmark_qed autoe reference-scores autoe_reference_settings.yaml local/output_test
-```
-
-To run autoe with our [generated answers](https://github.com/microsoft/benchmark-qed/docs/example_notebooks/example_answers). See the CLI Reference section for more options.
-
-
 ```yaml
 reference:
   name: lazygraphrag
-  answer_base_path: example_answers/lazygraphrag/activity_global.json
+  answer_base_path: input/lazygraphrag/activity_global.json
 
 generated:
   - name: vector_rag
-    answer_base_path: example_answers/vector_rag/activity_global.json
+    answer_base_path: input/vector_rag/activity_global.json
 
 score_min: 1
 score_max: 10
+
+# Optional: Custom Evaluation Criteria
+# You may define your own list of evaluation criteria here. If this section is omitted, the default criteria will be used.
+# criteria: 
+#   - name: "criteria name"
+#     description: "criteria description"
 
 trials: 4
 
@@ -191,7 +197,7 @@ OPENAI_API_KEY=your-secret-api-key-here
 
 ## CLI Reference
 
-This page documents the command-line interface of the benchmark-qed autoe package.
+This page documents the command-line interface of the BenchmarkQED's AutoE package.
 
 ::: mkdocs-typer2
     :module: benchmark_qed.autoe.cli

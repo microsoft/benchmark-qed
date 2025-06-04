@@ -1,14 +1,20 @@
 ## Question Generation Configuration
 
-This document describes the configuration schema for the question generation process, including input data, sampling, encoding, and model settings. For more information about how to configure the LLM check: [LLM Configuration](llm_config.md)
+This document provides an overview of the configuration schema for the question generation process, covering input data, sampling, encoding, and model settings. For details on configuring the LLM, see: [LLM Configuration](llm_config.md).
 
-To generate a template configuration file you can run:
+To create a template configuration file, run:
 
 ```sh
-benchmark_qed config init autoq local/autoq/settings.yaml
+benchmark-qed config init autoq local/autoq_test/settings.yaml
 ```
 
-See more about the config init command: [Config Init CLI](config_init.md)
+To generate synthetic queries using your configuration file, run:
+
+```sh
+benchmark-qed autoq local/autoq_test/settings.yaml local/autoq_test/output
+```
+
+For more information about the `config init` command, see: [Config Init CLI](config_init.md)
 
 ---
 
@@ -92,21 +98,13 @@ Top-level configuration for the entire question generation process.
 
 Here is an example of how this configuration might look in a YAML file.
 
-Save the following yaml file as autoq_settings.yaml and use with the command:
-
-```sh
-benchmark_qed autoq autoq_settings.yaml local/output_test
-```
-
-To run autoq with our AP news dataset. See the CLI Reference section for more options.
-
 ```yaml
 ## Input Configuration
 input:
-  dataset_path: datasets/AP_news/raw_data/
+  dataset_path: ./input
   input_type: json
-  text_column: body_nitf
-  metadata_columns: [headline, firstcreated]
+  text_column: body_nitf # The column in the dataset that contains the text to be processed. Modify this for your dataset
+  metadata_columns: [headline, firstcreated] # Additional metadata columns to include in the input. Modify this for your dataset
   file_encoding: utf-8-sig
 
 ## Encoder configuration
@@ -133,7 +131,7 @@ embedding_model:
   api_key: ${OPENAI_API_KEY}
   llm_provider: openai.embedding
 
-## Question Generation Configuration
+## Question Generation Sample Configuration
 data_local:
   num_questions: 10
   oversample_factor: 2.0
@@ -163,7 +161,7 @@ OPENAI_API_KEY=your-secret-api-key-here
 
 ## CLI Reference
 
-This page documents the command-line interface of the benchmark-qed autoq package.
+This page documents the command-line interface of the BenchmarkQED's AutoQ package.
 
 ::: mkdocs-typer2
     :module: benchmark_qed.autoq.cli
