@@ -99,18 +99,21 @@ test_only = "pytest -v -k"
 _semversioner_release = "semversioner release"
 semversioner_add = "semversioner add-change"
 
-[[tool.poe.tasks._semversioner_create_tag]]
-shell = "git tag release/v$(semversioner current-version)"
+[[tool.poe.tasks.pypi_release]]
+shell = """
+git checkout main
+git pull
+git tag release/v$(semversioner current-version)
+"""
 
 [[tool.poe.tasks._semversioner_changelog]]
 cmd = "semversioner changelog"
 capture_stdout = "CHANGELOG.md"
 
-[[tool.poe.tasks.release]]
+[[tool.poe.tasks.semver_release]]
 sequence = [
     '_semversioner_release',
     '_semversioner_changelog',
-    '_semversioner_create_tag',
 ]
 
 # https://github.com/microsoft/pyright/blob/9f81564a4685ff5c55edd3959f9b39030f590b2f/docs/configuration.md#sample-pyprojecttoml-file
