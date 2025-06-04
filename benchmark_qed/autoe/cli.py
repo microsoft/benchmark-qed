@@ -21,7 +21,10 @@ from benchmark_qed.cli.utils import print_df
 from benchmark_qed.config.utils import load_config
 from benchmark_qed.llm.factory import ModelFactory
 
-app: typer.Typer = typer.Typer(pretty_exceptions_show_locals=False)
+app: typer.Typer = typer.Typer(
+    pretty_exceptions_show_locals=False,
+    help="Evaluate Retrieval-Augmented Generation (RAG) methods.",
+)
 
 
 @app.command()
