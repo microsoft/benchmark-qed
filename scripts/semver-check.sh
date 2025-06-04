@@ -1,7 +1,7 @@
 #!/bin/sh
 changes=$(git diff --name-only origin/main)
 has_change_doc=$(echo $changes | grep .semversioner/next-release)
-has_impacting_changes=$(echo $changes | grep benchmark-qed)
+has_impacting_changes=$(echo $changes | grep benchmark_qed)
 
 if [ "$has_impacting_changes" ] && [ -z "$has_change_doc" ]; then
     echo "Check failed. Run 'uv run semversioner add-change' to update the next release version"
