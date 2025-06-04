@@ -78,7 +78,9 @@ question_sets:
 # criteria: 
 #   - name: "criteria name"
 #     description: "criteria description"
+
 trials: 4
+
 llm_config:
   auth_type: api_key
   model: gpt-4.1
@@ -165,6 +167,7 @@ generated:
   - name: vector_rag
     answer_base_path: input/vector_rag/activity_global.json
 
+# Scoring scale
 score_min: 1
 score_max: 10
 
@@ -197,7 +200,7 @@ OPENAI_API_KEY=your-secret-api-key-here
 
 ## CLI Reference
 
-This page documents the command-line interface of the BenchmarkQED's AutoE package.
+This section documents the command-line interface of the BenchmarkQED's AutoE package.
 
 ::: mkdocs-typer2
     :module: benchmark_qed.autoe.cli

@@ -1,6 +1,6 @@
 ## Question Generation Configuration
 
-This document provides an overview of the configuration schema for the question generation process, covering input data, sampling, encoding, and model settings. For details on configuring the LLM, see: [LLM Configuration](llm_config.md).
+This section provides an overview of the configuration schema for the question generation process, covering input data, sampling, encoding, and model settings. For details on configuring the LLM, see: [LLM Configuration](llm_config.md).
 
 To create a template configuration file, run:
 
@@ -161,7 +161,7 @@ OPENAI_API_KEY=your-secret-api-key-here
 
 ## CLI Reference
 
-This page documents the command-line interface of the BenchmarkQED's AutoQ package.
+This section documents the command-line interface of the BenchmarkQED's AutoQ package.
 
 ::: mkdocs-typer2
     :module: benchmark_qed.autoq.cli
