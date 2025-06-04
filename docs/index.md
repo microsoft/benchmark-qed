@@ -47,7 +47,7 @@ The AutoQ component generates four synthetic query classes based on the scope an
 
 AutoQ can be configured to generate any number and distribution of synthetic queries along these classes.
 
-> **Note:** AutoQ generates queries only; it curently does **not** produce reference (ground truth) answers for these queries.
+> **Note:** AutoQ generates queries only; it currently does **not** produce reference (ground truth) answers for these queries.
 
 #### Example
 
