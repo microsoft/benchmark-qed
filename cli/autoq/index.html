@@ -1087,11 +1087,14 @@
 
 
 <h2 id="question-generation-configuration">Question Generation Configuration</h2>
-<p>This document describes the configuration schema for the question generation process, including input data, sampling, encoding, and model settings. For more information about how to configure the LLM check: <a href="../llm_config/">LLM Configuration</a></p>
-<p>To generate a template configuration file you can run:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>benchmark_qed<span class="w"> </span>config<span class="w"> </span>init<span class="w"> </span>autoq<span class="w"> </span>local/autoq/settings.yaml
+<p>This section provides an overview of the configuration schema for the question generation process, covering input data, sampling, encoding, and model settings. For details on configuring the LLM, see: <a href="../llm_config/">LLM Configuration</a>.</p>
+<p>To create a template configuration file, run:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>benchmark-qed<span class="w"> </span>config<span class="w"> </span>init<span class="w"> </span>autoq<span class="w"> </span>local/autoq_test/settings.yaml
 </code></pre></div>
-<p>See more about the config init command: <a href="../config_init/">Config Init CLI</a></p>
+<p>To generate synthetic queries using your configuration file, run:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>benchmark-qed<span class="w"> </span>autoq<span class="w"> </span>local/autoq_test/settings.yaml<span class="w"> </span>local/autoq_test/output
+</code></pre></div>
+<p>For more information about the <code>config init</code> command, see: <a href="../config_init/">Config Init CLI</a></p>
 <hr />
 <h3 id="classes-and-fields">Classes and Fields</h3>
 <h4 id="inputconfig"><code>InputConfig</code></h4>
@@ -1342,16 +1345,12 @@
 <hr />
 <h3 id="yaml-example">YAML Example</h3>
 <p>Here is an example of how this configuration might look in a YAML file.</p>
-<p>Save the following yaml file as autoq_settings.yaml and use with the command:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>benchmark_qed<span class="w"> </span>autoq<span class="w"> </span>autoq_settings.yaml<span class="w"> </span>local/output_test
-</code></pre></div>
-<p>To run autoq with our AP news dataset. See the CLI Reference section for more options.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1">## Input Configuration</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="nt">input</span><span class="p">:</span>
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">  </span><span class="nt">dataset_path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">datasets/AP_news/raw_data/</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">  </span><span class="nt">dataset_path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./input</span>
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">  </span><span class="nt">input_type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">json</span>
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">  </span><span class="nt">text_column</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">body_nitf</span>
-<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">  </span><span class="nt">metadata_columns</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">headline</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">firstcreated</span><span class="p p-Indicator">]</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">  </span><span class="nt">text_column</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">body_nitf</span><span class="w"> </span><span class="c1"># The column in the dataset that contains the text to be processed. Modify this for your dataset</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">  </span><span class="nt">metadata_columns</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">headline</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">firstcreated</span><span class="p p-Indicator">]</span><span class="w"> </span><span class="c1"># Additional metadata columns to include in the input. Modify this for your dataset</span>
 <a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">  </span><span class="nt">file_encoding</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">utf-8-sig</span>
 <a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>
 <a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="c1">## Encoder configuration</span>
@@ -1378,7 +1377,7 @@
 <a id="__codelineno-2-30" name="__codelineno-2-30" href="#__codelineno-2-30"></a><span class="w">  </span><span class="nt">api_key</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${OPENAI_API_KEY}</span>
 <a id="__codelineno-2-31" name="__codelineno-2-31" href="#__codelineno-2-31"></a><span class="w">  </span><span class="nt">llm_provider</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">openai.embedding</span>
 <a id="__codelineno-2-32" name="__codelineno-2-32" href="#__codelineno-2-32"></a>
-<a id="__codelineno-2-33" name="__codelineno-2-33" href="#__codelineno-2-33"></a><span class="c1">## Question Generation Configuration</span>
+<a id="__codelineno-2-33" name="__codelineno-2-33" href="#__codelineno-2-33"></a><span class="c1">## Question Generation Sample Configuration</span>
 <a id="__codelineno-2-34" name="__codelineno-2-34" href="#__codelineno-2-34"></a><span class="nt">data_local</span><span class="p">:</span>
 <a id="__codelineno-2-35" name="__codelineno-2-35" href="#__codelineno-2-35"></a><span class="w">  </span><span class="nt">num_questions</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10</span>
 <a id="__codelineno-2-36" name="__codelineno-2-36" href="#__codelineno-2-36"></a><span class="w">  </span><span class="nt">oversample_factor</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2.0</span>
@@ -1403,7 +1402,7 @@
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>OPENAI_API_KEY=your-secret-api-key-here
 </code></pre></div>
 <h2 id="cli-reference">CLI Reference</h2>
-<p>This page documents the command-line interface of the benchmark-qed autoq package.</p>
+<p>This section documents the command-line interface of the BenchmarkQED's AutoQ package.</p>
 <div class="typer-docs">
 <h1 id="autoq">autoq</h1>
 <p>Generate questions from the input data.</p>
