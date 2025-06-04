@@ -6,7 +6,7 @@ TODO:
  - Add blog post final url
 <-->
 
-👉 [Benchmark-QED Docs](https://microsoft.github.io/benchmark-qed/)<br/>
+👉 [BenchmarkQED Docs](https://microsoft.github.io/benchmark-qed/)<br/>
 
 <div align="left">
   <a href="https://github.com/microsoft/benchmark-qed/issues">
