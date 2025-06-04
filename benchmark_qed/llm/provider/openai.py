@@ -10,7 +10,7 @@ from openai import AsyncAzureOpenAI, AsyncOpenAI
 from benchmark_qed.config.llm_config import AuthType, LLMConfig
 from benchmark_qed.llm.type.base import BaseModelOutput, BaseModelResponse, Usage
 
-REASONING_MODELS = ["o3-mini", "o1-mini", "o1", "o1-pro"]
+REASONING_MODELS = ["o3", "o4-mini", "o3-mini", "o1-mini", "o1", "o1-pro"]
 
 
 class BaseOpenAIChat:
