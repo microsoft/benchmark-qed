@@ -29,6 +29,7 @@ dependencies = [
     "statsmodels>=0.14.4",
     "tiktoken>=0.9.0",
     "typer>=0.15.1",
+    "semversioner>=2.0.6",
 ]
 
 [dependency-groups]
@@ -94,6 +95,15 @@ test_coverage = [
     '_coverage_report'
 ]
 test_only = "pytest -v -k"
+
+_semversioner_release = "semversioner release"
+_semversioner_changelog = "semversioner changelog > CHANGELOG.md"
+semversioner_add = "semversioner add-change"
+[[tool.poe.tasks.release]]
+sequence = [
+    '_semversioner_release',
+    '_semversioner_changelog',
+]
 
 # https://github.com/microsoft/pyright/blob/9f81564a4685ff5c55edd3959f9b39030f590b2f/docs/configuration.md#sample-pyprojecttoml-file
 [tool.pyright]

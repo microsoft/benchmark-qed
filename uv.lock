@@ -240,6 +240,7 @@ dependencies = [
     { name = "pyyaml" },
     { name = "scikit-learn" },
     { name = "scipy" },
+    { name = "semversioner" },
     { name = "statsmodels" },
     { name = "tiktoken" },
     { name = "typer" },
@@ -281,6 +282,7 @@ requires-dist = [
     { name = "pyyaml", specifier = ">=6.0.2" },
     { name = "scikit-learn", specifier = ">=1.6.1" },
     { name = "scipy", specifier = ">=1.14.1" },
+    { name = "semversioner", specifier = ">=2.0.6" },
     { name = "statsmodels", specifier = ">=0.14.4" },
     { name = "tiktoken", specifier = ">=0.9.0" },
     { name = "typer", specifier = ">=0.15.1" },
@@ -2560,6 +2562,20 @@ wheels = [
     { url = "https://files.pythonhosted.org/packages/b7/8e/038ccfe29d272b30086b25a4960f757f97122cb2ec42e62b460d02fe98e9/scipy-1.15.3-cp313-cp313t-musllinux_1_2_aarch64.whl", hash = "sha256:40e54d5c7e7ebf1aa596c374c49fa3135f04648a0caabcb66c52884b943f02b4", size = 36393132, upload_time = "2025-05-08T16:08:15.34Z" },
     { url = "https://files.pythonhosted.org/packages/10/7e/5c12285452970be5bdbe8352c619250b97ebf7917d7a9a9e96b8a8140f17/scipy-1.15.3-cp313-cp313t-musllinux_1_2_x86_64.whl", hash = "sha256:5e721fed53187e71d0ccf382b6bf977644c533e506c4d33c3fb24de89f5c3ed5", size = 38979503, upload_time = "2025-05-08T16:08:21.513Z" },
     { url = "https://files.pythonhosted.org/packages/81/06/0a5e5349474e1cbc5757975b21bd4fad0e72ebf138c5592f191646154e06/scipy-1.15.3-cp313-cp313t-win_amd64.whl", hash = "sha256:76ad1fb5f8752eabf0fa02e4cc0336b4e8f021e2d5f061ed37d6d264db35e3ca", size = 40308097, upload_time = "2025-05-08T16:08:27.627Z" },
+]
+
+[[package]]
+name = "semversioner"
+version = "2.0.6"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "click" },
+    { name = "jinja2" },
+    { name = "packaging" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/92/b9/922cfdf95a3c986c16984212b823fcc0acde5eb62184f578e5c6202c90e3/semversioner-2.0.6.tar.gz", hash = "sha256:af7cf180c63601880e7de86cdc1fae0dd993339c5911769d9728c583b92af15c", size = 15617, upload_time = "2025-04-24T12:40:21.656Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/af/29/1fde3f7427b3e4595567d2354cb345004c34ab2747efe1d5192ee50e42ef/semversioner-2.0.6-py2.py3-none-any.whl", hash = "sha256:b43cb76118a9cd7b5e122ec25703b93f8cf96cda445f8b881abac362ec2d03f3", size = 13457, upload_time = "2025-04-24T12:40:20.677Z" },
 ]
 
 [[package]]
