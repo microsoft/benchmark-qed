@@ -96,7 +96,10 @@ class ModelFactory:
         ):
             msg = f"ChatModel implementation '{model_config.llm_provider}' is not registered."
             raise ValueError(msg)
-        if model_config.llm_provider in custom_provider_names:
+        if (
+            model_config.llm_provider in custom_provider_names
+            and model_config.llm_provider not in cls._chat_registry
+        ):
             cls.__register_custom_provider(model_config, ModelType.Chat)
         return cls._chat_registry[model_config.llm_provider](model_config)
 
@@ -122,7 +125,10 @@ class ModelFactory:
         ):
             msg = f"EmbeddingModel implementation '{model_config.llm_provider}' is not registered."
             raise ValueError(msg)
-        if model_config.llm_provider in custom_provider_names:
+        if (
+            model_config.llm_provider in custom_provider_names
+            and model_config.llm_provider not in cls._embedding_registry
+        ):
             cls.__register_custom_provider(model_config, ModelType.Embedding)
         return cls._embedding_registry[model_config.llm_provider](model_config)
 
