@@ -54,6 +54,12 @@ chat_model:
   #   For example, you can set the temperature, max tokens, etc.
   #   temperature: 0.0
   #   seed: 42
+  # custom_providers: # When implementing a custom LLM provider, you can add it here.
+  #   - model_type: chat
+  #     name: custom.chat # This name should match the llm_provider above
+  #     module: custom_test.custom_provider
+  #     model_class: CustomChatModel
+
 embedding_model:
   model: text-embedding-3-large
   auth_type: api_key # or azure_managed_identity
@@ -69,6 +75,11 @@ embedding_model:
   #   For example, you can set the temperature, max tokens, etc.
   #   temperature: 0.0
   #   seed: 42
+  # custom_providers: # When implementing a custom LLM provider, you can add it here.
+  #   - model_type: chat
+  #     name: custom.chat # This name should match the llm_provider above
+  #     module: custom_test.custom_provider
+  #     model_class: CustomChatModel
 
 ## Question Generation Configuration
 data_local:
@@ -127,7 +138,13 @@ llm_config:
   #   Additional arguments for the LLM call can be added here.
   #   For example, you can set the temperature, max tokens, etc.
   #   temperature: 0.0
-  #   seed: 42"""
+  #   seed: 42
+  # custom_providers: # When implementing a custom LLM provider, you can add it here.
+  #   - model_type: chat
+  #     name: custom.chat # This name should match the llm_provider above
+  #     module: custom_test.custom_provider
+  #     model_class: CustomChatModel"""
+
 
 AUTOE_REFERENCE_CONTENT = """## Input Configuration
 reference:
@@ -162,7 +179,12 @@ llm_config:
   #   Additional arguments for the LLM call can be added here.
   #   For example, you can set the temperature, max tokens, etc.
   #   temperature: 0.0
-  #   seed: 42"""
+  #   seed: 42
+  # custom_providers: # When implementing a custom LLM provider, you can add it here.
+  #   - model_type: chat
+  #     name: custom.chat # This name should match the llm_provider above
+  #     module: custom_test.custom_provider
+  #     model_class: CustomChatModel"""
 
 
 @app.command()
