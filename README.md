@@ -1,11 +1,6 @@
 # BenchmarkQED
 
-<!-- >
-TODO: 
- - Add missing badges
- - Add blog post final url
-<-->
-
+👉 [Microsoft Research Blog Post](https://www.microsoft.com/en-us/research/blog/benchmarkqed-automated-benchmarking-of-rag-systems/)<br/>
 👉 [BenchmarkQED Docs](https://microsoft.github.io/benchmark-qed/)<br/>
 
 <div align="left">
@@ -14,6 +9,9 @@ TODO:
   </a>
   <a href="https://github.com/microsoft/benchmark-qed/discussions">
     <img alt="GitHub Discussions" src="https://img.shields.io/github/discussions/microsoft/benchmark-qed">
+  </a>
+  <a href="https://pypi.org/project/benchmark-qed/">
+    <img alt="PyPI - Version" src="https://img.shields.io/pypi/v/benchmark-qed">
   </a>
 </div>
 
