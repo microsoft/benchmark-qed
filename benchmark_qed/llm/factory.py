@@ -16,7 +16,7 @@ from benchmark_qed.llm.provider.openai import (
 from benchmark_qed.llm.type.base import ChatModel, EmbeddingModel
 
 
-def __get_custom_provider_names(
+def _get_custom_provider_names(
     model_config: LLMConfig, model_type: ModelType
 ) -> list[str]:
     """Get the names of custom providers for the given model config."""
@@ -46,7 +46,7 @@ class ModelFactory:
         cls._embedding_registry[model_type] = creator
 
     @classmethod
-    def __register_custom_provider(
+    def _register_custom_provider(
         cls, model_config: LLMConfig, model_type: ModelType
     ) -> None:
         provider = next(
@@ -87,7 +87,7 @@ class ModelFactory:
         -------
             A ChatModel instance.
         """
-        custom_provider_names = __get_custom_provider_names(
+        custom_provider_names = _get_custom_provider_names(
             model_config, ModelType.Chat
         )
         if (
@@ -100,7 +100,7 @@ class ModelFactory:
             model_config.llm_provider in custom_provider_names
             and model_config.llm_provider not in cls._chat_registry
         ):
-            cls.__register_custom_provider(model_config, ModelType.Chat)
+            cls._register_custom_provider(model_config, ModelType.Chat)
         return cls._chat_registry[model_config.llm_provider](model_config)
 
     @classmethod
@@ -116,7 +116,7 @@ class ModelFactory:
         -------
             An EmbeddingLLM instance.
         """
-        custom_provider_names = __get_custom_provider_names(
+        custom_provider_names = _get_custom_provider_names(
             model_config, ModelType.Embedding
         )
         if (
@@ -129,7 +129,7 @@ class ModelFactory:
             model_config.llm_provider in custom_provider_names
             and model_config.llm_provider not in cls._embedding_registry
         ):
-            cls.__register_custom_provider(model_config, ModelType.Embedding)
+            cls._register_custom_provider(model_config, ModelType.Embedding)
         return cls._embedding_registry[model_config.llm_provider](model_config)
 
 
