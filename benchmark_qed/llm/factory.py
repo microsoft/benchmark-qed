@@ -87,9 +87,7 @@ class ModelFactory:
         -------
             A ChatModel instance.
         """
-        custom_provider_names = _get_custom_provider_names(
-            model_config, ModelType.Chat
-        )
+        custom_provider_names = _get_custom_provider_names(model_config, ModelType.Chat)
         if (
             model_config.llm_provider not in cls._chat_registry
             and model_config.llm_provider not in custom_provider_names
