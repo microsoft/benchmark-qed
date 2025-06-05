@@ -66,12 +66,13 @@ class ModelFactory:
                     f"from module '{provider.module}'. Please check the module and class name."
                 )
                 raise ImportError(msg) from e
-            if model_type == ModelType.Chat:
-                cls.register_chat(provider.name, lambda config: model_class(config))
-            elif model_type == ModelType.Embedding:
-                cls.register_embedding(
-                    provider.name, lambda config: model_class(config)
-                )
+            match model_type:
+                case ModelType.Chat:
+                    cls.register_chat(provider.name, lambda config: model_class(config))
+                case ModelType.Embedding:
+                    cls.register_embedding(
+                        provider.name, lambda config: model_class(config)
+                    )
 
     @classmethod
     def create_chat_model(cls, model_config: LLMConfig) -> ChatModel:
