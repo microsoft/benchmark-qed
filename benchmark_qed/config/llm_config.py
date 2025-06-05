@@ -19,6 +19,34 @@ class LLMProvider(StrEnum):
     AzureInferenceEmbedding = "azure.inference.embedding"
 
 
+class ModelType(StrEnum):
+    """Enum for the model type."""
+
+    Chat = "chat"
+    Embedding = "embedding"
+
+
+class CustomLLMProvider(BaseModel):
+    """Custom LLM provider configuration."""
+
+    model_type: ModelType = Field(
+        ...,
+        description="The type of model this custom provider implements.",
+    )
+    name: str = Field(
+        ...,
+        description="The name of the custom LLM provider.",
+    )
+    module: str = Field(
+        ...,
+        description="The module where the custom LLM provider is implemented",
+    )
+    model_class: str = Field(
+        ...,
+        description="Class name that implements the ChatModel or EmbeddingModel protocol.",
+    )
+
+
 class AuthType(StrEnum):
     """Enum for the authentication type."""
 
@@ -58,6 +86,11 @@ class LLMConfig(BaseModel):
     call_args: dict[str, Any] = Field(
         default_factory=lambda: {"temperature": 0.0, "seed": 42},
         description="Additional arguments to pass to the model when calling it.",
+    )
+
+    custom_providers: list[CustomLLMProvider] = Field(
+        default_factory=list,
+        description="List of custom LLM providers to register.",
     )
 
     @model_validator(mode="after")

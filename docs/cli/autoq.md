@@ -152,12 +152,12 @@ activity_global:
   num_entities_per_task: 5
 ```
 
-💡 Note: The api_key field uses an environment variable reference `${OPENAI_API_KEY}`. Make sure to define this variable in a .env file or your environment before running the application.
-
 ```
 # .env file
 OPENAI_API_KEY=your-secret-api-key-here
 ```
+
+>💡 Note: The api_key field uses an environment variable reference `${OPENAI_API_KEY}`. Make sure to define this variable in a .env file or your environment before running the application.
 
 ## CLI Reference
 

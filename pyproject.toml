@@ -29,7 +29,6 @@ dependencies = [
     "statsmodels>=0.14.4",
     "tiktoken>=0.9.0",
     "typer>=0.15.1",
-    "semversioner>=2.0.6",
 ]
 
 [dependency-groups]
@@ -49,6 +48,7 @@ dev = [
     "mkdocs-jupyter>=0.25.1",
     "mkdocs-exclude-search>=0.6.6",
     "mkdocs-typer2>=0.1.4",
+    "semversioner>=2.0.6",
 ]
 
 [build-system]
