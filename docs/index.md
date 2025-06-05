@@ -161,7 +161,9 @@ To learn how to use AutoE programmatically, please see the [AutoE Notebook Examp
 ### AutoD
 
 The AutoD component provides two main data utitilies:
+
 - Data sampling: Samples datasets to meet a target specification, defined by the number of topic clusters (breadth) and the number of samples per cluster (depth)
+
 - Data summarization: Summarizes input or output datasets in a way that reflect their topic coverage, using a map-reduce process. These summaries play an important role in the AutoQ query synthesis process, but they can also be used more broadly, such as in prompts where context space is limited. 
 
 To learn more about AutoD's data utilities, please see: [AutoD Notebook Example](notebooks/autod.ipynb).
