@@ -80,7 +80,7 @@ def load_text_doc(
         title=str(file_path.replace(".txt", "")),
         type="text",
         text=text,
-        attributes={},
+        attributes=None,
     )
 
 
