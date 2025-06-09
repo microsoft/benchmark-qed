@@ -6,6 +6,7 @@ import logging
 from collections.abc import Callable
 from typing import Any, TypeVar
 
+from json_repair import repair_json
 from pydantic import BaseModel, ValidationError
 
 from benchmark_qed.llm.type.base import ChatModel
@@ -29,7 +30,7 @@ async def chat_typed_response(
                 messages=messages,
                 **kwargs,
             )
-            json_response = str(response.output.content)
+            json_response = repair_json(str(response.output.content))
             parsed_response = json.loads(json_response)
             return data_model(**parsed_response)
         except json.JSONDecodeError as e:
