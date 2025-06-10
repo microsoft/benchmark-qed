@@ -33,6 +33,10 @@ def load_json_doc(
         for tag in metadata_tags:
             if tag in data:
                 metadata[tag] = data[tag]
+
+    if "date_created" not in metadata:
+        metadata["date_created"] = datetime.datetime.now(tz=datetime.UTC).isoformat()
+
     return Document(
         id=str(uuid4()),
         short_id=None,
@@ -80,7 +84,7 @@ def load_text_doc(
         title=str(file_path.replace(".txt", "")),
         type="text",
         text=text,
-        attributes={},
+        attributes={"date_created": datetime.datetime.now(tz=datetime.UTC).isoformat()},
     )
 
 
@@ -123,7 +127,7 @@ def load_csv_doc(
             for tag in metadata_tags:
                 if tag in data_df.columns:
                     metadata[tag] = getattr(row, tag)
-        if metadata is None or "date_created" not in metadata:
+        if "date_created" not in metadata:
             metadata["date_created"] = datetime.datetime.now(
                 tz=datetime.UTC
             ).isoformat()
