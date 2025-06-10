@@ -1,0 +1,26 @@
+{
+  "changes": [
+    {
+      "description": "Add LLM Custom Providers CLI Support through config",
+      "type": "minor"
+    },
+    {
+      "description": "Fix document loading bug + json repair on autoe",
+      "type": "minor"
+    },
+    {
+      "description": "Add semver",
+      "type": "patch"
+    },
+    {
+      "description": "Fix semver usage with poethepoet",
+      "type": "patch"
+    },
+    {
+      "description": "Update docs",
+      "type": "patch"
+    }
+  ],
+  "created_at": "2025-06-10T16:26:36+00:00",
+  "version": "0.1.0"
+}
