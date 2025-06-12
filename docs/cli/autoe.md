@@ -129,7 +129,7 @@ prompt_config:
 
 This applies to both `PairwiseConfig` and `ReferenceConfig`.
 
-See the [PromptConfig](../../benchmark_qed/config/prompt_config.py) class for details.
+See the [PromptConfig](https://github.com/microsoft/benchmark-qed/tree/main/benchmark_qed/config/prompt_config.py) class for details.
 
 ---
 
