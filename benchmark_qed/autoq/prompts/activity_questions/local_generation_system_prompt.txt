@@ -1,7 +1,3 @@
-# Copyright (c) 2025 Microsoft Corporation.
-"""Prompts for activity-local generation in AutoQ."""
-
-LOCAL_GENERAION_SYSTEM_PROMPT = """\
 ---ROLE---
 You are a helpful assistant tasked with identifying activity-related questions targeting key entities in a dataset.
 
@@ -37,41 +33,14 @@ Question set should be distinct, diverse and cover different aspects of the enti
 
 ---OUTPUT---
 Use the following JSON object structure:
-{{
+{
     "questions": [
-        {{
+        {
             "entities": ["A list of one or more entities from the list of provided entities that the question is focused on. Format each entity as entity_name: entity_description"],
             "output_question": "A concrete question that is relevant to the persona's task and can be answered based on the selected entity descriptions. Frame each question in a way that makes a clear reference to the selected entities and the persona's target task, without telegraphing the answer to the question. Keep the question short and concise. The question should ask only one thing at a time rather than having multiple sub-questions",
-        }},
+        },
         ...
     ]
-}}
+}
 
-Output JSON only, with no additional text or commentary. Aims for {num_questions} concrete questions.
-"""
-
-LOCAL_GENERAION_USER_PROMPT = """\
----Persona---
-{persona}
-
----Task of interest---
-{task}
-
----Entities---
-{entity_description}
-
----Number of questions to generate---
-{num_questions}
-
----OUTPUT---
-Outputthe following JSON object structure:
-{{
-    "questions": [
-        {{
-            "entities": ["A list of one or more entities from the list of provided entities that the question is focused on. Format each entity as entity_name: entity_description"],
-            "output_question": "A concrete question that is relevant to the persona's task and can be answered based on the selected entity descriptions.",
-        }},
-        ...
-    ]
-}}
-"""
+Output JSON only, with no additional text or commentary. Aims for ${num_questions} concrete questions.

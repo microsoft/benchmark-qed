@@ -59,6 +59,7 @@ async def __generate_data_local(
     oversample_factor: float,
     random_seed: int,
     concurrent_requests: int,
+    config: QuestionGenerationConfig,
 ) -> None:
     sample_texts_df = pd.read_parquet(f"{output_data_path}/sample_texts.parquet")
     sample_texts = load_text_units(df=sample_texts_df)
@@ -69,6 +70,9 @@ async def __generate_data_local(
         text_units=sample_texts,
         concurrent_coroutines=concurrent_requests,
         random_seed=random_seed,
+        extraction_prompt=config.data_questions_prompt_config.local_extraction_prompt.template,
+        text_input_prompt=config.data_questions_prompt_config.local_text_input_prompt.template,
+        generation_prompt=config.data_questions_prompt_config.local_generation_prompt.template,
     )
 
     data_local_question_results = await data_local_generator.agenerate(
@@ -103,6 +107,7 @@ async def __generate_data_global(
     oversample_factor: float,
     random_seed: int,
     concurrent_requests: int,
+    config: QuestionGenerationConfig,
 ) -> None:
     if not (
         output_data_path / "data_local_questions" / "candidate_questions.json"
@@ -122,6 +127,7 @@ async def __generate_data_global(
         local_questions=local_questions,
         concurrent_coroutines=concurrent_requests,
         random_seed=random_seed,
+        extraction_prompt=config.data_questions_prompt_config.global_extraction_prompt.template,
     )
 
     data_global_question_results = await data_global_generator.agenerate(
@@ -201,6 +207,7 @@ async def __generate_activity_local(
     oversample_factor: float,
     random_seed: int,
     concurrent_requests: int,
+    config: QuestionGenerationConfig,
 ) -> None:
     activity_context = ActivityContext(
         **json.loads(
@@ -208,12 +215,15 @@ async def __generate_activity_local(
         )
     )
 
+    # Use PromptConfig.template property for all prompt templates
     activity_local_generator = ActivityLocalQuestionGen(
         llm=llm,
         text_embedder=text_embedder,
         activity_context=activity_context,
         concurrent_coroutines=concurrent_requests,
         random_seed=random_seed,
+        generation_system_prompt=config.activity_questions_prompt_config.local_generation_system_prompt.template,
+        generation_user_prompt=config.activity_questions_prompt_config.local_generation_user_prompt.template,
     )
 
     activity_local_question_results = await activity_local_generator.agenerate(
@@ -248,6 +258,7 @@ async def __generate_activity_global(
     oversample_factor: float,
     random_seed: int,
     concurrent_requests: int,
+    config: QuestionGenerationConfig,
 ) -> None:
     activity_context = ActivityContext(
         **json.loads(
@@ -255,12 +266,15 @@ async def __generate_activity_global(
         )
     )
 
+    # Use PromptConfig.template property for all prompt templates
     activity_global_generator = ActivityGlobalQuestionGen(
         llm=llm,
         text_embedder=text_embedder,
         activity_context=activity_context,
         concurrent_coroutines=concurrent_requests,
         random_seed=random_seed,
+        generation_system_prompt=config.activity_questions_prompt_config.global_generation_system_prompt.template,
+        generation_user_prompt=config.activity_questions_prompt_config.global_generation_user_prompt.template,
     )
 
     activity_global_question_results = await activity_global_generator.agenerate(
@@ -424,6 +438,7 @@ def autoq(
                     oversample_factor=activity_config.oversample_factor,
                     random_seed=config.sampling.random_seed,
                     concurrent_requests=config.concurrent_requests,
+                    config=config,
                 )
             )
             first_activity = False
@@ -443,6 +458,7 @@ def autoq(
                     oversample_factor=data_config.oversample_factor,
                     random_seed=config.sampling.random_seed,
                     concurrent_requests=config.concurrent_requests,
+                    config=config,
                 )
             )
 

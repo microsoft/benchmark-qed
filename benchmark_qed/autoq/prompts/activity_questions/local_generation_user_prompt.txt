@@ -1,0 +1,23 @@
+---Persona---
+${persona}
+
+---Task of interest---
+${task}
+
+---Entities---
+${entity_description}
+
+---Number of questions to generate---
+${num_questions}
+
+---OUTPUT---
+Outputthe following JSON object structure:
+{
+    "questions": [
+        {
+            "entities": ["A list of one or more entities from the list of provided entities that the question is focused on. Format each entity as entity_name: entity_description"],
+            "output_question": "A concrete question that is relevant to the persona's task and can be answered based on the selected entity descriptions.",
+        },
+        ...
+    ]
+}

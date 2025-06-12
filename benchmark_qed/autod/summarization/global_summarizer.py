@@ -5,22 +5,18 @@ import asyncio
 import json
 import logging
 import operator
+from pathlib import Path
+from string import Template
 from typing import Any
 
 import tiktoken
 from tqdm.asyncio import tqdm_asyncio
 
+from benchmark_qed.autod import prompts
 from benchmark_qed.autod.data_model.text_unit import TextUnit
 from benchmark_qed.autod.data_processor.text_utils import (
     num_tokens,
     try_parse_json_object,
-)
-from benchmark_qed.autod.prompts.dataset_summary_prompts import (
-    MAP_SUMMARY_SYSTEM_PROMPT,
-    MAP_SUMMARY_USER_PROMPT,
-    NO_DATA_ANSWER,
-    REDUCE_SUMMARY_SYSTEM_PROMPT,
-    REDUCE_SUMMARY_USER_PROMPT,
 )
 from benchmark_qed.autod.sampler.clustering.constraint_kmeans import (
     ConstraintKmeansClustering,
@@ -30,9 +26,14 @@ from benchmark_qed.autod.summarization.base import (
     SummarizationResult,
 )
 from benchmark_qed.config.defaults import LLM_PARAMS
+from benchmark_qed.config.utils import load_template_file
 from benchmark_qed.llm.type.base import ChatModel
 
 log: logging.Logger = logging.getLogger(__name__)
+
+NO_DATA_ANSWER = "I am sorry but I am unable to summarize given the provided data."
+
+PROMPTS_PATH = Path(prompts.__file__).parent
 
 
 class GlobalSummarizer(BaseSummarizer):
@@ -41,11 +42,11 @@ class GlobalSummarizer(BaseSummarizer):
     def __init__(
         self,
         llm: ChatModel,
+        map_system_prompt: Template | None = None,
+        map_user_prompt: Template | None = None,
+        reduce_system_prompt: Template | None = None,
+        reduce_user_prompt: Template | None = None,
         token_encoder: tiktoken.Encoding | None = None,
-        map_system_prompt: str = MAP_SUMMARY_SYSTEM_PROMPT,
-        map_user_prompt: str = MAP_SUMMARY_USER_PROMPT,
-        reduce_system_prompt: str = REDUCE_SUMMARY_SYSTEM_PROMPT,
-        reduce_user_prompt: str = REDUCE_SUMMARY_USER_PROMPT,
         map_llm_params: dict[str, Any] = LLM_PARAMS,
         reduce_llm_params: dict[str, Any] = LLM_PARAMS,
         response_type: str = "single paragraph",
@@ -57,11 +58,21 @@ class GlobalSummarizer(BaseSummarizer):
             llm=llm,
             token_encoder=token_encoder,
         )
-        self.map_system_prompt = map_system_prompt
-        self.map_user_prompt = map_user_prompt
+        self.map_system_prompt: str = (
+            map_system_prompt
+            or load_template_file(PROMPTS_PATH / "map_summary_system_prompt.txt")
+        ).template
+        self.map_user_prompt: Template = map_user_prompt or load_template_file(
+            PROMPTS_PATH / "map_summary_user_prompt.txt"
+        )
         self.map_llm_params: dict[str, Any] = map_llm_params.copy()
-        self.reduce_system_prompt = reduce_system_prompt
-        self.reduce_user_prompt = reduce_user_prompt
+        self.reduce_system_prompt: str = (
+            reduce_system_prompt
+            or load_template_file(PROMPTS_PATH / "reduce_summary_system_prompt.txt")
+        ).template
+        self.reduce_user_prompt: Template = reduce_user_prompt or load_template_file(
+            PROMPTS_PATH / "reduce_summary_user_prompt.txt"
+        )
         self.reduce_llm_params: dict[str, Any] = reduce_llm_params.copy()
         self.response_type = response_type
 
@@ -139,7 +150,7 @@ class GlobalSummarizer(BaseSummarizer):
             {"role": "system", "content": self.map_system_prompt},
             {
                 "role": "user",
-                "content": self.map_user_prompt.format(dataset_data=context_data),
+                "content": self.map_user_prompt.substitute(dataset_data=context_data),
             },
         ]
         input_tokens = num_tokens(
@@ -277,7 +288,7 @@ class GlobalSummarizer(BaseSummarizer):
                 {"role": "system", "content": self.reduce_system_prompt},
                 {
                     "role": "user",
-                    "content": self.reduce_user_prompt.format(
+                    "content": self.reduce_user_prompt.substitute(
                         map_summaries=text_data, response_type=self.response_type
                     ),
                 },

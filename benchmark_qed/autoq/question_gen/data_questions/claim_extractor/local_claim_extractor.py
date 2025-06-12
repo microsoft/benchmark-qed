@@ -3,15 +3,15 @@
 
 import json
 import logging
+from pathlib import Path
+from string import Template
 from typing import Any, cast
 
 import pandas as pd
 
 from benchmark_qed.autod.data_model.text_unit import TextUnit
 from benchmark_qed.autod.data_processor.text_utils import try_parse_json_object
-from benchmark_qed.autoq.prompts.data_questions.claim_extraction_prompts import (
-    CLAIM_EXTRACTION_SYSTEM_PROMPT,
-)
+from benchmark_qed.autoq.prompts import data_questions
 from benchmark_qed.autoq.question_gen.data_questions.claim_extractor.claim_coverage import (
     get_relevant_references,
 )
@@ -19,9 +19,12 @@ from benchmark_qed.autoq.question_gen.data_questions.claim_extractor.typing impo
     ClaimExtractionResult,
 )
 from benchmark_qed.config.defaults import LLM_PARAMS
+from benchmark_qed.config.utils import load_template_file
 from benchmark_qed.llm.type.base import ChatModel
 
 log: logging.Logger = logging.getLogger(__name__)
+
+PROMPTS_PATH = Path(data_questions.__file__).parent
 
 
 class DataLocalClaimExtractor:
@@ -37,10 +40,12 @@ class DataLocalClaimExtractor:
         llm: ChatModel,
         llm_params: dict[str, Any] = LLM_PARAMS,
         json_mode: bool = True,
-        system_prompt: str = CLAIM_EXTRACTION_SYSTEM_PROMPT,
+        system_prompt: Template | None = None,
     ) -> None:
         self.llm = llm
-        self.system_prompt = system_prompt
+        self.system_prompt: Template = system_prompt or load_template_file(
+            PROMPTS_PATH / "claim_extraction_system_prompt.txt"
+        )
 
         self.llm_params = llm_params
         self.json_mode = json_mode
@@ -57,7 +62,7 @@ class DataLocalClaimExtractor:
         messages = [
             {
                 "role": "system",
-                "content": self.system_prompt.format(context_data=context_text),
+                "content": self.system_prompt.substitute(context_data=context_text),
             },
             {"role": "user", "content": question_text},
         ]

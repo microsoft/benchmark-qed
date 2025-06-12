@@ -96,6 +96,42 @@ OPENAI_API_KEY=your-secret-api-key-here
 
 >💡 Note: The api_key field uses an environment variable reference `${OPENAI_API_KEY}`. Make sure to define this variable in a .env file or your environment before running the application.
 
+---
+
+## Providing Prompts: File or Text
+
+Prompts for pairwise and reference-based scoring can be provided in two ways, as defined by the `PromptConfig` class:
+
+- **As a file path**: Specify the path to a `.txt` file containing the prompt (recommended for most use cases).
+- **As direct text**: Provide the prompt text directly in the configuration.
+
+Only one of these options should be set for each prompt. If both are set, or neither is set, an error will be raised.
+
+### Example (File Path)
+```yaml
+prompt_config:
+  user_prompt:
+    prompt: prompts/pairwise_user_prompt.txt
+  system_prompt:
+    prompt: prompts/pairwise_system_prompt.txt
+```
+
+### Example (Direct Text)
+```yaml
+prompt_config:
+  user_prompt:
+    prompt_text: |
+      Please compare the following answers and select the better one.
+  system_prompt:
+    prompt_text: |
+      You are an expert judge for answer quality.
+```
+
+This applies to both `PairwiseConfig` and `ReferenceConfig`.
+
+See the [PromptConfig](../../benchmark_qed/config/prompt_config.py) class for details.
+
+---
 
 ## Reference-Based Scoring Configuration
 
@@ -198,6 +234,7 @@ OPENAI_API_KEY=your-secret-api-key-here
 
 >💡 Note: The api_key field uses an environment variable reference `${OPENAI_API_KEY}`. Make sure to define this variable in a .env file or your environment before running the application.
 
+---
 
 ## CLI Reference
 
