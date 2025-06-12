@@ -1,0 +1,11 @@
+--INPUT QUESTIONS--
+${input_text}
+
+Output the following JSON object structure:
+
+{
+    "abstract_category": "The abstract category shared by the input questions.",
+    "questions": ["A list of global questions that requires a holistic understanding of the entire dataset, informed by the input local questions."]
+}
+
+Output a single JSON object only, not a list, with no additional text or commentary. Aim for ${num_questions} global questions.

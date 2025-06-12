@@ -1,7 +1,3 @@
-# Copyright (c) 2025 Microsoft Corporation.
-"""Prompts used for generation of activity-global questions in AutoQ."""
-
-GLOBAL_GENERATION_SYSTEM_PROMPT = """\
 ---ROLE---
 You are a helpful assistant tasked with identifying activity-related global questions targeting a dataset of interest.
 
@@ -31,29 +27,14 @@ Each generated question should:
 ---OUTPUT---
 Output questions as a JSON-formatted object with the following structure:
 
-{{
+{
     "questions": [
-        {{
+        {
             "reasoning": "A brief explanation of why the question is relevant based on the descriptions of dataset, persona and task.",
             "output_question": "The generated question based on the descriptions of dataset, persona and task."
-        }},
+        },
         ...
     ]
-}}
+}
 
 Output JSON only, with no additional text or commentary.
-"""
-
-GLOBAL_GENERATION_USER_PROMPT = """\
----Dataset description---
-{dataset_description}
-
----Persona---
-{persona}
-
----Task of interest---
-{task}
-
----Number of questions to generate---
-{num_questions}
-"""

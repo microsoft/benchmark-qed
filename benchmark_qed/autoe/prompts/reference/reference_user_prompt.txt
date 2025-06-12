@@ -1,0 +1,22 @@
+${score_id}
+
+---Question---
+${query}
+
+--- Start of ${answer_1_name} Answer---
+${answer_1}
+--- End of ${answer_1_name} Answer---
+
+
+--- Start of ${answer_2_name} Answer---
+${answer_2}
+--- End of ${answer_2_name} Answer---
+
+Assign a score from ${score_min} to ${score_max} based on how effectively the generated answer satisfies the following criterion in relation to the reference answer:
+${criteria_name}: ${criteria_description}
+
+Format your response as a JSON object with the following structure:
+{
+    "reasoning": "A detailed explanation of your assessment of the generated answer in relation to the evaluation criterion and reference answer.",
+    "score": <Integer score from ${score_min} to ${score_max}>
+}

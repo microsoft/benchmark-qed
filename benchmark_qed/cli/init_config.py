@@ -7,6 +7,12 @@ from typing import Annotated
 
 import typer
 
+from benchmark_qed.autod import prompts as autod_prompts
+from benchmark_qed.autoe.prompts import pairwise as pairwise_prompts
+from benchmark_qed.autoe.prompts import reference as reference_prompts
+from benchmark_qed.autoq.prompts import activity_questions as activity_questions_prompts
+from benchmark_qed.autoq.prompts import data_questions as data_questions_prompts
+
 app: typer.Typer = typer.Typer(pretty_exceptions_show_locals=False)
 
 
@@ -101,7 +107,52 @@ activity_global:
   num_tasks_per_persona: 2 # adjust this based on the number of questions you want to generate
   num_entities_per_task: 5 # adjust this based on the number of questions you want to generate
 
-concurrent_requests: 8"""
+concurrent_requests: 8
+
+map_reduce_prompt_config:
+  map_summary_system_prompt:
+    prompt: prompts/map_reduce/map_summary_system_prompt.txt
+  map_summary_user_prompt:
+    prompt: prompts/map_reduce/map_summary_user_prompt.txt
+  reduce_summary_system_prompt:
+    prompt: prompts/map_reduce/reduce_summary_system_prompt.txt
+  reduce_summary_user_prompt:
+    prompt: prompts/map_reduce/reduce_summary_user_prompt.txt
+
+activity_questions_prompt_config:
+  activity_identification_prompt:
+    prompt: prompts/activity_questions/activity_identification_prompt.txt
+  global_generation_system_prompt:
+    prompt: prompts/activity_questions/global_generation_system_prompt.txt
+  global_generation_user_prompt:
+    prompt: prompts/activity_questions/global_generation_user_prompt.txt
+  local_generation_system_prompt:
+    prompt: prompts/activity_questions/local_generation_system_prompt.txt
+  local_generation_user_prompt:
+    prompt: prompts/activity_questions/local_generation_user_prompt.txt
+  map_entity_extraction_system_prompt:
+    prompt: prompts/activity_questions/map_entity_extraction_system_prompt.txt
+  map_entity_extraction_user_prompt:
+    prompt: prompts/activity_questions/map_entity_extraction_user_prompt.txt
+  reduce_entity_extraction_system_prompt:
+    prompt: prompts/activity_questions/reduce_entity_extraction_system_prompt.txt
+  reduce_entity_extraction_user_prompt:
+    prompt: prompts/activity_questions/reduce_entity_extraction_user_prompt.txt
+
+data_questions_prompt_config:
+  claim_extraction_system_prompt:
+    prompt: prompts/data_questions/claim_extraction_system_prompt.txt
+  global_extraction_input_prompt:
+    prompt: prompts/data_questions/global_extraction_input_prompt.txt
+  global_extraction_prompt:
+    prompt: prompts/data_questions/global_extraction_prompt.txt
+  local_extraction_prompt:
+    prompt: prompts/data_questions/local_extraction_prompt.txt
+  local_generation_prompt:
+    prompt: prompts/data_questions/local_generation_prompt.txt
+  local_text_input_prompt:
+    prompt: prompts/data_questions/local_text_input_prompt.txt
+"""
 
 AUTOE_PAIRWISE_CONTENT = """## Input Configuration
 base:
@@ -143,7 +194,13 @@ llm_config:
   #   - model_type: chat
   #     name: custom.chat # This name should match the llm_provider above
   #     module: custom_test.custom_provider
-  #     model_class: CustomChatModel"""
+  #     model_class: CustomChatModel
+
+prompts_config:
+  user_prompt:
+    prompt: prompts/pairwise_user_prompt.txt
+  system_prompt:
+    prompt: prompts/pairwise_system_prompt.txt"""
 
 
 AUTOE_REFERENCE_CONTENT = """## Input Configuration
@@ -184,7 +241,23 @@ llm_config:
   #   - model_type: chat
   #     name: custom.chat # This name should match the llm_provider above
   #     module: custom_test.custom_provider
-  #     model_class: CustomChatModel"""
+  #     model_class: CustomChatModel
+
+prompts_config:
+  user_prompt: prompts/reference_user_prompt.txt
+  system_prompt: prompts/reference_system_prompt.txt"""
+
+
+def __copy_prompts(prompts_path: Path, output_path: Path) -> None:
+    """Copy prompts from the prompts directory to the output directory."""
+    if not output_path.exists():
+        output_path.mkdir(parents=True, exist_ok=True)
+    for prompt_file in prompts_path.glob("*.txt"):
+        target_file = output_path / prompt_file.name
+        target_file.write_text(
+            prompt_file.read_text(encoding="utf-8"), encoding="utf-8"
+        )
+        typer.echo(f"Copied {prompt_file} to {target_file}")
 
 
 @app.command()
@@ -211,10 +284,21 @@ def init(
     settings = root / "settings.yaml"
     if config_type == ConfigType.autoq:
         settings.write_text(AUTOQ_CONTENT, encoding="utf-8")
+        __copy_prompts(Path(autod_prompts.__file__).parent, root / "prompts" / "autod")
+        __copy_prompts(
+            Path(activity_questions_prompts.__file__).parent,
+            root / "prompts" / "activity_questions",
+        )
+        __copy_prompts(
+            Path(data_questions_prompts.__file__).parent,
+            root / "prompts" / "data_questions",
+        )
     elif config_type == ConfigType.autoe_pairwise:
         settings.write_text(AUTOE_PAIRWISE_CONTENT, encoding="utf-8")
+        __copy_prompts(Path(pairwise_prompts.__file__).parent, root / "prompts")
     elif config_type == ConfigType.autoe_reference:
         settings.write_text(AUTOE_REFERENCE_CONTENT, encoding="utf-8")
+        __copy_prompts(Path(reference_prompts.__file__).parent, root / "prompts")
 
     typer.echo(f"Configuration file created at {settings}")
 

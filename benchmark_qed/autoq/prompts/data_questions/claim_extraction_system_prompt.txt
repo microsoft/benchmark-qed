@@ -1,7 +1,3 @@
-# Copyright (c) 2025 Microsoft Corporation.
-"""Prompts used to extract claims from reference input texts."""
-
-CLAIM_EXTRACTION_SYSTEM_PROMPT = """
 ---Role---
 
 You are a helpful assistant responding to questions about data in the tables provided.
@@ -24,16 +20,16 @@ The response shall preserve the original meaning and use of modal verbs such as 
 Do not include information where the supporting evidence for it is not provided.
 
 The response should be JSON formatted as follows:
-{{
+{
     "claims": [
-        {{"statement": "Statement of claim 1", "sources": [a list of relevant source ids], "score": importance score value (integer)}},
-        {{"statement": "Statement of claim 2", "sources": [a list of relevant source ids], "score": importance score value (integer)}},
+        {"statement": "Statement of claim 1", "sources": [a list of relevant source ids], "score": importance score value (integer)},
+        {"statement": "Statement of claim 2", "sources": [a list of relevant source ids], "score": importance score value (integer)},
     ]
-}}
+}
 
 ---Data tables---
 
-{context_data}
+${context_data}
 
 
 ---Goal---
@@ -53,11 +49,9 @@ The response shall preserve the original meaning and use of modal verbs such as 
 Do not include information where the supporting evidence for it is not provided.
 
 The response should be JSON formatted as follows:
-{{
+{
     "claims": [
-        {{"statement": "Statement of claim 1", "sources": [a list of relevant source ids], "score": importance score value (integer)}},
-        {{"statement": "Statement of claim 2", "sources": [a list of relevant source ids], "score": importance score value (integer)}},
+        {"statement": "Statement of claim 1", "sources": [a list of relevant source ids], "score": importance score value (integer)},
+        {"statement": "Statement of claim 2", "sources": [a list of relevant source ids], "score": importance score value (integer)},
     ]
-}}
-
-"""
+}

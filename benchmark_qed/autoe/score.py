@@ -6,6 +6,8 @@ import functools
 import itertools
 import uuid
 from collections.abc import Callable
+from pathlib import Path
+from string import Template
 from typing import Any, NamedTuple
 
 import numpy as np
@@ -16,15 +18,15 @@ from scipy.stats import shapiro, ttest_rel, wilcoxon
 from statsmodels.stats.multitest import multipletests
 
 from benchmark_qed.autoe.config import Criteria
-from benchmark_qed.autoe.prompts import (
-    PAIRWISE_EVALUATION_SYSTEM_PROMPT,
-    PAIRWISE_EVALUATION_USER_PROMPT,
-    REFERENCE_EVALUATION_PROMPT,
-    REFERENCE_EVALUATION_USER_PROMPT,
-)
+from benchmark_qed.autoe.prompts import pairwise as pairwise_prompts
+from benchmark_qed.autoe.prompts import reference as reference_prompts
 from benchmark_qed.config.llm_config import LLMConfig
+from benchmark_qed.config.utils import load_template_file
 from benchmark_qed.llm.type.base import ChatModel
 from benchmark_qed.llm.utils import chat_typed_response
+
+PAIRWISE_PROMPTS_PATH = Path(pairwise_prompts.__file__).parent
+REFERENCE_PROMPTS_PATH = Path(reference_prompts.__file__).parent
 
 SCORE_MAPPING = {
     0: 0.5,
@@ -64,6 +66,8 @@ def get_pairwise_scores(
     other_name: str,
     base_answers: pd.DataFrame,
     other_answers: pd.DataFrame,
+    assessment_system_prompt: Template | None = None,
+    assessment_user_prompt: Template | None = None,
     criteria: list[Criteria],
     trials: int,
     include_score_id_in_prompt: bool = True,
@@ -85,6 +89,14 @@ def get_pairwise_scores(
     -------
         pd.DataFrame: A DataFrame containing the scores for each condition.
     """
+    assessment_system_prompt = assessment_system_prompt or load_template_file(
+        PAIRWISE_PROMPTS_PATH / "pairwise_eval_system_prompt.txt"
+    )
+
+    assessment_user_prompt = assessment_user_prompt or load_template_file(
+        PAIRWISE_PROMPTS_PATH / "pairwise_eval_user_prompt.txt"
+    )
+
     pairs = (
         base_answers.merge(
             other_answers,
@@ -117,6 +129,8 @@ def get_pairwise_scores(
                 answer_2=pair.answer_other,
                 criteria_name=criterion.name,
                 criteria_description=criterion.description,
+                assessment_system_prompt=assessment_system_prompt,
+                assessment_user_prompt=assessment_user_prompt,
                 complete_callback=functools.partial(
                     on_complete_callback, progress_tasks[criterion.name]
                 ),
@@ -148,8 +162,8 @@ async def get_pairwise_score(
     answer_2: str,
     criteria_name: str,
     criteria_description: str,
-    assessment_system_prompt: str = PAIRWISE_EVALUATION_SYSTEM_PROMPT,
-    assessment_user_prompt: str = PAIRWISE_EVALUATION_USER_PROMPT,
+    assessment_system_prompt: Template,
+    assessment_user_prompt: Template,
     complete_callback: Callable | None = None,
     trial: int = 0,
     include_score_id_in_prompt: bool = True,
@@ -188,7 +202,7 @@ async def get_pairwise_score(
     score_id = uuid.uuid4().hex
     score_id_text = f"Score ID: {score_id}\n" if include_score_id_in_prompt else ""
 
-    user_prompt = assessment_user_prompt.format(
+    user_prompt = assessment_user_prompt.substitute(
         score_id=score_id_text,
         question=question,
         answer1=answers_text[answers_order[0]],
@@ -197,7 +211,7 @@ async def get_pairwise_score(
         criteria_description=criteria_description,
     ).strip()
 
-    system_prompt = assessment_system_prompt.format(
+    system_prompt = assessment_system_prompt.substitute(
         criteria_name=criteria_name, criteria_description=criteria_description
     )
     assessment_response = await chat_typed_response(
@@ -244,6 +258,8 @@ def get_reference_scores(
     generated_answers: pd.DataFrame,
     reference_answers: pd.DataFrame,
     criteria: list[Criteria],
+    assessment_system_prompt: Template | None = None,
+    assessment_user_prompt: Template | None = None,
     trials: int,
     score_min: int = 1,
     score_max: int = 10,
@@ -269,6 +285,14 @@ def get_reference_scores(
     -------
     pd.DataFrame: A DataFrame containing the scores for each condition.
     """
+    assessment_system_prompt = assessment_system_prompt or load_template_file(
+        REFERENCE_PROMPTS_PATH / "reference_system_prompt.txt"
+    )
+
+    assessment_user_prompt = assessment_user_prompt or load_template_file(
+        REFERENCE_PROMPTS_PATH / "reference_user_prompt.txt"
+    )
+
     pairs = (
         reference_answers.merge(
             generated_answers,
@@ -300,6 +324,8 @@ def get_reference_scores(
                 generated_answer=pair.answer_other,
                 criteria_name=criterion.name,
                 criteria_description=criterion.description,
+                assessment_system_prompt=assessment_system_prompt,
+                assessment_user_prompt=assessment_user_prompt,
                 complete_callback=functools.partial(
                     on_complete_callback, progress_tasks[criterion.name]
                 ),
@@ -328,8 +354,8 @@ async def get_reference_score(
     generated_answer: str,
     criteria_name: str,
     criteria_description: str,
-    assessment_system_prompt: str = REFERENCE_EVALUATION_PROMPT,
-    assessment_user_prompt: str = REFERENCE_EVALUATION_USER_PROMPT,
+    assessment_system_prompt: Template,
+    assessment_user_prompt: Template,
     complete_callback: Callable | None = None,
     trial: int = 0,
     score_min: int = 1,
@@ -350,13 +376,13 @@ async def get_reference_score(
     score_id = uuid.uuid4().hex
     score_id_text = f"Score ID: {score_id}\n" if include_score_id_in_prompt else ""
 
-    system_prompt = assessment_system_prompt.format(
+    system_prompt = assessment_system_prompt.substitute(
         criteria_name=criteria_name,
         criteria_description=criteria_description,
         score_min=score_min,
         score_max=score_max,
     )
-    user_prompt = assessment_user_prompt.format(
+    user_prompt = assessment_user_prompt.substitute(
         score_id=score_id_text,
         query=question,
         answer_1_name=answer_1_name,

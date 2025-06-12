@@ -6,6 +6,8 @@ import json
 import logging
 import math
 import uuid
+from pathlib import Path
+from string import Template
 from typing import Any
 
 from tqdm.asyncio import tqdm_asyncio
@@ -24,19 +26,18 @@ from benchmark_qed.autod.sampler.sample_gen import load_texts_to_clusters
 from benchmark_qed.autod.sampler.sampling.kmeans_sampler import KmeansTextSampler
 from benchmark_qed.autoq.data_model.enums import QuestionType
 from benchmark_qed.autoq.data_model.question import Question
-from benchmark_qed.autoq.prompts.data_questions.local_question_prompts import (
-    LOCAL_EXTRACTION_PROMPT,
-    LOCAL_GENERATION_PROMPT,
-    LOCAL_TEXT_INPUT_PROMPT,
-)
+from benchmark_qed.autoq.prompts import data_questions
 from benchmark_qed.autoq.question_gen.base import BaseQuestionGen, QuestionGenResult
 from benchmark_qed.autoq.question_gen.data_questions.claim_extractor.local_claim_extractor import (
     DataLocalClaimExtractor,
 )
 from benchmark_qed.autoq.sampler.question_sampler import QuestionSampler
+from benchmark_qed.config.utils import load_template_file
 from benchmark_qed.llm.type.base import ChatModel
 
 log: logging.Logger = logging.getLogger(__name__)
+
+PROMPTS_PATH = Path(data_questions.__file__).parent
 
 
 class DataLocalQuestionGen(BaseQuestionGen):
@@ -51,9 +52,9 @@ class DataLocalQuestionGen(BaseQuestionGen):
         claim_extractor_params: dict[str, Any] | None = None,
         llm_params: dict[str, Any] = defs.LLM_PARAMS,
         json_mode: bool = True,
-        extraction_prompt: str = LOCAL_EXTRACTION_PROMPT,
-        text_input_prompt: str = LOCAL_TEXT_INPUT_PROMPT,
-        generation_prompt: str = LOCAL_GENERATION_PROMPT,
+        extraction_prompt: Template | None = None,
+        text_input_prompt: Template | None = None,
+        generation_prompt: Template | None = None,
         concurrent_coroutines: int = 32,
         random_seed: int = defs.RANDOM_SEED,
     ) -> None:
@@ -89,9 +90,17 @@ class DataLocalQuestionGen(BaseQuestionGen):
         else:
             self.llm_params.pop("response_format", None)
 
-        self.extraction_prompt = extraction_prompt
-        self.text_input_prompt = text_input_prompt
-        self.generation_prompt = generation_prompt
+        self.extraction_prompt: str = (
+            extraction_prompt
+            or load_template_file(PROMPTS_PATH / "local_extraction_prompt.txt")
+        ).template
+        self.text_input_prompt: Template = text_input_prompt or load_template_file(
+            PROMPTS_PATH / "local_text_input_prompt.txt"
+        )
+        self.generation_prompt: str = (
+            generation_prompt
+            or load_template_file(PROMPTS_PATH / "local_generation_prompt.txt")
+        ).template
         self.text_units = text_units
         self.text_embedder = text_embedder
         self.concurrent_coroutines = concurrent_coroutines
@@ -168,7 +177,7 @@ class DataLocalQuestionGen(BaseQuestionGen):
                 {"role": "system", "content": self.extraction_prompt},
                 {
                     "role": "user",
-                    "content": self.text_input_prompt.format(
+                    "content": self.text_input_prompt.substitute(
                         input_text=input_text, num_questions=num_questions
                     ),
                 },

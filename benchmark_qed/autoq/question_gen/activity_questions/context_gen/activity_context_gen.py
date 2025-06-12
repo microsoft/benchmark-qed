@@ -5,6 +5,8 @@ import asyncio
 import json
 import logging
 import uuid
+from pathlib import Path
+from string import Template
 from typing import Any
 
 import tiktoken
@@ -16,15 +18,16 @@ from benchmark_qed.autod.data_processor.text_utils import try_parse_json_object
 from benchmark_qed.autod.summarization.base import BaseSummarizer
 from benchmark_qed.autod.summarization.global_summarizer import GlobalSummarizer
 from benchmark_qed.autoq.data_model.activity import ActivityContext, TaskContext
-from benchmark_qed.autoq.prompts.activity_questions.activity_context_prompts import (
-    ACTIVITY_IDENTIFICATION_PROMPT,
-)
+from benchmark_qed.autoq.prompts import activity_questions
 from benchmark_qed.autoq.question_gen.activity_questions.context_gen.entity_extractor import (
     EntityExtractor,
 )
+from benchmark_qed.config.utils import load_template_file
 from benchmark_qed.llm.type.base import ChatModel
 
 log: logging.Logger = logging.getLogger(__name__)
+
+PROMPTS_PATH = Path(activity_questions.__file__).parent
 
 
 class ActivityContextGen:
@@ -38,7 +41,11 @@ class ActivityContextGen:
         token_encoder: tiktoken.Encoding | None = None,
         data_summarizer: BaseSummarizer | None = None,
         entity_extractor: EntityExtractor | None = None,
-        activity_identification_prompt: str = ACTIVITY_IDENTIFICATION_PROMPT,
+        activity_identification_prompt: Template | None = None,
+        map_system_prompt: Template | None = None,
+        map_user_prompt: Template | None = None,
+        reduce_system_prompt: Template | None = None,
+        reduce_user_prompt: Template | None = None,
         llm_params: dict[str, Any] = defs.LLM_PARAMS,
         concurrent_coroutines: int = 32,
         json_mode: bool = True,
@@ -48,7 +55,10 @@ class ActivityContextGen:
         self.text_units = text_units
         self.token_encoder = token_encoder
         self.llm_params = llm_params
-        self.activity_identification_prompt = activity_identification_prompt
+        self.activity_identification_prompt: Template = (
+            activity_identification_prompt
+            or load_template_file(PROMPTS_PATH / "activity_identification_prompt.txt")
+        )
         self.concurrent_coroutines = concurrent_coroutines
         self.json_mode = json_mode
         if json_mode:
@@ -63,6 +73,10 @@ class ActivityContextGen:
         else:
             self.data_summarizer: BaseSummarizer = GlobalSummarizer(
                 llm=llm,
+                map_system_prompt=map_system_prompt,
+                map_user_prompt=map_user_prompt,
+                reduce_system_prompt=reduce_system_prompt,
+                reduce_user_prompt=reduce_user_prompt,
                 token_encoder=token_encoder,
                 map_llm_params=llm_params,
                 reduce_llm_params=llm_params,
@@ -125,7 +139,7 @@ class ActivityContextGen:
         activity_messages = [
             {
                 "role": "system",
-                "content": self.activity_identification_prompt.format(
+                "content": self.activity_identification_prompt.substitute(
                     user_count=int(num_personas * oversample_factor),
                     task_count=num_tasks,
                     dataset_description=summary_str,

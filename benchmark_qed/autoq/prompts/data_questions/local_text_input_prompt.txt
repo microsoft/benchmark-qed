@@ -1,0 +1,12 @@
+--INPUT TEXTS--
+
+${input_text}
+
+--NUMBER OF QUESTIONS--
+Aims for ${num_questions} concrete questions.
+
+--OUTPUT--
+{
+    "background_information": "Background information that provides context for the question, e.g., who, what, where, when, why, how, etc. Background information may connect entities and concepts from multiple input texts",
+    "questions": ["A distinct and diverse list of concrete questions that follow from the background information and can be answered based on the input texts. Questions must stand alone in the absence of the background information. Questions should be specific, short, concise, and appropriately scoped to be completely answerable based on the input texts. Avoid repetitive questions and questions that contain multiple sub-questions."]
+}

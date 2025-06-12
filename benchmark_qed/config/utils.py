@@ -76,3 +76,21 @@ def load_config(config_path: Path | str, factory: Callable[..., T]) -> T:
     contents = __parse_env_vars(contents)
     contents = _parse(config_path.suffix, contents)
     return factory(**contents)
+
+
+def load_template_file(file_path: Path) -> Template:
+    """
+    Load a template file and return its contents.
+
+    Args
+    ----
+        file_path: The path to the template file.
+
+    Returns
+    -------
+        The contents of the template file as a string.
+    """
+    if not file_path.exists():
+        msg = f"Template file {file_path} does not exist."
+        raise FileNotFoundError(msg)
+    return Template(file_path.read_text())

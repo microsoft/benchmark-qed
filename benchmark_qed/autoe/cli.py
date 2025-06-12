@@ -108,6 +108,8 @@ def pairwise_scores(
                         encoding="utf-8",
                     ),
                     criteria=config.criteria,
+                    assessment_user_prompt=config.prompt_config.user_prompt.template,
+                    assessment_system_prompt=config.prompt_config.system_prompt.template,
                     trials=config.trials,
                     question_id_key=question_id_key,
                     include_score_id_in_prompt=include_score_id_in_prompt,
@@ -210,6 +212,8 @@ def reference_scores(
                 config.reference.answer_base_path, encoding="utf-8"
             ),
             criteria=config.criteria,
+            assessment_user_prompt=config.prompt_config.user_prompt.template,
+            assessment_system_prompt=config.prompt_config.system_prompt.template,
             score_min=config.score_min,
             score_max=config.score_max,
             trials=config.trials,
