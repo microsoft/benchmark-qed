@@ -621,6 +621,39 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#providing-prompts-file-or-text" class="md-nav__link">
+    <span class="md-ellipsis">
+      Providing Prompts: File or Text
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Providing Prompts: File or Text">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-file-path" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example (File Path)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-direct-text" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example (Direct Text)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#reference-based-scoring-configuration" class="md-nav__link">
     <span class="md-ellipsis">
       Reference-Based Scoring Configuration
@@ -1160,6 +1193,39 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#providing-prompts-file-or-text" class="md-nav__link">
+    <span class="md-ellipsis">
+      Providing Prompts: File or Text
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Providing Prompts: File or Text">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-file-path" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example (File Path)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-direct-text" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example (Direct Text)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#reference-based-scoring-configuration" class="md-nav__link">
     <span class="md-ellipsis">
       Reference-Based Scoring Configuration
@@ -1550,13 +1616,40 @@
 <blockquote>
 <p>💡 Note: The api_key field uses an environment variable reference <code>${OPENAI_API_KEY}</code>. Make sure to define this variable in a .env file or your environment before running the application.</p>
 </blockquote>
+<hr />
+<h2 id="providing-prompts-file-or-text">Providing Prompts: File or Text</h2>
+<p>Prompts for pairwise and reference-based scoring can be provided in two ways, as defined by the <code>PromptConfig</code> class:</p>
+<ul>
+<li><strong>As a file path</strong>: Specify the path to a <code>.txt</code> file containing the prompt (recommended for most use cases).</li>
+<li><strong>As direct text</strong>: Provide the prompt text directly in the configuration.</li>
+</ul>
+<p>Only one of these options should be set for each prompt. If both are set, or neither is set, an error will be raised.</p>
+<h3 id="example-file-path">Example (File Path)</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nt">prompt_config</span><span class="p">:</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span><span class="nt">user_prompt</span><span class="p">:</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span><span class="nt">prompt</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">prompts/pairwise_user_prompt.txt</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">  </span><span class="nt">system_prompt</span><span class="p">:</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">    </span><span class="nt">prompt</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">prompts/pairwise_system_prompt.txt</span>
+</code></pre></div>
+<h3 id="example-direct-text">Example (Direct Text)</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nt">prompt_config</span><span class="p">:</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">  </span><span class="nt">user_prompt</span><span class="p">:</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">    </span><span class="nt">prompt_text</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">      </span><span class="no">Please compare the following answers and select the better one.</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">  </span><span class="nt">system_prompt</span><span class="p">:</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">    </span><span class="nt">prompt_text</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="w">      </span><span class="no">You are an expert judge for answer quality.</span>
+</code></pre></div>
+<p>This applies to both <code>PairwiseConfig</code> and <code>ReferenceConfig</code>.</p>
+<p>See the <a href="https://github.com/microsoft/benchmark-qed/tree/main/benchmark_qed/config/prompt_config.py">PromptConfig</a> class for details.</p>
+<hr />
 <h2 id="reference-based-scoring-configuration">Reference-Based Scoring Configuration</h2>
 <p>This section explains how to configure reference-based scoring, where generated answers are evaluated against a reference set using the LLM-as-a-Judge approach. It covers the definitions for reference and generated conditions, scoring criteria, and model configuration. For details on LLM configuration, see: <a href="../llm_config/">LLM Configuration</a></p>
 <p>To create a template configuration file, run:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>benchmark-qed<span class="w"> </span>config<span class="w"> </span>init<span class="w"> </span>autoe_reference<span class="w"> </span>local/reference_test/settings.yaml
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>benchmark-qed<span class="w"> </span>config<span class="w"> </span>init<span class="w"> </span>autoe_reference<span class="w"> </span>local/reference_test/settings.yaml
 </code></pre></div>
 <p>To perform reference-based scoring with your configuration file, run:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>benchmark-qed<span class="w"> </span>autoe<span class="w"> </span>reference-scores<span class="w"> </span>local/reference_test/settings.yaml<span class="w"> </span>local/reference_test/output
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>benchmark-qed<span class="w"> </span>autoe<span class="w"> </span>reference-scores<span class="w"> </span>local/reference_test/settings.yaml<span class="w"> </span>local/reference_test/output
 </code></pre></div>
 <p>For information about the <code>config init</code> command, see: <a href="../config_init/">Config Init CLI</a></p>
 <hr />
@@ -1668,43 +1761,44 @@
 <hr />
 <h3 id="yaml-example_1">YAML Example</h3>
 <p>Below is an example of how this configuration might be represented in a YAML file. The API key is referenced using an environment variable.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nt">reference</span><span class="p">:</span>
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">lazygraphrag</span>
-<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">  </span><span class="nt">answer_base_path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">input/lazygraphrag/activity_global.json</span>
-<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>
-<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="nt">generated</span><span class="p">:</span>
-<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">vector_rag</span>
-<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="w">    </span><span class="nt">answer_base_path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">input/vector_rag/activity_global.json</span>
-<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>
-<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="c1"># Scoring scale</span>
-<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="nt">score_min</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
-<a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a><span class="nt">score_max</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10</span>
-<a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a>
-<a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a><span class="c1"># Optional: Custom Evaluation Criteria</span>
-<a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a><span class="c1"># You may define your own list of evaluation criteria here. If this section is omitted, the default criteria will be used.</span>
-<a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a><span class="c1"># criteria: </span>
-<a id="__codelineno-6-16" name="__codelineno-6-16" href="#__codelineno-6-16"></a><span class="c1">#   - name: &quot;criteria name&quot;</span>
-<a id="__codelineno-6-17" name="__codelineno-6-17" href="#__codelineno-6-17"></a><span class="c1">#     description: &quot;criteria description&quot;</span>
-<a id="__codelineno-6-18" name="__codelineno-6-18" href="#__codelineno-6-18"></a>
-<a id="__codelineno-6-19" name="__codelineno-6-19" href="#__codelineno-6-19"></a><span class="nt">trials</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4</span>
-<a id="__codelineno-6-20" name="__codelineno-6-20" href="#__codelineno-6-20"></a>
-<a id="__codelineno-6-21" name="__codelineno-6-21" href="#__codelineno-6-21"></a><span class="nt">llm_config</span><span class="p">:</span>
-<a id="__codelineno-6-22" name="__codelineno-6-22" href="#__codelineno-6-22"></a><span class="w">  </span><span class="nt">model</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;gpt-4.1&quot;</span>
-<a id="__codelineno-6-23" name="__codelineno-6-23" href="#__codelineno-6-23"></a><span class="w">  </span><span class="nt">auth_type</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;api_key&quot;</span>
-<a id="__codelineno-6-24" name="__codelineno-6-24" href="#__codelineno-6-24"></a><span class="w">  </span><span class="nt">api_key</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${OPENAI_API_KEY}</span>
-<a id="__codelineno-6-25" name="__codelineno-6-25" href="#__codelineno-6-25"></a><span class="w">  </span><span class="nt">concurrent_requests</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4</span>
-<a id="__codelineno-6-26" name="__codelineno-6-26" href="#__codelineno-6-26"></a><span class="w">  </span><span class="nt">llm_provider</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;openai.chat&quot;</span>
-<a id="__codelineno-6-27" name="__codelineno-6-27" href="#__codelineno-6-27"></a><span class="w">  </span><span class="nt">init_args</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{}</span>
-<a id="__codelineno-6-28" name="__codelineno-6-28" href="#__codelineno-6-28"></a><span class="w">  </span><span class="nt">call_args</span><span class="p">:</span>
-<a id="__codelineno-6-29" name="__codelineno-6-29" href="#__codelineno-6-29"></a><span class="w">    </span><span class="nt">temperature</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0</span>
-<a id="__codelineno-6-30" name="__codelineno-6-30" href="#__codelineno-6-30"></a><span class="w">    </span><span class="nt">seed</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">42</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nt">reference</span><span class="p">:</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">lazygraphrag</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">  </span><span class="nt">answer_base_path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">input/lazygraphrag/activity_global.json</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="nt">generated</span><span class="p">:</span>
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">vector_rag</span>
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="w">    </span><span class="nt">answer_base_path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">input/vector_rag/activity_global.json</span>
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>
+<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span class="c1"># Scoring scale</span>
+<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a><span class="nt">score_min</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+<a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a><span class="nt">score_max</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10</span>
+<a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a>
+<a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a><span class="c1"># Optional: Custom Evaluation Criteria</span>
+<a id="__codelineno-8-14" name="__codelineno-8-14" href="#__codelineno-8-14"></a><span class="c1"># You may define your own list of evaluation criteria here. If this section is omitted, the default criteria will be used.</span>
+<a id="__codelineno-8-15" name="__codelineno-8-15" href="#__codelineno-8-15"></a><span class="c1"># criteria: </span>
+<a id="__codelineno-8-16" name="__codelineno-8-16" href="#__codelineno-8-16"></a><span class="c1">#   - name: &quot;criteria name&quot;</span>
+<a id="__codelineno-8-17" name="__codelineno-8-17" href="#__codelineno-8-17"></a><span class="c1">#     description: &quot;criteria description&quot;</span>
+<a id="__codelineno-8-18" name="__codelineno-8-18" href="#__codelineno-8-18"></a>
+<a id="__codelineno-8-19" name="__codelineno-8-19" href="#__codelineno-8-19"></a><span class="nt">trials</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4</span>
+<a id="__codelineno-8-20" name="__codelineno-8-20" href="#__codelineno-8-20"></a>
+<a id="__codelineno-8-21" name="__codelineno-8-21" href="#__codelineno-8-21"></a><span class="nt">llm_config</span><span class="p">:</span>
+<a id="__codelineno-8-22" name="__codelineno-8-22" href="#__codelineno-8-22"></a><span class="w">  </span><span class="nt">model</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;gpt-4.1&quot;</span>
+<a id="__codelineno-8-23" name="__codelineno-8-23" href="#__codelineno-8-23"></a><span class="w">  </span><span class="nt">auth_type</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;api_key&quot;</span>
+<a id="__codelineno-8-24" name="__codelineno-8-24" href="#__codelineno-8-24"></a><span class="w">  </span><span class="nt">api_key</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${OPENAI_API_KEY}</span>
+<a id="__codelineno-8-25" name="__codelineno-8-25" href="#__codelineno-8-25"></a><span class="w">  </span><span class="nt">concurrent_requests</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4</span>
+<a id="__codelineno-8-26" name="__codelineno-8-26" href="#__codelineno-8-26"></a><span class="w">  </span><span class="nt">llm_provider</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;openai.chat&quot;</span>
+<a id="__codelineno-8-27" name="__codelineno-8-27" href="#__codelineno-8-27"></a><span class="w">  </span><span class="nt">init_args</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{}</span>
+<a id="__codelineno-8-28" name="__codelineno-8-28" href="#__codelineno-8-28"></a><span class="w">  </span><span class="nt">call_args</span><span class="p">:</span>
+<a id="__codelineno-8-29" name="__codelineno-8-29" href="#__codelineno-8-29"></a><span class="w">    </span><span class="nt">temperature</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0</span>
+<a id="__codelineno-8-30" name="__codelineno-8-30" href="#__codelineno-8-30"></a><span class="w">    </span><span class="nt">seed</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">42</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a># .env file
-<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>OPENAI_API_KEY=your-secret-api-key-here
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a># .env file
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>OPENAI_API_KEY=your-secret-api-key-here
 </code></pre></div>
 <blockquote>
 <p>💡 Note: The api_key field uses an environment variable reference <code>${OPENAI_API_KEY}</code>. Make sure to define this variable in a .env file or your environment before running the application.</p>
 </blockquote>
+<hr />
 <h2 id="cli-reference">CLI Reference</h2>
 <p>This section documents the command-line interface of the BenchmarkQED's AutoE package.</p>
 <div class="typer-docs">

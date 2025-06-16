@@ -625,6 +625,39 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#providing-prompts-file-or-text" class="md-nav__link">
+    <span class="md-ellipsis">
+      Providing Prompts: File or Text
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Providing Prompts: File or Text">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-file-path" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example (File Path)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-direct-text" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example (Direct Text)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#cli-reference" class="md-nav__link">
     <span class="md-ellipsis">
       CLI Reference
@@ -1049,6 +1082,39 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#providing-prompts-file-or-text" class="md-nav__link">
+    <span class="md-ellipsis">
+      Providing Prompts: File or Text
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Providing Prompts: File or Text">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-file-path" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example (File Path)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-direct-text" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example (Direct Text)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#cli-reference" class="md-nav__link">
     <span class="md-ellipsis">
       CLI Reference
@@ -1438,12 +1504,33 @@
 <a id="__codelineno-2-50" name="__codelineno-2-50" href="#__codelineno-2-50"></a><span class="w">  </span><span class="nt">num_tasks_per_persona</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span>
 <a id="__codelineno-2-51" name="__codelineno-2-51" href="#__codelineno-2-51"></a><span class="w">  </span><span class="nt">num_entities_per_task</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a># .env file
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="gh"># .env file</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>OPENAI_API_KEY=your-secret-api-key-here
 </code></pre></div>
 <blockquote>
 <p>💡 Note: The api_key field uses an environment variable reference <code>${OPENAI_API_KEY}</code>. Make sure to define this variable in a .env file or your environment before running the application.</p>
 </blockquote>
+<h2 id="providing-prompts-file-or-text">Providing Prompts: File or Text</h2>
+<p>Prompts for question generation can be provided in two ways, as defined by the <code>PromptConfig</code> class:</p>
+<ul>
+<li><strong>As a file path</strong>: Specify the path to a <code>.txt</code> file containing the prompt (recommended for most use cases).</li>
+<li><strong>As direct text</strong>: Provide the prompt text directly in the configuration.</li>
+</ul>
+<p>Only one of these options should be set for each prompt. If both are set, or neither is set, an error will be raised.</p>
+<h3 id="example-file-path">Example (File Path)</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nt">activity_questions_prompt_config</span><span class="p">:</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span><span class="nt">activity_local_gen_system_prompt</span><span class="p">:</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span><span class="nt">prompt</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">prompts/activity_questions/local/activity_local_gen_system_prompt.txt</span>
+</code></pre></div>
+<h3 id="example-direct-text">Example (Direct Text)</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nt">activity_questions_prompt_config</span><span class="p">:</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">  </span><span class="nt">activity_local_gen_system_prompt</span><span class="p">:</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">    </span><span class="nt">prompt_text</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">      </span><span class="no">Generate a question about the following activity:</span>
+</code></pre></div>
+<p>This applies to all prompt fields in <a href="https://github.com/microsoft/benchmark-qed/tree/main/benchmark_qed/autoq/config.py#L289-L302"><code>QuestionGenerationConfig</code></a> (including <a href="https://github.com/microsoft/benchmark-qed/tree/main/benchmark_qed/autoq/config.py#L106-L130">map/reduce</a>, <a href="https://github.com/microsoft/benchmark-qed/tree/main/benchmark_qed/autoq/config.py#L133-L192">activity question generation</a>, and <a href="https://github.com/microsoft/benchmark-qed/tree/main/benchmark_qed/autoq/config.py#L195-L233">data question generation</a> prompt configs).</p>
+<p>See the <a href="https://github.com/microsoft/benchmark-qed/tree/main/benchmark_qed/config/prompt_config.py">PromptConfig</a> class for details.</p>
+<hr />
 <h2 id="cli-reference">CLI Reference</h2>
 <p>This section documents the command-line interface of the BenchmarkQED's AutoQ package.</p>
 <div class="typer-docs">
