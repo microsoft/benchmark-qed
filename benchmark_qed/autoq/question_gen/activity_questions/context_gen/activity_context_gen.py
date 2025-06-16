@@ -18,7 +18,7 @@ from benchmark_qed.autod.data_processor.text_utils import try_parse_json_object
 from benchmark_qed.autod.summarization.base import BaseSummarizer
 from benchmark_qed.autod.summarization.global_summarizer import GlobalSummarizer
 from benchmark_qed.autoq.data_model.activity import ActivityContext, TaskContext
-from benchmark_qed.autoq.prompts import activity_questions
+from benchmark_qed.autoq.prompts.activity_questions import activity_context
 from benchmark_qed.autoq.question_gen.activity_questions.context_gen.entity_extractor import (
     EntityExtractor,
 )
@@ -27,7 +27,7 @@ from benchmark_qed.llm.type.base import ChatModel
 
 log: logging.Logger = logging.getLogger(__name__)
 
-PROMPTS_PATH = Path(activity_questions.__file__).parent
+CONTEXT_PROMPTS = Path(activity_context.__file__).parent
 
 
 class ActivityContextGen:
@@ -46,6 +46,10 @@ class ActivityContextGen:
         map_user_prompt: Template | None = None,
         reduce_system_prompt: Template | None = None,
         reduce_user_prompt: Template | None = None,
+        entity_extractor_map_system_prompt: Template | None = None,
+        entity_extractor_map_user_prompt: Template | None = None,
+        entity_extractor_reduce_system_prompt: Template | None = None,
+        entity_extractor_reduce_user_prompt: Template | None = None,
         llm_params: dict[str, Any] = defs.LLM_PARAMS,
         concurrent_coroutines: int = 32,
         json_mode: bool = True,
@@ -57,7 +61,9 @@ class ActivityContextGen:
         self.llm_params = llm_params
         self.activity_identification_prompt: Template = (
             activity_identification_prompt
-            or load_template_file(PROMPTS_PATH / "activity_identification_prompt.txt")
+            or load_template_file(
+                CONTEXT_PROMPTS / "activity_identification_prompt.txt"
+            )
         )
         self.concurrent_coroutines = concurrent_coroutines
         self.json_mode = json_mode
@@ -92,6 +98,10 @@ class ActivityContextGen:
                 map_llm_params=llm_params,
                 reduce_llm_params=llm_params,
                 concurrent_coroutines=concurrent_coroutines,
+                map_system_prompt=entity_extractor_map_system_prompt,
+                map_user_prompt=entity_extractor_map_user_prompt,
+                reduce_system_prompt=entity_extractor_reduce_system_prompt,
+                reduce_user_prompt=entity_extractor_reduce_user_prompt,
             )
 
     async def agenerate(

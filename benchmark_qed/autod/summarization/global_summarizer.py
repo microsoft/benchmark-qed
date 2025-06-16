@@ -33,7 +33,7 @@ log: logging.Logger = logging.getLogger(__name__)
 
 NO_DATA_ANSWER = "I am sorry but I am unable to summarize given the provided data."
 
-PROMPTS_PATH = Path(prompts.__file__).parent
+SUMMARY_PROMPTS = Path(prompts.__file__).parent
 
 
 class GlobalSummarizer(BaseSummarizer):
@@ -60,18 +60,18 @@ class GlobalSummarizer(BaseSummarizer):
         )
         self.map_system_prompt: str = (
             map_system_prompt
-            or load_template_file(PROMPTS_PATH / "map_summary_system_prompt.txt")
+            or load_template_file(SUMMARY_PROMPTS / "map_summary_system_prompt.txt")
         ).template
         self.map_user_prompt: Template = map_user_prompt or load_template_file(
-            PROMPTS_PATH / "map_summary_user_prompt.txt"
+            SUMMARY_PROMPTS / "map_summary_user_prompt.txt"
         )
         self.map_llm_params: dict[str, Any] = map_llm_params.copy()
         self.reduce_system_prompt: str = (
             reduce_system_prompt
-            or load_template_file(PROMPTS_PATH / "reduce_summary_system_prompt.txt")
+            or load_template_file(SUMMARY_PROMPTS / "reduce_summary_system_prompt.txt")
         ).template
         self.reduce_user_prompt: Template = reduce_user_prompt or load_template_file(
-            PROMPTS_PATH / "reduce_summary_user_prompt.txt"
+            SUMMARY_PROMPTS / "reduce_summary_user_prompt.txt"
         )
         self.reduce_llm_params: dict[str, Any] = reduce_llm_params.copy()
         self.response_type = response_type

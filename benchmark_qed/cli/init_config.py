@@ -10,8 +10,22 @@ import typer
 from benchmark_qed.autod import prompts as autod_prompts
 from benchmark_qed.autoe.prompts import pairwise as pairwise_prompts
 from benchmark_qed.autoe.prompts import reference as reference_prompts
-from benchmark_qed.autoq.prompts import activity_questions as activity_questions_prompts
 from benchmark_qed.autoq.prompts import data_questions as data_questions_prompts
+from benchmark_qed.autoq.prompts.activity_questions import (
+    activity_context as activity_context_prompts,
+)
+from benchmark_qed.autoq.prompts.activity_questions import (
+    global_questions as activity_global_prompts,
+)
+from benchmark_qed.autoq.prompts.activity_questions import (
+    local_questions as activity_local_prompts,
+)
+from benchmark_qed.autoq.prompts.data_questions import (
+    global_questions as data_global_prompts,
+)
+from benchmark_qed.autoq.prompts.data_questions import (
+    local_questions as data_local_prompts,
+)
 
 app: typer.Typer = typer.Typer(pretty_exceptions_show_locals=False)
 
@@ -109,49 +123,53 @@ activity_global:
 
 concurrent_requests: 8
 
-map_reduce_prompt_config:
-  map_summary_system_prompt:
-    prompt: prompts/map_reduce/map_summary_system_prompt.txt
-  map_summary_user_prompt:
-    prompt: prompts/map_reduce/map_summary_user_prompt.txt
-  reduce_summary_system_prompt:
-    prompt: prompts/map_reduce/reduce_summary_system_prompt.txt
-  reduce_summary_user_prompt:
-    prompt: prompts/map_reduce/reduce_summary_user_prompt.txt
-
 activity_questions_prompt_config:
-  activity_identification_prompt:
-    prompt: prompts/activity_questions/activity_identification_prompt.txt
-  global_generation_system_prompt:
-    prompt: prompts/activity_questions/global_generation_system_prompt.txt
-  global_generation_user_prompt:
-    prompt: prompts/activity_questions/global_generation_user_prompt.txt
-  local_generation_system_prompt:
-    prompt: prompts/activity_questions/local_generation_system_prompt.txt
-  local_generation_user_prompt:
-    prompt: prompts/activity_questions/local_generation_user_prompt.txt
-  map_entity_extraction_system_prompt:
-    prompt: prompts/activity_questions/map_entity_extraction_system_prompt.txt
-  map_entity_extraction_user_prompt:
-    prompt: prompts/activity_questions/map_entity_extraction_user_prompt.txt
-  reduce_entity_extraction_system_prompt:
-    prompt: prompts/activity_questions/reduce_entity_extraction_system_prompt.txt
-  reduce_entity_extraction_user_prompt:
-    prompt: prompts/activity_questions/reduce_entity_extraction_user_prompt.txt
+  activity_context_prompt_config:
+    data_summary_prompt_config:
+      map_summary_system_prompt:
+        prompt: prompts/activity_questions/activity_context/data_summary/map_summary_system_prompt.txt
+      map_summary_user_prompt:
+        prompt: prompts/activity_questions/activity_context/data_summary/map_summary_user_prompt.txt
+      reduce_summary_system_prompt:
+        prompt: prompts/activity_questions/activity_context/data_summary/reduce_summary_system_prompt.txt
+      reduce_summary_user_prompt:
+        prompt: prompts/activity_questions/activity_context/data_summary/reduce_summary_user_prompt.txt
+    activity_identification_prompt:
+      prompt: prompts/activity_questions/activity_context/activity_identification_prompt.txt
+    map_entity_extraction_system_prompt:
+      prompt: prompts/activity_questions/activity_context/map_entity_extraction_system_prompt.txt
+    map_entity_extraction_user_prompt:
+      prompt: prompts/activity_questions/activity_context/map_entity_extraction_user_prompt.txt
+    reduce_entity_extraction_system_prompt:
+      prompt: prompts/activity_questions/activity_context/reduce_entity_extraction_system_prompt.txt
+    reduce_entity_extraction_user_prompt:
+      prompt: prompts/activity_questions/activity_context/reduce_entity_extraction_user_prompt.txt
+  activity_global_prompt_config:
+    global_generation_system_prompt:
+      prompt: prompts/activity_questions/activity_global/global_generation_system_prompt.txt
+    global_generation_user_prompt:
+      prompt: prompts/activity_questions/activity_global/global_generation_user_prompt.txt
+  activity_local_prompt_config:
+    local_generation_system_prompt:
+      prompt: prompts/activity_questions/activity_local/local_generation_system_prompt.txt
+    local_generation_user_prompt:
+      prompt: prompts/activity_questions/activity_local/local_generation_user_prompt.txt
 
 data_questions_prompt_config:
   claim_extraction_system_prompt:
     prompt: prompts/data_questions/claim_extraction_system_prompt.txt
-  global_extraction_input_prompt:
-    prompt: prompts/data_questions/global_extraction_input_prompt.txt
-  global_extraction_prompt:
-    prompt: prompts/data_questions/global_extraction_prompt.txt
-  local_extraction_prompt:
-    prompt: prompts/data_questions/local_extraction_prompt.txt
-  local_generation_prompt:
-    prompt: prompts/data_questions/local_generation_prompt.txt
-  local_text_input_prompt:
-    prompt: prompts/data_questions/local_text_input_prompt.txt
+  data_global_prompt_config:
+    global_extraction_input_prompt:
+      prompt: prompts/data_questions/data_global/global_extraction_input_prompt.txt
+    global_extraction_prompt:
+      prompt: prompts/data_questions/data_global/global_extraction_prompt.txt
+  data_local_prompt_config:
+    local_extraction_prompt:
+      prompt: prompts/data_questions/data_local/local_extraction_prompt.txt
+    local_generation_prompt:
+      prompt: prompts/data_questions/data_local/local_generation_prompt.txt
+    local_text_input_prompt:
+      prompt: prompts/data_questions/data_local/local_text_input_prompt.txt
 """
 
 AUTOE_PAIRWISE_CONTENT = """## Input Configuration
@@ -252,12 +270,13 @@ def __copy_prompts(prompts_path: Path, output_path: Path) -> None:
     """Copy prompts from the prompts directory to the output directory."""
     if not output_path.exists():
         output_path.mkdir(parents=True, exist_ok=True)
-    for prompt_file in prompts_path.glob("*.txt"):
-        target_file = output_path / prompt_file.name
-        target_file.write_text(
-            prompt_file.read_text(encoding="utf-8"), encoding="utf-8"
-        )
-        typer.echo(f"Copied {prompt_file} to {target_file}")
+    for prompt_file in prompts_path.iterdir():
+        if prompt_file.is_file() and prompt_file.suffix == ".txt":
+            target_file = output_path / prompt_file.name
+            target_file.write_text(
+                prompt_file.read_text(encoding="utf-8"), encoding="utf-8"
+            )
+            typer.echo(f"Copied {prompt_file} to {target_file}")
 
 
 @app.command()
@@ -282,23 +301,43 @@ def init(
         )
 
     settings = root / "settings.yaml"
+    prompts_folder = root / "prompts"
     if config_type == ConfigType.autoq:
         settings.write_text(AUTOQ_CONTENT, encoding="utf-8")
-        __copy_prompts(Path(autod_prompts.__file__).parent, root / "prompts" / "autod")
         __copy_prompts(
-            Path(activity_questions_prompts.__file__).parent,
-            root / "prompts" / "activity_questions",
+            Path(autod_prompts.__file__).parent,
+            prompts_folder / "activity_questions" / "activity_context" / "data_summary",
+        )
+        __copy_prompts(
+            Path(activity_context_prompts.__file__).parent,
+            prompts_folder / "activity_questions" / "activity_context",
+        )
+        __copy_prompts(
+            Path(activity_global_prompts.__file__).parent,
+            prompts_folder / "activity_questions" / "activity_global",
+        )
+        __copy_prompts(
+            Path(activity_local_prompts.__file__).parent,
+            prompts_folder / "activity_questions" / "activity_local",
+        )
+        __copy_prompts(
+            Path(data_global_prompts.__file__).parent,
+            prompts_folder / "data_questions" / "data_global",
+        )
+        __copy_prompts(
+            Path(data_local_prompts.__file__).parent,
+            prompts_folder / "data_questions" / "data_local",
         )
         __copy_prompts(
             Path(data_questions_prompts.__file__).parent,
-            root / "prompts" / "data_questions",
+            prompts_folder / "data_questions",
         )
     elif config_type == ConfigType.autoe_pairwise:
         settings.write_text(AUTOE_PAIRWISE_CONTENT, encoding="utf-8")
-        __copy_prompts(Path(pairwise_prompts.__file__).parent, root / "prompts")
+        __copy_prompts(Path(pairwise_prompts.__file__).parent, prompts_folder)
     elif config_type == ConfigType.autoe_reference:
         settings.write_text(AUTOE_REFERENCE_CONTENT, encoding="utf-8")
-        __copy_prompts(Path(reference_prompts.__file__).parent, root / "prompts")
+        __copy_prompts(Path(reference_prompts.__file__).parent, prompts_folder)
 
     typer.echo(f"Configuration file created at {settings}")
 

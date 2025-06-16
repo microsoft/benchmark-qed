@@ -24,7 +24,7 @@ from benchmark_qed.llm.type.base import ChatModel
 
 log: logging.Logger = logging.getLogger(__name__)
 
-PROMPTS_PATH = Path(data_questions.__file__).parent
+CLAIM_EXTRACTION_PROMPTS_PATH = Path(data_questions.__file__).parent
 
 
 class DataLocalClaimExtractor:
@@ -44,7 +44,7 @@ class DataLocalClaimExtractor:
     ) -> None:
         self.llm = llm
         self.system_prompt: Template = system_prompt or load_template_file(
-            PROMPTS_PATH / "claim_extraction_system_prompt.txt"
+            CLAIM_EXTRACTION_PROMPTS_PATH / "claim_extraction_system_prompt.txt"
         )
 
         self.llm_params = llm_params

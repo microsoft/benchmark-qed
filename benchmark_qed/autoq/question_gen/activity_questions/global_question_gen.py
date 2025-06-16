@@ -18,7 +18,7 @@ from benchmark_qed.autod.sampler.sampling.kmeans_sampler import KmeansTextSample
 from benchmark_qed.autoq.data_model.activity import ActivityContext, TaskContext
 from benchmark_qed.autoq.data_model.enums import QuestionType
 from benchmark_qed.autoq.data_model.question import Question
-from benchmark_qed.autoq.prompts import activity_questions
+from benchmark_qed.autoq.prompts.activity_questions import global_questions
 from benchmark_qed.autoq.question_gen.base import BaseQuestionGen, QuestionGenResult
 from benchmark_qed.autoq.sampler.question_sampler import QuestionSampler
 from benchmark_qed.config.utils import load_template_file
@@ -26,7 +26,7 @@ from benchmark_qed.llm.type.base import ChatModel
 
 log: logging.Logger = logging.getLogger(__name__)
 
-PROMPTS_PATH = Path(activity_questions.__file__).parent
+ACTIVITY_GLOBAL_QUESTIONS_PATH = Path(global_questions.__file__).parent
 
 
 class ActivityGlobalQuestionGen(BaseQuestionGen):
@@ -69,13 +69,15 @@ class ActivityGlobalQuestionGen(BaseQuestionGen):
         self.generation_system_prompt: str = (
             generation_system_prompt
             or load_template_file(
-                PROMPTS_PATH / "global_generation_generation_system_prompt.txt"
+                ACTIVITY_GLOBAL_QUESTIONS_PATH
+                / "global_generation_generation_system_prompt.txt"
             )
         ).template
         self.generation_user_prompt: Template = (
             generation_user_prompt
             or load_template_file(
-                PROMPTS_PATH / "global_generation_generation_user_prompt.txt"
+                ACTIVITY_GLOBAL_QUESTIONS_PATH
+                / "global_generation_generation_user_prompt.txt"
             )
         )
         self.activity_context = activity_context

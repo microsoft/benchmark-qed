@@ -26,7 +26,7 @@ from benchmark_qed.autod.sampler.sample_gen import load_texts_to_clusters
 from benchmark_qed.autod.sampler.sampling.kmeans_sampler import KmeansTextSampler
 from benchmark_qed.autoq.data_model.enums import QuestionType
 from benchmark_qed.autoq.data_model.question import Question
-from benchmark_qed.autoq.prompts import data_questions
+from benchmark_qed.autoq.prompts.data_questions import local_questions
 from benchmark_qed.autoq.question_gen.base import BaseQuestionGen, QuestionGenResult
 from benchmark_qed.autoq.question_gen.data_questions.claim_extractor.local_claim_extractor import (
     DataLocalClaimExtractor,
@@ -37,7 +37,7 @@ from benchmark_qed.llm.type.base import ChatModel
 
 log: logging.Logger = logging.getLogger(__name__)
 
-PROMPTS_PATH = Path(data_questions.__file__).parent
+DATA_LOCAL_PROMPTS_PATH = Path(local_questions.__file__).parent
 
 
 class DataLocalQuestionGen(BaseQuestionGen):
@@ -92,14 +92,18 @@ class DataLocalQuestionGen(BaseQuestionGen):
 
         self.extraction_prompt: str = (
             extraction_prompt
-            or load_template_file(PROMPTS_PATH / "local_extraction_prompt.txt")
+            or load_template_file(
+                DATA_LOCAL_PROMPTS_PATH / "local_extraction_prompt.txt"
+            )
         ).template
         self.text_input_prompt: Template = text_input_prompt or load_template_file(
-            PROMPTS_PATH / "local_text_input_prompt.txt"
+            DATA_LOCAL_PROMPTS_PATH / "local_text_input_prompt.txt"
         )
         self.generation_prompt: str = (
             generation_prompt
-            or load_template_file(PROMPTS_PATH / "local_generation_prompt.txt")
+            or load_template_file(
+                DATA_LOCAL_PROMPTS_PATH / "local_generation_prompt.txt"
+            )
         ).template
         self.text_units = text_units
         self.text_embedder = text_embedder

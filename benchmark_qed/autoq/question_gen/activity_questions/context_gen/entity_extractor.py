@@ -21,14 +21,14 @@ from benchmark_qed.autod.sampler.clustering.constraint_kmeans import (
     ConstraintKmeansClustering,
 )
 from benchmark_qed.autoq.data_model.activity import Entity
-from benchmark_qed.autoq.prompts import activity_questions
+from benchmark_qed.autoq.prompts.activity_questions import activity_context
 from benchmark_qed.config.defaults import LLM_PARAMS
 from benchmark_qed.config.utils import load_template_file
 from benchmark_qed.llm.type.base import ChatModel
 
 log: logging.Logger = logging.getLogger(__name__)
 
-PROMPTS_PATH = Path(activity_questions.__file__).parent
+CONTEXT_PROMPTS = Path(activity_context.__file__).parent
 
 
 @dataclass
@@ -63,21 +63,21 @@ class EntityExtractor:
         self.map_system_prompt: str = (
             map_system_prompt
             or load_template_file(
-                PROMPTS_PATH / "map_entity_extraction_system_prompt.txt"
+                CONTEXT_PROMPTS / "map_entity_extraction_system_prompt.txt"
             )
         ).template
         self.map_user_prompt: Template = map_user_prompt or load_template_file(
-            PROMPTS_PATH / "map_entity_extraction_user_prompt.txt"
+            CONTEXT_PROMPTS / "map_entity_extraction_user_prompt.txt"
         )
         self.map_llm_params = map_llm_params
         self.reduce_system_prompt: str = (
             reduce_system_prompt
             or load_template_file(
-                PROMPTS_PATH / "reduce_entity_extraction_system_prompt.txt"
+                CONTEXT_PROMPTS / "reduce_entity_extraction_system_prompt.txt"
             )
         ).template
         self.reduce_user_prompt: Template = reduce_user_prompt or load_template_file(
-            PROMPTS_PATH / "reduce_entity_extraction_user_prompt.txt"
+            CONTEXT_PROMPTS / "reduce_entity_extraction_user_prompt.txt"
         )
         self.reduce_llm_params = reduce_llm_params
 

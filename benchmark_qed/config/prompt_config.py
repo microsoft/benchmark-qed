@@ -6,6 +6,7 @@ from pathlib import Path
 from string import Template
 from typing import Self
 
+import typer
 from pydantic import BaseModel, Field, model_validator
 
 
@@ -36,6 +37,7 @@ class PromptConfig(BaseModel):
     @cached_property
     def template(self) -> Template:
         """Get the prompt template."""
+        typer.echo(f"Loading {self.prompt or 'provided text'} as prompt template.")
         if self.prompt:
             return Template(self.prompt.read_text(encoding="utf-8"))
         if self.prompt_text:

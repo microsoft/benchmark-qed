@@ -24,7 +24,7 @@ from benchmark_qed.autod.sampler.sampling.kmeans_sampler import KmeansTextSample
 from benchmark_qed.autoq.data_model.activity import ActivityContext, Entity, TaskContext
 from benchmark_qed.autoq.data_model.enums import QuestionType
 from benchmark_qed.autoq.data_model.question import Question
-from benchmark_qed.autoq.prompts import activity_questions
+from benchmark_qed.autoq.prompts.activity_questions import local_questions
 from benchmark_qed.autoq.question_gen.base import BaseQuestionGen, QuestionGenResult
 from benchmark_qed.autoq.sampler.question_sampler import QuestionSampler
 from benchmark_qed.config.utils import load_template_file
@@ -32,7 +32,7 @@ from benchmark_qed.llm.type.base import ChatModel
 
 log: logging.Logger = logging.getLogger(__name__)
 
-PROMPTS_PATH = Path(activity_questions.__file__).parent
+ACTIVITY_LOCAL_PROMPTS_PATH = Path(local_questions.__file__).parent
 
 
 class ActivityLocalQuestionGen(BaseQuestionGen):
@@ -86,13 +86,15 @@ class ActivityLocalQuestionGen(BaseQuestionGen):
         self.generation_system_prompt: Template = (
             generation_system_prompt
             or load_template_file(
-                PROMPTS_PATH / "local_generation_generation_system_prompt.txt"
+                ACTIVITY_LOCAL_PROMPTS_PATH
+                / "local_generation_generation_system_prompt.txt"
             )
         )
         self.generation_user_prompt: Template = (
             generation_user_prompt
             or load_template_file(
-                PROMPTS_PATH / "local_generation_generation_user_prompt.txt"
+                ACTIVITY_LOCAL_PROMPTS_PATH
+                / "local_generation_generation_user_prompt.txt"
             )
         )
         self.concurrent_coroutines = concurrent_coroutines
