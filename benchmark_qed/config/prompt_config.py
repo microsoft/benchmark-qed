@@ -6,7 +6,6 @@ from pathlib import Path
 from string import Template
 from typing import Self
 
-import typer
 from pydantic import BaseModel, Field, model_validator
 
 
