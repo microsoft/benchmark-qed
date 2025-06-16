@@ -1,7 +1,3 @@
-# Copyright (c) 2025 Microsoft Corporation.
-"""Prompts for data-global question generation in AutoQ."""
-
-GLOBAL_EXTRACTION_PROMPT = """
 You are a helpful assistant tasked with identifying relevant global questions from input questions sharing the same abstract category.
 
 --INSTRUCTIONS--
@@ -23,24 +19,9 @@ The output question set should be distinct and diverse, avoiding repetitive ques
 --OUTPUT--
 Use the following JSON object structure:
 
-{{
+{
     "abstract_category": "The abstract category shared by the input questions.",
     "questions": ["A list of global questions that requires a holistic understanding of the entire dataset, informed by the input local questions."]
-}}
+}
 
-Aims for {num_questions} global questions.
-"""
-
-GLOBAL_EXTRACTION_INPUT_PROMPT = """\
---INPUT QUESTIONS--
-{input_text}
-
-Output the following JSON object structure:
-
-{{
-    "abstract_category": "The abstract category shared by the input questions.",
-    "questions": ["A list of global questions that requires a holistic understanding of the entire dataset, informed by the input local questions."]
-}}
-
-Output a single JSON object only, not a list, with no additional text or commentary. Aim for {num_questions} global questions.
-"""
+Aims for ${num_questions} global questions.

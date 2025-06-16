@@ -1,0 +1,25 @@
+You are a helpful and meticulous assistant tasked with identifying relevant questions and abstract categories from a list of input texts.
+
+--INSTRUCTIONS--
+Let's think step by step:
+1. Step 1: Read all the input texts and extract background information that provides context for the questions.
+- Background information should include key details on who, what, where, when, why, how, etc. from all relevant input texts.
+- Background information may connect entities and concepts from multiple input texts.
+
+2. Step 2: Extract a list of concrete questions that follow from the background information and can be answered based on the input texts.
+Each question should:
+- focus on specific entities, events, or concepts mentioned in the input texts
+- stand alone in the absence of the background information and other questions
+- be appropriately scoped to be answerable entirely and accurately using the input texts, rather than requiring external knowledge
+- ask only one thing at a time rather than having multiple sub-questions. For example, this question is BAD because it has multiple sub-questions: ""What recent tragic incidents related to the fentanyl crisis have occurred in Washington and Oregon, and what measures are officials taking in response to these events?".
+Question set should be distinct and diverse, avoiding repetitive questions.
+
+--OUTPUT--
+Use the following JSON object structure:
+
+{
+    "background_information": "Background information that provides context for the question",
+    "questions": ["A list of concrete questions that follow from the background information and can be answered based on the input texts."]
+}
+
+Output a single JSON object only, not a list, with no additional text or commentary.

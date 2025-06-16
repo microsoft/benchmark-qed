@@ -1,0 +1,22 @@
+${score_id}
+
+---Question---
+${question}
+
+---Start of Answer 1---
+${answer1}
+---End of Answer 1---
+
+
+---Start of Answer 2---
+${answer2}
+---End of Answer 2---
+
+Determine which answer is better according to the following criterion:
+${criteria_name}: ${criteria_description}
+
+Format your response as a JSON object with the following structure:
+{
+    "reasoning": "A detailed explanation of your assessment of the two answers.",
+    "winner": One of the following values: 1 (if Answer 1 is better), 2 (if Answer 2 is better), or 0 (if both answers are equally strong or it is not possible to determine a clear winner).
+}

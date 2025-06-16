@@ -152,12 +152,43 @@ activity_global:
   num_entities_per_task: 5
 ```
 
-```
+```markdown
 # .env file
 OPENAI_API_KEY=your-secret-api-key-here
 ```
 
 >💡 Note: The api_key field uses an environment variable reference `${OPENAI_API_KEY}`. Make sure to define this variable in a .env file or your environment before running the application.
+
+## Providing Prompts: File or Text
+
+Prompts for question generation can be provided in two ways, as defined by the `PromptConfig` class:
+
+- **As a file path**: Specify the path to a `.txt` file containing the prompt (recommended for most use cases).
+- **As direct text**: Provide the prompt text directly in the configuration.
+
+Only one of these options should be set for each prompt. If both are set, or neither is set, an error will be raised.
+
+### Example (File Path)
+```yaml
+activity_questions_prompt_config:
+  activity_local_gen_system_prompt:
+    prompt: prompts/activity_questions/local/activity_local_gen_system_prompt.txt
+```
+
+### Example (Direct Text)
+```yaml
+activity_questions_prompt_config:
+  activity_local_gen_system_prompt:
+    prompt_text: |
+      Generate a question about the following activity:
+```
+
+This applies to all prompt fields in [`QuestionGenerationConfig`](https://github.com/microsoft/benchmark-qed/tree/main/benchmark_qed/autoq/config.py#L289-L302) (including [map/reduce](https://github.com/microsoft/benchmark-qed/tree/main/benchmark_qed/autoq/config.py#L106-L130), [activity question generation](https://github.com/microsoft/benchmark-qed/tree/main/benchmark_qed/autoq/config.py#L133-L192), and [data question generation](https://github.com/microsoft/benchmark-qed/tree/main/benchmark_qed/autoq/config.py#L195-L233) prompt configs).
+
+
+See the [PromptConfig](https://github.com/microsoft/benchmark-qed/tree/main/benchmark_qed/config/prompt_config.py) class for details.
+
+---
 
 ## CLI Reference
 

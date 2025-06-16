@@ -5,7 +5,7 @@ import asyncio
 import json
 from enum import StrEnum
 from pathlib import Path
-from typing import Annotated
+from typing import Annotated, Any
 
 import pandas as pd
 import tiktoken
@@ -16,7 +16,14 @@ from benchmark_qed.autod.data_processor.embedding import TextEmbedder
 from benchmark_qed.autod.io.enums import InputDataType
 from benchmark_qed.autod.io.text_unit import load_text_units
 from benchmark_qed.autod.sampler.sample_gen import acreate_clustered_sample
-from benchmark_qed.autoq.config import QuestionGenerationConfig
+from benchmark_qed.autoq.config import (
+    ActivityContextPromptConfig,
+    ActivityGlobalPromptConfig,
+    ActivityLocalPromptConfig,
+    DataGlobalPromptConfig,
+    DataLocalPromptConfig,
+    QuestionGenerationConfig,
+)
 from benchmark_qed.autoq.data_model.activity import ActivityContext
 from benchmark_qed.autoq.io.activity import save_activity_context
 from benchmark_qed.autoq.io.question import load_questions, save_questions
@@ -59,6 +66,7 @@ async def __generate_data_local(
     oversample_factor: float,
     random_seed: int,
     concurrent_requests: int,
+    config: DataLocalPromptConfig,
 ) -> None:
     sample_texts_df = pd.read_parquet(f"{output_data_path}/sample_texts.parquet")
     sample_texts = load_text_units(df=sample_texts_df)
@@ -69,6 +77,9 @@ async def __generate_data_local(
         text_units=sample_texts,
         concurrent_coroutines=concurrent_requests,
         random_seed=random_seed,
+        generation_system_prompt=config.data_local_gen_system_prompt.template,
+        generation_user_prompt=config.data_local_gen_user_prompt.template,
+        expansion_system_prompt=config.data_local_expansion_system_prompt.template,
     )
 
     data_local_question_results = await data_local_generator.agenerate(
@@ -103,6 +114,7 @@ async def __generate_data_global(
     oversample_factor: float,
     random_seed: int,
     concurrent_requests: int,
+    config: DataGlobalPromptConfig,
 ) -> None:
     if not (
         output_data_path / "data_local_questions" / "candidate_questions.json"
@@ -122,6 +134,8 @@ async def __generate_data_global(
         local_questions=local_questions,
         concurrent_coroutines=concurrent_requests,
         random_seed=random_seed,
+        generation_system_prompt=config.data_global_gen_system_prompt.template,
+        generation_user_prompt=config.data_global_gen_user_prompt.template,
     )
 
     data_global_question_results = await data_global_generator.agenerate(
@@ -158,6 +172,7 @@ async def __generate_activity_context(
     num_entities_per_task: int,
     oversample_factor: float,
     concurrent_requests: int,
+    config: ActivityContextPromptConfig,
     use_representative_samples_only: bool = True,
     skip_warning: bool = False,
 ) -> None:
@@ -180,6 +195,11 @@ async def __generate_activity_context(
         token_encoder=token_encoder,
         text_units=sample_texts,
         concurrent_coroutines=concurrent_requests,
+        activity_identification_prompt=config.activity_identification_prompt.template,
+        map_system_prompt=config.data_summary_prompt_config.summary_map_system_prompt.template,
+        map_user_prompt=config.data_summary_prompt_config.summary_map_user_prompt.template,
+        reduce_system_prompt=config.data_summary_prompt_config.summary_reduce_system_prompt.template,
+        reduce_user_prompt=config.data_summary_prompt_config.summary_reduce_user_prompt.template,
     )
 
     activity_context = await activity_generator.agenerate(
@@ -201,6 +221,7 @@ async def __generate_activity_local(
     oversample_factor: float,
     random_seed: int,
     concurrent_requests: int,
+    config: ActivityLocalPromptConfig,
 ) -> None:
     activity_context = ActivityContext(
         **json.loads(
@@ -208,12 +229,15 @@ async def __generate_activity_local(
         )
     )
 
+    # Use PromptConfig.template property for all prompt templates
     activity_local_generator = ActivityLocalQuestionGen(
         llm=llm,
         text_embedder=text_embedder,
         activity_context=activity_context,
         concurrent_coroutines=concurrent_requests,
         random_seed=random_seed,
+        generation_system_prompt=config.activity_local_gen_system_prompt.template,
+        generation_user_prompt=config.activity_local_gen_user_prompt.template,
     )
 
     activity_local_question_results = await activity_local_generator.agenerate(
@@ -248,6 +272,7 @@ async def __generate_activity_global(
     oversample_factor: float,
     random_seed: int,
     concurrent_requests: int,
+    config: ActivityGlobalPromptConfig,
 ) -> None:
     activity_context = ActivityContext(
         **json.loads(
@@ -255,12 +280,15 @@ async def __generate_activity_global(
         )
     )
 
+    # Use PromptConfig.template property for all prompt templates
     activity_global_generator = ActivityGlobalQuestionGen(
         llm=llm,
         text_embedder=text_embedder,
         activity_context=activity_context,
         concurrent_coroutines=concurrent_requests,
         random_seed=random_seed,
+        generation_system_prompt=config.activity_global_gen_system_prompt.template,
+        generation_user_prompt=config.activity_global_gen_user_prompt.template,
     )
 
     activity_global_question_results = await activity_global_generator.agenerate(
@@ -287,7 +315,7 @@ async def __generate_activity_global(
     )
 
 
-SCOPE_SOURCE_MAPPING = {
+SCOPE_SOURCE_MAPPING: dict[Any, Any] = {
     GenerationType.activity_local: __generate_activity_local,
     GenerationType.activity_global: __generate_activity_global,
     GenerationType.data_local: __generate_data_local,
@@ -411,6 +439,7 @@ def autoq(
                     num_entities_per_task=activity_config.num_entities_per_task,
                     oversample_factor=activity_config.oversample_factor,
                     concurrent_requests=config.concurrent_requests,
+                    config=config.activity_questions_prompt_config.activity_context_prompt_config,
                     skip_warning=not first_activity,
                 )
             )
@@ -424,6 +453,9 @@ def autoq(
                     oversample_factor=activity_config.oversample_factor,
                     random_seed=config.sampling.random_seed,
                     concurrent_requests=config.concurrent_requests,
+                    config=config.activity_questions_prompt_config.activity_local_prompt_config
+                    if generation_type == GenerationType.activity_local
+                    else config.activity_questions_prompt_config.activity_global_prompt_config,
                 )
             )
             first_activity = False
@@ -443,6 +475,9 @@ def autoq(
                     oversample_factor=data_config.oversample_factor,
                     random_seed=config.sampling.random_seed,
                     concurrent_requests=config.concurrent_requests,
+                    config=config.data_questions_prompt_config.data_local_prompt_config
+                    if generation_type == GenerationType.data_local
+                    else config.data_questions_prompt_config.data_global_prompt_config,
                 )
             )
 

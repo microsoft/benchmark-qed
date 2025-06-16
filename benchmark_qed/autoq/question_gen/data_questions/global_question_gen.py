@@ -8,6 +8,8 @@ import math
 import uuid
 from collections import defaultdict
 from dataclasses import dataclass
+from pathlib import Path
+from string import Template
 from typing import Any
 
 from tqdm.asyncio import tqdm_asyncio
@@ -19,18 +21,18 @@ from benchmark_qed.autod.sampler.enums import ClusterRepresentativeSelectionType
 from benchmark_qed.autod.sampler.sampling.kmeans_sampler import KmeansTextSampler
 from benchmark_qed.autoq.data_model.enums import QuestionType
 from benchmark_qed.autoq.data_model.question import Question
-from benchmark_qed.autoq.prompts.data_questions.global_question_prompts import (
-    GLOBAL_EXTRACTION_INPUT_PROMPT,
-    GLOBAL_EXTRACTION_PROMPT,
-)
+from benchmark_qed.autoq.prompts.data_questions import global_questions
 from benchmark_qed.autoq.question_gen.base import BaseQuestionGen, QuestionGenResult
 from benchmark_qed.autoq.question_gen.data_questions.claim_extractor.global_claim_extractor import (
     DataGlobalClaimExtractor,
 )
 from benchmark_qed.autoq.sampler.question_sampler import QuestionSampler
+from benchmark_qed.config.utils import load_template_file
 from benchmark_qed.llm.type.base import ChatModel
 
 log: logging.Logger = logging.getLogger(__name__)
+
+DATA_GLOBAL_PROMPTS_PATH = Path(global_questions.__file__).parent
 
 
 @dataclass
@@ -55,8 +57,8 @@ class DataGlobalQuestionGen(BaseQuestionGen):
         claim_extractor_params: dict[str, Any] | None = None,
         llm_params: dict[str, Any] = defs.LLM_PARAMS,
         json_mode: bool = True,
-        extraction_prompt: str = GLOBAL_EXTRACTION_PROMPT,
-        extraction_input_prompt: str = GLOBAL_EXTRACTION_INPUT_PROMPT,
+        generation_system_prompt: Template | None = None,
+        generation_user_prompt: Template | None = None,
         concurrent_coroutines: int = 32,
         random_seed: int = defs.RANDOM_SEED,
     ) -> None:
@@ -87,8 +89,18 @@ class DataGlobalQuestionGen(BaseQuestionGen):
         else:
             self.llm_params.pop("response_format", None)
 
-        self.extraction_prompt = extraction_prompt
-        self.extraction_input_prompt = extraction_input_prompt
+        self.extraction_prompt: Template = (
+            generation_system_prompt
+            or load_template_file(
+                DATA_GLOBAL_PROMPTS_PATH / "data_global_gen_system_prompt.txt"
+            )
+        )
+        self.extraction_input_prompt: Template = (
+            generation_user_prompt
+            or load_template_file(
+                DATA_GLOBAL_PROMPTS_PATH / "data_global_gen_user_prompt.txt"
+            )
+        )
         self.local_questions = local_questions
         self.concurrent_coroutines = concurrent_coroutines
         self.semaphore: asyncio.Semaphore = asyncio.Semaphore(
@@ -194,13 +206,13 @@ class DataGlobalQuestionGen(BaseQuestionGen):
                 extraction_messages = [
                     {
                         "role": "system",
-                        "content": self.extraction_prompt.format(
+                        "content": self.extraction_prompt.substitute(
                             num_questions=question_context.num_generated_questions
                         ),
                     },
                     {
                         "role": "user",
-                        "content": self.extraction_input_prompt.format(
+                        "content": self.extraction_input_prompt.substitute(
                             input_text=question_context.context_text,
                             num_questions=question_context.num_generated_questions,
                         ),

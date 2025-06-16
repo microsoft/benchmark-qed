@@ -5,8 +5,36 @@ from pathlib import Path
 
 from pydantic import BaseModel, Field
 
+from benchmark_qed.autod import prompts as autod_prompts
 from benchmark_qed.autod.io.enums import InputDataType
+from benchmark_qed.autoq.prompts import data_questions as autoq_data_prompts
+from benchmark_qed.autoq.prompts.activity_questions import (
+    activity_context as activity_context_prompts,
+)
+from benchmark_qed.autoq.prompts.activity_questions import (
+    global_questions as activity_global_prompts,
+)
+from benchmark_qed.autoq.prompts.activity_questions import (
+    local_questions as activity_local_prompts,
+)
+from benchmark_qed.autoq.prompts.data_questions import (
+    global_questions as data_global_prompts,
+)
+from benchmark_qed.autoq.prompts.data_questions import (
+    local_questions as data_local_prompts,
+)
 from benchmark_qed.config.llm_config import LLMConfig
+from benchmark_qed.config.prompt_config import PromptConfig
+
+AUTOD_PROMPTS_PATH = Path(autod_prompts.__file__).parent
+
+AUTOQ_ACTIVITY_CONTEXT_PROMPTS_PATH = Path(activity_context_prompts.__file__).parent
+AUTOQ_ACTIVITY_GLOBAL_PROMPTS_PATH = Path(activity_global_prompts.__file__).parent
+AUTOQ_ACTIVITY_LOCAL_PROMPTS_PATH = Path(activity_local_prompts.__file__).parent
+
+AUTOQ_DATA_PROMPTS_PATH = Path(autoq_data_prompts.__file__).parent
+AUTOQ_DATA_GLOBAL_PROMPTS_PATH = Path(data_global_prompts.__file__).parent
+AUTOQ_DATA_LOCAL_PROMPTS_PATH = Path(data_local_prompts.__file__).parent
 
 
 class InputConfig(BaseModel):
@@ -95,6 +123,200 @@ class ActivityQuestionConfig(QuestionConfig):
     )
 
 
+class DataSummaryPromptConfig(BaseModel):
+    """Configuration for the map/reduce summary prompts."""
+
+    summary_map_system_prompt: PromptConfig = Field(
+        default=PromptConfig(
+            prompt=AUTOD_PROMPTS_PATH / "summarization/summary_map_system_prompt.txt"
+        ),
+        description="System prompt for the map summary step in question generation.",
+    )
+    summary_map_user_prompt: PromptConfig = Field(
+        default=PromptConfig(
+            prompt=AUTOD_PROMPTS_PATH / "summarization/summary_map_user_prompt.txt"
+        ),
+        description="User prompt for the map summary step in question generation.",
+    )
+    summary_reduce_system_prompt: PromptConfig = Field(
+        default=PromptConfig(
+            prompt=AUTOD_PROMPTS_PATH / "summarization/summary_reduce_system_prompt.txt"
+        ),
+        description="System prompt for the reduce summary step in question generation.",
+    )
+    summary_reduce_user_prompt: PromptConfig = Field(
+        default=PromptConfig(
+            prompt=AUTOD_PROMPTS_PATH / "summarization/summary_reduce_user_prompt.txt"
+        ),
+        description="User prompt for the reduce summary step in question generation.",
+    )
+
+
+class ActivityContextPromptConfig(BaseModel):
+    """Configuration for the activity context prompts."""
+
+    data_summary_prompt_config: DataSummaryPromptConfig = Field(
+        default_factory=DataSummaryPromptConfig,
+        description="Configuration for the map/reduce summary prompts.",
+    )
+
+    entity_extraction_map_system_prompt: PromptConfig = Field(
+        default=PromptConfig(
+            prompt=AUTOQ_ACTIVITY_CONTEXT_PROMPTS_PATH
+            / "entity_extraction_map_system_prompt.txt"
+        ),
+        description="System prompt for extracting entities in the map step.",
+    )
+    entity_extraction_map_user_prompt: PromptConfig = Field(
+        default=PromptConfig(
+            prompt=AUTOQ_ACTIVITY_CONTEXT_PROMPTS_PATH
+            / "entity_extraction_map_user_prompt.txt"
+        ),
+        description="User prompt for extracting entities in the map step.",
+    )
+    entity_extraction_reduce_system_prompt: PromptConfig = Field(
+        default=PromptConfig(
+            prompt=AUTOQ_ACTIVITY_CONTEXT_PROMPTS_PATH
+            / "entity_extraction_reduce_system_prompt.txt"
+        ),
+        description="System prompt for extracting entities in the reduce step.",
+    )
+    entity_extraction_reduce_user_prompt: PromptConfig = Field(
+        default=PromptConfig(
+            prompt=AUTOQ_ACTIVITY_CONTEXT_PROMPTS_PATH
+            / "entity_extraction_reduce_user_prompt.txt"
+        ),
+        description="User prompt for extracting entities in the reduce step.",
+    )
+
+    activity_identification_prompt: PromptConfig = Field(
+        default=PromptConfig(
+            prompt=AUTOQ_ACTIVITY_CONTEXT_PROMPTS_PATH
+            / "activity_identification_prompt.txt"
+        ),
+        description="Prompt for identifying activities in the question generation process.",
+    )
+
+
+class ActivityGlobalPromptConfig(BaseModel):
+    """Configuration for global activity question generation prompts."""
+
+    activity_global_gen_system_prompt: PromptConfig = Field(
+        default=PromptConfig(
+            prompt=AUTOQ_ACTIVITY_GLOBAL_PROMPTS_PATH
+            / "activity_global_gen_system_prompt.txt"
+        ),
+        description="System prompt for generating global questions in question generation.",
+    )
+    activity_global_gen_user_prompt: PromptConfig = Field(
+        default=PromptConfig(
+            prompt=AUTOQ_ACTIVITY_GLOBAL_PROMPTS_PATH
+            / "activity_global_gen_user_prompt.txt"
+        ),
+        description="User prompt for generating global questions in question generation.",
+    )
+
+
+class ActivityLocalPromptConfig(BaseModel):
+    """Configuration for local activity question generation prompts."""
+
+    activity_local_gen_system_prompt: PromptConfig = Field(
+        default=PromptConfig(
+            prompt=AUTOQ_ACTIVITY_LOCAL_PROMPTS_PATH
+            / "activity_local_gen_system_prompt.txt"
+        ),
+        description="System prompt for generating local activity questions.",
+    )
+    activity_local_gen_user_prompt: PromptConfig = Field(
+        default=PromptConfig(
+            prompt=AUTOQ_ACTIVITY_LOCAL_PROMPTS_PATH
+            / "activity_local_gen_user_prompt.txt"
+        ),
+        description="User prompt for generating local activity questions.",
+    )
+
+
+class ActivityQuestionsPromptConfig(BaseModel):
+    """Configuration for activity-related prompts."""
+
+    activity_context_prompt_config: ActivityContextPromptConfig = Field(
+        default_factory=ActivityContextPromptConfig,
+        description="Configuration for the map/reduce summary prompts.",
+    )
+
+    activity_global_prompt_config: ActivityGlobalPromptConfig = Field(
+        default_factory=ActivityGlobalPromptConfig,
+        description="Configuration for global activity question generation prompts.",
+    )
+
+    activity_local_prompt_config: ActivityLocalPromptConfig = Field(
+        default_factory=ActivityLocalPromptConfig,
+        description="Configuration for local activity question generation prompts.",
+    )
+
+
+class DataGlobalPromptConfig(BaseModel):
+    """Configuration for global data question generation prompts."""
+
+    data_global_gen_user_prompt: PromptConfig = Field(
+        default=PromptConfig(
+            prompt=AUTOQ_DATA_GLOBAL_PROMPTS_PATH / "data_global_gen_user_prompt.txt"
+        ),
+        description="Input prompt for extracting global questions from local questions.",
+    )
+    data_global_gen_system_prompt: PromptConfig = Field(
+        default=PromptConfig(
+            prompt=AUTOQ_DATA_GLOBAL_PROMPTS_PATH / "data_global_gen_system_prompt.txt"
+        ),
+        description="Prompt for extracting global questions from local questions.",
+    )
+
+
+class DataLocalPromptConfig(BaseModel):
+    """Configuration for local data question generation prompts."""
+
+    data_local_gen_system_prompt: PromptConfig = Field(
+        default=PromptConfig(
+            prompt=AUTOQ_DATA_LOCAL_PROMPTS_PATH / "data_local_gen_system_prompt.txt"
+        ),
+        description="Prompt for extracting local questions from input texts.",
+    )
+    data_local_expansion_system_prompt: PromptConfig = Field(
+        default=PromptConfig(
+            prompt=AUTOQ_DATA_LOCAL_PROMPTS_PATH
+            / "data_local_expansion_system_prompt.txt"
+        ),
+        description="Prompt for generating local questions from input questions.",
+    )
+    data_local_gen_user_prompt: PromptConfig = Field(
+        default=PromptConfig(
+            prompt=AUTOQ_DATA_LOCAL_PROMPTS_PATH / "data_local_gen_user_prompt.txt"
+        ),
+        description="Prompt for input texts for local question generation.",
+    )
+
+
+class DataQuestionsPromptConfig(BaseModel):
+    """Configuration for data-related prompts."""
+
+    claim_extraction_system_prompt: PromptConfig = Field(
+        default=PromptConfig(
+            prompt=AUTOQ_DATA_PROMPTS_PATH / "claim_extraction_system_prompt.txt"
+        ),
+        description="System prompt for extracting claims from data tables.",
+    )
+
+    data_global_prompt_config: DataGlobalPromptConfig = Field(
+        default_factory=DataGlobalPromptConfig,
+        description="Configuration for global data question generation prompts.",
+    )
+
+    data_local_prompt_config: DataLocalPromptConfig = Field(
+        default_factory=DataLocalPromptConfig,
+        description="Configuration for local data question generation prompts.",
+    )
+
+
 class QuestionGenerationConfig(BaseModel):
     """Configuration for question generation."""
 
@@ -146,4 +368,14 @@ class QuestionGenerationConfig(BaseModel):
     embedding_model: LLMConfig = Field(
         default_factory=LLMConfig,
         description="Configuration for the LLM to use for embedding.",
+    )
+
+    activity_questions_prompt_config: ActivityQuestionsPromptConfig = Field(
+        default_factory=ActivityQuestionsPromptConfig,
+        description="Configuration for activity-related prompts.",
+    )
+
+    data_questions_prompt_config: DataQuestionsPromptConfig = Field(
+        default_factory=DataQuestionsPromptConfig,
+        description="Configuration for data-related prompts.",
     )

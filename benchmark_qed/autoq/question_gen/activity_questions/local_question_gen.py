@@ -7,6 +7,8 @@ import logging
 import math
 import random
 import uuid
+from pathlib import Path
+from string import Template
 from typing import Any
 
 import benchmark_qed.config.defaults as defs
@@ -22,15 +24,15 @@ from benchmark_qed.autod.sampler.sampling.kmeans_sampler import KmeansTextSample
 from benchmark_qed.autoq.data_model.activity import ActivityContext, Entity, TaskContext
 from benchmark_qed.autoq.data_model.enums import QuestionType
 from benchmark_qed.autoq.data_model.question import Question
-from benchmark_qed.autoq.prompts.activity_questions.local_question_prompts import (
-    LOCAL_GENERAION_SYSTEM_PROMPT,
-    LOCAL_GENERAION_USER_PROMPT,
-)
+from benchmark_qed.autoq.prompts.activity_questions import local_questions
 from benchmark_qed.autoq.question_gen.base import BaseQuestionGen, QuestionGenResult
 from benchmark_qed.autoq.sampler.question_sampler import QuestionSampler
+from benchmark_qed.config.utils import load_template_file
 from benchmark_qed.llm.type.base import ChatModel
 
 log: logging.Logger = logging.getLogger(__name__)
+
+ACTIVITY_LOCAL_PROMPTS_PATH = Path(local_questions.__file__).parent
 
 
 class ActivityLocalQuestionGen(BaseQuestionGen):
@@ -44,8 +46,8 @@ class ActivityLocalQuestionGen(BaseQuestionGen):
         question_sampler: QuestionSampler | None = None,
         llm_params: dict[str, Any] = defs.LLM_PARAMS,
         json_mode: bool = True,
-        generation_system_prompt: str = LOCAL_GENERAION_SYSTEM_PROMPT,
-        generation_user_prompt: str = LOCAL_GENERAION_USER_PROMPT,
+        generation_system_prompt: Template | None = None,
+        generation_user_prompt: Template | None = None,
         concurrent_coroutines: int = 32,
         random_seed: int = defs.RANDOM_SEED,
     ) -> None:
@@ -81,8 +83,20 @@ class ActivityLocalQuestionGen(BaseQuestionGen):
 
         self.activity_context = activity_context
         self.activity_entities: list[Entity] = activity_context.get_all_entities()
-        self.generation_system_prompt = generation_system_prompt
-        self.generation_user_prompt = generation_user_prompt
+        self.generation_system_prompt: Template = (
+            generation_system_prompt
+            or load_template_file(
+                ACTIVITY_LOCAL_PROMPTS_PATH
+                / "local_generation_generation_system_prompt.txt"
+            )
+        )
+        self.generation_user_prompt: Template = (
+            generation_user_prompt
+            or load_template_file(
+                ACTIVITY_LOCAL_PROMPTS_PATH
+                / "local_generation_generation_user_prompt.txt"
+            )
+        )
         self.concurrent_coroutines = concurrent_coroutines
         self.semaphore: asyncio.Semaphore = asyncio.Semaphore(
             self.concurrent_coroutines
@@ -225,7 +239,7 @@ class ActivityLocalQuestionGen(BaseQuestionGen):
             entity_description = "\n\n".join([
                 entity.to_str() for entity in task_context.entities
             ])
-            question_input_prompt = self.generation_user_prompt.format(
+            question_input_prompt = self.generation_user_prompt.substitute(
                 entity_description=entity_description,
                 persona=task_context.persona,
                 task=task_context.task,
@@ -234,7 +248,7 @@ class ActivityLocalQuestionGen(BaseQuestionGen):
             extraction_messages = [
                 {
                     "role": "system",
-                    "content": self.generation_system_prompt.format(
+                    "content": self.generation_system_prompt.substitute(
                         num_questions=num_questions
                     ),
                 },
