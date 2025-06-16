@@ -63,21 +63,21 @@ class EntityExtractor:
         self.map_system_prompt: str = (
             map_system_prompt
             or load_template_file(
-                CONTEXT_PROMPTS / "map_entity_extraction_system_prompt.txt"
+                CONTEXT_PROMPTS / "entity_extraction_map_system_prompt.txt"
             )
         ).template
         self.map_user_prompt: Template = map_user_prompt or load_template_file(
-            CONTEXT_PROMPTS / "map_entity_extraction_user_prompt.txt"
+            CONTEXT_PROMPTS / "entity_extraction_map_user_prompt.txt"
         )
         self.map_llm_params = map_llm_params
         self.reduce_system_prompt: str = (
             reduce_system_prompt
             or load_template_file(
-                CONTEXT_PROMPTS / "reduce_entity_extraction_system_prompt.txt"
+                CONTEXT_PROMPTS / "entity_extraction_reduce_system_prompt.txt"
             )
         ).template
         self.reduce_user_prompt: Template = reduce_user_prompt or load_template_file(
-            CONTEXT_PROMPTS / "reduce_entity_extraction_user_prompt.txt"
+            CONTEXT_PROMPTS / "entity_extraction_reduce_user_prompt.txt"
         )
         self.reduce_llm_params = reduce_llm_params
 

@@ -90,12 +90,12 @@ class DataGlobalQuestionGen(BaseQuestionGen):
             self.llm_params.pop("response_format", None)
 
         self.extraction_prompt: Template = extraction_prompt or load_template_file(
-            DATA_GLOBAL_PROMPTS_PATH / "global_extraction_prompt.txt"
+            DATA_GLOBAL_PROMPTS_PATH / "data_global_gen_system_prompt.txt"
         )
         self.extraction_input_prompt: Template = (
             extraction_input_prompt
             or load_template_file(
-                DATA_GLOBAL_PROMPTS_PATH / "global_extraction_input_prompt.txt"
+                DATA_GLOBAL_PROMPTS_PATH / "data_global_gen_user_prompt.txt"
             )
         )
         self.local_questions = local_questions

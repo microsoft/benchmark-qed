@@ -37,7 +37,6 @@ class PromptConfig(BaseModel):
     @cached_property
     def template(self) -> Template:
         """Get the prompt template."""
-        typer.echo(f"Loading {self.prompt or 'provided text'} as prompt template.")
         if self.prompt:
             return Template(self.prompt.read_text(encoding="utf-8"))
         if self.prompt_text:

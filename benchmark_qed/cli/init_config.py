@@ -7,7 +7,7 @@ from typing import Annotated
 
 import typer
 
-from benchmark_qed.autod import prompts as autod_prompts
+from benchmark_qed.autod.prompts import summarization
 from benchmark_qed.autoe.prompts import pairwise as pairwise_prompts
 from benchmark_qed.autoe.prompts import reference as reference_prompts
 from benchmark_qed.autoq.prompts import data_questions as data_questions_prompts
@@ -126,50 +126,50 @@ concurrent_requests: 8
 activity_questions_prompt_config:
   activity_context_prompt_config:
     data_summary_prompt_config:
-      map_summary_system_prompt:
-        prompt: prompts/activity_questions/activity_context/data_summary/map_summary_system_prompt.txt
-      map_summary_user_prompt:
-        prompt: prompts/activity_questions/activity_context/data_summary/map_summary_user_prompt.txt
-      reduce_summary_system_prompt:
-        prompt: prompts/activity_questions/activity_context/data_summary/reduce_summary_system_prompt.txt
-      reduce_summary_user_prompt:
-        prompt: prompts/activity_questions/activity_context/data_summary/reduce_summary_user_prompt.txt
+      summary_map_system_prompt:
+        prompt: prompts/summarization/summary_map_system_prompt.txt
+      summary_map_user_prompt:
+        prompt: prompts/summarization/summary_map_user_prompt.txt
+      summary_reduce_system_prompt:
+        prompt: prompts/summarization/summary_reduce_system_prompt.txt
+      summary_reduce_user_prompt:
+        prompt: prompts/summarization/summary_reduce_user_prompt.txt
     activity_identification_prompt:
       prompt: prompts/activity_questions/activity_context/activity_identification_prompt.txt
-    map_entity_extraction_system_prompt:
-      prompt: prompts/activity_questions/activity_context/map_entity_extraction_system_prompt.txt
-    map_entity_extraction_user_prompt:
-      prompt: prompts/activity_questions/activity_context/map_entity_extraction_user_prompt.txt
-    reduce_entity_extraction_system_prompt:
-      prompt: prompts/activity_questions/activity_context/reduce_entity_extraction_system_prompt.txt
-    reduce_entity_extraction_user_prompt:
-      prompt: prompts/activity_questions/activity_context/reduce_entity_extraction_user_prompt.txt
+    entity_extraction_map_system_prompt:
+      prompt: prompts/activity_questions/activity_context/entity_extraction_map_system_prompt.txt
+    entity_extraction_map_user_prompt:
+      prompt: prompts/activity_questions/activity_context/entity_extraction_map_user_prompt.txt
+    entity_extraction_reduce_system_prompt:
+      prompt: prompts/activity_questions/activity_context/entity_extraction_reduce_system_prompt.txt
+    entity_extraction_reduce_user_prompt:
+      prompt: prompts/activity_questions/activity_context/entity_extraction_reduce_user_prompt.txt
   activity_global_prompt_config:
-    global_generation_system_prompt:
-      prompt: prompts/activity_questions/activity_global/global_generation_system_prompt.txt
-    global_generation_user_prompt:
-      prompt: prompts/activity_questions/activity_global/global_generation_user_prompt.txt
+    activity_global_gen_system_prompt:
+      prompt: prompts/activity_questions/activity_global/activity_global_gen_system_prompt.txt
+    activity_global_gen_user_prompt:
+      prompt: prompts/activity_questions/activity_global/activity_global_gen_user_prompt.txt
   activity_local_prompt_config:
-    local_generation_system_prompt:
-      prompt: prompts/activity_questions/activity_local/local_generation_system_prompt.txt
-    local_generation_user_prompt:
-      prompt: prompts/activity_questions/activity_local/local_generation_user_prompt.txt
+    activity_local_gen_system_prompt:
+      prompt: prompts/activity_questions/activity_local/activity_local_gen_system_prompt.txt
+    activity_local_gen_user_prompt:
+      prompt: prompts/activity_questions/activity_local/activity_local_gen_user_prompt.txt
 
 data_questions_prompt_config:
   claim_extraction_system_prompt:
     prompt: prompts/data_questions/claim_extraction_system_prompt.txt
   data_global_prompt_config:
-    global_extraction_input_prompt:
-      prompt: prompts/data_questions/data_global/global_extraction_input_prompt.txt
-    global_extraction_prompt:
-      prompt: prompts/data_questions/data_global/global_extraction_prompt.txt
+    data_global_gen_user_prompt:
+      prompt: prompts/data_questions/data_global/data_global_gen_user_prompt.txt
+    data_global_gen_system_prompt:
+      prompt: prompts/data_questions/data_global/data_global_gen_system_prompt.txt
   data_local_prompt_config:
-    local_extraction_prompt:
-      prompt: prompts/data_questions/data_local/local_extraction_prompt.txt
-    local_generation_prompt:
-      prompt: prompts/data_questions/data_local/local_generation_prompt.txt
-    local_text_input_prompt:
-      prompt: prompts/data_questions/data_local/local_text_input_prompt.txt
+    data_local_gen_system_prompt:
+      prompt: prompts/data_questions/data_local/data_local_gen_system_prompt.txt
+    data_local_expansion_system_prompt:
+      prompt: prompts/data_questions/data_local/data_local_expansion_system_prompt.txt
+    data_local_gen_user_prompt:
+      prompt: prompts/data_questions/data_local/data_local_gen_user_prompt.txt
 """
 
 AUTOE_PAIRWISE_CONTENT = """## Input Configuration
@@ -276,7 +276,6 @@ def __copy_prompts(prompts_path: Path, output_path: Path) -> None:
             target_file.write_text(
                 prompt_file.read_text(encoding="utf-8"), encoding="utf-8"
             )
-            typer.echo(f"Copied {prompt_file} to {target_file}")
 
 
 @app.command()
@@ -305,8 +304,8 @@ def init(
     if config_type == ConfigType.autoq:
         settings.write_text(AUTOQ_CONTENT, encoding="utf-8")
         __copy_prompts(
-            Path(autod_prompts.__file__).parent,
-            prompts_folder / "activity_questions" / "activity_context" / "data_summary",
+            Path(summarization.__file__).parent,
+            prompts_folder / "summarization",
         )
         __copy_prompts(
             Path(activity_context_prompts.__file__).parent,

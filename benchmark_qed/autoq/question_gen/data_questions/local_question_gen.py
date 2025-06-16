@@ -93,16 +93,16 @@ class DataLocalQuestionGen(BaseQuestionGen):
         self.extraction_prompt: str = (
             extraction_prompt
             or load_template_file(
-                DATA_LOCAL_PROMPTS_PATH / "local_extraction_prompt.txt"
+                DATA_LOCAL_PROMPTS_PATH / "data_local_gen_system_prompt.txt"
             )
         ).template
         self.text_input_prompt: Template = text_input_prompt or load_template_file(
-            DATA_LOCAL_PROMPTS_PATH / "local_text_input_prompt.txt"
+            DATA_LOCAL_PROMPTS_PATH / "data_local_gen_user_prompt.txt"
         )
         self.generation_prompt: str = (
             generation_prompt
             or load_template_file(
-                DATA_LOCAL_PROMPTS_PATH / "local_generation_prompt.txt"
+                DATA_LOCAL_PROMPTS_PATH / "data_local_expansion_system_prompt.txt"
             )
         ).template
         self.text_units = text_units

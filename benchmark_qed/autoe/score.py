@@ -480,7 +480,7 @@ def analyze_criteria(raw_scores: pd.DataFrame, alpha: float = 0.05) -> pd.DataFr
     """
     # Drop unused columns
     others = raw_scores["other_name"].unique()
-    base_name = raw_scores["base_name"].unique()[0]
+    base_names = raw_scores["base_name"].unique()[0]
 
     scores_group = raw_scores.groupby([
         "question",
@@ -500,6 +500,7 @@ def analyze_criteria(raw_scores: pd.DataFrame, alpha: float = 0.05) -> pd.DataFr
         .dropna()
         .reset_index()
         for other in others
+        for base_name in base_names
     ]
 
     all_results = pd.concat(results, ignore_index=True)

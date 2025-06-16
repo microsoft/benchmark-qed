@@ -171,14 +171,14 @@ Only one of these options should be set for each prompt. If both are set, or nei
 ### Example (File Path)
 ```yaml
 activity_questions_prompt_config:
-  local_generation_system_prompt:
-    prompt: prompts/activity_questions/local_generation_system_prompt.txt
+  activity_local_gen_system_prompt:
+    prompt: prompts/activity_questions/local/activity_local_gen_system_prompt.txt
 ```
 
 ### Example (Direct Text)
 ```yaml
 activity_questions_prompt_config:
-  local_generation_system_prompt:
+  activity_local_gen_system_prompt:
     prompt_text: |
       Generate a question about the following activity:
 ```

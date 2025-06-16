@@ -70,9 +70,9 @@ async def __generate_data_local(
         text_units=sample_texts,
         concurrent_coroutines=concurrent_requests,
         random_seed=random_seed,
-        extraction_prompt=config.data_questions_prompt_config.data_local_prompt_config.local_extraction_prompt.template,
-        text_input_prompt=config.data_questions_prompt_config.data_local_prompt_config.local_text_input_prompt.template,
-        generation_prompt=config.data_questions_prompt_config.data_local_prompt_config.local_generation_prompt.template,
+        extraction_prompt=config.data_questions_prompt_config.data_local_prompt_config.data_local_gen_system_prompt.template,
+        text_input_prompt=config.data_questions_prompt_config.data_local_prompt_config.data_local_gen_user_prompt.template,
+        generation_prompt=config.data_questions_prompt_config.data_local_prompt_config.data_local_expansion_system_prompt.template,
     )
 
     data_local_question_results = await data_local_generator.agenerate(
@@ -127,8 +127,8 @@ async def __generate_data_global(
         local_questions=local_questions,
         concurrent_coroutines=concurrent_requests,
         random_seed=random_seed,
-        extraction_prompt=config.data_questions_prompt_config.data_global_prompt_config.global_extraction_prompt.template,
-        extraction_input_prompt=config.data_questions_prompt_config.data_global_prompt_config.global_extraction_input_prompt.template,
+        extraction_prompt=config.data_questions_prompt_config.data_global_prompt_config.data_global_gen_system_prompt.template,
+        extraction_input_prompt=config.data_questions_prompt_config.data_global_prompt_config.data_global_gen_user_prompt.template,
     )
 
     data_global_question_results = await data_global_generator.agenerate(
@@ -189,10 +189,10 @@ async def __generate_activity_context(
         text_units=sample_texts,
         concurrent_coroutines=concurrent_requests,
         activity_identification_prompt=config.activity_questions_prompt_config.activity_context_prompt_config.activity_identification_prompt.template,
-        map_system_prompt=config.activity_questions_prompt_config.activity_context_prompt_config.data_summary_prompt_config.map_summary_system_prompt.template,
-        map_user_prompt=config.activity_questions_prompt_config.activity_context_prompt_config.data_summary_prompt_config.map_summary_user_prompt.template,
-        reduce_system_prompt=config.activity_questions_prompt_config.activity_context_prompt_config.data_summary_prompt_config.reduce_summary_system_prompt.template,
-        reduce_user_prompt=config.activity_questions_prompt_config.activity_context_prompt_config.data_summary_prompt_config.reduce_summary_user_prompt.template,
+        map_system_prompt=config.activity_questions_prompt_config.activity_context_prompt_config.data_summary_prompt_config.summary_map_system_prompt.template,
+        map_user_prompt=config.activity_questions_prompt_config.activity_context_prompt_config.data_summary_prompt_config.summary_map_user_prompt.template,
+        reduce_system_prompt=config.activity_questions_prompt_config.activity_context_prompt_config.data_summary_prompt_config.summary_reduce_system_prompt.template,
+        reduce_user_prompt=config.activity_questions_prompt_config.activity_context_prompt_config.data_summary_prompt_config.summary_reduce_user_prompt.template,
     )
 
     activity_context = await activity_generator.agenerate(
@@ -229,8 +229,8 @@ async def __generate_activity_local(
         activity_context=activity_context,
         concurrent_coroutines=concurrent_requests,
         random_seed=random_seed,
-        generation_system_prompt=config.activity_questions_prompt_config.activity_local_prompt_config.local_generation_system_prompt.template,
-        generation_user_prompt=config.activity_questions_prompt_config.activity_local_prompt_config.local_generation_user_prompt.template,
+        generation_system_prompt=config.activity_questions_prompt_config.activity_local_prompt_config.activity_local_gen_system_prompt.template,
+        generation_user_prompt=config.activity_questions_prompt_config.activity_local_prompt_config.activity_local_gen_user_prompt.template,
     )
 
     activity_local_question_results = await activity_local_generator.agenerate(
@@ -280,8 +280,8 @@ async def __generate_activity_global(
         activity_context=activity_context,
         concurrent_coroutines=concurrent_requests,
         random_seed=random_seed,
-        generation_system_prompt=config.activity_questions_prompt_config.activity_global_prompt_config.global_generation_system_prompt.template,
-        generation_user_prompt=config.activity_questions_prompt_config.activity_global_prompt_config.global_generation_user_prompt.template,
+        generation_system_prompt=config.activity_questions_prompt_config.activity_global_prompt_config.activity_global_gen_system_prompt.template,
+        generation_user_prompt=config.activity_questions_prompt_config.activity_global_prompt_config.activity_global_gen_user_prompt.template,
     )
 
     activity_global_question_results = await activity_global_generator.agenerate(
