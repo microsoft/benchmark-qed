@@ -52,9 +52,9 @@ class DataLocalQuestionGen(BaseQuestionGen):
         claim_extractor_params: dict[str, Any] | None = None,
         llm_params: dict[str, Any] = defs.LLM_PARAMS,
         json_mode: bool = True,
-        extraction_prompt: Template | None = None,
-        text_input_prompt: Template | None = None,
-        generation_prompt: Template | None = None,
+        generation_system_prompt: Template | None = None,
+        generation_user_prompt: Template | None = None,
+        expansion_system_prompt: Template | None = None,
         concurrent_coroutines: int = 32,
         random_seed: int = defs.RANDOM_SEED,
     ) -> None:
@@ -91,16 +91,16 @@ class DataLocalQuestionGen(BaseQuestionGen):
             self.llm_params.pop("response_format", None)
 
         self.extraction_prompt: str = (
-            extraction_prompt
+            generation_system_prompt
             or load_template_file(
                 DATA_LOCAL_PROMPTS_PATH / "data_local_gen_system_prompt.txt"
             )
         ).template
-        self.text_input_prompt: Template = text_input_prompt or load_template_file(
+        self.text_input_prompt: Template = generation_user_prompt or load_template_file(
             DATA_LOCAL_PROMPTS_PATH / "data_local_gen_user_prompt.txt"
         )
         self.generation_prompt: str = (
-            generation_prompt
+            expansion_system_prompt
             or load_template_file(
                 DATA_LOCAL_PROMPTS_PATH / "data_local_expansion_system_prompt.txt"
             )

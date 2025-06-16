@@ -57,8 +57,8 @@ class DataGlobalQuestionGen(BaseQuestionGen):
         claim_extractor_params: dict[str, Any] | None = None,
         llm_params: dict[str, Any] = defs.LLM_PARAMS,
         json_mode: bool = True,
-        extraction_prompt: Template | None = None,
-        extraction_input_prompt: Template | None = None,
+        generation_system_prompt: Template | None = None,
+        generation_user_prompt: Template | None = None,
         concurrent_coroutines: int = 32,
         random_seed: int = defs.RANDOM_SEED,
     ) -> None:
@@ -89,11 +89,14 @@ class DataGlobalQuestionGen(BaseQuestionGen):
         else:
             self.llm_params.pop("response_format", None)
 
-        self.extraction_prompt: Template = extraction_prompt or load_template_file(
-            DATA_GLOBAL_PROMPTS_PATH / "data_global_gen_system_prompt.txt"
+        self.extraction_prompt: Template = (
+            generation_system_prompt
+            or load_template_file(
+                DATA_GLOBAL_PROMPTS_PATH / "data_global_gen_system_prompt.txt"
+            )
         )
         self.extraction_input_prompt: Template = (
-            extraction_input_prompt
+            generation_user_prompt
             or load_template_file(
                 DATA_GLOBAL_PROMPTS_PATH / "data_global_gen_user_prompt.txt"
             )
