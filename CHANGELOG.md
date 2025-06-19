@@ -1,6 +1,11 @@
 # Changelog
 Note: version releases in the 0.x.y range may introduce breaking changes.
 
+## 0.2.0
+
+- minor: Add prompt customization options for CLI
+- patch: fix typo
+
 ## 0.1.0
 
 - minor: Add LLM Custom Providers CLI Support through config
