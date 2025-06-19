@@ -87,7 +87,7 @@ class ActivityLocalQuestionGen(BaseQuestionGen):
             generation_system_prompt
             or load_template_file(
                 ACTIVITY_LOCAL_PROMPTS_PATH
-                / "local_generation_generation_system_prompt.txt"
+                / "local_generation_system_prompt.txt"
             )
         )
         self.generation_user_prompt: Template = (
