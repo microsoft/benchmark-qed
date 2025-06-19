@@ -86,15 +86,13 @@ class ActivityLocalQuestionGen(BaseQuestionGen):
         self.generation_system_prompt: Template = (
             generation_system_prompt
             or load_template_file(
-                ACTIVITY_LOCAL_PROMPTS_PATH
-                / "local_generation_generation_system_prompt.txt"
+                ACTIVITY_LOCAL_PROMPTS_PATH / "activity_local_gen_system_prompt.txt"
             )
         )
         self.generation_user_prompt: Template = (
             generation_user_prompt
             or load_template_file(
-                ACTIVITY_LOCAL_PROMPTS_PATH
-                / "local_generation_generation_user_prompt.txt"
+                ACTIVITY_LOCAL_PROMPTS_PATH / "activity_local_gen_user_prompt.txt"
             )
         )
         self.concurrent_coroutines = concurrent_coroutines
