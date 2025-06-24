@@ -12,11 +12,8 @@ import typer
 from rich import print as rich_print
 
 from benchmark_qed.autoe.config import PairwiseConfig, ReferenceConfig
-from benchmark_qed.autoe.score import (
-    analyze_criteria,
-    get_pairwise_scores,
-    get_reference_scores,
-)
+from benchmark_qed.autoe.pairwise_scores import analyze_criteria, get_pairwise_scores
+from benchmark_qed.autoe.reference_scores import get_reference_scores
 from benchmark_qed.cli.utils import print_df
 from benchmark_qed.config.utils import load_config
 from benchmark_qed.llm.factory import ModelFactory
@@ -250,3 +247,33 @@ def reference_scores(
         rich_print(llm_client.get_usage())
     usage_file = output / "model_usage.json"
     usage_file.write_text(json.dumps(llm_client.get_usage()), encoding="utf-8")
+
+
+@app.command()
+def assertion_scores(
+    comparison_spec: Annotated[
+        Path,
+        typer.Argument(help="The path to the JSON file containing the configuration."),
+    ],
+    output: Annotated[
+        Path, typer.Argument(help="The path to the output file for the scores.")
+    ],
+    *,
+    print_model_usage: Annotated[
+        bool,
+        typer.Option(help="Whether to print the model usage statistics after scoring."),
+    ] = False,
+    include_score_id_in_prompt: Annotated[
+        bool,
+        typer.Option(
+            help="Whether to include the score ID in the evaluation prompt for the LLM (might be useful to avoid cached scores)."
+        ),
+    ] = True,
+    question_id_key: Annotated[
+        str,
+        typer.Option(
+            help="The key in the JSON file that contains the question ID. This is used to match questions across different conditions."
+        ),
+    ] = "question_id",
+):
+    pass
