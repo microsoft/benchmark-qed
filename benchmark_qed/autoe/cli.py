@@ -365,7 +365,6 @@ def assertion_scores(
         pd.DataFrame, summary_by_assertion[summary_by_assertion["score"] == 0]
     )
 
-    failed_assertions["trials"] = config.trials
     failed_assertions = failed_assertions.drop(columns=["score"])
 
     if len(failed_assertions) > 0:
