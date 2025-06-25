@@ -11,7 +11,8 @@ import pandas as pd
 import typer
 from rich import print as rich_print
 
-from benchmark_qed.autoe.config import PairwiseConfig, ReferenceConfig
+from benchmark_qed.autoe.assertion_scores import get_assertion_scores
+from benchmark_qed.autoe.config import AssertionConfig, PairwiseConfig, ReferenceConfig
 from benchmark_qed.autoe.pairwise_scores import analyze_criteria, get_pairwise_scores
 from benchmark_qed.autoe.reference_scores import get_reference_scores
 from benchmark_qed.cli.utils import print_df
@@ -275,5 +276,64 @@ def assertion_scores(
             help="The key in the JSON file that contains the question ID. This is used to match questions across different conditions."
         ),
     ] = "question_id",
-):
-    pass
+) -> None:
+    """Generate assertion for the generated answers provided in the JSON file."""
+    config = load_config(comparison_spec, AssertionConfig)
+    output.mkdir(parents=True, exist_ok=True)
+
+    llm_client = ModelFactory.create_chat_model(config.llm_config)
+
+    assertion_score = get_assertion_scores(
+        llm_client=llm_client,
+        llm_config=config.llm_config,
+        answers=pd.read_json(config.generated.answer_base_path, encoding="utf-8"),
+        assertions=pd.read_json(config.assertions.assertions_path, encoding="utf-8"),
+        assessment_user_prompt=config.prompt_config.user_prompt.template,
+        assessment_system_prompt=config.prompt_config.system_prompt.template,
+        trials=config.trials,
+        include_score_id_in_prompt=include_score_id_in_prompt,
+        question_id_key=question_id_key,
+    )
+
+    assertion_score.to_csv(output / "assertion_scores.csv", index=False)
+
+    summary_by_assertion = (
+        assertion_score.groupby(["question", "assertion"])
+        .agg(
+            score=("score", lambda x: int(x.mean() > 0.5)),
+            score_mean=("score", "mean"),
+            score_std=("score", "std"),
+            score_min=("score", "min"),
+            score_max=("score", "max"),
+        )
+        .reset_index()
+    )
+
+    print_df(
+        summary_by_assertion,
+        "Assertion Scores Summary by Question-Assertion",
+    )
+
+    summary_by_question = (
+        summary_by_assertion.groupby(["question"])
+        .agg(
+            success=("score", lambda x: (x == 1).sum()),
+            fail=("score", lambda x: (x == 0).sum()),
+            score_mean=("score_mean", "mean"),
+            score_std=("score_std", "std"),
+            score_min=("score_min", "min"),
+            score_max=("score_max", "max"),
+        )
+        .reset_index()
+    )
+
+    print_df(
+        summary_by_question,
+        "Assertion Scores Summary by Question",
+    )
+
+    if print_model_usage:
+        rich_print("Model usage statistics:")
+        rich_print(llm_client.get_usage())
+    usage_file = output / "model_usage.json"
+    usage_file.write_text(json.dumps(llm_client.get_usage()), encoding="utf-8")
