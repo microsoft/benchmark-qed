@@ -1,0 +1,502 @@
+[
+  {
+    "question_id": "ce3dc9d4-5953-4644-b59f-73b6d73d937b",
+    "question_text": "Across the dataset, what are the common themes and narratives associated with public health crises?",
+    "assertions": [
+      "The response should identify and synthesize common themes found across diverse public health crises, such as underlying causes, community impacts, and typical responses.",
+      "The response should provide specific narrative examples from the dataset that illustrate issues like health disparities, mental health impacts, and the role of social determinants.",
+      "The response should discuss challenges faced in addressing public health crises, including factors like distrust in science, financial constraints, and policy barriers.",
+      "The response should mention strategies and systems for crisis management, such as vaccination campaigns, public health infrastructure, international cooperation, and community health centers."
+    ]
+  },
+  {
+    "question_id": "dff8d9ab-48bd-4d32-870f-c18a353e96b7",
+    "question_text": "Across the dataset, how are legal, political, and social issues linked to the emergence of public health crises?",
+    "assertions": [
+      "The response should explicitly link legal issues, such as legislation and court decisions, to the emergence or exacerbation of public health crises, providing concrete examples from the dataset.",
+      "The response should discuss the influence of political actions, policy decisions, or political division on public health outcomes, with supporting evidence from the dataset.",
+      "The response should address social issues, including disparities and inequities, and explain how these factors contribute to public health crises using specific data-driven examples.",
+      "The response should demonstrate how the interconnections among legal, political, and social issues collectively shape the emergence and progression of public health crises, supported by examples from the dataset."
+    ]
+  },
+  {
+    "question_id": "9b895e70-a39f-42c6-b172-80bdfcbd9b8c",
+    "question_text": "Across the dataset, how are healthcare policies depicted in terms of their impact on public health outcomes?",
+    "assertions": [
+      "The response should summarize how healthcare policies are depicted in the dataset regarding their influence on public health outcomes.",
+      "The response should provide specific examples of policy impacts, such as Medicaid expansion, legislative efforts, or preventive healthcare services, and their associated outcomes across multiple states.",
+      "The response should address the role of healthcare policies in mitigating or exacerbating health disparities, including references to minority health and maternal health initiatives.",
+      "The response should mention the significance of community health centers and preventive healthcare in improving access and outcomes, noting challenges or successes highlighted in the dataset."
+    ]
+  },
+  {
+    "question_id": "2db29428-e1b3-4faa-9fe3-b4ec50268a53",
+    "question_text": "Across the dataset, what patterns emerge regarding healthcare access and the management of public health crises?",
+    "assertions": [
+      "The response should identify and discuss systemic challenges in healthcare access, such as maternity care deserts and racial or socioeconomic disparities.",
+      "The response should mention specific barriers to healthcare access, including staffing shortages and rural-urban disparities, with supporting examples from the dataset.",
+      "The response should analyze management strategies and responses to public health crises, referencing actions such as telemedicine adoption, policy initiatives, or cybersecurity challenges.",
+      "The response should evaluate the effectiveness of crisis management efforts and address the impact of healthcare access disparities and social determinants of health on public health outcomes."
+    ]
+  },
+  {
+    "question_id": "7ceab902-84e8-4fef-9a18-91e8fa56ee28",
+    "question_text": "Across the dataset, what regions are most frequently mentioned in relation to infectious disease outbreaks?",
+    "assertions": [
+      "The response should identify and list specific regions that are most frequently mentioned in relation to infectious disease outbreaks across the dataset.",
+      "The response should provide examples of notable infectious disease outbreaks associated with each highlighted region.",
+      "The response should reference the types of infectious diseases prevalent in each region and mention any associated public health impacts.",
+      "The response should note patterns, trends, or factors contributing to outbreaks in the discussed regions, supported by data or source references where applicable."
+    ]
+  },
+  {
+    "question_id": "98b536bb-6a4f-47df-a5ee-6a8d3a4535c7",
+    "question_text": "Across the dataset, which infectious diseases are most commonly reported in news articles?",
+    "assertions": [
+      "The response should accurately list the most commonly reported infectious diseases as indicated by the dataset, such as flu, COVID-19, measles, dengue, tuberculosis, and respiratory illnesses.",
+      "The response should provide supporting information about the frequency, prevalence, or distribution for each identified disease, referencing evidence or data where possible.",
+      "The response should discuss variations in geographical distribution and temporal trends of these diseases as reflected in the dataset.",
+      "The response should mention public health responses and the impacts of the commonly reported diseases as reported in the news articles."
+    ]
+  },
+  {
+    "question_id": "e8281222-5fc8-4f61-b0c7-09d3f49da616",
+    "question_text": "Across the dataset, what types of public health interventions are most frequently discussed in relation to public health crises?",
+    "assertions": [
+      "The response should identify and discuss the most frequently mentioned public health interventions across the dataset, providing specific examples.",
+      "The response should reference relevant data sources or evidence from the dataset to support the identification and discussion of interventions.",
+      "The response should acknowledge challenges or barriers associated with the implementation of these public health interventions.",
+      "The response should provide a brief conclusion summarizing the variety of interventions and the factors influencing their effectiveness in public health crises."
+    ]
+  },
+  {
+    "question_id": "65b4f5b2-6048-4357-857d-d329ff67e463",
+    "question_text": "Across the dataset, how are public health interventions portrayed in terms of their effectiveness in addressing public health crises?",
+    "assertions": [
+      "The response should provide an overall characterization of how public health interventions are portrayed in terms of effectiveness across the dataset.",
+      "The response should include specific examples of interventions (such as Louisiana's 'Netflix model', community health centers, pandemic preparedness, opioid crisis responses, and mental health initiatives) and describe their reported impacts.",
+      "The response should acknowledge both the successes and the challenges (e.g., funding, staffing shortages, societal acceptance) faced by these interventions.",
+      "The response should reference diverse types of crises (infectious diseases, chronic illness, mental health, substance use) to demonstrate the breadth of interventions discussed in the dataset."
+    ]
+  },
+  {
+    "question_id": "4e514173-6942-49db-ab49-ed2d2afefabc",
+    "question_text": "Across the dataset, how do public health responses vary between different regions?",
+    "assertions": [
+      "The response should provide examples of public health responses from multiple regions, highlighting differences or similarities.",
+      "The response should discuss the factors influencing regional variations, such as local policies, resource availability, or community needs.",
+      "The response should address the effectiveness or outcomes of the different public health responses across regions.",
+      "The response should mention challenges faced or public reaction in at least some regions, illustrating how these impact public health measures."
+    ]
+  },
+  {
+    "question_id": "d07d0d39-3a3c-4aaa-a999-0255e6748331",
+    "question_text": "Across the dataset, what are the recurring public health issues associated with the implementation of new healthcare policies?",
+    "assertions": [
+      "The response should identify and explain multiple recurring public health issues associated with new healthcare policy implementation.",
+      "The response should provide specific examples or case studies from the dataset to illustrate each issue mentioned.",
+      "The response should address both systemic issues (such as disparities, infrastructure, and economics) and emerging challenges (such as cybersecurity and data privacy).",
+      "The response should demonstrate the connection between policy implementation and its public health impacts, referencing data or sources where appropriate."
+    ]
+  },
+  {
+    "question_id": "c5f50fe7-072b-43dc-86ba-99fc0281d67e",
+    "question_text": "Across the dataset, how are healthcare policy changes generally portrayed in terms of public opinion?",
+    "assertions": [
+      "The response should discuss the general portrayal of healthcare policy changes in terms of public opinion across the dataset, including overall sentiment and major trends.",
+      "The response should address the role of partisan polarization and how public opinion is divided along party lines regarding healthcare policy changes.",
+      "The response should provide examples of specific healthcare policy changes and describe the range of public reactions to those proposals.",
+      "The response should mention issues related to healthcare access, affordability, equity, and discrimination as factors influencing public opinion on healthcare policy changes."
+    ]
+  },
+  {
+    "question_id": "f2d5cbff-ec05-4ba9-a077-ef8562cef61a",
+    "question_text": "Across the dataset, what are the common barriers to healthcare access for underserved communities discussed in the articles?",
+    "assertions": [
+      "The response should identify and describe multiple types of barriers to healthcare access for underserved communities, such as economic, geographic, cultural, systemic, and staffing challenges.",
+      "The response should provide data or specific examples from the dataset/articles to support each barrier discussed.",
+      "The response should address the intersectionality and interconnected nature of these barriers, reflecting complexity rather than isolated issues.",
+      "The response should mention how these barriers impact specific populations within underserved communities, including racial and ethnic minorities, rural residents, and immigrants."
+    ]
+  },
+  {
+    "question_id": "63b6c9b4-86e3-46d7-a8e8-45ca0b153361",
+    "question_text": "Across the dataset, which demographic groups are most often reported as having limited access to healthcare?",
+    "assertions": [
+      "The response should explicitly identify multiple demographic groups most frequently reported as having limited access to healthcare, such as African Americans, Hispanic Americans, Asian Americans and Pacific Islanders, low-income individuals, immigrants, rural residents, and people with disabilities.",
+      "The response should provide specific data points or examples from the dataset illustrating limited healthcare access for each group mentioned.",
+      "The response should address variations in access both across geographic regions (e.g., specific states or rural vs. urban areas) and within demographic categories (e.g., by income level or immigration status).",
+      "The response should include a summary or conclusion synthesizing the main groups affected and noting the importance of recognizing their unique challenges."
+    ]
+  },
+  {
+    "question_id": "00fb67b6-5936-44c9-b6ac-c714e6489c8e",
+    "question_text": "Across the dataset, what are the recurring issues related to healthcare access and how are they addressed by policy interventions?",
+    "assertions": [
+      "The response should identify multiple recurring issues related to healthcare access across the dataset, such as workforce shortages, financial barriers, discrimination, and challenges at community health centers.",
+      "The response should clearly describe policy interventions implemented to address these issues, such as Medicaid expansion, increased funding, minimum staffing requirements, and cultural competence training.",
+      "The response should provide specific examples or data from the dataset to support both the identified issues and the effectiveness (or limitations) of the policy interventions.",
+      "The response should discuss ongoing challenges or barriers to effective policy implementation, such as legal opposition to the Affordable Care Act or resistance to Medicaid expansion, and mention the roles of various stakeholders."
+    ]
+  },
+  {
+    "question_id": "87432647-3c8b-49ad-a105-e13ae3710b3e",
+    "question_text": "Across the dataset, what are the common themes in news articles discussing the legal aspects of healthcare policies?",
+    "assertions": [
+      "The response should identify and describe multiple common themes presented in news articles about the legal aspects of healthcare policies.",
+      "The response should reference specific legal challenges, such as those involving the Affordable Care Act and issues surrounding preventive care mandates.",
+      "The response should mention the influence of political and partisan perspectives on legal debates and policy outcomes in healthcare.",
+      "The response should address the legal impact on specific populations (such as reproductive health, abortion rights, and prison healthcare) and note relevant legislative and regulatory changes."
+    ]
+  },
+  {
+    "question_id": "4ffb8df9-36cd-448c-9008-7167592b2a73",
+    "question_text": "Across the dataset, how are mental health issues typically framed in news articles?",
+    "assertions": [
+      "The response should identify and describe multiple framing lenses used in news articles, such as systemic challenges, legislative impacts, law enforcement involvement, youth/education, and stigma/cultural barriers.",
+      "The response should use concrete examples or references to the dataset to illustrate how each framing lens is portrayed in the news articles.",
+      "The response should synthesize the impact of these framings on public perception or policy, rather than simply listing issues.",
+      "The response should provide an overall summary or conclusion that integrates the various framings and highlights their significance."
+    ]
+  },
+  {
+    "question_id": "30c6357f-70b6-40aa-bcb3-82dd43f52a61",
+    "question_text": "Across the dataset, how are mental health issues represented in discussions about healthcare policies?",
+    "assertions": [
+      "The response should describe the frequency and prominence of mental health issues in healthcare policy discussions across the dataset.",
+      "The response should identify specific mental health concerns discussed in the policies, such as types of disorders or populations affected.",
+      "The response should outline proposed solutions or strategies for addressing mental health issues within the healthcare policy context.",
+      "The response should mention key challenges, barriers, or impacts related to how mental health issues are addressed in healthcare policies."
+    ]
+  },
+  {
+    "question_id": "a194ecc3-6883-406e-ab2f-b1b81e78a6dc",
+    "question_text": "Across the dataset, how are healthcare access issues portrayed in various communities?",
+    "assertions": [
+      "The response should provide examples of how healthcare access issues are portrayed in multiple geographic and demographic communities across the dataset.",
+      "The response should address the specific roles and challenges faced by community health centers in providing care.",
+      "The response should discuss disparities in healthcare access for racial, ethnic minorities, and low-income populations, including relevant statistics.",
+      "The response should mention the impact of socioeconomic factors and preventive care challenges in shaping healthcare access issues, supported by data from the dataset."
+    ]
+  },
+  {
+    "question_id": "4fc08a38-427d-4fe7-b66d-57c4089ad6de",
+    "question_text": "Across the dataset, what common challenges and barriers are reported in the implementation of mental health intervention programs?",
+    "assertions": [
+      "The response should identify and categorize common challenges and barriers as reported in the dataset, including financial, logistical, cultural/societal, legal/policy, and infrastructure/capacity-related issues.",
+      "The response should provide specific examples from the dataset that illustrate each type of barrier, including reference to data points or sources when possible.",
+      "The response should explain the impact of each barrier on the implementation of mental health intervention programs, such as reduced access to care, treatment delays, or workforce shortages.",
+      "The response should conclude with a summary emphasizing the multifaceted nature of the challenges and suggest that solutions require comprehensive, multi-pronged approaches."
+    ]
+  },
+  {
+    "question_id": "ab382179-1eb9-49e4-88eb-d7cf9f78bcb9",
+    "question_text": "Across the dataset, how are mental health concerns addressed during public health crises?",
+    "assertions": [
+      "The response should describe general strategies and resource allocation efforts implemented to address mental health concerns during public health crises.",
+      "The response should mention specific policy initiatives or legislative actions taken to address mental health issues.",
+      "The response should address challenges faced by specific populations, such as children, LGBTQ+ youth, or Native Americans, during public health crises.",
+      "The response should discuss barriers to access, such as insurance coverage issues, and community or law enforcement efforts to support mental health."
+    ]
+  },
+  {
+    "question_id": "27a521dc-3822-4ab0-860f-a77f60b87269",
+    "question_text": "Across the dataset, how are environmental issues linked to public health outcomes in news articles?",
+    "assertions": [
+      "The response should describe specific types of environmental issues, such as climate change, air quality, and water contamination, as discussed across news articles.",
+      "The response should clearly explain the direct and indirect impacts of these environmental issues on public health outcomes, providing concrete examples or case studies from the dataset.",
+      "The response should address how socioeconomic and racial disparities intersect with environmental issues to exacerbate public health risks.",
+      "The response should use or reference data or findings from news articles in the dataset to support the described links between environmental issues and public health outcomes."
+    ]
+  },
+  {
+    "question_id": "2ec2e6e4-89a8-4d4b-b133-28bd21413809",
+    "question_text": "Across the dataset, what are the reported health outcomes associated with the implementation of environmental policies?",
+    "assertions": [
+      "The response should provide specific health outcomes (both positive and negative) associated with environmental policy implementation, supported by examples or data from the dataset.",
+      "The response should mention health benefits related to reductions in air pollution and greenhouse gas emissions.",
+      "The response should address health impacts from environmental mismanagement (e.g., Flint water crisis) and environmental hazards like PFAS and plastic pollution.",
+      "The response should discuss the intersection of environmental policy impacts with social justice, highlighting disproportionate effects on vulnerable or marginalized communities."
+    ]
+  },
+  {
+    "question_id": "14ecae82-98b5-47d5-9368-3203395f3adf",
+    "question_text": "Across the dataset, which regions are frequently mentioned in relation to environmental health hazards?",
+    "assertions": [
+      "The response should identify and list multiple regions mentioned in relation to environmental health hazards across the dataset.",
+      "The response should provide specific examples of environmental health hazards associated with each region.",
+      "The response should mention health impacts experienced by populations in the regions discussed.",
+      "The response should include historical context or duration for the environmental health hazards in each region where possible."
+    ]
+  },
+  {
+    "question_id": "39a1181b-f396-4db6-b2ed-efa6e1ae443f",
+    "question_text": "Across the dataset, what are the prevalent themes in news articles discussing the health impacts of environmental disasters?",
+    "assertions": [
+      "The response should identify and clearly describe the main themes present in news articles about the health impacts of environmental disasters.",
+      "The response should provide specific examples or evidence from the dataset to illustrate each identified theme.",
+      "The response should mention the disproportionate effects on vulnerable or marginalized communities where applicable.",
+      "The response should address both immediate and long-term health impacts, as well as social, economic, and policy-related consequences."
+    ]
+  },
+  {
+    "question_id": "e9c4b5e1-f2ee-44a0-bb72-51a99335af5c",
+    "question_text": "Across the dataset, how are environmental health risks presented in relation to public health concerns?",
+    "assertions": [
+      "The response should explicitly describe how environmental health risks are framed as public health concerns across the dataset.",
+      "The response should provide specific examples linking environmental health risks (such as climate change, pollution, and disasters) to concrete public health outcomes, referencing source data when relevant.",
+      "The response should mention regulatory, community, or technological solutions that are being proposed or implemented to address environmental health risks in the context of public health.",
+      "The response should demonstrate an understanding of the disproportionate impact of environmental health risks on vulnerable or marginalized populations as presented in the dataset."
+    ]
+  },
+  {
+    "question_id": "85c6de56-3718-4869-85bd-18d799e96cc6",
+    "question_text": "Across the dataset, how are changes in healthcare policies legally framed and discussed?",
+    "assertions": [
+      "The response should identify major legal frameworks and language used to frame healthcare policy changes, such as references to constitutional rights, federal and state laws, and regulatory frameworks.",
+      "The response should discuss specific policy areas (e.g., abortion, Medicaid, gender-affirming care) and provide concrete examples of how legal debates unfold in each area.",
+      "The response should mention the main stakeholders involved in the legal discussions on healthcare policy (e.g., federal and state governments, advocacy groups, healthcare providers, patients).",
+      "The response should address the broader legal implications and historical context for healthcare policy changes, explaining how past events and legislative developments shape current legal debates."
+    ]
+  },
+  {
+    "question_id": "3af687ca-958d-408c-a9e8-79a61ee0d3b6",
+    "question_text": "Across the dataset, what legal challenges are highlighted in relation to healthcare access and public health crises?",
+    "assertions": [
+      "The response should identify key legal challenges such as abortion laws, EMTALA conflicts, data privacy, healthcare disparities, and cybersecurity in relation to healthcare access and public health crises.",
+      "The response should accurately cite relevant examples or cases from the dataset, including court cases, legislative actions, or regulatory measures.",
+      "The response should demonstrate how these legal challenges specifically impact healthcare access and the management of public health crises.",
+      "The response should mention multiple areas of law affected, such as emergency medical treatment, preventive care mandates, minority health disparities, and funding issues for community health centers."
+    ]
+  },
+  {
+    "question_id": "b3f57dc9-3759-435b-a885-cafeab0a341e",
+    "question_text": "Across the dataset, how have legal decisions influenced the availability and accessibility of healthcare services?",
+    "assertions": [
+      "The response should discuss how legal decisions have led to variations in healthcare availability and accessibility across different states.",
+      "The response should mention the impact of legal decisions on specific domains, such as abortion access, emergency care, preventive health services, health equity, and data privacy.",
+      "The response should provide concrete examples of key legal decisions and their effects on healthcare services, referencing both state and federal developments.",
+      "The response should synthesize information from the dataset and highlight the overall influence and implications of legal decisions on healthcare access."
+    ]
+  },
+  {
+    "question_id": "ffe1f716-e22e-4e8d-beca-07f0b992fc18",
+    "question_text": "Across the dataset, how are healthcare laws portrayed in terms of their impact on patient rights?",
+    "assertions": [
+      "The response should comprehensively describe how healthcare laws are portrayed as influencing patient rights across multiple domains (emergency care, privacy, cybersecurity, equity, preventive care).",
+      "The response should mention specific healthcare laws or acts (such as EMTALA, HIPAA, ACA) and explain their effects on patient rights, with relevant examples from the dataset.",
+      "The response should include discussion of both positive protections and ongoing legal challenges or controversies that affect patient rights according to the dataset.",
+      "The response should reference relevant data or sources from the dataset to support key points about the impact of healthcare laws on patient rights."
+    ]
+  },
+  {
+    "question_id": "6b560119-38b5-4aa6-88ed-ccaeda664156",
+    "question_text": "Across the dataset, how do healthcare policies influence access to medical services for underserved communities?",
+    "assertions": [
+      "The response should clearly explain how healthcare policies impact access to medical services in underserved communities, referencing funding, Medicaid expansion, disparities, community initiatives, and workforce issues.",
+      "The response should use specific examples and data from the dataset (e.g., Medicaid expansion in California and North Carolina, funding gaps, rural hospital impacts) to support its points.",
+      "The response should discuss the role of health disparities, equity efforts, and relevant policy initiatives addressing minority health and social determinants.",
+      "The response should address both positive and negative effects of policies, including potential barriers (e.g., workforce shortages and policy resistance) and measures aimed at improving access."
+    ]
+  },
+  {
+    "question_id": "acc52f98-6e4a-4424-b0db-b5012ddfbe24",
+    "question_text": "Across the dataset, what are the main public health initiatives mentioned that target underserved communities?",
+    "assertions": [
+      "The response should identify and summarize multiple main public health initiatives that specifically target underserved communities as mentioned in the dataset.",
+      "The response should mention key sectors or focus areas covered by these initiatives, such as healthcare access, disease prevention, maternal and child health, mental health, and environmental health.",
+      "The response should include specific examples of programs or initiatives along with their goals, outcomes, or funding details as presented in the dataset.",
+      "The response should address major challenges or barriers faced by these initiatives, as well as notable outcomes or impacts where applicable."
+    ]
+  },
+  {
+    "question_id": "7b197d80-2d79-47c0-a0e4-50a373e8b87c",
+    "question_text": "Across the dataset, what are the common outcomes reported for community health interventions aimed at underserved communities?",
+    "assertions": [
+      "The response should mention common health outcomes, such as reductions in overdoses, improvements in infectious disease rates, or increased access to treatment, as documented in the dataset.",
+      "The response should address the impact of community health interventions on social determinants of health, such as connections to employment, food security, or access to insurance.",
+      "The response should provide examples of efforts to improve health equity and access among underserved populations, including specific programs or policy changes.",
+      "The response should acknowledge challenges and limitations faced by interventions, and note any innovative solutions or adaptations documented across the dataset."
+    ]
+  },
+  {
+    "question_id": "53108ea7-bc50-4b1b-95c8-6704ae88f668",
+    "question_text": "Across the dataset, what are the primary challenges mentioned in the implementation of community health interventions in underserved communities?",
+    "assertions": [
+      "The response should comprehensively identify primary challenges such as financial constraints, staffing shortages, health inequities, and infrastructure or accessibility issues.",
+      "The response should provide supporting data or examples from the dataset to substantiate identified challenges.",
+      "The response should address additional contextual factors influencing implementation, such as community trust and environmental or climate-related impacts where relevant.",
+      "The response should synthesize information from across the dataset, indicating a broad and integrated understanding rather than reliance on a single type of challenge."
+    ]
+  },
+  {
+    "question_id": "62a99062-7560-4c5c-ac99-af3a7f004482",
+    "question_text": "Across the dataset, how are new technological advancements in healthcare being portrayed in terms of their impact on public health?",
+    "assertions": [
+      "The response should provide a balanced portrayal of technological advancements in healthcare, addressing both positive and negative impacts on public health.",
+      "The response should mention specific examples of new healthcare technologies (such as telemedicine, gene therapies, cancer treatments, etc.) and describe their impacts.",
+      "The response should discuss concerns and challenges related to these advancements, including privacy, data security, cybersecurity, and health inequities.",
+      "The response should include references to public and professional opinions on these advancements, indicating how different stakeholders perceive their impact on public health."
+    ]
+  },
+  {
+    "question_id": "6438ef3d-6f2d-49cb-9f9d-5757333b14bc",
+    "question_text": "Across the dataset, what are the reported effects of healthcare technology on access to medical services?",
+    "assertions": [
+      "The response should discuss the expansion of telemedicine and its effects on access to medical services, citing examples from the dataset.",
+      "The response should address the impact of healthcare AI tools on communication, data management, and patient access, including both benefits and challenges.",
+      "The response should mention cybersecurity threats and their specific consequences on healthcare service delivery and access.",
+      "The response should identify disparities (such as racial and ethnic) and legislative measures affecting equitable access to healthcare, as reported in the dataset."
+    ]
+  },
+  {
+    "question_id": "49395666-1d5b-4f3a-a181-7bdf4c5ed669",
+    "question_text": "Across the dataset, what factors are influencing the adoption of healthcare technologies in different regions?",
+    "assertions": [
+      "The response should identify and discuss government policies and privacy concerns as factors influencing healthcare technology adoption across regions.",
+      "The response should mention technological advancements, such as telemedicine and AI, and their impact on adoption rates.",
+      "The response should address economic factors (including costs, insurance coverage, and healthcare funding disparities) that affect adoption in different regions.",
+      "The response should consider additional factors such as disparities in healthcare access, cybersecurity concerns, and the role of global health initiatives in shaping regional adoption of healthcare technologies."
+    ]
+  },
+  {
+    "question_id": "af3bd549-f88d-453e-a79d-e3167374b437",
+    "question_text": "Across the dataset, what are the emerging trends in medical treatments driven by technological innovations?",
+    "assertions": [
+      "The response should identify at least three emerging trends in medical treatments that are directly linked to technological innovations.",
+      "The response should provide specific examples of how technology (such as AI, gene therapy, telemedicine) is transforming traditional medical practices.",
+      "The response should address associated challenges or barriers\u2014such as cost, accessibility, or misinformation\u2014arising from these technological innovations.",
+      "The response should mention how these innovations are impacting global health, including considerations of health disparities and prospects for equitable access."
+    ]
+  },
+  {
+    "question_id": "1b2603bf-4823-40fd-9a85-222ef4547677",
+    "question_text": "Across the dataset, how are telemedicine and digital health tools portrayed in terms of their impact on healthcare access and patient outcomes?",
+    "assertions": [
+      "The response should describe how telemedicine and digital health tools have influenced healthcare access, citing specific examples from the dataset.",
+      "The response should address the impact of these tools on patient outcomes, including benefits and challenges, as portrayed in the dataset.",
+      "The response should discuss both positive aspects (e.g., improved access, workforce relief) and challenges (e.g., data security, quality concerns) of telemedicine and digital health tools.",
+      "The response should reference the role of AI and other technological advancements in shaping the outcomes and access associated with digital health tools, supported by examples from the dataset."
+    ]
+  },
+  {
+    "question_id": "fca87c9c-b28f-4b1f-92f5-09059268d0c4",
+    "question_text": "Across the dataset, what are the reported challenges and successes of implementing telemedicine and digital health tools during public health crises?",
+    "assertions": [
+      "The response should identify and describe key challenges of implementing telemedicine and digital health tools during public health crises, such as cybersecurity threats, access and equity issues, and quality of care concerns.",
+      "The response should highlight major successes of telemedicine and digital health tools, including increased access to care, technological advancements, and policy support.",
+      "The response should provide specific examples or data points from the dataset to support the discussion of both challenges and successes.",
+      "The response should address the overall impact of telemedicine and digital health tools on patient care during public health crises."
+    ]
+  },
+  {
+    "question_id": "742b4ce2-0899-42a3-a195-8b94e9a2ddf3",
+    "question_text": "Across the dataset, how are healthcare policies portrayed in relation to political agendas and party positions?",
+    "assertions": [
+      "The response should clearly describe how healthcare policies are portrayed as connected to political agendas and party positions across the dataset.",
+      "The response should address the distinct stances and portrayals of both the Democratic and Republican parties regarding healthcare policy, citing specific policy differences.",
+      "The response should provide examples of state-level initiatives or conflicts that illustrate how party positions influence healthcare policy implementation.",
+      "The response should include discussion of public perception or opinion regarding party approaches to healthcare policies, referencing polling or survey data where available."
+    ]
+  },
+  {
+    "question_id": "f71876b7-6ffa-41ce-91c1-1fd51c5e9cbb",
+    "question_text": "Across the dataset, how are political debates on healthcare policies framed in relation to public health crises?",
+    "assertions": [
+      "The response should describe how political debates on healthcare policies are specifically framed in relation to public health crises, mentioning key themes and narrative strategies.",
+      "The response should compare and contrast the positions and arguments of major political parties (such as Democrats and Republicans) regarding healthcare during public health crises.",
+      "The response should illustrate the influence of recent and ongoing public health crises (e.g., COVID-19 pandemic, opioid crisis) on the tone, content, and legislative focus of healthcare policy debates.",
+      "The response should mention the impact of public opinion and notable legislative actions or proposals that have arisen in response to public health crises within political debates."
+    ]
+  },
+  {
+    "question_id": "cc86f89d-8567-4ec0-b83a-804449a019ba",
+    "question_text": "Across the dataset, what role have political actions played in shaping responses to public health crises?",
+    "assertions": [
+      "The response should clearly explain how political actions have influenced responses to public health crises, using concrete examples across different contexts.",
+      "The response should reference specific cases (e.g., COVID-19 in China and the United States, Flint water crisis, delayed UK COVID-19 response) to illustrate the impact of political decisions on public health.",
+      "The response should address the effects of political actions on scientific inquiry, public trust, international cooperation, and long-term public health infrastructure.",
+      "The response should draw from relevant data or cited sources in the dataset to support claims about the role of political actions in shaping public health crisis responses."
+    ]
+  },
+  {
+    "question_id": "07ebb0b6-9acc-4012-9b06-e0883583794b",
+    "question_text": "Across the dataset, which political figures are frequently mentioned in the context of healthcare policy?",
+    "assertions": [
+      "The response should identify specific political figures frequently mentioned in the context of healthcare policy across the dataset.",
+      "The response should provide brief explanations of each figure's involvement or stance on healthcare policy.",
+      "The response should reference supporting data or sources for claims about each political figure\u2019s role in healthcare policy.",
+      "The response should discuss variations in public or media perceptions of the identified political figures' healthcare policies."
+    ]
+  },
+  {
+    "question_id": "002c914f-c232-41a5-acc1-98a04190e87e",
+    "question_text": "Across the dataset, what are the major healthcare-related political developments and their reported societal impacts?",
+    "assertions": [
+      "The response should identify and summarize major healthcare-related political developments mentioned in the dataset, such as data privacy laws, cybersecurity incidents, legislative efforts, Medicaid expansion, and related rhetoric.",
+      "The response should describe the reported societal impacts of these political developments, including effects on patient privacy, hospital operations, healthcare affordability, racial and ethnic health disparities, and economic burdens like medical debt.",
+      "The response should provide specific examples or laws cited in the dataset to support the major points (e.g., state data protection laws, the Lower Costs, More Transparency Act, Medicaid expansion in North Carolina).",
+      "The response should reference data or sources from the dataset to substantiate claims, demonstrating the answer is grounded in the material provided."
+    ]
+  },
+  {
+    "question_id": "da0e407e-2c65-404f-93f7-63b33c3d6dae",
+    "question_text": "Across the dataset, how are reproductive rights issues framed in relation to healthcare policies?",
+    "assertions": [
+      "The response should describe how reproductive rights issues are connected to healthcare policies, highlighting framing on both sides of the debate.",
+      "The response should mention the impact of Roe v. Wade being overturned and how this has influenced legislative, judicial, and political actions relating to reproductive healthcare.",
+      "The response should address the consequences of reproductive rights policies on medical services, including access to abortion, fertility treatments, and mental health.",
+      "The response should discuss economic, social, and mental health implications, illustrating the multifaceted framing of reproductive rights within healthcare policy discussions."
+    ]
+  },
+  {
+    "question_id": "02aca35b-b38f-460b-b9b8-50e08f024add",
+    "question_text": "Across the dataset, what are the main arguments presented by different stakeholders regarding reproductive healthcare policies?",
+    "assertions": [
+      "The response should identify and distinctly summarize the main arguments of at least four stakeholder groups regarding reproductive healthcare policies (e.g., Democratic politicians, Republican politicians, reproductive rights advocates, healthcare providers, and/or the general public).",
+      "The response should include specific policy positions, concerns, or legislative actions advocated by each stakeholder group (e.g., protection of contraception and abortion rights, concerns about conscience rights, the importance of reproductive health data privacy).",
+      "The response should reference empirical examples, data points, or notable events (such as ballot initiatives, polling data, or lawsuits) to support summaries of stakeholder arguments.",
+      "The response should briefly mention shifts in public opinion or voting behaviors and connect them to stakeholder arguments or policy outcomes."
+    ]
+  },
+  {
+    "question_id": "4c244824-95c8-44b6-bd0f-6d50287f3205",
+    "question_text": "Across the dataset, how are reproductive healthcare laws portrayed in terms of their impact on access to services?",
+    "assertions": [
+      "The response should provide a synthesis of how reproductive healthcare laws are portrayed in the dataset, emphasizing the multifaceted impact on access to services.",
+      "The response should cite specific examples, such as the effects of abortion bans after Roe v. Wade, changes in contraception access, and variations across different states or regions.",
+      "The response should address additional dimensions of impact noted in the dataset, such as data privacy concerns and the broader economic, social, and regional implications.",
+      "The response should discuss disparities in access to services, specifying who is most affected, and demonstrate that these portrayals are based on evidence or sourced data from the dataset."
+    ]
+  },
+  {
+    "question_id": "9793db71-eb4c-4b82-bb1e-d99469ddf23e",
+    "question_text": "Across the dataset, what are the common barriers to reproductive healthcare access in various regions?",
+    "assertions": [
+      "The response should identify and categorize the main types of barriers to reproductive healthcare access, such as geographical, legal, economic, healthcare system, and cultural barriers.",
+      "The response should provide specific regional examples or case studies illustrating each barrier, drawn from the dataset.",
+      "The response should mention how different barriers (e.g., legal restrictions, infrastructure deficits, discrimination) vary across regions and affect access differently.",
+      "The response should synthesize the information into a concise summary, emphasizing the multifaceted and region-specific nature of the barriers."
+    ]
+  },
+  {
+    "question_id": "39e2569d-e08b-49d4-81fe-dd5fbe167d2c",
+    "question_text": "Across the dataset, what are the prevailing public opinions on reproductive rights issues?",
+    "assertions": [
+      "The response should summarize the overall prevailing public opinion on reproductive rights, particularly abortion, with reference to general polling data.",
+      "The response should discuss variations in opinion among key demographic groups, such as AAPI, Black women, and young voters, using relevant statistics from the dataset.",
+      "The response should address the political implications for both Democratic and Republican parties relating to reproductive rights issues based on the data.",
+      "The response should explain the influence of recent state legislation and court rulings on public opinion and access to reproductive healthcare services, including contraception and IVF."
+    ]
+  },
+  {
+    "question_id": "62adb3b4-70b5-48cf-b862-6b95ec9c5c0d",
+    "question_text": "Across the dataset, how are reproductive rights issues typically framed in news articles?",
+    "assertions": [
+      "The response should describe multiple ways in which reproductive rights issues are framed in news articles, such as political, personal, legal, and societal lenses.",
+      "The response should provide specific examples or references illustrating each identified framing approach (e.g., political strategy, personal impact, court rulings).",
+      "The response should include mention of broader reproductive rights topics beyond abortion, such as IVF, contraception, and gender-affirming care, if relevant in the dataset.",
+      "The response should reference the use of public opinion and polling data as a framing device in news coverage of reproductive rights."
+    ]
+  }
+]
