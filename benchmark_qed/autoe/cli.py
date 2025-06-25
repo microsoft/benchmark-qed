@@ -273,9 +273,23 @@ def assertion_scores(
     question_id_key: Annotated[
         str,
         typer.Option(
-            help="The key in the JSON file that contains the question ID. This is used to match questions across different conditions."
+            help="The key in the JSON file that contains the question ID. This is used to match questions with assertions."
         ),
     ] = "question_id",
+    question_text_key: Annotated[
+        str,
+        typer.Option(help="The key in the JSON file that contains the question text."),
+    ] = "question_text",
+    answer_text_key: Annotated[
+        str,
+        typer.Option(help="The key in the JSON file that contains the answer text."),
+    ] = "answer",
+    assertions_key: Annotated[
+        str,
+        typer.Option(
+            help="The key in the JSON file that contains the assertions. This should be a list of assertions for each question."
+        ),
+    ] = "assertions",
 ) -> None:
     """Generate assertion for the generated answers provided in the JSON file."""
     config = load_config(comparison_spec, AssertionConfig)
@@ -285,8 +299,8 @@ def assertion_scores(
 
     assertions = (
         pd.read_json(config.assertions.assertions_path, encoding="utf-8")
-        .explode("assertions")
-        .rename(columns={"assertions": "assertion"})
+        .explode(assertions_key)
+        .rename(columns={f"{assertions_key}": "assertion"})
         .reset_index(drop=True)
     )
 
@@ -300,17 +314,15 @@ def assertion_scores(
         trials=config.trials,
         include_score_id_in_prompt=include_score_id_in_prompt,
         question_id_key=question_id_key,
+        question_text_key=question_text_key,
+        answer_text_key=answer_text_key,
     )
 
     assertion_score.to_csv(output / "assertion_scores.csv", index=False)
 
     summary_by_assertion = (
         assertion_score.groupby(["question", "assertion"])
-        .agg(
-            score=("score", lambda x: int(x.mean() > 0.5)),
-            score_mean=("score", "mean"),
-            score_std=("score", "std"),
-        )
+        .agg(score=("score", lambda x: int(x.mean() > 0.5)), scores=("score", list))
         .reset_index()
     )
 
@@ -319,11 +331,17 @@ def assertion_scores(
         .agg(
             success=("score", lambda x: (x == 1).sum()),
             fail=("score", lambda x: (x == 0).sum()),
-            score_mean=("score_mean", "mean"),
-            score_std=("score_std", "std"),
         )
         .reset_index()
     )
+
+    summary_by_assertion["score_mean"] = summary_by_assertion["scores"].apply(
+        lambda x: np.mean(x) if len(x) > 0 else 0.0
+    )
+    summary_by_assertion["score_std"] = summary_by_assertion["scores"].apply(
+        lambda x: np.std(x) if len(x) > 0 else 0.0
+    )
+    summary_by_assertion = summary_by_assertion.drop(columns=["scores"])
 
     print_df(
         summary_by_question,
@@ -331,11 +349,11 @@ def assertion_scores(
     )
 
     failed_assertions: pd.DataFrame = cast(
-        pd.DataFrame,
-        summary_by_assertion[summary_by_assertion["score"] == 0][
-            ["question", "assertion"]
-        ],
+        pd.DataFrame, summary_by_assertion[summary_by_assertion["score"] == 0]
     )
+
+    failed_assertions["trials"] = config.trials
+    failed_assertions = failed_assertions.drop(columns=["score"])
 
     if len(failed_assertions) > 0:
         print_df(

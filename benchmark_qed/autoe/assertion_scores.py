@@ -34,6 +34,8 @@ def get_assertion_scores(
     assessment_user_prompt: Template | None = None,
     include_score_id_in_prompt: bool = True,
     question_id_key: str = "question_id",
+    question_text_key: str = "question_text",
+    answer_text_key: str = "answer",
 ) -> pd.DataFrame:
     """
     Score assertions based on the provided answers using a language model.
@@ -54,9 +56,16 @@ def get_assertion_scores(
             on=[question_id_key],
             suffixes=("_base", "_other"),
         )
-        .drop(columns=["question_text_other"])
-        .rename(columns={"question_text_base": "question_text"})
+        .drop(columns=[f"{question_text_key}_other"])
+        .rename(
+            columns={
+                f"{question_id_key}": "question_id",
+                f"{question_text_key}_base": "question_text",
+                f"{answer_text_key}": "answer_text",
+            }
+        )
     )
+    pairs = pairs[["question_id", "question_text", "answer_text", "assertion"]]
 
     with Progress() as progress:
 
