@@ -236,6 +236,108 @@ OPENAI_API_KEY=your-secret-api-key-here
 
 ---
 
+## Assertion-Based Scoring Configuration
+
+This section describes the configuration schema for evaluating generated answers against predefined assertions using the LLM-as-a-Judge approach. It includes definitions for generated conditions, assertions, and model configuration. For more information about how to configure the LLM, please refer to: [LLM Configuration](llm_config.md)
+
+To create a template configuration file, run:
+
+```sh
+benchmark-qed config init autoe_assertion local/assertion_test/settings.yaml
+```
+
+To perform assertion-based scoring with your configuration file, use:
+
+```sh
+benchmark-qed autoe assertion-scores local/assertion_test/settings.yaml local/assertion_test/output
+```
+
+For information about the `config init` command, refer to: [Config Init CLI](config_init.md)
+
+---
+
+### Classes and Fields
+
+#### `Condition`
+Represents a condition to be evaluated.
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `name` | `str` | Name of the condition. |
+| `answer_base_path` | `Path` | Path to the JSON file containing the answers for this condition. |
+
+---
+
+#### `Assertions`
+Defines the assertions to be evaluated.
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `assertions_path` | `Path` | Path to the JSON file containing the assertions to evaluate. |
+
+---
+
+#### `AssertionConfig`
+Top-level configuration for scoring generated answers against assertions.
+
+| Field | Type | Default | Description |
+|-------|------|---------|-------------|
+| `generated` | `Condition` | _required_ | The condition containing the generated answers to be evaluated. |
+| `assertions` | `Assertions` | _required_ | The assertions to use for evaluation. |
+| `pass_threshold` | `float` | `0.5` | Threshold for passing the assertion score. |
+| `llm_config` | `LLMConfig` | `LLMConfig()` | Configuration for the LLM used in scoring. |
+| `trials` | `int` | `4` | Number of trials to run for each assertion. |
+
+---
+
+### YAML Example
+
+Below is an example showing how this configuration might be represented in a YAML file. The API key is referenced using an environment variable.
+
+```yaml
+generated:
+  name: vector_rag
+  answer_base_path: input/vector_rag/activity_global.json
+
+assertions:
+  assertions_path: input/assertions.json
+
+# Pass threshold for assertions
+pass_threshold: 0.5
+
+trials: 4
+
+llm_config:
+  auth_type: api_key
+  model: gpt-4.1
+  api_key: ${OPENAI_API_KEY}
+  llm_provider: openai.chat
+  concurrent_requests: 20
+```
+
+```
+# .env file
+OPENAI_API_KEY=your-secret-api-key-here
+```
+
+>💡 Note: The api_key field uses an environment variable reference `${OPENAI_API_KEY}`. Make sure to define this variable in a .env file or your environment before running the application.
+
+> 📋 Assertions json example:
+```json
+[
+  {
+    "question_id": "abc123",
+    "question_text": "What is the capital of France?",
+    "assertions": [
+        "The response should align with the following ground truth text: Paris is the capital of France.",
+        "The response should be concise and directly answer the question and do not add any additional information."
+    ]
+  }
+]
+```
+
+---
+
 ## CLI Reference
 
 This section documents the command-line interface of the BenchmarkQED's AutoE package.

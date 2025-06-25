@@ -45,6 +45,7 @@ CHAT_MODEL_DEFAULTS = """
   auth_type: api_key # or azure_managed_identity
   api_key: ${OPENAI_API_KEY} # remove this if using azure_managed_identity
   llm_provider: openai.chat # or azure.openai.chat | azure.inference.chat
+  concurrent_requests: 4 # The number of concurrent requests to send to the model.
   # init_args:
   #   Additional initialization arguments for the LLM can be added here.
   #   For example, you can set the model version or other parameters.
@@ -181,8 +182,27 @@ data_questions_prompt_config:
 AUTOE_ASSERTION_CONTENT = f"""## Input Configuration
 generated:
   name: vector_rag
-  answer_base_path: input/vector_rag  # The path to the base answers that you want to compare other RAG answers to. Modify this based on your dataset.
+  answer_base_path: input/vector_rag/activity_global.json
 assertions: # List of other conditions to compare against the base.
+  assertions_path: input/activity_global_assertions.json # The path to the assertions file. Modify this based on your dataset.
+
+pass_threshold: 0.5 # The threshold for passing the assertion. If the score is above this threshold, the assertion is considered passed.
+trials: 4 # Number of trials to repeat the scoring process for each question-assertion pair.
+
+## LLM Configuration
+llm_config: {CHAT_MODEL_DEFAULTS}
+
+prompts_config:
+  user_prompt:
+    prompt: prompts/assertion_user_prompt.txt
+  system_prompt:
+    prompt: prompts/assertion_system_prompt.txt"""
+
+AUTOE_PAIRWISE_CONTENT = f"""## Input Configuration
+base:
+  name: vector_rag
+  answer_base_path: input/vector_rag  # The path to the base answers that you want to compare other RAG answers to. Modify this based on your dataset.
+others: # List of other conditions to compare against the base.
   - name: lazygraphrag
     answer_base_path: input/lazygraphrag
   - name: graphrag_global
@@ -196,25 +216,6 @@ question_sets: # List of question sets to use for scoring.
 #   - name: "criteria name"
 #     description: "criteria description"
 trials: 4 # Number of trials to repeat the scoring process for each question. Should be an even number to allow for counterbalancing.
-
-## LLM Configuration
-llm_config: {CHAT_MODEL_DEFAULTS}
-
-prompts_config:
-  user_prompt:
-    prompt: prompts/pairwise_user_prompt.txt
-  system_prompt:
-    prompt: prompts/pairwise_system_prompt.txt"""
-
-AUTOE_PAIRWISE_CONTENT = f"""## Input Configuration
-base:
-  name: lazygraphrag
-  answer_base_path: input/lazygraphrag/activity_global.json
-assertions: # List of other conditions to compare against the base.
-  assertions_path: input/assertions.json # The path to the assertions file. Modify this based on your dataset.
-
-pass_threshold: 0.5 # The threshold for passing the assertion. If the score is above this threshold, the assertion is considered passed.
-trials: 4 # Number of trials to repeat the scoring process for each question.
 
 ## LLM Configuration
 llm_config: {CHAT_MODEL_DEFAULTS}

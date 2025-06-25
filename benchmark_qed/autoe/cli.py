@@ -283,11 +283,18 @@ def assertion_scores(
 
     llm_client = ModelFactory.create_chat_model(config.llm_config)
 
+    assertions = (
+        pd.read_json(config.assertions.assertions_path, encoding="utf-8")
+        .explode("assertions")
+        .rename(columns={"assertions": "assertion"})
+        .reset_index(drop=True)
+    )
+
     assertion_score = get_assertion_scores(
         llm_client=llm_client,
         llm_config=config.llm_config,
         answers=pd.read_json(config.generated.answer_base_path, encoding="utf-8"),
-        assertions=pd.read_json(config.assertions.assertions_path, encoding="utf-8"),
+        assertions=assertions,
         assessment_user_prompt=config.prompt_config.user_prompt.template,
         assessment_system_prompt=config.prompt_config.system_prompt.template,
         trials=config.trials,
@@ -303,15 +310,8 @@ def assertion_scores(
             score=("score", lambda x: int(x.mean() > 0.5)),
             score_mean=("score", "mean"),
             score_std=("score", "std"),
-            score_min=("score", "min"),
-            score_max=("score", "max"),
         )
         .reset_index()
-    )
-
-    print_df(
-        summary_by_assertion,
-        "Assertion Scores Summary by Question-Assertion",
     )
 
     summary_by_question = (
@@ -321,8 +321,6 @@ def assertion_scores(
             fail=("score", lambda x: (x == 0).sum()),
             score_mean=("score_mean", "mean"),
             score_std=("score_std", "std"),
-            score_min=("score_min", "min"),
-            score_max=("score_max", "max"),
         )
         .reset_index()
     )
@@ -331,6 +329,24 @@ def assertion_scores(
         summary_by_question,
         "Assertion Scores Summary by Question",
     )
+
+    failed_assertions: pd.DataFrame = cast(
+        pd.DataFrame,
+        summary_by_assertion[summary_by_assertion["score"] == 0][
+            ["question", "assertion"]
+        ],
+    )
+
+    if len(failed_assertions) > 0:
+        print_df(
+            failed_assertions,
+            f"[bold red]{failed_assertions.shape[0]} Failed Assertions[/bold red]",
+        )
+        rich_print(
+            f"[bold red]{failed_assertions.shape[0]} assertions failed. See {output / 'assertion_scores.csv'} for details.[/bold red]"
+        )
+    else:
+        rich_print("[bold green]All assertions passed.[/bold green]")
 
     if print_model_usage:
         rich_print("Model usage statistics:")
