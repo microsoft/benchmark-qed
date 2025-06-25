@@ -296,11 +296,24 @@ def assertion_scores(
     output.mkdir(parents=True, exist_ok=True)
 
     llm_client = ModelFactory.create_chat_model(config.llm_config)
+    assertions = pd.read_json(config.assertions.assertions_path, encoding="utf-8")
+
+    if assertions.loc[:, assertions_key].isna().any():  # type: ignore
+        msg = f"Some questions in the assertions file do not have assertions. Please check {config.assertions.assertions_path}, these questions will be skipped."
+        rich_print(f"[bold red]{msg}[/bold red]")
+    assertions = assertions[~assertions.loc[:, assertions_key].isna()]
+
+    if assertions.loc[:, assertions_key].apply(lambda x: len(x) == 0).any():
+        msg = f"Some questions in the assertions file have empty assertions. Please check {config.assertions.assertions_path}, these questions will be skipped."
+        rich_print(f"[bold red]{msg}[/bold red]")
+    assertions = cast(
+        pd.DataFrame,
+        assertions[assertions.loc[:, assertions_key].apply(lambda x: len(x) > 0)],
+    )
 
     assertions = (
-        pd.read_json(config.assertions.assertions_path, encoding="utf-8")
-        .explode(assertions_key)
-        .rename(columns={f"{assertions_key}": "assertion"})
+        assertions.explode(assertions_key)
+        .rename(columns={assertions_key: "assertion"})
         .reset_index(drop=True)
     )
 
