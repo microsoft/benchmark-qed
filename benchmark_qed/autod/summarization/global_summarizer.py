@@ -12,12 +12,12 @@ from typing import Any
 import tiktoken
 from tqdm.asyncio import tqdm_asyncio
 
-from benchmark_qed.autod import prompts
 from benchmark_qed.autod.data_model.text_unit import TextUnit
 from benchmark_qed.autod.data_processor.text_utils import (
     num_tokens,
     try_parse_json_object,
 )
+from benchmark_qed.autod.prompts import summarization as summarization_prompts
 from benchmark_qed.autod.sampler.clustering.constraint_kmeans import (
     ConstraintKmeansClustering,
 )
@@ -33,7 +33,7 @@ log: logging.Logger = logging.getLogger(__name__)
 
 NO_DATA_ANSWER = "I am sorry but I am unable to summarize given the provided data."
 
-SUMMARY_PROMPTS = Path(prompts.__file__).parent
+SUMMARY_PROMPTS = Path(summarization_prompts.__file__).parent
 
 
 class GlobalSummarizer(BaseSummarizer):
@@ -60,22 +60,18 @@ class GlobalSummarizer(BaseSummarizer):
         )
         self.map_system_prompt: str = (
             map_system_prompt
-            or load_template_file(
-                SUMMARY_PROMPTS / "summarization/summary_map_system_prompt.txt"
-            )
+            or load_template_file(SUMMARY_PROMPTS / "summary_map_system_prompt.txt")
         ).template
         self.map_user_prompt: Template = map_user_prompt or load_template_file(
-            SUMMARY_PROMPTS / "summarization/summary_map_user_prompt.txt"
+            SUMMARY_PROMPTS / "summary_map_user_prompt.txt"
         )
         self.map_llm_params: dict[str, Any] = map_llm_params.copy()
         self.reduce_system_prompt: str = (
             reduce_system_prompt
-            or load_template_file(
-                SUMMARY_PROMPTS / "summarization/summary_reduce_system_prompt.txt"
-            )
+            or load_template_file(SUMMARY_PROMPTS / "summary_reduce_system_prompt.txt")
         ).template
         self.reduce_user_prompt: Template = reduce_user_prompt or load_template_file(
-            SUMMARY_PROMPTS / "summarization/summary_reduce_user_prompt.txt"
+            SUMMARY_PROMPTS / "summary_reduce_user_prompt.txt"
         )
         self.reduce_llm_params: dict[str, Any] = reduce_llm_params.copy()
         self.response_type = response_type

@@ -6,10 +6,12 @@ from typing import Self
 
 from pydantic import BaseModel, Field, model_validator
 
+from benchmark_qed.autoe.prompts import assertion as assertion_prompts
 from benchmark_qed.autoe.prompts import pairwise as pairwise_prompts
 from benchmark_qed.autoe.prompts import reference as reference_prompts
 from benchmark_qed.config.llm_config import LLMConfig
 from benchmark_qed.config.model.score import (
+    Assertions,
     Condition,
     Criteria,
     pairwise_scores_criteria,
@@ -124,3 +126,40 @@ class ReferenceConfig(BaseAutoEConfig):
         ),
         description="Configuration for prompts used in reference scoring.",
     )
+
+
+class AssertionConfig(BaseAutoEConfig):
+    """Configuration for scoring based on assertions."""
+
+    generated: Condition = Field(
+        ...,
+        description="Conditions with the generated answers to test.",
+    )
+    assertions: Assertions = Field(
+        ...,
+        description="List of assertions to use for scoring.",
+    )
+
+    pass_threshold: float = Field(
+        0.5,
+        description="Threshold for passing the assertion score.",
+    )
+
+    prompt_config: AutoEPromptConfig = Field(
+        default=AutoEPromptConfig(
+            user_prompt=PromptConfig(
+                prompt=Path(assertion_prompts.__file__).parent
+                / "assertion_user_prompt.txt",
+            ),
+            system_prompt=PromptConfig(
+                prompt=Path(assertion_prompts.__file__).parent
+                / "assertion_system_prompt.txt",
+            ),
+        ),
+        description="Configuration for prompts used in assertion scoring.",
+    )
+
+    @model_validator(mode="after")
+    def check_trials_even(self) -> Self:
+        """Even number of trials check does not apply for assertion scoring."""
+        return self

@@ -69,15 +69,13 @@ class ActivityGlobalQuestionGen(BaseQuestionGen):
         self.generation_system_prompt: str = (
             generation_system_prompt
             or load_template_file(
-                ACTIVITY_GLOBAL_QUESTIONS_PATH
-                / "global_generation_generation_system_prompt.txt"
+                ACTIVITY_GLOBAL_QUESTIONS_PATH / "activity_global_gen_system_prompt.txt"
             )
         ).template
         self.generation_user_prompt: Template = (
             generation_user_prompt
             or load_template_file(
-                ACTIVITY_GLOBAL_QUESTIONS_PATH
-                / "global_generation_generation_user_prompt.txt"
+                ACTIVITY_GLOBAL_QUESTIONS_PATH / "activity_global_gen_user_prompt.txt"
             )
         )
         self.activity_context = activity_context

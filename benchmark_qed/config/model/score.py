@@ -15,6 +15,14 @@ class Condition(BaseModel):
     )
 
 
+class Assertions(BaseModel):
+    """BaseModel for assertions."""
+
+    assertions_path: Path = Field(
+        description="Path to the JSON file containing the assertions for this condition."
+    )
+
+
 class Criteria(BaseModel):
     """BaseModel for a scoring criteria."""
 

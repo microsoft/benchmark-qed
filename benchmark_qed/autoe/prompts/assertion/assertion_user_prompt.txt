@@ -1,0 +1,24 @@
+${score_id}
+
+---Question---
+${question}
+
+---Answer to Evaluate---
+${answer}
+---End of Answer---
+
+---Assertion to Check---
+Determine whether the answer satisfies the following assertion:
+${assertion}
+
+**Instructions:**
+1. Carefully read and understand what the assertion requires
+2. Examine the answer for evidence that satisfies or contradicts the assertion
+3. Provide specific evidence from the answer in your reasoning
+4. Make a binary decision: does the answer satisfy the assertion or not?
+
+Format your response as a JSON object with the following structure:
+{
+    "reasoning": "A detailed explanation citing specific evidence from the answer and explaining how it relates to the assertion requirement.",
+    "score": 1 if the assertion is satisfied, 0 otherwise
+}

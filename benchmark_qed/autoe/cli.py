@@ -11,12 +11,10 @@ import pandas as pd
 import typer
 from rich import print as rich_print
 
-from benchmark_qed.autoe.config import PairwiseConfig, ReferenceConfig
-from benchmark_qed.autoe.score import (
-    analyze_criteria,
-    get_pairwise_scores,
-    get_reference_scores,
-)
+from benchmark_qed.autoe.assertion_scores import get_assertion_scores
+from benchmark_qed.autoe.config import AssertionConfig, PairwiseConfig, ReferenceConfig
+from benchmark_qed.autoe.pairwise_scores import analyze_criteria, get_pairwise_scores
+from benchmark_qed.autoe.reference_scores import get_reference_scores
 from benchmark_qed.cli.utils import print_df
 from benchmark_qed.config.utils import load_config
 from benchmark_qed.llm.factory import ModelFactory
@@ -244,6 +242,141 @@ def reference_scores(
             summary_df.drop(columns=["score_id"]).reset_index(),
             f"Reference Scores Summary for {generated.name}",
         )
+
+    if print_model_usage:
+        rich_print("Model usage statistics:")
+        rich_print(llm_client.get_usage())
+    usage_file = output / "model_usage.json"
+    usage_file.write_text(json.dumps(llm_client.get_usage()), encoding="utf-8")
+
+
+@app.command()
+def assertion_scores(
+    comparison_spec: Annotated[
+        Path,
+        typer.Argument(help="The path to the JSON file containing the configuration."),
+    ],
+    output: Annotated[
+        Path, typer.Argument(help="The path to the output file for the scores.")
+    ],
+    *,
+    print_model_usage: Annotated[
+        bool,
+        typer.Option(help="Whether to print the model usage statistics after scoring."),
+    ] = False,
+    include_score_id_in_prompt: Annotated[
+        bool,
+        typer.Option(
+            help="Whether to include the score ID in the evaluation prompt for the LLM (might be useful to avoid cached scores)."
+        ),
+    ] = True,
+    question_id_key: Annotated[
+        str,
+        typer.Option(
+            help="The key in the JSON file that contains the question ID. This is used to match questions with assertions."
+        ),
+    ] = "question_id",
+    question_text_key: Annotated[
+        str,
+        typer.Option(help="The key in the JSON file that contains the question text."),
+    ] = "question_text",
+    answer_text_key: Annotated[
+        str,
+        typer.Option(help="The key in the JSON file that contains the answer text."),
+    ] = "answer",
+    assertions_key: Annotated[
+        str,
+        typer.Option(
+            help="The key in the JSON file that contains the assertions. This should be a list of assertions for each question."
+        ),
+    ] = "assertions",
+) -> None:
+    """Generate assertion for the generated answers provided in the JSON file."""
+    config = load_config(comparison_spec, AssertionConfig)
+    output.mkdir(parents=True, exist_ok=True)
+
+    llm_client = ModelFactory.create_chat_model(config.llm_config)
+    assertions = pd.read_json(config.assertions.assertions_path, encoding="utf-8")
+
+    if assertions.loc[:, assertions_key].isna().any():  # type: ignore
+        msg = f"Some questions in the assertions file do not have assertions. Please check {config.assertions.assertions_path}, these questions will be skipped."
+        rich_print(f"[bold red]{msg}[/bold red]")
+    assertions = assertions[~assertions.loc[:, assertions_key].isna()]
+
+    if assertions.loc[:, assertions_key].apply(lambda x: len(x) == 0).any():
+        msg = f"Some questions in the assertions file have empty assertions. Please check {config.assertions.assertions_path}, these questions will be skipped."
+        rich_print(f"[bold red]{msg}[/bold red]")
+    assertions = cast(
+        pd.DataFrame,
+        assertions[assertions.loc[:, assertions_key].apply(lambda x: len(x) > 0)],
+    )
+
+    assertions = (
+        assertions.explode(assertions_key)
+        .rename(columns={assertions_key: "assertion"})
+        .reset_index(drop=True)
+    )
+
+    assertion_score = get_assertion_scores(
+        llm_client=llm_client,
+        llm_config=config.llm_config,
+        answers=pd.read_json(config.generated.answer_base_path, encoding="utf-8"),
+        assertions=assertions,
+        assessment_user_prompt=config.prompt_config.user_prompt.template,
+        assessment_system_prompt=config.prompt_config.system_prompt.template,
+        trials=config.trials,
+        include_score_id_in_prompt=include_score_id_in_prompt,
+        question_id_key=question_id_key,
+        question_text_key=question_text_key,
+        answer_text_key=answer_text_key,
+    )
+
+    assertion_score.to_csv(output / "assertion_scores.csv", index=False)
+
+    summary_by_assertion = (
+        assertion_score.groupby(["question", "assertion"])
+        .agg(score=("score", lambda x: int(x.mean() > 0.5)), scores=("score", list))
+        .reset_index()
+    )
+
+    summary_by_question = (
+        summary_by_assertion.groupby(["question"])
+        .agg(
+            success=("score", lambda x: (x == 1).sum()),
+            fail=("score", lambda x: (x == 0).sum()),
+        )
+        .reset_index()
+    )
+
+    summary_by_assertion["score_mean"] = summary_by_assertion["scores"].apply(
+        lambda x: np.mean(x) if len(x) > 0 else 0.0
+    )
+    summary_by_assertion["score_std"] = summary_by_assertion["scores"].apply(
+        lambda x: np.std(x) if len(x) > 0 else 0.0
+    )
+    summary_by_assertion = summary_by_assertion.drop(columns=["scores"])
+
+    print_df(
+        summary_by_question,
+        "Assertion Scores Summary by Question",
+    )
+
+    failed_assertions: pd.DataFrame = cast(
+        pd.DataFrame, summary_by_assertion[summary_by_assertion["score"] == 0]
+    )
+
+    failed_assertions = failed_assertions.drop(columns=["score"])
+
+    if len(failed_assertions) > 0:
+        print_df(
+            failed_assertions,
+            f"[bold red]{failed_assertions.shape[0]} Failed Assertions[/bold red]",
+        )
+        rich_print(
+            f"[bold red]{failed_assertions.shape[0]} assertions failed. See {output / 'assertion_scores.csv'} for details.[/bold red]"
+        )
+    else:
+        rich_print("[bold green]All assertions passed.[/bold green]")
 
     if print_model_usage:
         rich_print("Model usage statistics:")
