@@ -1445,6 +1445,35 @@ logging.getLogger("httpx").setLevel(logging.ERROR)</div>
 </div>
 </div>
 </div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="CodeMirror cm-s-jupyter">
+<div class="zeroclipboard-container">
+<clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-3">
+<div>
+<span class="notice" hidden="">Copied!</span>
+<svg aria-hidden="true" class="clipboard-copy-icon" data-view-component="true" height="20" version="1.1" viewbox="0 0 16 16" width="20">
+<path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z" fill="currentColor" fill-rule="evenodd"></path>
+<path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z" fill="currentColor" fill-rule="evenodd"></path>
+</svg>
+</div>
+</clipboard-copy>
+</div>
+<div class="highlight-ipynb hl-python"><pre><span></span><span class="o">%</span><span class="n">load_ext</span> <span class="n">dotenv</span>
+<span class="o">%</span><span class="n">dotenv</span>
+</pre></div>
+<div class="clipboard-copy-txt" id="cell-3">%load_ext dotenv
+%dotenv</div>
+</div>
+</div>
+</div>
+</div>
+</div>
 </div>
 <div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper" tabindex="0">
@@ -1476,7 +1505,7 @@ logging.getLogger("httpx").setLevel(logging.ERROR)</div>
 <div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="CodeMirror cm-s-jupyter">
 <div class="zeroclipboard-container">
-<clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-3">
+<clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-4">
 <div>
 <span class="notice" hidden="">Copied!</span>
 <svg aria-hidden="true" class="clipboard-copy-icon" data-view-component="true" height="20" version="1.1" viewbox="0 0 16 16" width="20">
@@ -1502,7 +1531,7 @@ logging.getLogger("httpx").setLevel(logging.ERROR)</div>
 <span class="n">EMBEDDING_MODEL</span> <span class="o">=</span> <span class="s2">"text-embedding-3-large"</span>
 <span class="n">LLM_MODEL</span> <span class="o">=</span> <span class="s2">"gpt-4.1"</span>
 </pre></div>
-<div class="clipboard-copy-txt" id="cell-3">INPUT_DATA_PATH = "../../datasets/AP_news/raw_data"
+<div class="clipboard-copy-txt" id="cell-4">INPUT_DATA_PATH = "../../datasets/AP_news/raw_data"
 OUTPUT_DATA_PATH = "./output/AP_news/processed_data"
 TEXT_COLUMN = "body_nitf"
 METADATA_COLUMNS = ["headline", "firstcreated"]
@@ -1544,7 +1573,7 @@ LLM_MODEL = "gpt-4.1"</div>
 <div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="CodeMirror cm-s-jupyter">
 <div class="zeroclipboard-container">
-<clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-4">
+<clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-5">
 <div>
 <span class="notice" hidden="">Copied!</span>
 <svg aria-hidden="true" class="clipboard-copy-icon" data-view-component="true" height="20" version="1.1" viewbox="0 0 16 16" width="20">
@@ -1565,7 +1594,7 @@ LLM_MODEL = "gpt-4.1"</div>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Document count: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">document_df</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 <span class="n">document_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
-<div class="clipboard-copy-txt" id="cell-4">documents = create_documents(
+<div class="clipboard-copy-txt" id="cell-5">documents = create_documents(
     input_path=INPUT_DATA_PATH,
     input_type="json",
     text_tag=TEXT_COLUMN,
@@ -1600,7 +1629,7 @@ document_df.head()</div>
 <div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="CodeMirror cm-s-jupyter">
 <div class="zeroclipboard-container">
-<clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-5">
+<clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-6">
 <div>
 <span class="notice" hidden="">Copied!</span>
 <svg aria-hidden="true" class="clipboard-copy-icon" data-view-component="true" height="20" version="1.1" viewbox="0 0 16 16" width="20">
@@ -1637,7 +1666,7 @@ document_df.head()</div>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Text unit count: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">text_unit_df</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 <span class="n">text_unit_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
-<div class="clipboard-copy-txt" id="cell-5">text_splitter = TokenTextSplitter(
+<div class="clipboard-copy-txt" id="cell-6">text_splitter = TokenTextSplitter(
     encoding_name=ENCODING_MODEL,
     chunk_size=CHUNK_SIZE,
     chunk_overlap=CHUNK_OVERLAP,
@@ -1693,7 +1722,7 @@ text_unit_df.head()</div>
 <div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="CodeMirror cm-s-jupyter">
 <div class="zeroclipboard-container">
-<clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-6">
+<clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-7">
 <div>
 <span class="notice" hidden="">Copied!</span>
 <svg aria-hidden="true" class="clipboard-copy-icon" data-view-component="true" height="20" version="1.1" viewbox="0 0 16 16" width="20">
@@ -1706,37 +1735,8 @@ text_unit_df.head()</div>
 <div class="highlight-ipynb hl-python"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">benchmark_qed.autod.sampler.enums</span><span class="w"> </span><span class="kn">import</span> <span class="n">ClusterRepresentativeSelectionType</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">benchmark_qed.autod.sampler.sampling.kmeans_sampler</span><span class="w"> </span><span class="kn">import</span> <span class="n">KmeansTextSampler</span>
 </pre></div>
-<div class="clipboard-copy-txt" id="cell-6">from benchmark_qed.autod.sampler.enums import ClusterRepresentativeSelectionType
+<div class="clipboard-copy-txt" id="cell-7">from benchmark_qed.autod.sampler.enums import ClusterRepresentativeSelectionType
 from benchmark_qed.autod.sampler.sampling.kmeans_sampler import KmeansTextSampler</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="CodeMirror cm-s-jupyter">
-<div class="zeroclipboard-container">
-<clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-7">
-<div>
-<span class="notice" hidden="">Copied!</span>
-<svg aria-hidden="true" class="clipboard-copy-icon" data-view-component="true" height="20" version="1.1" viewbox="0 0 16 16" width="20">
-<path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z" fill="currentColor" fill-rule="evenodd"></path>
-<path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z" fill="currentColor" fill-rule="evenodd"></path>
-</svg>
-</div>
-</clipboard-copy>
-</div>
-<div class="highlight-ipynb hl-python"><pre><span></span><span class="n">NUM_CLUSTERS</span> <span class="o">=</span> <span class="mi">50</span>
-<span class="n">NUM_SAMPLES_PER_CLUSTER</span> <span class="o">=</span> <span class="mi">10</span>
-</pre></div>
-<div class="clipboard-copy-txt" id="cell-7">NUM_CLUSTERS = 50
-NUM_SAMPLES_PER_CLUSTER = 10</div>
 </div>
 </div>
 </div>
@@ -1761,25 +1761,11 @@ NUM_SAMPLES_PER_CLUSTER = 10</div>
 </div>
 </clipboard-copy>
 </div>
-<div class="highlight-ipynb hl-python"><pre><span></span><span class="n">sampler</span> <span class="o">=</span> <span class="n">KmeansTextSampler</span><span class="p">()</span>
-<span class="n">sampled_text_units</span> <span class="o">=</span> <span class="n">sampler</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span>
-    <span class="n">text_units</span><span class="o">=</span><span class="n">text_units</span><span class="p">,</span>
-    <span class="n">sample_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-    <span class="n">num_clusters</span><span class="o">=</span><span class="n">NUM_CLUSTERS</span><span class="p">,</span>
-    <span class="n">num_samples_per_cluster</span><span class="o">=</span><span class="n">NUM_SAMPLES_PER_CLUSTER</span><span class="p">,</span>
-    <span class="n">cluster_representative_selection_type</span><span class="o">=</span><span class="n">ClusterRepresentativeSelectionType</span><span class="o">.</span><span class="n">CENTROID</span><span class="p">,</span>
-<span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Sampled text unit count: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">sampled_text_units</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<div class="highlight-ipynb hl-python"><pre><span></span><span class="n">NUM_CLUSTERS</span> <span class="o">=</span> <span class="mi">50</span>
+<span class="n">NUM_SAMPLES_PER_CLUSTER</span> <span class="o">=</span> <span class="mi">10</span>
 </pre></div>
-<div class="clipboard-copy-txt" id="cell-8">sampler = KmeansTextSampler()
-sampled_text_units = sampler.sample(
-    text_units=text_units,
-    sample_size=None,
-    num_clusters=NUM_CLUSTERS,
-    num_samples_per_cluster=NUM_SAMPLES_PER_CLUSTER,
-    cluster_representative_selection_type=ClusterRepresentativeSelectionType.CENTROID,
-)
-print(f"Sampled text unit count: {len(sampled_text_units)}")</div>
+<div class="clipboard-copy-txt" id="cell-8">NUM_CLUSTERS = 50
+NUM_SAMPLES_PER_CLUSTER = 10</div>
 </div>
 </div>
 </div>
@@ -1804,6 +1790,49 @@ print(f"Sampled text unit count: {len(sampled_text_units)}")</div>
 </div>
 </clipboard-copy>
 </div>
+<div class="highlight-ipynb hl-python"><pre><span></span><span class="n">sampler</span> <span class="o">=</span> <span class="n">KmeansTextSampler</span><span class="p">()</span>
+<span class="n">sampled_text_units</span> <span class="o">=</span> <span class="n">sampler</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span>
+    <span class="n">text_units</span><span class="o">=</span><span class="n">text_units</span><span class="p">,</span>
+    <span class="n">sample_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">num_clusters</span><span class="o">=</span><span class="n">NUM_CLUSTERS</span><span class="p">,</span>
+    <span class="n">num_samples_per_cluster</span><span class="o">=</span><span class="n">NUM_SAMPLES_PER_CLUSTER</span><span class="p">,</span>
+    <span class="n">cluster_representative_selection_type</span><span class="o">=</span><span class="n">ClusterRepresentativeSelectionType</span><span class="o">.</span><span class="n">CENTROID</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Sampled text unit count: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">sampled_text_units</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+<div class="clipboard-copy-txt" id="cell-9">sampler = KmeansTextSampler()
+sampled_text_units = sampler.sample(
+    text_units=text_units,
+    sample_size=None,
+    num_clusters=NUM_CLUSTERS,
+    num_samples_per_cluster=NUM_SAMPLES_PER_CLUSTER,
+    cluster_representative_selection_type=ClusterRepresentativeSelectionType.CENTROID,
+)
+print(f"Sampled text unit count: {len(sampled_text_units)}")</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="CodeMirror cm-s-jupyter">
+<div class="zeroclipboard-container">
+<clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-10">
+<div>
+<span class="notice" hidden="">Copied!</span>
+<svg aria-hidden="true" class="clipboard-copy-icon" data-view-component="true" height="20" version="1.1" viewbox="0 0 16 16" width="20">
+<path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z" fill="currentColor" fill-rule="evenodd"></path>
+<path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z" fill="currentColor" fill-rule="evenodd"></path>
+</svg>
+</div>
+</clipboard-copy>
+</div>
 <div class="highlight-ipynb hl-python"><pre><span></span><span class="c1"># Quality check: check number of clusters</span>
 <span class="n">clusters</span> <span class="o">=</span> <span class="p">[</span>
     <span class="n">sampled_text_units</span><span class="p">[</span><span class="n">i</span> <span class="p">:</span> <span class="n">i</span> <span class="o">+</span> <span class="n">NUM_SAMPLES_PER_CLUSTER</span><span class="p">]</span>
@@ -1817,7 +1846,7 @@ print(f"Sampled text unit count: {len(sampled_text_units)}")</div>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Text </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">text_unit</span><span class="o">.</span><span class="n">text</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">"----------------------"</span><span class="p">)</span>
 </pre></div>
-<div class="clipboard-copy-txt" id="cell-9"># Quality check: check number of clusters
+<div class="clipboard-copy-txt" id="cell-10"># Quality check: check number of clusters
 clusters = [
     sampled_text_units[i : i + NUM_SAMPLES_PER_CLUSTER]
     for i in range(0, len(sampled_text_units), NUM_SAMPLES_PER_CLUSTER)
@@ -1854,7 +1883,7 @@ for i, text_unit in enumerate(clusters[0]):
 <div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="CodeMirror cm-s-jupyter">
 <div class="zeroclipboard-container">
-<clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-10">
+<clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-11">
 <div>
 <span class="notice" hidden="">Copied!</span>
 <svg aria-hidden="true" class="clipboard-copy-icon" data-view-component="true" height="20" version="1.1" viewbox="0 0 16 16" width="20">
@@ -1868,7 +1897,7 @@ for i, text_unit in enumerate(clusters[0]):
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">benchmark_qed.autod.summarization.global_summarizer</span><span class="w"> </span><span class="kn">import</span> <span class="n">GlobalSummarizer</span>
 </pre></div>
-<div class="clipboard-copy-txt" id="cell-10">import tiktoken
+<div class="clipboard-copy-txt" id="cell-11">import tiktoken
 
 from benchmark_qed.autod.summarization.global_summarizer import GlobalSummarizer</div>
 </div>
@@ -1885,7 +1914,7 @@ from benchmark_qed.autod.summarization.global_summarizer import GlobalSummarizer
 <div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="CodeMirror cm-s-jupyter">
 <div class="zeroclipboard-container">
-<clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-11">
+<clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-12">
 <div>
 <span class="notice" hidden="">Copied!</span>
 <svg aria-hidden="true" class="clipboard-copy-icon" data-view-component="true" height="20" version="1.1" viewbox="0 0 16 16" width="20">
@@ -1923,7 +1952,7 @@ from benchmark_qed.autod.summarization.global_summarizer import GlobalSummarizer
 <span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Summary: </span><span class="si">{</span><span class="n">summary_result</span><span class="o">.</span><span class="n">summary</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </pre></div>
-<div class="clipboard-copy-txt" id="cell-11"># adjust this based on your model. For example, some reasoning models do not support temperature settings
+<div class="clipboard-copy-txt" id="cell-12"># adjust this based on your model. For example, some reasoning models do not support temperature settings
 LLM_PARAMS = {"temperature": 0.0, "seed": 42}
 
 llm = ModelFactory.create_chat_model(

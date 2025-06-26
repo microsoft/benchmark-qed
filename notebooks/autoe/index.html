@@ -1996,7 +1996,7 @@ if not output_dir.exists():
 <span class="n">answers</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_json</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">input_dir</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">generated_rag</span><span class="si">}</span><span class="s2">/activity_global.json"</span><span class="p">)</span>
 
 <span class="n">assertions</span> <span class="o">=</span> <span class="p">(</span>
-    <span class="n">pd</span><span class="o">.</span><span class="n">read_json</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">input_dir</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">assertions_file</span><span class="si">}</span><span class="s2">.json"</span><span class="p">)</span>
+    <span class="n">pd</span><span class="o">.</span><span class="n">read_json</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">input_dir</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">assertions_file</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
     <span class="o">.</span><span class="n">explode</span><span class="p">(</span><span class="s2">"assertions"</span><span class="p">)</span>
     <span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s2">"assertions"</span><span class="p">:</span> <span class="s2">"assertion"</span><span class="p">})</span>
     <span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -2067,7 +2067,7 @@ from benchmark_qed.autoe.assertion_scores import get_assertion_scores
 answers = pd.read_json(f"{input_dir}/{generated_rag}/activity_global.json")
 
 assertions = (
-    pd.read_json(f"{input_dir}/{assertions_file}.json")
+    pd.read_json(f"{input_dir}/{assertions_file}")
     .explode("assertions")
     .rename(columns={"assertions": "assertion"})
     .reset_index(drop=True)
