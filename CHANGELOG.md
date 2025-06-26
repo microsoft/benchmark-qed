@@ -1,6 +1,12 @@
 # Changelog
 Note: version releases in the 0.x.y range may introduce breaking changes.
 
+## 0.3.0
+
+- minor: add assertions evaluation method
+- patch: fix default prompts paths
+- patch: various fixes
+
 ## 0.2.0
 
 - minor: Add prompt customization options for CLI
