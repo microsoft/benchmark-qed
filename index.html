@@ -1055,10 +1055,10 @@
 
 <h1 id="welcome-to-benchmarkqed">Welcome to BenchmarkQED</h1>
 <pre class="mermaid"><code>flowchart LR
-    AutoQ["&lt;span style='font-size:1.5em; color:black'&gt;&lt;b&gt;AutoQ&lt;/b&gt;&lt;/span&gt;&lt;br&gt;LLM synthesis of&lt;br&gt;local-to-global&lt;br&gt;queries for target&lt;br&gt;datasets"] -- creates queries &lt;br&gt;for evaluation --&gt; AutoE["&lt;span style='font-size:1.5em; color:black'&gt;&lt;b&gt;AutoE&lt;/b&gt;&lt;/span&gt;&lt;br&gt;LLM evaluation of&lt;br&gt;relative answer &lt;br&gt;quality on target &lt;br&gt;metrics"]
-    AutoE ~~~ AutoD["&lt;span style='font-size:1.5em; color:black'&gt;&lt;b&gt;AutoD&lt;/b&gt;&lt;/span&gt;&lt;br&gt;LLM summarization&lt;br&gt;of datasets samples&lt;br&gt;to a curated target&lt;br&gt;structures"]
-    AutoD -- curates datasets &lt;br&gt;for evaluation --&gt; AutoE
-    AutoD -- creates dataset summaries &lt;br&gt;for query synthesis --&gt; AutoQ
+    AutoQ["&lt;span style='font-size:1.5em; color:black'&gt;&lt;b&gt;AutoQ&lt;/b&gt;&lt;/span&gt;&lt;br&gt;LLM synthesis of&lt;br&gt;local-global queries&lt;br&gt;for target datasets&lt;br&gt;&lt;br&gt;Enables &lt;i&gt;repeatibility&lt;i&gt;"] -- creates&lt;br&gt;standard queries&lt;br&gt;for evaluation --&gt; AutoE["&lt;span style='font-size:1.5em; color:black'&gt;&lt;b&gt;AutoE&lt;/b&gt;&lt;/span&gt;&lt;br&gt;LLM evaluation that&lt;br&gt;compares answers&lt;br&gt;or checks assertions&lt;br&gt;&lt;br&gt; Enables &lt;i&gt;scalability"]
+    AutoE ~~~ AutoD["&lt;span style='font-size:1.5em; color:black'&gt;&lt;b&gt;AutoD&lt;/b&gt;&lt;/span&gt;&lt;br&gt;LLM summarization&lt;br&gt;of datasets sampled&lt;br&gt;to a target structure &lt;br&gt;&lt;br&gt; Enables &lt;i&gt;consistency"]
+    AutoD -- curates&lt;br&gt;standard datasets &lt;br&gt; for evaluation --&gt; AutoE
+    AutoD -- creates standard dataset summaries query synthesis --&gt; AutoQ
     style AutoQ fill:#a8d0ed,color:black,font-weight:normal
     style AutoE fill:#a8d0ed,color:black,font-weight:normal
     style AutoD fill:#a8d0ed,color:black,font-weight:normal
