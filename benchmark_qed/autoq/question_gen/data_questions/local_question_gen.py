@@ -31,6 +31,9 @@ from benchmark_qed.autoq.question_gen.base import BaseQuestionGen, QuestionGenRe
 from benchmark_qed.autoq.question_gen.data_questions.claim_extractor.local_claim_extractor import (
     DataLocalClaimExtractor,
 )
+from benchmark_qed.autoq.question_gen.data_questions.assertion_gen import (
+    ClaimAssertionGenerator,
+)
 from benchmark_qed.autoq.sampler.question_sampler import QuestionSampler
 from benchmark_qed.config.utils import load_template_file
 from benchmark_qed.llm.type.base import ChatModel
@@ -41,7 +44,12 @@ DATA_LOCAL_PROMPTS_PATH = Path(local_questions.__file__).parent
 
 
 class DataLocalQuestionGen(BaseQuestionGen):
-    """Generate local data questions for a given dataset."""
+    """
+    Generate local data questions for a given dataset.
+    
+    Supports optional assertion generation after claim extraction to create
+    testable facts that can be used for answer accuracy evaluation.
+    """
 
     def __init__(
         self,
@@ -50,6 +58,8 @@ class DataLocalQuestionGen(BaseQuestionGen):
         text_units: list[TextUnit],
         question_sampler: QuestionSampler | None = None,
         claim_extractor_params: dict[str, Any] | None = None,
+        assertion_generator_params: dict[str, Any] | None = None,
+        generate_assertions: bool = True,
         llm_params: dict[str, Any] = defs.LLM_PARAMS,
         json_mode: bool = True,
         generation_system_prompt: Template | None = None,
@@ -60,6 +70,10 @@ class DataLocalQuestionGen(BaseQuestionGen):
     ) -> None:
         if claim_extractor_params is None:
             claim_extractor_params = {}
+        if assertion_generator_params is None:
+            assertion_generator_params = {}
+            
+        self.generate_assertions = generate_assertions
         self.random_seed = random_seed
         if question_sampler is not None:
             question_sampler.random_seed = random_seed
@@ -83,6 +97,13 @@ class DataLocalQuestionGen(BaseQuestionGen):
         self.claim_extractor: DataLocalClaimExtractor = DataLocalClaimExtractor(
             llm=llm, **claim_extractor_params
         )
+
+        # Initialize assertion generator if enabled
+        self.assertion_generator: ClaimAssertionGenerator | None = None
+        if self.generate_assertions:
+            self.assertion_generator = ClaimAssertionGenerator(
+                llm=llm, **assertion_generator_params
+            )
 
         self.json_mode = json_mode
         if json_mode:
@@ -230,6 +251,20 @@ class DataLocalQuestionGen(BaseQuestionGen):
                     )
 
                     if claims.reference_coverage > 0:
+                        # Generate assertions if enabled
+                        assertions = None
+                        if self.generate_assertions and self.assertion_generator is not None:
+                            try:
+                                assertion_result = await self.assertion_generator.agenerate_assertions_from_claims(
+                                    question_text=question_text,
+                                    claims=claims.claims
+                                )
+                                assertions = assertion_result.assertions
+                                log.info(f"Generated {len(assertions)} assertions for question: {question_text}")
+                            except Exception as e:
+                                log.warning(f"Failed to generate assertions for question '{question_text}': {e}")
+                                assertions = []
+                        
                         # calculate the similarity of the question to the references
                         (
                             question_embedding,
@@ -278,6 +313,8 @@ class DataLocalQuestionGen(BaseQuestionGen):
                                     "intra_inter_similarity_ratio": intra_inter_similarity_ratio,
                                     "claim_count": len(claims.claims),
                                     "claims": claims.claims,
+                                    "assertions": assertions if assertions is not None else [],
+                                    "assertion_count": len(assertions) if assertions is not None else 0,
                                 },
                             )
                         )

@@ -1,0 +1,66 @@
+---ROLE---
+
+You are a helpful assistant that generates factual assertions for evaluating answer accuracy in question-answering systems.
+
+
+---GOAL---
+
+Given a user query and a list of relevant claims, generate a comprehensive list of assertions that can be used as unit tests to verify the accuracy of any answer to the query.
+
+Each assertion should be a specific, factual statement that:
+- Contains facts that should be included in a complete and accurate answer to the query
+- Can be verified with a simple YES/NO criteria (either the assertion is present in an answer or it is not)
+- Covers all relevant information from the provided claims
+- Is atomic and testable (focuses on one specific fact per assertion)
+- Includes specific details like numbers, dates, locations, entities, or events when relevant
+
+Assertions do not need to correspond 1:1 to the provided claims. You may combine information from multiple claims into a single assertion, or break down complex claims into multiple testable assertions as needed.
+
+Each assertion in the response should contain the following elements:
+- "statement": A clear, specific assertion that begins with the phrase "The response should align with the following statement: " followed by a fact that should be present in an accurate answer
+- "sources": A list of all source claim IDs that support this assertion
+- "score": An integer score between 0-100 indicating how important this assertion is for answering the query (100 = essential, 0 = irrelevant)
+
+The response should be JSON formatted as follows:
+{
+    "assertions": [
+        {"statement": "The response should align with the following statement: Specific factual assertion 1", "sources": [list of supporting claim IDs], "score": importance score (0-100)},
+        {"statement": "The response should align with the following statement: Specific factual assertion 2", "sources": [list of supporting claim IDs], "score": importance score (0-100)},
+    ]
+}
+
+
+---QUERY---
+${query}
+
+---INPUT CLAIMS---
+${context_data}
+
+
+---GOAL---
+
+Given a user query and a list of relevant claims, generate a comprehensive list of assertions that can be used as unit tests to verify the accuracy of any answer to the query.
+
+---INSTRUCTIONS---
+Each assertion should be a specific, factual statement that:
+- Contains facts that should be included in a complete and accurate answer to the query
+- Can be verified with a simple YES/NO criteria (either the assertion is present in an answer or it is not)
+- Covers all relevant information from the provided claims
+- Is atomic and testable (focuses on one specific fact per assertion)
+- Includes specific details like numbers, dates, locations, entities, or events when relevant
+
+Assertions do not need to correspond 1:1 to the provided claims. You may combine information from multiple claims into a single assertion, or break down complex claims into multiple testable assertions as needed.
+
+Each assertion in the response should contain the following elements:
+- "statement": A clear, specific assertion that begins with the phrase "The response should align with the following statement: " followed by a fact that should be present in an accurate answer
+- "sources": A list of all source claim IDs that support this assertion
+- "score": An integer score between 0-100 indicating how important this assertion is for answering the query (100 = essential, 0 = irrelevant)
+
+The response should be JSON formatted as follows:
+{
+    "assertions": [
+        {"statement": "The response should align with the following statement: Specific factual assertion 1", "sources": [list of supporting claim IDs], "score": importance score (0-100)},
+        {"statement": "The response should align with the following statement: Specific factual assertion 2", "sources": [list of supporting claim IDs], "score": importance score (0-100)},
+    ]
+}
+
