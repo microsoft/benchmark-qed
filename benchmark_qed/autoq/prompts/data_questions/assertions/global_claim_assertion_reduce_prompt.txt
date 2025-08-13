@@ -1,0 +1,75 @@
+---ROLE---
+
+You are a helpful assistant that consolidates multiple assertions into fewer, higher-level thematic assertions for global question-answering evaluation.
+
+
+---GOAL---
+
+Given a global query and a list of initial assertions generated from claims, consolidate them into a smaller set of high-level thematic assertions that comprehensively cover the same topics while reducing redundancy and creating broader thematic categories.
+
+---INSTRUCTIONS---
+
+Each consolidated assertion should be a high-level, thematic statement that adheres to the following rules:
+
+1. **Thematic Grouping**: Group related assertions by theme, topic, or conceptual area to create broader thematic categories.
+
+2. **Comprehensive Coverage**: Ensure that all important aspects from the initial assertions are preserved in the consolidated set - no critical topics should be lost.
+
+3. **Higher-Level Abstraction**: Create assertions that are more abstract and comprehensive than the originals, focusing on major thematic dimensions rather than specific details.
+
+4. **Reduced Redundancy**: Merge overlapping or similar assertions to eliminate duplication while maintaining complete coverage.
+
+5. **Clear Testability**: Each consolidated assertion should be verifiable with a simple YES/NO criteria.
+
+6. **Atomicity**: Each consolidated assertion should test a single, coherent thematic concept. Avoid combining multiple distinct evaluation criteria that should be tested separately.
+
+7. **Conciseness**: Keep assertions brief and focused. Aims for under 50 words. Avoid long lists of examples or detailed enumerations within the assertion statement.
+
+8. **Optimal Count**: Create up to ${max_assertions} consolidated assertions that provide comprehensive coverage of all the important themes present in the initial assertions. Use fewer assertions if that provides better thematic coherence and avoids forcing unnatural groupings.
+
+Each consolidated assertion should contain the following elements:
+- "statement": A high-level thematic assertion that begins with "The response should address" or "The response should discuss" followed by a broad thematic area.
+- "sources": A list of the original assertions IDs that were consolidated into this thematic assertion.
+- "score": An integer score between 0-100 indicating the importance of this thematic area (typically high since these represent consolidated important themes).
+
+**EXAMPLES**:
+
+**Original Assertions** → **Consolidated Assertion**:
+- "Address economic impacts on businesses" + "Discuss financial consequences for industry" → "The response should address economic and financial impacts across affected sectors"
+- "Discuss environmental regulations in California" + "Address environmental policy in Texas" + "Discuss environmental rules in Florida" → "The response should address environmental regulatory approaches across different states"
+
+**GOOD (Concise)**:
+- "The response should address regulatory approaches to environmental protection"
+- "The response should discuss economic impacts of policy changes"
+- "The response should address stakeholder perspectives on the measures"
+
+**AVOID (Too Long)**:
+- "The response should address regulatory approaches to environmental protection, including water quality standards, air pollution controls, hazardous waste management, and oversight of industrial facilities"
+- "The response should discuss the various economic impacts of policy changes on businesses, industries, workers, consumers, and local communities"
+
+The response should be JSON formatted as follows:
+{
+    "assertions": [
+        {"statement": "The response should address...", "sources": [list of original assertion IDs], "score": importance score (0-100)},
+        {"statement": "The response should discuss...", "sources": [list of original assertion IDs], "score": importance score (0-100)}
+    ]
+}
+
+
+---QUERY---
+$question_text
+
+
+---INITIAL ASSERTIONS---
+$assertions_context
+
+---MAX NUMBER OF OUTPUT ASSERTIONS---
+Up to ${max_assertions}
+
+The response should be JSON formatted as follows:
+{
+    "assertions": [
+        {"statement": "The response should address...", "sources": ["original assertion 1", "original assertion 2", ...], "score": importance score (0-100)},
+        {"statement": "The response should discuss...", "sources": ["original assertion 1", "original assertion 2", ...], "score": importance score (0-100)}
+    ]
+}

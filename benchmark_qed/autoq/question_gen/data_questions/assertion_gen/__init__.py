@@ -4,13 +4,19 @@
 from benchmark_qed.autoq.question_gen.data_questions.assertion_gen.base import (
     AssertionGenerationResult,
     BaseAssertionGenerator,
+    ClaimDict,
 )
-from benchmark_qed.autoq.question_gen.data_questions.assertion_gen.claim_assertion_gen import (
-    ClaimAssertionGenerator,
+from benchmark_qed.autoq.question_gen.data_questions.assertion_gen.global_claim_assertion_gen import (
+    GlobalClaimAssertionGenerator,
+)
+from benchmark_qed.autoq.question_gen.data_questions.assertion_gen.local_claim_assertion_gen import (
+    LocalClaimAssertionGenerator,
 )
 
 __all__ = [
     "AssertionGenerationResult",
     "BaseAssertionGenerator",
-    "ClaimAssertionGenerator",
+    "ClaimDict",
+    "GlobalClaimAssertionGenerator",
+    "LocalClaimAssertionGenerator",
 ]

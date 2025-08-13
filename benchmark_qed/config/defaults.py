@@ -20,7 +20,10 @@ TEXT_UNIT_OUTPUT = "text_units"
 SAMPLE_TEXTS_OUTPUT = "sample_texts"
 
 # General LLM defaults
-LLM_PARAMS: dict[str, Any] = {"temperature": 0.0, "seed": 42}
+LLM_PARAMS: dict[str, Any] = {
+    "temperature": 0.0, 
+    "seed": 42
+}
 MAX_DATA_TOKENS = 8000
 
 # AutoQ defaults

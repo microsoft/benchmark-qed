@@ -2,6 +2,7 @@
 """Data-local question generation module."""
 
 import asyncio
+from dataclasses import asdict
 import json
 import logging
 import math
@@ -12,6 +13,7 @@ from typing import Any
 
 from tqdm.asyncio import tqdm_asyncio
 
+from benchmark_qed.autoq.question_gen.data_questions.assertion_gen.base import Assertion
 import benchmark_qed.config.defaults as defs
 from benchmark_qed.autod.data_model.text_unit import TextUnit
 from benchmark_qed.autod.data_processor.embedding import TextEmbedder
@@ -32,7 +34,7 @@ from benchmark_qed.autoq.question_gen.data_questions.claim_extractor.local_claim
     DataLocalClaimExtractor,
 )
 from benchmark_qed.autoq.question_gen.data_questions.assertion_gen import (
-    ClaimAssertionGenerator,
+    LocalClaimAssertionGenerator,
 )
 from benchmark_qed.autoq.sampler.question_sampler import QuestionSampler
 from benchmark_qed.config.utils import load_template_file
@@ -48,7 +50,9 @@ class DataLocalQuestionGen(BaseQuestionGen):
     Generate local data questions for a given dataset.
     
     Supports optional assertion generation after claim extraction to create
-    testable facts that can be used for answer accuracy evaluation.
+    testable facts that can be used for answer accuracy evaluation. Set max_assertions
+    to None or 0 to skip assertion generation, or to a positive integer to limit
+    the number of assertions per question.
     """
 
     def __init__(
@@ -59,7 +63,7 @@ class DataLocalQuestionGen(BaseQuestionGen):
         question_sampler: QuestionSampler | None = None,
         claim_extractor_params: dict[str, Any] | None = None,
         assertion_generator_params: dict[str, Any] | None = None,
-        generate_assertions: bool = True,
+        max_assertions: int = 5,
         llm_params: dict[str, Any] = defs.LLM_PARAMS,
         json_mode: bool = True,
         generation_system_prompt: Template | None = None,
@@ -73,7 +77,7 @@ class DataLocalQuestionGen(BaseQuestionGen):
         if assertion_generator_params is None:
             assertion_generator_params = {}
             
-        self.generate_assertions = generate_assertions
+        self.max_assertions = max_assertions
         self.random_seed = random_seed
         if question_sampler is not None:
             question_sampler.random_seed = random_seed
@@ -99,9 +103,11 @@ class DataLocalQuestionGen(BaseQuestionGen):
         )
 
         # Initialize assertion generator if enabled
-        self.assertion_generator: ClaimAssertionGenerator | None = None
-        if self.generate_assertions:
-            self.assertion_generator = ClaimAssertionGenerator(
+        self.assertion_generator: LocalClaimAssertionGenerator | None = None
+        if self.max_assertions is None or self.max_assertions > 0:
+            # Pass max_assertions to the assertion generator (None means unlimited)
+            assertion_generator_params["max_assertions"] = self.max_assertions
+            self.assertion_generator = LocalClaimAssertionGenerator(
                 llm=llm, **assertion_generator_params
             )
 
@@ -167,10 +173,52 @@ class DataLocalQuestionGen(BaseQuestionGen):
         msg = f"Generated {len(results)} candidate questions from {len(text_clusters)} clusters."
         log.info(msg)
         final_questions = self.select(candidate_questions=results, top_k=num_questions)
+        
+        # Generate assertions only for the final selected questions
+        if self.max_assertions > 0 and self.assertion_generator is not None:
+            await self._agenerate_assertions_for_questions(final_questions)
+        
         return QuestionGenResult(
             selected_questions=final_questions,
             candidate_questions=results,
         )
+
+    async def _agenerate_assertions_for_questions(self, questions: list[Question]) -> None:
+        """Generate assertions for a list of questions and update their attributes."""
+        if not self.assertion_generator:
+            return
+            
+        log.info(f"Generating assertions for {len(questions)} final questions")
+        
+        for question in questions:
+            try:
+                # Get claims from question attributes
+                claims = question.attributes.get("claims", []) if question.attributes else []
+                if not claims:
+                    log.warning(f"No claims found for question: {question.text}")
+                    continue
+                    
+                assertion_result = await self.assertion_generator.agenerate_assertions(
+                    question_text=question.text,
+                    claims=claims
+                )
+                assertions = [asdict(assertion) for assertion in assertion_result.assertions]
+                
+                # Update question attributes with assertions
+                if question.attributes is None:
+                    question.attributes = {}
+                question.attributes["assertions"] = assertions
+                question.attributes["assertion_count"] = len(assertions)
+                
+                log.info(f"Generated {len(assertions)} assertions for question: {question.text}")
+                
+            except Exception as e:
+                log.warning(f"Failed to generate assertions for question '{question.text}': {e}")
+                # Ensure attributes exist even on failure
+                if question.attributes is None:
+                    question.attributes = {}
+                question.attributes["assertions"] = []
+                question.attributes["assertion_count"] = 0
 
     async def _agenerate_local_questions(
         self,
@@ -251,20 +299,9 @@ class DataLocalQuestionGen(BaseQuestionGen):
                     )
 
                     if claims.reference_coverage > 0:
-                        # Generate assertions if enabled
-                        assertions = None
-                        if self.generate_assertions and self.assertion_generator is not None:
-                            try:
-                                assertion_result = await self.assertion_generator.agenerate_assertions_from_claims(
-                                    question_text=question_text,
-                                    claims=claims.claims
-                                )
-                                assertions = assertion_result.assertions
-                                log.info(f"Generated {len(assertions)} assertions for question: {question_text}")
-                            except Exception as e:
-                                log.warning(f"Failed to generate assertions for question '{question_text}': {e}")
-                                assertions = []
-                        
+                        # Initialize empty assertions - will be generated later for final questions only
+                        assertions = []
+
                         # calculate the similarity of the question to the references
                         (
                             question_embedding,
@@ -313,8 +350,8 @@ class DataLocalQuestionGen(BaseQuestionGen):
                                     "intra_inter_similarity_ratio": intra_inter_similarity_ratio,
                                     "claim_count": len(claims.claims),
                                     "claims": claims.claims,
-                                    "assertions": assertions if assertions is not None else [],
-                                    "assertion_count": len(assertions) if assertions is not None else 0,
+                                    "assertions": assertions if assertions else [],
+                                    "assertion_count": len(assertions) if assertions else 0,
                                 },
                             )
                         )

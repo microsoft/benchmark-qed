@@ -7,7 +7,7 @@ from typing import Any
 
 @dataclass
 class ClaimExtractionResult:
-    """Data class for claim extraction results."""
+    """Data class for claim extraction results"""
 
     claims: list[dict[str, Any]]
     """The extracted claims."""
@@ -17,3 +17,4 @@ class ClaimExtractionResult:
 
     relevant_references_count: int
     """Count of input texts referenced in the claims"""
+
