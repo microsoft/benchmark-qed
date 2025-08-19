@@ -15,6 +15,7 @@ Each assertion should be a clear, testable statement that adheres to the followi
 3. **Appropriate Scope**: 
     - Cover the important aspects from the claims without being overly specific about details like exact numbers, dates, locations, wordings, quotes, or individual entities unless they are absolutely central to answering the query. 
     - Focus on concepts, meaning, and role of the claims relative to the query rather than precise phrasing.
+    - Use terminology that accepts conceptually equivalent expressions (e.g., "respiratory illness" encompasses flu, cold, fatigue, breathing problems; "financial impact" covers costs, expenses, budget effects; "time off" includes leave, unpaid time, medical accommodation).
 
 4. **Query Context Awareness - Avoid Redundancy**: 
     - Never generate assertions that merely restate facts already mentioned in the query. 
@@ -84,6 +85,15 @@ Each assertion should be a clear, testable statement that adheres to the followi
 **GOOD (Conceptual - focuses on policy change)**:
 - "The response should address that the bill creates exemptions allowing certain institutions to open hospitals without certificate-of-need requirements."
 
+**TERMINOLOGY SPECIFICITY vs. CONCEPTUAL EQUIVALENCE**:
+
+*Query*: "What health issues has Pope Francis experienced from late 2023 to early 2024 that have affected his ability to perform his duties in Vatican City and Rome?"
+
+**BAD (Overly specific terminology - requires exact words)**:
+- "The response should mention that Pope Francis suffered from fatigue and a persistent cold in early 2024, affecting his ability to deliver speeches."
+
+**GOOD (Conceptual equivalence - accepts related terminology)**:
+- "The response should address that Pope Francis experienced respiratory illness symptoms in early 2024 that affected his ability to perform duties."
 
 ---OUTPUT---
 Each assertion in the response should contain the following elements:
@@ -117,6 +127,7 @@ Each assertion should be a clear, testable statement that adheres to the followi
 3. **Appropriate Scope**: 
     - Cover the important aspects from the claims without being overly specific about details like exact numbers, dates, locations, wordings, quotes, or individual entities unless they are absolutely central to answering the query. 
     - Focus on concepts, meaning, and role of the claims relative to the query rather than precise phrasing.
+    - Use terminology that accepts conceptually equivalent expressions (e.g., "respiratory illness" encompasses flu, cold, fatigue, breathing problems; "financial impact" covers costs, expenses, budget effects; "time off" includes leave, unpaid time, medical accommodation).
 
 4. **Query Context Awareness - Avoid Redundancy**: 
     - Never generate assertions that merely restate facts already mentioned in the query. 
