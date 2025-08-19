@@ -48,7 +48,7 @@ class GlobalClaimAssertionGenerator(BaseAssertionGenerator):
         json_mode: bool = True,
         map_system_prompt: Template | None = None,
         reduce_system_prompt: Template | None = None,
-        max_assertions: int = 5,
+        max_assertions: int | None = 5,
         batch_size: int | None = 50,
         concurrent_coroutines: int = 8,
         max_data_tokens: int = 32000,
@@ -69,6 +69,11 @@ class GlobalClaimAssertionGenerator(BaseAssertionGenerator):
         if isinstance(self.reduce_prompt, str):
             self.reduce_prompt = Template(self.reduce_prompt)
         
+        # Load max assertion instruction template for dynamic count limiting
+        self._max_assertion_instruction_prompt = load_template_file(
+            ASSERTION_GEN_PROMPTS_PATH / "assertions" / "global_max_assertion_instruction_prompt.txt"
+        )
+        
         # Batch processing parameters for complex global processing
         self.batch_size = batch_size
         self.concurrent_coroutines = concurrent_coroutines
@@ -82,7 +87,7 @@ class GlobalClaimAssertionGenerator(BaseAssertionGenerator):
             llm_params=self.llm_params,
             json_mode=self.json_mode,
             system_prompt=self.map_prompt, 
-            max_assertions=self.max_assertions * 2, # overgenerate in map step so we can consolidate in the reduce step.
+            max_assertions=None,  # No assertion limiting in map step - focus on quality and comprehensiveness
         )
 
     async def agenerate_assertions(
@@ -285,6 +290,8 @@ class GlobalClaimAssertionGenerator(BaseAssertionGenerator):
                     if source_assertion["sources"]:
                         aggregated_source_chunks.extend(source_assertion["sources"])
                 else:
+                    # Log missing source for debugging
+                    log.warning(f"Source mapping not found: '{source_str}' (available keys: {list(assertion_mapping.keys())[:5]}...)")
                     # Keep original source if not found in mapping
                     mapped_sources.append(source_str)
         else:
@@ -321,11 +328,21 @@ class GlobalClaimAssertionGenerator(BaseAssertionGenerator):
                     validated_assertion = Assertion(
                         statement=statement,
                         sources=aggregated_source_chunks,
-                        score=assertion.get("score", 50),
+                        score=assertion.get("score", 5),
                         attributes={
                             "source_assertions": mapped_sources,
                         }
                     )
+                    # Debug logging for source counts
+                    source_count = len(aggregated_source_chunks) if aggregated_source_chunks else 0
+                    if source_count == 0:
+                        log.warning(f"Global assertion created with 0 sources: '{statement[:100]}...'")
+                        log.warning(f"  Original sources from LLM: {assertion.get('sources', [])}")
+                        log.warning(f"  Available assertion mapping keys: {list(assertion_mapping.keys())[:10] if assertion_mapping else 'None'}")
+                        log.debug(f"  Full assertion data: {assertion}")
+                    else:
+                        log.debug(f"Global assertion created with {source_count} sources")
+                    
                     validated_assertions.append(validated_assertion)
                 except ValueError as e:
                     log.warning(f"Skipping invalid consolidated assertion: {e}")
@@ -351,14 +368,20 @@ class GlobalClaimAssertionGenerator(BaseAssertionGenerator):
             return []
         
         # Use LLM with reduce prompt to consolidate assertions
-        log.info(f"REDUCE RESPONSE: Consolidating {len(unique_assertions)} assertions to {self.max_assertions}")
+        log.info(f"REDUCE RESPONSE: Consolidating {len(unique_assertions)} assertions")
         
-        # Prepare prompt using template
-        prompt_content = self.reduce_prompt.substitute(
+        # Build base prompt
+        base_prompt = self.reduce_prompt.substitute(
             question_text=question_text,
-            assertions_context=formatted_text,
-            max_assertions=self.max_assertions
+            assertions_context=formatted_text
         )
+        
+        # Dynamically add count instruction if max_assertions is specified
+        if self.max_assertions is not None and self.max_assertions > 0:
+            count_instruction = self._max_assertion_instruction_prompt.substitute(max_assertions=self.max_assertions)
+            prompt_content = base_prompt + "\n\n" + count_instruction
+        else:
+            prompt_content = base_prompt
         
         messages = [{"role": "user", "content": prompt_content}]
         

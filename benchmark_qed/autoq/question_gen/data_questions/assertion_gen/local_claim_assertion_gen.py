@@ -5,7 +5,7 @@ import json
 import logging
 from pathlib import Path
 from string import Template
-from typing import Any, TypeAlias
+from typing import Any
 
 from benchmark_qed.autod.data_processor.text_utils import try_parse_json_object
 from benchmark_qed.autoq.prompts import data_questions
@@ -41,7 +41,7 @@ class LocalClaimAssertionGenerator(BaseAssertionGenerator):
         llm_params: dict[str, Any] = LLM_PARAMS,
         json_mode: bool = True,
         system_prompt: Template | None = None,
-        max_assertions: int = 5,
+        max_assertions: int | None = 5,
     ) -> None:
         super().__init__(llm, llm_params, json_mode, max_assertions)
 
@@ -51,6 +51,11 @@ class LocalClaimAssertionGenerator(BaseAssertionGenerator):
         if isinstance(system_prompt, str):
             system_prompt = Template(system_prompt)
         self.system_prompt = system_prompt
+        
+        # Load max assertion instruction template for dynamic count limiting
+        self._max_assertion_instruction_prompt = load_template_file(
+            ASSERTION_GEN_PROMPTS_PATH / "assertions" / "local_max_assertion_instruction_prompt.txt"
+        )
 
     async def agenerate_assertions(
         self, question_text: str, **kwargs: Any
@@ -66,13 +71,24 @@ class LocalClaimAssertionGenerator(BaseAssertionGenerator):
         
         if self.system_prompt is None:
             raise ValueError("System prompt cannot be None")
+        
+        # Build base prompt
+        base_prompt = self.system_prompt.substitute(
+            query=question_text, 
+            context_data=claims_text
+        )
+        
+        # Dynamically add count instruction if max_assertions is specified
+        if self.max_assertions is not None and self.max_assertions > 0:
+            count_instruction = self._max_assertion_instruction_prompt.substitute(max_assertions=self.max_assertions)
+            prompt_content = base_prompt + "\n\n" + count_instruction
+        else:
+            prompt_content = base_prompt
             
         messages = [
             {
                 "role": "system",
-                "content": self.system_prompt.substitute(
-                    query=question_text, context_data=claims_text, max_assertions=self.max_assertions
-                ),
+                "content": prompt_content,
             },
         ]
         
@@ -92,7 +108,7 @@ class LocalClaimAssertionGenerator(BaseAssertionGenerator):
         # Validate and clean the assertions
         validated_assertions = self._validate_assertions(parsed_assertions, claims=claims)
         
-        # Apply ranking and limiting
+        # Apply ranking and limiting (None means no limit)
         validated_assertions = self._rank_and_limit_assertions(validated_assertions, self.max_assertions)
         
         return AssertionGenerationResult(
@@ -123,12 +139,12 @@ class LocalClaimAssertionGenerator(BaseAssertionGenerator):
         
         for assertion in parsed_assertions:
             statement = assertion.get("statement", "").strip()
-            score = assertion.get("score", 0)
+            score = assertion.get("score", 5)
             
             if (
                 statement != ""
                 and isinstance(score, int)
-                and 0 < score <= 100
+                and 1 <= score <= 10
             ):
                 # Map claim IDs to actual claim text
                 sources = assertion.get("sources", [])
@@ -162,6 +178,16 @@ class LocalClaimAssertionGenerator(BaseAssertionGenerator):
                             "source_claims": source_claim_texts,
                         }
                     )
+                    # Debug logging for source counts
+                    source_count = len(source_chunks) if source_chunks else 0
+                    if source_count == 0:
+                        log.warning(f"Local assertion created with 0 sources: '{statement[:100]}...'")
+                        log.debug(f"  Original sources: {sources}")
+                        log.debug(f"  Source claim texts: {source_claim_texts}")
+                        log.debug(f"  Source chunks: {source_chunks}")
+                    else:
+                        log.debug(f"Local assertion created with {source_count} sources")
+                    
                     validated_assertions.append(assertion_obj)
                 except ValueError as e:
                     log.warning(f"Skipping invalid assertion: {e}")

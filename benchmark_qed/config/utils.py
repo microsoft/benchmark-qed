@@ -93,4 +93,4 @@ def load_template_file(file_path: Path) -> Template:
     if not file_path.exists():
         msg = f"Template file {file_path} does not exist."
         raise FileNotFoundError(msg)
-    return Template(file_path.read_text())
+    return Template(file_path.read_text(encoding="utf-8"))

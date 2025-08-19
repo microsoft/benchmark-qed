@@ -9,6 +9,7 @@ from string import Template
 from typing import Any
 
 from benchmark_qed.autoq.data_model.question import Question
+from benchmark_qed.autoq.question_gen.data_questions.assertion_gen.ranking import calculate_rrf_scores
 from benchmark_qed.config.defaults import LLM_PARAMS
 from benchmark_qed.llm.type.base import ChatModel
 
@@ -25,7 +26,7 @@ class Assertion:
     """The assertion statement text."""
 
     score: int
-    """The importance/confidence score (1-100)."""
+    """The importance/confidence score (1-10)."""
 
     sources: list[str] = field(default_factory=list)
     """List of source text chunks that are associated with the assertion."""
@@ -37,8 +38,8 @@ class Assertion:
         """Validate assertion fields after creation."""
         if not self.statement.strip():
             raise ValueError("Assertion statement cannot be empty")
-        if not (0 < self.score <= 100):
-            raise ValueError("Assertion score must be between 1 and 100")
+        if not (1 <= self.score <= 10):
+            raise ValueError("Assertion score must be between 1 and 10")
 
 
 @dataclass
@@ -67,7 +68,7 @@ class BaseAssertionGenerator(ABC):
         llm: ChatModel,
         llm_params: dict[str, Any] = LLM_PARAMS,
         json_mode: bool = True,
-        max_assertions: int = 10,
+        max_assertions: int | None = 10,
     ) -> None:
         self.llm = llm
         self.llm_params = llm_params
@@ -138,26 +139,46 @@ class BaseAssertionGenerator(ABC):
         )
 
     def _rank_and_limit_assertions(
-        self, assertions: list[Assertion], max_assertions: int
+        self, assertions: list[Assertion], max_assertions: int | None
     ) -> list[Assertion]:
         """
-        Rank assertions by importance score (descending) then by source count (descending),
-        and limit to max_assertions.
+        Rank assertions using Reciprocal Rank Fusion (RRF) to combine importance score 
+        and source count rankings, and optionally limit to max_assertions.
         
-        This is a general utility method that can be used by any assertion generator.
+        RRF fuses rankings from two criteria:
+        1. Importance score (descending: higher scores = better rank)
+        2. Source count (descending: more sources = better rank)
+        
+        The RRF scores are stored in each assertion's attributes for debugging/analysis.
         
         Args:
             assertions: List of validated assertions
-            max_assertions: Maximum number of assertions to return
+            max_assertions: Maximum number of assertions to return, or None for no limit
             
         Returns:
-            Top ranked assertions limited to max_assertions
+            Top ranked assertions using RRF fusion, optionally limited to max_assertions
         """
-        # Rank assertions by score (descending) and source count (descending)
-        ranked_assertions = sorted(
-            assertions, 
-            key=lambda a: (-a.score, -len(a.sources))
+        if not assertions:
+            return []
+        
+        # Calculate RRF scores using the utility function
+        rrf_scores = calculate_rrf_scores(
+            items=assertions,
+            score_key_func=lambda a: a.score,
+            source_count_key_func=lambda a: len(a.sources)
         )
         
-        # Limit to max_assertions
-        return ranked_assertions[:max_assertions]
+        # Store RRF scores in assertion attributes for debugging/analysis
+        for assertion in assertions:
+            assertion.attributes['rrf_score'] = rrf_scores[id(assertion)]
+        
+        # Sort by RRF score (descending - higher RRF scores are better)
+        ranked_assertions = sorted(
+            assertions,
+            key=lambda a: -rrf_scores[id(a)]
+        )
+        
+        # Limit to max_assertions if specified
+        if max_assertions is not None:
+            return ranked_assertions[:max_assertions]
+        return ranked_assertions

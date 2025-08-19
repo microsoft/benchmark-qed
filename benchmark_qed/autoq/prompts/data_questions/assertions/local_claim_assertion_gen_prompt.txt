@@ -1,79 +1,100 @@
 ---ROLE---
-
-You are a helpful assistant that generates factual assertions for evaluating answer accuracy in question-answering systems.
+You are a helpful assistant that generates assertions for evaluating answer accuracy in question-answering systems.
 
 
 ---GOAL---
-
-Given a user query and a list of relevant claims, generate a comprehensive list of assertions that can be used as unit tests to verify the accuracy and completeness of any answer to the query.
+Given a user query and potentially relevant claims, generate assertions that can be used as unit tests to verify the accuracy and completeness of any answer to the query.
 
 ---INSTRUCTIONS---
-Each assertion should be a specific, factual statement that adheres to the following rules:
+Each assertion should be a clear, testable statement that adheres to the following rules:
 
-1. **Claim-based Relevance**: Contains topics or facts from the provided claims that should be included in a complete and accurate answer to the query.
+1. **Claim-Based Relevance**: Focus on the key topics and insights present in the provided claims that should be present in a complete and accurate answer.
 
-2. **Appropriate Level of Detail**: Focuses on the purpose and meaning of the claims relative to the query, rather than exact wordings or minor details.
-    - Include specific details (exact wordings, numbers, dates, locations, entities, or events) *ONLY IF THEY ARE ABSOLUTELY NECESSARY* for determining the correctness of the answer.
-    - For example, if the query is 'What is the number of employees at Company X in 2023?', then the specific number of employees would be essential. However, if the query is 'What factors contributed to Company X's growth?', then focus on the types of factors rather than exact figures or dates.
+2. **Clear Testability**: Can be verified with a simple YES/NO criteria (either the aspect is addressed in an answer or it is not).
 
-3. **Binary Testability**: Can be verified with a simple YES/NO criteria (either the assertion is present in an answer or it is not).
+3. **Appropriate Scope**: 
+    - Cover the important aspects from the claims without being overly specific about details like exact numbers, dates, locations, wordings, quotes, or individual entities unless they are absolutely central to answering the query. 
+    - Focus on concepts, meaning, and role of the claims relative to the query rather than precise phrasing.
 
-4. **Atomic Structure**: Is atomic and testable, focusing on one specific aspect per assertion. Avoid compound statements that combine multiple facts with "and", "also", "including", or similar connectors.
+4. **Query Context Awareness - Avoid Redundancy**: 
+    - Never generate assertions that merely restate facts already mentioned in the query. 
+    - Focus on substantive information that a complete answer should provide BEYOND what's already stated in the question.
 
-5. **Single Fact Rule**: Each assertion should test exactly one fact or concept. If a claim contains multiple distinct pieces of information, split them into separate assertions.
+5. **Comprehensive Coverage**: Generate assertions that collectively test coverage of the main topics and insights present in the claims.
 
-6. **Claim Consolidation and Decomposition**: Assertions do not need to correspond 1:1 to the provided claims.
-    - Group claims that serve similar purposes into a single assertion, or break down complex claims into multiple testable assertions as needed.
+6. **Conciseness**: Keep assertions brief and focused. Aim for under 50 words. Focus on the core topics/facts rather than listing multiple examples or detailed specifications.
 
-7. **Uniqueness and Exclusivity**: Avoids repetitive assertions - each assertion should test a unique aspect of the answer.
-    - Assertions should be mutually exclusive and non-redundant.
-    - **Avoid General-Specific Overlap**: If a specific assertion already covers the essential information, do not create a more general version of the same assertion.
-        - BAD: "The response should state that hospitals implemented measures" + "The response should mention specific mask mandates in hospitals" + "The response should describe visitor restrictions in hospitals"
-        - GOOD: Only the specific assertions: "The response should mention specific mask mandates in hospitals" + "The response should describe visitor restrictions in hospitals" (avoid the general "measures" assertion that overlaps with the specific ones)
-    - **Avoid Similar Phrasings**: Do not create multiple assertions that test essentially the same information with slightly different wording.
-        - BAD: "The response should explain the health impacts" + "The response should discuss health consequences" 
-        - GOOD: Choose one clear, specific phrasing: "The response should explain the specific health impacts documented in the studies"
-    - **Hierarchy Rule**: When assertions have a hierarchical relationship (general → specific), always choose the most specific level that captures the essential information needed to answer the query. Never include both a general assertion and its specific components - choose only the specific ones.
-        - BAD: "The response should mention hospital measures" + "The response should state mask requirements" + "The response should describe visitor restrictions"
-        - GOOD: Only "The response should state mask requirements" + "The response should describe visitor restrictions" (omit the general "measures" assertion)
+7. **Atomic Structure - NO COMPOUND STATEMENTS**: Each assertion must test exactly ONE concept or fact. 
+    - Never use compound statements that combine multiple facts or examples using words like "including", "such as", "and", or other similar connectors.
+    - If you find yourself wanting to list examples, create separate assertions instead
+    - Each assertion should pass this test: "Can this be verified with a single YES/NO answer?"
 
-8. **Optimal Count**: Generate up to ${max_assertions} high-quality assertions that provide comprehensive coverage of the important topics in the claims. Use fewer assertions if that provides better quality and avoids redundancy or less important details.
-
----OUTPUT---
-Each assertion in the response should contain the following elements:
-- "statement": A clear, specific assertion that begins with the phrase "The response should " followed by a fact or topic that should be present in an accurate answer.
-- "sources": A list of all source claim IDs that support this assertion.
-- "score": An integer score between 0-100 indicating how important this assertion is for answering the query (100 = essential, 0 = irrelevant).
+8. **Avoid Detailed Lists**: Never enumerate specific subtypes, categories, or examples within assertions. Use broad thematic terms instead of detailed breakdowns.
 
 
 ---EXAMPLES---
-
 **GOOD (Atomic, Single Facts)**:
 - "The response should state that the ballot measure allows abortion restrictions only after fetal viability."
-- "The response should specify that the ballot measure permits later abortions to protect maternal health."
 - "The response should mention that fetal viability is generally around 23-24 weeks."
 
-**AVOID (Compound Statements)**:
-- "The response should describe that the ballot measure would allow lawmakers to restrict abortion only after fetal viability, generally around 23 or 24 weeks, and would permit abortion later in pregnancy to protect the life and physical and mental health of the woman."
-- "The response should state that hospitals implemented mask mandates and limited visitors during winter 2023-2024."
-- "The response should explain that the EPA set limits for PFOA and PFOS at 4 parts per trillion and requires testing within three years."
+**BAD (Compound Statements)**:
+- "The response should describe that the ballot measure would allow lawmakers to restrict abortion only after fetal viability, generally around 23 or 24 weeks, and would permit abortion later in pregnancy."
 
-**QUALITY CONTROL CHECKLIST** - Before finalizing your assertions, verify:
-1. Each assertion is atomic and tests only one specific aspect
-2. Each assertion can be verified with a simple YES/NO criteria (either the assertion is present in an answer or it is not).
-3. No assertion contains compound statements with "and", "also", "including", or similar connectors
-4. No two assertions test the same information with different levels of specificity
-5. No two assertions use different phrasings to test essentially the same facts
-6. Each assertion adds unique value that cannot be satisfied by any other assertion
-7. No general assertions when specific ones already cover the same content
-8. The final list contains only the most essential, non-overlapping assertions needed to evaluate answer accuracy
+**How to Fix**: Split into separate assertions for each distinct fact.
 
+**REDUNDANT vs. VALUABLE ASSERTIONS**:
+
+*Query*: "What amendment was made to Article 34 of the French Constitution regarding abortion rights in March 2024?"
+
+**BAD (Redundant - restates query)**:
+- "The response should address that Article 34 of the French Constitution was amended in March 2024."
+
+**GOOD (Valuable - tests substantive answer content)**:
+- "The response should state that the amendment guarantees the freedom of women to have recourse to an abortion."
+- "The response should mention that the law determines the conditions for exercising abortion freedom."
+
+**SPECIFIC WORDING vs. CONCEPTUAL CONTENT**:
+
+*Query*: "Why did Governor Tony Evers veto the Republican-backed bill to combat PFAS pollution in Wisconsin between February 2024 and April 2024?"
+
+**BAD (Too specific - focuses on exact quotes)**:
+- "The response should indicate that Evers called the bill 'not good enough' and reaffirmed his commitment to addressing PFAS contamination."
+
+**GOOD (Conceptual - focuses on meaning)**:
+- "The response should address that Evers criticized the bill's adequacy for addressing PFAS contamination."
+- "The response should mention that Evers expressed continued commitment to combating PFAS pollution."
+
+**OVERLY SPECIFIC vs. APPROPRIATELY GENERAL**:
+
+*Query*: "What health issues has Pope Francis experienced from late 2023 to early 2024 that have affected his ability to perform his duties in Vatican City and Rome?"
+
+**BAD (Overly specific - unnecessary precision)**:
+- "The response should mention that Pope Francis experienced a mild flu in late February 2024 that led to the cancellation of several appointments."
+
+**GOOD (Appropriately general - conceptual focus)**:
+- "The response should address that Pope Francis experienced flu symptoms in early 2024 that affected his scheduled activities."
+
+**INSTITUTIONAL SPECIFICITY vs. POLICY CONCEPTS**:
+
+*Query*: "How does House Bill 1339, passed by the Georgia Senate in March 2024, propose to change the certificate-of-need requirements for health facilities in Georgia?"
+
+**BAD (Overly specific - focuses on particular institutions)**:
+- "The response should mention that the bill would allow the Morehouse School of Medicine to open a hospital in central Atlanta without a certificate of need."
+
+**GOOD (Conceptual - focuses on policy change)**:
+- "The response should address that the bill creates exemptions allowing certain institutions to open hospitals without certificate-of-need requirements."
+
+
+---OUTPUT---
+Each assertion in the response should contain the following elements:
+- "statement": A clear assertion that begins with "The response should " followed by an aspect to be included in the answer from the claims.
+- "sources": A list of all source claim IDs that support this assertion (exact string values taken from the ID column in the input claims).
+- "score": An integer score between 1-10 indicating how important this aspect is for answering the query (10 = essential, 1 = least important).
 
 The response should be JSON formatted as follows:
 {
     "assertions": [
-        {"statement": "The response should...", "sources": [list of supporting claim IDs], "score": importance score (0-100)},
-        {"statement": "The response should...", "sources": [list of supporting claim IDs], "score": importance score (0-100)},
+        {"statement": "The response should...", "sources": [list of supporting claim IDs], "score": importance score (1-10)},
     ]
 }
 
@@ -85,24 +106,41 @@ ${query}
 ---INPUT CLAIMS---
 ${context_data}
 
----MAX NUMBER OF ASSERTIONS---
-Up to ${max_assertions}
 
----REMINDER---
-Before finalizing your assertions, verify:
-1. Each assertion is atomic and tests only one specific aspect
-2. Each assertion can be verified with a simple YES/NO criteria (either the assertion is present in an answer or it is not).
-3. No assertion contains compound statements with "and", "also", "including", or similar connectors
-4. No two assertions test the same information with different levels of specificity
-5. No two assertions use different phrasings to test essentially the same facts
-6. Each assertion adds unique value that cannot be satisfied by any other assertion
-7. No general assertions when specific ones already cover the same content
-8. The final list contains only the most essential, non-overlapping assertions needed to evaluate answer accuracy
+---INSTRUCTIONS---
+Each assertion should be a clear, testable statement that adheres to the following rules:
+
+1. **Claim-Based Relevance**: Focus on the key topics, facts, and insights present in the provided claims that are relevant to the query.
+
+2. **Clear Testability**: Can be verified with a simple YES/NO criteria (either the aspect is addressed in an answer or it is not).
+
+3. **Appropriate Scope**: 
+    - Cover the important aspects from the claims without being overly specific about details like exact numbers, dates, locations, wordings, quotes, or individual entities unless they are absolutely central to answering the query. 
+    - Focus on concepts, meaning, and role of the claims relative to the query rather than precise phrasing.
+
+4. **Query Context Awareness - Avoid Redundancy**: 
+    - Never generate assertions that merely restate facts already mentioned in the query. 
+    - Focus on substantive information that a complete answer should provide BEYOND what's already stated in the question.
+
+5. **Comprehensive Coverage**: Generate assertions that collectively test coverage of the main topics and insights present in the claims.
+
+6. **Conciseness**: Keep assertions brief and focused. Aim for under 50 words. Focus on the core topics/facts rather than listing multiple examples or detailed specifications.
+
+7. **Atomic Structure - NO COMPOUND STATEMENTS**: Each assertion must test exactly ONE concept or fact.
+    - Never use compound statements that combine multiple facts or examples using words like "including", "such as", "and", or other similar connectors.
+    - If you find yourself wanting to list examples, create separate assertions instead
+    - Each assertion should pass this test: "Can this be verified with a single YES/NO answer?"
+
+8. **Avoid Detailed Lists**: Never enumerate specific subtypes, categories, or examples within assertions. Use broad thematic terms instead of detailed breakdowns.
+
+Each assertion in the response should contain the following elements:
+- "statement": A clear assertion that begins with "The response should " followed by an aspect to be included in the answer from the claims.
+- "sources": A list of all source claim IDs that support this assertion (exact string values taken from the ID column in the input claims)
+- "score": An integer score between 1-10 indicating how important this aspect is for answering the query (10 = essential, 1 = least important).
 
 The response should be JSON formatted as follows:
 {
     "assertions": [
-        {"statement": "The response should...", "sources": [list of supporting claim IDs], "score": importance score (0-100)},
-        {"statement": "The response should...", "sources": [list of supporting claim IDs], "score": importance score (0-100)},
+        {"statement": "The response should...", "sources": [list of supporting claim IDs], "score": importance score (1-10)},
     ]
 }

@@ -29,6 +29,8 @@ dependencies = [
     "statsmodels>=0.14.4",
     "tiktoken>=0.9.0",
     "typer>=0.15.1",
+    "matplotlib>=3.10.5",
+    "seaborn>=0.13.2",
 ]
 
 [dependency-groups]

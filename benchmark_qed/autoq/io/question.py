@@ -2,15 +2,18 @@
 """Util functions to save/load questions."""
 
 import json
+import logging
 from dataclasses import asdict
 from pathlib import Path
 from uuid import uuid4
 
 from benchmark_qed.autoq.data_model.question import Question
 
+log = logging.getLogger(__name__)
+
 
 def _save_assertions(questions: list[Question], output_path: Path) -> None:
-    """Extract and save assertions from questions to a separate JSON file."""
+    """Extract and save assertions from questions to a separate JSON file with ranks."""
     questions_with_assertions = []
     
     for question in questions:
@@ -18,19 +21,72 @@ def _save_assertions(questions: list[Question], output_path: Path) -> None:
         if hasattr(question, 'attributes') and question.attributes:
             assertions = question.attributes.get('assertions', [])
             if assertions:
-                # Extract just the assertion statements as per the plan
-                assertion_statements = []
-                for assertion in assertions:
-                    if isinstance(assertion, dict) and 'statement' in assertion:
-                        assertion_statements.append(assertion['statement'])
+                # Convert assertions to a list of dictionaries if needed
+                assertion_dicts = []
+                for i, assertion in enumerate(assertions):
+                    if isinstance(assertion, dict):
+                        # Debug logging for dict assertions
+                        sources = assertion.get('sources', [])
+                        if sources is None:
+                            log.warning(f"Question {question.id}, assertion {i}: Dict assertion has None sources")
+                        elif not isinstance(sources, (list, tuple)):
+                            log.warning(f"Question {question.id}, assertion {i}: Dict assertion has non-list sources: {type(sources)}")
+                        assertion_dicts.append(assertion)
+                    elif hasattr(assertion, '__dict__'):  # Handle dataclass/object
+                        sources = assertion.sources if hasattr(assertion, 'sources') else []
+                        if sources is None:
+                            log.warning(f"Question {question.id}, assertion {i}: Object assertion has None sources")
+                            sources = []
+                        elif not isinstance(sources, (list, tuple)):
+                            log.warning(f"Question {question.id}, assertion {i}: Object assertion has non-list sources: {type(sources)}")
+                            sources = [] if sources is None else [sources]
+                        
+                        assertion_dict = {
+                            'statement': assertion.statement if hasattr(assertion, 'statement') else str(assertion),
+                            'sources': sources,
+                            'score': assertion.score if hasattr(assertion, 'score') else 0
+                        }
+                        log.debug(f"Question {question.id}, assertion {i}: Created dict with {len(sources)} sources")
+                        assertion_dicts.append(assertion_dict)
                     elif isinstance(assertion, str):
-                        assertion_statements.append(assertion)
+                        log.debug(f"Question {question.id}, assertion {i}: String assertion, 0 sources")
+                        assertion_dicts.append({'statement': assertion, 'sources': [], 'score': 0})
                 
-                if assertion_statements:
+                if assertion_dicts:
+                    # Sort assertions by score (descending) then by source count (descending) to determine ranks
+                    sorted_assertions = sorted(
+                        assertion_dicts,
+                        key=lambda a: (-a.get('score', 0), -len(a.get('sources', [])))
+                    )
+                    
+                    # Add rank information (rank 1 = highest importance)
+                    ranked_assertions = []
+                    for rank, assertion in enumerate(sorted_assertions, 1):
+                        # Debug logging for source_count calculation
+                        sources = assertion.get('sources', [])
+                        if sources is None:
+                            log.warning(f"Question {question.id}: Assertion has None sources, setting to empty list")
+                            sources = []
+                        elif not isinstance(sources, (list, tuple)):
+                            log.warning(f"Question {question.id}: Assertion has non-list sources: {type(sources)}, sources: {sources}")
+                            sources = [] if sources is None else [sources]
+                        
+                        source_count = len(sources)
+                        if source_count == 0:
+                            log.debug(f"Question {question.id}: Assertion with 0 sources - Statement: '{assertion['statement'][:100]}...'")
+                        
+                        ranked_assertion = {
+                            'statement': assertion['statement'],
+                            'source_count': source_count,
+                            'score': assertion.get('score', 0),
+                            'rank': rank
+                        }
+                        ranked_assertions.append(ranked_assertion)
+                    
                     questions_with_assertions.append({
                         "question_id": question.id,
                         "question_text": question.text,
-                        "assertions": assertion_statements
+                        "assertions": ranked_assertions
                     })
     
     # Save assertions to file as a direct list
