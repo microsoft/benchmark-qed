@@ -5,6 +5,7 @@ import numpy as np
 from scipy.spatial.distance import cosine
 
 from benchmark_qed.autod.data_model.text_unit import TextUnit
+from benchmark_qed.autod.data_processor.embedding import TextEmbedder
 from benchmark_qed.autod.sampler.enums import DistanceMetricType
 
 
@@ -45,6 +46,51 @@ def get_semantic_neighbors(
         if len(candidate_neighbors) >= n:
             break
     return candidate_neighbors[:n]
+
+
+async def get_semantic_neighbors_from_text(
+    text: str,
+    corpus: list[TextUnit],
+    text_embedder: TextEmbedder,
+    n: int = 5,
+    distance_metric: DistanceMetricType = DistanceMetricType.COSINE,
+) -> list[TextUnit]:
+    """
+    Get the n most semantically similar text units to the given text string.
+    
+    Args:
+        text: Text string to find neighbors for.
+        corpus: List of text units to search for neighbors.
+        text_embedder: Text embedder to generate embedding for the text.
+        n: Number of neighbors to return.
+        distance_metric: Distance metric to use for similarity calculation.
+        
+    Returns:
+        List of n most similar text units.
+    """
+    if len(corpus) <= n:
+        return corpus
+
+    # Generate embedding for the text
+    text_embedding = await text_embedder.embed_raw_text(text)
+    
+    text_embedding_array = np.array(text_embedding)
+    if distance_metric == DistanceMetricType.COSINE:
+        neighbors = sorted(
+            corpus,
+            key=lambda unit: float(
+                cosine(np.array(unit.text_embedding), text_embedding_array)
+            ) if unit.text_embedding is not None else float('inf'),
+        )
+    else:
+        neighbors = sorted(
+            corpus,
+            key=lambda unit: float(
+                np.linalg.norm(np.array(unit.text_embedding) - text_embedding_array)
+            ) if unit.text_embedding is not None else float('inf'),
+        )
+
+    return neighbors[:n]
 
 
 def compute_similarity_to_references(
