@@ -35,3 +35,26 @@ def print_clusters(clusters: list[TextCluster]) -> None:
         cluster_texts = [f"CLUSTER {cluster.id}:"]
         cluster_texts.extend(f"Text: {unit.text}" for unit in cluster.text_units)
         log.info("\n".join(cluster_texts))
+
+def create_text_unit_to_cluster_mapping(
+    clusters: list[TextCluster], 
+    use_text_unit_short_id: bool = True
+) -> dict[str, str]:
+    """
+    Create a mapping from text unit ID to cluster ID.
+    
+    Args:
+        clusters: List of TextCluster objects.
+        use_text_unit_short_id: Whether to use text unit short ID for mapping. Default to True. If False, use id (the uuid)
+
+    Returns:
+        Dictionary mapping text unit ID (short or uuid) to cluster ID.
+    """
+    mapping = {}
+    for cluster in clusters:
+        for text_unit in cluster.text_units:
+            if use_text_unit_short_id:
+                mapping[text_unit.short_id] = cluster.id
+            else:
+                mapping[text_unit.id] = cluster.id
+    return mapping
