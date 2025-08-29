@@ -38,7 +38,6 @@ def print_clusters(clusters: list[TextCluster]) -> None:
 
 def create_text_unit_to_cluster_mapping(
     clusters: list[TextCluster], 
-    use_text_unit_short_id: bool = True
 ) -> dict[str, str]:
     """
     Create a mapping from text unit ID to cluster ID.
@@ -53,8 +52,5 @@ def create_text_unit_to_cluster_mapping(
     mapping = {}
     for cluster in clusters:
         for text_unit in cluster.text_units:
-            if use_text_unit_short_id:
-                mapping[text_unit.short_id] = cluster.id
-            else:
-                mapping[text_unit.id] = cluster.id
+                mapping[text_unit.text] = cluster.id
     return mapping

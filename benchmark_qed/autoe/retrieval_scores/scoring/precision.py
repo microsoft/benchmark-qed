@@ -212,5 +212,6 @@ def get_precision_summary(
             "binary_relevance_threshold": relevance_threshold,
             "macro_averaged_binary_precision": binary_metrics["macro_averaged_precision"],
             "macro_averaged_graded_precision": graded_metrics["macro_averaged_precision"],
+            "total_relevant_chunks": binary_metrics["total_relevant"]
         }
     }
