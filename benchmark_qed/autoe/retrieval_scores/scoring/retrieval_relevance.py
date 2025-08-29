@@ -32,7 +32,7 @@ class QueryRelevanceResult:
     total_chunks: int
     """Total number of chunks assessed."""
     
-    def get_relevant_chunks(self, relevance_threshold: int = 1) -> list[dict[str, Any]]:
+    def get_relevant_chunks(self, relevance_threshold: int = 2) -> list[dict[str, Any]]:
         """
         Get chunks that meet or exceed the relevance threshold.
         

@@ -20,7 +20,6 @@ def get_retrieved_clusters(
     query_relevance_result: QueryRelevanceResult,
     text_unit_to_cluster_mapping: dict[str, str],
     relevance_threshold: int = 2,
-    use_text_unit_short_id: bool = True,
 ) -> set[str]:
     """
     Get the set of clusters that were retrieved for a query based on relevant text units.
@@ -41,14 +40,10 @@ def get_retrieved_clusters(
     
     for chunk_info in relevant_chunks:
         text_unit = chunk_info["text_unit"]
-        if use_text_unit_short_id:
-            text_unit_id = text_unit.short_id
-        else:
-            text_unit_id = text_unit.id
-
+        
         # Map text unit to cluster
-        if text_unit_id in text_unit_to_cluster_mapping:
-            cluster_id = text_unit_to_cluster_mapping[text_unit_id]
+        if text_unit.text in text_unit_to_cluster_mapping:
+            cluster_id = text_unit_to_cluster_mapping[text_unit.text]
             retrieved_clusters.add(cluster_id)
     
     return retrieved_clusters
@@ -59,7 +54,6 @@ def calculate_single_query_recall(
     retrieval_reference: QueryClusterReferenceResult,
     text_unit_to_cluster_mapping: dict[str, str],
     relevance_threshold: int = 2,
-    use_text_unit_short_id: bool = True
 ) -> dict[str, Any]:
     """
     Calculate cluster-level recall for a single query.
@@ -95,7 +89,7 @@ def calculate_single_query_recall(
         query_relevance_result=query_relevance_result,
         text_unit_to_cluster_mapping=text_unit_to_cluster_mapping,
         relevance_threshold=relevance_threshold,
-        use_text_unit_short_id=use_text_unit_short_id
+        
     )
     
     # Calculate intersection: retrieved clusters that are relevant
@@ -125,7 +119,6 @@ def calculate_recall(
     relevance_threshold: int = 2,
     text_unit_to_cluster_mapping: dict[str, str] | None = None,
     clusters: list[TextCluster] | None = None,
-    use_text_unit_short_id: bool = True
 ) -> dict[str, Any]:
     """
     Calculate cluster-level recall metrics for multiple queries.
@@ -171,7 +164,7 @@ def calculate_recall(
     if text_unit_to_cluster_mapping is None:
         if clusters is None:
             raise ValueError("Either text_unit_to_cluster_mapping or clusters must be provided")
-        text_unit_to_cluster_mapping = create_text_unit_to_cluster_mapping(clusters, use_text_unit_short_id=use_text_unit_short_id)
+        text_unit_to_cluster_mapping = create_text_unit_to_cluster_mapping(clusters)
 
     # Create a mapping from question_id to cluster relevance results
     cluster_references_by_question = {
