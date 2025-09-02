@@ -2,7 +2,8 @@
 """Module for calculating fidelity metrics using Jensen-Shannon divergence and Total Variation Distance between reference and query distributions."""
 
 import logging
-from typing import Any, Literal
+from enum import Enum
+from typing import Any
 
 import numpy as np
 from scipy.spatial.distance import jensenshannon
@@ -17,9 +18,8 @@ from benchmark_qed.autoe.retrieval_scores.reference_gen.reference_context import
 log = logging.getLogger(__name__)
 
 
-# Metric constants
-class FidelityMetric:
-    """Constants for fidelity distance metrics."""
+class FidelityMetric(Enum):
+    """Enum for fidelity distance metrics."""
     JENSEN_SHANNON = "js"
     TOTAL_VARIATION = "tvd"
 
@@ -170,7 +170,7 @@ def calculate_single_query_fidelity(
     retrieval_reference: QueryClusterReferenceResult,
     text_unit_to_cluster_mapping: dict[str, str],
     relevance_threshold: int = 2,
-    metric: Literal["js", "tvd"] = FidelityMetric.JENSEN_SHANNON
+    metric: FidelityMetric = FidelityMetric.JENSEN_SHANNON
 ) -> dict[str, Any]:
     """
     Calculate fidelity for a single query using the specified distance metric.
@@ -239,7 +239,7 @@ def calculate_single_query_fidelity(
     return {
         "fidelity": primary_fidelity,
         "distance": primary_distance,
-        "metric": metric,
+        "metric": metric.value,  # Return string value instead of enum object
         "js_fidelity": js_fidelity,
         "tvd_fidelity": tvd_fidelity,
         "js_divergence": js_divergence,
@@ -260,7 +260,7 @@ def calculate_fidelity(
     relevance_threshold: int = 2,
     text_unit_to_cluster_mapping: dict[str, str] | None = None,
     clusters: list[TextCluster] | None = None,
-    metric: Literal["js", "tvd"] = FidelityMetric.JENSEN_SHANNON
+    metric: FidelityMetric = FidelityMetric.JENSEN_SHANNON
 ) -> dict[str, Any]:
     """
     Calculate fidelity metrics for multiple queries using the specified distance metric.
@@ -305,7 +305,7 @@ def calculate_fidelity(
             "min_fidelity": 0.0,
             "max_fidelity": 0.0,
             "macro_averaged_distance": 1.0,
-            "metric": metric,
+            "metric": metric.value,  # Return string value instead of enum object
             
             # Jensen-Shannon specific
             "macro_averaged_js_fidelity": 0.0,
@@ -398,7 +398,7 @@ def calculate_fidelity(
             "min_fidelity": 0.0,
             "max_fidelity": 0.0,
             "macro_averaged_distance": 1.0,
-            "metric": metric,
+            "metric": metric.value,  # Return string value instead of enum object
             
             # Jensen-Shannon specific
             "macro_averaged_js_fidelity": 0.0,
@@ -447,7 +447,7 @@ def calculate_fidelity(
         "min_fidelity": min_fidelity,
         "max_fidelity": max_fidelity,
         "macro_averaged_distance": macro_averaged_distance,
-        "metric": metric,
+        "metric": metric.value,  # Return string value instead of enum object
         
         # Jensen-Shannon specific
         "macro_averaged_js_fidelity": macro_averaged_js_fidelity,

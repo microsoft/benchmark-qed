@@ -52,5 +52,5 @@ def create_text_unit_to_cluster_mapping(
     mapping = {}
     for cluster in clusters:
         for text_unit in cluster.text_units:
-                mapping[text_unit.text] = cluster.id
+                mapping[text_unit.text.strip().lower()] = cluster.id
     return mapping
