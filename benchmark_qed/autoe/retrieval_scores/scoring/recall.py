@@ -28,8 +28,7 @@ def get_retrieved_clusters(
         query_relevance_result: QueryRelevanceResult containing relevance assessments.
         text_unit_to_cluster_mapping: Mapping from text unit ID to cluster ID.
         relevance_threshold: Minimum relevance score to consider a text unit retrieved.
-        use_text_unit_short_id: Whether to use the short ID of the text unit for mapping.
-
+       
     Returns:
         Set of cluster IDs that contain relevant text units.
     """
@@ -42,8 +41,8 @@ def get_retrieved_clusters(
         text_unit = chunk_info["text_unit"]
         
         # Map text unit to cluster
-        if text_unit.text in text_unit_to_cluster_mapping:
-            cluster_id = text_unit_to_cluster_mapping[text_unit.text]
+        if text_unit.text.strip().lower() in text_unit_to_cluster_mapping:
+            cluster_id = text_unit_to_cluster_mapping[text_unit.text.strip().lower()]
             retrieved_clusters.add(cluster_id)
     
     return retrieved_clusters

@@ -5,6 +5,7 @@ import asyncio
 import logging
 from pathlib import Path
 from string import Template
+from typing import Any
 
 from benchmark_qed.autod.data_model.text_unit import TextUnit
 from benchmark_qed.autoe.data_model.relevance import RelevanceAssessmentItem, RelevanceAssessmentResponse
@@ -34,6 +35,8 @@ class RationaleRelevanceRater(RelevanceRater):
         llm_config: LLMConfig,
         prompt_template: Template | None = None,
         concurrent_requests: int = 32,
+        cache_dir: Path | None = None,
+        cache_enabled: bool = True,
     ) -> None:
         """
         Initialize the RationaleRelevanceAssessor.
@@ -43,7 +46,10 @@ class RationaleRelevanceRater(RelevanceRater):
             llm_config: The LLM configuration containing call arguments and other settings.
             prompt_template: Rationale prompt template. If None, uses default from file.
             concurrent_requests: Maximum number of concurrent requests to the LLM.
+            cache_dir: Directory to store cache files. If None, caching is disabled.
+            cache_enabled: Whether to enable caching functionality.
         """
+        super().__init__(cache_dir=cache_dir, cache_enabled=cache_enabled)
         self.llm_client = llm_client
         self.llm_config = llm_config
         self.prompt_template = prompt_template or load_template_file(
@@ -51,7 +57,15 @@ class RationaleRelevanceRater(RelevanceRater):
         )
         self.semaphore = asyncio.Semaphore(concurrent_requests)
 
-    async def rate_relevance(
+    def _get_cache_relevant_params(self) -> dict[str, Any]:
+        """Get parameters that affect the RationaleRelevanceRater assessment results."""
+        return {
+            "llm_model": getattr(self.llm_config, 'model', None),
+            "llm_call_args": getattr(self.llm_config, 'call_args', {}),
+            "prompt_template": self.prompt_template.template if self.prompt_template else None,
+        }
+
+    async def _rate_relevance_impl(
         self, query: str, text_units: list[TextUnit]
     ) -> RelevanceAssessmentResponse:
         """
