@@ -131,8 +131,3 @@ class LLMConfig(BaseModel):
             msg = "API key is required."
             raise ValueError(msg)
         return self
-
-    @property
-    def max_retries(self) -> int:
-        """Backward compatibility property for max_retries."""
-        return self.retry_config.retries
