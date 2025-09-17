@@ -38,9 +38,7 @@ def _async_retry(retry_config: RetryConfig) -> AsyncRetrying:
         wait=wait_exponential_jitter(
             initial=retry_config.base_delay,
             max=retry_config.max_delay,
-            jitter=retry_config.base_delay * 0.25
-            if retry_config.jitter
-            else 0,
+            jitter=retry_config.base_delay * 0.25 if retry_config.jitter else 0,
             exp_base=retry_config.backoff_factor,
         ),
         retry=retry_if_exception_type(RETRYABLE_EXCEPTIONS),
