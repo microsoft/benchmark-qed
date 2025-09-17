@@ -7,10 +7,45 @@ from typing import Any, cast
 from azure.ai.inference.aio import ChatCompletionsClient, EmbeddingsClient
 from azure.ai.inference.models import ChatCompletions, EmbeddingEncodingFormat
 from azure.core.credentials import AzureKeyCredential
+from azure.core.exceptions import HttpResponseError
 from azure.identity import DefaultAzureCredential
+from tenacity import (
+    AsyncRetrying,
+    retry_if_exception_type,
+    stop_after_attempt,
+    wait_exponential_jitter,
+)
 
 from benchmark_qed.config.llm_config import AuthType, LLMConfig
 from benchmark_qed.llm.type.base import BaseModelOutput, BaseModelResponse, Usage
+
+# Common retryable exceptions for Azure services
+RETRYABLE_EXCEPTIONS: tuple[type[Exception], ...] = (HttpResponseError,)
+
+
+def _create_retry_config(llm_config: LLMConfig) -> AsyncRetrying:
+    """Create a tenacity AsyncRetrying instance from LLMConfig.
+
+    Args:
+        llm_config: The LLM configuration containing retry settings.
+
+    Returns
+    -------
+        AsyncRetrying instance configured with the provided settings.
+    """
+    return AsyncRetrying(
+        stop=stop_after_attempt(llm_config.retry_config.retries),
+        wait=wait_exponential_jitter(
+            initial=llm_config.retry_config.base_delay,
+            max=llm_config.retry_config.max_delay,
+            jitter=llm_config.retry_config.base_delay * 0.25
+            if llm_config.retry_config.jitter
+            else 0,
+            exp_base=llm_config.retry_config.backoff_factor,
+        ),
+        retry=retry_if_exception_type(RETRYABLE_EXCEPTIONS),
+        reraise=True,
+    )
 
 
 class AzureInferenceChat:
@@ -29,10 +64,33 @@ class AzureInferenceChat:
         self._model = llm_config.model
         self._semaphore = asyncio.Semaphore(llm_config.concurrent_requests)
         self._usage = Usage(model=llm_config.model)
+        self._retry_config = _create_retry_config(llm_config)
 
     def get_usage(self) -> dict[str, Any]:
         """Get the usage of the Model."""
         return self._usage.model_dump()
+
+    async def _complete_chat(
+        self, messages: list[dict[str, str]], **kwargs: dict[str, Any]
+    ) -> ChatCompletions:
+        """Complete a chat request using the Azure client.
+
+        Args:
+            messages: The messages to send to the model.
+            kwargs: Additional arguments to pass to the model.
+
+        Returns
+        -------
+            The chat completion response.
+        """
+        return cast(
+            ChatCompletions,
+            await self._client.complete(
+                model=self._model,
+                messages=messages,
+                **kwargs,  # type: ignore
+            ),  # type: ignore
+        )
 
     async def chat(
         self, messages: list[dict[str, str]], **kwargs: dict[str, Any]
@@ -48,15 +106,15 @@ class AzureInferenceChat:
         -------
             The response from the Model.
         """
+        response = None
         async with self._semaphore:
-            response: ChatCompletions = cast(
-                ChatCompletions,
-                await self._client.complete(
-                    model=self._model,
-                    messages=messages,
-                    **kwargs,  # type: ignore
-                ),  # type: ignore
-            )
+            async for attempt in self._retry_config:
+                with attempt:
+                    response = await self._complete_chat(messages, **kwargs)
+
+        if response is None:
+            msg = "No response received from Azure Chat API"
+            raise ValueError(msg)
 
         content = response.choices[0].message.content.replace(
             "<|im_start|>assistant<|im_sep|>", ""
@@ -103,10 +161,29 @@ class AzureInferenceEmbedding:
         self._model = llm_config.model
         self._semaphore = asyncio.Semaphore(llm_config.concurrent_requests)
         self._usage = Usage(model=llm_config.model)
+        self._retry_config = _create_retry_config(llm_config)
 
     def get_usage(self) -> dict[str, Any]:
         """Get the usage of the Model."""
         return self._usage.model_dump()
+
+    async def _embed_text(self, text_list: list[str], **kwargs: Any) -> Any:
+        """Generate embeddings using the Azure client.
+
+        Args:
+            text_list: The list of text to generate embeddings for.
+            kwargs: Additional arguments to pass to the model.
+
+        Returns
+        -------
+            The embedding response.
+        """
+        return await self._client.embed(
+            model=self._model,
+            input=text_list,
+            encoding_format=EmbeddingEncodingFormat.FLOAT,
+            **kwargs,
+        )
 
     async def embed(self, text_list: list[str], **kwargs: Any) -> list[list[float]]:
         """
@@ -121,12 +198,7 @@ class AzureInferenceEmbedding:
             A collections of list of floats representing the embedding vector for each item in the batch.
         """
         async with self._semaphore:
-            response = await self._client.embed(
-                model=self._model,
-                input=text_list,
-                encoding_format=EmbeddingEncodingFormat.FLOAT,
-                **kwargs,
-            )
+            response = await self._retry_config(self._embed_text, text_list, **kwargs)
 
         self._usage.add_usage(prompt_tokens=response.usage.prompt_tokens)
 
