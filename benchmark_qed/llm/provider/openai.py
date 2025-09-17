@@ -19,7 +19,7 @@ from tenacity import (
     wait_exponential_jitter,
 )
 
-from benchmark_qed.config.llm_config import AuthType, LLMConfig
+from benchmark_qed.config.llm_config import AuthType, LLMConfig, RetryConfig
 from benchmark_qed.llm.type.base import BaseModelOutput, BaseModelResponse, Usage
 
 REASONING_MODELS = ["o3", "o4-mini", "o3-mini", "o1-mini", "o1", "o1-pro"]
@@ -32,7 +32,7 @@ RETRYABLE_EXCEPTIONS: tuple[type[Exception], ...] = (
 )
 
 
-def _create_retry_config(llm_config: LLMConfig) -> AsyncRetrying:
+def async_retry(retry_config: RetryConfig) -> AsyncRetrying:
     """Create a tenacity AsyncRetrying instance from LLMConfig.
 
     Args:
@@ -43,14 +43,14 @@ def _create_retry_config(llm_config: LLMConfig) -> AsyncRetrying:
         AsyncRetrying instance configured with the provided settings.
     """
     return AsyncRetrying(
-        stop=stop_after_attempt(llm_config.retry_config.retries),
+        stop=stop_after_attempt(retry_config.retries),
         wait=wait_exponential_jitter(
-            initial=llm_config.retry_config.base_delay,
-            max=llm_config.retry_config.max_delay,
-            jitter=llm_config.retry_config.base_delay * 0.25
-            if llm_config.retry_config.jitter
+            initial=retry_config.base_delay,
+            max=retry_config.max_delay,
+            jitter=retry_config.base_delay * 0.25
+            if retry_config.jitter
             else 0,
-            exp_base=llm_config.retry_config.backoff_factor,
+            exp_base=retry_config.backoff_factor,
         ),
         retry=retry_if_exception_type(RETRYABLE_EXCEPTIONS),
         reraise=True,
@@ -67,7 +67,7 @@ class BaseOpenAIChat:
         self._model = llm_config.model
         self._semaphore = asyncio.Semaphore(llm_config.concurrent_requests)
         self._usage = Usage(model=llm_config.model)
-        self._retry_config = _create_retry_config(llm_config)
+        self._retry_config = llm_config.retry_config
 
     def get_usage(self) -> dict[str, Any]:
         """Get the usage of the Model."""
@@ -111,7 +111,7 @@ class BaseOpenAIChat:
 
         response = None
         async with self._semaphore:
-            async for attempt in self._retry_config:
+            async for attempt in async_retry(self._retry_config):
                 with attempt:
                     response = await self._create_chat_completion(messages, **kwargs)
 
@@ -201,7 +201,7 @@ class BaseOpenAIEmbedding:
         self._model = llm_config.model
         self._semaphore = asyncio.Semaphore(llm_config.concurrent_requests)
         self._usage = Usage(model=llm_config.model)
-        self._retry_config = _create_retry_config(llm_config)
+        self._retry_config = llm_config.retry_config
 
     def get_usage(self) -> dict[str, Any]:
         """Get the usage of the Model."""
@@ -236,10 +236,15 @@ class BaseOpenAIEmbedding:
         -------
             A collections of list of floats representing the embedding vector for each item in the batch.
         """
+        response = None
         async with self._semaphore:
-            response = await self._retry_config(
-                self._create_embeddings, text_list, **kwargs
-            )
+            async for attempt in async_retry(self._retry_config):
+                with attempt:
+                    response = await self._create_embeddings(text_list, **kwargs)
+
+        if response is None:
+            msg = "No response received from Azure Chat API"
+            raise ValueError(msg)
 
         self._usage.add_usage(prompt_tokens=response.usage.prompt_tokens)
 
