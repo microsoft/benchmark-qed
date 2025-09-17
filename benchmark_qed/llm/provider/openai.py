@@ -5,12 +5,54 @@ import asyncio
 from typing import Any
 
 from azure.identity import DefaultAzureCredential, get_bearer_token_provider
-from openai import AsyncAzureOpenAI, AsyncOpenAI
+from openai import (
+    APITimeoutError,
+    AsyncAzureOpenAI,
+    AsyncOpenAI,
+    InternalServerError,
+    RateLimitError,
+)
+from tenacity import (
+    AsyncRetrying,
+    retry_if_exception_type,
+    stop_after_attempt,
+    wait_exponential_jitter,
+)
 
-from benchmark_qed.config.llm_config import AuthType, LLMConfig
+from benchmark_qed.config.llm_config import AuthType, LLMConfig, RetryConfig
 from benchmark_qed.llm.type.base import BaseModelOutput, BaseModelResponse, Usage
 
 REASONING_MODELS = ["o3", "o4-mini", "o3-mini", "o1-mini", "o1", "o1-pro"]
+
+# Common retryable exceptions for OpenAI services
+RETRYABLE_EXCEPTIONS: tuple[type[Exception], ...] = (
+    APITimeoutError,
+    InternalServerError,
+    RateLimitError,
+)
+
+
+def async_retry(retry_config: RetryConfig) -> AsyncRetrying:
+    """Create a tenacity AsyncRetrying instance from LLMConfig.
+
+    Args:
+        llm_config: The LLM configuration containing retry settings.
+
+    Returns
+    -------
+        AsyncRetrying instance configured with the provided settings.
+    """
+    return AsyncRetrying(
+        stop=stop_after_attempt(retry_config.retries),
+        wait=wait_exponential_jitter(
+            initial=retry_config.base_delay,
+            max=retry_config.max_delay,
+            jitter=retry_config.base_delay * 0.25 if retry_config.jitter else 0,
+            exp_base=retry_config.backoff_factor,
+        ),
+        retry=retry_if_exception_type(RETRYABLE_EXCEPTIONS),
+        reraise=True,
+    )
 
 
 class BaseOpenAIChat:
@@ -23,10 +65,30 @@ class BaseOpenAIChat:
         self._model = llm_config.model
         self._semaphore = asyncio.Semaphore(llm_config.concurrent_requests)
         self._usage = Usage(model=llm_config.model)
+        self._retry_config = llm_config.retry_config
 
     def get_usage(self) -> dict[str, Any]:
         """Get the usage of the Model."""
         return self._usage.model_dump()
+
+    async def _create_chat_completion(
+        self, messages: list[dict[str, str]], **kwargs: dict[str, Any]
+    ) -> Any:
+        """Create a chat completion using the OpenAI client.
+
+        Args:
+            messages: The messages to send to the model.
+            kwargs: Additional arguments to pass to the model.
+
+        Returns
+        -------
+            The chat completion response.
+        """
+        return await self._client.chat.completions.create(
+            model=self._model,
+            messages=messages,  # type: ignore
+            **kwargs,  # type: ignore
+        )
 
     async def chat(
         self, messages: list[dict[str, str]], **kwargs: dict[str, Any]
@@ -45,12 +107,15 @@ class BaseOpenAIChat:
         if self._model in REASONING_MODELS and "temperature" in kwargs:
             kwargs.pop("temperature")
 
+        response = None
         async with self._semaphore:
-            response = await self._client.chat.completions.create(
-                model=self._model,
-                messages=messages,  # type: ignore
-                **kwargs,  # type: ignore
-            )
+            async for attempt in async_retry(self._retry_config):
+                with attempt:
+                    response = await self._create_chat_completion(messages, **kwargs)
+
+        if response is None:
+            msg = "No response received from Azure Chat API"
+            raise ValueError(msg)
 
         history = [
             *messages,
@@ -134,10 +199,28 @@ class BaseOpenAIEmbedding:
         self._model = llm_config.model
         self._semaphore = asyncio.Semaphore(llm_config.concurrent_requests)
         self._usage = Usage(model=llm_config.model)
+        self._retry_config = llm_config.retry_config
 
     def get_usage(self) -> dict[str, Any]:
         """Get the usage of the Model."""
         return self._usage.model_dump()
+
+    async def _create_embeddings(self, text_list: list[str], **kwargs: Any) -> Any:
+        """Create embeddings using the OpenAI client.
+
+        Args:
+            text_list: The list of text to generate embeddings for.
+            kwargs: Additional arguments to pass to the model.
+
+        Returns
+        -------
+            The embedding response.
+        """
+        return await self._client.embeddings.create(
+            model=self._model,
+            input=text_list,
+            **kwargs,
+        )
 
     async def embed(self, text_list: list[str], **kwargs: Any) -> list[list[float]]:
         """
@@ -151,12 +234,15 @@ class BaseOpenAIEmbedding:
         -------
             A collections of list of floats representing the embedding vector for each item in the batch.
         """
+        response = None
         async with self._semaphore:
-            response = await self._client.embeddings.create(
-                model=self._model,
-                input=text_list,
-                **kwargs,
-            )
+            async for attempt in async_retry(self._retry_config):
+                with attempt:
+                    response = await self._create_embeddings(text_list, **kwargs)
+
+        if response is None:
+            msg = "No response received from Azure Chat API"
+            raise ValueError(msg)
 
         self._usage.add_usage(prompt_tokens=response.usage.prompt_tokens)
 

@@ -54,6 +54,31 @@ class AuthType(StrEnum):
     AzureManagedIdentity = "azure_managed_identity"
 
 
+class RetryConfig(BaseModel):
+    """Configuration for retrying failed requests."""
+
+    retries: int = Field(
+        default=3,
+        description="The maximum number of retry attempts.",
+    )
+    base_delay: float = Field(
+        default=1.0,
+        description="Initial delay between retries in seconds.",
+    )
+    max_delay: float = Field(
+        default=60.0,
+        description="Maximum delay between retries in seconds.",
+    )
+    backoff_factor: float = Field(
+        default=2.0,
+        description="Multiplier for exponential backoff.",
+    )
+    jitter: bool = Field(
+        default=True,
+        description="Whether to add random jitter to delay times.",
+    )
+
+
 class LLMConfig(BaseModel):
     """Configuration for the LLM to use."""
 
@@ -72,6 +97,10 @@ class LLMConfig(BaseModel):
     concurrent_requests: int = Field(
         default=4,
         description="The number of concurrent requests to send to the model. This should be a positive integer.",
+    )
+    retry_config: RetryConfig = Field(
+        default_factory=RetryConfig,
+        description="Configuration for retry behavior.",
     )
     llm_provider: LLMProvider | str = Field(
         default=LLMProvider.OpenAIChat,
