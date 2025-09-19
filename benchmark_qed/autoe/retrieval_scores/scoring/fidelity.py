@@ -75,8 +75,8 @@ def get_query_cluster_distribution(
         text_unit = chunk_info["text_unit"]
         
         # Map text unit to cluster
-        if text_unit.text in text_unit_to_cluster_mapping:
-            cluster_id = text_unit_to_cluster_mapping[text_unit.text]
+        if text_unit.text.strip().lower() in text_unit_to_cluster_mapping:
+            cluster_id = text_unit_to_cluster_mapping[text_unit.text.strip().lower()]
             cluster_distribution[cluster_id] = cluster_distribution.get(cluster_id, 0) + 1
     
     return cluster_distribution

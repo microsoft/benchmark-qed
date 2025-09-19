@@ -36,6 +36,7 @@ def get_retrieved_clusters(
     
     # Get relevant chunks based on the threshold
     relevant_chunks = query_relevance_result.get_relevant_chunks(relevance_threshold)
+    log.info(f"Retrieved {len(relevant_chunks)} relevant chunks for query")
     
     for chunk_info in relevant_chunks:
         text_unit = chunk_info["text_unit"]
@@ -44,6 +45,9 @@ def get_retrieved_clusters(
         if text_unit.text.strip().lower() in text_unit_to_cluster_mapping:
             cluster_id = text_unit_to_cluster_mapping[text_unit.text.strip().lower()]
             retrieved_clusters.add(cluster_id)
+        else:
+            log.warning(f"Text unit ID {text_unit.text} not found in cluster mapping")
+    log.info(f"Retrieved {len(retrieved_clusters)} clusters for query")
     
     return retrieved_clusters
 
@@ -83,6 +87,7 @@ def calculate_single_query_recall(
     )
     relevant_cluster_ids = set(relevant_clusters_dict.keys())
     
+    
     # Get retrieved clusters
     retrieved_cluster_ids = get_retrieved_clusters(
         query_relevance_result=query_relevance_result,
@@ -97,6 +102,7 @@ def calculate_single_query_recall(
     # Calculate recall
     total_relevant_clusters = len(relevant_cluster_ids)
     retrieved_relevant_clusters = len(retrieved_relevant_cluster_ids)
+    log.info(f"Retrieved {len(retrieved_cluster_ids)} clusters out of {total_relevant_clusters} clusters")
     
     recall = retrieved_relevant_clusters / total_relevant_clusters if total_relevant_clusters > 0 else 0.0
     
