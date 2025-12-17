@@ -137,7 +137,7 @@ def load_docs_from_dataframe(
                 id=str(uuid4()),
                 short_id=str(index),
                 title=title,
-                type=input_type,
+                type=str(input_type),
                 text=text,
                 attributes=metadata,
             )
@@ -212,7 +212,7 @@ def load_parquet_dir(
         metadata_tags: list[str] | None = None,
         max_text_length: int | None = None,
 ) -> list[Document]:
-    """Load a directory of CSV files and return a list of Document objects."""
+    """Load a directory of parquet files and return a list of Document objects."""
     documents: list[Document] = []
     for file_path in Path(dir_path).rglob("*.parquet"):
         documents.extend(
@@ -327,6 +327,14 @@ def load_documents(
     """Read documents from a dataframe using pre-converted records."""
     records = df.to_dict("records")
 
+    def _get_attributes(row: dict) -> dict[str, Any]:
+        attributes = row.get("attributes", dict())
+        selected_attributes = attributes_cols or []
+        return {
+            attr: attributes.get(attr, None)
+            for attr in selected_attributes
+        }
+
     return [
         Document(
             id=row.get(id_col, str(uuid4())),
@@ -334,11 +342,7 @@ def load_documents(
             title=row.get(title_col, ""),
             type=row.get(type_col, ""),
             text=row.get(text_col, ""),
-            attributes=(
-                {col: row.get(col) for col in attributes_cols}
-                if attributes_cols
-                else {}
-            ),
+            attributes=_get_attributes(row),
         )
         for index, row in enumerate(records)
     ]
