@@ -112,9 +112,8 @@ def test_create_documents_from_dataframe_simple(
 @pytest.mark.parametrize("input_data_type", [InputDataType.CSV, InputDataType.PARQUET])
 @pytest.mark.parametrize("file_or_dir", ["file", "dir"])
 def test_create_documents_from_dataframe_complex(
-    tmp_path: Path, input_data_type, file_or_dir: str
+    tmp_path: Path, input_data_type: InputDataType, file_or_dir: str
 ):
-    # save a test parquet file
     simple_docs = [
         {
             "content": "text 1",

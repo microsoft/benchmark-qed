@@ -121,5 +121,5 @@ sequence = [
 include = ["benchmark_qed", "tests"]
 exclude = ["**/__pycache__"]
 
-[pytest]
+[tool.pytest.ini_options]
 tmp_path_retention_policy = "failed"
