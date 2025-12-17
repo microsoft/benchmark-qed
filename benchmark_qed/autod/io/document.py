@@ -1,4 +1,5 @@
-# Copyright (c) 2025 Microsoft Corporation.
+# Copyright (c) Microsoft Corporation.
+# Licensed under the MIT License.
 """Load input files into Document objects."""
 
 import datetime
@@ -106,7 +107,7 @@ def load_text_dir(
     return documents
 
 
-def load_docs_from_dataframe(
+def _load_docs_from_dataframe(
     data_df: pd.DataFrame,
     input_type: InputDataType,
     title: str,
@@ -153,7 +154,7 @@ def load_csv_doc(
     max_text_length: int | None = None,
 ) -> list[Document]:
     """Load a CSV file and return a Document object."""
-    return load_docs_from_dataframe(
+    return _load_docs_from_dataframe(
         data_df=pd.read_csv(file_path, encoding=encoding),
         input_type=InputDataType.CSV,
         title=str(file_path.replace(".csv", "")),
@@ -195,8 +196,8 @@ def load_parquet_doc(
     metadata_tags: list[str] | None = None,
     max_text_length: int | None = None,
 ) -> list[Document]:
-    """Load Documents from a parquet file"""
-    return load_docs_from_dataframe(
+    """Load Documents from a parquet file."""
+    return _load_docs_from_dataframe(
         data_df=pd.read_parquet(file_path),
         input_type=InputDataType.PARQUET,
         title=str(file_path.replace(".parquet", "")),
@@ -328,7 +329,7 @@ def load_documents(
     records = df.to_dict("records")
 
     def _get_attributes(row: dict) -> dict[str, Any]:
-        attributes = row.get("attributes", dict())
+        attributes = row.get("attributes", {})
         selected_attributes = attributes_cols or []
         return {attr: attributes.get(attr, None) for attr in selected_attributes}
 

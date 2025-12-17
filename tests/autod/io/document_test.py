@@ -1,5 +1,6 @@
-# Copyright (c) 2025 Microsoft Corporation.
-import json
+# Copyright (c) Microsoft Corporation.
+# Licensed under the MIT License.
+import json  # noqa: I001
 from pathlib import Path
 from typing import Any
 
@@ -7,12 +8,39 @@ import pandas as pd
 import pytest
 
 import benchmark_qed.config.defaults as defs
+from benchmark_qed.autod.data_model.document import Document
 from benchmark_qed.autod.io.document import (
     create_documents,
     save_documents,
     load_documents,
 )
 from benchmark_qed.autod.io.enums import InputDataType
+
+
+def _save_input_docs(
+    doc_prefix_path: Path, docs: list[dict[str, Any]], input_data_type: InputDataType
+):
+    df = pd.DataFrame.from_records(data=docs)
+    if input_data_type == InputDataType.PARQUET:
+        input_path = doc_prefix_path.with_suffix(".parquet")
+        df.to_parquet(input_path)
+    elif input_data_type == InputDataType.CSV:
+        input_path = doc_prefix_path.with_suffix(".csv")
+        df.to_csv(input_path, header=True)
+    else:
+        msg = f"input_data_type must be {InputDataType.CSV} or {InputDataType.PARQUET}"
+        raise ValueError(msg)
+    return input_path
+
+
+def _doc_has_attribute(doc: Document, attr: str) -> bool:
+    return doc.attributes is not None and attr in doc.attributes
+
+
+def _doc_get_attribute(doc: Document, attr: str, default_value: str) -> Any:
+    if doc.attributes is not None:
+        return doc.attributes.get(attr, default_value)
+    return default_value
 
 
 def test_create_documents_text_file(tmp_path: Path):
@@ -46,19 +74,6 @@ def test_create_documents_text_dir(tmp_path: Path):
     assert docs_sorted_by_title[1].text == text_2
 
 
-def _save_input_docs(
-    doc_prefix_path: Path, docs: list[dict[str, Any]], input_data_type: InputDataType
-):
-    df = pd.DataFrame.from_records(data=docs)
-    if input_data_type == InputDataType.PARQUET:
-        input_path = doc_prefix_path.with_suffix(".parquet")
-        df.to_parquet(input_path)
-    elif input_data_type == InputDataType.CSV:
-        input_path = doc_prefix_path.with_suffix(".csv")
-        df.to_csv(input_path, header=True)
-    return input_path
-
-
 @pytest.mark.parametrize("input_data_type", [InputDataType.CSV, InputDataType.PARQUET])
 @pytest.mark.parametrize("file_or_dir", ["file", "dir"])
 def test_create_documents_from_dataframe_simple(
@@ -84,14 +99,14 @@ def test_create_documents_from_dataframe_simple(
     )
     assert docs_sorted_by_title[0].text == "text 1"
     assert docs_sorted_by_title[0].type == str(input_data_type)
-    assert "date_created" in docs_sorted_by_title[0].attributes
+    assert _doc_has_attribute(docs_sorted_by_title[0], "date_created")
     assert len(docs_sorted_by_title[1].id) > 0
     assert docs_sorted_by_title[1].title.endswith(
         "doc" if file_or_dir == "file" else "doc_1"
     )
     assert docs_sorted_by_title[1].text == "text 2"
     assert docs_sorted_by_title[1].type == str(input_data_type)
-    assert "date_created" in docs_sorted_by_title[1].attributes
+    assert _doc_has_attribute(docs_sorted_by_title[1], "date_created")
 
 
 @pytest.mark.parametrize("input_data_type", [InputDataType.CSV, InputDataType.PARQUET])
@@ -139,18 +154,24 @@ def test_create_documents_from_dataframe_complex(
     )
     assert docs_sorted_by_title[0].text == "text 1"
     assert docs_sorted_by_title[0].type == str(input_data_type)
-    assert docs_sorted_by_title[0].attributes["date_created"] == "20251217T000000Z"
-    assert docs_sorted_by_title[0].attributes["attr1"] == 1
-    assert "attr2" not in docs_sorted_by_title[0].attributes
+    assert (
+        _doc_get_attribute(docs_sorted_by_title[0], "date_created", "")
+        == "20251217T000000Z"
+    )
+    assert _doc_get_attribute(docs_sorted_by_title[0], "attr1", "") == 1
+    assert not _doc_has_attribute(docs_sorted_by_title[0], "attr2")
     assert len(docs_sorted_by_title[1].id) > 0
     assert docs_sorted_by_title[1].title.endswith(
         "doc" if file_or_dir == "file" else "doc_1"
     )
     assert docs_sorted_by_title[1].text == "text 2"
     assert docs_sorted_by_title[1].type == str(input_data_type)
-    assert docs_sorted_by_title[1].attributes["date_created"] == "20240101T000000Z"
-    assert docs_sorted_by_title[1].attributes["attr1"] == 2
-    assert "attr2" not in docs_sorted_by_title[1].attributes
+    assert (
+        _doc_get_attribute(docs_sorted_by_title[1], "date_created", "")
+        == "20240101T000000Z"
+    )
+    assert _doc_get_attribute(docs_sorted_by_title[1], "attr1", "") == 2
+    assert not _doc_has_attribute(docs_sorted_by_title[1], "attr2")
 
 
 @pytest.mark.parametrize("file_or_dir", ["file", "dir"])
@@ -164,7 +185,7 @@ def test_create_documents_json_simple(tmp_path: Path, file_or_dir: str):
     else:
         for idx, doc in enumerate(simple_docs):
             file_path = tmp_path / f"doc_{idx}.json"
-            file_path.write_text(json.dumps(simple_docs[idx]), encoding="utf-8")
+            file_path.write_text(json.dumps(doc), encoding="utf-8")
         input_path = tmp_path
         expected_count = 2
 
@@ -174,7 +195,7 @@ def test_create_documents_json_simple(tmp_path: Path, file_or_dir: str):
     docs_sorted = sorted(docs, key=lambda d: d.text)
     assert docs_sorted[0].text == "text 1"
     assert docs_sorted[0].type == "json"
-    assert "date_created" in docs_sorted[0].attributes
+    assert _doc_has_attribute(docs_sorted[0], "date_created")
 
 
 @pytest.mark.parametrize("file_or_dir", ["file", "dir"])
@@ -218,15 +239,17 @@ def test_create_documents_json_complex(tmp_path: Path, file_or_dir: str):
 
     docs_sorted = sorted(docs, key=lambda d: d.text)
     assert docs_sorted[0].text == "text 1"
-    assert docs_sorted[0].attributes["attr1"] == 1
-    assert docs_sorted[0].attributes["date_created"] == "20251217T000000Z"
-    assert "attr2" not in docs_sorted[0].attributes
+    assert _doc_get_attribute(docs_sorted[0], "attr1", "") == 1
+    assert _doc_get_attribute(docs_sorted[0], "date_created", "") == "20251217T000000Z"
+    assert not _doc_has_attribute(docs_sorted[0], "attr2")
 
     if expected_count > 1:
         assert docs_sorted[1].text == "text 2"
-        assert docs_sorted[1].attributes["attr1"] == 2
-        assert docs_sorted[1].attributes["date_created"] == "20240101T000000Z"
-        assert "attr2" not in docs_sorted[1].attributes
+        assert _doc_get_attribute(docs_sorted[1], "attr1", "") == 2
+        assert (
+            _doc_get_attribute(docs_sorted[1], "date_created", "") == "20240101T000000Z"
+        )
+        assert not _doc_has_attribute(docs_sorted[1], "attr2")
         assert {d.short_id for d in docs} == {"0", "1"}
 
 
@@ -281,7 +304,9 @@ def test_create_save_and_load_documents(tmp_path: Path, output_dir_exists: bool)
     loaded_docs = load_documents(docs_df, attributes_cols=["date_created"])
     assert len(loaded_docs) == 2
     for original, loaded in zip(
-        sorted(docs, key=lambda d: d.id), sorted(loaded_docs, key=lambda d: d.id)
+        sorted(docs, key=lambda d: d.id),
+        sorted(loaded_docs, key=lambda d: d.id),
+        strict=True,
     ):
         assert original.id == loaded.id
         assert original.short_id == loaded.short_id
@@ -295,7 +320,7 @@ def test_create_save_and_load_documents(tmp_path: Path, output_dir_exists: bool)
 def test_create_documents_unsupported_input_type(tmp_path: Path, file_or_dir: str):
     input_file = tmp_path / "text_doc_1.txt"
     input_file.write_text("doc 1", encoding="utf-8")
-    with pytest.raises(ValueError):
+    with pytest.raises(ValueError):  # noqa: PT011, PT012
         if file_or_dir == "file":
             create_documents(str(input_file), input_type="goblin")
         else:
