@@ -84,7 +84,7 @@ test = "pytest tests"
 serve_docs = "mkdocs serve"
 build_docs = "mkdocs build"
 
-_test_with_coverage = 'coverage run --source=benchmark_qed -m pytest tests/unit'
+_test_with_coverage = 'coverage run --source=benchmark_qed -m pytest tests'
 _coverage_report = 'coverage report --fail-under=100 --show-missing --omit="benchmark_qed/doc_gen/__main__.py"'
 _generate_coverage_xml = 'coverage xml --omit="benchmark_qed/doc_gen/__main__.py"'
 _generate_coverage_html = 'coverage html --omit="benchmark_qed/doc_gen/__main__.py"'
@@ -120,3 +120,6 @@ sequence = [
 [tool.pyright]
 include = ["benchmark_qed", "tests"]
 exclude = ["**/__pycache__"]
+
+[pytest]
+tmp_path_retention_policy = "failed"

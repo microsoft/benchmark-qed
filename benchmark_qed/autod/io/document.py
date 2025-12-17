@@ -106,17 +106,16 @@ def load_text_dir(
     return documents
 
 
-def load_csv_doc(
-    file_path: str,
-    encoding: str = defs.FILE_ENCODING,
+def load_docs_from_dataframe(
+    data_df: pd.DataFrame,
+    input_type: InputDataType,
+    title: str,
     text_tag: str = defs.TEXT_COLUMN,
     metadata_tags: list[str] | None = None,
     max_text_length: int | None = None,
 ) -> list[Document]:
-    """Load a CSV file and return a Document object."""
-    data_df = pd.read_csv(file_path, encoding=encoding)
-
     documents: list[Document] = []
+
     for index, row in enumerate(data_df.itertuples()):
         text = getattr(row, text_tag, "")
         if max_text_length is not None:
@@ -127,6 +126,7 @@ def load_csv_doc(
             for tag in metadata_tags:
                 if tag in data_df.columns:
                     metadata[tag] = getattr(row, tag)
+
         if "date_created" not in metadata:
             metadata["date_created"] = datetime.datetime.now(
                 tz=datetime.UTC
@@ -136,13 +136,31 @@ def load_csv_doc(
             Document(
                 id=str(uuid4()),
                 short_id=str(index),
-                title=str(file_path.replace(".csv", "")),
-                type="csv",
+                title=title,
+                type=input_type,
                 text=text,
                 attributes=metadata,
             )
         )
     return documents
+
+
+def load_csv_doc(
+        file_path: str,
+        encoding: str = defs.FILE_ENCODING,
+        text_tag: str = defs.TEXT_COLUMN,
+        metadata_tags: list[str] | None = None,
+        max_text_length: int | None = None,
+) -> list[Document]:
+    """Load a CSV file and return a Document object."""
+    return load_docs_from_dataframe(
+        data_df=pd.read_csv(file_path, encoding=encoding),
+        input_type=InputDataType.CSV,
+        title=str(file_path.replace(".csv", "")),
+        text_tag=text_tag,
+        metadata_tags=metadata_tags,
+        max_text_length=max_text_length
+    )
 
 
 def load_csv_dir(
@@ -159,6 +177,47 @@ def load_csv_dir(
             load_csv_doc(
                 file_path=str(file_path),
                 encoding=encoding,
+                text_tag=text_tag,
+                metadata_tags=metadata_tags,
+                max_text_length=max_text_length,
+            )
+        )
+
+    for index, document in enumerate(documents):
+        document.short_id = str(index)
+
+    return documents
+
+
+def load_parquet_doc(
+        file_path: str,
+        text_tag: str = defs.TEXT_COLUMN,
+        metadata_tags: list[str] | None = None,
+        max_text_length: int | None = None,
+) -> list[Document]:
+    """Load Documents from a parquet file"""
+    return load_docs_from_dataframe(
+        data_df=pd.read_parquet(file_path),
+        input_type=InputDataType.PARQUET,
+        title=str(file_path.replace(".parquet", "")),
+        text_tag=text_tag,
+        metadata_tags=metadata_tags,
+        max_text_length=max_text_length
+    )
+
+
+def load_parquet_dir(
+        dir_path: str,
+        text_tag: str = defs.TEXT_COLUMN,
+        metadata_tags: list[str] | None = None,
+        max_text_length: int | None = None,
+) -> list[Document]:
+    """Load a directory of CSV files and return a list of Document objects."""
+    documents: list[Document] = []
+    for file_path in Path(dir_path).rglob("*.parquet"):
+        documents.extend(
+            load_parquet_doc(
+                file_path=str(file_path),
                 text_tag=text_tag,
                 metadata_tags=metadata_tags,
                 max_text_length=max_text_length,
@@ -205,6 +264,13 @@ def create_documents(
                     metadata_tags=metadata_tags,
                     max_text_length=max_text_length,
                 )
+            case InputDataType.PARQUET:
+                documents = load_parquet_dir(
+                    dir_path=str(input_path),
+                    text_tag=text_tag,
+                    metadata_tags=metadata_tags,
+                    max_text_length=max_text_length,
+                )
             case _:
                 msg = f"Unsupported input type: {input_type}"
                 raise ValueError(msg)
@@ -232,6 +298,13 @@ def create_documents(
                 documents = load_csv_doc(
                     file_path=str(input_path),
                     encoding=encoding,
+                    text_tag=text_tag,
+                    metadata_tags=metadata_tags,
+                    max_text_length=max_text_length,
+                )
+            case InputDataType.PARQUET:
+                documents = load_parquet_doc(
+                    file_path=str(input_path),
                     text_tag=text_tag,
                     metadata_tags=metadata_tags,
                     max_text_length=max_text_length,
