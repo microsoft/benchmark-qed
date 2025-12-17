@@ -146,11 +146,11 @@ def load_docs_from_dataframe(
 
 
 def load_csv_doc(
-        file_path: str,
-        encoding: str = defs.FILE_ENCODING,
-        text_tag: str = defs.TEXT_COLUMN,
-        metadata_tags: list[str] | None = None,
-        max_text_length: int | None = None,
+    file_path: str,
+    encoding: str = defs.FILE_ENCODING,
+    text_tag: str = defs.TEXT_COLUMN,
+    metadata_tags: list[str] | None = None,
+    max_text_length: int | None = None,
 ) -> list[Document]:
     """Load a CSV file and return a Document object."""
     return load_docs_from_dataframe(
@@ -159,7 +159,7 @@ def load_csv_doc(
         title=str(file_path.replace(".csv", "")),
         text_tag=text_tag,
         metadata_tags=metadata_tags,
-        max_text_length=max_text_length
+        max_text_length=max_text_length,
     )
 
 
@@ -190,10 +190,10 @@ def load_csv_dir(
 
 
 def load_parquet_doc(
-        file_path: str,
-        text_tag: str = defs.TEXT_COLUMN,
-        metadata_tags: list[str] | None = None,
-        max_text_length: int | None = None,
+    file_path: str,
+    text_tag: str = defs.TEXT_COLUMN,
+    metadata_tags: list[str] | None = None,
+    max_text_length: int | None = None,
 ) -> list[Document]:
     """Load Documents from a parquet file"""
     return load_docs_from_dataframe(
@@ -202,15 +202,15 @@ def load_parquet_doc(
         title=str(file_path.replace(".parquet", "")),
         text_tag=text_tag,
         metadata_tags=metadata_tags,
-        max_text_length=max_text_length
+        max_text_length=max_text_length,
     )
 
 
 def load_parquet_dir(
-        dir_path: str,
-        text_tag: str = defs.TEXT_COLUMN,
-        metadata_tags: list[str] | None = None,
-        max_text_length: int | None = None,
+    dir_path: str,
+    text_tag: str = defs.TEXT_COLUMN,
+    metadata_tags: list[str] | None = None,
+    max_text_length: int | None = None,
 ) -> list[Document]:
     """Load a directory of parquet files and return a list of Document objects."""
     documents: list[Document] = []
@@ -330,10 +330,7 @@ def load_documents(
     def _get_attributes(row: dict) -> dict[str, Any]:
         attributes = row.get("attributes", dict())
         selected_attributes = attributes_cols or []
-        return {
-            attr: attributes.get(attr, None)
-            for attr in selected_attributes
-        }
+        return {attr: attributes.get(attr, None) for attr in selected_attributes}
 
     return [
         Document(

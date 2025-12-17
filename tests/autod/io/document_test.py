@@ -7,8 +7,13 @@ import pandas as pd
 import pytest
 
 import benchmark_qed.config.defaults as defs
-from benchmark_qed.autod.io.document import create_documents, save_documents, load_documents
+from benchmark_qed.autod.io.document import (
+    create_documents,
+    save_documents,
+    load_documents,
+)
 from benchmark_qed.autod.io.enums import InputDataType
+
 
 def test_create_documents_text_file(tmp_path: Path):
     file = tmp_path / "text_doc.txt"
@@ -41,7 +46,9 @@ def test_create_documents_text_dir(tmp_path: Path):
     assert docs_sorted_by_title[1].text == text_2
 
 
-def _save_input_docs(doc_prefix_path: Path, docs: list[dict[str, Any]], input_data_type: InputDataType):
+def _save_input_docs(
+    doc_prefix_path: Path, docs: list[dict[str, Any]], input_data_type: InputDataType
+):
     df = pd.DataFrame.from_records(data=docs)
     if input_data_type == InputDataType.PARQUET:
         input_path = doc_prefix_path.with_suffix(".parquet")
@@ -54,17 +61,16 @@ def _save_input_docs(doc_prefix_path: Path, docs: list[dict[str, Any]], input_da
 
 @pytest.mark.parametrize("input_data_type", [InputDataType.CSV, InputDataType.PARQUET])
 @pytest.mark.parametrize("file_or_dir", ["file", "dir"])
-def test_create_documents_from_dataframe_simple(tmp_path: Path, input_data_type: InputDataType, file_or_dir: str):
-    simple_docs = [
-        {"text": "text 1"},
-        {"text": "text 2"}
-    ]
+def test_create_documents_from_dataframe_simple(
+    tmp_path: Path, input_data_type: InputDataType, file_or_dir: str
+):
+    simple_docs = [{"text": "text 1"}, {"text": "text 2"}]
 
     if file_or_dir == "file":
         input_path = _save_input_docs(tmp_path / "doc", simple_docs, input_data_type)
     else:
         for idx, doc in enumerate(simple_docs):
-             _save_input_docs(tmp_path / f"doc_{idx}", [doc], input_data_type)
+            _save_input_docs(tmp_path / f"doc_{idx}", [doc], input_data_type)
         input_path = tmp_path
 
     docs = create_documents(str(input_path), input_type=input_data_type)
@@ -73,24 +79,40 @@ def test_create_documents_from_dataframe_simple(tmp_path: Path, input_data_type:
     # verify doc title and contents
     docs_sorted_by_title = sorted(docs, key=lambda d: (d.title, d.text))
     assert len(docs_sorted_by_title[0].id) > 0
-    assert docs_sorted_by_title[0].title.endswith("doc" if file_or_dir == "file" else "doc_0")
+    assert docs_sorted_by_title[0].title.endswith(
+        "doc" if file_or_dir == "file" else "doc_0"
+    )
     assert docs_sorted_by_title[0].text == "text 1"
     assert docs_sorted_by_title[0].type == str(input_data_type)
-    assert 'date_created' in docs_sorted_by_title[0].attributes
+    assert "date_created" in docs_sorted_by_title[0].attributes
     assert len(docs_sorted_by_title[1].id) > 0
-    assert docs_sorted_by_title[1].title.endswith("doc" if file_or_dir == "file" else "doc_1")
+    assert docs_sorted_by_title[1].title.endswith(
+        "doc" if file_or_dir == "file" else "doc_1"
+    )
     assert docs_sorted_by_title[1].text == "text 2"
     assert docs_sorted_by_title[1].type == str(input_data_type)
-    assert 'date_created' in docs_sorted_by_title[1].attributes
+    assert "date_created" in docs_sorted_by_title[1].attributes
 
 
 @pytest.mark.parametrize("input_data_type", [InputDataType.CSV, InputDataType.PARQUET])
 @pytest.mark.parametrize("file_or_dir", ["file", "dir"])
-def test_create_documents_from_dataframe_complex(tmp_path: Path, input_data_type, file_or_dir: str):
+def test_create_documents_from_dataframe_complex(
+    tmp_path: Path, input_data_type, file_or_dir: str
+):
     # save a test parquet file
     simple_docs = [
-        {"content": "text 1", "attr1": 1, "attr2": "foo", "date_created": "20251217T000000Z"},
-        {"content": "text 2truncateme", "attr1": 2, "attr2": "bar", "date_created": "20240101T000000Z"}
+        {
+            "content": "text 1",
+            "attr1": 1,
+            "attr2": "foo",
+            "date_created": "20251217T000000Z",
+        },
+        {
+            "content": "text 2truncateme",
+            "attr1": 2,
+            "attr2": "bar",
+            "date_created": "20240101T000000Z",
+        },
     ]
 
     if file_or_dir == "file":
@@ -100,20 +122,30 @@ def test_create_documents_from_dataframe_complex(tmp_path: Path, input_data_type
             _save_input_docs(tmp_path / f"doc_{idx}", [doc], input_data_type)
         input_path = tmp_path
 
-    docs = create_documents(str(input_path), input_type=input_data_type, text_tag="content", metadata_tags=["attr1", "date_created"], max_text_length=6)
+    docs = create_documents(
+        str(input_path),
+        input_type=input_data_type,
+        text_tag="content",
+        metadata_tags=["attr1", "date_created"],
+        max_text_length=6,
+    )
     assert len(docs) == 2
 
     # verify doc title and contents
     docs_sorted_by_title = sorted(docs, key=lambda d: (d.title, d.text))
     assert len(docs_sorted_by_title[0].id) > 0
-    assert docs_sorted_by_title[0].title.endswith("doc" if file_or_dir == "file" else "doc_0")
+    assert docs_sorted_by_title[0].title.endswith(
+        "doc" if file_or_dir == "file" else "doc_0"
+    )
     assert docs_sorted_by_title[0].text == "text 1"
     assert docs_sorted_by_title[0].type == str(input_data_type)
     assert docs_sorted_by_title[0].attributes["date_created"] == "20251217T000000Z"
     assert docs_sorted_by_title[0].attributes["attr1"] == 1
     assert "attr2" not in docs_sorted_by_title[0].attributes
     assert len(docs_sorted_by_title[1].id) > 0
-    assert docs_sorted_by_title[1].title.endswith("doc" if file_or_dir == "file" else "doc_1")
+    assert docs_sorted_by_title[1].title.endswith(
+        "doc" if file_or_dir == "file" else "doc_1"
+    )
     assert docs_sorted_by_title[1].text == "text 2"
     assert docs_sorted_by_title[1].type == str(input_data_type)
     assert docs_sorted_by_title[1].attributes["date_created"] == "20240101T000000Z"
@@ -123,10 +155,7 @@ def test_create_documents_from_dataframe_complex(tmp_path: Path, input_data_type
 
 @pytest.mark.parametrize("file_or_dir", ["file", "dir"])
 def test_create_documents_json_simple(tmp_path: Path, file_or_dir: str):
-    simple_docs = [
-        {"text": "text 1"},
-        {"text": "text 2"}
-    ]
+    simple_docs = [{"text": "text 1"}, {"text": "text 2"}]
 
     if file_or_dir == "file":
         input_path = tmp_path / "doc.json"
@@ -154,13 +183,23 @@ def test_create_documents_json_complex(tmp_path: Path, file_or_dir: str):
         input_path = tmp_path / "doc.json"
         input_path.write_text(
             '{"content": "text 1 truncateme", "attr1": 1, "attr2": "foo", "date_created": "20251217T000000Z"}',
-            encoding="utf-8"
+            encoding="utf-8",
         )
         expected_count = 1
     else:
         docs_data = [
-            {"content": "text 1 truncateme", "attr1": 1, "attr2": "foo", "date_created": "20251217T000000Z"},
-            {"content": "text 2 truncateme", "attr1": 2, "attr2": "bar", "date_created": "20240101T000000Z"},
+            {
+                "content": "text 1 truncateme",
+                "attr1": 1,
+                "attr2": "foo",
+                "date_created": "20251217T000000Z",
+            },
+            {
+                "content": "text 2 truncateme",
+                "attr1": 2,
+                "attr2": "bar",
+                "date_created": "20240101T000000Z",
+            },
         ]
         for idx, doc in enumerate(docs_data):
             file_path = tmp_path / f"doc_{idx}.json"
@@ -173,7 +212,7 @@ def test_create_documents_json_complex(tmp_path: Path, file_or_dir: str):
         input_type=InputDataType.JSON,
         text_tag="content",
         metadata_tags=["attr1", "date_created"],
-        max_text_length=6
+        max_text_length=6,
     )
     assert len(docs) == expected_count
 
@@ -191,15 +230,12 @@ def test_create_documents_json_complex(tmp_path: Path, file_or_dir: str):
         assert {d.short_id for d in docs} == {"0", "1"}
 
 
-
 def test_create_documents_text_max_length(tmp_path: Path):
     file = tmp_path / "text_doc.txt"
     file.write_text("hello world truncate this", encoding="utf-8")
 
     docs = create_documents(
-        input_path=str(file),
-        input_type=InputDataType.TEXT,
-        max_text_length=11
+        input_path=str(file), input_type=InputDataType.TEXT, max_text_length=11
     )
     assert len(docs) == 1
     assert docs[0].text == "hello world"
@@ -244,7 +280,9 @@ def test_create_save_and_load_documents(tmp_path: Path, output_dir_exists: bool)
 
     loaded_docs = load_documents(docs_df, attributes_cols=["date_created"])
     assert len(loaded_docs) == 2
-    for original, loaded in zip(sorted(docs, key=lambda d: d.id), sorted(loaded_docs, key=lambda d: d.id)):
+    for original, loaded in zip(
+        sorted(docs, key=lambda d: d.id), sorted(loaded_docs, key=lambda d: d.id)
+    ):
         assert original.id == loaded.id
         assert original.short_id == loaded.short_id
         assert original.title == loaded.title
@@ -255,7 +293,7 @@ def test_create_save_and_load_documents(tmp_path: Path, output_dir_exists: bool)
 
 @pytest.mark.parametrize("file_or_dir", ["file", "dir"])
 def test_create_documents_unsupported_input_type(tmp_path: Path, file_or_dir: str):
-    input_file = (tmp_path / "text_doc_1.txt")
+    input_file = tmp_path / "text_doc_1.txt"
     input_file.write_text("doc 1", encoding="utf-8")
     with pytest.raises(ValueError):
         if file_or_dir == "file":
