@@ -1,6 +1,6 @@
 # Copyright (c) Microsoft Corporation.
 # Licensed under the MIT License.
-import json  # noqa: I001
+import json
 from pathlib import Path
 from typing import Any
 
@@ -11,8 +11,8 @@ import benchmark_qed.config.defaults as defs
 from benchmark_qed.autod.data_model.document import Document
 from benchmark_qed.autod.io.document import (
     create_documents,
-    save_documents,
     load_documents,
+    save_documents,
 )
 from benchmark_qed.autod.io.enums import InputDataType
 
