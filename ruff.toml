@@ -95,3 +95,6 @@ builtins-ignorelist = ["input", "id", "bytes"]
 
 [lint.pydocstyle]
 convention = "numpy"
+
+[lint.flake8-copyright]
+notice-rgx = "(?i)Copyright \\(C\\) (\\d{4} )?Microsoft Corporation"

@@ -55,3 +55,7 @@ jobs:
       - name: benchmark-qed - Check
         run: |
           uv run poe check
+
+      - name: benchmark-qed - Test
+        run: |
+          uv run poe test
