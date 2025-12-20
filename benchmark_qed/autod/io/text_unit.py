@@ -33,11 +33,13 @@ async def create_text_units(
 
         # append document attributes to each chunk
         if document.attributes is not None and metadata_tags is not None:
-            metadata = "\n".join([
-                f"{key}: {document.attributes[key]}"
-                for key in metadata_tags
-                if key in document.attributes
-            ])
+            metadata = "\n".join(
+                [
+                    f"{key}: {document.attributes[key]}"
+                    for key in metadata_tags
+                    if key in document.attributes
+                ]
+            )
         else:
             metadata = ""
 

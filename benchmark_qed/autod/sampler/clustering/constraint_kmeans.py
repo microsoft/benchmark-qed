@@ -43,11 +43,13 @@ class ConstraintKmeansClustering(BaseClustering):
             num_clusters = 1
 
         # cluster using kmeans
-        embeddings = np.array([
-            unit.text_embedding
-            for unit in text_units
-            if unit.text_embedding is not None
-        ])
+        embeddings = np.array(
+            [
+                unit.text_embedding
+                for unit in text_units
+                if unit.text_embedding is not None
+            ]
+        )
         if len(embeddings) == 0:
             msg = "No valid text embeddings found in the text units."
             raise ValueError(msg)

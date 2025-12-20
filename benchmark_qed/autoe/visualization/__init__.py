@@ -23,20 +23,19 @@ from benchmark_qed.autoe.visualization.utils import (
 )
 
 __all__ = [
-    # Assertion-based visualizations
-    "plot_assertion_accuracy_by_rag_method",
-    "plot_assertion_score_distribution", 
-    "prepare_assertion_summary_data",
-    "get_available_question_sets",
-    "get_available_rag_methods",
-    
-    # Utilities
-    "setup_plot_style",
-    "get_color_palette", 
-    "save_figure",
+    "add_value_labels",
+    "calculate_bar_width",
     "format_method_name",
     "format_question_set_name",
-    "add_value_labels",
+    "get_available_question_sets",
+    "get_available_rag_methods",
+    "get_color_palette",
+    # Assertion-based visualizations
+    "plot_assertion_accuracy_by_rag_method",
+    "plot_assertion_score_distribution",
+    "prepare_assertion_summary_data",
+    "save_figure",
     "setup_grid",
-    "calculate_bar_width",
+    # Utilities
+    "setup_plot_style",
 ]

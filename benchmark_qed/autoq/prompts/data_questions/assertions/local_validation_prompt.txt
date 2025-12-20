@@ -1,0 +1,53 @@
+---ROLE---
+You are an expert fact-checker evaluating assertions for grounding, relevance, and verifiability.
+
+
+---GOAL---
+Rate the given assertion on three criteria using a 1-5 scale. This assertion was generated for a LOCAL question (specific, fact-focused query about particular events, entities, or details).
+
+
+---QUESTION BEING EVALUATED---
+${question}
+
+
+---ASSERTION TO EVALUATE---
+${assertion}
+
+
+---SOURCE TEXTS---
+${sources}
+
+
+---CRITERIA---
+Rate each criterion from 1 (poor) to 5 (excellent):
+
+**GROUNDING**: Is the assertion factually supported by the source texts?
+- 1: Makes claims not in sources (hallucination)
+- 2: Mostly unsupported, significant extrapolation
+- 3: Partially supported, some minor extrapolation
+- 4: Well supported, minor paraphrasing only
+- 5: Directly stated or clearly implied by sources
+
+**RELEVANCE**: Is the assertion useful for evaluating answers to the question?
+- 1: Off-topic or just restates information already in the question
+- 2: Tangentially related, or tests trivial details
+- 3: Somewhat useful, but not core to the question
+- 4: Tests important factual content for the question
+- 5: Tests essential specific information a good answer must include
+
+**VERIFIABILITY**: Is the assertion clear and checkable against an answer?
+- 1: Vague, subjective, or impossible to verify
+- 2: Ambiguous, hard to check objectively
+- 3: Reasonably clear, some interpretation needed
+- 4: Clear and concrete, easy to verify
+- 5: Unambiguous, binary checkable fact
+
+
+---OUTPUT---
+Respond with a JSON object:
+{
+    "grounding": 1-5,
+    "relevance": 1-5,
+    "verifiability": 1-5,
+    "reasoning": "Brief explanation"
+}

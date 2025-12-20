@@ -47,6 +47,13 @@ Follow these steps to generate synthetic queries using AutoQ:
     ```
     This will process your input data and save the generated queries in the `output` directory.
 
+    By default, AutoQ also generates **assertions** for data-driven queries. Assertions are testable factual statements that can be used to evaluate answer accuracy. You can configure assertion generation in `settings.yaml`:
+    ```yaml
+    assertions:
+      max_assertions: 20  # Set to 0 to disable, or null for unlimited
+      enable_validation: true  # Enable to filter low-quality assertions (can be slow)
+    ```
+
 ## Comparing RAG answer pairs
 
 Follow these steps to compare RAG answer pairs using the pairwise scoring pipeline:

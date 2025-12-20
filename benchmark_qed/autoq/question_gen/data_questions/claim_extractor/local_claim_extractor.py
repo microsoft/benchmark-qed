@@ -141,9 +141,11 @@ def _build_context(question_references: list[TextUnit]) -> tuple[str, pd.DataFra
 
     context_records = []
     for index, reference in enumerate(question_references):
-        context_records.append({
-            "source_id": reference.short_id or str(index + 1),
-            "text": reference.text,
-        })
+        context_records.append(
+            {
+                "source_id": reference.short_id or str(index + 1),
+                "text": reference.text,
+            }
+        )
     context_df = pd.DataFrame(context_records)
     return context_df.to_csv(index=False), context_df

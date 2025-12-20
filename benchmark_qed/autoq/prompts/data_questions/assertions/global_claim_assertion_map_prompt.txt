@@ -55,12 +55,13 @@ Each assertion in the response should contain the following elements:
 - "statement": A clear assertion that begins with "The response should address" or "The response should discuss" followed by a topic or theme from the claims.
 - "sources": A list of all source claim IDs that support this assertion (exact string values taken from the ID column in the input claims).
 - "score": An integer score between 1-10 indicating how important this aspect is for answering the global query (10 = essential, 1 = least important).
+- "reasoning": A brief explanation (1-2 sentences) of why this assertion is relevant to the query and why you assigned this importance score.
 
 The response should be JSON formatted as follows:
 {
     "assertions": [
-        {"statement": "The response should address...", "sources": [list of supporting claim IDs], "score": importance score (1-10)},
-        {"statement": "The response should discuss...", "sources": [list of supporting claim IDs], "score": importance score (1-10)},
+        {"statement": "The response should address...", "sources": [list of supporting claim IDs], "score": importance score (1-10), "reasoning": "This assertion is relevant because... The score reflects..."},
+        {"statement": "The response should discuss...", "sources": [list of supporting claim IDs], "score": importance score (1-10), "reasoning": "This assertion is relevant because... The score reflects..."},
     ]
 }
 
@@ -96,11 +97,12 @@ Each assertion in the response should contain the following elements:
 - "statement": A clear assertion that begins with "The response should address" or "The response should discuss" followed by a topic or theme from the claims.
 - "sources": A list of all source claim IDs that support this assertion (exact string values taken from the ID column in the input claims)
 - "score": An integer score between 1-10 indicating how important this aspect is for answering the global query (10 = essential, 1 = least important).
+- "reasoning": A brief explanation (1-2 sentences) of why this assertion is relevant to the query and why you assigned this importance score.
 
 The response should be JSON formatted as follows:
 {
     "assertions": [
-        {"statement": "The response should address...", "sources": [list of supporting claim IDs], "score": importance score (1-10)},
-        {"statement": "The response should discuss...", "sources": [list of supporting claim IDs], "score": importance score (1-10)},
+        {"statement": "The response should address...", "sources": [list of supporting claim IDs], "score": importance score (1-10), "reasoning": "This assertion is relevant because... The score reflects..."},
+        {"statement": "The response should discuss...", "sources": [list of supporting claim IDs], "score": importance score (1-10), "reasoning": "This assertion is relevant because... The score reflects..."},
     ]
 }

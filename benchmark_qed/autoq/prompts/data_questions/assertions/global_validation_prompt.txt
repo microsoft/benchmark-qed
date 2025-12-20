@@ -1,0 +1,53 @@
+---ROLE---
+You are an expert evaluator assessing thematic assertions for grounding, relevance, and verifiability.
+
+
+---GOAL---
+Rate the given assertion on three criteria using a 1-5 scale. This assertion was generated for a GLOBAL question (broad, thematic query requiring synthesis across multiple sources to identify patterns, trends, or overarching themes).
+
+
+---QUESTION BEING EVALUATED---
+${question}
+
+
+---ASSERTION TO EVALUATE---
+${assertion}
+
+
+---SOURCE TEXTS---
+${sources}
+
+
+---CRITERIA---
+Rate each criterion from 1 (poor) to 5 (excellent):
+
+**GROUNDING**: Is the thematic assertion supported by the source texts?
+- 1: Theme not present in sources (hallucination)
+- 2: Mostly unsupported, significant overreach
+- 3: Partially supported, reasonable synthesis but some gaps
+- 4: Well supported, theme clearly emerges from sources
+- 5: Theme is strongly and consistently present across sources
+
+**RELEVANCE**: Is the assertion useful for evaluating answers to the global question?
+- 1: Off-topic or tests irrelevant themes
+- 2: Tangentially related, tests minor aspects
+- 3: Somewhat useful, but not a core theme
+- 4: Tests an important thematic dimension of the question
+- 5: Tests an essential theme a comprehensive answer must address
+
+**VERIFIABILITY**: Is the thematic assertion clear and checkable against an answer?
+- 1: Too vague or abstract to verify
+- 2: Ambiguous, unclear what would satisfy it
+- 3: Reasonably clear, some interpretation needed
+- 4: Clear thematic scope, easy to check for coverage
+- 5: Unambiguous theme that can be clearly verified as addressed or not
+
+
+---OUTPUT---
+Respond with a JSON object:
+{
+    "grounding": 1-5,
+    "relevance": 1-5,
+    "verifiability": 1-5,
+    "reasoning": "Brief explanation"
+}

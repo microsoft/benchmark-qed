@@ -23,6 +23,7 @@ from benchmark_qed.autoq.prompts.data_questions import (
 from benchmark_qed.autoq.prompts.data_questions import (
     local_questions as data_local_prompts,
 )
+from benchmark_qed.config import defaults as defs
 from benchmark_qed.config.llm_config import LLMConfig
 from benchmark_qed.config.prompt_config import PromptConfig
 
@@ -35,6 +36,7 @@ AUTOQ_ACTIVITY_LOCAL_PROMPTS_PATH = Path(activity_local_prompts.__file__).parent
 AUTOQ_DATA_PROMPTS_PATH = Path(autoq_data_prompts.__file__).parent
 AUTOQ_DATA_GLOBAL_PROMPTS_PATH = Path(data_global_prompts.__file__).parent
 AUTOQ_DATA_LOCAL_PROMPTS_PATH = Path(data_local_prompts.__file__).parent
+AUTOQ_ASSERTIONS_PROMPTS_PATH = AUTOQ_DATA_PROMPTS_PATH / "assertions"
 
 
 class InputConfig(BaseModel):
@@ -49,13 +51,13 @@ class InputConfig(BaseModel):
         default=InputDataType.CSV, description="The type of the input data."
     )
     text_column: str = Field(
-        default="text", description="The column containing the text data."
+        default=defs.TEXT_COLUMN, description="The column containing the text data."
     )
     metadata_columns: list[str] | None = Field(
         default=None, description="The columns containing metadata information."
     )
     file_encoding: str = Field(
-        default="utf-8", description="The encoding of the input files."
+        default=defs.FILE_ENCODING, description="The encoding of the input files."
     )
 
 
@@ -63,12 +65,75 @@ class QuestionConfig(BaseModel):
     """Configuration for the question generation process."""
 
     num_questions: int = Field(
-        default=20,
+        default=defs.NUM_QUESTIONS,
         description="Number of questions to generate for each question class.",
     )
     oversample_factor: float = Field(
-        default=2.0,
+        default=defs.OVERSAMPLE_FACTOR,
         description="Factor by which to overgenerate candidate questions before filtering.",
+    )
+
+
+class AssertionConfig(BaseModel):
+    """Configuration for assertion generation."""
+
+    max_assertions: int | None = Field(
+        default=defs.MAX_ASSERTIONS,
+        description="Maximum number of assertions per question. Set to 0 to disable, or None for unlimited.",
+    )
+    enable_validation: bool = Field(
+        default=defs.ENABLE_ASSERTION_VALIDATION,
+        description="Whether to validate assertions against sources for quality filtering.",
+    )
+    min_validation_score: int = Field(
+        default=defs.MIN_ASSERTION_VALIDATION_SCORE,
+        description="Minimum score (1-5) for grounding, relevance, and verifiability criteria.",
+    )
+    batch_size: int = Field(
+        default=defs.ASSERTION_BATCH_SIZE,
+        description="Batch size for processing claims in global assertion generation.",
+    )
+    max_data_tokens: int = Field(
+        default=defs.ASSERTION_MAX_DATA_TOKENS,
+        description="Maximum input data tokens for the reduce step in global assertions.",
+    )
+
+
+class AssertionPromptConfig(BaseModel):
+    """Configuration for assertion generation prompts."""
+
+    local_assertion_gen_prompt: PromptConfig = Field(
+        default=PromptConfig(
+            prompt=AUTOQ_ASSERTIONS_PROMPTS_PATH
+            / "local_claim_assertion_gen_prompt.txt"
+        ),
+        description="Prompt for generating local assertions from claims.",
+    )
+    global_assertion_map_prompt: PromptConfig = Field(
+        default=PromptConfig(
+            prompt=AUTOQ_ASSERTIONS_PROMPTS_PATH
+            / "global_claim_assertion_map_prompt.txt"
+        ),
+        description="Prompt for the map step in global assertion generation.",
+    )
+    global_assertion_reduce_prompt: PromptConfig = Field(
+        default=PromptConfig(
+            prompt=AUTOQ_ASSERTIONS_PROMPTS_PATH
+            / "global_claim_assertion_reduce_prompt.txt"
+        ),
+        description="Prompt for the reduce step in global assertion generation.",
+    )
+    local_validation_prompt: PromptConfig = Field(
+        default=PromptConfig(
+            prompt=AUTOQ_ASSERTIONS_PROMPTS_PATH / "local_validation_prompt.txt"
+        ),
+        description="Prompt for validating local assertions (fact-focused) against sources.",
+    )
+    global_validation_prompt: PromptConfig = Field(
+        default=PromptConfig(
+            prompt=AUTOQ_ASSERTIONS_PROMPTS_PATH / "global_validation_prompt.txt"
+        ),
+        description="Prompt for validating global assertions (theme-focused) against sources.",
     )
 
 
@@ -76,15 +141,15 @@ class EncodingModelConfig(BaseModel):
     """Configuration for the encoding model used in question generation."""
 
     model_name: str = Field(
-        default="o200k_base",
+        default=defs.ENCODING_MODEL,
         description="Name of the encoding model to use for chunking documents.",
     )
     chunk_size: int = Field(
-        default=600,
+        default=defs.CHUNK_SIZE,
         description="Size of each text chunk to be processed by the encoding model.",
     )
     chunk_overlap: int = Field(
-        default=100,
+        default=defs.CHUNK_OVERLAP,
         description="Overlap size between consecutive text chunks.",
     )
 
@@ -93,15 +158,15 @@ class SamplingConfig(BaseModel):
     """Configuration for data sampling in question generation."""
 
     num_clusters: int = Field(
-        default=50,
+        default=defs.NUM_CLUSTERS,
         description="Number of clusters to sample from the dataset.",
     )
     num_samples_per_cluster: int = Field(
-        default=10,
+        default=defs.NUM_SAMPLES_PER_CLUSTER,
         description="Number of samples to take from each cluster.",
     )
     random_seed: int = Field(
-        default=42,
+        default=defs.RANDOM_SEED,
         description="Random seed for reproducibility of sampling.",
     )
 
@@ -110,15 +175,15 @@ class ActivityQuestionConfig(QuestionConfig):
     """Configuration for generating activity questions."""
 
     num_personas: int = Field(
-        default=5,
+        default=defs.NUM_PERSONAS,
         description="Number of personas to generate questions for.",
     )
     num_tasks_per_persona: int = Field(
-        default=5,
+        default=defs.NUM_TASKS_PER_PERSONA,
         description="Number of tasks to generate for each persona.",
     )
     num_entities_per_task: int = Field(
-        default=10,
+        default=defs.NUM_ENTITIES_PER_TASK,
         description="Number of entities to include in each task.",
     )
 
@@ -346,7 +411,7 @@ class QuestionGenerationConfig(BaseModel):
     )
 
     concurrent_requests: int = Field(
-        default=8,
+        default=defs.CONCURRENT_REQUESTS,
         description="Control for request concurrency. Adjust this based on your model capacity.",
     )
 
@@ -378,4 +443,14 @@ class QuestionGenerationConfig(BaseModel):
     data_questions_prompt_config: DataQuestionsPromptConfig = Field(
         default_factory=DataQuestionsPromptConfig,
         description="Configuration for data-related prompts.",
+    )
+
+    assertions: AssertionConfig = Field(
+        default_factory=AssertionConfig,
+        description="Configuration for assertion generation.",
+    )
+
+    assertion_prompts: AssertionPromptConfig = Field(
+        default_factory=AssertionPromptConfig,
+        description="Configuration for assertion generation prompts.",
     )

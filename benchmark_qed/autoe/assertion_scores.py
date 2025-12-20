@@ -50,8 +50,8 @@ def get_assertion_scores(
         answers (pd.DataFrame): DataFrame containing answers with columns 'question', 'answer'.
         assertions (pd.DataFrame): DataFrame containing assertions with column 'assertion'.
         trials (int): Number of trials to run for each assertion.
-        top_k (int | None): If specified, only evaluate the top-k assertions per question 
-                            (ranked by rank if available, where lower rank = higher importance, 
+        top_k (int | None): If specified, only evaluate the top-k assertions per question
+                            (ranked by rank if available, where lower rank = higher importance,
                             otherwise uses first k assertions).
         assessment_system_prompt (Template | None): Optional system prompt template for the assessment.
         assessment_user_prompt (Template | None): Optional user prompt template for the assessment.
@@ -59,8 +59,9 @@ def get_assertion_scores(
         question_id_key (str): Column name for question ID.
         question_text_key (str): Column name for question text.
         answer_text_key (str): Column name for answer text.
-        
-    Returns:
+
+    Returns
+    -------
         pd.DataFrame: Results with assertion scores and metadata.
     """
     pairs = (
@@ -80,33 +81,27 @@ def get_assertion_scores(
         )
     )
     pairs = pairs[["question_id", "question_text", "answer_text", "assertion"]]
-    
+
     # Apply top-k filtering if specified
     if top_k is not None and top_k > 0:
         # Check if assertions have a 'rank' column for ranking
-        if 'rank' in assertions.columns:
+        if "rank" in assertions.columns:
             # Rank by rank (ascending - lower rank = higher importance) and take top-k per question
             pairs_with_rank = pairs.merge(
-                assertions[['assertion', 'rank']],
-                on='assertion',
-                how='left'
+                assertions[["assertion", "rank"]], on="assertion", how="left"
             )
             pairs = (
-                pairs_with_rank
-                .sort_values(['question_id', 'rank'], ascending=[True, True])
-                .groupby('question_id')
+                pairs_with_rank.sort_values(
+                    ["question_id", "rank"], ascending=[True, True]
+                )
+                .groupby("question_id")
                 .head(top_k)
-                .drop(columns=['rank'])
+                .drop(columns=["rank"])
                 .reset_index(drop=True)
             )
         else:
             # If no rank column, just take first k assertions per question
-            pairs = (
-                pairs
-                .groupby('question_id')
-                .head(top_k)
-                .reset_index(drop=True)
-            )
+            pairs = pairs.groupby("question_id").head(top_k).reset_index(drop=True)
 
     with Progress() as progress:
 
@@ -200,42 +195,41 @@ async def evaluate_assertion(
 
 
 def load_and_normalize_assertions(
-    input_dir: str, 
-    question_set: str, 
-    assertions_filename_template: str = "{question_set}_assertions.json"
+    input_dir: str,
+    question_set: str,
+    assertions_filename_template: str = "{question_set}_assertions.json",
 ) -> pd.DataFrame:
     """
     Load assertions from JSON file and normalize nested dictionaries.
-    
+
     Args:
         input_dir: Directory containing assertion files
         question_set: Name of the question set
         assertions_filename_template: Template for assertion filename (default: "{question_set}_assertions.json")
-        
-    Returns:
+
+    Returns
+    -------
         DataFrame with normalized assertion data containing question_id, question_text, assertion, rank
     """
     assertions_file = assertions_filename_template.format(question_set=question_set)
     assertions_raw = pd.read_json(f"{input_dir}/{assertions_file}")
-    
+
     # Explode assertions and normalize the nested dictionaries
-    assertions = (
-        assertions_raw
-        .explode("assertions")
-        .reset_index(drop=True)
-    )
-    
+    assertions = assertions_raw.explode("assertions").reset_index(drop=True)
+
     # Normalize the assertion dictionaries into separate columns
-    assertion_normalized = pd.json_normalize(assertions['assertions'])
-    assertions = pd.concat([
-        assertions.drop('assertions', axis=1),
-        assertion_normalized[['statement', 'rank']]  # Keep only statement and rank
-    ], axis=1)
-    
+    assertion_normalized = pd.json_normalize(assertions["assertions"])
+    assertions = pd.concat(
+        [
+            assertions.drop("assertions", axis=1),
+            assertion_normalized[["statement", "rank"]],  # Keep only statement and rank
+        ],
+        axis=1,
+    )
+
     # Rename the statement column to assertion for compatibility
-    assertions = assertions.rename(columns={'statement': 'assertion'})
-    
-    return assertions
+    return assertions.rename(columns={"statement": "assertion"})
+
 
 
 def evaluate_rag_method(
@@ -253,7 +247,7 @@ def evaluate_rag_method(
 ) -> dict[str, Any] | None:
     """
     Evaluate a single RAG method against assertions for a question set.
-    
+
     Args:
         llm_client: LLM client for evaluation
         llm_config: LLM configuration
@@ -266,20 +260,19 @@ def evaluate_rag_method(
         top_k_assertions: Number of top assertions to evaluate (None for all)
         pass_threshold: Threshold for assertion pass/fail
         answers_path_template: Template for answers file path (default: "{input_dir}/{generated_rag}/{question_set}.json")
-        
-    Returns:
+
+    Returns
+    -------
         Dictionary with evaluation results or None if evaluation failed
     """
     question_set_output_dir = output_dir / question_set
     if not question_set_output_dir.exists():
         question_set_output_dir.mkdir(parents=True)
-    
+
     try:
         # Load answers for this RAG method and question set
         answers_path = answers_path_template.format(
-            input_dir=input_dir, 
-            generated_rag=generated_rag, 
-            question_set=question_set
+            input_dir=input_dir, generated_rag=generated_rag, question_set=question_set
         )
         answers = pd.read_json(answers_path)
 
@@ -297,12 +290,18 @@ def evaluate_rag_method(
         )
 
         # Save detailed scores for this RAG method and question set
-        assertion_score.to_csv(question_set_output_dir / f"{generated_rag}_assertion_scores.csv", index=False)
+        assertion_score.to_csv(
+            question_set_output_dir / f"{generated_rag}_assertion_scores.csv",
+            index=False,
+        )
 
         # Calculate summary statistics
         summary_by_assertion = (
             assertion_score.groupby(["question", "assertion"])
-            .agg(score=("score", lambda x: int(x.mean() > pass_threshold)), scores=("score", list))
+            .agg(
+                score=("score", lambda x: int(x.mean() > pass_threshold)),
+                scores=("score", list),
+            )
             .reset_index()
         )
 
@@ -314,13 +313,15 @@ def evaluate_rag_method(
             )
             .reset_index()
         )
-        
+
         # Calculate overall accuracy score
         total_success = summary_by_question["success"].sum()
         total_fail = summary_by_question["fail"].sum()
         total_assertions = total_success + total_fail
-        overall_accuracy = total_success / total_assertions if total_assertions > 0 else 0.0
-        
+        overall_accuracy = (
+            total_success / total_assertions if total_assertions > 0 else 0.0
+        )
+
         # Calculate per-assertion statistics
         summary_by_assertion["score_mean"] = summary_by_assertion["scores"].apply(
             lambda x: np.mean(x) if len(x) > 0 else 0.0
@@ -331,23 +332,37 @@ def evaluate_rag_method(
         summary_by_assertion = summary_by_assertion.drop(columns=["scores"])
 
         # Save detailed summary for this RAG method and question set
-        summary_by_question.to_csv(question_set_output_dir / f"{generated_rag}_summary_by_question.csv", index=False)
-        summary_by_assertion.to_csv(question_set_output_dir / f"{generated_rag}_summary_by_assertion.csv", index=False)
+        summary_by_question.to_csv(
+            question_set_output_dir / f"{generated_rag}_summary_by_question.csv",
+            index=False,
+        )
+        summary_by_assertion.to_csv(
+            question_set_output_dir / f"{generated_rag}_summary_by_assertion.csv",
+            index=False,
+        )
 
         # Report failed assertions for this method
         failed_assertions: pd.DataFrame = cast(
             pd.DataFrame, summary_by_assertion[summary_by_assertion["score"] == 0]
         )
-        
+
         if len(failed_assertions) > 0:
-            rich_print(f"    [bold red]{generated_rag} ({question_set}): {len(failed_assertions)} assertions failed[/bold red]")
+            rich_print(
+                f"    [bold red]{generated_rag} ({question_set}): {len(failed_assertions)} assertions failed[/bold red]"
+            )
         else:
-            rich_print(f"    [bold green]{generated_rag} ({question_set}): All assertions passed[/bold green]")
-        
-        rich_print(f"    {generated_rag} ({question_set}) - Overall accuracy: {overall_accuracy:.3f} ({total_success}/{total_assertions})")
+            rich_print(
+                f"    [bold green]{generated_rag} ({question_set}): All assertions passed[/bold green]"
+            )
+
+        rich_print(
+            f"    {generated_rag} ({question_set}) - Overall accuracy: {overall_accuracy:.3f} ({total_success}/{total_assertions})"
+        )
         if top_k_assertions is not None:
-            rich_print(f"    [dim]Using top-{top_k_assertions} assertions per question[/dim]")
-        
+            rich_print(
+                f"    [dim]Using top-{top_k_assertions} assertions per question[/dim]"
+            )
+
         # Return results for summary
         return {
             "question_set": question_set,
@@ -357,14 +372,18 @@ def evaluate_rag_method(
             "failed_assertions": total_fail,
             "overall_accuracy": overall_accuracy,
             "total_questions": len(summary_by_question),
-            "top_k_used": top_k_assertions if top_k_assertions is not None else "all"
+            "top_k_used": top_k_assertions if top_k_assertions is not None else "all",
         }
-        
+
     except FileNotFoundError as e:
-        rich_print(f"    [bold yellow]Warning: Could not find answers file at {answers_path}: {e}[/bold yellow]")
+        rich_print(
+            f"    [bold yellow]Warning: Could not find answers file at {answers_path}: {e}[/bold yellow]"
+        )
         return None
-    except Exception as e:
-        rich_print(f"    [bold red]Error processing {generated_rag}/{question_set}: {e}[/bold red]")
+    except (OSError, ValueError, KeyError) as e:
+        rich_print(
+            f"    [bold red]Error processing {generated_rag}/{question_set}: {e}[/bold red]"
+        )
         return None
 
 
@@ -383,7 +402,7 @@ def run_assertion_evaluation(
 ) -> pd.DataFrame:
     """
     Run assertion-based evaluation for multiple question sets and RAG methods.
-    
+
     Args:
         llm_client: LLM client for evaluation
         llm_config: LLM configuration
@@ -396,8 +415,9 @@ def run_assertion_evaluation(
         pass_threshold: Threshold for assertion pass/fail
         assertions_filename_template: Template for assertion filename (default: "{question_set}_assertions.json")
         answers_path_template: Template for answers file path (default: "{input_dir}/{generated_rag}/{question_set}.json")
-        
-    Returns:
+
+    Returns
+    -------
         DataFrame with overall results summary
     """
     overall_results = []
@@ -405,24 +425,22 @@ def run_assertion_evaluation(
     # Loop through each question set
     for question_set in question_sets:
         rich_print(f"Processing question set: {question_set}")
-        
+
         # Load and normalize assertions
         assertions = load_and_normalize_assertions(
-            input_dir, 
-            question_set, 
-            assertions_filename_template
+            input_dir, question_set, assertions_filename_template
         )
-        
+
         # Display assertion filtering info
         if top_k_assertions is not None:
             rich_print(f"  Filtering to top {top_k_assertions} assertions per question")
         else:
-            rich_print(f"  Using all assertions (no filtering)")
-        
+            rich_print("  Using all assertions (no filtering)")
+
         # Loop through each RAG method for this question set
         for generated_rag in generated_rags:
             rich_print(f"  Processing {generated_rag} for {question_set}")
-            
+
             result = evaluate_rag_method(
                 llm_client=llm_client,
                 llm_config=llm_config,
@@ -436,14 +454,18 @@ def run_assertion_evaluation(
                 pass_threshold=pass_threshold,
                 answers_path_template=answers_path_template,
             )
-            
+
             if result is not None:
                 overall_results.append(result)
 
     # Create and save overall summary
     overall_summary_df = pd.DataFrame(overall_results)
-    overall_summary_df = overall_summary_df.sort_values(["question_set", "overall_accuracy"], ascending=[True, False])
-    overall_summary_df.to_csv(output_dir / "assertion_scores_overall_summary.csv", index=False)
+    overall_summary_df = overall_summary_df.sort_values(
+        ["question_set", "overall_accuracy"], ascending=[True, False]
+    )
+    overall_summary_df.to_csv(
+        output_dir / "assertion_scores_overall_summary.csv", index=False
+    )
 
     # Display summary table
     print_df(
@@ -452,11 +474,13 @@ def run_assertion_evaluation(
     )
 
     # Also create a pivot table for easier comparison
-    pivot_summary = overall_summary_df.pivot(index="rag_method", columns="question_set", values="overall_accuracy")
+    pivot_summary = overall_summary_df.pivot_table(
+        index="rag_method", columns="question_set", values="overall_accuracy"
+    )
     pivot_summary.to_csv(output_dir / "assertion_scores_pivot_summary.csv")
     print_df(
         pivot_summary.reset_index(),
         "Assertion Accuracy Comparison (Pivot View)",
     )
-    
+
     return overall_summary_df

@@ -69,12 +69,13 @@ Each consolidated assertion should contain the following elements:
 - "statement": A high-level thematic assertion that begins with "The response should address" or "The response should discuss" followed by a broad thematic area.
 - "sources": A list of the original assertions IDs that were consolidated into this thematic assertion.
 - "score": An integer score between 1-10 indicating the importance of this thematic area (typically high since these represent consolidated important themes).
+- "reasoning": A brief explanation (1-2 sentences) of why this thematic assertion is important for the query and why you assigned this importance score.
 
 The response should be JSON formatted as follows:
 {
     "assertions": [
-        {"statement": "The response should address...", "sources": [list of original assertion IDs], "score": importance score (1-10)},
-        {"statement": "The response should discuss...", "sources": [list of original assertion IDs], "score": importance score (1-10)}
+        {"statement": "The response should address...", "sources": [list of original assertion IDs], "score": importance score (1-10), "reasoning": "This thematic assertion is important because... The score reflects..."},
+        {"statement": "The response should discuss...", "sources": [list of original assertion IDs], "score": importance score (1-10), "reasoning": "This thematic assertion is important because... The score reflects..."}
     ]
 }
 
@@ -116,11 +117,12 @@ Each consolidated assertion should contain the following elements:
 - "statement": A high-level thematic assertion that begins with "The response should address" or "The response should discuss" followed by a broad thematic area.
 - "sources": A list of the original assertions IDs that were consolidated into this thematic assertion.
 - "score": An integer score between 1-10 indicating the importance of this thematic area (typically high since these represent consolidated important themes).
+- "reasoning": A brief explanation (1-2 sentences) of why this thematic assertion is important for the query and why you assigned this importance score.
 
 The response should be JSON formatted as follows:
 {
     "assertions": [
-        {"statement": "The response should address...", "sources": ["original assertion 1", "original assertion 2", ...], "score": importance score (1-10)},
-        {"statement": "The response should discuss...", "sources": ["original assertion 1", "original assertion 2", ...], "score": importance score (1-10)}
+        {"statement": "The response should address...", "sources": ["original assertion 1", "original assertion 2", ...], "score": importance score (1-10), "reasoning": "This thematic assertion is important because... The score reflects..."},
+        {"statement": "The response should discuss...", "sources": ["original assertion 1", "original assertion 2", ...], "score": importance score (1-10), "reasoning": "This thematic assertion is important because... The score reflects..."}
     ]
 }

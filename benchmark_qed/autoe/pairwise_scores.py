@@ -246,13 +246,15 @@ def analyze_criteria(raw_scores: pd.DataFrame, alpha: float = 0.05) -> pd.DataFr
     others = raw_scores["other_name"].unique()
     base_names = raw_scores["base_name"].unique()
 
-    scores_group = raw_scores.groupby([
-        "question",
-        "criteria",
-        "question_set",
-        "base_name",
-        "other_name",
-    ])
+    scores_group = raw_scores.groupby(
+        [
+            "question",
+            "criteria",
+            "question_set",
+            "base_name",
+            "other_name",
+        ]
+    )
 
     results = [
         scores_group.agg(
@@ -339,11 +341,13 @@ def analyze_criteria(raw_scores: pd.DataFrame, alpha: float = 0.05) -> pd.DataFr
         ),
         include_groups=False,
     )
-    corrected_significance = corrected_significance.explode([
-        "corrected_p_values",
-        "base_name",
-        "other_name",
-    ]).reset_index()
+    corrected_significance = corrected_significance.explode(
+        [
+            "corrected_p_values",
+            "base_name",
+            "other_name",
+        ]
+    ).reset_index()
 
     final_result = final_result.merge(corrected_significance)
     final_result = final_result.rename(

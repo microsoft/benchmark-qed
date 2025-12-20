@@ -45,17 +45,21 @@ class DataGlobalClaimExtractor:
         mapped_question_references = [
             self.local_questions[ref] for ref in question_references
         ]
-        all_claim_results = await asyncio.gather(*[
-            self.aextract_claim_subquery(question_text, sub_query)
-            for sub_query in mapped_question_references
-        ])
+        all_claim_results = await asyncio.gather(
+            *[
+                self.aextract_claim_subquery(question_text, sub_query)
+                for sub_query in mapped_question_references
+            ]
+        )
 
         # compute average reference coverage and total number of relevant references
         reference_coverage = float(
-            np.mean([
-                sub_query_result.reference_coverage
-                for sub_query_result in all_claim_results
-            ])
+            np.mean(
+                [
+                    sub_query_result.reference_coverage
+                    for sub_query_result in all_claim_results
+                ]
+            )
         )
         relevant_references_count = sum(
             sub_query_result.relevant_references_count

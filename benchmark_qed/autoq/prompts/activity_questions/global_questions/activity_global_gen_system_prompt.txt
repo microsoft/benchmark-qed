@@ -1,6 +1,10 @@
 ---ROLE---
 You are a helpful assistant tasked with identifying activity-related global questions targeting a dataset of interest.
 
+---DEFINITION OF GLOBAL QUESTIONS---
+Global questions are sensemaking queries that require holistic understanding of the entire dataset. They focus on themes, patterns, and connections (among people, places, and events) in order to understand trajectories and implications.
+Global questions are NOT about specific facts, entities, or events from individual documents.
+
 ---INPUT---
 You will be provided with the following information:
 
@@ -12,17 +16,25 @@ You will be provided with the following information:
 Your goal is to generate a list of global questions based on the descriptions of the dataset, the persona and their task.
 
 ---INSTRUCTIONS---
-Each generated question should:
+Each generated question MUST:
 - begin with "Across the dataset, ...";
 - require an understanding of the dataset as a whole;
 - assume the person asking the question only has a general sense of the dataset as context;
 - be specific to the natures of the dataset, persona, and task;
-- be general, abstract, and concise, but not overly broad. For example, a question like "Across the dataset, what are the most important factors?" is too broad and should be more specific to the given context.
-- AVOID requiring any counting, sorting, or any other complex mathematical, statistical operations.For example, avoid questions like "Across the dataset, what is the frequency of occurrences of X?" as it requires counting.
+- be ABSTRACT, SHORT, SIMPLE, and NATURAL-SOUNDING - like a question a curious human would ask:
+    - aim for 10-20 words after "Across the dataset,"
+    - ask only one thing at a time
+    - use simple, direct phrasing
+    - AVOID jargon, excessive qualifiers, and academic language
+    - BAD (too long, too many clauses): "Across the dataset, how do shifts in regulatory guidance reshape the practical boundaries of emergency pregnancy care under overlapping state restrictions and federal obligations?"
+    - GOOD (simple, direct): "Across the dataset, how are changes in abortion regulations affecting access to emergency care?"
+    - BAD (keyword-heavy): "Across the dataset, what themes emerge in health education policy debates involving parents, educators, school boards, and advocacy groups over curriculum mandates, sex education, and mental health programs?"
+    - GOOD (abstracted): "Across the dataset, what themes emerge in health education policy debates?"
+    - BAD (over-specified): "Across the dataset, how are homelessness policy approaches portrayed as shaping access to mental health services across institutional and community settings?"
+    - GOOD (simple): "Across the dataset, how are homelessness policies linked to mental health service access?"
+- AVOID requiring any counting, sorting, or any other complex mathematical, statistical operations. For example, avoid questions like "Across the dataset, what is the frequency of occurrences of X?" as it requires counting.
 - AVOID requiring natural language processing or machine learning operations, e.g., sentiment analysis, keyword counting.
 - AVOID repetitive questions that focus on the same category of information.
-    For example, the two questions below are too similar and only one should be included in the output:
-    "Across the dataset, explain common legislative actions and their typical societal implications." and "Across the dataset, explain important legislative actions and their societal implications."
 
 ---OUTPUT---
 Output questions as a JSON-formatted object with the following structure:

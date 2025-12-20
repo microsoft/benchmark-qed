@@ -114,13 +114,15 @@ class ActivityLocalQuestionGen(BaseQuestionGen):
             ),
             1,
         )
-        results = await asyncio.gather(*[
-            self._agenerate_single_task(
-                task_context=context,
-                num_questions=num_questions_per_task,
-            )
-            for context in self.activity_context.task_contexts
-        ])
+        results = await asyncio.gather(
+            *[
+                self._agenerate_single_task(
+                    task_context=context,
+                    num_questions=num_questions_per_task,
+                )
+                for context in self.activity_context.task_contexts
+            ]
+        )
         results = [question for result in results for question in result]
         msg = f"Generated {len(results)} candidate questions"
         log.info(msg)
@@ -234,9 +236,9 @@ class ActivityLocalQuestionGen(BaseQuestionGen):
 
             # generate a set of questions from the entity list
             random.shuffle(task_context.entities)
-            entity_description = "\n\n".join([
-                entity.to_str() for entity in task_context.entities
-            ])
+            entity_description = "\n\n".join(
+                [entity.to_str() for entity in task_context.entities]
+            )
             question_input_prompt = self.generation_user_prompt.substitute(
                 entity_description=entity_description,
                 persona=task_context.persona,

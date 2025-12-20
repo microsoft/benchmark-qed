@@ -10,10 +10,10 @@ from benchmark_qed.autoe.visualization import (
 )
 
 __all__ = [
+    "get_available_question_sets",
+    "get_available_rag_methods",
     # Assertion-based visualizations
     "plot_assertion_accuracy_by_rag_method",
     "plot_assertion_score_distribution",
-    "prepare_assertion_summary_data", 
-    "get_available_question_sets",
-    "get_available_rag_methods",
+    "prepare_assertion_summary_data",
 ]

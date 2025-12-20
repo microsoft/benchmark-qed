@@ -99,14 +99,16 @@ class ActivityGlobalQuestionGen(BaseQuestionGen):
             1,
         )
 
-        results = await asyncio.gather(*[
-            self._agenerate_single_task(
-                dataset_description=self.activity_context.dataset_description,
-                task_context=context,
-                num_questions_per_task=num_questions_per_task,
-            )
-            for context in self.activity_context.task_contexts
-        ])
+        results = await asyncio.gather(
+            *[
+                self._agenerate_single_task(
+                    dataset_description=self.activity_context.dataset_description,
+                    task_context=context,
+                    num_questions_per_task=num_questions_per_task,
+                )
+                for context in self.activity_context.task_contexts
+            ]
+        )
 
         results = [question for result in results for question in result]
         msg = f"Generated {len(results)} candidate questions for {len(self.activity_context.task_contexts)} tasks"

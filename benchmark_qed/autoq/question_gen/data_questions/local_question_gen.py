@@ -1,24 +1,22 @@
 # Copyright (c) 2025 Microsoft Corporation.
 """Data-local question generation module."""
 
+from __future__ import annotations
+
 import asyncio
-from dataclasses import asdict
 import json
 import logging
 import math
 import uuid
+from dataclasses import asdict
 from pathlib import Path
-from string import Template
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
+from tqdm import tqdm
 from tqdm.asyncio import tqdm_asyncio
 
-from benchmark_qed.autoq.question_gen.data_questions.assertion_gen.base import Assertion
 import benchmark_qed.config.defaults as defs
-from benchmark_qed.autod.data_model.text_unit import TextUnit
-from benchmark_qed.autod.data_processor.embedding import TextEmbedder
 from benchmark_qed.autod.data_processor.text_utils import try_parse_json_object
-from benchmark_qed.autod.sampler.clustering.cluster import TextCluster
 from benchmark_qed.autod.sampler.enums import ClusterRepresentativeSelectionType
 from benchmark_qed.autod.sampler.neighboring.semantic_neighbors import (
     compute_intra_inter_references_similarity_ratio,
@@ -30,15 +28,24 @@ from benchmark_qed.autoq.data_model.enums import QuestionType
 from benchmark_qed.autoq.data_model.question import Question
 from benchmark_qed.autoq.prompts.data_questions import local_questions
 from benchmark_qed.autoq.question_gen.base import BaseQuestionGen, QuestionGenResult
+from benchmark_qed.autoq.question_gen.data_questions.assertion_gen import (
+    AssertionValidator,
+    LocalClaimAssertionGenerator,
+)
 from benchmark_qed.autoq.question_gen.data_questions.claim_extractor.local_claim_extractor import (
     DataLocalClaimExtractor,
 )
-from benchmark_qed.autoq.question_gen.data_questions.assertion_gen import (
-    LocalClaimAssertionGenerator,
-)
 from benchmark_qed.autoq.sampler.question_sampler import QuestionSampler
 from benchmark_qed.config.utils import load_template_file
-from benchmark_qed.llm.type.base import ChatModel
+
+if TYPE_CHECKING:
+    from string import Template
+
+    from benchmark_qed.autod.data_model.text_unit import TextUnit
+    from benchmark_qed.autod.data_processor.embedding import TextEmbedder
+    from benchmark_qed.autod.sampler.clustering.cluster import TextCluster
+    from benchmark_qed.autoq.config import AssertionConfig, AssertionPromptConfig
+    from benchmark_qed.llm.type.base import ChatModel
 
 log: logging.Logger = logging.getLogger(__name__)
 
@@ -48,11 +55,10 @@ DATA_LOCAL_PROMPTS_PATH = Path(local_questions.__file__).parent
 class DataLocalQuestionGen(BaseQuestionGen):
     """
     Generate local data questions for a given dataset.
-    
+
     Supports optional assertion generation after claim extraction to create
-    testable facts that can be used for answer accuracy evaluation. Set max_assertions
-    to None or 0 to skip assertion generation, or to a positive integer to limit
-    the number of assertions per question.
+    testable facts that can be used for answer accuracy evaluation. Configure
+    assertion generation using the assertion_config parameter.
     """
 
     def __init__(
@@ -62,8 +68,8 @@ class DataLocalQuestionGen(BaseQuestionGen):
         text_units: list[TextUnit],
         question_sampler: QuestionSampler | None = None,
         claim_extractor_params: dict[str, Any] | None = None,
-        assertion_generator_params: dict[str, Any] | None = None,
-        max_assertions: int = 5,
+        assertion_config: AssertionConfig | None = None,
+        assertion_prompt_config: AssertionPromptConfig | None = None,
         llm_params: dict[str, Any] = defs.LLM_PARAMS,
         json_mode: bool = True,
         generation_system_prompt: Template | None = None,
@@ -72,12 +78,52 @@ class DataLocalQuestionGen(BaseQuestionGen):
         concurrent_coroutines: int = 32,
         random_seed: int = defs.RANDOM_SEED,
     ) -> None:
+        """
+        Initialize the DataLocalQuestionGen.
+
+        Parameters
+        ----------
+        llm : ChatModel
+            The language model to use.
+        text_embedder : TextEmbedder
+            Text embedder for computing embeddings.
+        text_units : list[TextUnit]
+            The text units to generate questions from.
+        question_sampler : QuestionSampler | None
+            Optional sampler for selecting questions.
+        claim_extractor_params : dict[str, Any] | None
+            Parameters for the claim extractor.
+        assertion_config : AssertionConfig | None
+            Configuration for assertion generation and validation. If None, uses default
+            configuration from AssertionConfig(). Set max_assertions to 0 to disable.
+        assertion_prompt_config : AssertionPromptConfig | None
+            Custom prompts for assertion generation. If None, uses default prompts.
+        llm_params : dict[str, Any]
+            Parameters for the LLM.
+        json_mode : bool
+            Whether to use JSON mode.
+        generation_system_prompt : Template | None
+            Custom system prompt for question generation.
+        generation_user_prompt : Template | None
+            Custom user prompt for question generation.
+        expansion_system_prompt : Template | None
+            Custom prompt for question expansion.
+        concurrent_coroutines : int
+            Number of concurrent coroutines.
+        random_seed : int
+            Random seed for reproducibility.
+        """
+        # Import here to avoid circular imports
+        from benchmark_qed.autoq.config import AssertionConfig, AssertionPromptConfig
+
         if claim_extractor_params is None:
             claim_extractor_params = {}
-        if assertion_generator_params is None:
-            assertion_generator_params = {}
-            
-        self.max_assertions = max_assertions
+        if assertion_config is None:
+            assertion_config = AssertionConfig()
+        if assertion_prompt_config is None:
+            assertion_prompt_config = AssertionPromptConfig()
+
+        self.assertion_config = assertion_config
         self.random_seed = random_seed
         if question_sampler is not None:
             question_sampler.random_seed = random_seed
@@ -102,13 +148,26 @@ class DataLocalQuestionGen(BaseQuestionGen):
             llm=llm, **claim_extractor_params
         )
 
-        # Initialize assertion generator if enabled
+        # Initialize assertion generator if enabled (max_assertions != 0)
         self.assertion_generator: LocalClaimAssertionGenerator | None = None
-        if self.max_assertions is None or self.max_assertions > 0:
-            # Pass max_assertions to the assertion generator (None means unlimited)
-            assertion_generator_params["max_assertions"] = self.max_assertions
+        max_assertions = assertion_config.max_assertions
+        if max_assertions is None or max_assertions > 0:
+            # Create validator if validation is enabled
+            validator = None
+            if assertion_config.enable_validation:
+                validator = AssertionValidator(
+                    llm=llm,
+                    llm_params=llm_params,
+                    min_criterion_score=assertion_config.min_validation_score,
+                    validation_prompt=assertion_prompt_config.local_validation_prompt.template,
+                )
+
             self.assertion_generator = LocalClaimAssertionGenerator(
-                llm=llm, **assertion_generator_params
+                llm=llm,
+                llm_params=llm_params,
+                max_assertions=max_assertions,
+                validator=validator,
+                system_prompt=assertion_prompt_config.local_assertion_gen_prompt.template,
             )
 
         self.json_mode = json_mode
@@ -157,13 +216,15 @@ class DataLocalQuestionGen(BaseQuestionGen):
             msg = f"Processing clusters {i} to {min(i + self.concurrent_coroutines, len(text_clusters))} of {len(text_clusters)} clusters..."
             log.info(msg)
             batch = text_clusters[i : i + self.concurrent_coroutines]
-            batch_results = await tqdm_asyncio.gather(*[
-                self._agenerate_local_questions(
-                    text_cluster=cluster,
-                    num_questions=questions_per_cluster,
-                )
-                for cluster in batch
-            ])
+            batch_results = await tqdm_asyncio.gather(
+                *[
+                    self._agenerate_local_questions(
+                        text_cluster=cluster,
+                        num_questions=questions_per_cluster,
+                    )
+                    for cluster in batch
+                ]
+            )
             batch_questions = [
                 question for result in batch_results for question in result
             ]
@@ -173,47 +234,69 @@ class DataLocalQuestionGen(BaseQuestionGen):
         msg = f"Generated {len(results)} candidate questions from {len(text_clusters)} clusters."
         log.info(msg)
         final_questions = self.select(candidate_questions=results, top_k=num_questions)
-        
+
         # Generate assertions only for the final selected questions
-        if self.max_assertions > 0 and self.assertion_generator is not None:
+        max_assertions = (
+            self.assertion_config.max_assertions if self.assertion_config else None
+        )
+        if (
+            max_assertions is None or max_assertions > 0
+        ) and self.assertion_generator is not None:
             await self._agenerate_assertions_for_questions(final_questions)
-        
+
         return QuestionGenResult(
             selected_questions=final_questions,
             candidate_questions=results,
         )
 
-    async def _agenerate_assertions_for_questions(self, questions: list[Question]) -> None:
+    async def _agenerate_assertions_for_questions(
+        self, questions: list[Question]
+    ) -> None:
         """Generate assertions for a list of questions and update their attributes."""
         if not self.assertion_generator:
             return
-            
-        log.info(f"Generating assertions for {len(questions)} final questions")
-        
-        for question in questions:
+
+        log.info("Generating assertions for %s final questions", len(questions))
+
+        for question in tqdm(
+            questions, desc="Generating assertions", unit="question"
+        ):
             try:
-                # Get claims from question attributes
-                claims = question.attributes.get("claims", []) if question.attributes else []
+                # Generate assertions from extracted claims
+                claims = (
+                    question.attributes.get("claims", []) if question.attributes else []
+                )
                 if not claims:
-                    log.warning(f"No claims found for question: {question.text}")
+                    log.warning("No claims found for question: %s", question.text)
                     continue
-                    
+
                 assertion_result = await self.assertion_generator.agenerate_assertions(
                     question_text=question.text,
-                    claims=claims
+                    claims=claims,
                 )
-                assertions = [asdict(assertion) for assertion in assertion_result.assertions]
-                
+
+                assertions = [
+                    asdict(assertion) for assertion in assertion_result.assertions
+                ]
+
                 # Update question attributes with assertions
                 if question.attributes is None:
                     question.attributes = {}
                 question.attributes["assertions"] = assertions
                 question.attributes["assertion_count"] = len(assertions)
-                
-                log.info(f"Generated {len(assertions)} assertions for question: {question.text}")
-                
-            except Exception as e:
-                log.warning(f"Failed to generate assertions for question '{question.text}': {e}")
+
+                log.info(
+                    "Generated %s assertions for question: %s",
+                    len(assertions),
+                    question.text,
+                )
+
+            except Exception as e:  # noqa: BLE001
+                log.warning(
+                    "Failed to generate assertions for question '%s': %s",
+                    question.text,
+                    e,
+                )
                 # Ensure attributes exist even on failure
                 if question.attributes is None:
                     question.attributes = {}
@@ -351,7 +434,9 @@ class DataLocalQuestionGen(BaseQuestionGen):
                                     "claim_count": len(claims.claims),
                                     "claims": claims.claims,
                                     "assertions": assertions if assertions else [],
-                                    "assertion_count": len(assertions) if assertions else 0,
+                                    "assertion_count": len(assertions)
+                                    if assertions
+                                    else 0,
                                 },
                             )
                         )
