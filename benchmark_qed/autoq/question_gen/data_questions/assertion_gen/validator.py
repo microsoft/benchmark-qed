@@ -156,14 +156,14 @@ class AssertionValidator:
             Number of concurrent validations. Default 8.
         """
         self.llm = llm
-        self.llm_params = llm_params.copy()
+        self.llm_params: dict[str, Any] = llm_params.copy()
         self.min_criterion_score = min_criterion_score
         self.concurrent_validations = concurrent_validations
         self._semaphore = asyncio.Semaphore(concurrent_validations)
 
         # Load validation prompt
         if validation_prompt:
-            self.validation_prompt = validation_prompt
+            self.validation_prompt: Template = validation_prompt
         else:
             # Default to local validation prompt for backwards compatibility
             prompt_path = (

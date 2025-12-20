@@ -429,7 +429,7 @@ class DataLocalQuestionGen(BaseQuestionGen):
                                     "intra_inter_similarity_ratio": intra_inter_similarity_ratio,
                                     "claim_count": len(claims.claims),
                                     "claims": claims.claims,
-                                    "assertions": assertions if assertions else [],
+                                    "assertions": assertions or [],
                                     "assertion_count": len(assertions)
                                     if assertions
                                     else 0,

@@ -23,7 +23,7 @@ from benchmark_qed.autoe.visualization.utils import (
 def plot_assertion_accuracy_by_rag_method(
     results_df: pd.DataFrame,
     output_path: Path | None = None,
-    figsize: tuple = (12, 6),
+    figsize: tuple[int, int] = (12, 6),
     title: str = "Assertion-based Accuracy by RAG Method and Question Set",
     show_values: bool = True,
     sort_by_mean: bool = True,
@@ -137,7 +137,7 @@ def plot_assertion_accuracy_by_rag_method(
 def plot_assertion_score_distribution(
     results_df: pd.DataFrame,  # noqa: ARG001
     output_path: Path | None = None,
-    figsize: tuple = (10, 6),
+    figsize: tuple[int, int] = (10, 6),
     title: str = "Assertion Score Distribution by RAG Method",
 ) -> tuple[Figure, Axes]:
     """

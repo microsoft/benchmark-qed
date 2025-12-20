@@ -75,26 +75,18 @@ class GlobalClaimAssertionGenerator(BaseAssertionGenerator):
         super().__init__(llm, llm_params, json_mode, max_assertions, validator)
 
         # Load prompt templates
-        self.map_prompt = (
-            map_system_prompt
-            if map_system_prompt
-            else load_template_file(
-                ASSERTION_GEN_PROMPTS_PATH
-                / "assertions"
-                / "global_claim_assertion_map_prompt.txt"
-            )
+        self.map_prompt: Template = map_system_prompt or load_template_file(
+            ASSERTION_GEN_PROMPTS_PATH
+            / "assertions"
+            / "global_claim_assertion_map_prompt.txt"
         )
         if isinstance(self.map_prompt, str):
             self.map_prompt = Template(self.map_prompt)
 
-        self.reduce_prompt = (
-            reduce_system_prompt
-            if reduce_system_prompt
-            else load_template_file(
-                ASSERTION_GEN_PROMPTS_PATH
-                / "assertions"
-                / "global_claim_assertion_reduce_prompt.txt"
-            )
+        self.reduce_prompt: Template = reduce_system_prompt or load_template_file(
+            ASSERTION_GEN_PROMPTS_PATH
+            / "assertions"
+            / "global_claim_assertion_reduce_prompt.txt"
         )
         if isinstance(self.reduce_prompt, str):
             self.reduce_prompt = Template(self.reduce_prompt)
@@ -114,7 +106,7 @@ class GlobalClaimAssertionGenerator(BaseAssertionGenerator):
         self.token_encoder = token_encoder
 
         # Local generator for map phase processing
-        self.local_generator = LocalClaimAssertionGenerator(
+        self.local_generator: LocalClaimAssertionGenerator = LocalClaimAssertionGenerator(
             llm=self.llm,
             llm_params=self.llm_params,
             json_mode=self.json_mode,

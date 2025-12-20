@@ -23,7 +23,7 @@ if TYPE_CHECKING:
 
 ClaimDict = dict[str, Any]  # Individual claim with statement, score, etc.
 
-log = logging.getLogger(__name__)
+log: logging.Logger = logging.getLogger(__name__)
 
 
 @dataclass

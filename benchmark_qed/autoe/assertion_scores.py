@@ -218,7 +218,9 @@ def load_and_normalize_assertions(
     assertions = assertions_raw.explode("assertions").reset_index(drop=True)
 
     # Normalize the assertion dictionaries into separate columns
-    assertion_normalized = pd.json_normalize(assertions["assertions"])
+    assertion_normalized = pd.json_normalize(
+        cast(list[dict[str, Any]], assertions["assertions"].tolist())
+    )
     assertions = pd.concat(
         [
             assertions.drop("assertions", axis=1),
@@ -268,11 +270,13 @@ def evaluate_rag_method(
     if not question_set_output_dir.exists():
         question_set_output_dir.mkdir(parents=True)
 
+    # Define answers path before try block so it's available in except block
+    answers_path = answers_path_template.format(
+        input_dir=input_dir, generated_rag=generated_rag, question_set=question_set
+    )
+
     try:
         # Load answers for this RAG method and question set
-        answers_path = answers_path_template.format(
-            input_dir=input_dir, generated_rag=generated_rag, question_set=question_set
-        )
         answers = pd.read_json(answers_path)
 
         # Get assertion scores

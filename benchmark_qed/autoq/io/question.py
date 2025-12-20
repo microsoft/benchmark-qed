@@ -9,7 +9,7 @@ from uuid import uuid4
 
 from benchmark_qed.autoq.data_model.question import Question
 
-log = logging.getLogger(__name__)
+log: logging.Logger = logging.getLogger(__name__)
 
 
 def _save_assertions(questions: list[Question], output_path: Path) -> None:

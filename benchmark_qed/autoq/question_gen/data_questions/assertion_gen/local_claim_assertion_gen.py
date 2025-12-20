@@ -55,14 +55,10 @@ class LocalClaimAssertionGenerator(BaseAssertionGenerator):
     ) -> None:
         super().__init__(llm, llm_params, json_mode, max_assertions, validator)
 
-        system_prompt = (
-            system_prompt
-            if system_prompt
-            else load_template_file(
-                ASSERTION_GEN_PROMPTS_PATH
-                / "assertions"
-                / "local_claim_assertion_gen_prompt.txt"
-            )
+        system_prompt = system_prompt or load_template_file(
+            ASSERTION_GEN_PROMPTS_PATH
+            / "assertions"
+            / "local_claim_assertion_gen_prompt.txt"
         )
         if isinstance(system_prompt, str):
             system_prompt = Template(system_prompt)

@@ -7,7 +7,9 @@ from typing import Any
 
 import matplotlib.pyplot as plt
 import seaborn as sns
+from matplotlib.axes import Axes
 from matplotlib.container import BarContainer
+from matplotlib.figure import Figure
 from rich import print as rich_print
 
 
@@ -17,7 +19,7 @@ def setup_plot_style() -> None:
     sns.set_palette("Set2")
 
 
-def get_color_palette(n_colors: int) -> list:
+def get_color_palette(n_colors: int) -> list[tuple[float, float, float]]:
     """
     Get a consistent color palette for visualizations.
 
@@ -32,7 +34,7 @@ def get_color_palette(n_colors: int) -> list:
 
 
 def save_figure(
-    fig: plt.Figure, output_path: Path, dpi: int = 300, bbox_inches: str = "tight"
+    fig: Figure, output_path: Path, dpi: int = 300, bbox_inches: str = "tight"
 ) -> None:
     """
     Save a matplotlib figure with consistent settings.
@@ -76,7 +78,7 @@ def format_question_set_name(question_set: str) -> str:
 
 
 def add_value_labels(
-    ax: plt.Axes,
+    ax: Axes,
     bars: BarContainer | Iterable[Any],
     format_str: str = "{:.3f}",
     offset: int = 3,
@@ -109,7 +111,7 @@ def add_value_labels(
             )
 
 
-def setup_grid(ax: plt.Axes, alpha: float = 0.3, linestyle: str = "--") -> None:
+def setup_grid(ax: Axes, alpha: float = 0.3, linestyle: str = "--") -> None:
     """
     Set up consistent grid styling for plots.
 
