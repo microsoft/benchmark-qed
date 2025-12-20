@@ -231,7 +231,6 @@ def load_and_normalize_assertions(
     return assertions.rename(columns={"statement": "assertion"})
 
 
-
 def evaluate_rag_method(
     llm_client: ChatModel,
     llm_config: LLMConfig,

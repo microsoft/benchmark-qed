@@ -358,9 +358,7 @@ class DataGlobalQuestionGen(BaseQuestionGen):
 
         log.info("Generating assertions for %s final questions", len(questions))
 
-        for question in tqdm(
-            questions, desc="Generating assertions", unit="question"
-        ):
+        for question in tqdm(questions, desc="Generating assertions", unit="question"):
             try:
                 # Get claims from question attributes
                 claims = (
