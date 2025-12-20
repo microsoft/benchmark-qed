@@ -120,18 +120,16 @@ class EntityExtractor:
         )
         msg = f"Generating {len(clusters)} map responses..."
         log.info(msg)
-        map_responses = await tqdm_asyncio.gather(
-            *[
-                self._map_response_single_batch(
-                    persona=persona,
-                    task=task,
-                    num_entities=num_entities,
-                    context_data=cluster.convert_to_text(),
-                    **self.map_llm_params,
-                )
-                for cluster in clusters
-            ]
-        )
+        map_responses = await tqdm_asyncio.gather(*[
+            self._map_response_single_batch(
+                persona=persona,
+                task=task,
+                num_entities=num_entities,
+                context_data=cluster.convert_to_text(),
+                **self.map_llm_params,
+            )
+            for cluster in clusters
+        ])
 
         llm_calls["map"] = sum(response.llm_calls for response in map_responses)
         prompt_tokens["map"] = sum(response.input_tokens for response in map_responses)

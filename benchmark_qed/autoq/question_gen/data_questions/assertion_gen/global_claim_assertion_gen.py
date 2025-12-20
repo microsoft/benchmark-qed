@@ -355,12 +355,10 @@ class GlobalClaimAssertionGenerator(BaseAssertionGenerator):
                 source_str = str(source).strip()
                 if source_str in assertion_mapping:
                     source_assertion = assertion_mapping[source_str]
-                    mapped_sources.append(
-                        {
-                            "statement": source_assertion["statement"],
-                            "score": source_assertion["score"],
-                        }
-                    )
+                    mapped_sources.append({
+                        "statement": source_assertion["statement"],
+                        "score": source_assertion["score"],
+                    })
                     # Aggregate source chunks from the original assertion
                     if source_assertion["sources"]:
                         aggregated_source_chunks.extend(source_assertion["sources"])

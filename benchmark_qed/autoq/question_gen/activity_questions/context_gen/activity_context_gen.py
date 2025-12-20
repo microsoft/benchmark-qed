@@ -191,17 +191,15 @@ class ActivityContextGen:
             task_contexts = []
             for i in range(0, len(persona_tasks), self.concurrent_coroutines):
                 batch = persona_tasks[i : i + self.concurrent_coroutines]
-                batch_results = await asyncio.gather(
-                    *[
-                        self._aextract_entities(
-                            text_units=rep_text_units,
-                            persona=activity["persona"],
-                            num_entities=num_entities_per_task,
-                            task=activity["task"],
-                        )
-                        for activity in batch
-                    ]
-                )
+                batch_results = await asyncio.gather(*[
+                    self._aextract_entities(
+                        text_units=rep_text_units,
+                        persona=activity["persona"],
+                        num_entities=num_entities_per_task,
+                        task=activity["task"],
+                    )
+                    for activity in batch
+                ])
                 task_contexts.extend(batch_results)
 
             # filter out tasks that do not have entities, which is indication that the task is not relevant

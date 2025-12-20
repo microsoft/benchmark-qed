@@ -113,14 +113,12 @@ class GlobalSummarizer(BaseSummarizer):
         )
         msg = f"Generating {len(clusters)} map responses..."
         log.info(msg)
-        map_responses = await tqdm_asyncio.gather(
-            *[
-                self._map_response_single_batch(
-                    context_data=cluster.convert_to_text(), **self.map_llm_params
-                )
-                for cluster in clusters
-            ]
-        )
+        map_responses = await tqdm_asyncio.gather(*[
+            self._map_response_single_batch(
+                context_data=cluster.convert_to_text(), **self.map_llm_params
+            )
+            for cluster in clusters
+        ])
 
         llm_calls["map"] = sum(response.llm_calls for response in map_responses)
         prompt_tokens["map"] = sum(response.input_tokens for response in map_responses)
@@ -241,13 +239,11 @@ class GlobalSummarizer(BaseSummarizer):
                     or element["score"] <= 0
                 ):
                     continue
-                key_points.append(
-                    {
-                        "analyst": index,
-                        "topic": element["topic"],
-                        "score": element["score"],
-                    }
-                )
+                key_points.append({
+                    "analyst": index,
+                    "topic": element["topic"],
+                    "score": element["score"],
+                })
 
         key_points = sorted(
             key_points,
@@ -258,13 +254,11 @@ class GlobalSummarizer(BaseSummarizer):
         data = []
         total_tokens = 0
         for point in key_points:
-            formatted_response_text = "\n".join(
-                [
-                    f"----Analyst {point['analyst'] + 1}----",
-                    f"Importance Score: {point['score']}",
-                    point["topic"],
-                ]
-            )
+            formatted_response_text = "\n".join([
+                f"----Analyst {point['analyst'] + 1}----",
+                f"Importance Score: {point['score']}",
+                point["topic"],
+            ])
             if (
                 total_tokens + num_tokens(formatted_response_text, self.token_encoder)
                 > self.max_data_tokens

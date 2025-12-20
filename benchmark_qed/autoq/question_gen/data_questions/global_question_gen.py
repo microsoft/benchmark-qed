@@ -184,12 +184,10 @@ class DataGlobalQuestionGen(BaseQuestionGen):
             msg = f"Processing categories {i} to {min(i + self.concurrent_coroutines, len(question_contexts))} of {len(question_contexts)} categories..."
             log.info(msg)
             batch = question_contexts[i : i + self.concurrent_coroutines]
-            batch_results = await tqdm_asyncio.gather(
-                *[
-                    self._agenerate_single_chain(question_context=context)
-                    for context in batch
-                ]
-            )
+            batch_results = await tqdm_asyncio.gather(*[
+                self._agenerate_single_chain(question_context=context)
+                for context in batch
+            ])
             batch_questions = [
                 question for result in batch_results for question in result
             ]
@@ -325,12 +323,10 @@ class DataGlobalQuestionGen(BaseQuestionGen):
                     }
 
                     # Initialize empty assertions - will be generated later for final questions only
-                    question_attributes.update(
-                        {
-                            "assertions": [],
-                            "assertion_count": 0,
-                        }
-                    )
+                    question_attributes.update({
+                        "assertions": [],
+                        "assertion_count": 0,
+                    })
 
                     results.append(
                         Question(

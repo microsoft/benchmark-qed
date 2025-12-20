@@ -86,14 +86,12 @@ def _save_assertions(questions: list[Question], output_path: Path) -> None:
                             question.id,
                             i,
                         )
-                        assertion_dicts.append(
-                            {
-                                "statement": assertion,
-                                "sources": [],
-                                "score": 0,
-                                "reasoning": "",
-                            }
-                        )
+                        assertion_dicts.append({
+                            "statement": assertion,
+                            "sources": [],
+                            "score": 0,
+                            "reasoning": "",
+                        })
 
                 if assertion_dicts:
                     # Sort assertions by score (descending) then by source count (descending) to determine ranks
@@ -145,13 +143,11 @@ def _save_assertions(questions: list[Question], output_path: Path) -> None:
 
                         ranked_assertions.append(ranked_assertion)
 
-                    questions_with_assertions.append(
-                        {
-                            "question_id": question.id,
-                            "question_text": question.text,
-                            "assertions": ranked_assertions,
-                        }
-                    )
+                    questions_with_assertions.append({
+                        "question_id": question.id,
+                        "question_text": question.text,
+                        "assertions": ranked_assertions,
+                    })
 
     # Save assertions to file as a direct list
     if questions_with_assertions:

@@ -152,12 +152,10 @@ class BaseAssertionGenerator(ABC):
                     question.attributes = {}
 
                 # Add assertion results to question attributes
-                question.attributes.update(
-                    {
-                        "assertions": result.assertions,
-                        "assertion_count": result.total_assertions,
-                    }
-                )
+                question.attributes.update({
+                    "assertions": result.assertions,
+                    "assertion_count": result.total_assertions,
+                })
 
             except Exception as e:  # noqa: BLE001
                 log.warning(
@@ -168,12 +166,10 @@ class BaseAssertionGenerator(ABC):
                 # Add empty assertion data on failure
                 if question.attributes is None:
                     question.attributes = {}
-                question.attributes.update(
-                    {
-                        "assertions": [],
-                        "assertion_count": 0,
-                    }
-                )
+                question.attributes.update({
+                    "assertions": [],
+                    "assertion_count": 0,
+                })
 
         # Process all questions concurrently
         await asyncio.gather(

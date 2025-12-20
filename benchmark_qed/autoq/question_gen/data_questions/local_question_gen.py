@@ -216,15 +216,13 @@ class DataLocalQuestionGen(BaseQuestionGen):
             msg = f"Processing clusters {i} to {min(i + self.concurrent_coroutines, len(text_clusters))} of {len(text_clusters)} clusters..."
             log.info(msg)
             batch = text_clusters[i : i + self.concurrent_coroutines]
-            batch_results = await tqdm_asyncio.gather(
-                *[
-                    self._agenerate_local_questions(
-                        text_cluster=cluster,
-                        num_questions=questions_per_cluster,
-                    )
-                    for cluster in batch
-                ]
-            )
+            batch_results = await tqdm_asyncio.gather(*[
+                self._agenerate_local_questions(
+                    text_cluster=cluster,
+                    num_questions=questions_per_cluster,
+                )
+                for cluster in batch
+            ])
             batch_questions = [
                 question for result in batch_results for question in result
             ]
