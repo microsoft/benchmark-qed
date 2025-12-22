@@ -8,11 +8,9 @@ import json
 import logging
 import math
 import uuid
-from dataclasses import asdict
 from pathlib import Path
 from typing import TYPE_CHECKING, Any
 
-from tqdm import tqdm
 from tqdm.asyncio import tqdm_asyncio
 
 import benchmark_qed.config.defaults as defs
@@ -150,16 +148,18 @@ class DataLocalQuestionGen(BaseQuestionGen):
 
         # Initialize assertion generator if enabled (max_assertions != 0)
         self.assertion_generator: LocalClaimAssertionGenerator | None = None
-        max_assertions = assertion_config.max_assertions
+        local_assertion_config = assertion_config.local
+        max_assertions = local_assertion_config.max_assertions
         if max_assertions is None or max_assertions > 0:
             # Create validator if validation is enabled
             validator = None
-            if assertion_config.enable_validation:
+            if local_assertion_config.enable_validation:
                 validator = AssertionValidator(
                     llm=llm,
                     llm_params=llm_params,
-                    min_criterion_score=assertion_config.min_validation_score,
+                    min_criterion_score=local_assertion_config.min_validation_score,
                     validation_prompt=assertion_prompt_config.local_validation_prompt.template,
+                    concurrent_validations=local_assertion_config.concurrent_llm_calls,
                 )
 
             self.assertion_generator = LocalClaimAssertionGenerator(
@@ -168,6 +168,7 @@ class DataLocalQuestionGen(BaseQuestionGen):
                 max_assertions=max_assertions,
                 validator=validator,
                 system_prompt=assertion_prompt_config.local_assertion_gen_prompt.template,
+                max_concurrent_questions=local_assertion_config.max_concurrent_questions,
             )
 
         self.json_mode = json_mode
@@ -235,69 +236,24 @@ class DataLocalQuestionGen(BaseQuestionGen):
 
         # Generate assertions only for the final selected questions
         max_assertions = (
-            self.assertion_config.max_assertions if self.assertion_config else None
+            self.assertion_config.local.max_assertions
+            if self.assertion_config
+            else None
         )
         if (
             max_assertions is None or max_assertions > 0
         ) and self.assertion_generator is not None:
-            await self._agenerate_assertions_for_questions(final_questions)
+            log.info(
+                "Generating assertions for %s final questions", len(final_questions)
+            )
+            await self.assertion_generator.agenerate_assertions_for_questions(
+                final_questions
+            )
 
         return QuestionGenResult(
             selected_questions=final_questions,
             candidate_questions=results,
         )
-
-    async def _agenerate_assertions_for_questions(
-        self, questions: list[Question]
-    ) -> None:
-        """Generate assertions for a list of questions and update their attributes."""
-        if not self.assertion_generator:
-            return
-
-        log.info("Generating assertions for %s final questions", len(questions))
-
-        for question in tqdm(questions, desc="Generating assertions", unit="question"):
-            try:
-                # Generate assertions from extracted claims
-                claims = (
-                    question.attributes.get("claims", []) if question.attributes else []
-                )
-                if not claims:
-                    log.warning("No claims found for question: %s", question.text)
-                    continue
-
-                assertion_result = await self.assertion_generator.agenerate_assertions(
-                    question_text=question.text,
-                    claims=claims,
-                )
-
-                assertions = [
-                    asdict(assertion) for assertion in assertion_result.assertions
-                ]
-
-                # Update question attributes with assertions
-                if question.attributes is None:
-                    question.attributes = {}
-                question.attributes["assertions"] = assertions
-                question.attributes["assertion_count"] = len(assertions)
-
-                log.info(
-                    "Generated %s assertions for question: %s",
-                    len(assertions),
-                    question.text,
-                )
-
-            except Exception as e:  # noqa: BLE001
-                log.warning(
-                    "Failed to generate assertions for question '%s': %s",
-                    question.text,
-                    e,
-                )
-                # Ensure attributes exist even on failure
-                if question.attributes is None:
-                    question.attributes = {}
-                question.attributes["assertions"] = []
-                question.attributes["assertion_count"] = 0
 
     async def _agenerate_local_questions(
         self,

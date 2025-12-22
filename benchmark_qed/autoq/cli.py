@@ -419,10 +419,21 @@ def autoq(
     loop = asyncio.get_event_loop()
 
     # Log assertion generation status
-    if config.assertions.max_assertions is None or config.assertions.max_assertions > 0:
-        if config.assertions.enable_validation:
+    local_assertions_enabled = (
+        config.assertions.local.max_assertions is None
+        or config.assertions.local.max_assertions > 0
+    )
+    global_assertions_enabled = (
+        config.assertions.global_.max_assertions is None
+        or config.assertions.global_.max_assertions > 0
+    )
+    if local_assertions_enabled or global_assertions_enabled:
+        if (
+            config.assertions.local.enable_validation
+            or config.assertions.global_.enable_validation
+        ):
             rich_print(
-                f"Assertion generation enabled with validation (min score: {config.assertions.min_validation_score}/5)"
+                f"Assertion generation enabled with validation (local min score: {config.assertions.local.min_validation_score}/5, global min score: {config.assertions.global_.min_validation_score}/5)"
             )
         else:
             rich_print("Assertion generation enabled (validation disabled)")

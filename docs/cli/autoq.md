@@ -77,15 +77,40 @@ Configuration for sampling data from clusters.
 ---
 
 #### `AssertionConfig`
-Configuration for assertion generation. Assertions are testable factual statements derived from extracted claims that can be used to evaluate answer accuracy.
+Configuration for assertion generation with separate settings for local and global questions.
 
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
-| `max_assertions` | `int \| None` | `20` | Maximum number of assertions per question. Set to `0` to disable, or `None` for unlimited. |
-| `enable_validation` | `bool` | `True` | Whether to validate assertions against source data for quality filtering. |
-| `min_validation_score` | `int` | `3` | Minimum score (1-5) for grounding, relevance, and verifiability criteria. |
-| `batch_size` | `int` | `50` | Batch size for processing claims in global assertion generation. |
-| `max_data_tokens` | `int` | `32000` | Maximum input tokens for the reduce step in global assertions. |
+| `local` | `LocalAssertionConfig` | _(see below)_ | Configuration for local assertion generation. |
+| `global` | `GlobalAssertionConfig` | _(see below)_ | Configuration for global assertion generation. |
+
+---
+
+#### `LocalAssertionConfig`
+Configuration for local assertion generation.
+
+| Field | Type | Default | Description |
+|-------|------|---------|-------------|
+| `max_assertions` | `int \| None` | `20` | Maximum assertions per question. Set to `0` to disable, or `None` for unlimited. |
+| `enable_validation` | `bool` | `True` | Whether to validate assertions against source data. |
+| `min_validation_score` | `int` | `3` | Minimum score (1-5) for grounding, relevance, and verifiability. |
+| `concurrent_llm_calls` | `int` | `8` | Concurrent LLM calls for validation. |
+| `max_concurrent_questions` | `int \| None` | `8` | Questions to process in parallel. Set to `1` for sequential. |
+
+---
+
+#### `GlobalAssertionConfig`
+Configuration for global assertion generation.
+
+| Field | Type | Default | Description |
+|-------|------|---------|-------------|
+| `max_assertions` | `int \| None` | `20` | Maximum assertions per question. Set to `0` to disable, or `None` for unlimited. |
+| `enable_validation` | `bool` | `True` | Whether to validate assertions against source data. |
+| `min_validation_score` | `int` | `3` | Minimum score (1-5) for grounding, relevance, and verifiability. |
+| `batch_size` | `int` | `50` | Batch size for map-reduce claim processing. |
+| `max_data_tokens` | `int` | `32000` | Maximum input tokens for the reduce step. |
+| `concurrent_llm_calls` | `int` | `8` | Concurrent LLM calls for batch processing and validation. |
+| `max_concurrent_questions` | `int \| None` | `2` | Questions to process in parallel. Set to `1` for sequential. |
 
 ---
 
@@ -181,11 +206,20 @@ activity_global:
 
 ## Assertion Generation Configuration
 assertions:
-  max_assertions: 20  # Set to 0 to disable, or null/None for unlimited
-  enable_validation: true  # Enable to filter low-quality assertions (can be slow)
-  min_validation_score: 3  # Minimum score (1-5) to pass validation
-  batch_size: 50
-  max_data_tokens: 32000
+  local:
+    max_assertions: 20  # Set to 0 to disable, or null/None for unlimited
+    enable_validation: true  # Enable to filter low-quality assertions
+    min_validation_score: 3  # Minimum score (1-5) to pass validation
+    concurrent_llm_calls: 8  # Concurrent LLM calls for validation
+    max_concurrent_questions: 8  # Parallel questions for assertion generation. Set to 1 for sequential.
+  global:
+    max_assertions: 20
+    enable_validation: true
+    min_validation_score: 3
+    batch_size: 50  # Batch size for map-reduce processing
+    max_data_tokens: 32000  # Max tokens for reduce step
+    concurrent_llm_calls: 8  # Concurrent LLM calls for batch processing/validation
+    max_concurrent_questions: 2  # Parallel questions for assertion generation. Set to 1 for sequential.
 
 assertion_prompts:
   local_assertion_gen_prompt:
@@ -238,18 +272,24 @@ Assertions must meet the `min_validation_score` threshold on all three criteria 
 
 ### Controlling Assertion Limits
 
-To disable assertion generation entirely, set `max_assertions: 0`:
+To disable assertion generation entirely, set `max_assertions: 0` for both local and global:
 
 ```yaml
 assertions:
-  max_assertions: 0
+  local:
+    max_assertions: 0
+  global:
+    max_assertions: 0
 ```
 
 To generate unlimited assertions (no cap), set `max_assertions: null`:
 
 ```yaml
 assertions:
-  max_assertions: null  # or omit to use default of 20
+  local:
+    max_assertions: null  # or omit to use default of 20
+  global:
+    max_assertions: null
 ```
 
 ---

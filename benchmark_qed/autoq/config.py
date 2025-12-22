@@ -2,8 +2,9 @@
 """Configuration for the autoq question generation process."""
 
 from pathlib import Path
+from typing import ClassVar
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, ConfigDict, Field
 
 from benchmark_qed.autod import prompts as autod_prompts
 from benchmark_qed.autod.io.enums import InputDataType
@@ -74,8 +75,33 @@ class QuestionConfig(BaseModel):
     )
 
 
-class AssertionConfig(BaseModel):
-    """Configuration for assertion generation."""
+class LocalAssertionConfig(BaseModel):
+    """Configuration for local assertion generation."""
+
+    max_assertions: int | None = Field(
+        default=defs.MAX_ASSERTIONS,
+        description="Maximum number of assertions per question. Set to 0 to disable, or None for unlimited.",
+    )
+    enable_validation: bool = Field(
+        default=defs.ENABLE_ASSERTION_VALIDATION,
+        description="Whether to validate assertions against sources for quality filtering.",
+    )
+    min_validation_score: int = Field(
+        default=defs.MIN_ASSERTION_VALIDATION_SCORE,
+        description="Minimum score (1-5) for grounding, relevance, and verifiability criteria.",
+    )
+    concurrent_llm_calls: int = Field(
+        default=defs.ASSERTION_CONCURRENT_LLM_CALLS,
+        description="Number of concurrent LLM calls for validation.",
+    )
+    max_concurrent_questions: int | None = Field(
+        default=defs.ASSERTION_MAX_CONCURRENT_LOCAL_QUESTIONS,
+        description="Maximum questions to process in parallel. Set to 1 for sequential.",
+    )
+
+
+class GlobalAssertionConfig(BaseModel):
+    """Configuration for global assertion generation."""
 
     max_assertions: int | None = Field(
         default=defs.MAX_ASSERTIONS,
@@ -91,12 +117,36 @@ class AssertionConfig(BaseModel):
     )
     batch_size: int = Field(
         default=defs.ASSERTION_BATCH_SIZE,
-        description="Batch size for processing claims in global assertion generation.",
+        description="Batch size for processing claims in map-reduce assertion generation.",
     )
     max_data_tokens: int = Field(
         default=defs.ASSERTION_MAX_DATA_TOKENS,
-        description="Maximum input data tokens for the reduce step in global assertions.",
+        description="Maximum input data tokens for the reduce step.",
     )
+    concurrent_llm_calls: int = Field(
+        default=defs.ASSERTION_CONCURRENT_LLM_CALLS,
+        description="Number of concurrent LLM calls for batch processing and validation.",
+    )
+    max_concurrent_questions: int | None = Field(
+        default=defs.ASSERTION_MAX_CONCURRENT_GLOBAL_QUESTIONS,
+        description="Maximum questions to process in parallel. Set to 1 for sequential.",
+    )
+
+
+class AssertionConfig(BaseModel):
+    """Configuration for assertion generation (local and global)."""
+
+    local: LocalAssertionConfig = Field(
+        default_factory=LocalAssertionConfig,
+        description="Configuration for local assertion generation.",
+    )
+    global_: GlobalAssertionConfig = Field(
+        default_factory=GlobalAssertionConfig,
+        alias="global",
+        description="Configuration for global assertion generation.",
+    )
+
+    model_config: ClassVar[ConfigDict] = {"populate_by_name": True}
 
 
 class AssertionPromptConfig(BaseModel):

@@ -52,8 +52,16 @@ class LocalClaimAssertionGenerator(BaseAssertionGenerator):
         system_prompt: Template | None = None,
         max_assertions: int | None = MAX_ASSERTIONS,
         validator: AssertionValidator | None = None,
+        max_concurrent_questions: int | None = None,
     ) -> None:
-        super().__init__(llm, llm_params, json_mode, max_assertions, validator)
+        super().__init__(
+            llm,
+            llm_params,
+            json_mode,
+            max_assertions,
+            validator,
+            max_concurrent_questions,
+        )
 
         system_prompt = system_prompt or load_template_file(
             ASSERTION_GEN_PROMPTS_PATH

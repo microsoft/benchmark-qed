@@ -6,8 +6,10 @@ from __future__ import annotations
 import asyncio
 import logging
 from abc import ABC, abstractmethod
-from dataclasses import dataclass, field
 from typing import TYPE_CHECKING, Any
+
+from pydantic import BaseModel, Field, field_validator
+from tqdm.asyncio import tqdm_asyncio
 
 from benchmark_qed.autoq.question_gen.data_questions.assertion_gen.ranking import (
     calculate_rrf_scores,
@@ -26,38 +28,36 @@ ClaimDict = dict[str, Any]  # Individual claim with statement, score, etc.
 log: logging.Logger = logging.getLogger(__name__)
 
 
-@dataclass
-class Assertion:
-    """Data class representing an assertion for evaluation."""
+class Assertion(BaseModel):
+    """Pydantic model representing an assertion for evaluation."""
 
     statement: str
     """The assertion statement text."""
 
-    score: int
+    score: int = Field(ge=1, le=10)
     """The importance/confidence score (1-10)."""
 
-    sources: list[str] = field(default_factory=list)
+    sources: list[str] = Field(default_factory=list)
     """List of source text chunks that are associated with the assertion."""
 
     reasoning: str = ""
     """Explanation of why this assertion is relevant to the question."""
 
-    attributes: dict[str, Any] = field(default_factory=dict)
+    attributes: dict[str, Any] = Field(default_factory=dict)
     """Additional metadata and attributes."""
 
-    def __post_init__(self) -> None:
-        """Validate assertion fields after creation."""
-        if not self.statement.strip():
+    @field_validator("statement")
+    @classmethod
+    def statement_not_empty(cls, v: str) -> str:
+        """Validate that statement is not empty."""
+        if not v.strip():
             msg = "Assertion statement cannot be empty"
             raise ValueError(msg)
-        if not (1 <= self.score <= 10):
-            msg = "Assertion score must be between 1 and 10"
-            raise ValueError(msg)
+        return v
 
 
-@dataclass
-class AssertionGenerationResult:
-    """Data class for assertion generation results."""
+class AssertionGenerationResult(BaseModel):
+    """Pydantic model for assertion generation results."""
 
     assertions: list[Assertion]
     """The generated assertions."""
@@ -86,6 +86,7 @@ class BaseAssertionGenerator(ABC):
         json_mode: bool = True,
         max_assertions: int | None = MAX_ASSERTIONS,
         validator: AssertionValidator | None = None,
+        max_concurrent_questions: int | None = None,
     ) -> None:
         """
         Initialize the assertion generator.
@@ -104,12 +105,16 @@ class BaseAssertionGenerator(ABC):
             Optional validator for filtering assertions. If provided, assertions
             will be validated after generation and only valid ones returned.
             If None, validation is skipped.
+        max_concurrent_questions : int | None
+            Maximum number of questions to process concurrently when generating
+            assertions. If None, processes sequentially. If > 1, processes in parallel.
         """
         self.llm = llm
         self.llm_params = llm_params
         self.json_mode = json_mode
         self.max_assertions = max_assertions
         self.validator = validator
+        self.max_concurrent_questions = max_concurrent_questions
 
         if self.json_mode:
             self.llm_params["response_format"] = {"type": "json_object"}
@@ -128,53 +133,94 @@ class BaseAssertionGenerator(ABC):
         """
 
     async def agenerate_assertions_for_questions(
-        self, questions: list[Question], **kwargs: Any
+        self,
+        questions: list[Question],
     ) -> None:
         """
         Generate assertions for a list of questions and add them to question attributes.
 
+        This method extracts claims from each question's attributes and generates
+        assertions using the configured assertion generator. Results are stored
+        as dictionaries in question.attributes["assertions"].
+
         Args:
-            questions: List of Question objects to generate assertions for (modified in place)
-            **kwargs: Additional parameters passed to agenerate_assertions
+            questions: List of Question objects to generate assertions for (modified in place).
+                       Each question should have claims in question.attributes["claims"].
 
         Side Effects:
             Updates each question's attributes with generated assertions:
-            - 'assertions': List of generated assertion objects
+            - 'assertions': List of assertion dictionaries
             - 'assertion_count': Number of assertions generated
         """
+        if self.max_concurrent_questions is None or self.max_concurrent_questions <= 1:
+            # Sequential processing
+            await self._generate_assertions_sequential(questions)
+        else:
+            # Parallel processing with semaphore
+            await self._generate_assertions_parallel(questions)
 
-        async def process_question(question: Question) -> None:
-            try:
-                result = await self.agenerate_assertions(question.text, **kwargs)
+    async def _generate_assertions_sequential(self, questions: list[Question]) -> None:
+        """Generate assertions sequentially for each question."""
+        from tqdm import tqdm
 
-                # Initialize attributes if they don't exist
-                if question.attributes is None:
-                    question.attributes = {}
+        for question in tqdm(questions, desc="Generating assertions", unit="question"):
+            await self._process_single_question(question)
 
-                # Add assertion results to question attributes
-                question.attributes.update({
-                    "assertions": result.assertions,
-                    "assertion_count": result.total_assertions,
-                })
+    async def _generate_assertions_parallel(self, questions: list[Question]) -> None:
+        """Generate assertions in parallel with concurrency limit."""
+        semaphore = asyncio.Semaphore(self.max_concurrent_questions or 1)
 
-            except Exception as e:  # noqa: BLE001
-                log.warning(
-                    "Failed to generate assertions for question '%s': %s",
-                    question.id,
-                    e,
-                )
-                # Add empty assertion data on failure
-                if question.attributes is None:
-                    question.attributes = {}
-                question.attributes.update({
-                    "assertions": [],
-                    "assertion_count": 0,
-                })
+        async def process_with_semaphore(question: Question) -> None:
+            async with semaphore:
+                await self._process_single_question(question)
 
-        # Process all questions concurrently
-        await asyncio.gather(
-            *[process_question(q) for q in questions], return_exceptions=True
-        )
+        tasks = [process_with_semaphore(q) for q in questions]
+        await tqdm_asyncio.gather(*tasks, desc="Generating assertions", unit="question")
+
+    async def _process_single_question(self, question: Question) -> None:
+        """Process a single question to generate assertions."""
+        try:
+            # Get claims from question attributes
+            claims = (
+                question.attributes.get("claims", []) if question.attributes else []
+            )
+            if not claims:
+                log.warning("No claims found for question: %s", question.text)
+                return
+
+            result = await self.agenerate_assertions(
+                question_text=question.text,
+                claims=claims,
+            )
+
+            # Convert assertions to dicts for JSON serialization
+            assertions = [assertion.model_dump() for assertion in result.assertions]
+
+            # Initialize attributes if they don't exist
+            if question.attributes is None:
+                question.attributes = {}
+
+            # Add assertion results to question attributes
+            question.attributes["assertions"] = assertions
+            question.attributes["assertion_count"] = len(assertions)
+
+            log.info(
+                "Generated %s assertions for question: %s",
+                len(assertions),
+                question.text,
+            )
+
+        except Exception as e:  # noqa: BLE001
+            log.warning(
+                "Failed to generate assertions for question '%s': %s",
+                question.text,
+                e,
+            )
+            # Ensure attributes exist even on failure
+            if question.attributes is None:
+                question.attributes = {}
+            question.attributes["assertions"] = []
+            question.attributes["assertion_count"] = 0
 
     async def _validate_assertions(
         self,

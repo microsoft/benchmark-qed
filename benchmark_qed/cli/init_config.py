@@ -183,11 +183,20 @@ data_questions_prompt_config:
 
 ## Assertion Generation Configuration
 assertions:
-  max_assertions: 20 # Maximum assertions per question. Set to 0 to disable assertion generation, or null for unlimited.
-  enable_validation: true # Enable to filter low-quality assertions (can be slow).
-  min_validation_score: 3 # Minimum score (1-5) for an assertion to pass validation.
-  batch_size: 50 # Batch size for global assertion map-reduce processing.
-  max_data_tokens: 32000 # Maximum input tokens for the reduce step in global assertions.
+  local:
+    max_assertions: 20 # Maximum assertions per question. Set to 0 to disable, or null for unlimited.
+    enable_validation: true # Enable to filter low-quality assertions.
+    min_validation_score: 3 # Minimum score (1-5) for an assertion to pass validation.
+    concurrent_llm_calls: 8 # Concurrent LLM calls for validation.
+    max_concurrent_questions: 8 # Parallel questions for assertion generation. Set to 1 for sequential.
+  global:
+    max_assertions: 20 # Maximum assertions per question. Set to 0 to disable, or null for unlimited.
+    enable_validation: true # Enable to filter low-quality assertions.
+    min_validation_score: 3 # Minimum score (1-5) for an assertion to pass validation.
+    batch_size: 50 # Batch size for map-reduce processing.
+    max_data_tokens: 32000 # Maximum input tokens for the reduce step.
+    concurrent_llm_calls: 8 # Concurrent LLM calls for batch processing and validation.
+    max_concurrent_questions: 2 # Parallel questions for assertion generation. Set to 1 for sequential.
 
 assertion_prompts:
   local_assertion_gen_prompt:

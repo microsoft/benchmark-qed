@@ -55,6 +55,7 @@ class LocalSourceAssertionGenerator(BaseAssertionGenerator):
         json_mode: bool = True,
         system_prompt: Template | None = None,
         max_assertions: int | None = 5,
+        max_concurrent_questions: int | None = None,
     ) -> None:
         """
         Initialize the LocalSourceAssertionGenerator.
@@ -72,8 +73,17 @@ class LocalSourceAssertionGenerator(BaseAssertionGenerator):
         max_assertions : int | None
             Maximum number of assertions to generate per question.
             None means no limit.
+        max_concurrent_questions : int | None
+            Maximum number of questions to process concurrently.
+            None means sequential processing.
         """
-        super().__init__(llm, llm_params, json_mode, max_assertions)
+        super().__init__(
+            llm,
+            llm_params,
+            json_mode,
+            max_assertions,
+            max_concurrent_questions=max_concurrent_questions,
+        )
 
         system_prompt = system_prompt or load_template_file(
             ASSERTION_GEN_PROMPTS_PATH
