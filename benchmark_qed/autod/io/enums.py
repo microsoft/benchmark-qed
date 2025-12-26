@@ -10,3 +10,4 @@ class InputDataType(StrEnum):
     JSON = "json"
     CSV = "csv"
     TEXT = "text"
+    PARQUET = "parquet"
