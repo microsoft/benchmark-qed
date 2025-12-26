@@ -597,6 +597,42 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#assertionconfig" class="md-nav__link">
+    <span class="md-ellipsis">
+      AssertionConfig
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#localassertionconfig" class="md-nav__link">
+    <span class="md-ellipsis">
+      LocalAssertionConfig
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#globalassertionconfig" class="md-nav__link">
+    <span class="md-ellipsis">
+      GlobalAssertionConfig
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#assertionpromptconfig" class="md-nav__link">
+    <span class="md-ellipsis">
+      AssertionPromptConfig
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#questiongenerationconfig" class="md-nav__link">
     <span class="md-ellipsis">
       QuestionGenerationConfig
@@ -614,6 +650,57 @@
   <a href="#yaml-example" class="md-nav__link">
     <span class="md-ellipsis">
       YAML Example
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#assertion-generation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Assertion Generation
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Assertion Generation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-assertions-work" class="md-nav__link">
+    <span class="md-ellipsis">
+      How Assertions Work
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#assertion-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      Assertion Types
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#validation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Validation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#controlling-assertion-limits" class="md-nav__link">
+    <span class="md-ellipsis">
+      Controlling Assertion Limits
     </span>
   </a>
   
@@ -1054,6 +1141,42 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#assertionconfig" class="md-nav__link">
+    <span class="md-ellipsis">
+      AssertionConfig
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#localassertionconfig" class="md-nav__link">
+    <span class="md-ellipsis">
+      LocalAssertionConfig
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#globalassertionconfig" class="md-nav__link">
+    <span class="md-ellipsis">
+      GlobalAssertionConfig
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#assertionpromptconfig" class="md-nav__link">
+    <span class="md-ellipsis">
+      AssertionPromptConfig
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#questiongenerationconfig" class="md-nav__link">
     <span class="md-ellipsis">
       QuestionGenerationConfig
@@ -1071,6 +1194,57 @@
   <a href="#yaml-example" class="md-nav__link">
     <span class="md-ellipsis">
       YAML Example
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#assertion-generation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Assertion Generation
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Assertion Generation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-assertions-work" class="md-nav__link">
+    <span class="md-ellipsis">
+      How Assertions Work
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#assertion-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      Assertion Types
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#validation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Validation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#controlling-assertion-limits" class="md-nav__link">
+    <span class="md-ellipsis">
+      Controlling Assertion Limits
     </span>
   </a>
   
@@ -1375,6 +1549,180 @@
 </tbody>
 </table>
 <hr />
+<h4 id="assertionconfig"><code>AssertionConfig</code></h4>
+<p>Configuration for assertion generation with separate settings for local and global questions.</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>local</code></td>
+<td><code>LocalAssertionConfig</code></td>
+<td><em>(see below)</em></td>
+<td>Configuration for local assertion generation.</td>
+</tr>
+<tr>
+<td><code>global</code></td>
+<td><code>GlobalAssertionConfig</code></td>
+<td><em>(see below)</em></td>
+<td>Configuration for global assertion generation.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h4 id="localassertionconfig"><code>LocalAssertionConfig</code></h4>
+<p>Configuration for local assertion generation.</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>max_assertions</code></td>
+<td><code>int \| None</code></td>
+<td><code>20</code></td>
+<td>Maximum assertions per question. Set to <code>0</code> to disable, or <code>None</code> for unlimited.</td>
+</tr>
+<tr>
+<td><code>enable_validation</code></td>
+<td><code>bool</code></td>
+<td><code>True</code></td>
+<td>Whether to validate assertions against source data.</td>
+</tr>
+<tr>
+<td><code>min_validation_score</code></td>
+<td><code>int</code></td>
+<td><code>3</code></td>
+<td>Minimum score (1-5) for grounding, relevance, and verifiability.</td>
+</tr>
+<tr>
+<td><code>concurrent_llm_calls</code></td>
+<td><code>int</code></td>
+<td><code>8</code></td>
+<td>Concurrent LLM calls for validation.</td>
+</tr>
+<tr>
+<td><code>max_concurrent_questions</code></td>
+<td><code>int \| None</code></td>
+<td><code>8</code></td>
+<td>Questions to process in parallel. Set to <code>1</code> for sequential.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h4 id="globalassertionconfig"><code>GlobalAssertionConfig</code></h4>
+<p>Configuration for global assertion generation.</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>max_assertions</code></td>
+<td><code>int \| None</code></td>
+<td><code>20</code></td>
+<td>Maximum assertions per question. Set to <code>0</code> to disable, or <code>None</code> for unlimited.</td>
+</tr>
+<tr>
+<td><code>enable_validation</code></td>
+<td><code>bool</code></td>
+<td><code>True</code></td>
+<td>Whether to validate assertions against source data.</td>
+</tr>
+<tr>
+<td><code>min_validation_score</code></td>
+<td><code>int</code></td>
+<td><code>3</code></td>
+<td>Minimum score (1-5) for grounding, relevance, and verifiability.</td>
+</tr>
+<tr>
+<td><code>batch_size</code></td>
+<td><code>int</code></td>
+<td><code>50</code></td>
+<td>Batch size for map-reduce claim processing.</td>
+</tr>
+<tr>
+<td><code>max_data_tokens</code></td>
+<td><code>int</code></td>
+<td><code>32000</code></td>
+<td>Maximum input tokens for the reduce step.</td>
+</tr>
+<tr>
+<td><code>concurrent_llm_calls</code></td>
+<td><code>int</code></td>
+<td><code>8</code></td>
+<td>Concurrent LLM calls for batch processing and validation.</td>
+</tr>
+<tr>
+<td><code>max_concurrent_questions</code></td>
+<td><code>int \| None</code></td>
+<td><code>2</code></td>
+<td>Questions to process in parallel. Set to <code>1</code> for sequential.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h4 id="assertionpromptconfig"><code>AssertionPromptConfig</code></h4>
+<p>Configuration for assertion generation prompts. Each prompt can be specified as a file path or direct text.</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>local_assertion_gen_prompt</code></td>
+<td><code>PromptConfig</code></td>
+<td><em>(default file)</em></td>
+<td>Prompt for generating assertions from local claims.</td>
+</tr>
+<tr>
+<td><code>global_assertion_map_prompt</code></td>
+<td><code>PromptConfig</code></td>
+<td><em>(default file)</em></td>
+<td>Prompt for the map step in global assertion generation.</td>
+</tr>
+<tr>
+<td><code>global_assertion_reduce_prompt</code></td>
+<td><code>PromptConfig</code></td>
+<td><em>(default file)</em></td>
+<td>Prompt for the reduce step in global assertion generation.</td>
+</tr>
+<tr>
+<td><code>local_validation_prompt</code></td>
+<td><code>PromptConfig</code></td>
+<td><em>(default file)</em></td>
+<td>Prompt for validating local assertions (fact-focused) against source data.</td>
+</tr>
+<tr>
+<td><code>global_validation_prompt</code></td>
+<td><code>PromptConfig</code></td>
+<td><em>(default file)</em></td>
+<td>Prompt for validating global assertions (theme-focused) against source data.</td>
+</tr>
+</tbody>
+</table>
+<hr />
 <h4 id="questiongenerationconfig"><code>QuestionGenerationConfig</code></h4>
 <p>Top-level configuration for the entire question generation process.</p>
 <table>
@@ -1447,6 +1795,18 @@
 <td><code>LLMConfig()</code></td>
 <td>LLM configuration for embeddings.</td>
 </tr>
+<tr>
+<td><code>assertions</code></td>
+<td><code>AssertionConfig</code></td>
+<td><code>AssertionConfig()</code></td>
+<td>Assertion generation configuration.</td>
+</tr>
+<tr>
+<td><code>assertion_prompts</code></td>
+<td><code>AssertionPromptConfig</code></td>
+<td><code>AssertionPromptConfig()</code></td>
+<td>Assertion prompt configuration.</td>
+</tr>
 </tbody>
 </table>
 <hr />
@@ -1503,6 +1863,35 @@
 <a id="__codelineno-2-49" name="__codelineno-2-49" href="#__codelineno-2-49"></a><span class="w">  </span><span class="nt">num_personas</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5</span>
 <a id="__codelineno-2-50" name="__codelineno-2-50" href="#__codelineno-2-50"></a><span class="w">  </span><span class="nt">num_tasks_per_persona</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span>
 <a id="__codelineno-2-51" name="__codelineno-2-51" href="#__codelineno-2-51"></a><span class="w">  </span><span class="nt">num_entities_per_task</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5</span>
+<a id="__codelineno-2-52" name="__codelineno-2-52" href="#__codelineno-2-52"></a>
+<a id="__codelineno-2-53" name="__codelineno-2-53" href="#__codelineno-2-53"></a><span class="c1">## Assertion Generation Configuration</span>
+<a id="__codelineno-2-54" name="__codelineno-2-54" href="#__codelineno-2-54"></a><span class="nt">assertions</span><span class="p">:</span>
+<a id="__codelineno-2-55" name="__codelineno-2-55" href="#__codelineno-2-55"></a><span class="w">  </span><span class="nt">local</span><span class="p">:</span>
+<a id="__codelineno-2-56" name="__codelineno-2-56" href="#__codelineno-2-56"></a><span class="w">    </span><span class="nt">max_assertions</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">20</span><span class="w">  </span><span class="c1"># Set to 0 to disable, or null/None for unlimited</span>
+<a id="__codelineno-2-57" name="__codelineno-2-57" href="#__codelineno-2-57"></a><span class="w">    </span><span class="nt">enable_validation</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w">  </span><span class="c1"># Enable to filter low-quality assertions</span>
+<a id="__codelineno-2-58" name="__codelineno-2-58" href="#__codelineno-2-58"></a><span class="w">    </span><span class="nt">min_validation_score</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3</span><span class="w">  </span><span class="c1"># Minimum score (1-5) to pass validation</span>
+<a id="__codelineno-2-59" name="__codelineno-2-59" href="#__codelineno-2-59"></a><span class="w">    </span><span class="nt">concurrent_llm_calls</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8</span><span class="w">  </span><span class="c1"># Concurrent LLM calls for validation</span>
+<a id="__codelineno-2-60" name="__codelineno-2-60" href="#__codelineno-2-60"></a><span class="w">    </span><span class="nt">max_concurrent_questions</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8</span><span class="w">  </span><span class="c1"># Parallel questions for assertion generation. Set to 1 for sequential.</span>
+<a id="__codelineno-2-61" name="__codelineno-2-61" href="#__codelineno-2-61"></a><span class="w">  </span><span class="nt">global</span><span class="p">:</span>
+<a id="__codelineno-2-62" name="__codelineno-2-62" href="#__codelineno-2-62"></a><span class="w">    </span><span class="nt">max_assertions</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">20</span>
+<a id="__codelineno-2-63" name="__codelineno-2-63" href="#__codelineno-2-63"></a><span class="w">    </span><span class="nt">enable_validation</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<a id="__codelineno-2-64" name="__codelineno-2-64" href="#__codelineno-2-64"></a><span class="w">    </span><span class="nt">min_validation_score</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3</span>
+<a id="__codelineno-2-65" name="__codelineno-2-65" href="#__codelineno-2-65"></a><span class="w">    </span><span class="nt">batch_size</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">50</span><span class="w">  </span><span class="c1"># Batch size for map-reduce processing</span>
+<a id="__codelineno-2-66" name="__codelineno-2-66" href="#__codelineno-2-66"></a><span class="w">    </span><span class="nt">max_data_tokens</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">32000</span><span class="w">  </span><span class="c1"># Max tokens for reduce step</span>
+<a id="__codelineno-2-67" name="__codelineno-2-67" href="#__codelineno-2-67"></a><span class="w">    </span><span class="nt">concurrent_llm_calls</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8</span><span class="w">  </span><span class="c1"># Concurrent LLM calls for batch processing/validation</span>
+<a id="__codelineno-2-68" name="__codelineno-2-68" href="#__codelineno-2-68"></a><span class="w">    </span><span class="nt">max_concurrent_questions</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span><span class="w">  </span><span class="c1"># Parallel questions for assertion generation. Set to 1 for sequential.</span>
+<a id="__codelineno-2-69" name="__codelineno-2-69" href="#__codelineno-2-69"></a>
+<a id="__codelineno-2-70" name="__codelineno-2-70" href="#__codelineno-2-70"></a><span class="nt">assertion_prompts</span><span class="p">:</span>
+<a id="__codelineno-2-71" name="__codelineno-2-71" href="#__codelineno-2-71"></a><span class="w">  </span><span class="nt">local_assertion_gen_prompt</span><span class="p">:</span>
+<a id="__codelineno-2-72" name="__codelineno-2-72" href="#__codelineno-2-72"></a><span class="w">    </span><span class="nt">prompt</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">prompts/data_questions/assertions/local_claim_assertion_gen_prompt.txt</span>
+<a id="__codelineno-2-73" name="__codelineno-2-73" href="#__codelineno-2-73"></a><span class="w">  </span><span class="nt">global_assertion_map_prompt</span><span class="p">:</span>
+<a id="__codelineno-2-74" name="__codelineno-2-74" href="#__codelineno-2-74"></a><span class="w">    </span><span class="nt">prompt</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">prompts/data_questions/assertions/global_claim_assertion_map_prompt.txt</span>
+<a id="__codelineno-2-75" name="__codelineno-2-75" href="#__codelineno-2-75"></a><span class="w">  </span><span class="nt">global_assertion_reduce_prompt</span><span class="p">:</span>
+<a id="__codelineno-2-76" name="__codelineno-2-76" href="#__codelineno-2-76"></a><span class="w">    </span><span class="nt">prompt</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">prompts/data_questions/assertions/global_claim_assertion_reduce_prompt.txt</span>
+<a id="__codelineno-2-77" name="__codelineno-2-77" href="#__codelineno-2-77"></a><span class="w">  </span><span class="nt">local_validation_prompt</span><span class="p">:</span>
+<a id="__codelineno-2-78" name="__codelineno-2-78" href="#__codelineno-2-78"></a><span class="w">    </span><span class="nt">prompt</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">prompts/data_questions/assertions/local_validation_prompt.txt</span>
+<a id="__codelineno-2-79" name="__codelineno-2-79" href="#__codelineno-2-79"></a><span class="w">  </span><span class="nt">global_validation_prompt</span><span class="p">:</span>
+<a id="__codelineno-2-80" name="__codelineno-2-80" href="#__codelineno-2-80"></a><span class="w">    </span><span class="nt">prompt</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">prompts/data_questions/assertions/global_validation_prompt.txt</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="gh"># .env file</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>OPENAI_API_KEY=your-secret-api-key-here
@@ -1510,6 +1899,61 @@
 <blockquote>
 <p>💡 Note: The api_key field uses an environment variable reference <code>${OPENAI_API_KEY}</code>. Make sure to define this variable in a .env file or your environment before running the application.</p>
 </blockquote>
+<hr />
+<h2 id="assertion-generation">Assertion Generation</h2>
+<p>Assertions are testable factual statements derived from extracted claims that can be used as "unit tests" to evaluate the accuracy of RAG system answers. Each question can have multiple assertions that verify specific facts the answer should contain.</p>
+<h3 id="how-assertions-work">How Assertions Work</h3>
+<ol>
+<li><strong>Claim Extraction</strong>: During question generation, claims (factual statements) are extracted from the source text.</li>
+<li><strong>Assertion Generation</strong>: Claims are transformed into testable assertions with clear pass/fail criteria.</li>
+<li><strong>Optional Validation</strong>: Assertions can be validated against source data to filter out low-quality assertions.</li>
+</ol>
+<h3 id="assertion-types">Assertion Types</h3>
+<ul>
+<li><strong>Local Assertions</strong>: Generated for <code>data_local</code> questions from claims extracted from individual text chunks.</li>
+<li><strong>Global Assertions</strong>: Generated for <code>data_global</code> questions using a map-reduce approach across multiple source documents.</li>
+</ul>
+<h3 id="validation">Validation</h3>
+<p>When <code>enable_validation</code> is set to <code>true</code>, each assertion is scored on three criteria (1-5 scale):</p>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Grounding</strong></td>
+<td>Is the assertion factually supported by the source data?</td>
+</tr>
+<tr>
+<td><strong>Relevance</strong></td>
+<td>Is the assertion relevant to the question being asked?</td>
+</tr>
+<tr>
+<td><strong>Verifiability</strong></td>
+<td>Can the assertion be objectively verified from an answer?</td>
+</tr>
+</tbody>
+</table>
+<p>Assertions must meet the <code>min_validation_score</code> threshold on all three criteria to be included.</p>
+<h3 id="controlling-assertion-limits">Controlling Assertion Limits</h3>
+<p>To disable assertion generation entirely, set <code>max_assertions: 0</code> for both local and global:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nt">assertions</span><span class="p">:</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span><span class="nt">local</span><span class="p">:</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span><span class="nt">max_assertions</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">  </span><span class="nt">global</span><span class="p">:</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">    </span><span class="nt">max_assertions</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span>
+</code></pre></div>
+<p>To generate unlimited assertions (no cap), set <code>max_assertions: null</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nt">assertions</span><span class="p">:</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">  </span><span class="nt">local</span><span class="p">:</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">    </span><span class="nt">max_assertions</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">null</span><span class="w">  </span><span class="c1"># or omit to use default of 20</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">  </span><span class="nt">global</span><span class="p">:</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">    </span><span class="nt">max_assertions</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">null</span>
+</code></pre></div>
+<hr />
 <h2 id="providing-prompts-file-or-text">Providing Prompts: File or Text</h2>
 <p>Prompts for question generation can be provided in two ways, as defined by the <code>PromptConfig</code> class:</p>
 <ul>
@@ -1518,15 +1962,15 @@
 </ul>
 <p>Only one of these options should be set for each prompt. If both are set, or neither is set, an error will be raised.</p>
 <h3 id="example-file-path">Example (File Path)</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nt">activity_questions_prompt_config</span><span class="p">:</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span><span class="nt">activity_local_gen_system_prompt</span><span class="p">:</span>
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span><span class="nt">prompt</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">prompts/activity_questions/local/activity_local_gen_system_prompt.txt</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nt">activity_questions_prompt_config</span><span class="p">:</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">  </span><span class="nt">activity_local_gen_system_prompt</span><span class="p">:</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">    </span><span class="nt">prompt</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">prompts/activity_questions/local/activity_local_gen_system_prompt.txt</span>
 </code></pre></div>
 <h3 id="example-direct-text">Example (Direct Text)</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nt">activity_questions_prompt_config</span><span class="p">:</span>
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">  </span><span class="nt">activity_local_gen_system_prompt</span><span class="p">:</span>
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">    </span><span class="nt">prompt_text</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
-<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">      </span><span class="no">Generate a question about the following activity:</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nt">activity_questions_prompt_config</span><span class="p">:</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">  </span><span class="nt">activity_local_gen_system_prompt</span><span class="p">:</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">    </span><span class="nt">prompt_text</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="w">      </span><span class="no">Generate a question about the following activity:</span>
 </code></pre></div>
 <p>This applies to all prompt fields in <a href="https://github.com/microsoft/benchmark-qed/tree/main/benchmark_qed/autoq/config.py#L289-L302"><code>QuestionGenerationConfig</code></a> (including <a href="https://github.com/microsoft/benchmark-qed/tree/main/benchmark_qed/autoq/config.py#L106-L130">map/reduce</a>, <a href="https://github.com/microsoft/benchmark-qed/tree/main/benchmark_qed/autoq/config.py#L133-L192">activity question generation</a>, and <a href="https://github.com/microsoft/benchmark-qed/tree/main/benchmark_qed/autoq/config.py#L195-L233">data question generation</a> prompt configs).</p>
 <p>See the <a href="https://github.com/microsoft/benchmark-qed/tree/main/benchmark_qed/config/prompt_config.py">PromptConfig</a> class for details.</p>
