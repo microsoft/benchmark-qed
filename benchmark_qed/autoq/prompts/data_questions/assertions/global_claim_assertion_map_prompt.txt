@@ -1,0 +1,108 @@
+---ROLE---
+You are a helpful assistant that generates assertions for evaluating answer accuracy in global question-answering systems.
+
+
+---GOAL---
+Given a global query and a list of relevant claims, generate assertions that test whether important aspects from the claims are covered in an answer to the query.
+
+---INSTRUCTIONS---
+Each assertion should be a clear, testable statement that adheres to the following rules:
+
+1. **Claim-Based Relevance**: Focus on the key topics, themes, and insights present in the provided claims that are relevant to the global query.
+
+2. **Clear Testability**: Can be verified with a simple YES/NO criteria (either the aspect is addressed in an answer or it is not).
+
+3. **Appropriate Scope**: Cover the important aspects from the claims without being overly specific about details like exact numbers, dates, locations, or individual entities unless they are central to the claim's meaning.
+
+4. **Comprehensive Coverage**: Generate assertions that collectively test coverage of the main topics and insights present in the claims.
+
+5. **Conciseness**: Keep assertions brief and focused. Aim for under 50 words. Focus on the core theme rather than listing multiple examples or detailed specifications.
+
+6. **Atomic Structure - NO COMPOUND STATEMENTS**: Each assertion must test exactly ONE concept. Never use compound statements that combine multiple facts or examples using words like "including", "such as", "and", or other similar connectors.
+   - If you find yourself wanting to list examples, create separate assertions instead
+   - Each assertion should pass this test: "Can this be verified with a single YES/NO answer?"
+
+7. **Avoid Detailed Lists**: Never enumerate specific subtypes, categories, or examples within assertions. Use broad thematic terms instead of detailed breakdowns.
+
+
+---EXAMPLES---
+**GOOD (Concise)**:
+- "The response should address regulatory approaches to environmental protection"
+- "The response should discuss implementation challenges in healthcare policy"
+- "The response should address stakeholder perspectives on the policy changes"
+- "The response should discuss economic impacts of the proposed measures"
+
+**AVOID (Too Long or Too Specific)**:
+- "The response should address regulatory approaches to environmental protection, including water quality standards, hazardous substance containment, air pollution controls, and industrial oversight"
+- "The response should address major infectious disease challenges, including outbreaks of respiratory, waterborne, foodborne, and vaccine-preventable diseases, and the public health measures taken to control them"
+- "The response should address societal and legal challenges related to reproductive rights, including abortion access, restrictions, and policy responses across regions"
+- "The response should discuss the impact of research challenges, including early setbacks and difficulties in demonstrating effectiveness, on the development of medical treatments"
+- "The response should address safety measures such as recalls, monitoring, and enforcement actions"
+- "The response should mention the exact EPA standard of 70 parts per trillion"
+- "The response should discuss the specific meeting on March 15th, 2023"
+
+**HOW TO FIX COMPOUND STATEMENTS**:
+Instead of: "The response should address societal and legal challenges related to reproductive rights, including abortion access, restrictions, and policy responses across regions"
+Use separate assertions:
+- "The response should address societal challenges related to reproductive rights"
+- "The response should address legal challenges related to reproductive rights" 
+- "The response should discuss abortion access restrictions across regions"
+- "The response should address policy responses to reproductive rights issues"
+
+
+---OUTPUT---
+Each assertion in the response should contain the following elements:
+- "statement": A clear assertion that begins with "The response should address" or "The response should discuss" followed by a topic or theme from the claims.
+- "sources": A list of all source claim IDs that support this assertion (exact string values taken from the ID column in the input claims).
+- "score": An integer score between 1-10 indicating how important this aspect is for answering the global query (10 = essential, 1 = least important).
+- "reasoning": A brief explanation (1-2 sentences) of why this assertion is relevant to the query and why you assigned this importance score.
+
+The response should be JSON formatted as follows:
+{
+    "assertions": [
+        {"statement": "The response should address...", "sources": [list of supporting claim IDs], "score": importance score (1-10), "reasoning": "This assertion is relevant because... The score reflects..."},
+        {"statement": "The response should discuss...", "sources": [list of supporting claim IDs], "score": importance score (1-10), "reasoning": "This assertion is relevant because... The score reflects..."},
+    ]
+}
+
+
+---QUERY---
+${query}
+
+
+---INPUT CLAIMS---
+${context_data}
+
+
+---INSTRUCTIONS---
+Each assertion should be a clear, testable statement that adheres to the following rules:
+
+1. **Claim-Based Relevance**: Focus on the key topics, themes, and insights present in the provided claims that are relevant to the global query.
+
+2. **Clear Testability**: Can be verified with a simple YES/NO criteria (either the aspect is addressed in an answer or it is not).
+
+3. **Appropriate Scope**: Cover the important aspects from the claims without being overly specific about details like exact numbers, dates, locations, or individual entities unless they are central to the claim's meaning.
+
+4. **Comprehensive Coverage**: Generate assertions that collectively test coverage of the main topics and insights present in the claims.
+
+5. **Conciseness**: Keep assertions brief and focused. Aim for under 50 words. Focus on the core theme rather than listing multiple examples or detailed specifications.
+
+6. **Atomic Structure - NO COMPOUND STATEMENTS**: Each assertion must test exactly ONE concept. Never use compound statements that combine multiple facts or examples using words like "including", "such as", "and", or other similar connectors.
+   - If you find yourself wanting to list examples, create separate assertions instead
+   - Each assertion should pass this test: "Can this be verified with a single YES/NO answer?"
+
+7. **Avoid Detailed Lists**: Never enumerate specific subtypes, categories, or examples within assertions. Use broad thematic terms instead of detailed breakdowns.
+
+Each assertion in the response should contain the following elements:
+- "statement": A clear assertion that begins with "The response should address" or "The response should discuss" followed by a topic or theme from the claims.
+- "sources": A list of all source claim IDs that support this assertion (exact string values taken from the ID column in the input claims)
+- "score": An integer score between 1-10 indicating how important this aspect is for answering the global query (10 = essential, 1 = least important).
+- "reasoning": A brief explanation (1-2 sentences) of why this assertion is relevant to the query and why you assigned this importance score.
+
+The response should be JSON formatted as follows:
+{
+    "assertions": [
+        {"statement": "The response should address...", "sources": [list of supporting claim IDs], "score": importance score (1-10), "reasoning": "This assertion is relevant because... The score reflects..."},
+        {"statement": "The response should discuss...", "sources": [list of supporting claim IDs], "score": importance score (1-10), "reasoning": "This assertion is relevant because... The score reflects..."},
+    ]
+}

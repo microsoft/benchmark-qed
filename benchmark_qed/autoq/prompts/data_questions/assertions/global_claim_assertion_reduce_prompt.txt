@@ -1,0 +1,128 @@
+---ROLE---
+You are a helpful assistant that consolidates multiple assertions into fewer, higher-level thematic assertions for global question-answering evaluation.
+
+
+---GOAL---
+Given a global query and a list of initial assertions generated from claims, consolidate them into a smaller set of high-level thematic assertions that comprehensively cover the same topics while reducing redundancy and creating broader thematic categories.
+
+---INSTRUCTIONS---
+Each consolidated assertion should be a high-level, thematic statement that adheres to the following rules:
+
+1. **Thematic Grouping**: Group related assertions by theme, topic, or conceptual area to create broader thematic categories.
+
+2. **Comprehensive Coverage**: Ensure that all important aspects from the initial assertions are preserved in the consolidated set - no critical topics should be lost.
+
+3. **Higher-Level Abstraction**: Create assertions that are more abstract and comprehensive than the originals, focusing on major thematic dimensions rather than specific details.
+
+4. **Reduced Redundancy**: Merge overlapping or similar assertions to eliminate duplication while maintaining complete coverage.
+
+5. **Clear Testability**: Each consolidated assertion should be verifiable with a simple YES/NO criteria.
+
+6. **Atomicity**: Each consolidated assertion should test a single, coherent thematic concept. Avoid combining multiple distinct evaluation criteria that should be tested separately.
+
+7. **NO COMPOUND STATEMENTS**: Each assertion must test exactly ONE thematic concept. Never use compound statements that combine multiple themes or examples using words like "including", "such as", "and", or other similar connectors.
+   - If you find yourself wanting to list examples, use broader categorical terms instead
+   - Each assertion should pass this test: "Can this thematic area be verified with a single YES/NO answer?"
+  
+8. **Conciseness**: Keep assertions brief and focused. Aim for under 50 words. Avoid long lists of examples or detailed enumerations within the assertion statement.
+
+9. **Avoid Detailed Lists**: Never enumerate specific subtypes, categories, or examples within assertions. Use broad thematic terms instead of detailed breakdowns.
+
+10. **Use Categorical Terms**: When multiple related items would be listed (e.g., 'food and and product safety'), use a broader categorical term instead (e.g., 'consumer safety')
+
+11. **Quality Focus**: Create comprehensive, high-quality consolidated assertions that provide thorough thematic coverage. Focus on quality and comprehensive thematic representation rather than quantity.
+
+
+---EXAMPLES---
+**Original Assertions** → **Consolidated Assertion**:
+- "Address economic impacts on businesses" + "Discuss financial consequences for industry" → "The response should address economic and financial impacts across affected sectors"
+- "Discuss environmental regulations in California" + "Address environmental policy in Texas" + "Discuss environmental rules in Florida" → "The response should address environmental regulatory approaches across different states"
+
+**GOOD (Concise)**:
+- "The response should address regulatory approaches to environmental protection"
+- "The response should discuss economic impacts of policy changes"
+- "The response should address stakeholder perspectives on the measures"
+- "The response should discuss major infectious disease challenges and public health responses"
+- "The response should address consumer safety as public health challenges"
+
+
+**AVOID (Too Long)**:
+- "The response should address regulatory approaches to environmental protection, including water quality standards, air pollution controls, hazardous waste management, and oversight of industrial facilities"
+- "The response should discuss the various economic impacts of policy changes on businesses, industries, workers, consumers, and local communities"
+- "The response should address major infectious disease challenges, including outbreaks of respiratory, waterborne, foodborne, and vaccine-preventable diseases, and the public health measures taken to control them"
+- "The response should discuss research challenges, including early setbacks and difficulties in demonstrating effectiveness, in medical development"
+- "The response should address food and product safety as public health challenges and discuss related interventions"
+
+**HOW TO FIX COMPOUND STATEMENTS**:
+Instead of: "The response should discuss research challenges, including early setbacks and difficulties in demonstrating effectiveness"  
+Use: "The response should address research challenges in medical treatment development"
+
+Instead of: "The response should address societal and legal challenges related to reproductive rights, including abortion access, restrictions, and policy responses across regions"
+Use: "The response should address challenges related to reproductive rights"
+
+Instead of: "The response should address safety measures, including recalls and enforcement actions"
+Use: "The response should address regulatory safety measures"
+
+
+---OUTPUT---
+Each consolidated assertion should contain the following elements:
+- "statement": A high-level thematic assertion that begins with "The response should address" or "The response should discuss" followed by a broad thematic area.
+- "sources": A list of the original assertions IDs that were consolidated into this thematic assertion.
+- "score": An integer score between 1-10 indicating the importance of this thematic area (typically high since these represent consolidated important themes).
+- "reasoning": A brief explanation (1-2 sentences) of why this thematic assertion is important for the query and why you assigned this importance score.
+
+The response should be JSON formatted as follows:
+{
+    "assertions": [
+        {"statement": "The response should address...", "sources": [list of original assertion IDs], "score": importance score (1-10), "reasoning": "This thematic assertion is important because... The score reflects..."},
+        {"statement": "The response should discuss...", "sources": [list of original assertion IDs], "score": importance score (1-10), "reasoning": "This thematic assertion is important because... The score reflects..."}
+    ]
+}
+
+
+---QUERY---
+${question_text}
+
+
+---INITIAL ASSERTIONS---
+${assertions_context}
+
+
+---INSTRUCTIONS---
+Each consolidated assertion should be a high-level, thematic statement that adheres to the following rules:
+
+1. **Thematic Grouping**: Group related assertions by theme, topic, or conceptual area to create broader thematic categories.
+
+2. **Comprehensive Coverage**: Ensure that all important aspects from the initial assertions are preserved in the consolidated set - no critical topics should be lost.
+
+3. **Higher-Level Abstraction**: Create assertions that are more abstract and comprehensive than the originals, focusing on major thematic dimensions rather than specific details.
+
+4. **Reduced Redundancy**: Merge overlapping or similar assertions to eliminate duplication while maintaining complete coverage.
+
+5. **Clear Testability**: Each consolidated assertion should be verifiable with a simple YES/NO criteria.
+
+6. **Atomicity**: Each consolidated assertion should test a single, coherent thematic concept. Avoid combining multiple distinct evaluation criteria that should be tested separately.
+
+7. **NO COMPOUND STATEMENTS**: Each assertion must test exactly ONE thematic concept. Never use compound statements that combine multiple themes or examples using words like "including", "such as", "and", or other similar connectors.
+   - If you find yourself wanting to list examples, use broader categorical terms instead
+   - Each assertion should pass this test: "Can this thematic area be verified with a single YES/NO answer?"
+  
+8. **Conciseness**: Keep assertions brief and focused. Aim for under 50 words. Avoid long lists of examples or detailed enumerations within the assertion statement.
+
+9. **Avoid Detailed Lists**: Never enumerate specific subtypes, categories, or examples within assertions. Use broad thematic terms instead of detailed breakdowns.
+
+10. **Use Categorical Terms**: When multiple related items would be listed (e.g., 'food and and product safety'), use a broader categorical term instead (e.g., 'consumer safety')
+
+Each consolidated assertion should contain the following elements:
+- "statement": A high-level thematic assertion that begins with "The response should address" or "The response should discuss" followed by a broad thematic area.
+- "sources": A list of the original assertions IDs that were consolidated into this thematic assertion.
+- "score": An integer score between 1-10 indicating the importance of this thematic area (typically high since these represent consolidated important themes).
+- "reasoning": A brief explanation (1-2 sentences) of why this thematic assertion is important for the query and why you assigned this importance score.
+
+The response should be JSON formatted as follows:
+{
+    "assertions": [
+        {"statement": "The response should address...", "sources": ["original assertion 1", "original assertion 2", ...], "score": importance score (1-10), "reasoning": "This thematic assertion is important because... The score reflects..."},
+        {"statement": "The response should discuss...", "sources": ["original assertion 1", "original assertion 2", ...], "score": importance score (1-10), "reasoning": "This thematic assertion is important because... The score reflects..."}
+    ]
+}

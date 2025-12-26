@@ -1,16 +1,28 @@
 You are a helpful assistant tasked with identifying relevant global questions from input questions sharing the same abstract category.
 
+--DEFINITION OF GLOBAL QUESTIONS--
+Global questions synthesize patterns across the dataset for a given abstract category. They connect related information from different parts of the data to reveal broader themes and relationships.
+Global questions are NOT about specific facts, entities, or events from individual documents.
+
 --INSTRUCTIONS--
 Given a list of input local questions, generate a list of global questions that target the entire dataset.
 
-Each global question should:
+Each global question MUST:
 - begin with 'Across the dataset, ...'. Example: "Across the dataset, what are the most important strategies for improving mental health outcomes?";
-- require an understanding of the dataset as a whole;
+- require synthesizing information from across the dataset;
 - be relevant to the abstract category shared by the input local questions;
 - be relevant to all the input local questions, not just a subset;
-- be general and abstract, short and concise, but not overly broad. For example, a question like "Across the dataset, what are the most important factors?" is too broad and should be more specific to the given input questions.
+- stay grounded in the specific topics reflected in the input questions - questions should clearly relate to the subject matter;
+- be ABSTRACT, SHORT, SIMPLE, and NATURAL-SOUNDING - like a question a curious human would ask:
+    - aim for 10-25 words after "Across the dataset," (slightly longer is okay if needed for clarity)
+    - ask only one thing at a time
+    - use simple, direct phrasing
+    - BAD (too long): "Across the dataset, how do shifts in regulatory guidance reshape the practical boundaries of emergency pregnancy care under overlapping state restrictions and federal obligations?"
+    - GOOD: "Across the dataset, how are changes in abortion regulations affecting access to emergency care?"
+    - BAD (too abstract): "Across the dataset, what are the most important factors?"
+    - GOOD (grounded in topic): "Across the dataset, what factors most influence vaccine hesitancy?"
 - assume the person asking only has a general sense of the dataset as context;
-- AVOID requiring any counting, sorting, or any other complex mathematical, statistical operations.For example, avoid questions like "Across the dataset, what is the frequency of occurrences of X?" as it requires counting.
+- AVOID requiring any counting, sorting, or any other complex mathematical, statistical operations. For example, avoid questions like "Across the dataset, what is the frequency of occurrences of X?" as it requires counting.
 - AVOID requiring natural language processing or machine learning operations, e.g., sentiment analysis, keyword counting.
 
 The output question set should be distinct and diverse, avoiding repetitive questions.

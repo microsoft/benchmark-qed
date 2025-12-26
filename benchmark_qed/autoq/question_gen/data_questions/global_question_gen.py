@@ -1,6 +1,8 @@
 # Copyright (c) 2025 Microsoft Corporation.
 """Data-global question generation module."""
 
+from __future__ import annotations
+
 import asyncio
 import json
 import logging
@@ -9,13 +11,11 @@ import uuid
 from collections import defaultdict
 from dataclasses import dataclass
 from pathlib import Path
-from string import Template
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
 from tqdm.asyncio import tqdm_asyncio
 
 import benchmark_qed.config.defaults as defs
-from benchmark_qed.autod.data_processor.embedding import TextEmbedder
 from benchmark_qed.autod.data_processor.text_utils import try_parse_json_object
 from benchmark_qed.autod.sampler.enums import ClusterRepresentativeSelectionType
 from benchmark_qed.autod.sampler.sampling.kmeans_sampler import KmeansTextSampler
@@ -23,12 +23,24 @@ from benchmark_qed.autoq.data_model.enums import QuestionType
 from benchmark_qed.autoq.data_model.question import Question
 from benchmark_qed.autoq.prompts.data_questions import global_questions
 from benchmark_qed.autoq.question_gen.base import BaseQuestionGen, QuestionGenResult
+from benchmark_qed.autoq.question_gen.data_questions.assertion_gen import (
+    AssertionValidator,
+    GlobalClaimAssertionGenerator,
+)
 from benchmark_qed.autoq.question_gen.data_questions.claim_extractor.global_claim_extractor import (
     DataGlobalClaimExtractor,
 )
 from benchmark_qed.autoq.sampler.question_sampler import QuestionSampler
 from benchmark_qed.config.utils import load_template_file
-from benchmark_qed.llm.type.base import ChatModel
+
+if TYPE_CHECKING:
+    from string import Template
+
+    import tiktoken
+
+    from benchmark_qed.autod.data_processor.embedding import TextEmbedder
+    from benchmark_qed.autoq.config import AssertionConfig, AssertionPromptConfig
+    from benchmark_qed.llm.type.base import ChatModel
 
 log: logging.Logger = logging.getLogger(__name__)
 
@@ -46,15 +58,24 @@ class DataGlobalQuestionContext:
 
 
 class DataGlobalQuestionGen(BaseQuestionGen):
-    """Generate data-global questions for a given dataset from a set of local questions."""
+    """
+    Generate data-global questions for a given dataset from a set of local questions.
+
+    Supports optional assertion generation after claim extraction to create
+    testable facts that can be used for answer accuracy evaluation. Configure
+    assertion generation using the assertion_config parameter.
+    """
 
     def __init__(
         self,
         llm: ChatModel,
         text_embedder: TextEmbedder,
         local_questions: list[Question],
+        token_encoder: tiktoken.Encoding | None = None,
         question_sampler: QuestionSampler | None = None,
         claim_extractor_params: dict[str, Any] | None = None,
+        assertion_config: AssertionConfig | None = None,
+        assertion_prompt_config: AssertionPromptConfig | None = None,
         llm_params: dict[str, Any] = defs.LLM_PARAMS,
         json_mode: bool = True,
         generation_system_prompt: Template | None = None,
@@ -62,8 +83,17 @@ class DataGlobalQuestionGen(BaseQuestionGen):
         concurrent_coroutines: int = 32,
         random_seed: int = defs.RANDOM_SEED,
     ) -> None:
+        # Import here to avoid circular imports
+        from benchmark_qed.autoq.config import AssertionConfig, AssertionPromptConfig
+
         if claim_extractor_params is None:
             claim_extractor_params = {}
+        if assertion_config is None:
+            assertion_config = AssertionConfig()
+        if assertion_prompt_config is None:
+            assertion_prompt_config = AssertionPromptConfig()
+
+        self.assertion_config = assertion_config
         self.random_seed = random_seed
         if question_sampler is not None:
             question_sampler.random_seed = self.random_seed
@@ -82,6 +112,37 @@ class DataGlobalQuestionGen(BaseQuestionGen):
             )
         super().__init__(llm, llm_params, question_sampler)
         self.text_embedder = text_embedder
+        self.token_encoder = token_encoder
+
+        # Assertion generation setup (max_assertions != 0 enables it)
+        self.assertion_generator: GlobalClaimAssertionGenerator | None = None
+        global_assertion_config = assertion_config.global_
+        max_assertions = global_assertion_config.max_assertions
+        if max_assertions is None or max_assertions > 0:
+            # Create validator if validation is enabled
+            validator = None
+            if global_assertion_config.enable_validation:
+                validator = AssertionValidator(
+                    llm=llm,
+                    llm_params=llm_params,
+                    min_criterion_score=global_assertion_config.min_validation_score,
+                    validation_prompt=assertion_prompt_config.global_validation_prompt.template,
+                    concurrent_validations=global_assertion_config.concurrent_llm_calls,
+                )
+
+            self.assertion_generator = GlobalClaimAssertionGenerator(
+                llm=llm,
+                llm_params=llm_params,
+                token_encoder=self.token_encoder,
+                max_assertions=max_assertions,
+                validator=validator,
+                batch_size=global_assertion_config.batch_size,
+                max_data_tokens=global_assertion_config.max_data_tokens,
+                concurrent_coroutines=global_assertion_config.concurrent_llm_calls,
+                max_concurrent_questions=global_assertion_config.max_concurrent_questions,
+                map_system_prompt=assertion_prompt_config.global_assertion_map_prompt.template,
+                reduce_system_prompt=assertion_prompt_config.global_assertion_reduce_prompt.template,
+            )
 
         self.json_mode = json_mode
         if json_mode:
@@ -139,6 +200,23 @@ class DataGlobalQuestionGen(BaseQuestionGen):
 
         # select a subset of questions if needed
         final_questions = self.select(candidate_questions=results, top_k=num_questions)
+
+        # Generate assertions only for the final selected questions
+        max_assertions = (
+            self.assertion_config.global_.max_assertions
+            if self.assertion_config
+            else None
+        )
+        if (
+            max_assertions is None or max_assertions > 0
+        ) and self.assertion_generator is not None:
+            log.info(
+                "Generating assertions for %s final questions", len(final_questions)
+            )
+            await self.assertion_generator.agenerate_assertions_for_questions(
+                final_questions
+            )
+
         return QuestionGenResult(
             selected_questions=final_questions,
             candidate_questions=results,
@@ -239,11 +317,27 @@ class DataGlobalQuestionGen(BaseQuestionGen):
                     question_set.add(question)
 
                     # extract claims for the question
-                    claim_extraction_result = (
+                    claim_extraction_results = (
                         await self.claim_extractor.aextract_claims(
                             question, question_context.local_questions
                         )
                     )
+
+                    question_attributes = {
+                        "abstract_categories": question_context.category,
+                        "claims": claim_extraction_results.claims,
+                        "claim_count": len(claim_extraction_results.claims),
+                        "reference_coverage": claim_extraction_results.reference_coverage,
+                        "relevant_references_count": claim_extraction_results.relevant_references_count,
+                        "input_questions_count": len(question_context.local_questions),
+                    }
+
+                    # Initialize empty assertions - will be generated later for final questions only
+                    question_attributes.update({
+                        "assertions": [],
+                        "assertion_count": 0,
+                    })
+
                     results.append(
                         Question(
                             id=str(uuid.uuid4()),
@@ -251,16 +345,7 @@ class DataGlobalQuestionGen(BaseQuestionGen):
                             question_type=QuestionType.DATA_GLOBAL,
                             embedding=await self.text_embedder.embed_raw_text(question),
                             references=question_context.local_questions,
-                            attributes={
-                                "abstract_categories": question_context.category,
-                                "claims": claim_extraction_result.claims,
-                                "claim_count": len(claim_extraction_result.claims),
-                                "reference_coverage": claim_extraction_result.reference_coverage,
-                                "relevant_references_count": claim_extraction_result.relevant_references_count,
-                                "input_questions_count": len(
-                                    question_context.local_questions
-                                ),
-                            },
+                            attributes=question_attributes,
                         )
                     )
                 return results

@@ -14,6 +14,7 @@ dist/
 downloads/
 eggs/
 .eggs/
+generation/
 lib/
 lib64/
 parts/
@@ -152,6 +153,12 @@ output/
 # local artifacts
 local/
 
+# cache artifacts
+cache/
+
+# notebook cache
+docs/notebooks/cache/
+
 # mypy
 .mypy_cache/
 .dmypy.json
@@ -178,3 +185,6 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+
+# GitHub instructions
+.github/instructions/

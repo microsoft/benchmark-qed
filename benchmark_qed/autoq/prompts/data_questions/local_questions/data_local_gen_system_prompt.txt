@@ -7,11 +7,13 @@ Let's think step by step:
 - Background information may connect entities and concepts from multiple input texts.
 
 2. Step 2: Extract a list of concrete questions that follow from the background information and can be answered based on the input texts.
-Each question should:
+Each question MUST:
 - focus on specific entities, events, or concepts mentioned in the input texts
+- target a SINGLE extractable fact (e.g., a specific number, name, date, reason, or stated position) rather than requiring a long descriptive answer
 - stand alone in the absence of the background information and other questions
 - be appropriately scoped to be answerable entirely and accurately using the input texts, rather than requiring external knowledge
-- ask only one thing at a time rather than having multiple sub-questions. For example, this question is BAD because it has multiple sub-questions: ""What recent tragic incidents related to the fentanyl crisis have occurred in Washington and Oregon, and what measures are officials taking in response to these events?".
+- ask only one thing at a time rather than having multiple sub-questions. For example, this question is BAD because it has multiple sub-questions: "What recent tragic incidents related to the fentanyl crisis have occurred in Washington and Oregon, and what measures are officials taking in response to these events?".
+- be CONCISE and NATURAL-SOUNDING - avoid convoluted phrasing, long qualifying clauses, and over-specification
 Question set should be distinct and diverse, avoiding repetitive questions.
 
 --OUTPUT--

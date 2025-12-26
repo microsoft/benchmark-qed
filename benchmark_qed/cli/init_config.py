@@ -22,6 +22,9 @@ from benchmark_qed.autoq.prompts.activity_questions import (
     local_questions as activity_local_prompts,
 )
 from benchmark_qed.autoq.prompts.data_questions import (
+    assertions as autoq_assertion_prompts,
+)
+from benchmark_qed.autoq.prompts.data_questions import (
     global_questions as data_global_prompts,
 )
 from benchmark_qed.autoq.prompts.data_questions import (
@@ -177,6 +180,35 @@ data_questions_prompt_config:
       prompt: prompts/data_questions/data_local/data_local_expansion_system_prompt.txt
     data_local_gen_user_prompt:
       prompt: prompts/data_questions/data_local/data_local_gen_user_prompt.txt
+
+## Assertion Generation Configuration
+assertions:
+  local:
+    max_assertions: 20 # Maximum assertions per question. Set to 0 to disable, or null for unlimited.
+    enable_validation: true # Enable to filter low-quality assertions.
+    min_validation_score: 3 # Minimum score (1-5) for an assertion to pass validation.
+    concurrent_llm_calls: 8 # Concurrent LLM calls for validation.
+    max_concurrent_questions: 8 # Parallel questions for assertion generation. Set to 1 for sequential.
+  global:
+    max_assertions: 20 # Maximum assertions per question. Set to 0 to disable, or null for unlimited.
+    enable_validation: true # Enable to filter low-quality assertions.
+    min_validation_score: 3 # Minimum score (1-5) for an assertion to pass validation.
+    batch_size: 50 # Batch size for map-reduce processing.
+    max_data_tokens: 32000 # Maximum input tokens for the reduce step.
+    concurrent_llm_calls: 8 # Concurrent LLM calls for batch processing and validation.
+    max_concurrent_questions: 2 # Parallel questions for assertion generation. Set to 1 for sequential.
+
+assertion_prompts:
+  local_assertion_gen_prompt:
+    prompt: prompts/data_questions/assertions/local_claim_assertion_gen_prompt.txt
+  global_assertion_map_prompt:
+    prompt: prompts/data_questions/assertions/global_claim_assertion_map_prompt.txt
+  global_assertion_reduce_prompt:
+    prompt: prompts/data_questions/assertions/global_claim_assertion_reduce_prompt.txt
+  local_validation_prompt:
+    prompt: prompts/data_questions/assertions/local_validation_prompt.txt
+  global_validation_prompt:
+    prompt: prompts/data_questions/assertions/global_validation_prompt.txt
 """
 
 AUTOE_ASSERTION_CONTENT = f"""## Input Configuration
@@ -317,6 +349,10 @@ def init(
             __copy_prompts(
                 Path(data_questions_prompts.__file__).parent,
                 prompts_folder / "data_questions",
+            )
+            __copy_prompts(
+                Path(autoq_assertion_prompts.__file__).parent,
+                prompts_folder / "data_questions" / "assertions",
             )
         case ConfigType.autoe_pairwise:
             settings.write_text(AUTOE_PAIRWISE_CONTENT, encoding="utf-8")

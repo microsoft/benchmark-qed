@@ -76,6 +76,57 @@ Configuration for sampling data from clusters.
 
 ---
 
+#### `AssertionConfig`
+Configuration for assertion generation with separate settings for local and global questions.
+
+| Field | Type | Default | Description |
+|-------|------|---------|-------------|
+| `local` | `LocalAssertionConfig` | _(see below)_ | Configuration for local assertion generation. |
+| `global` | `GlobalAssertionConfig` | _(see below)_ | Configuration for global assertion generation. |
+
+---
+
+#### `LocalAssertionConfig`
+Configuration for local assertion generation.
+
+| Field | Type | Default | Description |
+|-------|------|---------|-------------|
+| `max_assertions` | `int \| None` | `20` | Maximum assertions per question. Set to `0` to disable, or `None` for unlimited. |
+| `enable_validation` | `bool` | `True` | Whether to validate assertions against source data. |
+| `min_validation_score` | `int` | `3` | Minimum score (1-5) for grounding, relevance, and verifiability. |
+| `concurrent_llm_calls` | `int` | `8` | Concurrent LLM calls for validation. |
+| `max_concurrent_questions` | `int \| None` | `8` | Questions to process in parallel. Set to `1` for sequential. |
+
+---
+
+#### `GlobalAssertionConfig`
+Configuration for global assertion generation.
+
+| Field | Type | Default | Description |
+|-------|------|---------|-------------|
+| `max_assertions` | `int \| None` | `20` | Maximum assertions per question. Set to `0` to disable, or `None` for unlimited. |
+| `enable_validation` | `bool` | `True` | Whether to validate assertions against source data. |
+| `min_validation_score` | `int` | `3` | Minimum score (1-5) for grounding, relevance, and verifiability. |
+| `batch_size` | `int` | `50` | Batch size for map-reduce claim processing. |
+| `max_data_tokens` | `int` | `32000` | Maximum input tokens for the reduce step. |
+| `concurrent_llm_calls` | `int` | `8` | Concurrent LLM calls for batch processing and validation. |
+| `max_concurrent_questions` | `int \| None` | `2` | Questions to process in parallel. Set to `1` for sequential. |
+
+---
+
+#### `AssertionPromptConfig`
+Configuration for assertion generation prompts. Each prompt can be specified as a file path or direct text.
+
+| Field | Type | Default | Description |
+|-------|------|---------|-------------|
+| `local_assertion_gen_prompt` | `PromptConfig` | _(default file)_ | Prompt for generating assertions from local claims. |
+| `global_assertion_map_prompt` | `PromptConfig` | _(default file)_ | Prompt for the map step in global assertion generation. |
+| `global_assertion_reduce_prompt` | `PromptConfig` | _(default file)_ | Prompt for the reduce step in global assertion generation. |
+| `local_validation_prompt` | `PromptConfig` | _(default file)_ | Prompt for validating local assertions (fact-focused) against source data. |
+| `global_validation_prompt` | `PromptConfig` | _(default file)_ | Prompt for validating global assertions (theme-focused) against source data. |
+
+---
+
 #### `QuestionGenerationConfig`
 Top-level configuration for the entire question generation process.
 
@@ -91,6 +142,8 @@ Top-level configuration for the entire question generation process.
 | `sampling` | `SamplingConfig` | `SamplingConfig()` | Sampling configuration. |
 | `chat_model` | `LLMConfig` | `LLMConfig()` | LLM configuration for chat. |
 | `embedding_model` | `LLMConfig` | `LLMConfig()` | LLM configuration for embeddings. |
+| `assertions` | `AssertionConfig` | `AssertionConfig()` | Assertion generation configuration. |
+| `assertion_prompts` | `AssertionPromptConfig` | `AssertionPromptConfig()` | Assertion prompt configuration. |
 
 ---
 
@@ -150,6 +203,35 @@ activity_global:
   num_personas: 5
   num_tasks_per_persona: 2
   num_entities_per_task: 5
+
+## Assertion Generation Configuration
+assertions:
+  local:
+    max_assertions: 20  # Set to 0 to disable, or null/None for unlimited
+    enable_validation: true  # Enable to filter low-quality assertions
+    min_validation_score: 3  # Minimum score (1-5) to pass validation
+    concurrent_llm_calls: 8  # Concurrent LLM calls for validation
+    max_concurrent_questions: 8  # Parallel questions for assertion generation. Set to 1 for sequential.
+  global:
+    max_assertions: 20
+    enable_validation: true
+    min_validation_score: 3
+    batch_size: 50  # Batch size for map-reduce processing
+    max_data_tokens: 32000  # Max tokens for reduce step
+    concurrent_llm_calls: 8  # Concurrent LLM calls for batch processing/validation
+    max_concurrent_questions: 2  # Parallel questions for assertion generation. Set to 1 for sequential.
+
+assertion_prompts:
+  local_assertion_gen_prompt:
+    prompt: prompts/data_questions/assertions/local_claim_assertion_gen_prompt.txt
+  global_assertion_map_prompt:
+    prompt: prompts/data_questions/assertions/global_claim_assertion_map_prompt.txt
+  global_assertion_reduce_prompt:
+    prompt: prompts/data_questions/assertions/global_claim_assertion_reduce_prompt.txt
+  local_validation_prompt:
+    prompt: prompts/data_questions/assertions/local_validation_prompt.txt
+  global_validation_prompt:
+    prompt: prompts/data_questions/assertions/global_validation_prompt.txt
 ```
 
 ```markdown
@@ -158,6 +240,59 @@ OPENAI_API_KEY=your-secret-api-key-here
 ```
 
 >💡 Note: The api_key field uses an environment variable reference `${OPENAI_API_KEY}`. Make sure to define this variable in a .env file or your environment before running the application.
+
+---
+
+## Assertion Generation
+
+Assertions are testable factual statements derived from extracted claims that can be used as "unit tests" to evaluate the accuracy of RAG system answers. Each question can have multiple assertions that verify specific facts the answer should contain.
+
+### How Assertions Work
+
+1. **Claim Extraction**: During question generation, claims (factual statements) are extracted from the source text.
+2. **Assertion Generation**: Claims are transformed into testable assertions with clear pass/fail criteria.
+3. **Optional Validation**: Assertions can be validated against source data to filter out low-quality assertions.
+
+### Assertion Types
+
+- **Local Assertions**: Generated for `data_local` questions from claims extracted from individual text chunks.
+- **Global Assertions**: Generated for `data_global` questions using a map-reduce approach across multiple source documents.
+
+### Validation
+
+When `enable_validation` is set to `true`, each assertion is scored on three criteria (1-5 scale):
+
+| Criterion | Description |
+|-----------|-------------|
+| **Grounding** | Is the assertion factually supported by the source data? |
+| **Relevance** | Is the assertion relevant to the question being asked? |
+| **Verifiability** | Can the assertion be objectively verified from an answer? |
+
+Assertions must meet the `min_validation_score` threshold on all three criteria to be included.
+
+### Controlling Assertion Limits
+
+To disable assertion generation entirely, set `max_assertions: 0` for both local and global:
+
+```yaml
+assertions:
+  local:
+    max_assertions: 0
+  global:
+    max_assertions: 0
+```
+
+To generate unlimited assertions (no cap), set `max_assertions: null`:
+
+```yaml
+assertions:
+  local:
+    max_assertions: null  # or omit to use default of 20
+  global:
+    max_assertions: null
+```
+
+---
 
 ## Providing Prompts: File or Text
 

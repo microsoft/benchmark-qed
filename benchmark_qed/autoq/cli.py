@@ -20,6 +20,8 @@ from benchmark_qed.autoq.config import (
     ActivityContextPromptConfig,
     ActivityGlobalPromptConfig,
     ActivityLocalPromptConfig,
+    AssertionConfig,
+    AssertionPromptConfig,
     DataGlobalPromptConfig,
     DataLocalPromptConfig,
     QuestionGenerationConfig,
@@ -67,6 +69,9 @@ async def __generate_data_local(
     random_seed: int,
     concurrent_requests: int,
     config: DataLocalPromptConfig,
+    assertion_config: AssertionConfig,
+    assertion_prompt_config: AssertionPromptConfig,
+    llm_params: dict[str, Any],
 ) -> None:
     sample_texts_df = pd.read_parquet(f"{output_data_path}/sample_texts.parquet")
     sample_texts = load_text_units(df=sample_texts_df)
@@ -77,9 +82,12 @@ async def __generate_data_local(
         text_units=sample_texts,
         concurrent_coroutines=concurrent_requests,
         random_seed=random_seed,
+        llm_params=llm_params,
         generation_system_prompt=config.data_local_gen_system_prompt.template,
         generation_user_prompt=config.data_local_gen_user_prompt.template,
         expansion_system_prompt=config.data_local_expansion_system_prompt.template,
+        assertion_config=assertion_config,
+        assertion_prompt_config=assertion_prompt_config,
     )
 
     data_local_question_results = await data_local_generator.agenerate(
@@ -115,6 +123,9 @@ async def __generate_data_global(
     random_seed: int,
     concurrent_requests: int,
     config: DataGlobalPromptConfig,
+    assertion_config: AssertionConfig,
+    assertion_prompt_config: AssertionPromptConfig,
+    llm_params: dict[str, Any],
 ) -> None:
     if not (
         output_data_path / "data_local_questions" / "candidate_questions.json"
@@ -134,8 +145,11 @@ async def __generate_data_global(
         local_questions=local_questions,
         concurrent_coroutines=concurrent_requests,
         random_seed=random_seed,
+        llm_params=llm_params,
         generation_system_prompt=config.data_global_gen_system_prompt.template,
         generation_user_prompt=config.data_global_gen_user_prompt.template,
+        assertion_config=assertion_config,
+        assertion_prompt_config=assertion_prompt_config,
     )
 
     data_global_question_results = await data_global_generator.agenerate(
@@ -173,6 +187,7 @@ async def __generate_activity_context(
     oversample_factor: float,
     concurrent_requests: int,
     config: ActivityContextPromptConfig,
+    llm_params: dict[str, Any],
     use_representative_samples_only: bool = True,
     skip_warning: bool = False,
 ) -> None:
@@ -195,6 +210,7 @@ async def __generate_activity_context(
         token_encoder=token_encoder,
         text_units=sample_texts,
         concurrent_coroutines=concurrent_requests,
+        llm_params=llm_params,
         activity_identification_prompt=config.activity_identification_prompt.template,
         map_system_prompt=config.data_summary_prompt_config.summary_map_system_prompt.template,
         map_user_prompt=config.data_summary_prompt_config.summary_map_user_prompt.template,
@@ -222,6 +238,7 @@ async def __generate_activity_local(
     random_seed: int,
     concurrent_requests: int,
     config: ActivityLocalPromptConfig,
+    llm_params: dict[str, Any],
 ) -> None:
     activity_context = ActivityContext(
         **json.loads(
@@ -236,6 +253,7 @@ async def __generate_activity_local(
         activity_context=activity_context,
         concurrent_coroutines=concurrent_requests,
         random_seed=random_seed,
+        llm_params=llm_params,
         generation_system_prompt=config.activity_local_gen_system_prompt.template,
         generation_user_prompt=config.activity_local_gen_user_prompt.template,
     )
@@ -273,6 +291,7 @@ async def __generate_activity_global(
     random_seed: int,
     concurrent_requests: int,
     config: ActivityGlobalPromptConfig,
+    llm_params: dict[str, Any],
 ) -> None:
     activity_context = ActivityContext(
         **json.loads(
@@ -287,6 +306,7 @@ async def __generate_activity_global(
         activity_context=activity_context,
         concurrent_coroutines=concurrent_requests,
         random_seed=random_seed,
+        llm_params=llm_params,
         generation_system_prompt=config.activity_global_gen_system_prompt.template,
         generation_user_prompt=config.activity_global_gen_user_prompt.template,
     )
@@ -398,6 +418,28 @@ def autoq(
     token_encoder = tiktoken.get_encoding(config.encoding.model_name)
     loop = asyncio.get_event_loop()
 
+    # Log assertion generation status
+    local_assertions_enabled = (
+        config.assertions.local.max_assertions is None
+        or config.assertions.local.max_assertions > 0
+    )
+    global_assertions_enabled = (
+        config.assertions.global_.max_assertions is None
+        or config.assertions.global_.max_assertions > 0
+    )
+    if local_assertions_enabled or global_assertions_enabled:
+        if (
+            config.assertions.local.enable_validation
+            or config.assertions.global_.enable_validation
+        ):
+            rich_print(
+                f"Assertion generation enabled with validation (local min score: {config.assertions.local.min_validation_score}/5, global min score: {config.assertions.global_.min_validation_score}/5)"
+            )
+        else:
+            rich_print("Assertion generation enabled (validation disabled)")
+    else:
+        rich_print("Assertion generation disabled")
+
     rich_print("Creating clustered sample from the input data...")
     loop.run_until_complete(
         __create_clustered_sample(
@@ -440,6 +482,7 @@ def autoq(
                     oversample_factor=activity_config.oversample_factor,
                     concurrent_requests=config.concurrent_requests,
                     config=config.activity_questions_prompt_config.activity_context_prompt_config,
+                    llm_params=config.chat_model.call_args,
                     skip_warning=not first_activity,
                 )
             )
@@ -456,6 +499,7 @@ def autoq(
                     config=config.activity_questions_prompt_config.activity_local_prompt_config
                     if generation_type == GenerationType.activity_local
                     else config.activity_questions_prompt_config.activity_global_prompt_config,
+                    llm_params=config.chat_model.call_args,
                 )
             )
             first_activity = False
@@ -478,6 +522,9 @@ def autoq(
                     config=config.data_questions_prompt_config.data_local_prompt_config
                     if generation_type == GenerationType.data_local
                     else config.data_questions_prompt_config.data_global_prompt_config,
+                    assertion_config=config.assertions,
+                    assertion_prompt_config=config.assertion_prompts,
+                    llm_params=config.chat_model.call_args,
                 )
             )
 
