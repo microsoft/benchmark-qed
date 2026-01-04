@@ -13,6 +13,7 @@ Your task is to extract named entities that are relevant to the user's target ta
 - relevance_score: A score between 1-100 indicating the relevance of the entity to the user's target task. A higher score indicates greater relevance.
 3. If no relevant entities are found, return an empty list.
 4. Do not include any citations in the entity description.
+5. Extract substantive entities (e.g., people, organizations, events, concepts) - NOT meta-elements like interview techniques, question patterns, or document formatting.
 
 ---OUTPUT---
 The extracted entities should be JSON formatted as follows:

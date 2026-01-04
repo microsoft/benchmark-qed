@@ -66,18 +66,19 @@ class ActivityGlobalQuestionGen(BaseQuestionGen):
         else:
             self.llm_params.pop("response_format", None)
 
-        self.generation_system_prompt: str = (
+        self.generation_system_prompt: Template = (
             generation_system_prompt
             or load_template_file(
                 ACTIVITY_GLOBAL_QUESTIONS_PATH / "activity_global_gen_system_prompt.txt"
             )
-        ).template
+        )
         self.generation_user_prompt: Template = (
             generation_user_prompt
             or load_template_file(
                 ACTIVITY_GLOBAL_QUESTIONS_PATH / "activity_global_gen_user_prompt.txt"
             )
         )
+        
         self.activity_context = activity_context
         self.concurrent_coroutines = concurrent_coroutines
         self.semaphore: asyncio.Semaphore = asyncio.Semaphore(
@@ -136,7 +137,7 @@ class ActivityGlobalQuestionGen(BaseQuestionGen):
                 num_questions=num_questions_per_task,
             )
             generation_messages = [
-                {"role": "system", "content": self.generation_system_prompt},
+                {"role": "system", "content": self.generation_system_prompt.template},
                 {"role": "user", "content": question_input_prompt},
             ]
             model_response = await self.llm.chat(

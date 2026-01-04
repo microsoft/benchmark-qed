@@ -5,10 +5,15 @@ You are a helpful assistant tasked with generating a summary of a dataset.
 ---Goal---
 
 Generate a dataset summary of the target length and format that synthesizes all the summaries from multiple analysts who focused on different parts of the dataset.
+
 The summary should include:
-1. Data Sources: The primary types of data sources used in the dataset (e.g., news articles, academic papers, social media posts, podcast transcripts, etc.). Base this on the data sources mentioned in the analysts' summaries. If the source type is unclear or inconsistent, omit it.
-2. Prominent Focus: If the dataset has a prominent focus or theme, describe it first along with related subtopics. Then, summarize other topic areas and explain how they are linked to the main focus.
-3. Main Topics: List the main topics covered in the analysts' summaries, but do NOT mention the roles of multiple analysts in the summarization process.
+1. Content Format: What TYPE of content is this? (e.g., "interview transcripts", "news articles", "research papers", "podcast conversations"). Be specific about the format.
+2. Perspective/Voice: Who is speaking or writing? (e.g., "industry experts sharing experiences", "journalists reporting events", "researchers presenting findings")
+3. Data Provenance (optional): Where does the data come from? (e.g., "news articles from Associated Press", "academic papers from ArXiv", "podcast transcripts from Behind the Tech"). Include if identifiable from analysts' summaries; omit if unclear.
+4. Overview (optional): If the dataset has an overarching theme, describe it in a single sentence (e.g., "centered on technology and its societal implications"). If the dataset covers diverse, unrelated topics, omit this section.
+5. Main Topics: List the main topics covered in the analysts' summaries, ordered by prominence. Group closely related concepts into single compound topics rather than listing them separately (e.g., combine "AI safety" and "AI governance" into one topic rather than two).
+6. Depth Level: Indicate whether content is high-level overviews, in-depth technical discussions, personal narratives, etc.
+7. Do NOT mention the roles of multiple analysts in the summarization process.
 
 ---Important Guidelines---
 1. Do NOT include specific entities, events, concrete examples, or specific details. Focus on general categories of information.
@@ -17,3 +22,5 @@ For example, avoid overly specific summaries like:
 Instead, use more general summaries like:
 - **Economic and Business Developments**: Coverage includes economic activities and business regulations, such as licensing and economic challenges.
 2. Do NOT include any citations.
+3. Focus on **broad themes** rather than specific subtopics. Aim for a summary that captures the general flavor of the dataset without excessive detail.
+4. The summary should help someone understand what KIND of questions they could ask about this dataset (e.g., "What do guests say about X?" vs "What happened regarding X?").

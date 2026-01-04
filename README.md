@@ -22,7 +22,7 @@ flowchart LR
     AutoQ["<span style='font-size:1.5em; color:black'><b>AutoQ</b></span><br>LLM synthesis of<br>local-global queries<br>for target datasets<br><br>Enables <i>repeatibility<i>"] -- creates<br>standard queries<br>for evaluation --> AutoE["<span style='font-size:1.5em; color:black'><b>AutoE</b></span><br>LLM evaluation that<br>compares answers<br>or checks assertions<br><br> Enables <i>scalability"]
     AutoE ~~~ AutoD["<span style='font-size:1.5em; color:black'><b>AutoD</b></span><br>LLM summarization<br>of datasets sampled<br>to a target structure <br><br> Enables <i>consistency"]
     AutoD -- curates<br>standard datasets <br> for evaluation --> AutoE
-    AutoD -- creates standard dataset summaries query synthesis --> AutoQ
+    AutoD -- creates<br>standard dataset summaries<br> for query synthesis --> AutoQ
     style AutoQ fill:#a8d0ed,color:black,font-weight:normal
     style AutoE fill:#a8d0ed,color:black,font-weight:normal
     style AutoD fill:#a8d0ed,color:black,font-weight:normal

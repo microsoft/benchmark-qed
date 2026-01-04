@@ -107,7 +107,7 @@ Configuration for global assertion generation.
 | `max_assertions` | `int \| None` | `20` | Maximum assertions per question. Set to `0` to disable, or `None` for unlimited. |
 | `enable_validation` | `bool` | `True` | Whether to validate assertions against source data. |
 | `min_validation_score` | `int` | `3` | Minimum score (1-5) for grounding, relevance, and verifiability. |
-| `batch_size` | `int` | `50` | Batch size for map-reduce claim processing. |
+| `batch_size` | `int` | `100` | Batch size for map-reduce claim processing. |
 | `max_data_tokens` | `int` | `32000` | Maximum input tokens for the reduce step. |
 | `concurrent_llm_calls` | `int` | `8` | Concurrent LLM calls for batch processing and validation. |
 | `max_concurrent_questions` | `int \| None` | `2` | Questions to process in parallel. Set to `1` for sequential. |
@@ -216,7 +216,7 @@ assertions:
     max_assertions: 20
     enable_validation: true
     min_validation_score: 3
-    batch_size: 50  # Batch size for map-reduce processing
+    batch_size: 100  # Batch size for map-reduce processing
     max_data_tokens: 32000  # Max tokens for reduce step
     concurrent_llm_calls: 8  # Concurrent LLM calls for batch processing/validation
     max_concurrent_questions: 2  # Parallel questions for assertion generation. Set to 1 for sequential.

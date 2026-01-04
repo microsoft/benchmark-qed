@@ -76,7 +76,7 @@ class KmeansTextSampler(BaseTextSampler):
             if num_samples_per_cluster is None:
                 num_samples_per_cluster = math.ceil(sample_size / num_clusters)
 
-        if sample_size is None or sample_size >= len(text_units):
+        if sample_size is None or sample_size > len(text_units):
             log.warning(
                 "Sample size is None or  exceeds number of text units in the corpus. Returning the entire corpus."
             )
