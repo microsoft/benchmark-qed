@@ -18,8 +18,7 @@ from tqdm.asyncio import tqdm_asyncio
 
 import benchmark_qed.config.defaults as defs
 from benchmark_qed.autod.data_processor.text_utils import try_parse_json_object
-from benchmark_qed.autod.sampler.enums import ClusterRepresentativeSelectionType
-from benchmark_qed.autod.sampler.sampling.kmeans_sampler import KmeansTextSampler
+from benchmark_qed.autod.sampler.sampling.mmr_sampler import MMRTextSampler
 from benchmark_qed.autoq.data_model.enums import QuestionType
 from benchmark_qed.autoq.data_model.question import Question
 from benchmark_qed.autoq.prompts.data_questions import global_questions
@@ -106,14 +105,12 @@ class DataGlobalQuestionGen(BaseQuestionGen):
             question_sampler.random_seed = self.random_seed
         else:
             question_sampler = QuestionSampler(
-                sampler=KmeansTextSampler(),
+                sampler=MMRTextSampler(lambda_param=0.5),
                 sampler_params={
-                    "sample_selection": ClusterRepresentativeSelectionType.ATTRIBUTE_RANKING,
-                    "ranking_attributes": [
+                    "quality_attributes": [
                         "relevant_references_count",
                         "input_questions_count",
                     ],
-                    "ascending": False,
                 },
                 random_seed=self.random_seed,
             )

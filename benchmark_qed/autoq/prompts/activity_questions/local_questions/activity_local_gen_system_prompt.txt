@@ -11,6 +11,8 @@ You will be provided with the following information:
 ---TASK---
 Generate a set of questions that are relevant to the persona's task and the provided entities.
 
+Each question MUST reference at least one source entity from the provided entity list and be specific to that source entity - not ask for patterns across the whole dataset.
+
 ---GOOD EXAMPLES (for a technology podcast transcript dataset)---
 Use VARIED question starters - don't repeat the same pattern. Good examples:
 - "What does Alex Chen say about the biggest challenges when scaling a startup?" (What does X say...)
@@ -19,17 +21,10 @@ Use VARIED question starters - don't repeat the same pattern. Good examples:
 - "According to OpenAI's GPT-4 documentation, what safety measures are required?" (According to X...)
 - "In Microsoft's 2024 AI report, how is responsible AI defined?" (In X, how/what...)
 
-IMPORTANT: Vary your question starters. Don't use "What does the dataset say/contain..." repeatedly.
-For example, instead of always writing "What does the dataset say about X?", try:
-- "How does [source] describe X?"
-- "According to [source], what is X?"
-- "In [document/report], how is X handled?"
-- "What [specific thing] does [source] mention about X?"
-
 ---INSTRUCTIONS---
 Each question MUST:
-- make a clear reference to the selected entities and the persona's target task;
-- be relevant to the persona's task and can be entirely and accurately answered based on the selected entity descriptions, rather than requiring external knowledge;
+- make a clear reference to the selected entities (e.g., use actual names, not generic terms like "guests" or "speakers") and the persona's target task;
+- be relevant to the persona's task and answerable from the selected entity's description alone, without requiring external knowledge or synthesizing across sources;
 - be SHORT and NATURAL (aim for 10-20 words) - write like a curious human would ask, avoiding convoluted phrasing, excessive qualifiers, and over-specification;
 - ask only one thing at a time rather than having multiple sub-questions. For example, this question is BAD because it has multiple sub-questions: "What recent tragic incidents related to the fentanyl crisis have occurred in Washington and Oregon, and what measures are officials taking in response to these events?";
 - avoid telegraphing the answer to the question. For example, consider this question: "Given the recent incidents in Zanzibar, what are the health implications of consuming sea turtle meat that have resulted in multiple deaths and hospitalizations?". This is a BAD output question because it telegraphs the answer by mentioning the deaths and hospitalizations as a result of consuming sea turtle meat;
@@ -46,6 +41,7 @@ Examples:
 Question set should be distinct, diverse and cover different aspects of the entities and the task. Avoid repetitive questions.
 
 ---AVOID THESE PATTERNS---
+- DO NOT ask about patterns, themes, or trends across the dataset - those are GLOBAL questions
 - DO NOT invent compound concepts by mashing unrelated entities together
 - DO NOT force awkward analogies between unrelated things
 - DO NOT cram multiple entities unnaturally into one question just to cover them
@@ -55,12 +51,6 @@ Question set should be distinct, diverse and cover different aspects of the enti
 - DO NOT start with "Why" - these presuppose claims are true. Use "How" or "What" instead (e.g., "How does X describe..." not "Why does X say...")
 - DO NOT ask meta-questions about other questions (e.g., comparing interview techniques or how different questions elicit responses)
 - DO NOT use vague, incomplete, or awkward phrasing - every question must be clear and natural-sounding on its own
-  - BAD: "How does indistinguishability from human art get used to argue for machine creativity?" - clunky noun form ("indistinguishability") and passive structure
-  - BAD: "What governance outcomes does decision documentation enable for deployed-model accountability?" - too many abstract nouns stacked together
-  - GOOD: "How do people argue that AI is creative because its art looks human-made?" - same idea, plain language
-  - GOOD: "How can documenting decisions help hold deployed AI models accountable?" - same idea, but clear and natural
-
-Each question should sound like something a real person would naturally ask when trying to learn from this dataset.
 
 ---OUTPUT---
 Use the following JSON object structure:

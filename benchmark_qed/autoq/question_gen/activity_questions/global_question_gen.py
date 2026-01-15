@@ -13,8 +13,7 @@ from typing import Any
 import benchmark_qed.config.defaults as defs
 from benchmark_qed.autod.data_processor.embedding import TextEmbedder
 from benchmark_qed.autod.data_processor.text_utils import try_parse_json_object
-from benchmark_qed.autod.sampler.enums import ClusterRepresentativeSelectionType
-from benchmark_qed.autod.sampler.sampling.kmeans_sampler import KmeansTextSampler
+from benchmark_qed.autod.sampler.sampling.mmr_sampler import MMRTextSampler
 from benchmark_qed.autoq.data_model.activity import ActivityContext, TaskContext
 from benchmark_qed.autoq.data_model.enums import QuestionType
 from benchmark_qed.autoq.data_model.question import Question
@@ -44,17 +43,15 @@ class ActivityGlobalQuestionGen(BaseQuestionGen):
         generation_user_prompt: Template | None = None,
         concurrent_coroutines: int = 32,
         random_seed: int = defs.RANDOM_SEED,
+        mmr_lambda: float = 0.5,
     ) -> None:
         self.random_seed = random_seed
         if question_sampler is not None:
             question_sampler.random_seed = random_seed
         else:
             question_sampler = QuestionSampler(
-                sampler=KmeansTextSampler(),
-                sampler_params={
-                    "sample_selection": ClusterRepresentativeSelectionType.CENTROID,
-                    "num_samples_per_cluster": 1,
-                },
+                sampler=MMRTextSampler(lambda_param=mmr_lambda),
+                sampler_params={},
             )
         super().__init__(llm, llm_params, question_sampler)
 
