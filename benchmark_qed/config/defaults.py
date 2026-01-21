@@ -27,7 +27,9 @@ MAX_DATA_TOKENS = 8000
 NUM_QUESTIONS = 50
 OVERSAMPLE_FACTOR = 2.0
 CONCURRENT_REQUESTS = 8
-MIN_QUESTIONS_IN_CONTEXT = 2  # Minimum local questions required in context for data_global
+MIN_QUESTIONS_IN_CONTEXT = (
+    2  # Minimum local questions required in context for data_global
+)
 
 # Activity question defaults
 NUM_PERSONAS = 5

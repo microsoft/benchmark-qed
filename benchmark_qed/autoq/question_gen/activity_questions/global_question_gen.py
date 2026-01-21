@@ -75,7 +75,7 @@ class ActivityGlobalQuestionGen(BaseQuestionGen):
                 ACTIVITY_GLOBAL_QUESTIONS_PATH / "activity_global_gen_user_prompt.txt"
             )
         )
-        
+
         self.activity_context = activity_context
         self.concurrent_coroutines = concurrent_coroutines
         self.semaphore: asyncio.Semaphore = asyncio.Semaphore(

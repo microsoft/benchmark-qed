@@ -52,8 +52,7 @@ class ConstraintKmeansClustering(BaseClustering):
         # Each text unit would be its own cluster
         if num_clusters >= len(text_units):
             return [
-                TextCluster(id=str(uuid4()), text_units=[unit])
-                for unit in text_units
+                TextCluster(id=str(uuid4()), text_units=[unit]) for unit in text_units
             ]
 
         # cluster using kmeans
@@ -90,16 +89,20 @@ class ConstraintKmeansClustering(BaseClustering):
                 if len(cluster) <= 1:
                     msg = f"Cluster {label} has {len(cluster)} item(s) but exceeds token size ({cluster_token_size} > {max_cluster_token_size}). Cannot split further."
                     log.warning(msg)
-                    text_clusters.append(TextCluster(id=str(uuid4()), text_units=cluster))
+                    text_clusters.append(
+                        TextCluster(id=str(uuid4()), text_units=cluster)
+                    )
                     continue
-                
+
                 # If the cluster size equals input size, we're not making progress - stop recursion
                 if len(cluster) == len(text_units):
                     msg = f"Cluster {label} has same size as input ({len(cluster)} items). Stopping to prevent infinite recursion."
                     log.warning(msg)
-                    text_clusters.append(TextCluster(id=str(uuid4()), text_units=cluster))
+                    text_clusters.append(
+                        TextCluster(id=str(uuid4()), text_units=cluster)
+                    )
                     continue
-                    
+
                 msg = f"Cluster {label} exceeds token size constraint with {cluster_token_size} tokens. Splitting into smaller clusters."
                 log.debug(msg)
 

@@ -20,13 +20,13 @@ from benchmark_qed.autod.io.enums import InputDataType
 def _save_input_docs(
     doc_prefix_path: Path, docs: list[dict[str, Any]], input_data_type: InputDataType
 ):
-    df = pd.DataFrame.from_records(data=docs)
+    dataframe = pd.DataFrame.from_records(data=docs)
     if input_data_type == InputDataType.PARQUET:
         input_path = doc_prefix_path.with_suffix(".parquet")
-        df.to_parquet(input_path)
+        dataframe.to_parquet(input_path)
     elif input_data_type == InputDataType.CSV:
         input_path = doc_prefix_path.with_suffix(".csv")
-        df.to_csv(input_path, header=True)
+        dataframe.to_csv(input_path, header=True)
     else:
         msg = f"input_data_type must be {InputDataType.CSV} or {InputDataType.PARQUET}"
         raise ValueError(msg)
@@ -276,7 +276,7 @@ def test_create_documents_text_dir_nested(tmp_path: Path):
 
     texts = {d.text for d in docs}
     assert texts == {"root doc", "nested doc"}
-    assert {d.title.split("/")[-1] for d in docs} == {"doc1", "doc2"}
+    assert {Path(d.title).name for d in docs} == {"doc1", "doc2"}
     assert {d.short_id for d in docs} == {"0", "1"}
 
 

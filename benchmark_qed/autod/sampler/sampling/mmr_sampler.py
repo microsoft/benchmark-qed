@@ -89,11 +89,14 @@ class MMRTextSampler(BaseTextSampler):
         units_with_embeddings = [u for u in text_units if u.text_embedding is not None]
         if len(units_with_embeddings) < len(text_units):
             log.warning(
-                f"Only {len(units_with_embeddings)}/{len(text_units)} text units have embeddings. "
-                "Using only units with embeddings."
+                "Only %s/%s text units have embeddings. Using only units with embeddings.",
+                len(units_with_embeddings),
+                len(text_units),
             )
         if len(units_with_embeddings) == 0:
-            log.warning("No text units have embeddings. Falling back to random sampling.")
+            log.warning(
+                "No text units have embeddings. Falling back to random sampling."
+            )
             return random.sample(text_units, min(sample_size, len(text_units)))
 
         text_units = units_with_embeddings
@@ -107,9 +110,7 @@ class MMRTextSampler(BaseTextSampler):
         embeddings_normalized = embeddings / norms
 
         # Get quality scores
-        quality_scores = self._get_quality_scores(
-            text_units, quality_attributes
-        )
+        quality_scores = self._get_quality_scores(text_units, quality_attributes)
 
         # MMR selection
         selected_indices: list[int] = []
@@ -157,8 +158,10 @@ class MMRTextSampler(BaseTextSampler):
 
         selected_units = [text_units[i] for i in selected_indices]
         log.info(
-            f"MMR selected {len(selected_units)} items from {len(text_units)} candidates "
-            f"(lambda={lam})"
+            "MMR selected %s items from %s candidates (lambda=%s)",
+            len(selected_units),
+            len(text_units),
+            lam,
         )
         return selected_units
 

@@ -30,9 +30,6 @@ from benchmark_qed.autoq.question_gen.data_questions.assertion_gen import (
 from benchmark_qed.autoq.question_gen.data_questions.claim_extractor.global_claim_extractor import (
     DataGlobalClaimExtractor,
 )
-from benchmark_qed.autoq.question_gen.data_questions.claim_extractor.typing import (
-    ClaimExtractionResult,
-)
 from benchmark_qed.autoq.sampler.question_sampler import QuestionSampler
 from benchmark_qed.config.utils import load_template_file
 
@@ -43,6 +40,9 @@ if TYPE_CHECKING:
 
     from benchmark_qed.autod.data_processor.embedding import TextEmbedder
     from benchmark_qed.autoq.config import AssertionConfig, AssertionPromptConfig
+    from benchmark_qed.autoq.question_gen.data_questions.claim_extractor.typing import (
+        ClaimExtractionResult,
+    )
     from benchmark_qed.llm.type.base import ChatModel
 
 log: logging.Logger = logging.getLogger(__name__)
@@ -166,7 +166,7 @@ class DataGlobalQuestionGen(BaseQuestionGen):
                 DATA_GLOBAL_PROMPTS_PATH / "data_global_gen_user_prompt.txt"
             )
         )
-        
+
         self.local_questions = local_questions
         self.concurrent_coroutines = concurrent_coroutines
         self.semaphore: asyncio.Semaphore = asyncio.Semaphore(
@@ -191,8 +191,10 @@ class DataGlobalQuestionGen(BaseQuestionGen):
         for i in range(0, len(question_contexts), self.concurrent_coroutines):
             batch = question_contexts[i : i + self.concurrent_coroutines]
             log.info(
-                f"Processing categories {i} to {min(i + self.concurrent_coroutines, len(question_contexts))} "
-                f"of {len(question_contexts)} categories..."
+                "Processing categories %s to %s of %s categories...",
+                i,
+                min(i + self.concurrent_coroutines, len(question_contexts)),
+                len(question_contexts),
             )
             batch_results = await tqdm_asyncio.gather(*[
                 self._agenerate_single_chain(question_context=context)
@@ -202,7 +204,11 @@ class DataGlobalQuestionGen(BaseQuestionGen):
                 question for result in batch_results for question in result
             ]
             results.extend(batch_questions)
-        log.info(f"Generated {len(results)} candidate questions from {len(self.local_questions)} local questions")
+        log.info(
+            "Generated %s candidate questions from %s local questions",
+            len(results),
+            len(self.local_questions),
+        )
 
         # select a subset of questions if needed
         final_questions = self.select(candidate_questions=results, top_k=num_questions)
@@ -245,8 +251,10 @@ class DataGlobalQuestionGen(BaseQuestionGen):
         ]
 
         log.info(
-            f"Categories: {len(category_to_questions)} total, "
-            f"{len(valid_categories)} valid (>={self.min_questions_in_context} questions)"
+            "Categories: %s total, %s valid (>=%s questions)",
+            len(category_to_questions),
+            len(valid_categories),
+            self.min_questions_in_context,
         )
 
         category_counts = self._compute_category_counts(
@@ -287,9 +295,11 @@ class DataGlobalQuestionGen(BaseQuestionGen):
         num_questions: int,
     ) -> dict[str, int]:
         """Sample categories with probability proportional to log(question_count)."""
-        rng = random.Random(self.random_seed)
+        rng = random.Random(self.random_seed)  # noqa: S311
         # Use log(count + 1) to handle edge cases and compress weights
-        weights = [math.log(len(category_to_questions[c]) + 1) for c in valid_categories]
+        weights = [
+            math.log(len(category_to_questions[c]) + 1) for c in valid_categories
+        ]
         sampled = rng.choices(valid_categories, weights=weights, k=num_questions)
 
         counts: dict[str, int] = defaultdict(int)
@@ -297,9 +307,12 @@ class DataGlobalQuestionGen(BaseQuestionGen):
             counts[cat] += 1
 
         log.info(
-            f"Weighted sampling (seed={self.random_seed}): "
-            f"{len(counts)} unique categories from {len(valid_categories)}, "
-            f"questions/category: {min(counts.values())}-{max(counts.values())}"
+            "Weighted sampling (seed=%s): %s unique categories from %s, questions/category: %s-%s",
+            self.random_seed,
+            len(counts),
+            len(valid_categories),
+            min(counts.values()),
+            max(counts.values()),
         )
         return counts
 
@@ -308,8 +321,8 @@ class DataGlobalQuestionGen(BaseQuestionGen):
     ) -> dict[str, int]:
         """Distribute questions evenly across all valid categories."""
         num_per_category = math.ceil(num_questions / len(valid_categories))
-        log.info(f"Even distribution: {num_per_category} questions per category")
-        return {cat: num_per_category for cat in valid_categories}
+        log.info("Even distribution: %s questions per category", num_per_category)
+        return dict.fromkeys(valid_categories, num_per_category)
 
     def _create_context(
         self, category: str, num_to_generate: int, local_questions: list[str]
@@ -317,9 +330,7 @@ class DataGlobalQuestionGen(BaseQuestionGen):
         """Create a single question generation context."""
         questions_text = "\n".join(local_questions)
         context_text = (
-            f"Category: {category}\n\n"
-            f"Local questions:\n\n"
-            f"{questions_text}\n\n---\n\n"
+            f"Category: {category}\n\nLocal questions:\n\n{questions_text}\n\n---\n\n"
         )
         return DataGlobalQuestionContext(
             category=category,
@@ -336,7 +347,9 @@ class DataGlobalQuestionGen(BaseQuestionGen):
         try:
             async with self.semaphore:
                 # Generate questions from LLM
-                unique_questions = await self._generate_unique_questions(question_context)
+                unique_questions = await self._generate_unique_questions(
+                    question_context
+                )
                 if not unique_questions:
                     return []
 
@@ -351,7 +364,7 @@ class DataGlobalQuestionGen(BaseQuestionGen):
                 )
 
         except Exception:
-            log.exception(f"Exception for category: {question_context.category}")
+            log.exception("Exception for category: %s", question_context.category)
             return []
 
     async def _generate_unique_questions(
@@ -401,7 +414,9 @@ class DataGlobalQuestionGen(BaseQuestionGen):
 
         async def extract_claims(question: str) -> ClaimExtractionResult:
             async with claim_semaphore:
-                return await self.claim_extractor.aextract_claims(question, local_questions)
+                return await self.claim_extractor.aextract_claims(
+                    question, local_questions
+                )
 
         claim_tasks = [extract_claims(q) for q in questions]
         embedding_tasks = [self.text_embedder.embed_raw_text(q) for q in questions]
@@ -421,7 +436,9 @@ class DataGlobalQuestionGen(BaseQuestionGen):
     ) -> list[Question]:
         """Assemble Question objects from generated questions and metadata."""
         results: list[Question] = []
-        for question, claims, embedding in zip(questions, claim_results, embeddings, strict=True):
+        for question, claims, embedding in zip(
+            questions, claim_results, embeddings, strict=True
+        ):
             results.append(
                 Question(
                     id=str(uuid.uuid4()),
