@@ -6,13 +6,18 @@ You will be given descriptions of a user and their target task, along with a set
 Your task is to extract named entities that are relevant to the user's target task from the source texts.
 
 ---IMPORTANT GUIDELINES---
-1. The extracted named named entities must clearly demonstrate relevance to the user's target task.
-2. Each extracted entity should include:
+1. Extract NAMED ENTITIES - things with specific, proper names that can be looked up (people, companies, products, places, publications, programs).
+   Do NOT extract:
+   - Abstract concepts: "User feedback loops", "Incentive systems", "High-stakes decision-making"
+   - General techniques: "Explainability", "Systems engineering", "Responsible AI"
+   - Jargon phrases: "entropy reversion to the mean", "ELIZA Effect", "compute constraints"
+2. The extracted named entities must clearly demonstrate relevance to the user's target task.
+3. Each extracted entity should include:
 - entity_name: The name of the entity.
 - entity_description: A brief description of the entity. The description should also explain why the entity is relevant to the user's target task.
 - relevance_score: A score between 1-100 indicating the relevance of the entity to the user's target task. A higher score indicates greater relevance.
-3. If no relevant entities are found, return an empty list.
-4. Do not include any citations in the entity description.
+4. If no relevant entities are found, return an empty list.
+5. Do not include any citations in the entity description.
 
 ---OUTPUT---
 The extracted entities should be JSON formatted as follows:

@@ -7,6 +7,7 @@ import asyncio
 import json
 import logging
 import math
+import random
 import uuid
 from collections import defaultdict
 from dataclasses import dataclass
@@ -17,8 +18,7 @@ from tqdm.asyncio import tqdm_asyncio
 
 import benchmark_qed.config.defaults as defs
 from benchmark_qed.autod.data_processor.text_utils import try_parse_json_object
-from benchmark_qed.autod.sampler.enums import ClusterRepresentativeSelectionType
-from benchmark_qed.autod.sampler.sampling.kmeans_sampler import KmeansTextSampler
+from benchmark_qed.autod.sampler.sampling.mmr_sampler import MMRTextSampler
 from benchmark_qed.autoq.data_model.enums import QuestionType
 from benchmark_qed.autoq.data_model.question import Question
 from benchmark_qed.autoq.prompts.data_questions import global_questions
@@ -40,6 +40,9 @@ if TYPE_CHECKING:
 
     from benchmark_qed.autod.data_processor.embedding import TextEmbedder
     from benchmark_qed.autoq.config import AssertionConfig, AssertionPromptConfig
+    from benchmark_qed.autoq.question_gen.data_questions.claim_extractor.typing import (
+        ClaimExtractionResult,
+    )
     from benchmark_qed.llm.type.base import ChatModel
 
 log: logging.Logger = logging.getLogger(__name__)
@@ -82,8 +85,9 @@ class DataGlobalQuestionGen(BaseQuestionGen):
         generation_user_prompt: Template | None = None,
         concurrent_coroutines: int = 32,
         random_seed: int = defs.RANDOM_SEED,
+        use_weighted_sampling: bool = True,
+        min_questions_in_context: int = defs.MIN_QUESTIONS_IN_CONTEXT,
     ) -> None:
-        # Import here to avoid circular imports
         from benchmark_qed.autoq.config import AssertionConfig, AssertionPromptConfig
 
         if claim_extractor_params is None:
@@ -95,18 +99,18 @@ class DataGlobalQuestionGen(BaseQuestionGen):
 
         self.assertion_config = assertion_config
         self.random_seed = random_seed
+        self.use_weighted_sampling = use_weighted_sampling
+        self.min_questions_in_context = min_questions_in_context
         if question_sampler is not None:
             question_sampler.random_seed = self.random_seed
         else:
             question_sampler = QuestionSampler(
-                sampler=KmeansTextSampler(),
+                sampler=MMRTextSampler(lambda_param=0.5),
                 sampler_params={
-                    "sample_selection": ClusterRepresentativeSelectionType.ATTRIBUTE_RANKING,
-                    "ranking_attributes": [
+                    "quality_attributes": [
                         "relevant_references_count",
                         "input_questions_count",
                     ],
-                    "ascending": False,
                 },
                 random_seed=self.random_seed,
             )
@@ -162,6 +166,7 @@ class DataGlobalQuestionGen(BaseQuestionGen):
                 DATA_GLOBAL_PROMPTS_PATH / "data_global_gen_user_prompt.txt"
             )
         )
+
         self.local_questions = local_questions
         self.concurrent_coroutines = concurrent_coroutines
         self.semaphore: asyncio.Semaphore = asyncio.Semaphore(
@@ -184,9 +189,13 @@ class DataGlobalQuestionGen(BaseQuestionGen):
 
         results: list[Question] = []
         for i in range(0, len(question_contexts), self.concurrent_coroutines):
-            msg = f"Processing categories {i} to {min(i + self.concurrent_coroutines, len(question_contexts))} of {len(question_contexts)} categories..."
-            log.info(msg)
             batch = question_contexts[i : i + self.concurrent_coroutines]
+            log.info(
+                "Processing categories %s to %s of %s categories...",
+                i,
+                min(i + self.concurrent_coroutines, len(question_contexts)),
+                len(question_contexts),
+            )
             batch_results = await tqdm_asyncio.gather(*[
                 self._agenerate_single_chain(question_context=context)
                 for context in batch
@@ -195,8 +204,11 @@ class DataGlobalQuestionGen(BaseQuestionGen):
                 question for result in batch_results for question in result
             ]
             results.extend(batch_questions)
-        msg = f"Generated {len(results)} candidate questions from {len(self.local_questions)} local questions."
-        log.info(msg)
+        log.info(
+            "Generated %s candidate questions from %s local questions",
+            len(results),
+            len(self.local_questions),
+        )
 
         # select a subset of questions if needed
         final_questions = self.select(candidate_questions=results, top_k=num_questions)
@@ -231,47 +243,101 @@ class DataGlobalQuestionGen(BaseQuestionGen):
 
         Each context consists of a set of local questions sharing the same abstract category.
         """
-        category_to_question = defaultdict(list)
+        category_to_questions = self._group_questions_by_category()
+        valid_categories = [
+            c
+            for c in category_to_questions
+            if len(category_to_questions[c]) >= self.min_questions_in_context
+        ]
+
+        log.info(
+            "Categories: %s total, %s valid (>=%s questions)",
+            len(category_to_questions),
+            len(valid_categories),
+            self.min_questions_in_context,
+        )
+
+        category_counts = self._compute_category_counts(
+            valid_categories, category_to_questions, num_questions
+        )
+
+        return [
+            self._create_context(category, count, category_to_questions[category])
+            for category, count in category_counts.items()
+        ]
+
+    def _group_questions_by_category(self) -> dict[str, list[str]]:
+        """Group local questions by their abstract categories."""
+        category_to_questions: dict[str, list[str]] = defaultdict(list)
         for question in self.local_questions:
             if question.attributes and "abstract_categories" in question.attributes:
-                categories = question.attributes["abstract_categories"]
-                for category in categories:
-                    category_to_question[category].append(question.text)
+                for category in question.attributes["abstract_categories"]:
+                    category_to_questions[category].append(question.text)
+        return category_to_questions
 
-        # filter out categories with only one question and sort the categories by the number of questions
-        sorted_cats = sorted(
-            [c for c in category_to_question if len(category_to_question[c]) > 1],
-            key=lambda x: len(category_to_question[x]),
-            reverse=True,
-        )
-
-        # Calculate the number of questions per category
-        num_questions_per_category = math.ceil(num_questions / len(sorted_cats))
-        msg = (
-            f"Number of initial categories: {len(category_to_question)}\n"
-            f"Number of valid candidate categories (i.e. categories with more than one input question): {len(sorted_cats)}\n"
-            f"Number of questions to generate per candidate category: {num_questions_per_category}"
-        )
-        log.info(msg)
-
-        contexts: list[DataGlobalQuestionContext] = []
-        for category in sorted_cats:
-            context_text = (
-                f"Category: {category}"
-                + "\n\nLocal questions:\n\n"
-                + "\n".join(category_to_question[category])
-                + "\n\n---\n\n"
+    def _compute_category_counts(
+        self,
+        valid_categories: list[str],
+        category_to_questions: dict[str, list[str]],
+        num_questions: int,
+    ) -> dict[str, int]:
+        """Determine how many questions to generate per category."""
+        if self.use_weighted_sampling:
+            return self._weighted_sample_categories(
+                valid_categories, category_to_questions, num_questions
             )
-            contexts.append(
-                DataGlobalQuestionContext(
-                    category=category,
-                    local_questions=category_to_question[category],
-                    num_generated_questions=num_questions_per_category,
-                    context_text=context_text,
-                )
-            )
+        return self._even_distribute_categories(valid_categories, num_questions)
 
-        return contexts
+    def _weighted_sample_categories(
+        self,
+        valid_categories: list[str],
+        category_to_questions: dict[str, list[str]],
+        num_questions: int,
+    ) -> dict[str, int]:
+        """Sample categories with probability proportional to log(question_count)."""
+        rng = random.Random(self.random_seed)  # noqa: S311
+        # Use log(count + 1) to handle edge cases and compress weights
+        weights = [
+            math.log(len(category_to_questions[c]) + 1) for c in valid_categories
+        ]
+        sampled = rng.choices(valid_categories, weights=weights, k=num_questions)
+
+        counts: dict[str, int] = defaultdict(int)
+        for cat in sampled:
+            counts[cat] += 1
+
+        log.info(
+            "Weighted sampling (seed=%s): %s unique categories from %s, questions/category: %s-%s",
+            self.random_seed,
+            len(counts),
+            len(valid_categories),
+            min(counts.values()),
+            max(counts.values()),
+        )
+        return counts
+
+    def _even_distribute_categories(
+        self, valid_categories: list[str], num_questions: int
+    ) -> dict[str, int]:
+        """Distribute questions evenly across all valid categories."""
+        num_per_category = math.ceil(num_questions / len(valid_categories))
+        log.info("Even distribution: %s questions per category", num_per_category)
+        return dict.fromkeys(valid_categories, num_per_category)
+
+    def _create_context(
+        self, category: str, num_to_generate: int, local_questions: list[str]
+    ) -> DataGlobalQuestionContext:
+        """Create a single question generation context."""
+        questions_text = "\n".join(local_questions)
+        context_text = (
+            f"Category: {category}\n\nLocal questions:\n\n{questions_text}\n\n---\n\n"
+        )
+        return DataGlobalQuestionContext(
+            category=category,
+            local_questions=local_questions,
+            num_generated_questions=num_to_generate,
+            context_text=context_text,
+        )
 
     async def _agenerate_single_chain(
         self,
@@ -280,77 +346,116 @@ class DataGlobalQuestionGen(BaseQuestionGen):
         """Generate questions for a single input text."""
         try:
             async with self.semaphore:
-                # get an initial set of question from the input text
-                extraction_messages = [
-                    {
-                        "role": "system",
-                        "content": self.extraction_prompt.substitute(
-                            num_questions=question_context.num_generated_questions
-                        ),
-                    },
-                    {
-                        "role": "user",
-                        "content": self.extraction_input_prompt.substitute(
-                            input_text=question_context.context_text,
-                            num_questions=question_context.num_generated_questions,
-                        ),
-                    },
-                ]
-                questions_result = await self.llm.chat(
-                    messages=extraction_messages, **self.llm_params
+                # Generate questions from LLM
+                unique_questions = await self._generate_unique_questions(
+                    question_context
                 )
-                questions, j = try_parse_json_object(questions_result.output.content)
-                if j == {}:
-                    msg = f"Error parsing JSON response: {questions}"
-                    log.error(msg)
+                if not unique_questions:
                     return []
 
-                parsed_questions = json.loads(questions)
+                # Extract claims and embeddings in parallel
+                claim_results, embeddings = await self._extract_question_metadata(
+                    unique_questions, question_context.local_questions
+                )
 
-                results: list[Question] = []
-                question_set = set()
-                for question in parsed_questions["questions"]:
-                    if question in question_set:
-                        msg = f"Duplicate question to be filtered out: {question}"
-                        log.info(msg)
-                        continue
-                    question_set.add(question)
-
-                    # extract claims for the question
-                    claim_extraction_results = (
-                        await self.claim_extractor.aextract_claims(
-                            question, question_context.local_questions
-                        )
-                    )
-
-                    question_attributes = {
-                        "abstract_categories": question_context.category,
-                        "claims": claim_extraction_results.claims,
-                        "claim_count": len(claim_extraction_results.claims),
-                        "reference_coverage": claim_extraction_results.reference_coverage,
-                        "relevant_references_count": claim_extraction_results.relevant_references_count,
-                        "input_questions_count": len(question_context.local_questions),
-                    }
-
-                    # Initialize empty assertions - will be generated later for final questions only
-                    question_attributes.update({
-                        "assertions": [],
-                        "assertion_count": 0,
-                    })
-
-                    results.append(
-                        Question(
-                            id=str(uuid.uuid4()),
-                            text=question,
-                            question_type=QuestionType.DATA_GLOBAL,
-                            embedding=await self.text_embedder.embed_raw_text(question),
-                            references=question_context.local_questions,
-                            attributes=question_attributes,
-                        )
-                    )
-                return results
+                # Build Question objects
+                return self._assemble_question_objects(
+                    unique_questions, claim_results, embeddings, question_context
+                )
 
         except Exception:
-            msg = f"Exception occurred while generating questions for category: {question_context.category}"
-            log.exception(msg)
+            log.exception("Exception for category: %s", question_context.category)
             return []
+
+    async def _generate_unique_questions(
+        self, question_context: DataGlobalQuestionContext
+    ) -> list[str]:
+        """Generate questions from LLM and deduplicate."""
+        extraction_messages = [
+            {
+                "role": "system",
+                "content": self.extraction_prompt.substitute(
+                    num_questions=question_context.num_generated_questions,
+                ),
+            },
+            {
+                "role": "user",
+                "content": self.extraction_input_prompt.substitute(
+                    input_text=question_context.context_text,
+                    num_questions=question_context.num_generated_questions,
+                ),
+            },
+        ]
+        questions_result = await self.llm.chat(
+            messages=extraction_messages, **self.llm_params
+        )
+        questions, j = try_parse_json_object(questions_result.output.content)
+        if j == {}:
+            msg = f"Error parsing JSON response: {questions}"
+            log.error(msg)
+            return []
+
+        parsed_questions = json.loads(questions)
+
+        # Deduplicate
+        unique_questions = []
+        question_set: set[str] = set()
+        for question in parsed_questions["questions"]:
+            if question not in question_set:
+                question_set.add(question)
+                unique_questions.append(question)
+        return unique_questions
+
+    async def _extract_question_metadata(
+        self, questions: list[str], local_questions: list[str]
+    ) -> tuple[list[ClaimExtractionResult], list[list[float]]]:
+        """Extract claims and compute embeddings for all questions in parallel."""
+        claim_semaphore = asyncio.Semaphore(self.concurrent_coroutines)
+
+        async def extract_claims(question: str) -> ClaimExtractionResult:
+            async with claim_semaphore:
+                return await self.claim_extractor.aextract_claims(
+                    question, local_questions
+                )
+
+        claim_tasks = [extract_claims(q) for q in questions]
+        embedding_tasks = [self.text_embedder.embed_raw_text(q) for q in questions]
+
+        claim_results, embeddings = await asyncio.gather(
+            asyncio.gather(*claim_tasks),
+            asyncio.gather(*embedding_tasks),
+        )
+        return claim_results, embeddings
+
+    def _assemble_question_objects(
+        self,
+        questions: list[str],
+        claim_results: list[ClaimExtractionResult],
+        embeddings: list[list[float]],
+        question_context: DataGlobalQuestionContext,
+    ) -> list[Question]:
+        """Assemble Question objects from generated questions and metadata."""
+        results: list[Question] = []
+        for question, claims, embedding in zip(
+            questions, claim_results, embeddings, strict=True
+        ):
+            results.append(
+                Question(
+                    id=str(uuid.uuid4()),
+                    text=question,
+                    question_type=QuestionType.DATA_GLOBAL,
+                    embedding=embedding,
+                    references=question_context.local_questions,
+                    attributes={
+                        "abstract_categories": question_context.category,
+                        "claims": claims.claims,
+                        "claim_count": len(claims.claims),
+                        "reference_coverage": claims.reference_coverage,
+                        "relevant_references_count": claims.relevant_references_count,
+                        "input_questions_count": len(question_context.local_questions),
+                        "assertions": [],
+                        "assertion_count": 0,
+                    },
+                )
+            )
+        return results

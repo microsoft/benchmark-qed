@@ -11,11 +11,21 @@ You will be provided with the following information:
 ---TASK---
 Generate a set of questions that are relevant to the persona's task and the provided entities.
 
+Each question MUST reference at least one source entity from the provided entity list and be specific to that source entity - not ask for patterns across the whole dataset.
+
+---GOOD EXAMPLES (for a technology podcast transcript dataset)---
+Use VARIED question starters - don't repeat the same pattern. Good examples:
+- "What does Alex Chen say about the biggest challenges when scaling a startup?" (What does X say...)
+- "How does Maria Garcia describe the company's approach to AI product strategy?" (How does X describe...)
+- "Which companies does David Park mention as leading the way in AI adoption?" (Which X does Y mention...)
+- "According to OpenAI's GPT-4 documentation, what safety measures are required?" (According to X...)
+- "In Microsoft's 2024 AI report, how is responsible AI defined?" (In X, how/what...)
+
 ---INSTRUCTIONS---
 Each question MUST:
-- make a clear reference to the selected entities and the persona's target task;
-- be relevant to the persona's task and can be entirely and accurately answered based on the selected entity descriptions, rather than requiring external knowledge;
-- be SHORT, CONCISE, and NATURAL-SOUNDING - avoid convoluted phrasing, long qualifying clauses, excessive parentheticals, and over-specification;
+- make a clear reference to the selected entities (e.g., use actual names, not generic terms like "guests" or "speakers") and the persona's target task;
+- be relevant to the persona's task and answerable from the selected entity's description alone, without requiring external knowledge or synthesizing across sources;
+- be SHORT and NATURAL (aim for 10-20 words) - write like a curious human would ask, avoiding convoluted phrasing, excessive qualifiers, and over-specification;
 - ask only one thing at a time rather than having multiple sub-questions. For example, this question is BAD because it has multiple sub-questions: "What recent tragic incidents related to the fentanyl crisis have occurred in Washington and Oregon, and what measures are officials taking in response to these events?";
 - avoid telegraphing the answer to the question. For example, consider this question: "Given the recent incidents in Zanzibar, what are the health implications of consuming sea turtle meat that have resulted in multiple deaths and hospitalizations?". This is a BAD output question because it telegraphs the answer by mentioning the deaths and hospitalizations as a result of consuming sea turtle meat;
 - stand alone in the absence of the entities and other questions;
@@ -24,12 +34,23 @@ Ensure that ALL references are clear and unambiguous, e.g., don't refer to "the 
 Do this for ALL references, and ensure that all references are absolute (e.g., summer 2024) rather than relative (e.g., this summer).
 Examples:
 
-"the proposal" -> "the proposal of the governor of California to increase funding for public schools"
-"the meeting" -> "the meeting of Contoso with their new client to discuss the upcoming project"
-"the president" -> "the president of the company, John Doe"
+"the proposal" -> "Governor Newsom's school funding proposal"
+"the meeting" -> "Contoso's client meeting in March 2024"
+"the president" -> "Acme Corp president John Doe"
 
 Question set should be distinct, diverse and cover different aspects of the entities and the task. Avoid repetitive questions.
 
+---AVOID THESE PATTERNS---
+- DO NOT ask about patterns, themes, or trends across the dataset - those are GLOBAL questions
+- DO NOT invent compound concepts by mashing unrelated entities together
+- DO NOT force awkward analogies between unrelated things
+- DO NOT cram multiple entities unnaturally into one question just to cover them
+- DO NOT use excessive jargon or buzzword chains that obscure meaning
+- DO NOT sound like marketing copy or academic abstracts rather than natural questions
+- DO NOT reference information that doesn't actually exist in the source data
+- DO NOT start with "Why" - these presuppose claims are true. Use "How" or "What" instead (e.g., "How does X describe..." not "Why does X say...")
+- DO NOT ask meta-questions about other questions (e.g., comparing interview techniques or how different questions elicit responses)
+- DO NOT use vague, incomplete, or awkward phrasing - every question must be clear and natural-sounding on its own
 
 ---OUTPUT---
 Use the following JSON object structure:

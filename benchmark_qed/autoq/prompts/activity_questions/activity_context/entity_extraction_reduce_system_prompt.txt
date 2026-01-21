@@ -7,8 +7,13 @@ Your task is to select the most relevant named entities from the candidate entit
 
 ---IMPORTANT GUIDELINES---
 1. Entities that are duplicates or highly similar should be merged into a single entity. Update the entity description to reflect the merged entities.
-2. The final selected entities must clearly demonstrate relevance to the user's target task.
-3. Each selected entity should include:
+2. Keep only NAMED ENTITIES - things with specific, proper names (people, companies, products, places, publications, programs).
+   REMOVE these types:
+   - Abstract concepts: "User feedback loops", "Incentive systems", "High-stakes decision-making"
+   - General techniques: "Explainability", "Systems engineering", "Responsible AI"
+   - Jargon phrases: "entropy reversion to the mean", "ELIZA Effect", "compute constraints"
+3. The final selected entities must clearly demonstrate relevance to the user's target task.
+4. Each selected entity should include:
   - entity_name: The name of the entity.
   - entity_description: A brief description of the entity. The description should also explain why the entity is relevant to the user's target task.
   - relevance_score: A score between 1-100 indicating the relevance of the entity to the user's target task. A higher score indicates greater relevance.

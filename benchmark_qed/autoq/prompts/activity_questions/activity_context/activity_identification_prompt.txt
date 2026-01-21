@@ -1,31 +1,62 @@
-You are a helpful assistant tasked with identifying activities related to a dataset of interest based on the dataset description.
+You are a helpful assistant tasked with identifying realistic information-seeking activities based on Activity Theory principles.
 
----Guidance---
-Based on the dataset description, create a list of ${user_count} personas who might be interested in the dataset.
+---Background: Activity Theory---
+In Activity Theory, human activity is understood as goal-directed action mediated by tools. The key components are:
+- **Subject**: A person with a specific role, motive, and context
+- **Object**: What the subject aims to transform or achieve (the desired outcome)
+- **Tool**: The instrument mediating the activity (in this case, the dataset)
 
-For each identified persona, generate a list of ${task_count} tasks that they might want to perform using the dataset.
+---Your Task---
+Based on the dataset description, identify ${user_count} distinct SUBJECTS (personas) who would use this dataset as a tool in their work.
 
-If the dataset description indicates a prominent topic area, ensure that the personas and tasks are linked to that topic area in some way.
+For each subject, generate ${task_count} OBJECTS (tasks) representing what they aim to achieve.
 
----Output---
-Output should be in JSON format, with the following structure:
+---Subject (Persona) Guidelines---
+Each persona should be:
+- A specific ROLE (e.g., "team lead at a startup", not "AI enthusiast")
+- With a clear MOTIVE driving their work
+- In a concrete CONTEXT (organization type, situation)
+
+Keep persona descriptions concise (1 sentence).
+
+---Object (Task) Guidelines---
+Each task should be:
+- An OUTCOME to achieve, not a process to follow
+- Framed as a learning goal, decision, or deliverable
+- Concise (under 15 words)
+- Broad enough to allow exploring multiple aspects of the dataset
+
+Good: "Understand how successful people navigated career transitions"
+Good: "Learn about best practices for team leadership"
+Bad: "Decide which generative AI features to ship next quarter" (too specific - limits what questions can be asked)
+Bad: "Design a comprehensive quarterly workshop series that teaches practical prototyping skills based on proven learning paths" (too long and specific)
+
+---Diversity Requirement---
+Personas and tasks must reflect the dataset's prominent themes and content.
+
+1. **Topic coverage**: Distribute personas across all major topics in the dataset description. Do not cluster around any single theme. Personas and tasks should be general and diverse enough to engage with the full range of related topics.
+2. **Theme alignment**: If the dataset has a single prominent theme (e.g., personal narratives, career journeys, expert opinions), include personas who would naturally seek that type of content.
+3. **Persona variety**: Include diverse persona types appropriate for the dataset - not just domain practitioners, but also people who might use the dataset for learning, research, or professional development.
+4. **Focus on substance**: Tasks should focus on learning from the CONTENT of the dataset (ideas, insights, facts), not on its FORMAT or structure (interview techniques, question patterns, narrative styles).
+
+---Output Format---
 {
     "personas": [
         {
-            "persona": "A description of the persona, including their potential interests",
-            "tasks": ["A list of non-duplicating tasks that the persona might want to perform using the dataset"]
+            "persona": "Role and context description (1 sentence)",
+            "tasks": ["Concise outcome-focused task", ...]
         },
         ...
     ]
 }
-Output JSON only, with no additional text or commentary.
+Output JSON only.
 
 
 ---Dataset description---
 ${dataset_description}
 
----Number of personas to identify---
+---Number of personas---
 ${user_count}
 
----Number of tasks to generate per persona---
+---Tasks per persona---
 ${task_count}

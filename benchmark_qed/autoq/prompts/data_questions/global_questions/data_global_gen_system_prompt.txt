@@ -8,21 +8,30 @@ Global questions are NOT about specific facts, entities, or events from individu
 Given a list of input local questions, generate a list of global questions that target the entire dataset.
 
 Each global question MUST:
-- begin with 'Across the dataset, ...'. Example: "Across the dataset, what are the most important strategies for improving mental health outcomes?";
 - require synthesizing information from across the dataset;
 - be relevant to the abstract category shared by the input local questions;
 - be relevant to all the input local questions, not just a subset;
 - stay grounded in the specific topics reflected in the input questions - questions should clearly relate to the subject matter;
+- be SELF-CONTAINED: Do NOT use demonstratives like "these cases", "these reports", "this issue" without an explicit referent. The question must make sense on its own without needing to see what came before.
+    - BAD: "How do these cases show tensions between individual rights and public safety?"
+    - GOOD: "How do court cases in the dataset show tensions between individual rights and public safety?"
 - be ABSTRACT, SHORT, SIMPLE, and NATURAL-SOUNDING - like a question a curious human would ask:
-    - aim for 10-25 words after "Across the dataset," (slightly longer is okay if needed for clarity)
-    - ask only one thing at a time
+    - aim for 10-15 words
+    - ask only one thing at a time - no compound questions
     - use simple, direct phrasing
-    - BAD (too long): "Across the dataset, how do shifts in regulatory guidance reshape the practical boundaries of emergency pregnancy care under overlapping state restrictions and federal obligations?"
-    - GOOD: "Across the dataset, how are changes in abortion regulations affecting access to emergency care?"
-    - BAD (too abstract): "Across the dataset, what are the most important factors?"
-    - GOOD (grounded in topic): "Across the dataset, what factors most influence vaccine hesitancy?"
+    - BAD (too long): "How do shifts in regulatory guidance reshape the practical boundaries of emergency pregnancy care under overlapping state restrictions and federal obligations?"
+    - GOOD: "How are changes in abortion regulations affecting access to emergency care?"
+    - BAD (too abstract): "What are the most important factors?"
+    - GOOD (grounded in topic): "What factors most influence vaccine hesitancy?"
 - assume the person asking only has a general sense of the dataset as context;
-- AVOID requiring any counting, sorting, or any other complex mathematical, statistical operations. For example, avoid questions like "Across the dataset, what is the frequency of occurrences of X?" as it requires counting.
+- use VARIED question types - include a mix of who, what, where, when, how, which, and why questions. Examples:
+    - Who: "who are the key figures that discuss X" or "who are the people mentioned for X"
+    - What: "what themes emerge around X" or "what examples of X appear"
+    - How: "how is X portrayed" or "how do guests describe X"
+    - Why: "why do speakers emphasize X"
+    - Which: "which approaches to X are discussed"
+  Aim for variety - if generating multiple questions, distribute them across different question types.
+- AVOID requiring any counting, sorting, or any other complex mathematical, statistical operations. For example, avoid questions like "What is the frequency of occurrences of X?" as it requires counting.
 - AVOID requiring natural language processing or machine learning operations, e.g., sentiment analysis, keyword counting.
 
 The output question set should be distinct and diverse, avoiding repetitive questions.

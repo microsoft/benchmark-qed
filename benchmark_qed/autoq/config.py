@@ -75,6 +75,15 @@ class QuestionConfig(BaseModel):
     )
 
 
+class DataGlobalQuestionConfig(QuestionConfig):
+    """Configuration for data-global question generation."""
+
+    min_questions_in_context: int = Field(
+        default=defs.MIN_QUESTIONS_IN_CONTEXT,
+        description="Minimum number of local questions required in context for data_global generation. Categories with fewer questions are excluded.",
+    )
+
+
 class LocalAssertionConfig(BaseModel):
     """Configuration for local assertion generation."""
 
@@ -445,8 +454,8 @@ class QuestionGenerationConfig(BaseModel):
         description="Configuration for generating questions from local data.",
     )
 
-    data_global: QuestionConfig = Field(
-        default_factory=QuestionConfig,
+    data_global: DataGlobalQuestionConfig = Field(
+        default_factory=DataGlobalQuestionConfig,
         description="Configuration for generating questions from global data.",
     )
 

@@ -120,6 +120,7 @@ async def __generate_data_global(
     text_embedder: TextEmbedder,
     num_questions: int,
     oversample_factor: float,
+    min_questions_in_context: int,
     random_seed: int,
     concurrent_requests: int,
     config: DataGlobalPromptConfig,
@@ -150,6 +151,7 @@ async def __generate_data_global(
         generation_user_prompt=config.data_global_gen_user_prompt.template,
         assertion_config=assertion_config,
         assertion_prompt_config=assertion_prompt_config,
+        min_questions_in_context=min_questions_in_context,
     )
 
     data_global_question_results = await data_global_generator.agenerate(
@@ -487,21 +489,20 @@ def autoq(
                 )
             )
             activity_fn = SCOPE_SOURCE_MAPPING[generation_type]
-            loop.run_until_complete(
-                activity_fn(
-                    output_data_path=output_data_path,
-                    llm=chat_model,
-                    text_embedder=text_embedder,
-                    num_questions=activity_config.num_questions,
-                    oversample_factor=activity_config.oversample_factor,
-                    random_seed=config.sampling.random_seed,
-                    concurrent_requests=config.concurrent_requests,
-                    config=config.activity_questions_prompt_config.activity_local_prompt_config
-                    if generation_type == GenerationType.activity_local
-                    else config.activity_questions_prompt_config.activity_global_prompt_config,
-                    llm_params=config.chat_model.call_args,
-                )
-            )
+            activity_fn_kwargs: dict[str, Any] = {
+                "output_data_path": output_data_path,
+                "llm": chat_model,
+                "text_embedder": text_embedder,
+                "num_questions": activity_config.num_questions,
+                "oversample_factor": activity_config.oversample_factor,
+                "random_seed": config.sampling.random_seed,
+                "concurrent_requests": config.concurrent_requests,
+                "config": config.activity_questions_prompt_config.activity_local_prompt_config
+                if generation_type == GenerationType.activity_local
+                else config.activity_questions_prompt_config.activity_global_prompt_config,
+                "llm_params": config.chat_model.call_args,
+            }
+            loop.run_until_complete(activity_fn(**activity_fn_kwargs))
             first_activity = False
         else:
             data_config = (
@@ -510,23 +511,28 @@ def autoq(
                 else config.data_global
             )
             data_fn = SCOPE_SOURCE_MAPPING[generation_type]
-            loop.run_until_complete(
-                data_fn(
-                    output_data_path=output_data_path,
-                    llm=chat_model,
-                    text_embedder=text_embedder,
-                    num_questions=data_config.num_questions,
-                    oversample_factor=data_config.oversample_factor,
-                    random_seed=config.sampling.random_seed,
-                    concurrent_requests=config.concurrent_requests,
-                    config=config.data_questions_prompt_config.data_local_prompt_config
-                    if generation_type == GenerationType.data_local
-                    else config.data_questions_prompt_config.data_global_prompt_config,
-                    assertion_config=config.assertions,
-                    assertion_prompt_config=config.assertion_prompts,
-                    llm_params=config.chat_model.call_args,
+            # Build kwargs for the data function
+            data_kwargs: dict[str, Any] = {
+                "output_data_path": output_data_path,
+                "llm": chat_model,
+                "text_embedder": text_embedder,
+                "num_questions": data_config.num_questions,
+                "oversample_factor": data_config.oversample_factor,
+                "random_seed": config.sampling.random_seed,
+                "concurrent_requests": config.concurrent_requests,
+                "config": config.data_questions_prompt_config.data_local_prompt_config
+                if generation_type == GenerationType.data_local
+                else config.data_questions_prompt_config.data_global_prompt_config,
+                "assertion_config": config.assertions,
+                "assertion_prompt_config": config.assertion_prompts,
+                "llm_params": config.chat_model.call_args,
+            }
+            # Add min_questions_in_context only for data_global
+            if generation_type == GenerationType.data_global:
+                data_kwargs["min_questions_in_context"] = (
+                    config.data_global.min_questions_in_context
                 )
-            )
+            loop.run_until_complete(data_fn(**data_kwargs))
 
     if print_model_usage:
         rich_print("Chat Model usage statistics:")

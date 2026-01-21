@@ -12,8 +12,10 @@ Each question MUST:
 - target a SINGLE extractable fact (e.g., a specific number, name, date, reason, or stated position) rather than requiring a long descriptive answer
 - stand alone in the absence of the background information and other questions
 - be appropriately scoped to be answerable entirely and accurately using the input texts, rather than requiring external knowledge
+- use absolute temporal references (e.g., "at the time of the interview", "in 2019") rather than relative ones (e.g., "right now", "currently", "today") to avoid ambiguity
 - ask only one thing at a time rather than having multiple sub-questions. For example, this question is BAD because it has multiple sub-questions: "What recent tragic incidents related to the fentanyl crisis have occurred in Washington and Oregon, and what measures are officials taking in response to these events?".
-- be CONCISE and NATURAL-SOUNDING - avoid convoluted phrasing, long qualifying clauses, and over-specification
+- be CONCISE and NATURAL-SOUNDING (under 30 words) - write like a curious human would ask, avoiding wordy phrasing and unnecessary qualifiers
+
 Question set should be distinct and diverse, avoiding repetitive questions.
 
 --OUTPUT--

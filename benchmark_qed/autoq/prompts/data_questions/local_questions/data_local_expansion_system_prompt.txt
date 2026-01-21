@@ -7,10 +7,17 @@ Let's think step by step:
 - period: The relevant period of time for the question, e.g., summer 2024.
 - location: The relevant location for the question, e.g., Boston.
 - named_entities: A list of named entities, events, or concepts that are relevant to the question.,
-- abstract_categories: A comprehensive list of abstract categories that the question falls into, e.g., 'AI technologies', 'healthcare policies', 'education', 'environment', 'security risks', 'safety concerns', 'societal impacts', or similar. Ensure the categories are general and abstract, but not overly broad. Fore example: 'issues' is too broad, 'safety issues' is at the right level of abstraction. Include as many relevant categories as possible.
+- abstract_categories: A list of 2-5 abstract categories that the question falls into. Use BROAD, REUSABLE category names that would apply to MANY questions across the dataset.
+  GOOD categories (broad, reusable): 'artificial intelligence', 'healthcare', 'education', 'career development', 'entrepreneurship', 'scientific research', 'software engineering', 'climate and environment', 'ethics and governance', 'neuroscience', 'robotics'.
+  BAD categories to AVOID:
+  - Too specific (use broader equivalent): 'bioengineering career pathways' → 'career development'; 'AI ethics' or 'AI governance' or 'AI accountability' → 'AI ethics'; 'career decision-making' or 'career history' or 'career background' → 'career development'
+  - Format/medium descriptors: 'podcast interviews', 'author interviews', 'media and journalism'
+  - Too generic/meaningless: 'biographical background', 'professional history', 'personal development', 'employment history'
+  Think: "What broad topic would a user search for to find this content?"
 
 2. STEP 2: Rewrite each input question to incorporate all necessary context from the background information, period, and place
-- Keep the question short and concise.
+- Target a SINGLE extractable fact (e.g., a specific number, name, date, reason, or stated position) rather than requiring a long descriptive answer.
+- Be CONCISE and NATURAL-SOUNDING (under 30 words) - avoid convoluted phrasing, long qualifying clauses, and over-specification.
 - Do not telegraph the answer or parts of the answer to the output question. For example, consider this output question: "Given the recent incidents in Zanzibar, what are the health implications of consuming sea turtle meat that have resulted in multiple deaths and hospitalizations?". This is a BAD output question because it telegraphs the answer by mentioning the deaths and hospitalizations as a result of consuming sea turtle meat.
 - The output question should ask only one thing at a time rather than having multiple sub-questions. For example, this question is BAD because it contains two sub-questions: ""What recent tragic incidents related to the fentanyl crisis have occurred in Washington and Oregon, and what measures are officials taking in response to these events?".
 - All references to people, places, or things should be fully described in the question. Such references should only be included if including this information materially affects the answer.
@@ -31,9 +38,9 @@ Return output as a JSON-formatted object with the following structure:
             "period": "The relevant period of time for the question, e.g., summer 2024.",
             "location": "The relevant location for the question, e.g., Boston.",
             "named_entities": "A list of named entities, events, or concepts that are relevant to the question.",
-            "abstract_categories": "A comprehensive list of abstract categories that the question falls into, e.g., 'AI technologies', 'healthcare policies', 'education', 'environment', 'security risks', 'safety concerns', 'societal impacts', or similar. Ensure the categories are general and abstract, but not overly broad. Include as many relevant categories as possible.",
+            "abstract_categories": "A list of 2-5 BROAD, REUSABLE abstract categories (e.g., 'artificial intelligence', 'healthcare', 'education', 'career development'). Use categories that would match MANY questions. AVOID overly specific categories, format/medium categories (e.g., 'podcast interviews'), or generic categories (e.g., 'biographical background').",
             "background_information": "Background information that provides context for the question, e.g., who, what, where, when, why, how, etc.",
-            "output_question": "An expanded version of the input question that must stand alone in the absence of the background information. It should incorporate all necessary context from the background information, period, and place without telegraphing the answer to the question. Keep the question short and concise. Avoid questions that contain multiple sub-questions.",
+            "output_question": "An expanded version of the input question that must stand alone in the absence of the background information. It should incorporate all necessary context from the background information, period, and place without telegraphing the answer to the question. Keep the question under 30 words - short and concise. Avoid questions that contain multiple sub-questions.",
         },
         ...
     ]
