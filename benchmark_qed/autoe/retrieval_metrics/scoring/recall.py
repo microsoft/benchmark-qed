@@ -6,12 +6,19 @@ from typing import Any
 
 import numpy as np
 
-from benchmark_qed.autod.data_model.text_unit import TextUnit
-from benchmark_qed.autod.sampler.clustering.base import create_text_unit_to_cluster_mapping
+from benchmark_qed.autod.sampler.clustering.base import (
+    create_text_unit_to_cluster_mapping,
+)
 from benchmark_qed.autod.sampler.clustering.cluster import TextCluster
-from benchmark_qed.autoe.retrieval_scores.scoring.retrieval_relevance import QueryRelevanceResult
-from benchmark_qed.autoe.retrieval_scores.reference_gen.cluster_relevance import QueryClusterReferenceResult
-from benchmark_qed.autoe.retrieval_scores.reference_gen.reference_context import get_relevant_clusters
+from benchmark_qed.autoe.retrieval_metrics.reference_gen.cluster_relevance import (
+    QueryClusterReferenceResult,
+)
+from benchmark_qed.autoe.retrieval_metrics.reference_gen.reference_context import (
+    get_relevant_clusters,
+)
+from benchmark_qed.autoe.retrieval_metrics.scoring.retrieval_relevance import (
+    QueryRelevanceResult,
+)
 
 log = logging.getLogger(__name__)
 
@@ -23,32 +30,33 @@ def get_retrieved_clusters(
 ) -> set[str]:
     """
     Get the set of clusters that were retrieved for a query based on relevant text units.
-    
+
     Args:
         query_relevance_result: QueryRelevanceResult containing relevance assessments.
         text_unit_to_cluster_mapping: Mapping from text unit ID to cluster ID.
         relevance_threshold: Minimum relevance score to consider a text unit retrieved.
-       
-    Returns:
+
+    Returns
+    -------
         Set of cluster IDs that contain relevant text units.
     """
     retrieved_clusters = set()
-    
+
     # Get relevant chunks based on the threshold
     relevant_chunks = query_relevance_result.get_relevant_chunks(relevance_threshold)
-    log.info(f"Retrieved {len(relevant_chunks)} relevant chunks for query")
-    
+    log.info("Retrieved %d relevant chunks for query", len(relevant_chunks))
+
     for chunk_info in relevant_chunks:
         text_unit = chunk_info["text_unit"]
-        
+
         # Map text unit to cluster
         if text_unit.text.strip().lower() in text_unit_to_cluster_mapping:
             cluster_id = text_unit_to_cluster_mapping[text_unit.text.strip().lower()]
             retrieved_clusters.add(cluster_id)
         else:
-            log.warning(f"Text unit ID {text_unit.text} not found in cluster mapping")
-    log.info(f"Retrieved {len(retrieved_clusters)} clusters for query")
-    
+            log.warning("Text unit ID %s not found in cluster mapping", text_unit.text)
+    log.info("Retrieved %d clusters for query", len(retrieved_clusters))
+
     return retrieved_clusters
 
 
@@ -60,9 +68,9 @@ def calculate_single_query_recall(
 ) -> dict[str, Any]:
     """
     Calculate cluster-level recall for a single query.
-    
+
     Recall = number of retrieved relevant clusters / total number of relevant clusters
-    
+
     Args:
         query_relevance_result: QueryRelevanceResult containing relevance assessments for retrieved text units.
         retrieval_reference: QueryClusterReferenceResult containing cluster relevance results.
@@ -70,7 +78,8 @@ def calculate_single_query_recall(
         relevance_threshold: Minimum relevance score to consider a cluster relevant.
         use_text_unit_short_id: Whether to use the short ID of the text unit for mapping.
 
-    Returns:
+    Returns
+    -------
         Dictionary containing recall metrics:
         - recall: Recall score (0.0 to 1.0)
         - retrieved_clusters: Number of retrieved clusters
@@ -86,26 +95,30 @@ def calculate_single_query_recall(
         relevance_threshold=relevance_threshold
     )
     relevant_cluster_ids = set(relevant_clusters_dict.keys())
-    
-    
+
+
     # Get retrieved clusters
     retrieved_cluster_ids = get_retrieved_clusters(
         query_relevance_result=query_relevance_result,
         text_unit_to_cluster_mapping=text_unit_to_cluster_mapping,
         relevance_threshold=relevance_threshold,
-        
+
     )
-    
+
     # Calculate intersection: retrieved clusters that are relevant
     retrieved_relevant_cluster_ids = retrieved_cluster_ids.intersection(relevant_cluster_ids)
-    
+
     # Calculate recall
     total_relevant_clusters = len(relevant_cluster_ids)
     retrieved_relevant_clusters = len(retrieved_relevant_cluster_ids)
-    log.info(f"Retrieved {len(retrieved_cluster_ids)} clusters out of {total_relevant_clusters} clusters")
-    
+    log.info(
+        "Retrieved %d clusters out of %d clusters",
+        len(retrieved_cluster_ids),
+        total_relevant_clusters,
+    )
+
     recall = retrieved_relevant_clusters / total_relevant_clusters if total_relevant_clusters > 0 else 0.0
-    
+
     return {
         "recall": recall,
         "retrieved_clusters": len(retrieved_cluster_ids),
@@ -127,7 +140,7 @@ def calculate_recall(
 ) -> dict[str, Any]:
     """
     Calculate cluster-level recall metrics for multiple queries.
-    
+
     Args:
         query_relevance_results: List of QueryRelevanceResult objects for multiple queries.
         retrieval_references: List of QueryClusterReferenceResult objects from assess_batch.
@@ -135,11 +148,12 @@ def calculate_recall(
         text_unit_to_cluster_mapping: Mapping from text unit ID to cluster ID.
                                     If None, will be created from clusters parameter.
         clusters: List of TextCluster objects. Required if text_unit_to_cluster_mapping is None.
-        
-    Returns:
+
+    Returns
+    -------
         Dictionary containing aggregate recall metrics:
         - macro_averaged_recall: Average recall across all queries
-        - macro_std_recall: Standard deviation of recall across queries  
+        - macro_std_recall: Standard deviation of recall across queries
         - min_recall: Minimum recall score
         - max_recall: Maximum recall score
         - micro_averaged_recall: Overall recall across all queries (total retrieved relevant / total relevant)
@@ -164,11 +178,12 @@ def calculate_recall(
             "classification_error_rate": 0.0,
             "query_details": []
         }
-    
+
     # Create text unit to cluster mapping if not provided
     if text_unit_to_cluster_mapping is None:
         if clusters is None:
-            raise ValueError("Either text_unit_to_cluster_mapping or clusters must be provided")
+            msg = "Either text_unit_to_cluster_mapping or clusters must be provided"
+            raise ValueError(msg)
         text_unit_to_cluster_mapping = create_text_unit_to_cluster_mapping(clusters)
 
     # Create a mapping from question_id to cluster relevance results
@@ -176,20 +191,22 @@ def calculate_recall(
         references.question_id: references.cluster_results
         for references in retrieval_references
     }
-    
+
     query_recalls = []
     query_details = []
     total_relevant_clusters = 0
     total_retrieved_relevant_clusters = 0
     total_classification_errors = 0
     classification_errors_per_query = []
-    
+
     for query_relevance_result in query_relevance_results:
         question_id = query_relevance_result.question_id
-        
+
         # Get cluster relevance results for this question
         if question_id not in cluster_references_by_question:
-            log.warning(f"No cluster relevance results found for question_id: {question_id}")
+            log.warning(
+                "No cluster relevance results found for question_id: %s", question_id
+            )
             continue
 
         cluster_reference = cluster_references_by_question[question_id]
@@ -200,31 +217,32 @@ def calculate_recall(
             question_text=query_relevance_result.question_text,
             cluster_results=cluster_reference
         )
-        
+
         # Calculate recall for this query
         if clusters is None:
-            raise ValueError("Clusters must be provided for calculate_recall")
-            
+            msg = "Clusters must be provided for calculate_recall"
+            raise ValueError(msg)
+
         recall_result = calculate_single_query_recall(
             query_relevance_result=query_relevance_result,
             retrieval_reference=single_query_reference,
             relevance_threshold=relevance_threshold,
             text_unit_to_cluster_mapping=text_unit_to_cluster_mapping
         )
-        
+
         query_recalls.append(recall_result["recall"])
         query_details.append({
             "question_id": question_id,
             "question_text": query_relevance_result.question_text,
             **recall_result
         })
-        
+
         # Accumulate for micro-averaged recall and classification error stats
         total_relevant_clusters += recall_result["relevant_clusters"]
         total_retrieved_relevant_clusters += recall_result["retrieved_relevant_clusters"]
         total_classification_errors += recall_result["cluster_classification_error"]
         classification_errors_per_query.append(recall_result["cluster_classification_error"])
-    
+
     if not query_recalls:
         log.warning("No valid queries processed for recall calculation")
         return {
@@ -239,26 +257,33 @@ def calculate_recall(
             "avg_classification_errors_per_query": 0.0,
             "classification_error_rate": 0.0
         }
-    
+
     macro_averaged_recall = np.mean(query_recalls)
     macro_std_recall = np.std(query_recalls)
     min_recall = np.min(query_recalls)
     max_recall = np.max(query_recalls)
     micro_averaged_recall = (
-        total_retrieved_relevant_clusters / total_relevant_clusters 
+        total_retrieved_relevant_clusters / total_relevant_clusters
         if total_relevant_clusters > 0 else 0.0
     )
-    
+
     # Calculate cluster classification error statistics
     avg_classification_errors_per_query = np.mean(classification_errors_per_query)
     total_retrieved_clusters = sum(len(detail["retrieved_cluster_ids"]) for detail in query_details)
     classification_error_rate = total_classification_errors / total_retrieved_clusters if total_retrieved_clusters > 0 else 0.0
-    
-    log.info(f"Calculated recall for {len(query_recalls)} queries: "
-             f"macro_avg={macro_averaged_recall:.3f}, micro_avg={micro_averaged_recall:.3f}, "
-             f"total_classification_errors={total_classification_errors}, "
-             f"classification_error_rate={classification_error_rate:.3f}")
-    
+
+    log.info(
+        "Calculated recall for %d queries: "
+        "macro_avg=%.3f, micro_avg=%.3f, "
+        "total_classification_errors=%d, "
+        "classification_error_rate=%.3f",
+        len(query_recalls),
+        macro_averaged_recall,
+        micro_averaged_recall,
+        total_classification_errors,
+        classification_error_rate,
+    )
+
     return {
         "macro_averaged_recall": float(macro_averaged_recall),
         "macro_std_recall": float(macro_std_recall),

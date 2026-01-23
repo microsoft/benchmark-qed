@@ -1,24 +1,31 @@
 # Copyright (c) 2025 Microsoft Corporation.
 """Base classes for relevance assessment."""
 
+import contextlib
 import hashlib
 import json
+import logging
 from abc import ABC, abstractmethod
-from datetime import datetime
+from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
 from benchmark_qed.autod.data_model.text_unit import TextUnit
-from benchmark_qed.autoe.data_model.relevance import RelevanceAssessmentItem, RelevanceAssessmentResponse
+from benchmark_qed.autoe.data_model.relevance import (
+    RelevanceAssessmentItem,
+    RelevanceAssessmentResponse,
+)
+
+log = logging.getLogger(__name__)
 
 
 class RelevanceRater(ABC):
     """Abstract base class for rating the relevance of text chunks to queries."""
 
-    def __init__(self, cache_dir: Path | None = None, cache_enabled: bool = True):
+    def __init__(self, cache_dir: Path | None = None, cache_enabled: bool = True) -> None:
         """
         Initialize the RelevanceRater with optional caching.
-        
+
         Args:
             cache_dir: Directory to store cache files. If None, caching is disabled.
             cache_enabled: Whether to enable caching functionality.
@@ -27,7 +34,7 @@ class RelevanceRater(ABC):
         self.cache_enabled = cache_enabled and cache_dir is not None
         self.cache_hits = 0
         self.cache_misses = 0
-        
+
         if self.cache_enabled and self.cache_dir:
             self.cache_dir.mkdir(parents=True, exist_ok=True)
 
@@ -41,24 +48,25 @@ class RelevanceRater(ABC):
             query: The query to assess relevance against.
             text_units: List of text units to assess.
 
-        Returns:
+        Returns
+        -------
             RelevanceAssessmentResponse containing assessment results.
         """
         if not self.cache_enabled:
             # No caching - call implementation directly
             return await self._rate_relevance_impl(query, text_units)
-        
+
         # With caching enabled, check each text unit individually
         cached_assessments = []
         uncached_text_units = []
         uncached_indices = []
-        
+
         rater_params = self._get_cache_relevant_params()
-        
+
         for i, text_unit in enumerate(text_units):
             cache_key = self._generate_cache_key(query, text_unit, rater_params)
             cached_assessment = self._load_from_cache(cache_key)
-            
+
             if cached_assessment is not None:
                 cached_assessments.append((i, cached_assessment))
                 self.cache_hits += 1
@@ -66,29 +74,29 @@ class RelevanceRater(ABC):
                 uncached_text_units.append(text_unit)
                 uncached_indices.append(i)
                 self.cache_misses += 1
-        
+
         # Process uncached text units if any
         uncached_results = []
         if uncached_text_units:
             uncached_response = await self._rate_relevance_impl(query, uncached_text_units)
             uncached_results = uncached_response.assessment
-            
+
             # Cache individual results
             for j, text_unit in enumerate(uncached_text_units):
                 cache_key = self._generate_cache_key(query, text_unit, rater_params)
                 self._save_to_cache(cache_key, query, uncached_results[j])
-        
+
         # Combine cached and uncached results in original order
         all_assessments: list[RelevanceAssessmentItem] = [None] * len(text_units)  # type: ignore
-        
+
         # Place cached results
         for original_idx, cached_assessment in cached_assessments:
             all_assessments[original_idx] = cached_assessment
-        
+
         # Place uncached results
         for j, original_idx in enumerate(uncached_indices):
             all_assessments[original_idx] = uncached_results[j]
-        
+
         return RelevanceAssessmentResponse(assessment=all_assessments)
 
     @abstractmethod
@@ -102,10 +110,10 @@ class RelevanceRater(ABC):
             query: The query to assess relevance against.
             text_units: List of text units to assess.
 
-        Returns:
+        Returns
+        -------
             RelevanceAssessmentResponse containing assessment results.
         """
-        pass
 
     def _generate_cache_key(self, query: str, text_unit: TextUnit, rater_params: dict[str, Any]) -> str:
         """Generate deterministic cache key for a single text unit assessment."""
@@ -115,7 +123,7 @@ class RelevanceRater(ABC):
             "rater_type": self.__class__.__name__,
             "rater_params": rater_params
         }
-        
+
         content_str = json.dumps(cache_data, sort_keys=True)
         return hashlib.sha256(content_str.encode()).hexdigest()
 
@@ -123,16 +131,16 @@ class RelevanceRater(ABC):
         """Load cached result for a single text unit if available."""
         if not self.cache_enabled or not self.cache_dir:
             return None
-            
+
         cache_file = self.cache_dir / f"{cache_key}.json"
         if not cache_file.exists():
             return None
-            
+
         try:
-            with open(cache_file, 'r', encoding='utf-8') as f:
+            with cache_file.open(encoding="utf-8") as f:
                 data = json.load(f)
-                return RelevanceAssessmentItem(**data['assessment_item'])
-        except Exception:
+                return RelevanceAssessmentItem(**data["assessment_item"])
+        except (OSError, json.JSONDecodeError, KeyError, TypeError):
             # If cache file is corrupted, ignore and continue
             return None
 
@@ -140,44 +148,44 @@ class RelevanceRater(ABC):
         """Save single text unit assessment result to cache."""
         if not self.cache_enabled or not self.cache_dir:
             return
-            
+
         cache_file = self.cache_dir / f"{cache_key}.json"
-        
-        # Create a copy of the assessment item without text embedding to reduce cache size
+
+        # Null out embedding before serialization to avoid Pydantic warning about numpy arrays
+        if assessment_item.text_unit is not None and assessment_item.text_unit.text_embedding is not None:
+            assessment_item.text_unit.text_embedding = None
+
         assessment_data = assessment_item.model_dump()
-        if "text_unit" in assessment_data and assessment_data["text_unit"] is not None:
-            # Remove text_embedding from the text_unit to save space
-            if "text_embedding" in assessment_data["text_unit"]:
-                assessment_data["text_unit"]["text_embedding"] = None
-        
+
         cache_data = {
-            "timestamp": datetime.now().isoformat(),
+            "timestamp": datetime.now(tz=UTC).isoformat(),
             "query": query.strip().lower(),
-            "assessment_item": assessment_data
+            "assessment_item": assessment_data,
         }
-        
+
         try:
-            with open(cache_file, 'w', encoding='utf-8') as f:
+            with cache_file.open("w", encoding="utf-8") as f:
                 json.dump(cache_data, f, indent=2)
-        except Exception:
+        except OSError:
             # If we can't write cache, continue without it
-            pass
+            log.debug("Failed to write cache file: %s", cache_file)
 
     def _get_cache_relevant_params(self) -> dict[str, Any]:
         """
         Get parameters that affect the relevance assessment results.
-        
+
         Subclasses should override this to include their specific parameters
         that could change the assessment output (LLM config, prompts, etc.).
-        
-        Returns:
+
+        Returns
+        -------
             Dictionary of parameter names to values that affect results.
         """
         return {}
 
     def get_relevant_contexts(
-        self, 
-        result: RelevanceAssessmentResponse, 
+        self,
+        result: RelevanceAssessmentResponse,
         relevance_threshold: int = 2,
     ) -> list[RelevanceAssessmentItem]:
         """
@@ -187,19 +195,21 @@ class RelevanceRater(ABC):
             result: The RelevanceAssessmentResponse containing assessment results.
             relevance_threshold: Minimum relevance score threshold (items with score >= threshold are returned).
 
-        Returns:
+        Returns
+        -------
             List of RelevanceAssessmentItem objects that meet or exceed the threshold.
         """
         return [
-            item for item in result.assessment 
+            item for item in result.assessment
             if item.score >= relevance_threshold
         ]
 
     def supports_caching(self) -> bool:
         """
         Check if this rater supports caching.
-        
-        Returns:
+
+        Returns
+        -------
             True if caching is enabled, False otherwise.
         """
         return self.cache_enabled
@@ -207,25 +217,26 @@ class RelevanceRater(ABC):
     def get_cache_stats(self) -> dict[str, Any]:
         """
         Get cache statistics.
-        
-        Returns:
+
+        Returns
+        -------
             Dictionary with cache stats.
         """
         if not self.cache_enabled:
             return {"caching_enabled": False}
-            
+
         total_requests = self.cache_hits + self.cache_misses
         hit_rate = (self.cache_hits / total_requests * 100) if total_requests > 0 else 0
-        
+
         # Count cache files
         cache_files = 0
         cache_size_mb = 0
-        
+
         if self.cache_dir and self.cache_dir.exists():
             all_cache_files = list(self.cache_dir.glob("*.json"))
             cache_files = len(all_cache_files)
             cache_size_mb = sum(f.stat().st_size for f in all_cache_files) / (1024 * 1024)
-        
+
         return {
             "caching_enabled": True,
             "cache_hits": self.cache_hits,
@@ -240,13 +251,11 @@ class RelevanceRater(ABC):
         """Clear all cached results."""
         if not self.cache_enabled or not self.cache_dir:
             return
-            
+
         for cache_file in self.cache_dir.glob("*.json"):
-            try:
+            with contextlib.suppress(Exception):
                 cache_file.unlink()
-            except Exception:
-                pass
-        
+
         # Reset statistics
         self.cache_hits = 0
         self.cache_misses = 0

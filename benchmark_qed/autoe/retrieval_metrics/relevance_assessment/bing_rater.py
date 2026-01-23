@@ -9,12 +9,17 @@ from string import Template
 from typing import Any
 
 from benchmark_qed.autod.data_model.text_unit import TextUnit
-from benchmark_qed.autoe.data_model.relevance import RelevanceAssessmentItem, RelevanceAssessmentResponse
+from benchmark_qed.autoe.data_model.relevance import (
+    RelevanceAssessmentItem,
+    RelevanceAssessmentResponse,
+)
 from benchmark_qed.autoe.prompts import retrieval as retrieval_prompts
+from benchmark_qed.autoe.retrieval_metrics.relevance_assessment.base import (
+    RelevanceRater,
+)
 from benchmark_qed.config.llm_config import LLMConfig
 from benchmark_qed.config.utils import load_template_file
 from benchmark_qed.llm.type.base import ChatModel
-from benchmark_qed.autoe.retrieval_scores.relevance_assessment.base import RelevanceRater
 
 log = logging.getLogger(__name__)
 
@@ -55,8 +60,8 @@ class BingRelevanceRater(RelevanceRater):
     def _get_cache_relevant_params(self) -> dict[str, Any]:
         """Get parameters that affect the BingRelevanceRater assessment results."""
         return {
-            "llm_model": getattr(self.llm_config, 'model', None),
-            "llm_call_args": getattr(self.llm_config, 'call_args', {}),
+            "llm_model": getattr(self.llm_config, "model", None),
+            "llm_call_args": getattr(self.llm_config, "call_args", {}),
             "prompt_template": self.prompt_template.template if self.prompt_template else None,
         }
 
@@ -70,7 +75,8 @@ class BingRelevanceRater(RelevanceRater):
             query: The query to assess relevance against.
             text_units: List of text units to assess.
 
-        Returns:
+        Returns
+        -------
             RelevanceAssessmentResponse containing assessment results.
             Score is on UMBRELA's 0-3 scale:
             0 = passage has nothing to do with the query
@@ -81,7 +87,7 @@ class BingRelevanceRater(RelevanceRater):
         if not text_units:
             return RelevanceAssessmentResponse(assessment=[])
 
-        log.info(f"Processing {len(text_units)} text units using Bing assessment prompt")
+        log.info("Processing %d text units using Bing assessment prompt", len(text_units))
         tasks = [
             self._assess_unit(query, unit, idx)
             for idx, unit in enumerate(text_units)
@@ -89,7 +95,7 @@ class BingRelevanceRater(RelevanceRater):
 
         results = await asyncio.gather(*tasks)
 
-        log.info(f"Completed Bing relevance assessment for {len(results)} text units")
+        log.info("Completed Bing relevance assessment for %d text units", len(results))
         return RelevanceAssessmentResponse(assessment=results)
 
     async def _assess_unit(
@@ -103,11 +109,12 @@ class BingRelevanceRater(RelevanceRater):
             unit: The text unit to assess.
             unit_idx: Index of the unit for logging.
 
-        Returns:
+        Returns
+        -------
             RelevanceAssessmentItem containing assessment results.
         """
         async with self.semaphore:
-            log.debug(f"Processing unit {unit_idx + 1}: {unit.id}")
+            log.debug("Processing unit %d: %s", unit_idx + 1, unit.id)
 
             # Create the prompt using UMBRELA template
             prompt_content = self.prompt_template.substitute(
@@ -136,7 +143,7 @@ class BingRelevanceRater(RelevanceRater):
                 )
 
             except Exception as e:
-                log.error(f"Error processing unit {unit.id}: {e}")
+                log.exception("Error processing unit %s", unit.id)
                 return RelevanceAssessmentItem(
                     text_unit=unit,
                     reasoning=f"Assessment failed - LLM processing error: {e}",
@@ -150,13 +157,14 @@ class BingRelevanceRater(RelevanceRater):
         Args:
             response_content: The raw response content from the LLM.
 
-        Returns:
+        Returns
+        -------
             Tuple of (score, reasoning).
         """
         # Look for the final score pattern: ##final score: X
         score_pattern = r"##final score:\s*(\d+)"
         score_match = re.search(score_pattern, response_content, re.IGNORECASE)
-        
+
         if score_match:
             try:
                 score = int(score_match.group(1))
@@ -168,14 +176,14 @@ class BingRelevanceRater(RelevanceRater):
                     if not reasoning:
                         reasoning = f"Bing assessment resulted in score {score}"
                     return score, reasoning
-                else:
-                    log.warning(f"Score {score} is out of valid range (0-3)")
-                    return -1, f"Invalid score range: {score}. Full response: {response_content}"
+                log.warning("Score %d is out of valid range (0-3)", score)
             except ValueError:
-                log.warning(f"Could not parse score from: {score_match.group(1)}")
-        
+                log.warning("Could not parse score from: %s", score_match.group(1))
+            else:
+                return -1, f"Invalid score range: {score}. Full response: {response_content}"
+
         # Fallback parsing - look for any number that could be a score
-        numbers = re.findall(r'\b([0-3])\b', response_content)
+        numbers = re.findall(r"\b([0-3])\b", response_content)
         if numbers:
             # Take the last valid number found
             try:
@@ -183,7 +191,7 @@ class BingRelevanceRater(RelevanceRater):
                 return score, f"Extracted score from response: {response_content.strip()}"
             except ValueError:
                 pass
-        
+
         # If no valid score found, return error
-        log.warning(f"Could not parse Bing score from response: {response_content}")
+        log.warning("Could not parse Bing score from response: %s", response_content)
         return -1, f"Failed to parse score. Full response: {response_content}"

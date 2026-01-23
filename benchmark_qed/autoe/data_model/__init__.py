@@ -7,8 +7,8 @@ from .reference import ReferenceLLMResponse
 from .retrieval_result import RetrievalResult, load_retrieval_results_from_dicts
 
 __all__ = [
-    "ConditionPair", 
-    "PairwiseLLMResponse", 
+    "ConditionPair",
+    "PairwiseLLMResponse",
     "ReferenceLLMResponse",
     "RetrievalResult",
     "load_retrieval_results_from_dicts",

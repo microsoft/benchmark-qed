@@ -1,6 +1,7 @@
 # Copyright (c) 2025 Microsoft Corporation.
 """Score CLI for generating scores and significance tests for different conditions."""
 
+import asyncio
 import json
 from itertools import combinations, product
 from pathlib import Path
@@ -12,7 +13,13 @@ import typer
 from rich import print as rich_print
 
 from benchmark_qed.autoe.assertion_scores import get_assertion_scores
-from benchmark_qed.autoe.config import AssertionConfig, PairwiseConfig, ReferenceConfig
+from benchmark_qed.autoe.config import (
+    AssertionConfig,
+    PairwiseConfig,
+    ReferenceConfig,
+    RetrievalReferenceConfig,
+    RetrievalScoresConfig,
+)
 from benchmark_qed.autoe.pairwise_scores import analyze_criteria, get_pairwise_scores
 from benchmark_qed.autoe.reference_scores import get_reference_scores
 from benchmark_qed.cli.utils import print_df
@@ -382,4 +389,322 @@ def assertion_scores(
         rich_print("Model usage statistics:")
         rich_print(llm_client.get_usage())
     usage_file = output / "model_usage.json"
+    usage_file.write_text(json.dumps(llm_client.get_usage()), encoding="utf-8")
+
+
+@app.command()
+def generate_retrieval_reference(
+    config_path: Annotated[
+        Path,
+        typer.Argument(help="Path to the retrieval reference configuration JSON file."),
+    ],
+    *,
+    print_model_usage: Annotated[
+        bool,
+        typer.Option(help="Whether to print the model usage statistics."),
+    ] = False,
+) -> None:
+    """Generate retrieval reference data (cluster relevance) for a question set.
+
+    This is a one-off operation that creates reference data used by retrieval_scores.
+    The reference data identifies which clusters are relevant to each question.
+
+    If clusters_path is provided, pre-computed clusters will be loaded.
+    Otherwise, text units will be loaded from text_units_path and clustered.
+    """
+    import pandas as pd
+
+    from benchmark_qed.autod.data_model.text_unit import TextUnit
+    from benchmark_qed.autod.data_processor.embedding import TextEmbedder
+    from benchmark_qed.autod.io.text_unit import load_text_units
+    from benchmark_qed.autod.sampler.clustering.cluster import TextCluster
+    from benchmark_qed.autoe.retrieval_metrics.reference_gen.cluster_relevance import (
+        ClusterRelevanceRater,
+        save_cluster_references_to_json,
+    )
+    from benchmark_qed.autoe.retrieval_metrics.relevance_assessment.bing_rater import (
+        BingRelevanceRater,
+    )
+    from benchmark_qed.autoe.retrieval_metrics.relevance_assessment.rationale_rater import (
+        RationaleRelevanceRater,
+    )
+
+    config = load_config(config_path, RetrievalReferenceConfig)
+    config.output_dir.mkdir(parents=True, exist_ok=True)
+
+    # Initialize LLM client
+    llm_client = ModelFactory.create_chat_model(config.llm_config)
+
+    # Initialize relevance rater based on config
+    if config.assessor_type == "bing":
+        relevance_rater = BingRelevanceRater(
+            llm_client=llm_client,
+            llm_config=config.llm_config,
+            cache_dir=config.cache_dir,
+            cache_enabled=config.cache_dir is not None,
+        )
+        rich_print("Using BingRelevanceRater (UMBRELA DNA prompt)")
+    else:
+        relevance_rater = RationaleRelevanceRater(
+            llm_client=llm_client,
+            llm_config=config.llm_config,
+            cache_dir=config.cache_dir,
+            cache_enabled=config.cache_dir is not None,
+        )
+        rich_print("Using RationaleRelevanceRater (structured JSON response)")
+
+    # Initialize embedding model and text embedder
+    embedding_model = ModelFactory.create_embedding_model(config.embedding_config)
+    embedder = TextEmbedder(embedding_model)
+
+    # Load corpus data (either pre-computed clusters or text units to cluster)
+    corpus: list[TextCluster] | list[TextUnit]
+
+    if config.clusters_path is not None:
+        # Load pre-computed clusters
+        rich_print(f"Loading pre-computed clusters from {config.clusters_path}...")
+        with config.clusters_path.open(encoding="utf-8") as f:
+            clusters_data = json.load(f)
+
+        clusters = []
+        for cluster_data in clusters_data:
+            text_units = [
+                TextUnit(
+                    id=tu.get("id", ""),
+                    short_id=tu.get("short_id", tu.get("id", "")),
+                    text=tu.get("text", ""),
+                    text_embedding=tu.get("text_embedding"),
+                )
+                for tu in cluster_data.get("text_units", [])
+            ]
+            cluster = TextCluster(
+                cluster_id=cluster_data["cluster_id"],
+                text_units=text_units,
+            )
+            clusters.append(cluster)
+
+        rich_print(f"Loaded {len(clusters)} pre-computed clusters")
+        corpus = clusters
+    else:
+        # Load text units and let ClusterRelevanceRater perform clustering
+        rich_print(f"Loading text units from {config.text_units_path}...")
+
+        suffix = config.text_units_path.suffix.lower()
+        if suffix == ".parquet":
+            text_df = pd.read_parquet(config.text_units_path)
+        elif suffix == ".csv":
+            text_df = pd.read_csv(config.text_units_path)
+        elif suffix in {".json", ".jsonl"}:
+            # lines=True for JSONL (one JSON object per line)
+            text_df = pd.read_json(config.text_units_path, lines=(suffix == ".jsonl"))
+        else:
+            msg = f"Unsupported file format: {suffix}. Supported: .parquet, .csv, .json, .jsonl"
+            raise ValueError(msg)
+
+        # Get field mappings from config
+        fields = config.text_unit_fields
+
+        # Validate required columns exist
+        if fields.id_col not in text_df.columns:
+            msg = f"Required column '{fields.id_col}' not found. Available: {list(text_df.columns)}"
+            raise ValueError(msg)
+        if fields.text_col not in text_df.columns:
+            msg = f"Required column '{fields.text_col}' not found. Available: {list(text_df.columns)}"
+            raise ValueError(msg)
+
+        # Check optional columns and warn if specified but missing
+        if fields.short_id_col and fields.short_id_col not in text_df.columns:
+            rich_print(f"[yellow]Column '{fields.short_id_col}' not found, will auto-generate short_id[/yellow]")
+        if fields.embedding_col and fields.embedding_col not in text_df.columns:
+            rich_print(f"[yellow]Column '{fields.embedding_col}' not found, will generate embeddings[/yellow]")
+
+        text_units = load_text_units(
+            text_df,
+            id_col=fields.id_col,
+            text_col=fields.text_col,
+            short_id_col=fields.short_id_col if fields.short_id_col and fields.short_id_col in text_df.columns else None,
+            embedding_col=fields.embedding_col if fields.embedding_col and fields.embedding_col in text_df.columns else None,
+        )
+        rich_print(f"Loaded {len(text_units)} text units")
+
+        # Check if embeddings exist and generate if needed
+        units_with_embeddings = sum(1 for tu in text_units if tu.text_embedding is not None)
+        if units_with_embeddings < len(text_units):
+            units_without = len(text_units) - units_with_embeddings
+            rich_print(f"[yellow]{units_without}/{len(text_units)} text units missing embeddings. Generating...[/yellow]")
+
+            async def embed_text_units() -> list[TextUnit]:
+                return await embedder.embed_batch(text_units=text_units, batch_size=32)
+
+            text_units = asyncio.run(embed_text_units())
+            rich_print(f"[green]Embedded {len(text_units)} text units[/green]")
+        else:
+            rich_print(f"All {len(text_units)} text units have embeddings")
+
+        corpus = text_units
+
+    # Initialize cluster relevance rater
+    # Will cluster text units if needed, or use pre-computed clusters
+    cluster_rater = ClusterRelevanceRater(
+        text_embedder=embedder,
+        relevance_rater=relevance_rater,
+        corpus=corpus,
+        semantic_neighbors=config.semantic_neighbors,
+        centroid_neighbors=config.centroid_neighbors,
+        num_clusters=config.num_clusters,
+    )
+
+    rich_print(f"Cluster relevance rater initialized with {len(cluster_rater.clusters)} clusters")
+
+    # Load questions
+    rich_print(f"Loading questions from {config.questions_path}...")
+    with config.questions_path.open(encoding="utf-8") as f:
+        questions_data = json.load(f)
+
+    # Limit questions if max_questions is set
+    if config.max_questions is not None and config.max_questions < len(questions_data):
+        questions_data = questions_data[:config.max_questions]
+        rich_print(f"Limited to {len(questions_data)} questions (max_questions={config.max_questions})")
+    else:
+        rich_print(f"Loaded {len(questions_data)} questions")
+
+    # Process questions using batch assessment
+    from benchmark_qed.autoq.data_model.question import Question
+
+    questions = [
+        Question(
+            id=q.get("question_id", q.get("id", str(i))),
+            text=q.get("text", q.get("question_text", "")),
+        )
+        for i, q in enumerate(questions_data)
+    ]
+
+    async def run_batch_assessment() -> list:
+        return await cluster_rater.assess_batch(questions)
+
+    rich_print(f"Assessing cluster relevance for {len(questions)} questions...")
+    results = asyncio.run(run_batch_assessment())
+
+    # Save results with clusters
+    output_file = config.output_dir / "reference.json"
+    save_cluster_references_to_json(
+        results,
+        output_file,
+        include_clusters=True,
+        clusters=cluster_rater.clusters,
+    )
+
+    rich_print(f"[green]Saved reference data to {output_file}[/green]")
+
+    # Print cache stats
+    cache_stats = relevance_rater.get_cache_stats()
+    if cache_stats.get("caching_enabled"):
+        rich_print(f"Cache stats: {cache_stats['cache_hits']} hits, {cache_stats['cache_misses']} misses")
+
+    if print_model_usage:
+        rich_print("Model usage statistics:")
+        rich_print(llm_client.get_usage())
+
+    usage_file = config.output_dir / "model_usage.json"
+    usage_file.write_text(json.dumps(llm_client.get_usage()), encoding="utf-8")
+
+
+@app.command()
+def retrieval_scores(
+    config_path: Annotated[
+        Path,
+        typer.Argument(help="Path to the retrieval scores configuration JSON file."),
+    ],
+    *,
+    print_model_usage: Annotated[
+        bool,
+        typer.Option(help="Whether to print the model usage statistics."),
+    ] = False,
+    max_concurrent: Annotated[
+        int,
+        typer.Option(help="Maximum concurrent relevance assessments."),
+    ] = 8,
+) -> None:
+    """Evaluate retrieval metrics (precision, recall, fidelity) for RAG methods.
+
+    Compares multiple RAG methods on retrieval quality metrics and runs
+    statistical significance tests.
+    """
+    from benchmark_qed.autoe.retrieval_metrics.relevance_assessment.rationale_rater import (
+        RationaleRelevanceRater,
+    )
+    from benchmark_qed.autoe.retrieval_metrics.scoring.fidelity import FidelityMetric
+    from benchmark_qed.autoe.retrieval_scores import (
+        load_clusters_from_json,
+        run_retrieval_evaluation,
+    )
+
+    config = load_config(config_path, RetrievalScoresConfig)
+    config.output_dir.mkdir(parents=True, exist_ok=True)
+
+    # Parse fidelity metric
+    fidelity_metric = (
+        FidelityMetric.JENSEN_SHANNON
+        if config.fidelity_metric == "js"
+        else FidelityMetric.TOTAL_VARIATION
+    )
+
+    # Initialize LLM client
+    llm_client = ModelFactory.create_chat_model(config.llm_config)
+
+    # Initialize relevance rater with caching
+    relevance_rater = RationaleRelevanceRater(
+        llm_client=llm_client,
+        llm_config=config.llm_config,
+        cache_dir=config.cache_dir,
+        cache_enabled=config.cache_dir is not None,
+    )
+
+    # Load clusters
+    rich_print(f"Loading clusters from {config.clusters_path}...")
+    clusters = load_clusters_from_json(config.clusters_path)
+    rich_print(f"Loaded {len(clusters)} clusters")
+
+    # Prepare RAG methods list
+    rag_methods = [
+        {"name": method.name, "retrieval_results_path": str(method.retrieval_results_path)}
+        for method in config.rag_methods
+    ]
+
+    # Run evaluation
+    asyncio.run(
+        run_retrieval_evaluation(
+            relevance_rater=relevance_rater,
+            rag_methods=rag_methods,
+            question_sets=config.question_sets,
+            reference_dir=config.reference_dir,
+            clusters=clusters,
+            output_dir=config.output_dir,
+            relevance_threshold=config.relevance_threshold,
+            context_id_key=config.context_id_key,
+            context_text_key=config.context_text_key,
+            run_significance_test=config.run_significance_test,
+            significance_alpha=config.significance_alpha,
+            significance_correction=config.significance_correction,
+            fidelity_metric=fidelity_metric,
+            max_concurrent=max_concurrent,
+        )
+    )
+
+    rich_print(f"\n[green]Results saved to {config.output_dir}[/green]")
+
+    # Print cache stats
+    cache_stats = relevance_rater.get_cache_stats()
+    if cache_stats.get("caching_enabled"):
+        rich_print(
+            f"Cache stats: {cache_stats['cache_hits']} hits, "
+            f"{cache_stats['cache_misses']} misses "
+            f"({cache_stats['hit_rate_percent']}% hit rate)"
+        )
+
+    if print_model_usage:
+        rich_print("Model usage statistics:")
+        rich_print(llm_client.get_usage())
+
+    usage_file = config.output_dir / "model_usage.json"
     usage_file.write_text(json.dumps(llm_client.get_usage()), encoding="utf-8")

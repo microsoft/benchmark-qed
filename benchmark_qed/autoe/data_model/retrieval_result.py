@@ -1,9 +1,11 @@
 # Copyright (c) 2025 Microsoft Corporation.
 """Data model for retrieval results in retrieval scoring."""
 
-from typing import Any, Sequence
+from collections.abc import Sequence
+from typing import Any
 
 from pydantic import BaseModel, Field, model_validator
+
 from benchmark_qed.autod.data_model.text_unit import TextUnit
 
 
@@ -22,21 +24,25 @@ class RetrievalResult(BaseModel):
     def validate_retrieval_result(self) -> "RetrievalResult":
         """Validate the RetrievalResult after initialization."""
         if not self.question_id:
-            raise ValueError("question_id cannot be empty")
+            msg = "question_id cannot be empty"
+            raise ValueError(msg)
         if not self.question_text:
-            raise ValueError("question_text cannot be empty")
+            msg = "question_text cannot be empty"
+            raise ValueError(msg)
         if not isinstance(self.context, list):
-            raise ValueError("context must be a list")
-        
+            msg = "context must be a list"
+            raise TypeError(msg)
+
         # Validate context items
         for i, item in enumerate(self.context):
             if not isinstance(item, TextUnit) and not (
                 isinstance(item, dict) and self.context_id_key in item and self.context_text_key in item
             ):
-                raise ValueError(
-                    f"Context item {i} must be TextUnit or dict with '{self.context_id_key}' and '{self.context_text_key}' keys, "
-                    f"got: {type(item)}"
+                msg = (
+                    f"Context item {i} must be TextUnit or dict with '{self.context_id_key}' "
+                    f"and '{self.context_text_key}' keys, got: {type(item)}"
                 )
+                raise ValueError(msg)
         return self
 
     @property
@@ -76,18 +82,18 @@ class RetrievalResult(BaseModel):
 
 
 def load_retrieval_results_from_dicts(
-    data: list[dict[str, Any]], 
-    context_id_key: str = "source_id", 
+    data: list[dict[str, Any]],
+    context_id_key: str = "source_id",
     context_text_key: str = "source_text",
     question_id_key: str = "question_id",
-    question_text_key: str = "question_text", 
+    question_text_key: str = "question_text",
     context_key: str = "context",
-    auto_transform_context: bool = False
+    auto_transform_context: bool = False,
 ) -> list[RetrievalResult]:
-    """
-    Load a list of RetrievalResult objects from a list of dictionaries.
-    
+    """Load a list of RetrievalResult objects from a list of dictionaries.
+
     Args:
+    ----
         data: List of dictionaries containing query context data.
         context_id_key: Key name for the ID field in dictionary context items.
         context_text_key: Key name for the text field in dictionary context items.
@@ -95,15 +101,18 @@ def load_retrieval_results_from_dicts(
         question_text_key: Key name for the question text field in input dictionaries.
         context_key: Key name for the context list field in input dictionaries.
         auto_transform_context: If True, automatically convert dict context items to TextUnit objects.
-    
-    Returns:
+
+    Returns
+    -------
         List of RetrievalResult objects created from the input dictionaries.
-        
-    Raises:
+
+    Raises
+    ------
         ValueError: If any dictionary is missing required keys or has invalid values.
         KeyError: If required keys are missing from the dictionaries.
-        
+
     Example:
+    -------
         >>> data = [
         ...     {
         ...         "query_id": "q1",
@@ -113,8 +122,8 @@ def load_retrieval_results_from_dicts(
         ... ]
         >>> # Using custom keys
         >>> retrieval_results = load_retrieval_results_from_dicts(
-        ...     data, 
-        ...     context_id_key="doc_id", 
+        ...     data,
+        ...     context_id_key="doc_id",
         ...     context_text_key="content",
         ...     question_id_key="query_id",
         ...     question_text_key="query_text",
@@ -122,35 +131,38 @@ def load_retrieval_results_from_dicts(
         ... )
         >>> len(retrieval_results)
         1
+
     """
     if not isinstance(data, list):
-        raise ValueError("data must be a list of dictionaries")
-    
+        msg = "data must be a list of dictionaries"
+        raise TypeError(msg)
+
     retrieval_results = []
     for i, item in enumerate(data):
         if not isinstance(item, dict):
-            raise ValueError(f"Item {i} must be a dictionary, got: {type(item)}")
-        
+            msg = f"Item {i} must be a dictionary, got: {type(item)}"
+            raise TypeError(msg)
+
         try:
             context = item[context_key]
-            
+
             # Auto-transform dictionary context items to TextUnit objects if requested
             if auto_transform_context and isinstance(context, list):
                 transformed_context = []
-                for j, ctx_item in enumerate(context):
+                for ctx_item in context:
                     if isinstance(ctx_item, dict):
                         # Create TextUnit from dictionary
                         text_unit = TextUnit(
                             id=ctx_item[context_id_key],
                             short_id=ctx_item.get("short_id", str(ctx_item[context_id_key])[:8]),
-                            text=ctx_item[context_text_key]
+                            text=ctx_item[context_text_key],
                         )
                         transformed_context.append(text_unit)
                     else:
                         # Keep existing TextUnit objects as-is
                         transformed_context.append(ctx_item)
                 context = transformed_context
-            
+
             retrieval_result = RetrievalResult(
                 question_id=item[question_id_key],
                 question_text=item[question_text_key],
@@ -160,8 +172,10 @@ def load_retrieval_results_from_dicts(
             )
             retrieval_results.append(retrieval_result)
         except KeyError as e:
-            raise KeyError(f"Item {i} missing required key: {e}") from e
+            msg = f"Item {i} missing required key: {e}"
+            raise KeyError(msg) from e
         except ValueError as e:
-            raise ValueError(f"Item {i} has invalid value: {e}") from e
-    
+            msg = f"Item {i} has invalid value: {e}"
+            raise ValueError(msg) from e
+
     return retrieval_results

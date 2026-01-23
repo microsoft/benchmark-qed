@@ -8,12 +8,16 @@ from string import Template
 from typing import Any
 
 from benchmark_qed.autod.data_model.text_unit import TextUnit
-from benchmark_qed.autoe.data_model.relevance import RelevanceAssessmentItem, RelevanceAssessmentResponse
+from benchmark_qed.autoe.data_model.relevance import (
+    RelevanceAssessmentItem,
+    RelevanceAssessmentResponse,
+)
 from benchmark_qed.autoe.prompts import retrieval as retrieval_prompts
 from benchmark_qed.config.llm_config import LLMConfig
 from benchmark_qed.config.utils import load_template_file
 from benchmark_qed.llm.type.base import ChatModel
 from benchmark_qed.llm.utils import chat_typed_response
+
 from .base import RelevanceRater
 
 log = logging.getLogger(__name__)
@@ -24,7 +28,7 @@ RETRIEVAL_PROMPTS_PATH = Path(retrieval_prompts.__file__).parent
 class RationaleRelevanceRater(RelevanceRater):
     """
     Rationale-based relevance assessor using UMBRELA methodology but with structured response.
-    
+
     This assessor uses the same UMBRELA scoring scale (0-3) but prompts the LLM to return
     a structured response with both reasoning and score using Pydantic models.
     """
@@ -60,8 +64,8 @@ class RationaleRelevanceRater(RelevanceRater):
     def _get_cache_relevant_params(self) -> dict[str, Any]:
         """Get parameters that affect the RationaleRelevanceRater assessment results."""
         return {
-            "llm_model": getattr(self.llm_config, 'model', None),
-            "llm_call_args": getattr(self.llm_config, 'call_args', {}),
+            "llm_model": getattr(self.llm_config, "model", None),
+            "llm_call_args": getattr(self.llm_config, "call_args", {}),
             "prompt_template": self.prompt_template.template if self.prompt_template else None,
         }
 
@@ -75,7 +79,8 @@ class RationaleRelevanceRater(RelevanceRater):
             query: The query to assess relevance against.
             text_units: List of text units to assess.
 
-        Returns:
+        Returns
+        -------
             RelevanceAssessmentResponse containing assessment results with reasoning.
             Score is on UMBRELA's 0-3 scale:
             0 = passage has nothing to do with the query
@@ -86,7 +91,7 @@ class RationaleRelevanceRater(RelevanceRater):
         if not text_units:
             return RelevanceAssessmentResponse(assessment=[])
 
-        log.info(f"Processing {len(text_units)} text units using Rationale methodology")
+        log.info("Processing %d text units using Rationale methodology", len(text_units))
 
         # Process each text unit individually
         tasks = [
@@ -96,7 +101,7 @@ class RationaleRelevanceRater(RelevanceRater):
 
         results = await asyncio.gather(*tasks)
 
-        log.info(f"Completed rationale relevance assessment for {len(results)} text units")
+        log.info("Completed rationale relevance assessment for %d text units", len(results))
         return RelevanceAssessmentResponse(assessment=results)
 
     async def _assess_unit(
@@ -110,11 +115,12 @@ class RationaleRelevanceRater(RelevanceRater):
             unit: The text unit to assess.
             unit_idx: Index of the unit for logging.
 
-        Returns:
+        Returns
+        -------
             RelevanceAssessmentItem containing assessment results with reasoning.
         """
         async with self.semaphore:
-            log.debug(f"Processing unit {unit_idx + 1}: {unit.id}")
+            log.debug("Processing unit %d: %s", unit_idx + 1, unit.id)
 
             try:
                 # Create the prompt for this specific text unit
@@ -141,7 +147,7 @@ class RationaleRelevanceRater(RelevanceRater):
                 )
 
             except Exception as e:
-                log.error(f"Error processing unit {unit.id}: {e}")
+                log.exception("Error processing unit %s", unit.id)
                 return RelevanceAssessmentItem(
                     text_unit=unit,
                     reasoning=f"Assessment failed - LLM processing error: {e}",

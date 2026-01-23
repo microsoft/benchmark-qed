@@ -6,7 +6,9 @@ from typing import Any
 
 import numpy as np
 
-from benchmark_qed.autoe.retrieval_scores.scoring.retrieval_relevance import BatchRelevanceResult
+from benchmark_qed.autoe.retrieval_metrics.scoring.retrieval_relevance import (
+    BatchRelevanceResult,
+)
 
 log = logging.getLogger(__name__)
 
@@ -17,14 +19,15 @@ def calculate_binary_precision(
 ) -> dict[str, float]:
     """
     Calculate binary precision metrics from batch relevance results.
-    
+
     Binary precision treats all scores >= threshold as relevant (1) and < threshold as not relevant (0).
-    
+
     Args:
         batch_result: BatchRelevanceResult containing relevance assessments for multiple queries.
         relevance_threshold: Minimum score to consider a chunk relevant (default: 1).
-    
-    Returns:
+
+    Returns
+    -------
         Dictionary containing precision metrics:
         - macro_averaged_precision: Average precision across all queries
         - macro_std_precision: Standard deviation of precision across queries
@@ -44,13 +47,13 @@ def calculate_binary_precision(
             "average_retrieved_chunks": 0.0,
             "micro_averaged_precision": 0.0
         }
-    
+
     precisions = []
     chunks_per_query = []
     relevant_per_query = []
     total_chunks = 0
     total_relevant = 0
-    
+
     for result in batch_result.results:
         relevant_count = result.get_relevant_count(relevance_threshold)
         precision = relevant_count / result.total_chunks if result.total_chunks > 0 else 0.0
@@ -63,9 +66,14 @@ def calculate_binary_precision(
     average_retrieved_chunks = float(np.mean(chunks_per_query)) if chunks_per_query else 0.0
     average_relevant_chunks = float(np.mean(relevant_per_query)) if relevant_per_query else 0.0
     micro_averaged_precision = total_relevant / total_chunks if total_chunks > 0 else 0.0
-    
-    log.info(f"Calculated binary precision for {len(batch_result.results)} queries: "
-             f"macro-averaged precision={np.mean(precisions):.3f}, micro-averaged precision={micro_averaged_precision:.3f}")
+
+    log.info(
+        "Calculated binary precision for %d queries: "
+        "macro-averaged precision=%.3f, micro-averaged precision=%.3f",
+        len(batch_result.results),
+        np.mean(precisions),
+        micro_averaged_precision,
+    )
 
     return {
         "macro_averaged_precision": float(np.mean(precisions)),
@@ -88,13 +96,14 @@ def calculate_graded_precision(
 
     Graded precision normalizes relevance scores between min and max scores:
     P_graded = (1/N_retrieved) * Σ(rel(i) - R_min)/(R_max - R_min)
-    
+
     Args:
         batch_result: BatchRelevanceResult containing relevance assessments for multiple queries.
         min_score: Minimum relevance score (default: 0).
         max_score: Maximum relevance score (default: 3).
-    
-    Returns:
+
+    Returns
+    -------
         Dictionary containing graded precision metrics:
         - macro_averaged_graded_precision: Average graded precision across all queries
         - macro_averaged_std_graded_precision: Standard deviation of graded precision
@@ -114,9 +123,11 @@ def calculate_graded_precision(
             "average_retrieved_chunks": 0.0,
             "micro_averaged_precision": 0.0
         }
-    
+
     if max_score == min_score:
-        log.warning(f"min_score and max_score are equal ({min_score}), returning zero precision")
+        log.warning(
+            "min_score and max_score are equal (%d), returning zero precision", min_score
+        )
         return {
             "macro_averaged_precision": 0.0,
             "macro_averaged_std_precision": 0.0,
@@ -126,16 +137,16 @@ def calculate_graded_precision(
             "average_retrieved_chunks": float(np.mean([result.total_chunks for result in batch_result.results])),
             "micro_averaged_precision": 0.0
         }
-    
+
     graded_precisions = []
     graded_scores_per_query = []
     chunks_per_query = []
     total_graded_score = 0.0
     total_chunks = 0
-    
+
     for result in batch_result.results:
         query_graded_score = 0.0
-        
+
         # Calculate graded score for this query using the formula
         for item in result.assessments.assessment:
             score = item.score
@@ -144,11 +155,11 @@ def calculate_graded_precision(
             # Clamp to [0, 1] range in case scores are outside min/max bounds
             normalized_score = max(0.0, min(1.0, normalized_score))
             query_graded_score += normalized_score
-        
+
         # Calculate precision for this query: (1/N_retrieved) * Σ normalized_scores
         query_precision = query_graded_score / result.total_chunks if result.total_chunks > 0 else 0.0
         graded_precisions.append(query_precision)
-        
+
         graded_scores_per_query.append(query_graded_score)
         chunks_per_query.append(result.total_chunks)
         total_graded_score += query_graded_score
@@ -158,10 +169,16 @@ def calculate_graded_precision(
     average_retrieved_chunks = float(np.mean(chunks_per_query)) if chunks_per_query else 0.0
     micro_averaged_precision = total_graded_score / total_chunks if total_chunks > 0 else 0.0
 
-    log.info(f"Calculated graded precision for {len(batch_result.results)} queries: "
-             f"mean={np.mean(graded_precisions):.3f}, overall={micro_averaged_precision:.3f}, "
-             f"score_range=[{min_score}, {max_score}]")
-    
+    log.info(
+        "Calculated graded precision for %d queries: "
+        "mean=%.3f, overall=%.3f, score_range=[%d, %d]",
+        len(batch_result.results),
+        np.mean(graded_precisions),
+        micro_averaged_precision,
+        min_score,
+        max_score,
+    )
+
     return {
         "macro_averaged_precision": float(np.mean(graded_precisions)),
         "macro_averaged_std_precision": float(np.std(graded_precisions)),
@@ -175,41 +192,51 @@ def calculate_graded_precision(
 
 def calculate_precision_by_score_level(
     batch_result: BatchRelevanceResult,
-    thresholds: list[int] = [1, 2, 3]
+    thresholds: list[int] | None = None
 ) -> dict[int, dict[str, float]]:
     """
     Calculate precision metrics at different score threshold levels.
-    
+
     Args:
         batch_result: BatchRelevanceResult containing relevance assessments for multiple queries.
-    
-    Returns:
+
+    Returns
+    -------
         Dictionary mapping score thresholds to precision metrics.
         Keys are threshold values (1, 2, 3), values are precision metric dictionaries.
     """
+    if thresholds is None:
+        thresholds = [1, 2, 3]
     results = {}
 
     for threshold in thresholds:
         results[threshold] = calculate_binary_precision(batch_result, threshold)
-        log.debug(f"Precision at threshold {threshold}: {results[threshold]['macro_averaged_precision']:.3f}")
+        log.debug(
+            "Precision at threshold %d: %.3f",
+            threshold,
+            results[threshold]["macro_averaged_precision"],
+        )
 
     return results
 
 
 def get_precision_summary(
-        batch_result: BatchRelevanceResult, 
+        batch_result: BatchRelevanceResult,
         relevance_threshold: int=2,
-        candidate_relevance_thresholds: list[int] = [1, 2, 3]
+        candidate_relevance_thresholds: list[int] | None = None
 ) -> dict[str, Any]:
     """
     Get a comprehensive summary of precision metrics.
-    
+
     Args:
         batch_result: BatchRelevanceResult containing relevance assessments for multiple queries.
-    
-    Returns:
+
+    Returns
+    -------
         Dictionary containing various precision calculations and summaries.
     """
+    if candidate_relevance_thresholds is None:
+        candidate_relevance_thresholds = [1, 2, 3]
     binary_metrics = calculate_binary_precision(batch_result)
     graded_metrics = calculate_graded_precision(batch_result)
     threshold_metrics = calculate_precision_by_score_level(batch_result, candidate_relevance_thresholds)

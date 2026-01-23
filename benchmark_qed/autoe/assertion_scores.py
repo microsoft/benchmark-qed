@@ -17,6 +17,7 @@ from rich.progress import Progress, TaskID
 
 from benchmark_qed.autoe.data_model.assertion import Assertion, AssertionLLMResponse
 from benchmark_qed.autoe.prompts import assertion as assertion_prompts
+from benchmark_qed.autoe.utils.stats import GroupComparisonResult, compare_groups
 from benchmark_qed.cli.utils import print_df
 from benchmark_qed.config.llm_config import LLMConfig
 from benchmark_qed.config.utils import load_template_file
@@ -390,6 +391,145 @@ def evaluate_rag_method(
         return None
 
 
+def compare_assertion_scores_significance(
+    output_dir: Path,
+    generated_rags: list[str],
+    question_sets: list[str],
+    alpha: float = 0.05,
+    correction_method: str = "holm",
+) -> dict[str, GroupComparisonResult]:
+    """
+    Compare assertion scores across RAG methods using statistical significance tests.
+
+    For each question set, loads per-question accuracy scores for each RAG method
+    and performs omnibus and pairwise post-hoc tests to determine if differences
+    are statistically significant.
+
+    Args:
+        output_dir: Directory containing assertion score results
+        generated_rags: List of RAG method names to compare
+        question_sets: List of question set names to analyze
+        alpha: Significance level (default 0.05)
+        correction_method: P-value correction method ("holm", "bonferroni", "fdr_bh")
+
+    Returns
+    -------
+        Dictionary mapping question_set names to GroupComparisonResult
+    """
+    results: dict[str, GroupComparisonResult] = {}
+
+    for question_set in question_sets:
+        rich_print(f"\n[bold]Statistical significance test for {question_set}[/bold]")
+
+        # Collect per-question accuracy for each RAG method
+        groups: dict[str, list[float]] = {}
+        question_set_dir = output_dir / question_set
+
+        for rag_method in generated_rags:
+            summary_file = question_set_dir / f"{rag_method}_summary_by_question.csv"
+            if not summary_file.exists():
+                rich_print(
+                    f"  [yellow]Warning: {summary_file} not found, skipping {rag_method}[/yellow]"
+                )
+                continue
+
+            # Load per-question summary and calculate accuracy
+            summary_df = pd.read_csv(summary_file)
+            if "success" not in summary_df.columns or "fail" not in summary_df.columns:
+                rich_print(
+                    f"  [yellow]Warning: {summary_file} missing required columns[/yellow]"
+                )
+                continue
+
+            # Calculate per-question accuracy: success / (success + fail)
+            total = summary_df["success"] + summary_df["fail"]
+            accuracy = summary_df["success"] / total.replace(0, np.nan)
+            accuracy = accuracy.dropna().tolist()
+
+            if len(accuracy) > 0:
+                groups[rag_method] = accuracy
+
+        # Need at least 2 groups to compare
+        if len(groups) < 2:
+            rich_print(
+                "  [yellow]Insufficient data for comparison (need at least 2 RAG methods with data)[/yellow]"
+            )
+            continue
+
+        # Run statistical comparison
+        comparison_result = compare_groups(
+            groups, alpha=alpha, correction=correction_method
+        )
+        results[question_set] = comparison_result
+
+        # Print summary
+        rich_print(f"  {comparison_result.omnibus.summary()}")
+        if comparison_result.posthoc:
+            rich_print(f"  {comparison_result.posthoc.summary()}")
+
+        # Save detailed results to CSV
+        _save_significance_results(
+            comparison_result, question_set, question_set_dir, groups
+        )
+
+    return results
+
+
+def _save_significance_results(
+    result: GroupComparisonResult,
+    question_set: str,
+    output_dir: Path,
+    groups: dict[str, list[float]],
+) -> None:
+    """Save significance test results to CSV files."""
+    # Save group statistics
+    group_stats = []
+    for name, data in groups.items():
+        group_stats.append(
+            {
+                "rag_method": name,
+                "n_questions": len(data),
+                "mean_accuracy": np.mean(data),
+                "std_accuracy": np.std(data),
+                "median_accuracy": np.median(data),
+            }
+        )
+    stats_df = pd.DataFrame(group_stats)
+    stats_df.to_csv(output_dir / "significance_group_stats.csv", index=False)
+
+    # Save omnibus test result
+    omnibus_df = pd.DataFrame(
+        [
+            {
+                "question_set": question_set,
+                "test_name": result.omnibus.test_name,
+                "statistic": result.omnibus.statistic,
+                "p_value": result.omnibus.p_value,
+                "is_significant": result.omnibus.is_significant,
+                "alpha": result.omnibus.alpha,
+                "is_normal": result.omnibus.is_normal,
+            }
+        ]
+    )
+    omnibus_df.to_csv(output_dir / "significance_omnibus.csv", index=False)
+
+    # Save pairwise comparisons if available
+    if result.posthoc and result.posthoc.comparisons:
+        pairwise_data = [
+            {
+                "group1": c.group1,
+                "group2": c.group2,
+                "statistic": c.statistic,
+                "p_value_raw": c.p_value_raw,
+                "p_value_corrected": c.p_value_corrected,
+                "is_significant": c.is_significant,
+            }
+            for c in result.posthoc.comparisons
+        ]
+        pairwise_df = pd.DataFrame(pairwise_data)
+        pairwise_df.to_csv(output_dir / "significance_pairwise.csv", index=False)
+
+
 def run_assertion_evaluation(
     llm_client: ChatModel,
     llm_config: LLMConfig,
@@ -402,6 +542,9 @@ def run_assertion_evaluation(
     pass_threshold: float,
     assertions_filename_template: str = "{question_set}_assertions.json",
     answers_path_template: str = "{input_dir}/{generated_rag}/{question_set}.json",
+    run_significance_test: bool = True,
+    significance_alpha: float = 0.05,
+    significance_correction: str = "holm",
 ) -> pd.DataFrame:
     """
     Run assertion-based evaluation for multiple question sets and RAG methods.
@@ -418,6 +561,9 @@ def run_assertion_evaluation(
         pass_threshold: Threshold for assertion pass/fail
         assertions_filename_template: Template for assertion filename (default: "{question_set}_assertions.json")
         answers_path_template: Template for answers file path (default: "{input_dir}/{generated_rag}/{question_set}.json")
+        run_significance_test: Whether to run statistical significance tests (default: True)
+        significance_alpha: Alpha level for significance tests (default: 0.05)
+        significance_correction: P-value correction method (default: "holm")
 
     Returns
     -------
@@ -485,5 +631,15 @@ def run_assertion_evaluation(
         pivot_summary.reset_index(),
         "Assertion Accuracy Comparison (Pivot View)",
     )
+
+    # Run statistical significance tests if requested
+    if run_significance_test and len(generated_rags) >= 2:
+        compare_assertion_scores_significance(
+            output_dir=output_dir,
+            generated_rags=generated_rags,
+            question_sets=question_sets,
+            alpha=significance_alpha,
+            correction_method=significance_correction,
+        )
 
     return overall_summary_df

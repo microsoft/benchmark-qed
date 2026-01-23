@@ -2,7 +2,7 @@
 """Scoring configuration models."""
 
 from pathlib import Path
-from typing import Self
+from typing import Literal, Self
 
 from pydantic import BaseModel, Field, model_validator
 
@@ -18,6 +18,37 @@ from benchmark_qed.config.model.score import (
     reference_scores_criteria,
 )
 from benchmark_qed.config.prompt_config import PromptConfig
+
+# Available relevance assessor types
+RelevanceAssessorType = Literal["rationale", "bing"]
+
+
+class TextUnitFieldsConfig(BaseModel):
+    """Configuration for mapping text unit column names from input data.
+
+    Use this to map column names from your parquet/JSON file to the expected fields.
+    Set a field to None if the column doesn't exist and should be auto-generated.
+    """
+
+    id_col: str = Field(
+        default="id",
+        description="Column name for unique text unit identifier.",
+    )
+
+    text_col: str = Field(
+        default="text",
+        description="Column name for text content.",
+    )
+
+    embedding_col: str | None = Field(
+        default="text_embedding",
+        description="Column name for embeddings. Set to None to auto-generate embeddings.",
+    )
+
+    short_id_col: str | None = Field(
+        default="short_id",
+        description="Column name for short ID. Set to None to auto-generate from index.",
+    )
 
 
 class AutoEPromptConfig(BaseModel):
@@ -163,3 +194,158 @@ class AssertionConfig(BaseAutoEConfig):
     def check_trials_even(self) -> Self:
         """Even number of trials check does not apply for assertion scoring."""
         return self
+
+
+class RAGMethod(BaseModel):
+    """Configuration for a RAG method to evaluate."""
+
+    name: str = Field(..., description="Name of the RAG method.")
+    retrieval_results_path: Path = Field(
+        ..., description="Path to the retrieval results JSON file."
+    )
+
+
+class RetrievalReferenceConfig(BaseModel):
+    """Configuration for generating retrieval reference data."""
+
+    llm_config: LLMConfig = Field(
+        default_factory=LLMConfig,
+        description="Configuration for the LLM to use for relevance assessment.",
+    )
+
+    embedding_config: LLMConfig = Field(
+        default_factory=LLMConfig,
+        description="Configuration for the embedding model (used if text units need embeddings).",
+    )
+
+    questions_path: Path = Field(
+        ..., description="Path to JSON file with questions."
+    )
+
+    clusters_path: Path | None = Field(
+        default=None,
+        description="Path to JSON file with pre-computed cluster data. If not provided, clustering will be performed on text_units_path.",
+    )
+
+    text_units_path: Path = Field(
+        ..., description="Path to parquet or JSON file with text units and embeddings."
+    )
+
+    output_dir: Path = Field(
+        ..., description="Directory to save reference results."
+    )
+
+    num_clusters: int | None = Field(
+        default=None,
+        description="Number of clusters to create. If None, will be auto-determined.",
+    )
+
+    semantic_neighbors: int = Field(
+        default=10,
+        description="Number of semantically similar chunks to test per cluster.",
+    )
+
+    centroid_neighbors: int = Field(
+        default=5,
+        description="Number of centroid neighbors to test per cluster.",
+    )
+
+    relevance_threshold: int = Field(
+        default=2,
+        description="Minimum relevance score to consider relevant (0-3 scale).",
+    )
+
+    assessor_type: RelevanceAssessorType = Field(
+        default="rationale",
+        description="Type of relevance assessor: 'rationale' (structured JSON with reasoning) or 'bing' (UMBRELA DNA prompt).",
+    )
+
+    max_questions: int | None = Field(
+        default=None,
+        description="Maximum number of questions to process. If None, process all questions.",
+    )
+
+    text_unit_fields: TextUnitFieldsConfig = Field(
+        default_factory=TextUnitFieldsConfig,
+        description="Column name mappings for text unit data.",
+    )
+
+    cache_dir: Path | None = Field(
+        default=None,
+        description="Directory for caching relevance assessments.",
+    )
+
+
+class RetrievalScoresConfig(BaseModel):
+    """Configuration for retrieval metrics evaluation."""
+
+    llm_config: LLMConfig = Field(
+        default_factory=LLMConfig,
+        description="Configuration for the LLM to use for relevance assessment.",
+    )
+
+    rag_methods: list[RAGMethod] = Field(
+        default_factory=list,
+        description="List of RAG methods to evaluate.",
+    )
+
+    question_sets: list[str] = Field(
+        default_factory=list,
+        description="List of question set names to evaluate.",
+    )
+
+    reference_dir: Path = Field(
+        ..., description="Directory containing reference data from generate-retrieval-reference."
+    )
+
+    clusters_path: Path = Field(
+        ..., description="Path to JSON file with cluster data."
+    )
+
+    text_units_path: Path = Field(
+        ..., description="Path to JSON file with text units."
+    )
+
+    output_dir: Path = Field(
+        ..., description="Directory to save evaluation results."
+    )
+
+    relevance_threshold: int = Field(
+        default=2,
+        description="Minimum relevance score to consider relevant (0-3 scale).",
+    )
+
+    cache_dir: Path | None = Field(
+        default=None,
+        description="Directory for caching relevance assessments (shared across RAG methods).",
+    )
+
+    context_id_key: str = Field(
+        default="chunk_id",
+        description="Key name for chunk ID in retrieval results.",
+    )
+
+    context_text_key: str = Field(
+        default="text",
+        description="Key name for chunk text in retrieval results.",
+    )
+
+    run_significance_test: bool = Field(
+        default=True,
+        description="Whether to run statistical significance tests.",
+    )
+
+    significance_alpha: float = Field(
+        default=0.05,
+        description="Alpha level for significance tests.",
+    )
+
+    significance_correction: str = Field(
+        default="holm",
+        description="P-value correction method for post-hoc tests.",
+    )
+
+    fidelity_metric: str = Field(
+        default="js",
+        description="Fidelity metric to use: 'js' (Jensen-Shannon) or 'tvd' (Total Variation Distance).",
+    )
