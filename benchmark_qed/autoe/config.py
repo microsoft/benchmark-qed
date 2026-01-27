@@ -362,6 +362,11 @@ class RetrievalScoresConfig(BaseModel):
         ..., description="Directory containing reference data from generate-retrieval-reference."
     )
 
+    reference_filename: str = Field(
+        default="reference.json",
+        description="Filename for reference data within reference_dir.",
+    )
+
     clusters_path: Path = Field(
         ..., description="Path to JSON file with cluster data."
     )

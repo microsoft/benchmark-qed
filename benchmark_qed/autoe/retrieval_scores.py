@@ -73,10 +73,21 @@ def load_clusters_from_json(clusters_path: Path) -> list[TextCluster]:
 
 
 def load_reference_results(
-    reference_dir: Path, question_set: str
+    reference_dir: Path,
+    question_set: str,
+    reference_filename: str = "reference.json",
 ) -> list[QueryClusterReferenceResult]:
-    """Load reference cluster relevance results from JSON files."""
-    reference_file = reference_dir / f"{question_set}_reference.json"
+    """Load reference cluster relevance results from JSON files.
+
+    Args:
+        reference_dir: Directory containing reference data.
+        question_set: Name of the question set (unused when reference_filename is set).
+        reference_filename: Filename for reference data within reference_dir.
+
+    Returns:
+        List of QueryClusterReferenceResult objects.
+    """
+    reference_file = reference_dir / reference_filename
     if not reference_file.exists():
         msg = f"Reference file not found: {reference_file}"
         raise FileNotFoundError(msg)
@@ -84,7 +95,11 @@ def load_reference_results(
     with reference_file.open(encoding="utf-8") as f:
         data = json.load(f)
 
-    return [QueryClusterReferenceResult.from_dict(item) for item in data]
+    # Handle wrapped format from generate-retrieval-reference
+    if isinstance(data, dict) and "references" in data:
+        data = data["references"]
+
+    return [QueryClusterReferenceResult.model_validate(item) for item in data]
 
 
 def load_retrieval_results(
@@ -414,6 +429,7 @@ async def run_retrieval_evaluation(
     significance_correction: str = "holm",
     fidelity_metric: FidelityMetric = FidelityMetric.JENSEN_SHANNON,
     max_concurrent: int = 8,
+    reference_filename: str = "reference.json",
 ) -> pd.DataFrame:
     """
     Run retrieval evaluation for multiple RAG methods and question sets.
@@ -450,7 +466,9 @@ async def run_retrieval_evaluation(
 
         # Load reference results for this question set
         try:
-            reference_results = load_reference_results(reference_dir, question_set)
+            reference_results = load_reference_results(
+                reference_dir, question_set, reference_filename
+            )
         except FileNotFoundError as e:
             rich_print(f"  [red]Error: {e}[/red]")
             continue

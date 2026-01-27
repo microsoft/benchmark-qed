@@ -784,6 +784,7 @@ def retrieval_scores(
             significance_correction=config.significance_correction,
             fidelity_metric=fidelity_metric,
             max_concurrent=max_concurrent,
+            reference_filename=config.reference_filename,
         )
     )
 
