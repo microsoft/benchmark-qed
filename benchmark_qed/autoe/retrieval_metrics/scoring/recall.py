@@ -23,18 +23,32 @@ from benchmark_qed.autoe.retrieval_metrics.scoring.retrieval_relevance import (
 log = logging.getLogger(__name__)
 
 
+def _get_text_unit_key(text_unit: Any, match_by: str = "text") -> str:
+    """Get the key for a text unit based on match_by setting."""
+    if match_by == "text":
+        return text_unit.text.strip().lower()
+    elif match_by == "id":
+        return text_unit.id
+    elif match_by == "short_id":
+        return text_unit.short_id or text_unit.id
+    else:
+        return text_unit.text.strip().lower()
+
+
 def get_retrieved_clusters(
     query_relevance_result: QueryRelevanceResult,
     text_unit_to_cluster_mapping: dict[str, str],
     relevance_threshold: int = 2,
+    match_by: str = "text",
 ) -> set[str]:
     """
     Get the set of clusters that were retrieved for a query based on relevant text units.
 
     Args:
         query_relevance_result: QueryRelevanceResult containing relevance assessments.
-        text_unit_to_cluster_mapping: Mapping from text unit ID to cluster ID.
+        text_unit_to_cluster_mapping: Mapping from text unit identifier to cluster ID.
         relevance_threshold: Minimum relevance score to consider a text unit retrieved.
+        match_by: How to match text units ('text', 'id', or 'short_id').
 
     Returns
     -------
@@ -48,14 +62,17 @@ def get_retrieved_clusters(
 
     for chunk_info in relevant_chunks:
         text_unit = chunk_info["text_unit"]
+        key = _get_text_unit_key(text_unit, match_by)
 
         # Map text unit to cluster
-        if text_unit.text.strip().lower() in text_unit_to_cluster_mapping:
-            cluster_id = text_unit_to_cluster_mapping[text_unit.text.strip().lower()]
+        if key in text_unit_to_cluster_mapping:
+            cluster_id = text_unit_to_cluster_mapping[key]
             retrieved_clusters.add(cluster_id)
         else:
-            log.warning("Text unit ID %s not found in cluster mapping", text_unit.text)
+            log.warning("Text unit key '%s' not found in cluster mapping", key[:100])
     log.info("Retrieved %d clusters for query", len(retrieved_clusters))
+
+    return retrieved_clusters
 
     return retrieved_clusters
 

@@ -399,6 +399,11 @@ class RetrievalScoresConfig(BaseModel):
         description="Key name for chunk text in retrieval results.",
     )
 
+    cluster_match_by: str = Field(
+        default="text",
+        description="How to match text units to clusters: 'text' (match by text content), 'id' (match by text unit ID), or 'short_id' (match by short ID).",
+    )
+
     run_significance_test: bool = Field(
         default=True,
         description="Whether to run statistical significance tests.",

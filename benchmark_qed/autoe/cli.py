@@ -758,7 +758,10 @@ def retrieval_scores(
 
     # Load clusters
     rich_print(f"Loading clusters from {config.clusters_path}...")
-    clusters = load_clusters_from_json(config.clusters_path)
+    clusters = load_clusters_from_json(
+        config.clusters_path,
+        text_units_path=config.text_units_path,
+    )
     rich_print(f"Loaded {len(clusters)} clusters")
 
     # Prepare RAG methods list
@@ -785,6 +788,7 @@ def retrieval_scores(
             fidelity_metric=fidelity_metric,
             max_concurrent=max_concurrent,
             reference_filename=config.reference_filename,
+            cluster_match_by=config.cluster_match_by,
         )
     )
 

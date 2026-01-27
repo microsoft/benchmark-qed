@@ -1,0 +1,155 @@
+You are a helpful assistant that creates simple, readable intersection questions.
+
+--TASK--
+You are given a list of claims about a shared entity or topic. Each claim is a factual statement from the source documents.
+
+Your task is to create INTERSECTION QUESTIONS. An intersection question asks about what TWO DISTINCT ITEMS have in common.
+
+CRITICAL: An intersection question MUST:
+- Name TWO DISTINCT items (e.g., "Texas and Arizona", "Gov. Kelly and Gov. Justice")
+- Ask what they SHARE or have IN COMMON
+- Have a SPECIFIC shared attribute as the answer
+
+If you cannot find two distinct items with a meaningful shared attribute, generate ZERO questions.
+
+--GOOD EXAMPLES--
+
+Example 1:
+  Claims: "Texas bans abortion after 6 weeks" and "Arizona bans abortion after 6 weeks"
+  
+  Intersection question: "What gestational limit do both Texas and Arizona set for abortions?"
+  
+  This works because:
+  - TWO DISTINCT ITEMS: Texas and Arizona (two different states)
+  - SHARED ATTRIBUTE: 6-week limit
+  - SPECIFIC ANSWER: "6 weeks"
+
+Example 2:
+  Claims: "Gov. Kelly cited budget concerns in her veto" and "Gov. Justice cited budget concerns in his veto"
+  
+  Intersection question: "What reason did both Gov. Kelly and Gov. Justice give for their vetoes?"
+  
+  This works because:
+  - TWO DISTINCT ITEMS: Gov. Kelly and Gov. Justice (two different governors)
+  - SHARED ATTRIBUTE: budget concerns
+  - SPECIFIC ANSWER: "budget concerns"
+
+--BAD EXAMPLES (DO NOT GENERATE THESE)--
+
+- "How did the Alabama Supreme Court describe frozen embryos?" 
+  BAD: Only ONE item (Alabama Supreme Court), not asking about commonality
+  
+- "What reproductive issues did Trump address on Truth Social?"
+  BAD: Only ONE item (Trump), just asking what he said, not commonality
+  
+- "How many people were killed in the Lewiston shooting?"
+  BAD: Simple factual question, not intersection at all
+  
+- "What did Kensington Palace say about Kate's surgery?"
+  BAD: Only ONE item (Kensington Palace), not asking what two things share
+
+--CORE RULES--
+1. Must be ANSWERABLE ENTIRELY from the provided claims - don't assume external knowledge
+2. Focus on TWO or more items (keep it focused, don't include too many)
+3. Use actual names/entities directly (e.g., "Texas" not "the state that banned...")
+4. IDENTIFY ITEMS CLEARLY: When referring to multiple items, make clear which specific items
+   - BAD: "When did both reports expect the ruling?" (which two reports?)
+   - GOOD: "When did the February and March reports expect the ruling?" (identifies which)
+   - GOOD: "When did reports on EMTALA expect the Supreme Court ruling?" (topic identifies them)
+5. Ask about SPECIFIC commonalities (same outcome, same reason, same approach)
+6. Must sound NATURAL - like something a curious person would ask
+7. USE PAST TENSE for events that already occurred (news describes past events)
+   - BAD: "What are Florida and Colorado both trying to enshrine?" (present tense)
+   - GOOD: "What did Florida and Colorado both try to enshrine?" (past tense)
+7. Keep questions under 20 words
+8. SUBSTANTIVE COMMONALITY: The shared attribute must be specific and meaningful, not trivial
+   - GOOD: "What limit do both Texas and Arizona set?" (specific shared number/policy)
+   - GOOD: "What reason did both governors give?" (specific shared justification)
+   - BAD: "What do Texas and Arizona have in common?" (too vague - answer could be anything)
+8. NO SELF-REFERENCES: NEVER use words like "claims", "both claims", "these cases", "the above", "this context"
+   - BAD: "What do both claims mention?" (reader can't see claims)
+   - BAD: "What is common in these cases?" (what cases?)
+   - GOOD: "What restriction do Idaho and Florida both place on minors?"
+9. GRAMMATICALLY CORRECT: The question must be a proper English sentence
+   - GOOD: "What do X and Y have in common regarding Z?"
+   - GOOD: "What restriction do both X and Y place on Z?"
+   - BAD: "What did X and Y involve restricting Z?" (broken grammar)
+10. CLEAR INTERSECTION: The question must clearly indicate it's asking about a shared attribute
+   - GOOD: "What do X and Y BOTH..." / "What SHARED..." / "What COMMON..."
+   - BAD: Questions that could be answered separately for each item
+
+--OUTPUT FORMAT--
+Return a JSON object with the following structure:
+{
+    "questions": [
+        {
+            "candidate_commonalities": [
+                {"shared_attribute": "what they share", "specificity": "HIGH: specific policy detail" or "LOW: trivial/obvious"},
+                {"shared_attribute": "another shared thing", "specificity": "..."}
+            ],
+            "selected_commonality": "the best shared attribute from candidates above",
+            "candidate_phrasings": [
+                "What do X and Y both Z?",
+                "What shared Z do X and Y have?",
+                "What Z is common to both X and Y?"
+            ],
+            "text": "Intersection question under 20 words (best phrasing from candidates)",
+            "intersecting_items": ["item1", "item2"],
+            "common_aspect": "What specific thing they have in common",
+            "source_claim_ids": ["claim IDs needed - should include claims about BOTH items"],
+            "claim_reasoning": "How the claims support the commonality",
+            "question_type": "intersection",
+            "quality": {
+                "reasoning": "Explain your assessment of the question quality before scoring",
+                "naturalness": 4,
+                "answerability": 5,
+                "clarity": 4,
+                "commonality_depth": 4
+            },
+            "validation": {
+                "has_two_distinct_items": true,
+                "items_clearly_identified": true,
+                "is_substantive_commonality": true,
+                "is_grammatically_correct": true,
+                "uses_past_tense": true,
+                "passes_all_checks": true,
+                "issues": []
+            }
+        }
+    ]
+}
+
+--SCORING (1-5 each)--
+- naturalness: Sounds like a real question someone would ask?
+- answerability: Fully answerable from the claims ONLY?
+  - 5: Question has a SPECIFIC, bounded answer from the claims
+  - 3: Answer exists in claims but question is too open-ended (e.g., "What do X and Y share?" without specifying aspect)
+  - 1: Requires knowledge not in the claims
+- clarity: Easy to understand in one read, simple structure, grammatically correct?
+  - 5: Clear, simple, grammatically perfect question
+  - 3: Understandable but awkward phrasing or minor grammar issues
+  - 1: Confusing, run-on, or grammatically broken
+- commonality_depth: Is the shared attribute substantive and specific?
+  - 5: Highly specific (e.g., "both set 6-week limits", "both cited budget concerns")
+  - 3: Moderately specific (e.g., "both faced lawsuits")
+  - 1: Trivial/universal (e.g., "both are states", "both happened in 2024")
+
+--VALIDATION (true/false each)--
+Before returning each question, validate it against these critical rules:
+- has_two_distinct_items: Does the question explicitly name TWO distinct items being compared?
+  - FALSE if: only mentions ONE item (e.g., "What did the Alabama Supreme Court say?")
+  - TRUE if: names two items (e.g., "What did both Texas and Arizona set as limits?")
+- items_clearly_identified: Are both items clearly specified (not vague)?
+  - FALSE if: "both reports" (which reports?), "both studies" (which studies?)
+  - TRUE if: "the February and March reports", "the NIH and CDC studies"
+- is_substantive_commonality: Is the shared attribute specific and meaningful?
+  - FALSE if: trivial commonality, asking for two unrelated facts that happen to be in claims
+  - TRUE if: specific shared policy, shared outcome, shared approach
+- is_grammatically_correct: Is the question a proper, well-formed English sentence?
+- uses_past_tense: For past events, does the question use past tense (not "are trying" but "tried")?
+- passes_all_checks: TRUE only if ALL above checks are TRUE. If ANY is FALSE, set this to FALSE.
+- issues: List any problems found (e.g., ["items not clearly identified - 'both reports' is vague"])
+
+IMPORTANT: Set passes_all_checks=false if ANY validation fails. Be strict - it's better to reject a borderline question than to include a bad one.
+
+Generate UP TO ${max_questions} questions. Generate ZERO if no valid intersection questions possible.

@@ -48,21 +48,86 @@ if TYPE_CHECKING:
 log = logging.getLogger(__name__)
 
 
-def load_clusters_from_json(clusters_path: Path) -> list[TextCluster]:
-    """Load clusters from a JSON file."""
+def load_clusters_from_json(
+    clusters_path: Path,
+    text_units_path: Path | None = None,
+) -> list[TextCluster]:
+    """Load clusters from a JSON file.
+    
+    Supports two formats:
+    1. text_units: array of objects with {id, short_id, text}
+    2. text_unit_ids: array of string IDs (requires text_units_path to load text)
+    
+    Args:
+        clusters_path: Path to clusters JSON file.
+        text_units_path: Optional path to text units file (parquet/json/csv).
+            Required if clusters use text_unit_ids format.
+    
+    Returns:
+        List of TextCluster objects with full TextUnit data.
+    """
     with clusters_path.open(encoding="utf-8") as f:
         data = json.load(f)
 
+    # Check if we need to load text units separately
+    needs_text_units = any(
+        "text_unit_ids" in cluster_data and "text_units" not in cluster_data
+        for cluster_data in data
+    )
+    
+    text_unit_map: dict[str, str] = {}
+    if needs_text_units:
+        if text_units_path is None:
+            log.warning(
+                "Clusters use text_unit_ids format but no text_units_path provided. "
+                "Text content will be empty, which may break cluster mapping."
+            )
+        else:
+            # Load text units and create ID -> text mapping
+            import pandas as pd
+            suffix = text_units_path.suffix.lower()
+            if suffix == ".parquet":
+                df = pd.read_parquet(text_units_path)
+            elif suffix == ".csv":
+                df = pd.read_csv(text_units_path)
+            elif suffix in (".json", ".jsonl"):
+                df = pd.read_json(text_units_path, lines=(suffix == ".jsonl"))
+            else:
+                log.warning(f"Unknown text units file format: {suffix}")
+                df = None
+            
+            if df is not None:
+                # Create mapping from ID to text
+                id_col = "id" if "id" in df.columns else df.columns[0]
+                text_col = "text" if "text" in df.columns else "chunk" if "chunk" in df.columns else df.columns[1]
+                text_unit_map = dict(zip(df[id_col].astype(str), df[text_col].astype(str)))
+                log.info(f"Loaded {len(text_unit_map)} text units from {text_units_path}")
+
     clusters = []
     for cluster_data in data:
-        text_units = [
-            TextUnit(
-                id=tu.get("id", ""),
-                short_id=tu.get("short_id", tu.get("id", "")),
-                text=tu.get("text", ""),
-            )
-            for tu in cluster_data.get("text_units", [])
-        ]
+        # Handle both formats: text_units (full objects) or text_unit_ids (just IDs)
+        if "text_units" in cluster_data:
+            text_units = [
+                TextUnit(
+                    id=tu.get("id", ""),
+                    short_id=tu.get("short_id", tu.get("id", "")),
+                    text=tu.get("text", ""),
+                )
+                for tu in cluster_data["text_units"]
+            ]
+        elif "text_unit_ids" in cluster_data:
+            # Create TextUnit objects from IDs, looking up text from map
+            text_units = [
+                TextUnit(
+                    id=tu_id,
+                    short_id=tu_id,
+                    text=text_unit_map.get(tu_id, ""),
+                )
+                for tu_id in cluster_data["text_unit_ids"]
+            ]
+        else:
+            text_units = []
+            
         cluster = TextCluster(
             id=cluster_data["cluster_id"],
             text_units=text_units,
@@ -430,6 +495,7 @@ async def run_retrieval_evaluation(
     fidelity_metric: FidelityMetric = FidelityMetric.JENSEN_SHANNON,
     max_concurrent: int = 8,
     reference_filename: str = "reference.json",
+    cluster_match_by: str = "text",
 ) -> pd.DataFrame:
     """
     Run retrieval evaluation for multiple RAG methods and question sets.
@@ -449,6 +515,8 @@ async def run_retrieval_evaluation(
         significance_correction: P-value correction method
         fidelity_metric: Fidelity metric to use (JS or TVD)
         max_concurrent: Maximum concurrent relevance assessments
+        reference_filename: Filename for reference data
+        cluster_match_by: How to match text units to clusters ('text', 'id', or 'short_id')
 
     Returns
     -------
@@ -457,7 +525,9 @@ async def run_retrieval_evaluation(
     output_dir.mkdir(parents=True, exist_ok=True)
 
     # Pre-compute text unit to cluster mapping
-    text_unit_to_cluster_mapping = create_text_unit_to_cluster_mapping(clusters)
+    text_unit_to_cluster_mapping = create_text_unit_to_cluster_mapping(
+        clusters, match_by=cluster_match_by
+    )
 
     overall_results = []
 

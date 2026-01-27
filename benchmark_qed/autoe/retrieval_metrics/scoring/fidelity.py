@@ -58,21 +58,36 @@ def get_reference_cluster_distribution(
     # The relevant_clusters_dict already contains cluster_id -> count mapping
 
 
+def _get_text_unit_key(text_unit: Any, match_by: str = "text") -> str:
+    """Get the key for a text unit based on match_by setting."""
+    if match_by == "text":
+        return text_unit.text.strip().lower()
+    elif match_by == "id":
+        return text_unit.id
+    elif match_by == "short_id":
+        return text_unit.short_id or text_unit.id
+    else:
+        return text_unit.text.strip().lower()
+
+
 def get_query_cluster_distribution(
     query_relevance_result: QueryRelevanceResult,
     text_unit_to_cluster_mapping: dict[str, str],
     relevance_threshold: int = 2,
+    match_by: str = "text",
 ) -> tuple[dict[str, int], dict[str, int]]:
     """
     Get the distribution of relevant text units across clusters from query relevance results.
 
-    Note: Chunk text must exactly match the reference text units (after normalization).
-    If your RAG system adds metadata to chunks, preprocess them before evaluation.
+    Note: When using match_by='text', chunk text must exactly match the reference text units 
+    (after normalization). If your RAG system adds metadata to chunks, preprocess them before 
+    evaluation or use match_by='id'.
 
     Args:
         query_relevance_result: QueryRelevanceResult containing relevance assessments for retrieved text units.
-        text_unit_to_cluster_mapping: Mapping from normalized text to cluster ID.
+        text_unit_to_cluster_mapping: Mapping from text unit identifier to cluster ID.
         relevance_threshold: Minimum relevance score to consider a text unit relevant.
+        match_by: How to match text units ('text', 'id', or 'short_id').
 
     Returns
     -------
@@ -88,20 +103,21 @@ def get_query_cluster_distribution(
 
     for chunk_info in relevant_chunks:
         text_unit = chunk_info["text_unit"]
-        normalized_text = text_unit.text.strip().lower()
+        key = _get_text_unit_key(text_unit, match_by)
 
-        if normalized_text in text_unit_to_cluster_mapping:
-            cluster_id = text_unit_to_cluster_mapping[normalized_text]
+        if key in text_unit_to_cluster_mapping:
+            cluster_id = text_unit_to_cluster_mapping[key]
             cluster_distribution[cluster_id] = cluster_distribution.get(cluster_id, 0) + 1
             match_stats["matched"] += 1
         else:
             match_stats["unmatched"] += 1
             log.warning(
                 "No cluster match for chunk in question '%s'. "
-                "Ensure chunk text matches reference exactly (after strip/lowercase). "
-                "Chunk preview: '%s...'",
+                "Ensure chunk %s matches reference exactly. "
+                "Key preview: '%s...'",
                 query_relevance_result.question_id,
-                text_unit.text[:100].replace("\n", "\\n"),
+                match_by,
+                str(key)[:100].replace("\n", "\\n"),
             )
 
     # Log summary if there were unmatched chunks

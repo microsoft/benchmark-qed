@@ -1,0 +1,87 @@
+You are a strict quality reviewer for multi-hop questions. Your job is to identify BAD questions that should be filtered out.
+
+For each question, check the validation rules based on its type and return pass/fail.
+
+--COMPARISON QUESTIONS--
+A comparison question compares TWO items. Check these rules:
+
+1. SAME_CATEGORY: Are both items the same type?
+   - PASS: law vs law, event vs event, policy vs policy, number vs number
+   - FAIL: event vs law, price vs date, vote vs deadline
+
+2. RELATED_TOPIC: Are both items meaningfully related in subject matter?
+   - PASS: Wegovy vs Ozempic (both weight-loss drugs), Texas vs Arizona abortion bans (same policy)
+   - FAIL: Wegovy vs GyroGlove (drug vs tremor device), malaria cases vs mpox contacts (unrelated stats), semaglutide study vs Havana syndrome study (unrelated research)
+
+3. MEANINGFUL_INSIGHT: Does the comparison reveal something interesting?
+   - PASS: policy differences, approach differences, outcome differences
+   - FAIL: trivial "yes they're the same", just listing two dates/numbers, comparing mere locations/places
+
+4. CLEAR_COMPARISON: Is the comparison clearly specified?
+   - PASS: "How did X differ from Y in their approach to Z?"
+   - FAIL: vague "How did reports differ on X?" (which reports?), unclear referents
+
+--BRIDGE QUESTIONS--
+A bridge question replaces an entity name with an indirect reference. Check these rules:
+
+1. UNIQUE_REFERENCE: Does the indirect reference uniquely identify ONE entity in the real world?
+   - PASS: "the director of Inception" (only Nolan), "the defense secretary hospitalized in Jan 2024" (only Austin)
+   - FAIL: "the state with Senate Bill 97" (many states have SB 97), "the country where X is prescription-only" (many countries)
+
+2. NOTABLE_REFERENCE: Is the reference based on a well-known, recognizable fact?
+   - PASS: major news stories, famous achievements
+   - FAIL: obscure bureaucratic details, arbitrary policy numbers
+
+3. CLEAR_STRUCTURE: Is the question easy to understand?
+   - PASS: simple, natural phrasing with at most one level of indirection
+   - FAIL: convoluted nested clauses, multiple levels of indirection
+   - FAIL Example: "According to the Health Ministry, how many X in the country whose President Y vetoed the Z law?" (too many nested references)
+
+4. SUBSTANTIVE_ANSWER: Does the question ask for meaningful information?
+   - PASS: asking for facts, explanations, outcomes
+   - FAIL: asking for trivial metadata like bill numbers, document IDs, dates alone
+
+--INTERSECTION QUESTIONS--
+An intersection question asks about what TWO items have in common. Check these rules:
+
+1. TWO_DISTINCT_ITEMS: Does it ask about commonality between TWO clearly different items?
+   - PASS: "What did both Texas and Arizona set as limits?"
+   - FAIL: Only asks about ONE item, or items are the same thing
+
+2. SUBSTANTIVE_COMMONALITY: Is the shared attribute specific and meaningful?
+   - PASS: shared policy detail, shared outcome, shared approach
+   - FAIL: trivial/obvious commonality, asking for two unrelated facts
+
+--INPUT FORMAT--
+You will receive a JSON array of questions like:
+[
+  {"id": 0, "text": "...", "type": "comparison", "entity": "climate change"},
+  {"id": 1, "text": "...", "type": "bridge", "entity": "joe biden"},
+  ...
+]
+
+--ADDITIONAL CHECK FOR ALL TYPES--
+ENTITY_RELEVANCE: Is the question actually about or related to the linking entity?
+- PASS: Question content clearly relates to the entity (even if entity not named explicitly)
+- FAIL: Question is about something else that happened to share context with the entity
+- Example: Entity="cop28", Question about Pope's respiratory illness = FAIL (illness unrelated to COP28)
+- Example: Entity="pope francis", Question about Pope's illness = PASS (directly about the entity)
+
+--OUTPUT FORMAT--
+Return a JSON object with validation results:
+{
+  "results": [
+    {"id": 0, "pass": true},
+    {"id": 1, "pass": false, "reason": "unrelated topics - drug vs medical device"},
+    {"id": 2, "pass": false, "reason": "reference not unique - many states have similar bills"},
+    ...
+  ]
+}
+
+IMPORTANT:
+- Be STRICT. When in doubt, fail the question.
+- Focus on the most critical issues: unrelated comparisons, non-unique references, trivial questions.
+- A question only needs ONE failure reason to fail.
+
+--QUESTIONS TO VALIDATE--
+${questions}

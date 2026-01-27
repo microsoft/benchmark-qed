@@ -84,6 +84,31 @@ class DataGlobalQuestionConfig(QuestionConfig):
     )
 
 
+class DataEntityQuestionConfig(QuestionConfig):
+    """Configuration for data-entity question generation.
+
+    Entity questions combine multiple local questions that share named entities
+    to create harder, multi-hop style questions (similar to HotpotQA).
+    """
+
+    min_questions_per_entity: int = Field(
+        default=2,
+        description="Minimum number of local questions required to form an entity group.",
+    )
+    max_questions_per_entity: int = Field(
+        default=3,
+        description="Maximum number of local questions to include per entity group. If more exist, selects most related by embedding similarity.",
+    )
+    max_questions_to_generate: int = Field(
+        default=2,
+        description="Maximum number of entity questions to generate per entity group. LLM chooses appropriate question types.",
+    )
+    entity_frequency_threshold: int = Field(
+        default=2,
+        description="Entity must appear in at least this many local questions to be considered for grouping.",
+    )
+
+
 class LocalAssertionConfig(BaseModel):
     """Configuration for local assertion generation."""
 
@@ -142,8 +167,38 @@ class GlobalAssertionConfig(BaseModel):
     )
 
 
+class EntityAssertionConfig(BaseModel):
+    """Configuration for entity assertion generation.
+
+    Entity assertions use a simplified approach: single LLM call with all claims,
+    then optional validation. No MAP or DEDUPE phases needed since claims are
+    already filtered to those relevant to the question.
+    """
+
+    max_assertions: int | None = Field(
+        default=defs.MAX_ASSERTIONS,
+        description="Maximum number of assertions per question. Set to 0 to disable, or None for unlimited.",
+    )
+    enable_validation: bool = Field(
+        default=defs.ENABLE_ASSERTION_VALIDATION,
+        description="Whether to validate assertions against sources for quality filtering.",
+    )
+    min_validation_score: int = Field(
+        default=defs.MIN_ASSERTION_VALIDATION_SCORE,
+        description="Minimum score (1-5) for grounding, relevance, and verifiability criteria.",
+    )
+    concurrent_llm_calls: int = Field(
+        default=defs.ASSERTION_CONCURRENT_LLM_CALLS,
+        description="Number of concurrent LLM calls for batch processing and validation.",
+    )
+    max_concurrent_questions: int | None = Field(
+        default=defs.ASSERTION_MAX_CONCURRENT_GLOBAL_QUESTIONS,
+        description="Maximum questions to process in parallel. Set to 1 for sequential.",
+    )
+
+
 class AssertionConfig(BaseModel):
-    """Configuration for assertion generation (local and global)."""
+    """Configuration for assertion generation (local, global, and entity)."""
 
     local: LocalAssertionConfig = Field(
         default_factory=LocalAssertionConfig,
@@ -153,6 +208,10 @@ class AssertionConfig(BaseModel):
         default_factory=GlobalAssertionConfig,
         alias="global",
         description="Configuration for global assertion generation.",
+    )
+    entity: EntityAssertionConfig = Field(
+        default_factory=EntityAssertionConfig,
+        description="Configuration for entity assertion generation.",
     )
 
     model_config: ClassVar[ConfigDict] = {"populate_by_name": True}
@@ -193,6 +252,12 @@ class AssertionPromptConfig(BaseModel):
             prompt=AUTOQ_ASSERTIONS_PROMPTS_PATH / "global_validation_prompt.txt"
         ),
         description="Prompt for validating global assertions (theme-focused) against sources.",
+    )
+    entity_assertion_dedupe_prompt: PromptConfig = Field(
+        default=PromptConfig(
+            prompt=AUTOQ_ASSERTIONS_PROMPTS_PATH / "entity_assertion_dedupe_prompt.txt"
+        ),
+        description="Prompt for deduplicating entity assertions (no synthesis, just filtering).",
     )
 
 
