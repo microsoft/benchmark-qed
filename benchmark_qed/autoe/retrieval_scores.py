@@ -64,7 +64,7 @@ def load_clusters_from_json(clusters_path: Path) -> list[TextCluster]:
             for tu in cluster_data.get("text_units", [])
         ]
         cluster = TextCluster(
-            cluster_id=cluster_data["cluster_id"],
+            id=cluster_data["cluster_id"],
             text_units=text_units,
         )
         clusters.append(cluster)
