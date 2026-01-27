@@ -397,7 +397,7 @@ def calculate_fidelity(
     if clusters is None:
         msg = "clusters must be provided to get all cluster IDs for fidelity calculation"
         raise ValueError(msg)
-    all_cluster_ids = [cluster.cluster_id for cluster in clusters]
+    all_cluster_ids = [cluster.id for cluster in clusters]
 
     # Create a mapping from question_id to cluster relevance results
     cluster_references_by_question = {
