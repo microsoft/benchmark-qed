@@ -713,6 +713,9 @@ def retrieval_scores(
     Compares multiple RAG methods on retrieval quality metrics and runs
     statistical significance tests.
     """
+    from benchmark_qed.autoe.retrieval_metrics.relevance_assessment.bing_rater import (
+        BingRelevanceRater,
+    )
     from benchmark_qed.autoe.retrieval_metrics.relevance_assessment.rationale_rater import (
         RationaleRelevanceRater,
     )
@@ -735,13 +738,23 @@ def retrieval_scores(
     # Initialize LLM client
     llm_client = ModelFactory.create_chat_model(config.llm_config)
 
-    # Initialize relevance rater with caching
-    relevance_rater = RationaleRelevanceRater(
-        llm_client=llm_client,
-        llm_config=config.llm_config,
-        cache_dir=config.cache_dir,
-        cache_enabled=config.cache_dir is not None,
-    )
+    # Initialize relevance rater based on config (must match reference generation)
+    if config.assessor_type == "bing":
+        relevance_rater = BingRelevanceRater(
+            llm_client=llm_client,
+            llm_config=config.llm_config,
+            cache_dir=config.cache_dir,
+            cache_enabled=config.cache_dir is not None,
+        )
+        rich_print(f"Using BingRelevanceRater (UMBRELA DNA prompt)")
+    else:
+        relevance_rater = RationaleRelevanceRater(
+            llm_client=llm_client,
+            llm_config=config.llm_config,
+            cache_dir=config.cache_dir,
+            cache_enabled=config.cache_dir is not None,
+        )
+        rich_print(f"Using RationaleRelevanceRater (structured JSON)")
 
     # Load clusters
     rich_print(f"Loading clusters from {config.clusters_path}...")

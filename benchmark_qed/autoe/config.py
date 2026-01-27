@@ -343,6 +343,11 @@ class RetrievalScoresConfig(BaseModel):
         description="Configuration for the LLM to use for relevance assessment.",
     )
 
+    assessor_type: RelevanceAssessorType = Field(
+        default="rationale",
+        description="Type of relevance assessor: 'rationale' (structured JSON with reasoning) or 'bing' (UMBRELA DNA prompt). Must match the assessor used in generate-retrieval-reference to use the cache.",
+    )
+
     rag_methods: list[RAGMethod] = Field(
         default_factory=list,
         description="List of RAG methods to evaluate.",
