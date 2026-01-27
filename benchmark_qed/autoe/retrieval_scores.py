@@ -206,6 +206,7 @@ def calculate_retrieval_metrics(
     relevance_threshold: int = 2,
     text_unit_to_cluster_mapping: dict[str, str] | None = None,
     fidelity_metric: FidelityMetric = FidelityMetric.JENSEN_SHANNON,
+    cluster_match_by: str = "text",
 ) -> dict[str, Any]:
     """
     Calculate all retrieval metrics (precision, recall, fidelity) for a RAG method.
@@ -223,7 +224,9 @@ def calculate_retrieval_metrics(
     """
     # Create mapping if not provided
     if text_unit_to_cluster_mapping is None:
-        text_unit_to_cluster_mapping = create_text_unit_to_cluster_mapping(clusters)
+        text_unit_to_cluster_mapping = create_text_unit_to_cluster_mapping(
+            clusters, match_by=cluster_match_by
+        )
 
     # Calculate precision metrics
     binary_precision = calculate_binary_precision(
@@ -238,6 +241,7 @@ def calculate_retrieval_metrics(
         relevance_threshold=relevance_threshold,
         text_unit_to_cluster_mapping=text_unit_to_cluster_mapping,
         clusters=clusters,
+        match_by=cluster_match_by,
     )
 
     # Calculate fidelity metrics (using selected metric)
@@ -248,6 +252,7 @@ def calculate_retrieval_metrics(
         text_unit_to_cluster_mapping=text_unit_to_cluster_mapping,
         clusters=clusters,
         metric=fidelity_metric,
+        match_by=cluster_match_by,
     )
 
     return {
@@ -274,6 +279,7 @@ def extract_per_query_metrics(
     relevance_threshold: int = 2,
     text_unit_to_cluster_mapping: dict[str, str] | None = None,
     fidelity_metric: FidelityMetric = FidelityMetric.JENSEN_SHANNON,
+    cluster_match_by: str = "text",
 ) -> pd.DataFrame:
     """
     Extract per-query metrics for statistical analysis.
@@ -281,7 +287,9 @@ def extract_per_query_metrics(
     Returns a DataFrame with one row per query and columns for each metric.
     """
     if text_unit_to_cluster_mapping is None:
-        text_unit_to_cluster_mapping = create_text_unit_to_cluster_mapping(clusters)
+        text_unit_to_cluster_mapping = create_text_unit_to_cluster_mapping(
+            clusters, match_by=cluster_match_by
+        )
 
     # Calculate all metrics to get per-query details
     recall_metrics = calculate_recall(
@@ -290,6 +298,7 @@ def extract_per_query_metrics(
         relevance_threshold=relevance_threshold,
         text_unit_to_cluster_mapping=text_unit_to_cluster_mapping,
         clusters=clusters,
+        match_by=cluster_match_by,
     )
 
     fidelity = calculate_fidelity(
@@ -299,6 +308,7 @@ def extract_per_query_metrics(
         text_unit_to_cluster_mapping=text_unit_to_cluster_mapping,
         clusters=clusters,
         metric=fidelity_metric,
+        match_by=cluster_match_by,
     )
 
     # Determine fidelity key based on metric
@@ -585,6 +595,7 @@ async def run_retrieval_evaluation(
                 relevance_threshold=relevance_threshold,
                 text_unit_to_cluster_mapping=text_unit_to_cluster_mapping,
                 fidelity_metric=fidelity_metric,
+                cluster_match_by=cluster_match_by,
             )
 
             # Extract per-query metrics for significance testing
@@ -595,6 +606,7 @@ async def run_retrieval_evaluation(
                 relevance_threshold=relevance_threshold,
                 text_unit_to_cluster_mapping=text_unit_to_cluster_mapping,
                 fidelity_metric=fidelity_metric,
+                cluster_match_by=cluster_match_by,
             )
             rag_per_query_metrics[rag_name] = per_query_df
 

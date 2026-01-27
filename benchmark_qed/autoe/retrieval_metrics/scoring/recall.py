@@ -82,6 +82,7 @@ def calculate_single_query_recall(
     retrieval_reference: QueryClusterReferenceResult,
     text_unit_to_cluster_mapping: dict[str, str],
     relevance_threshold: int = 2,
+    match_by: str = "text",
 ) -> dict[str, Any]:
     """
     Calculate cluster-level recall for a single query.
@@ -119,7 +120,7 @@ def calculate_single_query_recall(
         query_relevance_result=query_relevance_result,
         text_unit_to_cluster_mapping=text_unit_to_cluster_mapping,
         relevance_threshold=relevance_threshold,
-
+        match_by=match_by,
     )
 
     # Calculate intersection: retrieved clusters that are relevant
@@ -154,6 +155,7 @@ def calculate_recall(
     relevance_threshold: int = 2,
     text_unit_to_cluster_mapping: dict[str, str] | None = None,
     clusters: list[TextCluster] | None = None,
+    match_by: str = "text",
 ) -> dict[str, Any]:
     """
     Calculate cluster-level recall metrics for multiple queries.
@@ -201,7 +203,9 @@ def calculate_recall(
         if clusters is None:
             msg = "Either text_unit_to_cluster_mapping or clusters must be provided"
             raise ValueError(msg)
-        text_unit_to_cluster_mapping = create_text_unit_to_cluster_mapping(clusters)
+        text_unit_to_cluster_mapping = create_text_unit_to_cluster_mapping(
+            clusters, match_by=match_by
+        )
 
     # Create a mapping from question_id to cluster relevance results
     cluster_references_by_question = {
@@ -244,7 +248,8 @@ def calculate_recall(
             query_relevance_result=query_relevance_result,
             retrieval_reference=single_query_reference,
             relevance_threshold=relevance_threshold,
-            text_unit_to_cluster_mapping=text_unit_to_cluster_mapping
+            text_unit_to_cluster_mapping=text_unit_to_cluster_mapping,
+            match_by=match_by,
         )
 
         query_recalls.append(recall_result["recall"])

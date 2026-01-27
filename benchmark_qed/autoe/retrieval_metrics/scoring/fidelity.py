@@ -238,6 +238,7 @@ def calculate_single_query_fidelity(
     all_cluster_ids: list[str],
     relevance_threshold: int = 2,
     metric: FidelityMetric = FidelityMetric.JENSEN_SHANNON,
+    match_by: str = "text",
 ) -> dict[str, Any]:
     """
     Calculate fidelity for a single query using the specified distance metric.
@@ -285,6 +286,7 @@ def calculate_single_query_fidelity(
         query_relevance_result=query_relevance_result,
         text_unit_to_cluster_mapping=text_unit_to_cluster_mapping,
         relevance_threshold=relevance_threshold,
+        match_by=match_by,
     )
 
     # Calculate both metrics using ALL cluster IDs as the space
@@ -333,7 +335,8 @@ def calculate_fidelity(
     relevance_threshold: int = 2,
     text_unit_to_cluster_mapping: dict[str, str] | None = None,
     clusters: list[TextCluster] | None = None,
-    metric: FidelityMetric = FidelityMetric.JENSEN_SHANNON
+    metric: FidelityMetric = FidelityMetric.JENSEN_SHANNON,
+    match_by: str = "text",
 ) -> dict[str, Any]:
     """
     Calculate fidelity metrics for multiple queries using the specified distance metric.
@@ -407,6 +410,7 @@ def calculate_fidelity(
             raise ValueError(msg)
         text_unit_to_cluster_mapping = create_text_unit_to_cluster_mapping(
             clusters,
+            match_by=match_by,
         )
 
     # Get all cluster IDs from the corpus
@@ -456,6 +460,7 @@ def calculate_fidelity(
             all_cluster_ids=all_cluster_ids,
             relevance_threshold=relevance_threshold,
             metric=metric,
+            match_by=match_by,
         )
 
         # Collect primary metrics based on selected metric
