@@ -205,8 +205,26 @@ class RAGMethod(BaseModel):
     )
 
 
+class QuestionSetConfig(BaseModel):
+    """Configuration for a single question set."""
+
+    name: str = Field(..., description="Name identifier for this question set (e.g., 'global', 'local').")
+    questions_path: Path = Field(..., description="Path to JSON file with questions.")
+
+
 class RetrievalReferenceConfig(BaseModel):
-    """Configuration for generating retrieval reference data."""
+    """Configuration for generating retrieval reference data.
+
+    Supports multiple question sets and cluster counts for batch processing.
+    Results are saved in structured subdirectories:
+      output_dir/
+        clusters/
+          clusters_{num_clusters}.json
+        {question_set_name}/
+          clusters_{num_clusters}/
+            reference.json
+            model_usage.json
+    """
 
     llm_config: LLMConfig = Field(
         default_factory=LLMConfig,
@@ -218,8 +236,15 @@ class RetrievalReferenceConfig(BaseModel):
         description="Configuration for the embedding model (used if text units need embeddings).",
     )
 
-    questions_path: Path = Field(
-        ..., description="Path to JSON file with questions."
+    # Support both single path (backward compatible) and multiple question sets
+    questions_path: Path | None = Field(
+        default=None,
+        description="Path to JSON file with questions (for single question set mode).",
+    )
+
+    question_sets: list[QuestionSetConfig] | None = Field(
+        default=None,
+        description="List of question sets to process. If provided, questions_path is ignored.",
     )
 
     clusters_path: Path | None = Field(
@@ -235,9 +260,15 @@ class RetrievalReferenceConfig(BaseModel):
         ..., description="Directory to save reference results."
     )
 
-    num_clusters: int | None = Field(
+    # Support both single value (backward compatible) and multiple cluster counts
+    num_clusters: int | list[int] | None = Field(
         default=None,
-        description="Number of clusters to create. If None, will be auto-determined.",
+        description="Number of clusters to create. Can be a single int or list of ints for multiple runs. If None, will be auto-determined.",
+    )
+
+    save_clusters: bool = Field(
+        default=True,
+        description="Whether to save clustering results to separate files for debugging.",
     )
 
     semantic_neighbors: int = Field(
@@ -260,6 +291,11 @@ class RetrievalReferenceConfig(BaseModel):
         description="Type of relevance assessor: 'rationale' (structured JSON with reasoning) or 'bing' (UMBRELA DNA prompt).",
     )
 
+    concurrent_requests: int = Field(
+        default=16,
+        description="Maximum number of concurrent LLM requests for relevance assessment.",
+    )
+
     max_questions: int | None = Field(
         default=None,
         description="Maximum number of questions to process. If None, process all questions.",
@@ -274,6 +310,29 @@ class RetrievalReferenceConfig(BaseModel):
         default=None,
         description="Directory for caching relevance assessments.",
     )
+
+    @model_validator(mode="after")
+    def validate_question_config(self) -> Self:
+        """Ensure either questions_path or question_sets is provided."""
+        if self.questions_path is None and self.question_sets is None:
+            msg = "Either 'questions_path' or 'question_sets' must be provided."
+            raise ValueError(msg)
+        return self
+
+    def get_question_sets(self) -> list[QuestionSetConfig]:
+        """Get list of question sets to process."""
+        if self.question_sets is not None:
+            return self.question_sets
+        # Backward compatible: single questions_path
+        return [QuestionSetConfig(name="default", questions_path=self.questions_path)]  # type: ignore[arg-type]
+
+    def get_cluster_counts(self) -> list[int | None]:
+        """Get list of cluster counts to process."""
+        if self.num_clusters is None:
+            return [None]
+        if isinstance(self.num_clusters, int):
+            return [self.num_clusters]
+        return self.num_clusters
 
 
 class RetrievalScoresConfig(BaseModel):

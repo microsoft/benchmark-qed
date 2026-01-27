@@ -11,6 +11,7 @@ import numpy as np
 import pandas as pd
 import typer
 from rich import print as rich_print
+from tqdm import tqdm
 
 from benchmark_qed.autoe.assertion_scores import get_assertion_scores
 from benchmark_qed.autoe.config import (
@@ -409,11 +410,32 @@ def generate_retrieval_reference(
     This is a one-off operation that creates reference data used by retrieval_scores.
     The reference data identifies which clusters are relevant to each question.
 
+    Supports multiple question sets and cluster counts via config:
+    - question_sets: List of {name, questions_path} for multiple question sets
+    - num_clusters: Single int or list of ints for multiple cluster counts
+    - save_clusters: Whether to save clustering results separately for debugging
+
+    Output structure:
+      output_dir/
+        clusters/
+          clusters_{num_clusters}.json
+        {question_set_name}/
+          clusters_{num_clusters}/
+            reference.json
+            model_usage.json
+
     If clusters_path is provided, pre-computed clusters will be loaded.
     Otherwise, text units will be loaded from text_units_path and clustered.
     """
-    import pandas as pd
+    # Run all async work in a single event loop
+    asyncio.run(_generate_retrieval_reference_async(config_path, print_model_usage))
 
+
+async def _generate_retrieval_reference_async(
+    config_path: Path,
+    print_model_usage: bool,
+) -> None:
+    """Async implementation of generate_retrieval_reference."""
     from benchmark_qed.autod.data_model.text_unit import TextUnit
     from benchmark_qed.autod.data_processor.embedding import TextEmbedder
     from benchmark_qed.autod.io.text_unit import load_text_units
@@ -442,51 +464,26 @@ def generate_retrieval_reference(
             llm_config=config.llm_config,
             cache_dir=config.cache_dir,
             cache_enabled=config.cache_dir is not None,
+            concurrent_requests=config.concurrent_requests,
         )
-        rich_print("Using BingRelevanceRater (UMBRELA DNA prompt)")
+        rich_print(f"Using BingRelevanceRater (UMBRELA DNA prompt, {config.concurrent_requests} concurrent)")
     else:
         relevance_rater = RationaleRelevanceRater(
             llm_client=llm_client,
             llm_config=config.llm_config,
             cache_dir=config.cache_dir,
             cache_enabled=config.cache_dir is not None,
+            concurrent_requests=config.concurrent_requests,
         )
-        rich_print("Using RationaleRelevanceRater (structured JSON response)")
+        rich_print(f"Using RationaleRelevanceRater (structured JSON, {config.concurrent_requests} concurrent)")
 
     # Initialize embedding model and text embedder
     embedding_model = ModelFactory.create_embedding_model(config.embedding_config)
     embedder = TextEmbedder(embedding_model)
 
-    # Load corpus data (either pre-computed clusters or text units to cluster)
-    corpus: list[TextCluster] | list[TextUnit]
-
-    if config.clusters_path is not None:
-        # Load pre-computed clusters
-        rich_print(f"Loading pre-computed clusters from {config.clusters_path}...")
-        with config.clusters_path.open(encoding="utf-8") as f:
-            clusters_data = json.load(f)
-
-        clusters = []
-        for cluster_data in clusters_data:
-            text_units = [
-                TextUnit(
-                    id=tu.get("id", ""),
-                    short_id=tu.get("short_id", tu.get("id", "")),
-                    text=tu.get("text", ""),
-                    text_embedding=tu.get("text_embedding"),
-                )
-                for tu in cluster_data.get("text_units", [])
-            ]
-            cluster = TextCluster(
-                cluster_id=cluster_data["cluster_id"],
-                text_units=text_units,
-            )
-            clusters.append(cluster)
-
-        rich_print(f"Loaded {len(clusters)} pre-computed clusters")
-        corpus = clusters
-    else:
-        # Load text units and let ClusterRelevanceRater perform clustering
+    # Load text units (needed for clustering)
+    text_units: list[TextUnit] = []
+    if config.clusters_path is None:
         rich_print(f"Loading text units from {config.text_units_path}...")
 
         suffix = config.text_units_path.suffix.lower()
@@ -495,16 +492,13 @@ def generate_retrieval_reference(
         elif suffix == ".csv":
             text_df = pd.read_csv(config.text_units_path)
         elif suffix in {".json", ".jsonl"}:
-            # lines=True for JSONL (one JSON object per line)
             text_df = pd.read_json(config.text_units_path, lines=(suffix == ".jsonl"))
         else:
             msg = f"Unsupported file format: {suffix}. Supported: .parquet, .csv, .json, .jsonl"
             raise ValueError(msg)
 
-        # Get field mappings from config
         fields = config.text_unit_fields
 
-        # Validate required columns exist
         if fields.id_col not in text_df.columns:
             msg = f"Required column '{fields.id_col}' not found. Available: {list(text_df.columns)}"
             raise ValueError(msg)
@@ -512,7 +506,6 @@ def generate_retrieval_reference(
             msg = f"Required column '{fields.text_col}' not found. Available: {list(text_df.columns)}"
             raise ValueError(msg)
 
-        # Check optional columns and warn if specified but missing
         if fields.short_id_col and fields.short_id_col not in text_df.columns:
             rich_print(f"[yellow]Column '{fields.short_id_col}' not found, will auto-generate short_id[/yellow]")
         if fields.embedding_col and fields.embedding_col not in text_df.columns:
@@ -527,76 +520,169 @@ def generate_retrieval_reference(
         )
         rich_print(f"Loaded {len(text_units)} text units")
 
-        # Check if embeddings exist and generate if needed
         units_with_embeddings = sum(1 for tu in text_units if tu.text_embedding is not None)
         if units_with_embeddings < len(text_units):
             units_without = len(text_units) - units_with_embeddings
             rich_print(f"[yellow]{units_without}/{len(text_units)} text units missing embeddings. Generating...[/yellow]")
 
-            async def embed_text_units() -> list[TextUnit]:
-                return await embedder.embed_batch(text_units=text_units, batch_size=32)
-
-            text_units = asyncio.run(embed_text_units())
+            text_units = await embedder.embed_batch(text_units=text_units, batch_size=32)
             rich_print(f"[green]Embedded {len(text_units)} text units[/green]")
         else:
             rich_print(f"All {len(text_units)} text units have embeddings")
 
-        corpus = text_units
+    # Get question sets and cluster counts from config
+    question_sets = config.get_question_sets()
+    cluster_counts = config.get_cluster_counts()
 
-    # Initialize cluster relevance rater
-    # Will cluster text units if needed, or use pre-computed clusters
-    cluster_rater = ClusterRelevanceRater(
-        text_embedder=embedder,
-        relevance_rater=relevance_rater,
-        corpus=corpus,
-        semantic_neighbors=config.semantic_neighbors,
-        centroid_neighbors=config.centroid_neighbors,
-        num_clusters=config.num_clusters,
-    )
+    rich_print(f"\n[bold]Processing {len(question_sets)} question set(s) x {len(cluster_counts)} cluster count(s)[/bold]")
+    for qs in question_sets:
+        rich_print(f"  - Question set: {qs.name} ({qs.questions_path})")
+    rich_print(f"  - Cluster counts: {cluster_counts}")
 
-    rich_print(f"Cluster relevance rater initialized with {len(cluster_rater.clusters)} clusters")
+    # Cache for clusters by num_clusters to avoid re-clustering
+    clusters_cache: dict[int | None, list[TextCluster]] = {}
 
-    # Load questions
-    rich_print(f"Loading questions from {config.questions_path}...")
-    with config.questions_path.open(encoding="utf-8") as f:
-        questions_data = json.load(f)
+    # Create clusters directory if saving clusters
+    clusters_dir: Path | None = None
+    if config.save_clusters:
+        clusters_dir = config.output_dir / "clusters"
+        clusters_dir.mkdir(parents=True, exist_ok=True)
 
-    # Limit questions if max_questions is set
-    if config.max_questions is not None and config.max_questions < len(questions_data):
-        questions_data = questions_data[:config.max_questions]
-        rich_print(f"Limited to {len(questions_data)} questions (max_questions={config.max_questions})")
-    else:
-        rich_print(f"Loaded {len(questions_data)} questions")
+    # Calculate total combinations for progress tracking
+    total_combinations = len(cluster_counts) * len(question_sets)
+    combination_count = 0
 
-    # Process questions using batch assessment
-    from benchmark_qed.autoq.data_model.question import Question
+    # Process each combination of question set and cluster count
+    for num_clusters in tqdm(cluster_counts, desc="Cluster counts", unit="count"):
+        cluster_label = f"clusters_{num_clusters}" if num_clusters else "clusters_auto"
+        rich_print(f"\n[bold cyan]{'='*60}[/bold cyan]")
+        rich_print(f"[bold cyan]Processing with {num_clusters or 'auto'} clusters[/bold cyan]")
+        rich_print(f"[bold cyan]{'='*60}[/bold cyan]")
 
-    questions = [
-        Question(
-            id=q.get("question_id", q.get("id", str(i))),
-            text=q.get("text", q.get("question_text", "")),
-        )
-        for i, q in enumerate(questions_data)
-    ]
+        # Get or create clusters for this cluster count
+        if num_clusters in clusters_cache:
+            clusters = clusters_cache[num_clusters]
+            rich_print(f"Using cached clusters ({len(clusters)} clusters)")
+        elif config.clusters_path is not None:
+            # Load pre-computed clusters
+            rich_print(f"Loading pre-computed clusters from {config.clusters_path}...")
+            with config.clusters_path.open(encoding="utf-8") as f:
+                clusters_data = json.load(f)
 
-    async def run_batch_assessment() -> list:
-        return await cluster_rater.assess_batch(questions)
+            clusters = []
+            for cluster_data in clusters_data:
+                tus = [
+                    TextUnit(
+                        id=tu.get("id", ""),
+                        short_id=tu.get("short_id", tu.get("id", "")),
+                        text=tu.get("text", ""),
+                        text_embedding=tu.get("text_embedding"),
+                    )
+                    for tu in cluster_data.get("text_units", [])
+                ]
+                cluster = TextCluster(
+                    id=cluster_data.get("cluster_id", cluster_data.get("id", "")),
+                    text_units=tus,
+                )
+                clusters.append(cluster)
 
-    rich_print(f"Assessing cluster relevance for {len(questions)} questions...")
-    results = asyncio.run(run_batch_assessment())
+            rich_print(f"Loaded {len(clusters)} pre-computed clusters")
+            clusters_cache[num_clusters] = clusters
+        else:
+            # Create ClusterRelevanceRater to perform clustering
+            cluster_rater = ClusterRelevanceRater(
+                text_embedder=embedder,
+                relevance_rater=relevance_rater,
+                corpus=text_units,
+                semantic_neighbors=config.semantic_neighbors,
+                centroid_neighbors=config.centroid_neighbors,
+                num_clusters=num_clusters,
+            )
+            clusters = cluster_rater.clusters
+            clusters_cache[num_clusters] = clusters
+            rich_print(f"Created {len(clusters)} clusters")
 
-    # Save results with clusters
-    output_file = config.output_dir / "reference.json"
-    save_cluster_references_to_json(
-        results,
-        output_file,
-        include_clusters=True,
-        clusters=cluster_rater.clusters,
-    )
+            # Save clusters if requested
+            if config.save_clusters and clusters_dir is not None:
+                clusters_file = clusters_dir / f"{cluster_label}.json"
+                clusters_data_out = [
+                    {
+                        "cluster_id": c.id,
+                        "num_text_units": len(c.text_units),
+                        "text_unit_ids": [tu.id for tu in c.text_units],
+                        "text_unit_short_ids": [tu.short_id for tu in c.text_units],
+                    }
+                    for c in clusters
+                ]
+                with clusters_file.open("w", encoding="utf-8") as f:
+                    json.dump(clusters_data_out, f, indent=2)
+                rich_print(f"[green]Saved clustering results to {clusters_file}[/green]")
 
-    rich_print(f"[green]Saved reference data to {output_file}[/green]")
+        # Process each question set
+        for question_set in tqdm(question_sets, desc="Question sets", unit="set", leave=False):
+            combination_count += 1
+            rich_print(f"\n[bold]Processing question set: {question_set.name} ({combination_count}/{total_combinations})[/bold]")
 
-    # Print cache stats
+            # Create output directory for this combination
+            output_subdir = config.output_dir / question_set.name / cluster_label
+            output_subdir.mkdir(parents=True, exist_ok=True)
+
+            # Load questions
+            rich_print(f"Loading questions from {question_set.questions_path}...")
+            with question_set.questions_path.open(encoding="utf-8") as f:
+                questions_data = json.load(f)
+
+            if config.max_questions is not None and config.max_questions < len(questions_data):
+                questions_data = questions_data[:config.max_questions]
+                rich_print(f"Limited to {len(questions_data)} questions (max_questions={config.max_questions})")
+            else:
+                rich_print(f"Loaded {len(questions_data)} questions")
+
+            # Process questions
+            from benchmark_qed.autoq.data_model.question import Question
+
+            questions = [
+                Question(
+                    id=q.get("question_id", q.get("id", str(i))),
+                    text=q.get("text", q.get("question_text", "")),
+                )
+                for i, q in enumerate(questions_data)
+            ]
+
+            # Create cluster rater with cached clusters
+            cluster_rater = ClusterRelevanceRater(
+                text_embedder=embedder,
+                relevance_rater=relevance_rater,
+                corpus=clusters,  # Pass pre-computed clusters
+                semantic_neighbors=config.semantic_neighbors,
+                centroid_neighbors=config.centroid_neighbors,
+                num_clusters=num_clusters,
+            )
+
+            rich_print(f"Assessing cluster relevance for {len(questions)} questions...")
+            results = await cluster_rater.assess_batch(questions)
+
+            # Save results
+            output_file = output_subdir / "reference.json"
+            save_cluster_references_to_json(
+                results,
+                output_file,
+                include_clusters=True,
+                clusters=cluster_rater.clusters,
+            )
+
+            rich_print(f"[green]Saved reference data to {output_file}[/green]")
+
+            # Save usage for this run
+            usage_file = output_subdir / "model_usage.json"
+            usage_file.write_text(json.dumps(llm_client.get_usage()), encoding="utf-8")
+
+    # Print final summary
+    rich_print(f"\n[bold green]{'='*60}[/bold green]")
+    rich_print("[bold green]All reference data generated successfully![/bold green]")
+    rich_print(f"[bold green]{'='*60}[/bold green]")
+    rich_print(f"Output directory: {config.output_dir}")
+
     cache_stats = relevance_rater.get_cache_stats()
     if cache_stats.get("caching_enabled"):
         rich_print(f"Cache stats: {cache_stats['cache_hits']} hits, {cache_stats['cache_misses']} misses")
@@ -604,9 +690,6 @@ def generate_retrieval_reference(
     if print_model_usage:
         rich_print("Model usage statistics:")
         rich_print(llm_client.get_usage())
-
-    usage_file = config.output_dir / "model_usage.json"
-    usage_file.write_text(json.dumps(llm_client.get_usage()), encoding="utf-8")
 
 
 @app.command()

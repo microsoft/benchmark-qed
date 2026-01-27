@@ -8,6 +8,7 @@ from pathlib import Path
 from typing import Any
 
 from pydantic import BaseModel, Field, field_serializer
+from tqdm.asyncio import tqdm_asyncio
 
 from benchmark_qed.autod.data_model.text_unit import TextUnit
 from benchmark_qed.autod.data_processor.embedding import TextEmbedder
@@ -29,17 +30,19 @@ log = logging.getLogger(__name__)
 def _clean_assessment_response(response: RelevanceAssessmentResponse) -> dict[str, Any]:
     """Remove embeddings from RelevanceAssessmentResponse for serialization.
 
-    This function cleans embeddings before serialization to avoid Pydantic warnings
-    about numpy arrays being serialized as list[float].
+    This function creates a copy without embeddings to avoid Pydantic warnings
+    about numpy arrays being serialized as list[float], while preserving the
+    original objects' embeddings for subsequent operations.
     """
-    # First, null out the numpy array embeddings in the source objects
-    # to avoid Pydantic serialization warnings
-    for item in response.assessment:
-        if item.text_unit is not None and item.text_unit.text_embedding is not None:
-            item.text_unit.text_embedding = None
-
-    # Now serialize - no warnings since embeddings are already None
-    return response.model_dump()
+    # Use model_dump with exclude to create a copy without embeddings
+    # This avoids mutating the original TextUnit objects
+    return response.model_dump(
+        exclude={
+            "assessment": {
+                "__all__": {"text_unit": {"text_embedding"}}
+            }
+        }
+    )
 
 
 class ClusterRelevanceResult(BaseModel):
@@ -304,10 +307,11 @@ class ClusterRelevanceRater:
         )
 
         # Create tasks for each query
-        async def assess_single_query(query: Question) -> QueryClusterReferenceResult:
+        async def assess_single_query(query: Question, pbar: Any) -> QueryClusterReferenceResult:
             try:
                 cluster_results = await self.assess_clusters(query=query.text)
                 log.debug("Completed assessment for query ID: %s", query.id)
+                pbar.update(1)
                 return QueryClusterReferenceResult(
                     question_id=query.id,
                     question_text=query.text,
@@ -315,15 +319,17 @@ class ClusterRelevanceRater:
                 )
             except Exception:
                 log.exception("Failed to assess query %s", query.id)
+                pbar.update(1)
                 return QueryClusterReferenceResult(
                     question_id=query.id,
                     question_text=query.text,
                     cluster_results=[]
                 )
 
-        # Run all queries in parallel
-        tasks = [assess_single_query(query) for query in queries]
-        results = await asyncio.gather(*tasks, return_exceptions=True)
+        # Run all queries in parallel with progress bar
+        with tqdm_asyncio(total=len(queries), desc="Assessing queries", unit="query") as pbar:
+            tasks = [assess_single_query(query, pbar) for query in queries]
+            results = await asyncio.gather(*tasks, return_exceptions=True)
 
         # Process results and handle any exceptions
         query_results = []

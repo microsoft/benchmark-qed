@@ -151,11 +151,9 @@ class RelevanceRater(ABC):
 
         cache_file = self.cache_dir / f"{cache_key}.json"
 
-        # Null out embedding before serialization to avoid Pydantic warning about numpy arrays
-        if assessment_item.text_unit is not None and assessment_item.text_unit.text_embedding is not None:
-            assessment_item.text_unit.text_embedding = None
-
-        assessment_data = assessment_item.model_dump()
+        # Create a copy for serialization to avoid mutating the original
+        # We exclude the embedding to avoid Pydantic warnings about numpy arrays
+        assessment_data = assessment_item.model_dump(exclude={"text_unit": {"text_embedding"}})
 
         cache_data = {
             "timestamp": datetime.now(tz=UTC).isoformat(),
