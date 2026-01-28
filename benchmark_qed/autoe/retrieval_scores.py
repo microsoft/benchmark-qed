@@ -382,9 +382,9 @@ def compare_retrieval_metrics_significance(
             )
             continue
 
-        # Run statistical comparison
+        # Run statistical comparison (paired=True since same questions across RAG methods)
         comparison_result = compare_groups(
-            groups, alpha=alpha, correction=correction_method
+            groups, alpha=alpha, correction=correction_method, paired=True
         )
         results[metric_name] = comparison_result
 

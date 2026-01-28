@@ -456,9 +456,9 @@ def compare_assertion_scores_significance(
             )
             continue
 
-        # Run statistical comparison
+        # Run statistical comparison (paired=True since same questions across RAG methods)
         comparison_result = compare_groups(
-            groups, alpha=alpha, correction=correction_method
+            groups, alpha=alpha, correction=correction_method, paired=True
         )
         results[question_set] = comparison_result
 

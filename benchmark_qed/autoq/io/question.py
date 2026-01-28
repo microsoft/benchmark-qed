@@ -49,8 +49,27 @@ def _normalize_assertion(assertion: dict[str, Any] | str) -> dict[str, Any]:
 
 
 def _save_assertions(questions: list[Question], output_path: Path) -> None:
-    """Extract and save assertions from questions to a separate JSON file with ranks."""
+    """
+    Extract and save assertions from questions to separate JSON files with ranks.
+
+    Creates the following files:
+    - assertions.json: Final assertions with ranks and supporting_assertions metadata
+    - assertion_sources.json: Source text chunks for each assertion (kept separate to reduce file size)
+    - map_assertions.json: Intermediate assertions from map step (for global questions)
+    - map_assertion_sources.json: Source text chunks for map assertions
+
+    For global assertions, each assertion includes:
+    - supporting_assertions: The child/local assertions that were consolidated into it
+    - This enables comprehensive coverage scoring beyond binary pass/fail
+
+    Args:
+        questions: List of Question objects with assertions in attributes
+        output_path: Directory path to save the JSON files
+    """
     questions_with_assertions = []
+    questions_with_map_assertions = []
+    assertion_sources_data = []
+    map_assertion_sources_data = []
 
     for question in questions:
         # Check if question has assertions in its attributes
@@ -72,8 +91,11 @@ def _save_assertions(questions: list[Question], output_path: Path) -> None:
 
         # Add rank information (rank 1 = highest importance)
         ranked_assertions = []
+        question_assertion_sources = []
         for rank, assertion in enumerate(sorted_assertions, 1):
             sources = assertion.get("sources") or []
+            attributes = assertion.get("attributes") or {}
+
             ranked_assertion = {
                 "statement": assertion["statement"],
                 "source_count": len(sources),
@@ -83,11 +105,23 @@ def _save_assertions(questions: list[Question], output_path: Path) -> None:
             }
 
             # Include validation scores if available
-            attributes = assertion.get("attributes") or {}
             if attributes and "validation" in attributes:
                 ranked_assertion["validation"] = attributes["validation"]
 
+            # Include supporting_assertions if available (for global assertions)
+            # These are the child/local assertions that were consolidated
+            if attributes and "supporting_assertions" in attributes:
+                ranked_assertion["supporting_assertions"] = attributes["supporting_assertions"]
+
             ranked_assertions.append(ranked_assertion)
+
+            # Collect sources for separate file
+            if sources:
+                question_assertion_sources.append({
+                    "rank": rank,
+                    "statement": assertion["statement"],
+                    "sources": sources,
+                })
 
         questions_with_assertions.append({
             "question_id": question.id,
@@ -95,11 +129,100 @@ def _save_assertions(questions: list[Question], output_path: Path) -> None:
             "assertions": ranked_assertions,
         })
 
+        # Add sources data if any assertions have sources
+        if question_assertion_sources:
+            assertion_sources_data.append({
+                "question_id": question.id,
+                "question_text": question.text,
+                "assertion_sources": question_assertion_sources,
+            })
+
+        # Process map_assertions if available (for global assertions)
+        map_assertions = question.attributes.get("map_assertions", [])
+        if map_assertions:
+            map_assertion_dicts = [_normalize_assertion(a) for a in map_assertions]
+
+            # Sort and rank map assertions
+            sorted_map_assertions = sorted(
+                map_assertion_dicts,
+                key=lambda a: (-a.get("score", 0), -len(a.get("sources", []))),
+            )
+
+            ranked_map_assertions = []
+            question_map_assertion_sources = []
+            for rank, assertion in enumerate(sorted_map_assertions, 1):
+                sources = assertion.get("sources") or []
+                ranked_map_assertions.append({
+                    "statement": assertion["statement"],
+                    "source_count": len(sources),
+                    "score": assertion.get("score", 0),
+                    "reasoning": assertion.get("reasoning", ""),
+                    "rank": rank,
+                })
+
+                # Collect sources for separate file
+                if sources:
+                    question_map_assertion_sources.append({
+                        "rank": rank,
+                        "statement": assertion["statement"],
+                        "sources": sources,
+                    })
+
+            questions_with_map_assertions.append({
+                "question_id": question.id,
+                "question_text": question.text,
+                "map_assertions": ranked_map_assertions,
+            })
+
+            # Add map assertion sources if any
+            if question_map_assertion_sources:
+                map_assertion_sources_data.append({
+                    "question_id": question.id,
+                    "question_text": question.text,
+                    "map_assertion_sources": question_map_assertion_sources,
+                })
+
     # Save assertions to file as a direct list
     if questions_with_assertions:
         assertions_file = output_path / "assertions.json"
         Path(assertions_file).write_text(
             json.dumps(questions_with_assertions, indent=4)
+        )
+
+    # Save assertion sources to separate file
+    if assertion_sources_data:
+        assertion_sources_file = output_path / "assertion_sources.json"
+        Path(assertion_sources_file).write_text(
+            json.dumps(assertion_sources_data, indent=4)
+        )
+        log.info(
+            "Saved assertion sources for %d questions to %s",
+            len(assertion_sources_data),
+            assertion_sources_file,
+        )
+
+    # Save map_assertions to separate file (for global assertions)
+    if questions_with_map_assertions:
+        map_assertions_file = output_path / "map_assertions.json"
+        Path(map_assertions_file).write_text(
+            json.dumps(questions_with_map_assertions, indent=4)
+        )
+        log.info(
+            "Saved map (source) assertions for %d questions to %s",
+            len(questions_with_map_assertions),
+            map_assertions_file,
+        )
+
+    # Save map assertion sources to separate file
+    if map_assertion_sources_data:
+        map_assertion_sources_file = output_path / "map_assertion_sources.json"
+        Path(map_assertion_sources_file).write_text(
+            json.dumps(map_assertion_sources_data, indent=4)
+        )
+        log.info(
+            "Saved map assertion sources for %d questions to %s",
+            len(map_assertion_sources_data),
+            map_assertion_sources_file,
         )
 
 

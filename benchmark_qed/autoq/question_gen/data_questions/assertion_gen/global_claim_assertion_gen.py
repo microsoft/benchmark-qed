@@ -134,14 +134,28 @@ class GlobalClaimAssertionGenerator(BaseAssertionGenerator):
         Args:
             question_text: The question text to generate assertions for
             **kwargs: Additional parameters, expects 'claims' list (can be simple or batch format)
+
+        Returns
+        -------
+            AssertionGenerationResult containing:
+            - assertions: Final consolidated global assertions
+            - total_assertions: Number of final assertions
+            - map_assertions: Intermediate assertions from map step (before consolidation)
         """
         # MAP PHASE
         claim_batches = self.build_map_context(kwargs.get("claims", []))
         if not claim_batches:
             log.warning("No claims provided for assertion generation")
-            return AssertionGenerationResult(assertions=[], total_assertions=0)
+            return AssertionGenerationResult(
+                assertions=[], total_assertions=0, map_assertions=[]
+            )
 
         map_responses = await self.generate_map_responses(question_text, claim_batches)
+
+        # Flatten all map assertions for storage
+        all_map_assertions: list[Assertion] = []
+        for assertion_list in map_responses:
+            all_map_assertions.extend(assertion_list)
 
         # REDUCE PHASE
         reduce_context = self.build_reduce_context(map_responses)
@@ -155,7 +169,9 @@ class GlobalClaimAssertionGenerator(BaseAssertionGenerator):
         )
 
         return AssertionGenerationResult(
-            assertions=final_assertions, total_assertions=len(final_assertions)
+            assertions=final_assertions,
+            total_assertions=len(final_assertions),
+            map_assertions=all_map_assertions,
         )
 
     def build_map_context(self, claims: list[ClaimDict]) -> list[list[ClaimDict]]:
@@ -437,7 +453,7 @@ class GlobalClaimAssertionGenerator(BaseAssertionGenerator):
                 sources=aggregated_chunks,
                 score=assertion.get("score", 5),
                 reasoning=assertion.get("reasoning", ""),
-                attributes={"source_assertions": mapped_sources},
+                attributes={"supporting_assertions": mapped_sources},
             )
         except ValueError as e:
             log.warning("Skipping invalid consolidated assertion: %s", e)
