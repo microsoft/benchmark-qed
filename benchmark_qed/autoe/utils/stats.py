@@ -571,6 +571,97 @@ def _apply_correction_and_build_result(
     )
 
 
+def _compare_two_groups_paired(
+    groups: Mapping[str, Sequence[float]],
+    alpha: float = 0.05,
+) -> GroupComparisonResult:
+    """
+    Compare exactly 2 groups with a paired design.
+
+    For 2 groups, omnibus tests like Friedman are not applicable (they require
+    3+ conditions). Instead, we directly perform a paired comparison test.
+
+    Args:
+        groups: Dictionary mapping exactly 2 group names to their data samples.
+                Groups must have the same length and be aligned by subject/question.
+        alpha: Significance level.
+
+    Returns:
+        GroupComparisonResult with the pairwise comparison as both the "omnibus"
+        summary and a single post-hoc comparison.
+    """
+    if len(groups) != 2:
+        msg = "_compare_two_groups_paired requires exactly 2 groups"
+        raise ValueError(msg)
+
+    group_names = list(groups.keys())
+    group_a, group_b = group_names[0], group_names[1]
+    data_a = np.array(groups[group_a])
+    data_b = np.array(groups[group_b])
+
+    if len(data_a) != len(data_b):
+        msg = "Paired comparison requires groups of equal length"
+        raise ValueError(msg)
+
+    # Compute differences and check normality of the differences
+    differences = data_a - data_b
+    stat_normality, p_normality, is_normal = check_normality(
+        differences.tolist(), alpha=alpha
+    )
+
+    # Create a normality result for the differences
+    normality_results = [
+        NormalityResult(
+            group_name="differences",
+            statistic=float(stat_normality),
+            p_value=float(p_normality),
+            is_normal=is_normal,
+        )
+    ]
+
+    # Choose test based on normality of differences
+    if is_normal:
+        result = stats.ttest_rel(data_a, data_b)
+        stat, p_value = float(result.statistic), float(result.pvalue)
+        test_name = "Paired t-test"
+    else:
+        result = stats.wilcoxon(data_a, data_b)
+        stat, p_value = float(result.statistic), float(result.pvalue)
+        test_name = "Wilcoxon signed-rank test"
+
+    is_significant = p_value < alpha
+
+    # Create an "omnibus-like" result for consistency
+    omnibus = OmnibusTestResult(
+        test_name=test_name,
+        statistic=float(stat),
+        p_value=float(p_value),
+        is_significant=is_significant,
+        is_normal=is_normal,
+        alpha=alpha,
+        normality_results=normality_results,
+    )
+
+    # Also create a single pairwise comparison for the post-hoc result
+    comparison = PairwiseComparison(
+        group1=group_a,
+        group2=group_b,
+        statistic=float(stat),
+        p_value_raw=float(p_value),
+        p_value_corrected=float(p_value),  # No correction needed for single comparison
+        is_significant=is_significant,
+    )
+
+    posthoc = PostHocResult(
+        test_name=test_name,
+        correction_method="none (single comparison)",
+        alpha=alpha,
+        comparisons=[comparison],
+    )
+
+    return GroupComparisonResult(omnibus=omnibus, posthoc=posthoc)
+
+
 def compare_groups(
     groups: Mapping[str, Sequence[float]],
     alpha: float = 0.05,
@@ -588,8 +679,8 @@ def compare_groups(
         - Post-hoc: Tukey HSD or Dunn's test
 
     For repeated measures (paired=True):
-        - Omnibus: Repeated Measures ANOVA or Friedman test based on normality
-        - Post-hoc: Paired t-tests or Wilcoxon signed-rank tests with correction
+        - 2 groups: Direct paired test (no omnibus needed)
+        - 3+ groups: Omnibus (RM-ANOVA/Friedman) then paired post-hoc tests
 
     Use paired=True when comparing RAG methods on the same set of questions,
     as this is a repeated measures design (same questions measured under
@@ -627,6 +718,11 @@ def compare_groups(
         >>> result = compare_groups(groups, paired=True)
         >>> print(result.summary())
     """
+    # For paired design with exactly 2 groups, skip omnibus and go directly to pairwise
+    # (Friedman test requires 3+ groups)
+    if paired and len(groups) == 2:
+        return _compare_two_groups_paired(groups, alpha=alpha)
+
     omnibus = run_omnibus_test(groups, alpha=alpha, paired=paired)
 
     posthoc = None
