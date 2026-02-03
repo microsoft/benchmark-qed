@@ -196,6 +196,53 @@ class AssertionConfig(BaseAutoEConfig):
         return self
 
 
+class HierarchicalAssertionConfig(BaseAutoEConfig):
+    """Configuration for hierarchical assertion scoring with supporting assertions.
+
+    This config is used for global assertions that have supporting (local) assertions.
+    It evaluates both the global assertion and its supporting assertions in a single
+    LLM call, computing support coverage and detecting discovery.
+    """
+
+    generated: Condition = Field(
+        ...,
+        description="Conditions with the generated answers to test.",
+    )
+    assertions: Assertions = Field(
+        ...,
+        description="Assertions with supporting_assertions field for hierarchical scoring.",
+    )
+
+    pass_threshold: float = Field(
+        0.5,
+        description="Threshold for passing the assertion score.",
+    )
+
+    detect_discovery: bool = Field(
+        True,
+        description="Whether to detect information in answers beyond supporting assertions.",
+    )
+
+    prompt_config: AutoEPromptConfig = Field(
+        default=AutoEPromptConfig(
+            user_prompt=PromptConfig(
+                prompt=Path(assertion_prompts.__file__).parent
+                / "hierarchical_assertion_user_prompt.txt",
+            ),
+            system_prompt=PromptConfig(
+                prompt=Path(assertion_prompts.__file__).parent
+                / "hierarchical_assertion_system_prompt.txt",
+            ),
+        ),
+        description="Configuration for prompts used in hierarchical assertion scoring.",
+    )
+
+    @model_validator(mode="after")
+    def check_trials_even(self) -> Self:
+        """Even number of trials check does not apply for assertion scoring."""
+        return self
+
+
 class RAGMethod(BaseModel):
     """Configuration for a RAG method to evaluate."""
 

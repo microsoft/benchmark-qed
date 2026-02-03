@@ -31,7 +31,23 @@ Each global question MUST:
     - Why: "why do speakers emphasize X"
     - Which: "which approaches to X are discussed"
   Aim for variety - if generating multiple questions, distribute them across different question types.
-- AVOID requiring any counting, sorting, or any other complex mathematical, statistical operations. For example, avoid questions like "What is the frequency of occurrences of X?" as it requires counting.
+- INCLUDE LISTING/ENUMERATION QUESTIONS - questions that ask for multiple named entities, examples, or instances. These are valuable because they test comprehensive knowledge of the dataset. Examples:
+    - People: "Who are the key figures involved in X?"
+    - People: "Who are cited as experts or authorities on X?"
+    - Organizations: "Which companies or agencies are mentioned in relation to X?"
+    - Organizations: "What institutions are frequently referenced?"
+    - Places: "Which cities or regions are associated with X?"
+    - Events: "Which events or incidents are mentioned as significant?"
+  Aim for at least 1-3 listing questions per batch, including WHO questions about people when applicable.
+- **CRITICAL** - AVOID requiring any counting, sorting, frequency analysis, or any other complex mathematical or statistical operations.
+    - BANNED PHRASES (never use these): "most often", "most common", "most frequently", "least often", "how many", "frequency"
+    - BAD (explicit counting): "What is the frequency of X?" or "How many times is X mentioned?"
+    - BAD (implicit frequency): "Which X are most often mentioned?" or "What is the most common Y?"
+    - BAD (ranking by frequency): "Who is credited most for X?" or "What appears most frequently?"
+    - BAD: "Which investors, accelerators, and venture firms are most often credited for growth?"
+    - BAD: "Which schools and universities are most frequently linked to formative learning moments?"
+    - GOOD: "Which investors, accelerators, and venture firms are credited for startup growth?"
+    - GOOD: "Which schools and universities are linked to formative learning moments?"
 - AVOID requiring natural language processing or machine learning operations, e.g., sentiment analysis, keyword counting.
 
 The output question set should be distinct and diverse, avoiding repetitive questions.

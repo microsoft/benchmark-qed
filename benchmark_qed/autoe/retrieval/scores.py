@@ -1,5 +1,15 @@
 # Copyright (c) 2025 Microsoft Corporation.
-"""Retrieval metrics evaluation: precision, recall, and fidelity."""
+"""Retrieval metrics evaluation: precision, recall, and fidelity.
+
+This module provides comprehensive functions for evaluating retrieval-augmented
+generation (RAG) methods, including:
+- Loading and managing cluster data
+- Reference result handling
+- Relevance assessment
+- Metric calculation (precision, recall, fidelity)
+- Statistical significance testing
+- Result persistence
+"""
 
 from __future__ import annotations
 
@@ -21,6 +31,7 @@ from benchmark_qed.autoe.data_model.retrieval_result import (
     RetrievalResult,
     load_retrieval_results_from_dicts,
 )
+# Re-export from retrieval_metrics subpackage (will be deprecated, use retrieval/)
 from benchmark_qed.autoe.retrieval_metrics.reference_gen.cluster_relevance import (
     QueryClusterReferenceResult,
 )
@@ -53,16 +64,16 @@ def load_clusters_from_json(
     text_units_path: Path | None = None,
 ) -> list[TextCluster]:
     """Load clusters from a JSON file.
-    
+
     Supports two formats:
     1. text_units: array of objects with {id, short_id, text}
     2. text_unit_ids: array of string IDs (requires text_units_path to load text)
-    
+
     Args:
         clusters_path: Path to clusters JSON file.
         text_units_path: Optional path to text units file (parquet/json/csv).
             Required if clusters use text_unit_ids format.
-    
+
     Returns:
         List of TextCluster objects with full TextUnit data.
     """
@@ -74,7 +85,7 @@ def load_clusters_from_json(
         "text_unit_ids" in cluster_data and "text_units" not in cluster_data
         for cluster_data in data
     )
-    
+
     text_unit_map: dict[str, str] = {}
     if needs_text_units:
         if text_units_path is None:
@@ -84,7 +95,6 @@ def load_clusters_from_json(
             )
         else:
             # Load text units and create ID -> text mapping
-            import pandas as pd
             suffix = text_units_path.suffix.lower()
             if suffix == ".parquet":
                 df = pd.read_parquet(text_units_path)
@@ -95,13 +105,21 @@ def load_clusters_from_json(
             else:
                 log.warning(f"Unknown text units file format: {suffix}")
                 df = None
-            
+
             if df is not None:
                 # Create mapping from ID to text
                 id_col = "id" if "id" in df.columns else df.columns[0]
-                text_col = "text" if "text" in df.columns else "chunk" if "chunk" in df.columns else df.columns[1]
-                text_unit_map = dict(zip(df[id_col].astype(str), df[text_col].astype(str)))
-                log.info(f"Loaded {len(text_unit_map)} text units from {text_units_path}")
+                text_col = (
+                    "text"
+                    if "text" in df.columns
+                    else "chunk" if "chunk" in df.columns else df.columns[1]
+                )
+                text_unit_map = dict(
+                    zip(df[id_col].astype(str), df[text_col].astype(str))
+                )
+                log.info(
+                    f"Loaded {len(text_unit_map)} text units from {text_units_path}"
+                )
 
     clusters = []
     for cluster_data in data:
@@ -127,7 +145,7 @@ def load_clusters_from_json(
             ]
         else:
             text_units = []
-            
+
         cluster = TextCluster(
             id=cluster_data["cluster_id"],
             text_units=text_units,
@@ -172,7 +190,16 @@ def load_retrieval_results(
     context_id_key: str = "chunk_id",
     context_text_key: str = "text",
 ) -> list[RetrievalResult]:
-    """Load retrieval results from a JSON file."""
+    """Load retrieval results from a JSON file.
+
+    Args:
+        retrieval_path: Path to the retrieval results JSON file.
+        context_id_key: Key name for chunk ID in retrieval results.
+        context_text_key: Key name for chunk text in retrieval results.
+
+    Returns:
+        List of RetrievalResult objects.
+    """
     with retrieval_path.open(encoding="utf-8") as f:
         data = json.load(f)
 
@@ -191,7 +218,16 @@ async def assess_rag_method_relevance(
     relevance_rater: RelevanceRater,
     max_concurrent: int = 8,
 ) -> BatchRelevanceResult:
-    """Assess relevance of retrieved chunks for a RAG method."""
+    """Assess relevance of retrieved chunks for a RAG method.
+
+    Args:
+        retrieval_results: List of retrieval results to assess.
+        relevance_rater: RelevanceRater instance for assessing chunk relevance.
+        max_concurrent: Maximum number of concurrent relevance assessments.
+
+    Returns:
+        BatchRelevanceResult containing all relevance assessments.
+    """
     return await assess_batch_relevance(
         retrieval_results=retrieval_results,
         relevance_rater=relevance_rater,
@@ -208,19 +244,22 @@ def calculate_retrieval_metrics(
     fidelity_metric: FidelityMetric = FidelityMetric.JENSEN_SHANNON,
     cluster_match_by: str = "text",
 ) -> dict[str, Any]:
-    """
-    Calculate all retrieval metrics (precision, recall, fidelity) for a RAG method.
+    """Calculate all retrieval metrics for a RAG method.
+
+    Computes precision, recall, and fidelity metrics based on relevance assessments
+    and reference cluster data.
 
     Args:
-        batch_relevance: BatchRelevanceResult with relevance assessments
-        reference_results: Reference cluster relevance results
-        clusters: List of TextCluster objects
-        relevance_threshold: Minimum score to consider relevant
-        text_unit_to_cluster_mapping: Pre-computed mapping (optional)
+        batch_relevance: BatchRelevanceResult with relevance assessments.
+        reference_results: Reference cluster relevance results.
+        clusters: List of TextCluster objects.
+        relevance_threshold: Minimum score to consider relevant.
+        text_unit_to_cluster_mapping: Pre-computed mapping (optional).
+        fidelity_metric: Fidelity metric to use (JS or TVD).
+        cluster_match_by: How to match text units to clusters.
 
-    Returns
-    -------
-        Dictionary with all metrics
+    Returns:
+        Dictionary with all metrics including precision, recall, fidelity, and summary.
     """
     # Create mapping if not provided
     if text_unit_to_cluster_mapping is None:
@@ -281,10 +320,19 @@ def extract_per_query_metrics(
     fidelity_metric: FidelityMetric = FidelityMetric.JENSEN_SHANNON,
     cluster_match_by: str = "text",
 ) -> pd.DataFrame:
-    """
-    Extract per-query metrics for statistical analysis.
+    """Extract per-query metrics for statistical analysis.
 
-    Returns a DataFrame with one row per query and columns for each metric.
+    Args:
+        batch_relevance: BatchRelevanceResult with relevance assessments.
+        reference_results: Reference cluster relevance results.
+        clusters: List of TextCluster objects.
+        relevance_threshold: Minimum score to consider relevant.
+        text_unit_to_cluster_mapping: Pre-computed mapping (optional).
+        fidelity_metric: Fidelity metric to use (JS or TVD).
+        cluster_match_by: How to match text units to clusters.
+
+    Returns:
+        DataFrame with one row per query and columns for each metric.
     """
     if text_unit_to_cluster_mapping is None:
         text_unit_to_cluster_mapping = create_text_unit_to_cluster_mapping(
@@ -312,7 +360,11 @@ def extract_per_query_metrics(
     )
 
     # Determine fidelity key based on metric
-    fidelity_key = "js_fidelity" if fidelity_metric == FidelityMetric.JENSEN_SHANNON else "tvd_fidelity"
+    fidelity_key = (
+        "js_fidelity"
+        if fidelity_metric == FidelityMetric.JENSEN_SHANNON
+        else "tvd_fidelity"
+    )
 
     # Build per-query DataFrame
     rows = []
@@ -321,15 +373,25 @@ def extract_per_query_metrics(
 
         # Calculate per-query precision
         relevant_count = result.get_relevant_count(relevance_threshold)
-        precision = relevant_count / result.total_chunks if result.total_chunks > 0 else 0.0
+        precision = (
+            relevant_count / result.total_chunks if result.total_chunks > 0 else 0.0
+        )
 
         # Get recall and fidelity from query_details
         recall_detail = next(
-            (d for d in recall_metrics.get("query_details", []) if d["question_id"] == question_id),
+            (
+                d
+                for d in recall_metrics.get("query_details", [])
+                if d["question_id"] == question_id
+            ),
             {"recall": 0.0},
         )
         fidelity_detail = next(
-            (d for d in fidelity.get("query_details", []) if d["question_id"] == question_id),
+            (
+                d
+                for d in fidelity.get("query_details", [])
+                if d["question_id"] == question_id
+            ),
             {fidelity_key: 0.0},
         )
 
@@ -350,17 +412,18 @@ def compare_retrieval_metrics_significance(
     alpha: float = 0.05,
     correction_method: str = "holm",
 ) -> dict[str, GroupComparisonResult]:
-    """
-    Compare retrieval metrics across RAG methods using statistical significance tests.
+    """Compare retrieval metrics across RAG methods using statistical tests.
+
+    Performs significance testing to determine if differences in retrieval
+    metrics between RAG methods are statistically significant.
 
     Args:
-        rag_metrics: Dictionary mapping RAG method names to per-query metrics DataFrames
-        alpha: Significance level
-        correction_method: P-value correction method
+        rag_metrics: Dictionary mapping RAG method names to per-query DataFrames.
+        alpha: Significance level.
+        correction_method: P-value correction method.
 
-    Returns
-    -------
-        Dictionary mapping metric names to GroupComparisonResult
+    Returns:
+        Dictionary mapping metric names to GroupComparisonResult.
     """
     results: dict[str, GroupComparisonResult] = {}
     metrics_to_compare = ["precision", "recall", "fidelity"]
@@ -378,11 +441,12 @@ def compare_retrieval_metrics_significance(
 
         if len(groups) < 2:
             rich_print(
-                "  [yellow]Insufficient data for comparison (need at least 2 RAG methods)[/yellow]"
+                "  [yellow]Insufficient data for comparison "
+                "(need at least 2 RAG methods)[/yellow]"
             )
             continue
 
-        # Run statistical comparison (paired=True since same questions across RAG methods)
+        # Run statistical comparison (paired=True since same questions)
         comparison_result = compare_groups(
             groups, alpha=alpha, correction=correction_method, paired=True
         )
@@ -404,7 +468,16 @@ def save_retrieval_results(
     per_query_df: pd.DataFrame,
     batch_relevance: BatchRelevanceResult,
 ) -> None:
-    """Save retrieval evaluation results to files."""
+    """Save retrieval evaluation results to files.
+
+    Args:
+        output_dir: Directory to save results.
+        rag_name: Name of the RAG method.
+        question_set: Name of the question set.
+        metrics: Dictionary with all metrics.
+        per_query_df: DataFrame with per-query metrics.
+        batch_relevance: BatchRelevanceResult with relevance assessments.
+    """
     question_set_dir = output_dir / question_set
     question_set_dir.mkdir(parents=True, exist_ok=True)
 
@@ -413,15 +486,11 @@ def save_retrieval_results(
     summary["rag_method"] = rag_name
     summary["question_set"] = question_set
     summary_df = pd.DataFrame([summary])
-    summary_df.to_csv(
-        question_set_dir / f"{rag_name}_summary.csv", index=False
-    )
+    summary_df.to_csv(question_set_dir / f"{rag_name}_summary.csv", index=False)
 
     # Save per-query metrics
     per_query_df["rag_method"] = rag_name
-    per_query_df.to_csv(
-        question_set_dir / f"{rag_name}_per_query.csv", index=False
-    )
+    per_query_df.to_csv(question_set_dir / f"{rag_name}_per_query.csv", index=False)
 
     # Save full relevance results
     batch_relevance.save_to_json(
@@ -435,7 +504,14 @@ def save_significance_results(
     significance_results: dict[str, GroupComparisonResult],
     rag_metrics: dict[str, pd.DataFrame],
 ) -> None:
-    """Save significance test results to files."""
+    """Save significance test results to files.
+
+    Args:
+        output_dir: Directory to save results.
+        question_set: Name of the question set.
+        significance_results: Dictionary mapping metric names to results.
+        rag_metrics: Dictionary mapping RAG method names to DataFrames.
+    """
     question_set_dir = output_dir / question_set
     question_set_dir.mkdir(parents=True, exist_ok=True)
 
@@ -475,17 +551,21 @@ def save_significance_results(
 
         # Save pairwise comparisons if available
         if result.posthoc and result.posthoc.comparisons:
-            pairwise_data = [{
-                "group1": c.group1,
-                "group2": c.group2,
-                "statistic": c.statistic,
-                "p_value_raw": c.p_value_raw,
-                "p_value_corrected": c.p_value_corrected,
-                "is_significant": c.is_significant,
-            } for c in result.posthoc.comparisons]
+            pairwise_data = [
+                {
+                    "group1": c.group1,
+                    "group2": c.group2,
+                    "statistic": c.statistic,
+                    "p_value_raw": c.p_value_raw,
+                    "p_value_corrected": c.p_value_corrected,
+                    "is_significant": c.is_significant,
+                }
+                for c in result.posthoc.comparisons
+            ]
             pairwise_df = pd.DataFrame(pairwise_data)
             pairwise_df.to_csv(
-                question_set_dir / f"significance_{metric_name}_pairwise.csv", index=False
+                question_set_dir / f"significance_{metric_name}_pairwise.csv",
+                index=False,
             )
 
 
@@ -507,30 +587,28 @@ async def run_retrieval_evaluation(
     reference_filename: str = "reference.json",
     cluster_match_by: str = "text",
 ) -> pd.DataFrame:
-    """
-    Run retrieval evaluation for multiple RAG methods and question sets.
+    """Run retrieval evaluation for multiple RAG methods and question sets.
 
     Args:
-        relevance_rater: RelevanceRater instance for assessing chunk relevance
-        rag_methods: List of dicts with 'name' and 'retrieval_results_path'
-        question_sets: List of question set names to evaluate
-        reference_dir: Directory containing reference cluster relevance data
-        clusters: List of TextCluster objects
-        output_dir: Directory to save results
-        relevance_threshold: Minimum score to consider relevant
-        context_id_key: Key name for chunk ID in retrieval results
-        context_text_key: Key name for chunk text in retrieval results
-        run_significance_test: Whether to run statistical significance tests
-        significance_alpha: Alpha level for significance tests
-        significance_correction: P-value correction method
-        fidelity_metric: Fidelity metric to use (JS or TVD)
-        max_concurrent: Maximum concurrent relevance assessments
-        reference_filename: Filename for reference data
-        cluster_match_by: How to match text units to clusters ('text', 'id', or 'short_id')
+        relevance_rater: RelevanceRater instance for assessing chunk relevance.
+        rag_methods: List of dicts with 'name' and 'retrieval_results_path'.
+        question_sets: List of question set names to evaluate.
+        reference_dir: Directory containing reference cluster relevance data.
+        clusters: List of TextCluster objects.
+        output_dir: Directory to save results.
+        relevance_threshold: Minimum score to consider relevant.
+        context_id_key: Key name for chunk ID in retrieval results.
+        context_text_key: Key name for chunk text in retrieval results.
+        run_significance_test: Whether to run statistical significance tests.
+        significance_alpha: Alpha level for significance tests.
+        significance_correction: P-value correction method.
+        fidelity_metric: Fidelity metric to use (JS or TVD).
+        max_concurrent: Maximum concurrent relevance assessments.
+        reference_filename: Filename for reference data.
+        cluster_match_by: How to match text units to clusters.
 
-    Returns
-    -------
-        DataFrame with overall summary
+    Returns:
+        DataFrame with overall summary of retrieval metrics.
     """
     output_dir.mkdir(parents=True, exist_ok=True)
 
@@ -562,12 +640,17 @@ async def run_retrieval_evaluation(
 
             # Check if path includes question_set placeholder
             if "{question_set}" in str(retrieval_path):
-                retrieval_path = Path(str(retrieval_path).format(question_set=question_set))
+                retrieval_path = Path(
+                    str(retrieval_path).format(question_set=question_set)
+                )
 
             rich_print(f"  Processing RAG method: {rag_name}")
 
             if not retrieval_path.exists():
-                rich_print(f"    [yellow]Warning: {retrieval_path} not found, skipping[/yellow]")
+                rich_print(
+                    f"    [yellow]Warning: {retrieval_path} not found, skipping"
+                    "[/yellow]"
+                )
                 continue
 
             # Load retrieval results
@@ -582,7 +665,9 @@ async def run_retrieval_evaluation(
                 continue
 
             # Assess relevance
-            rich_print(f"    Assessing relevance for {len(retrieval_results)} queries...")
+            rich_print(
+                f"    Assessing relevance for {len(retrieval_results)} queries..."
+            )
             batch_relevance = await assess_rag_method_relevance(
                 retrieval_results, relevance_rater, max_concurrent
             )
@@ -621,7 +706,11 @@ async def run_retrieval_evaluation(
             )
 
             # Print summary
-            fidelity_label = "JS Fidelity" if fidelity_metric == FidelityMetric.JENSEN_SHANNON else "TVD Fidelity"
+            fidelity_label = (
+                "JS Fidelity"
+                if fidelity_metric == FidelityMetric.JENSEN_SHANNON
+                else "TVD Fidelity"
+            )
             summary = metrics["summary"]
             rich_print(f"    Binary Precision: {summary['binary_precision']:.3f}")
             rich_print(f"    Recall: {summary['recall']:.3f}")
@@ -665,7 +754,9 @@ async def run_retrieval_evaluation(
                     index="rag_method", columns="question_set", values=metric
                 )
                 pivot.to_csv(output_dir / f"retrieval_{metric}_pivot.csv")
-                print_df(pivot.reset_index(), f"{metric.replace('_', ' ').title()} by RAG Method")
+                print_df(
+                    pivot.reset_index(), f"{metric.replace('_', ' ').title()} by RAG"
+                )
 
         return overall_df
 

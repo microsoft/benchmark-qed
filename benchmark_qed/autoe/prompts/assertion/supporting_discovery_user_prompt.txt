@@ -1,0 +1,38 @@
+${score_id}
+
+---Question---
+${question}
+
+---Answer to Evaluate---
+${answer}
+---End of Answer---
+
+---Assertion (already satisfied)---
+${assertion}
+
+---Supporting Assertions---
+The following assertions are local/supporting claims derived from source documents:
+${supporting_assertions}
+
+---Instructions---
+The main assertion above has already been determined to be SATISFIED by the answer. Your task is to analyze HOW the answer satisfies it:
+
+1. **Supporting Assertions**: For each supporting assertion (SA1, SA2, etc.), determine if the answer contains evidence that satisfies it. Provide brief reasoning for each.
+
+2. **Discovery Detection**: Identify if the answer contains factual information that (a) is NOT covered by any supporting assertion, AND (b) helps satisfy the main assertion. This indicates the answer uses information beyond the grounded source material.
+
+**Important Notes:**
+- Semantic equivalence counts - if the answer conveys the same meaning using different words, it satisfies the assertion
+- Discovery must be relevant to satisfying the main assertion, not just any extra details
+- Return results for each supporting assertion using its ID (SA1, SA2, etc.)
+
+Format your response as a JSON object (use 1 for true, 0 for false):
+{
+    "supporting_results": [
+        {"id": "SA1", "passed": 1/0, "reasoning": "Brief explanation"},
+        {"id": "SA2", "passed": 1/0, "reasoning": "Brief explanation"},
+        ...
+    ],
+    "has_discovery": 1/0,
+    "discovery_reasoning": "Explanation of discovery or empty string"
+}

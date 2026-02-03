@@ -107,8 +107,12 @@ Configuration for global assertion generation.
 | `max_assertions` | `int \| None` | `20` | Maximum assertions per question. Set to `0` to disable, or `None` for unlimited. |
 | `enable_validation` | `bool` | `True` | Whether to validate assertions against source data. |
 | `min_validation_score` | `int` | `3` | Minimum score (1-5) for grounding, relevance, and verifiability. |
-| `batch_size` | `int` | `100` | Batch size for map-reduce claim processing. |
-| `max_data_tokens` | `int` | `32000` | Maximum input tokens for the reduce step. |
+| `batch_size` | `int` | `100` | Batch size for map-reduce claim processing (used when semantic grouping is disabled). |
+| `map_data_tokens` | `int` | `12000` | Maximum tokens per cluster in the map step when semantic grouping is enabled. |
+| `reduce_data_tokens` | `int` | `32000` | Maximum input tokens for the reduce step. |
+| `enable_semantic_grouping` | `bool` | `False` | Whether to group similar claims using embedding-based clustering before the map step. |
+| `validate_map_assertions` | `bool` | `False` | Whether to validate map assertions before the reduce step. Filters low-quality assertions early. |
+| `validate_reduce_assertions` | `bool` | `True` | Whether to validate final assertions after the reduce step. |
 | `concurrent_llm_calls` | `int` | `8` | Concurrent LLM calls for batch processing and validation. |
 | `max_concurrent_questions` | `int \| None` | `2` | Questions to process in parallel. Set to `1` for sequential. |
 
@@ -216,8 +220,12 @@ assertions:
     max_assertions: 20
     enable_validation: true
     min_validation_score: 3
-    batch_size: 100  # Batch size for map-reduce processing
-    max_data_tokens: 32000  # Max tokens for reduce step
+    batch_size: 100  # Batch size for map-reduce processing (when semantic grouping disabled)
+    map_data_tokens: 12000  # Max tokens per cluster in map step (when semantic grouping enabled)
+    reduce_data_tokens: 32000  # Max tokens for reduce step
+    enable_semantic_grouping: false  # Set to true to group similar claims together
+    validate_map_assertions: false  # Set to true to validate map assertions before reduce step
+    validate_reduce_assertions: true  # Set to false to skip validation of final assertions
     concurrent_llm_calls: 8  # Concurrent LLM calls for batch processing/validation
     max_concurrent_questions: 2  # Parallel questions for assertion generation. Set to 1 for sequential.
 

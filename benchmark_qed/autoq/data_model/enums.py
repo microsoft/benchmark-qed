@@ -9,6 +9,6 @@ class QuestionType(StrEnum):
 
     DATA_LOCAL = "data_local"
     DATA_GLOBAL = "data_global"
-    DATA_ENTITY = "data_entity"
+    DATA_LINK = "data_link"
     ACTIVITY_LOCAL = "activity_local"
     ACTIVITY_GLOBAL = "activity_global"

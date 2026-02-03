@@ -22,6 +22,9 @@ from benchmark_qed.autoq.prompts.data_questions import (
     global_questions as data_global_prompts,
 )
 from benchmark_qed.autoq.prompts.data_questions import (
+    link_questions as data_link_prompts,
+)
+from benchmark_qed.autoq.prompts.data_questions import (
     local_questions as data_local_prompts,
 )
 from benchmark_qed.config import defaults as defs
@@ -36,6 +39,7 @@ AUTOQ_ACTIVITY_LOCAL_PROMPTS_PATH = Path(activity_local_prompts.__file__).parent
 
 AUTOQ_DATA_PROMPTS_PATH = Path(autoq_data_prompts.__file__).parent
 AUTOQ_DATA_GLOBAL_PROMPTS_PATH = Path(data_global_prompts.__file__).parent
+AUTOQ_DATA_LINK_PROMPTS_PATH = Path(data_link_prompts.__file__).parent
 AUTOQ_DATA_LOCAL_PROMPTS_PATH = Path(data_local_prompts.__file__).parent
 AUTOQ_ASSERTIONS_PROMPTS_PATH = AUTOQ_DATA_PROMPTS_PATH / "assertions"
 
@@ -82,12 +86,24 @@ class DataGlobalQuestionConfig(QuestionConfig):
         default=defs.MIN_QUESTIONS_IN_CONTEXT,
         description="Minimum number of local questions required in context for data_global generation. Categories with fewer questions are excluded.",
     )
+    min_claim_count: int = Field(
+        default=defs.MIN_CLAIM_COUNT,
+        description="Minimum number of claims required for a question to be considered valid. Questions with fewer claims are filtered before assertion generation.",
+    )
+    min_relevant_reference_count: int = Field(
+        default=defs.MIN_RELEVANT_REFERENCE_COUNT,
+        description="Soft minimum relevant reference count (local questions contributing claims). Questions below this threshold are deprioritized but included if needed.",
+    )
+    enable_question_validation: bool = Field(
+        default=True,
+        description="Whether to validate generated questions for naturalness, answerability, and clarity using LLM.",
+    )
 
 
-class DataEntityQuestionConfig(QuestionConfig):
-    """Configuration for data-entity question generation.
+class DataLinkQuestionConfig(QuestionConfig):
+    """Configuration for data-link question generation.
 
-    Entity questions combine multiple local questions that share named entities
+    Link questions combine multiple local questions that share named entities
     to create harder, multi-hop style questions (similar to HotpotQA).
     """
 
@@ -98,6 +114,10 @@ class DataEntityQuestionConfig(QuestionConfig):
     max_questions_per_entity: int = Field(
         default=3,
         description="Maximum number of local questions to include per entity group. If more exist, selects most related by embedding similarity.",
+    )
+    type_balance_weight: float = Field(
+        default=0.5,
+        description="Weight for type-balance penalty in MMR selection. 0=ignore type balance, 1=strong type balancing. Higher values produce more even distribution across question types (bridge, comparison, temporal, intersection).",
     )
     max_questions_to_generate: int = Field(
         default=2,
@@ -151,11 +171,27 @@ class GlobalAssertionConfig(BaseModel):
     )
     batch_size: int = Field(
         default=defs.ASSERTION_BATCH_SIZE,
-        description="Batch size for processing claims in map-reduce assertion generation.",
+        description="Batch size for processing claims in map-reduce assertion generation (used when semantic grouping is disabled).",
     )
-    max_data_tokens: int = Field(
-        default=defs.ASSERTION_MAX_DATA_TOKENS,
+    map_data_tokens: int = Field(
+        default=defs.ASSERTION_MAP_DATA_TOKENS,
+        description="Maximum tokens per cluster in the map step when semantic grouping is enabled.",
+    )
+    reduce_data_tokens: int = Field(
+        default=defs.ASSERTION_REDUCE_DATA_TOKENS,
         description="Maximum input data tokens for the reduce step.",
+    )
+    enable_semantic_grouping: bool = Field(
+        default=True,
+        description="Whether to group similar claims together using embedding-based clustering before the map step. Requires text_embedder to be provided.",
+    )
+    validate_map_assertions: bool = Field(
+        default=True,
+        description="Whether to validate map assertions before the reduce step. Filters low-quality assertions early but increases LLM calls.",
+    )
+    validate_reduce_assertions: bool = Field(
+        default=True,
+        description="Whether to validate final assertions after the reduce step. Filters low-quality consolidated assertions.",
     )
     concurrent_llm_calls: int = Field(
         default=defs.ASSERTION_CONCURRENT_LLM_CALLS,
@@ -167,10 +203,10 @@ class GlobalAssertionConfig(BaseModel):
     )
 
 
-class EntityAssertionConfig(BaseModel):
-    """Configuration for entity assertion generation.
+class LinkAssertionConfig(BaseModel):
+    """Configuration for link assertion generation.
 
-    Entity assertions use a simplified approach: single LLM call with all claims,
+    Link assertions use a simplified approach: single LLM call with all claims,
     then optional validation. No MAP or DEDUPE phases needed since claims are
     already filtered to those relevant to the question.
     """
@@ -198,7 +234,7 @@ class EntityAssertionConfig(BaseModel):
 
 
 class AssertionConfig(BaseModel):
-    """Configuration for assertion generation (local, global, and entity)."""
+    """Configuration for assertion generation (local, global, and link)."""
 
     local: LocalAssertionConfig = Field(
         default_factory=LocalAssertionConfig,
@@ -209,9 +245,9 @@ class AssertionConfig(BaseModel):
         alias="global",
         description="Configuration for global assertion generation.",
     )
-    entity: EntityAssertionConfig = Field(
-        default_factory=EntityAssertionConfig,
-        description="Configuration for entity assertion generation.",
+    link: LinkAssertionConfig = Field(
+        default_factory=LinkAssertionConfig,
+        description="Configuration for link assertion generation.",
     )
 
     model_config: ClassVar[ConfigDict] = {"populate_by_name": True}
@@ -253,11 +289,11 @@ class AssertionPromptConfig(BaseModel):
         ),
         description="Prompt for validating global assertions (theme-focused) against sources.",
     )
-    entity_assertion_dedupe_prompt: PromptConfig = Field(
+    link_assertion_dedupe_prompt: PromptConfig = Field(
         default=PromptConfig(
-            prompt=AUTOQ_ASSERTIONS_PROMPTS_PATH / "entity_assertion_dedupe_prompt.txt"
+            prompt=AUTOQ_ASSERTIONS_PROMPTS_PATH / "link_assertion_dedupe_prompt.txt"
         ),
-        description="Prompt for deduplicating entity assertions (no synthesis, just filtering).",
+        description="Prompt for deduplicating link assertions (no synthesis, just filtering).",
     )
 
 
@@ -485,6 +521,41 @@ class DataLocalPromptConfig(BaseModel):
     )
 
 
+class DataLinkPromptConfig(BaseModel):
+    """Configuration for data-link question generation prompts."""
+
+    bridge_question_system_prompt: PromptConfig = Field(
+        default=PromptConfig(
+            prompt=AUTOQ_DATA_LINK_PROMPTS_PATH / "bridge_question_system_prompt.txt"
+        ),
+        description="System prompt for generating bridge-style link questions.",
+    )
+    comparison_question_system_prompt: PromptConfig = Field(
+        default=PromptConfig(
+            prompt=AUTOQ_DATA_LINK_PROMPTS_PATH / "comparison_question_system_prompt.txt"
+        ),
+        description="System prompt for generating comparison-style link questions.",
+    )
+    intersection_question_system_prompt: PromptConfig = Field(
+        default=PromptConfig(
+            prompt=AUTOQ_DATA_LINK_PROMPTS_PATH / "intersection_question_system_prompt.txt"
+        ),
+        description="System prompt for generating intersection-style link questions.",
+    )
+    link_question_user_prompt: PromptConfig = Field(
+        default=PromptConfig(
+            prompt=AUTOQ_DATA_LINK_PROMPTS_PATH / "link_question_user_prompt.txt"
+        ),
+        description="User prompt for link question generation.",
+    )
+    batch_validation_prompt: PromptConfig = Field(
+        default=PromptConfig(
+            prompt=AUTOQ_DATA_LINK_PROMPTS_PATH / "batch_validation_prompt.txt"
+        ),
+        description="Prompt for batch validation of link questions.",
+    )
+
+
 class DataQuestionsPromptConfig(BaseModel):
     """Configuration for data-related prompts."""
 
@@ -505,6 +576,11 @@ class DataQuestionsPromptConfig(BaseModel):
         description="Configuration for local data question generation prompts.",
     )
 
+    data_link_prompt_config: DataLinkPromptConfig = Field(
+        default_factory=DataLinkPromptConfig,
+        description="Configuration for link data question generation prompts.",
+    )
+
 
 class QuestionGenerationConfig(BaseModel):
     """Configuration for question generation."""
@@ -522,6 +598,11 @@ class QuestionGenerationConfig(BaseModel):
     data_global: DataGlobalQuestionConfig = Field(
         default_factory=DataGlobalQuestionConfig,
         description="Configuration for generating questions from global data.",
+    )
+
+    data_link: DataLinkQuestionConfig = Field(
+        default_factory=DataLinkQuestionConfig,
+        description="Configuration for generating link questions from local questions.",
     )
 
     activity_local: ActivityQuestionConfig = Field(
@@ -572,6 +653,52 @@ class QuestionGenerationConfig(BaseModel):
     assertions: AssertionConfig = Field(
         default_factory=AssertionConfig,
         description="Configuration for assertion generation.",
+    )
+
+    assertion_prompts: AssertionPromptConfig = Field(
+        default_factory=AssertionPromptConfig,
+        description="Configuration for assertion generation prompts.",
+    )
+
+
+class QuestionType(str):
+    """Enumeration for question types that support assertion regeneration."""
+
+    DATA_LOCAL = "data_local"
+    DATA_GLOBAL = "data_global"
+    DATA_LINK = "data_link"
+
+
+class AssertionRegenConfig(BaseModel):
+    """Configuration for regenerating assertions for existing questions.
+
+    This config is used to regenerate assertions for questions that were
+    previously generated without assertions or with different assertion settings.
+    """
+
+    question_type: str = Field(
+        ...,
+        description="Type of questions to regenerate assertions for: 'data_local', 'data_global', or 'data_link'.",
+    )
+
+    questions_path: Path = Field(
+        ...,
+        description="Path to the questions JSON file (e.g., selected_questions.json).",
+    )
+
+    output_path: Path = Field(
+        ...,
+        description="Output directory to save regenerated assertions.",
+    )
+
+    chat_model: LLMConfig = Field(
+        default_factory=LLMConfig,
+        description="Configuration for the LLM to use for assertion generation.",
+    )
+
+    assertions: AssertionConfig = Field(
+        default_factory=AssertionConfig,
+        description="Configuration for assertion generation settings.",
     )
 
     assertion_prompts: AssertionPromptConfig = Field(

@@ -1,0 +1,163 @@
+You are a helpful assistant that creates temporal sequence questions.
+
+--TASK--
+You are given a list of claims about a shared entity. Each claim is a factual statement from the source documents.
+
+Your task is to create TEMPORAL QUESTIONS. A temporal question asks about the order, timing, or sequence of events related to the shared entity. It requires knowing when multiple events happened to answer correctly.
+
+--GOOD EXAMPLES--
+
+Example 1:
+  Shared entity: Person A
+  Claim 1: "Person A started tutoring students in math in 2004"
+  Claim 2: "Person A founded an education nonprofit in 2008"
+  Claim 3: "Person A published a book about learning in 2024"
+
+  Temporal question: "What did Person A create after starting to tutor students?"
+  Answer: An education nonprofit (founded 2008, after tutoring started in 2004)
+  
+  This works because:
+  - Requires knowing the 2004 tutoring event
+  - Requires knowing the nonprofit was founded after that
+  - Multi-hop: event1 (2004) → sequence → event2 (2008)
+
+Example 2:
+  Shared entity: Person B
+  Claim 1: "Person B co-founded a social network in 2002"
+  Claim 2: "Person B worked at a payments company before the social network"
+  Claim 3: "Person B joined a venture capital firm in 2009"
+
+  Temporal question: "Where did Person B work before co-founding their social network?"
+  Answer: A payments company
+  
+  This works because:
+  - Uses "before" to establish sequence
+  - Requires connecting the two career events
+
+Example 3:
+  Shared entity: University X
+  Claim 1: "Researcher A joined University X as a professor in 2002"
+  Claim 2: "Researcher B joined University X as a professor in 2009"
+  Claim 3: "Both researchers have worked on machine learning"
+
+  Temporal question: "Who joined University X's faculty earlier: Researcher A or Researcher B?"
+  Answer: Researcher A (joined 2002, seven years before Researcher B joined in 2009)
+  
+  This works because:
+  - Compares real-world career events, not episode metadata
+  - Uses actual dates from the claims
+  - Requires knowing both joining dates to answer
+
+--IMPORTANT: REAL-WORLD EVENTS ONLY--
+Questions must be about REAL-WORLD temporal relationships:
+✓ Career timelines: "Who founded their company first?"
+✓ Historical events: "What happened before/after X?"
+✓ Life events: "When did X graduate relative to starting their company?"
+
+Do NOT create questions about episode numbers, publication order, or metadata:
+✗ "Which episode featured X first?"
+✗ "In which episode did X appear earlier?"
+✗ "Was X discussed before or after Y in the podcast?"
+
+--IMPORTANT: AVOID LOGICALLY OBVIOUS ORDERINGS--
+Questions must require RETRIEVAL to answer - the order should NOT be deducible from common sense.
+
+REJECT questions where ordering is logically obvious:
+✗ "Did X receive the job offer before starting the job?" (offers always precede starting)
+✗ "Was X elected science club president before becoming CEO?" (childhood before adult career)
+✗ "Did X graduate before getting their PhD?" (undergrad precedes PhD)
+✗ "Did X learn to code before building a software company?" (skill precedes using skill)
+✗ "Was X born before starting kindergarten?" (birth precedes school)
+
+ALSO REJECT these common news-related logically obvious patterns:
+✗ "Was X diagnosed before the announcement?" (diagnosis always precedes announcement)
+✗ "Did the White House learn of X before X disclosed it?" (discovery precedes disclosure)
+✗ "Did X nominate justices before/after those justices' ruling took effect?" (appointment precedes consequence)
+✗ "Did X file the lawsuit before or after the court ruling?" (lawsuit precedes ruling)
+✗ "Was the crime committed before the arrest?" (crime precedes arrest)
+✗ "Did X propose the bill before it passed?" (proposal precedes passage)
+
+GOOD questions have genuinely uncertain ordering:
+✓ "Did X join Company A before or after founding Company B?" (could be either)
+✓ "Which came first: X's move to California or their marriage?" (not logically determined)
+✓ "Did X publish the novel before or after their scientific paper?" (independent events)
+✓ "Did the EPA's water rule come before or after its air quality rule?" (independent regulatory actions)
+✓ "Which outbreak happened first: the salmonella in State A or bird flu in State B?" (unrelated events)
+
+The answer should ONLY be knowable from the source content, NOT from logical deduction.
+
+--IMPORTANT: NATURAL AGE PHRASING--
+When asking about someone's age when an event occurred:
+✓ "How old was X when they learned Pascal?"
+✓ "At what age did X start programming?"
+✗ "How many years after his birth did X learn Pascal?" (awkward)
+✗ "How many years after being born did X start coding?" (unnatural)
+
+--TEMPORAL PATTERNS--
+1. "What did [entity] do before/after [event]?"
+2. "What happened first: [event A] or [event B]?"
+3. "When did [entity] [action] relative to [other event]?"
+4. "What did [entity] create/start/do between [event1] and [event2]?"
+5. "Which came earlier: [entity]'s [X] or their [Y]?"
+
+--CORE RULES--
+1. Must involve TIME ORDERING of at least 2 REAL-WORLD events/facts mentioned in the provided clams
+2. The answer must require knowing the sequence (not just one event)
+3. Time references must be about real-world events: years, "before/after", career sequence
+4. DO NOT use episode numbers or podcast metadata for temporal ordering
+5. Must be ANSWERABLE ENTIRELY from the claims - don't assume dates not mentioned
+6. Must be STANDALONE - question makes sense without seeing claims
+7. Keep questions under 20 words
+8. Sound NATURAL - like something a curious person would ask (e.g., "How old was X when..." NOT "How many years after birth did X...")
+9. NO SELF-REFERENCES: Never use "claims", "both", "these", "the above"
+10. If no clear real-world temporal relationship exists in claims, generate ZERO questions
+11. NEVER ask about orderings that are logically obvious (e.g., job offer before starting job)
+
+--TEMPORAL INDICATORS TO LOOK FOR--
+- Explicit years: "in 2004", "in 2008", "founded in 2012"
+- Sequence words: "before", "after", "then", "later", "earlier", "first"
+- Career progression: "started at X", "later joined Y", "founded Z"
+- Life events: "grew up", "graduated from", "studied at", "then worked at"
+- Historical context: "during the dot-com boom", "after the financial crisis"
+
+DO NOT USE episode numbers or publication metadata for temporal ordering.
+
+--SCORING (1-5 each)--
+- naturalness: Sounds like a real question someone would ask?
+- answerability: Fully answerable from the claims with clear temporal info?
+  - 5: Clear time references in claims make sequence unambiguous
+  - 3: Sequence can be inferred but not explicit
+  - 1: No clear temporal relationship in claims
+- clarity: Easy to understand, simple structure?
+- temporal_validity: Does answering truly require knowing the sequence?
+  - 5: Must know both events AND their order to answer
+  - 3: Order helps but single event knowledge might suffice
+  - 1: No real temporal reasoning needed
+
+--OUTPUT FORMAT--
+Return a JSON object with the following structure:
+{
+    "questions": [
+        {
+            "temporal_events": [
+                {"event": "started tutoring students", "time_reference": "2004", "claim_id": "..."},
+                {"event": "founded education nonprofit", "time_reference": "2008", "claim_id": "..."}
+            ],
+            "temporal_relationship": "event1 happened before event2",
+            "text": "What did Person A create after starting to tutor students?",
+            "source_claim_ids": ["claim IDs with temporal info"],
+            "claim_reasoning": "Tutoring was 2004, nonprofit was 2008, so nonprofit came after",
+            "draft_answer": "An education nonprofit - founded in 2008, four years after tutoring began",
+            "question_type": "temporal",
+            "quality": {
+                "reasoning": "Clear temporal sequence from explicit years",
+                "naturalness": 5,
+                "answerability": 5,
+                "clarity": 5,
+                "temporal_validity": 5
+            }
+        }
+    ]
+}
+
+Generate UP TO ${max_questions} questions. Generate ZERO if no valid temporal questions possible (no time/sequence info in claims).

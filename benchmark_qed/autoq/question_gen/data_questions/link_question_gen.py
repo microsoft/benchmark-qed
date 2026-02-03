@@ -1,5 +1,5 @@
 # Copyright (c) 2025 Microsoft Corporation.
-"""Data-entity question generation module.
+"""Data-link question generation module.
 
 Generate multi-hop style questions by combining local questions that share named entities.
 Similar to HotpotQA bridge questions but using entities as the linking mechanism.
@@ -10,29 +10,37 @@ from __future__ import annotations
 import asyncio
 import logging
 import math
+import random
 import uuid
 from collections import defaultdict
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import TYPE_CHECKING, Any
 
+import numpy as np
 from tqdm.asyncio import tqdm_asyncio
 
 import benchmark_qed.config.defaults as defs
+from benchmark_qed.autod.data_model.text_unit import TextUnit
 from benchmark_qed.autod.data_processor.text_utils import try_parse_json_object
 from benchmark_qed.autod.sampler.sampling.mmr_sampler import MMRTextSampler
 from benchmark_qed.autoq.data_model.enums import QuestionType
 from benchmark_qed.autoq.data_model.question import Question
 from benchmark_qed.autoq.prompts import data_questions as prompts_data_questions
-from benchmark_qed.autoq.prompts.data_questions import entity_questions
+from benchmark_qed.autoq.prompts.data_questions import link_questions
 from benchmark_qed.autoq.question_gen.base import BaseQuestionGen, QuestionGenResult
 from benchmark_qed.autoq.question_gen.data_questions.assertion_gen.local_claim_assertion_gen import (
     LocalClaimAssertionGenerator,
 )
+from benchmark_qed.autoq.question_gen.data_questions.assertion_gen.ranking import (
+    calculate_dense_ranks,
+)
 from benchmark_qed.autoq.question_gen.data_questions.assertion_gen.validator import (
     AssertionValidator,
 )
-from benchmark_qed.autoq.sampler.question_sampler import QuestionSampler
+from benchmark_qed.autoq.question_gen.data_questions.question_validator import (
+    LinkQuestionValidator,
+)
 from benchmark_qed.config.utils import load_template_file
 
 if TYPE_CHECKING:
@@ -42,11 +50,12 @@ if TYPE_CHECKING:
 
     from benchmark_qed.autod.data_processor.embedding import TextEmbedder
     from benchmark_qed.autoq.config import AssertionConfig, AssertionPromptConfig
+    from benchmark_qed.autoq.sampler.question_sampler import QuestionSampler
     from benchmark_qed.llm.type.base import ChatModel
 
 log: logging.Logger = logging.getLogger(__name__)
 
-DATA_ENTITY_PROMPTS_PATH = Path(entity_questions.__file__).parent
+DATA_LINK_PROMPTS_PATH = Path(link_questions.__file__).parent
 ASSERTION_PROMPTS_PATH = Path(prompts_data_questions.__file__).parent / "assertions"
 
 
@@ -90,10 +99,10 @@ class QuestionFilterStats:
     skipped_single_document: int = 0
     skipped_parse_error: int = 0
     skipped_failed_validation: int = 0
-    
+
     # Track filtered questions for debugging
     filtered_questions: list[dict[str, Any]] = field(default_factory=list)
-    
+
     def add_filtered(self, question: dict[str, Any], reason: str, details: str = "") -> None:
         """Add a filtered question to the log."""
         self.filtered_questions.append({
@@ -130,9 +139,9 @@ class QuestionFilterStats:
             )
 
 
-class DataEntityQuestionGen(BaseQuestionGen):
+class DataLinkQuestionGen(BaseQuestionGen):
     """
-    Generate data-entity questions from local questions sharing named entities.
+    Generate data-link questions from local questions sharing named entities.
 
     Creates harder, multi-hop style questions by combining information from
     multiple local questions that mention the same entity. Similar to HotpotQA
@@ -144,7 +153,7 @@ class DataEntityQuestionGen(BaseQuestionGen):
     3. Generate assertions using map + dedupe approach
     4. Validate assertions against sources
 
-    Supports optional assertion generation using EntityClaimAssertionGenerator.
+    Supports optional assertion generation using LocalClaimAssertionGenerator.
     """
 
     def __init__(
@@ -158,7 +167,6 @@ class DataEntityQuestionGen(BaseQuestionGen):
         assertion_prompt_config: AssertionPromptConfig | None = None,
         llm_params: dict[str, Any] = defs.LLM_PARAMS,
         json_mode: bool = True,
-        generation_system_prompt: Template | None = None,
         generation_user_prompt: Template | None = None,
         concurrent_coroutines: int = 32,
         random_seed: int = defs.RANDOM_SEED,
@@ -166,46 +174,38 @@ class DataEntityQuestionGen(BaseQuestionGen):
         max_questions_per_entity: int = 10,
         min_quality_score: int = 4,
         question_types: list[str] | None = None,
-        use_embedding_clustering: bool = True,  # Set False to use quality-only selection
         enable_batch_validation: bool = True,  # Run batch validation to filter bad questions
+        mmr_lambda: float = 0.7,  # MMR trade-off: 0=diversity, 1=quality
+        type_balance_weight: float = 0.5,  # Type-balance penalty in MMR (0=ignore, 1=strong)
     ) -> None:
-        from benchmark_qed.autoq.config import AssertionConfig, AssertionPromptConfig
-
         if assertion_config is None:
+            from benchmark_qed.autoq.config import AssertionConfig
             assertion_config = AssertionConfig()
         if assertion_prompt_config is None:
+            from benchmark_qed.autoq.config import AssertionPromptConfig
             assertion_prompt_config = AssertionPromptConfig()
 
-        # Default to all question types for maximum variety
-        self.question_types = question_types or ["bridge", "comparison", "intersection"]
-        
+        # Default to bridge questions primarily, with comparison and intersection as secondary options
+        self.question_types = question_types or ["bridge", "comparison", "intersection", "temporal"]
+
         self.assertion_config = assertion_config
         self.random_seed = random_seed
         self.min_questions_per_entity = min_questions_per_entity
         self.max_questions_per_entity = max_questions_per_entity
         self.min_quality_score = min_quality_score
-        self.use_embedding_clustering = use_embedding_clustering
         self.enable_batch_validation = enable_batch_validation
+        self.mmr_lambda = mmr_lambda
+        self.type_balance_weight = type_balance_weight
 
-        if question_sampler is not None:
-            question_sampler.random_seed = self.random_seed
-        elif use_embedding_clustering:
-            # Use MMR (Maximal Marginal Relevance) for diversity + quality
-            # MMR penalizes items similar to already-selected items,
-            # which helps avoid near-duplicate questions
-            question_sampler = QuestionSampler(
-                sampler=MMRTextSampler(
-                    random_seed=self.random_seed,
-                    lambda_param=0.5,  # Balance quality and diversity
-                ),
-                sampler_params={
-                    "quality_attributes": ["combined_score"],
-                },
-                random_seed=self.random_seed,
+        # Create default MMR sampler if none provided
+        if question_sampler is None:
+            question_sampler = MMRTextSampler(
+                random_seed=random_seed,
+                lambda_param=mmr_lambda,
             )
         else:
-            # No sampler - will use quality-only selection in select() fallback
-            question_sampler = None
+            question_sampler.random_seed = self.random_seed
+
         super().__init__(llm, llm_params, question_sampler)
         self.text_embedder = text_embedder
         self.token_encoder = token_encoder
@@ -213,23 +213,29 @@ class DataEntityQuestionGen(BaseQuestionGen):
         # Assertion generation setup
         self.assertion_generator: LocalClaimAssertionGenerator | None = None
         self.assertion_validator: AssertionValidator | None = None
-        entity_assertion_config = assertion_config.entity
-        max_assertions = entity_assertion_config.max_assertions
+        link_assertion_config = assertion_config.link
+        max_assertions = link_assertion_config.max_assertions
         if max_assertions is None or max_assertions > 0:
-            if entity_assertion_config.enable_validation:
-                self.assertion_validator = AssertionValidator(
+            # Create validator if validation is enabled
+            validator = None
+            if link_assertion_config.enable_validation:
+                validator = AssertionValidator(
                     llm=llm,
                     llm_params=llm_params,
-                    min_criterion_score=entity_assertion_config.min_validation_score,
-                    # Use local validation prompt (entity assertions are fact-focused)
+                    min_criterion_score=link_assertion_config.min_validation_score,
+                    # Use local validation prompt (link assertions are fact-focused)
                     validation_prompt=assertion_prompt_config.local_validation_prompt.template,
-                    concurrent_validations=entity_assertion_config.concurrent_llm_calls,
+                    concurrent_validations=link_assertion_config.concurrent_llm_calls,
                 )
+                self.assertion_validator = validator
 
             self.assertion_generator = LocalClaimAssertionGenerator(
                 llm=llm,
                 llm_params=llm_params,
                 max_assertions=max_assertions,
+                validator=validator,
+                system_prompt=assertion_prompt_config.local_assertion_gen_prompt.template,
+                max_concurrent_questions=link_assertion_config.max_concurrent_questions,
             )
 
         self.json_mode = json_mode
@@ -238,34 +244,43 @@ class DataEntityQuestionGen(BaseQuestionGen):
         else:
             self.llm_params.pop("response_format", None)
 
+        # Question validator setup
+        self.question_validator: LinkQuestionValidator | None = None
+        if enable_batch_validation:
+            self.question_validator = LinkQuestionValidator(
+                llm=llm,
+                llm_params=llm_params,
+                batch_size=15,
+                random_seed=random_seed,
+            )
+
         # Load prompts for each question type
         self.system_prompts: dict[str, Template] = {}
-        
+
         # Bridge questions
-        self.system_prompts["bridge"] = (
-            generation_system_prompt
-            or load_template_file(
-                DATA_ENTITY_PROMPTS_PATH / "bridge_question_system_prompt.txt"
-            )
+        self.system_prompts["bridge"] = load_template_file(
+            DATA_LINK_PROMPTS_PATH / "bridge_question_system_prompt.txt"
         )
-        
+
+        # Temporal questions (sequence/timing of events)
+        self.system_prompts["temporal"] = load_template_file(
+            DATA_LINK_PROMPTS_PATH / "temporal_question_system_prompt.txt"
+        )
+
         # Comparison questions
         self.system_prompts["comparison"] = load_template_file(
-            DATA_ENTITY_PROMPTS_PATH / "comparison_question_system_prompt.txt"
+            DATA_LINK_PROMPTS_PATH / "comparison_question_system_prompt.txt"
         )
-        
+
         # Intersection questions
         self.system_prompts["intersection"] = load_template_file(
-            DATA_ENTITY_PROMPTS_PATH / "intersection_question_system_prompt.txt"
+            DATA_LINK_PROMPTS_PATH / "intersection_question_system_prompt.txt"
         )
-        
-        # Keep legacy attribute for compatibility
-        self.generation_system_prompt = self.system_prompts["bridge"]
-        
+
         self.generation_user_prompt: Template = (
             generation_user_prompt
             or load_template_file(
-                DATA_ENTITY_PROMPTS_PATH / "entity_question_user_prompt.txt"
+                DATA_LINK_PROMPTS_PATH / "link_question_user_prompt.txt"
             )
         )
 
@@ -293,33 +308,34 @@ class DataEntityQuestionGen(BaseQuestionGen):
                 candidate_questions=[],
             )
 
-        # Step 2: Calculate max_questions_per_entity based on claim count
-        # More claims = more potential question combinations, so scale accordingly
-        # Base: 1 question per 2-3 claims (need at least 2 claims for multi-hop)
+        # Step 2: Calculate questions per entity proportionally by claim count
+        # Total candidates divided by question types, then distributed by claims
+        num_question_types = len(self.question_types)
+        candidates_per_type = math.ceil(num_candidate_questions / num_question_types)
+
         total_claims = sum(len(ctx.claims) for ctx in entity_contexts)
         for ctx in entity_contexts:
-            # Scale max questions by proportion of claims this context has
-            # Minimum 1, and scale by claim richness
             claim_count = len(ctx.claims)
             if claim_count < 2:
                 ctx.max_questions_to_generate = 0  # Can't do multi-hop with < 2 claims
             else:
-                # More claims = more combinations possible
-                # Use ceiling of (claims - 1) / 2 as base, capped by oversample needs
-                base_max = max(1, (claim_count - 1) // 2)
-                # Scale by oversample factor and proportion of total claims
+                # Distribute candidates_per_type across entities by claim proportion
+                # Then multiply by number of types (each entity generates all types)
                 proportion = claim_count / total_claims if total_claims > 0 else 0
-                scaled_max = math.ceil(num_candidate_questions * proportion)
-                ctx.max_questions_to_generate = min(base_max, max(1, scaled_max))
+                questions_for_entity = math.ceil(candidates_per_type * proportion)
+                # Each entity generates up to this many per type, times num types
+                ctx.max_questions_to_generate = max(1, questions_for_entity) * num_question_types
 
         total_max = sum(ctx.max_questions_to_generate for ctx in entity_contexts)
         log.info(
             "Generated %s entity contexts from %s local questions "
-            "(total %s claims, ~%s max questions based on claim distribution)",
+            "(total %s claims, targeting ~%s candidates: %s per type x %s types)",
             len(entity_contexts),
             len(self.local_questions),
             total_claims,
             total_max,
+            candidates_per_type,
+            num_question_types,
         )
         log.info("Question types to generate: %s", self.question_types)
 
@@ -346,40 +362,56 @@ class DataEntityQuestionGen(BaseQuestionGen):
         # Log filtering summary
         stats.log_summary()
 
+        # Track pipeline stats
+        pipeline_stats: dict[str, Any] = {
+            "entity_groups": len(entity_contexts),
+            "target_candidates": total_max,
+            "llm_returned": stats.total_raw,
+            "after_generation_filter": stats.accepted,
+            "generation_filter_stats": {
+                "skipped_invalid_claims": stats.skipped_invalid_claims,
+                "skipped_few_claims": stats.skipped_few_claims,
+                "skipped_low_quality": stats.skipped_low_quality,
+                "skipped_single_document": stats.skipped_single_document,
+                "skipped_parse_error": stats.skipped_parse_error,
+                "skipped_failed_validation": stats.skipped_failed_validation,
+            },
+            "filtered_samples": stats.filtered_questions[:20],  # Sample of filtered questions for debugging
+            "generated": len(results),
+        }
+
         log.info(
             "Generated %s candidate questions from %s entity groups",
             len(results),
             len(entity_contexts),
         )
 
-        # Step 3: Generate embeddings for questions (only if using embedding clustering)
-        if self.use_embedding_clustering:
-            results = await self._ensure_embeddings(results)
-            # Step 4: Compute retrieval difficulty for each question
-            self._compute_retrieval_difficulty(results)
-            # Step 5: Compute combined score using RRF (quality + difficulty + assertions)
-            self._compute_combined_score(results)
-        else:
-            # Skip embedding-based metrics, use quality_score only
-            log.info("Embedding clustering disabled - using quality_score only for selection")
-            for q in results:
-                if q.attributes:
-                    q.attributes["combined_score"] = q.attributes.get("quality_score", 0.5)
+        # Step 3: Generate embeddings for questions (needed for MMR selection)
+        results = await self._ensure_embeddings(results)
+        # Step 4: Compute retrieval difficulty for each question (compares to source claims)
+        await self._compute_retrieval_difficulty(results)
+        # Step 5: Compute combined score using RRF (quality + difficulty)
+        self._compute_combined_score(results)
 
         # Step 5.5: Run batch validation to filter out bad questions
         # This is cheaper than assertion generation, so do it first
-        if self.enable_batch_validation:
+        if self.question_validator is not None:
             pre_validation_count = len(results)
-            results = await self._batch_validate_questions(results)
+            results = await self.question_validator.filter_valid_questions(results)
+            pipeline_stats["after_batch_validation"] = len(results)
+            pipeline_stats["batch_validation_filtered"] = pre_validation_count - len(results)
             log.info(
                 "After batch validation: %s questions remain (filtered %s)",
                 len(results),
                 pre_validation_count - len(results),
             )
+        else:
+            pipeline_stats["after_batch_validation"] = len(results)
+            pipeline_stats["batch_validation_filtered"] = 0
 
         # Step 6: Generate assertions for ALL candidates (before selection)
         max_assertions = (
-            self.assertion_config.entity.max_assertions
+            self.assertion_config.link.max_assertions
             if self.assertion_config
             else None
         )
@@ -403,6 +435,8 @@ class DataEntityQuestionGen(BaseQuestionGen):
             if q.attributes and q.attributes.get("assertion_count", 0) > 0
         ]
         filtered_out = len(results) - len(questions_with_assertions)
+        pipeline_stats["after_assertion_filter"] = len(questions_with_assertions)
+        pipeline_stats["assertion_filter_removed"] = filtered_out
         log.info(
             "Filtered to %s questions with valid assertions (removed %s with 0 valid assertions)",
             len(questions_with_assertions),
@@ -417,6 +451,28 @@ class DataEntityQuestionGen(BaseQuestionGen):
         final_questions = self.select(
             candidate_questions=questions_with_assertions, top_k=num_questions
         )
+        pipeline_stats["selected"] = len(final_questions)
+
+        # Type distribution stats
+        type_dist: dict[str, int] = {}
+        for q in final_questions:
+            qtype = q.attributes.get("question_subtype", "unknown") if q.attributes else "unknown"
+            type_dist[qtype] = type_dist.get(qtype, 0) + 1
+        pipeline_stats["type_distribution"] = type_dist
+
+        # Quality score stats
+        quality_scores = [
+            q.attributes.get("quality_score", 0) if q.attributes else 0
+            for q in final_questions
+        ]
+        if quality_scores:
+            pipeline_stats["quality_scores"] = {
+                "min": min(quality_scores),
+                "max": max(quality_scores),
+                "avg": sum(quality_scores) / len(quality_scores),
+            }
+
+        log.info("Pipeline stats: %s", pipeline_stats)
 
         result = QuestionGenResult(
             selected_questions=final_questions,
@@ -426,6 +482,8 @@ class DataEntityQuestionGen(BaseQuestionGen):
         result.invalid_assertions = invalid_assertions  # type: ignore[attr-defined]
         # Attach filter stats for debugging (accessible via result.filter_stats)
         result.filter_stats = stats  # type: ignore[attr-defined]
+        # Attach pipeline stats
+        result.pipeline_stats = pipeline_stats  # type: ignore[attr-defined]
         return result
 
     def select(
@@ -434,42 +492,201 @@ class DataEntityQuestionGen(BaseQuestionGen):
         top_k: int = 50,
         **kwargs: Any,
     ) -> list[Question]:
-        """Select questions using K-means clustering for diversity.
+        """Select questions with proportional distribution across question types.
 
-        Uses K-means to cluster questions by embedding, then selects the
-        highest quality question from each cluster. This naturally handles
-        deduplication since similar questions end up in the same cluster.
+        Uses proportional sampling based on candidate distribution, then MMR
+        within each type to select diverse, high-quality questions.
 
         Args:
             candidate_questions: List of candidate questions to select from.
             top_k: Number of questions to select.
-            **kwargs: Additional arguments passed to the sampler.
+            mmr_lambda: Trade-off between quality (1.0) and diversity (0.0).
+            **kwargs: Additional arguments (unused, for compatibility).
 
         Returns
         -------
         list[Question]
-            Selected questions with diverse topics and high quality.
+            Selected questions with proportional types and high quality.
 
         """
         if len(candidate_questions) <= top_k:
             return candidate_questions
 
-        # Use the question sampler (KmeansTextSampler) for selection
-        # It clusters by embedding and picks best quality from each cluster
-        if self.question_sampler:
-            return self.question_sampler.sample(
-                questions=candidate_questions, sample_size=top_k, **kwargs
-            )
+        # Group questions by type
+        by_type: dict[str, list[Question]] = {}
+        for q in candidate_questions:
+            qtype = q.attributes.get("question_subtype", "unknown") if q.attributes else "unknown"
+            if qtype not in by_type:
+                by_type[qtype] = []
+            by_type[qtype].append(q)
 
-        # Fallback: simple quality-based selection
-        sorted_questions = sorted(
-            candidate_questions,
-            key=lambda q: (
-                q.attributes.get("quality_score", 0.5) if q.attributes else 0.5
-            ),
-            reverse=True,
+        log.info(
+            "Question type distribution in candidates: %s",
+            {k: len(v) for k, v in by_type.items()},
         )
-        return sorted_questions[:top_k]
+
+        if not by_type:
+            return []
+
+        # No type boosting - retrieval_difficulty in combined_score naturally favors bridge questions
+        log.info("Using combined_score for selection (includes retrieval_difficulty)")
+
+        # Select using MMR across all candidates with type balancing
+        selected = self._mmr_select(
+            candidate_questions, top_k, type_balance_weight=self.type_balance_weight
+        )
+
+        # Log final distribution
+        final_dist: dict[str, int] = {}
+        for q in selected:
+            qtype = q.attributes.get("question_subtype", "unknown") if q.attributes else "unknown"
+            final_dist[qtype] = final_dist.get(qtype, 0) + 1
+        log.info("Question type distribution after selection: %s", final_dist)
+
+        return selected
+
+    def _mmr_select(
+        self,
+        questions: list[Question],
+        k: int,
+        type_balance_weight: float = 0.5,
+    ) -> list[Question]:
+        """Select k questions using type-aware MMR.
+
+        Extends standard MMR with a type-balance penalty to encourage diverse
+        question type distribution. The formula becomes:
+
+            MMR(q) = λ * quality(q) - (1-λ) * max_similarity(q, selected)
+                     - β * type_saturation(type(q), selected)
+
+        Where type_saturation increases as a question type becomes over-represented
+        relative to the target distribution (equal across types).
+
+        Args:
+            questions: List of candidate questions.
+            k: Number of questions to select.
+            type_balance_weight: Weight (β) for type-balance penalty (0=ignore, 1=strong).
+                Default 0.3 provides moderate type balancing.
+
+        Returns
+        -------
+        list[Question]
+            Selected questions with balanced type distribution.
+
+        """
+        if k <= 0:
+            return []
+        if len(questions) <= k:
+            return questions
+
+        # Build embedding matrix and normalize
+        embeddings = []
+        for q in questions:
+            if q.embedding is not None:
+                embeddings.append(q.embedding)
+            else:
+                # Fallback: random embedding (shouldn't happen)
+                embeddings.append(np.random.randn(768))
+        embeddings = np.array(embeddings)
+        norms = np.linalg.norm(embeddings, axis=1, keepdims=True)
+        norms = np.where(norms == 0, 1, norms)
+        embeddings_normalized = embeddings / norms
+
+        # Get quality scores
+        quality_scores = np.array([
+            q.attributes.get("combined_score", 0.5) if q.attributes else 0.5
+            for q in questions
+        ])
+        # Normalize quality scores to [0, 1]
+        q_min, q_max = quality_scores.min(), quality_scores.max()
+        if q_max > q_min:
+            quality_scores = (quality_scores - q_min) / (q_max - q_min)
+
+        # Get question types
+        question_types = [
+            q.attributes.get("question_subtype", "unknown") if q.attributes else "unknown"
+            for q in questions
+        ]
+        unique_types = list(set(question_types))
+        num_types = max(len(unique_types), 1)
+
+        # Target distribution: equal across types
+        target_per_type = k / num_types
+
+        # MMR selection with type-balance penalty
+        selected_indices: list[int] = []
+        selected_embeddings: list[np.ndarray] = []
+        selected_type_counts: dict[str, int] = {t: 0 for t in unique_types}
+        remaining_indices = set(range(len(questions)))
+
+        # First selection: highest quality
+        first_idx = int(np.argmax(quality_scores))
+        selected_indices.append(first_idx)
+        selected_embeddings.append(embeddings_normalized[first_idx])
+        selected_type_counts[question_types[first_idx]] += 1
+        remaining_indices.remove(first_idx)
+
+        # Get lambda from sampler (quality-diversity tradeoff)
+        lam = getattr(self.question_sampler, "lambda_param", 0.5)
+
+        # Subsequent selections
+        for _ in range(k - 1):
+            if not remaining_indices:
+                break
+
+            best_idx = None
+            best_score = float("-inf")
+
+            for idx in remaining_indices:
+                # Quality term
+                quality = quality_scores[idx]
+
+                # Diversity term: max similarity to selected
+                if selected_embeddings:
+                    similarities = [
+                        float(np.dot(embeddings_normalized[idx], sel_emb))
+                        for sel_emb in selected_embeddings
+                    ]
+                    max_sim = max(similarities)
+                else:
+                    max_sim = 0.0
+
+                # Type-balance penalty: how saturated is this type?
+                qtype = question_types[idx]
+                current_count = selected_type_counts.get(qtype, 0)
+                # Saturation: how much this type exceeds its fair share
+                # saturation = current_count / target_per_type (capped at 1)
+                # Penalty increases as type fills up
+                if target_per_type > 0:
+                    type_saturation = min(current_count / target_per_type, 2.0) / 2.0
+                else:
+                    type_saturation = 0.0
+
+                # MMR score with type balance
+                mmr_score = (
+                    lam * quality
+                    - (1 - lam) * max_sim
+                    - type_balance_weight * type_saturation
+                )
+
+                if mmr_score > best_score:
+                    best_score = mmr_score
+                    best_idx = idx
+
+            if best_idx is not None:
+                selected_indices.append(best_idx)
+                selected_embeddings.append(embeddings_normalized[best_idx])
+                selected_type_counts[question_types[best_idx]] += 1
+                remaining_indices.remove(best_idx)
+
+        log.info(
+            "Type-aware MMR selected %s items (type_balance_weight=%s, type_counts=%s)",
+            len(selected_indices),
+            type_balance_weight,
+            selected_type_counts,
+        )
+
+        return [questions[i] for i in selected_indices]
 
     async def _ensure_embeddings(
         self, questions: list[Question]
@@ -498,8 +715,6 @@ class DataEntityQuestionGen(BaseQuestionGen):
         )
 
         # Convert to TextUnits for batch embedding
-        from benchmark_qed.autod.data_model.text_unit import TextUnit
-
         text_units = [
             TextUnit(id=q.id, short_id=None, text=q.text)
             for q in questions_needing_embeddings
@@ -514,7 +729,7 @@ class DataEntityQuestionGen(BaseQuestionGen):
 
         return questions
 
-    def _compute_retrieval_difficulty(self, questions: list[Question]) -> None:
+    async def _compute_retrieval_difficulty(self, questions: list[Question]) -> None:
         """Compute retrieval difficulty for each question.
 
         Retrieval difficulty measures how hard it is to answer the question
@@ -522,36 +737,69 @@ class DataEntityQuestionGen(BaseQuestionGen):
             retrieval_difficulty = 1 - max_source_similarity
 
         Where max_source_similarity is the maximum cosine similarity between
-        the question embedding and any of its source local question embeddings.
+        the question embedding and any of its source claim texts.
 
-        Lower max similarity = harder to retrieve answer = higher difficulty.
+        Bridge questions should have LOWER similarity (higher difficulty) because
+        the entity name is replaced with an indirect reference.
+        Comparison/intersection questions should have HIGHER similarity (lower
+        difficulty) because they use entity names directly.
 
         Args:
             questions: List of questions with embeddings to compute difficulty for.
 
         """
-        import numpy as np
+        # Collect all unique claim texts that need embedding
+        claim_texts_to_embed: dict[str, str] = {}  # claim_id -> text
+        question_claim_ids: dict[str, list[str]] = {}  # question_id -> [claim_ids]
 
-        # Build lookup for local question embeddings
-        local_q_embeddings: dict[str, list[float]] = {}
-        for lq in self.local_questions:
-            if lq.embedding is not None:
-                local_q_embeddings[lq.id] = lq.embedding
+        for question in questions:
+            if question.attributes is None:
+                continue
+            source_claims = question.attributes.get("source_claims", [])
+            claim_ids = []
+            for claim in source_claims:
+                if isinstance(claim, dict):
+                    claim_id = claim.get("claim_id", "")
+                    statement = claim.get("statement", "")
+                    if claim_id and statement:
+                        claim_texts_to_embed[claim_id] = statement
+                        claim_ids.append(claim_id)
+            question_claim_ids[question.id] = claim_ids
 
+        if not claim_texts_to_embed:
+            log.debug("No claim texts to embed for retrieval difficulty")
+            for question in questions:
+                if question.attributes:
+                    question.attributes["retrieval_difficulty"] = 0.5
+                    question.attributes["max_source_similarity"] = 0.5
+            return
+
+        # Embed all claim texts
+        claim_text_units = [
+            TextUnit(id=cid, short_id=None, text=text)
+            for cid, text in claim_texts_to_embed.items()
+        ]
+        log.debug("Embedding %d claim texts for retrieval difficulty", len(claim_text_units))
+        claim_text_units = await self.text_embedder.embed_batch(claim_text_units, batch_size=32)
+
+        # Build lookup for claim embeddings
+        claim_embeddings: dict[str, list[float]] = {}
+        for tu in claim_text_units:
+            if tu.text_embedding is not None:
+                claim_embeddings[tu.id] = tu.text_embedding
+
+        # Compute similarity for each question
         for question in questions:
             if question.embedding is None or question.attributes is None:
                 continue
 
-            # Get source question IDs from attributes
-            source_questions = question.attributes.get("source_questions", [])
-            source_ids = [sq["id"] for sq in source_questions if isinstance(sq, dict)]
-
-            if not source_ids:
+            claim_ids = question_claim_ids.get(question.id, [])
+            if not claim_ids:
                 question.attributes["retrieval_difficulty"] = 0.5
                 question.attributes["max_source_similarity"] = 0.5
                 continue
 
-            # Compute similarity to each source local question
+            # Compute similarity to each source claim
             q_emb = np.array(question.embedding)
             q_norm = np.linalg.norm(q_emb)
             if q_norm == 0:
@@ -562,13 +810,13 @@ class DataEntityQuestionGen(BaseQuestionGen):
             q_emb_normalized = q_emb / q_norm
 
             similarities = []
-            for source_id in source_ids:
-                if source_id in local_q_embeddings:
-                    source_emb = np.array(local_q_embeddings[source_id])
-                    source_norm = np.linalg.norm(source_emb)
-                    if source_norm > 0:
-                        source_emb_normalized = source_emb / source_norm
-                        sim = float(np.dot(q_emb_normalized, source_emb_normalized))
+            for claim_id in claim_ids:
+                if claim_id in claim_embeddings:
+                    claim_emb = np.array(claim_embeddings[claim_id])
+                    claim_norm = np.linalg.norm(claim_emb)
+                    if claim_norm > 0:
+                        claim_emb_normalized = claim_emb / claim_norm
+                        sim = float(np.dot(q_emb_normalized, claim_emb_normalized))
                         similarities.append(sim)
 
             if similarities:
@@ -584,15 +832,13 @@ class DataEntityQuestionGen(BaseQuestionGen):
     ) -> None:
         """Compute combined score using Reciprocal Rank Fusion (RRF).
 
-        Combines quality_score, retrieval_difficulty, assertion_count, and
-        document_count rankings into a single score using RRF formula:
+        Combines quality_score and retrieval_difficulty rankings into a single
+        score using RRF formula:
             combined_score = sum(weight_i/(k + rank_i) for each ranking dimension)
 
         Weights:
             - quality_score: 1.0 (primary signal)
-            - assertion_count: 1.0 (evaluation coverage)
-            - document_count: 1.0 (retrieval complexity)
-            - retrieval_difficulty: 0.5 (secondary, may bias toward bridge)
+            - retrieval_difficulty: 1.0 (favors bridge questions with indirect references)
 
         Higher combined_score = better overall.
 
@@ -601,27 +847,11 @@ class DataEntityQuestionGen(BaseQuestionGen):
             k: RRF constant (default 60, standard value).
 
         """
-        from benchmark_qed.autoq.question_gen.data_questions.assertion_gen.ranking import (
-            calculate_dense_ranks,
-        )
-
         # Filter to questions with attributes
         valid_questions = [q for q in questions if q.attributes is not None]
 
         if not valid_questions:
             return
-
-        # Compute document count for each question
-        for question in valid_questions:
-            if question.attributes is None:
-                continue
-            source_claims = question.attributes.get("source_claims", [])
-            doc_ids = set()
-            for claim in source_claims:
-                for source in claim.get("sources", []):
-                    if isinstance(source, dict) and "document_id" in source:
-                        doc_ids.add(source["document_id"])
-            question.attributes["document_count"] = len(doc_ids)
 
         # Rank by quality_score (descending - higher is better)
         quality_ranks = calculate_dense_ranks(
@@ -633,6 +863,7 @@ class DataEntityQuestionGen(BaseQuestionGen):
         )
 
         # Rank by retrieval_difficulty (descending - higher is better)
+        # Bridge questions naturally have higher retrieval_difficulty
         difficulty_ranks = calculate_dense_ranks(
             valid_questions,
             key_func=lambda q: (
@@ -641,47 +872,23 @@ class DataEntityQuestionGen(BaseQuestionGen):
             reverse=True,
         )
 
-        # Rank by assertion_count (descending - more is better)
-        assertion_ranks = calculate_dense_ranks(
-            valid_questions,
-            key_func=lambda q: (
-                q.attributes.get("assertion_count", 0) if q.attributes else 0
-            ),
-            reverse=True,
-        )
-
-        # Rank by document_count (descending - more docs is better/harder)
-        doc_count_ranks = calculate_dense_ranks(
-            valid_questions,
-            key_func=lambda q: (
-                q.attributes.get("document_count", 0) if q.attributes else 0
-            ),
-            reverse=True,
-        )
-
-        # Compute RRF combined score with weights
+        # Compute RRF combined score with equal weights
         for question in valid_questions:
             if question.attributes is None:
                 continue
 
             q_rank = quality_ranks.get(id(question), len(valid_questions))
             d_rank = difficulty_ranks.get(id(question), len(valid_questions))
-            a_rank = assertion_ranks.get(id(question), len(valid_questions))
-            doc_rank = doc_count_ranks.get(id(question), len(valid_questions))
 
-            # RRF with weights: quality=1.0, assertions=1.0, docs=1.0, difficulty=1.0
+            # RRF: quality + retrieval_difficulty (bridge questions rank higher on difficulty)
             rrf_score = (
                 1.0 / (k + q_rank)
-                + 1.0 / (k + a_rank)
-                + 1.0 / (k + doc_rank)
                 + 1.0 / (k + d_rank)
             )
 
             question.attributes["combined_score"] = rrf_score
             question.attributes["quality_rank"] = q_rank
             question.attributes["difficulty_rank"] = d_rank
-            question.attributes["assertion_rank"] = a_rank
-            question.attributes["doc_count_rank"] = doc_rank
 
     def _generate_entity_contexts(
         self,
@@ -759,20 +966,13 @@ class DataEntityQuestionGen(BaseQuestionGen):
     def _select_related_questions(
         self, questions: list[Question], max_count: int
     ) -> list[Question]:
-        """Select diverse questions about the same entity using MMR-style selection.
+        """Select diverse questions about the same entity using MMR.
 
         We want questions that cover different aspects/facts about the entity
         so we can generate interesting multi-hop questions that combine them.
 
-        Algorithm (MMR-style for diversity):
-        1. Start with question closest to centroid (most representative)
-        2. Iteratively add questions that are MOST similar to already-selected
-           (so they can be meaningfully combined into multi-hop questions)
-
-        The intuition: questions that are semantically related can be combined
-        into multi-hop questions (e.g., "Biden signed bill" + "Bill allocates $50B"
-        → "How much did Biden's bill allocate?"). Unrelated questions about the
-        same entity are hard to combine meaningfully.
+        Uses MMR sampler with high lambda (quality-focused) since these are
+        input questions for generation, not final selection.
 
         Args:
             questions: List of local questions sharing an entity.
@@ -787,168 +987,34 @@ class DataEntityQuestionGen(BaseQuestionGen):
         if len(questions) <= max_count:
             return questions
 
-        import numpy as np
+        # Convert Questions to TextUnits
+        text_units: list[TextUnit] = []
+        question_map: dict[str, Question] = {}
+        for q in questions:
+            if q.embedding is not None:
+                tu = TextUnit(
+                    id=q.id,
+                    short_id=None,
+                    text=q.text,
+                    text_embedding=q.embedding,
+                    attributes={"quality_score": 1.0},  # Equal quality for input selection
+                )
+                text_units.append(tu)
+                question_map[q.id] = q
 
-        # Note: This method is sync, so we can't generate embeddings here.
-        # Questions without embeddings will be handled by random selection fallback.
-        # For best results, ensure local_questions have embeddings before calling.
-
-        # Filter to questions with valid embeddings
-        questions_with_embeddings = [
-            q for q in questions if q.embedding is not None
-        ]
-
-        if len(questions_with_embeddings) < 2:
+        if len(text_units) < 2:
             # Fall back to random selection
-            import random
             rng = random.Random(self.random_seed)  # noqa: S311
             return rng.sample(questions, min(max_count, len(questions)))
 
-        # Build embedding matrix
-        embeddings = np.array([q.embedding for q in questions_with_embeddings])
-
-        # Normalize for cosine similarity
-        norms = np.linalg.norm(embeddings, axis=1, keepdims=True)
-        norms = np.where(norms == 0, 1, norms)
-        embeddings_normalized = embeddings / norms
-
-        # Start with question closest to centroid (most representative)
-        centroid = np.mean(embeddings_normalized, axis=0)
-        centroid_norm = np.linalg.norm(centroid)
-        if centroid_norm > 0:
-            centroid = centroid / centroid_norm
-        similarities_to_centroid = embeddings_normalized @ centroid
-        first_idx = int(np.argmax(similarities_to_centroid))
-
-        selected_indices = [first_idx]
-        selected_embeddings = [embeddings_normalized[first_idx]]
-
-        # Iteratively add most similar questions (can be combined with selected)
-        while len(selected_indices) < max_count:
-            best_idx = -1
-            best_score = float("-inf")  # Higher is more similar
-
-            for i in range(len(questions_with_embeddings)):
-                if i in selected_indices:
-                    continue
-
-                # Average similarity to selected questions
-                avg_sim = sum(
-                    float(np.dot(embeddings_normalized[i], sel_emb))
-                    for sel_emb in selected_embeddings
-                ) / len(selected_embeddings)
-
-                # We want maximum avg_sim (most related to selected cluster)
-                if avg_sim > best_score:
-                    best_score = avg_sim
-                    best_idx = i
-
-            if best_idx >= 0:
-                selected_indices.append(best_idx)
-                selected_embeddings.append(embeddings_normalized[best_idx])
-            else:
-                break
-
-        return [questions_with_embeddings[i] for i in selected_indices]
-
-    async def _batch_validate_questions(
-        self,
-        questions: list[Question],
-        batch_size: int = 25,
-    ) -> list[Question]:
-        """Run batch validation on questions using a separate LLM judge.
-
-        Args:
-            questions: List of questions to validate.
-            batch_size: Number of questions per validation batch.
-
-        Returns
-        -------
-        list[Question]
-            Questions that passed validation.
-
-        """
-        if not questions:
-            return []
-
-        # Load validation prompt
-        validation_prompt_path = DATA_ENTITY_PROMPTS_PATH / "batch_validation_prompt.txt"
-        if not validation_prompt_path.exists():
-            log.warning("Batch validation prompt not found, skipping validation")
-            return questions
-
-        validation_prompt = load_template_file(validation_prompt_path)
-
-        passed_questions: list[Question] = []
-        failed_count = 0
-
-        # Process in batches
-        for i in range(0, len(questions), batch_size):
-            batch = questions[i : i + batch_size]
-            
-            # Format questions for validation (include entity for relevance check)
-            questions_for_validation = [
-                {
-                    "id": j,
-                    "text": q.text,
-                    "type": q.attributes.get("question_subtype", "unknown") if q.attributes else "unknown",
-                    "entity": q.attributes.get("entity", "") if q.attributes else "",
-                }
-                for j, q in enumerate(batch)
-            ]
-
-            import json
-            prompt = validation_prompt.substitute(
-                questions=json.dumps(questions_for_validation, indent=2)
-            )
-
-            try:
-                messages = [{"role": "user", "content": prompt}]
-                response = await self.llm.chat(
-                    messages=messages,
-                    **self.llm_params,
-                )
-                _, parsed = try_parse_json_object(response.output.content)
-
-                if parsed and isinstance(parsed, dict):
-                    results = parsed.get("results", [])
-                    
-                    # Build set of passing IDs
-                    passing_ids = set()
-                    for result in results:
-                        if isinstance(result, dict):
-                            qid = result.get("id")
-                            if result.get("pass", False):
-                                passing_ids.add(qid)
-                            else:
-                                reason = result.get("reason", "unknown")
-                                log.debug(
-                                    "Question failed batch validation: %s - %s",
-                                    batch[qid].text[:50] if qid < len(batch) else "?",
-                                    reason,
-                                )
-                                failed_count += 1
-
-                    # Add passing questions
-                    for j, q in enumerate(batch):
-                        if j in passing_ids:
-                            passed_questions.append(q)
-                else:
-                    # Parse failed, keep all questions from this batch
-                    log.warning("Failed to parse batch validation response, keeping all questions")
-                    passed_questions.extend(batch)
-
-            except Exception as e:
-                log.warning("Batch validation failed: %s, keeping all questions", e)
-                passed_questions.extend(batch)
-
-        log.info(
-            "Batch validation: %s passed, %s failed out of %s total",
-            len(passed_questions),
-            failed_count,
-            len(questions),
+        # Use MMR sampler - high lambda to start from centroid, then diversify
+        selected_units = self.question_sampler.sample(
+            text_units=text_units,
+            sample_size=max_count,
+            quality_attributes="quality_score",
         )
-        return passed_questions
+
+        return [question_map[tu.id] for tu in selected_units]
 
     def _collect_claims_from_questions(
         self, questions: list[Question]
@@ -980,11 +1046,11 @@ class DataEntityQuestionGen(BaseQuestionGen):
     ) -> list[Question]:
         """Generate questions for a single entity context using all configured question types."""
         all_questions: list[Question] = []
-        
+
         # Distribute max questions across question types
         num_types = len(self.question_types)
         questions_per_type = max(1, context.max_questions_to_generate // num_types)
-        
+
         for question_type in self.question_types:
             try:
                 questions = await self._agenerate_questions_of_type(
@@ -1000,7 +1066,7 @@ class DataEntityQuestionGen(BaseQuestionGen):
                     question_type,
                     context.entity,
                 )
-        
+
         return all_questions
 
     async def _agenerate_questions_of_type(
@@ -1019,12 +1085,12 @@ class DataEntityQuestionGen(BaseQuestionGen):
                     context.entity,
                     max_questions,
                 )
-                
+
                 # Get the appropriate system prompt for this question type
                 system_prompt_template = self.system_prompts.get(
                     question_type, self.system_prompts["bridge"]
                 )
-                
+
                 # Format claims for prompt (grouped by source question)
                 claims_text = self._format_claims_for_prompt(
                     context.claims, context.local_questions
@@ -1051,12 +1117,12 @@ class DataEntityQuestionGen(BaseQuestionGen):
                 questions = self._parse_question_response(
                     result.output.content, context, stats
                 )
-                
+
                 # Tag questions with their type
                 for q in questions:
                     if q.attributes:
                         q.attributes["question_subtype"] = question_type
-                
+
                 return questions
 
         except (ValueError, KeyError, AttributeError, TypeError):
@@ -1123,7 +1189,8 @@ class DataEntityQuestionGen(BaseQuestionGen):
         for raw in raw_questions:
             if not isinstance(raw, dict):
                 continue
-            text = raw.get("text", "").strip()
+            text = raw.get("text") or ""
+            text = text.strip()
             if not text:
                 continue
 
@@ -1166,9 +1233,9 @@ class DataEntityQuestionGen(BaseQuestionGen):
             for metric, score in quality_scores.items():
                 if metric in non_score_fields:
                     continue
-                # Convert score to int if it's a string, skip non-numeric values
+                # Convert score to float, skip non-numeric values
                 try:
-                    score_num = float(score) if isinstance(score, str) else float(score)
+                    score_num = float(score)
                 except (ValueError, TypeError):
                     continue  # Skip non-numeric fields
                 if score_num < self.min_quality_score:
@@ -1185,28 +1252,13 @@ class DataEntityQuestionGen(BaseQuestionGen):
                     stats.add_filtered(raw, "low_quality", failed_str)
                 continue
 
-            # SAFEGUARD C2: Filter by self-validation check
-            validation = raw.get("validation", {})
-            if isinstance(validation, dict):
-                passes_all = validation.get("passes_all_checks", True)
-                if passes_all is False:
-                    issues = validation.get("issues", [])
-                    issues_str = ", ".join(issues) if issues else "validation failed"
-                    log.debug(
-                        "Question failed self-validation (%s), skipping: %s",
-                        issues_str,
-                        text[:50],
-                    )
-                    if stats:
-                        stats.skipped_failed_validation += 1
-                        stats.add_filtered(raw, "failed_validation", issues_str)
-                    continue
+            # NOTE: Self-validation check removed - batch validation handles this more reliably
 
             # SAFEGUARD D: Filter bridge questions without proper indirect reference
             if question_type == "bridge":
                 replaced_entity = raw.get("replaced_entity", "")
                 indirect_reference = raw.get("indirect_reference", "")
-                
+
                 # Check if replaced_entity is empty or null
                 if not replaced_entity or replaced_entity.lower() in ("null", "none", "n/a", ""):
                     log.debug(
@@ -1217,7 +1269,7 @@ class DataEntityQuestionGen(BaseQuestionGen):
                         stats.skipped_single_document += 1
                         stats.add_filtered(raw, "single_document", "No replaced_entity")
                     continue
-                
+
                 # Check if indirect_reference is empty
                 if not indirect_reference or indirect_reference.lower() in ("null", "none", "n/a", ""):
                     log.debug(
@@ -1228,7 +1280,7 @@ class DataEntityQuestionGen(BaseQuestionGen):
                         stats.skipped_single_document += 1
                         stats.add_filtered(raw, "single_document", "No indirect_reference")
                     continue
-                
+
                 # Check if the indirect_reference actually appears in the question
                 if indirect_reference.lower() not in text.lower():
                     log.debug(
@@ -1273,7 +1325,7 @@ class DataEntityQuestionGen(BaseQuestionGen):
             question = Question(
                 id=str(uuid.uuid4()),
                 text=text,
-                question_type=QuestionType.DATA_ENTITY,
+                question_type=QuestionType.DATA_LINK,
                 references=references[:30],  # Limit references
                 attributes={
                     "entity": context.entity,
@@ -1281,6 +1333,7 @@ class DataEntityQuestionGen(BaseQuestionGen):
                     "source_claims": source_claims,
                     "source_questions": source_questions,
                     "claim_reasoning": raw.get("claim_reasoning", ""),
+                    "draft_answer": raw.get("draft_answer", ""),
                     "claim_count": len(source_claims),
                     "reference_count": len(references),
                     "quality": quality_scores,
@@ -1319,19 +1372,20 @@ class DataEntityQuestionGen(BaseQuestionGen):
 
         # Determine question type to use appropriate metrics
         question_type = raw_question.get("question_type", "bridge")
-        
+
         # Base metrics for all question types
         base_metrics = ["naturalness", "answerability", "clarity"]
-        
+
         # Type-specific metrics
         type_specific_metrics = {
-            "bridge": ["bridge_relevance"],
+            "bridge": ["bridge_relevance", "uniqueness"],
             "comparison": ["comparison_validity"],
             "intersection": ["commonality_depth"],
+            "temporal": ["temporal_validity"],
         }
-        
+
         metrics = base_metrics + type_specific_metrics.get(question_type, ["bridge_relevance"])
-        
+
         scores: dict[str, Any] = {}
         score_values: list[float] = []
 
@@ -1361,13 +1415,17 @@ class DataEntityQuestionGen(BaseQuestionGen):
     async def _generate_assertions_for_questions(
         self, questions: list[Question]
     ) -> list[dict[str, Any]]:
-        """Generate assertions for all questions.
-        
-        Returns:
-            List of invalid assertion records for debugging/analysis.
+        """Generate assertions for all questions using LocalClaimAssertionGenerator.
+
+        The generator handles validation internally if a validator was configured.
+
+        Returns
+        -------
+            List of invalid assertion records for debugging/analysis (empty for now,
+            invalid assertions are filtered internally by the generator).
         """
         invalid_assertions_log: list[dict[str, Any]] = []
-        
+
         if self.assertion_generator is None:
             return invalid_assertions_log
 
@@ -1386,47 +1444,8 @@ class DataEntityQuestionGen(BaseQuestionGen):
                 claims=claims,
             )
 
+            # Generator already validates if validator is configured
             assertions = result.assertions
-            total_generated = len(assertions)
-
-            # Validate assertions if validator is configured
-            if self.assertion_validator and assertions:
-                validation_summary = await self.assertion_validator.validate_assertions(
-                    assertions, question.text
-                )
-                
-                # Log and collect invalid assertions with reasons
-                if validation_summary.invalid_assertions:
-                    log.debug(
-                        "Question '%s...' had %d/%d assertions invalidated:",
-                        question.text[:50],
-                        len(validation_summary.invalid_assertions),
-                        total_generated,
-                    )
-                    for invalid_result in validation_summary.invalid_assertions:
-                        scores = invalid_result.scores
-                        log.debug(
-                            "  - INVALID: '%s...' | grounding=%d, relevance=%d, verifiability=%d | %s",
-                            invalid_result.assertion.statement[:60],
-                            scores.grounding,
-                            scores.relevance,
-                            scores.verifiability,
-                            scores.reasoning[:100] if scores.reasoning else "No reason",
-                        )
-                        # Collect for file output
-                        invalid_assertions_log.append({
-                            "question_id": question.id,
-                            "question_text": question.text,
-                            "assertion_statement": invalid_result.assertion.statement,
-                            "assertion_sources": invalid_result.assertion.sources,
-                            "grounding_score": scores.grounding,
-                            "relevance_score": scores.relevance,
-                            "verifiability_score": scores.verifiability,
-                            "reasoning": scores.reasoning,
-                            "source_claims": claims,
-                        })
-                
-                assertions = validation_summary.valid_assertions
 
             # Store assertions in question attributes
             question.attributes["assertions"] = [
@@ -1443,7 +1462,7 @@ class DataEntityQuestionGen(BaseQuestionGen):
 
         # Process questions with concurrency limit
         max_concurrent = (
-            self.assertion_config.entity.max_concurrent_questions
+            self.assertion_config.link.max_concurrent_questions
             if self.assertion_config
             else None
         )

@@ -13,16 +13,22 @@ import typer
 from rich import print as rich_print
 from tqdm import tqdm
 
-from benchmark_qed.autoe.assertion_scores import get_assertion_scores
+from benchmark_qed.autoe.assertion import (
+    aggregate_hierarchical_scores,
+    get_assertion_scores,
+    get_hierarchical_assertion_scores,
+    summarize_hierarchical_by_question,
+)
 from benchmark_qed.autoe.config import (
     AssertionConfig,
+    HierarchicalAssertionConfig,
     PairwiseConfig,
     ReferenceConfig,
     RetrievalReferenceConfig,
     RetrievalScoresConfig,
 )
-from benchmark_qed.autoe.pairwise_scores import analyze_criteria, get_pairwise_scores
-from benchmark_qed.autoe.reference_scores import get_reference_scores
+from benchmark_qed.autoe.pairwise import analyze_criteria, get_pairwise_scores
+from benchmark_qed.autoe.reference import get_reference_scores
 from benchmark_qed.cli.utils import print_df
 from benchmark_qed.config.utils import load_config
 from benchmark_qed.llm.factory import ModelFactory
@@ -394,6 +400,178 @@ def assertion_scores(
 
 
 @app.command()
+def hierarchical_assertion_scores(
+    comparison_spec: Annotated[
+        Path,
+        typer.Argument(help="The path to the JSON file containing the configuration."),
+    ],
+    output: Annotated[
+        Path, typer.Argument(help="The path to the output directory for the scores.")
+    ],
+    *,
+    print_model_usage: Annotated[
+        bool,
+        typer.Option(help="Whether to print the model usage statistics after scoring."),
+    ] = False,
+    include_score_id_in_prompt: Annotated[
+        bool,
+        typer.Option(
+            help="Whether to include the score ID in the evaluation prompt for the LLM."
+        ),
+    ] = True,
+    question_id_key: Annotated[
+        str,
+        typer.Option(
+            help="The key in the JSON file that contains the question ID."
+        ),
+    ] = "question_id",
+    question_text_key: Annotated[
+        str,
+        typer.Option(help="The key in the JSON file that contains the question text."),
+    ] = "question_text",
+    answer_text_key: Annotated[
+        str,
+        typer.Option(help="The key in the JSON file that contains the answer text."),
+    ] = "answer",
+    assertions_key: Annotated[
+        str,
+        typer.Option(
+            help="The key in the JSON file that contains the assertions."
+        ),
+    ] = "assertions",
+    supporting_assertions_key: Annotated[
+        str,
+        typer.Option(
+            help="The key in assertions that contains the supporting assertions list."
+        ),
+    ] = "supporting_assertions",
+) -> None:
+    """Score hierarchical assertions with supporting assertions.
+
+    This command evaluates global assertions along with their supporting (local)
+    assertions. It computes:
+    - Global assertion pass/fail
+    - Support coverage (ratio of supporting assertions that passed)
+    - Discovery detection (information beyond supporting assertions)
+    """
+    config = load_config(comparison_spec, HierarchicalAssertionConfig)
+    output.mkdir(parents=True, exist_ok=True)
+
+    llm_client = ModelFactory.create_chat_model(config.llm_config)
+    assertions_raw = pd.read_json(
+        config.assertions.assertions_path, encoding="utf-8"
+    )
+
+    # Validate assertions have the required fields
+    if assertions_key not in assertions_raw.columns:
+        msg = f"Assertions file missing '{assertions_key}' column."
+        raise ValueError(msg)
+
+    # Filter out rows with missing or empty assertions
+    if assertions_raw.loc[:, assertions_key].isna().any():
+        msg = "Some questions do not have assertions. These will be skipped."
+        rich_print(f"[bold yellow]{msg}[/bold yellow]")
+    assertions_raw = assertions_raw[~assertions_raw.loc[:, assertions_key].isna()]
+
+    # Explode assertions and extract supporting_assertions
+    assertions = assertions_raw.explode(assertions_key).reset_index(drop=True)
+
+    # Normalize nested assertion dicts if needed
+    if assertions[assertions_key].apply(lambda x: isinstance(x, dict)).any():
+        assertion_details = pd.json_normalize(assertions[assertions_key].tolist())
+        assertions = pd.concat(
+            [assertions.drop(columns=[assertions_key]), assertion_details], axis=1
+        )
+    else:
+        assertions = assertions.rename(columns={assertions_key: "assertion"})
+
+    # Validate supporting_assertions column exists
+    if supporting_assertions_key not in assertions.columns:
+        msg = (
+            f"Assertions missing '{supporting_assertions_key}' column. "
+            "Use regular assertion_scores command for non-hierarchical assertions."
+        )
+        raise ValueError(msg)
+
+    # Filter out assertions without supporting assertions
+    has_supporting = assertions[supporting_assertions_key].apply(
+        lambda x: isinstance(x, list) and len(x) > 0
+    )
+    if not has_supporting.all():
+        n_missing = (~has_supporting).sum()
+        rich_print(
+            f"[bold yellow]{n_missing} assertions without supporting assertions "
+            f"will be skipped.[/bold yellow]"
+        )
+        assertions = assertions[has_supporting].reset_index(drop=True)
+
+    rich_print(f"Evaluating {len(assertions)} hierarchical assertions...")
+
+    # Get hierarchical scores
+    scores = get_hierarchical_assertion_scores(
+        llm_client=llm_client,
+        llm_config=config.llm_config,
+        answers=pd.read_json(config.generated.answer_base_path, encoding="utf-8"),
+        assertions=assertions,
+        assessment_user_prompt=config.prompt_config.user_prompt.template,
+        assessment_system_prompt=config.prompt_config.system_prompt.template,
+        trials=config.trials,
+        include_score_id_in_prompt=include_score_id_in_prompt,
+        question_id_key=question_id_key,
+        question_text_key=question_text_key,
+        answer_text_key=answer_text_key,
+        supporting_assertions_key=supporting_assertions_key,
+    )
+
+    # Save raw scores
+    scores.to_csv(output / "hierarchical_assertion_scores.csv", index=False)
+
+    # Aggregate across trials
+    aggregated = aggregate_hierarchical_scores(
+        scores, pass_threshold=config.pass_threshold
+    )
+    aggregated.to_csv(output / "hierarchical_assertion_summary.csv", index=False)
+
+    # Summarize by question
+    summary_by_question = summarize_hierarchical_by_question(aggregated)
+    summary_by_question.to_csv(
+        output / "hierarchical_summary_by_question.csv", index=False
+    )
+
+    # Print summary
+    print_df(summary_by_question, "Hierarchical Assertion Summary by Question")
+
+    # Report statistics
+    total_assertions = len(aggregated)
+    passed_assertions = (aggregated["global_score"] == 1).sum()
+    avg_support_coverage = aggregated["support_coverage"].mean()
+    discovery_count = aggregated["has_discovery"].sum()
+
+    rich_print("\n[bold]Overall Statistics:[/bold]")
+    rich_print(
+        f"  Global assertions passed: {passed_assertions}/{total_assertions} "
+        f"({passed_assertions/total_assertions*100:.1f}%)"
+    )
+    rich_print(f"  Average support coverage: {avg_support_coverage*100:.1f}%")
+    rich_print(f"  Assertions with discovery: {discovery_count}")
+
+    # Report failed assertions
+    failed = aggregated[aggregated["global_score"] == 0]
+    if len(failed) > 0:
+        rich_print(
+            f"\n[bold red]{len(failed)} global assertions failed.[/bold red]"
+        )
+    else:
+        rich_print("\n[bold green]All global assertions passed.[/bold green]")
+
+    if print_model_usage:
+        rich_print("\nModel usage statistics:")
+        rich_print(llm_client.get_usage())
+    usage_file = output / "model_usage.json"
+    usage_file.write_text(json.dumps(llm_client.get_usage()), encoding="utf-8")
+
+
+@app.command()
 def generate_retrieval_reference(
     config_path: Annotated[
         Path,
@@ -719,8 +897,8 @@ def retrieval_scores(
     from benchmark_qed.autoe.retrieval_metrics.relevance_assessment.rationale_rater import (
         RationaleRelevanceRater,
     )
-    from benchmark_qed.autoe.retrieval_metrics.scoring.fidelity import FidelityMetric
-    from benchmark_qed.autoe.retrieval_scores import (
+    from benchmark_qed.autoe.retrieval import (
+        FidelityMetric,
         load_clusters_from_json,
         run_retrieval_evaluation,
     )

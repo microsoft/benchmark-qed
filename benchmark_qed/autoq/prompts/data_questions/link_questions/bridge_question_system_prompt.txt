@@ -75,6 +75,25 @@ Example 3:
    - GOOD: "How many Nobel Prizes did the scientist who discovered radium win?"
    - BAD: "The agency that issued guidelines, where is it headquartered?" (awkward)
 
+--SCORING (1-5 each)--
+- naturalness: Sounds like a real question someone would ask?
+- answerability: Fully answerable from the claims ONLY? (critical - don't require outside knowledge)
+  - 5: Question has a SPECIFIC, bounded answer from the claims
+  - 3: Answer exists in claims but question is too open-ended (e.g., "What did X say about Y?")
+  - 1: Requires knowledge not in the claims
+- clarity: Easy to understand in one read, simple structure, no nested clauses, grammatically correct?
+  - 5: Clear, simple, grammatically perfect question
+  - 3: Understandable but awkward phrasing or minor grammar issues
+  - 1: Confusing, run-on, or grammatically broken
+- bridge_relevance: Is the indirect reference (from the claims) a natural, meaningful way to identify the entity?
+  - 5: Notable/significant fact from the claims that clearly identifies the entity
+  - 3: Valid fact from claims but less distinctive
+  - 1: Obscure/arbitrary fact that nobody would naturally use to identify the entity
+- uniqueness: Does the indirect reference uniquely identify the entity IN THE REAL WORLD?
+  - 5: Only one entity fits (e.g., "the director of Inception" = only Christopher Nolan)
+  - 3: Likely unique but could theoretically match others (e.g., "the governor who vetoed a health bill")
+  - 1: Many entities could fit (e.g., "the country where X is prescription-only")
+
 --OUTPUT FORMAT--
 Return a JSON object with the following structure:
 {
@@ -95,6 +114,7 @@ Return a JSON object with the following structure:
             "indirect_reference": "Phrase used instead (e.g., the director of Inception)",
             "source_claim_ids": ["claim IDs needed to answer"],
             "claim_reasoning": "How the claims together answer the question",
+            "draft_answer": "The expected answer to this question based on the claims (1-2 sentences)",
             "question_type": "bridge",
             "quality": {
                 "reasoning": "Explain your assessment of the question quality before scoring",
@@ -103,53 +123,9 @@ Return a JSON object with the following structure:
                 "clarity": 4,
                 "bridge_relevance": 4,
                 "uniqueness": 5
-            },
-            "validation": {
-                "is_reference_unique": true,
-                "is_reference_notable": true,
-                "is_grammatically_correct": true,
-                "uses_past_tense": true,
-                "is_standalone": true,
-                "passes_all_checks": true,
-                "issues": []
             }
         }
     ]
 }
-
---SCORING (1-5 each)--
-- naturalness: Sounds like a real question someone would ask?
-- answerability: Fully answerable from the claims ONLY? (critical - don't require outside knowledge)
-  - 5: Question has a SPECIFIC, bounded answer from the claims
-  - 3: Answer exists in claims but question is too open-ended (e.g., "What did X say about Y?")
-  - 1: Requires knowledge not in the claims
-- clarity: Easy to understand in one read, simple structure, no nested clauses, grammatically correct?
-  - 5: Clear, simple, grammatically perfect question
-  - 3: Understandable but awkward phrasing or minor grammar issues
-  - 1: Confusing, run-on, or grammatically broken
-- bridge_relevance: Is the indirect reference (from the claims) a natural, meaningful way to identify the entity?
-  - 5: Notable/significant fact from the claims that clearly identifies the entity
-  - 3: Valid fact from claims but less distinctive
-  - 1: Obscure/arbitrary fact that nobody would naturally use to identify the entity
-- uniqueness: Does the indirect reference uniquely identify the entity IN THE REAL WORLD?
-  - 5: Only one entity fits (e.g., "the director of Inception" = only Christopher Nolan)
-  - 3: Likely unique but could theoretically match others (e.g., "the governor who vetoed a health bill")
-  - 1: Many entities could fit (e.g., "the country where X is prescription-only")
-
---VALIDATION (true/false each)--
-Before returning each question, validate it against these critical rules:
-- is_reference_unique: Does the indirect reference uniquely identify ONE entity in the real world?
-  - FALSE if: "state with Senate Bill 97" (many states have SB 97), "country where X is prescription-only" (many countries)
-  - TRUE if: "the director of Inception" (only Nolan), "the defense secretary hospitalized in Jan 2024" (only Austin)
-- is_reference_notable: Is the reference based on a well-known, recognizable fact?
-  - FALSE if: obscure bureaucratic details, policy numbers nobody knows
-  - TRUE if: major news stories, famous achievements, widely known facts
-- is_grammatically_correct: Is the question a proper, well-formed English sentence?
-- uses_past_tense: For past events, does the question use past tense (not "is trying" but "tried")?
-- is_standalone: Does the question make sense without seeing the claims?
-- passes_all_checks: TRUE only if ALL above checks are TRUE. If ANY is FALSE, set this to FALSE.
-- issues: List any problems found (e.g., ["reference not unique - many states have SB bills"])
-
-IMPORTANT: Set passes_all_checks=false if ANY validation fails. Be strict - it's better to reject a borderline question than to include a bad one.
 
 Generate UP TO ${max_questions} questions. Generate ZERO if no valid bridge questions possible.

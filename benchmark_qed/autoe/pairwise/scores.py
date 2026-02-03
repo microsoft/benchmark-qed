@@ -1,5 +1,9 @@
 # Copyright (c) 2025 Microsoft Corporation.
-"""Pairwise scoring functions for evaluation tasks."""
+"""Pairwise scoring functions for evaluation tasks.
+
+This module provides functions for pairwise comparison of answers using
+LLM-based evaluation with configurable criteria.
+"""
 
 import asyncio
 import functools
@@ -51,18 +55,21 @@ def get_pairwise_scores(
     """Score a pair of conditions using the specified criteria.
 
     Args:
-        llm_client (ChatModel): The LLM client to use for scoring.
-        llm_config (LLMConfig): The LLM configuration to use for scoring.
-        condition_a (Condition): The first condition to score.
-        condition_b (Condition): The second condition to score.
-        criteria (list[Criteria]): The criteria to use for scoring.
-        trials (int): The number of trials to run for each comparison.
-        include_score_id_in_prompt (bool): Whether to include the score ID in the user prompt. Including the score ID can be helpful to invalidate cached scores in the LLM, but it is not strictly necessary.
-        question_id_key (str): The name for the question ID in the DataFrame.
+        llm_client: The LLM client to use for scoring.
+        llm_config: The LLM configuration to use for scoring.
+        base_name: Name of the base/reference condition.
+        other_name: Name of the other condition to compare.
+        base_answers: DataFrame with base condition answers.
+        other_answers: DataFrame with other condition answers.
+        assessment_system_prompt: Optional custom system prompt template.
+        assessment_user_prompt: Optional custom user prompt template.
+        criteria: The criteria to use for scoring.
+        trials: The number of trials to run for each comparison.
+        include_score_id_in_prompt: Whether to include score ID in the prompt.
+        question_id_key: The column name for question ID in the DataFrames.
 
-    Returns
-    -------
-        pd.DataFrame: A DataFrame containing the scores for each condition.
+    Returns:
+        DataFrame containing the scores for each condition.
     """
     pairs = (
         base_answers.merge(
@@ -136,24 +143,26 @@ async def get_pairwise_score(
     include_score_id_in_prompt: bool = True,
     additional_call_args: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
-    """Get the score for two answers to a question according to the specified criteria.
+    """Get the score for two answers to a question according to criteria.
 
     Args:
-        question (str): The question for which the answers are provided.
-        answer_1 (str): The first answer to the question.
-        answer_2 (str): The second answer to the question.
-        criteria_name (str): The criteria for assessing the answers.
-        criteria_description (str): The description of the criteria for assessing the answers.
-        llm (OpenAIChatLLM): The OpenAI LLM model to use for generating the prompts
-        assessment_system_prompt (str): The prompt for the system assessment task.
-        assessment_user_prompt (str): The prompt for the user assessment task.
-        trial (int): The trial index for the assessment.
-        include_score_id_in_prompt (bool): Whether to include the score ID in the user prompt.
-        additional_call_args (dict[str, Any] | None): Additional arguments to pass to the LLM call, e.g. temperature, seed, max_tokens, etc.
+        llm: The LLM client to use for scoring.
+        question: The question for which the answers are provided.
+        answer_1_name: Name/label for the first answer.
+        answer_1: The first answer to the question.
+        answer_2_name: Name/label for the second answer.
+        answer_2: The second answer to the question.
+        criteria_name: The name of the evaluation criteria.
+        criteria_description: The description of the evaluation criteria.
+        assessment_system_prompt: Optional custom system prompt template.
+        assessment_user_prompt: Optional custom user prompt template.
+        complete_callback: Callback function to invoke when evaluation completes.
+        trial: The trial number for this evaluation.
+        include_score_id_in_prompt: Whether to include score ID in the prompt.
+        additional_call_args: Additional arguments to pass to the LLM call.
 
-    Returns
-    -------
-        dict[str, Any]: A dictionary containing the scores and reasoning for each answer.
+    Returns:
+        Dictionary containing the scores and reasoning for each answer.
     """
     assessment_system_prompt = assessment_system_prompt or load_template_file(
         PAIRWISE_PROMPTS_PATH / "pairwise_system_prompt.txt"
@@ -227,22 +236,17 @@ async def get_pairwise_score(
 
 
 def analyze_criteria(raw_scores: pd.DataFrame, alpha: float = 0.05) -> pd.DataFrame:
-    """
-    Perform statistical significance tests (paired t-test or Wilcoxon) on criteria-based scores.
+    """Perform statistical significance tests on criteria-based scores.
 
-    Parameters
-    ----------
-    raw_scores : pd.DataFrame
-        Input DataFrame containing criteria and condition scores
-    alpha : float, optional
-        Significance threshold (default is 0.05).
+    Runs paired t-test or Wilcoxon signed-rank test depending on normality.
 
-    Returns
-    -------
-    pd.DataFrame
-        A DataFrame with test results, statistics, and Holm-corrected p-values.
+    Args:
+        raw_scores: DataFrame containing criteria and condition scores.
+        alpha: Significance threshold (default is 0.05).
+
+    Returns:
+        DataFrame with test results, statistics, and Holm-corrected p-values.
     """
-    # Drop unused columns
     others = raw_scores["other_name"].unique()
     base_names = raw_scores["base_name"].unique()
 
@@ -283,7 +287,6 @@ def analyze_criteria(raw_scores: pd.DataFrame, alpha: float = 0.05) -> pd.DataFr
             statistic = result.zstatistic  # type: ignore
             test = "wilcoxon"
         if np.isnan(p_value) and np.array_equal(base_scores, other_scores):
-            # If the scores are identical, set p_value to 1.0
             p_value = 1.0
         return pd.Series(
             [
@@ -314,12 +317,12 @@ def analyze_criteria(raw_scores: pd.DataFrame, alpha: float = 0.05) -> pd.DataFr
 
     final_result = (
         all_results.groupby(["question_set", "criteria", "base_name", "other_name"])
-        .apply(
+        .apply(  # type: ignore[call-overload]
             lambda x: _get_p_value(
                 x["base_mean"].to_numpy(),
                 x["other_mean"].to_numpy(),
             ),
-            include_groups=False,
+            include_groups=False,  # type: ignore[arg-type]
         )
         .reset_index()
     )
@@ -328,7 +331,9 @@ def analyze_criteria(raw_scores: pd.DataFrame, alpha: float = 0.05) -> pd.DataFr
         lambda x: f"{x:.3f}" if x > 0.001 else "< 0.001"
     )
 
-    corrected_significance = final_result.groupby(["question_set", "criteria"]).apply(
+    corrected_significance = final_result.groupby(
+        ["question_set", "criteria"]
+    ).apply(  # type: ignore[call-overload]
         lambda group: pd.Series(
             [
                 multipletests(group["p_value"].to_numpy(), method="holm")[1],
@@ -337,7 +342,7 @@ def analyze_criteria(raw_scores: pd.DataFrame, alpha: float = 0.05) -> pd.DataFr
             ],
             index=["corrected_p_values", "base_name", "other_name"],
         ),
-        include_groups=False,
+        include_groups=False,  # type: ignore[arg-type]
     )
     corrected_significance = corrected_significance.explode([
         "corrected_p_values",

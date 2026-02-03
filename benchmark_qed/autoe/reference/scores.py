@@ -1,5 +1,9 @@
 # Copyright (c) 2025 Microsoft Corporation.
-"""Reference scoring functions for evaluation tasks."""
+"""Reference scoring functions for evaluation tasks.
+
+This module provides functions for scoring generated answers against reference
+(ground truth) answers using LLM-based evaluation with configurable criteria.
+"""
 
 import asyncio
 import functools
@@ -40,24 +44,24 @@ def get_reference_scores(
     include_score_id_in_prompt: bool = True,
     question_id_key: str = "question_id",
 ) -> pd.DataFrame:
-    """
-    Score a generated answer against a ground truth answer using the specified criteria.
+    """Score generated answers against reference answers using specified criteria.
 
     Args:
-        llm_client (ChatModel): The LLM client to use for scoring.
-        llm_config (LLMConfig): The LLM configuration to use for scoring.
-        generated (Condition): The generated answer to score.
-        reference (Condition): The reference answer to score against.
-        criteria (list[Criteria]): The criteria to use for scoring.
-        trials (int): The number of trials to run for each comparison.
-        score_min (int): The minimum score for the criteria.
-        score_max (int): The maximum score for the criteria.
-        include_score_id_in_prompt (bool): Whether to include the score ID in the user prompt. Including the score ID can be helpful to invalidate cached scores in the LLM, but it is not strictly necessary.
-        question_id_key (str): The name for the question ID in the DataFrame.
+        llm_client: The LLM client to use for scoring.
+        llm_config: The LLM configuration to use for scoring.
+        generated_answers: DataFrame with generated answers.
+        reference_answers: DataFrame with reference/ground truth answers.
+        criteria: The criteria to use for scoring.
+        assessment_system_prompt: Optional custom system prompt template.
+        assessment_user_prompt: Optional custom user prompt template.
+        trials: The number of trials to run for each comparison.
+        score_min: The minimum score for the criteria.
+        score_max: The maximum score for the criteria.
+        include_score_id_in_prompt: Whether to include score ID in the prompt.
+        question_id_key: The column name for question ID in the DataFrames.
 
-    Returns
-    -------
-    pd.DataFrame: A DataFrame containing the scores for each condition.
+    Returns:
+        DataFrame containing the scores for each condition.
     """
     pairs = (
         reference_answers.merge(
@@ -129,7 +133,27 @@ async def get_reference_score(
     include_score_id_in_prompt: bool = True,
     additional_call_args: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
-    """Get the score for a generated answer to a question according to the specified criteria."""
+    """Get the score for a generated answer against a reference answer.
+
+    Args:
+        llm: The LLM client to use for scoring.
+        question: The question being answered.
+        reference_answer: The reference/ground truth answer.
+        generated_answer: The generated answer to evaluate.
+        criteria_name: The name of the evaluation criteria.
+        criteria_description: The description of the evaluation criteria.
+        assessment_system_prompt: Optional custom system prompt template.
+        assessment_user_prompt: Optional custom user prompt template.
+        complete_callback: Callback function to invoke when evaluation completes.
+        trial: The trial number for this evaluation.
+        score_min: The minimum score value.
+        score_max: The maximum score value.
+        include_score_id_in_prompt: Whether to include score ID in the prompt.
+        additional_call_args: Additional arguments to pass to the LLM call.
+
+    Returns:
+        Dictionary containing the score and evaluation details.
+    """
     assessment_system_prompt = assessment_system_prompt or load_template_file(
         REFERENCE_PROMPTS_PATH / "reference_system_prompt.txt"
     )
@@ -202,18 +226,13 @@ async def get_reference_score(
 
 
 def summarize_reference_scores(raw_scores: pd.DataFrame) -> pd.DataFrame:
-    """
-    Summarize reference scores by calculating the mean and standard deviation for each criteria.
+    """Summarize reference scores by calculating mean and std for each criteria.
 
-    Parameters
-    ----------
-    raw_scores : pd.DataFrame
-        Input DataFrame containing scores for each criteria.
+    Args:
+        raw_scores: DataFrame containing scores for each criteria.
 
-    Returns
-    -------
-    pd.DataFrame
-        A DataFrame with summarized scores, including mean and standard deviation.
+    Returns:
+        DataFrame with summarized scores including mean and standard deviation.
     """
     summary_df = (
         raw_scores.drop(
