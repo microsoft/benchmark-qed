@@ -283,11 +283,29 @@ def _get_hierarchical_scores_staged(
     """
     rich_print("[bold]Step 1: Standard global assertion scoring...[/bold]")
 
+    # Determine the actual question text column in assertions
+    # It may be different from question_text_key (which is for answers)
+    if question_text_key in assertions.columns:
+        assertion_question_col = question_text_key
+    elif "question_text" in assertions.columns:
+        assertion_question_col = "question_text"
+    else:
+        msg = (
+            f"Assertions must have either '{question_text_key}' or 'question_text' "
+            f"column. Found: {assertions.columns.tolist()}"
+        )
+        raise ValueError(msg)
+
     # Prepare global assertions for standard scoring (without supporting
     # assertions)
     global_assertions_df = assertions[
-        [question_id_key, question_text_key, "assertion"]
+        [question_id_key, assertion_question_col, "assertion"]
     ].copy()
+    # Rename to standard name for get_assertion_scores
+    if assertion_question_col != "question_text":
+        global_assertions_df = global_assertions_df.rename(
+            columns={assertion_question_col: "question_text"}
+        )
 
     # Run standard assertion scoring
     global_scores_raw = get_assertion_scores(
@@ -305,7 +323,7 @@ def _get_hierarchical_scores_staged(
 
     # Note: get_assertion_scores returns 'question' as question_text, not
     # question_id. We need to map back to question_id for merging with assertions
-    question_text_to_id = assertions.set_index(question_text_key)[
+    question_text_to_id = assertions.set_index(assertion_question_col)[
         question_id_key
     ].to_dict()
     global_scores_raw["question_id"] = global_scores_raw["question"].map(

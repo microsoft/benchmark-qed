@@ -6,6 +6,7 @@ from typing import Literal, Self
 
 from pydantic import BaseModel, Field, model_validator
 
+from benchmark_qed.autoe.assertion.hierarchical import HierarchicalMode
 from benchmark_qed.autoe.prompts import assertion as assertion_prompts
 from benchmark_qed.autoe.prompts import pairwise as pairwise_prompts
 from benchmark_qed.autoe.prompts import reference as reference_prompts
@@ -213,6 +214,13 @@ class HierarchicalAssertionConfig(BaseAutoEConfig):
         description="Assertions with supporting_assertions field for hierarchical scoring.",
     )
 
+    mode: HierarchicalMode = Field(
+        default=HierarchicalMode.STAGED,
+        description="Evaluation mode: 'staged' evaluates global assertions first then "
+        "supporting assertions only for passed globals, 'joint' evaluates together "
+        "(cheaper but may have anchoring bias).",
+    )
+
     pass_threshold: float = Field(
         0.5,
         description="Threshold for passing the assertion score.",
@@ -241,6 +249,252 @@ class HierarchicalAssertionConfig(BaseAutoEConfig):
     def check_trials_even(self) -> Self:
         """Even number of trials check does not apply for assertion scoring."""
         return self
+
+
+class MultiRAGAssertionConfig(BaseAutoEConfig):
+    """Configuration for assertion scoring across multiple RAG methods.
+
+    This config enables batch evaluation of multiple RAG methods against the same
+    assertions, with optional statistical significance testing at the end.
+    """
+
+    input_dir: Path = Field(
+        ...,
+        description="Base directory containing RAG method answer files.",
+    )
+
+    output_dir: Path = Field(
+        ...,
+        description="Directory to save evaluation results.",
+    )
+
+    rag_methods: list[str] = Field(
+        ...,
+        description="List of RAG method names to evaluate (subdirectory names in input_dir).",
+    )
+
+    question_sets: list[str] = Field(
+        ...,
+        description="List of question set names to evaluate.",
+    )
+
+    assertions_filename_template: str = Field(
+        "{question_set}_assertions.json",
+        description="Template for assertion filename in input_dir. Use {question_set} placeholder.",
+    )
+
+    answers_path_template: str = Field(
+        "{input_dir}/{rag_method}/{question_set}.json",
+        description="Template for answers file path. Use {input_dir}, {rag_method}, {question_set} placeholders.",
+    )
+
+    question_text_key: str = Field(
+        "question_text",
+        description="Column name for question text in the answer files.",
+    )
+
+    answer_text_key: str = Field(
+        "answer",
+        description="Column name for answer text in the answer files.",
+    )
+
+    pass_threshold: float = Field(
+        0.5,
+        description="Threshold for passing the assertion score.",
+    )
+
+    top_k_assertions: int | None = Field(
+        None,
+        description="Number of top-ranked assertions to evaluate per question. None means all.",
+    )
+
+    run_significance_test: bool = Field(
+        True,
+        description="Whether to run statistical significance tests after scoring.",
+    )
+
+    significance_alpha: float = Field(
+        0.05,
+        description="Alpha level for significance tests.",
+    )
+
+    significance_correction: Literal["holm", "bonferroni", "fdr_bh"] = Field(
+        "holm",
+        description="P-value correction method for post-hoc tests.",
+    )
+
+    prompt_config: AutoEPromptConfig = Field(
+        default=AutoEPromptConfig(
+            user_prompt=PromptConfig(
+                prompt=Path(assertion_prompts.__file__).parent
+                / "assertion_user_prompt.txt",
+            ),
+            system_prompt=PromptConfig(
+                prompt=Path(assertion_prompts.__file__).parent
+                / "assertion_system_prompt.txt",
+            ),
+        ),
+        description="Configuration for prompts used in assertion scoring.",
+    )
+
+    @model_validator(mode="after")
+    def check_trials_even(self) -> Self:
+        """Even number of trials check does not apply for assertion scoring."""
+        return self
+
+
+class MultiRAGHierarchicalAssertionConfig(BaseAutoEConfig):
+    """Configuration for hierarchical assertion scoring across multiple RAG methods.
+
+    This config enables batch evaluation of multiple RAG methods against the same
+    hierarchical assertions, with optional statistical significance testing at the end.
+    """
+
+    input_dir: Path = Field(
+        ...,
+        description="Base directory containing RAG method answer files and assertions.",
+    )
+
+    output_dir: Path = Field(
+        ...,
+        description="Directory to save evaluation results.",
+    )
+
+    rag_methods: list[str] = Field(
+        ...,
+        description="List of RAG method names to evaluate (subdirectory names in input_dir).",
+    )
+
+    assertions_file: str = Field(
+        ...,
+        description="Path to hierarchical assertions file (relative to input_dir or absolute).",
+    )
+
+    answers_path_template: str = Field(
+        "{input_dir}/{rag_method}/data_global.json",
+        description="Template for answers file path. Use {input_dir}, {rag_method} placeholders.",
+    )
+
+    question_id_key: str = Field(
+        "question_id",
+        description="Column name for question ID in the answer files.",
+    )
+
+    question_text_key: str = Field(
+        "question_text",
+        description="Column name for question text in the answer files.",
+    )
+
+    answer_text_key: str = Field(
+        "answer",
+        description="Column name for answer text in the answer files.",
+    )
+
+    supporting_assertions_key: str = Field(
+        "supporting_assertions",
+        description="Column name for supporting assertions in the assertions file.",
+    )
+
+    pass_threshold: float = Field(
+        0.5,
+        description="Threshold for passing the assertion score.",
+    )
+
+    mode: HierarchicalMode = Field(
+        default=HierarchicalMode.STAGED,
+        description="Evaluation mode: 'staged' or 'joint'.",
+    )
+
+    run_significance_test: bool = Field(
+        True,
+        description="Whether to run statistical significance tests after scoring.",
+    )
+
+    significance_alpha: float = Field(
+        0.05,
+        description="Alpha level for significance tests.",
+    )
+
+    significance_correction: Literal["holm", "bonferroni", "fdr_bh"] = Field(
+        "holm",
+        description="P-value correction method for post-hoc tests.",
+    )
+
+    @model_validator(mode="after")
+    def check_trials_even(self) -> Self:
+        """Even number of trials check does not apply for assertion scoring."""
+        return self
+
+
+class AssertionSignificanceConfig(BaseModel):
+    """Configuration for assertion significance testing across RAG methods.
+
+    This config is used to compare assertion scores across multiple RAG methods
+    using statistical significance tests.
+    """
+
+    output_dir: Path = Field(
+        ...,
+        description="Directory containing assertion scoring results.",
+    )
+
+    rag_methods: list[str] = Field(
+        ...,
+        description="List of RAG method names to compare (must match subdirectory names).",
+    )
+
+    question_sets: list[str] = Field(
+        ...,
+        description="List of question set names to analyze.",
+    )
+
+    alpha: float = Field(
+        0.05,
+        description="Significance level for hypothesis tests.",
+    )
+
+    correction_method: Literal["holm", "bonferroni", "fdr_bh"] = Field(
+        "holm",
+        description="P-value correction method for post-hoc tests.",
+    )
+
+
+class HierarchicalAssertionSignificanceConfig(BaseModel):
+    """Configuration for hierarchical assertion significance testing.
+
+    This config is used to compare hierarchical assertion scores across multiple
+    RAG methods using statistical significance tests on multiple metrics.
+    """
+
+    scores_dir: Path = Field(
+        ...,
+        description="Directory containing aggregated hierarchical scores CSVs.",
+    )
+
+    rag_methods: list[str] = Field(
+        ...,
+        description="List of RAG method names to compare.",
+    )
+
+    scores_filename_template: str = Field(
+        "{rag_method}_hierarchical_scores_aggregated.csv",
+        description="Filename template for aggregated scores. Use {rag_method} placeholder.",
+    )
+
+    alpha: float = Field(
+        0.05,
+        description="Significance level for hypothesis tests.",
+    )
+
+    correction_method: Literal["holm", "bonferroni", "fdr_bh"] = Field(
+        "holm",
+        description="P-value correction method for post-hoc tests.",
+    )
+
+    output_dir: Path | None = Field(
+        None,
+        description="Optional directory to save significance test results as CSV files.",
+    )
 
 
 class RAGMethod(BaseModel):

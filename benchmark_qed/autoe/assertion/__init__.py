@@ -23,6 +23,7 @@ from benchmark_qed.autoe.assertion.pipeline import (
     evaluate_rag_method,
     load_and_normalize_assertions,
     run_assertion_evaluation,
+    run_hierarchical_assertion_evaluation,
 )
 from benchmark_qed.autoe.assertion.significance import (
     compare_assertion_scores_significance,
@@ -52,4 +53,5 @@ __all__ = [
     "evaluate_rag_method",
     "load_and_normalize_assertions",
     "run_assertion_evaluation",
+    "run_hierarchical_assertion_evaluation",
 ]

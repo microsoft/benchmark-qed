@@ -14,14 +14,19 @@ from rich import print as rich_print
 from tqdm import tqdm
 
 from benchmark_qed.autoe.assertion import (
+    HierarchicalMode,
     aggregate_hierarchical_scores,
     get_assertion_scores,
     get_hierarchical_assertion_scores,
+    run_assertion_evaluation,
     summarize_hierarchical_by_question,
 )
 from benchmark_qed.autoe.config import (
     AssertionConfig,
+    AssertionSignificanceConfig,
     HierarchicalAssertionConfig,
+    HierarchicalAssertionSignificanceConfig,
+    MultiRAGAssertionConfig,
     PairwiseConfig,
     ReferenceConfig,
     RetrievalReferenceConfig,
@@ -266,47 +271,110 @@ def reference_scores(
 
 @app.command()
 def assertion_scores(
-    comparison_spec: Annotated[
+    config_path: Annotated[
         Path,
-        typer.Argument(help="The path to the JSON file containing the configuration."),
+        typer.Argument(help="Path to the assertion scoring config YAML."),
     ],
     output: Annotated[
-        Path, typer.Argument(help="The path to the output file for the scores.")
-    ],
+        Path | None,
+        typer.Argument(help="Output directory (required for single-RAG config, ignored for multi-RAG)."),
+    ] = None,
     *,
     print_model_usage: Annotated[
         bool,
-        typer.Option(help="Whether to print the model usage statistics after scoring."),
+        typer.Option(help="Whether to print the model usage statistics."),
     ] = False,
     include_score_id_in_prompt: Annotated[
         bool,
         typer.Option(
-            help="Whether to include the score ID in the evaluation prompt for the LLM (might be useful to avoid cached scores)."
+            help="Whether to include the score ID in the prompt (single-RAG mode only)."
         ),
     ] = True,
     question_id_key: Annotated[
         str,
-        typer.Option(
-            help="The key in the JSON file that contains the question ID. This is used to match questions with assertions."
-        ),
+        typer.Option(help="Question ID key in JSON (single-RAG mode only)."),
     ] = "question_id",
     question_text_key: Annotated[
         str,
-        typer.Option(help="The key in the JSON file that contains the question text."),
+        typer.Option(help="Question text key in JSON (single-RAG mode only)."),
     ] = "question_text",
     answer_text_key: Annotated[
         str,
-        typer.Option(help="The key in the JSON file that contains the answer text."),
+        typer.Option(help="Answer text key in JSON (single-RAG mode only)."),
     ] = "answer",
     assertions_key: Annotated[
         str,
-        typer.Option(
-            help="The key in the JSON file that contains the assertions. This should be a list of assertions for each question."
-        ),
+        typer.Option(help="Assertions key in JSON (single-RAG mode only)."),
     ] = "assertions",
 ) -> None:
-    """Generate assertion for the generated answers provided in the JSON file."""
-    config = load_config(comparison_spec, AssertionConfig)
+    """Score assertions for RAG method(s).
+
+    Supports two config formats (auto-detected):
+
+    1. Single-RAG mode (legacy): requires 'generated' key and output argument
+    2. Multi-RAG mode: requires 'rag_methods' key, includes significance testing
+
+    Single-RAG config example:
+        generated:
+          name: vector_rag
+          answer_base_path: input/vector_rag/answers.json
+        assertions:
+          assertions_path: input/assertions.json
+        pass_threshold: 0.5
+        trials: 4
+        llm_config: ...
+
+    Multi-RAG config example:
+        input_dir: ./input
+        output_dir: ./output
+        rag_methods: [graphrag, vectorrag]
+        question_sets: [data_global_questions]
+        run_significance_test: true
+        llm_config: ...
+    """
+    import yaml
+
+    # Load raw YAML to detect format
+    with open(config_path, encoding="utf-8") as f:
+        raw_config = yaml.safe_load(f)
+
+    # Auto-detect config format
+    is_multi_rag = "rag_methods" in raw_config
+
+    if is_multi_rag:
+        _run_multi_rag_assertion_scores(config_path, print_model_usage)
+    else:
+        if output is None:
+            rich_print(
+                "[bold red]Error: output directory is required for single-RAG config.[/bold red]"
+            )
+            rich_print("Usage: benchmark-qed autoe assertion-scores config.yaml output_dir")
+            raise typer.Exit(1)
+        _run_single_rag_assertion_scores(
+            config_path=config_path,
+            output=output,
+            print_model_usage=print_model_usage,
+            include_score_id_in_prompt=include_score_id_in_prompt,
+            question_id_key=question_id_key,
+            question_text_key=question_text_key,
+            answer_text_key=answer_text_key,
+            assertions_key=assertions_key,
+        )
+
+
+def _run_single_rag_assertion_scores(
+    config_path: Path,
+    output: Path,
+    *,
+    print_model_usage: bool,
+    include_score_id_in_prompt: bool,
+    question_id_key: str,
+    question_text_key: str,
+    answer_text_key: str,
+    assertions_key: str,
+) -> None:
+    """Run assertion scoring for a single RAG method (legacy mode)."""
+    config = load_config(config_path, AssertionConfig)
     output.mkdir(parents=True, exist_ok=True)
 
     llm_client = ModelFactory.create_chat_model(config.llm_config)
@@ -399,15 +467,73 @@ def assertion_scores(
     usage_file.write_text(json.dumps(llm_client.get_usage()), encoding="utf-8")
 
 
+def _run_multi_rag_assertion_scores(
+    config_path: Path,
+    print_model_usage: bool,
+) -> None:
+    """Run assertion scoring for multiple RAG methods with significance testing."""
+    config = load_config(config_path, MultiRAGAssertionConfig)
+    config.output_dir.mkdir(parents=True, exist_ok=True)
+
+    llm_client = ModelFactory.create_chat_model(config.llm_config)
+
+    rich_print("[bold]Running multi-RAG assertion scoring[/bold]")
+    rich_print(f"  Input dir: {config.input_dir}")
+    rich_print(f"  Output dir: {config.output_dir}")
+    rich_print(f"  RAG methods: {config.rag_methods}")
+    rich_print(f"  Question sets: {config.question_sets}")
+    rich_print(f"  Top-k assertions: {config.top_k_assertions or 'all'}")
+    rich_print(f"  Trials: {config.trials}")
+    if config.run_significance_test:
+        rich_print(
+            f"  Significance test: enabled "
+            f"(alpha={config.significance_alpha}, "
+            f"correction={config.significance_correction})"
+        )
+
+    # Run the evaluation pipeline
+    results_df = run_assertion_evaluation(
+        llm_client=llm_client,
+        llm_config=config.llm_config,
+        question_sets=config.question_sets,
+        generated_rags=config.rag_methods,
+        input_dir=str(config.input_dir),
+        output_dir=config.output_dir,
+        trials=config.trials,
+        top_k_assertions=config.top_k_assertions,
+        pass_threshold=config.pass_threshold,
+        assertions_filename_template=config.assertions_filename_template,
+        answers_path_template=config.answers_path_template,
+        run_significance_test=config.run_significance_test,
+        significance_alpha=config.significance_alpha,
+        significance_correction=config.significance_correction,
+        question_text_key=config.question_text_key,
+        answer_text_key=config.answer_text_key,
+    )
+
+    if len(results_df) > 0:
+        rich_print("\n[bold green]Evaluation complete![/bold green]")
+        rich_print(f"Results saved to: {config.output_dir}")
+    else:
+        rich_print("[yellow]No results generated. Check input paths and files.[/yellow]")
+
+    if print_model_usage:
+        rich_print("\nModel usage statistics:")
+        rich_print(llm_client.get_usage())
+    usage_file = config.output_dir / "model_usage.json"
+    usage_file.write_text(json.dumps(llm_client.get_usage()), encoding="utf-8")
+
+
 @app.command()
 def hierarchical_assertion_scores(
-    comparison_spec: Annotated[
+    config_path: Annotated[
         Path,
-        typer.Argument(help="The path to the JSON file containing the configuration."),
+        typer.Argument(help="Path to the hierarchical assertion scoring config YAML."),
     ],
     output: Annotated[
-        Path, typer.Argument(help="The path to the output directory for the scores.")
-    ],
+        Path | None,
+        typer.Argument(help="Output directory (required for single-RAG config, ignored for multi-RAG)."),
+    ] = None,
     *,
     print_model_usage: Annotated[
         bool,
@@ -448,13 +574,82 @@ def hierarchical_assertion_scores(
 ) -> None:
     """Score hierarchical assertions with supporting assertions.
 
+    Supports two config formats (auto-detected):
+
+    1. Single-RAG mode (legacy): requires 'generated' key and output argument
+    2. Multi-RAG mode: requires 'rag_methods' key, includes significance testing
+
+    Single-RAG config example:
+        generated:
+          name: vector_rag
+          answer_base_path: input/vector_rag/data_global.json
+        assertions:
+          assertions_path: input/data_global_assertions.json
+        pass_threshold: 0.5
+        trials: 4
+        mode: staged
+        llm_config: ...
+
+    Multi-RAG config example:
+        input_dir: ./input
+        output_dir: ./output
+        rag_methods: [graphrag, vectorrag]
+        assertions_file: data_global_assertions.json
+        run_significance_test: true
+        mode: staged
+        llm_config: ...
+
     This command evaluates global assertions along with their supporting (local)
     assertions. It computes:
     - Global assertion pass/fail
     - Support coverage (ratio of supporting assertions that passed)
     - Discovery detection (information beyond supporting assertions)
     """
-    config = load_config(comparison_spec, HierarchicalAssertionConfig)
+    import yaml
+
+    # Load raw YAML to detect format
+    with open(config_path, encoding="utf-8") as f:
+        raw_config = yaml.safe_load(f)
+
+    # Auto-detect config format
+    is_multi_rag = "rag_methods" in raw_config
+
+    if is_multi_rag:
+        _run_multi_rag_hierarchical_assertion_scores(config_path, print_model_usage)
+    else:
+        if output is None:
+            rich_print(
+                "[bold red]Error: output directory is required for single-RAG config.[/bold red]"
+            )
+            rich_print("Usage: benchmark-qed autoe hierarchical-assertion-scores config.yaml output_dir")
+            raise typer.Exit(1)
+        _run_single_rag_hierarchical_assertion_scores(
+            config_path=config_path,
+            output=output,
+            print_model_usage=print_model_usage,
+            include_score_id_in_prompt=include_score_id_in_prompt,
+            question_id_key=question_id_key,
+            question_text_key=question_text_key,
+            answer_text_key=answer_text_key,
+            assertions_key=assertions_key,
+            supporting_assertions_key=supporting_assertions_key,
+        )
+
+
+def _run_single_rag_hierarchical_assertion_scores(
+    config_path: Path,
+    output: Path,
+    *,
+    print_model_usage: bool,
+    include_score_id_in_prompt: bool,
+    question_id_key: str,
+    question_text_key: str,
+    answer_text_key: str,
+    assertions_key: str,
+    supporting_assertions_key: str,
+) -> None:
+    """Run hierarchical assertion scoring for a single RAG method."""
+    config = load_config(config_path, HierarchicalAssertionConfig)
     output.mkdir(parents=True, exist_ok=True)
 
     llm_client = ModelFactory.create_chat_model(config.llm_config)
@@ -516,6 +711,8 @@ def hierarchical_assertion_scores(
         assessment_user_prompt=config.prompt_config.user_prompt.template,
         assessment_system_prompt=config.prompt_config.system_prompt.template,
         trials=config.trials,
+        mode=config.mode,
+        pass_threshold=config.pass_threshold,
         include_score_id_in_prompt=include_score_id_in_prompt,
         question_id_key=question_id_key,
         question_text_key=question_text_key,
@@ -547,6 +744,13 @@ def hierarchical_assertion_scores(
     avg_support_coverage = aggregated["support_coverage"].mean()
     discovery_count = aggregated["has_discovery"].sum()
 
+    # Count overridden assertions (pass forced to fail due to no support/discovery)
+    overridden_count = (
+        aggregated["global_score_overridden"].sum()
+        if "global_score_overridden" in aggregated.columns
+        else 0
+    )
+
     rich_print("\n[bold]Overall Statistics:[/bold]")
     rich_print(
         f"  Global assertions passed: {passed_assertions}/{total_assertions} "
@@ -554,6 +758,11 @@ def hierarchical_assertion_scores(
     )
     rich_print(f"  Average support coverage: {avg_support_coverage*100:.1f}%")
     rich_print(f"  Assertions with discovery: {discovery_count}")
+    if overridden_count > 0:
+        rich_print(
+            f"  [yellow]Overridden to fail (no support/discovery): "
+            f"{overridden_count}[/yellow]"
+        )
 
     # Report failed assertions
     failed = aggregated[aggregated["global_score"] == 0]
@@ -569,6 +778,219 @@ def hierarchical_assertion_scores(
         rich_print(llm_client.get_usage())
     usage_file = output / "model_usage.json"
     usage_file.write_text(json.dumps(llm_client.get_usage()), encoding="utf-8")
+
+
+def _run_multi_rag_hierarchical_assertion_scores(
+    config_path: Path,
+    print_model_usage: bool,
+) -> None:
+    """Run hierarchical assertion scoring for multiple RAG methods with significance testing."""
+    from benchmark_qed.autoe.assertion import run_hierarchical_assertion_evaluation
+    from benchmark_qed.autoe.config import MultiRAGHierarchicalAssertionConfig
+
+    config = load_config(config_path, MultiRAGHierarchicalAssertionConfig)
+    config.output_dir.mkdir(parents=True, exist_ok=True)
+
+    llm_client = ModelFactory.create_chat_model(config.llm_config)
+
+    rich_print("[bold]Running multi-RAG hierarchical assertion scoring[/bold]")
+    rich_print(f"  Input dir: {config.input_dir}")
+    rich_print(f"  Output dir: {config.output_dir}")
+    rich_print(f"  RAG methods: {config.rag_methods}")
+    rich_print(f"  Assertions file: {config.assertions_file}")
+    rich_print(f"  Mode: {config.mode.value}")
+    rich_print(f"  Trials: {config.trials}")
+    if config.run_significance_test:
+        rich_print(
+            f"  Significance test: enabled "
+            f"(alpha={config.significance_alpha}, "
+            f"correction={config.significance_correction})"
+        )
+
+    # Load and prepare assertions
+    assertions_path = (
+        config.input_dir / config.assertions_file
+        if not Path(config.assertions_file).is_absolute()
+        else Path(config.assertions_file)
+    )
+    assertions_raw = pd.read_json(assertions_path, encoding="utf-8")
+
+    # Explode and normalize assertions
+    assertions = assertions_raw.explode("assertions").reset_index(drop=True)
+    if assertions["assertions"].apply(lambda x: isinstance(x, dict)).any():
+        assertion_details = pd.json_normalize(assertions["assertions"].tolist())
+        assertions = pd.concat(
+            [assertions.drop(columns=["assertions"]), assertion_details], axis=1
+        )
+        if "statement" in assertions.columns:
+            assertions = assertions.rename(columns={"statement": "assertion"})
+
+    # Filter to only include assertions with supporting assertions
+    has_supporting = assertions[config.supporting_assertions_key].apply(
+        lambda x: isinstance(x, list) and len(x) > 0
+    )
+    if not has_supporting.all():
+        n_missing = (~has_supporting).sum()
+        rich_print(
+            f"[bold yellow]{n_missing} assertions without supporting assertions "
+            f"will be skipped.[/bold yellow]"
+        )
+        assertions = assertions[has_supporting].reset_index(drop=True)
+
+    rich_print(f"Loaded {len(assertions)} hierarchical assertions")
+
+    # Run the evaluation pipeline
+    results_df = run_hierarchical_assertion_evaluation(
+        llm_client=llm_client,
+        llm_config=config.llm_config,
+        generated_rags=config.rag_methods,
+        assertions=assertions,
+        input_dir=str(config.input_dir),
+        output_dir=config.output_dir,
+        trials=config.trials,
+        pass_threshold=config.pass_threshold,
+        mode=config.mode,
+        answers_path_template=config.answers_path_template,
+        run_significance_test=config.run_significance_test,
+        significance_alpha=config.significance_alpha,
+        significance_correction=config.significance_correction,
+        question_id_key=config.question_id_key,
+        question_text_key=config.question_text_key,
+        answer_text_key=config.answer_text_key,
+        supporting_assertions_key=config.supporting_assertions_key,
+    )
+
+    if len(results_df) > 0:
+        rich_print("\n[bold green]Evaluation complete![/bold green]")
+        rich_print(f"Results saved to: {config.output_dir}")
+    else:
+        rich_print("[yellow]No results generated. Check input paths and files.[/yellow]")
+
+    if print_model_usage:
+        rich_print("\nModel usage statistics:")
+        rich_print(llm_client.get_usage())
+    usage_file = config.output_dir / "model_usage.json"
+    usage_file.write_text(json.dumps(llm_client.get_usage()), encoding="utf-8")
+
+
+@app.command()
+def assertion_significance(
+    config_path: Annotated[
+        Path,
+        typer.Argument(help="Path to the assertion significance configuration YAML file."),
+    ],
+) -> None:
+    """Run statistical significance tests on standard assertion scores.
+
+    Compares assertion scores across multiple RAG methods using statistical
+    tests (Friedman/Kruskal-Wallis for omnibus, Wilcoxon/Mann-Whitney for
+    post-hoc).
+
+    Example config:
+        output_dir: ./output/assertion_scoring
+        rag_methods:
+          - graphrag_global
+          - vectorrag
+          - lazygraphrag
+        question_sets:
+          - data_global_questions
+          - data_local_questions
+        alpha: 0.05
+        correction_method: holm
+    """
+    from benchmark_qed.autoe.assertion import compare_assertion_scores_significance
+
+    config = load_config(config_path, AssertionSignificanceConfig)
+
+    rich_print(f"[bold]Running assertion significance tests[/bold]")
+    rich_print(f"  Output dir: {config.output_dir}")
+    rich_print(f"  RAG methods: {config.rag_methods}")
+    rich_print(f"  Question sets: {config.question_sets}")
+    rich_print(f"  Alpha: {config.alpha}, Correction: {config.correction_method}")
+
+    results = compare_assertion_scores_significance(
+        output_dir=config.output_dir,
+        generated_rags=config.rag_methods,
+        question_sets=config.question_sets,
+        alpha=config.alpha,
+        correction_method=config.correction_method,
+    )
+
+    # Summary
+    rich_print("\n[bold]===== Summary =====[/bold]")
+    for question_set, result in results.items():
+        sig_marker = "✓" if result.omnibus.is_significant else "✗"
+        rich_print(
+            f"  {question_set}: {result.omnibus.test_name} "
+            f"p={result.omnibus.p_value:.4f} [{sig_marker}]"
+        )
+
+
+@app.command()
+def hierarchical_assertion_significance(
+    config_path: Annotated[
+        Path,
+        typer.Argument(help="Path to the hierarchical assertion significance config YAML."),
+    ],
+) -> None:
+    """Run statistical significance tests on hierarchical assertion scores.
+
+    Compares hierarchical assertion scores across multiple RAG methods on
+    four metrics: global_pass_rate, support_level, supporting_pass_rate,
+    and discovery_rate.
+
+    Example config:
+        scores_dir: ./output/hierarchical_scoring
+        rag_methods:
+          - graphrag_global
+          - vectorrag
+          - lazygraphrag
+        scores_filename_template: "{rag_method}_hierarchical_scores_aggregated.csv"
+        alpha: 0.05
+        correction_method: holm
+        output_dir: ./output/significance  # Optional
+    """
+    from benchmark_qed.autoe.assertion import (
+        compare_hierarchical_assertion_scores_significance,
+    )
+
+    config = load_config(config_path, HierarchicalAssertionSignificanceConfig)
+
+    rich_print(f"[bold]Running hierarchical assertion significance tests[/bold]")
+    rich_print(f"  Scores dir: {config.scores_dir}")
+    rich_print(f"  RAG methods: {config.rag_methods}")
+    rich_print(f"  Alpha: {config.alpha}, Correction: {config.correction_method}")
+
+    # Load aggregated scores for each RAG method
+    aggregated_scores: dict[str, pd.DataFrame] = {}
+    for rag_method in config.rag_methods:
+        filename = config.scores_filename_template.format(rag_method=rag_method)
+        filepath = config.scores_dir / filename
+        if not filepath.exists():
+            rich_print(f"  [yellow]Warning: {filepath} not found, skipping[/yellow]")
+            continue
+        aggregated_scores[rag_method] = pd.read_csv(filepath)
+        rich_print(f"  Loaded {len(aggregated_scores[rag_method])} rows for {rag_method}")
+
+    if len(aggregated_scores) < 2:
+        rich_print("[red]Error: Need at least 2 RAG methods with data[/red]")
+        raise typer.Exit(1)
+
+    results = compare_hierarchical_assertion_scores_significance(
+        aggregated_scores=aggregated_scores,
+        alpha=config.alpha,
+        correction_method=config.correction_method,
+        output_dir=config.output_dir,
+    )
+
+    # Summary
+    rich_print("\n[bold]===== Summary =====[/bold]")
+    for metric, result in results.items():
+        sig_marker = "✓" if result.omnibus.is_significant else "✗"
+        rich_print(
+            f"  {metric}: {result.omnibus.test_name} "
+            f"p={result.omnibus.p_value:.4f} [{sig_marker}]"
+        )
 
 
 @app.command()

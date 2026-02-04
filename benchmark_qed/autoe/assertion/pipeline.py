@@ -12,8 +12,14 @@ import numpy as np
 import pandas as pd
 from rich import print as rich_print
 
+from benchmark_qed.autoe.assertion.aggregation import aggregate_hierarchical_scores
+from benchmark_qed.autoe.assertion.hierarchical import (
+    HierarchicalMode,
+    get_hierarchical_assertion_scores,
+)
 from benchmark_qed.autoe.assertion.significance import (
     compare_assertion_scores_significance,
+    compare_hierarchical_assertion_scores_significance,
 )
 from benchmark_qed.autoe.assertion.standard import get_assertion_scores
 from benchmark_qed.cli.utils import print_df
@@ -72,6 +78,8 @@ def evaluate_rag_method(
     top_k_assertions: int | None,
     pass_threshold: float,
     answers_path_template: str = "{input_dir}/{generated_rag}/{question_set}.json",
+    question_text_key: str = "question_text",
+    answer_text_key: str = "answer",
 ) -> dict[str, Any] | None:
     """Evaluate a single RAG method against assertions for a question set.
 
@@ -88,6 +96,8 @@ def evaluate_rag_method(
         pass_threshold: Threshold for assertion pass/fail.
         answers_path_template: Template for answers file path
             (default: "{input_dir}/{generated_rag}/{question_set}.json").
+        question_text_key: Column name for question text (default: "question_text").
+        answer_text_key: Column name for answer text (default: "answer").
 
     Returns:
         Dictionary with evaluation results or None if evaluation failed.
@@ -114,8 +124,8 @@ def evaluate_rag_method(
             trials=trials,
             top_k=top_k_assertions,
             question_id_key="question_id",
-            question_text_key="question_text",
-            answer_text_key="answer",
+            question_text_key=question_text_key,
+            answer_text_key=answer_text_key,
         )
 
         # Save detailed scores for this RAG method and question set
@@ -236,6 +246,8 @@ def run_assertion_evaluation(
     run_significance_test: bool = True,
     significance_alpha: float = 0.05,
     significance_correction: str = "holm",
+    question_text_key: str = "question_text",
+    answer_text_key: str = "answer",
 ) -> pd.DataFrame:
     """Run assertion-based evaluation for multiple question sets and RAG methods.
 
@@ -257,6 +269,8 @@ def run_assertion_evaluation(
             (default: True).
         significance_alpha: Alpha level for significance tests (default: 0.05).
         significance_correction: P-value correction method (default: "holm").
+        question_text_key: Column name for question text (default: "question_text").
+        answer_text_key: Column name for answer text (default: "answer").
 
     Returns:
         DataFrame with overall results summary.
@@ -294,6 +308,8 @@ def run_assertion_evaluation(
                 top_k_assertions=top_k_assertions,
                 pass_threshold=pass_threshold,
                 answers_path_template=answers_path_template,
+                question_text_key=question_text_key,
+                answer_text_key=answer_text_key,
             )
 
             if result is not None:
@@ -335,3 +351,191 @@ def run_assertion_evaluation(
         )
 
     return overall_summary_df
+
+
+def run_hierarchical_assertion_evaluation(
+    llm_client: ChatModel,
+    llm_config: LLMConfig,
+    generated_rags: list[str],
+    assertions: pd.DataFrame,
+    input_dir: str,
+    output_dir: Path,
+    trials: int,
+    pass_threshold: float,
+    mode: HierarchicalMode = HierarchicalMode.JOINT,
+    answers_path_template: str = "{input_dir}/{generated_rag}/data_global.json",
+    run_significance_test: bool = True,
+    significance_alpha: float = 0.05,
+    significance_correction: str = "holm",
+    question_id_key: str = "question_id",
+    question_text_key: str = "question_text",
+    answer_text_key: str = "answer",
+    supporting_assertions_key: str = "supporting_assertions",
+) -> pd.DataFrame:
+    """Run hierarchical assertion evaluation for multiple RAG methods.
+
+    This is a pipeline function that evaluates hierarchical assertions
+    (with supporting assertions) across multiple RAG methods and optionally
+    runs statistical significance tests.
+
+    Args:
+        llm_client: LLM client for evaluation.
+        llm_config: LLM configuration.
+        generated_rags: List of RAG method names.
+        assertions: DataFrame with hierarchical assertions (must have
+            supporting_assertions column).
+        input_dir: Input directory containing RAG answer files.
+        output_dir: Output directory for results.
+        trials: Number of evaluation trials.
+        pass_threshold: Threshold for assertion pass/fail.
+        mode: Hierarchical evaluation mode (JOINT or STAGED).
+        answers_path_template: Template for answers file path.
+        run_significance_test: Whether to run statistical significance tests.
+        significance_alpha: Alpha level for significance tests.
+        significance_correction: P-value correction method.
+        question_id_key: Column name for question ID.
+        question_text_key: Column name for question text.
+        answer_text_key: Column name for answer text.
+        supporting_assertions_key: Column name for supporting assertions.
+
+    Returns:
+        DataFrame with comparison summary across all RAG methods.
+    """
+    output_dir.mkdir(parents=True, exist_ok=True)
+
+    all_aggregated: list[pd.DataFrame] = []
+    aggregated_scores_dict: dict[str, pd.DataFrame] = {}
+
+    # Evaluate each RAG method
+    for generated_rag in generated_rags:
+        rich_print(f"\n[bold]Processing {generated_rag}[/bold]")
+
+        # Build answers path
+        answers_path = answers_path_template.format(
+            input_dir=input_dir, generated_rag=generated_rag
+        )
+
+        try:
+            answers = pd.read_json(answers_path)
+        except FileNotFoundError:
+            rich_print(
+                f"  [yellow]Warning: {answers_path} not found, skipping[/yellow]"
+            )
+            continue
+
+        # Run hierarchical scoring
+        scores = get_hierarchical_assertion_scores(
+            llm_client=llm_client,
+            llm_config=llm_config,
+            answers=answers,
+            assertions=assertions,
+            trials=trials,
+            mode=mode,
+            pass_threshold=pass_threshold,
+            question_id_key=question_id_key,
+            question_text_key=question_text_key,
+            answer_text_key=answer_text_key,
+            supporting_assertions_key=supporting_assertions_key,
+        )
+
+        # Save raw per-trial scores
+        rag_output_dir = output_dir / generated_rag
+        rag_output_dir.mkdir(parents=True, exist_ok=True)
+        scores.to_csv(rag_output_dir / "hierarchical_scores_raw.csv", index=False)
+
+        # Aggregate scores across trials
+        aggregated = aggregate_hierarchical_scores(scores, pass_threshold=pass_threshold)
+        aggregated["rag_method"] = generated_rag
+        aggregated.to_csv(
+            rag_output_dir / "hierarchical_scores_aggregated.csv", index=False
+        )
+        all_aggregated.append(aggregated)
+        aggregated_scores_dict[generated_rag] = aggregated
+
+        # Print summary stats (per-question averages, consistent with significance tests)
+        per_q_global = aggregated.groupby("question")["global_score"].mean()
+        per_q_support = aggregated.groupby("question")["support_level"].mean()
+        rich_print(
+            f"  Global pass rate (per-question avg): "
+            f"{per_q_global.mean() * 100:.1f}%"
+        )
+        if "support_level" in aggregated.columns:
+            rich_print(
+                f"  Average support level (per-question avg): "
+                f"{per_q_support.mean() * 100:.1f}%"
+            )
+
+    if not all_aggregated:
+        rich_print("[red]Error: No RAG methods were successfully processed[/red]")
+        return pd.DataFrame()
+
+    # Combine all results
+    all_aggregated_df = pd.concat(all_aggregated, ignore_index=True)
+    all_aggregated_df.to_csv(output_dir / "all_hierarchical_scores.csv", index=False)
+
+    # Create comparison summary with per-question metrics
+    # All metrics are computed per-question first, then averaged across questions
+    # (consistent with how significance tests compare RAG methods)
+    comparison_rows = []
+    for rag_method, df in aggregated_scores_dict.items():
+        # Compute per-question supporting pass rate
+        # Count all supporting assertion evaluations (no deduplication)
+        # because the same supporting assertion can have different results
+        # under different global assertions
+        per_question_supporting_rates = []
+        for _, group in df.groupby("question"):
+            total_supporting = 0
+            total_passed = 0
+            for support_results in group["support_results"]:
+                if support_results:
+                    total_supporting += len(support_results)
+                    total_passed += sum(1 for sr in support_results if sr["passed"])
+            if total_supporting > 0:
+                pass_rate = total_passed / total_supporting
+                per_question_supporting_rates.append(pass_rate)
+
+        # All metrics: per-question average first, then mean across questions
+        comparison_rows.append({
+            "rag_method": rag_method,
+            "global_pass_rate": df.groupby("question")["global_score"].mean().mean(),
+            "avg_support_level": df.groupby("question")["support_level"].mean().mean(),
+            "supporting_pass_rate": (
+                np.mean(per_question_supporting_rates)
+                if per_question_supporting_rates else 0.0
+            ),
+            "discovery_rate": df.groupby("question")["has_discovery"].mean().mean(),
+        })
+
+    comparison_df = pd.DataFrame(comparison_rows)
+    comparison_df.to_csv(output_dir / "hierarchical_comparison_summary.csv", index=False)
+    print_df(comparison_df, "Hierarchical Assertion Scores Comparison")
+
+    # Run statistical significance tests if requested
+    if run_significance_test and len(aggregated_scores_dict) >= 2:
+        rich_print("\n[bold]Running significance tests...[/bold]")
+        sig_results = compare_hierarchical_assertion_scores_significance(
+            aggregated_scores=aggregated_scores_dict,
+            alpha=significance_alpha,
+            correction_method=significance_correction,
+            output_dir=output_dir,
+        )
+
+        # Print significance summary
+        rich_print("\n[bold]===== Significance Test Summary =====[/bold]")
+        for metric, result in sig_results.items():
+            sig_marker = "✓" if result.omnibus.is_significant else "✗"
+            rich_print(
+                f"  {metric}: {result.omnibus.test_name} "
+                f"p={result.omnibus.p_value:.4f} [{sig_marker}]"
+            )
+
+            # Print pairwise results if significant and available
+            if result.omnibus.is_significant and result.posthoc:
+                for comparison in result.posthoc.comparisons:
+                    pair_sig = "✓" if comparison.is_significant else "✗"
+                    rich_print(
+                        f"    {comparison.group1} vs {comparison.group2}: "
+                        f"p={comparison.p_value_corrected:.4f} [{pair_sig}]"
+                    )
+
+    return comparison_df

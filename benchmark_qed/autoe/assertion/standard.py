@@ -68,22 +68,40 @@ def get_assertion_scores(
     Returns:
         DataFrame: Results with assertion scores and metadata.
     """
-    pairs = (
-        answers.merge(
-            assertions,
-            how="inner",
-            on=[question_id_key],
-            suffixes=("_base", "_other"),
-        )
-        .drop(columns=[f"{question_text_key}_other"])
-        .rename(
-            columns={
-                f"{question_id_key}": "question_id",
-                f"{question_text_key}_base": "question_text",
-                f"{answer_text_key}": "answer_text",
-            }
-        )
+    pairs = answers.merge(
+        assertions,
+        how="inner",
+        on=[question_id_key],
+        suffixes=("_base", "_other"),
     )
+
+    # Handle column renaming - the question text column may have different names
+    # in answers vs assertions, or may only exist in one of them
+    question_col_other = f"{question_text_key}_other"
+    question_col_base = f"{question_text_key}_base"
+
+    # Drop the _other question column if it exists
+    if question_col_other in pairs.columns:
+        pairs = pairs.drop(columns=[question_col_other])
+
+    # Rename columns to standard names
+    rename_map = {question_id_key: "question_id", answer_text_key: "answer_text"}
+    if question_col_base in pairs.columns:
+        rename_map[question_col_base] = "question_text"
+    elif question_text_key in pairs.columns:
+        # If we're renaming a column to question_text but question_text already
+        # exists (from assertions), drop the existing one first to avoid duplicates
+        if (
+            question_text_key != "question_text"
+            and "question_text" in pairs.columns
+        ):
+            pairs = pairs.drop(columns=["question_text"])
+        rename_map[question_text_key] = "question_text"
+    # Also check if assertions have question_text column that wasn't suffixed
+    elif "question_text" not in pairs.columns and "question_text_base" in pairs.columns:
+        rename_map["question_text_base"] = "question_text"
+
+    pairs = pairs.rename(columns=rename_map)
     pairs = pairs[["question_id", "question_text", "answer_text", "assertion"]]
 
     # Apply top-k filtering if specified

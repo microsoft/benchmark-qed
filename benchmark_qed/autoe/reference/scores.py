@@ -43,6 +43,7 @@ def get_reference_scores(
     score_max: int = 10,
     include_score_id_in_prompt: bool = True,
     question_id_key: str = "question_id",
+    question_text_key: str = "question_text",
 ) -> pd.DataFrame:
     """Score generated answers against reference answers using specified criteria.
 
@@ -59,6 +60,7 @@ def get_reference_scores(
         score_max: The maximum score for the criteria.
         include_score_id_in_prompt: Whether to include score ID in the prompt.
         question_id_key: The column name for question ID in the DataFrames.
+        question_text_key: The column name for question text in the DataFrames.
 
     Returns:
         DataFrame containing the scores for each condition.
@@ -70,9 +72,16 @@ def get_reference_scores(
             on=[question_id_key],
             suffixes=("_base", "_other"),
         )
-        .drop(columns=["question_text_other"])
-        .rename(columns={"question_text_base": "question_text"})
+        .drop(columns=[f"{question_text_key}_other"])
+        .rename(
+            columns={
+                question_id_key: "question_id",
+                f"{question_text_key}_base": "question_text",
+            }
+        )
     )
+    # Select only the columns needed for ConditionPair
+    pairs = pairs[["question_id", "question_text", "answer_base", "answer_other"]]
 
     with Progress(transient=True) as progress:
 

@@ -193,21 +193,22 @@ def compare_hierarchical_assertion_scores_significance(
         for rag_method in rag_methods:
             df = aggregated_scores[rag_method]
 
-            # Special handling for supporting_pass_rate (needs deduplication)
+            # Special handling for supporting_pass_rate
             if config["agg_func"] == "_supporting_pass_rate":
-                # Compute per-question supporting pass rate with deduplication
+                # Compute per-question supporting pass rate
+                # Count all supporting assertion evaluations (no deduplication)
+                # because the same supporting assertion can have different results
+                # under different global assertions
                 per_question_values = []
                 for _, group in df.groupby("question"):
-                    # Deduplicate supporting assertions by ID
-                    unique_supporting: dict[str, bool] = {}
+                    total_supporting = 0
+                    total_passed = 0
                     for support_results in group["support_results"]:
                         if support_results:
-                            for sr in support_results:
-                                unique_supporting[sr["id"]] = sr["passed"]
-                    if unique_supporting:
-                        pass_rate = sum(unique_supporting.values()) / len(
-                            unique_supporting
-                        )
+                            total_supporting += len(support_results)
+                            total_passed += sum(1 for sr in support_results if sr["passed"])
+                    if total_supporting > 0:
+                        pass_rate = total_passed / total_supporting
                         per_question_values.append(pass_rate)
 
                 if per_question_values:

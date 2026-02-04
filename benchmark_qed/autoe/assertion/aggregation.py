@@ -26,10 +26,16 @@ def aggregate_hierarchical_scores(
         (per-global-assertion)
     - has_discovery: Majority vote across trials (only when global_score=1)
     - discovery_reasoning: From first trial with discovery (if any)
+    - global_score_overridden: True if global_score was forced to 0 due to
+        having no support and no discovery
 
     Note: has_discovery is only meaningful when the global assertion passes.
     If global_score=0, has_discovery is automatically set to False since there
     is no "discovery" when the answer doesn't satisfy the main claim.
+
+    Additionally, if a global assertion passes but has support_level=0 and
+    has_discovery=False, the global_score is overridden to 0 (fail) since
+    a pass without any supporting evidence or discovery is suspicious.
 
     Args:
         scores_df: DataFrame from get_hierarchical_assertion_scores() with
@@ -44,6 +50,7 @@ def aggregate_hierarchical_scores(
             - assertion: The global assertion text
             - global_score: Binary score (1 if mean > threshold, else 0)
             - global_score_mean: Mean global_passed across trials
+            - global_score_overridden: Whether global_score was forced to 0
             - n_supporting: Total number of supporting assertions
             - n_supporting_passed: Number of supporting assertions that passed
             - support_level: Ratio of passed supporting assertions (per-global)
@@ -153,6 +160,17 @@ def aggregate_hierarchical_scores(
         # Aggregate discovery
         discovery_metrics = _aggregate_discovery(group)
 
+        # Check for suspicious pass: global passed but no support and no
+        # discovery Override global_score to 0 in this case
+        global_score_overridden = False
+        if (
+            global_score == 1
+            and support_metrics["support_level"] == 0.0
+            and not discovery_metrics["has_discovery"]
+        ):
+            global_score = 0
+            global_score_overridden = True
+
         # Get supporting_assertions from the first row (should be the same for
         # all trials)
         supporting_assertions = (
@@ -170,6 +188,7 @@ def aggregate_hierarchical_scores(
                 "assertion": assertion,
                 "global_score": global_score,
                 "global_score_mean": global_passed_mean,
+                "global_score_overridden": global_score_overridden,
                 "reasoning": reasoning,
                 "supporting_assertions": supporting_assertions,
                 **support_metrics,
