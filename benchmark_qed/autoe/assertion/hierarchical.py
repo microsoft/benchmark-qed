@@ -365,7 +365,7 @@ def _get_hierarchical_scores_staged(
                     supporting_assertions_key
                 ].iloc[0]
             )
-            for trial_idx, (score, reasoning) in enumerate(
+            for trial_idx, (_score, reasoning) in enumerate(
                 zip(row["trial_scores"], row["reasoning_list"], strict=True)
             ):
                 results.append({
@@ -460,7 +460,7 @@ def _get_hierarchical_scores_staged(
         )
 
     # Build lookup for supporting results keyed by
-    # (question_id, assertion, trial) for per-trial pairing
+    # (question_id, assertion, trial) for trial-indexed retrieval
     supporting_lookup: dict[tuple[str, str, int], dict] = {
         (r["question_id"], r["assertion"], r["trial"]): r
         for r in supporting_results
@@ -487,7 +487,7 @@ def _get_hierarchical_scores_staged(
             n_supporting = 0
             supporting_assertions_list = []
 
-        for trial_idx, (score, reasoning) in enumerate(
+        for trial_idx, (_score, reasoning) in enumerate(
             zip(row["trial_scores"], row["reasoning_list"], strict=True)
         ):
             # Use (question_id, assertion, trial) to look up
