@@ -423,15 +423,16 @@ def _get_hierarchical_scores_staged(
         answer_lookup
     )
 
-    # Run supporting + discovery evaluation for passed assertions (single trial is
-    # enough)
+    # Run supporting + discovery evaluation for passed assertions
+    # across all trials for proper variance estimation
+    total_evals = len(passed_with_supporting) * trials
     with Progress() as progress:
 
         def on_complete_callback(progress_task: TaskID) -> None:
             progress.update(progress_task, advance=1, refresh=True)
 
         progress_task = progress.add_task(
-            "Evaluating supporting...", total=len(passed_with_supporting)
+            "Evaluating supporting...", total=total_evals
         )
 
         tasks = [
@@ -441,23 +442,28 @@ def _get_hierarchical_scores_staged(
                 question=row["question"],
                 answer=row["answer_text"],
                 supporting_assertions=row["supporting_assertions"],
-                question_id=row["question_id"],  # Pass question_id for tracking
-                trial=0,  # Single trial for supporting eval
+                question_id=row["question_id"],
+                trial=trial_idx,
                 complete_callback=functools.partial(
                     on_complete_callback, progress_task
                 ),
                 include_score_id_in_prompt=include_score_id_in_prompt,
                 additional_call_args=llm_config.call_args,
             )
+            for trial_idx in range(trials)
             for _, row in passed_with_supporting.iterrows()
         ]
 
         loop = asyncio.get_event_loop()
-        supporting_results = loop.run_until_complete(asyncio.gather(*tasks))
+        supporting_results = loop.run_until_complete(
+            asyncio.gather(*tasks)
+        )
 
-    # Build lookup for supporting results using question_id
-    supporting_lookup = {
-        (r["question_id"], r["assertion"]): r for r in supporting_results
+    # Build lookup for supporting results keyed by
+    # (question_id, assertion, trial) for per-trial pairing
+    supporting_lookup: dict[tuple[str, str, int], dict] = {
+        (r["question_id"], r["assertion"], r["trial"]): r
+        for r in supporting_results
     }
 
     # Combine all results
@@ -484,10 +490,11 @@ def _get_hierarchical_scores_staged(
         for trial_idx, (score, reasoning) in enumerate(
             zip(row["trial_scores"], row["reasoning_list"], strict=True)
         ):
-            # Use question_id to look up supporting results (matches
-            # supporting_lookup key)
-            if global_passed and (question_id, assertion_text) in supporting_lookup:
-                supp_result = supporting_lookup[(question_id, assertion_text)]
+            # Use (question_id, assertion, trial) to look up
+            # the trial-specific supporting result
+            supp_key = (question_id, assertion_text, trial_idx)
+            if global_passed and supp_key in supporting_lookup:
+                supp_result = supporting_lookup[supp_key]
                 results.append({
                     "question": question,
                     "assertion": assertion_text,

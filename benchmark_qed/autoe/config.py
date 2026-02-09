@@ -420,6 +420,20 @@ class MultiRAGHierarchicalAssertionConfig(BaseAutoEConfig):
         description="P-value correction method for post-hoc tests.",
     )
 
+    prompt_config: AutoEPromptConfig = Field(
+        default=AutoEPromptConfig(
+            user_prompt=PromptConfig(
+                prompt=Path(assertion_prompts.__file__).parent
+                / "hierarchical_assertion_user_prompt.txt",
+            ),
+            system_prompt=PromptConfig(
+                prompt=Path(assertion_prompts.__file__).parent
+                / "hierarchical_assertion_system_prompt.txt",
+            ),
+        ),
+        description="Configuration for prompts used in hierarchical assertion scoring.",
+    )
+
     @model_validator(mode="after")
     def check_trials_even(self) -> Self:
         """Even number of trials check does not apply for assertion scoring."""
