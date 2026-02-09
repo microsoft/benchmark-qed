@@ -420,6 +420,24 @@ class MultiRAGHierarchicalAssertionConfig(BaseAutoEConfig):
         description="P-value correction method for post-hoc tests.",
     )
 
+    run_clustered_permutation: bool = Field(
+        default=False,
+        description=(
+            "Whether to run assertion-level clustered permutation tests "
+            "as secondary analysis alongside question-level tests."
+        ),
+    )
+
+    n_permutations: int = Field(
+        10_000,
+        description="Number of permutations for clustered permutation tests.",
+    )
+
+    permutation_seed: int | None = Field(
+        None,
+        description="Random seed for reproducibility of permutation tests.",
+    )
+
     prompt_config: AutoEPromptConfig = Field(
         default=AutoEPromptConfig(
             user_prompt=PromptConfig(
@@ -508,6 +526,24 @@ class HierarchicalAssertionSignificanceConfig(BaseModel):
     output_dir: Path | None = Field(
         None,
         description="Optional directory to save significance test results as CSV files.",
+    )
+
+    run_clustered_permutation: bool = Field(
+        default=False,
+        description=(
+            "Whether to run assertion-level clustered permutation tests "
+            "as secondary analysis."
+        ),
+    )
+
+    n_permutations: int = Field(
+        10_000,
+        description="Number of permutations for clustered permutation tests.",
+    )
+
+    permutation_seed: int | None = Field(
+        None,
+        description="Random seed for reproducibility of permutation tests.",
     )
 
 

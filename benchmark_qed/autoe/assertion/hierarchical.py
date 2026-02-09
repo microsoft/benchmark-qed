@@ -345,9 +345,18 @@ def _get_hierarchical_scores_staged(
 
     passed_count = global_aggregated["global_passed"].sum()
     total_count = len(global_aggregated)
+    per_q_pass_rate = (
+        global_aggregated.groupby("question")["global_score"]
+        .mean()
+        .mean()
+    )
     rich_print(
         f"  Global assertions: {passed_count}/{total_count} passed "
         f"({passed_count/total_count*100:.1f}%)"
+    )
+    rich_print(
+        f"  Global pass rate (per-question avg): "
+        f"{per_q_pass_rate * 100:.1f}%"
     )
 
     # Get the passed assertions for step 2

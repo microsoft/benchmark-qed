@@ -20,6 +20,7 @@ from benchmark_qed.autoe.assertion.hierarchical import (
 from benchmark_qed.autoe.assertion.significance import (
     compare_assertion_scores_significance,
     compare_hierarchical_assertion_scores_significance,
+    summarize_significance_results,
 )
 from benchmark_qed.autoe.assertion.standard import get_assertion_scores
 from benchmark_qed.cli.utils import print_df
@@ -367,6 +368,9 @@ def run_hierarchical_assertion_evaluation(
     run_significance_test: bool = True,
     significance_alpha: float = 0.05,
     significance_correction: str = "holm",
+    run_clustered_permutation: bool = False,
+    n_permutations: int = 10_000,
+    permutation_seed: int | None = None,
     question_id_key: str = "question_id",
     question_text_key: str = "question_text",
     answer_text_key: str = "answer",
@@ -393,6 +397,10 @@ def run_hierarchical_assertion_evaluation(
         run_significance_test: Whether to run statistical significance tests.
         significance_alpha: Alpha level for significance tests.
         significance_correction: P-value correction method.
+        run_clustered_permutation: Whether to run assertion-level clustered
+            permutation tests as secondary analysis.
+        n_permutations: Number of permutations for clustered permutation tests.
+        permutation_seed: Random seed for reproducibility of permutation tests.
         question_id_key: Column name for question ID.
         question_text_key: Column name for question text.
         answer_text_key: Column name for answer text.
@@ -453,12 +461,7 @@ def run_hierarchical_assertion_evaluation(
         aggregated_scores_dict[generated_rag] = aggregated
 
         # Print summary stats (per-question averages, consistent with significance tests)
-        per_q_global = aggregated.groupby("question")["global_score"].mean()
         per_q_support = aggregated.groupby("question")["support_level"].mean()
-        rich_print(
-            f"  Global pass rate (per-question avg): "
-            f"{per_q_global.mean() * 100:.1f}%"
-        )
         if "support_level" in aggregated.columns:
             rich_print(
                 f"  Average support level (per-question avg): "
@@ -478,7 +481,7 @@ def run_hierarchical_assertion_evaluation(
     # (consistent with how significance tests compare RAG methods)
     comparison_rows = []
     for rag_method, df in aggregated_scores_dict.items():
-        # Compute per-question supporting pass rate
+        # Compute per-question supporting pass rate (all assertions)
         # Count all supporting assertion evaluations (no deduplication)
         # because the same supporting assertion can have different results
         # under different global assertions
@@ -494,17 +497,62 @@ def run_hierarchical_assertion_evaluation(
                 pass_rate = total_passed / total_supporting
                 per_question_supporting_rates.append(pass_rate)
 
+        # Compute conditional metrics (only for passed global assertions)
+        # These give a clearer picture of support quality by excluding
+        # structural zeros from failed assertions.
+        passed_df = df[df["global_score"] == 1]
+        per_q_supp_rates_passed = []
+        for _, group in passed_df.groupby("question"):
+            total_supp = 0
+            total_supp_passed = 0
+            for support_results in group["support_results"]:
+                if support_results:
+                    total_supp += len(support_results)
+                    total_supp_passed += sum(
+                        1 for sr in support_results if sr["passed"]
+                    )
+            if total_supp > 0:
+                per_q_supp_rates_passed.append(
+                    total_supp_passed / total_supp
+                )
+
         # All metrics: per-question average first, then mean across questions
-        comparison_rows.append({
+        row: dict[str, object] = {
             "rag_method": rag_method,
-            "global_pass_rate": df.groupby("question")["global_score"].mean().mean(),
-            "avg_support_level": df.groupby("question")["support_level"].mean().mean(),
+            "global_pass_rate": (
+                df.groupby("question")["global_score"].mean().mean()
+            ),
+            "avg_support_level": (
+                df.groupby("question")["support_level"].mean().mean()
+            ),
             "supporting_pass_rate": (
                 np.mean(per_question_supporting_rates)
                 if per_question_supporting_rates else 0.0
             ),
-            "discovery_rate": df.groupby("question")["has_discovery"].mean().mean(),
-        })
+            "discovery_rate": (
+                df.groupby("question")["has_discovery"].mean().mean()
+            ),
+        }
+
+        # Conditional metrics (passed globals only)
+        if not passed_df.empty:
+            per_q = passed_df.groupby("question")
+            row["support_level_passed"] = (
+                per_q["support_level"].mean().mean()
+            )
+            row["supporting_pass_rate_passed"] = (
+                np.mean(per_q_supp_rates_passed)
+                if per_q_supp_rates_passed else 0.0
+            )
+            row["discovery_rate_passed"] = (
+                per_q["has_discovery"].mean().mean()
+            )
+        else:
+            row["support_level_passed"] = None
+            row["supporting_pass_rate_passed"] = None
+            row["discovery_rate_passed"] = None
+
+        comparison_rows.append(row)
 
     comparison_df = pd.DataFrame(comparison_rows)
     comparison_df.to_csv(output_dir / "hierarchical_comparison_summary.csv", index=False)
@@ -518,24 +566,17 @@ def run_hierarchical_assertion_evaluation(
             alpha=significance_alpha,
             correction_method=significance_correction,
             output_dir=output_dir,
+            run_clustered_permutation=run_clustered_permutation,
+            n_permutations=n_permutations,
+            permutation_seed=permutation_seed,
         )
 
-        # Print significance summary
-        rich_print("\n[bold]===== Significance Test Summary =====[/bold]")
-        for metric, result in sig_results.items():
-            sig_marker = "✓" if result.omnibus.is_significant else "✗"
-            rich_print(
-                f"  {metric}: {result.omnibus.test_name} "
-                f"p={result.omnibus.p_value:.4f} [{sig_marker}]"
+        # Build and display significance summary table
+        sig_summary = summarize_significance_results(sig_results)
+        if not sig_summary.empty:
+            print_df(sig_summary, "Significance Test Summary")
+            sig_summary.to_csv(
+                output_dir / "significance_summary.csv", index=False
             )
-
-            # Print pairwise results if significant and available
-            if result.omnibus.is_significant and result.posthoc:
-                for comparison in result.posthoc.comparisons:
-                    pair_sig = "✓" if comparison.is_significant else "✗"
-                    rich_print(
-                        f"    {comparison.group1} vs {comparison.group2}: "
-                        f"p={comparison.p_value_corrected:.4f} [{pair_sig}]"
-                    )
 
     return comparison_df

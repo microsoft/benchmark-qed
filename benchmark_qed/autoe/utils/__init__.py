@@ -10,6 +10,7 @@ from benchmark_qed.autoe.utils.stats import (
     PostHocResult,
     check_normality,
     compare_groups,
+    run_clustered_permutation_test,
     run_omnibus_test,
     run_posthoc_pairwise,
 )
@@ -23,6 +24,7 @@ __all__ = [
     "PostHocResult",
     "check_normality",
     "compare_groups",
+    "run_clustered_permutation_test",
     "run_omnibus_test",
     "run_posthoc_pairwise",
 ]

@@ -854,6 +854,9 @@ def _run_multi_rag_hierarchical_assertion_scores(
         run_significance_test=config.run_significance_test,
         significance_alpha=config.significance_alpha,
         significance_correction=config.significance_correction,
+        run_clustered_permutation=config.run_clustered_permutation,
+        n_permutations=config.n_permutations,
+        permutation_seed=config.permutation_seed,
         question_id_key=config.question_id_key,
         question_text_key=config.question_text_key,
         answer_text_key=config.answer_text_key,
@@ -981,6 +984,9 @@ def hierarchical_assertion_significance(
         alpha=config.alpha,
         correction_method=config.correction_method,
         output_dir=config.output_dir,
+        run_clustered_permutation=config.run_clustered_permutation,
+        n_permutations=config.n_permutations,
+        permutation_seed=config.permutation_seed,
     )
 
     # Summary

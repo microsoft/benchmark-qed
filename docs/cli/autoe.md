@@ -549,6 +549,9 @@ This format evaluates multiple RAG methods against the same hierarchical asserti
 | `run_significance_test` | `bool` | `True` | Whether to run significance tests after scoring. |
 | `significance_alpha` | `float` | `0.05` | Alpha level for significance tests. |
 | `significance_correction` | `str` | `"holm"` | P-value correction method. |
+| `run_clustered_permutation` | `bool` | `False` | Whether to run assertion-level clustered permutation tests as secondary analysis. |
+| `n_permutations` | `int` | `10000` | Number of permutations for clustered permutation tests. |
+| `permutation_seed` | `int \| None` | `None` | Random seed for reproducibility of permutation tests. |
 | `trials` | `int` | `4` | Number of evaluation trials. |
 | `llm_config` | `LLMConfig` | `LLMConfig()` | LLM configuration. |
 
@@ -585,6 +588,13 @@ pass_threshold: 0.5
 run_significance_test: true
 significance_alpha: 0.05
 significance_correction: holm
+
+# Clustered permutation test (optional secondary analysis)
+# Runs assertion-level tests that account for within-question correlation
+# by permuting RAG method labels at the question level (Gail et al., 1996).
+run_clustered_permutation: false  # Set to true to enable
+n_permutations: 10000
+permutation_seed: null  # Set for reproducibility
 
 trials: 4
 
@@ -748,7 +758,7 @@ This tests four metrics:
 | Metric | Description |
 |--------|-------------|
 | `global_pass_rate` | Per-question global assertion pass rate |
-| `support_level` | Per-question average support level (per-global-assertion) |
+| `support_level` | Per-question average support level |
 | `supporting_pass_rate` | Per-question supporting assertion pass rate |
 | `discovery_rate` | Per-question discovery rate |
 
@@ -762,6 +772,9 @@ This tests four metrics:
 | `alpha` | `float` | `0.05` | Significance level for hypothesis tests. |
 | `correction_method` | `str` | `"holm"` | P-value correction method: `"holm"`, `"bonferroni"`, or `"fdr_bh"`. |
 | `output_dir` | `Path \| None` | `None` | Optional directory to save significance test results as CSV files. |
+| `run_clustered_permutation` | `bool` | `False` | Whether to run assertion-level clustered permutation tests as secondary analysis. |
+| `n_permutations` | `int` | `10000` | Number of permutations for the clustered permutation test. |
+| `permutation_seed` | `int \| None` | `None` | Random seed for reproducibility of permutation tests. |
 
 #### YAML Example
 
@@ -782,6 +795,12 @@ correction_method: holm
 
 # Optional: save detailed results to CSV
 output_dir: ./output/significance
+
+# Clustered permutation test (optional secondary analysis)
+# Runs assertion-level tests that account for within-question correlation.
+run_clustered_permutation: false  # Set to true to enable
+n_permutations: 10000
+permutation_seed: null  # Set for reproducibility
 ```
 
 #### Output Files
@@ -792,6 +811,10 @@ When `output_dir` is provided, the following files are saved:
 - `support_level_significance.csv` - Per-question support levels and test results  
 - `supporting_pass_rate_significance.csv` - Per-question supporting pass rates
 - `discovery_rate_significance.csv` - Per-question discovery rates
+- `global_pass_rate_clustered_*.csv` - Assertion-level clustered permutation results (if enabled)
+- `support_level_clustered_*.csv` - Assertion-level clustered permutation results (if enabled)
+- `supporting_pass_rate_clustered_*.csv` - Assertion-level clustered permutation results (if enabled)
+- `discovery_rate_clustered_*.csv` - Assertion-level clustered permutation results (if enabled)
 
 ---
 
@@ -805,8 +828,11 @@ The significance testing uses the following statistical tests:
 | Omnibus (unpaired) | Kruskal-Wallis test | When questions differ across methods |
 | Post-hoc (paired) | Wilcoxon signed-rank | Pairwise comparisons with paired data |
 | Post-hoc (unpaired) | Mann-Whitney U | Pairwise comparisons with unpaired data |
+| Assertion-level (clustered) | Clustered permutation test | When testing at assertion level with within-question correlation (optional secondary analysis) |
 
 P-value correction is applied to post-hoc tests to control for multiple comparisons.
+
+> 💡 **Clustered Permutation Test**: This optional secondary analysis tests significance at the assertion level while accounting for the fact that assertions within the same question are correlated (they share the same RAG answer). It permutes RAG method labels at the question (cluster) level, preserving the within-question correlation structure. This is a well-established approach from cluster-randomized trial methodology (Gail et al., 1996; Ernst, 2004). Enable with `run_clustered_permutation: true`.
 
 ---
 

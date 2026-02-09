@@ -736,3 +736,358 @@ def compare_groups(
         )
 
     return GroupComparisonResult(omnibus=omnibus, posthoc=posthoc)
+
+
+def _compute_f_statistic(
+    values: np.ndarray,
+    labels: np.ndarray,
+    group_names: list[str],
+) -> float:
+    """Compute one-way F-statistic for K groups.
+
+    Args:
+        values: Array of observation values.
+        labels: Array of group labels (same length as values).
+        group_names: Unique group names.
+
+    Returns:
+        F-statistic (between-group variance / within-group variance).
+        Returns 0.0 if within-group variance is zero.
+    """
+    grand_mean = np.mean(values)
+    ss_between = 0.0
+    ss_within = 0.0
+    for name in group_names:
+        mask = labels == name
+        group_vals = values[mask]
+        n_g = len(group_vals)
+        group_mean = np.mean(group_vals)
+        ss_between += n_g * (group_mean - grand_mean) ** 2
+        ss_within += np.sum((group_vals - group_mean) ** 2)
+
+    k = len(group_names)
+    n = len(values)
+    df_between = k - 1
+    df_within = n - k
+
+    if df_within <= 0 or ss_within == 0:
+        return 0.0
+
+    ms_between = ss_between / df_between
+    ms_within = ss_within / df_within
+    return ms_between / ms_within
+
+
+def run_clustered_permutation_test(
+    groups: Mapping[str, Sequence[float]],
+    cluster_ids: Mapping[str, Sequence[str]],
+    n_permutations: int = 10_000,
+    alpha: float = 0.05,
+    correction: str = "holm",
+    seed: int | None = None,
+) -> GroupComparisonResult:
+    """Run a clustered permutation test for comparing groups.
+
+    Compares assertion-level scores across RAG methods while accounting
+    for within-cluster (within-question) correlation by permuting group
+    labels at the cluster level. All observations within a cluster are
+    reassigned together, preserving the within-cluster correlation
+    structure.
+
+    This is the recommended approach for assertion-level significance
+    testing when assertions within the same question are correlated
+    (Gail et al., 1996; Ernst, 2004).
+
+    For K=2 groups, the test statistic is the absolute difference in
+    group means. For K>2 groups, the one-way F-statistic is used as
+    the omnibus test, with pairwise 2-group clustered permutation tests
+    as post-hoc comparisons.
+
+    Args:
+        groups: Dictionary mapping group names (RAG methods) to their
+            observation values. Each value is a sequence of floats
+            (e.g., assertion scores).
+        cluster_ids: Dictionary mapping group names to cluster
+            identifiers for each observation, parallel to groups.
+            Cluster IDs identify which question each assertion
+            belongs to.
+        n_permutations: Number of random permutations for Monte
+            Carlo approximation (default 10,000).
+        alpha: Significance level (default 0.05).
+        correction: P-value correction method for post-hoc pairwise
+            tests ("holm", "bonferroni", "fdr_bh"). Only used when
+            K > 2 groups.
+        seed: Random seed for reproducibility (default None).
+
+    Returns:
+        GroupComparisonResult with omnibus test result and optional
+        post-hoc pairwise comparisons.
+
+    Raises:
+        ValueError: If fewer than 2 groups provided, or if groups
+            and cluster_ids have mismatched lengths.
+    """
+    if len(groups) < 2:
+        msg = "Need at least 2 groups to compare"
+        raise ValueError(msg)
+
+    group_names = list(groups.keys())
+
+    # Validate parallel arrays
+    for name in group_names:
+        if len(groups[name]) != len(cluster_ids[name]):
+            msg = (
+                f"Group '{name}' has {len(groups[name])} values but "
+                f"{len(cluster_ids[name])} cluster IDs"
+            )
+            raise ValueError(msg)
+
+    # Build unified arrays: values, labels, clusters
+    all_values: list[float] = []
+    all_labels: list[str] = []
+    all_clusters: list[str] = []
+    for name in group_names:
+        all_values.extend(groups[name])
+        all_labels.extend([name] * len(groups[name]))
+        all_clusters.extend(cluster_ids[name])
+
+    values = np.array(all_values, dtype=float)
+    labels = np.array(all_labels)
+    clusters = np.array(all_clusters)
+    unique_clusters = np.unique(clusters)
+
+    rng = np.random.default_rng(seed)
+
+    if len(group_names) == 2:
+        return _clustered_permutation_two_groups(
+            values=values,
+            labels=labels,
+            clusters=clusters,
+            unique_clusters=unique_clusters,
+            group_names=group_names,
+            n_permutations=n_permutations,
+            alpha=alpha,
+            rng=rng,
+        )
+
+    return _clustered_permutation_k_groups(
+        values=values,
+        labels=labels,
+        clusters=clusters,
+        unique_clusters=unique_clusters,
+        group_names=group_names,
+        groups=groups,
+        cluster_ids=cluster_ids,
+        n_permutations=n_permutations,
+        alpha=alpha,
+        correction=correction,
+        rng=rng,
+    )
+
+
+def _clustered_permutation_two_groups(
+    values: np.ndarray,
+    labels: np.ndarray,
+    clusters: np.ndarray,
+    unique_clusters: np.ndarray,
+    group_names: list[str],
+    n_permutations: int,
+    alpha: float,
+    rng: np.random.Generator,
+) -> GroupComparisonResult:
+    """Run clustered permutation test for exactly 2 groups.
+
+    Uses absolute difference in group means as the test statistic.
+
+    Args:
+        values: All observation values.
+        labels: Group label for each observation.
+        clusters: Cluster ID for each observation.
+        unique_clusters: Array of unique cluster IDs.
+        group_names: List of exactly 2 group names.
+        n_permutations: Number of permutations.
+        alpha: Significance level.
+        rng: Random number generator.
+
+    Returns:
+        GroupComparisonResult with the pairwise comparison as both
+        omnibus and post-hoc result.
+    """
+    g1, g2 = group_names
+
+    # Observed statistic: absolute difference in means
+    obs_stat = abs(
+        np.mean(values[labels == g1]) - np.mean(values[labels == g2])
+    )
+
+    # Build cluster-to-indices mapping
+    cluster_indices: dict[str, np.ndarray] = {}
+    for c in unique_clusters:
+        cluster_indices[c] = np.where(clusters == c)[0]
+
+    # Permutation loop
+    count_extreme = 0
+    for _ in range(n_permutations):
+        perm_labels = labels.copy()
+        for c in unique_clusters:
+            idx = cluster_indices[c]
+            if rng.random() < 0.5:
+                # Swap labels for all observations in this cluster
+                perm_labels[idx] = np.where(
+                    perm_labels[idx] == g1, g2,
+                    np.where(perm_labels[idx] == g2, g1,
+                             perm_labels[idx])
+                )
+        perm_stat = abs(
+            np.mean(values[perm_labels == g1])
+            - np.mean(values[perm_labels == g2])
+        )
+        if perm_stat >= obs_stat:
+            count_extreme += 1
+
+    p_value = count_extreme / n_permutations
+
+    omnibus = OmnibusTestResult(
+        test_name="Clustered permutation test",
+        statistic=float(obs_stat),
+        p_value=float(p_value),
+        is_significant=p_value < alpha,
+        alpha=alpha,
+        is_normal=False,  # Non-parametric test
+        normality_results=[],
+    )
+
+    comparison = PairwiseComparison(
+        group1=g1,
+        group2=g2,
+        statistic=float(obs_stat),
+        p_value_raw=float(p_value),
+        p_value_corrected=float(p_value),
+        is_significant=p_value < alpha,
+    )
+
+    posthoc = PostHocResult(
+        test_name="Clustered permutation test",
+        correction_method="none (single comparison)",
+        alpha=alpha,
+        comparisons=[comparison],
+    )
+
+    return GroupComparisonResult(omnibus=omnibus, posthoc=posthoc)
+
+
+def _clustered_permutation_k_groups(
+    values: np.ndarray,
+    labels: np.ndarray,
+    clusters: np.ndarray,
+    unique_clusters: np.ndarray,
+    group_names: list[str],
+    groups: Mapping[str, Sequence[float]],
+    cluster_ids: Mapping[str, Sequence[str]],
+    n_permutations: int,
+    alpha: float,
+    correction: str,
+    rng: np.random.Generator,
+) -> GroupComparisonResult:
+    """Run clustered permutation test for K > 2 groups.
+
+    Uses the one-way F-statistic as the omnibus test statistic,
+    followed by pairwise 2-group clustered permutation tests with
+    multiple comparison correction.
+
+    Args:
+        values: All observation values.
+        labels: Group label for each observation.
+        clusters: Cluster ID for each observation.
+        unique_clusters: Array of unique cluster IDs.
+        group_names: List of K group names (K > 2).
+        groups: Original groups mapping (for pairwise tests).
+        cluster_ids: Original cluster_ids mapping (for pairwise tests).
+        n_permutations: Number of permutations.
+        alpha: Significance level.
+        correction: P-value correction method for pairwise tests.
+        rng: Random number generator.
+
+    Returns:
+        GroupComparisonResult with F-statistic omnibus and corrected
+        pairwise post-hoc comparisons.
+    """
+    # Observed F-statistic
+    obs_stat = _compute_f_statistic(values, labels, group_names)
+
+    # Build cluster-to-indices mapping
+    cluster_indices: dict[str, np.ndarray] = {}
+    for c in unique_clusters:
+        cluster_indices[c] = np.where(clusters == c)[0]
+
+    # Permutation loop: for each cluster, randomly permute which
+    # group label maps to which group's observations
+    count_extreme = 0
+    for _ in range(n_permutations):
+        perm_labels = labels.copy()
+        for c in unique_clusters:
+            idx = cluster_indices[c]
+            # Create a random permutation of group names for this
+            # cluster
+            perm_map = dict(zip(
+                group_names,
+                rng.permutation(group_names),
+                strict=True,
+            ))
+            perm_labels[idx] = np.array(
+                [perm_map[lbl] for lbl in labels[idx]]
+            )
+        perm_stat = _compute_f_statistic(
+            values, perm_labels, group_names
+        )
+        if perm_stat >= obs_stat:
+            count_extreme += 1
+
+    p_value = count_extreme / n_permutations
+
+    omnibus = OmnibusTestResult(
+        test_name="Clustered permutation test (F-statistic)",
+        statistic=float(obs_stat),
+        p_value=float(p_value),
+        is_significant=p_value < alpha,
+        alpha=alpha,
+        is_normal=False,
+        normality_results=[],
+    )
+
+    # Pairwise post-hoc tests (only if omnibus is significant)
+    posthoc = None
+    if p_value < alpha:
+        comparisons_raw: list[tuple[str, str, float, float]] = []
+        for i, name1 in enumerate(group_names):
+            for name2 in group_names[i + 1:]:
+                pair_groups = {
+                    name1: groups[name1],
+                    name2: groups[name2],
+                }
+                pair_clusters = {
+                    name1: cluster_ids[name1],
+                    name2: cluster_ids[name2],
+                }
+                pair_result = run_clustered_permutation_test(
+                    groups=pair_groups,
+                    cluster_ids=pair_clusters,
+                    n_permutations=n_permutations,
+                    alpha=alpha,
+                    seed=rng.integers(0, 2**31),
+                )
+                comparisons_raw.append((
+                    name1,
+                    name2,
+                    pair_result.omnibus.statistic,
+                    pair_result.omnibus.p_value,
+                ))
+
+        posthoc = _apply_correction_and_build_result(
+            comparisons_raw,
+            "Clustered permutation test",
+            alpha,
+            correction,
+        )
+
+    return GroupComparisonResult(omnibus=omnibus, posthoc=posthoc)
