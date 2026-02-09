@@ -634,10 +634,31 @@ output_dir/
     hierarchical_scores_aggregated.csv
   all_hierarchical_scores.csv
   hierarchical_comparison_summary.csv
-  global_pass_rate_significance.csv       # If run_significance_test=true
-  support_level_significance.csv
-  supporting_pass_rate_significance.csv
-  discovery_rate_significance.csv
+  significance_summary.csv                                  # If run_significance_test=true
+  significance_global_pass_rate_group_stats.csv              #   Per-metric detailed files
+  significance_global_pass_rate_omnibus.csv
+  significance_global_pass_rate_pairwise.csv
+  significance_support_level_group_stats.csv
+  significance_support_level_omnibus.csv
+  significance_support_level_pairwise.csv
+  significance_supporting_pass_rate_group_stats.csv
+  significance_supporting_pass_rate_omnibus.csv
+  significance_supporting_pass_rate_pairwise.csv
+  significance_discovery_rate_group_stats.csv
+  significance_discovery_rate_omnibus.csv
+  significance_discovery_rate_pairwise.csv
+  significance_global_pass_rate_clustered_group_stats.csv    # If run_clustered_permutation=true
+  significance_global_pass_rate_clustered_omnibus.csv
+  significance_global_pass_rate_clustered_pairwise.csv
+  significance_support_level_clustered_group_stats.csv
+  significance_support_level_clustered_omnibus.csv
+  significance_support_level_clustered_pairwise.csv
+  significance_supporting_pass_rate_clustered_group_stats.csv
+  significance_supporting_pass_rate_clustered_omnibus.csv
+  significance_supporting_pass_rate_clustered_pairwise.csv
+  significance_discovery_rate_clustered_group_stats.csv
+  significance_discovery_rate_clustered_omnibus.csv
+  significance_discovery_rate_clustered_pairwise.csv
   model_usage.json
 ```
 
@@ -805,16 +826,13 @@ permutation_seed: null  # Set for reproducibility
 
 #### Output Files
 
-When `output_dir` is provided, the following files are saved:
+When `output_dir` is provided, for each of the four metrics (`global_pass_rate`, `support_level`, `supporting_pass_rate`, `discovery_rate`) the following files are saved:
 
-- `global_pass_rate_significance.csv` - Per-question global pass rates and test results
-- `support_level_significance.csv` - Per-question support levels and test results  
-- `supporting_pass_rate_significance.csv` - Per-question supporting pass rates
-- `discovery_rate_significance.csv` - Per-question discovery rates
-- `global_pass_rate_clustered_*.csv` - Assertion-level clustered permutation results (if enabled)
-- `support_level_clustered_*.csv` - Assertion-level clustered permutation results (if enabled)
-- `supporting_pass_rate_clustered_*.csv` - Assertion-level clustered permutation results (if enabled)
-- `discovery_rate_clustered_*.csv` - Assertion-level clustered permutation results (if enabled)
+- `significance_{metric}_group_stats.csv` - Per-method descriptive statistics (n, mean, std, median, min, max)
+- `significance_{metric}_omnibus.csv` - Omnibus test result (test name, statistic, p-value)
+- `significance_{metric}_pairwise.csv` - Pairwise post-hoc comparisons with corrected p-values
+
+If `run_clustered_permutation` is enabled, the same three files are also produced for the assertion-level clustered permutation tests, using the key `{metric}_clustered` (e.g., `significance_global_pass_rate_clustered_omnibus.csv`).
 
 ---
 
