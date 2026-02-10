@@ -8,11 +8,14 @@ multiple RAG methods, and generating summary reports.
 from pathlib import Path
 from typing import Any, cast
 
-import numpy as np
 import pandas as pd
 from rich import print as rich_print
 
-from benchmark_qed.autoe.assertion.aggregation import aggregate_hierarchical_scores
+from benchmark_qed.autoe.assertion.aggregation import (
+    aggregate_hierarchical_scores,
+    compute_hierarchical_eval_summary,
+    summarize_standard_scores,
+)
 from benchmark_qed.autoe.assertion.hierarchical import (
     HierarchicalMode,
     get_hierarchical_assertion_scores,
@@ -244,41 +247,17 @@ def evaluate_rag_method(
             index=False,
         )
 
-        # Calculate summary statistics
-        summary_by_assertion = (
-            assertion_score.groupby(["question", "assertion"])
-            .agg(
-                score=("score", lambda x: int(x.mean() > pass_threshold)),
-                scores=("score", list),
+        # Calculate summary statistics using shared aggregation logic
+        summary_by_assertion, summary_by_question, eval_stats = (
+            summarize_standard_scores(
+                assertion_score, pass_threshold=pass_threshold
             )
-            .reset_index()
         )
 
-        summary_by_question = (
-            summary_by_assertion.groupby(["question"])
-            .agg(
-                success=("score", lambda x: (x == 1).sum()),
-                fail=("score", lambda x: (x == 0).sum()),
-            )
-            .reset_index()
-        )
-
-        # Calculate overall accuracy score
-        total_success = summary_by_question["success"].sum()
-        total_fail = summary_by_question["fail"].sum()
-        total_assertions = total_success + total_fail
-        overall_accuracy = (
-            total_success / total_assertions if total_assertions > 0 else 0.0
-        )
-
-        # Calculate per-assertion statistics
-        summary_by_assertion["score_mean"] = summary_by_assertion["scores"].apply(
-            lambda x: np.mean(x) if len(x) > 0 else 0.0
-        )
-        summary_by_assertion["score_std"] = summary_by_assertion["scores"].apply(
-            lambda x: np.std(x) if len(x) > 0 else 0.0
-        )
-        summary_by_assertion = summary_by_assertion.drop(columns=["scores"])
+        total_success = eval_stats["passed_assertions"]
+        total_fail = eval_stats["failed_assertions"]
+        total_assertions = eval_stats["total_assertions"]
+        overall_accuracy = eval_stats["overall_accuracy"]
 
         # Save detailed summary for this RAG method and question set
         summary_by_question.to_csv(
@@ -308,7 +287,9 @@ def evaluate_rag_method(
 
         rich_print(
             f"    {generated_rag} ({question_set}) - Overall accuracy: "
-            f"{overall_accuracy:.3f} ({total_success}/{total_assertions})"
+            f"{overall_accuracy:.3f} ({total_success}/{total_assertions}), "
+            f"Avg question pass rate: "
+            f"{eval_stats['avg_question_pass_rate']:.3f}"
         )
         if top_k_assertions is not None:
             rich_print(
@@ -323,6 +304,7 @@ def evaluate_rag_method(
             "successful_assertions": total_success,
             "failed_assertions": total_fail,
             "overall_accuracy": overall_accuracy,
+            "avg_question_pass_rate": eval_stats["avg_question_pass_rate"],
             "total_questions": len(summary_by_question),
             "top_k_used": top_k_assertions if top_k_assertions is not None else "all",
         }
@@ -590,77 +572,25 @@ def run_hierarchical_assertion_evaluation(
     # (consistent with how significance tests compare RAG methods)
     comparison_rows = []
     for rag_method, df in aggregated_scores_dict.items():
-        # Compute per-question supporting pass rate (all assertions)
-        # Count all supporting assertion evaluations (no deduplication)
-        # because the same supporting assertion can have different results
-        # under different global assertions
-        per_question_supporting_rates = []
-        for _, group in df.groupby("question"):
-            total_supporting = 0
-            total_passed = 0
-            for support_results in group["support_results"]:
-                if support_results:
-                    total_supporting += len(support_results)
-                    total_passed += sum(1 for sr in support_results if sr["passed"])
-            if total_supporting > 0:
-                pass_rate = total_passed / total_supporting
-                per_question_supporting_rates.append(pass_rate)
-
-        # Compute conditional metrics (only for passed global assertions)
-        # These give a clearer picture of support quality by excluding
-        # structural zeros from failed assertions.
-        passed_df = df[df["global_score"] == 1]
-        per_q_supp_rates_passed = []
-        for _, group in passed_df.groupby("question"):
-            total_supp = 0
-            total_supp_passed = 0
-            for support_results in group["support_results"]:
-                if support_results:
-                    total_supp += len(support_results)
-                    total_supp_passed += sum(
-                        1 for sr in support_results if sr["passed"]
-                    )
-            if total_supp > 0:
-                per_q_supp_rates_passed.append(
-                    total_supp_passed / total_supp
-                )
-
-        # All metrics: per-question average first, then mean across questions
+        eval_stats = compute_hierarchical_eval_summary(df)
         row: dict[str, object] = {
             "rag_method": rag_method,
-            "global_pass_rate": (
-                df.groupby("question")["global_score"].mean().mean()
-            ),
-            "avg_support_level": (
-                df.groupby("question")["support_level"].mean().mean()
-            ),
-            "supporting_pass_rate": (
-                np.mean(per_question_supporting_rates)
-                if per_question_supporting_rates else 0.0
-            ),
-            "discovery_rate": (
-                df.groupby("question")["has_discovery"].mean().mean()
-            ),
+            "global_pass_rate": eval_stats["avg_global_pass_rate"],
+            "avg_support_level": eval_stats["avg_support_level"],
+            "supporting_pass_rate": eval_stats[
+                "supporting_pass_rate"
+            ],
+            "discovery_rate": eval_stats["discovery_rate"],
+            "support_level_passed": eval_stats[
+                "support_level_passed"
+            ],
+            "supporting_pass_rate_passed": eval_stats[
+                "supporting_pass_rate_passed"
+            ],
+            "discovery_rate_passed": eval_stats[
+                "discovery_rate_passed"
+            ],
         }
-
-        # Conditional metrics (passed globals only)
-        if not passed_df.empty:
-            per_q = passed_df.groupby("question")
-            row["support_level_passed"] = (
-                per_q["support_level"].mean().mean()
-            )
-            row["supporting_pass_rate_passed"] = (
-                np.mean(per_q_supp_rates_passed)
-                if per_q_supp_rates_passed else 0.0
-            )
-            row["discovery_rate_passed"] = (
-                per_q["has_discovery"].mean().mean()
-            )
-        else:
-            row["support_level_passed"] = None
-            row["supporting_pass_rate_passed"] = None
-            row["discovery_rate_passed"] = None
-
         comparison_rows.append(row)
 
     comparison_df = pd.DataFrame(comparison_rows)

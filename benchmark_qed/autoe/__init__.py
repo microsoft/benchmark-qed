@@ -13,10 +13,12 @@ from benchmark_qed.autoe.assertion import (
     HierarchicalMode,
     aggregate_hierarchical_scores,
     compare_hierarchical_assertion_scores_significance,
+    compute_hierarchical_eval_summary,
     evaluate_assertion,
     get_assertion_scores,
     get_hierarchical_assertion_scores,
     summarize_hierarchical_by_question,
+    summarize_standard_scores,
 )
 
 # Pairwise scoring
@@ -67,44 +69,46 @@ from benchmark_qed.autoe.visualization import (
 )
 
 __all__ = [
-    # Assertion scoring
-    "HierarchicalMode",
-    "aggregate_hierarchical_scores",
-    "compare_hierarchical_assertion_scores_significance",
-    "evaluate_assertion",
-    "get_assertion_scores",
-    "get_hierarchical_assertion_scores",
-    "summarize_hierarchical_by_question",
     # Pairwise scoring
     "SCORE_MAPPING",
+    # Retrieval scoring
+    "FidelityMetric",
+    # Utilities
+    "GroupComparisonResult",
+    # Assertion scoring
+    "HierarchicalMode",
+    "NormalityResult",
+    "OmnibusTestResult",
+    "PairwiseComparison",
+    "PostHocResult",
+    "aggregate_hierarchical_scores",
     "analyze_criteria",
+    "calculate_retrieval_metrics",
+    "check_normality",
+    "compare_groups",
+    "compare_hierarchical_assertion_scores_significance",
+    "compute_hierarchical_eval_summary",
+    "evaluate_assertion",
+    "get_assertion_scores",
+    # Visualization
+    "get_available_question_sets",
+    "get_available_rag_methods",
+    "get_hierarchical_assertion_scores",
     "get_pairwise_score",
     "get_pairwise_scores",
     # Reference scoring
     "get_reference_score",
     "get_reference_scores",
-    "summarize_reference_scores",
-    # Retrieval scoring
-    "FidelityMetric",
-    "calculate_retrieval_metrics",
     "load_clusters_from_json",
     "load_reference_results",
     "load_retrieval_results",
-    "run_retrieval_evaluation",
-    # Utilities
-    "GroupComparisonResult",
-    "NormalityResult",
-    "OmnibusTestResult",
-    "PairwiseComparison",
-    "PostHocResult",
-    "check_normality",
-    "compare_groups",
-    "run_omnibus_test",
-    "run_posthoc_pairwise",
-    # Visualization
-    "get_available_question_sets",
-    "get_available_rag_methods",
     "plot_assertion_accuracy_by_rag_method",
     "plot_assertion_score_distribution",
     "prepare_assertion_summary_data",
+    "run_omnibus_test",
+    "run_posthoc_pairwise",
+    "run_retrieval_evaluation",
+    "summarize_hierarchical_by_question",
+    "summarize_reference_scores",
+    "summarize_standard_scores",
 ]

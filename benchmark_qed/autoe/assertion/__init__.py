@@ -11,7 +11,9 @@ This module provides functions for:
 
 from benchmark_qed.autoe.assertion.aggregation import (
     aggregate_hierarchical_scores,
+    compute_hierarchical_eval_summary,
     summarize_hierarchical_by_question,
+    summarize_standard_scores,
 )
 from benchmark_qed.autoe.assertion.hierarchical import (
     HierarchicalMode,
@@ -44,6 +46,7 @@ __all__ = [
     # Significance testing
     "compare_assertion_scores_significance",
     "compare_hierarchical_assertion_scores_significance",
+    "compute_hierarchical_eval_summary",
     # Standard scoring
     "evaluate_assertion",
     "evaluate_hierarchical_assertion",
@@ -58,4 +61,5 @@ __all__ = [
     "run_hierarchical_assertion_evaluation",
     "summarize_hierarchical_by_question",
     "summarize_significance_results",
+    "summarize_standard_scores",
 ]

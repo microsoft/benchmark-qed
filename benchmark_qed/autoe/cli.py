@@ -16,10 +16,12 @@ from tqdm import tqdm
 from benchmark_qed.autoe.assertion import (
     HierarchicalMode,
     aggregate_hierarchical_scores,
+    compute_hierarchical_eval_summary,
     get_assertion_scores,
     get_hierarchical_assertion_scores,
     run_assertion_evaluation,
     summarize_hierarchical_by_question,
+    summarize_standard_scores,
 )
 from benchmark_qed.autoe.config import (
     AssertionConfig,
@@ -415,28 +417,18 @@ def _run_single_rag_assertion_scores(
 
     assertion_score.to_csv(output / "assertion_scores.csv", index=False)
 
-    summary_by_assertion = (
-        assertion_score.groupby(["question", "assertion"])
-        .agg(score=("score", lambda x: int(x.mean() > 0.5)), scores=("score", list))
-        .reset_index()
+    # Compute summaries using shared aggregation logic
+    summary_by_assertion, summary_by_question, eval_summary = (
+        summarize_standard_scores(assertion_score)
     )
 
-    summary_by_question = (
-        summary_by_assertion.groupby(["question"])
-        .agg(
-            success=("score", lambda x: (x == 1).sum()),
-            fail=("score", lambda x: (x == 0).sum()),
-        )
-        .reset_index()
+    # Save summary CSVs for consistency with multi-RAG pipeline
+    summary_by_question.to_csv(
+        output / "assertion_summary_by_question.csv", index=False
     )
-
-    summary_by_assertion["score_mean"] = summary_by_assertion["scores"].apply(
-        lambda x: np.mean(x) if len(x) > 0 else 0.0
+    summary_by_assertion.to_csv(
+        output / "assertion_summary_by_assertion.csv", index=False
     )
-    summary_by_assertion["score_std"] = summary_by_assertion["scores"].apply(
-        lambda x: np.std(x) if len(x) > 0 else 0.0
-    )
-    summary_by_assertion = summary_by_assertion.drop(columns=["scores"])
 
     print_df(
         summary_by_question,
@@ -444,9 +436,9 @@ def _run_single_rag_assertion_scores(
     )
 
     failed_assertions: pd.DataFrame = cast(
-        pd.DataFrame, summary_by_assertion[summary_by_assertion["score"] == 0]
+        pd.DataFrame,
+        summary_by_assertion[summary_by_assertion["score"] == 0],
     )
-
     failed_assertions = failed_assertions.drop(columns=["score"])
 
     if len(failed_assertions) > 0:
@@ -459,6 +451,12 @@ def _run_single_rag_assertion_scores(
         )
     else:
         rich_print("[bold green]All assertions passed.[/bold green]")
+
+    # Save machine-readable evaluation summary
+    eval_summary_file = output / "eval_summary.json"
+    eval_summary_file.write_text(
+        json.dumps(eval_summary, indent=2), encoding="utf-8"
+    )
 
     if print_model_usage:
         rich_print("Model usage statistics:")
@@ -701,30 +699,29 @@ def _run_single_rag_hierarchical_assertion_scores(
     # Print summary
     print_df(summary_by_question, "Hierarchical Assertion Summary by Question")
 
-    # Report statistics
-    total_assertions = len(aggregated)
-    passed_assertions = (aggregated["global_score"] == 1).sum()
-    avg_support_coverage = aggregated["support_coverage"].mean()
-    discovery_count = aggregated["has_discovery"].sum()
+    # Compute comprehensive evaluation metrics using shared logic
+    eval_summary = compute_hierarchical_eval_summary(aggregated)
 
-    # Count overridden assertions (pass forced to fail due to no support/discovery)
-    overridden_count = (
-        aggregated["global_score_overridden"].sum()
-        if "global_score_overridden" in aggregated.columns
-        else 0
-    )
-
+    # Print summary statistics
     rich_print("\n[bold]Overall Statistics:[/bold]")
     rich_print(
-        f"  Global assertions passed: {passed_assertions}/{total_assertions} "
-        f"({passed_assertions/total_assertions*100:.1f}%)"
+        f"  Global assertions passed: "
+        f"{eval_summary['passed_assertions']}/"
+        f"{eval_summary['total_assertions']} "
+        f"({eval_summary['global_pass_rate']*100:.1f}%)"  # type: ignore[operator]
     )
-    rich_print(f"  Average support coverage: {avg_support_coverage*100:.1f}%")
-    rich_print(f"  Assertions with discovery: {discovery_count}")
-    if overridden_count > 0:
+    rich_print(
+        f"  Average support level: "
+        f"{eval_summary['avg_support_level']*100:.1f}%"  # type: ignore[operator]
+    )
+    rich_print(
+        f"  Assertions with discovery: "
+        f"{eval_summary['discovery_count']}"
+    )
+    if eval_summary["overridden_count"]:
         rich_print(
             f"  [yellow]Overridden to fail (no support/discovery): "
-            f"{overridden_count}[/yellow]"
+            f"{eval_summary['overridden_count']}[/yellow]"
         )
 
     # Report failed assertions
@@ -735,6 +732,12 @@ def _run_single_rag_hierarchical_assertion_scores(
         )
     else:
         rich_print("\n[bold green]All global assertions passed.[/bold green]")
+
+    # Save machine-readable evaluation summary
+    eval_summary_file = output / "eval_summary.json"
+    eval_summary_file.write_text(
+        json.dumps(eval_summary, indent=2), encoding="utf-8"
+    )
 
     if print_model_usage:
         rich_print("\nModel usage statistics:")
