@@ -67,6 +67,115 @@ def load_and_normalize_assertions(
     return assertions.rename(columns={"statement": "assertion"})
 
 
+def load_and_normalize_hierarchical_assertions(
+    assertions_path: str | Path,
+    *,
+    assertions_key: str = "assertions",
+    supporting_assertions_key: str = "supporting_assertions",
+) -> pd.DataFrame:
+    """Load hierarchical assertions from JSON and normalize for evaluation.
+
+    Loads assertions with supporting sub-assertions, explodes the nested
+    structure, normalizes dict columns, renames 'statement' to 'assertion'
+    for consistency, and filters to only include assertions that have
+    non-empty supporting assertions.
+
+    Parameters
+    ----------
+    assertions_path : str | Path
+        Path to the JSON file containing assertions.
+    assertions_key : str
+        Column name containing the assertions list
+        (default: "assertions").
+    supporting_assertions_key : str
+        Column name containing supporting assertions within each
+        assertion (default: "supporting_assertions").
+
+    Returns
+    -------
+    pd.DataFrame
+        DataFrame with normalized hierarchical assertions, each row
+        containing a single assertion with its supporting assertions.
+
+    Raises
+    ------
+    ValueError
+        If the assertions file is missing required columns or contains
+        no valid hierarchical assertions.
+    """
+    assertions_raw = pd.read_json(assertions_path, encoding="utf-8")
+
+    # Validate the assertions key exists
+    if assertions_key not in assertions_raw.columns:
+        msg = f"Assertions file missing required '{assertions_key}' column."
+        raise ValueError(msg)
+
+    # Filter out rows with missing or empty assertions
+    if assertions_raw[assertions_key].isna().any():
+        rich_print(
+            "[bold yellow]Some questions do not have assertions. "
+            "These will be skipped.[/bold yellow]"
+        )
+        assertions_raw = assertions_raw[
+            ~assertions_raw[assertions_key].isna()
+        ]
+
+    # Explode the assertions list into individual rows
+    assertions = assertions_raw.explode(assertions_key).reset_index(
+        drop=True
+    )
+
+    # Normalize nested assertion dicts into separate columns
+    if assertions[assertions_key].apply(
+        lambda x: isinstance(x, dict)
+    ).any():
+        assertion_details = pd.json_normalize(
+            assertions[assertions_key].tolist()
+        )
+        assertions = pd.concat(
+            [
+                assertions.drop(columns=[assertions_key]),
+                assertion_details,
+            ],
+            axis=1,
+        )
+        # Rename 'statement' to 'assertion' for consistency
+        if "statement" in assertions.columns:
+            assertions = assertions.rename(
+                columns={"statement": "assertion"}
+            )
+    else:
+        assertions = assertions.rename(
+            columns={assertions_key: "assertion"}
+        )
+
+    # Validate supporting assertions column exists
+    if supporting_assertions_key not in assertions.columns:
+        msg = (
+            f"Assertions missing '{supporting_assertions_key}' column. "
+            "Use load_and_normalize_assertions for standard assertions."
+        )
+        raise ValueError(msg)
+
+    # Filter to only include assertions with non-empty supporting assertions
+    has_supporting = assertions[supporting_assertions_key].apply(
+        lambda x: isinstance(x, list) and len(x) > 0
+    )
+    if not has_supporting.all():
+        n_missing = (~has_supporting).sum()
+        rich_print(
+            f"[bold yellow]{n_missing} assertions without supporting "
+            f"assertions will be skipped.[/bold yellow]"
+        )
+    assertions = assertions[has_supporting].reset_index(drop=True)
+
+    if len(assertions) == 0:
+        msg = "No valid hierarchical assertions found after filtering."
+        raise ValueError(msg)
+
+    return assertions
+
+
 def evaluate_rag_method(
     llm_client: ChatModel,
     llm_config: LLMConfig,

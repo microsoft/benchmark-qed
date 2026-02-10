@@ -649,56 +649,19 @@ def _run_single_rag_hierarchical_assertion_scores(
     supporting_assertions_key: str,
 ) -> None:
     """Run hierarchical assertion scoring for a single RAG method."""
+    from benchmark_qed.autoe.assertion import (
+        load_and_normalize_hierarchical_assertions,
+    )
+
     config = load_config(config_path, HierarchicalAssertionConfig)
     output.mkdir(parents=True, exist_ok=True)
 
     llm_client = ModelFactory.create_chat_model(config.llm_config)
-    assertions_raw = pd.read_json(
-        config.assertions.assertions_path, encoding="utf-8"
+    assertions = load_and_normalize_hierarchical_assertions(
+        config.assertions.assertions_path,
+        assertions_key=assertions_key,
+        supporting_assertions_key=supporting_assertions_key,
     )
-
-    # Validate assertions have the required fields
-    if assertions_key not in assertions_raw.columns:
-        msg = f"Assertions file missing '{assertions_key}' column."
-        raise ValueError(msg)
-
-    # Filter out rows with missing or empty assertions
-    if assertions_raw.loc[:, assertions_key].isna().any():
-        msg = "Some questions do not have assertions. These will be skipped."
-        rich_print(f"[bold yellow]{msg}[/bold yellow]")
-    assertions_raw = assertions_raw[~assertions_raw.loc[:, assertions_key].isna()]
-
-    # Explode assertions and extract supporting_assertions
-    assertions = assertions_raw.explode(assertions_key).reset_index(drop=True)
-
-    # Normalize nested assertion dicts if needed
-    if assertions[assertions_key].apply(lambda x: isinstance(x, dict)).any():
-        assertion_details = pd.json_normalize(assertions[assertions_key].tolist())
-        assertions = pd.concat(
-            [assertions.drop(columns=[assertions_key]), assertion_details], axis=1
-        )
-    else:
-        assertions = assertions.rename(columns={assertions_key: "assertion"})
-
-    # Validate supporting_assertions column exists
-    if supporting_assertions_key not in assertions.columns:
-        msg = (
-            f"Assertions missing '{supporting_assertions_key}' column. "
-            "Use regular assertion_scores command for non-hierarchical assertions."
-        )
-        raise ValueError(msg)
-
-    # Filter out assertions without supporting assertions
-    has_supporting = assertions[supporting_assertions_key].apply(
-        lambda x: isinstance(x, list) and len(x) > 0
-    )
-    if not has_supporting.all():
-        n_missing = (~has_supporting).sum()
-        rich_print(
-            f"[bold yellow]{n_missing} assertions without supporting assertions "
-            f"will be skipped.[/bold yellow]"
-        )
-        assertions = assertions[has_supporting].reset_index(drop=True)
 
     rich_print(f"Evaluating {len(assertions)} hierarchical assertions...")
 
@@ -808,35 +771,19 @@ def _run_multi_rag_hierarchical_assertion_scores(
         )
 
     # Load and prepare assertions
+    from benchmark_qed.autoe.assertion import (
+        load_and_normalize_hierarchical_assertions,
+    )
+
     assertions_path = (
         config.input_dir / config.assertions_file
         if not Path(config.assertions_file).is_absolute()
         else Path(config.assertions_file)
     )
-    assertions_raw = pd.read_json(assertions_path, encoding="utf-8")
-
-    # Explode and normalize assertions
-    assertions = assertions_raw.explode("assertions").reset_index(drop=True)
-    if assertions["assertions"].apply(lambda x: isinstance(x, dict)).any():
-        assertion_details = pd.json_normalize(assertions["assertions"].tolist())
-        assertions = pd.concat(
-            [assertions.drop(columns=["assertions"]), assertion_details], axis=1
-        )
-        if "statement" in assertions.columns:
-            assertions = assertions.rename(columns={"statement": "assertion"})
-
-    # Filter to only include assertions with supporting assertions
-    has_supporting = assertions[config.supporting_assertions_key].apply(
-        lambda x: isinstance(x, list) and len(x) > 0
+    assertions = load_and_normalize_hierarchical_assertions(
+        assertions_path,
+        supporting_assertions_key=config.supporting_assertions_key,
     )
-    if not has_supporting.all():
-        n_missing = (~has_supporting).sum()
-        rich_print(
-            f"[bold yellow]{n_missing} assertions without supporting assertions "
-            f"will be skipped.[/bold yellow]"
-        )
-        assertions = assertions[has_supporting].reset_index(drop=True)
-
     rich_print(f"Loaded {len(assertions)} hierarchical assertions")
 
     # Run the evaluation pipeline

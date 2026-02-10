@@ -22,6 +22,7 @@ from benchmark_qed.autoe.assertion.hierarchical import (
 from benchmark_qed.autoe.assertion.pipeline import (
     evaluate_rag_method,
     load_and_normalize_assertions,
+    load_and_normalize_hierarchical_assertions,
     run_assertion_evaluation,
     run_hierarchical_assertion_evaluation,
 )
@@ -52,6 +53,7 @@ __all__ = [
     "get_assertion_scores",
     "get_hierarchical_assertion_scores",
     "load_and_normalize_assertions",
+    "load_and_normalize_hierarchical_assertions",
     "run_assertion_evaluation",
     "run_hierarchical_assertion_evaluation",
     "summarize_hierarchical_by_question",
