@@ -7,19 +7,22 @@ ${question}
 ${answer}
 ---End of Answer---
 
----Assertion (already satisfied)---
+---Main Assertion (parent, already satisfied)---
 ${assertion}
 
----Supporting Assertions---
-The following assertions are local/supporting claims derived from source documents:
+---Reasoning for Why the Main Assertion Is Satisfied---
+${global_reasoning}
+
+---Supporting Assertions (children of the main assertion)---
+The following are children of the main assertion above. Each is a more specific assertion that captures a piece of evidence contributing to the parent. Together they form the grounded evidence base for the parent:
 ${supporting_assertions}
 
 ---Instructions---
-The main assertion above has already been determined to be SATISFIED by the answer. Your task is to analyze HOW the answer satisfies it:
+The main (parent) assertion has already been determined to be SATISFIED by the answer (see the reasoning above for context). Your task is to analyze HOW the answer satisfies it by checking which children are present and whether any additional information was used:
 
-1. **Supporting Assertions**: For each supporting assertion (SA1, SA2, etc.), determine if the answer contains evidence that satisfies it. Provide brief reasoning for each.
+1. **Supporting Assertions (Children)**: For each supporting assertion (SA1, SA2, etc.), determine if the answer contains evidence that satisfies it. Each child captures a specific piece of the evidence base that underpins the parent. Provide brief reasoning for each.
 
-2. **Discovery Detection**: Identify if the answer contains factual information that (a) is NOT covered by any supporting assertion, AND (b) helps satisfy the main assertion. This indicates the answer uses information beyond the grounded source material.
+2. **Discovery Detection**: Identify if the answer contains factual information that (a) is NOT covered by any of the children above, AND (b) helps satisfy the parent assertion. This indicates the answer draws on information beyond the grounded source material from which the children were derived.
 
 **Important Notes:**
 - Semantic equivalence counts - if the answer conveys the same meaning using different words, it satisfies the assertion

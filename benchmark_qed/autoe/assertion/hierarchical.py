@@ -55,6 +55,52 @@ class HierarchicalMode(Enum):
     STAGED = "staged"
 
 
+def _format_supporting_assertion(
+    sa: str | dict[str, Any],
+) -> str:
+    """Extract statement text from a supporting assertion.
+
+    Supporting assertions may be stored as plain strings or as
+    dictionaries with a ``statement`` key.  This helper normalises
+    both representations to a string suitable for prompt formatting.
+
+    Args:
+        sa: A supporting assertion, either as a string or a dict
+            containing a ``statement`` key.
+
+    Returns:
+        The statement text as a string.
+    """
+    if isinstance(sa, dict):
+        return str(sa.get("statement", sa))
+    return str(sa)
+
+
+def _select_best_global_reasoning(row: pd.Series) -> str:
+    """Pick the longest reasoning from passing trials.
+
+    When multiple trials are run, only the trials that passed
+    (score == 1) are considered.  Among those, the longest
+    reasoning string is selected so that the step-2 prompt
+    receives the most informative context.
+
+    Args:
+        row: A DataFrame row with ``reasoning_list`` (list of str)
+            and ``trial_scores`` (list of int).
+
+    Returns:
+        The selected reasoning string, or an empty string if no
+        reasoning is available.
+    """
+    reasonings: list[str] = row["reasoning_list"]
+    scores: list[int] = row["trial_scores"]
+    passing = [r for r, s in zip(reasonings, scores, strict=True) if s == 1]
+    if not passing:
+        # Fallback: return the first reasoning if available
+        return reasonings[0] if reasonings else ""
+    return max(passing, key=len)
+
+
 def get_hierarchical_assertion_scores(
     *,
     llm_client: ChatModel,
@@ -346,23 +392,31 @@ def _get_hierarchical_scores_staged(
     passed_count = global_aggregated["global_passed"].sum()
     total_count = len(global_aggregated)
     per_q_pass_rate = (
-        global_aggregated.groupby("question")["global_score"]
-        .mean()
-        .mean()
+        global_aggregated.groupby("question")["global_score"].mean().mean()
     )
     rich_print(
         f"  Global assertions: {passed_count}/{total_count} passed "
-        f"({passed_count/total_count*100:.1f}%)"
+        f"({passed_count / total_count * 100:.1f}%)"
     )
-    rich_print(
-        f"  Global pass rate (per-question avg): "
-        f"{per_q_pass_rate * 100:.1f}%"
-    )
+    rich_print(f"  Global pass rate (per-question avg): {per_q_pass_rate * 100:.1f}%")
 
     # Get the passed assertions for step 2
     passed_assertions = global_aggregated[global_aggregated["global_passed"]][
-        ["question_id", "question", "assertion"]
+        [
+            "question_id",
+            "question",
+            "assertion",
+            "reasoning_list",
+            "trial_scores",
+        ]
     ].copy()
+
+    # Select the best global reasoning for each passed assertion:
+    # pick the longest reasoning from passing trials only, so the
+    # step-2 prompt gets the most informative context.
+    passed_assertions["global_reasoning"] = passed_assertions.apply(
+        _select_best_global_reasoning, axis=1
+    )
 
     if len(passed_assertions) == 0:
         rich_print("[yellow]No assertions passed. Skipping step 2.[/yellow]")
@@ -377,21 +431,23 @@ def _get_hierarchical_scores_staged(
             for trial_idx, (_score, reasoning) in enumerate(
                 zip(row["trial_scores"], row["reasoning_list"], strict=True)
             ):
-                results.append({
-                    "question": row["question"],
-                    "assertion": row["assertion"],
-                    "global_passed": False,
-                    "global_score": 0,
-                    "reasoning": reasoning,
-                    "supporting_passed": [False] * n_supporting,
-                    "supporting_scores": [0] * n_supporting,
-                    "supporting_results": [],
-                    "support_count": 0,
-                    "support_total": n_supporting,
-                    "has_discovery": False,
-                    "discovery_reasoning": "",
-                    "trial": trial_idx,
-                })
+                results.append(
+                    {
+                        "question": row["question"],
+                        "assertion": row["assertion"],
+                        "global_passed": False,
+                        "global_score": 0,
+                        "reasoning": reasoning,
+                        "supporting_passed": [False] * n_supporting,
+                        "supporting_scores": [0] * n_supporting,
+                        "supporting_results": [],
+                        "support_count": 0,
+                        "support_total": n_supporting,
+                        "has_discovery": False,
+                        "discovery_reasoning": "",
+                        "trial": trial_idx,
+                    }
+                )
         return pd.DataFrame(results)
 
     rich_print(
@@ -440,9 +496,7 @@ def _get_hierarchical_scores_staged(
         def on_complete_callback(progress_task: TaskID) -> None:
             progress.update(progress_task, advance=1, refresh=True)
 
-        progress_task = progress.add_task(
-            "Evaluating supporting...", total=total_evals
-        )
+        progress_task = progress.add_task("Evaluating supporting...", total=total_evals)
 
         tasks = [
             evaluate_supporting_discovery(
@@ -453,6 +507,7 @@ def _get_hierarchical_scores_staged(
                 supporting_assertions=row["supporting_assertions"],
                 question_id=row["question_id"],
                 trial=trial_idx,
+                global_reasoning=row["global_reasoning"],
                 complete_callback=functools.partial(
                     on_complete_callback, progress_task
                 ),
@@ -464,15 +519,12 @@ def _get_hierarchical_scores_staged(
         ]
 
         loop = asyncio.get_event_loop()
-        supporting_results = loop.run_until_complete(
-            asyncio.gather(*tasks)
-        )
+        supporting_results = loop.run_until_complete(asyncio.gather(*tasks))
 
     # Build lookup for supporting results keyed by
     # (question_id, assertion, trial) for trial-indexed retrieval
     supporting_lookup: dict[tuple[str, str, int], dict] = {
-        (r["question_id"], r["assertion"], r["trial"]): r
-        for r in supporting_results
+        (r["question_id"], r["assertion"], r["trial"]): r for r in supporting_results
     }
 
     # Combine all results
@@ -486,9 +538,7 @@ def _get_hierarchical_scores_staged(
         # Get supporting assertions count
         matching_assertion = assertions[assertions["assertion"] == assertion_text]
         if len(matching_assertion) > 0:
-            n_supporting = len(
-                matching_assertion[supporting_assertions_key].iloc[0]
-            )
+            n_supporting = len(matching_assertion[supporting_assertions_key].iloc[0])
             supporting_assertions_list = matching_assertion[
                 supporting_assertions_key
             ].iloc[0]
@@ -504,47 +554,51 @@ def _get_hierarchical_scores_staged(
             supp_key = (question_id, assertion_text, trial_idx)
             if global_passed and supp_key in supporting_lookup:
                 supp_result = supporting_lookup[supp_key]
-                results.append({
-                    "question": question,
-                    "assertion": assertion_text,
-                    "global_passed": True,
-                    "global_score": 1,
-                    "reasoning": reasoning,
-                    "supporting_passed": supp_result["supporting_passed"],
-                    "supporting_scores": supp_result["supporting_scores"],
-                    "supporting_results": supp_result["supporting_results"],
-                    "support_count": sum(supp_result["supporting_scores"]),
-                    "support_total": n_supporting,
-                    "has_discovery": supp_result["has_discovery"],
-                    "discovery_reasoning": supp_result["discovery_reasoning"],
-                    "supporting_assertions": supporting_assertions_list,
-                    "trial": trial_idx,
-                })
+                results.append(
+                    {
+                        "question": question,
+                        "assertion": assertion_text,
+                        "global_passed": True,
+                        "global_score": 1,
+                        "reasoning": reasoning,
+                        "supporting_passed": supp_result["supporting_passed"],
+                        "supporting_scores": supp_result["supporting_scores"],
+                        "supporting_results": supp_result["supporting_results"],
+                        "support_count": sum(supp_result["supporting_scores"]),
+                        "support_total": n_supporting,
+                        "has_discovery": supp_result["has_discovery"],
+                        "discovery_reasoning": supp_result["discovery_reasoning"],
+                        "supporting_assertions": supporting_assertions_list,
+                        "trial": trial_idx,
+                    }
+                )
             else:
                 # Failed assertion - no supporting data
-                results.append({
-                    "question": question,
-                    "assertion": assertion_text,
-                    "global_passed": False,
-                    "global_score": 0,
-                    "reasoning": reasoning,
-                    "supporting_passed": [False] * n_supporting,
-                    "supporting_scores": [0] * n_supporting,
-                    "supporting_results": [
-                        {
-                            "id": f"SA{i+1}",
-                            "passed": False,
-                            "reasoning": "Global assertion failed",
-                        }
-                        for i in range(n_supporting)
-                    ],
-                    "support_count": 0,
-                    "support_total": n_supporting,
-                    "has_discovery": False,
-                    "discovery_reasoning": "",
-                    "supporting_assertions": supporting_assertions_list,
-                    "trial": trial_idx,
-                })
+                results.append(
+                    {
+                        "question": question,
+                        "assertion": assertion_text,
+                        "global_passed": False,
+                        "global_score": 0,
+                        "reasoning": reasoning,
+                        "supporting_passed": [False] * n_supporting,
+                        "supporting_scores": [0] * n_supporting,
+                        "supporting_results": [
+                            {
+                                "id": f"SA{i + 1}",
+                                "passed": False,
+                                "reasoning": "Global assertion failed",
+                            }
+                            for i in range(n_supporting)
+                        ],
+                        "support_count": 0,
+                        "support_total": n_supporting,
+                        "has_discovery": False,
+                        "discovery_reasoning": "",
+                        "supporting_assertions": supporting_assertions_list,
+                        "trial": trial_idx,
+                    }
+                )
 
     return pd.DataFrame(results)
 
@@ -554,7 +608,7 @@ async def evaluate_hierarchical_assertion(
     assertion: str,
     question: str,
     answer: str,
-    supporting_assertions: list[str],
+    supporting_assertions: list[str | dict[str, Any]],
     trial: int = 0,
     *,
     assessment_system_prompt: Template | None = None,
@@ -575,7 +629,8 @@ async def evaluate_hierarchical_assertion(
         question: The question being answered.
         answer: The answer to evaluate.
         supporting_assertions: List of supporting/local assertions that underpin
-            the global assertion.
+            the global assertion. Each item may be a string or a dict with a
+            ``statement`` key.
         trial: Trial number for this evaluation (for repeated trials).
         assessment_system_prompt: Optional custom system prompt template.
         assessment_user_prompt: Optional custom user prompt template.
@@ -608,7 +663,8 @@ async def evaluate_hierarchical_assertion(
 
     # Format supporting assertions with IDs (SA1, SA2, etc.) for the prompt
     supporting_assertions_formatted = "\n".join(
-        f"SA{i + 1}: {sa}" for i, sa in enumerate(supporting_assertions)
+        f"SA{i + 1}: {_format_supporting_assertion(sa)}"
+        for i, sa in enumerate(supporting_assertions)
     )
     # Create ID mapping for validation
     expected_ids = [f"SA{i + 1}" for i in range(len(supporting_assertions))]
@@ -689,9 +745,10 @@ async def evaluate_supporting_discovery(
     assertion: str,
     question: str,
     answer: str,
-    supporting_assertions: list[str],
+    supporting_assertions: list[str | dict[str, Any]],
     question_id: str | None = None,
     trial: int = 0,
+    global_reasoning: str = "",
     *,
     assessment_system_prompt: Template | None = None,
     assessment_user_prompt: Template | None = None,
@@ -710,9 +767,14 @@ async def evaluate_supporting_discovery(
         assertion: The global assertion (already determined to be satisfied).
         question: The question being answered.
         answer: The answer to evaluate.
-        supporting_assertions: List of supporting/local assertions.
+        supporting_assertions: List of supporting/local assertions. Each
+            item may be a string or a dict with a ``statement`` key.
         question_id: Optional question ID for tracking in results.
         trial: Trial number for this evaluation (for repeated trials).
+        global_reasoning: Reasoning from the step-1 global evaluation that
+            explains why the main assertion was determined to be satisfied.
+            Included in the prompt so the LLM has context for evaluating
+            supporting assertions and discovery.
         assessment_system_prompt: Optional custom system prompt template.
         assessment_user_prompt: Optional custom user prompt template.
         include_score_id_in_prompt: Whether to include a unique score ID in
@@ -744,7 +806,8 @@ async def evaluate_supporting_discovery(
 
     # Format supporting assertions with IDs (SA1, SA2, etc.) for the prompt
     supporting_assertions_formatted = "\n".join(
-        f"SA{i + 1}: {sa}" for i, sa in enumerate(supporting_assertions)
+        f"SA{i + 1}: {_format_supporting_assertion(sa)}"
+        for i, sa in enumerate(supporting_assertions)
     )
     # Create ID mapping for validation
     expected_ids = [f"SA{i + 1}" for i in range(len(supporting_assertions))]
@@ -762,6 +825,7 @@ async def evaluate_supporting_discovery(
                 question=question,
                 answer=answer,
                 supporting_assertions=supporting_assertions_formatted,
+                global_reasoning=global_reasoning,
             ),
         },
     ]

@@ -1,25 +1,30 @@
 ---Role---
-You are an impartial judge responsible for analyzing what evidence in an answer supports a given assertion.
+You are an impartial judge responsible for analyzing how an answer satisfies a hierarchical set of assertions.
+
+---Assertion Hierarchy---
+Assertions are organized in a parent-children structure:
+- **Main assertion (parent)**: A high-level assertion that synthesizes information across multiple source documents.
+- **Supporting assertions (children)**: More specific assertions that each capture a piece of evidence contributing to the main assertion. Together, the children form the grounded evidence base for the parent.
 
 ---Goal---
-Given a question, an answer, an assertion (which has already been determined to be satisfied), and a list of supporting assertions, determine:
-1. Whether the answer satisfies each individual supporting assertion (for coverage tracking)
-2. Whether the answer uses information beyond the supporting assertions (discovery)
+Given a question, an answer, a main assertion (which has already been determined to be satisfied), and its children (supporting assertions), determine:
+1. Which children are individually satisfied by the answer (coverage tracking)
+2. Whether the answer contains relevant information that satisfies the parent but is NOT covered by any of its children (discovery detection)
 
 ---Evaluation Process---
 Follow these steps in order:
 
-**Step 1: Evaluate Each Supporting Assertion**
+**Step 1: Evaluate Each Supporting Assertion (Child)**
 - For each supporting assertion (identified by ID like SA1, SA2, etc.), determine if the answer contains evidence that satisfies it
-- Supporting assertions are specific facts/claims derived from source documents
-- Evaluate each supporting assertion independently and provide brief reasoning for each
+- Each child is a specific assertion — evaluate it independently
+- Provide brief reasoning for each
 
 **Step 2: Detect Discovery**
-- Identify any factual information in the answer that is relevant to the **main assertion**
-- Check if this information goes beyond what is covered by all supporting assertions
-- Discovery means: the answer contains information that (a) is NOT covered by any supporting assertion, AND (b) helps support or satisfy the main assertion
-- If such information exists, flag it as discovery and explain what additional information was found
-- **Important**: Discovery is about information that helps satisfy the main assertion, not just any extra details
+- Consider whether the answer contains factual information that helps satisfy the **main (parent) assertion**
+- Check if this information goes beyond what is covered by all supporting assertions (children)
+- Discovery means: the answer uses information that (a) is NOT covered by any child assertion, AND (b) contributes to satisfying the parent assertion
+- If such information exists, flag it as discovery and explain what was found
+- **Important**: Discovery must be relevant to satisfying the parent assertion, not just any extra details
 
 ---Important Guidelines---
 - **Be precise**: Look for explicit evidence or strong implications in the answer that directly relate to the assertion
