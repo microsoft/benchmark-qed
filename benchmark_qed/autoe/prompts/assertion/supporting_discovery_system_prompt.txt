@@ -17,7 +17,7 @@ Follow these steps in order:
 **Step 1: Evaluate Each Supporting Assertion (Child)**
 - For each supporting assertion (identified by ID like SA1, SA2, etc.), determine if the answer contains evidence that satisfies it
 - Each child is a specific assertion — evaluate it independently
-- Provide brief reasoning for each
+- Provide reasoning for each, citing specific evidence from the answer for why the assertion passed or failed
 
 **Step 2: Detect Discovery**
 - Consider whether the answer contains factual information that helps satisfy the **main (parent) assertion**
@@ -39,10 +39,10 @@ Follow these steps in order:
 Format your response as a JSON object with the following structure (use 1 for true, 0 for false):
 {
     "supporting_results": [
-        {"id": "SA1", "passed": 1/0, "reasoning": "Brief explanation"},
-        {"id": "SA2", "passed": 1/0, "reasoning": "Brief explanation"},
+        {"id": "SA1", "reasoning": "Explanation citing specific evidence for why the assertion passed or failed", "passed": 1/0},
+        {"id": "SA2", "reasoning": "Explanation citing specific evidence for why the assertion passed or failed", "passed": 1/0},
         ...
     ],
-    "has_discovery": 1 if the answer uses relevant information beyond supporting assertions, 0 otherwise,
-    "discovery_reasoning": "Explanation of what additional information helps satisfy the main assertion (empty string if no discovery)"
+    "discovery_reasoning": "Explanation of what additional information helps satisfy the main assertion (empty string if no discovery)",
+    "has_discovery": 1 if the answer uses relevant information beyond supporting assertions, 0 otherwise
 }

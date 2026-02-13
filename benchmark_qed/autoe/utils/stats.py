@@ -1091,3 +1091,175 @@ def _clustered_permutation_k_groups(
         )
 
     return GroupComparisonResult(omnibus=omnibus, posthoc=posthoc)
+
+
+# ---------------------------------------------------------------------------
+#  P-value combination across independent datasets
+# ---------------------------------------------------------------------------
+
+
+@dataclass
+class CombinedPValueResult:
+    """Result of combining p-values from independent tests.
+
+    Attributes:
+        method: Combination method used (e.g. "fisher", "stouffer").
+        statistic: Test statistic from the combination method.
+        combined_p_value: Combined p-value.
+        is_significant: Whether the combined p-value is below alpha.
+        alpha: Significance threshold used.
+        input_p_values: Original p-values that were combined.
+        dataset_names: Optional names identifying each p-value's source.
+        weights: Weights applied (Stouffer's method only).
+    """
+
+    method: str
+    statistic: float
+    combined_p_value: float
+    is_significant: bool
+    alpha: float
+    input_p_values: list[float]
+    dataset_names: list[str] = field(default_factory=list)
+    weights: list[float] | None = None
+
+    def summary(self) -> str:
+        """Return a human-readable summary of the combination result."""
+        sig_str = (
+            "significant" if self.is_significant else "not significant"
+        )
+        parts = [
+            f"{self.method} combination: "
+            f"statistic={self.statistic:.4f}, "
+            f"combined_p={self.combined_p_value:.4f} ({sig_str})",
+        ]
+        for i, p in enumerate(self.input_p_values):
+            name = (
+                self.dataset_names[i]
+                if i < len(self.dataset_names)
+                else f"dataset_{i}"
+            )
+            parts.append(f"  {name}: p={p:.4f}")
+        return "\n".join(parts)
+
+
+def combine_pvalues(
+    p_values: Sequence[float],
+    *,
+    method: str = "stouffer",
+    weights: Sequence[float] | None = None,
+    dataset_names: Sequence[str] | None = None,
+    alpha: float = 0.05,
+) -> CombinedPValueResult:
+    """Combine p-values from independent statistical tests.
+
+    Useful when the same comparison (e.g. RAG-A vs RAG-B) is run on
+    multiple independent datasets and you want a single combined
+    p-value that aggregates all evidence.
+
+    Supported methods
+    -----------------
+    - **stouffer** (default): Converts each p-value to a Z-score,
+      takes the (optionally weighted) sum, and normalises.  Supports
+      weights (e.g. ``sqrt(n_questions)`` per dataset) for unequal
+      sample sizes.  More powerful than Fisher when effects are
+      consistent in direction.
+    - **fisher**: Uses ``-2 * sum(ln(p_i))`` which follows a
+      chi-squared distribution with ``2k`` degrees of freedom.
+      Sensitive to any single small p-value.
+
+    Args:
+        p_values: Sequence of p-values from independent tests.
+        method: Combination method — ``"stouffer"`` or ``"fisher"``.
+        weights: Optional weights for Stouffer's method.  Ignored for
+            Fisher's.  Typically ``sqrt(n_i)`` where ``n_i`` is the
+            number of observations in dataset *i*.
+        dataset_names: Optional labels identifying each dataset
+            (used in the result summary).
+        alpha: Significance threshold for the combined test.
+
+    Returns:
+        CombinedPValueResult with the combined test statistic and
+        p-value.
+
+    Raises:
+        ValueError: If fewer than 2 p-values are provided, if any
+            p-value is outside (0, 1], if weights length does not
+            match p_values, or if an unsupported method is given.
+    """
+    _validate_combine_inputs(p_values, method, weights)
+
+    p_arr = np.asarray(p_values, dtype=np.float64)
+
+    if method == "fisher":
+        statistic, combined_p = stats.combine_pvalues(
+            p_arr, method="fisher"
+        )
+    elif method == "stouffer":
+        w = (
+            np.asarray(weights, dtype=np.float64)
+            if weights is not None
+            else None
+        )
+        statistic, combined_p = stats.combine_pvalues(
+            p_arr, method="stouffer", weights=w
+        )
+    else:
+        msg = (
+            f"Unsupported method '{method}'. "
+            "Use 'fisher' or 'stouffer'."
+        )
+        raise ValueError(msg)
+
+    return CombinedPValueResult(
+        method=method,
+        statistic=float(statistic),
+        combined_p_value=float(combined_p),
+        is_significant=bool(combined_p < alpha),
+        alpha=alpha,
+        input_p_values=list(p_values),
+        dataset_names=list(dataset_names) if dataset_names else [],
+        weights=list(weights) if weights is not None else None,
+    )
+
+
+def _validate_combine_inputs(
+    p_values: Sequence[float],
+    method: str,
+    weights: Sequence[float] | None,
+) -> None:
+    """Validate inputs for combine_pvalues.
+
+    Args:
+        p_values: The p-values to validate.
+        method: Combination method name.
+        weights: Optional weights to validate.
+
+    Raises:
+        ValueError: On invalid inputs.
+    """
+    if len(p_values) < 2:
+        msg = (
+            f"Need at least 2 p-values to combine, got {len(p_values)}."
+        )
+        raise ValueError(msg)
+
+    for i, p in enumerate(p_values):
+        if not (0 < p <= 1):
+            msg = (
+                f"p_values[{i}]={p} is outside the valid range (0, 1]."
+            )
+            raise ValueError(msg)
+
+    if method not in {"fisher", "stouffer"}:
+        msg = (
+            f"Unsupported method '{method}'. "
+            "Use 'fisher' or 'stouffer'."
+        )
+        raise ValueError(msg)
+
+    if weights is not None and len(weights) != len(p_values):
+        msg = (
+            f"weights length ({len(weights)}) must match "
+            f"p_values length ({len(p_values)})."
+        )
+        raise ValueError(msg)

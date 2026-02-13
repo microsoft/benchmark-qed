@@ -3,12 +3,14 @@
 
 from benchmark_qed.autoe.utils.stats import (
     CORRECTION_DISPLAY_NAMES,
+    CombinedPValueResult,
     GroupComparisonResult,
     NormalityResult,
     OmnibusTestResult,
     PairwiseComparison,
     PostHocResult,
     check_normality,
+    combine_pvalues,
     compare_groups,
     run_clustered_permutation_test,
     run_omnibus_test,
@@ -17,12 +19,14 @@ from benchmark_qed.autoe.utils.stats import (
 
 __all__ = [
     "CORRECTION_DISPLAY_NAMES",
+    "CombinedPValueResult",
     "GroupComparisonResult",
     "NormalityResult",
     "OmnibusTestResult",
     "PairwiseComparison",
     "PostHocResult",
     "check_normality",
+    "combine_pvalues",
     "compare_groups",
     "run_clustered_permutation_test",
     "run_omnibus_test",

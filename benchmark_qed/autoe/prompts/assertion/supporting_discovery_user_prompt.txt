@@ -20,7 +20,7 @@ ${supporting_assertions}
 ---Instructions---
 The main (parent) assertion has already been determined to be SATISFIED by the answer (see the reasoning above for context). Your task is to analyze HOW the answer satisfies it by checking which children are present and whether any additional information was used:
 
-1. **Supporting Assertions (Children)**: For each supporting assertion (SA1, SA2, etc.), determine if the answer contains evidence that satisfies it. Each child captures a specific piece of the evidence base that underpins the parent. Provide brief reasoning for each.
+1. **Supporting Assertions (Children)**: For each supporting assertion (SA1, SA2, etc.), determine if the answer contains evidence that satisfies it. Each child captures a specific piece of the evidence base that underpins the parent. Provide reasoning for each, citing specific evidence from the answer for why the assertion passed or failed.
 
 2. **Discovery Detection**: Identify if the answer contains factual information that (a) is NOT covered by any of the children above, AND (b) helps satisfy the parent assertion. This indicates the answer draws on information beyond the grounded source material from which the children were derived.
 
@@ -32,10 +32,10 @@ The main (parent) assertion has already been determined to be SATISFIED by the a
 Format your response as a JSON object (use 1 for true, 0 for false):
 {
     "supporting_results": [
-        {"id": "SA1", "passed": 1/0, "reasoning": "Brief explanation"},
-        {"id": "SA2", "passed": 1/0, "reasoning": "Brief explanation"},
+        {"id": "SA1", "reasoning": "Explanation citing specific evidence for why the assertion passed or failed", "passed": 1/0},
+        {"id": "SA2", "reasoning": "Explanation citing specific evidence for why the assertion passed or failed", "passed": 1/0},
         ...
     ],
-    "has_discovery": 1/0,
-    "discovery_reasoning": "Explanation of discovery or empty string"
+    "discovery_reasoning": "Explanation of discovery or empty string",
+    "has_discovery": 1/0
 }

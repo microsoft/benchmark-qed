@@ -17,10 +17,10 @@ class SupportingAssertionResult(BaseModel):
     """Result for a single supporting assertion evaluation."""
 
     id: str = Field(description="The ID of the supporting assertion (e.g., 'SA1').")
-    passed: bool = Field(description="Whether the supporting assertion was satisfied.")
     reasoning: str = Field(
-        description="Brief explanation of why the assertion passed or failed."
+        description="Explanation citing specific evidence for why the assertion passed or failed."
     )
+    passed: bool = Field(description="Whether the supporting assertion was satisfied.")
 
 
 class HierarchicalAssertionLLMResponse(BaseModel):
@@ -44,18 +44,18 @@ class HierarchicalAssertionLLMResponse(BaseModel):
             "pass/fail status, and brief reasoning."
         )
     )
-    has_discovery: bool = Field(
-        default=False,
-        description=(
-            "Whether the answer contains information that goes beyond "
-            "what is covered by the supporting assertions."
-        ),
-    )
     discovery_reasoning: str = Field(
         default="",
         description=(
             "Explanation of what additional information was found in the answer "
             "that is not covered by the supporting assertions."
+        ),
+    )
+    has_discovery: bool = Field(
+        default=False,
+        description=(
+            "Whether the answer contains information that goes beyond "
+            "what is covered by the supporting assertions."
         ),
     )
 
@@ -74,18 +74,18 @@ class SupportingDiscoveryLLMResponse(BaseModel):
             "pass/fail status, and brief reasoning."
         )
     )
-    has_discovery: bool = Field(
-        default=False,
-        description=(
-            "Whether the answer contains information that goes beyond "
-            "what is covered by the supporting assertions."
-        ),
-    )
     discovery_reasoning: str = Field(
         default="",
         description=(
             "Explanation of what additional information was found in the answer "
             "that is not covered by the supporting assertions."
+        ),
+    )
+    has_discovery: bool = Field(
+        default=False,
+        description=(
+            "Whether the answer contains information that goes beyond "
+            "what is covered by the supporting assertions."
         ),
     )
 

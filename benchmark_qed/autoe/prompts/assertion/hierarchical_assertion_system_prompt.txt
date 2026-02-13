@@ -20,7 +20,7 @@ Follow these steps in order:
 **Step 2: Evaluate Each Supporting Assertion (for coverage tracking)**
 - For each supporting assertion (identified by ID like SA1, SA2, etc.), determine if the answer contains evidence that satisfies it
 - Supporting assertions are specific facts/claims derived from source documents
-- Evaluate each supporting assertion independently and provide brief reasoning for each
+- Evaluate each supporting assertion independently and provide reasoning for each, citing specific evidence from the answer for why the assertion passed or failed
 - **Note**: These results track what specific evidence is present; they do NOT affect the global assertion result from Step 1
 
 **Step 3: Detect Discovery**
@@ -44,13 +44,13 @@ Follow these steps in order:
 ---Output Format---
 Format your response as a JSON object with the following structure (use 1 for true, 0 for false):
 {
-    "global_passed": 1 if the global assertion is satisfied, 0 otherwise,
     "reasoning": "Overall explanation of how you evaluated the global assertion, citing specific evidence from the answer.",
+    "global_passed": 1 if the global assertion is satisfied, 0 otherwise,
     "supporting_results": [
-        {"id": "SA1", "passed": 1/0, "reasoning": "Brief explanation"},
-        {"id": "SA2", "passed": 1/0, "reasoning": "Brief explanation"},
+        {"id": "SA1", "reasoning": "Explanation citing specific evidence for why this supporting assertion passed or failed", "passed": 1/0},
+        {"id": "SA2", "reasoning": "Explanation citing specific evidence for why this supporting assertion passed or failed", "passed": 1/0},
         ...
     ],
-    "has_discovery": 1 if the answer uses relevant information beyond supporting assertions, 0 otherwise,
-    "discovery_reasoning": "Explanation of what additional information helps satisfy the global assertion (empty string if no discovery)"
+    "discovery_reasoning": "Explanation of what additional information helps satisfy the global assertion (empty string if no discovery)",
+    "has_discovery": 1 if the answer uses relevant information beyond supporting assertions, 0 otherwise
 }
