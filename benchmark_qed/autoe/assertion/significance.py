@@ -105,6 +105,9 @@ def compare_assertion_scores_significance(
     question_sets: list[str],
     alpha: float = 0.05,
     correction_method: str = "holm",
+    run_clustered_permutation: bool = False,
+    n_permutations: int = 10_000,
+    permutation_seed: int | None = None,
 ) -> dict[str, GroupComparisonResult]:
     """Compare assertion scores across RAG methods using statistical tests.
 
@@ -119,9 +122,16 @@ def compare_assertion_scores_significance(
         alpha: Significance level (default 0.05).
         correction_method: P-value correction method
             ("holm", "bonferroni", "fdr_bh").
+        run_clustered_permutation: Whether to run assertion-level clustered
+            permutation tests as secondary analysis.
+        n_permutations: Number of permutations for clustered permutation test.
+        permutation_seed: Random seed for permutation reproducibility.
 
     Returns:
-        Dictionary mapping question_set names to GroupComparisonResult.
+        Dictionary mapping question_set names to GroupComparisonResult. If
+        run_clustered_permutation is True, additional keys with
+        "_clustered" suffix contain assertion-level clustered permutation
+        results.
     """
     results: dict[str, GroupComparisonResult] = {}
 
@@ -130,6 +140,10 @@ def compare_assertion_scores_significance(
 
         # Collect per-question accuracy for each RAG method
         groups: dict[str, list[float]] = {}
+        # Collect per-assertion binary scores and cluster IDs for optional
+        # clustered permutation analysis.
+        clustered_groups: dict[str, list[float]] = {}
+        clustered_cluster_ids: dict[str, list[str]] = {}
         question_set_dir = output_dir / question_set
 
         for rag_method in generated_rags:
@@ -161,6 +175,40 @@ def compare_assertion_scores_significance(
             if len(accuracy) > 0:
                 groups[rag_method] = accuracy
 
+            if not run_clustered_permutation:
+                continue
+
+            # Load per-assertion summary for clustered permutation analysis.
+            summary_by_assertion_file = (
+                question_set_dir / f"{rag_method}_summary_by_assertion.csv"
+            )
+            if not summary_by_assertion_file.exists():
+                rich_print(
+                    f"  [yellow]Warning: {summary_by_assertion_file} not found, "
+                    f"skipping clustered permutation for {rag_method}[/yellow]"
+                )
+                continue
+
+            summary_by_assertion_df = pd.read_csv(summary_by_assertion_file)
+            required_columns = {"question", "score"}
+            if not required_columns.issubset(summary_by_assertion_df.columns):
+                rich_print(
+                    f"  [yellow]Warning: {summary_by_assertion_file} missing "
+                    f"required columns {sorted(required_columns)}[/yellow]"
+                )
+                continue
+
+            valid_assertions_df = summary_by_assertion_df.dropna(
+                subset=["question", "score"]
+            )
+            if len(valid_assertions_df) > 0:
+                clustered_groups[rag_method] = (
+                    valid_assertions_df["score"].astype(float).tolist()
+                )
+                clustered_cluster_ids[rag_method] = (
+                    valid_assertions_df["question"].astype(str).tolist()
+                )
+
         # Need at least 2 groups to compare
         if len(groups) < 2:
             rich_print(
@@ -184,6 +232,43 @@ def compare_assertion_scores_significance(
         # Save detailed results to CSV
         _save_significance_results(
             comparison_result, question_set, question_set_dir, groups
+        )
+
+        if not run_clustered_permutation:
+            continue
+
+        if len(clustered_groups) < 2:
+            rich_print(
+                "  [yellow]Insufficient data for clustered permutation "
+                "comparison (need at least 2 RAG methods with data)[/yellow]"
+            )
+            continue
+
+        rich_print(
+            "  [bold]Running clustered permutation test "
+            "(assertion-level)...[/bold]"
+        )
+        clustered_result = run_clustered_permutation_test(
+            groups=clustered_groups,
+            cluster_ids=clustered_cluster_ids,
+            n_permutations=n_permutations,
+            alpha=alpha,
+            correction=correction_method,
+            seed=permutation_seed,
+        )
+        clustered_key = f"{question_set}_clustered"
+        results[clustered_key] = clustered_result
+
+        rich_print(f"  {clustered_result.omnibus.summary()}")
+        if clustered_result.posthoc:
+            rich_print(f"  {clustered_result.posthoc.summary()}")
+
+        _save_significance_results(
+            clustered_result,
+            question_set,
+            question_set_dir,
+            clustered_groups,
+            file_suffix="_clustered",
         )
 
     return results
@@ -714,6 +799,7 @@ def _save_significance_results(
     question_set: str,
     output_dir: Path,
     groups: dict[str, list[float]],
+    file_suffix: str = "",
 ) -> None:
     """Save significance test results to CSV files.
 
@@ -723,6 +809,7 @@ def _save_significance_results(
         output_dir: Directory to save CSV files.
         groups: Dictionary of RAG method names to their per-question accuracy
             values.
+        file_suffix: Optional suffix appended to output filenames.
     """
     # Save group statistics
     group_stats = []
@@ -737,7 +824,10 @@ def _save_significance_results(
             }
         )
     stats_df = pd.DataFrame(group_stats)
-    stats_df.to_csv(output_dir / "significance_group_stats.csv", index=False)
+    stats_df.to_csv(
+        output_dir / f"significance_group_stats{file_suffix}.csv",
+        index=False,
+    )
 
     # Save omnibus test result
     omnibus_df = pd.DataFrame(
@@ -753,7 +843,10 @@ def _save_significance_results(
             }
         ]
     )
-    omnibus_df.to_csv(output_dir / "significance_omnibus.csv", index=False)
+    omnibus_df.to_csv(
+        output_dir / f"significance_omnibus{file_suffix}.csv",
+        index=False,
+    )
 
     # Save pairwise comparisons if available
     if result.posthoc and result.posthoc.comparisons:
@@ -769,4 +862,7 @@ def _save_significance_results(
             for c in result.posthoc.comparisons
         ]
         pairwise_df = pd.DataFrame(pairwise_data)
-        pairwise_df.to_csv(output_dir / "significance_pairwise.csv", index=False)
+        pairwise_df.to_csv(
+            output_dir / f"significance_pairwise{file_suffix}.csv",
+            index=False,
+        )

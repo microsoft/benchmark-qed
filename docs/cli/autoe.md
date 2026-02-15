@@ -369,6 +369,9 @@ This format evaluates multiple RAG methods against the same assertions in a sing
 | `run_significance_test` | `bool` | `True` | Whether to run significance tests after scoring. |
 | `significance_alpha` | `float` | `0.05` | Alpha level for significance tests. |
 | `significance_correction` | `str` | `"holm"` | P-value correction method. |
+| `run_clustered_permutation` | `bool` | `False` | Whether to run assertion-level clustered permutation tests as secondary analysis. |
+| `n_permutations` | `int` | `10000` | Number of permutations for the clustered permutation test. |
+| `permutation_seed` | `int \| None` | `None` | Random seed for reproducibility of permutation tests. |
 | `trials` | `int` | `4` | Number of evaluation trials. |
 | `llm_config` | `LLMConfig` | `LLMConfig()` | LLM configuration. |
 
@@ -401,6 +404,12 @@ top_k_assertions: null  # Use all assertions, or set to e.g. 5 for top-5
 run_significance_test: true
 significance_alpha: 0.05
 significance_correction: holm
+
+# Optional secondary analysis: assertion-level clustered permutation test
+# (accounts for within-question correlation among assertions)
+run_clustered_permutation: true
+n_permutations: 10000
+permutation_seed: 42
 
 trials: 4
 
@@ -724,6 +733,9 @@ benchmark-qed autoe assertion-significance config.yaml
 | `question_sets` | `list[str]` | _required_ | List of question set names to analyze. |
 | `alpha` | `float` | `0.05` | Significance level for hypothesis tests. |
 | `correction_method` | `str` | `"holm"` | P-value correction method: `"holm"`, `"bonferroni"`, or `"fdr_bh"`. |
+| `run_clustered_permutation` | `bool` | `False` | Whether to run assertion-level clustered permutation tests as secondary analysis. |
+| `n_permutations` | `int` | `10000` | Number of permutations for the clustered permutation test. |
+| `permutation_seed` | `int \| None` | `None` | Random seed for reproducibility of permutation tests. |
 
 #### YAML Example
 
@@ -742,6 +754,11 @@ question_sets:
 
 alpha: 0.05
 correction_method: holm
+
+# Optional secondary analysis
+run_clustered_permutation: true
+n_permutations: 10000
+permutation_seed: 42
 ```
 
 #### Expected Directory Structure
@@ -752,15 +769,27 @@ The command expects assertion scoring results organized as:
 output_dir/
   data_global_questions/
     graphrag_global_summary_by_question.csv
+    graphrag_global_summary_by_assertion.csv
     vectorrag_summary_by_question.csv
+    vectorrag_summary_by_assertion.csv
     lazygraphrag_summary_by_question.csv
+    lazygraphrag_summary_by_assertion.csv
   data_local_questions/
     graphrag_global_summary_by_question.csv
+    graphrag_global_summary_by_assertion.csv
     vectorrag_summary_by_question.csv
+    vectorrag_summary_by_assertion.csv
     lazygraphrag_summary_by_question.csv
+    lazygraphrag_summary_by_assertion.csv
 ```
 
 Each summary file should contain `success` and `fail` columns for per-question accuracy calculation.
+
+If `run_clustered_permutation` is enabled, `*_summary_by_assertion.csv` files are also used, and additional outputs are saved per question set:
+
+- `significance_group_stats_clustered.csv`
+- `significance_omnibus_clustered.csv`
+- `significance_pairwise_clustered.csv` (only when pairwise post-hoc comparisons exist)
 
 ---
 

@@ -488,6 +488,12 @@ def _run_multi_rag_assertion_scores(
             f"(alpha={config.significance_alpha}, "
             f"correction={config.significance_correction})"
         )
+        if config.run_clustered_permutation:
+            rich_print(
+                "  Clustered permutation: enabled "
+                f"(n={config.n_permutations}, "
+                f"seed={config.permutation_seed})"
+            )
 
     # Run the evaluation pipeline
     results_df = run_assertion_evaluation(
@@ -505,6 +511,9 @@ def _run_multi_rag_assertion_scores(
         run_significance_test=config.run_significance_test,
         significance_alpha=config.significance_alpha,
         significance_correction=config.significance_correction,
+        run_clustered_permutation=config.run_clustered_permutation,
+        n_permutations=config.n_permutations,
+        permutation_seed=config.permutation_seed,
         question_text_key=config.question_text_key,
         answer_text_key=config.answer_text_key,
     )
@@ -860,6 +869,11 @@ def assertion_significance(
     rich_print(f"  RAG methods: {config.rag_methods}")
     rich_print(f"  Question sets: {config.question_sets}")
     rich_print(f"  Alpha: {config.alpha}, Correction: {config.correction_method}")
+    if config.run_clustered_permutation:
+        rich_print(
+            "  Clustered permutation: enabled "
+            f"(n={config.n_permutations}, seed={config.permutation_seed})"
+        )
 
     results = compare_assertion_scores_significance(
         output_dir=config.output_dir,
@@ -867,6 +881,9 @@ def assertion_significance(
         question_sets=config.question_sets,
         alpha=config.alpha,
         correction_method=config.correction_method,
+        run_clustered_permutation=config.run_clustered_permutation,
+        n_permutations=config.n_permutations,
+        permutation_seed=config.permutation_seed,
     )
 
     # Summary

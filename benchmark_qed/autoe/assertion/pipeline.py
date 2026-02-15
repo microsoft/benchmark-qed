@@ -338,6 +338,9 @@ def run_assertion_evaluation(
     run_significance_test: bool = True,
     significance_alpha: float = 0.05,
     significance_correction: str = "holm",
+    run_clustered_permutation: bool = False,
+    n_permutations: int = 10_000,
+    permutation_seed: int | None = None,
     question_text_key: str = "question_text",
     answer_text_key: str = "answer",
 ) -> pd.DataFrame:
@@ -361,6 +364,10 @@ def run_assertion_evaluation(
             (default: True).
         significance_alpha: Alpha level for significance tests (default: 0.05).
         significance_correction: P-value correction method (default: "holm").
+        run_clustered_permutation: Whether to run assertion-level clustered
+            permutation tests as secondary analysis.
+        n_permutations: Number of permutations for clustered permutation tests.
+        permutation_seed: Random seed for clustered permutation tests.
         question_text_key: Column name for question text (default: "question_text").
         answer_text_key: Column name for answer text (default: "answer").
 
@@ -440,6 +447,9 @@ def run_assertion_evaluation(
             question_sets=question_sets,
             alpha=significance_alpha,
             correction_method=significance_correction,
+            run_clustered_permutation=run_clustered_permutation,
+            n_permutations=n_permutations,
+            permutation_seed=permutation_seed,
         )
 
     return overall_summary_df
