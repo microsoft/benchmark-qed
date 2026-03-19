@@ -28,7 +28,7 @@ from benchmark_qed.autoq.prompts.data_questions import (
     global_questions as data_global_prompts,
 )
 from benchmark_qed.autoq.prompts.data_questions import (
-    link_questions as data_link_prompts,
+    linked_questions as data_linked_prompts,
 )
 from benchmark_qed.autoq.prompts.data_questions import (
     local_questions as data_local_prompts,
@@ -121,7 +121,7 @@ data_local:
 data_global:
   num_questions: 10
   oversample_factor: 2.0
-data_link:
+data_linked:
   num_questions: 10
   oversample_factor: 2.0
   min_questions_per_entity: 2 # Minimum local questions sharing an entity to form a group
@@ -188,17 +188,17 @@ data_questions_prompt_config:
       prompt: prompts/data_questions/data_local/data_local_expansion_system_prompt.txt
     data_local_gen_user_prompt:
       prompt: prompts/data_questions/data_local/data_local_gen_user_prompt.txt
-  data_link_prompt_config:
+  data_linked_prompt_config:
     bridge_question_system_prompt:
-      prompt: prompts/data_questions/data_link/bridge_question_system_prompt.txt
+      prompt: prompts/data_questions/data_linked/bridge_question_system_prompt.txt
     comparison_question_system_prompt:
-      prompt: prompts/data_questions/data_link/comparison_question_system_prompt.txt
+      prompt: prompts/data_questions/data_linked/comparison_question_system_prompt.txt
     intersection_question_system_prompt:
-      prompt: prompts/data_questions/data_link/intersection_question_system_prompt.txt
-    link_question_user_prompt:
-      prompt: prompts/data_questions/data_link/link_question_user_prompt.txt
+      prompt: prompts/data_questions/data_linked/intersection_question_system_prompt.txt
+    linked_question_user_prompt:
+      prompt: prompts/data_questions/data_linked/linked_question_user_prompt.txt
     batch_validation_prompt:
-      prompt: prompts/data_questions/data_link/batch_validation_prompt.txt
+      prompt: prompts/data_questions/data_linked/batch_validation_prompt.txt
 
 ## Assertion Generation Configuration
 assertions:
@@ -220,7 +220,7 @@ assertions:
     validate_reduce_assertions: true # Validate final assertions after reduce step.
     concurrent_llm_calls: 8 # Concurrent LLM calls for batch processing and validation.
     max_concurrent_questions: 2 # Parallel questions for assertion generation. Set to 1 for sequential.
-  link:
+  linked:
     max_assertions: 20 # Maximum assertions per question. Set to 0 to disable, or null for unlimited.
     enable_validation: true # Enable to filter low-quality assertions.
     min_validation_score: 3 # Minimum score (1-5) for an assertion to pass validation.
@@ -376,8 +376,8 @@ def init(
                 prompts_folder / "data_questions" / "data_local",
             )
             __copy_prompts(
-                Path(data_link_prompts.__file__).parent,
-                prompts_folder / "data_questions" / "data_link",
+                Path(data_linked_prompts.__file__).parent,
+                prompts_folder / "data_questions" / "data_linked",
             )
             __copy_prompts(
                 Path(data_questions_prompts.__file__).parent,

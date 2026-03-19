@@ -1,5 +1,5 @@
 # Copyright (c) 2025 Microsoft Corporation.
-"""Data-link question generation module.
+"""Data-linked question generation module.
 
 Generate multi-hop style questions by combining local questions that share named entities.
 Similar to HotpotQA bridge questions but using entities as the linking mechanism.
@@ -27,7 +27,7 @@ from benchmark_qed.autod.sampler.sampling.mmr_sampler import MMRTextSampler
 from benchmark_qed.autoq.data_model.enums import QuestionType
 from benchmark_qed.autoq.data_model.question import Question
 from benchmark_qed.autoq.prompts import data_questions as prompts_data_questions
-from benchmark_qed.autoq.prompts.data_questions import link_questions
+from benchmark_qed.autoq.prompts.data_questions import linked_questions
 from benchmark_qed.autoq.question_gen.base import BaseQuestionGen, QuestionGenResult
 from benchmark_qed.autoq.question_gen.data_questions.assertion_gen.local_claim_assertion_gen import (
     LocalClaimAssertionGenerator,
@@ -39,7 +39,7 @@ from benchmark_qed.autoq.question_gen.data_questions.assertion_gen.validator imp
     AssertionValidator,
 )
 from benchmark_qed.autoq.question_gen.data_questions.question_validator import (
-    LinkQuestionValidator,
+    LinkedQuestionValidator,
 )
 from benchmark_qed.config.utils import load_template_file
 
@@ -55,7 +55,7 @@ if TYPE_CHECKING:
 
 log: logging.Logger = logging.getLogger(__name__)
 
-DATA_LINK_PROMPTS_PATH = Path(link_questions.__file__).parent
+DATA_LINKED_PROMPTS_PATH = Path(linked_questions.__file__).parent
 ASSERTION_PROMPTS_PATH = Path(prompts_data_questions.__file__).parent / "assertions"
 
 
@@ -139,9 +139,9 @@ class QuestionFilterStats:
             )
 
 
-class DataLinkQuestionGen(BaseQuestionGen):
+class DataLinkedQuestionGen(BaseQuestionGen):
     """
-    Generate data-link questions from local questions sharing named entities.
+    Generate data-linked questions from local questions sharing named entities.
 
     Creates harder, multi-hop style questions by combining information from
     multiple local questions that mention the same entity. Similar to HotpotQA
@@ -213,19 +213,19 @@ class DataLinkQuestionGen(BaseQuestionGen):
         # Assertion generation setup
         self.assertion_generator: LocalClaimAssertionGenerator | None = None
         self.assertion_validator: AssertionValidator | None = None
-        link_assertion_config = assertion_config.link
-        max_assertions = link_assertion_config.max_assertions
+        linked_assertion_config = assertion_config.linked
+        max_assertions = linked_assertion_config.max_assertions
         if max_assertions is None or max_assertions > 0:
             # Create validator if validation is enabled
             validator = None
-            if link_assertion_config.enable_validation:
+            if linked_assertion_config.enable_validation:
                 validator = AssertionValidator(
                     llm=llm,
                     llm_params=llm_params,
-                    min_criterion_score=link_assertion_config.min_validation_score,
-                    # Use local validation prompt (link assertions are fact-focused)
+                    min_criterion_score=linked_assertion_config.min_validation_score,
+                    # Use local validation prompt (linked assertions are fact-focused)
                     validation_prompt=assertion_prompt_config.local_validation_prompt.template,
-                    concurrent_validations=link_assertion_config.concurrent_llm_calls,
+                    concurrent_validations=linked_assertion_config.concurrent_llm_calls,
                 )
                 self.assertion_validator = validator
 
@@ -235,7 +235,7 @@ class DataLinkQuestionGen(BaseQuestionGen):
                 max_assertions=max_assertions,
                 validator=validator,
                 system_prompt=assertion_prompt_config.local_assertion_gen_prompt.template,
-                max_concurrent_questions=link_assertion_config.max_concurrent_questions,
+                max_concurrent_questions=linked_assertion_config.max_concurrent_questions,
             )
 
         self.json_mode = json_mode
@@ -245,9 +245,9 @@ class DataLinkQuestionGen(BaseQuestionGen):
             self.llm_params.pop("response_format", None)
 
         # Question validator setup
-        self.question_validator: LinkQuestionValidator | None = None
+        self.question_validator: LinkedQuestionValidator | None = None
         if enable_batch_validation:
-            self.question_validator = LinkQuestionValidator(
+            self.question_validator = LinkedQuestionValidator(
                 llm=llm,
                 llm_params=llm_params,
                 batch_size=15,
@@ -259,28 +259,28 @@ class DataLinkQuestionGen(BaseQuestionGen):
 
         # Bridge questions
         self.system_prompts["bridge"] = load_template_file(
-            DATA_LINK_PROMPTS_PATH / "bridge_question_system_prompt.txt"
+            DATA_LINKED_PROMPTS_PATH / "bridge_question_system_prompt.txt"
         )
 
         # Temporal questions (sequence/timing of events)
         self.system_prompts["temporal"] = load_template_file(
-            DATA_LINK_PROMPTS_PATH / "temporal_question_system_prompt.txt"
+            DATA_LINKED_PROMPTS_PATH / "temporal_question_system_prompt.txt"
         )
 
         # Comparison questions
         self.system_prompts["comparison"] = load_template_file(
-            DATA_LINK_PROMPTS_PATH / "comparison_question_system_prompt.txt"
+            DATA_LINKED_PROMPTS_PATH / "comparison_question_system_prompt.txt"
         )
 
         # Intersection questions
         self.system_prompts["intersection"] = load_template_file(
-            DATA_LINK_PROMPTS_PATH / "intersection_question_system_prompt.txt"
+            DATA_LINKED_PROMPTS_PATH / "intersection_question_system_prompt.txt"
         )
 
         self.generation_user_prompt: Template = (
             generation_user_prompt
             or load_template_file(
-                DATA_LINK_PROMPTS_PATH / "link_question_user_prompt.txt"
+                DATA_LINKED_PROMPTS_PATH / "linked_question_user_prompt.txt"
             )
         )
 
@@ -411,7 +411,7 @@ class DataLinkQuestionGen(BaseQuestionGen):
 
         # Step 6: Generate assertions for ALL candidates (before selection)
         max_assertions = (
-            self.assertion_config.link.max_assertions
+            self.assertion_config.linked.max_assertions
             if self.assertion_config
             else None
         )
@@ -586,7 +586,8 @@ class DataLinkQuestionGen(BaseQuestionGen):
                 embeddings.append(q.embedding)
             else:
                 # Fallback: random embedding (shouldn't happen)
-                embeddings.append(np.random.randn(768))
+                rng = np.random.default_rng()
+                embeddings.append(rng.standard_normal(768))
         embeddings = np.array(embeddings)
         norms = np.linalg.norm(embeddings, axis=1, keepdims=True)
         norms = np.where(norms == 0, 1, norms)
@@ -616,7 +617,7 @@ class DataLinkQuestionGen(BaseQuestionGen):
         # MMR selection with type-balance penalty
         selected_indices: list[int] = []
         selected_embeddings: list[np.ndarray] = []
-        selected_type_counts: dict[str, int] = {t: 0 for t in unique_types}
+        selected_type_counts: dict[str, int] = dict.fromkeys(unique_types, 0)
         remaining_indices = set(range(len(questions)))
 
         # First selection: highest quality
@@ -1160,6 +1161,80 @@ class DataLinkQuestionGen(BaseQuestionGen):
 
         return "\n".join(lines).strip()
 
+    def _find_failed_quality_metrics(
+        self,
+        quality_scores: dict[str, Any],
+    ) -> list[tuple[str, float]]:
+        """Find quality metrics that fall below the minimum threshold.
+
+        Checks all numeric scores except 'composite' and 'reasoning'
+        against ``self.min_quality_score``.
+
+        Args:
+            quality_scores: Dict of metric names to score values.
+
+        Returns
+        -------
+        list[tuple[str, float]]
+            List of (metric, score) tuples that failed the threshold.
+        """
+        non_score_fields = {"composite", "reasoning"}
+        failed: list[tuple[str, float]] = []
+        for metric, score in quality_scores.items():
+            if metric in non_score_fields:
+                continue
+            try:
+                score_num = float(score)
+            except (ValueError, TypeError):
+                continue  # Skip non-numeric fields
+            if score_num < self.min_quality_score:
+                failed.append((metric, score_num))
+        return failed
+
+    def _validate_bridge_question(
+        self,
+        raw: dict[str, Any],
+        text: str,
+    ) -> str | None:
+        """Validate bridge-type question has proper indirect reference.
+
+        Checks that the bridge question has a non-empty replaced_entity
+        and indirect_reference, and that the indirect_reference appears
+        in the question text.
+
+        Args:
+            raw: Raw question dict from the LLM response.
+            text: The question text (already stripped).
+
+        Returns
+        -------
+        str | None
+            A failure reason string if validation fails, or None if valid.
+        """
+        replaced_entity = raw.get("replaced_entity", "")
+        indirect_reference = raw.get("indirect_reference", "")
+        null_values = ("null", "none", "n/a", "")
+
+        if (
+            not replaced_entity
+            or replaced_entity.lower() in null_values
+        ):
+            return "No replaced_entity"
+
+        if (
+            not indirect_reference
+            or indirect_reference.lower() in null_values
+        ):
+            return "No indirect_reference"
+
+        if indirect_reference.lower() not in text.lower():
+            return (
+                f"indirect_reference "
+                f"'{indirect_reference[:30]}' not in text"
+            )
+
+        return None
+
     def _parse_question_response(
         self,
         response: str,
@@ -1199,7 +1274,10 @@ class DataLinkQuestionGen(BaseQuestionGen):
             source_claim_ids = raw.get("source_claim_ids", [])
 
             # SAFEGUARD A: Validate all claim IDs exist
-            invalid_ids = [cid for cid in source_claim_ids if cid not in valid_claim_ids]
+            invalid_ids = [
+                cid for cid in source_claim_ids
+                if cid not in valid_claim_ids
+            ]
             if invalid_ids:
                 log.debug(
                     "Question references non-existent claims %s, skipping: %s",
@@ -1226,22 +1304,14 @@ class DataLinkQuestionGen(BaseQuestionGen):
             # Extract quality scores from quality sub-dict
             quality_scores = self._extract_quality_scores(raw)
 
-            # SAFEGUARD C: Filter by quality scores - ALL scores must meet threshold
-            # Skip non-score fields like 'composite' and 'reasoning'
-            non_score_fields = {"composite", "reasoning"}
-            failed_metrics = []
-            for metric, score in quality_scores.items():
-                if metric in non_score_fields:
-                    continue
-                # Convert score to float, skip non-numeric values
-                try:
-                    score_num = float(score)
-                except (ValueError, TypeError):
-                    continue  # Skip non-numeric fields
-                if score_num < self.min_quality_score:
-                    failed_metrics.append((metric, score_num))
+            # SAFEGUARD C: Filter by quality scores
+            failed_metrics = self._find_failed_quality_metrics(
+                quality_scores
+            )
             if failed_metrics:
-                failed_str = ", ".join(f"{m}={s}" for m, s in failed_metrics)
+                failed_str = ", ".join(
+                    f"{m}={s}" for m, s in failed_metrics
+                )
                 log.debug(
                     "Question has low quality scores (%s), skipping: %s",
                     failed_str,
@@ -1252,45 +1322,20 @@ class DataLinkQuestionGen(BaseQuestionGen):
                     stats.add_filtered(raw, "low_quality", failed_str)
                 continue
 
-            # NOTE: Self-validation check removed - batch validation handles this more reliably
-
             # SAFEGUARD D: Filter bridge questions without proper indirect reference
             if question_type == "bridge":
-                replaced_entity = raw.get("replaced_entity", "")
-                indirect_reference = raw.get("indirect_reference", "")
-
-                # Check if replaced_entity is empty or null
-                if not replaced_entity or replaced_entity.lower() in ("null", "none", "n/a", ""):
+                bridge_failure = self._validate_bridge_question(
+                    raw, text
+                )
+                if bridge_failure:
                     log.debug(
-                        "Bridge question has no replaced_entity (single-hop), skipping: %s",
+                        "Bridge question validation failed (%s), skipping: %s",
+                        bridge_failure,
                         text[:50],
                     )
                     if stats:
                         stats.skipped_single_document += 1
-                        stats.add_filtered(raw, "single_document", "No replaced_entity")
-                    continue
-
-                # Check if indirect_reference is empty
-                if not indirect_reference or indirect_reference.lower() in ("null", "none", "n/a", ""):
-                    log.debug(
-                        "Bridge question has no indirect_reference, skipping: %s",
-                        text[:50],
-                    )
-                    if stats:
-                        stats.skipped_single_document += 1
-                        stats.add_filtered(raw, "single_document", "No indirect_reference")
-                    continue
-
-                # Check if the indirect_reference actually appears in the question
-                if indirect_reference.lower() not in text.lower():
-                    log.debug(
-                        "Bridge question indirect_reference '%s' not found in text, skipping: %s",
-                        indirect_reference[:30],
-                        text[:50],
-                    )
-                    if stats:
-                        stats.skipped_single_document += 1
-                        stats.add_filtered(raw, "single_document", f"indirect_reference '{indirect_reference[:30]}' not in text")
+                        stats.add_filtered(raw, "single_document", bridge_failure)
                     continue
 
             # Collect sources from referenced claims
@@ -1325,7 +1370,7 @@ class DataLinkQuestionGen(BaseQuestionGen):
             question = Question(
                 id=str(uuid.uuid4()),
                 text=text,
-                question_type=QuestionType.DATA_LINK,
+                question_type=QuestionType.DATA_LINKED,
                 references=references[:30],  # Limit references
                 attributes={
                     "entity": context.entity,
@@ -1462,7 +1507,7 @@ class DataLinkQuestionGen(BaseQuestionGen):
 
         # Process questions with concurrency limit
         max_concurrent = (
-            self.assertion_config.link.max_concurrent_questions
+            self.assertion_config.linked.max_concurrent_questions
             if self.assertion_config
             else None
         )

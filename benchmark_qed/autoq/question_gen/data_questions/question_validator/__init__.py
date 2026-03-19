@@ -7,8 +7,8 @@ from benchmark_qed.autoq.question_gen.data_questions.question_validator.base imp
 from benchmark_qed.autoq.question_gen.data_questions.question_validator.global_validator import (
     GlobalQuestionValidator,
 )
-from benchmark_qed.autoq.question_gen.data_questions.question_validator.link_validator import (
-    LinkQuestionValidator,
+from benchmark_qed.autoq.question_gen.data_questions.question_validator.linked_validator import (
+    LinkedQuestionValidator,
 )
 
 # Backward compatibility alias
@@ -17,6 +17,6 @@ QuestionValidator = GlobalQuestionValidator
 __all__ = [
     "BatchQuestionValidator",
     "GlobalQuestionValidator",
-    "LinkQuestionValidator",
+    "LinkedQuestionValidator",
     "QuestionValidator",
 ]

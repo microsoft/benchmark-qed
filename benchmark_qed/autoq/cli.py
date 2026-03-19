@@ -23,7 +23,7 @@ from benchmark_qed.autoq.config import (
     AssertionConfig,
     AssertionPromptConfig,
     DataGlobalPromptConfig,
-    DataLinkPromptConfig,
+    DataLinkedPromptConfig,
     DataLocalPromptConfig,
     QuestionGenerationConfig,
 )
@@ -42,8 +42,8 @@ from benchmark_qed.autoq.question_gen.activity_questions.local_question_gen impo
 from benchmark_qed.autoq.question_gen.data_questions.global_question_gen import (
     DataGlobalQuestionGen,
 )
-from benchmark_qed.autoq.question_gen.data_questions.link_question_gen import (
-    DataLinkQuestionGen,
+from benchmark_qed.autoq.question_gen.data_questions.linked_question_gen import (
+    DataLinkedQuestionGen,
 )
 from benchmark_qed.autoq.question_gen.data_questions.local_question_gen import (
     DataLocalQuestionGen,
@@ -60,7 +60,7 @@ class GenerationType(StrEnum):
 
     data_local = "data_local"
     data_global = "data_global"
-    data_link = "data_link"
+    data_linked = "data_linked"
     activity_local = "activity_local"
     activity_global = "activity_global"
 
@@ -191,7 +191,7 @@ async def __generate_data_global(
     )
 
 
-async def __generate_data_link(
+async def __generate_data_linked(
     output_data_path: Path,
     llm: ChatModel,
     text_embedder: TextEmbedder,
@@ -202,12 +202,12 @@ async def __generate_data_link(
     type_balance_weight: float,
     random_seed: int,
     concurrent_requests: int,
-    config: DataLinkPromptConfig,  # noqa: ARG001 - Reserved for future prompt customization
+    config: DataLinkedPromptConfig,  # noqa: ARG001 - Reserved for future prompt customization
     assertion_config: AssertionConfig,
     assertion_prompt_config: AssertionPromptConfig,
     llm_params: dict[str, Any],
 ) -> None:
-    """Generate data-link questions from local questions sharing named entities."""
+    """Generate data-linked questions from local questions sharing named entities."""
     if not (
         output_data_path / "data_local_questions" / "candidate_questions.json"
     ).exists():
@@ -220,7 +220,7 @@ async def __generate_data_link(
         f"{output_data_path}/data_local_questions/candidate_questions.json"
     )
 
-    data_link_generator = DataLinkQuestionGen(
+    data_linked_generator = DataLinkedQuestionGen(
         llm=llm,
         text_embedder=text_embedder,
         local_questions=local_questions,
@@ -234,40 +234,39 @@ async def __generate_data_link(
         type_balance_weight=type_balance_weight,
     )
 
-    data_link_question_results = await data_link_generator.agenerate(
+    data_linked_question_results = await data_linked_generator.agenerate(
         num_questions=num_questions,
         oversample_factor=oversample_factor,
     )
 
     # save both candidate questions and the final selected questions
     save_questions(
-        data_link_question_results.selected_questions,
-        f"{output_data_path}/data_link_questions/",
+        data_linked_question_results.selected_questions,
+        f"{output_data_path}/data_linked_questions/",
         "selected_questions",
     )
     save_questions(
-        data_link_question_results.selected_questions,
-        f"{output_data_path}/data_link_questions/",
+        data_linked_question_results.selected_questions,
+        f"{output_data_path}/data_linked_questions/",
         "selected_questions_text",
         question_text_only=True,
     )
     save_questions(
-        data_link_question_results.candidate_questions,
-        f"{output_data_path}/data_link_questions/",
+        data_linked_question_results.candidate_questions,
+        f"{output_data_path}/data_linked_questions/",
         "candidate_questions",
         save_assertions=False,  # Only save assertions for selected questions
     )
 
     # Save question stats (includes pipeline stats)
-    if hasattr(data_link_question_results, "pipeline_stats"):
+    if hasattr(data_linked_question_results, "pipeline_stats"):
         import json
-        stats = data_link_question_results.pipeline_stats
-        stats_path = Path(f"{output_data_path}/data_link_questions/question_stats.json")
-        with open(stats_path, "w") as f:
-            json.dump(stats, f, indent=2)
-        
+        stats = data_linked_question_results.pipeline_stats
+        stats_path = Path(f"{output_data_path}/data_linked_questions/question_stats.json")
+        stats_path.write_text(json.dumps(stats, indent=2))
+
         # Print summary stats
-        rich_print("\n[bold]Data Link Question Generation Summary:[/bold]")
+        rich_print("\n[bold]Data-Linked Question Generation Summary:[/bold]")
         rich_print(f"  Entity groups: {stats.get('entity_groups', 'N/A')}")
         rich_print(f"  Generated: {stats.get('generated', 'N/A')}")
         rich_print(f"  After batch validation: {stats.get('after_batch_validation', 'N/A')} (filtered {stats.get('batch_validation_filtered', 0)})")
@@ -276,7 +275,7 @@ async def __generate_data_link(
         if "type_distribution" in stats:
             rich_print(f"  Type distribution: {stats['type_distribution']}")
         if "quality_scores" in stats:
-            qs = stats['quality_scores']
+            qs = stats["quality_scores"]
             rich_print(f"  Quality scores: min={qs.get('min', 'N/A'):.2f}, max={qs.get('max', 'N/A'):.2f}, avg={qs.get('avg', 'N/A'):.2f}")
 
 
@@ -446,7 +445,7 @@ SCOPE_SOURCE_MAPPING: dict[Any, Any] = {
     GenerationType.activity_global: __generate_activity_global,
     GenerationType.data_local: __generate_data_local,
     GenerationType.data_global: __generate_data_global,
-    GenerationType.data_link: __generate_data_link,
+    GenerationType.data_linked: __generate_data_linked,
 }
 
 
@@ -549,8 +548,8 @@ def autoq(
 
     # Only create clustered sample if needed
     # - data_local needs sample_texts.parquet
-    # - activity_* needs sample_texts.parquet  
-    # - data_global and data_link use local questions (don't need sample)
+    # - activity_* needs sample_texts.parquet
+    # - data_global and data_linked use local questions (don't need sample)
     needs_sample = any(
         gt in generation_types
         for gt in [
@@ -623,16 +622,16 @@ def autoq(
             loop.run_until_complete(activity_fn(**activity_fn_kwargs))
             first_activity = False
         else:
-            # Handle data question types (data_local, data_global, data_link)
+            # Handle data question types (data_local, data_global, data_linked)
             if generation_type == GenerationType.data_local:
                 data_config = config.data_local
                 prompt_config = config.data_questions_prompt_config.data_local_prompt_config
             elif generation_type == GenerationType.data_global:
                 data_config = config.data_global
                 prompt_config = config.data_questions_prompt_config.data_global_prompt_config
-            else:  # data_link
-                data_config = config.data_link
-                prompt_config = config.data_questions_prompt_config.data_link_prompt_config
+            else:  # data_linked
+                data_config = config.data_linked
+                prompt_config = config.data_questions_prompt_config.data_linked_prompt_config
 
             data_fn = SCOPE_SOURCE_MAPPING[generation_type]
             # Build kwargs for the data function
@@ -661,16 +660,16 @@ def autoq(
                 data_kwargs["enable_question_validation"] = (
                     config.data_global.enable_question_validation
                 )
-            # Add entity grouping params only for data_link
-            if generation_type == GenerationType.data_link:
+            # Add entity grouping params only for data_linked
+            if generation_type == GenerationType.data_linked:
                 data_kwargs["min_questions_per_entity"] = (
-                    config.data_link.min_questions_per_entity
+                    config.data_linked.min_questions_per_entity
                 )
                 data_kwargs["max_questions_per_entity"] = (
-                    config.data_link.max_questions_per_entity
+                    config.data_linked.max_questions_per_entity
                 )
                 data_kwargs["type_balance_weight"] = (
-                    config.data_link.type_balance_weight
+                    config.data_linked.type_balance_weight
                 )
             loop.run_until_complete(data_fn(**data_kwargs))
 
@@ -763,7 +762,7 @@ class AssertionType(StrEnum):
 
     local = "local"
     global_ = "global"
-    link = "link"
+    linked = "linked"
 
 
 async def __generate_assertions_for_questions(
@@ -805,8 +804,8 @@ async def __generate_assertions_for_questions(
         config = assertion_config.local
         system_prompt = assertion_prompt_config.local_assertion_gen_prompt.template
         validation_prompt = assertion_prompt_config.local_validation_prompt.template
-    elif assertion_type == AssertionType.link:
-        config = assertion_config.link
+    elif assertion_type == AssertionType.linked:
+        config = assertion_config.linked
         system_prompt = assertion_prompt_config.local_assertion_gen_prompt.template
         validation_prompt = assertion_prompt_config.local_validation_prompt.template
     else:  # global
@@ -831,7 +830,7 @@ async def __generate_assertions_for_questions(
         )
 
     # Create assertion generator based on type
-    if assertion_type in [AssertionType.local, AssertionType.link]:
+    if assertion_type in [AssertionType.local, AssertionType.linked]:
         generator = LocalClaimAssertionGenerator(
             llm=llm,
             llm_params=llm_params,
@@ -899,7 +898,7 @@ def generate_assertions(
         AssertionType,
         typer.Option(
             "--type", "-t",
-            help="Type of assertions to generate: 'local', 'global', or 'link'.",
+            help="Type of assertions to generate: 'local', 'global', or 'linked'.",
         ),
     ] = AssertionType.local,
     print_model_usage: Annotated[
@@ -924,10 +923,10 @@ def generate_assertions(
             output/data_global_questions/candidate_questions.json \
             output/data_global_questions/ --type global
 
-        # Generate link assertions
+        # Generate linked assertions
         benchmark-qed autoq generate-assertions settings.yaml \
-            output/data_link_questions/candidate_questions.json \
-            output/data_link_questions/ --type link
+            output/data_linked_questions/candidate_questions.json \
+            output/data_linked_questions/ --type linked
     """
     config = load_config(configuration_path, QuestionGenerationConfig)
 
@@ -960,8 +959,8 @@ def generate_assertions(
     # Log configuration
     if assertion_type == AssertionType.local:
         assertion_cfg = config.assertions.local
-    elif assertion_type == AssertionType.link:
-        assertion_cfg = config.assertions.link
+    elif assertion_type == AssertionType.linked:
+        assertion_cfg = config.assertions.linked
     else:
         assertion_cfg = config.assertions.global_
 

@@ -1,12 +1,12 @@
 # Copyright (c) 2025 Microsoft Corporation.
-"""Question validation for link questions using batch validation with clustering."""
+"""Question validation for linked questions using batch validation with clustering."""
 
 from __future__ import annotations
 
 from pathlib import Path
 from typing import TYPE_CHECKING, Any
 
-from benchmark_qed.autoq.prompts.data_questions import link_questions
+from benchmark_qed.autoq.prompts.data_questions import linked_questions
 from benchmark_qed.autoq.question_gen.data_questions.question_validator.base import (
     BatchQuestionValidator,
 )
@@ -18,18 +18,18 @@ if TYPE_CHECKING:
     from benchmark_qed.autoq.data_model.question import Question
     from benchmark_qed.llm.type.base import ChatModel
 
-PROMPTS_PATH = Path(link_questions.__file__).parent
+PROMPTS_PATH = Path(linked_questions.__file__).parent
 
 
-class LinkQuestionValidator(BatchQuestionValidator):
+class LinkedQuestionValidator(BatchQuestionValidator):
     """
-    Validate link questions using batch validation with KMeans clustering.
+    Validate linked questions using batch validation with KMeans clustering.
 
     Uses clustering to group similar questions together, enabling duplicate
     detection within batches. Each batch is validated by an LLM that checks
     for quality issues and marks duplicates.
 
-    Link questions include bridge, comparison, intersection, and temporal types
+    Linked questions include bridge, comparison, intersection, and temporal types
     that require entity-specific validation criteria.
     """
 
@@ -42,7 +42,7 @@ class LinkQuestionValidator(BatchQuestionValidator):
         random_seed: int = RANDOM_SEED,
     ) -> None:
         """
-        Initialize the LinkQuestionValidator.
+        Initialize the LinkedQuestionValidator.
 
         Parameters
         ----------
@@ -66,16 +66,16 @@ class LinkQuestionValidator(BatchQuestionValidator):
         )
 
     def _get_default_prompt_path(self) -> Path:
-        """Return the path to the link validation prompt."""
+        """Return the path to the linked validation prompt."""
         return PROMPTS_PATH / "batch_validation_prompt.txt"
 
     def _format_question_for_validation(
         self, idx: int, question: Question
     ) -> dict[str, Any]:
         """
-        Format a link question for validation.
+        Format a linked question for validation.
 
-        Includes entity, question type, and draft answer for link-specific
+        Includes entity, question type, and draft answer for linked-specific
         validation.
 
         Parameters

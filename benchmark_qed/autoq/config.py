@@ -22,7 +22,7 @@ from benchmark_qed.autoq.prompts.data_questions import (
     global_questions as data_global_prompts,
 )
 from benchmark_qed.autoq.prompts.data_questions import (
-    link_questions as data_link_prompts,
+    linked_questions as data_linked_prompts,
 )
 from benchmark_qed.autoq.prompts.data_questions import (
     local_questions as data_local_prompts,
@@ -39,7 +39,7 @@ AUTOQ_ACTIVITY_LOCAL_PROMPTS_PATH = Path(activity_local_prompts.__file__).parent
 
 AUTOQ_DATA_PROMPTS_PATH = Path(autoq_data_prompts.__file__).parent
 AUTOQ_DATA_GLOBAL_PROMPTS_PATH = Path(data_global_prompts.__file__).parent
-AUTOQ_DATA_LINK_PROMPTS_PATH = Path(data_link_prompts.__file__).parent
+AUTOQ_DATA_LINKED_PROMPTS_PATH = Path(data_linked_prompts.__file__).parent
 AUTOQ_DATA_LOCAL_PROMPTS_PATH = Path(data_local_prompts.__file__).parent
 AUTOQ_ASSERTIONS_PROMPTS_PATH = AUTOQ_DATA_PROMPTS_PATH / "assertions"
 
@@ -100,10 +100,10 @@ class DataGlobalQuestionConfig(QuestionConfig):
     )
 
 
-class DataLinkQuestionConfig(QuestionConfig):
-    """Configuration for data-link question generation.
+class DataLinkedQuestionConfig(QuestionConfig):
+    """Configuration for data-linked question generation.
 
-    Link questions combine multiple local questions that share named entities
+    Linked questions combine multiple local questions that share named entities
     to create harder, multi-hop style questions (similar to HotpotQA).
     """
 
@@ -203,10 +203,10 @@ class GlobalAssertionConfig(BaseModel):
     )
 
 
-class LinkAssertionConfig(BaseModel):
-    """Configuration for link assertion generation.
+class LinkedAssertionConfig(BaseModel):
+    """Configuration for linked assertion generation.
 
-    Link assertions use a simplified approach: single LLM call with all claims,
+    Linked assertions use a simplified approach: single LLM call with all claims,
     then optional validation. No MAP or DEDUPE phases needed since claims are
     already filtered to those relevant to the question.
     """
@@ -234,7 +234,7 @@ class LinkAssertionConfig(BaseModel):
 
 
 class AssertionConfig(BaseModel):
-    """Configuration for assertion generation (local, global, and link)."""
+    """Configuration for assertion generation (local, global, and linked)."""
 
     local: LocalAssertionConfig = Field(
         default_factory=LocalAssertionConfig,
@@ -245,9 +245,9 @@ class AssertionConfig(BaseModel):
         alias="global",
         description="Configuration for global assertion generation.",
     )
-    link: LinkAssertionConfig = Field(
-        default_factory=LinkAssertionConfig,
-        description="Configuration for link assertion generation.",
+    linked: LinkedAssertionConfig = Field(
+        default_factory=LinkedAssertionConfig,
+        description="Configuration for linked assertion generation.",
     )
 
     model_config: ClassVar[ConfigDict] = {"populate_by_name": True}
@@ -289,11 +289,11 @@ class AssertionPromptConfig(BaseModel):
         ),
         description="Prompt for validating global assertions (theme-focused) against sources.",
     )
-    link_assertion_dedupe_prompt: PromptConfig = Field(
+    linked_assertion_dedupe_prompt: PromptConfig = Field(
         default=PromptConfig(
-            prompt=AUTOQ_ASSERTIONS_PROMPTS_PATH / "link_assertion_dedupe_prompt.txt"
+            prompt=AUTOQ_ASSERTIONS_PROMPTS_PATH / "linked_assertion_dedupe_prompt.txt"
         ),
-        description="Prompt for deduplicating link assertions (no synthesis, just filtering).",
+        description="Prompt for deduplicating linked assertions (no synthesis, just filtering).",
     )
 
 
@@ -521,38 +521,38 @@ class DataLocalPromptConfig(BaseModel):
     )
 
 
-class DataLinkPromptConfig(BaseModel):
-    """Configuration for data-link question generation prompts."""
+class DataLinkedPromptConfig(BaseModel):
+    """Configuration for data-linked question generation prompts."""
 
     bridge_question_system_prompt: PromptConfig = Field(
         default=PromptConfig(
-            prompt=AUTOQ_DATA_LINK_PROMPTS_PATH / "bridge_question_system_prompt.txt"
+            prompt=AUTOQ_DATA_LINKED_PROMPTS_PATH / "bridge_question_system_prompt.txt"
         ),
-        description="System prompt for generating bridge-style link questions.",
+        description="System prompt for generating bridge-style linked questions.",
     )
     comparison_question_system_prompt: PromptConfig = Field(
         default=PromptConfig(
-            prompt=AUTOQ_DATA_LINK_PROMPTS_PATH / "comparison_question_system_prompt.txt"
+            prompt=AUTOQ_DATA_LINKED_PROMPTS_PATH / "comparison_question_system_prompt.txt"
         ),
-        description="System prompt for generating comparison-style link questions.",
+        description="System prompt for generating comparison-style linked questions.",
     )
     intersection_question_system_prompt: PromptConfig = Field(
         default=PromptConfig(
-            prompt=AUTOQ_DATA_LINK_PROMPTS_PATH / "intersection_question_system_prompt.txt"
+            prompt=AUTOQ_DATA_LINKED_PROMPTS_PATH / "intersection_question_system_prompt.txt"
         ),
-        description="System prompt for generating intersection-style link questions.",
+        description="System prompt for generating intersection-style linked questions.",
     )
-    link_question_user_prompt: PromptConfig = Field(
+    linked_question_user_prompt: PromptConfig = Field(
         default=PromptConfig(
-            prompt=AUTOQ_DATA_LINK_PROMPTS_PATH / "link_question_user_prompt.txt"
+            prompt=AUTOQ_DATA_LINKED_PROMPTS_PATH / "linked_question_user_prompt.txt"
         ),
-        description="User prompt for link question generation.",
+        description="User prompt for linked question generation."
     )
     batch_validation_prompt: PromptConfig = Field(
         default=PromptConfig(
-            prompt=AUTOQ_DATA_LINK_PROMPTS_PATH / "batch_validation_prompt.txt"
+            prompt=AUTOQ_DATA_LINKED_PROMPTS_PATH / "batch_validation_prompt.txt"
         ),
-        description="Prompt for batch validation of link questions.",
+        description="Prompt for batch validation of linked questions.",
     )
 
 
@@ -576,9 +576,9 @@ class DataQuestionsPromptConfig(BaseModel):
         description="Configuration for local data question generation prompts.",
     )
 
-    data_link_prompt_config: DataLinkPromptConfig = Field(
-        default_factory=DataLinkPromptConfig,
-        description="Configuration for link data question generation prompts.",
+    data_linked_prompt_config: DataLinkedPromptConfig = Field(
+        default_factory=DataLinkedPromptConfig,
+        description="Configuration for linked data question generation prompts.",
     )
 
 
@@ -600,9 +600,9 @@ class QuestionGenerationConfig(BaseModel):
         description="Configuration for generating questions from global data.",
     )
 
-    data_link: DataLinkQuestionConfig = Field(
-        default_factory=DataLinkQuestionConfig,
-        description="Configuration for generating link questions from local questions.",
+    data_linked: DataLinkedQuestionConfig = Field(
+        default_factory=DataLinkedQuestionConfig,
+        description="Configuration for generating linked questions from local questions.",
     )
 
     activity_local: ActivityQuestionConfig = Field(
@@ -664,9 +664,11 @@ class QuestionGenerationConfig(BaseModel):
 class QuestionType(str):
     """Enumeration for question types that support assertion regeneration."""
 
+    __slots__ = ()
+
     DATA_LOCAL = "data_local"
     DATA_GLOBAL = "data_global"
-    DATA_LINK = "data_link"
+    DATA_LINKED = "data_linked"
 
 
 class AssertionRegenConfig(BaseModel):
@@ -678,7 +680,7 @@ class AssertionRegenConfig(BaseModel):
 
     question_type: str = Field(
         ...,
-        description="Type of questions to regenerate assertions for: 'data_local', 'data_global', or 'data_link'.",
+        description="Type of questions to regenerate assertions for: 'data_local', 'data_global', or 'data_linked'.",
     )
 
     questions_path: Path = Field(
