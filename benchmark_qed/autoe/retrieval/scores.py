@@ -31,6 +31,7 @@ from benchmark_qed.autoe.data_model.retrieval_result import (
     RetrievalResult,
     load_retrieval_results_from_dicts,
 )
+
 # Re-export from retrieval_metrics subpackage (will be deprecated, use retrieval/)
 from benchmark_qed.autoe.retrieval_metrics.reference_gen.cluster_relevance import (
     QueryClusterReferenceResult,
@@ -74,7 +75,8 @@ def load_clusters_from_json(
         text_units_path: Optional path to text units file (parquet/json/csv).
             Required if clusters use text_unit_ids format.
 
-    Returns:
+    Returns
+    -------
         List of TextCluster objects with full TextUnit data.
     """
     with clusters_path.open(encoding="utf-8") as f:
@@ -112,10 +114,12 @@ def load_clusters_from_json(
                 text_col = (
                     "text"
                     if "text" in df.columns
-                    else "chunk" if "chunk" in df.columns else df.columns[1]
+                    else "chunk"
+                    if "chunk" in df.columns
+                    else df.columns[1]
                 )
                 text_unit_map = dict(
-                    zip(df[id_col].astype(str), df[text_col].astype(str))
+                    zip(df[id_col].astype(str), df[text_col].astype(str), strict=False)
                 )
                 log.info(
                     f"Loaded {len(text_unit_map)} text units from {text_units_path}"
@@ -167,7 +171,8 @@ def load_reference_results(
         question_set: Name of the question set (unused when reference_filename is set).
         reference_filename: Filename for reference data within reference_dir.
 
-    Returns:
+    Returns
+    -------
         List of QueryClusterReferenceResult objects.
     """
     reference_file = reference_dir / reference_filename
@@ -197,7 +202,8 @@ def load_retrieval_results(
         context_id_key: Key name for chunk ID in retrieval results.
         context_text_key: Key name for chunk text in retrieval results.
 
-    Returns:
+    Returns
+    -------
         List of RetrievalResult objects.
     """
     with retrieval_path.open(encoding="utf-8") as f:
@@ -225,7 +231,8 @@ async def assess_rag_method_relevance(
         relevance_rater: RelevanceRater instance for assessing chunk relevance.
         max_concurrent: Maximum number of concurrent relevance assessments.
 
-    Returns:
+    Returns
+    -------
         BatchRelevanceResult containing all relevance assessments.
     """
     return await assess_batch_relevance(
@@ -258,7 +265,8 @@ def calculate_retrieval_metrics(
         fidelity_metric: Fidelity metric to use (JS or TVD).
         cluster_match_by: How to match text units to clusters.
 
-    Returns:
+    Returns
+    -------
         Dictionary with all metrics including precision, recall, fidelity, and summary.
     """
     # Create mapping if not provided
@@ -331,7 +339,8 @@ def extract_per_query_metrics(
         fidelity_metric: Fidelity metric to use (JS or TVD).
         cluster_match_by: How to match text units to clusters.
 
-    Returns:
+    Returns
+    -------
         DataFrame with one row per query and columns for each metric.
     """
     if text_unit_to_cluster_mapping is None:
@@ -422,7 +431,8 @@ def compare_retrieval_metrics_significance(
         alpha: Significance level.
         correction_method: P-value correction method.
 
-    Returns:
+    Returns
+    -------
         Dictionary mapping metric names to GroupComparisonResult.
     """
     results: dict[str, GroupComparisonResult] = {}
@@ -536,15 +546,17 @@ def save_significance_results(
         )
 
         # Save omnibus result
-        omnibus_df = pd.DataFrame([{
-            "metric": metric_name,
-            "test_name": result.omnibus.test_name,
-            "statistic": result.omnibus.statistic,
-            "p_value": result.omnibus.p_value,
-            "is_significant": result.omnibus.is_significant,
-            "alpha": result.omnibus.alpha,
-            "is_normal": result.omnibus.is_normal,
-        }])
+        omnibus_df = pd.DataFrame([
+            {
+                "metric": metric_name,
+                "test_name": result.omnibus.test_name,
+                "statistic": result.omnibus.statistic,
+                "p_value": result.omnibus.p_value,
+                "is_significant": result.omnibus.is_significant,
+                "alpha": result.omnibus.alpha,
+                "is_normal": result.omnibus.is_normal,
+            }
+        ])
         omnibus_df.to_csv(
             question_set_dir / f"significance_{metric_name}_omnibus.csv", index=False
         )
@@ -607,7 +619,8 @@ async def run_retrieval_evaluation(
         reference_filename: Filename for reference data.
         cluster_match_by: How to match text units to clusters.
 
-    Returns:
+    Returns
+    -------
         DataFrame with overall summary of retrieval metrics.
     """
     output_dir.mkdir(parents=True, exist_ok=True)

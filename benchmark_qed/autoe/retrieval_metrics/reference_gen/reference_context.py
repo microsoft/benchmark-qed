@@ -1,7 +1,6 @@
 # Copyright (c) 2025 Microsoft Corporation.
 """Module containing functions that take a list of ClusterRelevanceResult and return a list of relevant clusters with associated relevant units given a relevance threshold."""
 
-
 from benchmark_qed.autod.data_model.text_unit import TextUnit
 from benchmark_qed.autoe.retrieval_metrics.reference_gen.cluster_relevance import (
     ClusterRelevanceResult,
@@ -28,7 +27,8 @@ def get_relevant_units_per_cluster(
     for cluster_result in cluster_results:
         # Filter assessments that meet the relevance threshold
         relevant_assessments = [
-            item for item in cluster_result.all_assessments.assessment
+            item
+            for item in cluster_result.all_assessments.assessment
             if item.score >= relevance_threshold and item.text_unit is not None
         ]
 
@@ -38,6 +38,7 @@ def get_relevant_units_per_cluster(
         relevant_units_by_cluster[cluster_result.cluster_id] = relevant_units
 
     return relevant_units_by_cluster
+
 
 def get_relevant_clusters(
     cluster_results: list[ClusterRelevanceResult],
@@ -54,7 +55,9 @@ def get_relevant_clusters(
     -------
         Dictionary mapping cluster_id to count of relevant text units that meet the threshold.
     """
-    relevant_units_per_clusters = get_relevant_units_per_cluster(cluster_results, relevance_threshold=relevance_threshold)
+    relevant_units_per_clusters = get_relevant_units_per_cluster(
+        cluster_results, relevance_threshold=relevance_threshold
+    )
 
     relevant_clusters = {}
     for cluster_id, relevant_units in relevant_units_per_clusters.items():

@@ -13,10 +13,20 @@ class RetrievalResult(BaseModel):
     """Container for query and context data for relevance assessment."""
 
     question_id: str = Field(description="Unique identifier for the question.")
-    question_text: str = Field(description="The text of the question to assess relevance against.")
-    context: Sequence[TextUnit | dict[str, str]] = Field(description="List of text units or dictionaries representing the context.")
-    context_id_key: str = Field(default="source_id", description="Key name for the ID field in dictionary context items.")
-    context_text_key: str = Field(default="source_text", description="Key name for the text field in dictionary context items.")
+    question_text: str = Field(
+        description="The text of the question to assess relevance against."
+    )
+    context: Sequence[TextUnit | dict[str, str]] = Field(
+        description="List of text units or dictionaries representing the context."
+    )
+    context_id_key: str = Field(
+        default="source_id",
+        description="Key name for the ID field in dictionary context items.",
+    )
+    context_text_key: str = Field(
+        default="source_text",
+        description="Key name for the text field in dictionary context items.",
+    )
 
     model_config = {"frozen": True}
 
@@ -36,7 +46,9 @@ class RetrievalResult(BaseModel):
         # Validate context items
         for i, item in enumerate(self.context):
             if not isinstance(item, TextUnit) and not (
-                isinstance(item, dict) and self.context_id_key in item and self.context_text_key in item
+                isinstance(item, dict)
+                and self.context_id_key in item
+                and self.context_text_key in item
             ):
                 msg = (
                     f"Context item {i} must be TextUnit or dict with '{self.context_id_key}' "
@@ -117,7 +129,12 @@ def load_retrieval_results_from_dicts(
         ...     {
         ...         "query_id": "q1",
         ...         "query_text": "What is renewable energy?",
-        ...         "documents": [{"doc_id": "doc1", "content": "Solar energy is clean..."}]
+        ...         "documents": [
+        ...             {
+        ...                 "doc_id": "doc1",
+        ...                 "content": "Solar energy is clean...",
+        ...             }
+        ...         ],
         ...     }
         ... ]
         >>> # Using custom keys
@@ -127,9 +144,11 @@ def load_retrieval_results_from_dicts(
         ...     context_text_key="content",
         ...     question_id_key="query_id",
         ...     question_text_key="query_text",
-        ...     context_key="documents"
+        ...     context_key="documents",
         ... )
-        >>> len(retrieval_results)
+        >>> len(
+        ...     retrieval_results
+        ... )
         1
 
     """
@@ -154,7 +173,9 @@ def load_retrieval_results_from_dicts(
                         # Create TextUnit from dictionary
                         text_unit = TextUnit(
                             id=ctx_item[context_id_key],
-                            short_id=ctx_item.get("short_id", str(ctx_item[context_id_key])[:8]),
+                            short_id=ctx_item.get(
+                                "short_id", str(ctx_item[context_id_key])[:8]
+                            ),
                             text=ctx_item[context_text_key],
                         )
                         transformed_context.append(text_unit)

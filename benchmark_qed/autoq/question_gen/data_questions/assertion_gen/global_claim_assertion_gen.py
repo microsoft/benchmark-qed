@@ -152,12 +152,14 @@ class GlobalClaimAssertionGenerator(BaseAssertionGenerator):
         # Local generator for map phase processing
         # Uses map prompt to generate specific factual assertions
         # The reduce step will consolidate these into thematic global assertions
-        self.local_generator: LocalClaimAssertionGenerator = LocalClaimAssertionGenerator(
-            llm=self.llm,
-            llm_params=self.llm_params,
-            json_mode=self.json_mode,
-            system_prompt=self.map_prompt,
-            max_assertions=None,  # No assertion limiting in map step
+        self.local_generator: LocalClaimAssertionGenerator = (
+            LocalClaimAssertionGenerator(
+                llm=self.llm,
+                llm_params=self.llm_params,
+                json_mode=self.json_mode,
+                system_prompt=self.map_prompt,
+                max_assertions=None,  # No assertion limiting in map step
+            )
         )
 
     async def agenerate_assertions(
@@ -197,9 +199,7 @@ class GlobalClaimAssertionGenerator(BaseAssertionGenerator):
             all_map_assertions.extend(assertion_list)
 
         # Debug: Check map assertions for empty sources
-        empty_source_count = sum(
-            1 for a in all_map_assertions if not a.sources
-        )
+        empty_source_count = sum(1 for a in all_map_assertions if not a.sources)
         if empty_source_count > 0:
             log.warning(
                 "MAP ASSERTIONS: %s/%s map assertions have EMPTY sources!",
@@ -663,12 +663,10 @@ class GlobalClaimAssertionGenerator(BaseAssertionGenerator):
                 source_str = str(source).strip()
                 if source_str in assertion_mapping:
                     source_assertion = assertion_mapping[source_str]
-                    mapped_sources.append(
-                        {
-                            "statement": source_assertion["statement"],
-                            "score": source_assertion["score"],
-                        }
-                    )
+                    mapped_sources.append({
+                        "statement": source_assertion["statement"],
+                        "score": source_assertion["score"],
+                    })
                     # Aggregate source chunks from the original assertion
                     if source_assertion["sources"]:
                         aggregated_source_chunks.extend(source_assertion["sources"])

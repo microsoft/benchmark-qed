@@ -27,12 +27,11 @@ def _get_text_unit_key(text_unit: Any, match_by: str = "text") -> str:
     """Get the key for a text unit based on match_by setting."""
     if match_by == "text":
         return text_unit.text.strip().lower()
-    elif match_by == "id":
+    if match_by == "id":
         return text_unit.id
-    elif match_by == "short_id":
+    if match_by == "short_id":
         return text_unit.short_id or text_unit.id
-    else:
-        return text_unit.text.strip().lower()
+    return text_unit.text.strip().lower()
 
 
 def get_retrieved_clusters(
@@ -110,10 +109,9 @@ def calculate_single_query_recall(
     # Get ground truth: relevant clusters based on cluster relevance results
     relevant_clusters_dict = get_relevant_clusters(
         cluster_results=retrieval_reference.cluster_results,  # These are ClusterRelevanceResult objects
-        relevance_threshold=relevance_threshold
+        relevance_threshold=relevance_threshold,
     )
     relevant_cluster_ids = set(relevant_clusters_dict.keys())
-
 
     # Get retrieved clusters
     retrieved_cluster_ids = get_retrieved_clusters(
@@ -124,7 +122,9 @@ def calculate_single_query_recall(
     )
 
     # Calculate intersection: retrieved clusters that are relevant
-    retrieved_relevant_cluster_ids = retrieved_cluster_ids.intersection(relevant_cluster_ids)
+    retrieved_relevant_cluster_ids = retrieved_cluster_ids.intersection(
+        relevant_cluster_ids
+    )
 
     # Calculate recall
     total_relevant_clusters = len(relevant_cluster_ids)
@@ -135,7 +135,11 @@ def calculate_single_query_recall(
         total_relevant_clusters,
     )
 
-    recall = retrieved_relevant_clusters / total_relevant_clusters if total_relevant_clusters > 0 else 0.0
+    recall = (
+        retrieved_relevant_clusters / total_relevant_clusters
+        if total_relevant_clusters > 0
+        else 0.0
+    )
 
     return {
         "recall": recall,
@@ -145,7 +149,9 @@ def calculate_single_query_recall(
         "retrieved_cluster_ids": retrieved_cluster_ids,
         "relevant_cluster_ids": relevant_cluster_ids,
         "retrieved_relevant_cluster_ids": retrieved_relevant_cluster_ids,
-        "cluster_classification_error": len([id for id in retrieved_cluster_ids if id not in relevant_cluster_ids])
+        "cluster_classification_error": len([
+            id for id in retrieved_cluster_ids if id not in relevant_cluster_ids
+        ]),
     }
 
 
@@ -195,7 +201,7 @@ def calculate_recall(
             "total_classification_errors": 0,
             "avg_classification_errors_per_query": 0.0,
             "classification_error_rate": 0.0,
-            "query_details": []
+            "query_details": [],
         }
 
     # Create text unit to cluster mapping if not provided
@@ -236,7 +242,7 @@ def calculate_recall(
         single_query_reference = QueryClusterReferenceResult(
             question_id=question_id,
             question_text=query_relevance_result.question_text,
-            cluster_results=cluster_reference
+            cluster_results=cluster_reference,
         )
 
         # Calculate recall for this query
@@ -256,14 +262,18 @@ def calculate_recall(
         query_details.append({
             "question_id": question_id,
             "question_text": query_relevance_result.question_text,
-            **recall_result
+            **recall_result,
         })
 
         # Accumulate for micro-averaged recall and classification error stats
         total_relevant_clusters += recall_result["relevant_clusters"]
-        total_retrieved_relevant_clusters += recall_result["retrieved_relevant_clusters"]
+        total_retrieved_relevant_clusters += recall_result[
+            "retrieved_relevant_clusters"
+        ]
         total_classification_errors += recall_result["cluster_classification_error"]
-        classification_errors_per_query.append(recall_result["cluster_classification_error"])
+        classification_errors_per_query.append(
+            recall_result["cluster_classification_error"]
+        )
 
     if not query_recalls:
         log.warning("No valid queries processed for recall calculation")
@@ -277,7 +287,7 @@ def calculate_recall(
             "query_details": [],
             "total_classification_errors": 0,
             "avg_classification_errors_per_query": 0.0,
-            "classification_error_rate": 0.0
+            "classification_error_rate": 0.0,
         }
 
     macro_averaged_recall = np.mean(query_recalls)
@@ -286,13 +296,20 @@ def calculate_recall(
     max_recall = np.max(query_recalls)
     micro_averaged_recall = (
         total_retrieved_relevant_clusters / total_relevant_clusters
-        if total_relevant_clusters > 0 else 0.0
+        if total_relevant_clusters > 0
+        else 0.0
     )
 
     # Calculate cluster classification error statistics
     avg_classification_errors_per_query = np.mean(classification_errors_per_query)
-    total_retrieved_clusters = sum(len(detail["retrieved_cluster_ids"]) for detail in query_details)
-    classification_error_rate = total_classification_errors / total_retrieved_clusters if total_retrieved_clusters > 0 else 0.0
+    total_retrieved_clusters = sum(
+        len(detail["retrieved_cluster_ids"]) for detail in query_details
+    )
+    classification_error_rate = (
+        total_classification_errors / total_retrieved_clusters
+        if total_retrieved_clusters > 0
+        else 0.0
+    )
 
     log.info(
         "Calculated recall for %d queries: "
@@ -315,7 +332,9 @@ def calculate_recall(
         "relevance_threshold": relevance_threshold,
         "total_queries": len(query_relevance_results),
         "total_classification_errors": total_classification_errors,
-        "macro_averaged_classification_error": float(avg_classification_errors_per_query),
+        "macro_averaged_classification_error": float(
+            avg_classification_errors_per_query
+        ),
         "micro_averaged_classification_error": float(classification_error_rate),
-        "query_details": query_details
+        "query_details": query_details,
     }

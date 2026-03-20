@@ -532,13 +532,15 @@ class DataLinkedPromptConfig(BaseModel):
     )
     comparison_question_system_prompt: PromptConfig = Field(
         default=PromptConfig(
-            prompt=AUTOQ_DATA_LINKED_PROMPTS_PATH / "comparison_question_system_prompt.txt"
+            prompt=AUTOQ_DATA_LINKED_PROMPTS_PATH
+            / "comparison_question_system_prompt.txt"
         ),
         description="System prompt for generating comparison-style linked questions.",
     )
     intersection_question_system_prompt: PromptConfig = Field(
         default=PromptConfig(
-            prompt=AUTOQ_DATA_LINKED_PROMPTS_PATH / "intersection_question_system_prompt.txt"
+            prompt=AUTOQ_DATA_LINKED_PROMPTS_PATH
+            / "intersection_question_system_prompt.txt"
         ),
         description="System prompt for generating intersection-style linked questions.",
     )
@@ -546,7 +548,7 @@ class DataLinkedPromptConfig(BaseModel):
         default=PromptConfig(
             prompt=AUTOQ_DATA_LINKED_PROMPTS_PATH / "linked_question_user_prompt.txt"
         ),
-        description="User prompt for linked question generation."
+        description="User prompt for linked question generation.",
     )
     batch_validation_prompt: PromptConfig = Field(
         default=PromptConfig(

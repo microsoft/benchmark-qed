@@ -6,6 +6,6 @@ from .cluster import TextCluster
 
 __all__ = [
     "BaseClustering",
-    "TextCluster", 
+    "TextCluster",
     "print_clusters",
 ]

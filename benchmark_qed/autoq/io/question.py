@@ -111,7 +111,9 @@ def _save_assertions(questions: list[Question], output_path: Path) -> None:
             # Include supporting_assertions if available (for global assertions)
             # These are the child/local assertions that were consolidated
             if attributes and "supporting_assertions" in attributes:
-                ranked_assertion["supporting_assertions"] = attributes["supporting_assertions"]
+                ranked_assertion["supporting_assertions"] = attributes[
+                    "supporting_assertions"
+                ]
 
             ranked_assertions.append(ranked_assertion)
 
@@ -237,22 +239,28 @@ def _save_assertions(questions: list[Question], output_path: Path) -> None:
             assertions_data=questions_with_assertions,
             assertion_type="global",
             file_path=str(output_path / "assertions.json"),
-            sources_data=assertion_sources_data if assertion_sources_data else None,
+            sources_data=assertion_sources_data or None,
         )
         save_stats_to_file(stats, output_path / "assertions_stats.json")
-        log.info("Generated assertion statistics: %d questions, %d assertions",
-                 stats.total_questions, stats.total_assertions)
+        log.info(
+            "Generated assertion statistics: %d questions, %d assertions",
+            stats.total_questions,
+            stats.total_assertions,
+        )
 
     if questions_with_map_assertions:
         map_stats = compute_assertion_stats(
             assertions_data=questions_with_map_assertions,
             assertion_type="map",
             file_path=str(output_path / "map_assertions.json"),
-            sources_data=map_assertion_sources_data if map_assertion_sources_data else None,
+            sources_data=map_assertion_sources_data or None,
         )
         save_stats_to_file(map_stats, output_path / "map_assertions_stats.json")
-        log.info("Generated map assertion statistics: %d questions, %d assertions",
-                 map_stats.total_questions, map_stats.total_assertions)
+        log.info(
+            "Generated map assertion statistics: %d questions, %d assertions",
+            map_stats.total_questions,
+            map_stats.total_assertions,
+        )
 
 
 def load_questions(file_path: str, question_text_only: bool = False) -> list[Question]:

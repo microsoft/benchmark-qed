@@ -103,7 +103,9 @@ class QuestionFilterStats:
     # Track filtered questions for debugging
     filtered_questions: list[dict[str, Any]] = field(default_factory=list)
 
-    def add_filtered(self, question: dict[str, Any], reason: str, details: str = "") -> None:
+    def add_filtered(
+        self, question: dict[str, Any], reason: str, details: str = ""
+    ) -> None:
         """Add a filtered question to the log."""
         self.filtered_questions.append({
             "text": question.get("text", "")[:200],
@@ -180,13 +182,20 @@ class DataLinkedQuestionGen(BaseQuestionGen):
     ) -> None:
         if assertion_config is None:
             from benchmark_qed.autoq.config import AssertionConfig
+
             assertion_config = AssertionConfig()
         if assertion_prompt_config is None:
             from benchmark_qed.autoq.config import AssertionPromptConfig
+
             assertion_prompt_config = AssertionPromptConfig()
 
         # Default to bridge questions primarily, with comparison and intersection as secondary options
-        self.question_types = question_types or ["bridge", "comparison", "intersection", "temporal"]
+        self.question_types = question_types or [
+            "bridge",
+            "comparison",
+            "intersection",
+            "temporal",
+        ]
 
         self.assertion_config = assertion_config
         self.random_seed = random_seed
@@ -324,7 +333,9 @@ class DataLinkedQuestionGen(BaseQuestionGen):
                 proportion = claim_count / total_claims if total_claims > 0 else 0
                 questions_for_entity = math.ceil(candidates_per_type * proportion)
                 # Each entity generates up to this many per type, times num types
-                ctx.max_questions_to_generate = max(1, questions_for_entity) * num_question_types
+                ctx.max_questions_to_generate = (
+                    max(1, questions_for_entity) * num_question_types
+                )
 
         total_max = sum(ctx.max_questions_to_generate for ctx in entity_contexts)
         log.info(
@@ -376,7 +387,9 @@ class DataLinkedQuestionGen(BaseQuestionGen):
                 "skipped_parse_error": stats.skipped_parse_error,
                 "skipped_failed_validation": stats.skipped_failed_validation,
             },
-            "filtered_samples": stats.filtered_questions[:20],  # Sample of filtered questions for debugging
+            "filtered_samples": stats.filtered_questions[
+                :20
+            ],  # Sample of filtered questions for debugging
             "generated": len(results),
         }
 
@@ -399,7 +412,9 @@ class DataLinkedQuestionGen(BaseQuestionGen):
             pre_validation_count = len(results)
             results = await self.question_validator.filter_valid_questions(results)
             pipeline_stats["after_batch_validation"] = len(results)
-            pipeline_stats["batch_validation_filtered"] = pre_validation_count - len(results)
+            pipeline_stats["batch_validation_filtered"] = pre_validation_count - len(
+                results
+            )
             log.info(
                 "After batch validation: %s questions remain (filtered %s)",
                 len(results),
@@ -419,9 +434,7 @@ class DataLinkedQuestionGen(BaseQuestionGen):
         if (
             max_assertions is None or max_assertions > 0
         ) and self.assertion_generator is not None:
-            log.info(
-                "Generating assertions for %s candidate questions", len(results)
-            )
+            log.info("Generating assertions for %s candidate questions", len(results))
             invalid_assertions = await self._generate_assertions_for_questions(results)
             if invalid_assertions:
                 log.info(
@@ -431,7 +444,8 @@ class DataLinkedQuestionGen(BaseQuestionGen):
 
         # Step 7: Filter out questions with no valid assertions
         questions_with_assertions = [
-            q for q in results
+            q
+            for q in results
             if q.attributes and q.attributes.get("assertion_count", 0) > 0
         ]
         filtered_out = len(results) - len(questions_with_assertions)
@@ -456,7 +470,11 @@ class DataLinkedQuestionGen(BaseQuestionGen):
         # Type distribution stats
         type_dist: dict[str, int] = {}
         for q in final_questions:
-            qtype = q.attributes.get("question_subtype", "unknown") if q.attributes else "unknown"
+            qtype = (
+                q.attributes.get("question_subtype", "unknown")
+                if q.attributes
+                else "unknown"
+            )
             type_dist[qtype] = type_dist.get(qtype, 0) + 1
         pipeline_stats["type_distribution"] = type_dist
 
@@ -515,7 +533,11 @@ class DataLinkedQuestionGen(BaseQuestionGen):
         # Group questions by type
         by_type: dict[str, list[Question]] = {}
         for q in candidate_questions:
-            qtype = q.attributes.get("question_subtype", "unknown") if q.attributes else "unknown"
+            qtype = (
+                q.attributes.get("question_subtype", "unknown")
+                if q.attributes
+                else "unknown"
+            )
             if qtype not in by_type:
                 by_type[qtype] = []
             by_type[qtype].append(q)
@@ -539,7 +561,11 @@ class DataLinkedQuestionGen(BaseQuestionGen):
         # Log final distribution
         final_dist: dict[str, int] = {}
         for q in selected:
-            qtype = q.attributes.get("question_subtype", "unknown") if q.attributes else "unknown"
+            qtype = (
+                q.attributes.get("question_subtype", "unknown")
+                if q.attributes
+                else "unknown"
+            )
             final_dist[qtype] = final_dist.get(qtype, 0) + 1
         log.info("Question type distribution after selection: %s", final_dist)
 
@@ -605,7 +631,9 @@ class DataLinkedQuestionGen(BaseQuestionGen):
 
         # Get question types
         question_types = [
-            q.attributes.get("question_subtype", "unknown") if q.attributes else "unknown"
+            q.attributes.get("question_subtype", "unknown")
+            if q.attributes
+            else "unknown"
             for q in questions
         ]
         unique_types = list(set(question_types))
@@ -689,9 +717,7 @@ class DataLinkedQuestionGen(BaseQuestionGen):
 
         return [questions[i] for i in selected_indices]
 
-    async def _ensure_embeddings(
-        self, questions: list[Question]
-    ) -> list[Question]:
+    async def _ensure_embeddings(self, questions: list[Question]) -> list[Question]:
         """Ensure all questions have embeddings, generating them if missing.
 
         Args:
@@ -703,9 +729,7 @@ class DataLinkedQuestionGen(BaseQuestionGen):
             Same list of questions with embeddings populated.
 
         """
-        questions_needing_embeddings = [
-            q for q in questions if q.embedding is None
-        ]
+        questions_needing_embeddings = [q for q in questions if q.embedding is None]
 
         if not questions_needing_embeddings:
             return questions
@@ -720,9 +744,7 @@ class DataLinkedQuestionGen(BaseQuestionGen):
             TextUnit(id=q.id, short_id=None, text=q.text)
             for q in questions_needing_embeddings
         ]
-        text_units = await self.text_embedder.embed_batch(
-            text_units, batch_size=32
-        )
+        text_units = await self.text_embedder.embed_batch(text_units, batch_size=32)
 
         # Copy embeddings back to questions
         for q, tu in zip(questions_needing_embeddings, text_units, strict=True):
@@ -780,8 +802,12 @@ class DataLinkedQuestionGen(BaseQuestionGen):
             TextUnit(id=cid, short_id=None, text=text)
             for cid, text in claim_texts_to_embed.items()
         ]
-        log.debug("Embedding %d claim texts for retrieval difficulty", len(claim_text_units))
-        claim_text_units = await self.text_embedder.embed_batch(claim_text_units, batch_size=32)
+        log.debug(
+            "Embedding %d claim texts for retrieval difficulty", len(claim_text_units)
+        )
+        claim_text_units = await self.text_embedder.embed_batch(
+            claim_text_units, batch_size=32
+        )
 
         # Build lookup for claim embeddings
         claim_embeddings: dict[str, list[float]] = {}
@@ -828,9 +854,7 @@ class DataLinkedQuestionGen(BaseQuestionGen):
                 question.attributes["max_source_similarity"] = 0.5
                 question.attributes["retrieval_difficulty"] = 0.5
 
-    def _compute_combined_score(
-        self, questions: list[Question], k: int = 60
-    ) -> None:
+    def _compute_combined_score(self, questions: list[Question], k: int = 60) -> None:
         """Compute combined score using Reciprocal Rank Fusion (RRF).
 
         Combines quality_score and retrieval_difficulty rankings into a single
@@ -882,10 +906,7 @@ class DataLinkedQuestionGen(BaseQuestionGen):
             d_rank = difficulty_ranks.get(id(question), len(valid_questions))
 
             # RRF: quality + retrieval_difficulty (bridge questions rank higher on difficulty)
-            rrf_score = (
-                1.0 / (k + q_rank)
-                + 1.0 / (k + d_rank)
-            )
+            rrf_score = 1.0 / (k + q_rank) + 1.0 / (k + d_rank)
 
             question.attributes["combined_score"] = rrf_score
             question.attributes["quality_rank"] = q_rank
@@ -998,7 +1019,9 @@ class DataLinkedQuestionGen(BaseQuestionGen):
                     short_id=None,
                     text=q.text,
                     text_embedding=q.embedding,
-                    attributes={"quality_score": 1.0},  # Equal quality for input selection
+                    attributes={
+                        "quality_score": 1.0
+                    },  # Equal quality for input selection
                 )
                 text_units.append(tu)
                 question_map[q.id] = q
@@ -1215,23 +1238,14 @@ class DataLinkedQuestionGen(BaseQuestionGen):
         indirect_reference = raw.get("indirect_reference", "")
         null_values = ("null", "none", "n/a", "")
 
-        if (
-            not replaced_entity
-            or replaced_entity.lower() in null_values
-        ):
+        if not replaced_entity or replaced_entity.lower() in null_values:
             return "No replaced_entity"
 
-        if (
-            not indirect_reference
-            or indirect_reference.lower() in null_values
-        ):
+        if not indirect_reference or indirect_reference.lower() in null_values:
             return "No indirect_reference"
 
         if indirect_reference.lower() not in text.lower():
-            return (
-                f"indirect_reference "
-                f"'{indirect_reference[:30]}' not in text"
-            )
+            return f"indirect_reference '{indirect_reference[:30]}' not in text"
 
         return None
 
@@ -1275,8 +1289,7 @@ class DataLinkedQuestionGen(BaseQuestionGen):
 
             # SAFEGUARD A: Validate all claim IDs exist
             invalid_ids = [
-                cid for cid in source_claim_ids
-                if cid not in valid_claim_ids
+                cid for cid in source_claim_ids if cid not in valid_claim_ids
             ]
             if invalid_ids:
                 log.debug(
@@ -1286,7 +1299,9 @@ class DataLinkedQuestionGen(BaseQuestionGen):
                 )
                 if stats:
                     stats.skipped_invalid_claims += 1
-                    stats.add_filtered(raw, "invalid_claims", f"Invalid IDs: {invalid_ids}")
+                    stats.add_filtered(
+                        raw, "invalid_claims", f"Invalid IDs: {invalid_ids}"
+                    )
                 continue
 
             # SAFEGUARD B: Require at least 2 claims (multi-hop requirement)
@@ -1298,20 +1313,18 @@ class DataLinkedQuestionGen(BaseQuestionGen):
                 )
                 if stats:
                     stats.skipped_few_claims += 1
-                    stats.add_filtered(raw, "few_claims", f"Only {len(source_claim_ids)} claims")
+                    stats.add_filtered(
+                        raw, "few_claims", f"Only {len(source_claim_ids)} claims"
+                    )
                 continue
 
             # Extract quality scores from quality sub-dict
             quality_scores = self._extract_quality_scores(raw)
 
             # SAFEGUARD C: Filter by quality scores
-            failed_metrics = self._find_failed_quality_metrics(
-                quality_scores
-            )
+            failed_metrics = self._find_failed_quality_metrics(quality_scores)
             if failed_metrics:
-                failed_str = ", ".join(
-                    f"{m}={s}" for m, s in failed_metrics
-                )
+                failed_str = ", ".join(f"{m}={s}" for m, s in failed_metrics)
                 log.debug(
                     "Question has low quality scores (%s), skipping: %s",
                     failed_str,
@@ -1324,9 +1337,7 @@ class DataLinkedQuestionGen(BaseQuestionGen):
 
             # SAFEGUARD D: Filter bridge questions without proper indirect reference
             if question_type == "bridge":
-                bridge_failure = self._validate_bridge_question(
-                    raw, text
-                )
+                bridge_failure = self._validate_bridge_question(raw, text)
                 if bridge_failure:
                     log.debug(
                         "Bridge question validation failed (%s), skipping: %s",
@@ -1350,8 +1361,7 @@ class DataLinkedQuestionGen(BaseQuestionGen):
 
             # Build source_questions with id and text for easier review
             source_questions = [
-                {"id": q.id, "text": q.text}
-                for q in context.local_questions
+                {"id": q.id, "text": q.text} for q in context.local_questions
             ]
 
             # Build source_claims with full claim info including sources for assertion gen
@@ -1361,7 +1371,9 @@ class DataLinkedQuestionGen(BaseQuestionGen):
                     "statement": claim["statement"],
                     "score": claim.get("score", 50),
                     "source_question_id": claim.get("source_question_id"),
-                    "sources": claim.get("sources", []),  # Include sources for assertions
+                    "sources": claim.get(
+                        "sources", []
+                    ),  # Include sources for assertions
                 }
                 for claim in context.claims
                 if claim["claim_id"] in source_claim_ids
@@ -1396,9 +1408,7 @@ class DataLinkedQuestionGen(BaseQuestionGen):
 
         return questions
 
-    def _extract_quality_scores(
-        self, raw_question: dict[str, Any]
-    ) -> dict[str, Any]:
+    def _extract_quality_scores(self, raw_question: dict[str, Any]) -> dict[str, Any]:
         """Extract quality scores from LLM response and compute composite score.
 
         Args:
@@ -1429,7 +1439,9 @@ class DataLinkedQuestionGen(BaseQuestionGen):
             "temporal": ["temporal_validity"],
         }
 
-        metrics = base_metrics + type_specific_metrics.get(question_type, ["bridge_relevance"])
+        metrics = base_metrics + type_specific_metrics.get(
+            question_type, ["bridge_relevance"]
+        )
 
         scores: dict[str, Any] = {}
         score_values: list[float] = []
@@ -1519,9 +1531,7 @@ class DataLinkedQuestionGen(BaseQuestionGen):
                 async with semaphore:
                     await generate_for_question(q)
 
-            await tqdm_asyncio.gather(*[
-                with_semaphore(q) for q in questions
-            ])
+            await tqdm_asyncio.gather(*[with_semaphore(q) for q in questions])
         else:
             for question in questions:
                 await generate_for_question(question)

@@ -66,7 +66,9 @@ class RationaleRelevanceRater(RelevanceRater):
         return {
             "llm_model": getattr(self.llm_config, "model", None),
             "llm_call_args": getattr(self.llm_config, "call_args", {}),
-            "prompt_template": self.prompt_template.template if self.prompt_template else None,
+            "prompt_template": self.prompt_template.template
+            if self.prompt_template
+            else None,
         }
 
     async def _rate_relevance_impl(
@@ -91,17 +93,20 @@ class RationaleRelevanceRater(RelevanceRater):
         if not text_units:
             return RelevanceAssessmentResponse(assessment=[])
 
-        log.info("Processing %d text units using Rationale methodology", len(text_units))
+        log.info(
+            "Processing %d text units using Rationale methodology", len(text_units)
+        )
 
         # Process each text unit individually
         tasks = [
-            self._assess_unit(query, unit, idx)
-            for idx, unit in enumerate(text_units)
+            self._assess_unit(query, unit, idx) for idx, unit in enumerate(text_units)
         ]
 
         results = await asyncio.gather(*tasks)
 
-        log.info("Completed rationale relevance assessment for %d text units", len(results))
+        log.info(
+            "Completed rationale relevance assessment for %d text units", len(results)
+        )
         return RelevanceAssessmentResponse(assessment=results)
 
     async def _assess_unit(

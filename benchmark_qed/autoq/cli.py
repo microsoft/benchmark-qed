@@ -261,22 +261,31 @@ async def __generate_data_linked(
     # Save question stats (includes pipeline stats)
     if hasattr(data_linked_question_results, "pipeline_stats"):
         import json
+
         stats = data_linked_question_results.pipeline_stats
-        stats_path = Path(f"{output_data_path}/data_linked_questions/question_stats.json")
+        stats_path = Path(
+            f"{output_data_path}/data_linked_questions/question_stats.json"
+        )
         stats_path.write_text(json.dumps(stats, indent=2))
 
         # Print summary stats
         rich_print("\n[bold]Data-Linked Question Generation Summary:[/bold]")
         rich_print(f"  Entity groups: {stats.get('entity_groups', 'N/A')}")
         rich_print(f"  Generated: {stats.get('generated', 'N/A')}")
-        rich_print(f"  After batch validation: {stats.get('after_batch_validation', 'N/A')} (filtered {stats.get('batch_validation_filtered', 0)})")
-        rich_print(f"  After assertion filter: {stats.get('after_assertion_filter', 'N/A')} (filtered {stats.get('assertion_filter_removed', 0)})")
+        rich_print(
+            f"  After batch validation: {stats.get('after_batch_validation', 'N/A')} (filtered {stats.get('batch_validation_filtered', 0)})"
+        )
+        rich_print(
+            f"  After assertion filter: {stats.get('after_assertion_filter', 'N/A')} (filtered {stats.get('assertion_filter_removed', 0)})"
+        )
         rich_print(f"  Selected: {stats.get('selected', 'N/A')}")
         if "type_distribution" in stats:
             rich_print(f"  Type distribution: {stats['type_distribution']}")
         if "quality_scores" in stats:
             qs = stats["quality_scores"]
-            rich_print(f"  Quality scores: min={qs.get('min', 'N/A'):.2f}, max={qs.get('max', 'N/A'):.2f}, avg={qs.get('avg', 'N/A'):.2f}")
+            rich_print(
+                f"  Quality scores: min={qs.get('min', 'N/A'):.2f}, max={qs.get('max', 'N/A'):.2f}, avg={qs.get('avg', 'N/A'):.2f}"
+            )
 
 
 async def __generate_activity_context(
@@ -625,13 +634,19 @@ def autoq(
             # Handle data question types (data_local, data_global, data_linked)
             if generation_type == GenerationType.data_local:
                 data_config = config.data_local
-                prompt_config = config.data_questions_prompt_config.data_local_prompt_config
+                prompt_config = (
+                    config.data_questions_prompt_config.data_local_prompt_config
+                )
             elif generation_type == GenerationType.data_global:
                 data_config = config.data_global
-                prompt_config = config.data_questions_prompt_config.data_global_prompt_config
+                prompt_config = (
+                    config.data_questions_prompt_config.data_global_prompt_config
+                )
             else:  # data_linked
                 data_config = config.data_linked
-                prompt_config = config.data_questions_prompt_config.data_linked_prompt_config
+                prompt_config = (
+                    config.data_questions_prompt_config.data_linked_prompt_config
+                )
 
             data_fn = SCOPE_SOURCE_MAPPING[generation_type]
             # Build kwargs for the data function
@@ -685,26 +700,31 @@ def autoq(
 def assertion_stats(
     assertions_path: Annotated[
         Path,
-        typer.Argument(help="Path to assertion JSON file or directory containing assertion files."),
+        typer.Argument(
+            help="Path to assertion JSON file or directory containing assertion files."
+        ),
     ],
     output_path: Annotated[
         Path | None,
         typer.Option(
-            "--output", "-o",
+            "--output",
+            "-o",
             help="Path to save stats JSON. If not specified, saves as {input}_stats.json.",
         ),
     ] = None,
     assertion_type: Annotated[
         str | None,
         typer.Option(
-            "--type", "-t",
+            "--type",
+            "-t",
             help="Type of assertions: 'global', 'map', or 'local'. If not specified, inferred from filename.",
         ),
     ] = None,
     quiet: Annotated[
         bool,
         typer.Option(
-            "--quiet", "-q",
+            "--quiet",
+            "-q",
             help="Suppress printing stats to console.",
         ),
     ] = False,
@@ -736,7 +756,7 @@ def assertion_stats(
 
     if assertions_path.is_dir():
         # Process directory
-        output_dir = output_path if output_path else assertions_path
+        output_dir = output_path or assertions_path
         results = generate_stats_for_directory(
             directory=assertions_path,
             output_dir=output_dir,
@@ -754,7 +774,9 @@ def assertion_stats(
             assertion_type=assertion_type,
             print_stats=not quiet,
         )
-        rich_print(f"[green]Stats saved to: {output_path or assertions_path.parent / f'{assertions_path.stem}_stats.json'}[/green]")
+        rich_print(
+            f"[green]Stats saved to: {output_path or assertions_path.parent / f'{assertions_path.stem}_stats.json'}[/green]"
+        )
 
 
 class AssertionType(StrEnum):
@@ -879,7 +901,6 @@ async def __generate_assertions_for_questions(
     return questions
 
 
-
 @app.command(name="generate-assertions")
 def generate_assertions(
     configuration_path: Annotated[
@@ -888,7 +909,9 @@ def generate_assertions(
     ],
     questions_path: Annotated[
         Path,
-        typer.Argument(help="Path to questions JSON file (e.g., candidate_questions.json)."),
+        typer.Argument(
+            help="Path to questions JSON file (e.g., candidate_questions.json)."
+        ),
     ],
     output_path: Annotated[
         Path,
@@ -897,7 +920,8 @@ def generate_assertions(
     assertion_type: Annotated[
         AssertionType,
         typer.Option(
-            "--type", "-t",
+            "--type",
+            "-t",
             help="Type of assertions to generate: 'local', 'global', or 'linked'.",
         ),
     ] = AssertionType.local,
@@ -940,8 +964,7 @@ def generate_assertions(
 
     # Check if questions have claims (required for assertion generation)
     questions_with_claims = [
-        q for q in questions
-        if q.attributes and q.attributes.get("claims")
+        q for q in questions if q.attributes and q.attributes.get("claims")
     ]
     if not questions_with_claims:
         rich_print(

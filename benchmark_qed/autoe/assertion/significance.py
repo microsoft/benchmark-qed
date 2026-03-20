@@ -36,7 +36,8 @@ def summarize_significance_results(
         groups: Optional nested dict ``{metric: {rag_method: values}}``
             for embedding per-method means in the pairwise rows.
 
-    Returns:
+    Returns
+    -------
         DataFrame with columns: metric, level, test_name, group1,
         group2, statistic, p_value, is_significant, group1_mean,
         group2_mean.  ``level`` is ``"omnibus"`` or ``"pairwise"``.
@@ -127,7 +128,8 @@ def compare_assertion_scores_significance(
         n_permutations: Number of permutations for clustered permutation test.
         permutation_seed: Random seed for permutation reproducibility.
 
-    Returns:
+    Returns
+    -------
         Dictionary mapping question_set names to GroupComparisonResult. If
         run_clustered_permutation is True, additional keys with
         "_clustered" suffix contain assertion-level clustered permutation
@@ -157,10 +159,7 @@ def compare_assertion_scores_significance(
 
             # Load per-question summary and calculate accuracy
             summary_df = pd.read_csv(summary_file)
-            if (
-                "success" not in summary_df.columns
-                or "fail" not in summary_df.columns
-            ):
+            if "success" not in summary_df.columns or "fail" not in summary_df.columns:
                 rich_print(
                     f"  [yellow]Warning: {summary_file} missing required "
                     f"columns[/yellow]"
@@ -245,8 +244,7 @@ def compare_assertion_scores_significance(
             continue
 
         rich_print(
-            "  [bold]Running clustered permutation test "
-            "(assertion-level)...[/bold]"
+            "  [bold]Running clustered permutation test (assertion-level)...[/bold]"
         )
         clustered_result = run_clustered_permutation_test(
             groups=clustered_groups,
@@ -317,13 +315,15 @@ def compare_hierarchical_assertion_scores_significance(
         permutation_seed: Random seed for reproducibility of permutation
             tests (default None).
 
-    Returns:
+    Returns
+    -------
         Dictionary mapping metric names to GroupComparisonResult objects
         containing omnibus test results and pairwise post-hoc comparisons.
         If run_clustered_permutation is True, additional keys with
         "_clustered" suffix contain assertion-level results.
 
-    Raises:
+    Raises
+    ------
         ValueError: If fewer than 2 RAG methods are provided.
 
     Example:
@@ -333,11 +333,21 @@ def compare_hierarchical_assertion_scores_significance(
         ...         "vectorrag": vectorrag_aggregated,
         ...     },
         ...     alpha=0.05,
-        ...     output_dir=Path("./output"),
+        ...     output_dir=Path(
+        ...         "./output"
+        ...     ),
         ...     run_clustered_permutation=True,
         ... )
-        >>> print(results["global_pass_rate"].omnibus.summary())
-        >>> print(results["global_pass_rate_clustered"].omnibus.summary())
+        >>> print(
+        ...     results[
+        ...         "global_pass_rate"
+        ...     ].omnibus.summary()
+        ... )
+        >>> print(
+        ...     results[
+        ...         "global_pass_rate_clustered"
+        ...     ].omnibus.summary()
+        ... )
     """
     if len(aggregated_scores) < 2:
         msg = "Need at least 2 RAG methods to compare"
@@ -374,10 +384,7 @@ def compare_hierarchical_assertion_scores_significance(
     }
 
     for metric_name, config in metrics_config.items():
-        rich_print(
-            f"\n[bold]Significance test for "
-            f"{config['description']}[/bold]"
-        )
+        rich_print(f"\n[bold]Significance test for {config['description']}[/bold]")
 
         # Collect per-question metric values for each RAG method
         groups: dict[str, list[float]] = {}
@@ -393,23 +400,15 @@ def compare_hierarchical_assertion_scores_significance(
                 # assertion can have different results under
                 # different global assertions.
                 per_question_values: list[float] = []
-                for _, group in scores_df.groupby(
-                    "question"
-                ):
+                for _, group in scores_df.groupby("question"):
                     total_supporting = 0
                     total_passed = 0
                     for sr in group["support_results"]:
                         if sr:
                             total_supporting += len(sr)
-                            total_passed += sum(
-                                1
-                                for s in sr
-                                if s["passed"]
-                            )
+                            total_passed += sum(1 for s in sr if s["passed"])
                     if total_supporting > 0:
-                        per_question_values.append(
-                            total_passed / total_supporting
-                        )
+                        per_question_values.append(total_passed / total_supporting)
 
                 if per_question_values:
                     groups[rag_method] = per_question_values
@@ -434,10 +433,8 @@ def compare_hierarchical_assertion_scores_significance(
                 continue
 
             # Aggregate per question
-            per_question = (
-                scores_df.groupby("question")[
-                    config["column"]
-                ].agg(config["agg_func"])
+            per_question = scores_df.groupby("question")[config["column"]].agg(
+                config["agg_func"]
             )
             values = per_question.dropna().tolist()
 
@@ -471,9 +468,7 @@ def compare_hierarchical_assertion_scores_significance(
         # Print summary
         rich_print(f"  {comparison_result.omnibus.summary()}")
         if comparison_result.posthoc:
-            rich_print(
-                f"  {comparison_result.posthoc.summary()}"
-            )
+            rich_print(f"  {comparison_result.posthoc.summary()}")
 
         # Save results if output_dir provided
         if output_dir is not None:
@@ -532,8 +527,7 @@ def _run_clustered_permutation_analysis(
         output_dir: Optional directory to save results.
     """
     rich_print(
-        "\n[bold]Running clustered permutation tests "
-        "(assertion-level)...[/bold]"
+        "\n[bold]Running clustered permutation tests (assertion-level)...[/bold]"
     )
 
     # Metrics that map directly to assertion-level columns
@@ -554,10 +548,7 @@ def _run_clustered_permutation_analysis(
 
     for metric_name, config in direct_metrics.items():
         result_key = f"{metric_name}_clustered"
-        rich_print(
-            f"\n[bold]Clustered permutation: "
-            f"{config['description']}[/bold]"
-        )
+        rich_print(f"\n[bold]Clustered permutation: {config['description']}[/bold]")
 
         groups: dict[str, list[float]] = {}
         cluster_id_map: dict[str, list[str]] = {}
@@ -572,22 +563,16 @@ def _run_clustered_permutation_analysis(
                 )
                 continue
 
-            valid = scores_df[["question", col]].dropna(
-                subset=[col]
-            )
+            valid = scores_df[["question", col]].dropna(subset=[col])
             groups[rag_method] = valid[col].astype(float).tolist()
-            cluster_id_map[rag_method] = (
-                valid["question"].astype(str).tolist()
-            )
+            cluster_id_map[rag_method] = valid["question"].astype(str).tolist()
             rich_print(
                 f"  {rag_method}: n={len(groups[rag_method])}, "
                 f"mean={np.mean(groups[rag_method]):.3f}"
             )
 
         if len(groups) < 2:
-            rich_print(
-                "  [yellow]Insufficient data for comparison[/yellow]"
-            )
+            rich_print("  [yellow]Insufficient data for comparison[/yellow]")
             continue
 
         comparison_result = run_clustered_permutation_test(
@@ -660,9 +645,7 @@ def _run_supporting_pass_rate_clustered(
         permutation_seed: Random seed for reproducibility.
         output_dir: Optional directory to save results.
     """
-    rich_print(
-        f"\n[bold]Clustered permutation: {description}[/bold]"
-    )
+    rich_print(f"\n[bold]Clustered permutation: {description}[/bold]")
     supp_groups: dict[str, list[float]] = {}
     supp_clusters: dict[str, list[str]] = {}
 
@@ -684,10 +667,7 @@ def _run_supporting_pass_rate_clustered(
         if values:
             supp_groups[rag_method] = values
             supp_clusters[rag_method] = clusters_list
-            rich_print(
-                f"  {rag_method}: n={len(values)}, "
-                f"mean={np.mean(values):.3f}"
-            )
+            rich_print(f"  {rag_method}: n={len(values)}, mean={np.mean(values):.3f}")
 
     if len(supp_groups) >= 2:
         supp_result = run_clustered_permutation_test(
@@ -714,9 +694,7 @@ def _run_supporting_pass_rate_clustered(
                 supp_groups,
             )
     else:
-        rich_print(
-            "  [yellow]Insufficient data for comparison[/yellow]"
-        )
+        rich_print("  [yellow]Insufficient data for comparison[/yellow]")
 
 
 def _save_hierarchical_significance_results(
@@ -738,38 +716,34 @@ def _save_hierarchical_significance_results(
     # Save group statistics for this metric
     group_stats = []
     for name, data in groups.items():
-        group_stats.append(
-            {
-                "rag_method": name,
-                "metric": metric_name,
-                "n_questions": len(data),
-                "mean": np.mean(data),
-                "std": np.std(data),
-                "median": np.median(data),
-                "min": np.min(data),
-                "max": np.max(data),
-            }
-        )
+        group_stats.append({
+            "rag_method": name,
+            "metric": metric_name,
+            "n_questions": len(data),
+            "mean": np.mean(data),
+            "std": np.std(data),
+            "median": np.median(data),
+            "min": np.min(data),
+            "max": np.max(data),
+        })
     stats_df = pd.DataFrame(group_stats)
     stats_df.to_csv(
         output_dir / f"significance_{metric_name}_group_stats.csv", index=False
     )
 
     # Save omnibus test result
-    omnibus_df = pd.DataFrame(
-        [
-            {
-                "metric": metric_name,
-                "description": metric_description,
-                "test_name": result.omnibus.test_name,
-                "statistic": result.omnibus.statistic,
-                "p_value": result.omnibus.p_value,
-                "is_significant": result.omnibus.is_significant,
-                "alpha": result.omnibus.alpha,
-                "is_normal": result.omnibus.is_normal,
-            }
-        ]
-    )
+    omnibus_df = pd.DataFrame([
+        {
+            "metric": metric_name,
+            "description": metric_description,
+            "test_name": result.omnibus.test_name,
+            "statistic": result.omnibus.statistic,
+            "p_value": result.omnibus.p_value,
+            "is_significant": result.omnibus.is_significant,
+            "alpha": result.omnibus.alpha,
+            "is_normal": result.omnibus.is_normal,
+        }
+    ])
     omnibus_df.to_csv(
         output_dir / f"significance_{metric_name}_omnibus.csv", index=False
     )
@@ -814,15 +788,13 @@ def _save_significance_results(
     # Save group statistics
     group_stats = []
     for name, data in groups.items():
-        group_stats.append(
-            {
-                "rag_method": name,
-                "n_questions": len(data),
-                "mean_accuracy": np.mean(data),
-                "std_accuracy": np.std(data),
-                "median_accuracy": np.median(data),
-            }
-        )
+        group_stats.append({
+            "rag_method": name,
+            "n_questions": len(data),
+            "mean_accuracy": np.mean(data),
+            "std_accuracy": np.std(data),
+            "median_accuracy": np.median(data),
+        })
     stats_df = pd.DataFrame(group_stats)
     stats_df.to_csv(
         output_dir / f"significance_group_stats{file_suffix}.csv",
@@ -830,19 +802,17 @@ def _save_significance_results(
     )
 
     # Save omnibus test result
-    omnibus_df = pd.DataFrame(
-        [
-            {
-                "question_set": question_set,
-                "test_name": result.omnibus.test_name,
-                "statistic": result.omnibus.statistic,
-                "p_value": result.omnibus.p_value,
-                "is_significant": result.omnibus.is_significant,
-                "alpha": result.omnibus.alpha,
-                "is_normal": result.omnibus.is_normal,
-            }
-        ]
-    )
+    omnibus_df = pd.DataFrame([
+        {
+            "question_set": question_set,
+            "test_name": result.omnibus.test_name,
+            "statistic": result.omnibus.statistic,
+            "p_value": result.omnibus.p_value,
+            "is_significant": result.omnibus.is_significant,
+            "alpha": result.omnibus.alpha,
+            "is_normal": result.omnibus.is_normal,
+        }
+    ])
     omnibus_df.to_csv(
         output_dir / f"significance_omnibus{file_suffix}.csv",
         index=False,

@@ -108,10 +108,7 @@ class DataLocalClaimExtractor:
                 context_source_ids = context_df["source_id"].astype(str).tolist()
 
                 # Find matching sources (case-insensitive, whitespace-normalized)
-                matching_sources = [
-                    s for s in sources_str
-                    if s in context_source_ids
-                ]
+                matching_sources = [s for s in sources_str if s in context_source_ids]
 
                 if not matching_sources:
                     log.warning(
@@ -125,7 +122,9 @@ class DataLocalClaimExtractor:
                 # Filter to only matching records
                 source_records = cast(
                     pd.DataFrame,
-                    context_df[context_df["source_id"].astype(str).isin(matching_sources)]
+                    context_df[
+                        context_df["source_id"].astype(str).isin(matching_sources)
+                    ],
                 ).drop_duplicates(subset=["source_id"])
 
                 # remove any hallucinated sources that are not in the context records

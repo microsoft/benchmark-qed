@@ -68,7 +68,9 @@ class AssertionStats:
     assertion_type: str = ""  # "global", "map", or "local"
     total_questions: int = 0
     total_assertions: int = 0
-    assertions_per_question: DistributionStats = field(default_factory=DistributionStats)
+    assertions_per_question: DistributionStats = field(
+        default_factory=DistributionStats
+    )
     sources_per_assertion: DistributionStats = field(default_factory=DistributionStats)
     unique_sources_per_question: DistributionStats | None = None
     unique_claim_sources_per_question: DistributionStats | None = None
@@ -171,12 +173,15 @@ def compute_assertion_stats(
         sources_data: Optional list of source data for computing unique sources per question.
             Expected format: [{"question_id": ..., "assertion_sources": [{"sources": [...]}]}]
 
-    Returns:
+    Returns
+    -------
         AssertionStats object containing computed statistics.
     """
     # Determine the assertions key based on type
     assertions_key = "map_assertions" if assertion_type == "map" else "assertions"
-    sources_key = "map_assertion_sources" if assertion_type == "map" else "assertion_sources"
+    sources_key = (
+        "map_assertion_sources" if assertion_type == "map" else "assertion_sources"
+    )
 
     # Build a lookup for sources by question_id if sources_data is provided
     sources_by_question: dict[str, list[dict[str, Any]]] = {}
@@ -281,7 +286,8 @@ def compute_stats_from_file(
             - "map" for map_assertions.json or files with "map" in name
             - "local" for other files
 
-    Returns:
+    Returns
+    -------
         AssertionStats object containing computed statistics.
     """
     file_path = Path(file_path)
@@ -359,7 +365,8 @@ def generate_stats_for_assertion_file(
         assertion_type: Type of assertions. If None, inferred from filename.
         print_stats: Whether to print statistics to console.
 
-    Returns:
+    Returns
+    -------
         AssertionStats object containing computed statistics.
     """
     assertions_path = Path(assertions_path)
@@ -398,7 +405,8 @@ def generate_stats_for_directory(
         output_dir: Directory to save stats files. If None, saves alongside originals.
         print_stats: Whether to print statistics to console.
 
-    Returns:
+    Returns
+    -------
         Dictionary mapping file names to their AssertionStats.
     """
     directory = Path(directory)

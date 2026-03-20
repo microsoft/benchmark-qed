@@ -111,9 +111,13 @@ def load_text_units(
             short_id=_get_str_field(row, short_id_col, str(index)),
             text=row.get(text_col, ""),
             n_tokens=row.get(tokens_col) if tokens_col else None,
-            document_id=_get_str_field(row, document_id_col, None) if document_id_col else None,  # type: ignore[arg-type]
+            document_id=_get_str_field(row, document_id_col, None)
+            if document_id_col
+            else None,  # type: ignore[arg-type]
             text_embedding=row.get(embedding_col) if embedding_col else None,
-            cluster_id=_get_str_field(row, cluster_id_col, None) if cluster_id_col else None,  # type: ignore[arg-type]
+            cluster_id=_get_str_field(row, cluster_id_col, None)
+            if cluster_id_col
+            else None,  # type: ignore[arg-type]
             # Use the attributes_cols to extract attributes from the row
             attributes=(
                 {col: row.get("attributes", {}).get(col) for col in attributes_cols}

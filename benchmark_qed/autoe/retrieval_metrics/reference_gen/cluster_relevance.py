@@ -37,11 +37,7 @@ def _clean_assessment_response(response: RelevanceAssessmentResponse) -> dict[st
     # Use model_dump with exclude to create a copy without embeddings
     # This avoids mutating the original TextUnit objects
     return response.model_dump(
-        exclude={
-            "assessment": {
-                "__all__": {"text_unit": {"text_embedding"}}
-            }
-        }
+        exclude={"assessment": {"__all__": {"text_unit": {"text_embedding"}}}}
     )
 
 
@@ -50,7 +46,9 @@ class ClusterRelevanceResult(BaseModel):
 
     cluster_id: str = Field(description="ID of the assessed cluster.")
     cluster_size: int = Field(description="Total number of text units in the cluster.")
-    num_assessments: int = Field(description="Total number of relevance assessments performed.")
+    num_assessments: int = Field(
+        description="Total number of relevance assessments performed."
+    )
     num_overlapping_chunks: int = Field(
         description="Number of chunks that appeared in both semantic and centroid neighbor sets."
     )
@@ -64,8 +62,14 @@ class ClusterRelevanceResult(BaseModel):
         description="All relevance assessments for this cluster."
     )
 
-    @field_serializer("semantic_neighbor_assessments", "centroid_neighbor_assessments", "all_assessments")
-    def serialize_assessments(self, response: RelevanceAssessmentResponse) -> dict[str, Any]:
+    @field_serializer(
+        "semantic_neighbor_assessments",
+        "centroid_neighbor_assessments",
+        "all_assessments",
+    )
+    def serialize_assessments(
+        self, response: RelevanceAssessmentResponse
+    ) -> dict[str, Any]:
         """Serialize assessments without embeddings."""
         return _clean_assessment_response(response)
 
@@ -127,21 +131,25 @@ class ClusterRelevanceRater:
             log.info("Initialized with %d pre-computed clusters", len(self.clusters))
         elif isinstance(corpus[0], TextUnit):
             log.info("Performing one-time clustering of %d text units", len(corpus))
-            self.clusters = self._cluster_corpus(corpus, self.clusterer, self.num_clusters)  # type: ignore - we know this is list[TextUnit]
+            self.clusters = self._cluster_corpus(
+                corpus, self.clusterer, self.num_clusters
+            )  # type: ignore - we know this is list[TextUnit]
             log.info("Created %d clusters", len(self.clusters))
         else:
             msg = f"Data must be list of TextCluster or TextUnit objects, got {type(corpus[0])}"
             raise ValueError(msg)
 
     def _cluster_corpus(
-            self,
-            text_units: list[TextUnit],
-            clusterer: BaseClustering | None = None,
-            num_clusters: int | None = None
-        ) -> list[TextCluster]:
+        self,
+        text_units: list[TextUnit],
+        clusterer: BaseClustering | None = None,
+        num_clusters: int | None = None,
+    ) -> list[TextCluster]:
         """Perform initial clustering of text units."""
         # Validate that text units have embeddings
-        units_with_embeddings = [unit for unit in text_units if unit.text_embedding is not None]
+        units_with_embeddings = [
+            unit for unit in text_units if unit.text_embedding is not None
+        ]
         if not units_with_embeddings:
             msg = "Text units must have embeddings for clustering"
             raise ValueError(msg)
@@ -158,8 +166,7 @@ class ClusterRelevanceRater:
             clusterer = KmeansClustering(random_seed=42)
         try:
             clusters = clusterer.cluster(
-                text_units=units_with_embeddings,
-                num_clusters=num_clusters
+                text_units=units_with_embeddings, num_clusters=num_clusters
             )
 
             # Log cluster statistics
@@ -212,7 +219,9 @@ class ClusterRelevanceRater:
         centroid_chunks = representative_chunks["centroid_neighbors"]
 
         # Create a deduplicated list for the LLM call
-        all_chunks_dict = {chunk.id: chunk for chunk in semantic_chunks + centroid_chunks}
+        all_chunks_dict = {
+            chunk.id: chunk for chunk in semantic_chunks + centroid_chunks
+        }
         all_chunks = list(all_chunks_dict.values())
 
         # Create sets of IDs for proper separation of results
@@ -225,17 +234,29 @@ class ClusterRelevanceRater:
         )
 
         # Separate results by chunk type based on IDs, not ordering
-        semantic_assessments = [a for a in cluster_result.assessment if a.text_unit and a.text_unit.id in semantic_ids]
-        centroid_assessments = [a for a in cluster_result.assessment if a.text_unit and a.text_unit.id in centroid_ids]
+        semantic_assessments = [
+            a
+            for a in cluster_result.assessment
+            if a.text_unit and a.text_unit.id in semantic_ids
+        ]
+        centroid_assessments = [
+            a
+            for a in cluster_result.assessment
+            if a.text_unit and a.text_unit.id in centroid_ids
+        ]
 
         return ClusterRelevanceResult(
             cluster_id=cluster.id,
             cluster_size=len(cluster.text_units),
             num_assessments=len(cluster_result.assessment),
             num_overlapping_chunks=len(representative_chunks["overlapping_chunks"]),
-            semantic_neighbor_assessments=RelevanceAssessmentResponse(assessment=semantic_assessments),
-            centroid_neighbor_assessments=RelevanceAssessmentResponse(assessment=centroid_assessments),
-            all_assessments=cluster_result
+            semantic_neighbor_assessments=RelevanceAssessmentResponse(
+                assessment=semantic_assessments
+            ),
+            centroid_neighbor_assessments=RelevanceAssessmentResponse(
+                assessment=centroid_assessments
+            ),
+            all_assessments=cluster_result,
         )
 
     async def assess_clusters(
@@ -258,7 +279,9 @@ class ClusterRelevanceRater:
         log.info("Starting concurrent assessment of %d clusters", len(self.clusters))
 
         # Create tasks for concurrent execution
-        async def assess_single_cluster_with_semaphore(cluster: TextCluster, index: int) -> ClusterRelevanceResult:
+        async def assess_single_cluster_with_semaphore(
+            cluster: TextCluster, index: int
+        ) -> ClusterRelevanceResult:
             async with self.semaphore:
                 log.info(
                     "Assessing cluster %d/%d: cluster ID %s",
@@ -307,7 +330,9 @@ class ClusterRelevanceRater:
         )
 
         # Create tasks for each query
-        async def assess_single_query(query: Question, pbar: Any) -> QueryClusterReferenceResult:
+        async def assess_single_query(
+            query: Question, pbar: Any
+        ) -> QueryClusterReferenceResult:
             try:
                 cluster_results = await self.assess_clusters(query=query.text)
                 log.debug("Completed assessment for query ID: %s", query.id)
@@ -315,19 +340,19 @@ class ClusterRelevanceRater:
                 return QueryClusterReferenceResult(
                     question_id=query.id,
                     question_text=query.text,
-                    cluster_results=cluster_results
+                    cluster_results=cluster_results,
                 )
             except Exception:
                 log.exception("Failed to assess query %s", query.id)
                 pbar.update(1)
                 return QueryClusterReferenceResult(
-                    question_id=query.id,
-                    question_text=query.text,
-                    cluster_results=[]
+                    question_id=query.id, question_text=query.text, cluster_results=[]
                 )
 
         # Run all queries in parallel with progress bar
-        with tqdm_asyncio(total=len(queries), desc="Assessing queries", unit="query") as pbar:
+        with tqdm_asyncio(
+            total=len(queries), desc="Assessing queries", unit="query"
+        ) as pbar:
             tasks = [assess_single_query(query, pbar) for query in queries]
             results = await asyncio.gather(*tasks, return_exceptions=True)
 
@@ -374,7 +399,11 @@ class ClusterRelevanceRater:
 
         if not chunks_with_embeddings:
             log.warning("Cluster %s has no chunks with embeddings", cluster.id)
-            return {"semantic_neighbors": [], "centroid_neighbors": [], "overlapping_chunks": []}
+            return {
+                "semantic_neighbors": [],
+                "centroid_neighbors": [],
+                "overlapping_chunks": [],
+            }
 
         # Get semantic neighbors (chunks most similar to the query)
         semantic_neighbor_chunks = await get_semantic_neighbors_from_text(
@@ -385,13 +414,14 @@ class ClusterRelevanceRater:
         )
 
         # Get centroid neighbors
-        centroid_neighbor_chunks = cluster.get_centroid_neighbors(n=self.centroid_neighbors)
+        centroid_neighbor_chunks = cluster.get_centroid_neighbors(
+            n=self.centroid_neighbors
+        )
 
         # Find overlapping chunks (appear in both lists)
         semantic_ids = {chunk.id for chunk in semantic_neighbor_chunks}
         overlapping_chunks = [
-            chunk for chunk in centroid_neighbor_chunks
-            if chunk.id in semantic_ids
+            chunk for chunk in centroid_neighbor_chunks if chunk.id in semantic_ids
         ]
 
         return {
@@ -405,7 +435,7 @@ def save_cluster_references_to_json(
     reference_results: list[QueryClusterReferenceResult],
     filepath: str | Path,
     include_clusters: bool = True,
-    clusters: list[TextCluster] | None = None
+    clusters: list[TextCluster] | None = None,
 ) -> None:
     """
     Save query cluster reference results to a JSON file.
@@ -441,7 +471,7 @@ def save_cluster_references_to_json(
                         "text": unit.text,
                     }
                     for unit in cluster.text_units
-                ]
+                ],
             }
             cluster_data.append(cluster_dict)
         data["clusters"] = cluster_data
@@ -457,7 +487,7 @@ def save_cluster_references_to_json(
 
 
 def load_cluster_references_from_json(
-    filepath: str | Path
+    filepath: str | Path,
 ) -> tuple[list[QueryClusterReferenceResult], list[TextCluster] | None]:
     """
     Load query cluster reference results and clusters from a JSON file.

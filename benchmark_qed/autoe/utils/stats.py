@@ -586,7 +586,8 @@ def _compare_two_groups_paired(
                 Groups must have the same length and be aligned by subject/question.
         alpha: Significance level.
 
-    Returns:
+    Returns
+    -------
         GroupComparisonResult with the pairwise comparison as both the "omnibus"
         summary and a single post-hoc comparison.
     """
@@ -703,20 +704,67 @@ def compare_groups(
     Example:
         >>> # Independent samples (different questions per method)
         >>> groups = {
-        ...     "method_a": [0.82, 0.85, 0.79, 0.88, 0.84],
-        ...     "method_b": [0.75, 0.72, 0.78, 0.71, 0.74],
-        ...     "method_c": [0.80, 0.83, 0.81, 0.79, 0.82],
+        ...     "method_a": [
+        ...         0.82,
+        ...         0.85,
+        ...         0.79,
+        ...         0.88,
+        ...         0.84,
+        ...     ],
+        ...     "method_b": [
+        ...         0.75,
+        ...         0.72,
+        ...         0.78,
+        ...         0.71,
+        ...         0.74,
+        ...     ],
+        ...     "method_c": [
+        ...         0.80,
+        ...         0.83,
+        ...         0.81,
+        ...         0.79,
+        ...         0.82,
+        ...     ],
         ... }
-        >>> result = compare_groups(groups)
+        >>> result = (
+        ...     compare_groups(
+        ...         groups
+        ...     )
+        ... )
 
         >>> # Repeated measures (same questions, different methods)
         >>> groups = {
-        ...     "method_a": [0.82, 0.85, 0.79, 0.88, 0.84],  # scores for questions 1-5
-        ...     "method_b": [0.75, 0.72, 0.78, 0.71, 0.74],  # scores for questions 1-5
-        ...     "method_c": [0.80, 0.83, 0.81, 0.79, 0.82],  # scores for questions 1-5
+        ...     "method_a": [
+        ...         0.82,
+        ...         0.85,
+        ...         0.79,
+        ...         0.88,
+        ...         0.84,
+        ...     ],  # scores for questions 1-5
+        ...     "method_b": [
+        ...         0.75,
+        ...         0.72,
+        ...         0.78,
+        ...         0.71,
+        ...         0.74,
+        ...     ],  # scores for questions 1-5
+        ...     "method_c": [
+        ...         0.80,
+        ...         0.83,
+        ...         0.81,
+        ...         0.79,
+        ...         0.82,
+        ...     ],  # scores for questions 1-5
         ... }
-        >>> result = compare_groups(groups, paired=True)
-        >>> print(result.summary())
+        >>> result = (
+        ...     compare_groups(
+        ...         groups,
+        ...         paired=True,
+        ...     )
+        ... )
+        >>> print(
+        ...     result.summary()
+        ... )
     """
     # For paired design with exactly 2 groups, skip omnibus and go directly to pairwise
     # (Friedman test requires 3+ groups)
@@ -750,7 +798,8 @@ def _compute_f_statistic(
         labels: Array of group labels (same length as values).
         group_names: Unique group names.
 
-    Returns:
+    Returns
+    -------
         F-statistic (between-group variance / within-group variance).
         Returns 0.0 if within-group variance is zero.
     """
@@ -819,11 +868,13 @@ def run_clustered_permutation_test(
             K > 2 groups.
         seed: Random seed for reproducibility (default None).
 
-    Returns:
+    Returns
+    -------
         GroupComparisonResult with omnibus test result and optional
         post-hoc pairwise comparisons.
 
-    Raises:
+    Raises
+    ------
         ValueError: If fewer than 2 groups provided, or if groups
             and cluster_ids have mismatched lengths.
     """
@@ -909,16 +960,15 @@ def _clustered_permutation_two_groups(
         alpha: Significance level.
         rng: Random number generator.
 
-    Returns:
+    Returns
+    -------
         GroupComparisonResult with the pairwise comparison as both
         omnibus and post-hoc result.
     """
     g1, g2 = group_names
 
     # Observed statistic: absolute difference in means
-    obs_stat = abs(
-        np.mean(values[labels == g1]) - np.mean(values[labels == g2])
-    )
+    obs_stat = abs(np.mean(values[labels == g1]) - np.mean(values[labels == g2]))
 
     # Build cluster-to-indices mapping
     cluster_indices: dict[str, np.ndarray] = {}
@@ -934,13 +984,12 @@ def _clustered_permutation_two_groups(
             if rng.random() < 0.5:
                 # Swap labels for all observations in this cluster
                 perm_labels[idx] = np.where(
-                    perm_labels[idx] == g1, g2,
-                    np.where(perm_labels[idx] == g2, g1,
-                             perm_labels[idx])
+                    perm_labels[idx] == g1,
+                    g2,
+                    np.where(perm_labels[idx] == g2, g1, perm_labels[idx]),
                 )
         perm_stat = abs(
-            np.mean(values[perm_labels == g1])
-            - np.mean(values[perm_labels == g2])
+            np.mean(values[perm_labels == g1]) - np.mean(values[perm_labels == g2])
         )
         if perm_stat >= obs_stat:
             count_extreme += 1
@@ -1008,7 +1057,8 @@ def _clustered_permutation_k_groups(
         correction: P-value correction method for pairwise tests.
         rng: Random number generator.
 
-    Returns:
+    Returns
+    -------
         GroupComparisonResult with F-statistic omnibus and corrected
         pairwise post-hoc comparisons.
     """
@@ -1029,17 +1079,15 @@ def _clustered_permutation_k_groups(
             idx = cluster_indices[c]
             # Create a random permutation of group names for this
             # cluster
-            perm_map = dict(zip(
-                group_names,
-                rng.permutation(group_names),
-                strict=True,
-            ))
-            perm_labels[idx] = np.array(
-                [perm_map[lbl] for lbl in labels[idx]]
+            perm_map = dict(
+                zip(
+                    group_names,
+                    rng.permutation(group_names),
+                    strict=True,
+                )
             )
-        perm_stat = _compute_f_statistic(
-            values, perm_labels, group_names
-        )
+            perm_labels[idx] = np.array([perm_map[lbl] for lbl in labels[idx]])
+        perm_stat = _compute_f_statistic(values, perm_labels, group_names)
         if perm_stat >= obs_stat:
             count_extreme += 1
 
@@ -1060,7 +1108,7 @@ def _clustered_permutation_k_groups(
     if p_value < alpha:
         comparisons_raw: list[tuple[str, str, float, float]] = []
         for i, name1 in enumerate(group_names):
-            for name2 in group_names[i + 1:]:
+            for name2 in group_names[i + 1 :]:
                 pair_groups = {
                     name1: groups[name1],
                     name2: groups[name2],
@@ -1102,7 +1150,8 @@ def _clustered_permutation_k_groups(
 class CombinedPValueResult:
     """Result of combining p-values from independent tests.
 
-    Attributes:
+    Attributes
+    ----------
         method: Combination method used (e.g. "fisher", "stouffer").
         statistic: Test statistic from the combination method.
         combined_p_value: Combined p-value.
@@ -1124,9 +1173,7 @@ class CombinedPValueResult:
 
     def summary(self) -> str:
         """Return a human-readable summary of the combination result."""
-        sig_str = (
-            "significant" if self.is_significant else "not significant"
-        )
+        sig_str = "significant" if self.is_significant else "not significant"
         parts = [
             f"{self.method} combination: "
             f"statistic={self.statistic:.4f}, "
@@ -1134,9 +1181,7 @@ class CombinedPValueResult:
         ]
         for i, p in enumerate(self.input_p_values):
             name = (
-                self.dataset_names[i]
-                if i < len(self.dataset_names)
-                else f"dataset_{i}"
+                self.dataset_names[i] if i < len(self.dataset_names) else f"dataset_{i}"
             )
             parts.append(f"  {name}: p={p:.4f}")
         return "\n".join(parts)
@@ -1177,11 +1222,13 @@ def combine_pvalues(
             (used in the result summary).
         alpha: Significance threshold for the combined test.
 
-    Returns:
+    Returns
+    -------
         CombinedPValueResult with the combined test statistic and
         p-value.
 
-    Raises:
+    Raises
+    ------
         ValueError: If fewer than 2 p-values are provided, if any
             p-value is outside (0, 1], if weights length does not
             match p_values, or if an unsupported method is given.
@@ -1191,23 +1238,14 @@ def combine_pvalues(
     p_arr = np.asarray(p_values, dtype=np.float64)
 
     if method == "fisher":
-        statistic, combined_p = stats.combine_pvalues(
-            p_arr, method="fisher"
-        )
+        statistic, combined_p = stats.combine_pvalues(p_arr, method="fisher")
     elif method == "stouffer":
-        w = (
-            np.asarray(weights, dtype=np.float64)
-            if weights is not None
-            else None
-        )
+        w = np.asarray(weights, dtype=np.float64) if weights is not None else None
         statistic, combined_p = stats.combine_pvalues(
             p_arr, method="stouffer", weights=w
         )
     else:
-        msg = (
-            f"Unsupported method '{method}'. "
-            "Use 'fisher' or 'stouffer'."
-        )
+        msg = f"Unsupported method '{method}'. Use 'fisher' or 'stouffer'."
         raise ValueError(msg)
 
     return CombinedPValueResult(
@@ -1234,27 +1272,21 @@ def _validate_combine_inputs(
         method: Combination method name.
         weights: Optional weights to validate.
 
-    Raises:
+    Raises
+    ------
         ValueError: On invalid inputs.
     """
     if len(p_values) < 2:
-        msg = (
-            f"Need at least 2 p-values to combine, got {len(p_values)}."
-        )
+        msg = f"Need at least 2 p-values to combine, got {len(p_values)}."
         raise ValueError(msg)
 
     for i, p in enumerate(p_values):
         if not (0 < p <= 1):
-            msg = (
-                f"p_values[{i}]={p} is outside the valid range (0, 1]."
-            )
+            msg = f"p_values[{i}]={p} is outside the valid range (0, 1]."
             raise ValueError(msg)
 
     if method not in {"fisher", "stouffer"}:
-        msg = (
-            f"Unsupported method '{method}'. "
-            "Use 'fisher' or 'stouffer'."
-        )
+        msg = f"Unsupported method '{method}'. Use 'fisher' or 'stouffer'."
         raise ValueError(msg)
 
     if weights is not None and len(weights) != len(p_values):

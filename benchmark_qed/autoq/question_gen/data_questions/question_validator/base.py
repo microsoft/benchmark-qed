@@ -7,6 +7,7 @@ import json
 import logging
 import math
 from abc import ABC, abstractmethod
+from itertools import starmap
 from typing import TYPE_CHECKING, Any
 
 import numpy as np
@@ -197,9 +198,9 @@ class BatchQuestionValidator(ABC):
             (passed_questions, failed_count, duplicate_count)
         """
         # Format questions for validation
-        questions_for_validation = [
-            self._format_question_for_validation(j, q) for j, q in enumerate(batch)
-        ]
+        questions_for_validation = list(
+            starmap(self._format_question_for_validation, enumerate(batch))
+        )
 
         prompt = self.validation_prompt.substitute(
             questions=json.dumps(questions_for_validation, indent=2)

@@ -33,8 +33,7 @@ class FidelityMetric(Enum):
 
 
 def get_reference_cluster_distribution(
-    retrieval_reference: QueryClusterReferenceResult,
-    relevance_threshold: int = 2
+    retrieval_reference: QueryClusterReferenceResult, relevance_threshold: int = 2
 ) -> dict[str, int]:
     """
     Get the distribution of relevant text units across clusters from reference cluster relevance results.
@@ -52,7 +51,7 @@ def get_reference_cluster_distribution(
     # This returns dict[str, int] where values are counts of relevant text units
     return get_relevant_clusters(
         cluster_results=retrieval_reference.cluster_results,
-        relevance_threshold=relevance_threshold
+        relevance_threshold=relevance_threshold,
     )
 
     # The relevant_clusters_dict already contains cluster_id -> count mapping
@@ -62,12 +61,11 @@ def _get_text_unit_key(text_unit: Any, match_by: str = "text") -> str:
     """Get the key for a text unit based on match_by setting."""
     if match_by == "text":
         return text_unit.text.strip().lower()
-    elif match_by == "id":
+    if match_by == "id":
         return text_unit.id
-    elif match_by == "short_id":
+    if match_by == "short_id":
         return text_unit.short_id or text_unit.id
-    else:
-        return text_unit.text.strip().lower()
+    return text_unit.text.strip().lower()
 
 
 def get_query_cluster_distribution(
@@ -79,8 +77,8 @@ def get_query_cluster_distribution(
     """
     Get the distribution of relevant text units across clusters from query relevance results.
 
-    Note: When using match_by='text', chunk text must exactly match the reference text units 
-    (after normalization). If your RAG system adds metadata to chunks, preprocess them before 
+    Note: When using match_by='text', chunk text must exactly match the reference text units
+    (after normalization). If your RAG system adds metadata to chunks, preprocess them before
     evaluation or use match_by='id'.
 
     Args:
@@ -107,7 +105,9 @@ def get_query_cluster_distribution(
 
         if key in text_unit_to_cluster_mapping:
             cluster_id = text_unit_to_cluster_mapping[key]
-            cluster_distribution[cluster_id] = cluster_distribution.get(cluster_id, 0) + 1
+            cluster_distribution[cluster_id] = (
+                cluster_distribution.get(cluster_id, 0) + 1
+            )
             match_stats["matched"] += 1
         else:
             match_stats["unmatched"] += 1
@@ -277,8 +277,7 @@ def calculate_single_query_fidelity(
     """
     # Get reference distribution from cluster relevance results
     reference_distribution = get_reference_cluster_distribution(
-        retrieval_reference=retrieval_reference,
-        relevance_threshold=relevance_threshold
+        retrieval_reference=retrieval_reference, relevance_threshold=relevance_threshold
     )
 
     # Get query distribution from query relevance results
@@ -290,8 +289,12 @@ def calculate_single_query_fidelity(
     )
 
     # Calculate both metrics using ALL cluster IDs as the space
-    js_divergence = calculate_js_divergence(reference_distribution, query_distribution, all_cluster_ids)
-    tvd_distance = calculate_total_variation_distance(reference_distribution, query_distribution, all_cluster_ids)
+    js_divergence = calculate_js_divergence(
+        reference_distribution, query_distribution, all_cluster_ids
+    )
+    tvd_distance = calculate_total_variation_distance(
+        reference_distribution, query_distribution, all_cluster_ids
+    )
 
     # Fidelity metrics (higher is better for both)
     js_fidelity = 1.0 - js_divergence
@@ -306,7 +309,9 @@ def calculate_single_query_fidelity(
         primary_distance = tvd_distance
 
     # Calculate additional metrics
-    common_clusters = len(set(reference_distribution.keys()) & set(query_distribution.keys()))
+    common_clusters = len(
+        set(reference_distribution.keys()) & set(query_distribution.keys())
+    )
     reference_total_units = sum(reference_distribution.values())
     query_total_units = sum(query_distribution.values())
 
@@ -325,7 +330,7 @@ def calculate_single_query_fidelity(
         "reference_total_units": reference_total_units,
         "query_total_units": query_total_units,
         "reference_clusters_count": len(reference_distribution),
-        "query_clusters_count": len(query_distribution)
+        "query_clusters_count": len(query_distribution),
     }
 
 
@@ -383,24 +388,21 @@ def calculate_fidelity(
             "max_fidelity": 0.0,
             "macro_averaged_distance": 1.0,
             "metric": metric.value,  # Return string value instead of enum object
-
             # Jensen-Shannon specific
             "macro_averaged_js_fidelity": 0.0,
             "macro_std_js_fidelity": 0.0,
             "min_js_fidelity": 0.0,
             "max_js_fidelity": 0.0,
             "macro_averaged_js_divergence": 1.0,
-
             # Total Variation Distance specific
             "macro_averaged_tvd_fidelity": 0.0,
             "macro_std_tvd_fidelity": 0.0,
             "min_tvd_fidelity": 0.0,
             "max_tvd_fidelity": 0.0,
             "macro_averaged_tvd_distance": 1.0,
-
             "total_queries": 0,
             "relevance_threshold": relevance_threshold,
-            "query_details": []
+            "query_details": [],
         }
 
     # Create text unit to cluster mapping if not provided
@@ -415,7 +417,9 @@ def calculate_fidelity(
 
     # Get all cluster IDs from the corpus
     if clusters is None:
-        msg = "clusters must be provided to get all cluster IDs for fidelity calculation"
+        msg = (
+            "clusters must be provided to get all cluster IDs for fidelity calculation"
+        )
         raise ValueError(msg)
     all_cluster_ids = [cluster.id for cluster in clusters]
 
@@ -449,7 +453,7 @@ def calculate_fidelity(
         single_query_reference = QueryClusterReferenceResult(
             question_id=question_id,
             question_text=query_relevance_result.question_text,
-            cluster_results=cluster_reference
+            cluster_results=cluster_reference,
         )
 
         # Calculate fidelity for this query using the selected metric
@@ -475,7 +479,7 @@ def calculate_fidelity(
         query_details.append({
             "question_id": question_id,
             "question_text": query_relevance_result.question_text,
-            **fidelity_result
+            **fidelity_result,
         })
 
     if not query_fidelities:
@@ -488,24 +492,21 @@ def calculate_fidelity(
             "max_fidelity": 0.0,
             "macro_averaged_distance": 1.0,
             "metric": metric.value,  # Return string value instead of enum object
-
             # Jensen-Shannon specific
             "macro_averaged_js_fidelity": 0.0,
             "macro_std_js_fidelity": 0.0,
             "min_js_fidelity": 0.0,
             "max_js_fidelity": 0.0,
             "macro_averaged_js_divergence": 1.0,
-
             # Total Variation Distance specific
             "macro_averaged_tvd_fidelity": 0.0,
             "macro_std_tvd_fidelity": 0.0,
             "min_tvd_fidelity": 0.0,
             "max_tvd_fidelity": 0.0,
             "macro_averaged_tvd_distance": 1.0,
-
             "total_queries": 0,
             "relevance_threshold": relevance_threshold,
-            "query_details": []
+            "query_details": [],
         }
 
     # Calculate aggregate statistics
@@ -537,22 +538,19 @@ def calculate_fidelity(
         "max_fidelity": max_fidelity,
         "macro_averaged_distance": macro_averaged_distance,
         "metric": metric.value,  # Return string value instead of enum object
-
         # Jensen-Shannon specific
         "macro_averaged_js_fidelity": macro_averaged_js_fidelity,
         "macro_std_js_fidelity": macro_std_js_fidelity,
         "min_js_fidelity": min_js_fidelity,
         "max_js_fidelity": max_js_fidelity,
         "macro_averaged_js_divergence": macro_averaged_js_divergence,
-
         # Total Variation Distance specific
         "macro_averaged_tvd_fidelity": macro_averaged_tvd_fidelity,
         "macro_std_tvd_fidelity": macro_std_tvd_fidelity,
         "min_tvd_fidelity": min_tvd_fidelity,
         "max_tvd_fidelity": max_tvd_fidelity,
         "macro_averaged_tvd_distance": macro_averaged_tvd_distance,
-
         "total_queries": len(query_fidelities),
         "relevance_threshold": relevance_threshold,
-        "query_details": query_details
+        "query_details": query_details,
     }

@@ -28,68 +28,73 @@ class KmeansClustering(BaseClustering):
     ) -> int:
         """
         Find the optimal number of clusters using silhouette score.
-        
+
         Args:
             embeddings: The text embeddings to cluster.
             min_clusters: Minimum number of clusters to try.
             max_clusters: Maximum number of clusters to try. If None, uses sqrt(n_samples/2).
-            
-        Returns:
+
+        Returns
+        -------
             Optimal number of clusters based on highest silhouette score.
         """
         n_samples = len(embeddings)
         if max_clusters is None:
             max_clusters = max(int(math.sqrt(n_samples / 2)), min_clusters)
-        
+
         # Ensure we don't try more clusters than we have samples
         max_clusters = min(max_clusters, n_samples - 1)
-        
+
         if max_clusters < min_clusters:
-            log.warning(f"Not enough samples ({n_samples}) for clustering. Using {min_clusters} clusters.")
+            log.warning(
+                f"Not enough samples ({n_samples}) for clustering. Using {min_clusters} clusters."
+            )
             return min_clusters
-        
+
         best_score = -1
         best_k = min_clusters
-        
-        log.info(f"Tuning number of clusters between {min_clusters} and {max_clusters} using silhouette score...")
-        
+
+        log.info(
+            f"Tuning number of clusters between {min_clusters} and {max_clusters} using silhouette score..."
+        )
+
         # Use tqdm to track progress of cluster tuning
         cluster_range = range(min_clusters, max_clusters + 1)
         with tqdm(cluster_range, desc="Finding optimal clusters", unit="k") as pbar:
             for k in pbar:
                 try:
                     model = KMeans(
-                        n_clusters=k, 
-                        random_state=self.random_seed, 
-                        n_init="auto"
+                        n_clusters=k, random_state=self.random_seed, n_init="auto"
                     ).fit(embeddings)
-                    
+
                     score = silhouette_score(embeddings, model.labels_)
                     log.debug(f"k={k}, silhouette_score={score:.4f}")
-                    
+
                     # Update progress bar with current best
                     pbar.set_postfix({
-                        'current_k': k, 
-                        'score': f'{score:.4f}', 
-                        'best_k': best_k, 
-                        'best_score': f'{best_score:.4f}'
+                        "current_k": k,
+                        "score": f"{score:.4f}",
+                        "best_k": best_k,
+                        "best_score": f"{best_score:.4f}",
                     })
-                    
+
                     if score > best_score:
                         best_score = score
                         best_k = k
-                        
+
                 except Exception as e:
                     log.warning(f"Failed to compute silhouette score for k={k}: {e}")
                     pbar.set_postfix({
-                        'current_k': k, 
-                        'status': 'failed', 
-                        'best_k': best_k, 
-                        'best_score': f'{best_score:.4f}'
+                        "current_k": k,
+                        "status": "failed",
+                        "best_k": best_k,
+                        "best_score": f"{best_score:.4f}",
                     })
                     continue
-        
-        log.info(f"Optimal number of clusters: {best_k} (silhouette_score={best_score:.4f})")
+
+        log.info(
+            f"Optimal number of clusters: {best_k} (silhouette_score={best_score:.4f})"
+        )
         return best_k
 
     def cluster(

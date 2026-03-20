@@ -1,7 +1,6 @@
 # Copyright (c) 2025 Microsoft Corporation.
 """Utility for comparing relevance assessment between different raters."""
 
-import asyncio
 import json
 import logging
 from dataclasses import dataclass, field
@@ -9,9 +8,6 @@ from pathlib import Path
 from typing import Any
 
 from benchmark_qed.autod.data_model.text_unit import TextUnit
-from benchmark_qed.autoe.retrieval_metrics.relevance_assessment.base import (
-    RelevanceRater,
-)
 from benchmark_qed.autoe.retrieval_metrics.relevance_assessment.bing_rater import (
     BingRelevanceRater,
 )
@@ -56,7 +52,9 @@ class RaterStats:
     @property
     def avg_time_per_query(self) -> float:
         """Average time per query in seconds."""
-        return self.total_time_seconds / self.num_queries if self.num_queries > 0 else 0.0
+        return (
+            self.total_time_seconds / self.num_queries if self.num_queries > 0 else 0.0
+        )
 
     @property
     def total_tokens(self) -> int:
@@ -96,14 +94,18 @@ class JudgeVerdict:
     def __post_init__(self) -> None:
         """Compute agreement fields."""
         self.agrees_with_bing = self.judge_says_relevant == self.bing_says_relevant
-        self.agrees_with_rationale = self.judge_says_relevant == self.rationale_says_relevant
+        self.agrees_with_rationale = (
+            self.judge_says_relevant == self.rationale_says_relevant
+        )
 
     def to_dict(self) -> dict[str, Any]:
         """Convert to dictionary."""
         return {
             "query": self.query[:100] + "..." if len(self.query) > 100 else self.query,
             "text_unit_id": self.text_unit_id,
-            "text_unit_text": self.text_unit_text[:200] + "..." if len(self.text_unit_text) > 200 else self.text_unit_text,
+            "text_unit_text": self.text_unit_text[:200] + "..."
+            if len(self.text_unit_text) > 200
+            else self.text_unit_text,
             "threshold": self.threshold,
             "bing_score": self.bing_score,
             "rationale_score": self.rationale_score,
@@ -139,9 +141,13 @@ class JudgeResults:
             return
 
         self.agrees_with_bing = sum(1 for v in self.verdicts if v.agrees_with_bing)
-        self.agrees_with_rationale = sum(1 for v in self.verdicts if v.agrees_with_rationale)
+        self.agrees_with_rationale = sum(
+            1 for v in self.verdicts if v.agrees_with_rationale
+        )
         self.bing_agreement_rate = self.agrees_with_bing / self.total_disagreements
-        self.rationale_agreement_rate = self.agrees_with_rationale / self.total_disagreements
+        self.rationale_agreement_rate = (
+            self.agrees_with_rationale / self.total_disagreements
+        )
 
     def to_dict(self) -> dict[str, Any]:
         """Convert to dictionary."""
@@ -216,16 +222,24 @@ class RaterComparisonResult:
         )
         self.within_one_rate = self.within_one_agreements / self.total_comparisons
 
-        self.mean_score_diff = sum(item.score_diff for item in self.items) / self.total_comparisons
-        self.bing_mean_score = sum(item.bing_score for item in self.items) / self.total_comparisons
-        self.rationale_mean_score = sum(item.rationale_score for item in self.items) / self.total_comparisons
+        self.mean_score_diff = (
+            sum(item.score_diff for item in self.items) / self.total_comparisons
+        )
+        self.bing_mean_score = (
+            sum(item.bing_score for item in self.items) / self.total_comparisons
+        )
+        self.rationale_mean_score = (
+            sum(item.rationale_score for item in self.items) / self.total_comparisons
+        )
 
         # Score distribution
         bing_dist: dict[int, int] = {0: 0, 1: 0, 2: 0, 3: 0}
         rationale_dist: dict[int, int] = {0: 0, 1: 0, 2: 0, 3: 0}
         for item in self.items:
             bing_dist[item.bing_score] = bing_dist.get(item.bing_score, 0) + 1
-            rationale_dist[item.rationale_score] = rationale_dist.get(item.rationale_score, 0) + 1
+            rationale_dist[item.rationale_score] = (
+                rationale_dist.get(item.rationale_score, 0) + 1
+            )
         self.score_distribution = {"bing": bing_dist, "rationale": rationale_dist}
 
         # Compute inter-rater reliability metrics
@@ -247,9 +261,7 @@ class RaterComparisonResult:
             "rationale_positive_rate": 0.0,
         }
 
-    def _compute_binary_agreement(
-        self, threshold: int
-    ) -> dict[str, float]:
+    def _compute_binary_agreement(self, threshold: int) -> dict[str, float]:
         """Compute binary agreement metrics at a given relevance threshold.
 
         Args:
@@ -279,13 +291,19 @@ class RaterComparisonResult:
         # Using Rationale as "ground truth" for precision/recall calculation
         # (Bing is the predicted, Rationale is the reference)
         tp = sum(
-            1 for b, r in zip(bing_binary, rationale_binary, strict=True) if b == 1 and r == 1
+            1
+            for b, r in zip(bing_binary, rationale_binary, strict=True)
+            if b == 1 and r == 1
         )
         fp = sum(
-            1 for b, r in zip(bing_binary, rationale_binary, strict=True) if b == 1 and r == 0
+            1
+            for b, r in zip(bing_binary, rationale_binary, strict=True)
+            if b == 1 and r == 0
         )
         fn = sum(
-            1 for b, r in zip(bing_binary, rationale_binary, strict=True) if b == 0 and r == 1
+            1
+            for b, r in zip(bing_binary, rationale_binary, strict=True)
+            if b == 0 and r == 1
         )
 
         # Precision, recall, F1 (bing vs rationale as reference)
@@ -298,7 +316,9 @@ class RaterComparisonResult:
         )
 
         # Cohen's Kappa for binary
-        kappa = self._compute_cohens_kappa(bing_binary, rationale_binary, num_categories=2)
+        kappa = self._compute_cohens_kappa(
+            bing_binary, rationale_binary, num_categories=2
+        )
 
         # Positive rates
         bing_positive_rate = sum(bing_binary) / n
@@ -378,8 +398,13 @@ class RaterComparisonResult:
 
         # Expected agreement by chance
         row_sums = [sum(matrix[i]) for i in range(num_categories)]
-        col_sums = [sum(matrix[i][j] for i in range(num_categories)) for j in range(num_categories)]
-        expected = sum(row_sums[i] * col_sums[i] for i in range(num_categories)) / (n * n)
+        col_sums = [
+            sum(matrix[i][j] for i in range(num_categories))
+            for j in range(num_categories)
+        ]
+        expected = sum(row_sums[i] * col_sums[i] for i in range(num_categories)) / (
+            n * n
+        )
 
         # Kappa
         if expected == 1.0:
@@ -426,7 +451,10 @@ class RaterComparisonResult:
 
         # Row and column marginals
         row_sums = [sum(matrix[i]) / n for i in range(num_categories)]
-        col_sums = [sum(matrix[i][j] for i in range(num_categories)) / n for j in range(num_categories)]
+        col_sums = [
+            sum(matrix[i][j] for i in range(num_categories)) / n
+            for j in range(num_categories)
+        ]
 
         # Observed weighted disagreement
         observed = sum(
@@ -449,79 +477,121 @@ class RaterComparisonResult:
 
     def print_summary(self) -> None:
         """Print a summary of the comparison results."""
-        print(f"\n{'='*60}")
+        print(f"\n{'=' * 60}")
         print("RATER COMPARISON SUMMARY")
-        print(f"{'='*60}")
+        print(f"{'=' * 60}")
         print(f"Total comparisons: {self.total_comparisons}")
-        print(f"\nAgreement Metrics:")
-        print(f"  Exact agreement: {self.exact_agreements}/{self.total_comparisons} ({self.agreement_rate:.1%})")
-        print(f"  Within 1 point:  {self.within_one_agreements}/{self.total_comparisons} ({self.within_one_rate:.1%})")
+        print("\nAgreement Metrics:")
+        print(
+            f"  Exact agreement: {self.exact_agreements}/{self.total_comparisons} ({self.agreement_rate:.1%})"
+        )
+        print(
+            f"  Within 1 point:  {self.within_one_agreements}/{self.total_comparisons} ({self.within_one_rate:.1%})"
+        )
         print(f"  Mean score diff: {self.mean_score_diff:.2f}")
-        print(f"\nInter-Rater Reliability:")
+        print("\nInter-Rater Reliability:")
         print(f"  Cohen's Kappa:       {self.cohens_kappa:.3f}")
         print(f"  Weighted Kappa (QW): {self.weighted_kappa:.3f}")
         print(f"  Spearman corr:       {self.spearman_correlation:.3f}")
         print(f"  Pearson corr:        {self.pearson_correlation:.3f}")
-        print(f"\n  Kappa Interpretation:")
-        print(f"    < 0.00: Poor | 0.00-0.20: Slight | 0.21-0.40: Fair")
-        print(f"    0.41-0.60: Moderate | 0.61-0.80: Substantial | 0.81-1.00: Almost Perfect")
-        print(f"\nMean Scores:")
+        print("\n  Kappa Interpretation:")
+        print("    < 0.00: Poor | 0.00-0.20: Slight | 0.21-0.40: Fair")
+        print(
+            "    0.41-0.60: Moderate | 0.61-0.80: Substantial | 0.81-1.00: Almost Perfect"
+        )
+        print("\nMean Scores:")
         print(f"  Bing rater:      {self.bing_mean_score:.2f}")
         print(f"  Rationale rater: {self.rationale_mean_score:.2f}")
-        print(f"\nScore Distribution:")
+        print("\nScore Distribution:")
         print(f"  {'Score':<8} {'Bing':<10} {'Rationale':<10}")
         for score in range(4):
-            print(f"  {score:<8} {self.score_distribution['bing'].get(score, 0):<10} {self.score_distribution['rationale'].get(score, 0):<10}")
-        print(f"\nConfusion Matrix (Bing rows x Rationale cols):")
+            print(
+                f"  {score:<8} {self.score_distribution['bing'].get(score, 0):<10} {self.score_distribution['rationale'].get(score, 0):<10}"
+            )
+        print("\nConfusion Matrix (Bing rows x Rationale cols):")
         print(f"  {'':>6} {0:>6} {1:>6} {2:>6} {3:>6}")
         for i in range(4):
             row = self.confusion_matrix[i]
             print(f"  {i:>6} {row[0]:>6} {row[1]:>6} {row[2]:>6} {row[3]:>6}")
-        print(f"\nBinary Agreement (threshold >= 1, i.e. score 1+ is relevant):")
-        print(f"  Agreement rate:      {self.binary_agreement_t1['agreement_rate']:.1%}")
+        print("\nBinary Agreement (threshold >= 1, i.e. score 1+ is relevant):")
+        print(
+            f"  Agreement rate:      {self.binary_agreement_t1['agreement_rate']:.1%}"
+        )
         print(f"  Cohen's Kappa:       {self.binary_agreement_t1['cohens_kappa']:.3f}")
         print(f"  Precision:           {self.binary_agreement_t1['precision']:.3f}")
         print(f"  Recall:              {self.binary_agreement_t1['recall']:.3f}")
         print(f"  F1 Score:            {self.binary_agreement_t1['f1_score']:.3f}")
-        print(f"  Bing positive rate:  {self.binary_agreement_t1['bing_positive_rate']:.1%}")
-        print(f"  Rationale pos rate:  {self.binary_agreement_t1['rationale_positive_rate']:.1%}")
-        print(f"\nBinary Agreement (threshold >= 2, i.e. score 2+ is relevant):")
-        print(f"  Agreement rate:      {self.binary_agreement_t2['agreement_rate']:.1%}")
+        print(
+            f"  Bing positive rate:  {self.binary_agreement_t1['bing_positive_rate']:.1%}"
+        )
+        print(
+            f"  Rationale pos rate:  {self.binary_agreement_t1['rationale_positive_rate']:.1%}"
+        )
+        print("\nBinary Agreement (threshold >= 2, i.e. score 2+ is relevant):")
+        print(
+            f"  Agreement rate:      {self.binary_agreement_t2['agreement_rate']:.1%}"
+        )
         print(f"  Cohen's Kappa:       {self.binary_agreement_t2['cohens_kappa']:.3f}")
         print(f"  Precision:           {self.binary_agreement_t2['precision']:.3f}")
         print(f"  Recall:              {self.binary_agreement_t2['recall']:.3f}")
         print(f"  F1 Score:            {self.binary_agreement_t2['f1_score']:.3f}")
-        print(f"  Bing positive rate:  {self.binary_agreement_t2['bing_positive_rate']:.1%}")
-        print(f"  Rationale pos rate:  {self.binary_agreement_t2['rationale_positive_rate']:.1%}")
+        print(
+            f"  Bing positive rate:  {self.binary_agreement_t2['bing_positive_rate']:.1%}"
+        )
+        print(
+            f"  Rationale pos rate:  {self.binary_agreement_t2['rationale_positive_rate']:.1%}"
+        )
         if self.bing_stats or self.rationale_stats:
-            print(f"\nRater Performance:")
+            print("\nRater Performance:")
             if self.bing_stats:
-                print(f"  Bing Rater:")
-                print(f"    Total time:       {self.bing_stats.total_time_seconds:.1f}s")
-                print(f"    Avg time/query:   {self.bing_stats.avg_time_per_query:.2f}s")
+                print("  Bing Rater:")
+                print(
+                    f"    Total time:       {self.bing_stats.total_time_seconds:.1f}s"
+                )
+                print(
+                    f"    Avg time/query:   {self.bing_stats.avg_time_per_query:.2f}s"
+                )
                 print(f"    Prompt tokens:    {self.bing_stats.prompt_tokens:,}")
                 print(f"    Completion tokens:{self.bing_stats.completion_tokens:,}")
                 print(f"    Total tokens:     {self.bing_stats.total_tokens:,}")
             if self.rationale_stats:
-                print(f"  Rationale Rater:")
-                print(f"    Total time:       {self.rationale_stats.total_time_seconds:.1f}s")
-                print(f"    Avg time/query:   {self.rationale_stats.avg_time_per_query:.2f}s")
+                print("  Rationale Rater:")
+                print(
+                    f"    Total time:       {self.rationale_stats.total_time_seconds:.1f}s"
+                )
+                print(
+                    f"    Avg time/query:   {self.rationale_stats.avg_time_per_query:.2f}s"
+                )
                 print(f"    Prompt tokens:    {self.rationale_stats.prompt_tokens:,}")
-                print(f"    Completion tokens:{self.rationale_stats.completion_tokens:,}")
+                print(
+                    f"    Completion tokens:{self.rationale_stats.completion_tokens:,}"
+                )
                 print(f"    Total tokens:     {self.rationale_stats.total_tokens:,}")
         if self.judge_results_t1 or self.judge_results_t2:
-            print(f"\nLLM Judge Review of Binary Disagreements:")
+            print("\nLLM Judge Review of Binary Disagreements:")
             if self.judge_results_t1 and self.judge_results_t1.total_disagreements > 0:
-                print(f"  Threshold >= 1:")
-                print(f"    Disagreements reviewed: {self.judge_results_t1.total_disagreements}")
-                print(f"    Judge agrees with Bing:      {self.judge_results_t1.agrees_with_bing} ({self.judge_results_t1.bing_agreement_rate:.1%})")
-                print(f"    Judge agrees with Rationale: {self.judge_results_t1.agrees_with_rationale} ({self.judge_results_t1.rationale_agreement_rate:.1%})")
+                print("  Threshold >= 1:")
+                print(
+                    f"    Disagreements reviewed: {self.judge_results_t1.total_disagreements}"
+                )
+                print(
+                    f"    Judge agrees with Bing:      {self.judge_results_t1.agrees_with_bing} ({self.judge_results_t1.bing_agreement_rate:.1%})"
+                )
+                print(
+                    f"    Judge agrees with Rationale: {self.judge_results_t1.agrees_with_rationale} ({self.judge_results_t1.rationale_agreement_rate:.1%})"
+                )
             if self.judge_results_t2 and self.judge_results_t2.total_disagreements > 0:
-                print(f"  Threshold >= 2:")
-                print(f"    Disagreements reviewed: {self.judge_results_t2.total_disagreements}")
-                print(f"    Judge agrees with Bing:      {self.judge_results_t2.agrees_with_bing} ({self.judge_results_t2.bing_agreement_rate:.1%})")
-                print(f"    Judge agrees with Rationale: {self.judge_results_t2.agrees_with_rationale} ({self.judge_results_t2.rationale_agreement_rate:.1%})")
-        print(f"{'='*60}\n")
+                print("  Threshold >= 2:")
+                print(
+                    f"    Disagreements reviewed: {self.judge_results_t2.total_disagreements}"
+                )
+                print(
+                    f"    Judge agrees with Bing:      {self.judge_results_t2.agrees_with_bing} ({self.judge_results_t2.bing_agreement_rate:.1%})"
+                )
+                print(
+                    f"    Judge agrees with Rationale: {self.judge_results_t2.agrees_with_rationale} ({self.judge_results_t2.rationale_agreement_rate:.1%})"
+                )
+        print(f"{'=' * 60}\n")
 
     def get_disagreements(self, min_diff: int = 2) -> list[RaterComparisonItem]:
         """Get items where raters disagree by at least min_diff points.
@@ -558,12 +628,20 @@ class RaterComparisonResult:
             "binary_agreement_threshold_1": self.binary_agreement_t1,
             "binary_agreement_threshold_2": self.binary_agreement_t2,
             "bing_stats": self.bing_stats.to_dict() if self.bing_stats else None,
-            "rationale_stats": self.rationale_stats.to_dict() if self.rationale_stats else None,
-            "judge_results_threshold_1": self.judge_results_t1.to_dict() if self.judge_results_t1 else None,
-            "judge_results_threshold_2": self.judge_results_t2.to_dict() if self.judge_results_t2 else None,
+            "rationale_stats": self.rationale_stats.to_dict()
+            if self.rationale_stats
+            else None,
+            "judge_results_threshold_1": self.judge_results_t1.to_dict()
+            if self.judge_results_t1
+            else None,
+            "judge_results_threshold_2": self.judge_results_t2.to_dict()
+            if self.judge_results_t2
+            else None,
             "items": [
                 {
-                    "query": item.query[:100] + "..." if len(item.query) > 100 else item.query,
+                    "query": item.query[:100] + "..."
+                    if len(item.query) > 100
+                    else item.query,
                     "text_unit_id": item.text_unit_id,
                     "bing_score": item.bing_score,
                     "rationale_score": item.rationale_score,
@@ -636,12 +714,15 @@ async def judge_binary_disagreements(
 
     if max_judgments and len(disagreements) > max_judgments:
         import random
+
         disagreements = random.sample(disagreements, max_judgments)
 
     if not disagreements:
         return JudgeResults(verdicts=[], threshold=threshold)
 
-    log.info("Judging %d binary disagreements at threshold %d", len(disagreements), threshold)
+    log.info(
+        "Judging %d binary disagreements at threshold %d", len(disagreements), threshold
+    )
 
     llm_client = ModelFactory.create_chat_model(llm_config)
 
@@ -649,7 +730,9 @@ async def judge_binary_disagreements(
 
     from tqdm import tqdm
 
-    for item in tqdm(disagreements, desc=f"Judge reviewing (t={threshold})", unit="item"):
+    for item in tqdm(
+        disagreements, desc=f"Judge reviewing (t={threshold})", unit="item"
+    ):
         prompt = JUDGE_PROMPT_TEMPLATE.format(
             query=item.query,
             text=item.text_unit_text,
@@ -669,7 +752,10 @@ async def judge_binary_disagreements(
                 judge_reasoning = str(parsed.get("reasoning", ""))
             else:
                 # Fallback: look for "relevant": true/false
-                judge_relevant = '"relevant": true' in response_text.lower() or '"relevant":true' in response_text.lower()
+                judge_relevant = (
+                    '"relevant": true' in response_text.lower()
+                    or '"relevant":true' in response_text.lower()
+                )
                 judge_reasoning = response_text
 
             bing_relevant = item.bing_score >= threshold
@@ -866,7 +952,8 @@ async def _compare_raters_with_topk_selection(
 
     # Embed queries that don't have embeddings
     queries_needing_embedding = [
-        (i, q) for i, (q, emb) in enumerate(zip(queries, query_embeddings, strict=True))
+        (i, q)
+        for i, (q, emb) in enumerate(zip(queries, query_embeddings, strict=True))
         if emb is None
     ]
 
@@ -882,7 +969,9 @@ async def _compare_raters_with_topk_selection(
         embedding_model = ModelFactory.create_embedding_model(embedding_config)
         text_embedder = TextEmbedder(embedding_model)
 
-        log.info("Embedding %d queries without embeddings...", len(queries_needing_embedding))
+        log.info(
+            "Embedding %d queries without embeddings...", len(queries_needing_embedding)
+        )
         texts_to_embed = [q for _, q in queries_needing_embedding]
         embeddings = await embedding_model.embed(texts_to_embed)
 
@@ -899,13 +988,18 @@ async def _compare_raters_with_topk_selection(
     from tqdm import tqdm
 
     query_pairs = [
-        (q, emb) for q, emb in zip(queries, query_embeddings, strict=True)
+        (q, emb)
+        for q, emb in zip(queries, query_embeddings, strict=True)
         if emb is not None
     ]
 
     # Track timing and token usage
-    bing_stats = RaterStats(num_queries=len(query_pairs), num_text_units=len(query_pairs) * max_text_units)
-    rationale_stats = RaterStats(num_queries=len(query_pairs), num_text_units=len(query_pairs) * max_text_units)
+    bing_stats = RaterStats(
+        num_queries=len(query_pairs), num_text_units=len(query_pairs) * max_text_units
+    )
+    rationale_stats = RaterStats(
+        num_queries=len(query_pairs), num_text_units=len(query_pairs) * max_text_units
+    )
 
     # Get initial token counts
     bing_initial_usage = bing_rater.llm_client.get_usage()
@@ -928,7 +1022,9 @@ async def _compare_raters_with_topk_selection(
 
         # Run Rationale rater with timing
         rationale_start = time.perf_counter()
-        rationale_response = await rationale_rater.rate_relevance(query, selected_text_units)
+        rationale_response = await rationale_rater.rate_relevance(
+            query, selected_text_units
+        )
         rationale_stats.total_time_seconds += time.perf_counter() - rationale_start
 
         # Pair up results by text unit ID
@@ -963,10 +1059,18 @@ async def _compare_raters_with_topk_selection(
     bing_final_usage = bing_rater.llm_client.get_usage()
     rationale_final_usage = rationale_rater.llm_client.get_usage()
 
-    bing_stats.prompt_tokens = bing_final_usage.get("prompt_tokens", 0) - bing_initial_usage.get("prompt_tokens", 0)
-    bing_stats.completion_tokens = bing_final_usage.get("completion_tokens", 0) - bing_initial_usage.get("completion_tokens", 0)
-    rationale_stats.prompt_tokens = rationale_final_usage.get("prompt_tokens", 0) - rationale_initial_usage.get("prompt_tokens", 0)
-    rationale_stats.completion_tokens = rationale_final_usage.get("completion_tokens", 0) - rationale_initial_usage.get("completion_tokens", 0)
+    bing_stats.prompt_tokens = bing_final_usage.get(
+        "prompt_tokens", 0
+    ) - bing_initial_usage.get("prompt_tokens", 0)
+    bing_stats.completion_tokens = bing_final_usage.get(
+        "completion_tokens", 0
+    ) - bing_initial_usage.get("completion_tokens", 0)
+    rationale_stats.prompt_tokens = rationale_final_usage.get(
+        "prompt_tokens", 0
+    ) - rationale_initial_usage.get("prompt_tokens", 0)
+    rationale_stats.completion_tokens = rationale_final_usage.get(
+        "completion_tokens", 0
+    ) - rationale_initial_usage.get("completion_tokens", 0)
 
     log.info("Comparison complete. %d items compared.", len(comparison_items))
 

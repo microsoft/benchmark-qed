@@ -22,7 +22,9 @@ log = logging.getLogger(__name__)
 class RelevanceRater(ABC):
     """Abstract base class for rating the relevance of text chunks to queries."""
 
-    def __init__(self, cache_dir: Path | None = None, cache_enabled: bool = True) -> None:
+    def __init__(
+        self, cache_dir: Path | None = None, cache_enabled: bool = True
+    ) -> None:
         """
         Initialize the RelevanceRater with optional caching.
 
@@ -78,7 +80,9 @@ class RelevanceRater(ABC):
         # Process uncached text units if any
         uncached_results = []
         if uncached_text_units:
-            uncached_response = await self._rate_relevance_impl(query, uncached_text_units)
+            uncached_response = await self._rate_relevance_impl(
+                query, uncached_text_units
+            )
             uncached_results = uncached_response.assessment
 
             # Cache individual results
@@ -115,13 +119,15 @@ class RelevanceRater(ABC):
             RelevanceAssessmentResponse containing assessment results.
         """
 
-    def _generate_cache_key(self, query: str, text_unit: TextUnit, rater_params: dict[str, Any]) -> str:
+    def _generate_cache_key(
+        self, query: str, text_unit: TextUnit, rater_params: dict[str, Any]
+    ) -> str:
         """Generate deterministic cache key for a single text unit assessment."""
         cache_data = {
             "query": query.strip().lower(),
             "text_content": text_unit.text.strip().lower(),
             "rater_type": self.__class__.__name__,
-            "rater_params": rater_params
+            "rater_params": rater_params,
         }
 
         content_str = json.dumps(cache_data, sort_keys=True)
@@ -144,7 +150,9 @@ class RelevanceRater(ABC):
             # If cache file is corrupted, ignore and continue
             return None
 
-    def _save_to_cache(self, cache_key: str, query: str, assessment_item: RelevanceAssessmentItem) -> None:
+    def _save_to_cache(
+        self, cache_key: str, query: str, assessment_item: RelevanceAssessmentItem
+    ) -> None:
         """Save single text unit assessment result to cache."""
         if not self.cache_enabled or not self.cache_dir:
             return
@@ -153,7 +161,9 @@ class RelevanceRater(ABC):
 
         # Create a copy for serialization to avoid mutating the original
         # We exclude the embedding to avoid Pydantic warnings about numpy arrays
-        assessment_data = assessment_item.model_dump(exclude={"text_unit": {"text_embedding"}})
+        assessment_data = assessment_item.model_dump(
+            exclude={"text_unit": {"text_embedding"}}
+        )
 
         cache_data = {
             "timestamp": datetime.now(tz=UTC).isoformat(),
@@ -197,10 +207,7 @@ class RelevanceRater(ABC):
         -------
             List of RelevanceAssessmentItem objects that meet or exceed the threshold.
         """
-        return [
-            item for item in result.assessment
-            if item.score >= relevance_threshold
-        ]
+        return [item for item in result.assessment if item.score >= relevance_threshold]
 
     def supports_caching(self) -> bool:
         """
@@ -233,7 +240,9 @@ class RelevanceRater(ABC):
         if self.cache_dir and self.cache_dir.exists():
             all_cache_files = list(self.cache_dir.glob("*.json"))
             cache_files = len(all_cache_files)
-            cache_size_mb = sum(f.stat().st_size for f in all_cache_files) / (1024 * 1024)
+            cache_size_mb = sum(f.stat().st_size for f in all_cache_files) / (
+                1024 * 1024
+            )
 
         return {
             "caching_enabled": True,
@@ -242,7 +251,7 @@ class RelevanceRater(ABC):
             "hit_rate_percent": round(hit_rate, 1),
             "cache_files": cache_files,
             "cache_size_mb": round(cache_size_mb, 2),
-            "cache_dir": str(self.cache_dir) if self.cache_dir else None
+            "cache_dir": str(self.cache_dir) if self.cache_dir else None,
         }
 
     def clear_cache(self) -> None:

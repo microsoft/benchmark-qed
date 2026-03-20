@@ -62,7 +62,9 @@ class BingRelevanceRater(RelevanceRater):
         return {
             "llm_model": getattr(self.llm_config, "model", None),
             "llm_call_args": getattr(self.llm_config, "call_args", {}),
-            "prompt_template": self.prompt_template.template if self.prompt_template else None,
+            "prompt_template": self.prompt_template.template
+            if self.prompt_template
+            else None,
         }
 
     async def _rate_relevance_impl(
@@ -87,10 +89,11 @@ class BingRelevanceRater(RelevanceRater):
         if not text_units:
             return RelevanceAssessmentResponse(assessment=[])
 
-        log.info("Processing %d text units using Bing assessment prompt", len(text_units))
+        log.info(
+            "Processing %d text units using Bing assessment prompt", len(text_units)
+        )
         tasks = [
-            self._assess_unit(query, unit, idx)
-            for idx, unit in enumerate(text_units)
+            self._assess_unit(query, unit, idx) for idx, unit in enumerate(text_units)
         ]
 
         results = await asyncio.gather(*tasks)
@@ -118,13 +121,10 @@ class BingRelevanceRater(RelevanceRater):
 
             # Create the prompt using UMBRELA template
             prompt_content = self.prompt_template.substitute(
-                query=query,
-                passage=unit.text
+                query=query, passage=unit.text
             )
 
-            messages = [
-                {"role": "system", "content": prompt_content}
-            ]
+            messages = [{"role": "system", "content": prompt_content}]
 
             try:
                 # Call the LLM directly
@@ -180,7 +180,10 @@ class BingRelevanceRater(RelevanceRater):
             except ValueError:
                 log.warning("Could not parse score from: %s", score_match.group(1))
             else:
-                return -1, f"Invalid score range: {score}. Full response: {response_content}"
+                return (
+                    -1,
+                    f"Invalid score range: {score}. Full response: {response_content}",
+                )
 
         # Fallback parsing - look for any number that could be a score
         numbers = re.findall(r"\b([0-3])\b", response_content)
@@ -188,7 +191,10 @@ class BingRelevanceRater(RelevanceRater):
             # Take the last valid number found
             try:
                 score = int(numbers[-1])
-                return score, f"Extracted score from response: {response_content.strip()}"
+                return (
+                    score,
+                    f"Extracted score from response: {response_content.strip()}",
+                )
             except ValueError:
                 pass
 

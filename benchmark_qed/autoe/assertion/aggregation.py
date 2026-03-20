@@ -45,7 +45,8 @@ def aggregate_hierarchical_scores(
         pass_threshold: Threshold for determining if an assertion passed.
             Default 0.5.
 
-    Returns:
+    Returns
+    -------
         DataFrame with aggregated scores per assertion containing:
             - question: The question text
             - assertion: The global assertion text
@@ -109,14 +110,12 @@ def aggregate_hierarchical_scores(
                     reasoning = trial_results[i]["reasoning"]
                     break
 
-            aggregated_results.append(
-                {
-                    "id": sa_id,
-                    "passed": sa_passed,
-                    "pass_rate": pass_rate,
-                    "reasoning": reasoning,
-                }
-            )
+            aggregated_results.append({
+                "id": sa_id,
+                "passed": sa_passed,
+                "pass_rate": pass_rate,
+                "reasoning": reasoning,
+            })
 
         level = passed_count / n_supporting if n_supporting > 0 else 0.0
 
@@ -183,19 +182,17 @@ def aggregate_hierarchical_scores(
         # Get reasoning from first row
         reasoning = group["reasoning"].iloc[0] if "reasoning" in group.columns else ""
 
-        results.append(
-            {
-                "question": question,
-                "assertion": assertion,
-                "global_score": global_score,
-                "global_score_mean": global_passed_mean,
-                "global_score_overridden": global_score_overridden,
-                "reasoning": reasoning,
-                "supporting_assertions": supporting_assertions,
-                **support_metrics,
-                **discovery_metrics,
-            }
-        )
+        results.append({
+            "question": question,
+            "assertion": assertion,
+            "global_score": global_score,
+            "global_score_mean": global_passed_mean,
+            "global_score_overridden": global_score_overridden,
+            "reasoning": reasoning,
+            "supporting_assertions": supporting_assertions,
+            **support_metrics,
+            **discovery_metrics,
+        })
 
     return pd.DataFrame(results)
 
@@ -209,7 +206,8 @@ def summarize_hierarchical_by_question(
         aggregated_df: DataFrame from aggregate_hierarchical_scores() with
             per-assertion aggregated metrics.
 
-    Returns:
+    Returns
+    -------
         DataFrame with per-question summary containing:
             - question: The question text
             - assertions_passed: Number of global assertions that passed
@@ -252,13 +250,11 @@ def summarize_hierarchical_by_question(
         n_passed = sum(unique_supporting.values())
         pass_rate = n_passed / n_unique if n_unique > 0 else 0.0
 
-        return pd.Series(
-            {
-                "n_supporting_unique": n_unique,
-                "n_supporting_passed_unique": n_passed,
-                "supporting_pass_rate": pass_rate,
-            }
-        )
+        return pd.Series({
+            "n_supporting_unique": n_unique,
+            "n_supporting_passed_unique": n_passed,
+            "supporting_pass_rate": pass_rate,
+        })
 
     # Basic aggregations
     summary = (
@@ -284,16 +280,14 @@ def summarize_hierarchical_by_question(
     both_counts = (
         aggregated_df.groupby("question")
         .apply(  # type: ignore[call-overload]
-            lambda g: pd.Series(
-                {
-                    "n_with_both": (
-                        (g["has_discovery"]) & (g["n_supporting_passed"] > 0)
-                    ).sum(),
-                    "n_support_only": (
-                        (~g["has_discovery"]) & (g["n_supporting_passed"] > 0)
-                    ).sum(),
-                }
-            ),
+            lambda g: pd.Series({
+                "n_with_both": (
+                    (g["has_discovery"]) & (g["n_supporting_passed"] > 0)
+                ).sum(),
+                "n_support_only": (
+                    (~g["has_discovery"]) & (g["n_supporting_passed"] > 0)
+                ).sum(),
+            }),
             include_groups=False,  # type: ignore[arg-type]
         )
         .reset_index()
@@ -315,7 +309,8 @@ def summarize_hierarchical_by_question(
     unique_stats = (
         aggregated_df.groupby("question")
         .apply(  # type: ignore[call-overload]
-            _compute_unique_supporting_stats, include_groups=False  # type: ignore[arg-type]
+            _compute_unique_supporting_stats,
+            include_groups=False,  # type: ignore[arg-type]
         )
         .reset_index()
     )
@@ -346,7 +341,8 @@ def summarize_standard_scores(
         pass_threshold: Threshold for determining if an assertion
             passed (default 0.5).
 
-    Returns:
+    Returns
+    -------
         Tuple of (summary_by_assertion, summary_by_question, eval_stats):
             - summary_by_assertion: DataFrame with columns question,
                 assertion, score (binary), score_mean, score_std.
@@ -378,15 +374,11 @@ def summarize_standard_scores(
     )
 
     # Per-assertion trial statistics
-    summary_by_assertion["score_mean"] = (
-        summary_by_assertion["scores"].apply(
-            lambda x: np.mean(x) if len(x) > 0 else 0.0
-        )
+    summary_by_assertion["score_mean"] = summary_by_assertion["scores"].apply(
+        lambda x: np.mean(x) if len(x) > 0 else 0.0
     )
-    summary_by_assertion["score_std"] = (
-        summary_by_assertion["scores"].apply(
-            lambda x: np.std(x) if len(x) > 0 else 0.0
-        )
+    summary_by_assertion["score_std"] = summary_by_assertion["scores"].apply(
+        lambda x: np.std(x) if len(x) > 0 else 0.0
     )
     summary_by_assertion = summary_by_assertion.drop(columns=["scores"])
 
@@ -394,21 +386,15 @@ def summarize_standard_scores(
     total_success = int(summary_by_question["success"].sum())
     total_fail = int(summary_by_question["fail"].sum())
     total_assertions = total_success + total_fail
-    overall_accuracy = (
-        total_success / total_assertions
-        if total_assertions > 0
-        else 0.0
-    )
+    overall_accuracy = total_success / total_assertions if total_assertions > 0 else 0.0
 
     # Per-question pass rate: for each question, passed / total,
     # then average across questions
-    summary_by_question["pass_rate"] = summary_by_question[
-        "success"
-    ] / (summary_by_question["success"] + summary_by_question["fail"])
-    num_questions = len(summary_by_question)
-    avg_question_pass_rate = float(
-        summary_by_question["pass_rate"].mean()
+    summary_by_question["pass_rate"] = summary_by_question["success"] / (
+        summary_by_question["success"] + summary_by_question["fail"]
     )
+    num_questions = len(summary_by_question)
+    avg_question_pass_rate = float(summary_by_question["pass_rate"].mean())
 
     eval_stats: dict[str, object] = {
         "total_assertions": total_assertions,
@@ -440,7 +426,8 @@ def compute_hierarchical_eval_summary(
             global_score, support_level, has_discovery,
             support_results, n_supporting_passed, etc.
 
-    Returns:
+    Returns
+    -------
         Dict with comprehensive evaluation metrics:
             - total_assertions, passed_assertions, failed_assertions
             - global_pass_rate: overall ratio of passed assertions
@@ -470,15 +457,9 @@ def compute_hierarchical_eval_summary(
 
     # Per-question metrics (average per question, then mean across)
     per_q = aggregated.groupby("question")
-    avg_global_pass_rate = float(
-        per_q["global_score"].mean().mean()
-    )
-    avg_support_level = float(
-        per_q["support_level"].mean().mean()
-    )
-    discovery_rate = float(
-        per_q["has_discovery"].mean().mean()
-    )
+    avg_global_pass_rate = float(per_q["global_score"].mean().mean())
+    avg_support_level = float(per_q["support_level"].mean().mean())
+    discovery_rate = float(per_q["has_discovery"].mean().mean())
 
     # Supporting pass rate: count all evaluations per question
     # (no deduplication, same as multi-RAG pipeline)
@@ -489,17 +470,11 @@ def compute_hierarchical_eval_summary(
         for support_results in group["support_results"]:
             if support_results:
                 total_supporting += len(support_results)
-                total_passed += sum(
-                    1 for sr in support_results if sr["passed"]
-                )
+                total_passed += sum(1 for sr in support_results if sr["passed"])
         if total_supporting > 0:
-            per_question_supporting_rates.append(
-                total_passed / total_supporting
-            )
+            per_question_supporting_rates.append(total_passed / total_supporting)
     supporting_pass_rate = float(
-        np.mean(per_question_supporting_rates)
-        if per_question_supporting_rates
-        else 0.0
+        np.mean(per_question_supporting_rates) if per_question_supporting_rates else 0.0
     )
 
     # Conditional metrics (passed globals only)
@@ -510,12 +485,8 @@ def compute_hierarchical_eval_summary(
 
     if not passed_df.empty:
         per_q_passed = passed_df.groupby("question")
-        support_level_passed = float(
-            per_q_passed["support_level"].mean().mean()
-        )
-        discovery_rate_passed = float(
-            per_q_passed["has_discovery"].mean().mean()
-        )
+        support_level_passed = float(per_q_passed["support_level"].mean().mean())
+        discovery_rate_passed = float(per_q_passed["has_discovery"].mean().mean())
 
         per_q_supp_rates_passed: list[float] = []
         for _, group in per_q_passed:
@@ -525,17 +496,12 @@ def compute_hierarchical_eval_summary(
                 if support_results:
                     total_supp += len(support_results)
                     total_supp_passed += sum(
-                        1 for sr in support_results
-                        if sr["passed"]
+                        1 for sr in support_results if sr["passed"]
                     )
             if total_supp > 0:
-                per_q_supp_rates_passed.append(
-                    total_supp_passed / total_supp
-                )
+                per_q_supp_rates_passed.append(total_supp_passed / total_supp)
         supporting_pass_rate_passed = float(
-            np.mean(per_q_supp_rates_passed)
-            if per_q_supp_rates_passed
-            else 0.0
+            np.mean(per_q_supp_rates_passed) if per_q_supp_rates_passed else 0.0
         )
 
     num_questions = aggregated["question"].nunique()
@@ -545,9 +511,7 @@ def compute_hierarchical_eval_summary(
         "passed_assertions": passed_assertions,
         "failed_assertions": failed_assertions,
         "global_pass_rate": (
-            float(passed_assertions / total_assertions)
-            if total_assertions > 0
-            else 0.0
+            float(passed_assertions / total_assertions) if total_assertions > 0 else 0.0
         ),
         "avg_global_pass_rate": avg_global_pass_rate,
         "avg_support_level": avg_support_level,

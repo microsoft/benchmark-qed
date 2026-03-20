@@ -31,7 +31,9 @@ MIN_QUESTIONS_IN_CONTEXT = (
     2  # Minimum local questions required in context for data_global
 )
 MIN_CLAIM_COUNT = 2  # Minimum claims required for data_global question filtering
-MIN_RELEVANT_REFERENCE_COUNT = 10  # Soft minimum relevant references for data_global questions
+MIN_RELEVANT_REFERENCE_COUNT = (
+    10  # Soft minimum relevant references for data_global questions
+)
 
 # Activity question defaults
 NUM_PERSONAS = 5

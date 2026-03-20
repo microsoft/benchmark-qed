@@ -46,7 +46,7 @@ class QueryRelevanceResult(BaseModel):
             {
                 "text_unit": item.text_unit,
                 "reasoning": item.reasoning,
-                "score": item.score
+                "score": item.score,
             }
             for item in self.assessments.assessment
             if item.score >= relevance_threshold
@@ -63,10 +63,16 @@ class QueryRelevanceResult(BaseModel):
         -------
             Number of relevant chunks.
         """
-        return len([item for item in self.assessments.assessment if item.score >= relevance_threshold])
+        return len([
+            item
+            for item in self.assessments.assessment
+            if item.score >= relevance_threshold
+        ])
 
     @field_serializer("assessments")
-    def serialize_assessments(self, response: RelevanceAssessmentResponse) -> dict[str, Any]:
+    def serialize_assessments(
+        self, response: RelevanceAssessmentResponse
+    ) -> dict[str, Any]:
         """Serialize assessments excluding embeddings."""
         return {
             "assessment": [
@@ -74,14 +80,16 @@ class QueryRelevanceResult(BaseModel):
                     "text_unit": {
                         "id": item.text_unit.id,
                         "short_id": item.text_unit.short_id,
-                        "text": item.text_unit.text
+                        "text": item.text_unit.text,
                     },
                     "reasoning": item.reasoning,
-                    "score": item.score
+                    "score": item.score,
                 }
-                for item in response.assessment if item.text_unit is not None
+                for item in response.assessment
+                if item.text_unit is not None
             ]
         }
+
 
 class BatchRelevanceResult(BaseModel):
     """Result of batch relevance assessment."""
@@ -183,7 +191,11 @@ async def assess_query_relevance(
     for item in retrieval_result.context:
         if isinstance(item, TextUnit):
             text_units.append(item)
-        elif isinstance(item, dict) and retrieval_result.context_id_key in item and retrieval_result.context_text_key in item:
+        elif (
+            isinstance(item, dict)
+            and retrieval_result.context_id_key in item
+            and retrieval_result.context_text_key in item
+        ):
             # Convert dict to TextUnit
             text_unit = TextUnit(
                 id=retrieval_result.get_context_item_id(item),
@@ -243,7 +255,9 @@ async def assess_batch_relevance(
     # Create semaphore to limit concurrent requests
     semaphore = asyncio.Semaphore(max_concurrent)
 
-    async def assess_single_with_semaphore(retrieval_result: RetrievalResult, index: int) -> QueryRelevanceResult:
+    async def assess_single_with_semaphore(
+        retrieval_result: RetrievalResult, index: int
+    ) -> QueryRelevanceResult:
         async with semaphore:
             log.debug(
                 "Processing query %d/%d: %s",

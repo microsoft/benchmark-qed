@@ -62,9 +62,7 @@ class TestLoadAndNormalizeHierarchicalAssertions:
 
     def test_basic_loading(self, tmp_path: Path) -> None:
         """Load valid hierarchical assertions and verify structure."""
-        path = _make_assertions_file(
-            tmp_path, _sample_hierarchical_data()
-        )
+        path = _make_assertions_file(tmp_path, _sample_hierarchical_data())
         result = load_and_normalize_hierarchical_assertions(path)
 
         # Should have 3 rows total (2 from q1 + 1 from q2)
@@ -73,22 +71,16 @@ class TestLoadAndNormalizeHierarchicalAssertions:
         assert "supporting_assertions" in result.columns
         assert "question_id" in result.columns
 
-    def test_statement_renamed_to_assertion(
-        self, tmp_path: Path
-    ) -> None:
+    def test_statement_renamed_to_assertion(self, tmp_path: Path) -> None:
         """Verify 'statement' column is renamed to 'assertion'."""
-        path = _make_assertions_file(
-            tmp_path, _sample_hierarchical_data()
-        )
+        path = _make_assertions_file(tmp_path, _sample_hierarchical_data())
         result = load_and_normalize_hierarchical_assertions(path)
 
         assert "statement" not in result.columns
         assert "assertion" in result.columns
         assert result["assertion"].iloc[0] == "X is a thing."
 
-    def test_filters_empty_supporting_assertions(
-        self, tmp_path: Path
-    ) -> None:
+    def test_filters_empty_supporting_assertions(self, tmp_path: Path) -> None:
         """Assertions without supporting assertions are filtered out."""
         data = [
             {
@@ -114,9 +106,7 @@ class TestLoadAndNormalizeHierarchicalAssertions:
         assert len(result) == 1
         assert result["assertion"].iloc[0] == "Has support."
 
-    def test_missing_assertions_key_raises(
-        self, tmp_path: Path
-    ) -> None:
+    def test_missing_assertions_key_raises(self, tmp_path: Path) -> None:
         """Raise ValueError when assertions key column is missing."""
         data = [{"question_id": "q1", "other_col": "value"}]
         path = _make_assertions_file(tmp_path, data)
@@ -124,9 +114,7 @@ class TestLoadAndNormalizeHierarchicalAssertions:
         with pytest.raises(ValueError, match="missing required"):
             load_and_normalize_hierarchical_assertions(path)
 
-    def test_missing_supporting_assertions_raises(
-        self, tmp_path: Path
-    ) -> None:
+    def test_missing_supporting_assertions_raises(self, tmp_path: Path) -> None:
         """Raise ValueError when supporting_assertions column is missing."""
         data = [
             {
@@ -185,20 +173,16 @@ class TestLoadAndNormalizeHierarchicalAssertions:
         assert len(result) == 1
         assert result["assertion"].iloc[0] == "A claim."
 
-    def test_non_dict_assertions_renamed(
-        self, tmp_path: Path
-    ) -> None:
+    def test_non_dict_assertions_renamed(self, tmp_path: Path) -> None:
         """Non-dict assertions use the assertions_key rename path."""
         # Build a DataFrame where assertions are plain strings but
         # supporting_assertions is a separate column
-        df = pd.DataFrame(
-            {
-                "question_id": ["q1"],
-                "question_text": ["What?"],
-                "assertions": ["A plain assertion."],
-                "supporting_assertions": [["SA1"]],
-            }
-        )
+        df = pd.DataFrame({
+            "question_id": ["q1"],
+            "question_text": ["What?"],
+            "assertions": ["A plain assertion."],
+            "supporting_assertions": [["SA1"]],
+        })
         path = tmp_path / "assertions.json"
         df.to_json(path, orient="records")
 
@@ -209,9 +193,7 @@ class TestLoadAndNormalizeHierarchicalAssertions:
 
     def test_preserves_rank_column(self, tmp_path: Path) -> None:
         """Rank column is preserved after normalization."""
-        path = _make_assertions_file(
-            tmp_path, _sample_hierarchical_data()
-        )
+        path = _make_assertions_file(tmp_path, _sample_hierarchical_data())
         result = load_and_normalize_hierarchical_assertions(path)
 
         assert "rank" in result.columns
@@ -219,13 +201,9 @@ class TestLoadAndNormalizeHierarchicalAssertions:
 
     def test_accepts_path_object(self, tmp_path: Path) -> None:
         """Accept both str and Path for assertions_path."""
-        path = _make_assertions_file(
-            tmp_path, _sample_hierarchical_data()
-        )
+        path = _make_assertions_file(tmp_path, _sample_hierarchical_data())
         # Pass as string
-        result_str = load_and_normalize_hierarchical_assertions(
-            str(path)
-        )
+        result_str = load_and_normalize_hierarchical_assertions(str(path))
         # Pass as Path
         result_path = load_and_normalize_hierarchical_assertions(path)
 

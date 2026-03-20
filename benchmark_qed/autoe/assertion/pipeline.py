@@ -44,7 +44,8 @@ def load_and_normalize_assertions(
         assertions_filename_template: Template for assertion filename
             (default: "{question_set}_assertions.json").
 
-    Returns:
+    Returns
+    -------
         DataFrame with normalized assertion data containing question_id,
         question_text, assertion, rank.
     """
@@ -119,22 +120,14 @@ def load_and_normalize_hierarchical_assertions(
             "[bold yellow]Some questions do not have assertions. "
             "These will be skipped.[/bold yellow]"
         )
-        assertions_raw = assertions_raw[
-            ~assertions_raw[assertions_key].isna()
-        ]
+        assertions_raw = assertions_raw[~assertions_raw[assertions_key].isna()]
 
     # Explode the assertions list into individual rows
-    assertions = assertions_raw.explode(assertions_key).reset_index(
-        drop=True
-    )
+    assertions = assertions_raw.explode(assertions_key).reset_index(drop=True)
 
     # Normalize nested assertion dicts into separate columns
-    if assertions[assertions_key].apply(
-        lambda x: isinstance(x, dict)
-    ).any():
-        assertion_details = pd.json_normalize(
-            assertions[assertions_key].tolist()
-        )
+    if assertions[assertions_key].apply(lambda x: isinstance(x, dict)).any():
+        assertion_details = pd.json_normalize(assertions[assertions_key].tolist())
         assertions = pd.concat(
             [
                 assertions.drop(columns=[assertions_key]),
@@ -144,13 +137,9 @@ def load_and_normalize_hierarchical_assertions(
         )
         # Rename 'statement' to 'assertion' for consistency
         if "statement" in assertions.columns:
-            assertions = assertions.rename(
-                columns={"statement": "assertion"}
-            )
+            assertions = assertions.rename(columns={"statement": "assertion"})
     else:
-        assertions = assertions.rename(
-            columns={assertions_key: "assertion"}
-        )
+        assertions = assertions.rename(columns={assertions_key: "assertion"})
 
     # Validate supporting assertions column exists
     if supporting_assertions_key not in assertions.columns:
@@ -212,7 +201,8 @@ def evaluate_rag_method(
         question_text_key: Column name for question text (default: "question_text").
         answer_text_key: Column name for answer text (default: "answer").
 
-    Returns:
+    Returns
+    -------
         Dictionary with evaluation results or None if evaluation failed.
     """
     question_set_output_dir = output_dir / question_set
@@ -249,9 +239,7 @@ def evaluate_rag_method(
 
         # Calculate summary statistics using shared aggregation logic
         summary_by_assertion, summary_by_question, eval_stats = (
-            summarize_standard_scores(
-                assertion_score, pass_threshold=pass_threshold
-            )
+            summarize_standard_scores(assertion_score, pass_threshold=pass_threshold)
         )
 
         total_success = eval_stats["passed_assertions"]
@@ -371,7 +359,8 @@ def run_assertion_evaluation(
         question_text_key: Column name for question text (default: "question_text").
         answer_text_key: Column name for answer text (default: "answer").
 
-    Returns:
+    Returns
+    -------
         DataFrame with overall results summary.
     """
     overall_results = []
@@ -507,7 +496,8 @@ def run_hierarchical_assertion_evaluation(
         answer_text_key: Column name for answer text.
         supporting_assertions_key: Column name for supporting assertions.
 
-    Returns:
+    Returns
+    -------
         DataFrame with comparison summary across all RAG methods.
     """
     output_dir.mkdir(parents=True, exist_ok=True)
@@ -553,7 +543,9 @@ def run_hierarchical_assertion_evaluation(
         scores.to_csv(rag_output_dir / "hierarchical_scores_raw.csv", index=False)
 
         # Aggregate scores across trials
-        aggregated = aggregate_hierarchical_scores(scores, pass_threshold=pass_threshold)
+        aggregated = aggregate_hierarchical_scores(
+            scores, pass_threshold=pass_threshold
+        )
         aggregated["rag_method"] = generated_rag
         aggregated.to_csv(
             rag_output_dir / "hierarchical_scores_aggregated.csv", index=False
@@ -587,24 +579,18 @@ def run_hierarchical_assertion_evaluation(
             "rag_method": rag_method,
             "global_pass_rate": eval_stats["avg_global_pass_rate"],
             "avg_support_level": eval_stats["avg_support_level"],
-            "supporting_pass_rate": eval_stats[
-                "supporting_pass_rate"
-            ],
+            "supporting_pass_rate": eval_stats["supporting_pass_rate"],
             "discovery_rate": eval_stats["discovery_rate"],
-            "support_level_passed": eval_stats[
-                "support_level_passed"
-            ],
-            "supporting_pass_rate_passed": eval_stats[
-                "supporting_pass_rate_passed"
-            ],
-            "discovery_rate_passed": eval_stats[
-                "discovery_rate_passed"
-            ],
+            "support_level_passed": eval_stats["support_level_passed"],
+            "supporting_pass_rate_passed": eval_stats["supporting_pass_rate_passed"],
+            "discovery_rate_passed": eval_stats["discovery_rate_passed"],
         }
         comparison_rows.append(row)
 
     comparison_df = pd.DataFrame(comparison_rows)
-    comparison_df.to_csv(output_dir / "hierarchical_comparison_summary.csv", index=False)
+    comparison_df.to_csv(
+        output_dir / "hierarchical_comparison_summary.csv", index=False
+    )
     print_df(comparison_df, "Hierarchical Assertion Scores Comparison")
 
     # Run statistical significance tests if requested
@@ -624,8 +610,6 @@ def run_hierarchical_assertion_evaluation(
         sig_summary = summarize_significance_results(sig_results)
         if not sig_summary.empty:
             print_df(sig_summary, "Significance Test Summary")
-            sig_summary.to_csv(
-                output_dir / "significance_summary.csv", index=False
-            )
+            sig_summary.to_csv(output_dir / "significance_summary.csv", index=False)
 
     return comparison_df

@@ -14,7 +14,6 @@ from rich import print as rich_print
 from tqdm import tqdm
 
 from benchmark_qed.autoe.assertion import (
-    HierarchicalMode,
     aggregate_hierarchical_scores,
     compute_hierarchical_eval_summary,
     get_assertion_scores,
@@ -279,7 +278,9 @@ def assertion_scores(
     ],
     output: Annotated[
         Path | None,
-        typer.Argument(help="Output directory (required for single-RAG config, ignored for multi-RAG)."),
+        typer.Argument(
+            help="Output directory (required for single-RAG config, ignored for multi-RAG)."
+        ),
     ] = None,
     *,
     print_model_usage: Annotated[
@@ -350,7 +351,9 @@ def assertion_scores(
             rich_print(
                 "[bold red]Error: output directory is required for single-RAG config.[/bold red]"
             )
-            rich_print("Usage: benchmark-qed autoe assertion-scores config.yaml output_dir")
+            rich_print(
+                "Usage: benchmark-qed autoe assertion-scores config.yaml output_dir"
+            )
             raise typer.Exit(1)
         _run_single_rag_assertion_scores(
             config_path=config_path,
@@ -418,8 +421,8 @@ def _run_single_rag_assertion_scores(
     assertion_score.to_csv(output / "assertion_scores.csv", index=False)
 
     # Compute summaries using shared aggregation logic
-    summary_by_assertion, summary_by_question, eval_summary = (
-        summarize_standard_scores(assertion_score)
+    summary_by_assertion, summary_by_question, eval_summary = summarize_standard_scores(
+        assertion_score
     )
 
     # Save summary CSVs for consistency with multi-RAG pipeline
@@ -454,9 +457,7 @@ def _run_single_rag_assertion_scores(
 
     # Save machine-readable evaluation summary
     eval_summary_file = output / "eval_summary.json"
-    eval_summary_file.write_text(
-        json.dumps(eval_summary, indent=2), encoding="utf-8"
-    )
+    eval_summary_file.write_text(json.dumps(eval_summary, indent=2), encoding="utf-8")
 
     if print_model_usage:
         rich_print("Model usage statistics:")
@@ -522,7 +523,9 @@ def _run_multi_rag_assertion_scores(
         rich_print("\n[bold green]Evaluation complete![/bold green]")
         rich_print(f"Results saved to: {config.output_dir}")
     else:
-        rich_print("[yellow]No results generated. Check input paths and files.[/yellow]")
+        rich_print(
+            "[yellow]No results generated. Check input paths and files.[/yellow]"
+        )
 
     if print_model_usage:
         rich_print("\nModel usage statistics:")
@@ -539,7 +542,9 @@ def hierarchical_assertion_scores(
     ],
     output: Annotated[
         Path | None,
-        typer.Argument(help="Output directory (required for single-RAG config, ignored for multi-RAG)."),
+        typer.Argument(
+            help="Output directory (required for single-RAG config, ignored for multi-RAG)."
+        ),
     ] = None,
     *,
     print_model_usage: Annotated[
@@ -554,9 +559,7 @@ def hierarchical_assertion_scores(
     ] = True,
     question_id_key: Annotated[
         str,
-        typer.Option(
-            help="The key in the JSON file that contains the question ID."
-        ),
+        typer.Option(help="The key in the JSON file that contains the question ID."),
     ] = "question_id",
     question_text_key: Annotated[
         str,
@@ -568,9 +571,7 @@ def hierarchical_assertion_scores(
     ] = "answer",
     assertions_key: Annotated[
         str,
-        typer.Option(
-            help="The key in the JSON file that contains the assertions."
-        ),
+        typer.Option(help="The key in the JSON file that contains the assertions."),
     ] = "assertions",
     supporting_assertions_key: Annotated[
         str,
@@ -628,7 +629,9 @@ def hierarchical_assertion_scores(
             rich_print(
                 "[bold red]Error: output directory is required for single-RAG config.[/bold red]"
             )
-            rich_print("Usage: benchmark-qed autoe hierarchical-assertion-scores config.yaml output_dir")
+            rich_print(
+                "Usage: benchmark-qed autoe hierarchical-assertion-scores config.yaml output_dir"
+            )
             raise typer.Exit(1)
         _run_single_rag_hierarchical_assertion_scores(
             config_path=config_path,
@@ -717,16 +720,12 @@ def _run_single_rag_hierarchical_assertion_scores(
         f"  Global assertions passed: "
         f"{eval_summary['passed_assertions']}/"
         f"{eval_summary['total_assertions']} "
-        f"({eval_summary['global_pass_rate']*100:.1f}%)"  # type: ignore[operator]
+        f"({eval_summary['global_pass_rate'] * 100:.1f}%)"  # type: ignore[operator]
     )
     rich_print(
-        f"  Average support level: "
-        f"{eval_summary['avg_support_level']*100:.1f}%"  # type: ignore[operator]
+        f"  Average support level: {eval_summary['avg_support_level'] * 100:.1f}%"  # type: ignore[operator]
     )
-    rich_print(
-        f"  Assertions with discovery: "
-        f"{eval_summary['discovery_count']}"
-    )
+    rich_print(f"  Assertions with discovery: {eval_summary['discovery_count']}")
     if eval_summary["overridden_count"]:
         rich_print(
             f"  [yellow]Overridden to fail (no support/discovery): "
@@ -736,17 +735,13 @@ def _run_single_rag_hierarchical_assertion_scores(
     # Report failed assertions
     failed = aggregated[aggregated["global_score"] == 0]
     if len(failed) > 0:
-        rich_print(
-            f"\n[bold red]{len(failed)} global assertions failed.[/bold red]"
-        )
+        rich_print(f"\n[bold red]{len(failed)} global assertions failed.[/bold red]")
     else:
         rich_print("\n[bold green]All global assertions passed.[/bold green]")
 
     # Save machine-readable evaluation summary
     eval_summary_file = output / "eval_summary.json"
-    eval_summary_file.write_text(
-        json.dumps(eval_summary, indent=2), encoding="utf-8"
-    )
+    eval_summary_file.write_text(json.dumps(eval_summary, indent=2), encoding="utf-8")
 
     if print_model_usage:
         rich_print("\nModel usage statistics:")
@@ -826,7 +821,9 @@ def _run_multi_rag_hierarchical_assertion_scores(
         rich_print("\n[bold green]Evaluation complete![/bold green]")
         rich_print(f"Results saved to: {config.output_dir}")
     else:
-        rich_print("[yellow]No results generated. Check input paths and files.[/yellow]")
+        rich_print(
+            "[yellow]No results generated. Check input paths and files.[/yellow]"
+        )
 
     if print_model_usage:
         rich_print("\nModel usage statistics:")
@@ -839,7 +836,9 @@ def _run_multi_rag_hierarchical_assertion_scores(
 def assertion_significance(
     config_path: Annotated[
         Path,
-        typer.Argument(help="Path to the assertion significance configuration YAML file."),
+        typer.Argument(
+            help="Path to the assertion significance configuration YAML file."
+        ),
     ],
 ) -> None:
     """Run statistical significance tests on standard assertion scores.
@@ -864,7 +863,7 @@ def assertion_significance(
 
     config = load_config(config_path, AssertionSignificanceConfig)
 
-    rich_print(f"[bold]Running assertion significance tests[/bold]")
+    rich_print("[bold]Running assertion significance tests[/bold]")
     rich_print(f"  Output dir: {config.output_dir}")
     rich_print(f"  RAG methods: {config.rag_methods}")
     rich_print(f"  Question sets: {config.question_sets}")
@@ -900,7 +899,9 @@ def assertion_significance(
 def hierarchical_assertion_significance(
     config_path: Annotated[
         Path,
-        typer.Argument(help="Path to the hierarchical assertion significance config YAML."),
+        typer.Argument(
+            help="Path to the hierarchical assertion significance config YAML."
+        ),
     ],
 ) -> None:
     """Run statistical significance tests on hierarchical assertion scores.
@@ -926,7 +927,7 @@ def hierarchical_assertion_significance(
 
     config = load_config(config_path, HierarchicalAssertionSignificanceConfig)
 
-    rich_print(f"[bold]Running hierarchical assertion significance tests[/bold]")
+    rich_print("[bold]Running hierarchical assertion significance tests[/bold]")
     rich_print(f"  Scores dir: {config.scores_dir}")
     rich_print(f"  RAG methods: {config.rag_methods}")
     rich_print(f"  Alpha: {config.alpha}, Correction: {config.correction_method}")
@@ -940,7 +941,9 @@ def hierarchical_assertion_significance(
             rich_print(f"  [yellow]Warning: {filepath} not found, skipping[/yellow]")
             continue
         aggregated_scores[rag_method] = pd.read_csv(filepath)
-        rich_print(f"  Loaded {len(aggregated_scores[rag_method])} rows for {rag_method}")
+        rich_print(
+            f"  Loaded {len(aggregated_scores[rag_method])} rows for {rag_method}"
+        )
 
     if len(aggregated_scores) < 2:
         rich_print("[red]Error: Need at least 2 RAG methods with data[/red]")
@@ -1039,7 +1042,9 @@ async def _generate_retrieval_reference_async(
             cache_enabled=config.cache_dir is not None,
             concurrent_requests=config.concurrent_requests,
         )
-        rich_print(f"Using BingRelevanceRater (UMBRELA DNA prompt, {config.concurrent_requests} concurrent)")
+        rich_print(
+            f"Using BingRelevanceRater (UMBRELA DNA prompt, {config.concurrent_requests} concurrent)"
+        )
     else:
         relevance_rater = RationaleRelevanceRater(
             llm_client=llm_client,
@@ -1048,7 +1053,9 @@ async def _generate_retrieval_reference_async(
             cache_enabled=config.cache_dir is not None,
             concurrent_requests=config.concurrent_requests,
         )
-        rich_print(f"Using RationaleRelevanceRater (structured JSON, {config.concurrent_requests} concurrent)")
+        rich_print(
+            f"Using RationaleRelevanceRater (structured JSON, {config.concurrent_requests} concurrent)"
+        )
 
     # Initialize embedding model and text embedder
     embedding_model = ModelFactory.create_embedding_model(config.embedding_config)
@@ -1080,25 +1087,39 @@ async def _generate_retrieval_reference_async(
             raise ValueError(msg)
 
         if fields.short_id_col and fields.short_id_col not in text_df.columns:
-            rich_print(f"[yellow]Column '{fields.short_id_col}' not found, will auto-generate short_id[/yellow]")
+            rich_print(
+                f"[yellow]Column '{fields.short_id_col}' not found, will auto-generate short_id[/yellow]"
+            )
         if fields.embedding_col and fields.embedding_col not in text_df.columns:
-            rich_print(f"[yellow]Column '{fields.embedding_col}' not found, will generate embeddings[/yellow]")
+            rich_print(
+                f"[yellow]Column '{fields.embedding_col}' not found, will generate embeddings[/yellow]"
+            )
 
         text_units = load_text_units(
             text_df,
             id_col=fields.id_col,
             text_col=fields.text_col,
-            short_id_col=fields.short_id_col if fields.short_id_col and fields.short_id_col in text_df.columns else None,
-            embedding_col=fields.embedding_col if fields.embedding_col and fields.embedding_col in text_df.columns else None,
+            short_id_col=fields.short_id_col
+            if fields.short_id_col and fields.short_id_col in text_df.columns
+            else None,
+            embedding_col=fields.embedding_col
+            if fields.embedding_col and fields.embedding_col in text_df.columns
+            else None,
         )
         rich_print(f"Loaded {len(text_units)} text units")
 
-        units_with_embeddings = sum(1 for tu in text_units if tu.text_embedding is not None)
+        units_with_embeddings = sum(
+            1 for tu in text_units if tu.text_embedding is not None
+        )
         if units_with_embeddings < len(text_units):
             units_without = len(text_units) - units_with_embeddings
-            rich_print(f"[yellow]{units_without}/{len(text_units)} text units missing embeddings. Generating...[/yellow]")
+            rich_print(
+                f"[yellow]{units_without}/{len(text_units)} text units missing embeddings. Generating...[/yellow]"
+            )
 
-            text_units = await embedder.embed_batch(text_units=text_units, batch_size=32)
+            text_units = await embedder.embed_batch(
+                text_units=text_units, batch_size=32
+            )
             rich_print(f"[green]Embedded {len(text_units)} text units[/green]")
         else:
             rich_print(f"All {len(text_units)} text units have embeddings")
@@ -1107,7 +1128,9 @@ async def _generate_retrieval_reference_async(
     question_sets = config.get_question_sets()
     cluster_counts = config.get_cluster_counts()
 
-    rich_print(f"\n[bold]Processing {len(question_sets)} question set(s) x {len(cluster_counts)} cluster count(s)[/bold]")
+    rich_print(
+        f"\n[bold]Processing {len(question_sets)} question set(s) x {len(cluster_counts)} cluster count(s)[/bold]"
+    )
     for qs in question_sets:
         rich_print(f"  - Question set: {qs.name} ({qs.questions_path})")
     rich_print(f"  - Cluster counts: {cluster_counts}")
@@ -1128,9 +1151,11 @@ async def _generate_retrieval_reference_async(
     # Process each combination of question set and cluster count
     for num_clusters in tqdm(cluster_counts, desc="Cluster counts", unit="count"):
         cluster_label = f"clusters_{num_clusters}" if num_clusters else "clusters_auto"
-        rich_print(f"\n[bold cyan]{'='*60}[/bold cyan]")
-        rich_print(f"[bold cyan]Processing with {num_clusters or 'auto'} clusters[/bold cyan]")
-        rich_print(f"[bold cyan]{'='*60}[/bold cyan]")
+        rich_print(f"\n[bold cyan]{'=' * 60}[/bold cyan]")
+        rich_print(
+            f"[bold cyan]Processing with {num_clusters or 'auto'} clusters[/bold cyan]"
+        )
+        rich_print(f"[bold cyan]{'=' * 60}[/bold cyan]")
 
         # Get or create clusters for this cluster count
         if num_clusters in clusters_cache:
@@ -1189,12 +1214,18 @@ async def _generate_retrieval_reference_async(
                 ]
                 with clusters_file.open("w", encoding="utf-8") as f:
                     json.dump(clusters_data_out, f, indent=2)
-                rich_print(f"[green]Saved clustering results to {clusters_file}[/green]")
+                rich_print(
+                    f"[green]Saved clustering results to {clusters_file}[/green]"
+                )
 
         # Process each question set
-        for question_set in tqdm(question_sets, desc="Question sets", unit="set", leave=False):
+        for question_set in tqdm(
+            question_sets, desc="Question sets", unit="set", leave=False
+        ):
             combination_count += 1
-            rich_print(f"\n[bold]Processing question set: {question_set.name} ({combination_count}/{total_combinations})[/bold]")
+            rich_print(
+                f"\n[bold]Processing question set: {question_set.name} ({combination_count}/{total_combinations})[/bold]"
+            )
 
             # Create output directory for this combination
             output_subdir = config.output_dir / question_set.name / cluster_label
@@ -1205,9 +1236,13 @@ async def _generate_retrieval_reference_async(
             with question_set.questions_path.open(encoding="utf-8") as f:
                 questions_data = json.load(f)
 
-            if config.max_questions is not None and config.max_questions < len(questions_data):
-                questions_data = questions_data[:config.max_questions]
-                rich_print(f"Limited to {len(questions_data)} questions (max_questions={config.max_questions})")
+            if config.max_questions is not None and config.max_questions < len(
+                questions_data
+            ):
+                questions_data = questions_data[: config.max_questions]
+                rich_print(
+                    f"Limited to {len(questions_data)} questions (max_questions={config.max_questions})"
+                )
             else:
                 rich_print(f"Loaded {len(questions_data)} questions")
 
@@ -1251,14 +1286,16 @@ async def _generate_retrieval_reference_async(
             usage_file.write_text(json.dumps(llm_client.get_usage()), encoding="utf-8")
 
     # Print final summary
-    rich_print(f"\n[bold green]{'='*60}[/bold green]")
+    rich_print(f"\n[bold green]{'=' * 60}[/bold green]")
     rich_print("[bold green]All reference data generated successfully![/bold green]")
-    rich_print(f"[bold green]{'='*60}[/bold green]")
+    rich_print(f"[bold green]{'=' * 60}[/bold green]")
     rich_print(f"Output directory: {config.output_dir}")
 
     cache_stats = relevance_rater.get_cache_stats()
     if cache_stats.get("caching_enabled"):
-        rich_print(f"Cache stats: {cache_stats['cache_hits']} hits, {cache_stats['cache_misses']} misses")
+        rich_print(
+            f"Cache stats: {cache_stats['cache_hits']} hits, {cache_stats['cache_misses']} misses"
+        )
 
     if print_model_usage:
         rich_print("Model usage statistics:")
@@ -1286,16 +1323,16 @@ def retrieval_scores(
     Compares multiple RAG methods on retrieval quality metrics and runs
     statistical significance tests.
     """
+    from benchmark_qed.autoe.retrieval import (
+        FidelityMetric,
+        load_clusters_from_json,
+        run_retrieval_evaluation,
+    )
     from benchmark_qed.autoe.retrieval_metrics.relevance_assessment.bing_rater import (
         BingRelevanceRater,
     )
     from benchmark_qed.autoe.retrieval_metrics.relevance_assessment.rationale_rater import (
         RationaleRelevanceRater,
-    )
-    from benchmark_qed.autoe.retrieval import (
-        FidelityMetric,
-        load_clusters_from_json,
-        run_retrieval_evaluation,
     )
 
     config = load_config(config_path, RetrievalScoresConfig)
@@ -1319,7 +1356,7 @@ def retrieval_scores(
             cache_dir=config.cache_dir,
             cache_enabled=config.cache_dir is not None,
         )
-        rich_print(f"Using BingRelevanceRater (UMBRELA DNA prompt)")
+        rich_print("Using BingRelevanceRater (UMBRELA DNA prompt)")
     else:
         relevance_rater = RationaleRelevanceRater(
             llm_client=llm_client,
@@ -1327,7 +1364,7 @@ def retrieval_scores(
             cache_dir=config.cache_dir,
             cache_enabled=config.cache_dir is not None,
         )
-        rich_print(f"Using RationaleRelevanceRater (structured JSON)")
+        rich_print("Using RationaleRelevanceRater (structured JSON)")
 
     # Load clusters
     rich_print(f"Loading clusters from {config.clusters_path}...")
@@ -1339,7 +1376,10 @@ def retrieval_scores(
 
     # Prepare RAG methods list
     rag_methods = [
-        {"name": method.name, "retrieval_results_path": str(method.retrieval_results_path)}
+        {
+            "name": method.name,
+            "retrieval_results_path": str(method.retrieval_results_path),
+        }
         for method in config.rag_methods
     ]
 

@@ -595,7 +595,10 @@ class RAGMethod(BaseModel):
 class QuestionSetConfig(BaseModel):
     """Configuration for a single question set."""
 
-    name: str = Field(..., description="Name identifier for this question set (e.g., 'global', 'local').")
+    name: str = Field(
+        ...,
+        description="Name identifier for this question set (e.g., 'global', 'local').",
+    )
     questions_path: Path = Field(..., description="Path to JSON file with questions.")
 
 
@@ -643,9 +646,7 @@ class RetrievalReferenceConfig(BaseModel):
         ..., description="Path to parquet or JSON file with text units and embeddings."
     )
 
-    output_dir: Path = Field(
-        ..., description="Directory to save reference results."
-    )
+    output_dir: Path = Field(..., description="Directory to save reference results.")
 
     # Support both single value (backward compatible) and multiple cluster counts
     num_clusters: int | list[int] | None = Field(
@@ -746,7 +747,8 @@ class RetrievalScoresConfig(BaseModel):
     )
 
     reference_dir: Path = Field(
-        ..., description="Directory containing reference data from generate-retrieval-reference."
+        ...,
+        description="Directory containing reference data from generate-retrieval-reference.",
     )
 
     reference_filename: str = Field(
@@ -754,17 +756,11 @@ class RetrievalScoresConfig(BaseModel):
         description="Filename for reference data within reference_dir.",
     )
 
-    clusters_path: Path = Field(
-        ..., description="Path to JSON file with cluster data."
-    )
+    clusters_path: Path = Field(..., description="Path to JSON file with cluster data.")
 
-    text_units_path: Path = Field(
-        ..., description="Path to JSON file with text units."
-    )
+    text_units_path: Path = Field(..., description="Path to JSON file with text units.")
 
-    output_dir: Path = Field(
-        ..., description="Directory to save evaluation results."
-    )
+    output_dir: Path = Field(..., description="Directory to save evaluation results.")
 
     relevance_threshold: int = Field(
         default=2,

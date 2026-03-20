@@ -62,7 +62,8 @@ def get_reference_scores(
         question_id_key: The column name for question ID in the DataFrames.
         question_text_key: The column name for question text in the DataFrames.
 
-    Returns:
+    Returns
+    -------
         DataFrame containing the scores for each condition.
     """
     pairs = (
@@ -160,7 +161,8 @@ async def get_reference_score(
         include_score_id_in_prompt: Whether to include score ID in the prompt.
         additional_call_args: Additional arguments to pass to the LLM call.
 
-    Returns:
+    Returns
+    -------
         Dictionary containing the score and evaluation details.
     """
     assessment_system_prompt = assessment_system_prompt or load_template_file(
@@ -240,7 +242,8 @@ def summarize_reference_scores(raw_scores: pd.DataFrame) -> pd.DataFrame:
     Args:
         raw_scores: DataFrame containing scores for each criteria.
 
-    Returns:
+    Returns
+    -------
         DataFrame with summarized scores including mean and standard deviation.
     """
     summary_df = (

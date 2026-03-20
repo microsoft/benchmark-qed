@@ -65,7 +65,8 @@ def get_assertion_scores(
         question_text_key: Column name for question text.
         answer_text_key: Column name for answer text.
 
-    Returns:
+    Returns
+    -------
         DataFrame: Results with assertion scores and metadata.
     """
     pairs = answers.merge(
@@ -91,10 +92,7 @@ def get_assertion_scores(
     elif question_text_key in pairs.columns:
         # If we're renaming a column to question_text but question_text already
         # exists (from assertions), drop the existing one first to avoid duplicates
-        if (
-            question_text_key != "question_text"
-            and "question_text" in pairs.columns
-        ):
+        if question_text_key != "question_text" and "question_text" in pairs.columns:
             pairs = pairs.drop(columns=["question_text"])
         rename_map[question_text_key] = "question_text"
     # Also check if assertions have question_text column that wasn't suffixed
@@ -185,7 +183,8 @@ async def evaluate_assertion(
         additional_call_args: Additional arguments to pass to the LLM call.
         complete_callback: Callback function to invoke when evaluation completes.
 
-    Returns:
+    Returns
+    -------
         Dictionary containing:
             - score_id: Unique identifier for this evaluation
             - reasoning: Explanation from the LLM

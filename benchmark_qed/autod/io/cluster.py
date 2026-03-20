@@ -19,15 +19,12 @@ def save_clusters_to_json(clusters: list[TextCluster], filepath: str | Path) -> 
         filepath: Path to the JSON file where clusters will be saved.
     """
     filepath = Path(filepath)
-    
+
     # Convert clusters to serializable format
     serializable_clusters = []
     for cluster in clusters:
-        cluster_data = {
-            "id": cluster.id,
-            "text_units": []
-        }
-        
+        cluster_data = {"id": cluster.id, "text_units": []}
+
         for unit in cluster.text_units:
             unit_data = {
                 "id": unit.id,
@@ -37,16 +34,16 @@ def save_clusters_to_json(clusters: list[TextCluster], filepath: str | Path) -> 
                 "n_tokens": unit.n_tokens,
                 "text_embedding": unit.text_embedding,
                 "cluster_id": unit.cluster_id,
-                "attributes": unit.attributes
+                "attributes": unit.attributes,
             }
             cluster_data["text_units"].append(unit_data)
-        
+
         serializable_clusters.append(cluster_data)
-    
+
     # Save to JSON file
     with filepath.open("w", encoding="utf-8") as f:
         json.dump(serializable_clusters, f, indent=4, ensure_ascii=False)
-    
+
     log.info(f"Saved {len(clusters)} clusters to {filepath}")
 
 
@@ -56,23 +53,25 @@ def load_clusters_from_json(filepath: str | Path) -> list[TextCluster]:
     Args:
         filepath: Path to the JSON file containing saved clusters.
 
-    Returns:
+    Returns
+    -------
         List of TextCluster objects loaded from the file.
-    
-    Raises:
+
+    Raises
+    ------
         FileNotFoundError: If the specified file does not exist.
         json.JSONDecodeError: If the file contains invalid JSON.
         KeyError: If the JSON structure is invalid or missing required fields.
     """
     filepath = Path(filepath)
-    
+
     if not filepath.exists():
         raise FileNotFoundError(f"Cluster file not found: {filepath}")
-    
+
     # Load from JSON file
     with filepath.open("r", encoding="utf-8") as f:
         cluster_data = json.load(f)
-    
+
     # Convert back to TextCluster objects
     clusters = []
     for cluster_dict in cluster_data:
@@ -86,15 +85,12 @@ def load_clusters_from_json(filepath: str | Path) -> list[TextCluster]:
                 n_tokens=unit_dict["n_tokens"],
                 text_embedding=unit_dict["text_embedding"],
                 cluster_id=unit_dict["cluster_id"],
-                attributes=unit_dict["attributes"]
+                attributes=unit_dict["attributes"],
             )
             text_units.append(text_unit)
-        
-        cluster = TextCluster(
-            id=cluster_dict["id"],
-            text_units=text_units
-        )
+
+        cluster = TextCluster(id=cluster_dict["id"], text_units=text_units)
         clusters.append(cluster)
-    
+
     log.info(f"Loaded {len(clusters)} clusters from {filepath}")
     return clusters

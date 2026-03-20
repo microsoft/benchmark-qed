@@ -76,14 +76,14 @@ def soft_filter_questions(
 
     """
     above_threshold = [
-        q for q in questions
-        if q.attributes
-        and q.attributes.get(attribute_name, 0) >= min_threshold
+        q
+        for q in questions
+        if q.attributes and q.attributes.get(attribute_name, 0) >= min_threshold
     ]
     below_threshold = [
-        q for q in questions
-        if q.attributes
-        and q.attributes.get(attribute_name, 0) < min_threshold
+        q
+        for q in questions
+        if q.attributes and q.attributes.get(attribute_name, 0) < min_threshold
     ]
 
     if len(above_threshold) >= min_needed:
@@ -100,8 +100,7 @@ def soft_filter_questions(
     if len(above_threshold) > 0:
         # Not enough high-quality, supplement with best below-threshold
         below_threshold.sort(
-            key=lambda q: q.attributes.get(attribute_name, 0)
-            if q.attributes else 0,
+            key=lambda q: q.attributes.get(attribute_name, 0) if q.attributes else 0,
             reverse=True,
         )
         needed = min_needed - len(above_threshold)
@@ -118,16 +117,14 @@ def soft_filter_questions(
 
     # No questions meet threshold, sort by attribute and take best
     log.warning(
-        "No questions meet %s >= %s. "
-        "Selecting top %s by highest value instead.",
+        "No questions meet %s >= %s. Selecting top %s by highest value instead.",
         attribute_name,
         min_threshold,
         min_needed,
     )
     questions_sorted = sorted(
         questions,
-        key=lambda q: q.attributes.get(attribute_name, 0)
-        if q.attributes else 0,
+        key=lambda q: q.attributes.get(attribute_name, 0) if q.attributes else 0,
         reverse=True,
     )
     return questions_sorted[:min_needed]
@@ -313,12 +310,10 @@ class DataGlobalQuestionGen(BaseQuestionGen):
                 min(i + self.concurrent_coroutines, len(question_contexts)),
                 len(question_contexts),
             )
-            batch_results = await tqdm_asyncio.gather(
-                *[
-                    self._agenerate_single_chain(question_context=context)
-                    for context in batch
-                ]
-            )
+            batch_results = await tqdm_asyncio.gather(*[
+                self._agenerate_single_chain(question_context=context)
+                for context in batch
+            ])
             batch_questions = [
                 question for result in batch_results for question in result
             ]
@@ -332,7 +327,8 @@ class DataGlobalQuestionGen(BaseQuestionGen):
         # Step 1: Hard filter by minimum claim count
         pre_filter_count = len(results)
         results = [
-            q for q in results
+            q
+            for q in results
             if q.attributes
             and q.attributes.get("claim_count", 0) >= self.min_claim_count
         ]
@@ -350,7 +346,8 @@ class DataGlobalQuestionGen(BaseQuestionGen):
             questions=results,
             attribute_name="relevant_references_count",
             min_threshold=self.min_relevant_reference_count,
-            min_needed=num_questions * 2,  # Keep 2x to allow for validation/assertion failures
+            min_needed=num_questions
+            * 2,  # Keep 2x to allow for validation/assertion failures
         )
 
         # Step 3: Validate question quality BEFORE assertion generation (saves LLM costs)

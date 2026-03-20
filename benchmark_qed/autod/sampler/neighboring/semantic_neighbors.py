@@ -57,15 +57,16 @@ async def get_semantic_neighbors_from_text(
 ) -> list[TextUnit]:
     """
     Get the n most semantically similar text units to the given text string.
-    
+
     Args:
         text: Text string to find neighbors for.
         corpus: List of text units to search for neighbors.
         text_embedder: Text embedder to generate embedding for the text.
         n: Number of neighbors to return.
         distance_metric: Distance metric to use for similarity calculation.
-        
-    Returns:
+
+    Returns
+    -------
         List of n most similar text units.
     """
     if len(corpus) <= n:
@@ -73,21 +74,25 @@ async def get_semantic_neighbors_from_text(
 
     # Generate embedding for the text
     text_embedding = await text_embedder.embed_raw_text(text)
-    
+
     text_embedding_array = np.array(text_embedding)
     if distance_metric == DistanceMetricType.COSINE:
         neighbors = sorted(
             corpus,
             key=lambda unit: float(
                 cosine(np.array(unit.text_embedding), text_embedding_array)
-            ) if unit.text_embedding is not None else float('inf'),
+            )
+            if unit.text_embedding is not None
+            else float("inf"),
         )
     else:
         neighbors = sorted(
             corpus,
             key=lambda unit: float(
                 np.linalg.norm(np.array(unit.text_embedding) - text_embedding_array)
-            ) if unit.text_embedding is not None else float('inf'),
+            )
+            if unit.text_embedding is not None
+            else float("inf"),
         )
 
     return neighbors[:n]

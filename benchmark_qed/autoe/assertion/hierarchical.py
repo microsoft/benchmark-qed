@@ -43,7 +43,8 @@ ASSERTION_PROMPTS = Path(assertion_prompts.__file__).parent
 class HierarchicalMode(Enum):
     """Evaluation mode for hierarchical assertion scoring.
 
-    Attributes:
+    Attributes
+    ----------
         JOINT: Evaluate global and supporting assertions together in one LLM
             call. Cheaper but may have anchoring bias.
         STAGED: Evaluate global assertions first (standard scoring), then
@@ -68,7 +69,8 @@ def _format_supporting_assertion(
         sa: A supporting assertion, either as a string or a dict
             containing a ``statement`` key.
 
-    Returns:
+    Returns
+    -------
         The statement text as a string.
     """
     if isinstance(sa, dict):
@@ -88,7 +90,8 @@ def _select_best_global_reasoning(row: pd.Series) -> str:
         row: A DataFrame row with ``reasoning_list`` (list of str)
             and ``trial_scores`` (list of int).
 
-    Returns:
+    Returns
+    -------
         The selected reasoning string, or an empty string if no
         reasoning is available.
     """
@@ -147,7 +150,8 @@ def get_hierarchical_assertion_scores(
         answer_text_key: Column name for answer text.
         supporting_assertions_key: Column name for supporting assertions list.
 
-    Returns:
+    Returns
+    -------
         DataFrame with hierarchical assertion scores including:
             - global_score: Whether the global assertion passed (0/1)
             - global_passed: Boolean indicating if global assertion passed
@@ -176,21 +180,21 @@ def get_hierarchical_assertion_scores(
             answer_text_key=answer_text_key,
             supporting_assertions_key=supporting_assertions_key,
         )
-    else:  # STAGED
-        return _get_hierarchical_scores_staged(
-            llm_client=llm_client,
-            llm_config=llm_config,
-            answers=answers,
-            assertions=assertions,
-            trials=trials,
-            pass_threshold=pass_threshold,
-            top_k=top_k,
-            include_score_id_in_prompt=include_score_id_in_prompt,
-            question_id_key=question_id_key,
-            question_text_key=question_text_key,
-            answer_text_key=answer_text_key,
-            supporting_assertions_key=supporting_assertions_key,
-        )
+    # STAGED
+    return _get_hierarchical_scores_staged(
+        llm_client=llm_client,
+        llm_config=llm_config,
+        answers=answers,
+        assertions=assertions,
+        trials=trials,
+        pass_threshold=pass_threshold,
+        top_k=top_k,
+        include_score_id_in_prompt=include_score_id_in_prompt,
+        question_id_key=question_id_key,
+        question_text_key=question_text_key,
+        answer_text_key=answer_text_key,
+        supporting_assertions_key=supporting_assertions_key,
+    )
 
 
 def _get_hierarchical_scores_joint(
@@ -431,23 +435,21 @@ def _get_hierarchical_scores_staged(
             for trial_idx, (_score, reasoning) in enumerate(
                 zip(row["trial_scores"], row["reasoning_list"], strict=True)
             ):
-                results.append(
-                    {
-                        "question": row["question"],
-                        "assertion": row["assertion"],
-                        "global_passed": False,
-                        "global_score": 0,
-                        "reasoning": reasoning,
-                        "supporting_passed": [False] * n_supporting,
-                        "supporting_scores": [0] * n_supporting,
-                        "supporting_results": [],
-                        "support_count": 0,
-                        "support_total": n_supporting,
-                        "has_discovery": False,
-                        "discovery_reasoning": "",
-                        "trial": trial_idx,
-                    }
-                )
+                results.append({
+                    "question": row["question"],
+                    "assertion": row["assertion"],
+                    "global_passed": False,
+                    "global_score": 0,
+                    "reasoning": reasoning,
+                    "supporting_passed": [False] * n_supporting,
+                    "supporting_scores": [0] * n_supporting,
+                    "supporting_results": [],
+                    "support_count": 0,
+                    "support_total": n_supporting,
+                    "has_discovery": False,
+                    "discovery_reasoning": "",
+                    "trial": trial_idx,
+                })
         return pd.DataFrame(results)
 
     rich_print(
@@ -554,51 +556,47 @@ def _get_hierarchical_scores_staged(
             supp_key = (question_id, assertion_text, trial_idx)
             if global_passed and supp_key in supporting_lookup:
                 supp_result = supporting_lookup[supp_key]
-                results.append(
-                    {
-                        "question": question,
-                        "assertion": assertion_text,
-                        "global_passed": True,
-                        "global_score": 1,
-                        "reasoning": reasoning,
-                        "supporting_passed": supp_result["supporting_passed"],
-                        "supporting_scores": supp_result["supporting_scores"],
-                        "supporting_results": supp_result["supporting_results"],
-                        "support_count": sum(supp_result["supporting_scores"]),
-                        "support_total": n_supporting,
-                        "has_discovery": supp_result["has_discovery"],
-                        "discovery_reasoning": supp_result["discovery_reasoning"],
-                        "supporting_assertions": supporting_assertions_list,
-                        "trial": trial_idx,
-                    }
-                )
+                results.append({
+                    "question": question,
+                    "assertion": assertion_text,
+                    "global_passed": True,
+                    "global_score": 1,
+                    "reasoning": reasoning,
+                    "supporting_passed": supp_result["supporting_passed"],
+                    "supporting_scores": supp_result["supporting_scores"],
+                    "supporting_results": supp_result["supporting_results"],
+                    "support_count": sum(supp_result["supporting_scores"]),
+                    "support_total": n_supporting,
+                    "has_discovery": supp_result["has_discovery"],
+                    "discovery_reasoning": supp_result["discovery_reasoning"],
+                    "supporting_assertions": supporting_assertions_list,
+                    "trial": trial_idx,
+                })
             else:
                 # Failed assertion - no supporting data
-                results.append(
-                    {
-                        "question": question,
-                        "assertion": assertion_text,
-                        "global_passed": False,
-                        "global_score": 0,
-                        "reasoning": reasoning,
-                        "supporting_passed": [False] * n_supporting,
-                        "supporting_scores": [0] * n_supporting,
-                        "supporting_results": [
-                            {
-                                "id": f"SA{i + 1}",
-                                "passed": False,
-                                "reasoning": "Global assertion failed",
-                            }
-                            for i in range(n_supporting)
-                        ],
-                        "support_count": 0,
-                        "support_total": n_supporting,
-                        "has_discovery": False,
-                        "discovery_reasoning": "",
-                        "supporting_assertions": supporting_assertions_list,
-                        "trial": trial_idx,
-                    }
-                )
+                results.append({
+                    "question": question,
+                    "assertion": assertion_text,
+                    "global_passed": False,
+                    "global_score": 0,
+                    "reasoning": reasoning,
+                    "supporting_passed": [False] * n_supporting,
+                    "supporting_scores": [0] * n_supporting,
+                    "supporting_results": [
+                        {
+                            "id": f"SA{i + 1}",
+                            "passed": False,
+                            "reasoning": "Global assertion failed",
+                        }
+                        for i in range(n_supporting)
+                    ],
+                    "support_count": 0,
+                    "support_total": n_supporting,
+                    "has_discovery": False,
+                    "discovery_reasoning": "",
+                    "supporting_assertions": supporting_assertions_list,
+                    "trial": trial_idx,
+                })
 
     return pd.DataFrame(results)
 
@@ -639,7 +637,8 @@ async def evaluate_hierarchical_assertion(
         additional_call_args: Additional arguments to pass to the LLM call.
         complete_callback: Callback function to invoke when evaluation completes.
 
-    Returns:
+    Returns
+    -------
         Dictionary containing:
             - score_id: Unique identifier for this evaluation
             - reasoning: Overall reasoning from the LLM
@@ -782,7 +781,8 @@ async def evaluate_supporting_discovery(
         additional_call_args: Additional arguments to pass to the LLM call.
         complete_callback: Callback function to invoke when evaluation completes.
 
-    Returns:
+    Returns
+    -------
         Dictionary containing:
             - score_id: Unique identifier for this evaluation
             - supporting_passed: List of bools for each supporting assertion

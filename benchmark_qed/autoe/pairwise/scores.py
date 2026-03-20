@@ -70,7 +70,8 @@ def get_pairwise_scores(
         question_id_key: The column name for question ID in the DataFrames.
         question_text_key: The column name for question text in the DataFrames.
 
-    Returns:
+    Returns
+    -------
         DataFrame containing the scores for each condition.
     """
     pairs = (
@@ -170,7 +171,8 @@ async def get_pairwise_score(
         include_score_id_in_prompt: Whether to include score ID in the prompt.
         additional_call_args: Additional arguments to pass to the LLM call.
 
-    Returns:
+    Returns
+    -------
         Dictionary containing the scores and reasoning for each answer.
     """
     assessment_system_prompt = assessment_system_prompt or load_template_file(
@@ -253,7 +255,8 @@ def analyze_criteria(raw_scores: pd.DataFrame, alpha: float = 0.05) -> pd.DataFr
         raw_scores: DataFrame containing criteria and condition scores.
         alpha: Significance threshold (default is 0.05).
 
-    Returns:
+    Returns
+    -------
         DataFrame with test results, statistics, and Holm-corrected p-values.
     """
     others = raw_scores["other_name"].unique()
@@ -340,9 +343,7 @@ def analyze_criteria(raw_scores: pd.DataFrame, alpha: float = 0.05) -> pd.DataFr
         lambda x: f"{x:.3f}" if x > 0.001 else "< 0.001"
     )
 
-    corrected_significance = final_result.groupby(
-        ["question_set", "criteria"]
-    ).apply(  # type: ignore[call-overload]
+    corrected_significance = final_result.groupby(["question_set", "criteria"]).apply(  # type: ignore[call-overload]
         lambda group: pd.Series(
             [
                 multipletests(group["p_value"].to_numpy(), method="holm")[1],
