@@ -50,33 +50,29 @@ from benchmark_qed.autoe.retrieval_metrics.scoring.retrieval_relevance import (
 )
 
 __all__ = [
-    # Main evaluation functions
+    "BatchRelevanceResult",
+    "ClusterRelevanceRater",
+    "ClusterRelevanceResult",
+    "FidelityMetric",
+    "QueryClusterReferenceResult",
+    "QueryRelevanceResult",
+    "assess_batch_relevance",
     "assess_rag_method_relevance",
+    "calculate_binary_precision",
+    "calculate_fidelity",
+    "calculate_graded_precision",
+    "calculate_recall",
     "calculate_retrieval_metrics",
     "compare_retrieval_metrics_significance",
     "extract_per_query_metrics",
+    "get_relevant_clusters",
+    "get_relevant_units_per_cluster",
+    "load_cluster_references_from_json",
     "load_clusters_from_json",
     "load_reference_results",
     "load_retrieval_results",
     "run_retrieval_evaluation",
+    "save_cluster_references_to_json",
     "save_retrieval_results",
     "save_significance_results",
-    # Reference generation
-    "ClusterRelevanceRater",
-    "ClusterRelevanceResult",
-    "QueryClusterReferenceResult",
-    "get_relevant_clusters",
-    "get_relevant_units_per_cluster",
-    "load_cluster_references_from_json",
-    "save_cluster_references_to_json",
-    # Scoring metrics
-    "FidelityMetric",
-    "calculate_fidelity",
-    "calculate_binary_precision",
-    "calculate_graded_precision",
-    "calculate_recall",
-    # Relevance assessment
-    "BatchRelevanceResult",
-    "QueryRelevanceResult",
-    "assess_batch_relevance",
 ]

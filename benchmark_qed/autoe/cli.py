@@ -338,7 +338,7 @@ def assertion_scores(
     import yaml
 
     # Load raw YAML to detect format
-    with open(config_path, encoding="utf-8") as f:
+    with Path(config_path).open(encoding="utf-8") as f:
         raw_config = yaml.safe_load(f)
 
     # Auto-detect config format
@@ -616,7 +616,7 @@ def hierarchical_assertion_scores(
     import yaml
 
     # Load raw YAML to detect format
-    with open(config_path, encoding="utf-8") as f:
+    with Path(config_path).open(encoding="utf-8") as f:
         raw_config = yaml.safe_load(f)
 
     # Auto-detect config format

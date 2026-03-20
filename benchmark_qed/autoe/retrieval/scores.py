@@ -105,7 +105,7 @@ def load_clusters_from_json(
             elif suffix in (".json", ".jsonl"):
                 df = pd.read_json(text_units_path, lines=(suffix == ".jsonl"))
             else:
-                log.warning(f"Unknown text units file format: {suffix}")
+                log.warning("Unknown text units file format: %s", suffix)
                 df = None
 
             if df is not None:
@@ -122,7 +122,9 @@ def load_clusters_from_json(
                     zip(df[id_col].astype(str), df[text_col].astype(str), strict=False)
                 )
                 log.info(
-                    f"Loaded {len(text_unit_map)} text units from {text_units_path}"
+                    "Loaded %s text units from %s",
+                    len(text_unit_map),
+                    text_units_path,
                 )
 
     clusters = []
@@ -161,7 +163,7 @@ def load_clusters_from_json(
 
 def load_reference_results(
     reference_dir: Path,
-    question_set: str,
+    question_set: str,  # noqa: ARG001
     reference_filename: str = "reference.json",
 ) -> list[QueryClusterReferenceResult]:
     """Load reference cluster relevance results from JSON files.
@@ -652,7 +654,7 @@ async def run_retrieval_evaluation(
             retrieval_path = Path(rag_method["retrieval_results_path"])
 
             # Check if path includes question_set placeholder
-            if "{question_set}" in str(retrieval_path):
+            if "{question_set}" in str(retrieval_path):  # noqa: RUF027
                 retrieval_path = Path(
                     str(retrieval_path).format(question_set=question_set)
                 )

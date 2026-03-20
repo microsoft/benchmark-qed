@@ -1,3 +1,4 @@
+# Copyright (c) 2025 Microsoft Corporation.
 """Tests for standard assertion significance analysis."""
 
 from pathlib import Path

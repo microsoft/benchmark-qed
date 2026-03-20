@@ -1174,12 +1174,13 @@ class DataLinkedQuestionGen(BaseQuestionGen):
         lines = []
         for source_id, question_claims in claims_by_question.items():
             question_text = question_texts.get(source_id, "Unknown question")
-            lines.append(f"Question: {question_text}")
-            lines.append("Claims:")
+            lines.extend([f"Question: {question_text}", "Claims:"])
             for claim in question_claims:
-                lines.append(f"ID: {claim['claim_id']}")
-                lines.append(f"Statement: {claim['statement']}")
-                lines.append("")
+                lines.extend([
+                    f"ID: {claim['claim_id']}",
+                    f"Statement: {claim['statement']}",
+                    "",
+                ])
             lines.append("")  # Extra blank line between questions
 
         return "\n".join(lines).strip()

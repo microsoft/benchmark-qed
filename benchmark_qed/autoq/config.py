@@ -663,7 +663,7 @@ class QuestionGenerationConfig(BaseModel):
     )
 
 
-class QuestionType(str):
+class QuestionType(str):  # noqa: FURB189
     """Enumeration for question types that support assertion regeneration."""
 
     __slots__ = ()

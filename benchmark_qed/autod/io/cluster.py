@@ -44,7 +44,7 @@ def save_clusters_to_json(clusters: list[TextCluster], filepath: str | Path) -> 
     with filepath.open("w", encoding="utf-8") as f:
         json.dump(serializable_clusters, f, indent=4, ensure_ascii=False)
 
-    log.info(f"Saved {len(clusters)} clusters to {filepath}")
+    log.info("Saved %s clusters to %s", len(clusters), filepath)
 
 
 def load_clusters_from_json(filepath: str | Path) -> list[TextCluster]:
@@ -66,7 +66,8 @@ def load_clusters_from_json(filepath: str | Path) -> list[TextCluster]:
     filepath = Path(filepath)
 
     if not filepath.exists():
-        raise FileNotFoundError(f"Cluster file not found: {filepath}")
+        msg = f"Cluster file not found: {filepath}"
+        raise FileNotFoundError(msg)
 
     # Load from JSON file
     with filepath.open("r", encoding="utf-8") as f:
@@ -92,5 +93,5 @@ def load_clusters_from_json(filepath: str | Path) -> list[TextCluster]:
         cluster = TextCluster(id=cluster_dict["id"], text_units=text_units)
         clusters.append(cluster)
 
-    log.info(f"Loaded {len(clusters)} clusters from {filepath}")
+    log.info("Loaded %s clusters from %s", len(clusters), filepath)
     return clusters

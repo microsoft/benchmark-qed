@@ -47,7 +47,9 @@ class KmeansClustering(BaseClustering):
 
         if max_clusters < min_clusters:
             log.warning(
-                f"Not enough samples ({n_samples}) for clustering. Using {min_clusters} clusters."
+                "Not enough samples (%s) for clustering. Using %s clusters.",
+                n_samples,
+                min_clusters,
             )
             return min_clusters
 
@@ -55,7 +57,9 @@ class KmeansClustering(BaseClustering):
         best_k = min_clusters
 
         log.info(
-            f"Tuning number of clusters between {min_clusters} and {max_clusters} using silhouette score..."
+            "Tuning number of clusters between %s and %s using silhouette score...",
+            min_clusters,
+            max_clusters,
         )
 
         # Use tqdm to track progress of cluster tuning
@@ -68,7 +72,7 @@ class KmeansClustering(BaseClustering):
                     ).fit(embeddings)
 
                     score = silhouette_score(embeddings, model.labels_)
-                    log.debug(f"k={k}, silhouette_score={score:.4f}")
+                    log.debug("k=%s, silhouette_score=%.4f", k, score)
 
                     # Update progress bar with current best
                     pbar.set_postfix({
@@ -82,8 +86,8 @@ class KmeansClustering(BaseClustering):
                         best_score = score
                         best_k = k
 
-                except Exception as e:
-                    log.warning(f"Failed to compute silhouette score for k={k}: {e}")
+                except (ValueError, RuntimeError) as e:
+                    log.warning("Failed to compute silhouette score for k=%s: %s", k, e)
                     pbar.set_postfix({
                         "current_k": k,
                         "status": "failed",
@@ -93,7 +97,9 @@ class KmeansClustering(BaseClustering):
                     continue
 
         log.info(
-            f"Optimal number of clusters: {best_k} (silhouette_score={best_score:.4f})"
+            "Optimal number of clusters: %s (silhouette_score=%.4f)",
+            best_k,
+            best_score,
         )
         return best_k
 
@@ -117,7 +123,7 @@ class KmeansClustering(BaseClustering):
             # Use silhouette score to find optimal number of clusters
             num_clusters = self._find_optimal_clusters(embeddings)
         else:
-            log.info(f"Using specified number of clusters: {num_clusters}")
+            log.info("Using specified number of clusters: %s", num_clusters)
 
         model = KMeans(
             n_clusters=num_clusters, random_state=self.random_seed, n_init="auto"

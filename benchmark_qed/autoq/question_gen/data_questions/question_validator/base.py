@@ -163,7 +163,7 @@ class BatchQuestionValidator(ABC):
         duplicate_count = 0
 
         # Process each cluster
-        for _cluster_idx, batch in enumerate(clustered_batches):
+        for batch in clustered_batches:
             batch_passed, batch_failed, batch_duplicates = await self._validate_batch(
                 batch
             )

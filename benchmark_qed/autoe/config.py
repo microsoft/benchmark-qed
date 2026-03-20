@@ -227,7 +227,7 @@ class HierarchicalAssertionConfig(BaseAutoEConfig):
     )
 
     detect_discovery: bool = Field(
-        True,
+        default=True,
         description="Whether to detect information in answers beyond supporting assertions.",
     )
 
@@ -309,7 +309,7 @@ class MultiRAGAssertionConfig(BaseAutoEConfig):
     )
 
     run_significance_test: bool = Field(
-        True,
+        default=True,
         description="Whether to run statistical significance tests after scoring.",
     )
 
@@ -424,7 +424,7 @@ class MultiRAGHierarchicalAssertionConfig(BaseAutoEConfig):
     )
 
     run_significance_test: bool = Field(
-        True,
+        default=True,
         description="Whether to run statistical significance tests after scoring.",
     )
 

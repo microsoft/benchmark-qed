@@ -775,7 +775,7 @@ async def judge_binary_disagreements(
                     judge_reasoning=judge_reasoning,
                 )
             )
-        except Exception as e:
+        except (ValueError, RuntimeError) as e:
             log.warning("Failed to judge item %s: %s", item.text_unit_id, e)
 
     return JudgeResults(verdicts=verdicts, threshold=threshold)
@@ -927,7 +927,6 @@ async def _compare_raters_with_topk_selection(
         RaterComparisonResult with aggregated comparison metrics.
 
     """
-    from benchmark_qed.autod.data_processor.embedding import TextEmbedder
     from benchmark_qed.llm.factory import ModelFactory
 
     # Create LLM client and raters
@@ -967,7 +966,6 @@ async def _compare_raters_with_topk_selection(
             embedding_config = llm_config
 
         embedding_model = ModelFactory.create_embedding_model(embedding_config)
-        text_embedder = TextEmbedder(embedding_model)
 
         log.info(
             "Embedding %d queries without embeddings...", len(queries_needing_embedding)
@@ -1127,11 +1125,10 @@ async def compare_raters_from_files(
 
     if random_seed is not None:
         random.seed(random_seed)
-        np.random.seed(random_seed)
+        np.random.seed(random_seed)  # noqa: NPY002
 
     # Load questions
-    with open(questions_path) as f:
-        questions_data = json.load(f)
+    questions_data = json.loads(Path(questions_path).read_text())
 
     # Sample questions if needed
     if max_questions and max_questions < len(questions_data):
@@ -1207,8 +1204,7 @@ async def compare_raters_from_files(
 
     if output_path:
         output_path.parent.mkdir(parents=True, exist_ok=True)
-        with open(output_path, "w") as f:
-            json.dump(result.to_dict(), f, indent=2)
+        Path(output_path).write_text(json.dumps(result.to_dict(), indent=2))
         log.info("Saved comparison results to %s", output_path)
 
     return result

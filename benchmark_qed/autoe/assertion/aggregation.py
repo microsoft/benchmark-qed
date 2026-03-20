@@ -316,9 +316,7 @@ def summarize_hierarchical_by_question(
     )
 
     # Merge the unique supporting stats
-    summary = summary.merge(unique_stats, on="question", how="left")
-
-    return summary
+    return summary.merge(unique_stats, on="question", how="left")
 
 
 def summarize_standard_scores(
