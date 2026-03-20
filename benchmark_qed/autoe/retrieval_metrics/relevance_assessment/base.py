@@ -16,7 +16,7 @@ from benchmark_qed.autoe.data_model.relevance import (
     RelevanceAssessmentResponse,
 )
 
-log = logging.getLogger(__name__)
+log: logging.Logger = logging.getLogger(__name__)
 
 
 class RelevanceRater(ABC):
@@ -32,10 +32,10 @@ class RelevanceRater(ABC):
             cache_dir: Directory to store cache files. If None, caching is disabled.
             cache_enabled: Whether to enable caching functionality.
         """
-        self.cache_dir = cache_dir
-        self.cache_enabled = cache_enabled and cache_dir is not None
-        self.cache_hits = 0
-        self.cache_misses = 0
+        self.cache_dir: Path | None = cache_dir
+        self.cache_enabled: bool = cache_enabled and cache_dir is not None
+        self.cache_hits: int = 0
+        self.cache_misses: int = 0
 
         if self.cache_enabled and self.cache_dir:
             self.cache_dir.mkdir(parents=True, exist_ok=True)

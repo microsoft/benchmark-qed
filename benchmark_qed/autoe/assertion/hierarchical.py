@@ -95,8 +95,8 @@ def _select_best_global_reasoning(row: pd.Series) -> str:
         The selected reasoning string, or an empty string if no
         reasoning is available.
     """
-    reasonings: list[str] = row["reasoning_list"]
-    scores: list[int] = row["trial_scores"]
+    reasonings: list[str] = row["reasoning_list"]  # type: ignore[assignment]
+    scores: list[int] = row["trial_scores"]  # type: ignore[assignment]
     passing = [r for r, s in zip(reasonings, scores, strict=True) if s == 1]
     if not passing:
         # Fallback: return the first reasoning if available
@@ -250,7 +250,7 @@ def _get_hierarchical_scores_joint(
             raise ValueError(msg)
 
     pairs = pairs[required_cols]
-    pairs = pairs.rename(columns={supporting_assertions_key: "supporting_assertions"})
+    pairs = pairs.rename(columns={supporting_assertions_key: "supporting_assertions"})  # type: ignore[call-overload]
 
     # Apply top-k filtering if specified
     if top_k is not None and top_k > 0:
@@ -282,10 +282,10 @@ def _get_hierarchical_scores_joint(
         tasks = [
             evaluate_hierarchical_assertion(
                 llm_client=llm_client,
-                assertion=row["assertion"],
-                question=row["question_text"],
-                answer=row["answer_text"],
-                supporting_assertions=row["supporting_assertions"],
+                assertion=row["assertion"],  # type: ignore[arg-type]
+                question=row["question_text"],  # type: ignore[arg-type]
+                answer=row["answer_text"],  # type: ignore[arg-type]
+                supporting_assertions=row["supporting_assertions"],  # type: ignore[arg-type]
                 assessment_system_prompt=assessment_system_prompt,
                 assessment_user_prompt=assessment_user_prompt,
                 complete_callback=functools.partial(
@@ -353,7 +353,7 @@ def _get_hierarchical_scores_staged(
     ].copy()
     # Rename to standard name for get_assertion_scores
     if assertion_question_col != "question_text":
-        global_assertions_df = global_assertions_df.rename(
+        global_assertions_df = global_assertions_df.rename(  # type: ignore[call-overload]
             columns={assertion_question_col: "question_text"}
         )
 
@@ -362,7 +362,7 @@ def _get_hierarchical_scores_staged(
         llm_client=llm_client,
         llm_config=llm_config,
         answers=answers,
-        assertions=global_assertions_df,
+        assertions=global_assertions_df,  # type: ignore[arg-type]
         trials=trials,
         top_k=top_k,
         include_score_id_in_prompt=include_score_id_in_prompt,
@@ -377,7 +377,7 @@ def _get_hierarchical_scores_staged(
         question_id_key
     ].to_dict()
     global_scores_raw["question_id"] = global_scores_raw["question"].map(
-        question_text_to_id
+        question_text_to_id  # type: ignore[arg-type]
     )
 
     # Aggregate global scores to determine which assertions passed
@@ -418,7 +418,7 @@ def _get_hierarchical_scores_staged(
     # Select the best global reasoning for each passed assertion:
     # pick the longest reasoning from passing trials only, so the
     # step-2 prompt gets the most informative context.
-    passed_assertions["global_reasoning"] = passed_assertions.apply(
+    passed_assertions["global_reasoning"] = passed_assertions.apply(  # type: ignore[union-attr]
         _select_best_global_reasoning, axis=1
     )
 
@@ -430,7 +430,7 @@ def _get_hierarchical_scores_staged(
             n_supporting = len(
                 assertions[assertions["assertion"] == row["assertion"]][
                     supporting_assertions_key
-                ].iloc[0]
+                ].iloc[0]  # type: ignore[union-attr]
             )
             for trial_idx, (_score, reasoning) in enumerate(
                 zip(row["trial_scores"], row["reasoning_list"], strict=True)
@@ -461,13 +461,13 @@ def _get_hierarchical_scores_staged(
     assertions_for_merge = assertions[
         [question_id_key, "assertion", supporting_assertions_key]
     ].copy()
-    assertions_for_merge = assertions_for_merge.rename(
+    assertions_for_merge = assertions_for_merge.rename(  # type: ignore[call-overload]
         columns={
             question_id_key: "question_id",
             supporting_assertions_key: "supporting_assertions",
         }
     )
-    passed_with_supporting = passed_assertions.merge(
+    passed_with_supporting = passed_assertions.merge(  # type: ignore[union-attr]
         assertions_for_merge,
         on=["question_id", "assertion"],
         how="left",
@@ -487,7 +487,7 @@ def _get_hierarchical_scores_staged(
     # Also need the answer text - lookup by question_id
     answer_lookup = answers.set_index(question_id_key)[answer_text_key].to_dict()
     passed_with_supporting["answer_text"] = passed_with_supporting["question_id"].map(
-        answer_lookup
+        answer_lookup  # type: ignore[arg-type]
     )
 
     # Run supporting + discovery evaluation for passed assertions
@@ -503,13 +503,13 @@ def _get_hierarchical_scores_staged(
         tasks = [
             evaluate_supporting_discovery(
                 llm_client=llm_client,
-                assertion=row["assertion"],
-                question=row["question"],
-                answer=row["answer_text"],
-                supporting_assertions=row["supporting_assertions"],
-                question_id=row["question_id"],
+                assertion=row["assertion"],  # type: ignore[arg-type]
+                question=row["question"],  # type: ignore[arg-type]
+                answer=row["answer_text"],  # type: ignore[arg-type]
+                supporting_assertions=row["supporting_assertions"],  # type: ignore[arg-type]
+                question_id=row["question_id"],  # type: ignore[arg-type]
                 trial=trial_idx,
-                global_reasoning=row["global_reasoning"],
+                global_reasoning=row["global_reasoning"],  # type: ignore[arg-type]
                 complete_callback=functools.partial(
                     on_complete_callback, progress_task
                 ),
@@ -540,10 +540,10 @@ def _get_hierarchical_scores_staged(
         # Get supporting assertions count
         matching_assertion = assertions[assertions["assertion"] == assertion_text]
         if len(matching_assertion) > 0:
-            n_supporting = len(matching_assertion[supporting_assertions_key].iloc[0])
+            n_supporting = len(matching_assertion[supporting_assertions_key].iloc[0])  # type: ignore[union-attr]
             supporting_assertions_list = matching_assertion[
                 supporting_assertions_key
-            ].iloc[0]
+            ].iloc[0]  # type: ignore[union-attr]
         else:
             n_supporting = 0
             supporting_assertions_list = []
@@ -554,8 +554,8 @@ def _get_hierarchical_scores_staged(
             # Use (question_id, assertion, trial) to look up
             # the trial-specific supporting result
             supp_key = (question_id, assertion_text, trial_idx)
-            if global_passed and supp_key in supporting_lookup:
-                supp_result = supporting_lookup[supp_key]
+            if global_passed and supp_key in supporting_lookup:  # type: ignore[operator]
+                supp_result = supporting_lookup[supp_key]  # type: ignore[arg-type]
                 results.append({
                     "question": question,
                     "assertion": assertion_text,

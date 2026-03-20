@@ -57,7 +57,7 @@ if TYPE_CHECKING:
         RelevanceRater,
     )
 
-log = logging.getLogger(__name__)
+log: logging.Logger = logging.getLogger(__name__)
 
 
 def load_clusters_from_json(

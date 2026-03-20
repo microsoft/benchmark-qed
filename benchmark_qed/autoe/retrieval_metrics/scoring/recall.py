@@ -20,7 +20,7 @@ from benchmark_qed.autoe.retrieval_metrics.scoring.retrieval_relevance import (
     QueryRelevanceResult,
 )
 
-log = logging.getLogger(__name__)
+log: logging.Logger = logging.getLogger(__name__)
 
 
 def _get_text_unit_key(text_unit: Any, match_by: str = "text") -> str:

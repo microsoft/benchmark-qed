@@ -235,7 +235,7 @@ class BatchQuestionValidator(ABC):
             if isinstance(result, dict):
                 qid = result.get("id")
                 if result.get("pass", False):
-                    passing_ids.add(qid)
+                    passing_ids.add(qid)  # type: ignore[arg-type]
                 else:
                     reasoning = result.get("reasoning", "unknown")
                     if "duplicate" in reasoning.lower():
@@ -292,7 +292,9 @@ class BatchQuestionValidator(ABC):
 
         # Run KMeans
         kmeans = KMeans(
-            n_clusters=actual_num_clusters, random_state=self.random_seed, n_init=10
+            n_clusters=actual_num_clusters,
+            random_state=self.random_seed,
+            n_init=10,  # type: ignore[arg-type]
         )
         labels = kmeans.fit_predict(embeddings)
 

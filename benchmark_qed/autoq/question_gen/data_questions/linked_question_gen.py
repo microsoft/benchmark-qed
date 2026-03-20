@@ -190,7 +190,7 @@ class DataLinkedQuestionGen(BaseQuestionGen):
             assertion_prompt_config = AssertionPromptConfig()
 
         # Default to bridge questions primarily, with comparison and intersection as secondary options
-        self.question_types = question_types or [
+        self.question_types: list[str] = question_types or [
             "bridge",
             "comparison",
             "intersection",
@@ -208,14 +208,14 @@ class DataLinkedQuestionGen(BaseQuestionGen):
 
         # Create default MMR sampler if none provided
         if question_sampler is None:
-            question_sampler = MMRTextSampler(
+            question_sampler = MMRTextSampler(  # type: ignore[assignment]
                 random_seed=random_seed,
                 lambda_param=mmr_lambda,
             )
         else:
             question_sampler.random_seed = self.random_seed
 
-        super().__init__(llm, llm_params, question_sampler)
+        super().__init__(llm, llm_params, question_sampler)  # type: ignore[arg-type]
         self.text_embedder = text_embedder
         self.token_encoder = token_encoder
 
@@ -1032,10 +1032,10 @@ class DataLinkedQuestionGen(BaseQuestionGen):
             return rng.sample(questions, min(max_count, len(questions)))
 
         # Use MMR sampler - high lambda to start from centroid, then diversify
-        selected_units = self.question_sampler.sample(
-            text_units=text_units,
+        selected_units = self.question_sampler.sample(  # type: ignore[union-attr]
+            text_units=text_units,  # type: ignore[call-arg]
             sample_size=max_count,
-            quality_attributes="quality_score",
+            quality_attributes="quality_score",  # type: ignore[call-arg]
         )
 
         return [question_map[tu.id] for tu in selected_units]

@@ -17,7 +17,7 @@ from benchmark_qed.autoe.retrieval_metrics.relevance_assessment.rationale_rater 
 from benchmark_qed.config.llm_config import LLMConfig
 from benchmark_qed.llm.factory import ModelFactory
 
-log = logging.getLogger(__name__)
+log: logging.Logger = logging.getLogger(__name__)
 
 
 @dataclass
@@ -1143,7 +1143,7 @@ async def compare_raters_from_files(
         TextUnit(
             id=str(row.get("id", idx)),
             short_id=str(row.get("short_id", idx)),
-            text=row["text"],
+            text=str(row["text"]),
             text_embedding=row.get("text_embedding"),
         )
         for idx, row in df.iterrows()

@@ -22,7 +22,7 @@ from benchmark_qed.autoe.retrieval_metrics.scoring.retrieval_relevance import (
     QueryRelevanceResult,
 )
 
-log = logging.getLogger(__name__)
+log: logging.Logger = logging.getLogger(__name__)
 
 
 class FidelityMetric(Enum):

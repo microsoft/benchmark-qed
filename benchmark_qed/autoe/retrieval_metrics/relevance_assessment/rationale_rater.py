@@ -20,7 +20,7 @@ from benchmark_qed.llm.utils import chat_typed_response
 
 from .base import RelevanceRater
 
-log = logging.getLogger(__name__)
+log: logging.Logger = logging.getLogger(__name__)
 
 RETRIEVAL_PROMPTS_PATH = Path(retrieval_prompts.__file__).parent
 
@@ -56,10 +56,10 @@ class RationaleRelevanceRater(RelevanceRater):
         super().__init__(cache_dir=cache_dir, cache_enabled=cache_enabled)
         self.llm_client = llm_client
         self.llm_config = llm_config
-        self.prompt_template = prompt_template or load_template_file(
+        self.prompt_template: Template = prompt_template or load_template_file(
             RETRIEVAL_PROMPTS_PATH / "rationale_relevance_assessment_prompt.txt"
         )
-        self.semaphore = asyncio.Semaphore(concurrent_requests)
+        self.semaphore: asyncio.Semaphore = asyncio.Semaphore(concurrent_requests)
 
     def _get_cache_relevant_params(self) -> dict[str, Any]:
         """Get parameters that affect the RationaleRelevanceRater assessment results."""

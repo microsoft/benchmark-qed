@@ -2,9 +2,9 @@
 """Data model for retrieval results in retrieval scoring."""
 
 from collections.abc import Sequence
-from typing import Any
+from typing import Any, ClassVar
 
-from pydantic import BaseModel, Field, model_validator
+from pydantic import BaseModel, ConfigDict, Field, model_validator
 
 from benchmark_qed.autod.data_model.text_unit import TextUnit
 
@@ -28,7 +28,7 @@ class RetrievalResult(BaseModel):
         description="Key name for the text field in dictionary context items.",
     )
 
-    model_config = {"frozen": True}
+    model_config: ClassVar[ConfigDict] = ConfigDict(frozen=True)
 
     @model_validator(mode="after")
     def validate_retrieval_result(self) -> "RetrievalResult":

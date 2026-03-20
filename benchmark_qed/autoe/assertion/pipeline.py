@@ -115,7 +115,7 @@ def load_and_normalize_hierarchical_assertions(
         raise ValueError(msg)
 
     # Filter out rows with missing or empty assertions
-    if assertions_raw[assertions_key].isna().any():
+    if assertions_raw[assertions_key].isna().any():  # type: ignore[truthy-bool]
         rich_print(
             "[bold yellow]Some questions do not have assertions. "
             "These will be skipped.[/bold yellow]"
@@ -123,10 +123,10 @@ def load_and_normalize_hierarchical_assertions(
         assertions_raw = assertions_raw[~assertions_raw[assertions_key].isna()]
 
     # Explode the assertions list into individual rows
-    assertions = assertions_raw.explode(assertions_key).reset_index(drop=True)
+    assertions = assertions_raw.explode(assertions_key).reset_index(drop=True)  # type: ignore[arg-type]
 
     # Normalize nested assertion dicts into separate columns
-    if assertions[assertions_key].apply(lambda x: isinstance(x, dict)).any():
+    if assertions[assertions_key].apply(lambda x: isinstance(x, dict)).any():  # type: ignore[union-attr,truthy-bool]
         assertion_details = pd.json_normalize(assertions[assertions_key].tolist())
         assertions = pd.concat(
             [
@@ -137,9 +137,9 @@ def load_and_normalize_hierarchical_assertions(
         )
         # Rename 'statement' to 'assertion' for consistency
         if "statement" in assertions.columns:
-            assertions = assertions.rename(columns={"statement": "assertion"})
+            assertions = assertions.rename(columns={"statement": "assertion"})  # type: ignore[call-overload]
     else:
-        assertions = assertions.rename(columns={assertions_key: "assertion"})
+        assertions = assertions.rename(columns={assertions_key: "assertion"})  # type: ignore[call-overload]
 
     # Validate supporting assertions column exists
     if supporting_assertions_key not in assertions.columns:
@@ -153,7 +153,7 @@ def load_and_normalize_hierarchical_assertions(
     has_supporting = assertions[supporting_assertions_key].apply(
         lambda x: isinstance(x, list) and len(x) > 0
     )
-    if not has_supporting.all():
+    if not has_supporting.all():  # type: ignore[truthy-bool]
         n_missing = (~has_supporting).sum()
         rich_print(
             f"[bold yellow]{n_missing} assertions without supporting "
@@ -165,7 +165,7 @@ def load_and_normalize_hierarchical_assertions(
         msg = "No valid hierarchical assertions found after filtering."
         raise ValueError(msg)
 
-    return assertions
+    return cast(pd.DataFrame, assertions)
 
 
 def evaluate_rag_method(

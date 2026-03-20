@@ -136,7 +136,7 @@ def aggregate_hierarchical_scores(
         discovery_reasoning = ""
         if has_discovery:
             for _, row in group.iterrows():
-                if row["has_discovery"] and row["discovery_reasoning"]:
+                if row["has_discovery"] and row["discovery_reasoning"]:  # type: ignore[truthy-bool]
                     discovery_reasoning = row["discovery_reasoning"]
                     break
 
@@ -149,7 +149,7 @@ def aggregate_hierarchical_scores(
     grouped = scores_df.groupby(["question", "assertion"])
 
     results = []
-    for (question, assertion), group in grouped:
+    for (question, assertion), group in grouped:  # type: ignore[misc]
         # Aggregate global score
         global_passed_mean = group["global_passed"].mean()
         global_score = 1 if global_passed_mean > pass_threshold else 0

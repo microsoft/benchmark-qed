@@ -262,7 +262,7 @@ async def __generate_data_linked(
     if hasattr(data_linked_question_results, "pipeline_stats"):
         import json
 
-        stats = data_linked_question_results.pipeline_stats
+        stats = data_linked_question_results.pipeline_stats  # type: ignore[attr-defined]
         stats_path = Path(
             f"{output_data_path}/data_linked_questions/question_stats.json"
         )

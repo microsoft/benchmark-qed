@@ -5,9 +5,9 @@ import asyncio
 import json
 import logging
 from pathlib import Path
-from typing import Any
+from typing import Any, ClassVar
 
-from pydantic import BaseModel, Field, field_serializer
+from pydantic import BaseModel, ConfigDict, Field, field_serializer
 
 from benchmark_qed.autod.data_model.text_unit import TextUnit
 from benchmark_qed.autoe.data_model.relevance import RelevanceAssessmentResponse
@@ -16,13 +16,13 @@ from benchmark_qed.autoe.retrieval_metrics.relevance_assessment.base import (
     RelevanceRater,
 )
 
-log = logging.getLogger(__name__)
+log: logging.Logger = logging.getLogger(__name__)
 
 
 class QueryRelevanceResult(BaseModel):
     """Result of relevance assessment for a single query."""
 
-    model_config = {"frozen": True}
+    model_config: ClassVar[ConfigDict] = ConfigDict(frozen=True)
 
     question_id: str = Field(description="Unique identifier for the question.")
     question_text: str = Field(description="The text of the question.")
@@ -94,7 +94,7 @@ class QueryRelevanceResult(BaseModel):
 class BatchRelevanceResult(BaseModel):
     """Result of batch relevance assessment."""
 
-    model_config = {"frozen": True}
+    model_config: ClassVar[ConfigDict] = ConfigDict(frozen=True)
 
     results: list[QueryRelevanceResult] = Field(description="Individual query results.")
 

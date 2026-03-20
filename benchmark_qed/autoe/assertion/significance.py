@@ -563,7 +563,7 @@ def _run_clustered_permutation_analysis(
                 )
                 continue
 
-            valid = scores_df[["question", col]].dropna(subset=[col])
+            valid = scores_df[["question", col]].dropna(subset=[col])  # type: ignore[call-overload]
             groups[rag_method] = valid[col].astype(float).tolist()
             cluster_id_map[rag_method] = valid["question"].astype(str).tolist()
             rich_print(

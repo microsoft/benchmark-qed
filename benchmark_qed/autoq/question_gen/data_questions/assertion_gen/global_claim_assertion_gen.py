@@ -139,7 +139,7 @@ class GlobalClaimAssertionGenerator(BaseAssertionGenerator):
 
         # Semantic grouping parameters for improved claim batching
         self.text_embedder = text_embedder
-        self.enable_semantic_grouping = (
+        self.enable_semantic_grouping: bool = (
             enable_semantic_grouping and text_embedder is not None
         )
 

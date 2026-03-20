@@ -10,7 +10,7 @@ from benchmark_qed.autoe.retrieval_metrics.scoring.retrieval_relevance import (
     BatchRelevanceResult,
 )
 
-log = logging.getLogger(__name__)
+log: logging.Logger = logging.getLogger(__name__)
 
 
 def calculate_binary_precision(

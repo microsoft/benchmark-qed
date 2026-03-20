@@ -11,9 +11,12 @@ import json
 import logging
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
 import numpy as np
+
+if TYPE_CHECKING:
+    from collections.abc import Sequence
 
 log: logging.Logger = logging.getLogger(__name__)
 
@@ -43,7 +46,7 @@ class DistributionStats:
         }
 
     @classmethod
-    def from_values(cls, values: list[int | float]) -> DistributionStats:
+    def from_values(cls, values: Sequence[int | float]) -> DistributionStats:
         """Create distribution stats from a list of values."""
         if not values:
             return cls()

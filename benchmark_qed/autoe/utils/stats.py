@@ -627,7 +627,7 @@ def _compare_two_groups_paired(
         test_name = "Paired t-test"
     else:
         result = stats.wilcoxon(data_a, data_b)
-        stat, p_value = float(result.statistic), float(result.pvalue)
+        stat, p_value = float(result.statistic), float(result.pvalue)  # type: ignore[union-attr]
         test_name = "Wilcoxon signed-rank test"
 
     is_significant = p_value < alpha
@@ -824,7 +824,7 @@ def _compute_f_statistic(
 
     ms_between = ss_between / df_between
     ms_within = ss_within / df_within
-    return ms_between / ms_within
+    return float(ms_between / ms_within)
 
 
 def run_clustered_permutation_test(
@@ -1250,9 +1250,9 @@ def combine_pvalues(
 
     return CombinedPValueResult(
         method=method,
-        statistic=float(statistic),
-        combined_p_value=float(combined_p),
-        is_significant=bool(combined_p < alpha),
+        statistic=float(statistic),  # type: ignore[arg-type]
+        combined_p_value=float(combined_p),  # type: ignore[arg-type]
+        is_significant=bool(combined_p < alpha),  # type: ignore[operator]
         alpha=alpha,
         input_p_values=list(p_values),
         dataset_names=list(dataset_names) if dataset_names else [],

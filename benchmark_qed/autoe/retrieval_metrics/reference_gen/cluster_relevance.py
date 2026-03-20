@@ -24,7 +24,7 @@ from benchmark_qed.autoe.retrieval_metrics.relevance_assessment.base import (
 )
 from benchmark_qed.autoq.data_model.question import Question
 
-log = logging.getLogger(__name__)
+log: logging.Logger = logging.getLogger(__name__)
 
 
 def _clean_assessment_response(response: RelevanceAssessmentResponse) -> dict[str, Any]:
@@ -116,7 +116,7 @@ class ClusterRelevanceRater:
         self.text_embedder = text_embedder
         self.semantic_neighbors = semantic_neighbors
         self.centroid_neighbors = centroid_neighbors
-        self.semaphore = asyncio.Semaphore(max_concurrent_clusters)
+        self.semaphore: asyncio.Semaphore = asyncio.Semaphore(max_concurrent_clusters)
         self.rater = relevance_rater
         self.clusterer = clusterer
         self.num_clusters = num_clusters
@@ -132,8 +132,10 @@ class ClusterRelevanceRater:
         elif isinstance(corpus[0], TextUnit):
             log.info("Performing one-time clustering of %d text units", len(corpus))
             self.clusters = self._cluster_corpus(
-                corpus, self.clusterer, self.num_clusters
-            )  # type: ignore - we know this is list[TextUnit]
+                corpus,  # type: ignore[arg-type]
+                self.clusterer,
+                self.num_clusters,
+            )
             log.info("Created %d clusters", len(self.clusters))
         else:
             msg = f"Data must be list of TextCluster or TextUnit objects, got {type(corpus[0])}"

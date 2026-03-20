@@ -720,7 +720,7 @@ class RetrievalReferenceConfig(BaseModel):
             return [None]
         if isinstance(self.num_clusters, int):
             return [self.num_clusters]
-        return self.num_clusters
+        return self.num_clusters  # type: ignore[return-value]
 
 
 class RetrievalScoresConfig(BaseModel):
