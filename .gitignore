@@ -189,5 +189,14 @@ cython_debug/
 # PyPI configuration file
 .pypirc
 
-# GitHub instructions
+# GitHub instructions and agents
 .github/instructions/
+.github/agents/
+
+# Local override/scratch files
+_inspect_overrides.py
+_inspect_overrides2.py
+.vscode.bak/
+
+# Large data files
+docs/notebooks/example_answers/text_units.parquet

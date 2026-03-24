@@ -390,6 +390,7 @@ rag_methods:
 question_sets:
   - data_global_questions
   - data_local_questions
+  - data_linked_questions
 
 # Assertion file template: {input_dir}/{question_set}_assertions.json
 assertions_filename_template: "{question_set}_assertions.json"
@@ -427,15 +428,19 @@ llm_config:
 input_dir/
   data_global_questions_assertions.json
   data_local_questions_assertions.json
+  data_linked_questions_assertions.json
   graphrag_global/
     data_global_questions.json
     data_local_questions.json
+    data_linked_questions.json
   vectorrag/
     data_global_questions.json
     data_local_questions.json
+    data_linked_questions.json
   lazygraphrag/
     data_global_questions.json
     data_local_questions.json
+    data_linked_questions.json
 ```
 
 ### Output Structure
@@ -751,6 +756,7 @@ rag_methods:
 question_sets:
   - data_global_questions
   - data_local_questions
+  - data_linked_questions
 
 alpha: 0.05
 correction_method: holm
