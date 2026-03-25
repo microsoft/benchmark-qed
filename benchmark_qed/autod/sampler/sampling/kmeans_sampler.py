@@ -7,14 +7,13 @@ import math
 import random
 from typing import TYPE_CHECKING, Any
 
+import numpy as np
+
 from benchmark_qed.autod.data_model.text_unit import TextUnit
 from benchmark_qed.autod.sampler.clustering.kmeans import KmeansClustering
 from benchmark_qed.autod.sampler.enums import (
     ClusterRepresentativeSelectionType,
     DistanceMetricType,
-)
-from benchmark_qed.autod.sampler.neighboring.semantic_neighbors import (
-    get_semantic_neighbors,
 )
 from benchmark_qed.autod.sampler.sampling.base import BaseTextSampler
 from benchmark_qed.config.defaults import RANDOM_SEED
@@ -136,6 +135,36 @@ class KmeansTextSampler(BaseTextSampler):
         corpus = [
             unit for unit in copy.deepcopy(text_units) if unit.id not in selected_ids
         ]
+
+        # Pre-build embedding matrix for batch distance computation
+        corpus_embeddings = np.array([unit.text_embedding for unit in corpus])
+        n_neighbors = num_samples_per_cluster - 1
+
+        # Batch compute: all rep distances to all corpus in one matrix multiply
+        rep_embeddings = np.array([rep.text_embedding for rep in selected_reps])
+        distance_metric = kwargs.get("distance_metric", DistanceMetricType.COSINE)
+
+        if distance_metric == DistanceMetricType.COSINE:
+            # Normalize for cosine: distance = 1 - similarity
+            rep_norms = np.linalg.norm(rep_embeddings, axis=1, keepdims=True)
+            rep_norms = np.where(rep_norms == 0, 1.0, rep_norms)
+            corpus_norms = np.linalg.norm(corpus_embeddings, axis=1, keepdims=True)
+            corpus_norms = np.where(corpus_norms == 0, 1.0, corpus_norms)
+            # (num_reps, num_corpus) similarity matrix via single matmul
+            similarities = (rep_embeddings / rep_norms) @ (
+                corpus_embeddings / corpus_norms
+            ).T
+            all_distances = 1.0 - similarities
+        else:
+            # Euclidean: broadcast difference
+            all_distances = np.linalg.norm(
+                rep_embeddings[:, np.newaxis, :] - corpus_embeddings[np.newaxis, :, :],
+                axis=2,
+            )
+
+        # Greedy assignment: for each rep, pick closest available neighbors
+        available_mask = np.ones(len(corpus), dtype=bool)
+
         for index, rep in enumerate(selected_reps):
             if rep.attributes is None:
                 rep.attributes = {}
@@ -143,23 +172,25 @@ class KmeansTextSampler(BaseTextSampler):
             rep.cluster_id = str(index)
             selected_sample.append(rep)
 
-            # Get neighbors
-            neighbors = get_semantic_neighbors(
-                text_unit=rep,
-                corpus=[unit for unit in corpus if unit.id not in selected_ids],
-                n=num_samples_per_cluster - 1,
-                distance_metric=kwargs.get(
-                    "distance_metric", DistanceMetricType.COSINE
-                ),
-            )
+            distances_row = all_distances[index].copy()
+            # Mask out already-selected items with inf
+            distances_row[~available_mask] = np.inf
 
-            for neighbor in neighbors:
+            # Get top-n nearest available neighbors
+            if n_neighbors >= np.sum(available_mask):
+                top_indices = np.where(available_mask)[0]
+            else:
+                top_indices = np.argpartition(distances_row, n_neighbors)[:n_neighbors]
+            top_indices = top_indices[np.argsort(distances_row[top_indices])]
+
+            for idx in top_indices[:n_neighbors]:
+                neighbor = corpus[idx]
                 neighbor.cluster_id = str(index)
                 if neighbor.attributes is None:
                     neighbor.attributes = {}
                 neighbor.attributes["is_representative"] = False
-                selected_ids.add(neighbor.id)
-            selected_sample.extend(neighbors)
+                available_mask[idx] = False
+                selected_sample.append(neighbor)
 
         if sample_size < len(selected_sample):
             selected_sample = random.sample(selected_sample, sample_size)

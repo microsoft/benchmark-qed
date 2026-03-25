@@ -6,7 +6,7 @@ import math
 from typing import Any, cast
 
 import numpy as np
-from sklearn.cluster import KMeans
+from sklearn.cluster import KMeans, MiniBatchKMeans
 from sklearn.metrics import silhouette_score
 from tqdm import tqdm
 
@@ -125,9 +125,25 @@ class KmeansClustering(BaseClustering):
         else:
             log.info("Using specified number of clusters: %s", num_clusters)
 
-        model = KMeans(
-            n_clusters=num_clusters, random_state=self.random_seed, n_init="auto"
-        ).fit(embeddings)
+        # Use MiniBatchKMeans for large datasets (>20K samples) for speed
+        n_samples = len(embeddings)
+        if n_samples > 20_000:
+            log.info(
+                "Using MiniBatchKMeans for %s samples (faster for large datasets)",
+                n_samples,
+            )
+            model = MiniBatchKMeans(
+                n_clusters=num_clusters,
+                random_state=self.random_seed,
+                n_init="auto",
+                batch_size=10_000,
+            ).fit(embeddings)
+        else:
+            model = KMeans(
+                n_clusters=num_clusters,
+                random_state=self.random_seed,
+                n_init="auto",
+            ).fit(embeddings)
         clusters = {}
         for label, unit in zip(
             cast(np.ndarray, model.labels_), filtered_text_units, strict=False
