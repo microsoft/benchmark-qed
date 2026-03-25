@@ -27,7 +27,6 @@ from benchmark_qed.autod.sampler.sampling.mmr_sampler import MMRTextSampler
 from benchmark_qed.autoq.data_model.enums import QuestionType
 from benchmark_qed.autoq.data_model.question import Question
 from benchmark_qed.autoq.prompts import data_questions as prompts_data_questions
-from benchmark_qed.autoq.prompts.data_questions import linked_questions
 from benchmark_qed.autoq.question_gen.base import BaseQuestionGen, QuestionGenResult
 from benchmark_qed.autoq.question_gen.data_questions.assertion_gen.local_claim_assertion_gen import (
     LocalClaimAssertionGenerator,
@@ -41,7 +40,6 @@ from benchmark_qed.autoq.question_gen.data_questions.assertion_gen.validator imp
 from benchmark_qed.autoq.question_gen.data_questions.question_validator import (
     LinkedQuestionValidator,
 )
-from benchmark_qed.config.utils import load_template_file
 
 if TYPE_CHECKING:
     from string import Template
@@ -49,13 +47,16 @@ if TYPE_CHECKING:
     import tiktoken
 
     from benchmark_qed.autod.data_processor.embedding import TextEmbedder
-    from benchmark_qed.autoq.config import AssertionConfig, AssertionPromptConfig
+    from benchmark_qed.autoq.config import (
+        AssertionConfig,
+        AssertionPromptConfig,
+        DataLinkedPromptConfig,
+    )
     from benchmark_qed.autoq.sampler.question_sampler import QuestionSampler
     from benchmark_qed.llm.type.base import ChatModel
 
 log: logging.Logger = logging.getLogger(__name__)
 
-DATA_LINKED_PROMPTS_PATH = Path(linked_questions.__file__).parent
 ASSERTION_PROMPTS_PATH = Path(prompts_data_questions.__file__).parent / "assertions"
 
 
@@ -167,6 +168,7 @@ class DataLinkedQuestionGen(BaseQuestionGen):
         question_sampler: QuestionSampler | None = None,
         assertion_config: AssertionConfig | None = None,
         assertion_prompt_config: AssertionPromptConfig | None = None,
+        prompt_config: DataLinkedPromptConfig | None = None,
         llm_params: dict[str, Any] = defs.LLM_PARAMS,
         json_mode: bool = True,
         generation_user_prompt: Template | None = None,
@@ -188,6 +190,10 @@ class DataLinkedQuestionGen(BaseQuestionGen):
             from benchmark_qed.autoq.config import AssertionPromptConfig
 
             assertion_prompt_config = AssertionPromptConfig()
+        if prompt_config is None:
+            from benchmark_qed.autoq.config import DataLinkedPromptConfig
+
+            prompt_config = DataLinkedPromptConfig()
 
         # Default to bridge questions primarily, with comparison and intersection as secondary options
         self.question_types: list[str] = question_types or [
@@ -259,38 +265,21 @@ class DataLinkedQuestionGen(BaseQuestionGen):
             self.question_validator = LinkedQuestionValidator(
                 llm=llm,
                 llm_params=llm_params,
+                validation_prompt=prompt_config.batch_validation_prompt.template,
                 batch_size=15,
                 random_seed=random_seed,
             )
 
-        # Load prompts for each question type
-        self.system_prompts: dict[str, Template] = {}
-
-        # Bridge questions
-        self.system_prompts["bridge"] = load_template_file(
-            DATA_LINKED_PROMPTS_PATH / "bridge_question_system_prompt.txt"
-        )
-
-        # Temporal questions (sequence/timing of events)
-        self.system_prompts["temporal"] = load_template_file(
-            DATA_LINKED_PROMPTS_PATH / "temporal_question_system_prompt.txt"
-        )
-
-        # Comparison questions
-        self.system_prompts["comparison"] = load_template_file(
-            DATA_LINKED_PROMPTS_PATH / "comparison_question_system_prompt.txt"
-        )
-
-        # Intersection questions
-        self.system_prompts["intersection"] = load_template_file(
-            DATA_LINKED_PROMPTS_PATH / "intersection_question_system_prompt.txt"
-        )
+        # Load prompts for each question type from config
+        self.system_prompts: dict[str, Template] = {
+            "bridge": prompt_config.bridge_question_system_prompt.template,
+            "temporal": prompt_config.temporal_question_system_prompt.template,
+            "comparison": prompt_config.comparison_question_system_prompt.template,
+            "intersection": prompt_config.intersection_question_system_prompt.template,
+        }
 
         self.generation_user_prompt: Template = (
-            generation_user_prompt
-            or load_template_file(
-                DATA_LINKED_PROMPTS_PATH / "linked_question_user_prompt.txt"
-            )
+            generation_user_prompt or prompt_config.linked_question_user_prompt.template
         )
 
         self.local_questions = local_questions

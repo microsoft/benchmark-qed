@@ -202,7 +202,7 @@ async def __generate_data_linked(
     type_balance_weight: float,
     random_seed: int,
     concurrent_requests: int,
-    config: DataLinkedPromptConfig,  # noqa: ARG001 - Reserved for future prompt customization
+    config: DataLinkedPromptConfig,
     assertion_config: AssertionConfig,
     assertion_prompt_config: AssertionPromptConfig,
     llm_params: dict[str, Any],
@@ -232,6 +232,7 @@ async def __generate_data_linked(
         min_questions_per_entity=min_questions_per_entity,
         max_questions_per_entity=max_questions_per_entity,
         type_balance_weight=type_balance_weight,
+        prompt_config=config,
     )
 
     data_linked_question_results = await data_linked_generator.agenerate(

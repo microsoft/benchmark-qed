@@ -15,10 +15,6 @@ from benchmark_qed.autod.sampler.neighboring.semantic_neighbors import (
     get_semantic_neighbors,
 )
 
-# ---------------------------------------------------------------------------
-# Helpers
-# ---------------------------------------------------------------------------
-
 _RNG = np.random.RandomState(42)
 
 
@@ -62,9 +58,7 @@ def _old_get_semantic_neighbors(
     if distance_metric == DistanceMetricType.COSINE:
         neighbors = sorted(
             corpus,
-            key=lambda unit: float(
-                scipy_cosine(np.array(unit.text_embedding), query)
-            ),
+            key=lambda unit: float(scipy_cosine(np.array(unit.text_embedding), query)),
         )
     else:
         neighbors = sorted(
@@ -82,11 +76,6 @@ def _old_get_semantic_neighbors(
     return candidate_neighbors[:n]
 
 
-# ---------------------------------------------------------------------------
-# Tests: _cosine_distances_vectorized matches scipy per-element
-# ---------------------------------------------------------------------------
-
-
 class TestCosineDistancesVectorized:
     """Verify vectorized cosine distance matches scipy element-by-element."""
 
@@ -97,9 +86,7 @@ class TestCosineDistancesVectorized:
         matrix = rng.randn(50, 32)
 
         vectorized = _cosine_distances_vectorized(query, matrix)
-        expected = np.array([
-            _scipy_cosine_distance(query, row) for row in matrix
-        ])
+        expected = np.array([_scipy_cosine_distance(query, row) for row in matrix])
         np.testing.assert_allclose(vectorized, expected, atol=1e-10)
 
     def test_zero_query_returns_ones(self) -> None:
@@ -131,11 +118,6 @@ class TestCosineDistancesVectorized:
         np.testing.assert_allclose(result, [2.0], atol=1e-10)
 
 
-# ---------------------------------------------------------------------------
-# Tests: _euclidean_distances_vectorized matches numpy per-element
-# ---------------------------------------------------------------------------
-
-
 class TestEuclideanDistancesVectorized:
     """Verify vectorized euclidean distance matches per-element numpy."""
 
@@ -146,9 +128,7 @@ class TestEuclideanDistancesVectorized:
         matrix = rng.randn(50, 32)
 
         vectorized = _euclidean_distances_vectorized(query, matrix)
-        expected = np.array([
-            _scipy_euclidean_distance(query, row) for row in matrix
-        ])
+        expected = np.array([_scipy_euclidean_distance(query, row) for row in matrix])
         np.testing.assert_allclose(vectorized, expected, atol=1e-10)
 
     def test_identical_vectors_return_zero(self) -> None:
@@ -159,15 +139,10 @@ class TestEuclideanDistancesVectorized:
         np.testing.assert_allclose(result, [0.0], atol=1e-10)
 
 
-# ---------------------------------------------------------------------------
-# Tests: get_semantic_neighbors matches old implementation
-# ---------------------------------------------------------------------------
-
-
 class TestGetSemanticNeighbors:
     """Verify new get_semantic_neighbors returns same results as old scipy-based version."""
 
-    @pytest.fixture()
+    @pytest.fixture
     def corpus_and_query(self) -> tuple[TextUnit, list[TextUnit]]:
         """Create a query and a corpus of 20 text units with 8-dim embeddings."""
         rng = np.random.RandomState(789)
@@ -214,9 +189,7 @@ class TestGetSemanticNeighbors:
         rng = np.random.RandomState(101)
         query = _make_text_unit("q")
         query.text_embedding = rng.randn(8).tolist()
-        corpus = [query] + [
-            _make_text_unit(f"c-{i}") for i in range(10)
-        ]
+        corpus = [query] + [_make_text_unit(f"c-{i}") for i in range(10)]
         for unit in corpus[1:]:
             unit.text_embedding = rng.randn(8).tolist()
 
@@ -266,11 +239,6 @@ class TestGetSemanticNeighbors:
         assert [u.id for u in old_result] == [u.id for u in new_result]
 
 
-# ---------------------------------------------------------------------------
-# Tests: compute_similarity_to_references
-# ---------------------------------------------------------------------------
-
-
 class TestComputeSimilarityToReferences:
     """Verify vectorized compute_similarity_to_references matches scipy."""
 
@@ -286,17 +254,12 @@ class TestComputeSimilarityToReferences:
 
         # Compute expected with scipy
         expected_sims = [
-            1.0 - _scipy_cosine_distance(
-                np.array(query_emb), np.array(ref.text_embedding)
-            )
+            1.0
+            - _scipy_cosine_distance(np.array(query_emb), np.array(ref.text_embedding))
             for ref in refs
         ]
-        assert result["min_similarity"] == pytest.approx(
-            min(expected_sims), abs=1e-10
-        )
-        assert result["max_similarity"] == pytest.approx(
-            max(expected_sims), abs=1e-10
-        )
+        assert result["min_similarity"] == pytest.approx(min(expected_sims), abs=1e-10)
+        assert result["max_similarity"] == pytest.approx(max(expected_sims), abs=1e-10)
         assert result["mean_similarity"] == pytest.approx(
             float(np.mean(expected_sims)), abs=1e-10
         )

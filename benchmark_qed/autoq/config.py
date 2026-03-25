@@ -544,6 +544,13 @@ class DataLinkedPromptConfig(BaseModel):
         ),
         description="System prompt for generating intersection-style linked questions.",
     )
+    temporal_question_system_prompt: PromptConfig = Field(
+        default=PromptConfig(
+            prompt=AUTOQ_DATA_LINKED_PROMPTS_PATH
+            / "temporal_question_system_prompt.txt"
+        ),
+        description="System prompt for generating temporal-style linked questions.",
+    )
     linked_question_user_prompt: PromptConfig = Field(
         default=PromptConfig(
             prompt=AUTOQ_DATA_LINKED_PROMPTS_PATH / "linked_question_user_prompt.txt"

@@ -45,9 +45,7 @@ def _old_neighbor_selection(
     """
     selected_sample: list[TextUnit] = []
     selected_ids: set[str] = {rep.id for rep in selected_reps}
-    corpus = [
-        unit for unit in copy.deepcopy(text_units) if unit.id not in selected_ids
-    ]
+    corpus = [unit for unit in copy.deepcopy(text_units) if unit.id not in selected_ids]
 
     for index, rep in enumerate(selected_reps):
         if rep.attributes is None:
@@ -61,16 +59,12 @@ def _old_neighbor_selection(
         if distance_metric == DistanceMetricType.COSINE:
             available_sorted = sorted(
                 available,
-                key=lambda u: float(
-                    scipy_cosine(np.array(u.text_embedding), query)
-                ),
+                key=lambda u: float(scipy_cosine(np.array(u.text_embedding), query)),
             )
         else:
             available_sorted = sorted(
                 available,
-                key=lambda u: float(
-                    np.linalg.norm(np.array(u.text_embedding) - query)
-                ),
+                key=lambda u: float(np.linalg.norm(np.array(u.text_embedding) - query)),
             )
 
         neighbors = available_sorted[: num_samples_per_cluster - 1]
@@ -113,7 +107,9 @@ class TestBatchDistanceMatrix:
             for j in range(num_corpus):
                 expected = scipy_cosine(rep_embeddings[i], corpus_embeddings[j])
                 np.testing.assert_allclose(
-                    batch_distances[i, j], expected, atol=1e-10,
+                    batch_distances[i, j],
+                    expected,
+                    atol=1e-10,
                     err_msg=f"Mismatch at rep={i}, corpus={j}",
                 )
 
@@ -135,11 +131,11 @@ class TestBatchDistanceMatrix:
 
         for i in range(num_reps):
             for j in range(num_corpus):
-                expected = np.linalg.norm(
-                    rep_embeddings[i] - corpus_embeddings[j]
-                )
+                expected = np.linalg.norm(rep_embeddings[i] - corpus_embeddings[j])
                 np.testing.assert_allclose(
-                    batch_distances[i, j], expected, atol=1e-10,
+                    batch_distances[i, j],
+                    expected,
+                    atol=1e-10,
                     err_msg=f"Mismatch at rep={i}, corpus={j}",
                 )
 
@@ -147,7 +143,7 @@ class TestBatchDistanceMatrix:
 class TestKmeansSamplerNeighborSelection:
     """Verify full KmeansTextSampler.sample produces same neighbor assignments as old code."""
 
-    @pytest.fixture()
+    @pytest.fixture
     def small_dataset(self) -> list[TextUnit]:
         """Create a small dataset of 100 text units for testing."""
         rng = np.random.RandomState(500)
@@ -177,9 +173,7 @@ class TestKmeansSamplerNeighborSelection:
         # 5 clusters * 3 samples each = 15
         assert len(result) == 15
 
-    def test_no_duplicate_ids_in_sample(
-        self, small_dataset: list[TextUnit]
-    ) -> None:
+    def test_no_duplicate_ids_in_sample(self, small_dataset: list[TextUnit]) -> None:
         """All sampled text units should have unique IDs."""
         sampler = KmeansTextSampler(random_seed=42)
         result = sampler.sample(
@@ -204,14 +198,18 @@ class TestKmeansSamplerNeighborSelection:
             num_samples_per_cluster=3,
             representative_selection=ClusterRepresentativeSelectionType.CENTROID,
         )
-        reps = [u for u in result if u.attributes and u.attributes.get("is_representative")]
-        non_reps = [u for u in result if u.attributes and not u.attributes.get("is_representative")]
+        reps = [
+            u for u in result if u.attributes and u.attributes.get("is_representative")
+        ]
+        non_reps = [
+            u
+            for u in result
+            if u.attributes and not u.attributes.get("is_representative")
+        ]
         assert len(reps) == 5
         assert len(non_reps) == 10
 
-    def test_cluster_ids_assigned(
-        self, small_dataset: list[TextUnit]
-    ) -> None:
+    def test_cluster_ids_assigned(self, small_dataset: list[TextUnit]) -> None:
         """All sampled units should have a cluster_id assigned."""
         sampler = KmeansTextSampler(random_seed=42)
         result = sampler.sample(
@@ -266,9 +264,7 @@ class TestKmeansSamplerNeighborSelection:
         new_reps = copy.deepcopy(reps)
         selected_ids: set[str] = {rep.id for rep in new_reps}
         corpus = [
-            unit
-            for unit in copy.deepcopy(corpus_units)
-            if unit.id not in selected_ids
+            unit for unit in copy.deepcopy(corpus_units) if unit.id not in selected_ids
         ]
         corpus_embeddings = np.array([u.text_embedding for u in corpus])
         rep_embeddings = np.array([r.text_embedding for r in new_reps])
@@ -295,9 +291,7 @@ class TestKmeansSamplerNeighborSelection:
 
             distances_row = all_distances[index].copy()
             distances_row[~available_mask] = np.inf
-            top_indices = np.argpartition(distances_row, n_neighbors)[
-                :n_neighbors
-            ]
+            top_indices = np.argpartition(distances_row, n_neighbors)[:n_neighbors]
             top_indices = top_indices[np.argsort(distances_row[top_indices])]
 
             for idx in top_indices[:n_neighbors]:
@@ -316,9 +310,7 @@ class TestKmeansSamplerNeighborSelection:
             f"Neighbor selection mismatch.\nOld: {old_ids}\nNew: {new_ids}"
         )
 
-    def test_single_sample_per_cluster(
-        self, small_dataset: list[TextUnit]
-    ) -> None:
+    def test_single_sample_per_cluster(self, small_dataset: list[TextUnit]) -> None:
         """When num_samples_per_cluster=1, only reps are returned (no neighbor loop)."""
         sampler = KmeansTextSampler(random_seed=42)
         result = sampler.sample(
