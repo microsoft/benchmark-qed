@@ -278,7 +278,7 @@ requires-dist = [
     { name = "azure-ai-inference", specifier = ">=1.0.0b9" },
     { name = "azure-identity", specifier = ">=1.22.0" },
     { name = "fastparquet", specifier = ">=2024.11.0" },
-    { name = "graphrag-common", specifier = ">=3.0.7" },
+    { name = "graphrag-common", specifier = ">=3.0.8" },
     { name = "json-repair", specifier = ">=0.44.1" },
     { name = "matplotlib", specifier = ">=3.10.5" },
     { name = "nest-asyncio", specifier = ">=1.6.0" },
@@ -969,16 +969,16 @@ wheels = [
 
 [[package]]
 name = "graphrag-common"
-version = "3.0.7"
+version = "3.0.8"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "python-dotenv" },
     { name = "pyyaml" },
     { name = "toml" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/9e/97/bbe186b7913f38bd43ffa4973e5439c228f2b46d9723e7b50dc9f1399826/graphrag_common-3.0.7.tar.gz", hash = "sha256:f9466ae9d8ad01ae67ce68f8595a4014bc7435fe2d4080aaec859b1e6f9950f6", size = 9031, upload_time = "2026-03-24T17:18:15.081Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/26/e4/10de7935a0e9e862bb63211fec3e2b4837d0500c9d0375eb741239aefb8f/graphrag_common-3.0.8.tar.gz", hash = "sha256:4c3d31483255ea92321aa3147f72f6cd02273fe664264b0bbf7da520158dcd07", size = 9034, upload_time = "2026-03-27T18:48:59.728Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/68/9e/4dbb78d2c01103052f393a780f285a9c7e7c0af422cd3a73623a7aa2df14/graphrag_common-3.0.7-py3-none-any.whl", hash = "sha256:b0b39290a708ca100d5b3e337765fdd9377ede8abe6e930cc67b89a4c25301e0", size = 8896, upload_time = "2026-03-24T17:18:11.81Z" },
+    { url = "https://files.pythonhosted.org/packages/44/45/9822c7a30be8deb5c705e86895bc699e78577994bac846432153a415dcfe/graphrag_common-3.0.8-py3-none-any.whl", hash = "sha256:fbcbb6bd76aa64ef72ab1f3be2339e9260e835c9b02cbbfa67020ef12937b9ec", size = 8896, upload_time = "2026-03-27T18:49:12.532Z" },
 ]
 
 [[package]]
