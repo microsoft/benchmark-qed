@@ -253,16 +253,6 @@ class TestLoadConfigFileSystem:
         with open(config_file, "w") as f:
             yaml.dump(config_data, f)
 
-        # Ensure we're in a valid directory first
-        import os
-
-        try:
-            os.getcwd()
-        except FileNotFoundError:
-            # If current dir is invalid, change to repo root
-            os.chdir("/Users/gaudy-microsoft/Repositories/benchmark-qed")
-
-        # Change to the temp directory and use relative path
         monkeypatch.chdir(tmp_path)
         config = load_config(PairwiseConfig, "config.yaml")
 
@@ -315,8 +305,8 @@ class TestLoadConfigFileSystem:
 class TestLoadConfigDataValidation:
     """Test load_config with various data validation scenarios."""
 
-    def test_load_config_with_missing_required_fields(self, tmp_path: Path):
-        """Test loading config with validation error (odd number of trials)."""
+    def test_load_config_with_invalid_trial_values(self, tmp_path: Path):
+        """Test loading config with validation error for an odd number of trials."""
         config_data = {
             "llm_config": {"model": "gpt-4", "auth_type": "azure_managed_identity"},
             "trials": 3,  # Invalid - must be even
@@ -475,14 +465,9 @@ class TestLoadConfigFileFormats:
         with open(config_file, "w") as f:
             yaml.dump(config_data, f)
 
-        # This might work if the function tries to parse as YAML/JSON regardless of extension
-        # or might fail - depends on implementation
-        try:
-            config = load_config(PairwiseConfig, str(config_file))
-            assert isinstance(config, PairwiseConfig)
-        except (ValueError, ValidationError):
-            # This is also acceptable behavior
-            pass
+        # load_config rejects unsupported extensions rather than guessing the parser.
+        with pytest.raises(ConfigParsingError, match=r"[Uu]nsupported file extension"):
+            load_config(PairwiseConfig, str(config_file))
 
 
 class TestLoadConfigEdgeCases:
