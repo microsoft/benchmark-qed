@@ -9,6 +9,7 @@ from typing import Annotated, cast
 import numpy as np
 import pandas as pd
 import typer
+from graphrag_common.config import load_config
 from rich import print as rich_print
 
 from benchmark_qed.autoe.assertion_scores import get_assertion_scores
@@ -16,7 +17,6 @@ from benchmark_qed.autoe.config import AssertionConfig, PairwiseConfig, Referenc
 from benchmark_qed.autoe.pairwise_scores import analyze_criteria, get_pairwise_scores
 from benchmark_qed.autoe.reference_scores import get_reference_scores
 from benchmark_qed.cli.utils import print_df
-from benchmark_qed.config.utils import load_config
 from benchmark_qed.llm.factory import ModelFactory
 
 app: typer.Typer = typer.Typer(
@@ -62,7 +62,7 @@ def pairwise_scores(
     """Generate scores for the different conditions provided in the JSON file."""
     if exclude_criteria is None:
         exclude_criteria = []
-    config = load_config(comparison_spec, PairwiseConfig)
+    config = load_config(PairwiseConfig, comparison_spec)
 
     config.criteria = [
         criterion
@@ -189,7 +189,7 @@ def reference_scores(
     """Generate scores for the generated answers provided in the JSON file."""
     if exclude_criteria is None:
         exclude_criteria = []
-    config = load_config(comparison_spec, ReferenceConfig)
+    config = load_config(ReferenceConfig, comparison_spec)
 
     config.criteria = [
         criterion
@@ -292,7 +292,7 @@ def assertion_scores(
     ] = "assertions",
 ) -> None:
     """Generate assertion for the generated answers provided in the JSON file."""
-    config = load_config(comparison_spec, AssertionConfig)
+    config = load_config(AssertionConfig, comparison_spec)
     output.mkdir(parents=True, exist_ok=True)
 
     llm_client = ModelFactory.create_chat_model(config.llm_config)

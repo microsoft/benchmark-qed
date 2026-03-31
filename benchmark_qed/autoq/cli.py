@@ -10,6 +10,7 @@ from typing import Annotated, Any
 import pandas as pd
 import tiktoken
 import typer
+from graphrag_common.config import load_config
 from rich import print as rich_print
 
 from benchmark_qed.autod.data_processor.embedding import TextEmbedder
@@ -44,7 +45,6 @@ from benchmark_qed.autoq.question_gen.data_questions.global_question_gen import 
 from benchmark_qed.autoq.question_gen.data_questions.local_question_gen import (
     DataLocalQuestionGen,
 )
-from benchmark_qed.config.utils import load_config
 from benchmark_qed.llm.factory import ModelFactory
 from benchmark_qed.llm.type.base import ChatModel
 
@@ -403,7 +403,7 @@ def autoq(
     ] = False,
 ) -> None:
     """Generate questions from the input data."""
-    config = load_config(configuration_path, QuestionGenerationConfig)
+    config = load_config(QuestionGenerationConfig, configuration_path)
 
     if generation_types is None:
         generation_types = [

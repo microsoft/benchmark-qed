@@ -31,6 +31,7 @@ dependencies = [
     "typer>=0.15.1",
     "matplotlib>=3.10.5",
     "seaborn>=0.13.2",
+    "graphrag-common>=3.0.8"
 ]
 
 [dependency-groups]
@@ -44,6 +45,7 @@ dev = [
     "pytest>=8.3.5",
     "pytest-asyncio>=0.26.0",
     "pytest-cov>=6.1.0",
+    "psutil>=6.1.0",
     "ruff>=0.8.4",
     "uv-dynamic-versioning>=0.6.0",
     "typos>=1.32.0",
@@ -83,6 +85,7 @@ fix = "ruff check --fix ."
 fix_unsafe = "ruff check --preview --fix --unsafe-fixes ."
 format = ['_sort_imports', '_format_code']
 test = "pytest tests"
+test_fast = "pytest tests -m 'not slow'"
 serve_docs = "mkdocs serve"
 build_docs = "mkdocs build"
 
@@ -125,3 +128,6 @@ exclude = ["**/__pycache__"]
 
 [tool.pytest.ini_options]
 tmp_path_retention_policy = "failed"
+markers = [
+    "slow: marks tests as slow (deselect with '-m \"not slow\"')",
+]
