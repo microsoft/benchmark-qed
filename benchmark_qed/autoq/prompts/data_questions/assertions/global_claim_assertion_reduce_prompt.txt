@@ -16,21 +16,25 @@ Each consolidated assertion should be a high-level, thematic statement that adhe
 
 4. **Reduced Redundancy**: Merge overlapping or similar assertions to eliminate duplication while maintaining complete coverage.
 
-5. **Clear Testability**: Each consolidated assertion should be verifiable with a simple YES/NO criteria.
+5. **Deduplicate Sources**: When listing sources, exclude near-duplicate assertions that make the same claim about the same entity with minor wording differences. Keep only the highest-scored version. Assertions about **different entities** with similar phrasing are NOT duplicates.
+   - DUPLICATE: "identify OpenAI as a key partner...across multiple platforms" (score 10) vs "identify OpenAI as a key partner...in the dataset" (score 7) → same entity, keep score-10 only
+   - NOT duplicate: "identify OpenAI as a key partner..." vs "identify Anthropic as a key partner..." → different entities, keep both
 
-6. **Atomicity**: Each consolidated assertion should test a single, coherent thematic concept. Avoid combining multiple distinct evaluation criteria that should be tested separately.
+6. **Clear Testability**: Each consolidated assertion should be verifiable with a simple YES/NO criteria.
 
-7. **NO COMPOUND STATEMENTS**: Each assertion must test exactly ONE thematic concept. Never use compound statements that combine multiple themes or examples using words like "including", "such as", "and", or other similar connectors.
+7. **Atomicity**: Each consolidated assertion should test a single, coherent thematic concept. Avoid combining multiple distinct evaluation criteria that should be tested separately.
+
+8. **NO COMPOUND STATEMENTS**: Each assertion must test exactly ONE thematic concept. Never use compound statements that combine multiple themes or examples using words like "including", "such as", "and", or other similar connectors.
    - If you find yourself wanting to list examples, use broader categorical terms instead
    - Each assertion should pass this test: "Can this thematic area be verified with a single YES/NO answer?"
   
-8. **Conciseness**: Keep assertions brief and focused. Aim for under 50 words. Avoid long lists of examples or detailed enumerations within the assertion statement.
+9. **Conciseness**: Keep assertions brief and focused. Aim for under 50 words. Avoid long lists of examples or detailed enumerations within the assertion statement.
 
-9. **Avoid Detailed Lists**: Never enumerate specific subtypes, categories, or examples within assertions. Use broad thematic terms instead of detailed breakdowns.
+10. **Avoid Detailed Lists**: Never enumerate specific subtypes, categories, or examples within assertions. Use broad thematic terms instead of detailed breakdowns.
 
-10. **Use Categorical Terms**: When multiple related items would be listed (e.g., 'food and and product safety'), use a broader categorical term instead (e.g., 'consumer safety')
+11. **Use Categorical Terms**: When multiple related items would be listed (e.g., 'food and and product safety'), use a broader categorical term instead (e.g., 'consumer safety')
 
-11. **Quality Focus**: Create comprehensive, high-quality consolidated assertions that provide thorough thematic coverage. Focus on quality and comprehensive thematic representation rather than quantity.
+12. **Quality Focus**: Create comprehensive, high-quality consolidated assertions that provide thorough thematic coverage. Focus on quality and comprehensive thematic representation rather than quantity.
 
 
 ---EXAMPLES---
@@ -67,7 +71,7 @@ Use: "The response should address regulatory safety measures"
 ---OUTPUT---
 Each consolidated assertion should contain the following elements:
 - "statement": A high-level thematic assertion that begins with "The response should address" or "The response should discuss" followed by a broad thematic area.
-- "sources": A list of the original assertions IDs that were consolidated into this thematic assertion.
+- "sources": A deduplicated list of the original assertion IDs consolidated into this thematic assertion. Exclude near-duplicate IDs that make the same claim about the same entity (see rule 5).
 - "score": An integer score between 1-10 indicating the importance of this thematic area (typically high since these represent consolidated important themes).
 - "reasoning": A brief explanation (1-2 sentences) of why this thematic assertion is important for the query and why you assigned this importance score.
 
@@ -99,23 +103,25 @@ Each consolidated assertion should be a high-level, thematic statement that adhe
 
 4. **Reduced Redundancy**: Merge overlapping or similar assertions to eliminate duplication while maintaining complete coverage.
 
-5. **Clear Testability**: Each consolidated assertion should be verifiable with a simple YES/NO criteria.
+5. **Deduplicate Sources**: When listing sources, exclude near-duplicate assertions that make the same claim about the same entity with minor wording differences. Keep only the highest-scored version. Assertions about **different entities** with similar phrasing are NOT duplicates.
 
-6. **Atomicity**: Each consolidated assertion should test a single, coherent thematic concept. Avoid combining multiple distinct evaluation criteria that should be tested separately.
+6. **Clear Testability**: Each consolidated assertion should be verifiable with a simple YES/NO criteria.
 
-7. **NO COMPOUND STATEMENTS**: Each assertion must test exactly ONE thematic concept. Never use compound statements that combine multiple themes or examples using words like "including", "such as", "and", or other similar connectors.
+7. **Atomicity**: Each consolidated assertion should test a single, coherent thematic concept. Avoid combining multiple distinct evaluation criteria that should be tested separately.
+
+8. **NO COMPOUND STATEMENTS**: Each assertion must test exactly ONE thematic concept. Never use compound statements that combine multiple themes or examples using words like "including", "such as", "and", or other similar connectors.
    - If you find yourself wanting to list examples, use broader categorical terms instead
    - Each assertion should pass this test: "Can this thematic area be verified with a single YES/NO answer?"
   
-8. **Conciseness**: Keep assertions brief and focused. Aim for under 50 words. Avoid long lists of examples or detailed enumerations within the assertion statement.
+9. **Conciseness**: Keep assertions brief and focused. Aim for under 50 words. Avoid long lists of examples or detailed enumerations within the assertion statement.
 
-9. **Avoid Detailed Lists**: Never enumerate specific subtypes, categories, or examples within assertions. Use broad thematic terms instead of detailed breakdowns.
+10. **Avoid Detailed Lists**: Never enumerate specific subtypes, categories, or examples within assertions. Use broad thematic terms instead of detailed breakdowns.
 
-10. **Use Categorical Terms**: When multiple related items would be listed (e.g., 'food and and product safety'), use a broader categorical term instead (e.g., 'consumer safety')
+11. **Use Categorical Terms**: When multiple related items would be listed (e.g., 'food and and product safety'), use a broader categorical term instead (e.g., 'consumer safety')
 
 Each consolidated assertion should contain the following elements:
 - "statement": A high-level thematic assertion that begins with "The response should address" or "The response should discuss" followed by a broad thematic area.
-- "sources": A list of the original assertions IDs that were consolidated into this thematic assertion.
+- "sources": A deduplicated list of the original assertion IDs consolidated into this thematic assertion. Exclude near-duplicate IDs that make the same claim about the same entity (see rule 5).
 - "score": An integer score between 1-10 indicating the importance of this thematic area (typically high since these represent consolidated important themes).
 - "reasoning": A brief explanation (1-2 sentences) of why this thematic assertion is important for the query and why you assigned this importance score.
 
