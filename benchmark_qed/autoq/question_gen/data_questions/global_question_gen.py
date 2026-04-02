@@ -224,6 +224,7 @@ class DataGlobalQuestionGen(BaseQuestionGen):
                     min_criterion_score=global_assertion_config.min_validation_score,
                     validation_prompt=assertion_prompt_config.local_validation_prompt.template,
                     concurrent_validations=global_assertion_config.concurrent_llm_calls,
+                    max_source_count=global_assertion_config.max_source_count,
                 )
                 # Reduce validator for thematic reduce assertions
                 reduce_validator = AssertionValidator(
@@ -232,6 +233,7 @@ class DataGlobalQuestionGen(BaseQuestionGen):
                     min_criterion_score=global_assertion_config.min_validation_score,
                     validation_prompt=assertion_prompt_config.global_validation_prompt.template,
                     concurrent_validations=global_assertion_config.concurrent_llm_calls,
+                    max_source_count=global_assertion_config.max_source_count,
                 )
 
             self.assertion_generator = GlobalClaimAssertionGenerator(

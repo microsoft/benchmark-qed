@@ -144,6 +144,10 @@ class LocalAssertionConfig(BaseModel):
         default=defs.MIN_ASSERTION_VALIDATION_SCORE,
         description="Minimum score (1-5) for grounding, relevance, and verifiability criteria.",
     )
+    max_source_count: int = Field(
+        default=defs.ASSERTION_MAX_SOURCE_COUNT,
+        description="Maximum number of deduplicated sources per assertion. Assertions exceeding this cause the entire question to be dropped.",
+    )
     concurrent_llm_calls: int = Field(
         default=defs.ASSERTION_CONCURRENT_LLM_CALLS,
         description="Number of concurrent LLM calls for validation.",
@@ -168,6 +172,10 @@ class GlobalAssertionConfig(BaseModel):
     min_validation_score: int = Field(
         default=defs.MIN_ASSERTION_VALIDATION_SCORE,
         description="Minimum score (1-5) for grounding, relevance, and verifiability criteria.",
+    )
+    max_source_count: int = Field(
+        default=defs.ASSERTION_MAX_SOURCE_COUNT,
+        description="Maximum number of deduplicated sources per assertion. Assertions exceeding this cause the entire question to be dropped.",
     )
     batch_size: int = Field(
         default=defs.ASSERTION_BATCH_SIZE,
@@ -222,6 +230,10 @@ class LinkedAssertionConfig(BaseModel):
     min_validation_score: int = Field(
         default=defs.MIN_ASSERTION_VALIDATION_SCORE,
         description="Minimum score (1-5) for grounding, relevance, and verifiability criteria.",
+    )
+    max_source_count: int = Field(
+        default=defs.ASSERTION_MAX_SOURCE_COUNT,
+        description="Maximum number of deduplicated sources per assertion. Assertions exceeding this cause the entire question to be dropped.",
     )
     concurrent_llm_calls: int = Field(
         default=defs.ASSERTION_CONCURRENT_LLM_CALLS,

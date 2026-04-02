@@ -850,6 +850,7 @@ async def __generate_assertions_for_questions(
             min_criterion_score=config.min_validation_score,
             validation_prompt=validation_prompt,
             concurrent_validations=config.concurrent_llm_calls,
+            max_source_count=config.max_source_count,
         )
 
     # Create assertion generator based on type
@@ -874,6 +875,7 @@ async def __generate_assertions_for_questions(
                 min_criterion_score=global_config.min_validation_score,
                 validation_prompt=assertion_prompt_config.local_validation_prompt.template,
                 concurrent_validations=global_config.concurrent_llm_calls,
+                max_source_count=global_config.max_source_count,
             )
             reduce_validator = validator
 

@@ -241,6 +241,7 @@ class DataLinkedQuestionGen(BaseQuestionGen):
                     # Use local validation prompt (linked assertions are fact-focused)
                     validation_prompt=assertion_prompt_config.local_validation_prompt.template,
                     concurrent_validations=linked_assertion_config.concurrent_llm_calls,
+                    max_source_count=linked_assertion_config.max_source_count,
                 )
                 self.assertion_validator = validator
 
@@ -1073,7 +1074,7 @@ class DataLinkedQuestionGen(BaseQuestionGen):
                     stats=stats,
                 )
                 all_questions.extend(questions)
-            except (ValueError, KeyError, AttributeError, TypeError):
+            except Exception:
                 log.exception(
                     "Error generating %s questions for entity %s",
                     question_type,
@@ -1138,7 +1139,7 @@ class DataLinkedQuestionGen(BaseQuestionGen):
 
                 return questions
 
-        except (ValueError, KeyError, AttributeError, TypeError):
+        except Exception:
             log.exception(
                 "Error generating %s questions for entity %s",
                 question_type,

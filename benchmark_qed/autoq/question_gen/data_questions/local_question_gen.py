@@ -161,6 +161,7 @@ class DataLocalQuestionGen(BaseQuestionGen):
                     min_criterion_score=local_assertion_config.min_validation_score,
                     validation_prompt=assertion_prompt_config.local_validation_prompt.template,
                     concurrent_validations=local_assertion_config.concurrent_llm_calls,
+                    max_source_count=local_assertion_config.max_source_count,
                 )
 
             self.assertion_generator = LocalClaimAssertionGenerator(
