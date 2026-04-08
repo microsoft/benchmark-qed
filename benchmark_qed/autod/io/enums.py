@@ -3,8 +3,6 @@
 
 from enum import StrEnum
 
-from graphrag_input import InputType
-
 
 class InputDataType(StrEnum):
     """Enum for input data types."""
