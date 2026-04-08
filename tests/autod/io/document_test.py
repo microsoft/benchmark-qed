@@ -63,7 +63,9 @@ async def test_create_documents_text_dir(tmp_path: Path):
     text_2 = "2"
     file_2.write_text(text_2, encoding="utf-8")
 
-    docs = await create_documents(input_path=str(tmp_path), input_type=InputDataType.TEXT)
+    docs = await create_documents(
+        input_path=str(tmp_path), input_type=InputDataType.TEXT
+    )
     assert len(docs) == 2
 
     # verify doc title and contents
@@ -271,7 +273,9 @@ async def test_create_documents_text_dir_nested(tmp_path: Path):
     (tmp_path / "doc1.txt").write_text("root doc", encoding="utf-8")
     (subdir / "doc2.txt").write_text("nested doc", encoding="utf-8")
 
-    docs = await create_documents(input_path=str(tmp_path), input_type=InputDataType.TEXT)
+    docs = await create_documents(
+        input_path=str(tmp_path), input_type=InputDataType.TEXT
+    )
     assert len(docs) == 2
 
     texts = {d.text for d in docs}
@@ -285,7 +289,9 @@ async def test_create_save_and_load_documents(tmp_path: Path, output_dir_exists:
     (tmp_path / "text_doc_1.txt").write_text("doc 1", encoding="utf-8")
     (tmp_path / "text_doc_2.txt").write_text("doc 2", encoding="utf-8")
 
-    docs = await create_documents(input_path=str(tmp_path), input_type=InputDataType.TEXT)
+    docs = await create_documents(
+        input_path=str(tmp_path), input_type=InputDataType.TEXT
+    )
     assert len(docs) == 2
 
     if output_dir_exists:
@@ -316,7 +322,9 @@ async def test_create_save_and_load_documents(tmp_path: Path, output_dir_exists:
 
 
 @pytest.mark.parametrize("file_or_dir", ["file", "dir"])
-async def test_create_documents_unsupported_input_type(tmp_path: Path, file_or_dir: str):
+async def test_create_documents_unsupported_input_type(
+    tmp_path: Path, file_or_dir: str
+):
     input_file = tmp_path / "text_doc_1.txt"
     input_file.write_text("doc 1", encoding="utf-8")
     with pytest.raises(ValueError):  # noqa: PT011, PT012

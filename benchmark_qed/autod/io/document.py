@@ -39,7 +39,9 @@ def _to_document(
 
     attributes: dict[str, Any] = text_document.collect(metadata_tags or [])
     if "date_created" not in attributes:
-        attributes["date_created"] = text_document.get("creation_date", text_document.creation_date)
+        attributes["date_created"] = text_document.get(
+            "creation_date", text_document.creation_date
+        )
 
     return Document(
         id=text_document.id,
@@ -73,7 +75,9 @@ def _load_docs_from_dataframe(
                     metadata[tag] = getattr(row, tag)
 
         if "date_created" not in metadata:
-            metadata["date_created"] = datetime.datetime.now(tz=datetime.UTC).isoformat()
+            metadata["date_created"] = datetime.datetime.now(
+                tz=datetime.UTC
+            ).isoformat()
 
         documents.append(
             Document(
@@ -186,13 +190,21 @@ async def create_documents(
 
     if str(input_type) == InputDataType.PARQUET:
         if input_path_obj.is_dir():
-            return _load_parquet_dir(str(input_path), text_tag, metadata_tags, max_text_length)
-        return _load_parquet_doc(str(input_path), text_tag, metadata_tags, max_text_length)
+            return _load_parquet_dir(
+                str(input_path), text_tag, metadata_tags, max_text_length
+            )
+        return _load_parquet_doc(
+            str(input_path), text_tag, metadata_tags, max_text_length
+        )
 
     if str(input_type) == InputDataType.CSV:
         if input_path_obj.is_dir():
-            return _load_csv_dir(str(input_path), encoding, text_tag, metadata_tags, max_text_length)
-        return _load_csv_doc(str(input_path), encoding, text_tag, metadata_tags, max_text_length)
+            return _load_csv_dir(
+                str(input_path), encoding, text_tag, metadata_tags, max_text_length
+            )
+        return _load_csv_doc(
+            str(input_path), encoding, text_tag, metadata_tags, max_text_length
+        )
 
     # For JSON and TEXT: delegate to graphrag-input readers
     if input_path_obj.is_dir():
@@ -216,7 +228,6 @@ async def create_documents(
         _to_document(td, input_type, index, metadata_tags, max_text_length)
         for index, td in enumerate(text_documents)
     ]
-
 
 
 def load_documents(
