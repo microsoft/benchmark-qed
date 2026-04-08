@@ -9,7 +9,7 @@ from graphrag_input import InputType
 class InputDataType(StrEnum):
     """Enum for input data types."""
 
-    JSON = InputType.Json
-    CSV = InputType.Csv
-    TEXT = InputType.Text
+    JSON = "json"
+    CSV = "csv"
+    TEXT = "text"
     PARQUET = "parquet"  # not provided by graphrag-input
