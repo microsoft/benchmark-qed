@@ -133,50 +133,6 @@ def _load_parquet_dir(
     return documents
 
 
-def _load_csv_doc(
-    file_path: str,
-    encoding: str = defs.FILE_ENCODING,
-    text_tag: str = defs.TEXT_COLUMN,
-    metadata_tags: list[str] | None = None,
-    max_text_length: int | None = None,
-) -> list[Document]:
-    """Load a CSV file and return a list of Document objects (preserves column types via pandas)."""
-    return _load_docs_from_dataframe(
-        data_df=pd.read_csv(file_path, encoding=encoding),
-        input_type=InputDataType.CSV,
-        title=str(file_path.replace(".csv", "")),
-        text_tag=text_tag,
-        metadata_tags=metadata_tags,
-        max_text_length=max_text_length,
-    )
-
-
-def _load_csv_dir(
-    dir_path: str,
-    encoding: str = defs.FILE_ENCODING,
-    text_tag: str = defs.TEXT_COLUMN,
-    metadata_tags: list[str] | None = None,
-    max_text_length: int | None = None,
-) -> list[Document]:
-    """Load a directory of CSV files and return a list of Document objects."""
-    documents: list[Document] = []
-    for file_path in Path(dir_path).rglob("*.csv"):
-        documents.extend(
-            _load_csv_doc(
-                file_path=str(file_path),
-                encoding=encoding,
-                text_tag=text_tag,
-                metadata_tags=metadata_tags,
-                max_text_length=max_text_length,
-            )
-        )
-
-    for index, document in enumerate(documents):
-        document.short_id = str(index)
-
-    return documents
-
-
 async def create_documents(
     input_path: str,
     input_type: InputDataType | str = InputDataType.JSON,
@@ -197,16 +153,7 @@ async def create_documents(
             str(input_path), text_tag, metadata_tags, max_text_length
         )
 
-    if str(input_type) == InputDataType.CSV:
-        if input_path_obj.is_dir():
-            return _load_csv_dir(
-                str(input_path), encoding, text_tag, metadata_tags, max_text_length
-            )
-        return _load_csv_doc(
-            str(input_path), encoding, text_tag, metadata_tags, max_text_length
-        )
-
-    # For JSON and TEXT: delegate to graphrag-input readers
+    # For JSON, CSV, and TEXT: delegate to graphrag-input readers
     if input_path_obj.is_dir():
         base_dir = str(input_path_obj)
         file_pattern = None

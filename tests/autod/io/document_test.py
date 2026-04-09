@@ -159,7 +159,7 @@ async def test_create_documents_from_dataframe_complex(
         _doc_get_attribute(docs_sorted_by_title[0], "date_created", "")
         == "20251217T000000Z"
     )
-    assert _doc_get_attribute(docs_sorted_by_title[0], "attr1", "") == 1
+    assert str(_doc_get_attribute(docs_sorted_by_title[0], "attr1", "")) == "1"
     assert not _doc_has_attribute(docs_sorted_by_title[0], "attr2")
     assert len(docs_sorted_by_title[1].id) > 0
     assert docs_sorted_by_title[1].title.endswith(
@@ -171,7 +171,7 @@ async def test_create_documents_from_dataframe_complex(
         _doc_get_attribute(docs_sorted_by_title[1], "date_created", "")
         == "20240101T000000Z"
     )
-    assert _doc_get_attribute(docs_sorted_by_title[1], "attr1", "") == 2
+    assert str(_doc_get_attribute(docs_sorted_by_title[1], "attr1", "")) == "2"
     assert not _doc_has_attribute(docs_sorted_by_title[1], "attr2")
 
 
