@@ -2,7 +2,6 @@
 # Licensed under the MIT License.
 """Load input files into Document objects."""
 
-import datetime
 import re
 from dataclasses import asdict
 from pathlib import Path, PurePosixPath
@@ -27,7 +26,7 @@ def _clean_title(title: str) -> str:
 
 def _to_document(
     text_document: TextDocument,
-    input_type: InputDataType | str,
+    input_type: str,
     index: int,
     metadata_tags: list[str] | None,
     max_text_length: int | None,
@@ -53,89 +52,9 @@ def _to_document(
     )
 
 
-def _load_docs_from_dataframe(
-    data_df: pd.DataFrame,
-    input_type: InputDataType,
-    title: str,
-    text_tag: str = defs.TEXT_COLUMN,
-    metadata_tags: list[str] | None = None,
-    max_text_length: int | None = None,
-) -> list[Document]:
-    documents: list[Document] = []
-
-    for index, row in enumerate(data_df.itertuples()):
-        text = getattr(row, text_tag, "")
-        if max_text_length is not None:
-            text = text[:max_text_length]
-
-        metadata: dict[str, Any] = {}
-        if metadata_tags is not None:
-            for tag in metadata_tags:
-                if tag in data_df.columns:
-                    metadata[tag] = getattr(row, tag)
-
-        if "date_created" not in metadata:
-            metadata["date_created"] = datetime.datetime.now(
-                tz=datetime.UTC
-            ).isoformat()
-
-        documents.append(
-            Document(
-                id=str(uuid4()),
-                short_id=str(index),
-                title=title,
-                type=str(input_type),
-                text=text,
-                attributes=metadata,
-            )
-        )
-    return documents
-
-
-def _load_parquet_doc(
-    file_path: str,
-    text_tag: str = defs.TEXT_COLUMN,
-    metadata_tags: list[str] | None = None,
-    max_text_length: int | None = None,
-) -> list[Document]:
-    """Load Documents from a parquet file."""
-    return _load_docs_from_dataframe(
-        data_df=pd.read_parquet(file_path),
-        input_type=InputDataType.PARQUET,
-        title=str(file_path.replace(".parquet", "")),
-        text_tag=text_tag,
-        metadata_tags=metadata_tags,
-        max_text_length=max_text_length,
-    )
-
-
-def _load_parquet_dir(
-    dir_path: str,
-    text_tag: str = defs.TEXT_COLUMN,
-    metadata_tags: list[str] | None = None,
-    max_text_length: int | None = None,
-) -> list[Document]:
-    """Load a directory of parquet files and return a list of Document objects."""
-    documents: list[Document] = []
-    for file_path in Path(dir_path).rglob("*.parquet"):
-        documents.extend(
-            _load_parquet_doc(
-                file_path=str(file_path),
-                text_tag=text_tag,
-                metadata_tags=metadata_tags,
-                max_text_length=max_text_length,
-            )
-        )
-
-    for index, document in enumerate(documents):
-        document.short_id = str(index)
-
-    return documents
-
-
 async def create_documents(
     input_path: str,
-    input_type: InputDataType | str = InputDataType.JSON,
+    input_type: str = InputDataType.Json,
     encoding: str = defs.FILE_ENCODING,
     text_tag: str = defs.TEXT_COLUMN,
     metadata_tags: list[str] | None = None,
@@ -144,16 +63,6 @@ async def create_documents(
     """Load documents from a specified path and return a list of Document objects."""
     input_path_obj = Path(input_path)
 
-    if str(input_type) == InputDataType.PARQUET:
-        if input_path_obj.is_dir():
-            return _load_parquet_dir(
-                str(input_path), text_tag, metadata_tags, max_text_length
-            )
-        return _load_parquet_doc(
-            str(input_path), text_tag, metadata_tags, max_text_length
-        )
-
-    # For JSON, CSV, and TEXT: delegate to graphrag-input readers
     if input_path_obj.is_dir():
         base_dir = str(input_path_obj)
         file_pattern = None
@@ -165,7 +74,7 @@ async def create_documents(
     config = InputConfig(
         type=str(input_type),
         encoding=encoding,
-        text_column=text_tag if str(input_type) != InputDataType.TEXT else None,
+        text_column=text_tag if str(input_type) != InputDataType.Text else None,
         file_pattern=file_pattern,
     )
     reader = create_input_reader(config, storage)

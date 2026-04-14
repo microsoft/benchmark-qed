@@ -321,8 +321,8 @@ requires-dist = [
     { name = "azure-ai-inference", specifier = ">=1.0.0b9" },
     { name = "azure-identity", specifier = ">=1.22.0" },
     { name = "fastparquet", specifier = ">=2024.11.0" },
-    { name = "graphrag-common", specifier = ">=3.0.8" },
-    { name = "graphrag-input", specifier = ">=3.0.8" },
+    { name = "graphrag-common", specifier = ">=3.0.9" },
+    { name = "graphrag-input", specifier = ">=3.0.9" },
     { name = "json-repair", specifier = ">=0.44.1" },
     { name = "matplotlib", specifier = ">=3.10.5" },
     { name = "nest-asyncio", specifier = ">=1.6.0" },
@@ -1034,36 +1034,37 @@ wheels = [
 
 [[package]]
 name = "graphrag-common"
-version = "3.0.8"
+version = "3.0.9"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "python-dotenv" },
     { name = "pyyaml" },
     { name = "toml" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/26/e4/10de7935a0e9e862bb63211fec3e2b4837d0500c9d0375eb741239aefb8f/graphrag_common-3.0.8.tar.gz", hash = "sha256:4c3d31483255ea92321aa3147f72f6cd02273fe664264b0bbf7da520158dcd07", size = 9034, upload_time = "2026-03-27T18:48:59.728Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/3c/be/a20abe482d6a9919cc42469ab90908f83047adfbe62f8bd652989dce2f4b/graphrag_common-3.0.9.tar.gz", hash = "sha256:bda893261d042a7a1b4a5292730f6aa673307a10fced20d04257359992bd79d4", size = 9032, upload_time = "2026-04-13T19:26:14.903Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/44/45/9822c7a30be8deb5c705e86895bc699e78577994bac846432153a415dcfe/graphrag_common-3.0.8-py3-none-any.whl", hash = "sha256:fbcbb6bd76aa64ef72ab1f3be2339e9260e835c9b02cbbfa67020ef12937b9ec", size = 8896, upload_time = "2026-03-27T18:49:12.532Z" },
+    { url = "https://files.pythonhosted.org/packages/65/ce/7636e27622546c8ca91aa8b036fec957a4f9cc44b2a1da89d3d1f7c89830/graphrag_common-3.0.9-py3-none-any.whl", hash = "sha256:65c2dac8899228cf76e043611ca008dba318bfebaba1495eeb0167106d99e1f9", size = 8897, upload_time = "2026-04-13T19:26:13.975Z" },
 ]
 
 [[package]]
 name = "graphrag-input"
-version = "3.0.8"
+version = "3.0.9"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "graphrag-common" },
     { name = "graphrag-storage" },
     { name = "markitdown", extra = ["pdf"] },
+    { name = "pyarrow" },
     { name = "pydantic" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/9e/1d/7945c652eccce1bfac423f834dadf6082bc322a3ceb9c74d259995a8da70/graphrag_input-3.0.8.tar.gz", hash = "sha256:b54ed3403094696544b4675b29261ffff2393d696b93459a991a4d4c6618c13a", size = 16439, upload_time = "2026-03-27T18:49:09.664Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/d3/60/dfe88db5bfaa3da790b3e2e2d58397672b32fa0a8d871cd0e8fbc5d3877b/graphrag_input-3.0.9.tar.gz", hash = "sha256:e5308b073128ef03e598a570a11cd2cafbabc6a34e185430ebb1a1d1f6098f48", size = 16609, upload_time = "2026-04-13T19:26:16.994Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/56/42/741b032fdd5bb02d8b3889546cc1d967b4003e549411e4998d4e6c511f47/graphrag_input-3.0.8-py3-none-any.whl", hash = "sha256:53261e0113776eb433e693487c2d3aeac4a2cc11090a67797525026066acd5ba", size = 13851, upload_time = "2026-03-27T18:49:00.59Z" },
+    { url = "https://files.pythonhosted.org/packages/c9/c0/502bb2b7a31e15f6ebd84cfc7f24329b962b06109e061855a7816811dc9d/graphrag_input-3.0.9-py3-none-any.whl", hash = "sha256:bd51cea902e5d5b8edf65d40e60a7f26344419753778986b3837176073c0f065", size = 14637, upload_time = "2026-04-13T19:26:16.06Z" },
 ]
 
 [[package]]
 name = "graphrag-storage"
-version = "3.0.8"
+version = "3.0.9"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "aiofiles" },
@@ -1074,9 +1075,9 @@ dependencies = [
     { name = "pandas" },
     { name = "pydantic" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/0e/7d/e6fe2731f7e9c431b1d25c63f5632ee24d283bbf43bb130c8a21f5103a16/graphrag_storage-3.0.8.tar.gz", hash = "sha256:9ca3f26caa5a30cd1631fc6ff86bfa353c3b23c95879c8eb32c2f2d9c8450e4c", size = 18929, upload_time = "2026-03-27T18:49:01.701Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/02/9d/ed836a30327bd6261e77f3f94b0761ad14e7a09432f9a4e7a60931780a72/graphrag_storage-3.0.9.tar.gz", hash = "sha256:f40f1457ca6ec3b61ccf986869031fbe5ad27e51beac766f41fa1274bee22cac", size = 18927, upload_time = "2026-04-13T19:26:21.522Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/dc/eb/c016962a6e7ff09fa33218e2bf74e1524f5417515106f414cf4b8f4fe14e/graphrag_storage-3.0.8-py3-none-any.whl", hash = "sha256:1eec253c90d3c88350ef9576b5a12f412956526e1ab2e1895f283e1eb77ac8b0", size = 29060, upload_time = "2026-03-27T18:49:05.056Z" },
+    { url = "https://files.pythonhosted.org/packages/db/bf/cd6b919b6340328ac8a488f29c05465b57a4ce0541f33d9f3b03424745a9/graphrag_storage-3.0.9-py3-none-any.whl", hash = "sha256:6262185ac2f0822d2444432a4fa892d385d21e036f27ab9087922e952d6cd534", size = 29061, upload_time = "2026-04-13T19:26:20.3Z" },
 ]
 
 [[package]]
@@ -2281,7 +2282,7 @@ name = "pexpect"
 version = "4.9.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "ptyprocess" },
+    { name = "ptyprocess", marker = "sys_platform != 'win32'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/42/92/cc564bf6381ff43ce1f4d06852fc19a2f11d180f23dc32d9588bee2f149d/pexpect-4.9.0.tar.gz", hash = "sha256:ee7d41123f3c9911050ea2c2dac107568dc43b2d3b0c7557a33212c398ead30f", size = 166450, upload_time = "2023-11-25T09:07:26.339Z" }
 wheels = [

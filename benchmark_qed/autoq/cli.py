@@ -14,7 +14,6 @@ from graphrag_common.config import load_config
 from rich import print as rich_print
 
 from benchmark_qed.autod.data_processor.embedding import TextEmbedder
-from benchmark_qed.autod.io.enums import InputDataType
 from benchmark_qed.autod.io.text_unit import load_text_units
 from benchmark_qed.autod.sampler.sample_gen import acreate_clustered_sample
 from benchmark_qed.autoq.config import (
@@ -351,7 +350,7 @@ async def __create_clustered_sample(
     text_embedder: TextEmbedder,
     num_clusters: int,
     num_samples_per_cluster: int,
-    input_type: InputDataType,
+    input_type: str,
     text_column: str,
     metadata_columns: list[str] | None,
     file_encoding: str,

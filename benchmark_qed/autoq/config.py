@@ -48,8 +48,8 @@ class InputConfig(BaseModel):
         description="Path to the input dataset file.",
     )
 
-    input_type: InputDataType = Field(
-        default=InputDataType.CSV, description="The type of the input data."
+    input_type: str = Field(
+        default=InputDataType.Csv, description="The type of the input data."
     )
     text_column: str = Field(
         default=defs.TEXT_COLUMN, description="The column containing the text data."
