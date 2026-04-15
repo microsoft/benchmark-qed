@@ -1229,7 +1229,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [1]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="CodeMirror cm-s-jupyter">
 <div class="zeroclipboard-container">
 <clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-1">
@@ -1251,8 +1251,14 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <span class="kn">from</span><span class="w"> </span><span class="nn">pydantic</span><span class="w"> </span><span class="kn">import</span> <span class="n">SecretStr</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">rich</span><span class="w"> </span><span class="kn">import</span> <span class="nb">print</span> <span class="k">as</span> <span class="n">rich_print</span>
 
-<span class="kn">from</span><span class="w"> </span><span class="nn">benchmark_qed.autoe.pairwise_scores</span><span class="w"> </span><span class="kn">import</span> <span class="n">analyze_criteria</span><span class="p">,</span> <span class="n">get_pairwise_scores</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">benchmark_qed.autoe.reference_scores</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">benchmark_qed.autoe.assertion</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">HierarchicalMode</span><span class="p">,</span>
+    <span class="n">load_and_normalize_hierarchical_assertions</span><span class="p">,</span>
+    <span class="n">run_assertion_evaluation</span><span class="p">,</span>
+    <span class="n">run_hierarchical_assertion_evaluation</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">benchmark_qed.autoe.pairwise</span><span class="w"> </span><span class="kn">import</span> <span class="n">analyze_criteria</span><span class="p">,</span> <span class="n">get_pairwise_scores</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">benchmark_qed.autoe.reference</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">get_reference_scores</span><span class="p">,</span>
     <span class="n">summarize_reference_scores</span><span class="p">,</span>
 <span class="p">)</span>
@@ -1276,8 +1282,14 @@ import pandas as pd
 from pydantic import SecretStr
 from rich import print as rich_print
 
-from benchmark_qed.autoe.pairwise_scores import analyze_criteria, get_pairwise_scores
-from benchmark_qed.autoe.reference_scores import (
+from benchmark_qed.autoe.assertion import (
+    HierarchicalMode,
+    load_and_normalize_hierarchical_assertions,
+    run_assertion_evaluation,
+    run_hierarchical_assertion_evaluation,
+)
+from benchmark_qed.autoe.pairwise import analyze_criteria, get_pairwise_scores
+from benchmark_qed.autoe.reference import (
     get_reference_scores,
     summarize_reference_scores,
 )
@@ -1313,7 +1325,7 @@ from benchmark_qed.llm.factory import ModelFactory</div>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [2]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="CodeMirror cm-s-jupyter">
 <div class="zeroclipboard-container">
 <clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-2">
@@ -1338,13 +1350,13 @@ nest_asyncio.apply()</div>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=351b3cad">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=351b3cad">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [3]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="CodeMirror cm-s-jupyter">
 <div class="zeroclipboard-container">
 <clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-3">
@@ -1366,6 +1378,19 @@ nest_asyncio.apply()</div>
 </div>
 </div>
 </div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>cannot find .env file
+</pre>
+</div>
+</div>
+</div>
+</div>
 </div>
 </div>
 <div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=173041a8">
@@ -1374,9 +1399,8 @@ nest_asyncio.apply()</div>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h1 id="relative-comparisons-of-rag-methods">Relative Comparisons of RAG methods<a class="anchor-link" href="#relative-comparisons-of-rag-methods">¶</a></h1><p>The AutoE component automates relative comparisons of RAG methods using the LLM-as-a-judge approach. It presents an LLM with pairs of answers, along with the query and target metric, in a counterbalanced order. The model then judges whether the first answer wins, loses, or ties with the second. Aggregating these judgments across multiple queries and trials yields <strong>win rates</strong> for each method.</p>
-<p>In the example below, we compare Vector RAG (baseline) with two competing methods: <a href="https://github.com/microsoft/graphrag">GraphRAG's Global Search</a> and <a href="https://www.microsoft.com/en-us/research/blog/lazygraphrag-setting-a-new-standard-for-quality-and-cost/?msockid=0ae860de9eb16660047973969f0b679b">LazyGraphRAG</a>. We use 100 synthetic questions (50 activity-local and 50 activity-global) generated from 1,397 AP News health-related articles using AutoQ. Each query is evaluated in 4 counterbalanced trials across four default metrics (comprehensiveness, diversity, empowerment, and relevance), using GPT-4.1 as the judge.</p>
-<p>We hypothesize that GraphRAG’s Global Search, which is optimized for global questions, will outperform Vector RAG on global queries but underperform on local ones. LazyGraphRAG, a hybrid method, is expected to perform well on both.</p>
+<h1 id="pairwise-comparisons-of-rag-methods">Pairwise Comparisons of RAG Methods<a class="anchor-link" href="#pairwise-comparisons-of-rag-methods">¶</a></h1><p>The AutoE component automates relative comparisons of RAG methods using the LLM-as-a-judge approach. It presents an LLM with pairs of answers, along with the query and target metric, in a counterbalanced order. The model then judges whether the first answer wins, loses, or ties with the second. Aggregating these judgments across multiple queries and trials yields <strong>win rates</strong> for each method.</p>
+<p>In the example below, we compare <strong>Vector RAG with short context</strong> (retrieves 50 text chunks) against <strong>Vector RAG with long context</strong> (retrieves 200 text chunks). We use synthetic questions generated from AP News health-related articles using AutoQ, covering data-global, data-local, and data-linked question types. Each query is evaluated in 4 counterbalanced trials across four default metrics (comprehensiveness, diversity, empowerment, and relevance), using GPT-4.1 as the judge.</p>
 <p>Choosing the right LLM judge is <strong>critical</strong>: less capable models may introduce biases and yield unreliable results. A useful first step in validating a judge model is to run an A/A test — comparing a RAG method against itself. This should result in a ~0.5 win rate with no statistically significant differences.</p>
 </div>
 </div>
@@ -1402,7 +1426,7 @@ nest_asyncio.apply()</div>
 </div>
 <div class="highlight-ipynb hl-python"><pre><span></span><span class="c1"># Config LLM model to be used as judge</span>
 <span class="n">llm_config</span> <span class="o">=</span> <span class="n">LLMConfig</span><span class="p">(</span>
-    <span class="n">model</span><span class="o">=</span><span class="s2">"gpt-4.1"</span><span class="p">,</span>
+    <span class="n">model</span><span class="o">=</span><span class="s2">"gpt-5.2"</span><span class="p">,</span>
     <span class="n">api_key</span><span class="o">=</span><span class="n">SecretStr</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">"OPENAI_API_KEY"</span><span class="p">]),</span>
     <span class="n">llm_provider</span><span class="o">=</span><span class="n">LLMProvider</span><span class="o">.</span><span class="n">OpenAIChat</span><span class="p">,</span>
     <span class="n">concurrent_requests</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span>
@@ -1412,7 +1436,7 @@ nest_asyncio.apply()</div>
 </pre></div>
 <div class="clipboard-copy-txt" id="cell-4"># Config LLM model to be used as judge
 llm_config = LLMConfig(
-    model="gpt-4.1",
+    model="gpt-5.2",
     api_key=SecretStr(os.environ["OPENAI_API_KEY"]),
     llm_provider=LLMProvider.OpenAIChat,
     concurrent_requests=32,
@@ -1444,9 +1468,9 @@ llm_client = ModelFactory.create_chat_model(llm_config)</div>
 </clipboard-copy>
 </div>
 <div class="highlight-ipynb hl-python"><pre><span></span><span class="c1"># Config conditions for comparison</span>
-<span class="n">base</span> <span class="o">=</span> <span class="s2">"vector_rag"</span>
-<span class="n">others</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"lazygraphrag"</span><span class="p">,</span> <span class="s2">"graphrag_global"</span><span class="p">]</span>
-<span class="n">question_sets</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"activity_global"</span><span class="p">,</span> <span class="s2">"activity_local"</span><span class="p">]</span>
+<span class="n">base</span> <span class="o">=</span> <span class="s2">"vector_rag_short_context"</span>
+<span class="n">others</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"vector_rag_long_context"</span><span class="p">]</span>
+<span class="n">question_sets</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"data_global"</span><span class="p">,</span> <span class="s2">"data_local"</span><span class="p">,</span> <span class="s2">"data_linked"</span><span class="p">]</span>
 <span class="n">trials</span> <span class="o">=</span> <span class="mi">4</span>  <span class="c1"># number of trials to run for each combination of [query, base, other]. Trials must be an even number to support counterbalancing.</span>
 <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.05</span>  <span class="c1"># significance level used for statistical tests</span>
 
@@ -1459,9 +1483,9 @@ llm_client = ModelFactory.create_chat_model(llm_config)</div>
 <span class="n">criteria</span> <span class="o">=</span> <span class="n">pairwise_scores_criteria</span><span class="p">()</span>
 </pre></div>
 <div class="clipboard-copy-txt" id="cell-5"># Config conditions for comparison
-base = "vector_rag"
-others = ["lazygraphrag", "graphrag_global"]
-question_sets = ["activity_global", "activity_local"]
+base = "vector_rag_short_context"
+others = ["vector_rag_long_context"]
+question_sets = ["data_global", "data_local", "data_linked"]
 trials = 4  # number of trials to run for each combination of [query, base, other]. Trials must be an even number to support counterbalancing.
 alpha = 0.05  # significance level used for statistical tests
 
@@ -1506,12 +1530,17 @@ criteria = pairwise_scores_criteria()</div>
             <span class="n">llm_config</span><span class="o">=</span><span class="n">llm_config</span><span class="p">,</span>
             <span class="n">base_name</span><span class="o">=</span><span class="n">base</span><span class="p">,</span>
             <span class="n">other_name</span><span class="o">=</span><span class="n">other</span><span class="p">,</span>
-            <span class="n">base_answers</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">read_json</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">input_dir</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">base</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">question_set</span><span class="si">}</span><span class="s2">.json"</span><span class="p">),</span>
-            <span class="n">other_answers</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">read_json</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">input_dir</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">other</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">question_set</span><span class="si">}</span><span class="s2">.json"</span><span class="p">),</span>
+            <span class="n">base_answers</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">read_json</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">input_dir</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">base</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">question_set</span><span class="si">}</span><span class="s2">_answers.json"</span>
+            <span class="p">),</span>
+            <span class="n">other_answers</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">read_json</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">input_dir</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">other</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">question_set</span><span class="si">}</span><span class="s2">_answers.json"</span>
+            <span class="p">),</span>
             <span class="n">criteria</span><span class="o">=</span><span class="n">criteria</span><span class="p">,</span>
             <span class="n">trials</span><span class="o">=</span><span class="n">trials</span><span class="p">,</span>
             <span class="n">include_score_id_in_prompt</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
             <span class="n">question_id_key</span><span class="o">=</span><span class="s2">"question_id"</span><span class="p">,</span>
+            <span class="n">question_text_key</span><span class="o">=</span><span class="s2">"question"</span><span class="p">,</span>  <span class="c1"># Column name in the answer files</span>
         <span class="p">)</span>
         <span class="n">result</span><span class="p">[</span><span class="s2">"question_set"</span><span class="p">]</span> <span class="o">=</span> <span class="n">question_set</span>
         <span class="n">all_results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
@@ -1561,12 +1590,17 @@ for question_set in question_sets:
             llm_config=llm_config,
             base_name=base,
             other_name=other,
-            base_answers=pd.read_json(f"{input_dir}/{base}/{question_set}.json"),
-            other_answers=pd.read_json(f"{input_dir}/{other}/{question_set}.json"),
+            base_answers=pd.read_json(
+                f"{input_dir}/{base}/{question_set}_answers.json"
+            ),
+            other_answers=pd.read_json(
+                f"{input_dir}/{other}/{question_set}_answers.json"
+            ),
             criteria=criteria,
             trials=trials,
             include_score_id_in_prompt=True,
             question_id_key="question_id",
+            question_text_key="question",  # Column name in the answer files
         )
         result["question_set"] = question_set
         all_results.append(result)
@@ -1647,7 +1681,7 @@ rich_print(llm_client.get_usage())</div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h2 id="reference-based-scoring">Reference-based Scoring<a class="anchor-link" href="#reference-based-scoring">¶</a></h2><p>When reference answers (such as ground truth or "gold standard" responses) are available, AutoE can evaluate RAG-generated answers against these references using metrics like correctness, completeness, or other user-defined criteria on a customizable scoring scale.</p>
-<p>In the example below, we use the same 100 synthetic questions (50 activity-local and 50 activity-global) generated by AutoQ. Since AutoQ does not provide ground-truth answers, we use LazyGraphRAG as the reference method because it achieved the best win rates in the pairwise relative comparisons above. We then score the answers from Vector RAG against those from LazyGraphRAG using the default metrics (correctness and completeness) on a scale from 1 to 10.</p>
+<p>In the example below, we use the <strong>long context</strong> version as the reference method. Note that this is <strong>not ground truth</strong>—we use it here purely to demonstrate the reference-based scoring workflow. While more context can sometimes lead to more complete answers, this relationship is not universal: it depends on the model, the specific context window, and the nature of the questions. We then score the answers from <strong>short context</strong> against those from the long context version using the default metrics (correctness and completeness) on a scale from 1 to 10.</p>
 </div>
 </div>
 </div>
@@ -1672,7 +1706,7 @@ rich_print(llm_client.get_usage())</div>
 </div>
 <div class="highlight-ipynb hl-python"><pre><span></span><span class="c1"># Config LLM model to be used as judge</span>
 <span class="n">llm_config</span> <span class="o">=</span> <span class="n">LLMConfig</span><span class="p">(</span>
-    <span class="n">model</span><span class="o">=</span><span class="s2">"gpt-4.1"</span><span class="p">,</span>
+    <span class="n">model</span><span class="o">=</span><span class="s2">"gpt-5.2"</span><span class="p">,</span>
     <span class="n">api_key</span><span class="o">=</span><span class="n">SecretStr</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">"OPENAI_API_KEY"</span><span class="p">]),</span>
     <span class="n">llm_provider</span><span class="o">=</span><span class="n">LLMProvider</span><span class="o">.</span><span class="n">OpenAIChat</span><span class="p">,</span>
     <span class="n">concurrent_requests</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span>
@@ -1682,7 +1716,7 @@ rich_print(llm_client.get_usage())</div>
 </pre></div>
 <div class="clipboard-copy-txt" id="cell-8"># Config LLM model to be used as judge
 llm_config = LLMConfig(
-    model="gpt-4.1",
+    model="gpt-5.2",
     api_key=SecretStr(os.environ["OPENAI_API_KEY"]),
     llm_provider=LLMProvider.OpenAIChat,
     concurrent_requests=32,
@@ -1714,11 +1748,11 @@ llm_client = ModelFactory.create_chat_model(llm_config)</div>
 </clipboard-copy>
 </div>
 <div class="highlight-ipynb hl-python"><pre><span></span><span class="c1"># Config conditions for comparison</span>
-<span class="n">reference</span> <span class="o">=</span> <span class="s2">"lazygraphrag"</span>
-<span class="n">generated_rags</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s2">"vector_rag"</span>
-<span class="p">]</span>  <span class="c1"># you can add more generated RAGs to compare against the reference</span>
-<span class="n">question_sets</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"activity_global"</span><span class="p">,</span> <span class="s2">"activity_local"</span><span class="p">]</span>
+<span class="n">reference</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="s2">"vector_rag_long_context"</span>  <span class="c1"># long context as reference (more complete answers)</span>
+<span class="p">)</span>
+<span class="n">generated_rags</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"vector_rag_short_context"</span><span class="p">]</span>  <span class="c1"># short context to evaluate</span>
+<span class="n">question_sets</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"data_global"</span><span class="p">,</span> <span class="s2">"data_local"</span><span class="p">,</span> <span class="s2">"data_linked"</span><span class="p">]</span>
 <span class="n">trials</span> <span class="o">=</span> <span class="mi">4</span>  <span class="c1"># number of trials must be an even number to support counterbalancing</span>
 
 <span class="n">input_dir</span> <span class="o">=</span> <span class="s2">"./example_answers"</span>
@@ -1730,11 +1764,11 @@ llm_client = ModelFactory.create_chat_model(llm_config)</div>
 <span class="n">criteria</span> <span class="o">=</span> <span class="n">reference_scores_criteria</span><span class="p">()</span>
 </pre></div>
 <div class="clipboard-copy-txt" id="cell-9"># Config conditions for comparison
-reference = "lazygraphrag"
-generated_rags = [
-    "vector_rag"
-]  # you can add more generated RAGs to compare against the reference
-question_sets = ["activity_global", "activity_local"]
+reference = (
+    "vector_rag_long_context"  # long context as reference (more complete answers)
+)
+generated_rags = ["vector_rag_short_context"]  # short context to evaluate
+question_sets = ["data_global", "data_local", "data_linked"]
 trials = 4  # number of trials must be an even number to support counterbalancing
 
 input_dir = "./example_answers"
@@ -1780,10 +1814,10 @@ criteria = reference_scores_criteria()</div>
             <span class="n">llm_client</span><span class="o">=</span><span class="n">llm_client</span><span class="p">,</span>
             <span class="n">llm_config</span><span class="o">=</span><span class="n">llm_config</span><span class="p">,</span>
             <span class="n">reference_answers</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">read_json</span><span class="p">(</span>
-                <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">input_dir</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">reference</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">question_set</span><span class="si">}</span><span class="s2">.json"</span>
+                <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">input_dir</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">reference</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">question_set</span><span class="si">}</span><span class="s2">_answers.json"</span>
             <span class="p">),</span>
             <span class="n">generated_answers</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">read_json</span><span class="p">(</span>
-                <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">input_dir</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">generated</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">question_set</span><span class="si">}</span><span class="s2">.json"</span>
+                <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">input_dir</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">generated</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">question_set</span><span class="si">}</span><span class="s2">_answers.json"</span>
             <span class="p">),</span>
             <span class="n">criteria</span><span class="o">=</span><span class="n">criteria</span><span class="p">,</span>
             <span class="n">trials</span><span class="o">=</span><span class="n">trials</span><span class="p">,</span>
@@ -1791,6 +1825,7 @@ criteria = reference_scores_criteria()</div>
             <span class="n">score_max</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
             <span class="n">include_score_id_in_prompt</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
             <span class="n">question_id_key</span><span class="o">=</span><span class="s2">"question_id"</span><span class="p">,</span>
+            <span class="n">question_text_key</span><span class="o">=</span><span class="s2">"question"</span><span class="p">,</span>  <span class="c1"># Column name in the answer files</span>
         <span class="p">)</span>
 
         <span class="n">all_results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
@@ -1812,7 +1847,7 @@ criteria = reference_scores_criteria()</div>
 <span class="n">print_df</span><span class="p">(</span>
     <span class="n">all_summary_df</span><span class="p">[</span>
         <span class="p">[</span><span class="s2">"question_set"</span><span class="p">,</span> <span class="s2">"criteria"</span><span class="p">,</span> <span class="s2">"reference"</span><span class="p">,</span> <span class="s2">"generated"</span><span class="p">,</span> <span class="s2">"mean"</span><span class="p">,</span> <span class="s2">"std"</span><span class="p">]</span>
-    <span class="p">]</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(),</span>
+    <span class="p">]</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
     <span class="s2">"Reference Scores Summary"</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="n">all_summary_df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">output_dir</span> <span class="o">/</span> <span class="s2">"reference_scores_summary.csv"</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
@@ -1829,10 +1864,10 @@ for question_set in question_sets:
             llm_client=llm_client,
             llm_config=llm_config,
             reference_answers=pd.read_json(
-                f"{input_dir}/{reference}/{question_set}.json"
+                f"{input_dir}/{reference}/{question_set}_answers.json"
             ),
             generated_answers=pd.read_json(
-                f"{input_dir}/{generated}/{question_set}.json"
+                f"{input_dir}/{generated}/{question_set}_answers.json"
             ),
             criteria=criteria,
             trials=trials,
@@ -1840,6 +1875,7 @@ for question_set in question_sets:
             score_max=10,
             include_score_id_in_prompt=True,
             question_id_key="question_id",
+            question_text_key="question",  # Column name in the answer files
         )
 
         all_results.append(result)
@@ -1861,7 +1897,7 @@ all_summary_df = pd.concat(all_summaries, ignore_index=True)
 print_df(
     all_summary_df[
         ["question_set", "criteria", "reference", "generated", "mean", "std"]
-    ].reset_index(),
+    ].reset_index(drop=True),
     "Reference Scores Summary",
 )
 all_summary_df.to_csv(output_dir / "reference_scores_summary.csv", index=False)</div>
@@ -1878,7 +1914,7 @@ all_summary_df.to_csv(output_dir / "reference_scores_summary.csv", index=False)<
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h2 id="assertion-based-scoring">Assertion-based Scoring<a class="anchor-link" href="#assertion-based-scoring">¶</a></h2><p>Assertion-based scoring evaluates RAG-generated answers by checking whether they contain specific factual assertions or claims that should be present according to a reference or gold standard. This approach is especially useful for tasks where the presence or absence of key facts is more important than holistic correctness or completeness.</p>
-<p>In this example, we use the same synthetic questions and answers as before. We assume that a set of reference assertions has been extracted for each question (e.g., using an information extraction pipeline or manual annotation). The LLM judge is tasked with verifying whether each assertion is supported by the generated answer.</p>
+<h3 id="standard-assertions-for-data-local-and-data-linked-questions">Standard Assertions (for data-local and data-linked questions)<a class="anchor-link" href="#standard-assertions-for-data-local-and-data-linked-questions">¶</a></h3><p>For <strong>data-local</strong> and <strong>data-linked</strong> questions, we use standard (flat) assertions. These are straightforward factual claims that can be independently verified against the generated answer. The LLM judge checks whether each assertion is supported by the answer.</p>
 </div>
 </div>
 </div>
@@ -1888,7 +1924,7 @@ all_summary_df.to_csv(output_dir / "reference_scores_summary.csv", index=False)<
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [4]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="CodeMirror cm-s-jupyter">
 <div class="zeroclipboard-container">
 <clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-11">
@@ -1903,7 +1939,7 @@ all_summary_df.to_csv(output_dir / "reference_scores_summary.csv", index=False)<
 </div>
 <div class="highlight-ipynb hl-python"><pre><span></span><span class="c1"># Config LLM model to be used as judge</span>
 <span class="n">llm_config</span> <span class="o">=</span> <span class="n">LLMConfig</span><span class="p">(</span>
-    <span class="n">model</span><span class="o">=</span><span class="s2">"gpt-4.1"</span><span class="p">,</span>
+    <span class="n">model</span><span class="o">=</span><span class="s2">"gpt-5.2"</span><span class="p">,</span>
     <span class="n">api_key</span><span class="o">=</span><span class="n">SecretStr</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">"OPENAI_API_KEY"</span><span class="p">]),</span>
     <span class="n">llm_provider</span><span class="o">=</span><span class="n">LLMProvider</span><span class="o">.</span><span class="n">OpenAIChat</span><span class="p">,</span>
     <span class="n">concurrent_requests</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
@@ -1913,7 +1949,7 @@ all_summary_df.to_csv(output_dir / "reference_scores_summary.csv", index=False)<
 </pre></div>
 <div class="clipboard-copy-txt" id="cell-11"># Config LLM model to be used as judge
 llm_config = LLMConfig(
-    model="gpt-4.1",
+    model="gpt-5.2",
     api_key=SecretStr(os.environ["OPENAI_API_KEY"]),
     llm_provider=LLMProvider.OpenAIChat,
     concurrent_requests=100,
@@ -1944,24 +1980,30 @@ llm_client = ModelFactory.create_chat_model(llm_config)</div>
 </div>
 </clipboard-copy>
 </div>
-<div class="highlight-ipynb hl-python"><pre><span></span><span class="c1"># Config</span>
-<span class="n">assertions_file</span> <span class="o">=</span> <span class="s2">"activity_global_assertions.json"</span>
-<span class="n">generated_rag</span> <span class="o">=</span> <span class="s2">"vector_rag"</span>
+<div class="highlight-ipynb hl-python"><pre><span></span><span class="c1"># Config for standard assertion scoring (data-local and data-linked)</span>
+<span class="n">generated_rags</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"vector_rag_short_context"</span><span class="p">,</span> <span class="s2">"vector_rag_long_context"</span><span class="p">]</span>
+<span class="n">question_sets</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">"data_local"</span><span class="p">,</span>
+    <span class="s2">"data_linked"</span><span class="p">,</span>
+<span class="p">]</span>  <span class="c1"># Standard assertions for these question types</span>
 <span class="n">pass_threshold</span> <span class="o">=</span> <span class="mf">0.5</span>
-<span class="n">trials</span> <span class="o">=</span> <span class="mi">4</span>  <span class="c1"># number of trials</span>
+<span class="n">trials</span> <span class="o">=</span> <span class="mi">2</span>
 
-<span class="n">input_dir</span> <span class="o">=</span> <span class="s2">"./example_answers"</span>
+<span class="n">input_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">"./example_answers"</span><span class="p">)</span>
 <span class="n">output_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">"./output/assertion_scores"</span><span class="p">)</span>
 <span class="k">if</span> <span class="ow">not</span> <span class="n">output_dir</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
     <span class="n">output_dir</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
-<div class="clipboard-copy-txt" id="cell-12"># Config
-assertions_file = "activity_global_assertions.json"
-generated_rag = "vector_rag"
+<div class="clipboard-copy-txt" id="cell-12"># Config for standard assertion scoring (data-local and data-linked)
+generated_rags = ["vector_rag_short_context", "vector_rag_long_context"]
+question_sets = [
+    "data_local",
+    "data_linked",
+]  # Standard assertions for these question types
 pass_threshold = 0.5
-trials = 4  # number of trials
+trials = 2
 
-input_dir = "./example_answers"
+input_dir = Path("./example_answers")
 output_dir = Path("./output/assertion_scores")
 if not output_dir.exists():
     output_dir.mkdir(parents=True)</div>
@@ -1970,8 +2012,8 @@ if not output_dir.exists():
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=207cbce9">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=207cbce9">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -1989,159 +2031,330 @@ if not output_dir.exists():
 </div>
 </clipboard-copy>
 </div>
-<div class="highlight-ipynb hl-python"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<div class="highlight-ipynb hl-python"><pre><span></span><span class="c1"># Run standard assertion scoring for multiple RAG methods</span>
+<span class="c1"># This uses run_assertion_evaluation which handles multiple RAGs and runs significance tests</span>
 
-<span class="kn">from</span><span class="w"> </span><span class="nn">benchmark_qed.autoe.assertion_scores</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_assertion_scores</span>
-
-<span class="n">answers</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_json</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">input_dir</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">generated_rag</span><span class="si">}</span><span class="s2">/activity_global.json"</span><span class="p">)</span>
-
-<span class="n">assertions</span> <span class="o">=</span> <span class="p">(</span>
-    <span class="n">pd</span><span class="o">.</span><span class="n">read_json</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">input_dir</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">assertions_file</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-    <span class="o">.</span><span class="n">explode</span><span class="p">(</span><span class="s2">"assertions"</span><span class="p">)</span>
-    <span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s2">"assertions"</span><span class="p">:</span> <span class="s2">"assertion"</span><span class="p">})</span>
-    <span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="p">)</span>
-
-<span class="n">assertion_score</span> <span class="o">=</span> <span class="n">get_assertion_scores</span><span class="p">(</span>
+<span class="n">results_df</span> <span class="o">=</span> <span class="n">run_assertion_evaluation</span><span class="p">(</span>
     <span class="n">llm_client</span><span class="o">=</span><span class="n">llm_client</span><span class="p">,</span>
     <span class="n">llm_config</span><span class="o">=</span><span class="n">llm_config</span><span class="p">,</span>
-    <span class="n">answers</span><span class="o">=</span><span class="n">answers</span><span class="p">,</span>
-    <span class="n">assertions</span><span class="o">=</span><span class="n">assertions</span><span class="p">,</span>
-    <span class="n">trials</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
-    <span class="n">question_id_key</span><span class="o">=</span><span class="s2">"question_id"</span><span class="p">,</span>
-    <span class="n">question_text_key</span><span class="o">=</span><span class="s2">"question_text"</span><span class="p">,</span>
+    <span class="n">question_sets</span><span class="o">=</span><span class="n">question_sets</span><span class="p">,</span>
+    <span class="n">generated_rags</span><span class="o">=</span><span class="n">generated_rags</span><span class="p">,</span>
+    <span class="n">input_dir</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">input_dir</span><span class="p">),</span>
+    <span class="n">output_dir</span><span class="o">=</span><span class="n">output_dir</span><span class="p">,</span>
+    <span class="n">trials</span><span class="o">=</span><span class="n">trials</span><span class="p">,</span>
+    <span class="n">top_k_assertions</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  <span class="c1"># Use all assertions</span>
+    <span class="n">pass_threshold</span><span class="o">=</span><span class="n">pass_threshold</span><span class="p">,</span>
+    <span class="c1"># Assertions are in input_dir (not in RAG subdirs)</span>
+    <span class="n">assertions_filename_template</span><span class="o">=</span><span class="s2">"</span><span class="si">{question_set}</span><span class="s2">_assertions.json"</span><span class="p">,</span>  <span class="c1"># noqa: RUF027</span>
+    <span class="c1"># Answers are in RAG subdirs with question_set name</span>
+    <span class="n">answers_path_template</span><span class="o">=</span><span class="s2">"</span><span class="si">{input_dir}</span><span class="s2">/</span><span class="si">{generated_rag}</span><span class="s2">/</span><span class="si">{question_set}</span><span class="s2">_answers.json"</span><span class="p">,</span>
+    <span class="n">run_significance_test</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>  <span class="c1"># Run Friedman/Wilcoxon tests</span>
+    <span class="n">significance_alpha</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span>
+    <span class="n">significance_correction</span><span class="o">=</span><span class="s2">"holm"</span><span class="p">,</span>
+    <span class="n">question_text_key</span><span class="o">=</span><span class="s2">"question"</span><span class="p">,</span>  <span class="c1"># Column name in the answer files</span>
     <span class="n">answer_text_key</span><span class="o">=</span><span class="s2">"answer"</span><span class="p">,</span>
 <span class="p">)</span>
 
-<span class="n">assertion_score</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">output_dir</span> <span class="o">/</span> <span class="s2">"assertion_scores.csv"</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-
-<span class="n">summary_by_assertion</span> <span class="o">=</span> <span class="p">(</span>
-    <span class="n">assertion_score</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s2">"question"</span><span class="p">,</span> <span class="s2">"assertion"</span><span class="p">])</span>
-    <span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="n">score</span><span class="o">=</span><span class="p">(</span><span class="s2">"score"</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mf">0.5</span><span class="p">)),</span> <span class="n">scores</span><span class="o">=</span><span class="p">(</span><span class="s2">"score"</span><span class="p">,</span> <span class="nb">list</span><span class="p">))</span>
-    <span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
-<span class="p">)</span>
-
-<span class="n">summary_by_question</span> <span class="o">=</span> <span class="p">(</span>
-    <span class="n">summary_by_assertion</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s2">"question"</span><span class="p">])</span>
-    <span class="o">.</span><span class="n">agg</span><span class="p">(</span>
-        <span class="n">success</span><span class="o">=</span><span class="p">(</span><span class="s2">"score"</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="n">x</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()),</span>
-        <span class="n">fail</span><span class="o">=</span><span class="p">(</span><span class="s2">"score"</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="n">x</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()),</span>
-    <span class="p">)</span>
-    <span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
-<span class="p">)</span>
-
-<span class="n">summary_by_assertion</span><span class="p">[</span><span class="s2">"score_mean"</span><span class="p">]</span> <span class="o">=</span> <span class="n">summary_by_assertion</span><span class="p">[</span><span class="s2">"scores"</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span>
-    <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="mf">0.0</span>
-<span class="p">)</span>
-<span class="n">summary_by_assertion</span><span class="p">[</span><span class="s2">"score_std"</span><span class="p">]</span> <span class="o">=</span> <span class="n">summary_by_assertion</span><span class="p">[</span><span class="s2">"scores"</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span>
-    <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="mf">0.0</span>
-<span class="p">)</span>
-<span class="n">summary_by_assertion</span> <span class="o">=</span> <span class="n">summary_by_assertion</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">"scores"</span><span class="p">])</span>
-
-<span class="n">print_df</span><span class="p">(</span>
-    <span class="n">summary_by_question</span><span class="p">,</span>
-    <span class="s2">"Assertion Scores Summary by Question"</span><span class="p">,</span>
-<span class="p">)</span>
-
-<span class="n">failed_assertions</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span>
-    <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">summary_by_assertion</span><span class="p">[</span><span class="n">summary_by_assertion</span><span class="p">[</span><span class="s2">"score"</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span>
-<span class="p">)</span>
-
-<span class="n">failed_assertions</span> <span class="o">=</span> <span class="n">failed_assertions</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">"score"</span><span class="p">])</span>
-
-<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">failed_assertions</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-    <span class="n">print_df</span><span class="p">(</span>
-        <span class="n">failed_assertions</span><span class="p">,</span>
-        <span class="sa">f</span><span class="s2">"[bold red]</span><span class="si">{</span><span class="n">failed_assertions</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2"> Failed Assertions[/bold red]"</span><span class="p">,</span>
-    <span class="p">)</span>
-    <span class="n">rich_print</span><span class="p">(</span>
-        <span class="sa">f</span><span class="s2">"[bold red]</span><span class="si">{</span><span class="n">failed_assertions</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2"> assertions failed. See </span><span class="si">{</span><span class="n">output_dir</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="s1">'assertion_scores.csv'</span><span class="si">}</span><span class="s2"> for details.[/bold red]"</span>
-    <span class="p">)</span>
-<span class="k">else</span><span class="p">:</span>
-    <span class="n">rich_print</span><span class="p">(</span><span class="s2">"[bold green]All assertions passed.[/bold green]"</span><span class="p">)</span>
+<span class="n">print_df</span><span class="p">(</span><span class="n">results_df</span><span class="p">,</span> <span class="s2">"Assertion Scoring Results Summary"</span><span class="p">)</span>
 </pre></div>
-<div class="clipboard-copy-txt" id="cell-13">import numpy as np
+<div class="clipboard-copy-txt" id="cell-13"># Run standard assertion scoring for multiple RAG methods
+# This uses run_assertion_evaluation which handles multiple RAGs and runs significance tests
 
-from benchmark_qed.autoe.assertion_scores import get_assertion_scores
-
-answers = pd.read_json(f"{input_dir}/{generated_rag}/activity_global.json")
-
-assertions = (
-    pd.read_json(f"{input_dir}/{assertions_file}")
-    .explode("assertions")
-    .rename(columns={"assertions": "assertion"})
-    .reset_index(drop=True)
-)
-
-assertion_score = get_assertion_scores(
+results_df = run_assertion_evaluation(
     llm_client=llm_client,
     llm_config=llm_config,
-    answers=answers,
-    assertions=assertions,
-    trials=4,
-    question_id_key="question_id",
-    question_text_key="question_text",
+    question_sets=question_sets,
+    generated_rags=generated_rags,
+    input_dir=str(input_dir),
+    output_dir=output_dir,
+    trials=trials,
+    top_k_assertions=None,  # Use all assertions
+    pass_threshold=pass_threshold,
+    # Assertions are in input_dir (not in RAG subdirs)
+    assertions_filename_template="{question_set}_assertions.json",  # noqa: RUF027
+    # Answers are in RAG subdirs with question_set name
+    answers_path_template="{input_dir}/{generated_rag}/{question_set}_answers.json",
+    run_significance_test=True,  # Run Friedman/Wilcoxon tests
+    significance_alpha=0.05,
+    significance_correction="holm",
+    question_text_key="question",  # Column name in the answer files
     answer_text_key="answer",
 )
 
-assertion_score.to_csv(output_dir / "assertion_scores.csv", index=False)
-
-summary_by_assertion = (
-    assertion_score.groupby(["question", "assertion"])
-    .agg(score=("score", lambda x: int(x.mean() &gt; 0.5)), scores=("score", list))
-    .reset_index()
-)
-
-summary_by_question = (
-    summary_by_assertion.groupby(["question"])
-    .agg(
-        success=("score", lambda x: (x == 1).sum()),
-        fail=("score", lambda x: (x == 0).sum()),
-    )
-    .reset_index()
-)
-
-summary_by_assertion["score_mean"] = summary_by_assertion["scores"].apply(
-    lambda x: np.mean(x) if len(x) &gt; 0 else 0.0
-)
-summary_by_assertion["score_std"] = summary_by_assertion["scores"].apply(
-    lambda x: np.std(x) if len(x) &gt; 0 else 0.0
-)
-summary_by_assertion = summary_by_assertion.drop(columns=["scores"])
-
-print_df(
-    summary_by_question,
-    "Assertion Scores Summary by Question",
-)
-
-failed_assertions: pd.DataFrame = cast(
-    pd.DataFrame, summary_by_assertion[summary_by_assertion["score"] == 0]
-)
-
-failed_assertions = failed_assertions.drop(columns=["score"])
-
-if len(failed_assertions) &gt; 0:
-    print_df(
-        failed_assertions,
-        f"[bold red]{failed_assertions.shape[0]} Failed Assertions[/bold red]",
-    )
-    rich_print(
-        f"[bold red]{failed_assertions.shape[0]} assertions failed. See {output_dir / 'assertion_scores.csv'} for details.[/bold red]"
-    )
-else:
-    rich_print("[bold green]All assertions passed.[/bold green]")</div>
+print_df(results_df, "Assertion Scoring Results Summary")</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">Processing question set: data_local
+</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">  Using all assertions <span style="font-weight: bold">(</span>no filtering<span style="font-weight: bold">)</span>
+</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">  Processing vector_rag_short_context for data_local
+</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>Output()</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"></pre>
+</div>
+</div>
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">    <span style="color: #800000; text-decoration-color: #800000; font-weight: bold">vector_rag_short_context (data_local): </span><span style="color: #800000; text-decoration-color: #800000; font-weight: bold">2</span><span style="color: #800000; text-decoration-color: #800000; font-weight: bold"> assertions failed</span>
+</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">    vector_rag_short_context <span style="font-weight: bold">(</span>data_local<span style="font-weight: bold">)</span> - Overall accuracy: <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0.970</span> <span style="font-weight: bold">(</span><span style="color: #008080; text-decoration-color: #008080; font-weight: bold">65</span>/<span style="color: #008080; text-decoration-color: #008080; font-weight: bold">67</span><span style="font-weight: bold">)</span>, Avg question pass rate: <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0.973</span>
+</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">  Processing vector_rag_long_context for data_local
+</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>Output()</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"></pre>
+</div>
+</div>
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">    <span style="color: #800000; text-decoration-color: #800000; font-weight: bold">vector_rag_long_context (data_local): </span><span style="color: #800000; text-decoration-color: #800000; font-weight: bold">2</span><span style="color: #800000; text-decoration-color: #800000; font-weight: bold"> assertions failed</span>
+</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">    vector_rag_long_context <span style="font-weight: bold">(</span>data_local<span style="font-weight: bold">)</span> - Overall accuracy: <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0.970</span> <span style="font-weight: bold">(</span><span style="color: #008080; text-decoration-color: #008080; font-weight: bold">65</span>/<span style="color: #008080; text-decoration-color: #008080; font-weight: bold">67</span><span style="font-weight: bold">)</span>, Avg question pass rate: <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0.973</span>
+</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">Processing question set: data_link
+</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">  Using all assertions <span style="font-weight: bold">(</span>no filtering<span style="font-weight: bold">)</span>
+</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">  Processing vector_rag_short_context for data_link
+</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>Output()</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"></pre>
+</div>
+</div>
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">    <span style="color: #800000; text-decoration-color: #800000; font-weight: bold">vector_rag_short_context (data_link): </span><span style="color: #800000; text-decoration-color: #800000; font-weight: bold">22</span><span style="color: #800000; text-decoration-color: #800000; font-weight: bold"> assertions failed</span>
+</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">    vector_rag_short_context <span style="font-weight: bold">(</span>data_link<span style="font-weight: bold">)</span> - Overall accuracy: <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0.836</span> <span style="font-weight: bold">(</span><span style="color: #008080; text-decoration-color: #008080; font-weight: bold">112</span>/<span style="color: #008080; text-decoration-color: #008080; font-weight: bold">134</span><span style="font-weight: bold">)</span>, Avg question pass rate: <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0.854</span>
+</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">  Processing vector_rag_long_context for data_link
+</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>Output()</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"></pre>
+</div>
+</div>
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">    <span style="color: #800000; text-decoration-color: #800000; font-weight: bold">vector_rag_long_context (data_link): </span><span style="color: #800000; text-decoration-color: #800000; font-weight: bold">13</span><span style="color: #800000; text-decoration-color: #800000; font-weight: bold"> assertions failed</span>
+</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">    vector_rag_long_context <span style="font-weight: bold">(</span>data_link<span style="font-weight: bold">)</span> - Overall accuracy: <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0.903</span> <span style="font-weight: bold">(</span><span style="color: #008080; text-decoration-color: #008080; font-weight: bold">121</span>/<span style="color: #008080; text-decoration-color: #008080; font-weight: bold">134</span><span style="font-weight: bold">)</span>, Avg question pass rate: <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0.922</span>
+</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="font-style: italic">                          Overall Assertion Scores Summary by Question Set and RAG Method                          </span>
+┏━━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━┓
+┃<span style="font-weight: bold"> question_… </span>┃<span style="font-weight: bold"> rag_method </span>┃<span style="font-weight: bold"> total_ass… </span>┃<span style="font-weight: bold"> successfu… </span>┃<span style="font-weight: bold"> failed_a… </span>┃<span style="font-weight: bold"> overall_a… </span>┃<span style="font-weight: bold"> avg_ques… </span>┃<span style="font-weight: bold"> total_que… </span>┃<span style="font-weight: bold"> top_k_us… </span>┃
+┡━━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━━━┩
+│ data_link  │ vector_ra… │ 134        │ 121        │ 13        │ 0.9029850… │ 0.922333… │ 50         │ all       │
+│ data_link  │ vector_ra… │ 134        │ 112        │ 22        │ 0.8358208… │ 0.854333… │ 50         │ all       │
+│ data_local │ vector_ra… │ 67         │ 65         │ 2         │ 0.9701492… │ 0.973333… │ 50         │ all       │
+│ data_local │ vector_ra… │ 67         │ 65         │ 2         │ 0.9701492… │ 0.973333… │ 50         │ all       │
+└────────────┴────────────┴────────────┴────────────┴───────────┴────────────┴───────────┴────────────┴───────────┘
+</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="font-style: italic">              Assertion Accuracy Comparison (Pivot View)              </span>
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━┓
+┃<span style="font-weight: bold"> rag_method               </span>┃<span style="font-weight: bold"> data_link          </span>┃<span style="font-weight: bold"> data_local         </span>┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━┩
+│ vector_rag_long_context  │ 0.9029850746268657 │ 0.9701492537313433 │
+│ vector_rag_short_context │ 0.835820895522388  │ 0.9701492537313433 │
+└──────────────────────────┴────────────────────┴────────────────────┘
+</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">
+<span style="font-weight: bold">Statistical significance test for data_local</span>
+</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
+<pre>c:\Users\trinhha\Documents\sources\benchmark-qed\.venv\Lib\site-packages\scipy\stats\_axis_nan_policy.py:579: UserWarning: scipy.stats.shapiro: Input data has range zero. The results may not be accurate.
+  res = hypotest_fun_out(*samples, **kwds)
+</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">  Paired t-test <span style="font-weight: bold">(</span>normal data<span style="font-weight: bold">)</span>: <span style="color: #808000; text-decoration-color: #808000">statistic</span>=<span style="color: #800080; text-decoration-color: #800080">nan</span>, <span style="color: #808000; text-decoration-color: #808000">p</span>=<span style="color: #800080; text-decoration-color: #800080">nan</span> <span style="font-weight: bold">(</span>not significant<span style="font-weight: bold">)</span>
+</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">  No significant pairwise differences found.
+</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">
+<span style="font-weight: bold">Statistical significance test for data_link</span>
+</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">  Wilcoxon signed-rank test <span style="font-weight: bold">(</span>non-normal data<span style="font-weight: bold">)</span>: <span style="color: #808000; text-decoration-color: #808000">statistic</span>=<span style="color: #008080; text-decoration-color: #008080; font-weight: bold">6.0000</span>, <span style="color: #808000; text-decoration-color: #808000">p</span>=<span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0.0506</span> <span style="font-weight: bold">(</span>not significant<span style="font-weight: bold">)</span>
+</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">  No significant pairwise differences found.
+</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="font-style: italic">                                         Assertion Scoring Results Summary                                         </span>
+┏━━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━┓
+┃<span style="font-weight: bold"> question_… </span>┃<span style="font-weight: bold"> rag_method </span>┃<span style="font-weight: bold"> total_ass… </span>┃<span style="font-weight: bold"> successfu… </span>┃<span style="font-weight: bold"> failed_a… </span>┃<span style="font-weight: bold"> overall_a… </span>┃<span style="font-weight: bold"> avg_ques… </span>┃<span style="font-weight: bold"> total_que… </span>┃<span style="font-weight: bold"> top_k_us… </span>┃
+┡━━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━━━┩
+│ data_link  │ vector_ra… │ 134        │ 121        │ 13        │ 0.9029850… │ 0.922333… │ 50         │ all       │
+│ data_link  │ vector_ra… │ 134        │ 112        │ 22        │ 0.8358208… │ 0.854333… │ 50         │ all       │
+│ data_local │ vector_ra… │ 67         │ 65         │ 2         │ 0.9701492… │ 0.973333… │ 50         │ all       │
+│ data_local │ vector_ra… │ 67         │ 65         │ 2         │ 0.9701492… │ 0.973333… │ 50         │ all       │
+└────────────┴────────────┴────────────┴────────────┴───────────┴────────────┴───────────┴────────────┴───────────┘
+</pre>
 </div>
 </div>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=4fde1f8b">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=4fde1f8b">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [7]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="CodeMirror cm-s-jupyter">
 <div class="zeroclipboard-container">
 <clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-14">
@@ -2154,9 +2367,455 @@ else:
 </div>
 </clipboard-copy>
 </div>
-<div class="highlight-ipynb hl-python"><pre><span></span>
+<div class="highlight-ipynb hl-python"><pre><span></span><span class="n">rich_print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Model usage statistics:"</span><span class="p">)</span>
+<span class="n">rich_print</span><span class="p">(</span><span class="n">llm_client</span><span class="o">.</span><span class="n">get_usage</span><span class="p">())</span>
 </pre></div>
-<div class="clipboard-copy-txt" id="cell-14"></div>
+<div class="clipboard-copy-txt" id="cell-14">rich_print("\nModel usage statistics:")
+rich_print(llm_client.get_usage())</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">
+Model usage statistics:
+</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="font-weight: bold">{</span>
+    <span style="color: #008000; text-decoration-color: #008000">'model'</span>: <span style="color: #008000; text-decoration-color: #008000">'gpt-5.2'</span>,
+    <span style="color: #008000; text-decoration-color: #008000">'prompt_tokens'</span>: <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">596720</span>,
+    <span style="color: #008000; text-decoration-color: #008000">'completion_tokens'</span>: <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">77619</span>,
+    <span style="color: #008000; text-decoration-color: #008000">'total_tokens'</span>: <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">674339</span>,
+    <span style="color: #008000; text-decoration-color: #008000">'prompt_cached_tokens'</span>: <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0</span>,
+    <span style="color: #008000; text-decoration-color: #008000">'completion_reasoning_tokens'</span>: <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0</span>,
+    <span style="color: #008000; text-decoration-color: #008000">'accepted_prediction_tokens'</span>: <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0</span>,
+    <span style="color: #008000; text-decoration-color: #008000">'rejected_prediction_tokens'</span>: <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">0</span>,
+    <span style="color: #008000; text-decoration-color: #008000">'total_calls'</span>: <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">804</span>
+<span style="font-weight: bold">}</span>
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=b4510b6d">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="hierarchical-assertions-for-data-global-questions">Hierarchical Assertions (for data-global questions)<a class="anchor-link" href="#hierarchical-assertions-for-data-global-questions">¶</a></h3><p>For <strong>data-global</strong> questions, we use hierarchical assertions. These have a global assertion with supporting (local) assertions, providing deeper insight into answer quality:</p>
+<ol>
+<li><strong>Global assertion pass/fail</strong>: Whether the main assertion is satisfied</li>
+<li><strong>Support coverage</strong>: What fraction of supporting assertions are satisfied</li>
+<li><strong>Discovery detection</strong>: Whether the answer contains relevant information beyond what's covered by the supporting assertions</li>
+</ol>
+<p>This is particularly useful for global questions where answers may partially satisfy complex requirements.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=cbed52b1">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [8]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="CodeMirror cm-s-jupyter">
+<div class="zeroclipboard-container">
+<clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-15">
+<div>
+<span class="notice" hidden="">Copied!</span>
+<svg aria-hidden="true" class="clipboard-copy-icon" data-view-component="true" height="20" version="1.1" viewbox="0 0 16 16" width="20">
+<path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z" fill="currentColor" fill-rule="evenodd"></path>
+<path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z" fill="currentColor" fill-rule="evenodd"></path>
+</svg>
+</div>
+</clipboard-copy>
+</div>
+<div class="highlight-ipynb hl-python"><pre><span></span><span class="c1"># Config LLM model to be used as judge</span>
+<span class="n">llm_config</span> <span class="o">=</span> <span class="n">LLMConfig</span><span class="p">(</span>
+    <span class="n">model</span><span class="o">=</span><span class="s2">"gpt-5.2"</span><span class="p">,</span>
+    <span class="n">api_key</span><span class="o">=</span><span class="n">SecretStr</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">"OPENAI_API_KEY"</span><span class="p">]),</span>
+    <span class="n">llm_provider</span><span class="o">=</span><span class="n">LLMProvider</span><span class="o">.</span><span class="n">OpenAIChat</span><span class="p">,</span>
+    <span class="n">concurrent_requests</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+    <span class="n">call_args</span><span class="o">=</span><span class="p">{</span><span class="s2">"temperature"</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span> <span class="s2">"seed"</span><span class="p">:</span> <span class="mi">42</span><span class="p">},</span>
+<span class="p">)</span>
+<span class="n">llm_client</span> <span class="o">=</span> <span class="n">ModelFactory</span><span class="o">.</span><span class="n">create_chat_model</span><span class="p">(</span><span class="n">llm_config</span><span class="p">)</span>
+</pre></div>
+<div class="clipboard-copy-txt" id="cell-15"># Config LLM model to be used as judge
+llm_config = LLMConfig(
+    model="gpt-5.2",
+    api_key=SecretStr(os.environ["OPENAI_API_KEY"]),
+    llm_provider=LLMProvider.OpenAIChat,
+    concurrent_requests=100,
+    call_args={"temperature": 0.0, "seed": 42},
+)
+llm_client = ModelFactory.create_chat_model(llm_config)</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=68190555">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [9]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="CodeMirror cm-s-jupyter">
+<div class="zeroclipboard-container">
+<clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-16">
+<div>
+<span class="notice" hidden="">Copied!</span>
+<svg aria-hidden="true" class="clipboard-copy-icon" data-view-component="true" height="20" version="1.1" viewbox="0 0 16 16" width="20">
+<path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z" fill="currentColor" fill-rule="evenodd"></path>
+<path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z" fill="currentColor" fill-rule="evenodd"></path>
+</svg>
+</div>
+</clipboard-copy>
+</div>
+<div class="highlight-ipynb hl-python"><pre><span></span><span class="c1"># Config for hierarchical assertion scoring (data-global only)</span>
+<span class="n">hierarchical_assertions_file</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="s2">"data_global_assertions.json"</span>  <span class="c1"># Contains assertions with supporting_assertions</span>
+<span class="p">)</span>
+<span class="n">generated_rags</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"vector_rag_short_context"</span><span class="p">,</span> <span class="s2">"vector_rag_long_context"</span><span class="p">]</span>
+<span class="n">pass_threshold</span> <span class="o">=</span> <span class="mf">0.5</span>
+<span class="n">trials</span> <span class="o">=</span> <span class="mi">2</span>  <span class="c1"># number of trials for each assertion</span>
+
+<span class="c1"># Evaluation mode: JOINT or STAGED</span>
+<span class="c1"># - JOINT: Evaluate global and supporting assertions together in one LLM call. Cheaper but may be less accurate than the STAGED mode.</span>
+<span class="c1"># - STAGED: Evaluate global assertions first, then supporting assertions only for passed globals.</span>
+<span class="c1">#           Ensures global pass rate matches standard scoring.</span>
+<span class="n">hierarchical_mode</span> <span class="o">=</span> <span class="n">HierarchicalMode</span><span class="o">.</span><span class="n">STAGED</span>
+
+<span class="n">input_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">"./example_answers"</span><span class="p">)</span>
+<span class="n">output_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">"./output/hierarchical_assertion_scores"</span><span class="p">)</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">output_dir</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+    <span class="n">output_dir</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+<div class="clipboard-copy-txt" id="cell-16"># Config for hierarchical assertion scoring (data-global only)
+hierarchical_assertions_file = (
+    "data_global_assertions.json"  # Contains assertions with supporting_assertions
+)
+generated_rags = ["vector_rag_short_context", "vector_rag_long_context"]
+pass_threshold = 0.5
+trials = 2  # number of trials for each assertion
+
+# Evaluation mode: JOINT or STAGED
+# - JOINT: Evaluate global and supporting assertions together in one LLM call. Cheaper but may be less accurate than the STAGED mode.
+# - STAGED: Evaluate global assertions first, then supporting assertions only for passed globals.
+#           Ensures global pass rate matches standard scoring.
+hierarchical_mode = HierarchicalMode.STAGED
+
+input_dir = Path("./example_answers")
+output_dir = Path("./output/hierarchical_assertion_scores")
+if not output_dir.exists():
+    output_dir.mkdir(parents=True)</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=70f1272a">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [10]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="CodeMirror cm-s-jupyter">
+<div class="zeroclipboard-container">
+<clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-17">
+<div>
+<span class="notice" hidden="">Copied!</span>
+<svg aria-hidden="true" class="clipboard-copy-icon" data-view-component="true" height="20" version="1.1" viewbox="0 0 16 16" width="20">
+<path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z" fill="currentColor" fill-rule="evenodd"></path>
+<path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z" fill="currentColor" fill-rule="evenodd"></path>
+</svg>
+</div>
+</clipboard-copy>
+</div>
+<div class="highlight-ipynb hl-python"><pre><span></span><span class="c1"># Load hierarchical assertions for data-global questions</span>
+<span class="c1"># The file structure has assertions with a "supporting_assertions" field</span>
+<span class="n">assertions</span> <span class="o">=</span> <span class="n">load_and_normalize_hierarchical_assertions</span><span class="p">(</span>
+    <span class="n">input_dir</span> <span class="o">/</span> <span class="n">hierarchical_assertions_file</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">rich_print</span><span class="p">(</span>
+    <span class="sa">f</span><span class="s2">"Loaded </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">assertions</span><span class="p">)</span><span class="si">}</span><span class="s2"> hierarchical assertions for data-global questions"</span>
+<span class="p">)</span>
+</pre></div>
+<div class="clipboard-copy-txt" id="cell-17"># Load hierarchical assertions for data-global questions
+# The file structure has assertions with a "supporting_assertions" field
+assertions = load_and_normalize_hierarchical_assertions(
+    input_dir / hierarchical_assertions_file,
+)
+rich_print(
+    f"Loaded {len(assertions)} hierarchical assertions for data-global questions"
+)</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">Loaded <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">856</span> hierarchical assertions for data-global questions
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=5bbce9d0">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="CodeMirror cm-s-jupyter">
+<div class="zeroclipboard-container">
+<clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-18">
+<div>
+<span class="notice" hidden="">Copied!</span>
+<svg aria-hidden="true" class="clipboard-copy-icon" data-view-component="true" height="20" version="1.1" viewbox="0 0 16 16" width="20">
+<path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z" fill="currentColor" fill-rule="evenodd"></path>
+<path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z" fill="currentColor" fill-rule="evenodd"></path>
+</svg>
+</div>
+</clipboard-copy>
+</div>
+<div class="highlight-ipynb hl-python"><pre><span></span><span class="c1"># Run hierarchical assertion evaluation for all RAG methods</span>
+<span class="c1"># This handles scoring, aggregation, comparison, and significance tests</span>
+
+<span class="n">comparison_df</span> <span class="o">=</span> <span class="n">run_hierarchical_assertion_evaluation</span><span class="p">(</span>
+    <span class="n">llm_client</span><span class="o">=</span><span class="n">llm_client</span><span class="p">,</span>
+    <span class="n">llm_config</span><span class="o">=</span><span class="n">llm_config</span><span class="p">,</span>
+    <span class="n">generated_rags</span><span class="o">=</span><span class="n">generated_rags</span><span class="p">,</span>
+    <span class="n">assertions</span><span class="o">=</span><span class="n">assertions</span><span class="p">,</span>
+    <span class="n">input_dir</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">input_dir</span><span class="p">),</span>
+    <span class="n">output_dir</span><span class="o">=</span><span class="n">output_dir</span><span class="p">,</span>
+    <span class="n">trials</span><span class="o">=</span><span class="n">trials</span><span class="p">,</span>
+    <span class="n">pass_threshold</span><span class="o">=</span><span class="n">pass_threshold</span><span class="p">,</span>
+    <span class="n">mode</span><span class="o">=</span><span class="n">hierarchical_mode</span><span class="p">,</span>
+    <span class="n">answers_path_template</span><span class="o">=</span><span class="s2">"</span><span class="si">{input_dir}</span><span class="s2">/</span><span class="si">{generated_rag}</span><span class="s2">/data_global_answers.json"</span><span class="p">,</span>
+    <span class="n">run_significance_test</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">significance_alpha</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span>
+    <span class="n">significance_correction</span><span class="o">=</span><span class="s2">"holm"</span><span class="p">,</span>
+    <span class="c1"># Optional: run assertion-level clustered permutation tests</span>
+    <span class="c1"># as a secondary analysis that accounts for within-question correlation</span>
+    <span class="n">run_clustered_permutation</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">n_permutations</span><span class="o">=</span><span class="mi">10_000</span><span class="p">,</span>
+    <span class="n">permutation_seed</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span>
+    <span class="n">question_id_key</span><span class="o">=</span><span class="s2">"question_id"</span><span class="p">,</span>
+    <span class="n">question_text_key</span><span class="o">=</span><span class="s2">"question"</span><span class="p">,</span>  <span class="c1"># Column name in the answer files</span>
+    <span class="n">answer_text_key</span><span class="o">=</span><span class="s2">"answer"</span><span class="p">,</span>
+    <span class="n">supporting_assertions_key</span><span class="o">=</span><span class="s2">"supporting_assertions"</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+<div class="clipboard-copy-txt" id="cell-18"># Run hierarchical assertion evaluation for all RAG methods
+# This handles scoring, aggregation, comparison, and significance tests
+
+comparison_df = run_hierarchical_assertion_evaluation(
+    llm_client=llm_client,
+    llm_config=llm_config,
+    generated_rags=generated_rags,
+    assertions=assertions,
+    input_dir=str(input_dir),
+    output_dir=output_dir,
+    trials=trials,
+    pass_threshold=pass_threshold,
+    mode=hierarchical_mode,
+    answers_path_template="{input_dir}/{generated_rag}/data_global_answers.json",
+    run_significance_test=True,
+    significance_alpha=0.05,
+    significance_correction="holm",
+    # Optional: run assertion-level clustered permutation tests
+    # as a secondary analysis that accounts for within-question correlation
+    run_clustered_permutation=True,
+    n_permutations=10_000,
+    permutation_seed=42,
+    question_id_key="question_id",
+    question_text_key="question",  # Column name in the answer files
+    answer_text_key="answer",
+    supporting_assertions_key="supporting_assertions",
+)</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">
+<span style="font-weight: bold">Processing vector_rag_short_context</span>
+</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="font-weight: bold">Step </span><span style="color: #008080; text-decoration-color: #008080; font-weight: bold">1</span><span style="font-weight: bold">: Standard global assertion scoring</span><span style="color: #808000; text-decoration-color: #808000; font-weight: bold">...</span>
+</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>Output()</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"></pre>
+</div>
+</div>
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">  Global assertions: <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">401</span>/<span style="color: #008080; text-decoration-color: #008080; font-weight: bold">856</span> passed <span style="font-weight: bold">(</span><span style="color: #008080; text-decoration-color: #008080; font-weight: bold">46.8</span>%<span style="font-weight: bold">)</span>
+</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">  Global pass rate <span style="font-weight: bold">(</span>per-question avg<span style="font-weight: bold">)</span>: <span style="color: #008080; text-decoration-color: #008080; font-weight: bold">47.8</span>%
+</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">
+<span style="font-weight: bold">Step </span><span style="color: #008080; text-decoration-color: #008080; font-weight: bold">2</span><span style="font-weight: bold">: Supporting + discovery for </span><span style="color: #008080; text-decoration-color: #008080; font-weight: bold">401</span><span style="font-weight: bold"> passed assertions</span><span style="color: #808000; text-decoration-color: #808000; font-weight: bold">...</span>
+</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>Output()</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=081adf2e">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="CodeMirror cm-s-jupyter">
+<div class="zeroclipboard-container">
+<clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-19">
+<div>
+<span class="notice" hidden="">Copied!</span>
+<svg aria-hidden="true" class="clipboard-copy-icon" data-view-component="true" height="20" version="1.1" viewbox="0 0 16 16" width="20">
+<path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z" fill="currentColor" fill-rule="evenodd"></path>
+<path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z" fill="currentColor" fill-rule="evenodd"></path>
+</svg>
+</div>
+</clipboard-copy>
+</div>
+<div class="highlight-ipynb hl-python"><pre><span></span><span class="c1"># The pipeline automatically prints and saves a significance summary table.</span>
+<span class="c1"># You can also load it from CSV for further analysis:</span>
+<span class="n">sig_summary</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">output_dir</span> <span class="o">/</span> <span class="s2">"significance_summary.csv"</span><span class="p">)</span>
+<span class="n">print_df</span><span class="p">(</span><span class="n">sig_summary</span><span class="p">,</span> <span class="s2">"Significance Test Summary"</span><span class="p">)</span>
+</pre></div>
+<div class="clipboard-copy-txt" id="cell-19"># The pipeline automatically prints and saves a significance summary table.
+# You can also load it from CSV for further analysis:
+sig_summary = pd.read_csv(output_dir / "significance_summary.csv")
+print_df(sig_summary, "Significance Test Summary")</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
+<pre>
+<span class="ansi-red-intense-fg ansi-bold">notebook controller is DISPOSED. 
+</span>
+<span class="ansi-red-intense-fg ansi-bold">View Jupyter &lt;a href='command:jupyter.viewOutput'&gt;log&lt;/a&gt; for further details.</span></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=b064b8a4">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="CodeMirror cm-s-jupyter">
+<div class="zeroclipboard-container">
+<clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-20">
+<div>
+<span class="notice" hidden="">Copied!</span>
+<svg aria-hidden="true" class="clipboard-copy-icon" data-view-component="true" height="20" version="1.1" viewbox="0 0 16 16" width="20">
+<path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z" fill="currentColor" fill-rule="evenodd"></path>
+<path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z" fill="currentColor" fill-rule="evenodd"></path>
+</svg>
+</div>
+</clipboard-copy>
+</div>
+<div class="highlight-ipynb hl-python"><pre><span></span><span class="c1"># Alternatively, you can run significance tests separately and build the summary</span>
+<span class="c1"># yourself using summarize_significance_results(). This is useful when you have</span>
+<span class="c1"># pre-computed aggregated scores and want to re-run tests with different parameters.</span>
+<span class="c1"># See the compare_hierarchical_assertion_scores_significance and</span>
+<span class="c1"># summarize_significance_results functions in benchmark_qed.autoe.assertion.</span>
+</pre></div>
+<div class="clipboard-copy-txt" id="cell-20"># Alternatively, you can run significance tests separately and build the summary
+# yourself using summarize_significance_results(). This is useful when you have
+# pre-computed aggregated scores and want to re-run tests with different parameters.
+# See the compare_hierarchical_assertion_scores_significance and
+# summarize_significance_results functions in benchmark_qed.autoe.assertion.</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
+<pre>
+<span class="ansi-red-intense-fg ansi-bold">notebook controller is DISPOSED. 
+</span>
+<span class="ansi-red-intense-fg ansi-bold">View Jupyter &lt;a href='command:jupyter.viewOutput'&gt;log&lt;/a&gt; for further details.</span></pre>
 </div>
 </div>
 </div>

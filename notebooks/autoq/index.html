@@ -735,6 +735,30 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#data-linked-questions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data-Linked Questions
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Data-Linked Questions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#question-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      Question Types
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#activity-questions" class="md-nav__link">
     <span class="md-ellipsis">
       Activity Questions
@@ -919,6 +943,30 @@
       Data Global Questions
     </span>
   </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#data-linked-questions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data-Linked Questions
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Data-Linked Questions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#question-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      Question Types
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1577,7 +1625,7 @@ if logging.getLogger("httpx") is not None:
 </ul>
 </li>
 </ul>
-<p>This typology gives four major question types, generated using LLM-based methods. The question generation process generally consists of 2 main steps:</p>
+<p>This typology gives four major question types, generated using LLM-based methods. In addition, <em>data-linked</em> questions are a variant of data-driven local questions that combine multiple local questions sharing named entities into multi-hop questions. The question generation process generally consists of 2 main steps:</p>
 <ol>
 <li><em>Candidate Generation</em>: Use an LLM model to generate a large pool of candidate questions, typically oversampled (based on a specified oversample factor) to ensure sufficient variety for downstream selection.</li>
 <li><em>Ranking and Selection</em>: The candidate questions are clustered, ranked, and filtered using various metrics to select the final set of target questions.</li>
@@ -1591,6 +1639,14 @@ if logging.getLogger("httpx") is not None:
 <li>Relevant claims are extracted for each question based on the sources texts in the corresponding text region</li>
 <li>(Optional): <em>assertions</em> are generated for each question based on the extracted claims. These assertions can then be used to evaluate assertion-based accuracy of RAG methods.</li>
 <li>Any abstract categories (e.g., themes) reflected by the sample text are captured</li>
+</ul>
+</li>
+<li><em>Data-linked local questions</em> (multi-hop variant of data-driven local)<ul>
+<li>Local questions are grouped by shared named entities</li>
+<li>Candidate multi-hop questions are generated for each entity group, covering bridge, comparison, intersection, and temporal question types</li>
+<li>Candidate questions are validated using batch quality checks to filter low-quality outputs</li>
+<li>Questions are selected using MMR sampling with type-balance to ensure diversity across question types</li>
+<li>(Optional): <em>assertions</em> are generated for each selected question based on claims from the linked source texts</li>
 </ul>
 </li>
 <li><em>Data-driven global questions</em><ul>
@@ -1749,12 +1805,16 @@ NUM_ENTITIES_PER_TASK = 5</div>
 
 <span class="c1"># ASSERTION GENERATION CONFIGS</span>
 <span class="n">MAX_ASSERTIONS</span> <span class="o">=</span> <span class="mi">20</span>  <span class="c1"># Maximum number of assertions per question (set to 0 to disable)</span>
-<span class="n">BATCH_SIZE</span> <span class="o">=</span> <span class="mi">100</span>  <span class="c1"># Batch size for processing claims in global assertion generation</span>
-<span class="n">MAX_DATA_TOKENS</span> <span class="o">=</span> <span class="p">(</span>
-    <span class="mi">32000</span>  <span class="c1"># Maximum input data tokens for the reduce step in global assertions</span>
-<span class="p">)</span>
 <span class="n">ENABLE_VALIDATION</span> <span class="o">=</span> <span class="kc">True</span>  <span class="c1"># Set to True to validate assertions against sources</span>
 <span class="n">MIN_VALIDATION_SCORE</span> <span class="o">=</span> <span class="mi">3</span>  <span class="c1"># Minimum score (1-5) for grounding, relevance, verifiability</span>
+
+<span class="c1"># Global assertion generation configs (map-reduce with semantic grouping)</span>
+<span class="n">BATCH_SIZE</span> <span class="o">=</span> <span class="mi">100</span>  <span class="c1"># Batch size for processing claims when semantic grouping is disabled</span>
+<span class="n">MAP_DATA_TOKENS</span> <span class="o">=</span> <span class="mi">8000</span>  <span class="c1"># Maximum tokens per cluster in the map step</span>
+<span class="n">REDUCE_DATA_TOKENS</span> <span class="o">=</span> <span class="mi">32000</span>  <span class="c1"># Maximum input data tokens for the reduce step</span>
+<span class="n">ENABLE_SEMANTIC_GROUPING</span> <span class="o">=</span> <span class="kc">True</span>  <span class="c1"># Group similar claims using embeddings before map step</span>
+<span class="n">VALIDATE_MAP_ASSERTIONS</span> <span class="o">=</span> <span class="kc">True</span>  <span class="c1"># Validate assertions in the map step (filters early)</span>
+<span class="n">VALIDATE_REDUCE_ASSERTIONS</span> <span class="o">=</span> <span class="kc">True</span>  <span class="c1"># Validate assertions after reduce step</span>
 
 <span class="c1"># Parallelism for assertion generation (adjust based on your model rate limits)</span>
 <span class="n">CONCURRENT_LOCAL_QUESTIONS</span> <span class="o">=</span> <span class="mi">8</span>  <span class="c1"># Questions to process in parallel for local assertions</span>
@@ -1793,12 +1853,16 @@ CONCURRENT_REQUESTS = (
 
 # ASSERTION GENERATION CONFIGS
 MAX_ASSERTIONS = 20  # Maximum number of assertions per question (set to 0 to disable)
-BATCH_SIZE = 100  # Batch size for processing claims in global assertion generation
-MAX_DATA_TOKENS = (
-    32000  # Maximum input data tokens for the reduce step in global assertions
-)
 ENABLE_VALIDATION = True  # Set to True to validate assertions against sources
 MIN_VALIDATION_SCORE = 3  # Minimum score (1-5) for grounding, relevance, verifiability
+
+# Global assertion generation configs (map-reduce with semantic grouping)
+BATCH_SIZE = 100  # Batch size for processing claims when semantic grouping is disabled
+MAP_DATA_TOKENS = 8000  # Maximum tokens per cluster in the map step
+REDUCE_DATA_TOKENS = 32000  # Maximum input data tokens for the reduce step
+ENABLE_SEMANTIC_GROUPING = True  # Group similar claims using embeddings before map step
+VALIDATE_MAP_ASSERTIONS = True  # Validate assertions in the map step (filters early)
+VALIDATE_REDUCE_ASSERTIONS = True  # Validate assertions after reduce step
 
 # Parallelism for assertion generation (adjust based on your model rate limits)
 CONCURRENT_LOCAL_QUESTIONS = 8  # Questions to process in parallel for local assertions
@@ -1936,6 +2000,7 @@ print(
 <div class="highlight-ipynb hl-python"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">benchmark_qed.autoq.config</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">AssertionConfig</span><span class="p">,</span>
     <span class="n">GlobalAssertionConfig</span><span class="p">,</span>
+    <span class="n">LinkedAssertionConfig</span><span class="p">,</span>
     <span class="n">LocalAssertionConfig</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">benchmark_qed.autoq.question_gen.data_questions.local_question_gen</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
@@ -1963,12 +2028,24 @@ print(
     <span class="n">enable_validation</span><span class="o">=</span><span class="n">ENABLE_VALIDATION</span><span class="p">,</span>
     <span class="n">min_validation_score</span><span class="o">=</span><span class="n">MIN_VALIDATION_SCORE</span><span class="p">,</span>
     <span class="n">batch_size</span><span class="o">=</span><span class="n">BATCH_SIZE</span><span class="p">,</span>
-    <span class="n">max_data_tokens</span><span class="o">=</span><span class="n">MAX_DATA_TOKENS</span><span class="p">,</span>
+    <span class="n">map_data_tokens</span><span class="o">=</span><span class="n">MAP_DATA_TOKENS</span><span class="p">,</span>
+    <span class="n">reduce_data_tokens</span><span class="o">=</span><span class="n">REDUCE_DATA_TOKENS</span><span class="p">,</span>
+    <span class="n">enable_semantic_grouping</span><span class="o">=</span><span class="n">ENABLE_SEMANTIC_GROUPING</span><span class="p">,</span>
+    <span class="n">validate_map_assertions</span><span class="o">=</span><span class="n">VALIDATE_MAP_ASSERTIONS</span><span class="p">,</span>
+    <span class="n">validate_reduce_assertions</span><span class="o">=</span><span class="n">VALIDATE_REDUCE_ASSERTIONS</span><span class="p">,</span>
     <span class="n">concurrent_llm_calls</span><span class="o">=</span><span class="n">CONCURRENT_REQUESTS</span><span class="p">,</span>
     <span class="n">max_concurrent_questions</span><span class="o">=</span><span class="n">CONCURRENT_GLOBAL_QUESTIONS</span><span class="p">,</span>
 <span class="p">)</span>
+<span class="n">linked_assertion_config</span> <span class="o">=</span> <span class="n">LinkedAssertionConfig</span><span class="p">(</span>
+    <span class="n">max_assertions</span><span class="o">=</span><span class="n">MAX_ASSERTIONS</span><span class="p">,</span>
+    <span class="n">enable_validation</span><span class="o">=</span><span class="n">ENABLE_VALIDATION</span><span class="p">,</span>
+    <span class="n">min_validation_score</span><span class="o">=</span><span class="n">MIN_VALIDATION_SCORE</span><span class="p">,</span>
+    <span class="n">concurrent_llm_calls</span><span class="o">=</span><span class="n">CONCURRENT_REQUESTS</span><span class="p">,</span>
+    <span class="n">max_concurrent_questions</span><span class="o">=</span><span class="n">CONCURRENT_LOCAL_QUESTIONS</span><span class="p">,</span>  <span class="c1"># Linked questions use local-style concurrency</span>
+<span class="p">)</span>
 <span class="n">assertion_config</span> <span class="o">=</span> <span class="n">AssertionConfig</span><span class="p">(</span>
     <span class="n">local</span><span class="o">=</span><span class="n">local_assertion_config</span><span class="p">,</span>
+    <span class="n">linked</span><span class="o">=</span><span class="n">linked_assertion_config</span><span class="p">,</span>
     <span class="o">**</span><span class="p">{</span>
         <span class="s2">"global"</span><span class="p">:</span> <span class="n">global_assertion_config</span>
     <span class="p">},</span>  <span class="c1"># Use dict unpacking since "global" is a keyword</span>
@@ -2010,6 +2087,7 @@ print(
 <div class="clipboard-copy-txt" id="cell-7">from benchmark_qed.autoq.config import (
     AssertionConfig,
     GlobalAssertionConfig,
+    LinkedAssertionConfig,
     LocalAssertionConfig,
 )
 from benchmark_qed.autoq.question_gen.data_questions.local_question_gen import (
@@ -2037,12 +2115,24 @@ global_assertion_config = GlobalAssertionConfig(
     enable_validation=ENABLE_VALIDATION,
     min_validation_score=MIN_VALIDATION_SCORE,
     batch_size=BATCH_SIZE,
-    max_data_tokens=MAX_DATA_TOKENS,
+    map_data_tokens=MAP_DATA_TOKENS,
+    reduce_data_tokens=REDUCE_DATA_TOKENS,
+    enable_semantic_grouping=ENABLE_SEMANTIC_GROUPING,
+    validate_map_assertions=VALIDATE_MAP_ASSERTIONS,
+    validate_reduce_assertions=VALIDATE_REDUCE_ASSERTIONS,
     concurrent_llm_calls=CONCURRENT_REQUESTS,
     max_concurrent_questions=CONCURRENT_GLOBAL_QUESTIONS,
 )
+linked_assertion_config = LinkedAssertionConfig(
+    max_assertions=MAX_ASSERTIONS,
+    enable_validation=ENABLE_VALIDATION,
+    min_validation_score=MIN_VALIDATION_SCORE,
+    concurrent_llm_calls=CONCURRENT_REQUESTS,
+    max_concurrent_questions=CONCURRENT_LOCAL_QUESTIONS,  # Linked questions use local-style concurrency
+)
 assertion_config = AssertionConfig(
     local=local_assertion_config,
+    linked=linked_assertion_config,
     **{
         "global": global_assertion_config
     },  # Use dict unpacking since "global" is a keyword
@@ -2214,6 +2304,271 @@ save_questions(
 </div>
 </div>
 </div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=8246c29b">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="data-linked-questions">Data-Linked Questions<a class="anchor-link" href="#data-linked-questions">¶</a></h2><p>Data-linked questions are multi-hop style local questions generated by combining local questions that share named entities. These questions require combining information from a small set of text chunks—less localized than data-local questions (which target a single text region), but still local-scoped since the number of related chunks remains small.</p>
+<p>The pipeline:</p>
+<ol>
+<li><strong>Entity Grouping</strong>: Group local questions by shared named entities</li>
+<li><strong>Question Generation</strong>: Generate questions of different types (bridge, comparison, intersection, temporal)</li>
+<li><strong>Validation</strong>: Run batch validation to filter low-quality questions</li>
+<li><strong>Selection</strong>: Use MMR sampling with type-balance to select diverse, high-quality questions</li>
+<li><strong>Assertion Generation</strong> (optional): Generate assertions for each selected question</li>
+</ol>
+<h3 id="question-types">Question Types<a class="anchor-link" href="#question-types">¶</a></h3><ul>
+<li><strong>Bridge</strong>: Questions that require connecting information from multiple sources</li>
+<li><strong>Comparison</strong>: Questions comparing attributes, outcomes, or characteristics</li>
+<li><strong>Intersection</strong>: Questions about common elements or shared properties</li>
+<li><strong>Temporal</strong>: Questions about timing, sequence, or chronology of events</li>
+</ul>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=e398d07c">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="CodeMirror cm-s-jupyter">
+<div class="zeroclipboard-container">
+<clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-9">
+<div>
+<span class="notice" hidden="">Copied!</span>
+<svg aria-hidden="true" class="clipboard-copy-icon" data-view-component="true" height="20" version="1.1" viewbox="0 0 16 16" width="20">
+<path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z" fill="currentColor" fill-rule="evenodd"></path>
+<path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z" fill="currentColor" fill-rule="evenodd"></path>
+</svg>
+</div>
+</clipboard-copy>
+</div>
+<div class="highlight-ipynb hl-python"><pre><span></span><span class="c1"># Data-Linked Question Generation Configuration</span>
+<span class="c1"># These configs control the linked question generation process</span>
+
+<span class="c1"># Linked question generation specific configs</span>
+<span class="n">LINKED_QUESTION_TYPES</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">"bridge"</span><span class="p">,</span>
+    <span class="s2">"comparison"</span><span class="p">,</span>
+    <span class="s2">"intersection"</span><span class="p">,</span>
+    <span class="s2">"temporal"</span><span class="p">,</span>
+<span class="p">]</span>  <span class="c1"># Question types to generate</span>
+<span class="n">LINKED_MIN_QUESTIONS_PER_ENTITY</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="mi">2</span>  <span class="c1"># Minimum local questions per entity to form a linked group</span>
+<span class="p">)</span>
+<span class="n">LINKED_MAX_QUESTIONS_PER_ENTITY</span> <span class="o">=</span> <span class="mi">10</span>  <span class="c1"># Maximum local questions per entity</span>
+<span class="n">LINKED_MIN_QUALITY_SCORE</span> <span class="o">=</span> <span class="mi">4</span>  <span class="c1"># Minimum quality score (1-5) for generated questions</span>
+<span class="n">LINKED_ENABLE_BATCH_VALIDATION</span> <span class="o">=</span> <span class="kc">True</span>  <span class="c1"># Enable batch validation to filter bad questions</span>
+<span class="n">LINKED_MMR_LAMBDA</span> <span class="o">=</span> <span class="mf">0.7</span>  <span class="c1"># MMR trade-off: 0=max diversity, 1=max quality</span>
+<span class="n">LINKED_TYPE_BALANCE_WEIGHT</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="mf">0.5</span>  <span class="c1"># Type-balance penalty in MMR (0=ignore, 1=strong penalty)</span>
+<span class="p">)</span>
+<span class="n">LINKED_OVERSAMPLE_FACTOR</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="mf">10.0</span>  <span class="c1"># Higher oversample for linked questions due to validation filtering</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Linked question generation configured:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  Question types: </span><span class="si">{</span><span class="n">LINKED_QUESTION_TYPES</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  Min questions per entity: </span><span class="si">{</span><span class="n">LINKED_MIN_QUESTIONS_PER_ENTITY</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  Type balance weight: </span><span class="si">{</span><span class="n">LINKED_TYPE_BALANCE_WEIGHT</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  Batch validation enabled: </span><span class="si">{</span><span class="n">LINKED_ENABLE_BATCH_VALIDATION</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  Oversample factor: </span><span class="si">{</span><span class="n">LINKED_OVERSAMPLE_FACTOR</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span>
+    <span class="sa">f</span><span class="s2">"  Assertion config (linked): max_assertions=</span><span class="si">{</span><span class="n">assertion_config</span><span class="o">.</span><span class="n">linked</span><span class="o">.</span><span class="n">max_assertions</span><span class="si">}</span><span class="s2">, validation=</span><span class="si">{</span><span class="n">assertion_config</span><span class="o">.</span><span class="n">linked</span><span class="o">.</span><span class="n">enable_validation</span><span class="si">}</span><span class="s2">"</span>
+<span class="p">)</span>
+</pre></div>
+<div class="clipboard-copy-txt" id="cell-9"># Data-Linked Question Generation Configuration
+# These configs control the linked question generation process
+
+# Linked question generation specific configs
+LINKED_QUESTION_TYPES = [
+    "bridge",
+    "comparison",
+    "intersection",
+    "temporal",
+]  # Question types to generate
+LINKED_MIN_QUESTIONS_PER_ENTITY = (
+    2  # Minimum local questions per entity to form a linked group
+)
+LINKED_MAX_QUESTIONS_PER_ENTITY = 10  # Maximum local questions per entity
+LINKED_MIN_QUALITY_SCORE = 4  # Minimum quality score (1-5) for generated questions
+LINKED_ENABLE_BATCH_VALIDATION = True  # Enable batch validation to filter bad questions
+LINKED_MMR_LAMBDA = 0.7  # MMR trade-off: 0=max diversity, 1=max quality
+LINKED_TYPE_BALANCE_WEIGHT = (
+    0.5  # Type-balance penalty in MMR (0=ignore, 1=strong penalty)
+)
+LINKED_OVERSAMPLE_FACTOR = (
+    10.0  # Higher oversample for linked questions due to validation filtering
+)
+
+print("Linked question generation configured:")
+print(f"  Question types: {LINKED_QUESTION_TYPES}")
+print(f"  Min questions per entity: {LINKED_MIN_QUESTIONS_PER_ENTITY}")
+print(f"  Type balance weight: {LINKED_TYPE_BALANCE_WEIGHT}")
+print(f"  Batch validation enabled: {LINKED_ENABLE_BATCH_VALIDATION}")
+print(f"  Oversample factor: {LINKED_OVERSAMPLE_FACTOR}")
+print(
+    f"  Assertion config (linked): max_assertions={assertion_config.linked.max_assertions}, validation={assertion_config.linked.enable_validation}"
+)</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=224c9072">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="CodeMirror cm-s-jupyter">
+<div class="zeroclipboard-container">
+<clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-10">
+<div>
+<span class="notice" hidden="">Copied!</span>
+<svg aria-hidden="true" class="clipboard-copy-icon" data-view-component="true" height="20" version="1.1" viewbox="0 0 16 16" width="20">
+<path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z" fill="currentColor" fill-rule="evenodd"></path>
+<path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z" fill="currentColor" fill-rule="evenodd"></path>
+</svg>
+</div>
+</clipboard-copy>
+</div>
+<div class="highlight-ipynb hl-python"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">benchmark_qed.autoq.question_gen.data_questions.linked_question_gen</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">DataLinkedQuestionGen</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># Load candidate local questions (result from the data local question generation step)</span>
+<span class="c1"># Linked questions are generated from local questions that share named entities.</span>
+<span class="c1"># We use candidate local questions to have a larger pool for entity linking.</span>
+<span class="n">local_questions</span> <span class="o">=</span> <span class="n">load_questions</span><span class="p">(</span>
+    <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">OUTPUT_QUESTIONS_PATH</span><span class="si">}</span><span class="s2">/data_local_questions/candidate_questions.json"</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span>
+    <span class="sa">f</span><span class="s2">"Loaded </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">local_questions</span><span class="p">)</span><span class="si">}</span><span class="s2"> candidate local questions for linked question generation."</span>
+<span class="p">)</span>
+
+<span class="c1"># Create the linked question generator</span>
+<span class="n">data_linked_generator</span> <span class="o">=</span> <span class="n">DataLinkedQuestionGen</span><span class="p">(</span>
+    <span class="n">llm</span><span class="o">=</span><span class="n">llm</span><span class="p">,</span>
+    <span class="n">text_embedder</span><span class="o">=</span><span class="n">text_embedder</span><span class="p">,</span>
+    <span class="n">local_questions</span><span class="o">=</span><span class="n">local_questions</span><span class="p">,</span>
+    <span class="n">token_encoder</span><span class="o">=</span><span class="n">token_encoder</span><span class="p">,</span>
+    <span class="n">assertion_config</span><span class="o">=</span><span class="n">assertion_config</span><span class="p">,</span>
+    <span class="n">llm_params</span><span class="o">=</span><span class="n">LLM_PARAMS</span><span class="p">,</span>
+    <span class="n">concurrent_coroutines</span><span class="o">=</span><span class="n">CONCURRENT_REQUESTS</span><span class="p">,</span>
+    <span class="n">random_seed</span><span class="o">=</span><span class="n">RANDOM_SEED</span><span class="p">,</span>
+    <span class="c1"># Linked-specific parameters</span>
+    <span class="n">min_questions_per_entity</span><span class="o">=</span><span class="n">LINKED_MIN_QUESTIONS_PER_ENTITY</span><span class="p">,</span>
+    <span class="n">max_questions_per_entity</span><span class="o">=</span><span class="n">LINKED_MAX_QUESTIONS_PER_ENTITY</span><span class="p">,</span>
+    <span class="n">min_quality_score</span><span class="o">=</span><span class="n">LINKED_MIN_QUALITY_SCORE</span><span class="p">,</span>
+    <span class="n">question_types</span><span class="o">=</span><span class="n">LINKED_QUESTION_TYPES</span><span class="p">,</span>
+    <span class="n">enable_batch_validation</span><span class="o">=</span><span class="n">LINKED_ENABLE_BATCH_VALIDATION</span><span class="p">,</span>
+    <span class="n">mmr_lambda</span><span class="o">=</span><span class="n">LINKED_MMR_LAMBDA</span><span class="p">,</span>
+    <span class="n">type_balance_weight</span><span class="o">=</span><span class="n">LINKED_TYPE_BALANCE_WEIGHT</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># Generate linked questions (using higher oversample factor due to validation filtering)</span>
+<span class="n">data_linked_question_results</span> <span class="o">=</span> <span class="k">await</span> <span class="n">data_linked_generator</span><span class="o">.</span><span class="n">agenerate</span><span class="p">(</span>
+    <span class="n">num_questions</span><span class="o">=</span><span class="n">NUM_QUESTIONS</span><span class="p">,</span>
+    <span class="n">oversample_factor</span><span class="o">=</span><span class="n">LINKED_OVERSAMPLE_FACTOR</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># Save both candidate questions and the final selected questions</span>
+<span class="n">save_questions</span><span class="p">(</span>
+    <span class="n">data_linked_question_results</span><span class="o">.</span><span class="n">selected_questions</span><span class="p">,</span>
+    <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">OUTPUT_QUESTIONS_PATH</span><span class="si">}</span><span class="s2">/data_linked_questions/"</span><span class="p">,</span>
+    <span class="s2">"selected_questions"</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">save_questions</span><span class="p">(</span>
+    <span class="n">data_linked_question_results</span><span class="o">.</span><span class="n">selected_questions</span><span class="p">,</span>
+    <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">OUTPUT_QUESTIONS_PATH</span><span class="si">}</span><span class="s2">/data_linked_questions/"</span><span class="p">,</span>
+    <span class="s2">"selected_questions_text"</span><span class="p">,</span>
+    <span class="n">question_text_only</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">save_questions</span><span class="p">(</span>
+    <span class="n">data_linked_question_results</span><span class="o">.</span><span class="n">candidate_questions</span><span class="p">,</span>
+    <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">OUTPUT_QUESTIONS_PATH</span><span class="si">}</span><span class="s2">/data_linked_questions/"</span><span class="p">,</span>
+    <span class="s2">"candidate_questions"</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span>
+    <span class="sa">f</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Generated </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">data_linked_question_results</span><span class="o">.</span><span class="n">selected_questions</span><span class="p">)</span><span class="si">}</span><span class="s2"> linked questions"</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  (from </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">data_linked_question_results</span><span class="o">.</span><span class="n">candidate_questions</span><span class="p">)</span><span class="si">}</span><span class="s2"> candidates)"</span><span class="p">)</span>
+</pre></div>
+<div class="clipboard-copy-txt" id="cell-10">from benchmark_qed.autoq.question_gen.data_questions.linked_question_gen import (
+    DataLinkedQuestionGen,
+)
+
+# Load candidate local questions (result from the data local question generation step)
+# Linked questions are generated from local questions that share named entities.
+# We use candidate local questions to have a larger pool for entity linking.
+local_questions = load_questions(
+    f"{OUTPUT_QUESTIONS_PATH}/data_local_questions/candidate_questions.json"
+)
+print(
+    f"Loaded {len(local_questions)} candidate local questions for linked question generation."
+)
+
+# Create the linked question generator
+data_linked_generator = DataLinkedQuestionGen(
+    llm=llm,
+    text_embedder=text_embedder,
+    local_questions=local_questions,
+    token_encoder=token_encoder,
+    assertion_config=assertion_config,
+    llm_params=LLM_PARAMS,
+    concurrent_coroutines=CONCURRENT_REQUESTS,
+    random_seed=RANDOM_SEED,
+    # Linked-specific parameters
+    min_questions_per_entity=LINKED_MIN_QUESTIONS_PER_ENTITY,
+    max_questions_per_entity=LINKED_MAX_QUESTIONS_PER_ENTITY,
+    min_quality_score=LINKED_MIN_QUALITY_SCORE,
+    question_types=LINKED_QUESTION_TYPES,
+    enable_batch_validation=LINKED_ENABLE_BATCH_VALIDATION,
+    mmr_lambda=LINKED_MMR_LAMBDA,
+    type_balance_weight=LINKED_TYPE_BALANCE_WEIGHT,
+)
+
+# Generate linked questions (using higher oversample factor due to validation filtering)
+data_linked_question_results = await data_linked_generator.agenerate(
+    num_questions=NUM_QUESTIONS,
+    oversample_factor=LINKED_OVERSAMPLE_FACTOR,
+)
+
+# Save both candidate questions and the final selected questions
+save_questions(
+    data_linked_question_results.selected_questions,
+    f"{OUTPUT_QUESTIONS_PATH}/data_linked_questions/",
+    "selected_questions",
+)
+save_questions(
+    data_linked_question_results.selected_questions,
+    f"{OUTPUT_QUESTIONS_PATH}/data_linked_questions/",
+    "selected_questions_text",
+    question_text_only=True,
+)
+save_questions(
+    data_linked_question_results.candidate_questions,
+    f"{OUTPUT_QUESTIONS_PATH}/data_linked_questions/",
+    "candidate_questions",
+)
+
+print(
+    f"\nGenerated {len(data_linked_question_results.selected_questions)} linked questions"
+)
+print(f"  (from {len(data_linked_question_results.candidate_questions)} candidates)")</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
 <div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=afb1549d">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -2244,7 +2599,7 @@ save_questions(
 <div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="CodeMirror cm-s-jupyter">
 <div class="zeroclipboard-container">
-<clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-9">
+<clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-11">
 <div>
 <span class="notice" hidden="">Copied!</span>
 <svg aria-hidden="true" class="clipboard-copy-icon" data-view-component="true" height="20" version="1.1" viewbox="0 0 16 16" width="20">
@@ -2285,7 +2640,7 @@ save_questions(
 
 <span class="n">save_activity_context</span><span class="p">(</span><span class="n">activity_context</span><span class="p">,</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">OUTPUT_QUESTIONS_PATH</span><span class="si">}</span><span class="s2">/context/"</span><span class="p">)</span>
 </pre></div>
-<div class="clipboard-copy-txt" id="cell-9">from benchmark_qed.autoq.question_gen.activity_questions.context_gen.activity_context_gen import (
+<div class="clipboard-copy-txt" id="cell-11">from benchmark_qed.autoq.question_gen.activity_questions.context_gen.activity_context_gen import (
     ActivityContextGen,
 )
 
@@ -2340,7 +2695,7 @@ save_activity_context(activity_context, f"{OUTPUT_QUESTIONS_PATH}/context/")</di
 <div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="CodeMirror cm-s-jupyter">
 <div class="zeroclipboard-container">
-<clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-10">
+<clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-12">
 <div>
 <span class="notice" hidden="">Copied!</span>
 <svg aria-hidden="true" class="clipboard-copy-icon" data-view-component="true" height="20" version="1.1" viewbox="0 0 16 16" width="20">
@@ -2398,7 +2753,7 @@ save_activity_context(activity_context, f"{OUTPUT_QUESTIONS_PATH}/context/")</di
     <span class="s2">"candidate_questions"</span><span class="p">,</span>
 <span class="p">)</span>
 </pre></div>
-<div class="clipboard-copy-txt" id="cell-10">from pathlib import Path
+<div class="clipboard-copy-txt" id="cell-12">from pathlib import Path
 
 from benchmark_qed.autoq.data_model.activity import ActivityContext
 from benchmark_qed.autoq.question_gen.activity_questions.local_question_gen import (
@@ -2470,7 +2825,7 @@ save_questions(
 <div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="CodeMirror cm-s-jupyter">
 <div class="zeroclipboard-container">
-<clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-11">
+<clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-13">
 <div>
 <span class="notice" hidden="">Copied!</span>
 <svg aria-hidden="true" class="clipboard-copy-icon" data-view-component="true" height="20" version="1.1" viewbox="0 0 16 16" width="20">
@@ -2525,7 +2880,7 @@ save_questions(
     <span class="s2">"candidate_questions"</span><span class="p">,</span>
 <span class="p">)</span>
 </pre></div>
-<div class="clipboard-copy-txt" id="cell-11">from benchmark_qed.autoq.question_gen.activity_questions.global_question_gen import (
+<div class="clipboard-copy-txt" id="cell-13">from benchmark_qed.autoq.question_gen.activity_questions.global_question_gen import (
     ActivityGlobalQuestionGen,
 )
 

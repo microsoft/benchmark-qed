@@ -756,27 +756,27 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#configuration" class="md-nav__link">
+  <a href="#shared-configuration" class="md-nav__link">
     <span class="md-ellipsis">
-      Configuration
+      Shared Configuration
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#generate-assertions-for-existing-data-local-questions" class="md-nav__link">
+  <a href="#data-local-assertions" class="md-nav__link">
     <span class="md-ellipsis">
-      Generate Assertions for Existing Data-Local Questions
+      Data-Local Assertions
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#generate-assertions-for-existing-data-global-questions" class="md-nav__link">
+  <a href="#data-global-assertions" class="md-nav__link">
     <span class="md-ellipsis">
-      Generate Assertions for Existing Data-Global Questions
+      Data-Global Assertions
     </span>
   </a>
   
@@ -1391,7 +1391,7 @@ if logging.getLogger("httpx") is not None:
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="configuration">Configuration<a class="anchor-link" href="#configuration">¶</a></h2>
+<h2 id="shared-configuration">Shared Configuration<a class="anchor-link" href="#shared-configuration">¶</a></h2><p>Common settings for data path and LLM model used by both local and global assertion generation.</p>
 </div>
 </div>
 </div>
@@ -1414,33 +1414,25 @@ if logging.getLogger("httpx") is not None:
 </div>
 </clipboard-copy>
 </div>
-<div class="highlight-ipynb hl-python"><pre><span></span><span class="c1"># DATA CONFIGS</span>
-<span class="n">OUTPUT_QUESTIONS_PATH</span> <span class="o">=</span> <span class="s2">"../../output/AP_news/questions"</span>
+<div class="highlight-ipynb hl-python"><pre><span></span><span class="c1"># =============================================================================</span>
+<span class="c1"># SHARED CONFIGURATION - Used by both local and global assertion generation</span>
+<span class="c1"># =============================================================================</span>
+
+<span class="c1"># DATA PATH - where to load/save questions</span>
+<span class="n">OUTPUT_QUESTIONS_PATH</span> <span class="o">=</span> <span class="s2">"../../local/ap_news/output"</span>
 
 <span class="c1"># MODEL CONFIGS</span>
 <span class="n">API_KEY</span> <span class="o">=</span> <span class="n">SecretStr</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">"OPENAI_API_KEY"</span><span class="p">,</span> <span class="s2">""</span><span class="p">))</span>
-<span class="n">LLM_MODEL</span> <span class="o">=</span> <span class="s2">"gpt-4.1"</span>
+<span class="n">LLM_MODEL</span> <span class="o">=</span> <span class="s2">"gpt-5.2"</span>
 <span class="n">LLM_PARAMS</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s2">"temperature"</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
     <span class="s2">"seed"</span><span class="p">:</span> <span class="mi">42</span><span class="p">,</span>
-<span class="p">}</span>  <span class="c1"># adjust this based on your model. For example, some reasoning models do not support temperature settings</span>
+<span class="p">}</span>
 
-<span class="c1"># CONCURRENCY CONFIGS</span>
-<span class="n">CONCURRENT_REQUESTS</span> <span class="o">=</span> <span class="mi">8</span>  <span class="c1"># Concurrent LLM calls. Adjust based on your model capacity.</span>
+<span class="c1"># CONCURRENCY - adjust based on your model rate limits</span>
+<span class="n">CONCURRENT_REQUESTS</span> <span class="o">=</span> <span class="mi">32</span>
 
-<span class="c1"># ASSERTION GENERATION CONFIGS</span>
-<span class="n">MAX_ASSERTIONS</span> <span class="o">=</span> <span class="mi">20</span>  <span class="c1"># Maximum number of assertions per question</span>
-<span class="n">BATCH_SIZE</span> <span class="o">=</span> <span class="mi">100</span>  <span class="c1"># Batch size for processing claims in global assertion generation</span>
-<span class="n">MAX_DATA_TOKENS</span> <span class="o">=</span> <span class="p">(</span>
-    <span class="mi">32000</span>  <span class="c1"># Maximum input data tokens for the reduce step in global assertions</span>
-<span class="p">)</span>
-<span class="n">ENABLE_VALIDATION</span> <span class="o">=</span> <span class="kc">True</span>  <span class="c1"># Set to True to validate assertions against sources</span>
-<span class="n">MIN_VALIDATION_SCORE</span> <span class="o">=</span> <span class="mi">3</span>  <span class="c1"># Minimum score (1-5) for grounding, relevance, verifiability</span>
-
-<span class="c1"># Parallelism for assertion generation (adjust based on your model rate limits)</span>
-<span class="n">CONCURRENT_LOCAL_QUESTIONS</span> <span class="o">=</span> <span class="mi">8</span>  <span class="c1"># Questions to process in parallel for local assertions</span>
-<span class="n">CONCURRENT_GLOBAL_QUESTIONS</span> <span class="o">=</span> <span class="mi">2</span>  <span class="c1"># Questions to process in parallel for global assertions (lower due to internal parallelism, set to 1 for sequential)</span>
-
+<span class="c1"># Create LLM instance</span>
 <span class="n">llm</span> <span class="o">=</span> <span class="n">ModelFactory</span><span class="o">.</span><span class="n">create_chat_model</span><span class="p">(</span>
     <span class="n">model_config</span><span class="o">=</span><span class="n">LLMConfig</span><span class="p">(</span>
         <span class="n">model</span><span class="o">=</span><span class="n">LLM_MODEL</span><span class="p">,</span>
@@ -1450,54 +1442,28 @@ if logging.getLogger("httpx") is not None:
     <span class="p">)</span>
 <span class="p">)</span>
 
-<span class="c1"># Create validator if validation is enabled</span>
-<span class="c1"># Validator checks assertions for:</span>
-<span class="c1"># - Grounding: Is the assertion supported by source texts?</span>
-<span class="c1"># - Relevance: Is it useful for evaluating the question?</span>
-<span class="c1"># - Verifiability: Is it clear and testable?</span>
-<span class="n">validator</span> <span class="o">=</span> <span class="p">(</span>
-    <span class="n">AssertionValidator</span><span class="p">(</span>
-        <span class="n">llm</span><span class="o">=</span><span class="n">llm</span><span class="p">,</span>
-        <span class="n">llm_params</span><span class="o">=</span><span class="n">LLM_PARAMS</span><span class="p">,</span>
-        <span class="n">min_criterion_score</span><span class="o">=</span><span class="n">MIN_VALIDATION_SCORE</span><span class="p">,</span>
-        <span class="n">concurrent_validations</span><span class="o">=</span><span class="n">CONCURRENT_REQUESTS</span><span class="p">,</span>
-    <span class="p">)</span>
-    <span class="k">if</span> <span class="n">ENABLE_VALIDATION</span>
-    <span class="k">else</span> <span class="kc">None</span>
-<span class="p">)</span>
-
-<span class="k">if</span> <span class="n">validator</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Validation enabled (min score: </span><span class="si">{</span><span class="n">MIN_VALIDATION_SCORE</span><span class="si">}</span><span class="s2">/5)"</span><span class="p">)</span>
-<span class="k">else</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">"Validation disabled"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"LLM configured: </span><span class="si">{</span><span class="n">LLM_MODEL</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Data path: </span><span class="si">{</span><span class="n">OUTPUT_QUESTIONS_PATH</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </pre></div>
-<div class="clipboard-copy-txt" id="cell-4"># DATA CONFIGS
-OUTPUT_QUESTIONS_PATH = "../../output/AP_news/questions"
+<div class="clipboard-copy-txt" id="cell-4"># =============================================================================
+# SHARED CONFIGURATION - Used by both local and global assertion generation
+# =============================================================================
+
+# DATA PATH - where to load/save questions
+OUTPUT_QUESTIONS_PATH = "../../local/ap_news/output"
 
 # MODEL CONFIGS
 API_KEY = SecretStr(os.getenv("OPENAI_API_KEY", ""))
-LLM_MODEL = "gpt-4.1"
+LLM_MODEL = "gpt-5.2"
 LLM_PARAMS = {
     "temperature": 0.0,
     "seed": 42,
-}  # adjust this based on your model. For example, some reasoning models do not support temperature settings
+}
 
-# CONCURRENCY CONFIGS
-CONCURRENT_REQUESTS = 8  # Concurrent LLM calls. Adjust based on your model capacity.
+# CONCURRENCY - adjust based on your model rate limits
+CONCURRENT_REQUESTS = 32
 
-# ASSERTION GENERATION CONFIGS
-MAX_ASSERTIONS = 20  # Maximum number of assertions per question
-BATCH_SIZE = 100  # Batch size for processing claims in global assertion generation
-MAX_DATA_TOKENS = (
-    32000  # Maximum input data tokens for the reduce step in global assertions
-)
-ENABLE_VALIDATION = True  # Set to True to validate assertions against sources
-MIN_VALIDATION_SCORE = 3  # Minimum score (1-5) for grounding, relevance, verifiability
-
-# Parallelism for assertion generation (adjust based on your model rate limits)
-CONCURRENT_LOCAL_QUESTIONS = 8  # Questions to process in parallel for local assertions
-CONCURRENT_GLOBAL_QUESTIONS = 2  # Questions to process in parallel for global assertions (lower due to internal parallelism, set to 1 for sequential)
-
+# Create LLM instance
 llm = ModelFactory.create_chat_model(
     model_config=LLMConfig(
         model=LLM_MODEL,
@@ -1507,26 +1473,8 @@ llm = ModelFactory.create_chat_model(
     )
 )
 
-# Create validator if validation is enabled
-# Validator checks assertions for:
-# - Grounding: Is the assertion supported by source texts?
-# - Relevance: Is it useful for evaluating the question?
-# - Verifiability: Is it clear and testable?
-validator = (
-    AssertionValidator(
-        llm=llm,
-        llm_params=LLM_PARAMS,
-        min_criterion_score=MIN_VALIDATION_SCORE,
-        concurrent_validations=CONCURRENT_REQUESTS,
-    )
-    if ENABLE_VALIDATION
-    else None
-)
-
-if validator:
-    print(f"Validation enabled (min score: {MIN_VALIDATION_SCORE}/5)")
-else:
-    print("Validation disabled")</div>
+print(f"LLM configured: {LLM_MODEL}")
+print(f"Data path: {OUTPUT_QUESTIONS_PATH}")</div>
 </div>
 </div>
 </div>
@@ -1539,12 +1487,12 @@ else:
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="generate-assertions-for-existing-data-local-questions">Generate Assertions for Existing Data-Local Questions<a class="anchor-link" href="#generate-assertions-for-existing-data-local-questions">¶</a></h2><p>Generate assertions for data-local questions that were previously created without assertions.</p>
+<h2 id="data-local-assertions">Data-Local Assertions<a class="anchor-link" href="#data-local-assertions">¶</a></h2><p>Generate assertions for data-local questions. These are factual, single-source questions that require strict grounding validation.</p>
 </div>
 </div>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=0b1f44c1">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=4eb600e2">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -1562,12 +1510,102 @@ else:
 </div>
 </clipboard-copy>
 </div>
+<div class="highlight-ipynb hl-python"><pre><span></span><span class="c1"># =============================================================================</span>
+<span class="c1"># DATA-LOCAL SETTINGS</span>
+<span class="c1"># =============================================================================</span>
+
+<span class="c1"># Maximum assertions per question</span>
+<span class="n">LOCAL_MAX_ASSERTIONS</span> <span class="o">=</span> <span class="mi">20</span>
+
+<span class="c1"># Validation settings</span>
+<span class="n">LOCAL_ENABLE_VALIDATION</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">LOCAL_MIN_VALIDATION_SCORE</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="mi">3</span>  <span class="c1"># Minimum score (1-5) for grounding, relevance, verifiability</span>
+<span class="p">)</span>
+
+<span class="c1"># Parallelism - questions to process in parallel</span>
+<span class="n">LOCAL_CONCURRENT_QUESTIONS</span> <span class="o">=</span> <span class="mi">8</span>
+
+<span class="c1"># Create local validator (uses local_validation_prompt - stricter, fact-focused)</span>
+<span class="n">local_validator</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">AssertionValidator</span><span class="p">(</span>
+        <span class="n">llm</span><span class="o">=</span><span class="n">llm</span><span class="p">,</span>
+        <span class="n">llm_params</span><span class="o">=</span><span class="n">LLM_PARAMS</span><span class="p">,</span>
+        <span class="n">min_criterion_score</span><span class="o">=</span><span class="n">LOCAL_MIN_VALIDATION_SCORE</span><span class="p">,</span>
+        <span class="n">concurrent_validations</span><span class="o">=</span><span class="n">CONCURRENT_REQUESTS</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="k">if</span> <span class="n">LOCAL_ENABLE_VALIDATION</span>
+    <span class="k">else</span> <span class="kc">None</span>
+<span class="p">)</span>
+
+<span class="k">if</span> <span class="n">local_validator</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Local validation enabled (min score: </span><span class="si">{</span><span class="n">LOCAL_MIN_VALIDATION_SCORE</span><span class="si">}</span><span class="s2">/5)"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"  - Uses local_validation_prompt (fact-focused, strict grounding)"</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Local validation disabled"</span><span class="p">)</span>
+</pre></div>
+<div class="clipboard-copy-txt" id="cell-5"># =============================================================================
+# DATA-LOCAL SETTINGS
+# =============================================================================
+
+# Maximum assertions per question
+LOCAL_MAX_ASSERTIONS = 20
+
+# Validation settings
+LOCAL_ENABLE_VALIDATION = True
+LOCAL_MIN_VALIDATION_SCORE = (
+    3  # Minimum score (1-5) for grounding, relevance, verifiability
+)
+
+# Parallelism - questions to process in parallel
+LOCAL_CONCURRENT_QUESTIONS = 8
+
+# Create local validator (uses local_validation_prompt - stricter, fact-focused)
+local_validator = (
+    AssertionValidator(
+        llm=llm,
+        llm_params=LLM_PARAMS,
+        min_criterion_score=LOCAL_MIN_VALIDATION_SCORE,
+        concurrent_validations=CONCURRENT_REQUESTS,
+    )
+    if LOCAL_ENABLE_VALIDATION
+    else None
+)
+
+if local_validator:
+    print(f"Local validation enabled (min score: {LOCAL_MIN_VALIDATION_SCORE}/5)")
+    print("  - Uses local_validation_prompt (fact-focused, strict grounding)")
+else:
+    print("Local validation disabled")</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=0b1f44c1">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="CodeMirror cm-s-jupyter">
+<div class="zeroclipboard-container">
+<clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-6">
+<div>
+<span class="notice" hidden="">Copied!</span>
+<svg aria-hidden="true" class="clipboard-copy-icon" data-view-component="true" height="20" version="1.1" viewbox="0 0 16 16" width="20">
+<path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z" fill="currentColor" fill-rule="evenodd"></path>
+<path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z" fill="currentColor" fill-rule="evenodd"></path>
+</svg>
+</div>
+</clipboard-copy>
+</div>
 <div class="highlight-ipynb hl-python"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">benchmark_qed.autoq.question_gen.data_questions.assertion_gen.local_claim_assertion_gen</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">LocalClaimAssertionGenerator</span><span class="p">,</span>
 <span class="p">)</span>
 
 <span class="c1"># Load existing data-local questions from disk</span>
-<span class="c1"># Replace with your actual path to existing questions</span>
 <span class="n">existing_local_questions</span> <span class="o">=</span> <span class="n">load_questions</span><span class="p">(</span>
     <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">OUTPUT_QUESTIONS_PATH</span><span class="si">}</span><span class="s2">/data_local_questions/selected_questions.json"</span>
 <span class="p">)</span>
@@ -1590,15 +1628,15 @@ else:
     <span class="sa">f</span><span class="s2">"Questions with claims: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">questions_with_claims</span><span class="p">)</span><span class="si">}</span><span class="s2">, without claims: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">questions_without_claims</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span>
 <span class="p">)</span>
 
-<span class="c1"># Initialize local assertion generator with optional validator</span>
+<span class="c1"># Initialize local assertion generator</span>
 <span class="n">local_assertion_generator</span> <span class="o">=</span> <span class="n">LocalClaimAssertionGenerator</span><span class="p">(</span>
     <span class="n">llm</span><span class="o">=</span><span class="n">llm</span><span class="p">,</span>
-    <span class="n">max_assertions</span><span class="o">=</span><span class="n">MAX_ASSERTIONS</span><span class="p">,</span>
-    <span class="n">validator</span><span class="o">=</span><span class="n">validator</span><span class="p">,</span>  <span class="c1"># Pass validator for quality filtering (None to skip)</span>
-    <span class="n">max_concurrent_questions</span><span class="o">=</span><span class="n">CONCURRENT_LOCAL_QUESTIONS</span><span class="p">,</span>  <span class="c1"># Process questions in parallel</span>
+    <span class="n">max_assertions</span><span class="o">=</span><span class="n">LOCAL_MAX_ASSERTIONS</span><span class="p">,</span>
+    <span class="n">validator</span><span class="o">=</span><span class="n">local_validator</span><span class="p">,</span>
+    <span class="n">max_concurrent_questions</span><span class="o">=</span><span class="n">LOCAL_CONCURRENT_QUESTIONS</span><span class="p">,</span>
 <span class="p">)</span>
 
-<span class="c1"># Generate assertions for all questions with claims (parallel processing)</span>
+<span class="c1"># Generate assertions for all questions with claims</span>
 <span class="k">await</span> <span class="n">local_assertion_generator</span><span class="o">.</span><span class="n">agenerate_assertions_for_questions</span><span class="p">(</span>
     <span class="n">questions_with_claims</span>
 <span class="p">)</span>
@@ -1613,14 +1651,22 @@ else:
     <span class="s2">"selected_questions_with_assertions"</span><span class="p">,</span>
 <span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Saved </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">updated_local_questions</span><span class="p">)</span><span class="si">}</span><span class="s2"> data-local questions with assertions"</span><span class="p">)</span>
+<span class="c1"># Show summary</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">=== SUMMARY ==="</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Processed </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">questions_with_claims</span><span class="p">)</span><span class="si">}</span><span class="s2"> questions with claims"</span><span class="p">)</span>
+<span class="n">total_assertions</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span>
+    <span class="nb">len</span><span class="p">(</span><span class="n">q</span><span class="o">.</span><span class="n">attributes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"assertions"</span><span class="p">,</span> <span class="p">[]))</span> <span class="k">for</span> <span class="n">q</span> <span class="ow">in</span> <span class="n">questions_with_claims</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Total assertions generated: </span><span class="si">{</span><span class="n">total_assertions</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span>
+    <span class="sa">f</span><span class="s2">"Average assertions per question: </span><span class="si">{</span><span class="n">total_assertions</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nb">max</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">questions_with_claims</span><span class="p">),</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">"</span>
+<span class="p">)</span>
 </pre></div>
-<div class="clipboard-copy-txt" id="cell-5">from benchmark_qed.autoq.question_gen.data_questions.assertion_gen.local_claim_assertion_gen import (
+<div class="clipboard-copy-txt" id="cell-6">from benchmark_qed.autoq.question_gen.data_questions.assertion_gen.local_claim_assertion_gen import (
     LocalClaimAssertionGenerator,
 )
 
 # Load existing data-local questions from disk
-# Replace with your actual path to existing questions
 existing_local_questions = load_questions(
     f"{OUTPUT_QUESTIONS_PATH}/data_local_questions/selected_questions.json"
 )
@@ -1643,15 +1689,15 @@ print(
     f"Questions with claims: {len(questions_with_claims)}, without claims: {len(questions_without_claims)}"
 )
 
-# Initialize local assertion generator with optional validator
+# Initialize local assertion generator
 local_assertion_generator = LocalClaimAssertionGenerator(
     llm=llm,
-    max_assertions=MAX_ASSERTIONS,
-    validator=validator,  # Pass validator for quality filtering (None to skip)
-    max_concurrent_questions=CONCURRENT_LOCAL_QUESTIONS,  # Process questions in parallel
+    max_assertions=LOCAL_MAX_ASSERTIONS,
+    validator=local_validator,
+    max_concurrent_questions=LOCAL_CONCURRENT_QUESTIONS,
 )
 
-# Generate assertions for all questions with claims (parallel processing)
+# Generate assertions for all questions with claims
 await local_assertion_generator.agenerate_assertions_for_questions(
     questions_with_claims
 )
@@ -1666,7 +1712,16 @@ save_questions(
     "selected_questions_with_assertions",
 )
 
-print(f"Saved {len(updated_local_questions)} data-local questions with assertions")</div>
+# Show summary
+print("\n=== SUMMARY ===")
+print(f"Processed {len(questions_with_claims)} questions with claims")
+total_assertions = sum(
+    len(q.attributes.get("assertions", [])) for q in questions_with_claims
+)
+print(f"Total assertions generated: {total_assertions}")
+print(
+    f"Average assertions per question: {total_assertions / max(len(questions_with_claims), 1):.1f}"
+)</div>
 </div>
 </div>
 </div>
@@ -1679,7 +1734,232 @@ print(f"Saved {len(updated_local_questions)} data-local questions with assertion
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="generate-assertions-for-existing-data-global-questions">Generate Assertions for Existing Data-Global Questions<a class="anchor-link" href="#generate-assertions-for-existing-data-global-questions">¶</a></h2><p>Generate assertions for data-global questions that were previously created without assertions. Global assertion generation uses a map-reduce approach, first generating local assertions from referenced questions, then consolidating them into global assertions.</p>
+<h2 id="data-global-assertions">Data-Global Assertions<a class="anchor-link" href="#data-global-assertions">¶</a></h2><p>Generate assertions for data-global questions. These are thematic, cross-document questions that use a map-reduce approach:</p>
+<ol>
+<li><strong>Map step</strong>: Generate factual assertions from claim batches (uses semantic grouping)</li>
+<li><strong>Reduce step</strong>: Consolidate into high-level thematic assertions</li>
+</ol>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=49063d09">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="CodeMirror cm-s-jupyter">
+<div class="zeroclipboard-container">
+<clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-7">
+<div>
+<span class="notice" hidden="">Copied!</span>
+<svg aria-hidden="true" class="clipboard-copy-icon" data-view-component="true" height="20" version="1.1" viewbox="0 0 16 16" width="20">
+<path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z" fill="currentColor" fill-rule="evenodd"></path>
+<path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z" fill="currentColor" fill-rule="evenodd"></path>
+</svg>
+</div>
+</clipboard-copy>
+</div>
+<div class="highlight-ipynb hl-python"><pre><span></span><span class="c1"># =============================================================================</span>
+<span class="c1"># DATA-GLOBAL SETTINGS</span>
+<span class="c1"># =============================================================================</span>
+
+<span class="c1"># Maximum assertions per question</span>
+<span class="n">GLOBAL_MAX_ASSERTIONS</span> <span class="o">=</span> <span class="mi">20</span>
+
+<span class="c1"># Validation settings</span>
+<span class="n">GLOBAL_ENABLE_VALIDATION</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">GLOBAL_MIN_VALIDATION_SCORE</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="mi">3</span>  <span class="c1"># Minimum score (1-5) for grounding, relevance, verifiability</span>
+<span class="p">)</span>
+
+<span class="c1"># Map-reduce batching settings</span>
+<span class="n">GLOBAL_BATCH_SIZE</span> <span class="o">=</span> <span class="mi">100</span>  <span class="c1"># Batch size when semantic grouping is disabled</span>
+<span class="n">GLOBAL_MAP_DATA_TOKENS</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="mi">8000</span>  <span class="c1"># Max tokens per cluster in map step (when semantic grouping enabled)</span>
+<span class="p">)</span>
+<span class="n">GLOBAL_REDUCE_DATA_TOKENS</span> <span class="o">=</span> <span class="mi">32000</span>  <span class="c1"># Max input tokens for reduce step</span>
+
+<span class="c1"># Semantic grouping - groups similar claims together before map step</span>
+<span class="n">GLOBAL_ENABLE_SEMANTIC_GROUPING</span> <span class="o">=</span> <span class="kc">True</span>
+
+<span class="c1"># Validation phases</span>
+<span class="n">GLOBAL_VALIDATE_MAP_ASSERTIONS</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="kc">True</span>  <span class="c1"># Validate map assertions before reduce (increases LLM calls)</span>
+<span class="p">)</span>
+<span class="n">GLOBAL_VALIDATE_REDUCE_ASSERTIONS</span> <span class="o">=</span> <span class="kc">True</span>  <span class="c1"># Validate final assertions after reduce</span>
+
+<span class="c1"># Parallelism - questions to process in parallel (lower due to internal parallelism)</span>
+<span class="n">GLOBAL_CONCURRENT_QUESTIONS</span> <span class="o">=</span> <span class="mi">2</span>
+
+<span class="c1"># Create text embedder for semantic grouping</span>
+<span class="n">text_embedder</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="k">if</span> <span class="n">GLOBAL_ENABLE_SEMANTIC_GROUPING</span><span class="p">:</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">benchmark_qed.autod.data_processor.embedding</span><span class="w"> </span><span class="kn">import</span> <span class="n">TextEmbedder</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">benchmark_qed.config.llm_config</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+        <span class="n">LLMConfig</span> <span class="k">as</span> <span class="n">EmbeddingConfig</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">benchmark_qed.config.llm_config</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+        <span class="n">LLMProvider</span> <span class="k">as</span> <span class="n">EmbeddingProvider</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">benchmark_qed.llm.factory</span><span class="w"> </span><span class="kn">import</span> <span class="n">ModelFactory</span> <span class="k">as</span> <span class="n">EmbeddingModelFactory</span>
+
+    <span class="n">embedding_model</span> <span class="o">=</span> <span class="n">EmbeddingModelFactory</span><span class="o">.</span><span class="n">create_embedding_model</span><span class="p">(</span>
+        <span class="n">model_config</span><span class="o">=</span><span class="n">EmbeddingConfig</span><span class="p">(</span>
+            <span class="n">model</span><span class="o">=</span><span class="s2">"text-embedding-3-large"</span><span class="p">,</span>
+            <span class="n">api_key</span><span class="o">=</span><span class="n">API_KEY</span><span class="p">,</span>
+            <span class="n">llm_provider</span><span class="o">=</span><span class="n">EmbeddingProvider</span><span class="o">.</span><span class="n">OpenAIEmbedding</span><span class="p">,</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+    <span class="n">text_embedder</span> <span class="o">=</span> <span class="n">TextEmbedder</span><span class="p">(</span><span class="n">embedding_model</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Semantic grouping enabled - similar claims will be grouped together"</span><span class="p">)</span>
+
+<span class="c1"># Create map validator (fact-focused, for map assertions)</span>
+<span class="n">map_validator</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">AssertionValidator</span><span class="p">(</span>
+        <span class="n">llm</span><span class="o">=</span><span class="n">llm</span><span class="p">,</span>
+        <span class="n">llm_params</span><span class="o">=</span><span class="n">LLM_PARAMS</span><span class="p">,</span>
+        <span class="n">min_criterion_score</span><span class="o">=</span><span class="n">GLOBAL_MIN_VALIDATION_SCORE</span><span class="p">,</span>
+        <span class="n">concurrent_validations</span><span class="o">=</span><span class="n">CONCURRENT_REQUESTS</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="k">if</span> <span class="n">GLOBAL_ENABLE_VALIDATION</span> <span class="ow">and</span> <span class="n">GLOBAL_VALIDATE_MAP_ASSERTIONS</span>
+    <span class="k">else</span> <span class="kc">None</span>
+<span class="p">)</span>
+
+<span class="c1"># Create reduce validator (thematic, for final assertions)</span>
+<span class="n">reduce_validator</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="k">if</span> <span class="n">GLOBAL_ENABLE_VALIDATION</span> <span class="ow">and</span> <span class="n">GLOBAL_VALIDATE_REDUCE_ASSERTIONS</span><span class="p">:</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+
+    <span class="kn">from</span><span class="w"> </span><span class="nn">benchmark_qed.autoq.prompts</span><span class="w"> </span><span class="kn">import</span> <span class="n">data_questions</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">benchmark_qed.config.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_template_file</span>
+
+    <span class="n">global_validation_prompt</span> <span class="o">=</span> <span class="n">load_template_file</span><span class="p">(</span>
+        <span class="n">Path</span><span class="p">(</span><span class="n">data_questions</span><span class="o">.</span><span class="vm">__file__</span><span class="p">)</span><span class="o">.</span><span class="n">parent</span>
+        <span class="o">/</span> <span class="s2">"assertions"</span>
+        <span class="o">/</span> <span class="s2">"global_validation_prompt.txt"</span>
+    <span class="p">)</span>
+    <span class="n">reduce_validator</span> <span class="o">=</span> <span class="n">AssertionValidator</span><span class="p">(</span>
+        <span class="n">llm</span><span class="o">=</span><span class="n">llm</span><span class="p">,</span>
+        <span class="n">llm_params</span><span class="o">=</span><span class="n">LLM_PARAMS</span><span class="p">,</span>
+        <span class="n">min_criterion_score</span><span class="o">=</span><span class="n">GLOBAL_MIN_VALIDATION_SCORE</span><span class="p">,</span>
+        <span class="n">concurrent_validations</span><span class="o">=</span><span class="n">CONCURRENT_REQUESTS</span><span class="p">,</span>
+        <span class="n">validation_prompt</span><span class="o">=</span><span class="n">global_validation_prompt</span><span class="p">,</span>
+    <span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Global assertion settings:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  - Max assertions: </span><span class="si">{</span><span class="n">GLOBAL_MAX_ASSERTIONS</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  - Map data tokens: </span><span class="si">{</span><span class="n">GLOBAL_MAP_DATA_TOKENS</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  - Reduce data tokens: </span><span class="si">{</span><span class="n">GLOBAL_REDUCE_DATA_TOKENS</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  - Semantic grouping: </span><span class="si">{</span><span class="n">GLOBAL_ENABLE_SEMANTIC_GROUPING</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span>
+    <span class="sa">f</span><span class="s2">"  - Map validation: </span><span class="si">{</span><span class="n">GLOBAL_VALIDATE_MAP_ASSERTIONS</span><span class="si">}</span><span class="s2"> (min score: </span><span class="si">{</span><span class="n">GLOBAL_MIN_VALIDATION_SCORE</span><span class="si">}</span><span class="s2">/5)"</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span>
+    <span class="sa">f</span><span class="s2">"  - Reduce validation: </span><span class="si">{</span><span class="n">GLOBAL_VALIDATE_REDUCE_ASSERTIONS</span><span class="si">}</span><span class="s2"> (min score: </span><span class="si">{</span><span class="n">GLOBAL_MIN_VALIDATION_SCORE</span><span class="si">}</span><span class="s2">/5)"</span>
+<span class="p">)</span>
+</pre></div>
+<div class="clipboard-copy-txt" id="cell-7"># =============================================================================
+# DATA-GLOBAL SETTINGS
+# =============================================================================
+
+# Maximum assertions per question
+GLOBAL_MAX_ASSERTIONS = 20
+
+# Validation settings
+GLOBAL_ENABLE_VALIDATION = True
+GLOBAL_MIN_VALIDATION_SCORE = (
+    3  # Minimum score (1-5) for grounding, relevance, verifiability
+)
+
+# Map-reduce batching settings
+GLOBAL_BATCH_SIZE = 100  # Batch size when semantic grouping is disabled
+GLOBAL_MAP_DATA_TOKENS = (
+    8000  # Max tokens per cluster in map step (when semantic grouping enabled)
+)
+GLOBAL_REDUCE_DATA_TOKENS = 32000  # Max input tokens for reduce step
+
+# Semantic grouping - groups similar claims together before map step
+GLOBAL_ENABLE_SEMANTIC_GROUPING = True
+
+# Validation phases
+GLOBAL_VALIDATE_MAP_ASSERTIONS = (
+    True  # Validate map assertions before reduce (increases LLM calls)
+)
+GLOBAL_VALIDATE_REDUCE_ASSERTIONS = True  # Validate final assertions after reduce
+
+# Parallelism - questions to process in parallel (lower due to internal parallelism)
+GLOBAL_CONCURRENT_QUESTIONS = 2
+
+# Create text embedder for semantic grouping
+text_embedder = None
+if GLOBAL_ENABLE_SEMANTIC_GROUPING:
+    from benchmark_qed.autod.data_processor.embedding import TextEmbedder
+    from benchmark_qed.config.llm_config import (
+        LLMConfig as EmbeddingConfig,
+    )
+    from benchmark_qed.config.llm_config import (
+        LLMProvider as EmbeddingProvider,
+    )
+    from benchmark_qed.llm.factory import ModelFactory as EmbeddingModelFactory
+
+    embedding_model = EmbeddingModelFactory.create_embedding_model(
+        model_config=EmbeddingConfig(
+            model="text-embedding-3-large",
+            api_key=API_KEY,
+            llm_provider=EmbeddingProvider.OpenAIEmbedding,
+        )
+    )
+    text_embedder = TextEmbedder(embedding_model)
+    print("Semantic grouping enabled - similar claims will be grouped together")
+
+# Create map validator (fact-focused, for map assertions)
+map_validator = (
+    AssertionValidator(
+        llm=llm,
+        llm_params=LLM_PARAMS,
+        min_criterion_score=GLOBAL_MIN_VALIDATION_SCORE,
+        concurrent_validations=CONCURRENT_REQUESTS,
+    )
+    if GLOBAL_ENABLE_VALIDATION and GLOBAL_VALIDATE_MAP_ASSERTIONS
+    else None
+)
+
+# Create reduce validator (thematic, for final assertions)
+reduce_validator = None
+if GLOBAL_ENABLE_VALIDATION and GLOBAL_VALIDATE_REDUCE_ASSERTIONS:
+    from pathlib import Path
+
+    from benchmark_qed.autoq.prompts import data_questions
+    from benchmark_qed.config.utils import load_template_file
+
+    global_validation_prompt = load_template_file(
+        Path(data_questions.__file__).parent
+        / "assertions"
+        / "global_validation_prompt.txt"
+    )
+    reduce_validator = AssertionValidator(
+        llm=llm,
+        llm_params=LLM_PARAMS,
+        min_criterion_score=GLOBAL_MIN_VALIDATION_SCORE,
+        concurrent_validations=CONCURRENT_REQUESTS,
+        validation_prompt=global_validation_prompt,
+    )
+
+print("\nGlobal assertion settings:")
+print(f"  - Max assertions: {GLOBAL_MAX_ASSERTIONS}")
+print(f"  - Map data tokens: {GLOBAL_MAP_DATA_TOKENS}")
+print(f"  - Reduce data tokens: {GLOBAL_REDUCE_DATA_TOKENS}")
+print(f"  - Semantic grouping: {GLOBAL_ENABLE_SEMANTIC_GROUPING}")
+print(
+    f"  - Map validation: {GLOBAL_VALIDATE_MAP_ASSERTIONS} (min score: {GLOBAL_MIN_VALIDATION_SCORE}/5)"
+)
+print(
+    f"  - Reduce validation: {GLOBAL_VALIDATE_REDUCE_ASSERTIONS} (min score: {GLOBAL_MIN_VALIDATION_SCORE}/5)"
+)</div>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -1692,7 +1972,7 @@ print(f"Saved {len(updated_local_questions)} data-local questions with assertion
 <div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="CodeMirror cm-s-jupyter">
 <div class="zeroclipboard-container">
-<clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-6">
+<clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-8">
 <div>
 <span class="notice" hidden="">Copied!</span>
 <svg aria-hidden="true" class="clipboard-copy-icon" data-view-component="true" height="20" version="1.1" viewbox="0 0 16 16" width="20">
@@ -1707,7 +1987,6 @@ print(f"Saved {len(updated_local_questions)} data-local questions with assertion
 <span class="p">)</span>
 
 <span class="c1"># Load existing data-global questions from disk</span>
-<span class="c1"># Replace with your actual path to existing questions</span>
 <span class="n">existing_global_questions</span> <span class="o">=</span> <span class="n">load_questions</span><span class="p">(</span>
     <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">OUTPUT_QUESTIONS_PATH</span><span class="si">}</span><span class="s2">/data_global_questions/selected_questions.json"</span>
 <span class="p">)</span>
@@ -1730,18 +2009,24 @@ print(f"Saved {len(updated_local_questions)} data-local questions with assertion
     <span class="sa">f</span><span class="s2">"Questions with claims: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">questions_with_claims</span><span class="p">)</span><span class="si">}</span><span class="s2">, without claims: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">questions_without_claims</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span>
 <span class="p">)</span>
 
-<span class="c1"># Initialize global assertion generator with optional validator</span>
+<span class="c1"># Initialize global assertion generator</span>
 <span class="n">global_assertion_generator</span> <span class="o">=</span> <span class="n">GlobalClaimAssertionGenerator</span><span class="p">(</span>
     <span class="n">llm</span><span class="o">=</span><span class="n">llm</span><span class="p">,</span>
-    <span class="n">max_assertions</span><span class="o">=</span><span class="n">MAX_ASSERTIONS</span><span class="p">,</span>
-    <span class="n">batch_size</span><span class="o">=</span><span class="n">BATCH_SIZE</span><span class="p">,</span>  <span class="c1"># Batch size for processing multiple claims</span>
-    <span class="n">max_data_tokens</span><span class="o">=</span><span class="n">MAX_DATA_TOKENS</span><span class="p">,</span>  <span class="c1"># max input data tokens for the reduce step</span>
+    <span class="n">max_assertions</span><span class="o">=</span><span class="n">GLOBAL_MAX_ASSERTIONS</span><span class="p">,</span>
+    <span class="n">batch_size</span><span class="o">=</span><span class="n">GLOBAL_BATCH_SIZE</span><span class="p">,</span>
+    <span class="n">map_data_tokens</span><span class="o">=</span><span class="n">GLOBAL_MAP_DATA_TOKENS</span><span class="p">,</span>
+    <span class="n">reduce_data_tokens</span><span class="o">=</span><span class="n">GLOBAL_REDUCE_DATA_TOKENS</span><span class="p">,</span>
     <span class="n">concurrent_coroutines</span><span class="o">=</span><span class="n">CONCURRENT_REQUESTS</span><span class="p">,</span>
-    <span class="n">validator</span><span class="o">=</span><span class="n">validator</span><span class="p">,</span>  <span class="c1"># Pass validator for quality filtering (None to skip)</span>
-    <span class="n">max_concurrent_questions</span><span class="o">=</span><span class="n">CONCURRENT_GLOBAL_QUESTIONS</span><span class="p">,</span>  <span class="c1"># Process questions in parallel (lower due to internal parallelism)</span>
+    <span class="n">map_validator</span><span class="o">=</span><span class="n">map_validator</span><span class="p">,</span>
+    <span class="n">reduce_validator</span><span class="o">=</span><span class="n">reduce_validator</span><span class="p">,</span>
+    <span class="n">max_concurrent_questions</span><span class="o">=</span><span class="n">GLOBAL_CONCURRENT_QUESTIONS</span><span class="p">,</span>
+    <span class="n">text_embedder</span><span class="o">=</span><span class="n">text_embedder</span><span class="p">,</span>
+    <span class="n">enable_semantic_grouping</span><span class="o">=</span><span class="n">GLOBAL_ENABLE_SEMANTIC_GROUPING</span><span class="p">,</span>
+    <span class="n">validate_map_assertions</span><span class="o">=</span><span class="n">GLOBAL_VALIDATE_MAP_ASSERTIONS</span><span class="p">,</span>
+    <span class="n">validate_reduce_assertions</span><span class="o">=</span><span class="n">GLOBAL_VALIDATE_REDUCE_ASSERTIONS</span><span class="p">,</span>
 <span class="p">)</span>
 
-<span class="c1"># Generate assertions for all questions with claims (parallel processing)</span>
+<span class="c1"># Generate assertions for ALL questions with claims</span>
 <span class="k">await</span> <span class="n">global_assertion_generator</span><span class="o">.</span><span class="n">agenerate_assertions_for_questions</span><span class="p">(</span>
     <span class="n">questions_with_claims</span>
 <span class="p">)</span>
@@ -1756,14 +2041,35 @@ print(f"Saved {len(updated_local_questions)} data-local questions with assertion
     <span class="s2">"selected_questions_with_assertions"</span><span class="p">,</span>
 <span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Saved </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">updated_global_questions</span><span class="p">)</span><span class="si">}</span><span class="s2"> data-global questions with assertions"</span><span class="p">)</span>
+<span class="c1"># Show summary</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">=== SUMMARY ==="</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Processed </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">questions_with_claims</span><span class="p">)</span><span class="si">}</span><span class="s2"> questions with claims"</span><span class="p">)</span>
+<span class="n">total_assertions</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span>
+    <span class="nb">len</span><span class="p">(</span><span class="n">q</span><span class="o">.</span><span class="n">attributes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"assertions"</span><span class="p">,</span> <span class="p">[]))</span> <span class="k">for</span> <span class="n">q</span> <span class="ow">in</span> <span class="n">questions_with_claims</span>
+<span class="p">)</span>
+<span class="n">total_map_assertions</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span>
+    <span class="nb">len</span><span class="p">(</span><span class="n">q</span><span class="o">.</span><span class="n">attributes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"map_assertions"</span><span class="p">,</span> <span class="p">[]))</span> <span class="k">for</span> <span class="n">q</span> <span class="ow">in</span> <span class="n">questions_with_claims</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Total map assertions generated: </span><span class="si">{</span><span class="n">total_map_assertions</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Total final assertions generated: </span><span class="si">{</span><span class="n">total_assertions</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span>
+    <span class="sa">f</span><span class="s2">"Average assertions per question: </span><span class="si">{</span><span class="n">total_assertions</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nb">max</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">questions_with_claims</span><span class="p">),</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">"</span>
+<span class="p">)</span>
+
+<span class="c1"># Show per-question breakdown</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">=== PER-QUESTION BREAKDOWN ==="</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">q</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">questions_with_claims</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span>
+    <span class="n">assertions</span> <span class="o">=</span> <span class="n">q</span><span class="o">.</span><span class="n">attributes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"assertions"</span><span class="p">,</span> <span class="p">[])</span>
+    <span class="n">map_assertions</span> <span class="o">=</span> <span class="n">q</span><span class="o">.</span><span class="n">attributes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"map_assertions"</span><span class="p">,</span> <span class="p">[])</span>
+    <span class="nb">print</span><span class="p">(</span>
+        <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">. [</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">map_assertions</span><span class="p">)</span><span class="si">}</span><span class="s2"> map → </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">assertions</span><span class="p">)</span><span class="si">}</span><span class="s2"> final] </span><span class="si">{</span><span class="n">q</span><span class="o">.</span><span class="n">text</span><span class="p">[:</span><span class="mi">60</span><span class="p">]</span><span class="si">}</span><span class="s2">..."</span>
+    <span class="p">)</span>
 </pre></div>
-<div class="clipboard-copy-txt" id="cell-6">from benchmark_qed.autoq.question_gen.data_questions.assertion_gen.global_claim_assertion_gen import (
+<div class="clipboard-copy-txt" id="cell-8">from benchmark_qed.autoq.question_gen.data_questions.assertion_gen.global_claim_assertion_gen import (
     GlobalClaimAssertionGenerator,
 )
 
 # Load existing data-global questions from disk
-# Replace with your actual path to existing questions
 existing_global_questions = load_questions(
     f"{OUTPUT_QUESTIONS_PATH}/data_global_questions/selected_questions.json"
 )
@@ -1786,18 +2092,24 @@ print(
     f"Questions with claims: {len(questions_with_claims)}, without claims: {len(questions_without_claims)}"
 )
 
-# Initialize global assertion generator with optional validator
+# Initialize global assertion generator
 global_assertion_generator = GlobalClaimAssertionGenerator(
     llm=llm,
-    max_assertions=MAX_ASSERTIONS,
-    batch_size=BATCH_SIZE,  # Batch size for processing multiple claims
-    max_data_tokens=MAX_DATA_TOKENS,  # max input data tokens for the reduce step
+    max_assertions=GLOBAL_MAX_ASSERTIONS,
+    batch_size=GLOBAL_BATCH_SIZE,
+    map_data_tokens=GLOBAL_MAP_DATA_TOKENS,
+    reduce_data_tokens=GLOBAL_REDUCE_DATA_TOKENS,
     concurrent_coroutines=CONCURRENT_REQUESTS,
-    validator=validator,  # Pass validator for quality filtering (None to skip)
-    max_concurrent_questions=CONCURRENT_GLOBAL_QUESTIONS,  # Process questions in parallel (lower due to internal parallelism)
+    map_validator=map_validator,
+    reduce_validator=reduce_validator,
+    max_concurrent_questions=GLOBAL_CONCURRENT_QUESTIONS,
+    text_embedder=text_embedder,
+    enable_semantic_grouping=GLOBAL_ENABLE_SEMANTIC_GROUPING,
+    validate_map_assertions=GLOBAL_VALIDATE_MAP_ASSERTIONS,
+    validate_reduce_assertions=GLOBAL_VALIDATE_REDUCE_ASSERTIONS,
 )
 
-# Generate assertions for all questions with claims (parallel processing)
+# Generate assertions for ALL questions with claims
 await global_assertion_generator.agenerate_assertions_for_questions(
     questions_with_claims
 )
@@ -1812,7 +2124,29 @@ save_questions(
     "selected_questions_with_assertions",
 )
 
-print(f"Saved {len(updated_global_questions)} data-global questions with assertions")</div>
+# Show summary
+print("\n=== SUMMARY ===")
+print(f"Processed {len(questions_with_claims)} questions with claims")
+total_assertions = sum(
+    len(q.attributes.get("assertions", [])) for q in questions_with_claims
+)
+total_map_assertions = sum(
+    len(q.attributes.get("map_assertions", [])) for q in questions_with_claims
+)
+print(f"Total map assertions generated: {total_map_assertions}")
+print(f"Total final assertions generated: {total_assertions}")
+print(
+    f"Average assertions per question: {total_assertions / max(len(questions_with_claims), 1):.1f}"
+)
+
+# Show per-question breakdown
+print("\n=== PER-QUESTION BREAKDOWN ===")
+for i, q in enumerate(questions_with_claims, 1):
+    assertions = q.attributes.get("assertions", [])
+    map_assertions = q.attributes.get("map_assertions", [])
+    print(
+        f"{i}. [{len(map_assertions)} map → {len(assertions)} final] {q.text[:60]}..."
+    )</div>
 </div>
 </div>
 </div>
@@ -1846,11 +2180,38 @@ print(f"Saved {len(updated_global_questions)} data-global questions with asserti
 <p><strong>Configuration Options:</strong></p>
 <ul>
 <li><code>MAX_ASSERTIONS</code>: Maximum number of assertions to generate per question (default: 20)</li>
-<li><code>ENABLE_VALIDATION</code>: Set to <code>True</code> to validate assertions for quality (default: True)</li>
+<li><code>ENABLE_VALIDATION</code>: Set to <code>True</code> to validate final assertions for quality (default: True)</li>
 <li><code>MIN_VALIDATION_SCORE</code>: Minimum score (1-5) for validation criteria (default: 3)</li>
-<li><code>BATCH_SIZE</code>: For global questions, controls how many claims are processed together</li>
-<li><code>MAX_DATA_TOKENS</code>: For global questions, controls the max input data tokens in the reduce step</li>
+<li><code>BATCH_SIZE</code>: For global questions, controls how many claims are processed together (when semantic grouping disabled)</li>
+<li><code>MAP_DATA_TOKENS</code>: For global questions, max tokens per cluster in the map step (default: 12000, used when semantic grouping enabled)</li>
+<li><code>REDUCE_DATA_TOKENS</code>: For global questions, max input data tokens for the reduce step (default: 32000)</li>
 <li><code>CONCURRENT_REQUESTS</code>: Controls parallel LLM calls for batch processing and validation</li>
+</ul>
+<p><strong>Semantic Claim Grouping (Global Questions Only):</strong></p>
+<ul>
+<li><code>ENABLE_SEMANTIC_GROUPING</code>: Set to <code>True</code> to group similar claims together before the map step</li>
+<li>When enabled, claims are embedded and clustered using ConstraintKMeans to ensure similar claims are processed together</li>
+<li>Clusters are constrained by <code>MAP_DATA_TOKENS</code> to ensure each batch fits within the token limit</li>
+<li>This reduces redundancy in map assertions by consolidating semantically similar claims</li>
+<li>Requires a <code>text_embedder</code> to be provided to the <code>GlobalClaimAssertionGenerator</code></li>
+</ul>
+<p><strong>Map Assertion Validation (Global Questions Only):</strong></p>
+<ul>
+<li><code>VALIDATE_MAP_ASSERTIONS</code>: Set to <code>True</code> to validate map assertions before the reduce step (default: False)</li>
+<li>When enabled, map assertions are validated using the same criteria as final assertions</li>
+<li>Low-quality map assertions are filtered out before being passed to the reduce step</li>
+<li>Trade-offs:<ul>
+<li>Pro: Better quality input to reduce step, fewer low-quality assertions to consolidate</li>
+<li>Con: Increases LLM calls (validation for both map and final assertions)</li>
+</ul>
+</li>
+<li>Recommended when you have many low-quality claims or want highest quality final assertions</li>
+</ul>
+<p><strong>Reduce Assertion Validation (Global Questions Only):</strong></p>
+<ul>
+<li><code>VALIDATE_REDUCE_ASSERTIONS</code>: Set to <code>False</code> to skip validation of final assertions (default: True)</li>
+<li>When enabled, final assertions are validated after the reduce step</li>
+<li>Useful to disable if you've already validated map assertions and want to save LLM calls</li>
 </ul>
 <p><strong>Parallelism Settings:</strong></p>
 <ul>
@@ -1865,6 +2226,18 @@ When <code>ENABLE_VALIDATION=True</code>, each assertion is checked for:</p>
 <li><strong>Verifiability</strong>: Is the assertion clear and objectively checkable?</li>
 </ul>
 <p>Assertions must score at least <code>MIN_VALIDATION_SCORE</code> on all three criteria to pass validation and be included in the final assertion set.</p>
+<p><strong>Important: Validator Prompts for Global Assertions</strong>
+Global assertions use a map-reduce approach with different validation requirements:</p>
+<ul>
+<li><strong>Map assertions</strong> are factual and specific → use <code>local_validation_prompt</code> (stricter grounding)</li>
+<li><strong>Reduce assertions</strong> are thematic and synthesize across sources → use <code>global_validation_prompt</code> (allows synthesis)</li>
+</ul>
+<p>The notebook creates separate validators:</p>
+<ul>
+<li><code>local_validator</code>: For data-local questions and map assertions (fact-focused)</li>
+<li><code>global_validator</code>: For reduce/final assertions in data-global questions (thematic)</li>
+</ul>
+<p>Using the wrong validation prompt (e.g., local prompt for thematic assertions) will result in very low validation pass rates.</p>
 </div>
 </div>
 </div>
