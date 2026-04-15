@@ -107,7 +107,7 @@ class DataLocalClaimExtractor:
                 # Also create string versions of context source_ids for matching
                 context_source_ids = context_df["source_id"].astype(str).tolist()
 
-                # Find matching sources (case-insensitive, whitespace-normalized)
+                # Find matching sources (whitespace-normalized)
                 matching_sources = [s for s in sources_str if s in context_source_ids]
 
                 if not matching_sources:

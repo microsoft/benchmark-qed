@@ -115,7 +115,7 @@ class BaseOpenAIChat:
             raise RuntimeError(msg)
 
         history = [
-            *messages,
+            *sanitized_messages,
             {
                 "content": response.choices[0].message.content,
                 "role": response.choices[0].message.role,
