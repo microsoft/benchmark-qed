@@ -31,7 +31,8 @@ dependencies = [
     "typer>=0.15.1",
     "matplotlib>=3.10.5",
     "seaborn>=0.13.2",
-    "graphrag-common>=3.0.8"
+    "graphrag-common>=3.0.9",
+    "graphrag-input>=3.0.9"
 ]
 
 [dependency-groups]
@@ -127,6 +128,7 @@ include = ["benchmark_qed", "tests"]
 exclude = ["**/__pycache__"]
 
 [tool.pytest.ini_options]
+asyncio_mode = "auto"
 tmp_path_retention_policy = "failed"
 markers = [
     "slow: marks tests as slow (deselect with '-m \"not slow\"')",
