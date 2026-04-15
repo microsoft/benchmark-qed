@@ -55,7 +55,7 @@ async def acreate_clustered_sample(
         status.update("Creating documents...")
         if metadata_tags is None:
             metadata_tags = []
-        documents = create_documents(
+        documents = await create_documents(
             input_path=input_path,
             input_type=input_type,
             text_tag=text_tag,

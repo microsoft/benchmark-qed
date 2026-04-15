@@ -10,6 +10,7 @@ from typing import Annotated, cast
 import numpy as np
 import pandas as pd
 import typer
+from graphrag_common.config import load_config
 from rich import print as rich_print
 from tqdm import tqdm
 
@@ -36,7 +37,6 @@ from benchmark_qed.autoe.config import (
 from benchmark_qed.autoe.pairwise import analyze_criteria, get_pairwise_scores
 from benchmark_qed.autoe.reference import get_reference_scores
 from benchmark_qed.cli.utils import print_df
-from benchmark_qed.config.utils import load_config
 from benchmark_qed.llm.factory import ModelFactory
 
 app: typer.Typer = typer.Typer(
@@ -82,7 +82,7 @@ def pairwise_scores(
     """Generate scores for the different conditions provided in the JSON file."""
     if exclude_criteria is None:
         exclude_criteria = []
-    config = load_config(comparison_spec, PairwiseConfig)
+    config = load_config(PairwiseConfig, comparison_spec)
 
     config.criteria = [
         criterion
@@ -209,7 +209,7 @@ def reference_scores(
     """Generate scores for the generated answers provided in the JSON file."""
     if exclude_criteria is None:
         exclude_criteria = []
-    config = load_config(comparison_spec, ReferenceConfig)
+    config = load_config(ReferenceConfig, comparison_spec)
 
     config.criteria = [
         criterion
@@ -379,7 +379,7 @@ def _run_single_rag_assertion_scores(
     assertions_key: str,
 ) -> None:
     """Run assertion scoring for a single RAG method (legacy mode)."""
-    config = load_config(config_path, AssertionConfig)
+    config = load_config(AssertionConfig, config_path)
     output.mkdir(parents=True, exist_ok=True)
 
     llm_client = ModelFactory.create_chat_model(config.llm_config)
@@ -471,7 +471,7 @@ def _run_multi_rag_assertion_scores(
     print_model_usage: bool,
 ) -> None:
     """Run assertion scoring for multiple RAG methods with significance testing."""
-    config = load_config(config_path, MultiRAGAssertionConfig)
+    config = load_config(MultiRAGAssertionConfig, config_path)
     config.output_dir.mkdir(parents=True, exist_ok=True)
 
     llm_client = ModelFactory.create_chat_model(config.llm_config)
@@ -663,7 +663,7 @@ def _run_single_rag_hierarchical_assertion_scores(
         load_and_normalize_hierarchical_assertions,
     )
 
-    config = load_config(config_path, HierarchicalAssertionConfig)
+    config = load_config(HierarchicalAssertionConfig, config_path)
     output.mkdir(parents=True, exist_ok=True)
 
     llm_client = ModelFactory.create_chat_model(config.llm_config)
@@ -758,7 +758,7 @@ def _run_multi_rag_hierarchical_assertion_scores(
     from benchmark_qed.autoe.assertion import run_hierarchical_assertion_evaluation
     from benchmark_qed.autoe.config import MultiRAGHierarchicalAssertionConfig
 
-    config = load_config(config_path, MultiRAGHierarchicalAssertionConfig)
+    config = load_config(MultiRAGHierarchicalAssertionConfig, config_path)
     config.output_dir.mkdir(parents=True, exist_ok=True)
 
     llm_client = ModelFactory.create_chat_model(config.llm_config)
@@ -861,7 +861,7 @@ def assertion_significance(
     """
     from benchmark_qed.autoe.assertion import compare_assertion_scores_significance
 
-    config = load_config(config_path, AssertionSignificanceConfig)
+    config = load_config(AssertionSignificanceConfig, config_path)
 
     rich_print("[bold]Running assertion significance tests[/bold]")
     rich_print(f"  Output dir: {config.output_dir}")
@@ -925,7 +925,7 @@ def hierarchical_assertion_significance(
         compare_hierarchical_assertion_scores_significance,
     )
 
-    config = load_config(config_path, HierarchicalAssertionSignificanceConfig)
+    config = load_config(HierarchicalAssertionSignificanceConfig, config_path)
 
     rich_print("[bold]Running hierarchical assertion significance tests[/bold]")
     rich_print(f"  Scores dir: {config.scores_dir}")
@@ -1027,7 +1027,7 @@ async def _generate_retrieval_reference_async(
         RationaleRelevanceRater,
     )
 
-    config = load_config(config_path, RetrievalReferenceConfig)
+    config = load_config(RetrievalReferenceConfig, config_path)
     config.output_dir.mkdir(parents=True, exist_ok=True)
 
     # Initialize LLM client
@@ -1335,7 +1335,7 @@ def retrieval_scores(
         RationaleRelevanceRater,
     )
 
-    config = load_config(config_path, RetrievalScoresConfig)
+    config = load_config(RetrievalScoresConfig, config_path)
     config.output_dir.mkdir(parents=True, exist_ok=True)
 
     # Parse fidelity metric

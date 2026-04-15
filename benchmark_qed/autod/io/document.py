@@ -2,238 +2,59 @@
 # Licensed under the MIT License.
 """Load input files into Document objects."""
 
-import datetime
-import json
+import re
 from dataclasses import asdict
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 from typing import Any
 from uuid import uuid4
 
 import pandas as pd
+from graphrag_input import InputConfig, create_input_reader
+from graphrag_input.text_document import TextDocument
+from graphrag_storage.file_storage import FileStorage
 
 import benchmark_qed.config.defaults as defs
 from benchmark_qed.autod.data_model.document import Document
 from benchmark_qed.autod.io.enums import InputDataType
 
 
-def load_json_doc(
-    file_path: str,
-    encoding: str = defs.FILE_ENCODING,
-    text_tag: str = defs.TEXT_COLUMN,
-    metadata_tags: list[str] | None = None,
-    max_text_length: int | None = None,  # max length in characters
+def _clean_title(title: str) -> str:
+    """Strip row-index suffix and file extension from a graphrag-input title."""
+    title = re.sub(r" \(\d+\)$", "", title)
+    return str(PurePosixPath(title).with_suffix(""))
+
+
+def _to_document(
+    text_document: TextDocument,
+    input_type: str,
+    index: int,
+    metadata_tags: list[str] | None,
+    max_text_length: int | None,
 ) -> Document:
-    """Load a JSON file and return a Document object."""
-    data = json.loads(Path(file_path).read_text(encoding=encoding))
-    text = data.get(text_tag, "")
+    """Convert a graphrag-input TextDocument to a local Document."""
+    text = text_document.text
     if max_text_length is not None:
         text = text[:max_text_length]
 
-    metadata: dict[str, Any] = {}
-    if metadata_tags is not None:
-        for tag in metadata_tags:
-            if tag in data:
-                metadata[tag] = data[tag]
-
-    if "date_created" not in metadata:
-        metadata["date_created"] = datetime.datetime.now(tz=datetime.UTC).isoformat()
+    attributes: dict[str, Any] = text_document.collect(metadata_tags or [])
+    if "date_created" not in attributes:
+        attributes["date_created"] = text_document.get(
+            "creation_date", text_document.creation_date
+        )
 
     return Document(
-        id=str(uuid4()),
-        short_id=None,
-        title=str(file_path.replace(".json", "")),
-        type="json",
+        id=text_document.id,
+        short_id=str(index),
+        title=_clean_title(text_document.title),
+        type=str(input_type),
         text=text,
-        attributes=metadata,
+        attributes=attributes,
     )
 
 
-def load_json_dir(
-    dir_path: str,
-    encoding: str = defs.FILE_ENCODING,
-    text_tag: str = defs.TEXT_COLUMN,
-    metadata_tags: list[str] | None = None,
-    max_text_length: int | None = None,
-) -> list[Document]:
-    """Load a directory of JSON files and return a list of Document objects."""
-    documents = []
-    for index, file_path in enumerate(Path(dir_path).rglob("*.json")):
-        document = load_json_doc(
-            file_path=str(file_path),
-            encoding=encoding,
-            text_tag=text_tag,
-            metadata_tags=metadata_tags,
-            max_text_length=max_text_length,
-        )
-        document.short_id = str(index)
-        documents.append(document)
-    return documents
-
-
-def load_text_doc(
-    file_path: str,
-    encoding: str = defs.FILE_ENCODING,
-    max_text_length: int | None = None,
-) -> Document:
-    """Read a text file and return its content."""
-    text = Path(file_path).read_text(encoding=encoding)
-    if max_text_length is not None:
-        text = text[:max_text_length]
-    return Document(
-        id=str(uuid4()),
-        short_id=None,
-        title=str(file_path.replace(".txt", "")),
-        type="text",
-        text=text,
-        attributes={"date_created": datetime.datetime.now(tz=datetime.UTC).isoformat()},
-    )
-
-
-def load_text_dir(
-    dir_path: str,
-    encoding: str = defs.FILE_ENCODING,
-    max_text_length: int | None = None,
-) -> list[Document]:
-    """Load a directory of text files and return a list of Document objects."""
-    documents = []
-    for index, file_path in enumerate(Path(dir_path).rglob("*.txt")):
-        document = load_text_doc(
-            file_path=str(file_path),
-            encoding=encoding,
-            max_text_length=max_text_length,
-        )
-        document.short_id = str(index)
-        documents.append(document)
-    return documents
-
-
-def _load_docs_from_dataframe(
-    data_df: pd.DataFrame,
-    input_type: InputDataType,
-    title: str,
-    text_tag: str = defs.TEXT_COLUMN,
-    metadata_tags: list[str] | None = None,
-    max_text_length: int | None = None,
-) -> list[Document]:
-    documents: list[Document] = []
-
-    for index, row in enumerate(data_df.itertuples()):
-        text = getattr(row, text_tag, "")
-        if max_text_length is not None:
-            text = text[:max_text_length]
-
-        metadata: dict[str, Any] = {}
-        if metadata_tags is not None:
-            for tag in metadata_tags:
-                if tag in data_df.columns:
-                    metadata[tag] = getattr(row, tag)
-
-        if "date_created" not in metadata:
-            metadata["date_created"] = datetime.datetime.now(
-                tz=datetime.UTC
-            ).isoformat()
-
-        documents.append(
-            Document(
-                id=str(uuid4()),
-                short_id=str(index),
-                title=title,
-                type=str(input_type),
-                text=text,
-                attributes=metadata,
-            )
-        )
-    return documents
-
-
-def load_csv_doc(
-    file_path: str,
-    encoding: str = defs.FILE_ENCODING,
-    text_tag: str = defs.TEXT_COLUMN,
-    metadata_tags: list[str] | None = None,
-    max_text_length: int | None = None,
-) -> list[Document]:
-    """Load a CSV file and return a Document object."""
-    return _load_docs_from_dataframe(
-        data_df=pd.read_csv(file_path, encoding=encoding),
-        input_type=InputDataType.CSV,
-        title=str(file_path.replace(".csv", "")),
-        text_tag=text_tag,
-        metadata_tags=metadata_tags,
-        max_text_length=max_text_length,
-    )
-
-
-def load_csv_dir(
-    dir_path: str,
-    encoding: str = defs.FILE_ENCODING,
-    text_tag: str = defs.TEXT_COLUMN,
-    metadata_tags: list[str] | None = None,
-    max_text_length: int | None = None,
-) -> list[Document]:
-    """Load a directory of CSV files and return a list of Document objects."""
-    documents: list[Document] = []
-    for file_path in Path(dir_path).rglob("*.csv"):
-        documents.extend(
-            load_csv_doc(
-                file_path=str(file_path),
-                encoding=encoding,
-                text_tag=text_tag,
-                metadata_tags=metadata_tags,
-                max_text_length=max_text_length,
-            )
-        )
-
-    for index, document in enumerate(documents):
-        document.short_id = str(index)
-
-    return documents
-
-
-def load_parquet_doc(
-    file_path: str,
-    text_tag: str = defs.TEXT_COLUMN,
-    metadata_tags: list[str] | None = None,
-    max_text_length: int | None = None,
-) -> list[Document]:
-    """Load Documents from a parquet file."""
-    return _load_docs_from_dataframe(
-        data_df=pd.read_parquet(file_path),
-        input_type=InputDataType.PARQUET,
-        title=str(file_path.replace(".parquet", "")),
-        text_tag=text_tag,
-        metadata_tags=metadata_tags,
-        max_text_length=max_text_length,
-    )
-
-
-def load_parquet_dir(
-    dir_path: str,
-    text_tag: str = defs.TEXT_COLUMN,
-    metadata_tags: list[str] | None = None,
-    max_text_length: int | None = None,
-) -> list[Document]:
-    """Load a directory of parquet files and return a list of Document objects."""
-    documents: list[Document] = []
-    for file_path in Path(dir_path).rglob("*.parquet"):
-        documents.extend(
-            load_parquet_doc(
-                file_path=str(file_path),
-                text_tag=text_tag,
-                metadata_tags=metadata_tags,
-                max_text_length=max_text_length,
-            )
-        )
-
-    for index, document in enumerate(documents):
-        document.short_id = str(index)
-
-    return documents
-
-
-def create_documents(
+async def create_documents(
     input_path: str,
-    input_type: InputDataType | str = InputDataType.JSON,
+    input_type: str = InputDataType.Json,
     encoding: str = defs.FILE_ENCODING,
     text_tag: str = defs.TEXT_COLUMN,
     metadata_tags: list[str] | None = None,
@@ -241,79 +62,28 @@ def create_documents(
 ) -> list[Document]:
     """Load documents from a specified path and return a list of Document objects."""
     input_path_obj = Path(input_path)
+
     if input_path_obj.is_dir():
-        match input_type:
-            case InputDataType.JSON:
-                documents = load_json_dir(
-                    dir_path=str(input_path),
-                    encoding=encoding,
-                    text_tag=text_tag,
-                    metadata_tags=metadata_tags,
-                    max_text_length=max_text_length,
-                )
-            case InputDataType.TEXT:
-                documents = load_text_dir(
-                    dir_path=str(input_path),
-                    encoding=encoding,
-                    max_text_length=max_text_length,
-                )
-            case InputDataType.CSV:
-                documents = load_csv_dir(
-                    dir_path=str(input_path),
-                    encoding=encoding,
-                    text_tag=text_tag,
-                    metadata_tags=metadata_tags,
-                    max_text_length=max_text_length,
-                )
-            case InputDataType.PARQUET:
-                documents = load_parquet_dir(
-                    dir_path=str(input_path),
-                    text_tag=text_tag,
-                    metadata_tags=metadata_tags,
-                    max_text_length=max_text_length,
-                )
-            case _:
-                msg = f"Unsupported input type: {input_type}"
-                raise ValueError(msg)
+        base_dir = str(input_path_obj)
+        file_pattern = None
     else:
-        match input_type:
-            case InputDataType.JSON:
-                documents = [
-                    load_json_doc(
-                        file_path=str(input_path),
-                        encoding=encoding,
-                        text_tag=text_tag,
-                        metadata_tags=metadata_tags,
-                        max_text_length=max_text_length,
-                    )
-                ]
-            case InputDataType.TEXT:
-                documents = [
-                    load_text_doc(
-                        file_path=str(input_path),
-                        encoding=encoding,
-                        max_text_length=max_text_length,
-                    )
-                ]
-            case InputDataType.CSV:
-                documents = load_csv_doc(
-                    file_path=str(input_path),
-                    encoding=encoding,
-                    text_tag=text_tag,
-                    metadata_tags=metadata_tags,
-                    max_text_length=max_text_length,
-                )
-            case InputDataType.PARQUET:
-                documents = load_parquet_doc(
-                    file_path=str(input_path),
-                    text_tag=text_tag,
-                    metadata_tags=metadata_tags,
-                    max_text_length=max_text_length,
-                )
-            case _:
-                msg = f"Unsupported input type: {input_type}"
-                raise ValueError(msg)
-    return documents
+        base_dir = str(input_path_obj.parent)
+        file_pattern = re.escape(input_path_obj.name) + "$"
+
+    storage = FileStorage(base_dir=base_dir, encoding=encoding)
+    config = InputConfig(
+        type=str(input_type),
+        encoding=encoding,
+        text_column=text_tag if str(input_type) != InputDataType.Text else None,
+        file_pattern=file_pattern,
+    )
+    reader = create_input_reader(config, storage)
+    text_documents = await reader.read_files()
+
+    return [
+        _to_document(td, input_type, index, metadata_tags, max_text_length)
+        for index, td in enumerate(text_documents)
+    ]
 
 
 def load_documents(

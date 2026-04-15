@@ -10,10 +10,10 @@ from typing import Annotated, Any
 import pandas as pd
 import tiktoken
 import typer
+from graphrag_common.config import load_config
 from rich import print as rich_print
 
 from benchmark_qed.autod.data_processor.embedding import TextEmbedder
-from benchmark_qed.autod.io.enums import InputDataType
 from benchmark_qed.autod.io.text_unit import load_text_units
 from benchmark_qed.autod.sampler.sample_gen import acreate_clustered_sample
 from benchmark_qed.autoq.config import (
@@ -48,7 +48,6 @@ from benchmark_qed.autoq.question_gen.data_questions.linked_question_gen import 
 from benchmark_qed.autoq.question_gen.data_questions.local_question_gen import (
     DataLocalQuestionGen,
 )
-from benchmark_qed.config.utils import load_config
 from benchmark_qed.llm.factory import ModelFactory
 from benchmark_qed.llm.type.base import ChatModel
 
@@ -465,7 +464,7 @@ async def __create_clustered_sample(
     text_embedder: TextEmbedder,
     num_clusters: int,
     num_samples_per_cluster: int,
-    input_type: InputDataType,
+    input_type: str,
     text_column: str,
     metadata_columns: list[str] | None,
     file_encoding: str,
@@ -517,7 +516,7 @@ def autoq(
     ] = False,
 ) -> None:
     """Generate questions from the input data."""
-    config = load_config(configuration_path, QuestionGenerationConfig)
+    config = load_config(QuestionGenerationConfig, configuration_path)
 
     if generation_types is None:
         generation_types = [

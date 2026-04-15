@@ -21,14 +21,14 @@ def _save_input_docs(
     doc_prefix_path: Path, docs: list[dict[str, Any]], input_data_type: InputDataType
 ):
     dataframe = pd.DataFrame.from_records(data=docs)
-    if input_data_type == InputDataType.PARQUET:
+    if input_data_type == InputDataType.Parquet:
         input_path = doc_prefix_path.with_suffix(".parquet")
         dataframe.to_parquet(input_path)
-    elif input_data_type == InputDataType.CSV:
+    elif input_data_type == InputDataType.Csv:
         input_path = doc_prefix_path.with_suffix(".csv")
         dataframe.to_csv(input_path, header=True)
     else:
-        msg = f"input_data_type must be {InputDataType.CSV} or {InputDataType.PARQUET}"
+        msg = f"input_data_type must be {InputDataType.Csv} or {InputDataType.Parquet}"
         raise ValueError(msg)
     return input_path
 
@@ -43,18 +43,18 @@ def _doc_get_attribute(doc: Document, attr: str, default_value: str) -> Any:
     return default_value
 
 
-def test_create_documents_text_file(tmp_path: Path):
+async def test_create_documents_text_file(tmp_path: Path):
     file = tmp_path / "text_doc.txt"
     text = "here is a text document"
     file.write_text(text, encoding="utf-8")
 
-    docs = create_documents(input_path=str(file), input_type=InputDataType.TEXT)
+    docs = await create_documents(input_path=str(file), input_type=InputDataType.Text)
     assert len(docs) == 1
     assert docs[0].text == text
     assert docs[0].title.endswith("text_doc")
 
 
-def test_create_documents_text_dir(tmp_path: Path):
+async def test_create_documents_text_dir(tmp_path: Path):
     file_1 = tmp_path / "text_doc_1.txt"
     text_1 = "1"
     file_1.write_text(text_1, encoding="utf-8")
@@ -63,7 +63,9 @@ def test_create_documents_text_dir(tmp_path: Path):
     text_2 = "2"
     file_2.write_text(text_2, encoding="utf-8")
 
-    docs = create_documents(input_path=str(tmp_path), input_type=InputDataType.TEXT)
+    docs = await create_documents(
+        input_path=str(tmp_path), input_type=InputDataType.Text
+    )
     assert len(docs) == 2
 
     # verify doc title and contents
@@ -74,9 +76,9 @@ def test_create_documents_text_dir(tmp_path: Path):
     assert docs_sorted_by_title[1].text == text_2
 
 
-@pytest.mark.parametrize("input_data_type", [InputDataType.CSV, InputDataType.PARQUET])
+@pytest.mark.parametrize("input_data_type", [InputDataType.Csv, InputDataType.Parquet])
 @pytest.mark.parametrize("file_or_dir", ["file", "dir"])
-def test_create_documents_from_dataframe_simple(
+async def test_create_documents_from_dataframe_simple(
     tmp_path: Path, input_data_type: InputDataType, file_or_dir: str
 ):
     simple_docs = [{"text": "text 1"}, {"text": "text 2"}]
@@ -88,7 +90,7 @@ def test_create_documents_from_dataframe_simple(
             _save_input_docs(tmp_path / f"doc_{idx}", [doc], input_data_type)
         input_path = tmp_path
 
-    docs = create_documents(str(input_path), input_type=input_data_type)
+    docs = await create_documents(str(input_path), input_type=input_data_type)
     assert len(docs) == 2
 
     # verify doc title and contents
@@ -109,9 +111,9 @@ def test_create_documents_from_dataframe_simple(
     assert _doc_has_attribute(docs_sorted_by_title[1], "date_created")
 
 
-@pytest.mark.parametrize("input_data_type", [InputDataType.CSV, InputDataType.PARQUET])
+@pytest.mark.parametrize("input_data_type", [InputDataType.Csv, InputDataType.Parquet])
 @pytest.mark.parametrize("file_or_dir", ["file", "dir"])
-def test_create_documents_from_dataframe_complex(
+async def test_create_documents_from_dataframe_complex(
     tmp_path: Path, input_data_type: InputDataType, file_or_dir: str
 ):
     simple_docs = [
@@ -136,7 +138,7 @@ def test_create_documents_from_dataframe_complex(
             _save_input_docs(tmp_path / f"doc_{idx}", [doc], input_data_type)
         input_path = tmp_path
 
-    docs = create_documents(
+    docs = await create_documents(
         str(input_path),
         input_type=input_data_type,
         text_tag="content",
@@ -157,7 +159,7 @@ def test_create_documents_from_dataframe_complex(
         _doc_get_attribute(docs_sorted_by_title[0], "date_created", "")
         == "20251217T000000Z"
     )
-    assert _doc_get_attribute(docs_sorted_by_title[0], "attr1", "") == 1
+    assert str(_doc_get_attribute(docs_sorted_by_title[0], "attr1", "")) == "1"
     assert not _doc_has_attribute(docs_sorted_by_title[0], "attr2")
     assert len(docs_sorted_by_title[1].id) > 0
     assert docs_sorted_by_title[1].title.endswith(
@@ -169,12 +171,12 @@ def test_create_documents_from_dataframe_complex(
         _doc_get_attribute(docs_sorted_by_title[1], "date_created", "")
         == "20240101T000000Z"
     )
-    assert _doc_get_attribute(docs_sorted_by_title[1], "attr1", "") == 2
+    assert str(_doc_get_attribute(docs_sorted_by_title[1], "attr1", "")) == "2"
     assert not _doc_has_attribute(docs_sorted_by_title[1], "attr2")
 
 
 @pytest.mark.parametrize("file_or_dir", ["file", "dir"])
-def test_create_documents_json_simple(tmp_path: Path, file_or_dir: str):
+async def test_create_documents_json_simple(tmp_path: Path, file_or_dir: str):
     simple_docs = [{"text": "text 1"}, {"text": "text 2"}]
 
     if file_or_dir == "file":
@@ -188,7 +190,7 @@ def test_create_documents_json_simple(tmp_path: Path, file_or_dir: str):
         input_path = tmp_path
         expected_count = 2
 
-    docs = create_documents(str(input_path), input_type=InputDataType.JSON)
+    docs = await create_documents(str(input_path), input_type=InputDataType.Json)
     assert len(docs) == expected_count
 
     docs_sorted = sorted(docs, key=lambda d: d.text)
@@ -198,7 +200,7 @@ def test_create_documents_json_simple(tmp_path: Path, file_or_dir: str):
 
 
 @pytest.mark.parametrize("file_or_dir", ["file", "dir"])
-def test_create_documents_json_complex(tmp_path: Path, file_or_dir: str):
+async def test_create_documents_json_complex(tmp_path: Path, file_or_dir: str):
     if file_or_dir == "file":
         input_path = tmp_path / "doc.json"
         input_path.write_text(
@@ -227,9 +229,9 @@ def test_create_documents_json_complex(tmp_path: Path, file_or_dir: str):
         input_path = tmp_path
         expected_count = 2
 
-    docs = create_documents(
+    docs = await create_documents(
         str(input_path),
-        input_type=InputDataType.JSON,
+        input_type=InputDataType.Json,
         text_tag="content",
         metadata_tags=["attr1", "date_created"],
         max_text_length=6,
@@ -252,26 +254,28 @@ def test_create_documents_json_complex(tmp_path: Path, file_or_dir: str):
         assert {d.short_id for d in docs} == {"0", "1"}
 
 
-def test_create_documents_text_max_length(tmp_path: Path):
+async def test_create_documents_text_max_length(tmp_path: Path):
     file = tmp_path / "text_doc.txt"
     file.write_text("hello world truncate this", encoding="utf-8")
 
-    docs = create_documents(
-        input_path=str(file), input_type=InputDataType.TEXT, max_text_length=11
+    docs = await create_documents(
+        input_path=str(file), input_type=InputDataType.Text, max_text_length=11
     )
     assert len(docs) == 1
     assert docs[0].text == "hello world"
     assert docs[0].title.endswith("text_doc")
 
 
-def test_create_documents_text_dir_nested(tmp_path: Path):
+async def test_create_documents_text_dir_nested(tmp_path: Path):
     subdir = tmp_path / "subdir"
     subdir.mkdir()
 
     (tmp_path / "doc1.txt").write_text("root doc", encoding="utf-8")
     (subdir / "doc2.txt").write_text("nested doc", encoding="utf-8")
 
-    docs = create_documents(input_path=str(tmp_path), input_type=InputDataType.TEXT)
+    docs = await create_documents(
+        input_path=str(tmp_path), input_type=InputDataType.Text
+    )
     assert len(docs) == 2
 
     texts = {d.text for d in docs}
@@ -281,11 +285,13 @@ def test_create_documents_text_dir_nested(tmp_path: Path):
 
 
 @pytest.mark.parametrize("output_dir_exists", [True, False])
-def test_create_save_and_load_documents(tmp_path: Path, output_dir_exists: bool):
+async def test_create_save_and_load_documents(tmp_path: Path, output_dir_exists: bool):
     (tmp_path / "text_doc_1.txt").write_text("doc 1", encoding="utf-8")
     (tmp_path / "text_doc_2.txt").write_text("doc 2", encoding="utf-8")
 
-    docs = create_documents(input_path=str(tmp_path), input_type=InputDataType.TEXT)
+    docs = await create_documents(
+        input_path=str(tmp_path), input_type=InputDataType.Text
+    )
     assert len(docs) == 2
 
     if output_dir_exists:
@@ -316,11 +322,13 @@ def test_create_save_and_load_documents(tmp_path: Path, output_dir_exists: bool)
 
 
 @pytest.mark.parametrize("file_or_dir", ["file", "dir"])
-def test_create_documents_unsupported_input_type(tmp_path: Path, file_or_dir: str):
+async def test_create_documents_unsupported_input_type(
+    tmp_path: Path, file_or_dir: str
+):
     input_file = tmp_path / "text_doc_1.txt"
     input_file.write_text("doc 1", encoding="utf-8")
     with pytest.raises(ValueError):  # noqa: PT011, PT012
         if file_or_dir == "file":
-            create_documents(str(input_file), input_type="goblin")
+            await create_documents(str(input_file), input_type="goblin")
         else:
-            create_documents(str(tmp_path), input_type="goblin")
+            await create_documents(str(tmp_path), input_type="goblin")
