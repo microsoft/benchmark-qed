@@ -1,0 +1,127 @@
+You are a helpful assistant that creates simple, readable comparison questions.
+
+--TASK--
+You are given a list of claims about a shared entity or topic. Each claim is a factual statement from the source documents.
+
+Your task is to create COMPARISON QUESTIONS. A comparison question asks about differences or similarities between two related items that appear in the claims.
+
+--GOOD EXAMPLES--
+
+Example 1:
+  Claims: "North Carolina expanded Medicaid in December 2023" and "Kansas has not yet expanded Medicaid"
+  
+  Comparison question: "How does North Carolina's Medicaid expansion status differ from Kansas's?"
+  
+  This works because:
+  - Both states are compared on the same topic (Medicaid expansion)
+  - The claims provide information about both items
+  - The comparison yields meaningful differences
+
+Example 2:
+  Claims: "Texas bans abortion after 6 weeks" and "Idaho bans abortion after 6 weeks with exceptions"
+  
+  Comparison question: "How do Texas and Idaho's abortion gestational limits compare?"
+  
+  This works because:
+  - Direct comparison on a specific aspect (gestational limits)
+  - Same metric type (time/weeks)
+  - Answerable from the claims
+
+Example 3:
+  Claims: "The Vatican waited 3 days to disclose Pope Francis's surgery" and "Buckingham Palace announced King Charles's cancer within 24 hours"
+  
+  Comparison question: "How did the Vatican and Buckingham Palace differ in their disclosure timing for health issues?"
+  
+  This works because:
+  - Compares two institutions on the same aspect (disclosure timing)
+  - Both have relevant information in the claims
+  - Yields meaningful insight
+
+--CORE RULES--
+1. Must be ANSWERABLE ENTIRELY from the provided claims - don't assume external knowledge
+2. Compare TWO or more items (keep it focused, don't compare too many)
+3. Use actual names/entities directly (e.g., "Texas" not "the state that banned...")
+4. Ask about a SPECIFIC aspect (approach, outcome, policy, requirements)
+5. Must sound NATURAL - like something a curious person would ask
+6. Keep questions under 20 words
+7. All items must have relevant information in the claims
+8. NO SELF-REFERENCES: NEVER use words like "claims", "both claims", "these cases", "the above", "this context"
+   - BAD: "How do these two cases differ?" (what cases?)
+   - BAD: "What do both claims say about X?" (reader can't see claims)
+   - GOOD: "How do Texas and Idaho differ in abortion policy?"
+9. GRAMMATICALLY CORRECT: The question must be a proper English sentence
+10. SELF-EXPLANATORY: All terms must be clear without additional context
+   - BAD: "What is the difference between the 3,058 cap and 5,058 cap?" (cap on what?)
+   - BAD: "How do the two proposals differ?" (which proposals?)
+   - GOOD: "What is the difference between South Korea's current and proposed medical school enrollment caps?"
+   - GOOD: "How do Texas and Idaho's abortion gestational limits compare?"
+11. SAME CATEGORY: Only compare items of the same type
+   - GOOD: law vs law, event vs event, policy vs policy, number vs number
+   - BAD: event vs law (e.g., "Harris's visit" vs "Maine's shield law")
+   - BAD: funding amount vs vote count (incompatible units)
+11. RELATED TOPIC: Only compare items that are meaningfully related
+   - GOOD: Wegovy vs Ozempic prices (both weight-loss drugs)
+   - GOOD: Texas vs Arizona abortion bans (same policy type)
+   - BAD: Wegovy price vs GyroGlove price (unrelated products - drug vs tremor device)
+   - BAD: Global malaria cases vs specific mpox contacts (unrelated statistics)
+   - BAD: Semaglutide study vs Havana syndrome study (unrelated research topics)
+12. MEANINGFUL INSIGHT: The comparison must reveal interesting differences
+   - BAD: "How do Jan. 4 and Feb. 11 compare?" (trivial - one date is earlier than another)
+   - BAD: "How do the effective start dates compare?" (trivial - just two dates)
+   - GOOD: "How do Texas and Idaho differ in their abortion ban exceptions?" (reveals policy differences)
+   - GOOD: "How did the Vatican and Buckingham Palace handle health disclosures differently?" (reveals approach differences)
+   - GOOD: "How do the current and proposed enrollment caps compare?" (reveals magnitude of policy change)
+   - GOOD: "How do the vote counts compare in France and Maine?" (reveals different levels of support)
+13. USE PAST TENSE for events that already occurred (news describes past events)
+   - BAD: "What are Florida and Colorado both trying to pass?" (present tense)
+   - GOOD: "What did Florida and Colorado both try to pass?" (past tense)
+
+--SCORING (1-5 each)--
+- naturalness: Sounds like a real question someone would ask?
+- answerability: Fully answerable from the claims ONLY?
+  - 5: Question has a SPECIFIC, bounded answer from the claims
+  - 3: Answer exists in claims but question is too open-ended (e.g., "How do X and Y differ?" without specifying aspect)
+  - 1: Requires knowledge not in the claims
+- clarity: Easy to understand in one read, simple structure, grammatically correct?
+  - 5: Clear, simple, grammatically perfect question
+  - 3: Understandable but awkward phrasing or minor grammar issues
+  - 1: Confusing, run-on, or grammatically broken
+- comparison_validity: Does this comparison yield MEANINGFUL INSIGHT?
+  - 5: Reveals interesting differences in approach, policy, outcome, or requirements
+  - 3: Valid comparison but insight is limited
+  - 1: Trivial comparison (just listing two numbers/dates) or incompatible types
+
+--OUTPUT FORMAT--
+Return a JSON object with the following structure:
+{
+    "questions": [
+        {
+            "candidate_pairs": [
+                {"items": ["item1", "item2"], "same_category": "YES: both are laws" or "NO: law vs event", "potential_insight": "what comparing these would reveal"},
+                {"items": ["item3", "item4"], "same_category": "...", "potential_insight": "..."}
+            ],
+            "selected_pair": ["best item1", "best item2 - MUST be a pair with same_category=YES"],
+            "candidate_phrasings": [
+                "How do X and Y differ in Z?",
+                "How does X's approach to Z compare with Y's?",
+                "What distinguishes X from Y regarding Z?"
+            ],
+            "text": "Comparison question under 20 words (best phrasing from candidates)",
+            "compared_items": ["item1", "item2"],
+            "comparison_aspect": "What specific aspect is being compared",
+            "source_claim_ids": ["claim IDs needed - should include claims about BOTH items"],
+            "claim_reasoning": "How the claims answer the comparison",
+            "draft_answer": "The expected answer to this comparison based on the claims (1-2 sentences)",
+            "question_type": "comparison",
+            "quality": {
+                "reasoning": "Explain your assessment of the question quality before scoring",
+                "naturalness": 4,
+                "answerability": 5,
+                "clarity": 4,
+                "comparison_validity": 4
+            }
+        }
+    ]
+}
+
+Generate UP TO ${max_questions} questions. Generate ZERO if no valid comparison questions possible.

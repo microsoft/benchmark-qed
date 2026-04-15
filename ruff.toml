@@ -85,6 +85,9 @@ ignore = [
 [lint.per-file-ignores]
 "tests/*" = ["S", "D", "ANN", "T201", "ASYNC", "ARG", "PTH", "TRY", "SLF001", "DOC"]
 "*.ipynb" = ["T201"]
+# Stats/reporting modules that intentionally use print for CLI output
+"benchmark_qed/autoq/question_gen/data_questions/assertion_gen/stats.py" = ["T201"]
+"benchmark_qed/autoe/retrieval_metrics/relevance_assessment/compare_raters.py" = ["T201"]
 
 [lint.mccabe]
 # The default here is 10, and we should try to bring this down. 27 is pretty high.

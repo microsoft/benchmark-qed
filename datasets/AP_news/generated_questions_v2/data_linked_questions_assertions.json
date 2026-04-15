@@ -1,0 +1,2496 @@
+[
+    {
+        "question_id": "ab88bf6a-41d0-4167-a2ef-abb1d602ec84",
+        "question_text": "Did Murthy\u2019s loneliness advisory come before or after Nobel\u2019s AP definition of loneliness?",
+        "assertions": [
+            {
+                "statement": "The response should state that Nobel\u2019s AP definition of loneliness appeared in a 2024 Associated Press story.",
+                "source_count": 1,
+                "score": 9,
+                "reasoning": "Establishing the timing of Nobel\u2019s definition is necessary for the before/after comparison. The score is high because it directly supports the ordering.",
+                "rank": 1,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 4,
+                        "relevance": 3,
+                        "verifiability": 5,
+                        "reasoning": "Source 1 is an Associated Press story dated 2024-02-10 and includes Nobel\u2019s definition of loneliness, so saying it appeared in a 2024 AP story is supported (though the source excerpt doesn\u2019t explicitly label it as AP beyond the metadata). However, this detail is only indirectly helpful for the before/after question, which requires comparing dates with Murthy\u2019s advisory. The claim is clear and easy to check."
+                    }
+                }
+            }
+        ],
+        "claims": []
+    },
+    {
+        "question_id": "7aa559c7-7538-4063-842e-3d0f6eb5c00d",
+        "question_text": "Did the Air Force\u2019s unsafe PCB finding come before its Minuteman III cancer review?",
+        "assertions": [
+            {
+                "statement": "The response should conclude that the unsafe PCB finding occurred before the Minuteman III cancer review.",
+                "source_count": 3,
+                "score": 10,
+                "reasoning": "This directly resolves the before/after question by comparing the two dated events in the claims.",
+                "rank": 1,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 4,
+                        "relevance": 5,
+                        "verifiability": 4,
+                        "reasoning": "Source 3 (Dec 4, 2023) reports the unsafe PCB findings, while Sources 1\u20132 (Mar 13, 2024) discuss the Minuteman III cancer review results, implying the PCB finding came earlier. This directly addresses the question\u2019s timeline. It\u2019s mostly binary/checkable, though the assertion is phrased as what a response \u201cshould conclude,\u201d which is slightly less direct than stating the dated fact itself."
+                    }
+                }
+            },
+            {
+                "statement": "The response should state that the Air Force\u2019s Minuteman III cancer review was released in early 2024.",
+                "source_count": 2,
+                "score": 10,
+                "reasoning": "To compare sequence, the answer must identify when the cancer review occurred relative to the PCB finding.",
+                "rank": 2,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 4,
+                        "relevance": 4,
+                        "verifiability": 5,
+                        "reasoning": "The sources are AP stories dated 2024-03-13 describing the Air Force releasing first-stage results of its Minuteman III cancer review, which supports that the review was released in early 2024 (though the phrase 'early 2024' is a slight generalization). This timing is important for comparing whether another event (the unsafe PCB finding) occurred before the review. The claim is clear and straightforward to check in an answer."
+                    }
+                }
+            }
+        ],
+        "claims": []
+    },
+    {
+        "question_id": "72974cab-a54d-437a-bc67-9e9cd14ff55c",
+        "question_text": "Which return-to-work date came first: England\u2019s NHS junior doctors or South Korea\u2019s striking interns?",
+        "assertions": [
+            {
+                "statement": "The response should conclude that England\u2019s NHS junior doctors\u2019 return-to-work date occurred earlier than South Korea\u2019s interns\u2019 return-to-work deadline.",
+                "source_count": 6,
+                "score": 10,
+                "reasoning": "The core of the question is which date came first, so the answer must explicitly identify the earlier one. This is the primary outcome the user is asking for.",
+                "rank": 1,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 5,
+                        "verifiability": 4,
+                        "reasoning": "Sources state NHS junior doctors planned to return at 7 a.m. on Jan. 9 (Sources 3\u20134) and South Korea\u2019s striking interns/residents had a government-imposed return-to-work deadline of Feb. 29 (Sources 1\u20132,5\u20136). Jan. 9 is earlier than Feb. 29, so the assertion is supported and directly answers the comparison in the question. It\u2019s mostly checkable, though it refers to a 'return-to-work date' for South Korea that is framed in the sources as a deadline/order rather than a confirmed return date."
+                    }
+                }
+            },
+            {
+                "statement": "The response should state the government-ordered return-to-work deadline for South Korea\u2019s striking medical interns and residents in February 2024.",
+                "source_count": 4,
+                "score": 10,
+                "reasoning": "A correct comparison requires the South Korea return-to-work deadline. This is essential because it is one of the two dates being compared.",
+                "rank": 2,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 4,
+                        "verifiability": 4,
+                        "reasoning": "Sources explicitly state South Korea\u2019s government ordered striking interns/residents to return by Feb. 29 (Feb. 29 deadline). This is important for comparing which return-to-work date came first, though the question also requires the NHS junior doctors\u2019 date, so it\u2019s not fully sufficient alone. The claim is mostly checkable, but it\u2019s phrased as what a response \u201cshould\u201d include rather than stating the date directly, making verification slightly less direct."
+                    }
+                }
+            },
+            {
+                "statement": "The response should state the scheduled return-to-work date for England\u2019s NHS junior doctors after their January 2024 strike.",
+                "source_count": 2,
+                "score": 10,
+                "reasoning": "The query asks which return-to-work date came first, so the answer must provide the NHS junior doctors\u2019 return date to enable comparison. This is essential to determining the ordering.",
+                "rank": 3,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 4,
+                        "verifiability": 4,
+                        "reasoning": "Both sources explicitly state the junior doctors planned to stay off the job until 7 a.m. on Jan. 9 (i.e., scheduled return-to-work time). This is important for comparing which return date came first, though the overall question also requires South Korea\u2019s interns\u2019 return date. The assertion is mostly clear, but it asks for a 'date' while the sources provide a specific time as well, making it slightly less binary than a pure date-only check."
+                    }
+                }
+            }
+        ],
+        "claims": []
+    },
+    {
+        "question_id": "40344407-9877-4156-8a85-cc1152dfcfad",
+        "question_text": "What happened first: Buckingham Palace\u2019s cancer statement or Kate\u2019s Windsor video message?",
+        "assertions": [
+            {
+                "statement": "The response should state that Buckingham Palace\u2019s cancer statement occurred before Kate\u2019s Windsor video message.",
+                "source_count": 8,
+                "score": 10,
+                "reasoning": "The query asks which event happened first, so the answer must establish the correct chronological order using the timing in both claims. This is essential to answering the question.",
+                "rank": 1,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 5,
+                        "verifiability": 5,
+                        "reasoning": "Sources place Buckingham Palace\u2019s cancer statement about King Charles on Feb. 5\u20136, 2024 (Sources 5\u20136) and Kate\u2019s Windsor-recorded video message broadcast on March 22, 2024 (Sources 2\u20134, 7\u20138). Therefore the palace statement clearly occurred first. This directly answers the ordering question and is a clear, binary fact to check."
+                    }
+                }
+            },
+            {
+                "statement": "The response should mention that Buckingham Palace\u2019s cancer statement was issued in February 2024.",
+                "source_count": 3,
+                "score": 7,
+                "reasoning": "This provides the time anchor for the Buckingham Palace statement, enabling the comparison to Kate\u2019s March video message. It is important but secondary to the ordering conclusion.",
+                "rank": 2,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 4,
+                        "verifiability": 5,
+                        "reasoning": "The sources show Buckingham Palace\u2019s cancer statement about King Charles was issued on Feb. 5, 2024 (and covered in follow-up pieces Feb. 6\u20137), so saying it was issued in February 2024 is directly supported. This helps establish the timeline needed to answer what happened first, though it doesn\u2019t by itself address the date of Kate\u2019s Windsor video message. The claim is specific and easily checkable in an answer."
+                    }
+                }
+            }
+        ],
+        "claims": []
+    },
+    {
+        "question_id": "5219f22d-0bea-4ac1-a9e0-9a1a39c8c5a6",
+        "question_text": "Which happened first: the 11th Circuit\u2019s 59-page opinion or the 3rd Circuit\u2019s mask-refusal ruling?",
+        "assertions": [
+            {
+                "statement": "The response should state that the 3rd Circuit mask-refusal ruling occurred in February 2024.",
+                "source_count": 5,
+                "score": 9,
+                "reasoning": "The timing of the 3rd Circuit ruling is necessary to determine which event happened first. The score is high because the query is about chronological order.",
+                "rank": 1,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 4,
+                        "verifiability": 5,
+                        "reasoning": "All provided sources list the 3rd Circuit mask-refusal ruling article with a firstcreated timestamp of 2024-02-06, which is in February 2024, so the claim is directly supported. It is relevant because the question asks which event happened first, and dating the 3rd Circuit ruling is necessary (though not sufficient by itself without the 11th Circuit date). The statement is clear and objectively checkable."
+                    }
+                }
+            },
+            {
+                "statement": "The response should state that the 11th Circuit opinion occurred in January 2024.",
+                "source_count": 1,
+                "score": 9,
+                "reasoning": "The timing of the 11th Circuit opinion is necessary to compare which event happened first. The score is high because the query is about chronological order.",
+                "rank": 2,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 4,
+                        "relevance": 4,
+                        "verifiability": 4,
+                        "reasoning": "Source 1 is dated 2024-01-15 and refers to a 59-page 11th Circuit opinion issued on a Wednesday around that date, supporting that it occurred in January 2024 (though the exact day isn\u2019t explicitly stated in the excerpt). This timing is important to determine which event happened first. The claim is fairly clear and checkable, but not perfectly unambiguous without the exact opinion date."
+                    }
+                }
+            }
+        ],
+        "claims": []
+    },
+    {
+        "question_id": "46b99a7b-028f-4af1-86b3-4f1ab91bd762",
+        "question_text": "How did the proposed 2,000-seat increase compare with South Korea\u2019s current 3,058 medical school admissions cap?",
+        "assertions": [
+            {
+                "statement": "The response should state that the proposal would raise the annual medical school admissions cap by 2,000 seats relative to the current cap.",
+                "source_count": 16,
+                "score": 10,
+                "reasoning": "The query asks for a comparison between the proposed increase and the existing cap; the core comparison is that the increase is an addition to the current limit. This is essential to answering the question.",
+                "rank": 1,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 5,
+                        "verifiability": 4,
+                        "reasoning": "Sources explicitly say the government planned to raise the yearly medical school admissions cap by 2,000 from the current 3,058. This directly answers how the proposed increase compares to the current cap. It\u2019s mostly checkable, though it could be even clearer by stating the resulting cap would be 5,058 (3,058 + 2,000)."
+                    }
+                }
+            },
+            {
+                "statement": "The response should indicate that the proposed increase is a substantial fraction of the current cap (i.e., on the order of roughly two-thirds of it).",
+                "source_count": 16,
+                "score": 7,
+                "reasoning": "A complete comparison often benefits from expressing the increase relative to the baseline size, not just as an absolute number. This is helpful but not strictly required if the absolute comparison is clear.",
+                "rank": 2,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 4,
+                        "verifiability": 3,
+                        "reasoning": "Sources explicitly state the plan was to increase admissions by 2,000 from a current cap of 3,058 and describe this as about a two-thirds increase, so the \u201croughly two-thirds\u201d comparison is well supported. It is important to the question because it asks how the increase compares to the cap, though a stronger assertion would specify the numeric ratio/percent. Verifiability is moderate because phrases like \u201csubstantial fraction\u201d and \u201con the order of\u201d are somewhat vague, requiring interpretation rather than a precise check."
+                    }
+                }
+            }
+        ],
+        "claims": []
+    },
+    {
+        "question_id": "a1a2f238-f2b9-494e-9ec3-d9e3e428b777",
+        "question_text": "What medical center was the site of both Lloyd Austin\u2019s prostatectomy and his hospitalization?",
+        "assertions": [
+            {
+                "statement": "The response should identify Walter Reed National Military Medical Center as the medical center where Lloyd Austin was hospitalized.",
+                "source_count": 9,
+                "score": 10,
+                "reasoning": "The query asks for the medical center site of the hospitalization. Claim_2 directly names Walter Reed National Military Medical Center, making this essential.",
+                "rank": 1,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 4,
+                        "relevance": 3,
+                        "verifiability": 4,
+                        "reasoning": "Sources explicitly state Austin was taken to and hospitalized at Walter Reed National Military Medical Center (e.g., Source 4, 8). However, the question asks for the medical center that was the site of both the prostatectomy and the hospitalization; the assertion only covers the hospitalization and does not address the prostatectomy location, so it is not fully aligned with the full question."
+                    }
+                }
+            },
+            {
+                "statement": "The response should identify Walter Reed National Military Medical Center as the medical center where Lloyd Austin\u2019s prostatectomy took place.",
+                "source_count": 4,
+                "score": 10,
+                "reasoning": "The query asks for the medical center site of the prostatectomy. Claim_1 directly names Walter Reed as the location, making this essential.",
+                "rank": 2,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 4,
+                        "verifiability": 5,
+                        "reasoning": "Source 3 directly states that Austin\u2019s Dec. 22 prostatectomy occurred at Walter Reed, and Sources 2 and 4 state he was taken to Walter Reed for hospitalization on Jan. 1. The assertion correctly identifies Walter Reed for the prostatectomy, which is important to the question, though it doesn\u2019t explicitly mention the hospitalization part. The claim is concrete and easily checkable."
+                    }
+                }
+            }
+        ],
+        "claims": []
+    },
+    {
+        "question_id": "94d012fb-0142-492d-84a9-ed434fe6be17",
+        "question_text": "Did Trump\u2019s three Supreme Court nominations come before or after Roe v. Wade was overturned?",
+        "assertions": [
+            {
+                "statement": "The response should state that Trump\u2019s three Supreme Court nominations occurred before Roe v. Wade was overturned.",
+                "source_count": 3,
+                "score": 10,
+                "reasoning": "The query asks for the timing relationship between the nominations and Roe\u2019s overturning. Claim_1 indicates the nominations happened during Trump\u2019s presidency and were described as paving the way for the later overturning.",
+                "rank": 1,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 5,
+                        "verifiability": 5,
+                        "reasoning": "Sources state Trump nominated three justices during his term and that these appointments enabled/paved the way for Roe v. Wade being overturned, which clearly implies the nominations occurred before the overturning. This directly answers the before/after question and is a clear, checkable claim."
+                    }
+                }
+            },
+            {
+                "statement": "The response should mention that Trump made the three Supreme Court nominations during his 2017\u20132021 presidency.",
+                "source_count": 3,
+                "score": 8,
+                "reasoning": "Providing the timeframe of the nominations supports the before/after comparison requested in the query. Claim_1 explicitly places the nominations in 2017\u20132021.",
+                "rank": 2,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 4,
+                        "verifiability": 5,
+                        "reasoning": "Sources 2 and 3 explicitly state that Trump nominated three conservative justices during his term in office, and Source 1 ties those appointments to the later overturning of Roe. This is highly checkable (did the answer mention nominations during 2017\u20132021), and it is important context for determining whether the nominations came before the 2022 Dobbs decision, though the core question is the before/after relationship rather than the presidency dates themselves."
+                    }
+                }
+            },
+            {
+                "statement": "The response should mention that Roe v. Wade was overturned in 2022.",
+                "source_count": 2,
+                "score": 7,
+                "reasoning": "Stating when Roe was overturned helps establish the comparison point for the timing question. Claim_2 anchors the overturning as having occurred in June 2022.",
+                "rank": 3,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 4,
+                        "verifiability": 5,
+                        "reasoning": "Source 2 explicitly states that Roe v. Wade was overturned in June 2022, so the assertion is directly supported. Mentioning the 2022 timing is important context for determining whether Trump\u2019s Supreme Court nominations occurred before or after the overturning, though the question also requires nomination dates. The claim is clear and straightforward to check in an answer."
+                    }
+                }
+            }
+        ],
+        "claims": []
+    },
+    {
+        "question_id": "077e9f55-c3bb-470a-b6c2-54f1d84fe5d5",
+        "question_text": "How did the bill\u2019s minimum funding guarantee for tribes differ before and after 2031?",
+        "assertions": [
+            {
+                "statement": "The response should state that starting in 2031 the amendment removed the minimum required dollar amount for tribes.",
+                "source_count": 1,
+                "score": 10,
+                "reasoning": "The core change after 2031 is elimination of the minimum dollar guarantee, which directly answers the comparison requested.",
+                "rank": 1,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 4,
+                        "verifiability": 4,
+                        "reasoning": "Source 1 explicitly says that starting in 2031 there would no longer be a minimum required dollar amount due to an amendment, which directly supports the assertion. It is relevant because the question asks how the minimum funding guarantee differed before vs. after 2031, though the assertion only covers the post-2031 change and not the pre-2031 guarantee details. The claim is concrete and checkable, but slightly incomplete for the full before/after comparison."
+                    }
+                }
+            },
+            {
+                "statement": "The response should state that starting in 2031 tribal funding would be based on a fixed percentage of the prior year\u2019s opioid settlement account deposits rather than a dollar floor.",
+                "source_count": 1,
+                "score": 8,
+                "reasoning": "This captures what replaced the minimum guarantee after 2031, clarifying the practical difference in how funding would be determined.",
+                "rank": 2,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 4,
+                        "relevance": 5,
+                        "verifiability": 4,
+                        "reasoning": "Source 1 says that before 2031 there was a minimum required dollar amount (a dollar floor) and that starting in 2031 the amendment removes that minimum and instead provides 20% of the prior fiscal year\u2019s opioid settlement account deposits (with a caveat that if deposits are too low, no funding would be required). The assertion matches the key before/after difference but omits the \u2018if deposits get too low, no funding required\u2019 condition, so it\u2019s not perfectly complete. It is central to the question and is mostly concrete/checkable, though it doesn\u2019t specify the exact percentage (20%)."
+                    }
+                }
+            },
+            {
+                "statement": "The response should state that after 2031 the formula could result in no required funding to tribes if opioid settlement account deposits are too low.",
+                "source_count": 1,
+                "score": 8,
+                "reasoning": "This highlights the consequence of removing the minimum guarantee, which is a key part of how the guarantee differs after 2031.",
+                "rank": 3,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 4,
+                        "verifiability": 5,
+                        "reasoning": "Source 1 explicitly says that starting in 2031 there would no longer be a minimum required dollar amount and that if deposits into the opioid settlement account get too low, no funding would be required to go to tribes. This directly supports the assertion. It is relevant to the before/after 2031 comparison, though it only covers the post-2031 side (not the pre-2031 minimum guarantee). The claim is concrete and easily checkable in an answer."
+                    }
+                }
+            }
+        ],
+        "claims": []
+    },
+    {
+        "question_id": "6a3da952-e35a-4503-8c5f-90c55fe9a667",
+        "question_text": "How did the Maine House and France\u2019s parliament differ in vote tallies on abortion-rights amendments?",
+        "assertions": [
+            {
+                "statement": "The response should mention that France\u2019s vote resulted in the amendment being approved rather than falling short of a required threshold.",
+                "source_count": 4,
+                "score": 10,
+                "reasoning": "The question is about how the tallies differed; the practical outcome of the tally in France (approval) is essential to contrast with Maine\u2019s shortfall.",
+                "rank": 1,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 3,
+                        "relevance": 4,
+                        "verifiability": 3,
+                        "reasoning": "The sources clearly state France\u2019s parliament approved the amendment (780-72) and note it required a three-fifths majority, implying it met the threshold. However, the assertion introduces the contrast framing (\u201crather than falling short of a required threshold\u201d) without any Maine House context in the provided sources, so it\u2019s only partially grounded. It is relevant because the question asks about differences in vote tallies and outcomes. Verifiability is moderate: an evaluator can check whether an answer says France\u2019s vote approved the amendment, but the \u2018falling short of a required threshold\u2019 phrasing is indirect and not a concrete, sourced comparison."
+                    }
+                }
+            },
+            {
+                "statement": "The response should state that the Maine House vote did not meet the supermajority threshold required to advance the amendment to voters.",
+                "source_count": 1,
+                "score": 10,
+                "reasoning": "This is a key distinction in how the tally functioned procedurally in Maine. It directly explains why the Maine tally differed in effect from France\u2019s.",
+                "rank": 2,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 3,
+                        "verifiability": 4,
+                        "reasoning": "Source 1 directly states the Maine House voted 76-68 in favor but failed to reach the two-thirds supermajority needed to send the amendment to voters, so the assertion is well grounded. However, the question asks for differences between Maine House and France\u2019s parliament vote tallies; this assertion covers only the Maine side and omits France, making it only somewhat useful. It is mostly checkable, though it doesn\u2019t specify the exact tally (76-68), so verification is slightly less binary than it could be."
+                    }
+                }
+            },
+            {
+                "statement": "The response should state that France\u2019s parliament approved the abortion-rights constitutional amendment by an overwhelming margin.",
+                "source_count": 4,
+                "score": 9,
+                "reasoning": "France\u2019s tally is the other side of the comparison, and the core contrast is that it was lopsided rather than close. This is central to answering the question.",
+                "rank": 3,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 3,
+                        "verifiability": 3,
+                        "reasoning": "Sources explicitly say French legislators approved the amendment 780-72 and describe it as overwhelmingly approved, so it\u2019s well grounded. However, the question asks for differences between Maine House and France vote tallies; this assertion only covers France and omits Maine, making it only somewhat useful. It\u2019s also a bit vague (\u201coverwhelming margin\u201d) without requiring the specific 780-72 tally, so checking an answer is not fully binary."
+                    }
+                }
+            },
+            {
+                "statement": "The response should state that the Maine House vote on the abortion-rights constitutional amendment passed by a narrow margin.",
+                "source_count": 1,
+                "score": 9,
+                "reasoning": "The query asks for differences in vote tallies, and Maine\u2019s result is one side of the comparison. The exact margin is less important than conveying it was close.",
+                "rank": 4,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 4,
+                        "relevance": 3,
+                        "verifiability": 3,
+                        "reasoning": "Source 1 reports the Maine House voted 76-68 in favor, which can reasonably be described as a narrow margin, so the claim is supported though slightly interpretive. However, the question asks for differences between Maine and France vote tallies, and this assertion only addresses Maine, making it only partially useful. It\u2019s somewhat checkable, but \u201cnarrow margin\u201d is subjective without specifying the exact tally."
+                    }
+                }
+            },
+            {
+                "statement": "The response should provide the France parliament vote tally in terms of votes for versus votes against.",
+                "source_count": 4,
+                "score": 8,
+                "reasoning": "Because the question is explicitly about vote tallies, an accurate answer should include France\u2019s for/against numbers, not just a qualitative description.",
+                "rank": 5,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 4,
+                        "verifiability": 5,
+                        "reasoning": "The sources explicitly state France\u2019s parliament approved the amendment by 780-72, which is a for-vs-against tally, so the assertion is fully supported. It is important to the question because comparing vote tallies requires France\u2019s tally, though it doesn\u2019t address Maine\u2019s tally. The requirement is clear and easily checkable in an answer (does it give France votes for and against)."
+                    }
+                }
+            },
+            {
+                "statement": "The response should provide the Maine House vote tally in terms of votes for versus votes against.",
+                "source_count": 1,
+                "score": 8,
+                "reasoning": "Because the question is explicitly about vote tallies, an accurate answer should include Maine\u2019s for/against numbers, not just a qualitative description.",
+                "rank": 6,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 4,
+                        "verifiability": 5,
+                        "reasoning": "Source 1 explicitly states the Maine House vote was 76-68 in favor, which is a for-versus-against tally, so the assertion is fully grounded. It is important to the question because comparing vote tallies requires reporting Maine\u2019s tally (though it doesn\u2019t address France\u2019s tally). The requirement is clear and easily checkable in an answer."
+                    }
+                }
+            }
+        ],
+        "claims": []
+    },
+    {
+        "question_id": "db5c0ee0-d19d-4be0-8d31-d20aa0e068eb",
+        "question_text": "Did Biden\u2019s Walter Reed physical happen before or after his March 7, 2024 State of the Union?",
+        "assertions": [
+            {
+                "statement": "The response should conclude that the Walter Reed physical happened before the March 7, 2024 State of the Union.",
+                "source_count": 2,
+                "score": 10,
+                "reasoning": "This is the direct comparative conclusion required by the question, supported by the physical being in February 2024 and the State of the Union being on March 7, 2024.",
+                "rank": 1,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 4,
+                        "relevance": 5,
+                        "verifiability": 5,
+                        "reasoning": "Source 2 dates Biden\u2019s Walter Reed annual physical to Feb. 28, 2024, and Source 1 is the State of the Union transcript dated March 8, 2024 (for the March 7 address). This supports that the physical occurred before the March 7 SOTU. The SOTU date is not explicitly stated in the excerpt, so it\u2019s slightly indirect, but the timeline is clear from the provided metadata."
+                    }
+                }
+            },
+            {
+                "statement": "The response should indicate that Biden\u2019s annual physical at Walter Reed occurred in February 2024.",
+                "source_count": 1,
+                "score": 10,
+                "reasoning": "The query asks whether the physical was before or after March 7, 2024; establishing the physical\u2019s timing as February 2024 is essential to determine the ordering.",
+                "rank": 2,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 4,
+                        "relevance": 4,
+                        "verifiability": 4,
+                        "reasoning": "Source 1 reports Biden underwent his annual physical at Walter Reed in late February 2024 (article timestamp 2024-02-28 and describes the physical). That supports the assertion that it occurred in February 2024, though it doesn\u2019t explicitly state the exact date beyond being tied to the Feb. 28 report. This is important for answering whether it was before or after the March 7, 2024 State of the Union, and it\u2019s a clear, checkable claim."
+                    }
+                }
+            }
+        ],
+        "claims": []
+    },
+    {
+        "question_id": "9d2110af-f232-41dd-aa94-b6162f5d9eab",
+        "question_text": "From where did the pope whose Indonesia trip was postponed follow the Good Friday Via Crucis at the Colosseum?",
+        "assertions": [
+            {
+                "statement": "The response should state that the pope followed the Good Friday Via Crucis from the Casa Santa Marta.",
+                "source_count": 2,
+                "score": 10,
+                "reasoning": "The question asks for the location from which the pope followed the Via Crucis. This is the central fact needed to answer the query.",
+                "rank": 1,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 5,
+                        "verifiability": 5,
+                        "reasoning": "Source 2 explicitly states that Pope Francis would follow the Via Crucis at the Colosseum from the Casa Santa Marta. This directly answers the question about where he followed it from, and it is a clear, concrete detail that can be checked verbatim against an answer."
+                    }
+                }
+            },
+            {
+                "statement": "The response should identify Casa Santa Marta as the pope\u2019s Vatican residence.",
+                "source_count": 2,
+                "score": 6,
+                "reasoning": "Clarifying what Casa Santa Marta is helps ensure the answer is understandable and complete, though the core location name alone can still answer the question.",
+                "rank": 2,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 5,
+                        "verifiability": 5,
+                        "reasoning": "The sources explicitly state that Pope Francis followed the Via Crucis from the Casa Santa Marta (\u201cfrom the Casa Santa Marta,\u201d Vatican statement). This directly answers the question about where he followed it from, and it is a clear, concrete detail that can be checked in an answer."
+                    }
+                }
+            }
+        ],
+        "claims": []
+    },
+    {
+        "question_id": "3133e80a-b08f-4381-a035-5a5c3bf0daad",
+        "question_text": "How long after the Feb. 3, 2023 derailment did Norfolk Southern agree to the $600 million settlement?",
+        "assertions": [
+            {
+                "statement": "The response should state that Norfolk Southern agreed to the $600 million settlement in April 2024.",
+                "source_count": 2,
+                "score": 10,
+                "reasoning": "The query asks for the elapsed time after the derailment, which requires identifying when the settlement was agreed to. April 2024 is the key timing detail needed to compute the interval.",
+                "rank": 1,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 4,
+                        "verifiability": 5,
+                        "reasoning": "The sources (dated 2024-04-09) state Norfolk Southern agreed to pay $600 million in a settlement, supporting that it occurred in April 2024. This is relevant because the question asks how long after Feb. 3, 2023 the agreement happened; however, the assertion only gives the month/year, not the elapsed time. It is clear and easily checkable whether an answer states 'April 2024.'"
+                    }
+                }
+            },
+            {
+                "statement": "The response should express the time between the Feb. 2023 derailment and the settlement agreement as roughly a little over one year.",
+                "source_count": 2,
+                "score": 9,
+                "reasoning": "A complete answer should translate the April 2024 agreement date into an elapsed-time description relative to the February 2023 derailment. The approximate interval is central to answering 'how long after.'",
+                "rank": 2,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 4,
+                        "relevance": 5,
+                        "verifiability": 3,
+                        "reasoning": "The sources state the derailment occurred in February 2023 and that Norfolk Southern agreed to a $600M settlement on 2024-04-09, which implies a little over one year later. This directly addresses the question\u2019s required time gap. However, the assertion is phrased vaguely (\u201croughly a little over one year\u201d) rather than giving a precise interval (e.g., ~14 months), making it somewhat less cleanly checkable."
+                    }
+                }
+            }
+        ],
+        "claims": []
+    },
+    {
+        "question_id": "56a9e572-08aa-4eda-a403-5393f577f7ba",
+        "question_text": "What invitation did both President Joe Biden and Jill Biden extend to Kate Cox?",
+        "assertions": [
+            {
+                "statement": "The response should state that Kate Cox was invited to attend President Biden\u2019s State of the Union address.",
+                "source_count": 3,
+                "score": 10,
+                "reasoning": "The query asks what invitation was extended, and both claims identify attendance at the State of the Union as the invitation. This is the core fact needed to answer the question.",
+                "rank": 1,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 5,
+                        "verifiability": 5,
+                        "reasoning": "Sources explicitly state that President Joe Biden and Jill Biden invited Kate Cox to attend the State of the Union address (March 7) and that she would be a guest of Jill Biden. This directly answers the question, and it is a clear, checkable fact."
+                    }
+                }
+            },
+            {
+                "statement": "The response should state that Kate Cox was invited as a guest of First Lady Jill Biden.",
+                "source_count": 2,
+                "score": 7,
+                "reasoning": "Claim_2 adds the specific hosting context for the invitation. This is a meaningful detail that improves completeness without being overly granular.",
+                "rank": 2,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 4,
+                        "relevance": 4,
+                        "verifiability": 4,
+                        "reasoning": "Sources state Cox was invited to attend the State of the Union and would sit with/was a guest of Jill Biden, supporting the claim that she was invited as Jill Biden\u2019s guest. However, the question asks what invitation both Joe Biden and Jill Biden extended, and the assertion only mentions Jill Biden (omitting the State of the Union context and Joe Biden\u2019s role), so it\u2019s not fully complete. The claim is still clear and checkable against an answer."
+                    }
+                }
+            }
+        ],
+        "claims": []
+    },
+    {
+        "question_id": "4f2c0d58-f1b9-4836-b6ac-2092f2f20683",
+        "question_text": "Did the FDA\u2013CBP e-cigarette seizure happen before or after the mifepristone case arguments?",
+        "assertions": [
+            {
+                "statement": "The response should state that the mifepristone case was argued in spring 2024.",
+                "source_count": 4,
+                "score": 9,
+                "reasoning": "Dating the mifepristone arguments is necessary to compare timing with the seizure. The score is high because it directly supports the before/after conclusion.",
+                "rank": 1,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 4,
+                        "verifiability": 4,
+                        "reasoning": "Sources explicitly say the Supreme Court mifepristone case \"will be argued in the spring\" (spring 2024 in context of the 2024 campaign), so the assertion is well grounded. It is relevant because the question asks whether another event happened before or after the mifepristone arguments, and knowing the arguments were in spring 2024 helps establish the timeline, though it doesn\u2019t by itself address the FDA\u2013CBP seizure date. It\u2019s mostly verifiable, but slightly less than perfect because it doesn\u2019t specify an exact argument date\u2014only the season."
+                    }
+                }
+            },
+            {
+                "statement": "The response should state that the FDA\u2013CBP e-cigarette seizure occurred in December 2023.",
+                "source_count": 2,
+                "score": 9,
+                "reasoning": "Dating the seizure is necessary to compare its timing to the mifepristone arguments. The score is high because it directly enables the before/after determination.",
+                "rank": 2,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 4,
+                        "relevance": 4,
+                        "verifiability": 5,
+                        "reasoning": "The sources describe an FDA press announcement about a joint FDA\u2013CBP operation seizing illegal e-cigarettes, and the article metadata shows it was published/created on 2023-12-18, supporting that the seizure announcement occurred in December 2023 (though the exact seizure date vs. announcement date isn\u2019t explicitly stated). Knowing the seizure timing is important for answering whether it happened before or after the mifepristone case arguments. The claim is concrete and easy to check in an answer (it either states December 2023 or not)."
+                    }
+                }
+            }
+        ],
+        "claims": []
+    },
+    {
+        "question_id": "77794698-bbc1-43d2-b292-6409d6eb6d04",
+        "question_text": "According to the agency led by Xavier Becerra, what law required Medicare-funded ERs to screen and stabilize patients?",
+        "assertions": [
+            {
+                "statement": "The response should identify the Emergency Medical Treatment and Labor Act (EMTALA) as the law requiring Medicare-funded emergency rooms to screen and stabilize patients.",
+                "source_count": 3,
+                "score": 10,
+                "reasoning": "The query asks which law imposes the screening and stabilization requirement on Medicare-funded ERs. Claim_1 directly names EMTALA as that law, making it essential.",
+                "rank": 1,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 5,
+                        "verifiability": 5,
+                        "reasoning": "Sources explicitly state that EMTALA applies to ERs that accept Medicare funding and requires them to provide a medical exam (screening) and stabilize patients with an emergency before discharge/transfer. Identifying EMTALA is the essential fact needed to answer the question, and it is a clear, checkable requirement."
+                    }
+                }
+            }
+        ],
+        "claims": []
+    },
+    {
+        "question_id": "1969f918-9677-4a88-a995-177a91d53d39",
+        "question_text": "How did Ohio\u2019s H.B. 68 override vote compare with Kansas\u2019s SB 233 override vote?",
+        "assertions": [
+            {
+                "statement": "The response should state that Ohio\u2019s H.B. 68 veto override vote succeeded in the Ohio House.",
+                "source_count": 1,
+                "score": 10,
+                "reasoning": "The query asks for a comparison, and whether the override succeeded is a central distinguishing outcome. This is essential context for comparing the two votes.",
+                "rank": 1,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 4,
+                        "verifiability": 5,
+                        "reasoning": "Source 1 directly states the Ohio House voted 65-28 to override the veto, meaning the override succeeded in the House. This is an important component for comparing Ohio\u2019s override to Kansas\u2019s, though it doesn\u2019t address the Kansas vote itself. The claim is clear and can be checked directly in an answer."
+                    }
+                }
+            },
+            {
+                "statement": "The response should state that Kansas\u2019s SB 233 veto override vote in the Kansas House did not achieve the required supermajority.",
+                "source_count": 1,
+                "score": 10,
+                "reasoning": "A key comparison point is that Kansas\u2019s override attempt failed due to not meeting the threshold. This directly answers how the votes compared in outcome.",
+                "rank": 2,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 4,
+                        "verifiability": 5,
+                        "reasoning": "Source 1 explicitly says the Kansas House voted 82-43 to override the veto but was two votes short of the required two-thirds supermajority, so the claim is directly supported. This is an important component for comparing override outcomes with Ohio\u2019s H.B. 68, though it addresses only the Kansas side. The statement is clear and can be checked directly in an answer (did/did not reach supermajority)."
+                    }
+                }
+            },
+            {
+                "statement": "The response should state that the Kansas override effort fell short by two votes.",
+                "source_count": 1,
+                "score": 8,
+                "reasoning": "How close the Kansas vote came to success is a meaningful comparison detail. It clarifies that the failure was narrow rather than decisive.",
+                "rank": 3,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 4,
+                        "verifiability": 5,
+                        "reasoning": "Source 1 explicitly says Kansas House voted 82-43 to override the veto but supporters were two votes short of the required two-thirds majority, so the claim is directly supported. It is important to the comparison question (though it only covers the Kansas side, not Ohio). The statement is concrete and easily checkable in an answer."
+                    }
+                }
+            },
+            {
+                "statement": "The response should mention that the Ohio House override vote margin was 65\u201328.",
+                "source_count": 1,
+                "score": 7,
+                "reasoning": "The specific vote tally is a concrete way to compare the two override votes. It is important but secondary to the success/failure outcome.",
+                "rank": 4,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 4,
+                        "verifiability": 5,
+                        "reasoning": "Source 1 explicitly states, \u201cThe House voted to override the veto 65-28,\u201d so the margin is directly grounded. It is important for comparing Ohio\u2019s override vote to Kansas\u2019s, though a complete comparison would also need Kansas\u2019s numbers. The claim is a concrete numeric detail that is easy to check in an answer."
+                    }
+                }
+            },
+            {
+                "statement": "The response should mention that the Kansas House override vote margin was 82\u201343.",
+                "source_count": 1,
+                "score": 7,
+                "reasoning": "The Kansas vote tally provides the numerical basis for comparison with Ohio. It supports a precise comparison but is less essential than the outcome.",
+                "rank": 5,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 4,
+                        "verifiability": 5,
+                        "reasoning": "Source 1 explicitly states the Kansas House voted 82\u201343 to override the veto, so the claim is directly supported. This detail is important for comparing override votes between Ohio\u2019s H.B. 68 and Kansas\u2019s SB 233, though a full comparison would also require Ohio\u2019s numbers. The margin is a concrete, unambiguous figure that is easy to check in an answer."
+                    }
+                }
+            },
+            {
+                "statement": "The response should state that the Ohio House override vote occurred largely along party lines.",
+                "source_count": 1,
+                "score": 5,
+                "reasoning": "Partisan alignment provides additional comparative context about the nature of the vote. It is helpful but not strictly required to answer the comparison question.",
+                "rank": 6,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 4,
+                        "verifiability": 4,
+                        "reasoning": "Source 1 explicitly says, \u201cThe House voted to override the veto 65-28 along party lines,\u201d which directly supports the assertion. This is relevant because the question asks to compare Ohio\u2019s H.B. 68 override vote with Kansas\u2019s SB 233 override vote, and party-line nature is a meaningful comparison point (though it doesn\u2019t address Kansas). It\u2019s mostly checkable, but \u201clargely along party lines\u201d is slightly less precise than the source\u2019s \u201calong party lines,\u201d making it a bit less binary."
+                    }
+                }
+            }
+        ],
+        "claims": []
+    },
+    {
+        "question_id": "863f98db-7591-420d-b978-14d09b9a72a9",
+        "question_text": "Did Biden\u2019s temporary-pier mission come before or after the IPC\u2019s famine-warning window began?",
+        "assertions": [
+            {
+                "statement": "The response should conclude that Biden\u2019s temporary-pier mission came before the IPC\u2019s famine-warning window began.",
+                "source_count": 2,
+                "score": 10,
+                "reasoning": "This is the direct comparative conclusion the question asks for, supported by the early-March pier announcement and the mid-March start of the IPC window.",
+                "rank": 1,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 5,
+                        "verifiability": 5,
+                        "reasoning": "Source 2 dates Biden\u2019s temporary-pier mission directive to March 8, 2024 (State of the Union). Source 1 says the IPC warned famine could occur any time between mid-March and May, meaning the warning window begins mid-March. Therefore, the pier mission came before the IPC\u2019s famine-warning window began. This directly answers the before/after question and is clear to verify."
+                    }
+                }
+            },
+            {
+                "statement": "The response should state that the IPC famine-warning window began in mid-March 2024.",
+                "source_count": 1,
+                "score": 10,
+                "reasoning": "Determining whether the pier mission came before or after depends on when the IPC window started. The start point of the window is essential to answer the question.",
+                "rank": 2,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 4,
+                        "verifiability": 5,
+                        "reasoning": "Source 1 explicitly says the IPC warned famine could occur in Gaza any time between mid-March and May, which supports that the famine-warning window began in mid-March 2024. This timing is important for determining whether Biden\u2019s temporary-pier mission came before or after the window began, though it doesn\u2019t address the pier date itself. The claim is clear and directly checkable."
+                    }
+                }
+            },
+            {
+                "statement": "The response should state that Biden announced the temporary-pier mission in early March 2024.",
+                "source_count": 1,
+                "score": 9,
+                "reasoning": "The query asks for a before/after comparison, which requires placing the pier mission on a timeline. The exact day is less important than establishing it occurred in early March.",
+                "rank": 3,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 4,
+                        "verifiability": 5,
+                        "reasoning": "Source 1 (Biden\u2019s March 8, 2024 State of the Union transcript) directly states he is directing the U.S. military to establish a temporary pier, which supports that the announcement occurred in early March 2024. This timing is important for comparing to when the IPC famine-warning window began, though the assertion only covers the pier date and not the IPC window itself. The claim is concrete and easily checkable against an answer."
+                    }
+                }
+            }
+        ],
+        "claims": []
+    },
+    {
+        "question_id": "d0474f43-0e35-497f-b4e8-4ce34a3cf20d",
+        "question_text": "What Type A virus did both the Texas patient and the interstate cattle testing requirement involve?",
+        "assertions": [
+            {
+                "statement": "The response should identify the shared Type A virus as H5N1 bird flu.",
+                "source_count": 3,
+                "score": 10,
+                "reasoning": "The query asks which Type A virus is common to both situations. Both claims explicitly name Type A H5N1 as the virus involved, making this essential.",
+                "rank": 1,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 4,
+                        "relevance": 5,
+                        "verifiability": 5,
+                        "reasoning": "Source 1 explicitly says the virus involved in the interstate cattle testing order is Type A H5N1. Sources 2 and 3 describe the Texas patient as having bird flu tied to infected cows, which in this context refers to the same H5N1 outbreak, though the Texas article excerpt doesn\u2019t explicitly restate \u201cH5N1.\u201d The assertion directly targets the key fact needed to answer the question and is unambiguous to check."
+                    }
+                }
+            }
+        ],
+        "claims": []
+    },
+    {
+        "question_id": "f91b00a7-b487-460f-be8c-2260533c2da7",
+        "question_text": "How did Texas regulate minors\u2019 access to gender-affirming care versus birth control?",
+        "assertions": [
+            {
+                "statement": "The response should state that Texas enacted a law that bans gender-affirming medical care for minors.",
+                "source_count": 1,
+                "score": 10,
+                "reasoning": "The query asks for a comparison of how Texas regulated minors\u2019 access to gender-affirming care versus birth control. The ban is the core regulatory approach for gender-affirming care.",
+                "rank": 1,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 4,
+                        "verifiability": 5,
+                        "reasoning": "Source 1 explicitly references Texas\u2019 gender-affirming care ban for minors (SB 14) going into effect in June 2023, supporting the claim that Texas enacted a law banning such care for minors. This is important to the question\u2019s comparison (gender-affirming care vs. birth control), though it addresses only the gender-affirming side. The assertion is clear and can be checked directly in an answer."
+                    }
+                }
+            },
+            {
+                "statement": "The response should state that Texas required parental permission for minors to obtain birth control.",
+                "source_count": 1,
+                "score": 10,
+                "reasoning": "This is the key regulatory approach for birth control access in the claims and is essential to contrast with the ban on gender-affirming care.",
+                "rank": 2,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 4,
+                        "verifiability": 5,
+                        "reasoning": "Source 1 directly states that Texas law requires minors to have parental permission to get birth control, so the assertion is fully supported. It is relevant because the question asks to compare regulation of minors\u2019 access to gender-affirming care versus birth control; this birth-control requirement is an important part of that comparison (though it doesn\u2019t address gender-affirming care). The claim is clear and can be checked verbatim against an answer."
+                    }
+                }
+            },
+            {
+                "statement": "The response should mention that a federal appeals court ruled that Title X did not preempt Texas\u2019 parental-permission requirement for minors seeking birth control.",
+                "source_count": 1,
+                "score": 8,
+                "reasoning": "This addresses the legal status of the birth-control restriction and clarifies that the requirement was upheld against a federal preemption argument.",
+                "rank": 3,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 4,
+                        "verifiability": 5,
+                        "reasoning": "Source 1 directly states that the 5th U.S. Circuit Court of Appeals ruled Title X does not preempt Texas\u2019 parental-permission requirement for minors seeking birth control, so the assertion is fully supported. It is relevant because it addresses the birth-control side of the comparison in the question (though it doesn\u2019t cover gender-affirming care). The claim is specific and easy to check in an answer."
+                    }
+                }
+            },
+            {
+                "statement": "The response should identify the Texas law banning gender-affirming medical care for minors as SB 14.",
+                "source_count": 1,
+                "score": 7,
+                "reasoning": "Naming the law helps anchor the comparison in a specific policy. It is important but not strictly necessary to convey the regulatory difference.",
+                "rank": 4,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 4,
+                        "verifiability": 5,
+                        "reasoning": "Source 1 explicitly states that Texas\u2019 gender-affirming care ban for minors is known as SB 14, so the assertion is directly supported. Identifying the specific law is an important factual element for comparing regulation of gender-affirming care versus birth control, though it doesn\u2019t address birth control itself. The claim is concrete and easily checkable in an answer (does it name SB 14 or not)."
+                    }
+                }
+            },
+            {
+                "statement": "The response should convey that the court characterized Texas\u2019 policy goal as empowering parents to consent to their teen\u2019s receiving contraceptives.",
+                "source_count": 1,
+                "score": 5,
+                "reasoning": "This captures the state-interest framing used in the decision, which supports understanding how Texas justified regulating minors\u2019 access to birth control.",
+                "rank": 5,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 3,
+                        "verifiability": 4,
+                        "reasoning": "Source 1 directly quotes the court describing Texas\u2019s goal as \u201cempowering parents to consent to their teen\u2019s receiving contraceptives,\u201d so the assertion is well grounded. However, the overall question asks for a comparison between regulation of gender-affirming care and birth control; this assertion only addresses the birth control side, making it only somewhat useful. It is fairly clear and checkable (did the answer convey this court characterization), though phrased as what a response \u201cshould\u201d convey rather than a standalone fact."
+                    }
+                }
+            }
+        ],
+        "claims": []
+    },
+    {
+        "question_id": "cdd8432f-a736-4d88-804a-c632a8bb2183",
+        "question_text": "Which AP investigation was published first: the PPE stockpile report or the shrimp supply report?",
+        "assertions": [
+            {
+                "statement": "The response should state that the PPE stockpile AP investigation was published before the shrimp supply AP investigation.",
+                "source_count": 5,
+                "score": 10,
+                "reasoning": "The query asks which investigation was published first, so the answer must compare publication timing. This is the core determination supported by the two publication dates in the claims.",
+                "rank": 1,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 5,
+                        "verifiability": 5,
+                        "reasoning": "The sources give publication timestamps: the PPE stockpile investigation is firstcreated 2023-12-20, while the shrimp industry/supply-related AP report is firstcreated 2024-03-20. Therefore PPE was published first. This directly answers the question and is a clear, binary, checkable claim."
+                    }
+                }
+            },
+            {
+                "statement": "The response should indicate that the PPE stockpile AP investigation was published in 2023.",
+                "source_count": 4,
+                "score": 7,
+                "reasoning": "Identifying the year of publication supports the ordering and helps justify why it came first. It is important context but not strictly necessary if the ordering is clearly stated.",
+                "rank": 2,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 4,
+                        "verifiability": 5,
+                        "reasoning": "The sources explicitly show the PPE stockpile AP investigation has a firstcreated timestamp of 2023-12-20, so it was published in 2023. This is important for determining which investigation came first (though it doesn\u2019t address the shrimp report\u2019s date). The claim is clear and directly checkable."
+                    }
+                }
+            }
+        ],
+        "claims": []
+    },
+    {
+        "question_id": "ed048dcf-6b33-4415-b3f1-5e7b0b387cfd",
+        "question_text": "What happened first: the White House learning of Austin\u2019s hospitalization or his public cancer disclosure?",
+        "assertions": [
+            {
+                "statement": "The response should state that the White House learned of Austin\u2019s hospitalization before his public cancer disclosure.",
+                "source_count": 4,
+                "score": 10,
+                "reasoning": "The query asks which event happened first, so the answer must establish the correct ordering using both claims. This is essential to directly resolve the comparison.",
+                "rank": 1,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 5,
+                        "verifiability": 5,
+                        "reasoning": "Source 2 explicitly states the White House (Biden and senior officials) were not told about Austin\u2019s hospitalization until Jan. 4, while the cancer diagnosis was kept secret until Jan. 9. Therefore, the White House learning of the hospitalization happened first. This directly answers the ordering asked in the question and is a clear, checkable fact."
+                    }
+                }
+            },
+            {
+                "statement": "The response should mention that President Biden learned of Austin\u2019s hospitalization when he was informed by a senior national security official.",
+                "source_count": 2,
+                "score": 7,
+                "reasoning": "This supports the \u2018White House learning\u2019 event with a clear mechanism of how it occurred. It is helpful context but not strictly required beyond establishing timing.",
+                "rank": 2,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 3,
+                        "verifiability": 4,
+                        "reasoning": "The sources explicitly state that Biden was told of Austin\u2019s medical stay by national security adviser Jake Sullivan, which supports the claim that he learned via a senior national security official. However, the evaluated question is about which occurred first (White House learning of hospitalization vs. public cancer disclosure), and this assertion only addresses how Biden learned of the hospitalization, not the timing comparison. The claim is mostly clear and checkable, though 'senior national security official' is slightly less specific than naming Sullivan."
+                    }
+                }
+            }
+        ],
+        "claims": []
+    },
+    {
+        "question_id": "4e04673a-15f7-444b-afb0-859d4a813793",
+        "question_text": "How did prosecutors and the Trumbull County grand jury differ on charging Brittany Watts?",
+        "assertions": [
+            {
+                "statement": "The response should state that prosecutors filed a felony charge against Brittany Watts for abuse of a corpse.",
+                "source_count": 5,
+                "score": 10,
+                "reasoning": "The core contrast is that prosecutors pursued a criminal charge. This is essential to explaining how their position differed from the grand jury\u2019s.",
+                "rank": 1,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 4,
+                        "verifiability": 5,
+                        "reasoning": "Sources explicitly state Watts was charged with abuse of a corpse, a fifth-degree felony, so the claim is well grounded. It is relevant because it captures the prosecutors\u2019 action (filing a felony charge), though it does not include the contrasting grand jury outcome that the question asks about. The assertion is concrete and easily checkable in an answer."
+                    }
+                }
+            },
+            {
+                "statement": "The response should state that the Trumbull County grand jury declined to indict Brittany Watts on the abuse-of-a-corpse charge.",
+                "source_count": 1,
+                "score": 10,
+                "reasoning": "The grand jury\u2019s refusal to indict is the key point of difference from prosecutors\u2019 charging decision. It is essential to answering the question.",
+                "rank": 2,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 4,
+                        "verifiability": 5,
+                        "reasoning": "Source 1 explicitly states the grand jury decided Watts won\u2019t be charged with corpse abuse, i.e., it declined to indict on the abuse-of-a-corpse charge. This is an important part of how the grand jury\u2019s action differed from prosecutors\u2019 initial pursuit of the charge, though a full answer would also mention prosecutors\u2019 stance/investigation. The claim is concrete and easy to check in an answer."
+                    }
+                }
+            },
+            {
+                "statement": "The response should explain that the difference was that prosecutors sought to proceed with charges while the grand jury chose not to move the case forward.",
+                "source_count": 6,
+                "score": 9,
+                "reasoning": "The question asks for the difference between the two actions; this captures the practical outcome of each side\u2019s decision.",
+                "rank": 3,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 4,
+                        "relevance": 5,
+                        "verifiability": 4,
+                        "reasoning": "Sources indicate prosecutors pursued/advanced the abuse-of-a-corpse case (bound over to grand jury; prosecutor said he was duty bound to present it), while the Trumbull County grand jury ultimately decided not to indict/charge her. The assertion is slightly generalized (\u201cproceed with charges\u201d) but matches the described contrast. It is central to the question and is mostly straightforward to check in an answer, though wording like \u201cnot to move the case forward\u201d is a bit less precise than \u201cdeclined to indict.\u201d"
+                    }
+                }
+            }
+        ],
+        "claims": []
+    },
+    {
+        "question_id": "3be46b0b-0175-4c30-868e-74a9274091ce",
+        "question_text": "Did Trump authorize the CIA\u2019s China social-media campaign before or after the July 2017 ACA repeal effort?",
+        "assertions": [
+            {
+                "statement": "The response should conclude that the CIA campaign authorization happened after the July 2017 ACA repeal effort.",
+                "source_count": 4,
+                "score": 10,
+                "reasoning": "The core of the question is the relative ordering of the two events. Using the provided dates, the correct relationship is that 2019 is after July 2017.",
+                "rank": 1,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 5,
+                        "verifiability": 5,
+                        "reasoning": "Source 2 states the CIA China social-media campaign was authorized in 2019, while Sources 1 and 4 place the ACA repeal effort being blocked in July 2017. Since 2019 is after July 2017, the assertion is directly supported, central to answering the before/after question, and is a clear, checkable temporal claim."
+                    }
+                }
+            },
+            {
+                "statement": "The response should state that Trump authorized the CIA\u2019s China social-media campaign in 2019.",
+                "source_count": 1,
+                "score": 10,
+                "reasoning": "The query asks for a before/after comparison, which requires identifying when the CIA campaign was authorized. This is the key timing fact from the claims.",
+                "rank": 2,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 4,
+                        "verifiability": 5,
+                        "reasoning": "Source 1 explicitly says that in 2019 Trump authorized the CIA to launch a clandestine campaign on Chinese social media, so the assertion is directly supported. This date is important for answering whether it was before/after the July 2017 ACA repeal effort (2019 implies after), though it doesn\u2019t mention the ACA event itself. The claim is concrete and easily checkable in an answer (did it say 2019 or not)."
+                    }
+                }
+            },
+            {
+                "statement": "The response should state that the Affordable Care Act repeal effort occurred in July 2017.",
+                "source_count": 3,
+                "score": 9,
+                "reasoning": "To determine whether the CIA authorization was before or after the repeal effort, the answer must establish the timing of the July 2017 ACA repeal effort.",
+                "rank": 3,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 4,
+                        "verifiability": 5,
+                        "reasoning": "Sources 1 and 3 explicitly state that the GOP/Trump ACA repeal effort was blocked in July 2017, directly supporting the assertion. This date is important context for answering whether another event happened before or after the July 2017 repeal effort, though it does not address the CIA campaign timing itself. The claim is clear and straightforward to check."
+                    }
+                }
+            }
+        ],
+        "claims": []
+    },
+    {
+        "question_id": "98585abc-58e1-4fc5-a9bb-df079b604a6b",
+        "question_text": "How did Arizona\u2019s 1864 abortion ban differ from North Carolina\u2019s 12-week abortion ban?",
+        "assertions": [
+            {
+                "statement": "The response should state that Arizona\u2019s 1864 abortion ban was a near-total ban rather than a gestational-limit ban.",
+                "source_count": 3,
+                "score": 10,
+                "reasoning": "The core difference is the scope of restriction: Arizona\u2019s law is described as near-total, which contrasts with a time-based limit. This is essential to answering how the bans differed.",
+                "rank": 1,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 4,
+                        "verifiability": 4,
+                        "reasoning": "Sources explicitly describe Arizona\u2019s 1864 law as a near-total ban allowing abortion only to save the woman\u2019s life (no rape/incest exceptions), which supports the claim that it is not a gestational-limit ban. This is important to contrasting it with a 12-week ban, though the assertion doesn\u2019t mention North Carolina directly. The statement is mostly clear and checkable, but \u201cnear-total\u201d vs \u201cgestational-limit\u201d involves slight interpretation unless the answer uses equivalent phrasing (e.g., \u2018only to save the woman\u2019s life\u2019)."
+                    }
+                }
+            },
+            {
+                "statement": "The response should explain that North Carolina\u2019s law restricted abortions primarily by setting a 12-week pregnancy cutoff for most abortions.",
+                "source_count": 1,
+                "score": 10,
+                "reasoning": "The defining feature of the North Carolina law in the claims is the 12-week limit. This is essential to contrast with Arizona\u2019s near-total ban.",
+                "rank": 2,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 4,
+                        "relevance": 4,
+                        "verifiability": 4,
+                        "reasoning": "Source 1 states North Carolina enacted a law banning most abortions after 12 weeks, which supports the claim that the law primarily restricts abortions via a 12-week cutoff. The word 'primarily' adds slight interpretation, but aligns with the source. This is an important component for comparing NC\u2019s 12-week ban to Arizona\u2019s 1864 ban, and it is clear enough to check in an answer."
+                    }
+                }
+            },
+            {
+                "statement": "The response should mention that Arizona\u2019s 1864 abortion ban imposed criminal penalties on people who assist in providing an abortion.",
+                "source_count": 3,
+                "score": 9,
+                "reasoning": "Criminalization of providers/assistants is a major distinguishing feature highlighted in the claims. It materially differentiates the Arizona ban from a standard gestational-limit framework.",
+                "rank": 3,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 4,
+                        "verifiability": 4,
+                        "reasoning": "Sources explicitly state Arizona\u2019s 1864 law carries 2\u20135 years in prison for doctors or anyone else who assists in an abortion, so the claim is directly supported. It is relevant because it highlights a key feature of Arizona\u2019s ban (criminal penalties) that can be contrasted with North Carolina\u2019s 12-week ban, though it doesn\u2019t by itself describe NC\u2019s provisions. It is mostly clear and checkable, but the phrasing 'people who assist in providing an abortion' is slightly broader than the sources\u2019 'doctors or anyone else who assists,' requiring minor interpretation."
+                    }
+                }
+            },
+            {
+                "statement": "The response should mention that Arizona\u2019s 1864 abortion ban included a prison sentence for those who assist in an abortion.",
+                "source_count": 3,
+                "score": 8,
+                "reasoning": "The presence of incarceration as a penalty is a concrete, testable difference in enforcement severity. It is important for comparing how the laws operate.",
+                "rank": 4,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 4,
+                        "verifiability": 4,
+                        "reasoning": "Sources explicitly state Arizona\u2019s 1864 law carries a 2\u20135 year prison sentence for doctors or anyone who assists in an abortion, so the assertion is well grounded. This is an important differentiator versus a 12-week ban (which is less restrictive and not necessarily framed as a near-total criminal prohibition), though it doesn\u2019t directly address North Carolina details. The criterion is mostly clear to check in an answer, but the phrase 'included a prison sentence' is slightly less specific than '2\u20135 years' and 'for doctors or anyone else who assists.'"
+                    }
+                }
+            },
+            {
+                "statement": "The response should note that North Carolina\u2019s 12-week abortion ban was enacted through a veto override.",
+                "source_count": 1,
+                "score": 4,
+                "reasoning": "This provides relevant legislative context for North Carolina\u2019s ban, though it is less central than the substantive policy difference between a near-total ban and a 12-week limit.",
+                "rank": 5,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 3,
+                        "verifiability": 5,
+                        "reasoning": "Source 1 explicitly states North Carolina enacted its 12-week abortion ban by overriding the Democratic governor\u2019s veto, so the claim is directly supported. It is somewhat useful context for comparing the two bans\u2019 origins, but not core to how the 1864 Arizona ban differed substantively. The assertion is clear and can be checked directly in an answer."
+                    }
+                }
+            }
+        ],
+        "claims": []
+    },
+    {
+        "question_id": "5ecd2c5e-4697-4f6d-bfdb-ece311c6e9e9",
+        "question_text": "What monthly activity-hour requirement did both Georgia Pathways descriptions set for eligibility?",
+        "assertions": [
+            {
+                "statement": "The response should state that the eligibility requirement was 80 hours of qualifying activity per month.",
+                "source_count": 10,
+                "score": 10,
+                "reasoning": "The query asks for the monthly activity-hour requirement shared by both descriptions. The specific hour threshold is the central fact needed to answer correctly.",
+                "rank": 1,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 5,
+                        "verifiability": 5,
+                        "reasoning": "Multiple sources explicitly state that Georgia Pathways eligibility requires documenting 80 hours of qualifying activity per month (work, study, rehabilitation, volunteering). This directly answers the question, and it is a clear, concrete fact that can be checked verbatim against an answer."
+                    }
+                }
+            }
+        ],
+        "claims": []
+    },
+    {
+        "question_id": "f524a468-7d42-47fa-9006-181e969d4097",
+        "question_text": "What scan did the Vatican say ruled out pneumonia for the pope who approved \u201cInfinite Dignity\u201d?",
+        "assertions": [
+            {
+                "statement": "The response should state that a CT scan was the scan the Vatican said ruled out pneumonia.",
+                "source_count": 3,
+                "score": 10,
+                "reasoning": "The query asks which scan ruled out pneumonia, and the claim specifies it was a CT (CAT) scan. This is the core fact needed to answer the question.",
+                "rank": 1,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 5,
+                        "verifiability": 5,
+                        "reasoning": "All three sources explicitly say the Vatican reported a CAT scan (i.e., CT scan) ruled out pneumonia. This is the key fact needed to answer the question, and it is a clear, binary detail that can be checked directly against an answer."
+                    }
+                }
+            },
+            {
+                "statement": "The response should indicate that the Vatican described the scan as ruling out pneumonia for Pope Francis.",
+                "source_count": 3,
+                "score": 7,
+                "reasoning": "The question frames the scan as something the Vatican said ruled out pneumonia; an accurate answer should reflect that attribution. This supports correctness beyond naming the scan type.",
+                "rank": 2,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 4,
+                        "relevance": 3,
+                        "verifiability": 4,
+                        "reasoning": "Sources 2 and 3 explicitly say the Vatican said a CAT scan ruled out pneumonia, so the claim is supported. However, the assertion is incomplete for the question because it doesn\u2019t specify the scan type (CAT scan) and instead focuses on identifying the pope. It is still checkable, but less directly aligned with what the question asks."
+                    }
+                }
+            }
+        ],
+        "claims": []
+    },
+    {
+        "question_id": "dc4ce696-a0c6-40cf-91ac-0f639a742717",
+        "question_text": "How did the EPA\u2019s PM2.5 standard differ from its PFOA/PFOS drinking-water limit?",
+        "assertions": [
+            {
+                "statement": "The response should state that the PFOA/PFOS limit is a maximum allowed level for those chemicals in drinking water.",
+                "source_count": 3,
+                "score": 9,
+                "reasoning": "A complete comparison must identify the PFAS rule as a drinking-water limit rather than an air standard.",
+                "rank": 1,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 4,
+                        "verifiability": 4,
+                        "reasoning": "The sources explicitly say the EPA rule \u201csets limits\u201d for PFOA and PFOS in drinking water (e.g., 4 parts per trillion), which supports describing it as a maximum allowed level. This is relevant because the question asks how the PM2.5 standard differed from the drinking-water limit, and identifying the PFAS rule as a drinking-water concentration limit is an important part of that contrast (though it doesn\u2019t address PM2.5 itself). The assertion is mostly clear and checkable in an answer, though it\u2019s phrased generically without the numeric value."
+                    }
+                }
+            },
+            {
+                "statement": "The response should state that the PM2.5 standard is an annual limit for fine-particle concentration in ambient air.",
+                "source_count": 1,
+                "score": 9,
+                "reasoning": "The query asks how the two standards differ; identifying PM2.5 as an air-quality standard is central to that comparison.",
+                "rank": 2,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 4,
+                        "relevance": 4,
+                        "verifiability": 4,
+                        "reasoning": "Source 1 supports that the PM2.5 rule sets a maximum level of fine particle pollution per cubic meter of air (an ambient air standard). It does not explicitly say 'annual limit' in the provided excerpt, so that part is a small extrapolation. The assertion is relevant because the question asks how the PM2.5 standard differs from a drinking-water limit, and this captures the air-concentration nature of PM2.5. It is fairly clear and checkable in an answer (does it describe PM2.5 as an ambient air concentration limit, and specifically annual)."
+                    }
+                }
+            },
+            {
+                "statement": "The response should mention that the maximum allowed level for PFOA is 4 parts per trillion in drinking water.",
+                "source_count": 3,
+                "score": 8,
+                "reasoning": "The specific limit for PFOA is central to accurately describing the PFAS drinking-water standard being compared.",
+                "rank": 3,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 4,
+                        "verifiability": 5,
+                        "reasoning": "Sources explicitly state EPA set drinking-water limits for PFOA (and PFOS) at 4 parts per trillion, so the claim is directly supported. It is relevant because contrasting PM2.5 standards with PFAS limits requires stating the PFAS numeric limit, though it doesn\u2019t address the PM2.5 side. The assertion is specific and easily checkable in an answer (mentions PFOA at 4 ppt)."
+                    }
+                }
+            },
+            {
+                "statement": "The response should mention that the maximum allowed level for PFOS is 4 parts per trillion in drinking water.",
+                "source_count": 3,
+                "score": 8,
+                "reasoning": "The specific limit for PFOS is central to accurately describing the PFAS drinking-water standard being compared.",
+                "rank": 4,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 3,
+                        "relevance": 4,
+                        "verifiability": 5,
+                        "reasoning": "The sources state EPA set drinking-water limits of 4 parts per trillion for PFOA and PFOS (not specifically 'PFOS is 4 ppt' alone), so the claim is mostly supported but slightly imprecise. Mentioning the PFOS/PFOA limit is important for contrasting with the PM2.5 standard, though it doesn\u2019t address the PM2.5 side. The 4 ppt figure is concrete and easy to check in an answer."
+                    }
+                }
+            },
+            {
+                "statement": "The response should mention that the PM2.5 annual standard was set at 9 micrograms per cubic meter.",
+                "source_count": 1,
+                "score": 8,
+                "reasoning": "The numeric level is a key part of describing what the PM2.5 standard is, enabling a concrete comparison to the PFAS limit.",
+                "rank": 5,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 4,
+                        "verifiability": 5,
+                        "reasoning": "Source 1 explicitly states the PM2.5 annual standard was set at 9 micrograms per cubic meter, so the assertion is directly grounded. This detail is important for contrasting the PM2.5 air standard with the PFOA/PFOS drinking-water limit (different pollutant and units), though it doesn\u2019t address the drinking-water limit itself. The claim is specific and easily checkable in an answer."
+                    }
+                }
+            },
+            {
+                "statement": "The response should indicate that the two standards use different measurement units because one applies to air concentration and the other applies to drinking-water concentration.",
+                "source_count": 4,
+                "score": 7,
+                "reasoning": "A key difference is the medium and corresponding units; this is directly supported by the claims\u2019 air vs water measures.",
+                "rank": 6,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 4,
+                        "relevance": 5,
+                        "verifiability": 4,
+                        "reasoning": "Sources state the PM2.5 standard is an air concentration limit (9 micrograms per cubic meter of air) and the PFOA/PFOS limit is a drinking-water concentration limit (4 parts per trillion). The assertion correctly captures that they differ by medium and thus units, though it doesn\u2019t name the specific units/values. It is central to answering how the standards differ and is mostly straightforward to check in an answer, but slightly less binary because it doesn\u2019t specify the exact units."
+                    }
+                }
+            },
+            {
+                "statement": "The response should mention that the PM2.5 annual standard was tightened from a previous level of 12 micrograms per cubic meter.",
+                "source_count": 1,
+                "score": 6,
+                "reasoning": "This provides important context about how the PM2.5 standard changed, which helps distinguish it from the PFAS rule.",
+                "rank": 7,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 3,
+                        "verifiability": 5,
+                        "reasoning": "Source 1 explicitly states the PM2.5 annual standard is 9 \u00b5g/m\u00b3, down from 12 \u00b5g/m\u00b3 set a decade ago, so the claim about being tightened from 12 is directly grounded. It is only moderately relevant because the question asks for how the PM2.5 standard differed from the PFOA/PFOS drinking-water limit; mentioning the prior 12 \u00b5g/m\u00b3 level is helpful context but not essential to the comparison. The assertion is concrete and easily checkable in an answer."
+                    }
+                }
+            }
+        ],
+        "claims": []
+    },
+    {
+        "question_id": "d56e9ad7-4eef-43e0-be07-424b9aee7cdb",
+        "question_text": "Did Austin\u2019s disclosure come before or after Emhoff\u2019s Feb. 27, 2024 hunger announcement?",
+        "assertions": [
+            {
+                "statement": "The response should state that Austin\u2019s public disclosure occurred before Emhoff\u2019s Feb. 27, 2024 announcement.",
+                "source_count": 6,
+                "score": 10,
+                "reasoning": "The query asks for the relative timing between the two events. This is the core comparison needed to answer the question.",
+                "rank": 1,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 5,
+                        "verifiability": 5,
+                        "reasoning": "Sources 1\u20132 state Austin kept his cancer diagnosis secret until Jan. 9, 2024 (public disclosure). Sources 3\u20136 state Emhoff\u2019s hunger-related announcement occurred Feb. 27, 2024. Jan. 9 is clearly before Feb. 27, so the assertion is directly supported, central to the question, and easy to verify."
+                    }
+                }
+            },
+            {
+                "statement": "The response should mention that Austin did not publicly disclose his prostate cancer diagnosis until early January 2024.",
+                "source_count": 2,
+                "score": 8,
+                "reasoning": "Identifying when Austin disclosed provides the necessary anchor for comparing it to the Feb. 27 event. The exact day is less important than the timeframe.",
+                "rank": 2,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 4,
+                        "verifiability": 5,
+                        "reasoning": "Both sources state Austin kept the diagnosis secret until Jan. 9, 2024 (early January), so the claim is directly supported. This timing helps compare to Emhoff\u2019s Feb. 27, 2024 announcement (showing Austin\u2019s disclosure was earlier), though it doesn\u2019t by itself state the before/after relationship. The statement is specific and easily checkable."
+                    }
+                }
+            }
+        ],
+        "claims": []
+    },
+    {
+        "question_id": "a519294e-7680-445d-8ad2-73713743d120",
+        "question_text": "Why did the monarch diagnosed with an enlarged prostate on Jan. 17, 2024 publicly disclose his cancer diagnosis?",
+        "assertions": [
+            {
+                "statement": "The response should state that the monarch disclosed the cancer diagnosis to reduce or prevent public speculation.",
+                "source_count": 3,
+                "score": 10,
+                "reasoning": "The query asks for the reason behind the public disclosure. Preventing speculation is explicitly given as a primary motivation in the palace statement, making it essential.",
+                "rank": 1,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 4,
+                        "verifiability": 4,
+                        "reasoning": "Sources 1-3 explicitly state the palace said Charles chose to share his diagnosis \"to prevent speculation,\" which directly supports the assertion. This is an important part of why he disclosed the diagnosis, though the sources also give an additional reason (to assist public understanding), so it\u2019s not the sole complete answer. The claim is fairly clear and can be checked in an answer, though wording like \"reduce or prevent\" allows slight interpretation."
+                    }
+                }
+            },
+            {
+                "statement": "The response should state that the monarch disclosed the cancer diagnosis to help improve public understanding of cancer.",
+                "source_count": 3,
+                "score": 9,
+                "reasoning": "The palace statement frames the disclosure as intended to support broader public understanding of cancer. This directly answers the 'why' and is a key second rationale.",
+                "rank": 2,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 4,
+                        "verifiability": 4,
+                        "reasoning": "All three sources explicitly state that the palace said the monarch shared the diagnosis \"in the hope it may assist public understanding\" of cancer, so the claim is directly grounded. It is relevant to the question about why he disclosed the diagnosis, though it omits the other stated reason (to prevent speculation), making it not fully comprehensive. The assertion is mostly clear and checkable, but phrased as what the response \"should\" state rather than a direct factual claim, which adds slight interpretive ambiguity."
+                    }
+                }
+            }
+        ],
+        "claims": []
+    },
+    {
+        "question_id": "346bc9f4-2ea1-4490-98d6-85ce7165ff5d",
+        "question_text": "How did Dr. Vivek Murthy\u2019s loneliness warning compare with Dr. Jeremy Nobel\u2019s definition?",
+        "assertions": [
+            {
+                "statement": "The response should state that Nobel defined loneliness as a subjective experience.",
+                "source_count": 1,
+                "score": 10,
+                "reasoning": "Nobel\u2019s definition hinges on loneliness being subjective, which is central to contrasting it with Murthy\u2019s public-health risk framing. This is essential for a correct comparison.",
+                "rank": 1,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 4,
+                        "verifiability": 5,
+                        "reasoning": "Source 1 directly quotes Nobel saying \u201cLoneliness is subjective,\u201d so the claim is fully supported. It is an important part of comparing Murthy\u2019s warning with Nobel\u2019s definition, though it doesn\u2019t address Murthy\u2019s side. The assertion is clear and can be checked verbatim against an answer."
+                    }
+                }
+            },
+            {
+                "statement": "The response should state that Nobel described loneliness as a gap between desired social connection and actual social connection.",
+                "source_count": 1,
+                "score": 10,
+                "reasoning": "This is the core content of Nobel\u2019s definition in the claim. A complete comparison must include what he said loneliness is.",
+                "rank": 2,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 4,
+                        "verifiability": 5,
+                        "reasoning": "Source 1 directly quotes Nobel defining loneliness as \u201cthe gap between the social connections you want to have and the ones you do have,\u201d which matches the assertion. This is an important component for comparing Murthy\u2019s warning with Nobel\u2019s definition, though it covers only Nobel\u2019s side of the comparison. The claim is specific and can be checked verbatim against an answer."
+                    }
+                }
+            },
+            {
+                "statement": "The response should explain that Murthy\u2019s contribution was primarily a warning about health consequences rather than a definition of loneliness.",
+                "source_count": 1,
+                "score": 9,
+                "reasoning": "The comparison requires distinguishing Murthy\u2019s focus (health impact warning) from Nobel\u2019s focus (conceptual definition). This is a key interpretive link grounded in the claims.",
+                "rank": 3,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 4,
+                        "relevance": 4,
+                        "verifiability": 4,
+                        "reasoning": "Source 1 supports that Murthy issued a public health advisory warning about loneliness as an \u201cepidemic\u201d and emphasized severe health consequences (e.g., comparable to smoking). It does not present Murthy as offering a formal definition, so the contrast implied by the assertion is reasonable. However, the source set provided includes nothing about Dr. Jeremy Nobel\u2019s definition, so the comparison aspect can\u2019t be fully grounded here. The assertion is still relevant to the question because it captures the key distinction (warning vs. definition) and is fairly checkable in an answer, though terms like \u201cprimarily\u201d introduce slight subjectivity."
+                    }
+                }
+            },
+            {
+                "statement": "The response should explain that Nobel\u2019s contribution was primarily defining what loneliness means rather than quantifying its health risk.",
+                "source_count": 1,
+                "score": 9,
+                "reasoning": "To compare the two, an answer should clarify Nobel\u2019s role as definitional and subjective, contrasting with Murthy\u2019s risk emphasis. This is central to answering the question.",
+                "rank": 4,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 3,
+                        "relevance": 4,
+                        "verifiability": 4,
+                        "reasoning": "Source 1 directly supports that Jeremy Nobel defined loneliness as a subjective gap between desired and actual social connections. However, the source does not mention Vivek Murthy or any quantification of health risk, so the contrast about \"rather than quantifying its health risk\" is an extrapolation beyond the provided text. The assertion is still relevant to the comparison question (it captures Nobel\u2019s definitional role) and is fairly checkable in an answer (does it state Nobel defined loneliness vs. quantified risk)."
+                    }
+                }
+            },
+            {
+                "statement": "The response should mention that Murthy used a smoking-equivalence comparison to communicate the magnitude of loneliness-related health risk.",
+                "source_count": 1,
+                "score": 8,
+                "reasoning": "This is the distinctive way Murthy expressed the seriousness of the risk in the claim. It strongly supports an accurate comparison without requiring exact numbers.",
+                "rank": 5,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 4,
+                        "verifiability": 5,
+                        "reasoning": "Source 1 explicitly says Murthy warned loneliness poses health risks \u201cas deadly as smoking up to 15 cigarettes a day,\u201d so the smoking-equivalence comparison is directly supported. This is an important part of how Murthy framed his warning, which helps compare it to Nobel\u2019s definition, though it doesn\u2019t address Nobel itself. The assertion is concrete and easy to check in an answer (did it mention the smoking-equivalence comparison or not)."
+                    }
+                }
+            }
+        ],
+        "claims": []
+    },
+    {
+        "question_id": "d83577e9-d36a-4263-a739-e0b217d8cb96",
+        "question_text": "Did the EPA soot rule come before or after the 5th Circuit\u2019s March 12, 2024 Title X decision?",
+        "assertions": [
+            {
+                "statement": "The response should state that the EPA soot rule was issued before the 5th Circuit\u2019s March 12, 2024 Title X decision.",
+                "source_count": 2,
+                "score": 10,
+                "reasoning": "The query asks for the relative timing between the EPA soot rule and the March 12, 2024 Title X decision. The claims place the soot rule in February 2024 and the court decision on March 12, establishing the ordering.",
+                "rank": 1,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 4,
+                        "relevance": 5,
+                        "verifiability": 5,
+                        "reasoning": "Source 1 is dated 2024-02-07 and describes the EPA soot rule being set/tightened then, while Source 2 is dated 2024-03-12 for the 5th Circuit Title X decision. This supports that the soot rule came before the March 12 decision. The sources don\u2019t explicitly use the phrase \u201cissued before,\u201d but the timestamps clearly imply the ordering. The assertion directly answers the before/after question and is unambiguous to check."
+                    }
+                }
+            },
+            {
+                "statement": "The response should mention that the EPA soot rule occurred in February 2024.",
+                "source_count": 1,
+                "score": 8,
+                "reasoning": "Stating the month of the EPA rule supports the before/after comparison required by the question. It is important context for verifying the ordering.",
+                "rank": 2,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 4,
+                        "relevance": 4,
+                        "verifiability": 5,
+                        "reasoning": "Source 1 is dated 2024-02-07 and describes the EPA tightening soot standards, supporting that the soot rule occurred in February 2024 (though it doesn\u2019t explicitly say \u201cFebruary 2024\u201d in the body). This timing is important for answering whether it came before or after the March 12, 2024 5th Circuit decision. The assertion is concrete and easy to check in an answer (does it mention February 2024 or not)."
+                    }
+                }
+            },
+            {
+                "statement": "The response should mention that the Title X decision occurred on March 12, 2024.",
+                "source_count": 1,
+                "score": 8,
+                "reasoning": "Identifying the date of the court decision anchors the comparison point for the before/after determination. This is key context for the query.",
+                "rank": 3,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 4,
+                        "verifiability": 5,
+                        "reasoning": "Source 1 explicitly states the 5th Circuit Title X ruling occurred Tuesday, March 12, 2024, so the assertion is directly supported. Mentioning the decision date is important context for determining whether another rule came before or after it, though it does not by itself answer the EPA soot rule timing. The requirement is clear and easily checkable in an answer."
+                    }
+                }
+            }
+        ],
+        "claims": []
+    },
+    {
+        "question_id": "51af5058-2514-407b-81e8-49331cc721a3",
+        "question_text": "In what year did Philip Morris submit its Zyn marketing application to the agency that set the LDT approval deadline?",
+        "assertions": [
+            {
+                "statement": "The response should state that Philip Morris submitted its Zyn marketing application in 2020.",
+                "source_count": 2,
+                "score": 10,
+                "reasoning": "The query asks for the year of submission of the Zyn marketing application. This is the central fact needed to answer the question.",
+                "rank": 1,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 5,
+                        "verifiability": 5,
+                        "reasoning": "Source 1 explicitly states Philip Morris\u2019 Zyn marketing application was submitted in 2020, and Source 2 corroborates it as pending since 2020. The year of submission is the core fact needed to answer the question and is a clear, directly checkable detail."
+                    }
+                }
+            },
+            {
+                "statement": "The response should identify the agency that set the LDT approval deadline as the U.S. Food and Drug Administration.",
+                "source_count": 3,
+                "score": 6,
+                "reasoning": "The question references an agency that set an LDT approval deadline; both claims point to the FDA. Naming the agency supports correct linkage, though the year is the primary target.",
+                "rank": 2,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 4,
+                        "verifiability": 5,
+                        "reasoning": "Sources 1 and 3 explicitly describe FDA officials reviewing Philip Morris\u2019 Zyn marketing application and discuss FDA authorization, supporting that the relevant agency is the U.S. Food and Drug Administration. Identifying the agency is important context for the question (which asks about the year of submission to that agency), though the core asked-for fact is the year. The assertion is clear and straightforward to verify against an answer."
+                    }
+                }
+            }
+        ],
+        "claims": []
+    },
+    {
+        "question_id": "521cc6ab-0734-4014-9095-e5dca060da6a",
+        "question_text": "Did the FDA approve GLP-1 drugs before or after its January 2024 suicidality review?",
+        "assertions": [
+            {
+                "statement": "The response should state that the FDA\u2019s January 2024 suicidality review concerned GLP-1 receptor agonist drugs that had already been approved.",
+                "source_count": 4,
+                "score": 10,
+                "reasoning": "The query asks whether approvals occurred before or after the January 2024 review. Claim 2 indicates the review covered GLP-1 drugs approved since 2005, implying approval preceded the review.",
+                "rank": 1,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 5,
+                        "verifiability": 4,
+                        "reasoning": "Source 3 explicitly says the FDA was analyzing reports related to GLP-1 receptor agonists that were \u201capproved since 2005,\u201d which clearly implies the January 2024 suicidality review concerned already-approved drugs. This directly answers whether approvals occurred before/after the review (before). The assertion is mostly clear, though it\u2019s slightly broad (\u201chad already been approved\u201d without specifying the time range), but still straightforward to check in an answer."
+                    }
+                }
+            },
+            {
+                "statement": "The response should indicate that the GLP-1 drugs discussed were approved over a period starting well before 2024.",
+                "source_count": 4,
+                "score": 9,
+                "reasoning": "To answer the timing question, an accurate response should convey that approvals began years earlier, establishing that approval was before the January 2024 review.",
+                "rank": 2,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 4,
+                        "relevance": 4,
+                        "verifiability": 3,
+                        "reasoning": "Source 3 states the FDA was analyzing reports for more than a dozen GLP-1 receptor agonists \u201capproved since 2005,\u201d which supports the idea that approvals began well before 2024 (i.e., before the January 2024 review). However, the assertion is somewhat broad/vague (\u201cover a period starting well before 2024\u201d) and doesn\u2019t specify exact approval dates for particular drugs, making it less crisply checkable."
+                    }
+                }
+            }
+        ],
+        "claims": []
+    },
+    {
+        "question_id": "a24a4c93-f56c-4086-afc2-2a602f29301c",
+        "question_text": "How did the mifepristone case and Idaho emergency abortion case differ in their legal focus?",
+        "assertions": [
+            {
+                "statement": "The response should explain that the Idaho emergency abortion case focused on whether a state abortion ban conflicts with a federal emergency-care requirement.",
+                "source_count": 4,
+                "score": 10,
+                "reasoning": "The query asks for the difference in legal focus, and this captures the core issue in the Idaho case. It is essential for contrasting the two cases.",
+                "rank": 1,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 4,
+                        "verifiability": 4,
+                        "reasoning": "Sources repeatedly state the Idaho emergency abortion case concerns whether Idaho\u2019s abortion ban conflicts with the federal Emergency Medical Treatment and Active Labor Act (EMTALA) emergency-care requirements, so the assertion is well supported. It is important to the question because it captures the Idaho case\u2019s legal focus (though it doesn\u2019t address the mifepristone case side of the comparison). The claim is mostly clear and checkable, but phrased as what a response \u201cshould explain,\u201d which is slightly less direct than stating the fact itself."
+                    }
+                }
+            },
+            {
+                "statement": "The response should explain that the mifepristone case focused on FDA rules that eased access to mifepristone.",
+                "source_count": 4,
+                "score": 10,
+                "reasoning": "This is the central legal focus of the mifepristone case and is necessary to contrast it with the Idaho EMTALA preemption dispute.",
+                "rank": 2,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 4,
+                        "verifiability": 4,
+                        "reasoning": "Sources describe the mifepristone case as challenging FDA actions/changes that expanded access (e.g., mail-order availability since 2021, extending use to 10 weeks in 2016, reducing in-person visit requirements). That supports the assertion. It is relevant because the question asks how the mifepristone case differed in legal focus from the Idaho emergency abortion case, though the assertion only covers the mifepristone side. It is mostly clear and checkable, but slightly non-specific about which FDA rules were at issue."
+                    }
+                }
+            },
+            {
+                "statement": "The response should indicate that the mifepristone case concerned access conditions for a medication abortion drug rather than emergency-care obligations.",
+                "source_count": 4,
+                "score": 9,
+                "reasoning": "The question asks how the legal focuses differed; this assertion tests that the answer draws the correct conceptual distinction between drug regulation and emergency medical care.",
+                "rank": 3,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 4,
+                        "relevance": 3,
+                        "verifiability": 4,
+                        "reasoning": "Sources clearly describe the mifepristone case as about restrictions on access/conditions of use (mail-order, gestational window, in-person visits), so that part is well grounded. However, the sources provided do not mention the Idaho emergency abortion case or 'emergency-care obligations,' so the contrast is only partially supported from these texts. The assertion is fairly clear and checkable in an answer (does it characterize the mifepristone case as about access conditions rather than emergency-care duties), but it does not fully capture the two-case comparison asked by the question."
+                    }
+                }
+            },
+            {
+                "statement": "The response should state that the Idaho case concerned emergency treatment duties for hospitals.",
+                "source_count": 4,
+                "score": 9,
+                "reasoning": "This captures the practical legal domain of the Idaho case (emergency care obligations), which is key to differentiating it from the FDA regulatory dispute.",
+                "rank": 4,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 4,
+                        "verifiability": 4,
+                        "reasoning": "Sources repeatedly describe the Idaho case as a dispute over EMTALA and hospitals\u2019 obligations to provide emergency care (potentially including abortion) for Medicare-participating hospitals, so the assertion is well supported. It is important to the question because it identifies the Idaho case\u2019s legal focus, though it doesn\u2019t address the mifepristone case side of the comparison. The claim is mostly clear and checkable, but slightly broad because it doesn\u2019t explicitly name EMTALA or specify the federal-vs-state conflict."
+                    }
+                }
+            },
+            {
+                "statement": "The response should mention that the federal law at issue in the Idaho case was EMTALA.",
+                "source_count": 4,
+                "score": 8,
+                "reasoning": "Naming the governing federal statute clarifies the Idaho case\u2019s legal focus. This is important context for distinguishing it from the mifepristone case.",
+                "rank": 5,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 4,
+                        "verifiability": 5,
+                        "reasoning": "The sources explicitly state that the Idaho emergency abortion case centers on whether Idaho\u2019s abortion ban conflicts with the federal Emergency Medical Treatment and Active Labor Act (EMTALA). Mentioning EMTALA is therefore well supported. It is important to distinguishing the Idaho case\u2019s legal focus (federal emergency-care law vs. state ban) from the mifepristone case (FDA regulation of the drug), though it\u2019s not the only needed contrast. The assertion is concrete and easy to check in an answer."
+                    }
+                }
+            }
+        ],
+        "claims": []
+    },
+    {
+        "question_id": "954a32fb-fa49-4e17-ba4b-23635e4933a9",
+        "question_text": "Which CDC publication came first: the Puerto Rico cesarean report or the overdose-smoking study?",
+        "assertions": [
+            {
+                "statement": "The response should state that the Puerto Rico cesarean report was released before the overdose-smoking study.",
+                "source_count": 2,
+                "score": 10,
+                "reasoning": "The query asks which publication came first, so the answer must establish the correct ordering using the two publication dates. This is the core of the question.",
+                "rank": 1,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 5,
+                        "verifiability": 5,
+                        "reasoning": "Source 1 is dated 2024-01-10 and describes the CDC Puerto Rico cesarean report being released then; Source 2 is dated 2024-02-15 for the overdose-smoking study. Therefore, the cesarean report came first. This directly answers the question and is a clear, checkable ordering claim."
+                    }
+                }
+            },
+            {
+                "statement": "The response should mention that the Puerto Rico cesarean report was released in January 2024.",
+                "source_count": 1,
+                "score": 8,
+                "reasoning": "Identifying the month of release supports the ordering without requiring excessive precision. It is important context for determining which came first.",
+                "rank": 2,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 4,
+                        "verifiability": 5,
+                        "reasoning": "Source 1 shows the CDC Puerto Rico cesarean report was released on a Wednesday with a firstcreated timestamp of 2024-01-10, which is in January 2024, so the claim is directly supported. Mentioning the release month helps determine which publication came first, though the core comparison also requires the overdose-smoking study\u2019s date. The statement is specific and easily checkable in an answer."
+                    }
+                }
+            },
+            {
+                "statement": "The response should mention that the overdose-smoking study was published in February 2024.",
+                "source_count": 1,
+                "score": 8,
+                "reasoning": "Identifying the month of publication supports the ordering without requiring excessive precision. It is important context for determining which came first.",
+                "rank": 3,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 4,
+                        "relevance": 4,
+                        "verifiability": 5,
+                        "reasoning": "Source 1 shows a timestamp of 2024-02-15, supporting that the overdose-smoking study was published in February 2024 (month-level claim is supported, though the source doesn\u2019t explicitly say \u201cpublished in February 2024\u201d in prose). This publication date is important for determining which CDC publication came first. The assertion is concrete and easy to check in an answer (does it mention February 2024 or not)."
+                    }
+                }
+            }
+        ],
+        "claims": []
+    },
+    {
+        "question_id": "7a6d87f6-ce43-4c64-8f02-c7ed9bf5b572",
+        "question_text": "What decision did both Iowa and Nebraska make about the 2024 Summer EBT program?",
+        "assertions": [
+            {
+                "statement": "The response should state that Nebraska chose not to participate in the 2024 Summer EBT program.",
+                "source_count": 2,
+                "score": 10,
+                "reasoning": "Nebraska\u2019s decision to decline participation is the other half of the shared decision the question asks about.",
+                "rank": 1,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 3,
+                        "verifiability": 5,
+                        "reasoning": "Source 1 explicitly states that Nebraska will not participate in the 2024 Summer EBT program, so the claim is directly grounded. However, the question asks what decision both Iowa and Nebraska made, and this assertion only covers Nebraska, making it only partially useful for evaluating a full answer. The statement is clear and can be checked as a binary fact against an answer."
+                    }
+                }
+            },
+            {
+                "statement": "The response should state that Iowa chose not to participate in the 2024 Summer EBT program.",
+                "source_count": 1,
+                "score": 10,
+                "reasoning": "The query asks what decision both states made; Iowa\u2019s decision to decline participation is central to answering it.",
+                "rank": 2,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 3,
+                        "verifiability": 5,
+                        "reasoning": "Source 1 explicitly states Iowa\u2019s governor \u201csaid no to the Summer Electronic Benefits Transfer for Children program for 2024,\u201d directly supporting the claim that Iowa chose not to participate. However, the question asks what decision both Iowa and Nebraska made, and the assertion only addresses Iowa, making it only partially useful for evaluating a complete answer. The claim is clear and can be checked directly against an answer."
+                    }
+                }
+            }
+        ],
+        "claims": []
+    },
+    {
+        "question_id": "fdf1a097-1ab1-46b7-83e4-f28ed458f922",
+        "question_text": "On what date was the White House informed about the hospitalization at the hospital where Austin had a prostatectomy?",
+        "assertions": [
+            {
+                "statement": "The response should state that the White House was informed about Austin\u2019s hospitalization on Jan. 4, 2024.",
+                "source_count": 9,
+                "score": 10,
+                "reasoning": "The query asks for the date the White House was informed about the hospitalization. This is the central fact needed to answer the question.",
+                "rank": 1,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 5,
+                        "verifiability": 5,
+                        "reasoning": "Multiple sources explicitly state the White House was not informed of Austin\u2019s hospitalization until Jan. 4, 2024 (e.g., Sources 2, 4, 8). This date directly answers the question and is a clear, objectively checkable fact."
+                    }
+                }
+            }
+        ],
+        "claims": []
+    },
+    {
+        "question_id": "88d1c763-302d-458b-945b-0f9dcfe5c2ea",
+        "question_text": "Did Evers sign the dental-care package before or after urging PFAS funding release?",
+        "assertions": [
+            {
+                "statement": "The response should state that Evers signed the dental-care package after he urged the Legislature to release PFAS funding.",
+                "source_count": 5,
+                "score": 10,
+                "reasoning": "The query asks for the relative timing between the two events. This is the core comparison supported by the claims.",
+                "rank": 1,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 5,
+                        "verifiability": 5,
+                        "reasoning": "Sources 1/2/4 place Evers\u2019 urging to release PFAS funding in his State of the State address (Jan. 23, 2024). Sources 3/5 state he signed the dental-care package on Wednesday (Jan. 31, 2024). Therefore, the signing occurred after the PFAS funding urging. This directly answers the before/after question and is a clear, checkable ordering."
+                    }
+                }
+            },
+            {
+                "statement": "The response should mention that Evers urged the Legislature to release PFAS-related funding during his State of the State address in January 2024.",
+                "source_count": 3,
+                "score": 7,
+                "reasoning": "Identifying when the PFAS funding request occurred is necessary context to justify the before/after conclusion.",
+                "rank": 2,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 4,
+                        "verifiability": 5,
+                        "reasoning": "All three source excerpts explicitly say Evers renewed his call for Republicans to release $125 million in PFAS funding during his State of the State address in January 2024, so the claim is directly supported. This timing detail is important context for comparing whether the dental-care package was signed before or after that urging, though it doesn\u2019t address the dental-care signing date itself. The statement is specific (event + venue + month/year) and straightforward to check in an answer."
+                    }
+                }
+            },
+            {
+                "statement": "The response should mention that Evers signed the dental-care package into law on Jan. 31, 2024.",
+                "source_count": 2,
+                "score": 7,
+                "reasoning": "Stating when the dental-care package was signed provides the key anchor date needed to compare timing.",
+                "rank": 3,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 4,
+                        "relevance": 4,
+                        "verifiability": 5,
+                        "reasoning": "The sources state Evers signed the dental-care package into law on Wednesday and the article timestamp is 2024-01-31, supporting the Jan. 31, 2024 date (though the exact date is inferred from the dateline/timestamp rather than explicitly written as \u201cJan. 31, 2024\u201d). This detail is important for answering whether the signing occurred before or after urging PFAS funding release. The claim is specific and easily checkable in an answer."
+                    }
+                }
+            }
+        ],
+        "claims": []
+    },
+    {
+        "question_id": "8a96b3f2-8dfc-4bc6-b61a-fae51ac30370",
+        "question_text": "Which vote happened first: France\u2019s Versailles session or the Maine House vote?",
+        "assertions": [
+            {
+                "statement": "The response should state that the France parliament vote at Versailles occurred before the Maine House vote.",
+                "source_count": 5,
+                "score": 10,
+                "reasoning": "The query asks which vote happened first, so the answer must explicitly identify the earlier event. This is the core comparison supported by both claims' dates.",
+                "rank": 1,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 5,
+                        "verifiability": 4,
+                        "reasoning": "Sources place the France Versailles joint-session vote on Monday, 2024-03-04, and the Maine House vote on Tuesday, 2024-04-09, so France occurred first. This directly answers the question. It\u2019s checkable, though the assertion is phrased as what a response \u201cshould state\u201d rather than explicitly stating the dates, making it slightly less concrete than a date-based claim."
+                    }
+                }
+            },
+            {
+                "statement": "The response should mention that the France Versailles session vote took place in early March 2024.",
+                "source_count": 4,
+                "score": 8,
+                "reasoning": "Providing the timing of the Versailles vote supports the ordering conclusion. The score is high because it directly substantiates which vote was first.",
+                "rank": 2,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 3,
+                        "verifiability": 4,
+                        "reasoning": "Sources state the Versailles joint-session vote occurred on Monday, March 4, 2024 (early March 2024), so the claim is well grounded. However, the question asks which vote happened first (requires comparing to the Maine House vote date), so mentioning only the Versailles timing is helpful but not sufficient/core. The statement is mostly clear and checkable, though 'early March 2024' is slightly less precise than giving the exact date."
+                    }
+                }
+            },
+            {
+                "statement": "The response should mention that the Maine House vote took place in early April 2024.",
+                "source_count": 1,
+                "score": 8,
+                "reasoning": "Providing the timing of the Maine vote supports the ordering conclusion. The score is high because it directly substantiates which vote was later.",
+                "rank": 3,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 4,
+                        "verifiability": 4,
+                        "reasoning": "Source 1 states the Maine House vote was on Tuesday, April 9, 2024, which is in early April 2024, so the assertion is well supported. Mentioning the timing of the Maine House vote is important for determining which vote happened first, though it doesn\u2019t address the France Versailles session date. The claim is fairly concrete, but 'early April 2024' is slightly less precise than giving the exact date."
+                    }
+                }
+            }
+        ],
+        "claims": []
+    },
+    {
+        "question_id": "b8a05cd5-c3a5-46cb-97fc-5a3d6f09ca75",
+        "question_text": "How did the format and purpose differ between Kate\u2019s video message and Buckingham Palace\u2019s statement?",
+        "assertions": [
+            {
+                "statement": "The response should mention that the palace statement\u2019s purpose was to reduce or prevent public speculation.",
+                "source_count": 3,
+                "score": 10,
+                "reasoning": "The query asks about purpose differences, and preventing speculation is an explicit stated purpose of the palace statement, making it essential.",
+                "rank": 1,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 4,
+                        "verifiability": 4,
+                        "reasoning": "The sources explicitly state Buckingham Palace said Charles shared his diagnosis \u201cto prevent speculation,\u201d so the claim is directly grounded. It is relevant because the question asks about differences in purpose between a video message and a palace statement, and this identifies the statement\u2019s purpose. It\u2019s mostly verifiable, though it\u2019s framed as what an answer \u201cshould mention,\u201d which is slightly normative rather than a pure factual claim."
+                    }
+                }
+            },
+            {
+                "statement": "The response should state that Kate communicated her diagnosis through a recorded video message.",
+                "source_count": 5,
+                "score": 9,
+                "reasoning": "The query asks about format differences, and the key format detail in the claims is that Kate used a video message. This is central to comparing the two communications.",
+                "rank": 2,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 4,
+                        "verifiability": 5,
+                        "reasoning": "The sources explicitly say Kate disclosed her condition in a recorded video message (recorded in Windsor and broadcast Friday), so the claim is directly supported. It is relevant because the question asks about differences in format and purpose, and identifying Kate\u2019s communication as a recorded video addresses the format side (though it doesn\u2019t cover Buckingham Palace\u2019s statement). The assertion is clear and easily checkable in an answer."
+                    }
+                }
+            },
+            {
+                "statement": "The response should state that Buckingham Palace communicated the King\u2019s diagnosis through a written palace statement.",
+                "source_count": 3,
+                "score": 9,
+                "reasoning": "A palace statement contrasts with a personal video message, directly addressing the format comparison requested by the query.",
+                "rank": 3,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 4,
+                        "verifiability": 5,
+                        "reasoning": "The sources repeatedly describe Buckingham Palace communicating the King\u2019s cancer diagnosis via a palace statement, which is a written statement. This directly supports the assertion. It is relevant to the question\u2019s comparison of format (video message vs palace statement), though it does not address the full difference in purpose. The claim is clear and straightforward to check in an answer."
+                    }
+                }
+            },
+            {
+                "statement": "The response should mention that the palace statement\u2019s purpose was to promote public understanding about cancer.",
+                "source_count": 3,
+                "score": 8,
+                "reasoning": "This is another explicit purpose given for the palace statement and is important for a complete comparison of intent.",
+                "rank": 4,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 4,
+                        "verifiability": 4,
+                        "reasoning": "All three sources explicitly state that Buckingham Palace said the King shared his diagnosis partly \"in the hope it may assist public understanding\" for those affected by cancer, which matches the assertion. This is relevant to comparing purpose between the palace statement and Kate\u2019s video message, though it addresses only the palace side of the comparison. It is fairly easy to verify in an answer (look for mention of the palace statement aiming to assist/promote public understanding about cancer), though wording may vary slightly."
+                    }
+                }
+            }
+        ],
+        "claims": []
+    },
+    {
+        "question_id": "75a5edba-7228-4bd6-8ba4-42e6dc890e42",
+        "question_text": "What date did the U.S. defense secretary hospitalized at Walter Reed publicly disclose his prostate cancer diagnosis?",
+        "assertions": [
+            {
+                "statement": "The response should indicate that the public disclosure occurred on Jan. 9, 2024.",
+                "source_count": 2,
+                "score": 10,
+                "reasoning": "This is the exact date provided in the claims and directly answers the question, making it essential.",
+                "rank": 1,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 5,
+                        "verifiability": 5,
+                        "reasoning": "Both sources explicitly state that Austin kept the cancer diagnosis secret until Jan. 9, indicating that the public disclosure occurred on Jan. 9, 2024. This directly answers the question and is a clear, checkable date."
+                    }
+                }
+            }
+        ],
+        "claims": []
+    },
+    {
+        "question_id": "9d180832-9af0-4623-bde6-81c60b1217d6",
+        "question_text": "Did North Carolina expand Medicaid before or after H5N1 was detected in dairy cows?",
+        "assertions": [
+            {
+                "statement": "The response should state that North Carolina\u2019s Medicaid expansion coverage began in late 2023.",
+                "source_count": 4,
+                "score": 10,
+                "reasoning": "The query asks for a before/after comparison, which requires identifying when Medicaid expansion started. This is essential to determine the ordering.",
+                "rank": 1,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 4,
+                        "relevance": 4,
+                        "verifiability": 4,
+                        "reasoning": "Sources repeatedly state Medicaid expansion coverage in North Carolina began on Dec. 1, 2023, which supports the claim that it began in late 2023 (though the exact date is more precise than the assertion). This timing is an important component for answering whether expansion happened before or after H5N1 detection in dairy cows, but it does not address the H5N1 date itself. The assertion is concrete enough to check in an answer, though 'late 2023' is slightly less precise than 'Dec. 1, 2023.'"
+                    }
+                }
+            }
+        ],
+        "claims": []
+    },
+    {
+        "question_id": "c99f1b66-0ca6-4760-bb61-f5faaf3e1e29",
+        "question_text": "If opponents won, to how many weeks would use of the drug whose FDA label listed ER visits be limited?",
+        "assertions": [
+            {
+                "statement": "The response should state that if abortion opponents prevailed, the drug\u2019s use would be limited to seven weeks of pregnancy.",
+                "source_count": 4,
+                "score": 10,
+                "reasoning": "The query asks for the gestational-week limit if opponents won. This is the central factual outcome described in the claims.",
+                "rank": 1,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 5,
+                        "verifiability": 5,
+                        "reasoning": "Sources explicitly state that if the justices side with abortion opponents, the window for using mifepristone would be shortened to seven weeks (from 10). This directly answers the question about how many weeks use would be limited to, and it is a clear, checkable numeric claim."
+                    }
+                }
+            }
+        ],
+        "claims": []
+    },
+    {
+        "question_id": "4a7af487-bf7f-4ff4-8c61-7e0448428c53",
+        "question_text": "What fever-free timeframe did the CDC require for both students and workers to return?",
+        "assertions": [
+            {
+                "statement": "The response should state that the CDC required at least one day since having a fever before returning to work or regular activities.",
+                "source_count": 3,
+                "score": 10,
+                "reasoning": "The query asks for the fever-free timeframe for workers, and the work/activities guidance specifies a one-day fever-free period. This is essential for completeness.",
+                "rank": 1,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 4,
+                        "relevance": 5,
+                        "verifiability": 4,
+                        "reasoning": "Sources 1\u20133 state people can return to work/regular activities when symptoms are mild/improving and it\u2019s been a day since they\u2019ve had a fever, supporting the \u201cone day fever-free\u201d timeframe. The assertion slightly paraphrases as \u201cat least one day since having a fever\u201d and omits the \u2018symptoms mild and improving\u2019 condition, so it\u2019s not perfectly complete. It directly targets the question\u2019s requested fever-free timeframe and is concrete enough to check in an answer."
+                    }
+                }
+            },
+            {
+                "statement": "The response should state that the CDC required being fever-free for 24 hours before returning to school.",
+                "source_count": 1,
+                "score": 10,
+                "reasoning": "The query asks for the fever-free timeframe for return, and the school guidance explicitly specifies 24 hours. This is essential to answering the question accurately.",
+                "rank": 2,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 3,
+                        "relevance": 4,
+                        "verifiability": 4,
+                        "reasoning": "Source 1 explicitly says children can return to school when symptoms improve and they\u2019re fever-free for 24 hours without medication, supporting the 24-hour timeframe for students. However, the question asks about both students and workers, and the assertion only mentions school/students, so it\u2019s incomplete relative to the full query."
+                    }
+                }
+            },
+            {
+                "statement": "The response should indicate that the fever-free timeframe for students and workers was the same length of time.",
+                "source_count": 4,
+                "score": 7,
+                "reasoning": "Both claims describe a 24-hour/one-day fever-free period, and the question asks for the timeframe for both groups. Noting equivalence helps ensure the answer addresses both together.",
+                "rank": 3,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 4,
+                        "relevance": 3,
+                        "verifiability": 3,
+                        "reasoning": "Sources indicate both groups can return after being fever-free for about a day/24 hours (workers: \u201cbeen a day since you've had a fever\u201d; students: \u201cfever-free for 24 hours\u201d). So the claim that the timeframe is the same is supported. However, it doesn\u2019t state the actual timeframe (24 hours), which is what the question asks, making it less directly relevant and a bit less checkable than a concrete duration."
+                    }
+                }
+            }
+        ],
+        "claims": []
+    },
+    {
+        "question_id": "fc42bd87-a177-4690-975f-42383d60bc6a",
+        "question_text": "How did Pope Francis address health concerns at Gemelli in 2023 versus Via Crucis in 2024?",
+        "assertions": [
+            {
+                "statement": "The response should mention that in 2023 the Vatican addressed health concerns by reporting diagnostic testing at Gemelli that ruled out pneumonia.",
+                "source_count": 3,
+                "score": 10,
+                "reasoning": "The query asks how health concerns were addressed at Gemelli in 2023; the key action described is the Vatican\u2019s communication that a scan excluded pneumonia, which directly answers that part.",
+                "rank": 1,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 4,
+                        "verifiability": 5,
+                        "reasoning": "Sources state that in 2023 the Vatican said Pope Francis underwent diagnostic testing (a CAT scan) at Rome\u2019s Gemelli hospital and that it ruled out pneumonia/respiratory problems. This is a key part of how health concerns were addressed in 2023, though it only covers the 2023 side of the 2023-vs-2024 comparison. The claim is concrete and easily checkable in an answer."
+                    }
+                }
+            },
+            {
+                "statement": "The response should mention that in 2024 Pope Francis did not attend the Via Crucis in person and instead followed it from his Vatican residence.",
+                "source_count": 2,
+                "score": 10,
+                "reasoning": "The query asks how he addressed health concerns at Via Crucis in 2024; the central fact is that he participated remotely rather than attending in person.",
+                "rank": 2,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 4,
+                        "verifiability": 5,
+                        "reasoning": "Sources explicitly state that in 2024 Pope Francis skipped the Via Crucis at the Colosseum and followed it from his Vatican residence (Casa Santa Marta). This is an important part of comparing how he addressed health concerns in 2023 vs 2024, and it is a clear, concrete, checkable claim."
+                    }
+                }
+            },
+            {
+                "statement": "The response should state that the reason for not attending the 2024 Via Crucis in person was to conserve his health.",
+                "source_count": 2,
+                "score": 9,
+                "reasoning": "The question is about addressing health concerns; the explicit rationale of conserving health is a core part of the answer.",
+                "rank": 3,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 4,
+                        "verifiability": 5,
+                        "reasoning": "The sources explicitly state the Vatican said Pope Francis skipped the 2024 Via Crucis to conserve his health ahead of Easter services, so the claim is directly supported. It is important to the question\u2019s 2024 comparison point (though it doesn\u2019t address the 2023 Gemelli aspect). The assertion is clear and can be checked verbatim against an answer."
+                    }
+                }
+            },
+            {
+                "statement": "The response should state that the 2023 Gemelli visit was prompted by a flu-like illness.",
+                "source_count": 3,
+                "score": 8,
+                "reasoning": "Explaining what triggered the Gemelli episode clarifies the nature of the health concern being addressed, which is important context for the comparison.",
+                "rank": 4,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 4,
+                        "relevance": 3,
+                        "verifiability": 5,
+                        "reasoning": "Sources state Francis went to Gemelli for tests after coming down with the flu/flu-like illness, so the claim is well supported (though it doesn\u2019t mention the earlier 2023 Gemelli respiratory infection). It is only partially relevant because the question asks how he addressed health concerns in 2023 vs Via Crucis 2024, and this assertion covers only the 2023 side. The statement is concrete and easily checkable."
+                    }
+                }
+            },
+            {
+                "statement": "The response should mention that conserving health for upcoming Easter liturgies was cited as the motivation for the 2024 Via Crucis decision.",
+                "source_count": 2,
+                "score": 7,
+                "reasoning": "This adds the specific purpose behind conserving health, helping distinguish the 2024 approach (activity modification for future duties) from the 2023 approach (medical evaluation).",
+                "rank": 5,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 4,
+                        "verifiability": 5,
+                        "reasoning": "Sources explicitly quote the Vatican saying Francis skipped the 2024 Via Crucis \"to conserve his health in view of\" the Easter Vigil and Easter Sunday Mass, so the motivation is directly supported. This detail is important for contrasting how he addressed health concerns in 2023 vs 2024, though it covers only the 2024 side. It is a clear, concrete fact that can be checked in an answer."
+                    }
+                }
+            }
+        ],
+        "claims": []
+    },
+    {
+        "question_id": "ca072f55-6783-4f59-a031-d862ca94105d",
+        "question_text": "Which came first: RECA\u2019s scheduled expiration or Ohio\u2019s Aug. 7, 2024 ballot certification deadline?",
+        "assertions": [
+            {
+                "statement": "The response should state that RECA\u2019s scheduled expiration occurred before Ohio\u2019s ballot certification deadline.",
+                "source_count": 2,
+                "score": 10,
+                "reasoning": "The query asks which event came first, so the answer must explicitly compare the two dates and identify the earlier one. This is the core conclusion supported by both claims.",
+                "rank": 1,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 5,
+                        "verifiability": 5,
+                        "reasoning": "Source 1 states RECA expires June 7, and Source 2 states Ohio\u2019s ballot certification deadline is Aug. 7, 2024. June 7 is earlier than Aug. 7, so the assertion is directly supported, central to answering which came first, and is a clear, checkable claim."
+                    }
+                }
+            },
+            {
+                "statement": "The response should mention that RECA was scheduled to expire in early June 2024.",
+                "source_count": 1,
+                "score": 8,
+                "reasoning": "Identifying RECA\u2019s timing is necessary to justify the ordering. The exact day is less important than placing it in early June 2024.",
+                "rank": 2,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 4,
+                        "verifiability": 4,
+                        "reasoning": "Source 1 explicitly states that the RECA program expires June 7, which is in early June 2024, so the assertion is well grounded. Mentioning RECA\u2019s scheduled expiration date is important for determining which event came first versus the Aug. 7, 2024 deadline, though it doesn\u2019t address the Ohio date itself. The claim is concrete and checkable, but slightly less precise than stating the exact date (June 7)."
+                    }
+                }
+            },
+            {
+                "statement": "The response should mention that Ohio\u2019s ballot certification deadline was in early August 2024.",
+                "source_count": 1,
+                "score": 8,
+                "reasoning": "Identifying the ballot certification deadline timing is necessary to justify the ordering. The exact day is less important than placing it in early August 2024.",
+                "rank": 3,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 4,
+                        "verifiability": 4,
+                        "reasoning": "Source 1 explicitly states Ohio law requires ballot certification 90 days before the election\u2014Aug. 7, 2024\u2014so describing it as \u201cearly August 2024\u201d is directly supported. This is important for comparing which date came first versus RECA\u2019s scheduled expiration, though it doesn\u2019t by itself answer the comparison. It\u2019s clear and checkable, but slightly less precise than stating the exact Aug. 7 date."
+                    }
+                }
+            }
+        ],
+        "claims": []
+    },
+    {
+        "question_id": "96cf3f91-3e4b-4d31-a0ff-b4e38d27075d",
+        "question_text": "What kind of Senate action did both John McCain and Cindy Hyde-Smith take?",
+        "assertions": [
+            {
+                "statement": "The response should mention that Cindy Hyde-Smith objected to a request for a Senate vote on an IVF-related bill.",
+                "source_count": 1,
+                "score": 7,
+                "reasoning": "Identifying Hyde-Smith\u2019s specific instance of the shared action supports accuracy and demonstrates the parallel to McCain\u2019s action. It is important context but secondary to the shared action type.",
+                "rank": 1,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 3,
+                        "verifiability": 5,
+                        "reasoning": "Source 1 directly states that Sen. Cindy Hyde-Smith objected to a request for a Senate vote on an IVF-related bill, so the claim is well grounded and easily checkable. However, the question asks what kind of Senate action both John McCain and Hyde-Smith took; this assertion only covers Hyde-Smith and does not address McCain, making it only somewhat useful for evaluating the full answer."
+                    }
+                }
+            }
+        ],
+        "claims": []
+    },
+    {
+        "question_id": "65bf579a-1624-4453-b087-941ffc585bf2",
+        "question_text": "What did the EPA say about asbestos use at Savannah River Site versus U.S. chlor-alkali plants?",
+        "assertions": [
+            {
+                "statement": "The response should state that the EPA allowed continued use of asbestos-containing sheet gaskets at the Savannah River Site for a limited period under its asbestos ban rule.",
+                "source_count": 2,
+                "score": 10,
+                "reasoning": "The query asks for what EPA said about asbestos use at Savannah River Site; this is the core policy point about an allowed continued use. It is essential to the comparison.",
+                "rank": 1,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 4,
+                        "verifiability": 4,
+                        "reasoning": "Sources explicitly state the EPA rule allows asbestos-containing sheet gaskets to be used until 2037 at the Savannah River Site, which supports the claim of continued use for a limited period. This is important to the question\u2019s Savannah River Site side, but it does not address the comparison to U.S. chlor-alkali plants, so it\u2019s not fully comprehensive. The claim is concrete and checkable, though phrasing like \u201cunder its asbestos ban rule\u201d is slightly interpretive but still aligns with the cited rule."
+                    }
+                }
+            },
+            {
+                "statement": "The response should state that the EPA said only a small number of U.S. chlor-alkali plants still use asbestos diaphragms.",
+                "source_count": 2,
+                "score": 9,
+                "reasoning": "The query asks for what EPA said about U.S. chlor-alkali plants; the key point is that asbestos diaphragm use persists at only a limited number of facilities. This is essential to the comparison.",
+                "rank": 2,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 4,
+                        "relevance": 3,
+                        "verifiability": 4,
+                        "reasoning": "The sources state the EPA said there are only eight U.S. chlor-alkali plants that still use asbestos diaphragms, which supports the idea that only a small number still use them (though the assertion is less specific than the source). However, the question asks for a comparison with asbestos use at the Savannah River Site, which the assertion does not address, making it only partially relevant. The claim is fairly clear and checkable in an answer (did it say a small number of plants still use asbestos diaphragms), though 'small number' is somewhat subjective compared to citing 'eight'."
+                    }
+                }
+            },
+            {
+                "statement": "The response should mention that the EPA tied the Savannah River Site asbestos allowance to maintaining the schedule for safe disposal of nuclear materials.",
+                "source_count": 2,
+                "score": 8,
+                "reasoning": "This explains the rationale for the Savannah River Site exception, which is important context for contrasting it with industrial use. It is a key insight but slightly less central than the allowance itself.",
+                "rank": 3,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 4,
+                        "verifiability": 4,
+                        "reasoning": "Source 1 explicitly states the EPA allowed asbestos-containing sheet gaskets at the Savannah River Site until 2037 to ensure safe disposal of nuclear materials can continue on schedule, matching the assertion. This is an important part of what EPA said about Savannah River Site, though the question also asks for comparison to U.S. chlor-alkali plants (not covered in the assertion), so relevance is high but not complete. The claim is concrete and can be checked in an answer, though phrased as 'should mention,' making it slightly less binary than a pure factual statement."
+                    }
+                }
+            },
+            {
+                "statement": "The response should specify that the EPA put the number of U.S. chlor-alkali plants still using asbestos diaphragms at eight.",
+                "source_count": 2,
+                "score": 7,
+                "reasoning": "The exact count is a central quantitative detail in the claim and directly answers the chlor-alkali portion of the question. It is important but not strictly required if the answer accurately conveys the limited number.",
+                "rank": 4,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 4,
+                        "verifiability": 5,
+                        "reasoning": "Source 1 explicitly states there are \"only eight chlor-alkali plants in the U.S. that still use asbestos diaphragms,\" matching the assertion. This is an important part of what EPA said about U.S. chlor-alkali plants (though it does not address Savannah River Site). The claim is concrete and easily checkable in an answer."
+                    }
+                }
+            }
+        ],
+        "claims": []
+    },
+    {
+        "question_id": "9bbef35a-4e1b-405a-b7eb-0140ae7d0dcc",
+        "question_text": "By what date did President Yoon Suk Yeol\u2019s government order striking interns and residents to return to work?",
+        "assertions": [
+            {
+                "statement": "The response should state that the government set a deadline of Feb. 29, 2024 for striking interns and residents to return to work.",
+                "source_count": 4,
+                "score": 10,
+                "reasoning": "The query asks for the specific date by which the government ordered the doctors to return. This is the central fact needed to answer the question.",
+                "rank": 1,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 5,
+                        "verifiability": 5,
+                        "reasoning": "Multiple source excerpts explicitly state the government ordered striking interns and residents to return to work by a Feb. 29 deadline. This date directly answers the question and is a clear, easily checkable fact in any proposed answer."
+                    }
+                }
+            }
+        ],
+        "claims": []
+    }
+]

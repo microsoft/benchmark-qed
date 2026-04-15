@@ -1,2 +1,8 @@
 [files]
 extend-exclude = ["datasets/*", "docs/notebooks/example_answers/*"]
+
+[default.extend-words]
+# UMBRELA is an acronym (paper: "UMBRELA: UMbrella Benchmark for Release Agents")
+UMBRELA = "UMBRELA"
+# "ba" appears in auto-generated Jupyter notebook cell IDs (e.g. "ba3ab816")
+ba = "ba"

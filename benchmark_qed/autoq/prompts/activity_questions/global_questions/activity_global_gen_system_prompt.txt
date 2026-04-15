@@ -70,7 +70,15 @@ Each generated question MUST:
 - use varied question types - include a mix of What, Which, and How
 - be CONCISE, ABSTRACT, SIMPLE, and NATURAL-SOUNDING (like a curious person asking, not computer-generated)
 - ask only ONE thing at a time - NO compound questions
-- AVOID requiring counting, sorting, or mathematical/statistical operations
+- **CRITICAL** - AVOID requiring any counting, sorting, frequency analysis, or any other complex mathematical or statistical operations.
+    - BANNED PHRASES (never use these): "most often", "most common", "most frequently", "least often", "how many", "frequency"
+    - BAD (explicit counting): "What is the frequency of X?" or "How many times is X mentioned?"
+    - BAD (implicit frequency): "Which X are most often mentioned?" or "What is the most common Y?"
+    - BAD (ranking by frequency): "Who is credited most for X?" or "What appears most frequently?"
+    - BAD: "Which investors, accelerators, and venture firms are most often credited for growth?"
+    - BAD: "Which schools and universities are most frequently linked to formative learning moments?"
+    - GOOD: "Which investors, accelerators, and venture firms are credited for startup growth?"
+    - GOOD: "Which schools and universities are linked to formative learning moments?"
 - AVOID requiring NLP/ML operations like sentiment analysis or keyword extraction
 - AVOID repetitive questions that focus on the same category of information.
 

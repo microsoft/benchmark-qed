@@ -43,6 +43,19 @@ Configuration for generating standard questions.
 
 ---
 
+#### `DataLinkedQuestionConfig`
+Extends `QuestionConfig` with additional fields for data-linked (multi-hop) question generation. Linked questions combine multiple local questions that share named entities.
+
+| Field | Type | Default | Description |
+|-------|------|---------|-------------|
+| `min_questions_per_entity` | `int` | `2` | Minimum number of local questions required to form an entity group. |
+| `max_questions_per_entity` | `int` | `3` | Maximum number of local questions to include per entity group. |
+| `type_balance_weight` | `float` | `0.5` | Weight for type-balance penalty in MMR selection. 0=ignore, 1=strong type balancing. |
+| `max_questions_to_generate` | `int` | `2` | Maximum number of questions to generate per entity group. |
+| `entity_frequency_threshold` | `int` | `2` | Entity must appear in at least this many local questions to be considered. |
+
+---
+
 #### `ActivityQuestionConfig`
 Extends `QuestionConfig` with additional fields for persona-based question generation.
 
@@ -77,12 +90,13 @@ Configuration for sampling data from clusters.
 ---
 
 #### `AssertionConfig`
-Configuration for assertion generation with separate settings for local and global questions.
+Configuration for assertion generation with separate settings for local, global, and linked questions.
 
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
 | `local` | `LocalAssertionConfig` | _(see below)_ | Configuration for local assertion generation. |
 | `global` | `GlobalAssertionConfig` | _(see below)_ | Configuration for global assertion generation. |
+| `linked` | `LinkedAssertionConfig` | _(see below)_ | Configuration for linked assertion generation. |
 
 ---
 
@@ -94,6 +108,7 @@ Configuration for local assertion generation.
 | `max_assertions` | `int \| None` | `20` | Maximum assertions per question. Set to `0` to disable, or `None` for unlimited. |
 | `enable_validation` | `bool` | `True` | Whether to validate assertions against source data. |
 | `min_validation_score` | `int` | `3` | Minimum score (1-5) for grounding, relevance, and verifiability. |
+| `max_source_count` | `int` | `500` | Maximum deduplicated sources per assertion. Questions with assertions exceeding this are dropped. |
 | `concurrent_llm_calls` | `int` | `8` | Concurrent LLM calls for validation. |
 | `max_concurrent_questions` | `int \| None` | `8` | Questions to process in parallel. Set to `1` for sequential. |
 
@@ -107,8 +122,27 @@ Configuration for global assertion generation.
 | `max_assertions` | `int \| None` | `20` | Maximum assertions per question. Set to `0` to disable, or `None` for unlimited. |
 | `enable_validation` | `bool` | `True` | Whether to validate assertions against source data. |
 | `min_validation_score` | `int` | `3` | Minimum score (1-5) for grounding, relevance, and verifiability. |
-| `batch_size` | `int` | `100` | Batch size for map-reduce claim processing. |
-| `max_data_tokens` | `int` | `32000` | Maximum input tokens for the reduce step. |
+| `max_source_count` | `int` | `500` | Maximum deduplicated sources per assertion. Questions with assertions exceeding this are dropped. |
+| `batch_size` | `int` | `100` | Batch size for map-reduce claim processing (used when semantic grouping is disabled). |
+| `map_data_tokens` | `int` | `12000` | Maximum tokens per cluster in the map step when semantic grouping is enabled. |
+| `reduce_data_tokens` | `int` | `32000` | Maximum input tokens for the reduce step. |
+| `enable_semantic_grouping` | `bool` | `False` | Whether to group similar claims using embedding-based clustering before the map step. |
+| `validate_map_assertions` | `bool` | `False` | Whether to validate map assertions before the reduce step. Filters low-quality assertions early. |
+| `validate_reduce_assertions` | `bool` | `True` | Whether to validate final assertions after the reduce step. |
+| `concurrent_llm_calls` | `int` | `8` | Concurrent LLM calls for batch processing and validation. |
+| `max_concurrent_questions` | `int \| None` | `2` | Questions to process in parallel. Set to `1` for sequential. |
+
+---
+
+#### `LinkedAssertionConfig`
+Configuration for linked assertion generation. Uses a direct claim-to-assertion pipeline (no map-reduce).
+
+| Field | Type | Default | Description |
+|-------|------|---------|-------------|
+| `max_assertions` | `int \| None` | `20` | Maximum assertions per question. Set to `0` to disable, or `None` for unlimited. |
+| `enable_validation` | `bool` | `True` | Whether to validate assertions against source data. |
+| `min_validation_score` | `int` | `3` | Minimum score (1-5) for grounding, relevance, and verifiability. |
+| `max_source_count` | `int` | `500` | Maximum deduplicated sources per assertion. Questions with assertions exceeding this are dropped. |
 | `concurrent_llm_calls` | `int` | `8` | Concurrent LLM calls for batch processing and validation. |
 | `max_concurrent_questions` | `int \| None` | `2` | Questions to process in parallel. Set to `1` for sequential. |
 
@@ -134,7 +168,8 @@ Top-level configuration for the entire question generation process.
 |-------|------|---------|-------------|
 | `input` | `InputConfig` | _required_ | Input data configuration. |
 | `data_local` | `QuestionConfig` | `QuestionConfig()` | Local data question generation settings. |
-| `data_global` | `QuestionConfig` | `QuestionConfig()` | Global data question generation settings. |
+| `data_global` | `DataGlobalQuestionConfig` | `DataGlobalQuestionConfig()` | Global data question generation settings. |
+| `data_linked` | `DataLinkedQuestionConfig` | `DataLinkedQuestionConfig()` | Linked (multi-hop) data question generation settings. |
 | `activity_local` | `ActivityQuestionConfig` | `ActivityQuestionConfig()` | Local activity question generation. |
 | `activity_global` | `ActivityQuestionConfig` | `ActivityQuestionConfig()` | Global activity question generation. |
 | `concurrent_requests` | `int` | `8` | Number of concurrent model requests. |
@@ -191,6 +226,14 @@ data_local:
 data_global:
   num_questions: 10
   oversample_factor: 2.0
+data_linked:
+  num_questions: 10
+  oversample_factor: 10.0
+  min_questions_per_entity: 2
+  max_questions_per_entity: 3
+  type_balance_weight: 0.5
+  max_questions_to_generate: 2
+  entity_frequency_threshold: 2
 activity_local:
   num_questions: 10
   oversample_factor: 2.0
@@ -210,14 +253,27 @@ assertions:
     max_assertions: 20  # Set to 0 to disable, or null/None for unlimited
     enable_validation: true  # Enable to filter low-quality assertions
     min_validation_score: 3  # Minimum score (1-5) to pass validation
+    max_source_count: 500  # Max sources per assertion; exceeding drops the question
     concurrent_llm_calls: 8  # Concurrent LLM calls for validation
     max_concurrent_questions: 8  # Parallel questions for assertion generation. Set to 1 for sequential.
   global:
     max_assertions: 20
     enable_validation: true
     min_validation_score: 3
-    batch_size: 100  # Batch size for map-reduce processing
-    max_data_tokens: 32000  # Max tokens for reduce step
+    max_source_count: 500  # Max sources per assertion; exceeding drops the question
+    batch_size: 100  # Batch size for map-reduce processing (when semantic grouping disabled)
+    map_data_tokens: 12000  # Max tokens per cluster in map step (when semantic grouping enabled)
+    reduce_data_tokens: 32000  # Max tokens for reduce step
+    enable_semantic_grouping: false  # Set to true to group similar claims together
+    validate_map_assertions: false  # Set to true to validate map assertions before reduce step
+    validate_reduce_assertions: true  # Set to false to skip validation of final assertions
+    concurrent_llm_calls: 8  # Concurrent LLM calls for batch processing/validation
+    max_concurrent_questions: 2  # Parallel questions for assertion generation. Set to 1 for sequential.
+  linked:
+    max_assertions: 20  # Set to 0 to disable, or null/None for unlimited
+    enable_validation: true  # Enable to filter low-quality assertions
+    min_validation_score: 3  # Minimum score (1-5) to pass validation
+    max_source_count: 500  # Max sources per assertion; exceeding drops the question
     concurrent_llm_calls: 8  # Concurrent LLM calls for batch processing/validation
     max_concurrent_questions: 2  # Parallel questions for assertion generation. Set to 1 for sequential.
 

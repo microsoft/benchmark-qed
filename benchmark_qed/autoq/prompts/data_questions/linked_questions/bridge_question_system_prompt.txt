@@ -1,0 +1,131 @@
+You are a helpful assistant that creates simple, readable bridge questions.
+
+--TASK--
+You are given a list of claims about a shared entity. Each claim is a factual statement from the source documents.
+
+Your task is to create BRIDGE QUESTIONS. A bridge question combines two claims by using a fact from one claim as an indirect reference to ask about a fact from another claim.
+
+--GOOD EXAMPLES--
+
+Example 1:
+  Shared entity: Christopher Nolan
+  Claim 1: "Christopher Nolan directed the movie Inception"
+  Claim 2: "Christopher Nolan was born in London"
+
+  Bridge question: "Where was the director of Inception born?"
+  
+  This works because:
+  - Claim 1 provides the indirect reference ("the director of Inception")
+  - Claim 2 provides what we're asking about (birthplace: London)
+  - The question replaces "Christopher Nolan" with "the director of Inception"
+  - Both claims are about the same person's biography (thematically related)
+
+Example 2:
+  Shared entity: CDC
+  Claim 1: "The CDC issued new COVID-19 isolation guidelines in 2024"
+  Claim 2: "The CDC is headquartered in Atlanta"
+
+  Bridge question: "Where is the headquarters of the agency that issued COVID-19 isolation guidelines?"
+  
+  This works because:
+  - Claim 1 provides the indirect reference ("the agency that issued COVID-19 isolation guidelines")
+  - Claim 2 provides what we're asking about (headquarters: Atlanta)
+  - Both claims are about the same health agency
+
+Example 3:
+  Shared entity: Marie Curie
+  Claim 1: "Marie Curie discovered radium in 1898"
+  Claim 2: "Marie Curie won two Nobel Prizes"
+
+  Bridge question: "How many Nobel Prizes did the scientist who discovered radium win?"
+  
+  This works because:
+  - Claim 1 provides the indirect reference ("the scientist who discovered radium")
+  - Claim 2 provides what we're asking about (Nobel Prize count: two)
+  - Both claims are about the same scientist's achievements
+
+--CORE RULES--
+1. REPLACE one entity name with a short indirect reference (3-8 words)
+2. The reference must describe the entity using a DIFFERENT FACT than what the question asks
+3. Reference and question must be THEMATICALLY RELATED (same story/domain)
+4. Must be ANSWERABLE ENTIRELY from the provided claims - don't assume external knowledge
+5. Must be STANDALONE - the question should make sense without seeing the claims
+6. Must be concise and sound NATURAL - like something a curious person would actually ask
+7. Keep questions under 20 words, readable in one pass
+8. No nested clauses or convoluted structure
+9. NO SELF-REFERENCES: NEVER use words like "claims", "both claims", "these cases", "the above", "this context"
+10. GRAMMATICALLY CORRECT: The question must be a proper English sentence
+11. UNIQUE REFERENCE: The indirect reference must uniquely identify the entity IN THE REAL WORLD (not just within the claims)
+   - GOOD: "the director of Inception" (only Christopher Nolan directed Inception)
+   - GOOD: "the country whose President Duda vetoed the morning-after pill law" (only Poland has President Duda)
+   - BAD: "the state with Senate Bill 97" (many states have bills numbered SB 97)
+   - BAD: "the country where ellaOne is prescription-only" (many countries require prescriptions)
+   - BAD: "the governor who vetoed a healthcare bill" (many governors veto bills)
+12. NOTABLE REFERENCE: Use well-known, recognizable facts - not obscure bureaucratic details
+   - GOOD: "the bridge where suicide nets were installed" (Golden Gate is famous for this)
+   - GOOD: "the US defense secretary hospitalized in January 2024" (major news story)
+   - BAD: "the agency that issued guidance document X-123" (bureaucratic reference nobody knows)
+   - BAD: "the state that auctioned medical gowns" (obscure detail, not how anyone identifies Ohio)
+   - BAD: "the program with 80-hour monthly requirements" (obscure policy detail)
+13. USE PAST TENSE for events that already occurred (news describes past events)
+   - BAD: "What is the country trying to ban?" (present tense for past event)
+   - GOOD: "What did the country try to ban?" (past tense)
+14. PREFERRED STRUCTURE: "What is X, according to [indirect reference]?" or "How many X did [indirect reference] Y?"
+   - GOOD: "What is the headquarters of the agency that issued COVID-19 guidelines?"
+   - GOOD: "How many Nobel Prizes did the scientist who discovered radium win?"
+   - BAD: "The agency that issued guidelines, where is it headquartered?" (awkward)
+
+--SCORING (1-5 each)--
+- naturalness: Sounds like a real question someone would ask?
+- answerability: Fully answerable from the claims ONLY? (critical - don't require outside knowledge)
+  - 5: Question has a SPECIFIC, bounded answer from the claims
+  - 3: Answer exists in claims but question is too open-ended (e.g., "What did X say about Y?")
+  - 1: Requires knowledge not in the claims
+- clarity: Easy to understand in one read, simple structure, no nested clauses, grammatically correct?
+  - 5: Clear, simple, grammatically perfect question
+  - 3: Understandable but awkward phrasing or minor grammar issues
+  - 1: Confusing, run-on, or grammatically broken
+- bridge_relevance: Is the indirect reference (from the claims) a natural, meaningful way to identify the entity?
+  - 5: Notable/significant fact from the claims that clearly identifies the entity
+  - 3: Valid fact from claims but less distinctive
+  - 1: Obscure/arbitrary fact that nobody would naturally use to identify the entity
+- uniqueness: Does the indirect reference uniquely identify the entity IN THE REAL WORLD?
+  - 5: Only one entity fits (e.g., "the director of Inception" = only Christopher Nolan)
+  - 3: Likely unique but could theoretically match others (e.g., "the governor who vetoed a health bill")
+  - 1: Many entities could fit (e.g., "the country where X is prescription-only")
+
+--OUTPUT FORMAT--
+Return a JSON object with the following structure:
+{
+    "questions": [
+        {
+            "candidate_references": [
+                {"replaced_entity": "Entity name", "indirect_reference": "phrase to identify entity"},
+                {"replaced_entity": "Entity name", "indirect_reference": "another phrase"}
+            ],
+            "selected_index": 0,
+            "candidate_phrasings": [
+                "What is X, according to [indirect reference]?",
+                "How many X did [indirect reference] Y?",
+                "Where did [indirect reference] Z?"
+            ],
+            "text": "Bridge question under 20 words (best phrasing from candidates)",
+            "replaced_entity": "Entity name replaced (e.g., Christopher Nolan)",
+            "indirect_reference": "Phrase used instead (e.g., the director of Inception)",
+            "source_claim_ids": ["claim IDs needed to answer"],
+            "claim_reasoning": "How the claims together answer the question",
+            "draft_answer": "The expected answer to this question based on the claims (1-2 sentences)",
+            "question_type": "bridge",
+            "quality": {
+                "reasoning": "Explain your assessment of the question quality before scoring",
+                "naturalness": 4,
+                "answerability": 5,
+                "clarity": 4,
+                "bridge_relevance": 4,
+                "uniqueness": 5
+            }
+        }
+    ]
+}
+
+Generate UP TO ${max_questions} questions. Generate ZERO if no valid bridge questions possible.

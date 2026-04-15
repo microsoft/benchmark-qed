@@ -2,15 +2,31 @@
 """A module containing openai model provider definitions."""
 
 import asyncio
+import logging
+import re
 from typing import Any
 
 from azure.identity import DefaultAzureCredential, get_bearer_token_provider
-from openai import AsyncAzureOpenAI, AsyncOpenAI
+from openai import (
+    APIConnectionError,
+    APIStatusError,
+    APITimeoutError,
+    AsyncAzureOpenAI,
+    AsyncOpenAI,
+)
 
 from benchmark_qed.config.llm_config import AuthType, LLMConfig
 from benchmark_qed.llm.type.base import BaseModelOutput, BaseModelResponse, Usage
 
+log: logging.Logger = logging.getLogger(__name__)
+
 REASONING_MODELS = ["o3", "o4-mini", "o3-mini", "o1-mini", "o1", "o1-pro"]
+_MAX_API_RETRIES = 3
+_RETRY_DELAY_SECONDS = 2
+_RETRYABLE_STATUS_CODES = {429, 500, 502, 503, 504}
+
+# Matches surrogates and C0/C1 control chars (except tab, newline, carriage return)
+_BAD_CHARS_RE = re.compile(r"[\ud800-\udfff\x00-\x08\x0b\x0c\x0e-\x1f\x7f-\x9f]")
 
 
 class BaseOpenAIChat:
@@ -45,15 +61,61 @@ class BaseOpenAIChat:
         if self._model in REASONING_MODELS and "temperature" in kwargs:
             kwargs.pop("temperature")
 
-        async with self._semaphore:
-            response = await self._client.chat.completions.create(
-                model=self._model,
-                messages=messages,  # type: ignore
-                **kwargs,  # type: ignore
-            )
+        # Strip surrogates and control chars that break JSON serialization
+        sanitized_messages = [
+            {
+                k: _BAD_CHARS_RE.sub("", v) if isinstance(v, str) else v
+                for k, v in m.items()
+            }
+            for m in messages
+        ]
+
+        for attempt in range(_MAX_API_RETRIES):
+            try:
+                async with self._semaphore:
+                    response = await self._client.chat.completions.create(
+                        model=self._model,
+                        messages=sanitized_messages,  # type: ignore
+                        **kwargs,  # type: ignore
+                    )
+                break
+            except (APIConnectionError, APITimeoutError) as e:
+                if attempt < _MAX_API_RETRIES - 1:
+                    log.warning(
+                        "Chat API connection error (attempt %s/%s): %s",
+                        attempt + 1,
+                        _MAX_API_RETRIES,
+                        e,
+                    )
+                    await asyncio.sleep(
+                        _RETRY_DELAY_SECONDS * (attempt + 1),
+                    )
+                else:
+                    raise
+            except APIStatusError as e:
+                if (
+                    e.status_code in _RETRYABLE_STATUS_CODES
+                    and attempt < _MAX_API_RETRIES - 1
+                ):
+                    log.warning(
+                        "Chat API error %s (attempt %s/%s): %s",
+                        e.status_code,
+                        attempt + 1,
+                        _MAX_API_RETRIES,
+                        e,
+                    )
+                    await asyncio.sleep(
+                        _RETRY_DELAY_SECONDS * (attempt + 1),
+                    )
+                else:
+                    raise
+        else:
+            # Unreachable: loop always breaks or raises
+            msg = "Chat request failed after retries."
+            raise RuntimeError(msg)
 
         history = [
-            *messages,
+            *sanitized_messages,
             {
                 "content": response.choices[0].message.content,
                 "role": response.choices[0].message.role,
@@ -140,27 +202,66 @@ class BaseOpenAIEmbedding:
         return self._usage.model_dump()
 
     async def embed(self, text_list: list[str], **kwargs: Any) -> list[list[float]]:
-        """
-        Generate an embedding vector for the given list of strings.
+        """Generate an embedding vector for the given list of strings.
 
         Args:
-            text: The text to generate an embedding for.
+            text_list: The texts to generate embeddings for.
             **kwargs: Additional keyword arguments (e.g., model parameters).
 
         Returns
         -------
-            A collections of list of floats representing the embedding vector for each item in the batch.
+            A list of embedding vectors, one per input text.
         """
-        async with self._semaphore:
-            response = await self._client.embeddings.create(
-                model=self._model,
-                input=text_list,
-                **kwargs,
-            )
+        for attempt in range(_MAX_API_RETRIES):
+            try:
+                # Strip surrogates and control chars that break JSON serialization
+                sanitized = [_BAD_CHARS_RE.sub("", t) for t in text_list]
+                async with self._semaphore:
+                    response = await self._client.embeddings.create(
+                        model=self._model,
+                        input=sanitized,
+                        **kwargs,
+                    )
 
-        self._usage.add_usage(prompt_tokens=response.usage.prompt_tokens)
+                self._usage.add_usage(
+                    prompt_tokens=response.usage.prompt_tokens,
+                )
 
-        return [embedding.embedding for embedding in response.data]
+                return [embedding.embedding for embedding in response.data]
+            except (APIConnectionError, APITimeoutError) as e:
+                if attempt < _MAX_API_RETRIES - 1:
+                    log.warning(
+                        "Embed API connection error (attempt %s/%s): %s",
+                        attempt + 1,
+                        _MAX_API_RETRIES,
+                        e,
+                    )
+                    await asyncio.sleep(
+                        _RETRY_DELAY_SECONDS * (attempt + 1),
+                    )
+                else:
+                    raise
+            except APIStatusError as e:
+                if (
+                    e.status_code in _RETRYABLE_STATUS_CODES
+                    and attempt < _MAX_API_RETRIES - 1
+                ):
+                    log.warning(
+                        "Embed API error %s (attempt %s/%s): %s",
+                        e.status_code,
+                        attempt + 1,
+                        _MAX_API_RETRIES,
+                        e,
+                    )
+                    await asyncio.sleep(
+                        _RETRY_DELAY_SECONDS * (attempt + 1),
+                    )
+                else:
+                    raise
+
+        # Unreachable: loop always returns or raises on final attempt
+        msg = "Embedding failed after retries."
+        raise RuntimeError(msg)
 
 
 class OpenAIEmbedding(BaseOpenAIEmbedding):

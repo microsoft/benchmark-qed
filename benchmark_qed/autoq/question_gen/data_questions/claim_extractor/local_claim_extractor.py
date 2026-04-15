@@ -100,14 +100,32 @@ class DataLocalClaimExtractor:
             # remove hallucinated sources that are not in the context records
             sources = element.get("sources", [])
             if isinstance(sources, list):
-                sources = [str(source) for source in sources]
-                source_records = cast(
-                    pd.DataFrame, context_df[context_df["source_id"].isin(sources)]
-                ).drop_duplicates(subset=["source_id"])
-                if source_records.empty:
-                    msg = f"All extracted sources are not in the context records: {sources}"
-                    log.warning(msg)
+                # Normalize source IDs to strings for matching
+                # LLM may return int (1) or string ("1"), context_df has strings
+                sources_str = [str(source).strip() for source in sources]
+
+                # Also create string versions of context source_ids for matching
+                context_source_ids = context_df["source_id"].astype(str).tolist()
+
+                # Find matching sources (whitespace-normalized)
+                matching_sources = [s for s in sources_str if s in context_source_ids]
+
+                if not matching_sources:
+                    log.warning(
+                        "All extracted sources not in context records: %s "
+                        "(available: %s)",
+                        sources_str,
+                        context_source_ids[:5],  # Show first 5 for debugging
+                    )
                     continue
+
+                # Filter to only matching records
+                source_records = cast(
+                    pd.DataFrame,
+                    context_df[
+                        context_df["source_id"].astype(str).isin(matching_sources)
+                    ],
+                ).drop_duplicates(subset=["source_id"])
 
                 # remove any hallucinated sources that are not in the context records
                 element["sources"] = cast(

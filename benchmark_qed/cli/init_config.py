@@ -28,6 +28,9 @@ from benchmark_qed.autoq.prompts.data_questions import (
     global_questions as data_global_prompts,
 )
 from benchmark_qed.autoq.prompts.data_questions import (
+    linked_questions as data_linked_prompts,
+)
+from benchmark_qed.autoq.prompts.data_questions import (
     local_questions as data_local_prompts,
 )
 
@@ -118,6 +121,11 @@ data_local:
 data_global:
   num_questions: 10
   oversample_factor: 2.0
+data_linked:
+  num_questions: 10
+  oversample_factor: 2.0
+  min_questions_per_entity: 2 # Minimum local questions sharing an entity to form a group
+  max_questions_per_entity: 10 # Maximum local questions per entity group
 activity_local:
   num_questions: 10
   oversample_factor: 2.0
@@ -180,6 +188,17 @@ data_questions_prompt_config:
       prompt: prompts/data_questions/data_local/data_local_expansion_system_prompt.txt
     data_local_gen_user_prompt:
       prompt: prompts/data_questions/data_local/data_local_gen_user_prompt.txt
+  data_linked_prompt_config:
+    bridge_question_system_prompt:
+      prompt: prompts/data_questions/data_linked/bridge_question_system_prompt.txt
+    comparison_question_system_prompt:
+      prompt: prompts/data_questions/data_linked/comparison_question_system_prompt.txt
+    intersection_question_system_prompt:
+      prompt: prompts/data_questions/data_linked/intersection_question_system_prompt.txt
+    linked_question_user_prompt:
+      prompt: prompts/data_questions/data_linked/linked_question_user_prompt.txt
+    batch_validation_prompt:
+      prompt: prompts/data_questions/data_linked/batch_validation_prompt.txt
 
 ## Assertion Generation Configuration
 assertions:
@@ -193,9 +212,19 @@ assertions:
     max_assertions: 20 # Maximum assertions per question. Set to 0 to disable, or null for unlimited.
     enable_validation: true # Enable to filter low-quality assertions.
     min_validation_score: 3 # Minimum score (1-5) for an assertion to pass validation.
-    batch_size: 100 # Batch size for map-reduce processing.
-    max_data_tokens: 32000 # Maximum input tokens for the reduce step.
+    batch_size: 100 # Batch size for map-reduce processing (used when semantic grouping is disabled).
+    map_data_tokens: 8000 # Maximum tokens per cluster in the map step (when semantic grouping enabled).
+    reduce_data_tokens: 32000 # Maximum input tokens for the reduce step.
+    enable_semantic_grouping: true # Group similar claims together before map step for better consolidation.
+    validate_map_assertions: true # Validate map assertions before reduce step (filters low-quality early).
+    validate_reduce_assertions: true # Validate final assertions after reduce step.
     concurrent_llm_calls: 8 # Concurrent LLM calls for batch processing and validation.
+    max_concurrent_questions: 2 # Parallel questions for assertion generation. Set to 1 for sequential.
+  linked:
+    max_assertions: 20 # Maximum assertions per question. Set to 0 to disable, or null for unlimited.
+    enable_validation: true # Enable to filter low-quality assertions.
+    min_validation_score: 3 # Minimum score (1-5) for an assertion to pass validation.
+    concurrent_llm_calls: 8 # Concurrent LLM calls for validation.
     max_concurrent_questions: 2 # Parallel questions for assertion generation. Set to 1 for sequential.
 
 assertion_prompts:
@@ -345,6 +374,10 @@ def init(
             __copy_prompts(
                 Path(data_local_prompts.__file__).parent,
                 prompts_folder / "data_questions" / "data_local",
+            )
+            __copy_prompts(
+                Path(data_linked_prompts.__file__).parent,
+                prompts_folder / "data_questions" / "data_linked",
             )
             __copy_prompts(
                 Path(data_questions_prompts.__file__).parent,
