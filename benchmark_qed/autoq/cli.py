@@ -954,7 +954,7 @@ def generate_assertions(
             output/data_linked_questions/candidate_questions.json \
             output/data_linked_questions/ --type linked
     """
-    config = load_config(configuration_path, QuestionGenerationConfig)
+    config = load_config(QuestionGenerationConfig, configuration_path)
 
     # Load questions
     if not questions_path.exists():

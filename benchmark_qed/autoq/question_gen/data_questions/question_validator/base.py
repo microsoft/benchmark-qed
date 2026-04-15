@@ -233,10 +233,16 @@ class BatchQuestionValidator(ABC):
 
         for result in results:
             if isinstance(result, dict):
-                qid = result.get("id")
-                if result.get("pass", False):
-                    passing_ids.add(qid)  # type: ignore[arg-type]
-                else:
+                raw_id = result.get("id")
+                try:
+                    qid = int(raw_id)  # type: ignore[arg-type]
+                except (TypeError, ValueError):
+                    log.warning("Invalid question id: %s, skipping", raw_id)
+                    continue
+                is_pass = result.get("pass") is True
+                if is_pass and 0 <= qid < len(batch):
+                    passing_ids.add(qid)
+                elif not is_pass:
                     reasoning = result.get("reasoning", "unknown")
                     if "duplicate" in reasoning.lower():
                         duplicate_count += 1
@@ -244,9 +250,7 @@ class BatchQuestionValidator(ABC):
                         failed_count += 1
                     log.debug(
                         "Question failed batch validation: %s - %s",
-                        batch[qid].text[:50]
-                        if isinstance(qid, int) and qid < len(batch)
-                        else "?",
+                        batch[qid].text[:50] if 0 <= qid < len(batch) else "?",
                         reasoning,
                     )
 

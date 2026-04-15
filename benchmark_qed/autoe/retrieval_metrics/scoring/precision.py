@@ -23,7 +23,7 @@ def calculate_binary_precision(
 
     Args:
         batch_result: BatchRelevanceResult containing relevance assessments for multiple queries.
-        relevance_threshold: Minimum score to consider a chunk relevant (default: 1).
+        relevance_threshold: Minimum score to consider a chunk relevant (default: 2).
 
     Returns
     -------

@@ -73,8 +73,6 @@ def get_retrieved_clusters(
 
     return retrieved_clusters
 
-    return retrieved_clusters
-
 
 def calculate_single_query_recall(
     query_relevance_result: QueryRelevanceResult,

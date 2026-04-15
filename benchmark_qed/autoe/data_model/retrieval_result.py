@@ -1,7 +1,6 @@
 # Copyright (c) 2025 Microsoft Corporation.
 """Data model for retrieval results in retrieval scoring."""
 
-from collections.abc import Sequence
 from typing import Any, ClassVar
 
 from pydantic import BaseModel, ConfigDict, Field, model_validator
@@ -16,7 +15,7 @@ class RetrievalResult(BaseModel):
     question_text: str = Field(
         description="The text of the question to assess relevance against."
     )
-    context: Sequence[TextUnit | dict[str, str]] = Field(
+    context: list[TextUnit | dict[str, str]] = Field(
         description="List of text units or dictionaries representing the context."
     )
     context_id_key: str = Field(

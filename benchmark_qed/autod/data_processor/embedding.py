@@ -97,9 +97,9 @@ class TextEmbedder:
             for i in range(0, len(texts), batch_size):
                 yield [text.text for text in texts[i : i + batch_size]]
 
+        batches = list(get_batch(text_units, batch_size))
         tasks = [
-            self.text_embedder.embed(text_list=batch, **kwargs)
-            for batch in get_batch(text_units, batch_size)
+            self.text_embedder.embed(text_list=batch, **kwargs) for batch in batches
         ]
         results = await asyncio.gather(*tasks, return_exceptions=True)
 
@@ -107,11 +107,11 @@ class TextEmbedder:
         # will keep text_embedding=None (handled downstream).
         flat: list[list[float]] = []
         failed_batches = 0
-        for result in results:
+        for batch, result in zip(batches, results, strict=True):
             if isinstance(result, BaseException):
                 failed_batches += 1
                 log.warning("Embedding batch failed: %s", result)
-                flat.extend([] for _ in range(batch_size))
+                flat.extend([] for _ in range(len(batch)))
             else:
                 flat.extend(result)
 

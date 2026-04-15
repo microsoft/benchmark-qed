@@ -96,7 +96,9 @@ def load_text_units(
     """
     records = df.to_dict("records")
 
-    def _get_str_field(row: dict, col: str | None, default: str) -> str:
+    def _get_str_field(
+        row: dict, col: str | None, default: str | None = None
+    ) -> str | None:
         """Get a field as string, converting from other types if necessary."""
         if not col:
             return default
@@ -107,17 +109,15 @@ def load_text_units(
 
     return [
         TextUnit(
-            id=_get_str_field(row, id_col, str(uuid4())),
+            id=_get_str_field(row, id_col, str(uuid4())) or str(uuid4()),
             short_id=_get_str_field(row, short_id_col, str(index)),
             text=row.get(text_col, ""),
             n_tokens=row.get(tokens_col) if tokens_col else None,
-            document_id=_get_str_field(row, document_id_col, None)  # type: ignore[arg-type]
+            document_id=_get_str_field(row, document_id_col)
             if document_id_col
             else None,
             text_embedding=row.get(embedding_col) if embedding_col else None,
-            cluster_id=_get_str_field(row, cluster_id_col, None)  # type: ignore[arg-type]
-            if cluster_id_col
-            else None,
+            cluster_id=_get_str_field(row, cluster_id_col) if cluster_id_col else None,
             # Use the attributes_cols to extract attributes from the row
             attributes=(
                 {col: row.get("attributes", {}).get(col) for col in attributes_cols}
