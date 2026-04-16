@@ -239,7 +239,7 @@ class BatchQuestionValidator(ABC):
                 except (TypeError, ValueError):
                     log.warning("Invalid question id: %s, skipping", raw_id)
                     continue
-                is_pass = result.get("pass") is True
+                is_pass = bool(result.get("pass"))
                 if is_pass and 0 <= qid < len(batch):
                     passing_ids.add(qid)
                 elif not is_pass:
