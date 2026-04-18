@@ -1,6 +1,7 @@
 # Copyright (c) 2025 Microsoft Corporation.
 """Configuration for the autoq question generation process."""
 
+from enum import StrEnum
 from pathlib import Path
 from typing import ClassVar
 
@@ -692,10 +693,8 @@ class QuestionGenerationConfig(BaseModel):
     )
 
 
-class QuestionType(str):  # noqa: FURB189
+class QuestionType(StrEnum):
     """Enumeration for question types that support assertion regeneration."""
-
-    __slots__ = ()
 
     DATA_LOCAL = "data_local"
     DATA_GLOBAL = "data_global"

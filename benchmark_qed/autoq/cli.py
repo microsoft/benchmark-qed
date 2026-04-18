@@ -194,7 +194,7 @@ async def __generate_data_global(
 
 
 async def __generate_data_linked(
-    output_data_path: Path,
+    output_storage: Storage,
     llm: ChatModel,
     text_embedder: TextEmbedder,
     num_questions: int,
@@ -210,16 +210,15 @@ async def __generate_data_linked(
     llm_params: dict[str, Any],
 ) -> None:
     """Generate data-linked questions from local questions sharing named entities."""
-    if not (
-        output_data_path / "data_local_questions" / "candidate_questions.json"
-    ).exists():
+    data_local_storage = output_storage.child("data_local_questions")
+    if not await data_local_storage.has("candidate_questions.json"):
         rich_print(
             "Local candidate questions not found. Please run data_local generation first."
         )
         return
 
-    local_questions = load_questions(
-        f"{output_data_path}/data_local_questions/candidate_questions.json"
+    local_questions = await load_questions(
+        data_local_storage, "candidate_questions.json"
     )
 
     data_linked_generator = DataLinkedQuestionGen(
@@ -243,20 +242,21 @@ async def __generate_data_linked(
     )
 
     # save both candidate questions and the final selected questions
-    save_questions(
+    data_linked_storage = output_storage.child("data_linked_questions")
+    await save_questions(
         data_linked_question_results.selected_questions,
-        f"{output_data_path}/data_linked_questions/",
+        data_linked_storage,
         "selected_questions",
     )
-    save_questions(
+    await save_questions(
         data_linked_question_results.selected_questions,
-        f"{output_data_path}/data_linked_questions/",
+        data_linked_storage,
         "selected_questions_text",
         question_text_only=True,
     )
-    save_questions(
+    await save_questions(
         data_linked_question_results.candidate_questions,
-        f"{output_data_path}/data_linked_questions/",
+        data_linked_storage,
         "candidate_questions",
         save_assertions=False,  # Only save assertions for selected questions
     )
@@ -266,10 +266,9 @@ async def __generate_data_linked(
         import json
 
         stats = data_linked_question_results.pipeline_stats  # type: ignore[attr-defined]
-        stats_path = Path(
-            f"{output_data_path}/data_linked_questions/question_stats.json"
+        await data_linked_storage.set(
+            "question_stats.json", json.dumps(stats, indent=2)
         )
-        stats_path.write_text(json.dumps(stats, indent=2))
 
         # Print summary stats
         rich_print("\n[bold]Data-Linked Question Generation Summary:[/bold]")
@@ -983,13 +982,16 @@ def generate_assertions(
             output/data_linked_questions/ --type linked
     """
     config = load_config(QuestionGenerationConfig, configuration_path)
+    loop = asyncio.get_event_loop()
 
     # Load questions
     if not questions_path.exists():
         rich_print(f"[red]Questions file not found: {questions_path}[/red]")
         raise typer.Exit(1)
 
-    questions = load_questions(str(questions_path))
+    questions = loop.run_until_complete(
+        load_questions(FileStorage(str(questions_path.parent)), questions_path.name)
+    )
     rich_print(f"Loaded {len(questions)} questions from {questions_path}")
 
     # Check if questions have claims (required for assertion generation)
@@ -1024,7 +1026,6 @@ def generate_assertions(
         rich_print(f"  - min_validation_score: {assertion_cfg.min_validation_score}")
 
     # Generate assertions
-    loop = asyncio.get_event_loop()
     questions_with_assertions = loop.run_until_complete(
         __generate_assertions_for_questions(
             questions=questions_with_claims,
@@ -1039,10 +1040,12 @@ def generate_assertions(
 
     # Save results
     output_path.mkdir(parents=True, exist_ok=True)
-    save_questions(
-        questions_with_assertions,
-        str(output_path),
-        "questions_with_assertions",
+    loop.run_until_complete(
+        save_questions(
+            questions_with_assertions,
+            FileStorage(str(output_path)),
+            "questions_with_assertions",
+        )
     )
 
     # Count assertions generated
