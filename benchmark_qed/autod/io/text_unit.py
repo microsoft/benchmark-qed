@@ -2,11 +2,12 @@
 """Functions to chunk documents into text units and (optionally) embed them."""
 
 from dataclasses import asdict
-from pathlib import Path
 from typing import Any
 from uuid import uuid4
 
 import pandas as pd
+from graphrag_storage import Storage
+from graphrag_storage.tables.parquet_table_provider import ParquetTableProvider
 
 import benchmark_qed.config.defaults as defs
 from benchmark_qed.autod.data_model.document import Document
@@ -100,17 +101,13 @@ def load_text_units(
     ]
 
 
-def save_text_units(
+async def save_text_units(
     text_units: list[TextUnit],
-    output_path: str,
+    storage: Storage,
     output_name: str = defs.TEXT_UNIT_OUTPUT,
 ) -> pd.DataFrame:
-    """Save a list of TextUnit objects to a parquet file in the specified directory."""
-    output_path_obj = Path(output_path)
-    if not output_path_obj.exists():
-        output_path_obj.mkdir(parents=True, exist_ok=True)
-
-    output_file = output_path_obj / f"{output_name}.parquet"
+    """Save a list of TextUnit objects to a parquet file via storage backend."""
     text_df = pd.DataFrame([asdict(tu) for tu in text_units])
-    text_df.to_parquet(output_file, index=False)
+    table_provider = ParquetTableProvider(storage)
+    await table_provider.write_dataframe(output_name, text_df)
     return text_df

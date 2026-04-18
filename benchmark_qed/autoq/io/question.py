@@ -4,9 +4,10 @@
 import json
 import logging
 from dataclasses import asdict
-from pathlib import Path
 from typing import Any
 from uuid import uuid4
+
+from graphrag_storage import Storage
 
 from benchmark_qed.autoq.data_model.question import Question
 
@@ -48,7 +49,7 @@ def _normalize_assertion(assertion: dict[str, Any] | str) -> dict[str, Any]:
     }
 
 
-def _save_assertions(questions: list[Question], output_path: Path) -> None:
+async def _save_assertions(questions: list[Question], storage: Storage) -> None:
     """Extract and save assertions from questions to a separate JSON file with ranks."""
     questions_with_assertions = []
 
@@ -97,15 +98,18 @@ def _save_assertions(questions: list[Question], output_path: Path) -> None:
 
     # Save assertions to file as a direct list
     if questions_with_assertions:
-        assertions_file = output_path / "assertions.json"
-        Path(assertions_file).write_text(
-            json.dumps(questions_with_assertions, indent=4)
+        await storage.set(
+            "assertions.json",
+            json.dumps(questions_with_assertions, indent=4),
         )
 
 
-def load_questions(file_path: str, question_text_only: bool = False) -> list[Question]:
-    """Read question list from a json file."""
-    question_list = json.loads(Path(file_path).read_text())
+async def load_questions(
+    storage: Storage, file_name: str, question_text_only: bool = False
+) -> list[Question]:
+    """Read question list from a json file via storage backend."""
+    data = await storage.get(file_name)
+    question_list = json.loads(data)
     if question_text_only:
         return [Question(id=str(uuid4()), text=question) for question in question_list]
     questions = []
@@ -117,15 +121,15 @@ def load_questions(file_path: str, question_text_only: bool = False) -> list[Que
     return questions
 
 
-def save_questions(
+async def save_questions(
     questions: list[Question],
-    output_path: str,
+    storage: Storage,
     output_name: str,
     question_text_only: bool = False,
     include_embedding: bool = False,
     save_assertions: bool = True,
 ) -> None:
-    """Save question list to a json file."""
+    """Save question list to a json file via storage backend."""
     if question_text_only:
         question_list = [question.text for question in questions]
     else:
@@ -134,13 +138,8 @@ def save_questions(
             for question in question_list:
                 question.pop("embedding", None)
 
-    output_path_obj = Path(output_path)
-    if not output_path_obj.exists():
-        output_path_obj.mkdir(parents=True, exist_ok=True)
-    output_file = output_path_obj / f"{output_name}.json"
-
-    Path(output_file).write_text(json.dumps(question_list, indent=4))
+    await storage.set(f"{output_name}.json", json.dumps(question_list, indent=4))
 
     # Save assertions separately if requested
     if save_assertions:
-        _save_assertions(questions, output_path_obj)
+        await _save_assertions(questions, storage)

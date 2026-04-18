@@ -2,7 +2,8 @@
 """Util functions to save/load activities."""
 
 import json
-from pathlib import Path
+
+from graphrag_storage import Storage
 
 from benchmark_qed.autoq.data_model.activity import (
     EXCLUDE_ENTITIES,
@@ -12,26 +13,25 @@ from benchmark_qed.autoq.data_model.activity import (
 )
 
 
-def save_activity_context(
+async def save_activity_context(
     activity_context: ActivityContext,
-    output_path: str,
+    storage: Storage,
     output_name: str = "activity_context",
 ) -> None:
-    """Save the activity context to a JSON file."""
-    output_path_obj = Path(output_path)
-    if not output_path_obj.exists():
-        output_path_obj.mkdir(parents=True, exist_ok=True)
-    json_output_file = output_path_obj / f"{output_name}.json"
-    Path(json_output_file).write_text(
-        json.dumps(activity_context.model_dump(exclude=EXCLUDE_ENTITIES), indent=2)
+    """Save the activity context to a JSON file via storage backend."""
+    await storage.set(
+        f"{output_name}.json",
+        json.dumps(activity_context.model_dump(exclude=EXCLUDE_ENTITIES), indent=2),
     )
-    json_embeddings_file = output_path_obj / f"{output_name}_full.json"
-    Path(json_embeddings_file).write_text(json.dumps(activity_context.model_dump()))
+    await storage.set(
+        f"{output_name}_full.json",
+        json.dumps(activity_context.model_dump()),
+    )
 
 
-def load_activity_context(file_path: str) -> ActivityContext:
-    """Load the activity context from a JSON file."""
-    data = json.loads(Path(file_path).read_text())
+async def load_activity_context(storage: Storage, file_name: str) -> ActivityContext:
+    """Load the activity context from a JSON file via storage backend."""
+    data = json.loads(await storage.get(file_name))
     dataset_description = data.get("dataset_description", "")
     task_contexts_json = data.get("task_contexts", [])
     task_contexts = [

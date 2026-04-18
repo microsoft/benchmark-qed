@@ -5,6 +5,7 @@ import asyncio
 import functools
 import itertools
 from collections.abc import Callable
+from io import StringIO
 from pathlib import Path
 from string import Template
 from typing import Any, cast
@@ -12,6 +13,7 @@ from uuid import uuid4
 
 import numpy as np
 import pandas as pd
+from graphrag_storage import Storage
 from rich import print as rich_print
 from rich.progress import Progress, TaskID
 
@@ -195,7 +197,7 @@ async def evaluate_assertion(
 
 
 def load_and_normalize_assertions(
-    input_dir: str,
+    input_storage: Storage,
     question_set: str,
     assertions_filename_template: str = "{question_set}_assertions.json",
 ) -> pd.DataFrame:
@@ -203,7 +205,7 @@ def load_and_normalize_assertions(
     Load assertions from JSON file and normalize nested dictionaries.
 
     Args:
-        input_dir: Directory containing assertion files
+        input_storage: Storage backend containing assertion files
         question_set: Name of the question set
         assertions_filename_template: Template for assertion filename (default: "{question_set}_assertions.json")
 
@@ -212,7 +214,9 @@ def load_and_normalize_assertions(
         DataFrame with normalized assertion data containing question_id, question_text, assertion, rank
     """
     assertions_file = assertions_filename_template.format(question_set=question_set)
-    assertions_raw = pd.read_json(f"{input_dir}/{assertions_file}")
+    loop = asyncio.get_event_loop()
+    data = loop.run_until_complete(input_storage.get(assertions_file))
+    assertions_raw = pd.read_json(StringIO(data))
 
     # Explode assertions and normalize the nested dictionaries
     assertions = assertions_raw.explode("assertions").reset_index(drop=True)
@@ -239,14 +243,14 @@ def evaluate_rag_method(
     generated_rag: str,
     question_set: str,
     assertions: pd.DataFrame,
-    input_dir: str,
-    output_dir: Path,
+    input_storage: Storage,
+    output_storage: Storage,
     trials: int,
     top_k_assertions: int | None,
     pass_threshold: float,
-    answers_path_template: str = "{input_dir}/{generated_rag}/{question_set}.json",
+    answers_path_template: str = "{generated_rag}/{question_set}.json",
 ) -> dict[str, Any] | None:
-    """
+    r"""
     Evaluate a single RAG method against assertions for a question set.
 
     Args:
@@ -255,29 +259,29 @@ def evaluate_rag_method(
         generated_rag: Name of the RAG method
         question_set: Name of the question set
         assertions: DataFrame with assertions
-        input_dir: Input directory path
-        output_dir: Output directory path
+        input_storage: Storage backend for reading input files
+        output_storage: Storage backend for writing output files
         trials: Number of evaluation trials
         top_k_assertions: Number of top assertions to evaluate (None for all)
         pass_threshold: Threshold for assertion pass/fail
-        answers_path_template: Template for answers file path (default: "{input_dir}/{generated_rag}/{question_set}.json")
+        answers_path_template: Template for answers file path (default: "{generated_rag}/{question_set}.json")
 
     Returns
     -------
         Dictionary with evaluation results or None if evaluation failed
     """
-    question_set_output_dir = output_dir / question_set
-    if not question_set_output_dir.exists():
-        question_set_output_dir.mkdir(parents=True)
+    question_set_output_storage = output_storage.child(question_set)
 
     # Define answers path before try block so it's available in except block
-    answers_path = answers_path_template.format(
-        input_dir=input_dir, generated_rag=generated_rag, question_set=question_set
+    answers_key = answers_path_template.format(
+        generated_rag=generated_rag, question_set=question_set
     )
 
+    loop = asyncio.get_event_loop()
     try:
         # Load answers for this RAG method and question set
-        answers = pd.read_json(answers_path)
+        data = loop.run_until_complete(input_storage.get(answers_key))
+        answers = pd.read_json(StringIO(data))
 
         # Get assertion scores
         assertion_score = get_assertion_scores(
@@ -293,9 +297,11 @@ def evaluate_rag_method(
         )
 
         # Save detailed scores for this RAG method and question set
-        assertion_score.to_csv(
-            question_set_output_dir / f"{generated_rag}_assertion_scores.csv",
-            index=False,
+        loop.run_until_complete(
+            question_set_output_storage.set(
+                f"{generated_rag}_assertion_scores.csv",
+                assertion_score.to_csv(index=False),
+            )
         )
 
         # Calculate summary statistics
@@ -335,13 +341,17 @@ def evaluate_rag_method(
         summary_by_assertion = summary_by_assertion.drop(columns=["scores"])
 
         # Save detailed summary for this RAG method and question set
-        summary_by_question.to_csv(
-            question_set_output_dir / f"{generated_rag}_summary_by_question.csv",
-            index=False,
+        loop.run_until_complete(
+            question_set_output_storage.set(
+                f"{generated_rag}_summary_by_question.csv",
+                summary_by_question.to_csv(index=False),
+            )
         )
-        summary_by_assertion.to_csv(
-            question_set_output_dir / f"{generated_rag}_summary_by_assertion.csv",
-            index=False,
+        loop.run_until_complete(
+            question_set_output_storage.set(
+                f"{generated_rag}_summary_by_assertion.csv",
+                summary_by_assertion.to_csv(index=False),
+            )
         )
 
         # Report failed assertions for this method
@@ -380,7 +390,7 @@ def evaluate_rag_method(
 
     except FileNotFoundError as e:
         rich_print(
-            f"    [bold yellow]Warning: Could not find answers file at {answers_path}: {e}[/bold yellow]"
+            f"    [bold yellow]Warning: Could not find answers file at {answers_key}: {e}[/bold yellow]"
         )
         return None
     except (OSError, ValueError, KeyError) as e:
@@ -395,15 +405,15 @@ def run_assertion_evaluation(
     llm_config: LLMConfig,
     question_sets: list[str],
     generated_rags: list[str],
-    input_dir: str,
-    output_dir: Path,
+    input_storage: Storage,
+    output_storage: Storage,
     trials: int,
     top_k_assertions: int | None,
     pass_threshold: float,
     assertions_filename_template: str = "{question_set}_assertions.json",
-    answers_path_template: str = "{input_dir}/{generated_rag}/{question_set}.json",
+    answers_path_template: str = "{generated_rag}/{question_set}.json",
 ) -> pd.DataFrame:
-    """
+    r"""
     Run assertion-based evaluation for multiple question sets and RAG methods.
 
     Args:
@@ -411,19 +421,20 @@ def run_assertion_evaluation(
         llm_config: LLM configuration
         question_sets: List of question set names
         generated_rags: List of RAG method names
-        input_dir: Input directory path
-        output_dir: Output directory path
+        input_storage: Storage backend for reading input files
+        output_storage: Storage backend for writing output files
         trials: Number of evaluation trials
         top_k_assertions: Number of top assertions to evaluate (None for all)
         pass_threshold: Threshold for assertion pass/fail
         assertions_filename_template: Template for assertion filename (default: "{question_set}_assertions.json")
-        answers_path_template: Template for answers file path (default: "{input_dir}/{generated_rag}/{question_set}.json")
+        answers_path_template: Template for answers file path (default: "{generated_rag}/{question_set}.json")
 
     Returns
     -------
         DataFrame with overall results summary
     """
     overall_results = []
+    loop = asyncio.get_event_loop()
 
     # Loop through each question set
     for question_set in question_sets:
@@ -431,7 +442,7 @@ def run_assertion_evaluation(
 
         # Load and normalize assertions
         assertions = load_and_normalize_assertions(
-            input_dir, question_set, assertions_filename_template
+            input_storage, question_set, assertions_filename_template
         )
 
         # Display assertion filtering info
@@ -450,8 +461,8 @@ def run_assertion_evaluation(
                 generated_rag=generated_rag,
                 question_set=question_set,
                 assertions=assertions,
-                input_dir=input_dir,
-                output_dir=output_dir,
+                input_storage=input_storage,
+                output_storage=output_storage,
                 trials=trials,
                 top_k_assertions=top_k_assertions,
                 pass_threshold=pass_threshold,
@@ -466,8 +477,11 @@ def run_assertion_evaluation(
     overall_summary_df = overall_summary_df.sort_values(
         ["question_set", "overall_accuracy"], ascending=[True, False]
     )
-    overall_summary_df.to_csv(
-        output_dir / "assertion_scores_overall_summary.csv", index=False
+    loop.run_until_complete(
+        output_storage.set(
+            "assertion_scores_overall_summary.csv",
+            overall_summary_df.to_csv(index=False),
+        )
     )
 
     # Display summary table
@@ -480,7 +494,12 @@ def run_assertion_evaluation(
     pivot_summary = overall_summary_df.pivot_table(
         index="rag_method", columns="question_set", values="overall_accuracy"
     )
-    pivot_summary.to_csv(output_dir / "assertion_scores_pivot_summary.csv")
+    loop.run_until_complete(
+        output_storage.set(
+            "assertion_scores_pivot_summary.csv",
+            pivot_summary.to_csv(),
+        )
+    )
     print_df(
         pivot_summary.reset_index(),
         "Assertion Accuracy Comparison (Pivot View)",

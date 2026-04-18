@@ -4,6 +4,8 @@
 import logging
 from dataclasses import dataclass
 
+from graphrag_storage import Storage
+from graphrag_storage.file_storage import FileStorage
 from rich.status import Status
 
 import benchmark_qed.config.defaults as dfs
@@ -46,8 +48,12 @@ async def acreate_clustered_sample(
     file_encoding: str = dfs.FILE_ENCODING,
     token_encoding: str = dfs.ENCODING_MODEL,
     random_seed: int = dfs.RANDOM_SEED,
+    input_storage: Storage | None = None,
+    output_storage: Storage | None = None,
 ) -> ClusteredSample:
     """Create a clustered sample of text units from a given input folder."""
+    if output_storage is None:
+        output_storage = FileStorage(base_dir=output_path)
     with Status("Creating documents...") as status:
         status.update("Creating documents...")
         if metadata_tags is None:
@@ -58,10 +64,11 @@ async def acreate_clustered_sample(
             text_tag=text_tag,
             metadata_tags=metadata_tags,
             encoding=file_encoding,
+            input_storage=input_storage,
         )
         msg = f"Document count: {len(documents)}"
         log.info(msg)
-        save_documents(documents, output_path)
+        await save_documents(documents, output_storage)
         status.update("Creating text units and embedding...")
 
         # split documents into text units and embed text units
@@ -79,7 +86,7 @@ async def acreate_clustered_sample(
         )
         msg = f"Text unit count: {len(text_units)}"
         log.info(msg)
-        save_text_units(text_units, output_path)
+        await save_text_units(text_units, output_storage)
         status.update("Sampling text units...")
         # create a sample of clustered text units
         sampler = KmeansTextSampler(random_seed=random_seed)
@@ -91,7 +98,9 @@ async def acreate_clustered_sample(
             cluster_representative_selection_type=ClusterRepresentativeSelectionType.CENTROID,
         )
 
-        save_text_units(sampled_text_units, output_path, dfs.SAMPLE_TEXTS_OUTPUT)
+        await save_text_units(
+            sampled_text_units, output_storage, dfs.SAMPLE_TEXTS_OUTPUT
+        )
         msg = f"Sampled text unit count: {len(sampled_text_units)}"
         log.info(msg)
 

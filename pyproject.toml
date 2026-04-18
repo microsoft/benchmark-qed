@@ -32,7 +32,9 @@ dependencies = [
     "matplotlib>=3.10.5",
     "seaborn>=0.13.2",
     "graphrag-common>=3.0.9",
-    "graphrag-input>=3.0.9"
+    "graphrag-input>=3.0.9",
+    "graphrag-storage>=3.0.9",
+    "graphrag>=3.0.9"
 ]
 
 [dependency-groups]
