@@ -4,6 +4,7 @@
 from pathlib import Path
 from typing import Literal, Self
 
+from graphrag_storage.storage_config import StorageConfig
 from pydantic import BaseModel, Field, model_validator
 
 from benchmark_qed.autoe.assertion.hierarchical import HierarchicalMode
@@ -82,6 +83,16 @@ class BaseAutoEConfig(BaseModel):
     prompt_config: AutoEPromptConfig = Field(
         ...,
         description="Configuration for prompts used in scoring.",
+    )
+
+    input_storage: StorageConfig | None = Field(
+        default=None,
+        description="Optional storage configuration for reading input from blob/cosmos. When omitted, reads from local filesystem paths.",
+    )
+
+    output_storage: StorageConfig | None = Field(
+        default=None,
+        description="Optional storage configuration for writing output to blob/cosmos. When omitted, writes to the local filesystem path specified in the CLI.",
     )
 
     @model_validator(mode="after")

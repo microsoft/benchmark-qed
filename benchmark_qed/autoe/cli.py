@@ -3,6 +3,7 @@
 
 import asyncio
 import json
+from io import StringIO
 from itertools import combinations, product
 from pathlib import Path
 from typing import Annotated, cast
@@ -11,6 +12,10 @@ import numpy as np
 import pandas as pd
 import typer
 from graphrag_common.config import load_config
+from graphrag_storage import Storage
+from graphrag_storage.file_storage import FileStorage
+from graphrag_storage.storage_config import StorageConfig
+from graphrag_storage.storage_factory import create_storage
 from rich import print as rich_print
 from tqdm import tqdm
 
@@ -43,6 +48,68 @@ app: typer.Typer = typer.Typer(
     pretty_exceptions_show_locals=False,
     help="Evaluate Retrieval-Augmented Generation (RAG) methods.",
 )
+
+
+async def _read_json_df(storage: Storage, key: str) -> pd.DataFrame:
+    """Read a JSON file from storage and return as a DataFrame."""
+    data = await storage.get(key)
+    if data is None:
+        msg = f"File not found in storage: {key}"
+        raise FileNotFoundError(msg)
+    return pd.read_json(StringIO(data))
+
+
+async def _read_csv_df(storage: Storage, key: str) -> pd.DataFrame:
+    """Read a CSV file from storage and return as a DataFrame."""
+    data = await storage.get(key)
+    if data is None:
+        msg = f"File not found in storage: {key}"
+        raise FileNotFoundError(msg)
+    return pd.read_csv(StringIO(data))
+
+
+async def _write_csv_df(storage: Storage, key: str, df: pd.DataFrame) -> None:
+    """Write a DataFrame as CSV to storage."""
+    await storage.set(key, df.to_csv(index=False))
+
+
+async def _write_json(storage: Storage, key: str, data: object) -> None:
+    """Write JSON data to storage."""
+    await storage.set(key, json.dumps(data))
+
+
+def _build_output_storage(
+    storage_config: StorageConfig | None, output: Path
+) -> Storage:
+    """Build output storage from config or default to FileStorage."""
+    if storage_config:
+        storage = create_storage(storage_config)
+        output_posix = output.as_posix().strip("./")
+        return storage.child(output_posix) if output_posix else storage
+    output.mkdir(parents=True, exist_ok=True)
+    return FileStorage(base_dir=str(output))
+
+
+def _build_condition_storage(
+    storage_config: StorageConfig | None, answer_base_path: Path, *, is_dir: bool
+) -> tuple[Storage, str]:
+    """Build storage for a condition's answer path.
+
+    Returns (storage, filename) where filename is the key to read.
+    For directory-style paths (pairwise), filename is empty.
+    """
+    if storage_config:
+        storage = create_storage(storage_config)
+        path_posix = answer_base_path.as_posix().strip("./")
+        if is_dir:
+            return storage.child(path_posix) if path_posix else storage, ""
+        parent = str(Path(path_posix).parent)
+        name = Path(path_posix).name
+        child = storage.child(parent) if parent != "." else storage
+        return child, name
+    if is_dir:
+        return FileStorage(base_dir=str(answer_base_path)), ""
+    return FileStorage(base_dir=str(answer_base_path.parent)), answer_base_path.name
 
 
 @app.command()
@@ -91,7 +158,7 @@ def pairwise_scores(
     ]
 
     llm_client = ModelFactory.create_chat_model(config.llm_config)
-    output.mkdir(parents=True, exist_ok=True)
+    output_storage = _build_output_storage(config.output_storage, output)
     all_results = []
 
     all_combinations = (
@@ -100,30 +167,43 @@ def pairwise_scores(
         else combinations(config.others, 2)
     )
 
+    loop = asyncio.get_event_loop()
+
     for base, other in all_combinations:
         for question_set in config.question_sets:
             rich_print(f"Scoring {base.name} vs {other.name} for {question_set}")
-            if (output / f"{question_set}_{base.name}--{other.name}.csv").exists():
+            cache_key = f"{question_set}_{base.name}--{other.name}.csv"
+            if loop.run_until_complete(output_storage.has(cache_key)):
                 rich_print(
                     f"{base.name} vs {other.name} for {question_set} already exists. Skipping generation.\n"
-                    f"[bold yellow]If you want to generate a new comparison, delete {question_set}_{base.name}--{other.name}.csv from {output}.[/bold yellow]"
+                    f"[bold yellow]If you want to generate a new comparison, delete {cache_key} from {output}.[/bold yellow]"
                 )
-                result = pd.read_csv(
-                    output / f"{question_set}_{base.name}--{other.name}.csv"
+                result = loop.run_until_complete(
+                    _read_csv_df(output_storage, cache_key)
                 )
             else:
+                base_storage, _ = _build_condition_storage(
+                    config.input_storage, base.answer_base_path, is_dir=True
+                )
+                other_storage, _ = _build_condition_storage(
+                    config.input_storage, other.answer_base_path, is_dir=True
+                )
                 result = get_pairwise_scores(
                     llm_client=llm_client,
                     llm_config=config.llm_config,
                     base_name=base.name,
                     other_name=other.name,
-                    base_answers=pd.read_json(
-                        (base.answer_base_path / f"{question_set}.json"),
-                        encoding="utf-8",
+                    base_answers=loop.run_until_complete(
+                        _read_json_df(
+                            base_storage,
+                            f"{question_set}.json",
+                        )
                     ),
-                    other_answers=pd.read_json(
-                        (other.answer_base_path / f"{question_set}.json"),
-                        encoding="utf-8",
+                    other_answers=loop.run_until_complete(
+                        _read_json_df(
+                            other_storage,
+                            f"{question_set}.json",
+                        )
                     ),
                     criteria=config.criteria,
                     assessment_user_prompt=config.prompt_config.user_prompt.template,
@@ -133,22 +213,23 @@ def pairwise_scores(
                     include_score_id_in_prompt=include_score_id_in_prompt,
                 )
 
-                result.to_csv(
-                    output / f"{question_set}_{base.name}--{other.name}.csv",
-                    index=False,
+                loop.run_until_complete(
+                    _write_csv_df(output_storage, cache_key, result)
                 )
             result["question_set"] = question_set
             all_results.append(result)
 
     all_results = pd.concat(all_results)
-    all_results.to_csv(output / "win_rates.csv", index=False)
+    loop.run_until_complete(_write_csv_df(output_storage, "win_rates.csv", all_results))
 
     all_results_p_value = analyze_criteria(
         all_results,
         alpha=alpha,
     )
 
-    all_results_p_value.to_csv(output / "winrates_sig_tests.csv", index=False)
+    loop.run_until_complete(
+        _write_csv_df(output_storage, "winrates_sig_tests.csv", all_results_p_value)
+    )
 
     print_df(
         cast(
@@ -171,8 +252,9 @@ def pairwise_scores(
     if print_model_usage:
         rich_print("Model usage statistics:")
         rich_print(llm_client.get_usage())
-    usage_file = output / "model_usage.json"
-    usage_file.write_text(json.dumps(llm_client.get_usage()), encoding="utf-8")
+    loop.run_until_complete(
+        _write_json(output_storage, "model_usage.json", llm_client.get_usage())
+    )
 
 
 @app.command()
@@ -218,16 +300,24 @@ def reference_scores(
     ]
 
     llm_client = ModelFactory.create_chat_model(config.llm_config)
+    output_storage = _build_output_storage(config.output_storage, output)
+    loop = asyncio.get_event_loop()
 
     for generated in config.generated:
+        generated_storage, generated_key = _build_condition_storage(
+            config.input_storage, generated.answer_base_path, is_dir=False
+        )
+        reference_storage, reference_key = _build_condition_storage(
+            config.input_storage, config.reference.answer_base_path, is_dir=False
+        )
         result = get_reference_scores(
             llm_client=llm_client,
             llm_config=config.llm_config,
-            generated_answers=pd.read_json(
-                generated.answer_base_path, encoding="utf-8"
+            generated_answers=loop.run_until_complete(
+                _read_json_df(generated_storage, generated_key)
             ),
-            reference_answers=pd.read_json(
-                config.reference.answer_base_path, encoding="utf-8"
+            reference_answers=loop.run_until_complete(
+                _read_json_df(reference_storage, reference_key)
             ),
             criteria=config.criteria,
             assessment_user_prompt=config.prompt_config.user_prompt.template,
@@ -238,8 +328,13 @@ def reference_scores(
             include_score_id_in_prompt=include_score_id_in_prompt,
             question_id_key=question_id_key,
         )
-        output.mkdir(parents=True, exist_ok=True)
-        result.to_csv(output / f"reference_scores-{generated.name}.csv", index=False)
+        loop.run_until_complete(
+            _write_csv_df(
+                output_storage,
+                f"reference_scores-{generated.name}.csv",
+                result,
+            )
+        )
         summary_df = cast(
             pd.DataFrame,
             result.drop(
@@ -266,8 +361,9 @@ def reference_scores(
     if print_model_usage:
         rich_print("Model usage statistics:")
         rich_print(llm_client.get_usage())
-    usage_file = output / "model_usage.json"
-    usage_file.write_text(json.dumps(llm_client.get_usage()), encoding="utf-8")
+    loop.run_until_complete(
+        _write_json(output_storage, "model_usage.json", llm_client.get_usage())
+    )
 
 
 @app.command()
@@ -380,10 +476,16 @@ def _run_single_rag_assertion_scores(
 ) -> None:
     """Run assertion scoring for a single RAG method (legacy mode)."""
     config = load_config(AssertionConfig, config_path)
-    output.mkdir(parents=True, exist_ok=True)
+    output_storage = _build_output_storage(config.output_storage, output)
+    loop = asyncio.get_event_loop()
 
     llm_client = ModelFactory.create_chat_model(config.llm_config)
-    assertions = pd.read_json(config.assertions.assertions_path, encoding="utf-8")
+    assertions_storage, assertions_key = _build_condition_storage(
+        config.input_storage, config.assertions.assertions_path, is_dir=False
+    )
+    assertions = loop.run_until_complete(
+        _read_json_df(assertions_storage, assertions_key)
+    )
 
     if assertions.loc[:, assertions_key].isna().any():  # type: ignore
         msg = f"Some questions in the assertions file do not have assertions. Please check {config.assertions.assertions_path}, these questions will be skipped."
@@ -404,10 +506,15 @@ def _run_single_rag_assertion_scores(
         .reset_index(drop=True)
     )
 
+    generated_storage, generated_key = _build_condition_storage(
+        config.input_storage, config.generated.answer_base_path, is_dir=False
+    )
     assertion_score = get_assertion_scores(
         llm_client=llm_client,
         llm_config=config.llm_config,
-        answers=pd.read_json(config.generated.answer_base_path, encoding="utf-8"),
+        answers=loop.run_until_complete(
+            _read_json_df(generated_storage, generated_key)
+        ),
         assertions=assertions,
         assessment_user_prompt=config.prompt_config.user_prompt.template,
         assessment_system_prompt=config.prompt_config.system_prompt.template,
@@ -418,7 +525,9 @@ def _run_single_rag_assertion_scores(
         answer_text_key=answer_text_key,
     )
 
-    assertion_score.to_csv(output / "assertion_scores.csv", index=False)
+    loop.run_until_complete(
+        _write_csv_df(output_storage, "assertion_scores.csv", assertion_score)
+    )
 
     # Compute summaries using shared aggregation logic
     summary_by_assertion, summary_by_question, eval_summary = summarize_standard_scores(
@@ -462,8 +571,9 @@ def _run_single_rag_assertion_scores(
     if print_model_usage:
         rich_print("Model usage statistics:")
         rich_print(llm_client.get_usage())
-    usage_file = output / "model_usage.json"
-    usage_file.write_text(json.dumps(llm_client.get_usage()), encoding="utf-8")
+    loop.run_until_complete(
+        _write_json(output_storage, "model_usage.json", llm_client.get_usage())
+    )
 
 
 def _run_multi_rag_assertion_scores(

@@ -8,6 +8,8 @@ from pathlib import Path
 from typing import Any
 from uuid import uuid4
 
+from graphrag_storage import Storage
+
 from benchmark_qed.autoq.data_model.question import Question
 
 log: logging.Logger = logging.getLogger(__name__)
@@ -48,14 +50,14 @@ def _normalize_assertion(assertion: dict[str, Any] | str) -> dict[str, Any]:
     }
 
 
-def _save_assertions(questions: list[Question], output_path: Path) -> None:
+async def _save_assertions(questions: list[Question], storage: Storage) -> None:
     """
     Extract and save assertions from questions to separate JSON files with ranks.
 
     Creates the following files:
     - assertions.json: Final assertions with ranks and supporting_assertions metadata
     - assertion_sources.json: Source text chunks for each assertion (kept separate to reduce file size)
-    - map_assertions.json: Intermediate assertions from map step (for global questions)
+    - map_assertions.json: Intermediate assertions from map step (for global assertions)
     - map_assertion_sources.json: Source text chunks for map assertions
 
     For global assertions, each assertion includes:
@@ -64,7 +66,7 @@ def _save_assertions(questions: list[Question], output_path: Path) -> None:
 
     Args:
         questions: List of Question objects with assertions in attributes
-        output_path: Directory path to save the JSON files
+        storage: Storage backend to write the JSON files to
     """
     questions_with_assertions = []
     questions_with_map_assertions = []
@@ -187,61 +189,64 @@ def _save_assertions(questions: list[Question], output_path: Path) -> None:
 
     # Save assertions to file as a direct list
     if questions_with_assertions:
-        assertions_file = output_path / "assertions.json"
-        Path(assertions_file).write_text(
-            json.dumps(questions_with_assertions, indent=4)
+        await storage.set(
+            "assertions.json",
+            json.dumps(questions_with_assertions, indent=4),
         )
 
     # Save assertion sources to separate file
     if assertion_sources_data:
-        assertion_sources_file = output_path / "assertion_sources.json"
-        Path(assertion_sources_file).write_text(
-            json.dumps(assertion_sources_data, indent=4)
+        await storage.set(
+            "assertion_sources.json",
+            json.dumps(assertion_sources_data, indent=4),
         )
         log.info(
-            "Saved assertion sources for %d questions to %s",
+            "Saved assertion sources for %d questions",
             len(assertion_sources_data),
-            assertion_sources_file,
         )
 
     # Save map_assertions to separate file (for global assertions)
     if questions_with_map_assertions:
-        map_assertions_file = output_path / "map_assertions.json"
-        Path(map_assertions_file).write_text(
-            json.dumps(questions_with_map_assertions, indent=4)
+        await storage.set(
+            "map_assertions.json",
+            json.dumps(questions_with_map_assertions, indent=4),
         )
         log.info(
-            "Saved map (source) assertions for %d questions to %s",
+            "Saved map (source) assertions for %d questions",
             len(questions_with_map_assertions),
-            map_assertions_file,
         )
 
     # Save map assertion sources to separate file
     if map_assertion_sources_data:
-        map_assertion_sources_file = output_path / "map_assertion_sources.json"
-        Path(map_assertion_sources_file).write_text(
-            json.dumps(map_assertion_sources_data, indent=4)
+        await storage.set(
+            "map_assertion_sources.json",
+            json.dumps(map_assertion_sources_data, indent=4),
         )
         log.info(
-            "Saved map assertion sources for %d questions to %s",
+            "Saved map assertion sources for %d questions",
             len(map_assertion_sources_data),
-            map_assertion_sources_file,
         )
 
     # Generate and save assertion statistics
+    import tempfile
+
     from benchmark_qed.autoq.question_gen.data_questions.assertion_gen.stats import (
         compute_assertion_stats,
         save_stats_to_file,
     )
 
     if questions_with_assertions:
+        with tempfile.NamedTemporaryFile(suffix=".json", delete=False) as tmp:
+            tmp_path = Path(tmp.name)
         stats = compute_assertion_stats(
             assertions_data=questions_with_assertions,
             assertion_type="global",
-            file_path=str(output_path / "assertions.json"),
+            file_path="assertions.json",
             sources_data=assertion_sources_data or None,
         )
-        save_stats_to_file(stats, output_path / "assertions_stats.json")
+        save_stats_to_file(stats, tmp_path)
+        await storage.set("assertions_stats.json", tmp_path.read_text(encoding="utf-8"))
+        tmp_path.unlink(missing_ok=True)
         log.info(
             "Generated assertion statistics: %d questions, %d assertions",
             stats.total_questions,
@@ -249,13 +254,19 @@ def _save_assertions(questions: list[Question], output_path: Path) -> None:
         )
 
     if questions_with_map_assertions:
+        with tempfile.NamedTemporaryFile(suffix=".json", delete=False) as tmp:
+            tmp_path = Path(tmp.name)
         map_stats = compute_assertion_stats(
             assertions_data=questions_with_map_assertions,
             assertion_type="map",
-            file_path=str(output_path / "map_assertions.json"),
+            file_path="map_assertions.json",
             sources_data=map_assertion_sources_data or None,
         )
-        save_stats_to_file(map_stats, output_path / "map_assertions_stats.json")
+        save_stats_to_file(map_stats, tmp_path)
+        await storage.set(
+            "map_assertions_stats.json", tmp_path.read_text(encoding="utf-8")
+        )
+        tmp_path.unlink(missing_ok=True)
         log.info(
             "Generated map assertion statistics: %d questions, %d assertions",
             map_stats.total_questions,
@@ -263,9 +274,12 @@ def _save_assertions(questions: list[Question], output_path: Path) -> None:
         )
 
 
-def load_questions(file_path: str, question_text_only: bool = False) -> list[Question]:
-    """Read question list from a json file."""
-    question_list = json.loads(Path(file_path).read_text())
+async def load_questions(
+    storage: Storage, file_name: str, question_text_only: bool = False
+) -> list[Question]:
+    """Read question list from a json file via storage backend."""
+    data = await storage.get(file_name)
+    question_list = json.loads(data)
     if question_text_only:
         return [Question(id=str(uuid4()), text=question) for question in question_list]
     questions = []
@@ -277,15 +291,15 @@ def load_questions(file_path: str, question_text_only: bool = False) -> list[Que
     return questions
 
 
-def save_questions(
+async def save_questions(
     questions: list[Question],
-    output_path: str,
+    storage: Storage,
     output_name: str,
     question_text_only: bool = False,
     include_embedding: bool = False,
     save_assertions: bool = True,
 ) -> None:
-    """Save question list to a json file."""
+    """Save question list to a json file via storage backend."""
     if question_text_only:
         question_list = [question.text for question in questions]
     else:
@@ -294,13 +308,8 @@ def save_questions(
             for question in question_list:
                 question.pop("embedding", None)
 
-    output_path_obj = Path(output_path)
-    if not output_path_obj.exists():
-        output_path_obj.mkdir(parents=True, exist_ok=True)
-    output_file = output_path_obj / f"{output_name}.json"
-
-    Path(output_file).write_text(json.dumps(question_list, indent=4))
+    await storage.set(f"{output_name}.json", json.dumps(question_list, indent=4))
 
     # Save assertions separately if requested
     if save_assertions:
-        _save_assertions(questions, output_path_obj)
+        await _save_assertions(questions, storage)

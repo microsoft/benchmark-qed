@@ -177,14 +177,14 @@ class TestLoadAndNormalizeHierarchicalAssertions:
         """Non-dict assertions use the assertions_key rename path."""
         # Build a DataFrame where assertions are plain strings but
         # supporting_assertions is a separate column
-        df = pd.DataFrame({
+        assertions_df = pd.DataFrame({
             "question_id": ["q1"],
             "question_text": ["What?"],
             "assertions": ["A plain assertion."],
             "supporting_assertions": [["SA1"]],
         })
         path = tmp_path / "assertions.json"
-        df.to_json(path, orient="records")
+        assertions_df.to_json(path, orient="records")
 
         result = load_and_normalize_hierarchical_assertions(path)
 

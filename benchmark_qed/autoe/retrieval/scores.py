@@ -99,27 +99,35 @@ def load_clusters_from_json(
             # Load text units and create ID -> text mapping
             suffix = text_units_path.suffix.lower()
             if suffix == ".parquet":
-                df = pd.read_parquet(text_units_path)
+                text_units_df = pd.read_parquet(text_units_path)
             elif suffix == ".csv":
-                df = pd.read_csv(text_units_path)
+                text_units_df = pd.read_csv(text_units_path)
             elif suffix in (".json", ".jsonl"):
-                df = pd.read_json(text_units_path, lines=(suffix == ".jsonl"))
+                text_units_df = pd.read_json(
+                    text_units_path, lines=(suffix == ".jsonl")
+                )
             else:
                 log.warning("Unknown text units file format: %s", suffix)
-                df = None
+                text_units_df = None
 
-            if df is not None:
+            if text_units_df is not None:
                 # Create mapping from ID to text
-                id_col = "id" if "id" in df.columns else df.columns[0]
+                id_col = (
+                    "id" if "id" in text_units_df.columns else text_units_df.columns[0]
+                )
                 text_col = (
                     "text"
-                    if "text" in df.columns
+                    if "text" in text_units_df.columns
                     else "chunk"
-                    if "chunk" in df.columns
-                    else df.columns[1]
+                    if "chunk" in text_units_df.columns
+                    else text_units_df.columns[1]
                 )
                 text_unit_map = dict(
-                    zip(df[id_col].astype(str), df[text_col].astype(str), strict=False)
+                    zip(
+                        text_units_df[id_col].astype(str),
+                        text_units_df[text_col].astype(str),
+                        strict=False,
+                    )
                 )
                 log.info(
                     "Loaded %s text units from %s",

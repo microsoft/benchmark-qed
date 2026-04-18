@@ -11,7 +11,9 @@ from uuid import uuid4
 import pandas as pd
 from graphrag_input import InputConfig, create_input_reader
 from graphrag_input.text_document import TextDocument
+from graphrag_storage import Storage
 from graphrag_storage.file_storage import FileStorage
+from graphrag_storage.tables.parquet_table_provider import ParquetTableProvider
 
 import benchmark_qed.config.defaults as defs
 from benchmark_qed.autod.data_model.document import Document
@@ -59,25 +61,26 @@ async def create_documents(
     text_tag: str = defs.TEXT_COLUMN,
     metadata_tags: list[str] | None = None,
     max_text_length: int | None = None,
+    input_storage: Storage | None = None,
 ) -> list[Document]:
     """Load documents from a specified path and return a list of Document objects."""
-    input_path_obj = Path(input_path)
+    file_pattern = None
+    if input_storage is None:
+        input_path_obj = Path(input_path)
+        if input_path_obj.is_dir():
+            base_dir = str(input_path_obj)
+        else:
+            base_dir = str(input_path_obj.parent)
+            file_pattern = re.escape(input_path_obj.name) + "$"
+        input_storage = FileStorage(base_dir=base_dir, encoding=encoding)
 
-    if input_path_obj.is_dir():
-        base_dir = str(input_path_obj)
-        file_pattern = None
-    else:
-        base_dir = str(input_path_obj.parent)
-        file_pattern = re.escape(input_path_obj.name) + "$"
-
-    storage = FileStorage(base_dir=base_dir, encoding=encoding)
     config = InputConfig(
         type=str(input_type),
         encoding=encoding,
         text_column=text_tag if str(input_type) != InputDataType.Text else None,
         file_pattern=file_pattern,
     )
-    reader = create_input_reader(config, storage)
+    reader = create_input_reader(config, input_storage)
     text_documents = await reader.read_files()
 
     return [
@@ -116,17 +119,13 @@ def load_documents(
     ]
 
 
-def save_documents(
+async def save_documents(
     documents: list[Document],
-    output_path: str,
+    storage: Storage,
     output_name: str = defs.DOCUMENT_OUTPUT,
 ) -> pd.DataFrame:
-    """Save a list of Document objects to a parquet file in the specified directory."""
-    output_path_obj = Path(output_path)
-    if not output_path_obj.exists():
-        output_path_obj.mkdir(parents=True, exist_ok=True)
-
-    output_file = output_path_obj / f"{output_name}.parquet"
+    """Save a list of Document objects to a parquet file via storage backend."""
     document_df = pd.DataFrame([asdict(doc) for doc in documents])
-    document_df.to_parquet(output_file, index=False)
+    table_provider = ParquetTableProvider(storage)
+    await table_provider.write_dataframe(output_name, document_df)
     return document_df
