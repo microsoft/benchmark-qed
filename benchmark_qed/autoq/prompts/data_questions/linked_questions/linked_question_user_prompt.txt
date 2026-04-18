@@ -1,0 +1,8 @@
+--SHARED ENTITY--
+${shared_entity}
+
+--LOCAL QUESTIONS AND THEIR CLAIMS--
+${claims}
+
+--GENERATE--
+Generate up to ${max_questions} questions using the local questions and claims above.

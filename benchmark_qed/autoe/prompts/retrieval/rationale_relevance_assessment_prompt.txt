@@ -1,0 +1,23 @@
+Given a query and a passage, you must provide a score on an integer scale of 0 to 3 with the following meanings:
+0 = represent that the passage has nothing to do with the query, 
+1 = represents that the passage seems related to the query but does not answer it, 
+2 = represents that the passage has some answer for the query, but the answer may be a bit unclear, or hidden amongst extraneous information and 
+3 = represents that the passage is dedicated to the query and contains the exact answer.
+
+Important Instruction: 
+Assign category 1 if the passage is somewhat related to the topic but not completely, category 2 if passage presents something very important related to the entire topic but also has some extra information and category 3 if the passage only and entirely refers to the topic. If none of the above satisfies give it category 0.
+
+Query: ${query}
+Passage: ${passage}
+
+Split this problem into steps:
+Consider the underlying intent of the query.
+Measure how well the content matches a likely intent of the query (M).
+Measure how trustworthy the passage is (T).
+Consider the aspects above and the relative importance of each, and decide on a final score (O).
+
+Provide your response as a JSON object with the following format:
+{
+  "reasoning": "Brief explanation of your assessment, including analysis of the query intent, content matching (M), trustworthiness (T), and final decision process",
+  "score": integer score from 0 to 3
+}

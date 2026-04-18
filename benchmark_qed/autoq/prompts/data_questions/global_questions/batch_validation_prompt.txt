@@ -1,0 +1,45 @@
+You are evaluating a batch of generated questions for quality, answerability, and uniqueness.
+
+For each question, evaluate:
+
+**NATURALNESS**: Does the question sound like something a curious human would naturally ask?
+- Questions should be concise and natural-sounding
+- Watch for awkward phrasing that sounds computer-generated
+
+**ANSWERABILITY**: Can this question be answered by reading and synthesizing information from documents?
+- Must be answerable through document synthesis
+- FAIL any question with these BANNED PATTERNS:
+  - Frequency/counting: "most often", "most common", "most frequently", "least often", "how many", "frequency"
+  - Ranking/statistics: "top X", "ranked by", "percentage", "average", "proportion"
+  - Sentiment analysis: "positive/negative sentiment", "tone of discussion"
+  - Numeric aggregation: counting occurrences, calculating statistics
+
+**CLARITY**: Is the question clear and unambiguous?
+- Should have a single, clear interpretation
+- Watch for vague or confusing phrasing
+
+**DUPLICATE DETECTION**: Check for duplicates or near-duplicates within this batch.
+- Questions asking essentially the same thing with different wording are duplicates
+- If duplicates exist, keep the better-phrased one and mark others as "duplicate"
+
+---
+
+Questions to evaluate:
+${questions}
+
+---
+
+For each question, output whether it passes validation:
+- reasoning: Brief explanation of your evaluation
+- pass: 1 if the question meets ALL quality criteria AND is not a duplicate
+- pass: 0 if it fails ANY criterion OR is a duplicate (include "duplicate" in reasoning if applicable)
+
+Output a JSON object:
+{
+    "results": [
+        {"id": 0, "reasoning": "natural phrasing, answerable, clear", "pass": 1},
+        {"id": 1, "reasoning": "requires counting - banned pattern", "pass": 0},
+        {"id": 2, "reasoning": "duplicate of question 0", "pass": 0},
+        ...
+    ]
+}

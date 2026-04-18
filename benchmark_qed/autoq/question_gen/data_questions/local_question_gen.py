@@ -134,6 +134,7 @@ class DataLocalQuestionGen(BaseQuestionGen):
                     "ranking_attributes": [
                         "intra_inter_similarity_ratio",
                         "reference_coverage",
+                        "assertion_count",
                     ],
                     "ascending": False,
                 },
@@ -160,6 +161,7 @@ class DataLocalQuestionGen(BaseQuestionGen):
                     min_criterion_score=local_assertion_config.min_validation_score,
                     validation_prompt=assertion_prompt_config.local_validation_prompt.template,
                     concurrent_validations=local_assertion_config.concurrent_llm_calls,
+                    max_source_count=local_assertion_config.max_source_count,
                 )
 
             self.assertion_generator = LocalClaimAssertionGenerator(
@@ -229,12 +231,10 @@ class DataLocalQuestionGen(BaseQuestionGen):
             ]
             results.extend(batch_questions)
 
-        # select a subset of questions if needed
         msg = f"Generated {len(results)} candidate questions from {len(text_clusters)} clusters."
         log.info(msg)
-        final_questions = self.select(candidate_questions=results, top_k=num_questions)
 
-        # Generate assertions only for the final selected questions
+        # Step 1: Generate assertions for ALL candidate questions (before selection)
         max_assertions = (
             self.assertion_config.local.max_assertions
             if self.assertion_config
@@ -243,12 +243,26 @@ class DataLocalQuestionGen(BaseQuestionGen):
         if (
             max_assertions is None or max_assertions > 0
         ) and self.assertion_generator is not None:
-            log.info(
-                "Generating assertions for %s final questions", len(final_questions)
-            )
-            await self.assertion_generator.agenerate_assertions_for_questions(
-                final_questions
-            )
+            log.info("Generating assertions for %s candidate questions", len(results))
+            await self.assertion_generator.agenerate_assertions_for_questions(results)
+
+        # Step 2: Filter out questions with no valid assertions
+        questions_with_assertions = [
+            q
+            for q in results
+            if q.attributes and q.attributes.get("assertion_count", 0) > 0
+        ]
+        filtered_out = len(results) - len(questions_with_assertions)
+        log.info(
+            "Filtered to %s questions with valid assertions (removed %s with 0 assertions)",
+            len(questions_with_assertions),
+            filtered_out,
+        )
+
+        # Step 3: Select best questions from filtered set
+        final_questions = self.select(
+            candidate_questions=questions_with_assertions, top_k=num_questions
+        )
 
         return QuestionGenResult(
             selected_questions=final_questions,

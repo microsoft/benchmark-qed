@@ -1,0 +1,1390 @@
+[
+    {
+        "question_id": "5bdc2158-5fb1-4d5d-98dc-644f5a38b1ca",
+        "question_text": "In Behind the Tech\u2019s 2020 Year-in-Review episode, what movie does Microsoft CTO Kevin Scott reference when Christina Warren asks for a 2020 tagline?",
+        "assertions": [
+            {
+                "statement": "The response should state that Kevin Scott references the movie \"The Princess Bride.\"",
+                "source_count": 1,
+                "score": 10,
+                "reasoning": "The query asks which movie Kevin Scott references, and the claim identifies it directly. This is the core fact needed to answer the question.",
+                "rank": 1,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 5,
+                        "verifiability": 5,
+                        "reasoning": "Source 1 explicitly states Kevin Scott references scenes in \"The Princess Bride\" when asked for a 2020 tagline. This directly answers the question and is a clear, checkable fact."
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "question_id": "0d5e8139-5ce1-4322-9ad1-baa569f41e2d",
+        "question_text": "In the 2019 \u201cBehind the Tech\u201d discussion of Stanford HAI\u2019s principles, what word does Fei-Fei Li emphasize instead of \u201creplace\u201d for AI\u2019s role with humans?",
+        "assertions": [
+            {
+                "statement": "The response should state that Fei-Fei Li emphasizes the word \u201cenhance\u201d for AI\u2019s role with humans.",
+                "source_count": 2,
+                "score": 10,
+                "reasoning": "The query asks for the specific word Li uses instead of \u201creplace.\u201d This is the central factual detail needed to answer correctly.",
+                "rank": 1,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 5,
+                        "verifiability": 5,
+                        "reasoning": "Both provided sources explicitly quote Fei-Fei Li saying to \u201cemphasize the word \u2018enhance\u2019 instead of \u2018replace\u2019,\u201d directly answering the question. The assertion is central to the question and is a clear, unambiguous, easily checkable fact."
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "question_id": "bf18c8ce-3e8c-43b2-8522-bcc86a36a13f",
+        "question_text": "In EP-25 of \u201cBehind the Tech,\u201d what space opera did science fiction author Charlie Stross name as revisiting the singularity?",
+        "assertions": [
+            {
+                "statement": "The response should state that the space opera Charlie Stross named was titled \u201cGhost Engine.\u201d",
+                "source_count": 1,
+                "score": 10,
+                "reasoning": "The query asks which space opera was named as revisiting the singularity. The title is the central required fact, so it is essential.",
+                "rank": 1,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 5,
+                        "verifiability": 5,
+                        "reasoning": "Source 1 directly quotes Charlie Stross saying he will be revisiting the singularity in the space opera he mentioned, \u201cGhost Engine.\u201d This is exactly what the question asks for, and it is a clear, concrete title that can be checked verbatim against an answer."
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "question_id": "306049de-aac1-45b4-b325-dc04353502d7",
+        "question_text": "In episode EP-01 of Kevin Scott\u2019s 'Behind the Tech,' which programming language version transition does Anders Hejlsberg mention as a backwards-compatibility \u201ctrain wreck\u201d?",
+        "assertions": [
+            {
+                "statement": "The response should identify the Python 2 to Python 3 transition as the backwards-compatibility \u201ctrain wreck\u201d mentioned by Anders Hejlsberg.",
+                "source_count": 1,
+                "score": 10,
+                "reasoning": "The query asks which language version transition was described as a backwards-compatibility train wreck. This is the central fact in the provided claim.",
+                "rank": 1,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 5,
+                        "verifiability": 5,
+                        "reasoning": "Source 1 directly quotes Anders Hejlsberg calling the transition from \u201cPython two to three\u201d a backwards-compatibility \u201ctrain wreck.\u201d This is exactly what the question asks for, and it is a clear, concrete fact that can be checked against an answer."
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "question_id": "470d59a4-bd56-48ac-b2cc-a2156de471d0",
+        "question_text": "In Microsoft\u2019s \u201cBehind the Tech\u201d episode EP-40, what university did MIT roboticist Daniela Rus attend as an undergraduate?",
+        "assertions": [
+            {
+                "statement": "The response should state that Daniela Rus attended the University of Iowa as an undergraduate.",
+                "source_count": 2,
+                "score": 10,
+                "reasoning": "The query asks for the specific undergraduate university mentioned in the episode. This is the central fact provided by the claims, so it is essential.",
+                "rank": 1,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 5,
+                        "verifiability": 5,
+                        "reasoning": "Source 2 explicitly states: \u201cI went to college at the University of Iowa\u2026 And as an undergraduate student\u2026\u201d. This directly answers the question about her undergraduate university, is central to evaluating the correct response, and is a clear, binary fact to check."
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "question_id": "bcbcedad-b9ed-4b0c-8330-1e7ed490c37d",
+        "question_text": "In EP-02 of Behind the Tech, what age range did Code.org President Alice Steinglass say is when women tend to lose interest in computer science?",
+        "assertions": [
+            {
+                "statement": "The response should state that Steinglass said women tend to lose interest in computer science around ages 12 to 14.",
+                "source_count": 1,
+                "score": 10,
+                "reasoning": "The query asks for the age range she cited, and the claim specifies it as roughly 12\u201314. This is the core fact needed to answer accurately.",
+                "rank": 1,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 5,
+                        "verifiability": 5,
+                        "reasoning": "Source 1 explicitly states: \u201cIn computer science, it's between about 12 and 14 when they lose interest.\u201d This directly answers the question\u2019s requested age range, is central to evaluating responses, and is a clear, checkable fact."
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "question_id": "dc2c1481-363f-411e-8154-faba024ef770",
+        "question_text": "During Jacob Collier\u2019s live show in Germany, what action by a video operator triggered the loopers to speed up and rise in pitch?",
+        "assertions": [
+            {
+                "statement": "The response should state that the loopers sped up and rose in pitch because a video operator pressed the wrong button.",
+                "source_count": 2,
+                "score": 10,
+                "reasoning": "The query asks what action by the video operator triggered the looper malfunction. This is the central causal detail in the provided claim, so it is essential.",
+                "rank": 1,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 5,
+                        "verifiability": 5,
+                        "reasoning": "Both sources explicitly state that in Germany the loopers sped up and rose in pitch because a video operator pushed/pressed the wrong button at the wrong time. This directly answers the question and is a clear, checkable fact."
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "question_id": "c5e4d622-cdb3-40ec-8e7a-5ba4fdef0143",
+        "question_text": "Around what year did Percy Liang say he began transitioning into machine learning or AI during his undergraduate years at MIT?",
+        "assertions": [
+            {
+                "statement": "The response should state that Percy Liang dated his transition into machine learning or AI to around 2004.",
+                "source_count": 1,
+                "score": 10,
+                "reasoning": "The query asks for the approximate year of his transition, and the claim explicitly gives an approximate year. This is the core fact needed to answer the question.",
+                "rank": 1,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 5,
+                        "verifiability": 5,
+                        "reasoning": "Source 1 directly quotes Percy Liang saying the transition was \u201caround 2004.\u201d This is exactly the year-focused detail the question asks for, and it is a clear, concrete fact that can be checked against an answer."
+                    }
+                }
+            },
+            {
+                "statement": "The response should indicate that Percy Liang said this transition happened toward the end of his undergraduate years at MIT.",
+                "source_count": 1,
+                "score": 6,
+                "reasoning": "This provides important context for when the transition occurred during his undergraduate timeline, supporting the interpretation of the approximate year. It is helpful but secondary to the year itself.",
+                "rank": 2,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 3,
+                        "verifiability": 3,
+                        "reasoning": "Source 1 explicitly says he started transitioning into ML/AI toward the end of his undergrad, so the assertion is well grounded. However, the question asks for an approximate year (he says around 2004), and the assertion omits that, making it less central to evaluating a year-based answer. The phrase 'toward the end' is checkable but somewhat vague compared to a specific year, so verifiability is moderate."
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "question_id": "4717a582-d95a-4dea-afac-c4e41272449d",
+        "question_text": "In what year did Chris Urmson say he got a phone call from Google about starting a self-driving car effort there?",
+        "assertions": [
+            {
+                "statement": "The response should state that the year was 2008.",
+                "source_count": 1,
+                "score": 10,
+                "reasoning": "The query asks for the specific year of the phone call, and the claim directly provides it. This is essential to answering the question correctly.",
+                "rank": 1,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 5,
+                        "verifiability": 5,
+                        "reasoning": "Source 1 explicitly quotes Urmson saying the phone call about doing self-driving cars at Google was in 2008. This directly answers the question and is a clear, checkable year."
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "question_id": "b440cbbb-57e3-4db3-a9b8-d1079159f529",
+        "question_text": "In Episode 45 of Behind the Tech, what first program does Phil Spencer say he wrote in seventh grade in a before-school computer club?",
+        "assertions": [
+            {
+                "statement": "The response should state that Phil Spencer says the first program he wrote in seventh grade was Lemonade Stand.",
+                "source_count": 1,
+                "score": 10,
+                "reasoning": "The query asks for the specific first program Phil Spencer says he wrote. This is the central fact needed to answer correctly.",
+                "rank": 1,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 5,
+                        "verifiability": 5,
+                        "reasoning": "Source 1 directly quotes Phil Spencer saying his first program was probably \"Lemonade Stand\" in seventh grade in a before-school computer club. This is the exact detail needed to answer the question and is a clear, checkable fact."
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "question_id": "dd939d26-7114-428d-b79d-d046c54a55ab",
+        "question_text": "In EP-16 of Kevin Scott\u2019s Behind the Tech, how many processors did Danny Hillis say the first later Connection Machine from Thinking Machines had?",
+        "assertions": [
+            {
+                "statement": "The response should state that Danny Hillis said the first later Connection Machine had 64,000 processors.",
+                "source_count": 1,
+                "score": 10,
+                "reasoning": "The query asks for the processor count Hillis gave for the first later Connection Machine. This is the central factual detail needed to answer correctly.",
+                "rank": 1,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 5,
+                        "verifiability": 5,
+                        "reasoning": "The source explicitly quotes Danny Hillis saying, \u201cthe first one had 64,000 processors,\u201d which directly answers the question. The claim is central to the query and is a precise, easily checkable numeric fact."
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "question_id": "ad72d2be-14ec-42fb-95ec-149d5bfa413c",
+        "question_text": "In Microsoft\u2019s \u201cBehind the Tech\u201d EP-34, what three ways does Chase Jarvis say technology is transforming creativity?",
+        "assertions": [
+            {
+                "statement": "The response should identify that Jarvis names \u201ctools\u201d as one way technology is transforming creativity.",
+                "source_count": 1,
+                "score": 10,
+                "reasoning": "The query asks for the three ways; naming each category is essential. This is one of the three core items.",
+                "rank": 1,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 4,
+                        "verifiability": 5,
+                        "reasoning": "The source explicitly quotes Jarvis listing \u201cTools. Community\u2026 access\u201d as three ways technology is transforming creativity, so identifying \u201ctools\u201d is directly supported. It is an important component of the three-part answer (though incomplete on its own), and it is a clear, binary-checkable requirement against a candidate response."
+                    }
+                }
+            },
+            {
+                "statement": "The response should identify that Jarvis names \u201ccommunity\u201d as one way technology is transforming creativity.",
+                "source_count": 1,
+                "score": 10,
+                "reasoning": "The query requires all three ways; this is a central category in the claims.",
+                "rank": 2,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 4,
+                        "verifiability": 5,
+                        "reasoning": "In the provided transcript, Chase Jarvis explicitly lists \u201cTools. Community\u2026 access\u201d as three ways technology is transforming creativity, so naming \u201ccommunity\u201d is directly supported. It is an important component of the three-part answer (though not the full set), and it is a clear, binary-checkable requirement against a candidate response."
+                    }
+                }
+            },
+            {
+                "statement": "The response should identify that Jarvis names \u201caccess\u201d as one way technology is transforming creativity.",
+                "source_count": 1,
+                "score": 10,
+                "reasoning": "The query requires all three ways; this is the third core category described in the claims.",
+                "rank": 3,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 4,
+                        "verifiability": 5,
+                        "reasoning": "In the provided transcript, Jarvis explicitly lists \u201cTools. Community\u2026 access\u201d as three ways technology is transforming creativity, so naming \u201caccess\u201d is directly supported. It is an important component of the three-part answer (though not the full set), and it is a clear, binary-checkable requirement against a candidate response."
+                    }
+                }
+            },
+            {
+                "statement": "The response should convey that technology enables creators to connect with others to form or grow a community.",
+                "source_count": 4,
+                "score": 6,
+                "reasoning": "This explains the \u201ccommunity\u201d category in a conceptually clear way. It improves completeness beyond listing the three labels.",
+                "rank": 4,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 4,
+                        "verifiability": 4,
+                        "reasoning": "The sources explicitly describe the \u201ccommunity\u201d aspect: technology lets creators share work and \u201cconnect with others,\u201d build fans/followers, and form communities (e.g., CreativeLive). This is one of Jarvis\u2019s three ways (tools, community, access), so it\u2019s important to the question, though it captures only one of the three. The assertion is mostly checkable, but phrasing like \u201cform or grow a community\u201d is a slight paraphrase rather than the exact listed term (\u201ccommunity\u201d)."
+                    }
+                }
+            },
+            {
+                "statement": "The response should convey that technology has made creative tools broadly affordable or accessible.",
+                "source_count": 3,
+                "score": 6,
+                "reasoning": "This supports what Jarvis means by the \u201ctools\u201d category. It is helpful context but not strictly required beyond naming the three ways.",
+                "rank": 5,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 4,
+                        "verifiability": 4,
+                        "reasoning": "The sources explicitly say creative tools are now \u201cfree, cheap, or widely accessible\u201d and mention \u201ctools for free or cheap,\u201d directly supporting the assertion. It is relevant because one of Jarvis\u2019s three ways is \u201ctools/access,\u201d though the question asks for all three (tools, community, access/amplify), so this covers only part. It\u2019s mostly checkable against an answer, but phrasing like \u201cbroadly affordable or accessible\u201d is slightly interpretive compared to the exact wording."
+                    }
+                }
+            },
+            {
+                "statement": "The response should convey that technology expands access to expert instruction or learning opportunities for creators.",
+                "source_count": 3,
+                "score": 6,
+                "reasoning": "This explains the \u201caccess\u201d category and clarifies what Jarvis means by it, improving answer completeness.",
+                "rank": 6,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 4,
+                        "verifiability": 4,
+                        "reasoning": "Chase Jarvis explicitly lists \u201caccess\u201d as one of the three ways technology transforms creativity and elaborates with examples like access to top experts and thousands of CreativeLive classes, which matches the assertion about expanded access to expert instruction/learning. This is an important component of the three-part answer (tools, community, access), though it covers only one of the three. It\u2019s fairly checkable in an answer, though phrasing like \u201cexpert instruction or learning opportunities\u201d is a paraphrase and could require minor interpretation."
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "question_id": "ae41f589-f739-4dbf-b8dc-cbabbc0e078e",
+        "question_text": "In EP-24 of Kevin Scott\u2019s \u201cBehind the Tech,\u201d what end-to-end drug discovery success rate does insitro CEO Daphne Koller cite?",
+        "assertions": [
+            {
+                "statement": "The response should state that the cited end-to-end drug discovery success rate is around 5%.",
+                "source_count": 2,
+                "score": 10,
+                "reasoning": "The query asks for the specific success rate Daphne Koller cites in the episode. This is the central factual value needed to answer correctly.",
+                "rank": 1,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 5,
+                        "verifiability": 5,
+                        "reasoning": "The source text directly quotes Daphne Koller saying the end-to-end drug discovery success rate is \u201csomewhere around 5%.\u201d This is exactly what the question asks for, and it is a clear, concrete value that can be checked verbatim against an answer."
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "question_id": "beeb7885-b81f-408b-808e-efc9a56cc80f",
+        "question_text": "In EP-13 of Kevin Scott\u2019s Behind the Tech, what does Sam Altman say was the biggest reason Paul Graham chose him to run Y Combinator?",
+        "assertions": [
+            {
+                "statement": "The response should state that Sam Altman says the main reason Paul Graham chose him to run Y Combinator was that Graham wanted to retire.",
+                "source_count": 1,
+                "score": 10,
+                "reasoning": "This directly answers what Altman identified as the biggest reason for Graham\u2019s choice. It is the central fact needed to correctly respond to the query.",
+                "rank": 1,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 5,
+                        "verifiability": 5,
+                        "reasoning": "Source 1 directly quotes Sam Altman saying, \u201cHonestly, I think the biggest thing was\u2026 he wanted to retire,\u201d in response to why Paul Graham chose him to run Y Combinator. This is the core detail needed to answer the question and is a clear, checkable claim."
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "question_id": "8c76c59b-525d-4811-9f51-c098bde05060",
+        "question_text": "In episode EP-37 of Microsoft CTO Kevin Scott\u2019s \u201cBehind the Tech,\u201d what years did Justine Ezarik (iJustine) say she began doing online video work professionally?",
+        "assertions": [
+            {
+                "statement": "The response should state that iJustine began doing online video work professionally around 2006.",
+                "source_count": 1,
+                "score": 10,
+                "reasoning": "The query asks for the years she cited for starting professional online video work. 2006 is one of the key years given in the claim, making it essential.",
+                "rank": 1,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 3,
+                        "relevance": 5,
+                        "verifiability": 4,
+                        "reasoning": "The source quote has iJustine saying she began doing it professionally in \u201c2006, 2007.\u201d The assertion narrows this to \u201caround 2006,\u201d which is partially supported but omits 2007. It is directly relevant to the question (which asks for the years). It\u2019s mostly checkable, though \u201caround 2006\u201d is slightly less precise than the source\u2019s explicit two-year range."
+                    }
+                }
+            },
+            {
+                "statement": "The response should state that iJustine began doing online video work professionally around 2007.",
+                "source_count": 1,
+                "score": 10,
+                "reasoning": "The query asks for the years she cited for starting professional online video work. 2007 is the other key year given in the claim, making it essential.",
+                "rank": 2,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 3,
+                        "relevance": 5,
+                        "verifiability": 4,
+                        "reasoning": "The source quote has iJustine saying \"professionally, in 2006, 2007,\" so the assertion is directionally supported but incomplete because it collapses the two-year range into only \"around 2007\". It is central to the question (which asks what years she said). It\u2019s fairly checkable, though slightly vague due to \"around\" and omission of 2006."
+                    }
+                }
+            },
+            {
+                "statement": "The response should indicate that she defined \u201cprofessionally\u201d as the point when she started earning money from the work.",
+                "source_count": 1,
+                "score": 6,
+                "reasoning": "This clarifies what she meant by starting professionally, which supports answer completeness beyond just listing years.",
+                "rank": 3,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 3,
+                        "verifiability": 4,
+                        "reasoning": "The source directly supports that she framed \u201cprofessionally\u201d as when she was \u201cactually making money and getting sponsorships\u201d (2006/2007). However, the question asks for the years, so this assertion is only indirectly helpful (it clarifies the definition rather than providing the years). It is fairly checkable against an answer, though wording like \u201cdefined\u201d could allow minor interpretation."
+                    }
+                }
+            },
+            {
+                "statement": "The response should indicate that she associated starting professionally with receiving sponsorships.",
+                "source_count": 1,
+                "score": 6,
+                "reasoning": "This is part of her explanation for why that time period counted as professional work, adding useful context to the years.",
+                "rank": 4,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 3,
+                        "verifiability": 4,
+                        "reasoning": "The source directly quotes Ezarik saying she started professionally around 2006\u20132007 when she was making money and getting sponsorships, so the sponsorship association is well grounded. However, the question asks specifically for the years, so focusing on sponsorships is only indirectly helpful. The assertion is mostly checkable, though it\u2019s phrased as what the response \u201cshould indicate,\u201d which is slightly less concrete than stating the years outright."
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "question_id": "da495da3-33b6-4f40-a08f-665d4855ce80",
+        "question_text": "In EP-67 of Behind the Tech, where did classical pianist and music educator Ben Laude say he grew up?",
+        "assertions": [
+            {
+                "statement": "The response should state that Ben Laude said he grew up in the suburbs of Austin, Texas.",
+                "source_count": 1,
+                "score": 10,
+                "reasoning": "The query asks for the place Ben Laude said he grew up. This is the only provided claim and directly answers the question, making it essential.",
+                "rank": 1,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 5,
+                        "verifiability": 5,
+                        "reasoning": "The source explicitly quotes Ben Laude saying, \u201cSo, I grew up in the suburbs of Austin, Texas.\u201d This directly answers the question, is central to evaluating responses, and is a clear, binary-checkable fact."
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "question_id": "d0873290-50d1-42a8-ad61-e768f2c63c16",
+        "question_text": "In EP-09 of Behind the Tech, which company does Reid Hoffman say he worked at between founding SocialNet and cofounding LinkedIn?",
+        "assertions": [
+            {
+                "statement": "The response should state that Reid Hoffman worked at PayPal in the period between SocialNet and LinkedIn.",
+                "source_count": 1,
+                "score": 10,
+                "reasoning": "The query asks which company Hoffman says he worked at between founding SocialNet and cofounding LinkedIn. This is the central fact provided by the claims.",
+                "rank": 1,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 5,
+                        "verifiability": 5,
+                        "reasoning": "The source explicitly states that after SocialNet, Reid Hoffman says it was PayPal in between SocialNet and LinkedIn (\u201cNo, it was PayPal in between.\u201d). This directly answers the question, is essential to evaluating responses, and is a clear, binary fact to check."
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "question_id": "e95431f7-f146-41a5-b876-e47a7df2b0f5",
+        "question_text": "In what year did Neha Narkhede say LinkedIn donated Kafka to the Apache Software Foundation?",
+        "assertions": [
+            {
+                "statement": "The response should state that Neha Narkhede said LinkedIn donated Kafka to the Apache Software Foundation in 2011.",
+                "source_count": 1,
+                "score": 10,
+                "reasoning": "The query asks for the year of the donation as stated by Neha Narkhede. The provided claim directly specifies the year, making it essential.",
+                "rank": 1,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 5,
+                        "verifiability": 5,
+                        "reasoning": "Source 1 directly quotes Neha Narkhede saying that in 2011 Kafka was donated to the Apache Software Foundation. This is exactly the year asked for, and it is a clear, concrete fact that can be checked against an answer."
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "question_id": "2f8fd73f-78b0-4234-a468-8273b0bcfeee",
+        "question_text": "On Jacob Collier and Ben Bloomberg\u2019s first U.S. tour, about how many shows did they play during the month-long run?",
+        "assertions": [
+            {
+                "statement": "The response should state that the month-long run consisted of roughly 20 shows.",
+                "source_count": 4,
+                "score": 10,
+                "reasoning": "The query asks for an approximate number of shows played during the month-long tour. The provided claim directly gives the approximate total, making it essential.",
+                "rank": 1,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 5,
+                        "verifiability": 4,
+                        "reasoning": "Sources 1\u20133 explicitly quote Collier saying they set out for \u201ca month of shows, maybe about 20 shows,\u201d which directly supports \u201croughly 20 shows.\u201d This is the key fact needed to answer the question. It\u2019s highly checkable, though phrased approximately (\u201croughly/about\u201d), so it\u2019s not a perfectly binary exact count."
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "question_id": "6bec2569-a357-4196-99c2-7aa86f8a7fea",
+        "question_text": "In 2023, who did former Meta CTO Mike Schroepfer co-found the climate tech investment firm Gigascale with?",
+        "assertions": [
+            {
+                "statement": "The response should identify Victoria as a co-founder of Gigascale alongside Mike Schroepfer.",
+                "source_count": 1,
+                "score": 10,
+                "reasoning": "The query asks who Schroepfer co-founded Gigascale with, and Victoria is explicitly named in the claim. This is essential to correctly answering the question.",
+                "rank": 1,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 3,
+                        "relevance": 4,
+                        "verifiability": 4,
+                        "reasoning": "Source 1 explicitly says Schroepfer co-founded Gigascale with \u201cVictoria and Evaline.\u201d The assertion is partially supported because it names Victoria but omits Evaline, making it incomplete relative to the source. It is still relevant to the question (co-founders) and is a clear, checkable claim (whether an answer includes Victoria as a co-founder)."
+                    }
+                }
+            },
+            {
+                "statement": "The response should identify Evaline as a co-founder of Gigascale alongside Mike Schroepfer.",
+                "source_count": 1,
+                "score": 10,
+                "reasoning": "The query asks who Schroepfer co-founded Gigascale with, and Evaline is explicitly named in the claim. This is essential to correctly answering the question.",
+                "rank": 2,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 3,
+                        "relevance": 4,
+                        "verifiability": 4,
+                        "reasoning": "Source 1 explicitly says Schroepfer co-founded Gigascale with \u201cVictoria and Evaline,\u201d so naming Evaline is supported. However, the assertion implies only Evaline should be identified, omitting Victoria, which is also required by the question. It is still relevant because it tests a key co-founder name, and it is clear/checkable whether an answer includes Evaline."
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "question_id": "c207d40d-06ad-4278-b4fd-e45dff06cb97",
+        "question_text": "In episode EP-66 of Microsoft\u2019s \u201cBehind the Tech,\u201d what is the title of the book Sal Khan says he wrote about AI and education?",
+        "assertions": [
+            {
+                "statement": "The response should state that the book\u2019s title is \u201cBrave New Words.\u201d",
+                "source_count": 3,
+                "score": 10,
+                "reasoning": "The query asks for the book title mentioned in the episode. This is the central fact needed to answer correctly.",
+                "rank": 1,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 5,
+                        "verifiability": 5,
+                        "reasoning": "The sources explicitly mention Sal Khan\u2019s book as \u201cBrave New Words\u201d (including the full subtitle in Source 2). This directly answers the question about the book title in EP-66, and it is a clear, concrete fact that can be checked verbatim against an answer."
+                    }
+                }
+            },
+            {
+                "statement": "The response should indicate that the full title is \u201cBrave New Words: How AI Will Revolutionize Education and Why That\u2019s a Good Thing.\u201d",
+                "source_count": 1,
+                "score": 8,
+                "reasoning": "Providing the full title improves completeness beyond the shortened reference. It is important but not strictly required if the short title is given.",
+                "rank": 2,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 5,
+                        "verifiability": 5,
+                        "reasoning": "Source 1 explicitly states Sal Khan published a book titled \u201cBrave New Words: How AI Will Revolutionize Education and Why That\u2019s a Good Thing,\u201d matching the assertion exactly. This is the core detail needed to answer the question and is a clear, unambiguous, easily checkable fact."
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "question_id": "99490407-3091-457a-91e6-e740ea02868f",
+        "question_text": "In the 2019 Year In Review episode (EP-17) of Behind the Tech, what New York City-based nonprofit think tank is danah boyd founder and president of?",
+        "assertions": [
+            {
+                "statement": "The response should identify Data & Society as the nonprofit think tank associated with danah boyd.",
+                "source_count": 1,
+                "score": 10,
+                "reasoning": "The query asks which New York City-based nonprofit think tank danah boyd is founder and president of in the episode. Naming the organization is the core required information.",
+                "rank": 1,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 5,
+                        "verifiability": 5,
+                        "reasoning": "Source 1 explicitly states that danah boyd is the founder and president of Data & Society, described as a nonprofit, New York City-based think tank. This directly answers the question and is a clear, checkable fact."
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "question_id": "1cbbf047-51a0-428b-a092-45d390eef962",
+        "question_text": "At Lehigh University in Bethlehem, Pennsylvania, what was the first serious biology course Drew Endy took during his university studies?",
+        "assertions": [
+            {
+                "statement": "The response should state that the first serious biology course Drew Endy took was molecular genetics.",
+                "source_count": 1,
+                "score": 10,
+                "reasoning": "This directly answers the question about which course was his first serious biology class. It is the central fact in the provided claim.",
+                "rank": 1,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 5,
+                        "verifiability": 5,
+                        "reasoning": "Source 1 directly quotes Drew Endy identifying his first serious biology course as \u201cMolecular genetics\u201d at Lehigh University in Bethlehem, Pennsylvania. This is exactly what the question asks, and it is a clear, concrete fact that can be checked verbatim against an answer."
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "question_id": "3c61976d-1362-43d1-9511-dfc142291898",
+        "question_text": "In Ep-54 of \u201cBehind the Tech,\u201d what year did Neil deGrasse Tyson begin serving as director of New York City\u2019s Hayden Planetarium?",
+        "assertions": [
+            {
+                "statement": "The response should state that Neil deGrasse Tyson began serving as director of New York City\u2019s Hayden Planetarium in 1996.",
+                "source_count": 1,
+                "score": 10,
+                "reasoning": "The query asks for the specific year he began serving as director, and the claim directly provides that year. This is the essential fact needed to answer the question.",
+                "rank": 1,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 5,
+                        "verifiability": 5,
+                        "reasoning": "Source 1 explicitly states Tyson \u201chas been the director there since 1996,\u201d directly supporting the assertion. The year he began serving as director is the core detail needed to answer the question, and it is a clear, concrete fact that can be checked verbatim against an answer."
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "question_id": "45403dbf-c32b-4004-920f-8bf4a772732d",
+        "question_text": "In what year did electrical engineer Kimberly Bryant found the nonprofit Black Girls Code to introduce girls of color to technology?",
+        "assertions": [
+            {
+                "statement": "The response should state that Black Girls Code was founded in 2011.",
+                "source_count": 3,
+                "score": 10,
+                "reasoning": "The query asks for the founding year, and the claim explicitly provides 2011. This is the essential fact needed to answer the question.",
+                "rank": 1,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 5,
+                        "verifiability": 5,
+                        "reasoning": "Source 3 explicitly states, \u201cSo you started Black Girls Code in 2011,\u201d directly supporting the assertion. The year of founding is the core fact needed to answer the question, and it is a clear, unambiguous, easily checkable detail."
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "question_id": "f8a1d254-6d3b-4ec2-bab8-8a816dad429c",
+        "question_text": "In Kevin Scott\u2019s discussion of Roblox with CEO David Baszucki, what definition of the metaverse did Kevin Scott give?",
+        "assertions": [
+            {
+                "statement": "The response should state that Kevin Scott defined the metaverse as a fully immersive environment.",
+                "source_count": 3,
+                "score": 10,
+                "reasoning": "This is the core of Scott\u2019s definition and directly answers what he said the metaverse is. It is essential for accuracy.",
+                "rank": 1,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 4,
+                        "relevance": 4,
+                        "verifiability": 4,
+                        "reasoning": "Sources directly quote Kevin Scott defining the metaverse as \u201ca fully immersive environment\u2026\u201d so the assertion is supported, though it omits the rest of his definition (connecting with others, expressing identity, accomplishing creative endeavors). It is important to the question but incomplete. It\u2019s clear and checkable, but slightly underspecified compared to the full quoted definition."
+                    }
+                }
+            },
+            {
+                "statement": "The response should mention that Kevin Scott\u2019s definition of the metaverse emphasizes connecting with other people.",
+                "source_count": 3,
+                "score": 9,
+                "reasoning": "The social connection aspect is a central component of the definition and helps distinguish it from purely single-user virtual experiences.",
+                "rank": 2,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 4,
+                        "verifiability": 4,
+                        "reasoning": "The sources directly quote Kevin Scott defining the metaverse as a fully immersive environment that \"lets you connect with other people\" (along with identity expression and creative endeavors), so the assertion is well grounded. It is relevant because it captures a key component of his definition, though it omits other essential parts. It\u2019s mostly verifiable since an answer can be checked for mentioning the 'connect with other people' aspect, but the phrasing 'emphasizes' introduces slight interpretive wiggle room."
+                    }
+                }
+            },
+            {
+                "statement": "The response should mention that Kevin Scott\u2019s definition of the metaverse involves expressing the fullness of one\u2019s identity.",
+                "source_count": 3,
+                "score": 8,
+                "reasoning": "Identity expression is a key thematic element in the provided definition and should be reflected in a complete answer.",
+                "rank": 3,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 4,
+                        "verifiability": 4,
+                        "reasoning": "Source 1 (and repeated in Sources 2/3) directly states Kevin Scott\u2019s definition includes \u201cexpress[ing] the fullness of your identity,\u201d so the assertion is well grounded. It is relevant because it captures a key component of the definition asked about, though it omits other required parts (fully immersive environment, connecting with others, accomplishing creative endeavors). It\u2019s mostly verifiable, but phrased as \u201cshould mention,\u201d which is slightly less binary than quoting the full definition."
+                    }
+                }
+            },
+            {
+                "statement": "The response should mention that Kevin Scott\u2019s definition of the metaverse involves enabling creative endeavors.",
+                "source_count": 3,
+                "score": 8,
+                "reasoning": "Creativity is explicitly part of the definition and is important to capture the intended meaning of Scott\u2019s description.",
+                "rank": 4,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 4,
+                        "verifiability": 4,
+                        "reasoning": "The sources directly quote Kevin Scott defining the metaverse as an immersive environment that lets you connect with others to express identity and accomplish creative endeavors, so the claim about enabling creative endeavors is well grounded. It is relevant because it captures a key component of his definition, though it omits other essential parts (immersive, connection, identity). It is fairly verifiable, but slightly non-specific since it doesn\u2019t require the full definition\u2014only that creative endeavors be mentioned."
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "question_id": "f1683378-555c-4d4c-b97f-4fa7dc2c9880",
+        "question_text": "In spring 2021, how many times more tightly did David Baker\u2019s computationally designed proteins bind the coronavirus spike than the human ACE-2 receptor?",
+        "assertions": [
+            {
+                "statement": "The response should state that the designed proteins bound the coronavirus spike about 1,000 times more tightly than the human ACE-2 receptor.",
+                "source_count": 3,
+                "score": 10,
+                "reasoning": "The query asks for the binding-tightness multiple relative to ACE-2. This numeric comparison is the central fact needed to answer the question.",
+                "rank": 1,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 5,
+                        "verifiability": 5,
+                        "reasoning": "All provided sources explicitly state that the designed proteins bound the virus/spike about 1,000 times more tightly than ACE-2. This directly answers the question\u2019s key quantitative detail and is a clear, objective fact that can be checked in an answer."
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "question_id": "e6b46544-296f-414f-89d5-4e613df1b4cc",
+        "question_text": "In Behind the Tech EP-07, in what month and year did Dio Gonzalez join Microsoft as a principal software architect in Central Engineering?",
+        "assertions": [
+            {
+                "statement": "The response should state that Dio Gonzalez joined Microsoft in December 2017.",
+                "source_count": 1,
+                "score": 10,
+                "reasoning": "The query asks for the month and year of Dio Gonzalez joining Microsoft, and the claim provides this exact date. This is the essential fact needed to answer the question.",
+                "rank": 1,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 5,
+                        "verifiability": 5,
+                        "reasoning": "Source 1 explicitly states that Dio Gonzalez joined Microsoft in December 2017 as a principal software architect in Central Engineering. This directly answers the month and year asked, and it is a clear, concrete fact that is easy to check in an answer."
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "question_id": "941d387c-5690-486c-8d17-7a76c9e08e19",
+        "question_text": "In EP-06 of Behind the Tech, how much cash did a large bank pay to acquire Wences Casares\u2019s online brokerage that became the biggest in Latin America?",
+        "assertions": [
+            {
+                "statement": "The response should state that the acquisition price was $750 million in cash.",
+                "source_count": 2,
+                "score": 10,
+                "reasoning": "The query asks for the cash amount paid to acquire the brokerage. The claim directly provides the specific figure, making it essential.",
+                "rank": 1,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 5,
+                        "verifiability": 5,
+                        "reasoning": "Both source excerpts explicitly state the brokerage was bought by a large bank for \u201c$750 million in cash,\u201d which directly answers the question. The claim is specific, unambiguous, and easy to check in an answer."
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "question_id": "0c385e8e-2e50-4c81-9038-f3cbc152bc1c",
+        "question_text": "In Ep-46 of Behind the Tech, what brand of CNC machine does maker Simone Giertz say she assembled herself?",
+        "assertions": [
+            {
+                "statement": "The response should state that the CNC machine Simone Giertz assembled herself was an Avid CNC machine.",
+                "source_count": 1,
+                "score": 10,
+                "reasoning": "The query asks for the brand of CNC machine she assembled herself, and the claim identifies it as Avid CNC. This is the central fact needed to answer the question.",
+                "rank": 1,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 5,
+                        "verifiability": 5,
+                        "reasoning": "The source explicitly has Kevin Scott say, \u201cyou\u2019ve got an Avid C&C machine that you put together yourself?\u201d and Simone replies \u201cYeah,\u201d directly supporting that the brand was Avid. This is the core detail needed to answer the question and is a clear, binary fact to check in an answer."
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "question_id": "0c6eb82e-2be5-4c49-a746-e125f41b08b6",
+        "question_text": "In EP-28 of Microsoft\u2019s Behind the Tech, what does Dr. Mae Jemison say the 100 Year Starship initiative aims to ensure exists within the next 100 years?",
+        "assertions": [
+            {
+                "statement": "The response should state that the initiative aims to ensure the capability for human interstellar travel exists within the next 100 years.",
+                "source_count": 4,
+                "score": 10,
+                "reasoning": "This directly answers what Dr. Jemison says the initiative aims to ensure exists. It is the core factual target of the query.",
+                "rank": 1,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 5,
+                        "verifiability": 5,
+                        "reasoning": "Sources 2 and 3 directly quote Jemison saying 100 Year Starship is about ensuring the capabilities for human interstellar flight exist within the next 100 years, which matches the assertion (a close paraphrase). This is exactly what the question asks and is stated in a clear, checkable way."
+                    }
+                }
+            },
+            {
+                "statement": "The response should clarify that the goal is about ensuring capabilities rather than building a specific starship within that timeframe.",
+                "source_count": 4,
+                "score": 7,
+                "reasoning": "This captures an important nuance in the claim that prevents a common misinterpretation of the initiative\u2019s purpose.",
+                "rank": 2,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 4,
+                        "verifiability": 3,
+                        "reasoning": "Sources 2 and 3 explicitly state the initiative is about ensuring the capabilities for human interstellar flight exist within 100 years\u2014\"capabilities, not building a starship or launching a starship.\" The assertion matches this framing. It is relevant because it captures a key nuance needed to answer the question, though it doesn\u2019t restate the exact target (capabilities for human interstellar travel). Verifiability is moderate because the assertion is phrased as what a response \"should\" do and is somewhat general, requiring interpretation when checking an answer."
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "question_id": "c0281ddc-10ed-4572-9145-41417b61736f",
+        "question_text": "In what year did media artist Refik Anadol say he first used machine learning on 1.7 million cultural library documents for an art project?",
+        "assertions": [
+            {
+                "statement": "The response should state that Refik Anadol said the first use of machine learning on the library documents for an art project occurred in 2016.",
+                "source_count": 2,
+                "score": 10,
+                "reasoning": "The query asks for the year of the first use; the claim explicitly identifies 2016. This is the essential fact needed to answer the question.",
+                "rank": 1,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 5,
+                        "verifiability": 5,
+                        "reasoning": "Source 2 explicitly states: \u201cSo it was 2016 when I was very fortunate to work with, very first time, 1.7 million documents\u2026,\u201d in the context of applying machine learning to those library cultural documents for an art project. The assertion directly matches the question\u2019s requested year, is central to evaluating an answer, and is a clear, binary-checkable fact."
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "question_id": "29882ed0-5c86-432d-8951-029cb100e85b",
+        "question_text": "In 2009, how many images were in the ImageNet dataset described by Fei-Fei Li on Kevin Scott\u2019s Behind the Tech podcast?",
+        "assertions": [
+            {
+                "statement": "The response should state that ImageNet had about 15 million images in 2009.",
+                "source_count": 1,
+                "score": 10,
+                "reasoning": "The query asks for the number of images in ImageNet in 2009 as described on the podcast. The image count is the central fact needed to answer correctly.",
+                "rank": 1,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 5,
+                        "verifiability": 5,
+                        "reasoning": "Source 1 explicitly states that in 2009 ImageNet consisted of 15 million images. This directly answers the question\u2019s key detail (image count in 2009) and is a clear, concrete number that can be checked verbatim against an answer."
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "question_id": "f3891a1f-74b6-49a0-b4e0-527685988888",
+        "question_text": "In Eric Horvitz\u2019s childhood, what position did he say he was elected to in his third-grade science club?",
+        "assertions": [
+            {
+                "statement": "The response should state that Eric Horvitz said he was elected chairperson of the science club.",
+                "source_count": 2,
+                "score": 10,
+                "reasoning": "The query asks what position he said he was elected to in third grade, and the claim directly identifies that position. This is the core fact needed to answer the question.",
+                "rank": 1,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 5,
+                        "verifiability": 5,
+                        "reasoning": "Both source excerpts explicitly quote Horvitz saying that in third grade he \u201cwas elected to be the chairperson of the science club.\u201d This directly answers the question, and it is a clear, concrete detail that can be checked verbatim against an answer."
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "question_id": "247dfef8-0192-4229-8489-110876dfd944",
+        "question_text": "In what year did tech executive Judy Estrin become Chief Technology Officer of Cisco after Cisco acquired Precept?",
+        "assertions": [
+            {
+                "statement": "The response should state that Judy Estrin became Cisco's Chief Technology Officer in 1998.",
+                "source_count": 1,
+                "score": 10,
+                "reasoning": "The query asks for the year she became CTO after the acquisition, and the claim directly provides the year. This is the essential fact needed to answer correctly.",
+                "rank": 1,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 5,
+                        "verifiability": 5,
+                        "reasoning": "Source 1 explicitly states that after Cisco bought Precept, Judy Estrin became Cisco's Chief Technology Officer and that this was in 1998. The year is the core detail needed to answer the question, and it is a clear, directly checkable fact."
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "question_id": "3db4cc56-a32b-4a29-a128-35bf00f0b7d2",
+        "question_text": "During Judy Estrin\u2019s master\u2019s program at Stanford University, who served as her advisor?",
+        "assertions": [
+            {
+                "statement": "The response should state that Vint Cerf served as Judy Estrin\u2019s advisor during her master\u2019s program.",
+                "source_count": 1,
+                "score": 10,
+                "reasoning": "The query asks who her advisor was, and the claim directly identifies Vint Cerf as the advisor. This is the essential fact needed to answer the question.",
+                "rank": 1,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 5,
+                        "verifiability": 5,
+                        "reasoning": "Source 1 directly states: \u201cI ended up coming to Stanford, doing my master's, and Vint Cerf was my advisor.\u201d This exactly answers the question, is central to evaluating responses, and is a clear, checkable fact."
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "question_id": "3216185b-7333-4d50-aa47-bce2cae90c17",
+        "question_text": "When Randall Munroe began posting xkcd comics online after his third-year college internship, which NASA facility and which southeastern Virginia area was he working in?",
+        "assertions": [
+            {
+                "statement": "The response should identify NASA Langley Research Center as the NASA facility where Randall Munroe was working.",
+                "source_count": 1,
+                "score": 10,
+                "reasoning": "The query asks which NASA facility he was working at when he began posting xkcd. This is a central required detail.",
+                "rank": 1,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 4,
+                        "verifiability": 5,
+                        "reasoning": "Source 1 explicitly states Munroe interned at the local NASA Langley Research Center in southeastern Virginia. The assertion correctly identifies the NASA facility, which is a key part of the question (though it omits the southeastern Virginia area component). It is a clear, concrete fact that can be checked directly against an answer."
+                    }
+                }
+            },
+            {
+                "statement": "The response should state that Randall Munroe was working in the Newport News/Virginia Beach area of southeastern Virginia.",
+                "source_count": 1,
+                "score": 10,
+                "reasoning": "The query asks which southeastern Virginia area he was working in. Naming the area is essential to fully answer the question.",
+                "rank": 2,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 4,
+                        "verifiability": 5,
+                        "reasoning": "Source 1 explicitly says Munroe interned at NASA Langley Research Center in southeastern Virginia, specifically in the \u201cNewport News, Virginia Beach area.\u201d The assertion accurately captures the southeastern Virginia area portion, though it omits the NASA facility part of the question, making it slightly less than fully essential. The claim is concrete and directly checkable."
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "question_id": "de80662f-debf-4476-8a25-ef8c63312fbb",
+        "question_text": "In 2004, when Sal Khan tutored his cousin Nadia, what algebra topic did he teach her that her classmates had not learned yet?",
+        "assertions": [
+            {
+                "statement": "The response should state that the algebra topic Sal Khan taught Nadia was negative exponents.",
+                "source_count": 2,
+                "score": 10,
+                "reasoning": "The query asks for the specific algebra topic he taught her. This is the central fact in the provided claim, so it is essential.",
+                "rank": 1,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 5,
+                        "verifiability": 5,
+                        "reasoning": "Both source excerpts explicitly state Sal Khan taught Nadia \u201cnegative exponents,\u201d which her class had not seen yet. This directly answers the question, and it is a clear, concrete fact that can be checked verbatim in an answer."
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "question_id": "d5e42244-62ec-46e0-8014-75ee86a5c61b",
+        "question_text": "In the Behind the Tech podcast, what business plan does Jaron Lanier say emerges from mixing \u201ceverything should be free\u201d with libertarian philosophy?",
+        "assertions": [
+            {
+                "statement": "The response should state that the resulting business plan is advertising.",
+                "source_count": 4,
+                "score": 10,
+                "reasoning": "The query asks what business plan Lanier says emerges from combining those ideas. The claim identifies advertising as the key answer, making it essential.",
+                "rank": 1,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 5,
+                        "verifiability": 5,
+                        "reasoning": "Source text explicitly quotes Lanier saying that mixing \u201ceverything should be free\u201d with libertarian philosophy leaves \u201conly one possible business plan, which is advertising.\u201d This directly answers the question and is a clear, checkable claim."
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "question_id": "bde1fc68-5b7d-4c68-b8e0-5ca4c1f0a181",
+        "question_text": "In EP-48 of Behind the Tech, what popular explanation for why ice skates slide on ice does Randall Munroe say is incorrect?",
+        "assertions": [
+            {
+                "statement": "The response should state that the incorrect popular explanation is that skate pressure lowers ice\u2019s melting point.",
+                "source_count": 1,
+                "score": 10,
+                "reasoning": "This directly identifies the specific popular mechanism Munroe rejects. It is essential to answering what explanation he says is incorrect.",
+                "rank": 1,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 5,
+                        "verifiability": 5,
+                        "reasoning": "The source explicitly says the common explanation\u2014skate pressure lowers ice\u2019s melting point, forming a thin water layer\u2014is \u201cnot to be true at all.\u201d This directly answers the question, and it\u2019s a clear, checkable claim."
+                    }
+                }
+            },
+            {
+                "statement": "The response should state that the incorrect popular explanation is that skate pressure creates a thin liquid water layer that enables sliding.",
+                "source_count": 1,
+                "score": 9,
+                "reasoning": "This captures the key consequence in the rejected explanation (a lubricating water film). It is central to the commonly cited claim being labeled incorrect.",
+                "rank": 2,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 5,
+                        "verifiability": 5,
+                        "reasoning": "The source explicitly says the common explanation is that skate pressure lowers ice\u2019s melting point and forms a thin water layer, and that this is \u201cnot true at all.\u201d This is exactly what the question asks for, and it\u2019s a clear, checkable claim."
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "question_id": "c4361020-9967-4c16-a8b3-3b71451fd5d1",
+        "question_text": "In Behind the Tech episode EP-64, what book title does Mike Volpi name as his favorite recent read about Tesla, Edison, and the AC/DC rivalry?",
+        "assertions": [
+            {
+                "statement": "The response should state that Mike Volpi\u2019s favorite recent read is titled \"The Empires of Light.\"",
+                "source_count": 1,
+                "score": 10,
+                "reasoning": "The query asks for the specific book title Volpi names in EP-64. This is the central fact needed to answer correctly.",
+                "rank": 1,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 5,
+                        "verifiability": 5,
+                        "reasoning": "Source 1 directly quotes Mike Volpi naming his favorite recent read as \u201cThe Empires of Light,\u201d describing it as the story of Tesla (AC) vs Edison (DC). This is exactly what the question asks for, and it is a clear, checkable book title."
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "question_id": "2aa76f04-1478-4b4f-bdd4-24d73088bed4",
+        "question_text": "At Bill Gates\u2019s early-September GPT-4 dinner demo at his house, what prompt was typed in immediately after the AP Biology questions?",
+        "assertions": [
+            {
+                "statement": "The response should state that the next prompt asked what to say to a father with a sick child.",
+                "source_count": 3,
+                "score": 10,
+                "reasoning": "The query asks for the specific prompt typed immediately after the AP Biology questions. This is the central fact provided by the claim, so it is essential.",
+                "rank": 1,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 5,
+                        "verifiability": 5,
+                        "reasoning": "Sources 2 and 3 explicitly state that immediately after the AP Biology questions, Gates had them type: \u201cWhat do you say to a father with a sick child?\u201d This directly answers the question, is essential to evaluating responses, and is unambiguous and easy to check."
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "question_id": "c194f19d-12ba-41d5-9346-023d1c8c50ee",
+        "question_text": "When Danielle Feinberg applied to Pixar, what film did Pixar hire her to work on next?",
+        "assertions": [
+            {
+                "statement": "The response should state that Pixar hired Danielle Feinberg to work on \"A Bug's Life\" as their next film.",
+                "source_count": 1,
+                "score": 10,
+                "reasoning": "The query asks which film Pixar hired her to work on next, and the claim directly identifies the film. This is the essential fact needed to answer the question.",
+                "rank": 1,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 5,
+                        "verifiability": 5,
+                        "reasoning": "Source 1 directly quotes Danielle Feinberg saying Pixar told her to come work on their next film, \"A Bug's Life.\" This exactly answers the question, and it is a clear, concrete fact that can be checked verbatim against an answer."
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "question_id": "d0ba736e-b26a-4ab9-8f60-26dc4aa94fd7",
+        "question_text": "In Ep-44 of the \u201cBehind the Tech\u201d podcast, what is the name of the in-platform currency used in Roblox\u2019s economy?",
+        "assertions": [
+            {
+                "statement": "The response should state that Roblox\u2019s in-platform currency is called Robux.",
+                "source_count": 1,
+                "score": 10,
+                "reasoning": "The query asks for the name of the in-platform currency used in Roblox\u2019s economy as mentioned in the podcast episode. This is the single essential fact needed to answer correctly.",
+                "rank": 1,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 5,
+                        "verifiability": 5,
+                        "reasoning": "Source 1 explicitly states Roblox has a currency called \u201cRobux,\u201d directly answering the question about the in-platform currency mentioned in Ep-44. The assertion is essential to the question and is a clear, unambiguous fact that can be checked verbatim against an answer."
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "question_id": "09a301d6-2aa8-48ce-8bad-d04527a69c34",
+        "question_text": "In episode EP-43 of Behind the Tech, what event does Alexis Ohanian say occurred in 776 BCE?",
+        "assertions": [
+            {
+                "statement": "The response should state that Alexis Ohanian says 776 BCE was the year of the first Olympic Games.",
+                "source_count": 1,
+                "score": 10,
+                "reasoning": "This directly answers what event he associates with 776 BCE in the episode. It is the central fact needed to satisfy the query.",
+                "rank": 1,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 5,
+                        "verifiability": 5,
+                        "reasoning": "Source 1 directly quotes Alexis Ohanian saying \u201c776 \u2026 BCE, is the year of the first Olympic games,\u201d which exactly matches the assertion. This is the core fact needed to answer the question and is unambiguous and easy to check."
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "question_id": "5623c98f-607c-4b9c-bcfa-3a03d671b341",
+        "question_text": "After completing his MIT master\u2019s via the five-year program in 1997\u20131998, which company did Sal Khan join in Silicon Valley as a product manager?",
+        "assertions": [
+            {
+                "statement": "The response should state that Sal Khan joined Oracle as a product manager in Silicon Valley.",
+                "source_count": 2,
+                "score": 10,
+                "reasoning": "The query asks which company he joined as a product manager after completing the MIT five-year master\u2019s program. The claim directly identifies Oracle, making this essential.",
+                "rank": 1,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 5,
+                        "verifiability": 5,
+                        "reasoning": "Source 1 explicitly states that after the 1997\u201398 five-year master\u2019s program, Sal Khan moved to Silicon Valley to be a product manager at Oracle. This directly answers the question, and the claim is a clear, binary fact that is easy to check against an answer."
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "question_id": "18250a9e-8a01-49e8-8be2-024a4d77bb66",
+        "question_text": "In Behind the Tech episode 57, what Lynchburg, Virginia university did New York Times tech columnist Kevin Roose say he went undercover at for a book he wrote in college?",
+        "assertions": [
+            {
+                "statement": "The response should identify Liberty University as the Lynchburg, Virginia university Kevin Roose said he went undercover at.",
+                "source_count": 1,
+                "score": 10,
+                "reasoning": "The query asks for the specific university mentioned in the episode. Naming Liberty University is the central fact needed for a correct answer.",
+                "rank": 1,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 5,
+                        "verifiability": 5,
+                        "reasoning": "Source 1 explicitly states Kevin Roose wrote a book in college about going undercover at a conservative Christian school in Lynchburg, Virginia called Liberty University. This directly answers the question, is essential to evaluate responses, and is a clear, checkable fact."
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "question_id": "cefd4f1c-b80d-431d-9a16-6d0379adc024",
+        "question_text": "In Behind the Tech Ep-54, what fraction did Neil deGrasse Tyson say of the reasons cited for burning Joan of Arc at the stake was cross-dressing?",
+        "assertions": [
+            {
+                "statement": "The response should state that Neil deGrasse Tyson described the fraction as one-half.",
+                "source_count": 1,
+                "score": 10,
+                "reasoning": "The query asks for the specific fraction Tyson cited. The provided claim directly identifies it as half, which is essential to answering correctly.",
+                "rank": 1,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 5,
+                        "verifiability": 5,
+                        "reasoning": "The source explicitly quotes Tyson saying \u201cHalf the reason cited, half was cross-dressing,\u201d which corresponds to one-half. This is the exact fraction asked for, and it is a clear, directly checkable fact."
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "question_id": "c090a27a-d5d2-40b6-a92c-3b42119d0cfb",
+        "question_text": "In EP-07 of Behind the Tech, what formula does Dio Gonzalez cite as the correct number of bicycles a cyclist should own?",
+        "assertions": [
+            {
+                "statement": "The response should state that the correct number of bicycles to own is expressed as a formula of the form \u201cN+1.\u201d",
+                "source_count": 1,
+                "score": 10,
+                "reasoning": "The query asks for the specific formula Dio Gonzalez cites. This is the central factual content needed to answer correctly.",
+                "rank": 1,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 5,
+                        "verifiability": 5,
+                        "reasoning": "Source 1 explicitly quotes Dio Gonzalez saying the correct number of bicycles to own is \"N+one\" (i.e., N+1), where N is the current number of bikes. This directly answers the question, and the claim is clear and straightforward to check in an answer."
+                    }
+                }
+            },
+            {
+                "statement": "The response should explain that in the formula, N refers to the cyclist\u2019s current number of bicycles.",
+                "source_count": 1,
+                "score": 8,
+                "reasoning": "Clarifying what N represents ensures the formula is interpreted correctly. It is important for completeness beyond merely stating the expression.",
+                "rank": 2,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 4,
+                        "verifiability": 5,
+                        "reasoning": "Source 1 explicitly states the rule is N+one and clarifies that N is the current number of bikes the cyclist has, so the assertion is directly supported. It is relevant because identifying what N means is an important part of correctly stating the formula, though the core answer is the formula itself. The claim is clear and can be checked verbatim against an answer."
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "question_id": "f9469d7a-32a0-4962-896e-abd35716a497",
+        "question_text": "In what month and year did Mae Jemison\u2019s Look Up, One Sky initiative invite people worldwide to participate using the Skyfie app?",
+        "assertions": [
+            {
+                "statement": "The response should state that the invitation to participate using the Skyfie app occurred in October 2018.",
+                "source_count": 1,
+                "score": 10,
+                "reasoning": "The query asks for the month and year of the invitation, and the claim directly provides October 2018. This is the essential fact needed to answer the question.",
+                "rank": 1,
+                "validation": {
+                    "is_valid": true,
+                    "scores": {
+                        "grounding": 5,
+                        "relevance": 5,
+                        "verifiability": 5,
+                        "reasoning": "Source 1 explicitly states that Look Up, One Sky asked the world to look up and connect through the Skyfie app \"in a day in October of 2018.\" This directly answers the month and year, is central to the question, and is a clear, checkable fact."
+                    }
+                }
+            }
+        ]
+    }
+]

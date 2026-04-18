@@ -17,7 +17,10 @@ from benchmark_qed.autod.io.document import (
     create_documents,
     save_documents,
 )
-from benchmark_qed.autod.io.text_unit import create_text_units, save_text_units
+from benchmark_qed.autod.io.text_unit import (
+    create_text_units,
+    save_text_units,
+)
 from benchmark_qed.autod.sampler.clustering.cluster import TextCluster
 from benchmark_qed.autod.sampler.enums import ClusterRepresentativeSelectionType
 from benchmark_qed.autod.sampler.sampling.kmeans_sampler import KmeansTextSampler
@@ -71,7 +74,7 @@ async def acreate_clustered_sample(
         await save_documents(documents, output_storage)
         status.update("Creating text units and embedding...")
 
-        # split documents into text units and embed text units
+        # Split documents into text units and embed them
         text_splitter = TokenTextSplitter(
             encoding_name=token_encoding,
             chunk_size=chunk_size,

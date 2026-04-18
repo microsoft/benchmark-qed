@@ -65,6 +65,15 @@ class AssertionGenerationResult(BaseModel):
     total_assertions: int
     """Total number of assertions generated."""
 
+    map_assertions: list[Assertion] | None = None
+    """
+    Optional intermediate assertions from map step (for global assertions).
+
+    For global assertion generation using map-reduce, this stores the
+    intermediate local assertions generated during the map phase before
+    they are consolidated in the reduce phase.
+    """
+
 
 class BaseAssertionGenerator(ABC):
     """
@@ -178,7 +187,11 @@ class BaseAssertionGenerator(ABC):
         await tqdm_asyncio.gather(*tasks, desc="Generating assertions", unit="question")
 
     async def _process_single_question(self, question: Question) -> None:
-        """Process a single question to generate assertions."""
+        """Process a single question to generate assertions.
+
+        For global assertions (using map-reduce), this also stores the
+        intermediate map_assertions in question.attributes["map_assertions"].
+        """
         try:
             # Get claims from question attributes
             claims = (
@@ -203,6 +216,17 @@ class BaseAssertionGenerator(ABC):
             # Add assertion results to question attributes
             question.attributes["assertions"] = assertions
             question.attributes["assertion_count"] = len(assertions)
+
+            # Store map assertions if available (for global assertions)
+            if result.map_assertions is not None:
+                map_assertions = [a.model_dump() for a in result.map_assertions]
+                question.attributes["map_assertions"] = map_assertions
+                question.attributes["map_assertion_count"] = len(map_assertions)
+                log.info(
+                    "Stored %s map (source) assertions for question: %s",
+                    len(map_assertions),
+                    question.text[:50],
+                )
 
             log.info(
                 "Generated %s assertions for question: %s",

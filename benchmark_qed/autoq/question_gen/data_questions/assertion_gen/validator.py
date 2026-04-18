@@ -11,7 +11,11 @@ from typing import TYPE_CHECKING, Any
 
 from benchmark_qed.autod.data_processor.text_utils import try_parse_json_object
 from benchmark_qed.autoq.prompts import data_questions
-from benchmark_qed.config.defaults import LLM_PARAMS, MIN_ASSERTION_VALIDATION_SCORE
+from benchmark_qed.config.defaults import (
+    ASSERTION_MAX_SOURCE_COUNT,
+    LLM_PARAMS,
+    MIN_ASSERTION_VALIDATION_SCORE,
+)
 from benchmark_qed.config.utils import load_template_file
 
 if TYPE_CHECKING:
@@ -138,6 +142,7 @@ class AssertionValidator:
         min_criterion_score: int = MIN_ASSERTION_VALIDATION_SCORE,
         validation_prompt: Template | None = None,
         concurrent_validations: int = 8,
+        max_source_count: int = ASSERTION_MAX_SOURCE_COUNT,
     ) -> None:
         """
         Initialize the AssertionValidator.
@@ -154,10 +159,14 @@ class AssertionValidator:
             Custom prompt for validation.
         concurrent_validations : int
             Number of concurrent validations. Default 8.
+        max_source_count : int
+            Maximum deduplicated sources per assertion. Assertions exceeding
+            this threshold cause the entire question to be dropped.
         """
         self.llm = llm
         self.llm_params: dict[str, Any] = llm_params.copy()
         self.min_criterion_score = min_criterion_score
+        self.max_source_count = max_source_count
         self.concurrent_validations = concurrent_validations
         self._semaphore = asyncio.Semaphore(concurrent_validations)
 
@@ -217,8 +226,13 @@ class AssertionValidator:
                 log.warning("Validation failed for assertion: %s", e)
                 return ValidationResult(
                     assertion=assertion,
-                    is_valid=True,  # Default to valid on error to avoid losing assertions
-                    scores=ValidationScores(reasoning=f"Validation error: {e}"),
+                    is_valid=False,
+                    scores=ValidationScores(
+                        grounding=1,
+                        relevance=1,
+                        verifiability=1,
+                        reasoning=f"Validation error: {e}",
+                    ),
                     error=str(e),
                 )
 
@@ -290,6 +304,56 @@ class AssertionValidator:
             len(assertions),
             question_text[:50],
         )
+
+        # Pre-check: if any assertion has too many sources, drop all
+        # assertions for this question. Overly broad assertions would
+        # exceed the LLM context window and evaluating on narrower
+        # siblings would be misleading.
+        for assertion in assertions:
+            unique_count = len({
+                s.strip() for s in assertion.sources if s and s.strip()
+            })
+            if unique_count > self.max_source_count:
+                log.warning(
+                    "Assertion has %s unique sources (max %s) — "
+                    "dropping all assertions for question: %s...",
+                    unique_count,
+                    self.max_source_count,
+                    question_text[:50],
+                )
+                summary = ValidationSummary()
+                for a in assertions:
+                    a.attributes["validation"] = {
+                        "is_valid": False,
+                        "scores": ValidationScores(
+                            grounding=1,
+                            relevance=1,
+                            verifiability=1,
+                            reasoning=(
+                                "Dropped: sibling assertion has "
+                                f"{unique_count} sources "
+                                f"(max {self.max_source_count})"
+                            ),
+                        ).to_dict(),
+                        "dropped_excessive_sources": True,
+                    }
+                    summary.invalid_assertions.append(
+                        ValidationResult(
+                            assertion=a,
+                            is_valid=False,
+                            scores=ValidationScores(
+                                grounding=1,
+                                relevance=1,
+                                verifiability=1,
+                                reasoning=(
+                                    "Dropped: sibling assertion has "
+                                    f"{unique_count} sources "
+                                    f"(max {self.max_source_count})"
+                                ),
+                            ),
+                        )
+                    )
+                return summary
 
         # Run validations concurrently
         results = await asyncio.gather(

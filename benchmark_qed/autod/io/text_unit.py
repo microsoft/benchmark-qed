@@ -70,7 +70,7 @@ async def create_text_units(
 def load_text_units(
     df: pd.DataFrame,
     id_col: str = "id",
-    short_id_col: str = "short_id",
+    short_id_col: str | None = "short_id",
     text_col: str = "text",
     tokens_col: str | None = "n_tokens",
     embedding_col: str | None = "text_embedding",
@@ -78,18 +78,47 @@ def load_text_units(
     cluster_id_col: str | None = "cluster_id",
     attributes_cols: list[str] | None = None,
 ) -> list[TextUnit]:
-    """Read text units from a dataframe using pre-converted records."""
+    """Read text units from a dataframe using pre-converted records.
+
+    Args:
+        df: DataFrame containing text unit data.
+        id_col: Column name for unique ID (required).
+        short_id_col: Column name for short ID, or None to auto-generate from index.
+        text_col: Column name for text content (required).
+        tokens_col: Column name for token count, or None to skip.
+        embedding_col: Column name for embeddings, or None to skip.
+        document_id_col: Column name for document ID, or None to skip.
+        cluster_id_col: Column name for cluster ID, or None to skip.
+        attributes_cols: List of attribute column names to extract.
+
+    Returns
+    -------
+        List of TextUnit objects.
+    """
     records = df.to_dict("records")
+
+    def _get_str_field(
+        row: dict, col: str | None, default: str | None = None
+    ) -> str | None:
+        """Get a field as string, converting from other types if necessary."""
+        if not col:
+            return default
+        val = row.get(col)
+        if val is None:
+            return default
+        return str(val)
 
     return [
         TextUnit(
-            id=row.get(id_col, str(uuid4())),
-            short_id=row.get(short_id_col, str(index)),
+            id=_get_str_field(row, id_col, str(uuid4())) or str(uuid4()),
+            short_id=_get_str_field(row, short_id_col, str(index)),
             text=row.get(text_col, ""),
-            n_tokens=row.get(tokens_col, None),
-            document_id=row.get(document_id_col, None),
-            text_embedding=row.get(embedding_col, None),
-            cluster_id=row.get(cluster_id_col, None),
+            n_tokens=row.get(tokens_col) if tokens_col else None,
+            document_id=_get_str_field(row, document_id_col)
+            if document_id_col
+            else None,
+            text_embedding=row.get(embedding_col) if embedding_col else None,
+            cluster_id=_get_str_field(row, cluster_id_col) if cluster_id_col else None,
             # Use the attributes_cols to extract attributes from the row
             attributes=(
                 {col: row.get("attributes", {}).get(col) for col in attributes_cols}

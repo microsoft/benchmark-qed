@@ -2,12 +2,15 @@
 """Util functions to embed a collection of text using OpenAI embedding model."""
 
 import asyncio
+import logging
 from collections.abc import Generator
 from typing import Any
 
 from benchmark_qed.autod.data_model.text_unit import TextUnit
 from benchmark_qed.config.defaults import EMBEDDING_BATCH_SIZE
 from benchmark_qed.llm.type.base import EmbeddingModel
+
+log: logging.Logger = logging.getLogger(__name__)
 
 
 class TextEmbedder:
@@ -94,14 +97,34 @@ class TextEmbedder:
             for i in range(0, len(texts), batch_size):
                 yield [text.text for text in texts[i : i + batch_size]]
 
+        batches = list(get_batch(text_units, batch_size))
         tasks = [
-            self.text_embedder.embed(text_list=batch, **kwargs)
-            for batch in get_batch(text_units, batch_size)
+            self.text_embedder.embed(text_list=batch, **kwargs) for batch in batches
         ]
-        results = await asyncio.gather(*tasks)
-        results = [item for sublist in results for item in sublist]
+        results = await asyncio.gather(*tasks, return_exceptions=True)
 
-        for embedding, text_unit in zip(results, text_units, strict=False):
-            text_unit.text_embedding = embedding
+        # Flatten results, skipping failed batches whose text units
+        # will keep text_embedding=None (handled downstream).
+        flat: list[list[float]] = []
+        failed_batches = 0
+        for batch, result in zip(batches, results, strict=True):
+            if isinstance(result, BaseException):
+                failed_batches += 1
+                log.warning("Embedding batch failed: %s", result)
+                flat.extend([] for _ in range(len(batch)))
+            else:
+                flat.extend(result)
+
+        if failed_batches:
+            log.warning(
+                "%s of %s embedding batches failed — affected text "
+                "units will have no embedding.",
+                failed_batches,
+                len(results),
+            )
+
+        for embedding, text_unit in zip(flat, text_units, strict=False):
+            if embedding:
+                text_unit.text_embedding = embedding
 
         return text_units
