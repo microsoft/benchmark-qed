@@ -347,3 +347,40 @@ custom_providers:
 | `holm` | Holm-Bonferroni (default, recommended) |
 | `bonferroni` | Bonferroni (conservative) |
 | `fdr_bh` | Benjamini-Hochberg FDR |
+
+## Best Practices
+
+### LLM Configuration
+- Use `${OPENAI_API_KEY}` environment variable substitution — never hardcode secrets in YAML
+- Use `azure_managed_identity` for production Azure deployments (omit `api_key` entirely)
+- Set `temperature: 0.0` and `seed: 42` for reproducible LLM outputs
+- Start with `concurrent_requests: 4`; increase based on your rate limit budget
+- For Azure providers, always set `azure_endpoint` and `api_version` in `init_args`
+- Quote `api_version` values: `"2024-12-01-preview"` (YAML would otherwise parse as a date)
+
+### Question Generation (autoq)
+- **Wizard defaults vs model defaults**: The interactive wizard uses curated starter values (e.g., `num_questions: 10`, `num_clusters: 20`) suitable for initial exploration. The Pydantic model defaults (e.g., `num_questions: 50`, `num_clusters: 50`) are for production runs. Adjust based on your dataset size and budget.
+- Keep `chunk_overlap` at 15–20% of `chunk_size` (default: 100/600 ≈ 17%)
+- Use `oversample_factor: 2.0` to generate 2× candidates before filtering — lower values risk insufficient quality diversity
+- Enable `enable_semantic_grouping: true` for global assertions to improve claim consolidation
+- Set `max_concurrent_questions` lower for global (2) than local (8) — global processing is heavier per question
+
+### Assertion Generation
+- Keep `max_assertions: 20` as a reasonable limit per question
+- Enable validation (`enable_validation: true`) for production benchmarks — it filters low-quality assertions
+- `min_validation_score: 3` (scale 1–5) provides a good baseline quality threshold
+- Setting `max_assertions: 0` disables assertion generation entirely for that question type
+- `max_source_count: 500` drops entire questions when exceeded — monitor for unexpected question drops
+
+### Evaluation (autoe)
+- Trials must be **even** for pairwise and reference evaluation (counterbalancing) — the config validator rejects odd values
+- Assertion and hierarchical evaluation do NOT require even trials
+- Use `staged` mode for hierarchical assertions (more accurate); `joint` mode is cheaper but risks anchoring bias
+- Use `holm` correction for significance testing (default) — balances power and error control
+- Set `pass_threshold: 0.5` as the default quality bar; adjust based on assertion strictness
+
+### Retrieval Evaluation
+- `assessor_type: rationale` (default) provides structured JSON with reasoning; `bing` uses the UMBRELA DNA prompt
+- Match the assessor type between `generate-retrieval-reference` and `retrieval-scores` to share the cache
+- `relevance_threshold: 2` on a 0–3 scale is a reasonable default — lower values include marginal matches
+- Use `cache_dir` for iterative development to avoid redundant LLM calls across runs

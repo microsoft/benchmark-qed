@@ -17,6 +17,7 @@ Generate benchmark questions and assertions from input data for RAG evaluation.
 ## Prerequisites
 
 - A configured workspace with valid `settings.yaml` (use the `/benchmark-qed-setup` skill first)
+- A configured workspace with valid `settings.yaml` (use the `benchmark-qed-setup` skill to initialize and configure)
 - Input data (CSV or JSON) in the workspace `input/` directory
 - Valid LLM API key in `.env`
 
@@ -148,7 +149,7 @@ uvx --from "git+https://github.com/microsoft/benchmark-qed" benchmark-qed assert
 
 ### Standard Question Generation Flow
 
-- [ ] Step 1: Verify workspace is ready — confirm `settings.yaml`, `.env`, and `input/` exist in `<workspace_dir>` (the CLI will fail fast if anything is misconfigured).
+- [ ] Step 1: Initialize workspace if needed — use the `benchmark-qed-setup` skill to create and configure the workspace. Verify `settings.yaml`, `.env`, and `input/` exist.
 - [ ] Step 2: `cd <workspace_dir>` then run question generation — `uvx --from "git+https://github.com/microsoft/benchmark-qed" benchmark-qed autoq settings.yaml ./output --generation-types data_local --generation-types data_global --generation-types data_linked --generation-types activity_local --generation-types activity_global`
 - [ ] Step 3: Verify output artifacts — list `<output_dir>` and confirm the per-type `selected_questions.json` files (see "Output structure" above) plus `model_usage.json` exist.
 - [ ] Step 4: (Optional) Generate additional assertions — use `generate-assertions`

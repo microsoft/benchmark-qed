@@ -35,7 +35,23 @@ pip install uv && uvx --from "git+https://github.com/microsoft/benchmark-qed" be
 
 ### Step 1 — Initialize a Workspace
 
-Generate a configuration workspace for the desired workflow type:
+**Option A (Recommended): Interactive wizard**
+
+The interactive wizard guides you through configuration with sensible defaults:
+
+```bash
+uvx --from "git+https://github.com/microsoft/benchmark-qed" benchmark-qed init <root_directory>
+```
+
+This walks through:
+- Config type selection (autoq, autoe_pairwise, autoe_reference, autoe_assertion)
+- LLM provider selection with Azure-specific prompts (endpoint, API version)
+- Section-by-section customization (press Enter to accept defaults)
+- Automatic YAML validation before writing
+
+**Option B: Non-interactive (template-based)**
+
+Generate a static template and edit manually:
 
 ```bash
 uvx --from "git+https://github.com/microsoft/benchmark-qed" benchmark-qed config init <config_type> <root_directory>
@@ -160,6 +176,15 @@ For the full set of optional fields, read [references/config-reference.md](refer
 
 The benchmark-qed CLI validates `settings.yaml` via pydantic at startup, so any missing or malformed fields are reported when you run a command. After applying the answers, run the actual target command (e.g. `benchmark-qed autoq …`) — config errors surface immediately, before any LLM calls.
 
+## Best Practices
+
+See [references/config-reference.md](references/config-reference.md) for detailed best practices covering LLM configuration, prompts, question generation, assertion generation, evaluation, and retrieval.
+
+Key highlights:
+- Use `${OPENAI_API_KEY}` env var substitution — never hardcode secrets
+- Use `benchmark-qed init` (interactive wizard) to avoid manual YAML errors
+- Pin a specific version of benchmark-qed for reproducibility in CI/CD
+
 ## Gotchas
 
 - The `data download` command blocks on `typer.confirm()`. Always use `echo y | uvx --from "git+https://github.com/microsoft/benchmark-qed" benchmark-qed data download ...` to prevent hanging.
@@ -167,4 +192,4 @@ The benchmark-qed CLI validates `settings.yaml` via pydantic at startup, so any 
 - The `.env` file must be in the workspace root directory, not the project root.
 - Config types `autoe_pairwise`, `autoe_reference`, and `autoe_assertion` generate different settings.yaml templates — use the correct type for your evaluation method.
 - Prompts are copied as `.txt` files using Python `string.Template` syntax (`$variable` or `${variable}`).
-- **`prompts_config` vs `prompt_config`**: Some generated autoe configs may use `prompts_config`, but the runtime expects `prompt_config`. If you get config validation errors, rename the key.
+- **`prompts_config` vs `prompt_config`**: The non-interactive `config init` for some autoe types generates `prompts_config`, but the runtime expects `prompt_config`. The interactive `benchmark-qed init` wizard avoids this issue. If using `config init`, rename the key if you get validation errors.

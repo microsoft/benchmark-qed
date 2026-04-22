@@ -33,6 +33,7 @@ from benchmark_qed.autoq.prompts.data_questions import (
 from benchmark_qed.autoq.prompts.data_questions import (
     local_questions as data_local_prompts,
 )
+from benchmark_qed.cli.scaffold import copy_prompts, ensure_input_folder, write_env_file
 
 app: typer.Typer = typer.Typer(pretty_exceptions_show_locals=False)
 
@@ -314,15 +315,11 @@ prompts_config:
 
 
 def __copy_prompts(prompts_path: Path, output_path: Path) -> None:
-    """Copy prompts from the prompts directory to the output directory."""
-    if not output_path.exists():
-        output_path.mkdir(parents=True, exist_ok=True)
-    for prompt_file in prompts_path.iterdir():
-        if prompt_file.is_file() and prompt_file.suffix == ".txt":
-            target_file = output_path / prompt_file.name
-            target_file.write_text(
-                prompt_file.read_text(encoding="utf-8"), encoding="utf-8"
-            )
+    """Copy prompts from the prompts directory to the output directory.
+
+    Delegates to the shared scaffold utility.
+    """
+    copy_prompts(prompts_path, output_path)
 
 
 @app.command()
@@ -338,13 +335,7 @@ def init(
     ],
 ) -> None:
     """Generate settings file."""
-    input_folder = root / "input"
-    if not input_folder.exists():
-        input_folder.mkdir(parents=True, exist_ok=True)
-        typer.echo(f"Input folder created at {input_folder}")
-        typer.echo(
-            "Please place your input files in the 'input' folder before running, or modify the settings.yaml to point to your input files."
-        )
+    ensure_input_folder(root)
 
     settings = root / "settings.yaml"
     prompts_folder = root / "prompts"
@@ -399,9 +390,4 @@ def init(
 
     typer.echo(f"Configuration file created at {settings}")
 
-    env_file = root / ".env"
-    if not env_file.exists():
-        env_file.write_text("OPENAI_API_KEY=<API_KEY>", encoding="utf-8")
-    typer.echo(
-        f"Change the OPENAI_API_KEY placeholder at {env_file} with your actual OPENAI_API_KEY."
-    )
+    write_env_file(root)

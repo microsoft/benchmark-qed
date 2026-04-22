@@ -19,6 +19,7 @@ Evaluate and compare RAG system outputs using LLM-judged scoring, assertion-base
 - Generated questions/assertions from the autoq pipeline (or your own)
 - RAG method answer files (JSON, one per method per question set)
 - A valid `settings.yaml` for the evaluation type
+- A configured workspace with valid `settings.yaml` (use the `benchmark-qed-setup` skill to initialize and configure)
 - LLM API key configured
 
 Run all commands with:
@@ -159,7 +160,7 @@ uvx --from "git+https://github.com/microsoft/benchmark-qed" benchmark-qed autoe 
 ### Quick Evaluation (Assertion-Based)
 
 - [ ] Step 1: Verify questions and answers exist — list the workspace and confirm a `settings.yaml` (or `config.yaml`), question JSON files (typically under `output/`), and your RAG method answer JSONs are present.
-- [ ] Step 2: Initialize eval config — `uvx --from "git+https://github.com/microsoft/benchmark-qed" benchmark-qed config init autoe_assertion ./eval_workspace`
+- [ ] Step 2: Initialize eval config — use the `benchmark-qed-setup` skill to create and configure an assertion evaluation workspace.
 - [ ] Step 3: Configure settings.yaml with answer paths and assertion paths
 - [ ] Step 4: Run evaluation — `uvx --from "git+https://github.com/microsoft/benchmark-qed" benchmark-qed autoe assertion-scores ./eval_workspace/settings.yaml ./eval_output`
 - [ ] Step 5: Summarize results — read the CSVs in `<output_dir>` (e.g. `assertion_scores.csv`, `assertion_summary_by_question.csv`) and `eval_summary.json` directly.
@@ -168,8 +169,6 @@ uvx --from "git+https://github.com/microsoft/benchmark-qed" benchmark-qed autoe 
 
 For comparing multiple RAG methods, use multi-RAG config format (include `rag_methods` key in YAML). This gives you automated pairwise significance testing.
 
-For the full config reference with all fields, read the config reference in the `/benchmark-qed-setup` skill: [../benchmark-qed-setup/references/config-reference.md](../benchmark-qed-setup/references/config-reference.md).
-
 ## Gotchas
 
 - **Config auto-detection**: `assertion-scores` and `hierarchical-assertion-scores` detect single vs multi-RAG based on the `rag_methods` key in YAML. Ensure your config matches your intent.
@@ -177,4 +176,5 @@ For the full config reference with all fields, read the config reference in the 
 - **Stale outputs**: Several commands skip existing output files. Use a fresh output directory or delete specific files to force re-evaluation.
 - **Output is in files**: All scores are written to CSV/JSON files. Parse output files, not CLI stdout.
 - **Long-running**: Evaluation with many questions and trials can take hours. Use background execution.
-- **No `config init` for hierarchical/retrieval**: `config init` only supports `autoe_assertion`, `autoe_pairwise`, and `autoe_reference`. For hierarchical and retrieval configs, create YAML manually using the config reference.
+- **No `config init` for hierarchical/retrieval**: The `benchmark-qed-setup` skill only supports `autoe_assertion`, `autoe_pairwise`, and `autoe_reference`. For hierarchical, multi-RAG, and retrieval configs, create YAML manually.
+- **Advanced config types**: Use the `benchmark-qed-setup` skill for configuration guidance on advanced config types.
