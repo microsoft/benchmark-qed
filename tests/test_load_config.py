@@ -12,7 +12,7 @@ from pydantic import ValidationError
 
 from benchmark_qed.autoe.config import AssertionConfig, PairwiseConfig, ReferenceConfig
 from benchmark_qed.autoq.config import QuestionGenerationConfig
-from benchmark_qed.config.llm_config import LLMConfig, AuthType
+from benchmark_qed.config.llm_config import AuthType, LLMConfig
 
 
 class TestLoadConfigBasicFunctionality:
