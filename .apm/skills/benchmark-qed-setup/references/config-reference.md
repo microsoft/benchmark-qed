@@ -38,6 +38,8 @@ chat_model:
   api_key: ${OPENAI_API_KEY}         # Required for api_key auth
   llm_provider: openai.chat          # Provider (see table below)
   concurrent_requests: 4             # Parallel LLM requests
+  azure_identity_scopes:             # Azure identity scopes (azure_managed_identity only)
+    - https://cognitiveservices.azure.com/.default
   init_args: {}                      # Extra model init args (e.g., api_version, azure_endpoint)
   call_args:                         # Extra model call args
     temperature: 0.0
@@ -49,6 +51,24 @@ embedding_model:
   llm_provider: openai.embedding     # Must use an embedding provider
   api_key: ${OPENAI_API_KEY}
 ```
+
+### Azure Identity Scopes
+
+When using `auth_type: azure_managed_identity`, the `azure_identity_scopes` field controls which OAuth scopes are requested from Azure Active Directory via `get_bearer_token_provider`.
+
+```yaml
+azure_identity_scopes:
+  - https://cognitiveservices.azure.com/.default    # Default — Azure Cognitive Services
+```
+
+| Field | Type | Default | Description |
+|-------|------|---------|-------------|
+| `azure_identity_scopes` | `list[str]` | `["https://cognitiveservices.azure.com/.default"]` | OAuth scopes passed to `get_bearer_token_provider`. Only used when `auth_type` is `azure_managed_identity`. |
+
+**When to change this:**
+- The default scope (`https://cognitiveservices.azure.com/.default`) works for standard Azure OpenAI deployments
+- Use a custom scope if your Azure resource requires a different audience (e.g., private endpoints, sovereign clouds)
+- Multiple scopes can be listed if your deployment requires more than one
 
 ### Question Generation Types
 
