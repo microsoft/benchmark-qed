@@ -172,7 +172,26 @@ input:
 
 For the full set of optional fields, read [references/config-reference.md](references/config-reference.md).
 
-### Step 5 — Validate Configuration
+### Step 5 — Review Settings with the User
+
+After writing `settings.yaml`, **show the user the generated configuration** and ask if they want to customize anything. This is critical — the generated config uses sensible defaults, but users often need to tune dataset-specific or environment-specific values.
+
+1. Read the generated `settings.yaml` and display its contents to the user (use `show_file`).
+2. Use `ask_user` with a boolean field: *"Would you like to customize any settings before proceeding?"*
+3. If the user wants changes, use `ask_user` with a **free-text string field**: *"Describe what you'd like to change"* — let them say it in their own words (e.g., "increase num_questions to 50 for all types", "change the model to gpt-4o", "set trials to 6 and add a custom criterion"). Then apply the requested changes to `settings.yaml`.
+4. After applying changes, show the updated file and ask again: *"Any other changes?"* (boolean). Repeat until the user says no.
+
+Do **not** limit the user to predefined sections — they should be able to modify any field in `settings.yaml` by describing what they want.
+
+**Sections the user is most likely to customize** (call these out):
+- **autoq**: `num_questions` per type, `num_clusters`, `chunk_size`, assertion settings, `concurrent_requests`
+- **autoe_pairwise**: `trials`, `criteria`, `question_sets`
+- **autoe_reference**: `score_min`/`score_max`, `trials`
+- **autoe_assertion**: `pass_threshold`, `trials`
+
+For the full set of optional fields and best practices, read [references/config-reference.md](references/config-reference.md).
+
+### Step 6 — Validate Configuration
 
 The benchmark-qed CLI validates `settings.yaml` via pydantic at startup, so any missing or malformed fields are reported when you run a command. After applying the answers, run the actual target command (e.g. `benchmark-qed autoq …`) — config errors surface immediately, before any LLM calls.
 
