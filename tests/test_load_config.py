@@ -12,7 +12,7 @@ from pydantic import ValidationError
 
 from benchmark_qed.autoe.config import AssertionConfig, PairwiseConfig, ReferenceConfig
 from benchmark_qed.autoq.config import QuestionGenerationConfig
-from benchmark_qed.config.llm_config import LLMConfig
+from benchmark_qed.config.llm_config import LLMConfig, AuthType
 
 
 class TestLoadConfigBasicFunctionality:
@@ -729,7 +729,7 @@ class TestLLMConfigAzureIdentityScopes:
 
     def test_azure_identity_scopes_default(self):
         """azure_identity_scopes defaults to the standard Cognitive Services scope."""
-        config = LLMConfig(auth_type="azure_managed_identity")
+        config = LLMConfig(auth_type=AuthType.AzureManagedIdentity)
         assert config.azure_identity_scopes == [
             "https://cognitiveservices.azure.com/.default"
         ]
