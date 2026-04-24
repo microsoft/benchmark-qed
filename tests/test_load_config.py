@@ -722,3 +722,62 @@ class TestLoadConfigErrorMessages:
         assert len(error_message) > 0
         # The error should reference the file path
         assert "config.yaml" in error_message or nonexistent_path in error_message
+
+
+class TestLLMConfigAzureIdentityScopes:
+    """Tests for the azure_identity_scopes field on LLMConfig."""
+
+    def test_azure_identity_scopes_default(self):
+        """azure_identity_scopes defaults to the standard Cognitive Services scope."""
+        config = LLMConfig(auth_type="azure_managed_identity")
+        assert config.azure_identity_scopes == [
+            "https://cognitiveservices.azure.com/.default"
+        ]
+
+    def test_azure_identity_scopes_custom_single(self, tmp_path: Path):
+        """A custom single scope round-trips correctly through a config file."""
+        config_data = {
+            "llm_config": {
+                "model": "gpt-4",
+                "auth_type": "azure_managed_identity",
+                "azure_identity_scopes": ["https://management.azure.com/.default"],
+            },
+            "prompt_config": {
+                "user_prompt": {"prompt": "test"},
+                "system_prompt": {"prompt": "test"},
+            },
+        }
+        config_file = tmp_path / "custom_scope.yaml"
+        with open(config_file, "w") as f:
+            yaml.dump(config_data, f)
+
+        config = load_config(PairwiseConfig, str(config_file))
+
+        assert config.llm_config.azure_identity_scopes == [
+            "https://management.azure.com/.default"
+        ]
+
+    def test_azure_identity_scopes_multiple(self, tmp_path: Path):
+        """Multiple scopes round-trip correctly through a config file."""
+        scopes = [
+            "https://cognitiveservices.azure.com/.default",
+            "https://management.azure.com/.default",
+        ]
+        config_data = {
+            "llm_config": {
+                "model": "gpt-4",
+                "auth_type": "azure_managed_identity",
+                "azure_identity_scopes": scopes,
+            },
+            "prompt_config": {
+                "user_prompt": {"prompt": "test"},
+                "system_prompt": {"prompt": "test"},
+            },
+        }
+        config_file = tmp_path / "multi_scope.yaml"
+        with open(config_file, "w") as f:
+            yaml.dump(config_data, f)
+
+        config = load_config(PairwiseConfig, str(config_file))
+
+        assert config.llm_config.azure_identity_scopes == scopes
