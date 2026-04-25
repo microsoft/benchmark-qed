@@ -2,6 +2,7 @@
 """Data downloader CLI."""
 
 import asyncio
+import base64
 import zipfile
 from enum import StrEnum
 from io import BytesIO
@@ -57,8 +58,6 @@ async def _upload_zip_to_storage(
                 try:
                     content = data.decode("utf-8-sig")
                 except UnicodeDecodeError:
-                    import base64
-
                     content = base64.b64encode(data).decode("ascii")
                 await storage.set(safe_key, content)
             else:

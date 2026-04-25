@@ -84,7 +84,7 @@ def _build_output_storage(
     """Build output storage from config or default to FileStorage."""
     if storage_config:
         storage = create_storage(storage_config)
-        output_posix = output.as_posix().strip("./")
+        output_posix = output.as_posix().removeprefix("./")
         return storage.child(output_posix) if output_posix else storage
     output.mkdir(parents=True, exist_ok=True)
     return FileStorage(base_dir=str(output))
@@ -95,12 +95,15 @@ def _build_condition_storage(
 ) -> tuple[Storage, str]:
     """Build storage for a condition's answer path.
 
+    Always returns a non-null Storage instance: uses the provided StorageConfig when
+    specified, otherwise falls back to FileStorage on the local filesystem.
+
     Returns (storage, filename) where filename is the key to read.
     For directory-style paths (pairwise), filename is empty.
     """
     if storage_config:
         storage = create_storage(storage_config)
-        path_posix = answer_base_path.as_posix().strip("./")
+        path_posix = answer_base_path.as_posix().removeprefix("./")
         if is_dir:
             return storage.child(path_posix) if path_posix else storage, ""
         parent = str(Path(path_posix).parent)
@@ -167,20 +170,16 @@ def pairwise_scores(
         else combinations(config.others, 2)
     )
 
-    loop = asyncio.get_event_loop()
-
     for base, other in all_combinations:
         for question_set in config.question_sets:
             rich_print(f"Scoring {base.name} vs {other.name} for {question_set}")
             cache_key = f"{question_set}_{base.name}--{other.name}.csv"
-            if loop.run_until_complete(output_storage.has(cache_key)):
+            if asyncio.run(output_storage.has(cache_key)):
                 rich_print(
                     f"{base.name} vs {other.name} for {question_set} already exists. Skipping generation.\n"
                     f"[bold yellow]If you want to generate a new comparison, delete {cache_key} from {output}.[/bold yellow]"
                 )
-                result = loop.run_until_complete(
-                    _read_csv_df(output_storage, cache_key)
-                )
+                result = asyncio.run(_read_csv_df(output_storage, cache_key))
             else:
                 base_storage, _ = _build_condition_storage(
                     config.input_storage, base.answer_base_path, is_dir=True
@@ -193,13 +192,13 @@ def pairwise_scores(
                     llm_config=config.llm_config,
                     base_name=base.name,
                     other_name=other.name,
-                    base_answers=loop.run_until_complete(
+                    base_answers=asyncio.run(
                         _read_json_df(
                             base_storage,
                             f"{question_set}.json",
                         )
                     ),
-                    other_answers=loop.run_until_complete(
+                    other_answers=asyncio.run(
                         _read_json_df(
                             other_storage,
                             f"{question_set}.json",
@@ -213,21 +212,19 @@ def pairwise_scores(
                     include_score_id_in_prompt=include_score_id_in_prompt,
                 )
 
-                loop.run_until_complete(
-                    _write_csv_df(output_storage, cache_key, result)
-                )
+                asyncio.run(_write_csv_df(output_storage, cache_key, result))
             result["question_set"] = question_set
             all_results.append(result)
 
     all_results = pd.concat(all_results)
-    loop.run_until_complete(_write_csv_df(output_storage, "win_rates.csv", all_results))
+    asyncio.run(_write_csv_df(output_storage, "win_rates.csv", all_results))
 
     all_results_p_value = analyze_criteria(
         all_results,
         alpha=alpha,
     )
 
-    loop.run_until_complete(
+    asyncio.run(
         _write_csv_df(output_storage, "winrates_sig_tests.csv", all_results_p_value)
     )
 
@@ -252,9 +249,7 @@ def pairwise_scores(
     if print_model_usage:
         rich_print("Model usage statistics:")
         rich_print(llm_client.get_usage())
-    loop.run_until_complete(
-        _write_json(output_storage, "model_usage.json", llm_client.get_usage())
-    )
+    asyncio.run(_write_json(output_storage, "model_usage.json", llm_client.get_usage()))
 
 
 @app.command()
@@ -301,7 +296,6 @@ def reference_scores(
 
     llm_client = ModelFactory.create_chat_model(config.llm_config)
     output_storage = _build_output_storage(config.output_storage, output)
-    loop = asyncio.get_event_loop()
 
     for generated in config.generated:
         generated_storage, generated_key = _build_condition_storage(
@@ -313,10 +307,10 @@ def reference_scores(
         result = get_reference_scores(
             llm_client=llm_client,
             llm_config=config.llm_config,
-            generated_answers=loop.run_until_complete(
+            generated_answers=asyncio.run(
                 _read_json_df(generated_storage, generated_key)
             ),
-            reference_answers=loop.run_until_complete(
+            reference_answers=asyncio.run(
                 _read_json_df(reference_storage, reference_key)
             ),
             criteria=config.criteria,
@@ -328,7 +322,7 @@ def reference_scores(
             include_score_id_in_prompt=include_score_id_in_prompt,
             question_id_key=question_id_key,
         )
-        loop.run_until_complete(
+        asyncio.run(
             _write_csv_df(
                 output_storage,
                 f"reference_scores-{generated.name}.csv",
@@ -361,9 +355,7 @@ def reference_scores(
     if print_model_usage:
         rich_print("Model usage statistics:")
         rich_print(llm_client.get_usage())
-    loop.run_until_complete(
-        _write_json(output_storage, "model_usage.json", llm_client.get_usage())
-    )
+    asyncio.run(_write_json(output_storage, "model_usage.json", llm_client.get_usage()))
 
 
 @app.command()
@@ -477,15 +469,12 @@ def _run_single_rag_assertion_scores(
     """Run assertion scoring for a single RAG method (legacy mode)."""
     config = load_config(AssertionConfig, config_path)
     output_storage = _build_output_storage(config.output_storage, output)
-    loop = asyncio.get_event_loop()
 
     llm_client = ModelFactory.create_chat_model(config.llm_config)
     assertions_storage, assertions_key = _build_condition_storage(
         config.input_storage, config.assertions.assertions_path, is_dir=False
     )
-    assertions = loop.run_until_complete(
-        _read_json_df(assertions_storage, assertions_key)
-    )
+    assertions = asyncio.run(_read_json_df(assertions_storage, assertions_key))
 
     if assertions.loc[:, assertions_key].isna().any():  # type: ignore
         msg = f"Some questions in the assertions file do not have assertions. Please check {config.assertions.assertions_path}, these questions will be skipped."
@@ -512,9 +501,7 @@ def _run_single_rag_assertion_scores(
     assertion_score = get_assertion_scores(
         llm_client=llm_client,
         llm_config=config.llm_config,
-        answers=loop.run_until_complete(
-            _read_json_df(generated_storage, generated_key)
-        ),
+        answers=asyncio.run(_read_json_df(generated_storage, generated_key)),
         assertions=assertions,
         assessment_user_prompt=config.prompt_config.user_prompt.template,
         assessment_system_prompt=config.prompt_config.system_prompt.template,
@@ -525,9 +512,7 @@ def _run_single_rag_assertion_scores(
         answer_text_key=answer_text_key,
     )
 
-    loop.run_until_complete(
-        _write_csv_df(output_storage, "assertion_scores.csv", assertion_score)
-    )
+    asyncio.run(_write_csv_df(output_storage, "assertion_scores.csv", assertion_score))
 
     # Compute summaries using shared aggregation logic
     summary_by_assertion, summary_by_question, eval_summary = summarize_standard_scores(
@@ -571,9 +556,7 @@ def _run_single_rag_assertion_scores(
     if print_model_usage:
         rich_print("Model usage statistics:")
         rich_print(llm_client.get_usage())
-    loop.run_until_complete(
-        _write_json(output_storage, "model_usage.json", llm_client.get_usage())
-    )
+    asyncio.run(_write_json(output_storage, "model_usage.json", llm_client.get_usage()))
 
 
 def _run_multi_rag_assertion_scores(

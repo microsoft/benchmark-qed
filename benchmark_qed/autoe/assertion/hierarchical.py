@@ -299,8 +299,10 @@ def _get_hierarchical_scores_joint(
             for n in range(trials)
         ]
 
-        loop = asyncio.get_event_loop()
-        results = loop.run_until_complete(asyncio.gather(*tasks))
+        async def _run_tasks() -> list[dict[str, Any]]:
+            return await asyncio.gather(*tasks)
+
+        results = asyncio.run(_run_tasks())
 
         # Post-process results to add support metrics
         for result in results:
@@ -520,8 +522,10 @@ def _get_hierarchical_scores_staged(
             for _, row in passed_with_supporting.iterrows()
         ]
 
-        loop = asyncio.get_event_loop()
-        supporting_results = loop.run_until_complete(asyncio.gather(*tasks))
+        async def _run_supporting_tasks() -> list[dict[str, Any]]:
+            return await asyncio.gather(*tasks)
+
+        supporting_results = asyncio.run(_run_supporting_tasks())
 
     # Build lookup for supporting results keyed by
     # (question_id, assertion, trial) for trial-indexed retrieval

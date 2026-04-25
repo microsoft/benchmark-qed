@@ -3,6 +3,7 @@
 
 import json
 import logging
+import tempfile
 from dataclasses import asdict
 from pathlib import Path
 from typing import Any
@@ -11,6 +12,10 @@ from uuid import uuid4
 from graphrag_storage import Storage
 
 from benchmark_qed.autoq.data_model.question import Question
+from benchmark_qed.autoq.question_gen.data_questions.assertion_gen.stats import (
+    compute_assertion_stats,
+    save_stats_to_file,
+)
 
 log: logging.Logger = logging.getLogger(__name__)
 
@@ -228,25 +233,20 @@ async def _save_assertions(questions: list[Question], storage: Storage) -> None:
         )
 
     # Generate and save assertion statistics
-    import tempfile
-
-    from benchmark_qed.autoq.question_gen.data_questions.assertion_gen.stats import (
-        compute_assertion_stats,
-        save_stats_to_file,
-    )
 
     if questions_with_assertions:
-        with tempfile.NamedTemporaryFile(suffix=".json", delete=False) as tmp:
-            tmp_path = Path(tmp.name)
         stats = compute_assertion_stats(
             assertions_data=questions_with_assertions,
             assertion_type="global",
             file_path="assertions.json",
             sources_data=assertion_sources_data or None,
         )
-        save_stats_to_file(stats, tmp_path)
-        await storage.set("assertions_stats.json", tmp_path.read_text(encoding="utf-8"))
-        tmp_path.unlink(missing_ok=True)
+        with tempfile.NamedTemporaryFile(suffix=".json", delete=True) as tmp:
+            tmp_path = Path(tmp.name)
+            save_stats_to_file(stats, tmp_path)
+            await storage.set(
+                "assertions_stats.json", tmp_path.read_text(encoding="utf-8")
+            )
         log.info(
             "Generated assertion statistics: %d questions, %d assertions",
             stats.total_questions,
@@ -254,19 +254,18 @@ async def _save_assertions(questions: list[Question], storage: Storage) -> None:
         )
 
     if questions_with_map_assertions:
-        with tempfile.NamedTemporaryFile(suffix=".json", delete=False) as tmp:
-            tmp_path = Path(tmp.name)
         map_stats = compute_assertion_stats(
             assertions_data=questions_with_map_assertions,
             assertion_type="map",
             file_path="map_assertions.json",
             sources_data=map_assertion_sources_data or None,
         )
-        save_stats_to_file(map_stats, tmp_path)
-        await storage.set(
-            "map_assertions_stats.json", tmp_path.read_text(encoding="utf-8")
-        )
-        tmp_path.unlink(missing_ok=True)
+        with tempfile.NamedTemporaryFile(suffix=".json", delete=True) as tmp:
+            tmp_path = Path(tmp.name)
+            save_stats_to_file(map_stats, tmp_path)
+            await storage.set(
+                "map_assertions_stats.json", tmp_path.read_text(encoding="utf-8")
+            )
         log.info(
             "Generated map assertion statistics: %d questions, %d assertions",
             map_stats.total_questions,

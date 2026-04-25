@@ -82,20 +82,18 @@ def get_assertion_scores(
             }
         )
     )
-    pairs = pairs[["question_id", "question_text", "answer_text", "assertion"]]
+    base_columns = ["question_id", "question_text", "answer_text", "assertion"]
+    if "rank" in assertions.columns:
+        base_columns.append("rank")
+    pairs = pairs[base_columns]
 
     # Apply top-k filtering if specified
     if top_k is not None and top_k > 0:
         # Check if assertions have a 'rank' column for ranking
         if "rank" in assertions.columns:
             # Rank by rank (ascending - lower rank = higher importance) and take top-k per question
-            pairs_with_rank = pairs.merge(
-                assertions[["assertion", "rank"]], on="assertion", how="left"
-            )
             pairs = (
-                pairs_with_rank.sort_values(
-                    ["question_id", "rank"], ascending=[True, True]
-                )
+                pairs.sort_values(["question_id", "rank"], ascending=[True, True])
                 .groupby("question_id")
                 .head(top_k)
                 .drop(columns=["rank"])

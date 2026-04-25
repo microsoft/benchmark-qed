@@ -37,8 +37,23 @@ class BaseOpenAIChat:
     ) -> None:
         self._client = client
         self._model = llm_config.model
-        self._semaphore = asyncio.Semaphore(llm_config.concurrent_requests)
+        self._concurrent_requests = llm_config.concurrent_requests
+        self._semaphore: asyncio.Semaphore | None = None
+        self._semaphore_loop: asyncio.AbstractEventLoop | None = None
         self._usage = Usage(model=llm_config.model)
+
+    def _get_semaphore(self) -> asyncio.Semaphore:
+        """Return a semaphore bound to the current running event loop.
+
+        Recreates the semaphore when the event loop changes (e.g. between
+        successive ``asyncio.run()`` calls) so that callers never hit a
+        'bound to a different event loop' RuntimeError.
+        """
+        loop = asyncio.get_running_loop()
+        if self._semaphore is None or self._semaphore_loop is not loop:
+            self._semaphore = asyncio.Semaphore(self._concurrent_requests)
+            self._semaphore_loop = loop
+        return self._semaphore
 
     def get_usage(self) -> dict[str, Any]:
         """Get the usage of the Model."""
@@ -72,7 +87,7 @@ class BaseOpenAIChat:
 
         for attempt in range(_MAX_API_RETRIES):
             try:
-                async with self._semaphore:
+                async with self._get_semaphore():
                     response = await self._client.chat.completions.create(
                         model=self._model,
                         messages=sanitized_messages,  # type: ignore
@@ -194,8 +209,18 @@ class BaseOpenAIEmbedding:
     ) -> None:
         self._client = client
         self._model = llm_config.model
-        self._semaphore = asyncio.Semaphore(llm_config.concurrent_requests)
+        self._concurrent_requests = llm_config.concurrent_requests
+        self._semaphore: asyncio.Semaphore | None = None
+        self._semaphore_loop: asyncio.AbstractEventLoop | None = None
         self._usage = Usage(model=llm_config.model)
+
+    def _get_semaphore(self) -> asyncio.Semaphore:
+        """Return a semaphore bound to the current running event loop."""
+        loop = asyncio.get_running_loop()
+        if self._semaphore is None or self._semaphore_loop is not loop:
+            self._semaphore = asyncio.Semaphore(self._concurrent_requests)
+            self._semaphore_loop = loop
+        return self._semaphore
 
     def get_usage(self) -> dict[str, Any]:
         """Get the usage of the Model."""
@@ -216,7 +241,7 @@ class BaseOpenAIEmbedding:
             try:
                 # Strip surrogates and control chars that break JSON serialization
                 sanitized = [_BAD_CHARS_RE.sub("", t) for t in text_list]
-                async with self._semaphore:
+                async with self._get_semaphore():
                     response = await self._client.embeddings.create(
                         model=self._model,
                         input=sanitized,

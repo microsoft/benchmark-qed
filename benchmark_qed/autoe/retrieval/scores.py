@@ -96,6 +96,9 @@ def load_clusters_from_json(
                 "Text content will be empty, which may break cluster mapping."
             )
         else:
+            # TODO(benchmark-qed): These reads bypass the storage abstraction and read directly from disk.
+            # load_clusters_from_json should accept an optional Storage parameter so that
+            # blob storage users can load text units via the storage provider.
             # Load text units and create ID -> text mapping
             suffix = text_units_path.suffix.lower()
             if suffix == ".parquet":
@@ -662,7 +665,7 @@ async def run_retrieval_evaluation(
             retrieval_path = Path(rag_method["retrieval_results_path"])
 
             # Check if path includes question_set placeholder
-            if "{question_set}" in str(retrieval_path):  # noqa: RUF027
+            if "{question_set}" in str(retrieval_path):
                 retrieval_path = Path(
                     str(retrieval_path).format(question_set=question_set)
                 )
