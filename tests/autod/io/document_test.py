@@ -6,6 +6,7 @@ from typing import Any
 
 import pandas as pd
 import pytest
+from graphrag_storage.file_storage import FileStorage
 
 import benchmark_qed.config.defaults as defs
 from benchmark_qed.autod.data_model.document import Document
@@ -297,11 +298,14 @@ async def test_create_save_and_load_documents(tmp_path: Path, output_dir_exists:
     if output_dir_exists:
         expected_path = tmp_path / f"{defs.DOCUMENT_OUTPUT}.parquet"
         assert expected_path.parent.exists()
+        output_storage = FileStorage(base_dir=str(tmp_path))
     else:
         expected_path = tmp_path / "nested" / f"{defs.DOCUMENT_OUTPUT}.parquet"
         assert not expected_path.parent.exists()
+        (tmp_path / "nested").mkdir(parents=True, exist_ok=True)
+        output_storage = FileStorage(base_dir=str(tmp_path / "nested"))
 
-    docs_df = save_documents(docs, output_path=str(expected_path.parent))
+    docs_df = await save_documents(docs, output_storage)
 
     assert len(docs_df) == 2
     assert expected_path.exists()

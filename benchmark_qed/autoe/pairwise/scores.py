@@ -127,8 +127,10 @@ def get_pairwise_scores(
             for n in range(trials)
         ]
 
-        loop = asyncio.get_event_loop()
-        results = loop.run_until_complete(asyncio.gather(*tasks))
+        async def _run_tasks() -> list[dict[str, Any]]:
+            return await asyncio.gather(*tasks)
+
+        results = asyncio.run(_run_tasks())
 
         result = pd.DataFrame(results)
         result["base_name"] = base_name

@@ -96,6 +96,22 @@ input:
   text_column: body_nitf # The column in the dataset that contains the text to be processed. Modify this based on your dataset.
   metadata_columns: [headline, firstcreated] # Additional metadata columns to include in the input. Modify this based on your dataset.
   file_encoding: utf-8-sig
+  # storage: # Optional: read input from Azure Blob Storage instead of local filesystem.
+  #   type: blob
+  #   container_name: my-datasets # The blob container name (acts as the root folder).
+  #   connection_string: $${{AZURE_STORAGE_CONNECTION_STRING}} # Auth option 1: connection string.
+  #   # account_url: https://<account>.blob.core.windows.net # Auth option 2: managed identity (use instead of connection_string).
+  #   # base_dir: path/within/container # Optional prefix path. dataset_path is resolved relative to this.
+
+## Output Storage Configuration
+# output_storage: # Optional: write output to Azure Blob Storage instead of local filesystem.
+#   type: blob
+#   container_name: my-output # The blob container name (acts as the root folder).
+#   connection_string: $${{AZURE_STORAGE_CONNECTION_STRING}} # Auth option 1: connection string.
+#   # account_url: https://<account>.blob.core.windows.net # Auth option 2: managed identity (use instead of connection_string).
+#   # base_dir: path/within/container # Optional prefix path. The CLI output argument is resolved relative to this.
+#   # Example: with container_name=my-output, base_dir=experiments/run1, and CLI arg "output",
+#   #   files are written to: my-output/experiments/run1/output/
 
 ## Encoder configuration
 encoding:
@@ -240,7 +256,18 @@ assertion_prompts:
     prompt: prompts/data_questions/assertions/global_validation_prompt.txt
 """
 
-AUTOE_ASSERTION_CONTENT = f"""## Input Configuration
+AUTOE_ASSERTION_CONTENT = f"""## Storage Configuration
+# input_storage: # Optional: read input answers/assertions from Azure Blob Storage.
+#   type: blob
+#   container_name: my-datasets # The blob container name (acts as the root folder).
+#   account_url: https://<account>.blob.core.windows.net # Auth via managed identity.
+#   # connection_string: $${{AZURE_STORAGE_CONNECTION_STRING}} # Or use connection string instead.
+# output_storage: # Optional: write output scores to Azure Blob Storage.
+#   type: blob
+#   container_name: my-output
+#   account_url: https://<account>.blob.core.windows.net
+
+## Input Configuration
 generated:
   name: vector_rag
   answer_base_path: input/vector_rag/activity_global.json
@@ -253,13 +280,24 @@ trials: 4 # Number of trials to repeat the scoring process for each question-ass
 ## LLM Configuration
 llm_config: {CHAT_MODEL_DEFAULTS}
 
-prompts_config:
+prompt_config:
   user_prompt:
     prompt: prompts/assertion_user_prompt.txt
   system_prompt:
     prompt: prompts/assertion_system_prompt.txt"""
 
-AUTOE_PAIRWISE_CONTENT = f"""## Input Configuration
+AUTOE_PAIRWISE_CONTENT = f"""## Storage Configuration
+# input_storage: # Optional: read input answers from Azure Blob Storage.
+#   type: blob
+#   container_name: my-datasets # The blob container name (acts as the root folder).
+#   account_url: https://<account>.blob.core.windows.net # Auth via managed identity.
+#   # connection_string: $${{AZURE_STORAGE_CONNECTION_STRING}} # Or use connection string instead.
+# output_storage: # Optional: write output scores to Azure Blob Storage.
+#   type: blob
+#   container_name: my-output
+#   account_url: https://<account>.blob.core.windows.net
+
+## Input Configuration
 base:
   name: vector_rag
   answer_base_path: input/vector_rag  # The path to the base answers that you want to compare other RAG answers to. Modify this based on your dataset.
@@ -281,14 +319,25 @@ trials: 4 # Number of trials to repeat the scoring process for each question. Sh
 ## LLM Configuration
 llm_config: {CHAT_MODEL_DEFAULTS}
 
-prompts_config:
+prompt_config:
   user_prompt:
     prompt: prompts/pairwise_user_prompt.txt
   system_prompt:
     prompt: prompts/pairwise_system_prompt.txt"""
 
 
-AUTOE_REFERENCE_CONTENT = f"""## Input Configuration
+AUTOE_REFERENCE_CONTENT = f"""## Storage Configuration
+# input_storage: # Optional: read input answers from Azure Blob Storage.
+#   type: blob
+#   container_name: my-datasets # The blob container name (acts as the root folder).
+#   account_url: https://<account>.blob.core.windows.net # Auth via managed identity.
+#   # connection_string: $${{AZURE_STORAGE_CONNECTION_STRING}} # Or use connection string instead.
+# output_storage: # Optional: write output scores to Azure Blob Storage.
+#   type: blob
+#   container_name: my-output
+#   account_url: https://<account>.blob.core.windows.net
+
+## Input Configuration
 reference:
   name: lazygraphrag
   answer_base_path: input/lazygraphrag/activity_global.json # The path to the reference answers. Modify this based on your dataset.
@@ -308,9 +357,11 @@ trials: 4 # Number of trials to repeat the scoring process for each question. Sh
 ## LLM Configuration
 llm_config: {CHAT_MODEL_DEFAULTS}
 
-prompts_config:
-  user_prompt: prompts/reference_user_prompt.txt
-  system_prompt: prompts/reference_system_prompt.txt"""
+prompt_config:
+  user_prompt:
+    prompt: prompts/reference_user_prompt.txt
+  system_prompt:
+    prompt: prompts/reference_system_prompt.txt"""
 
 
 def __copy_prompts(prompts_path: Path, output_path: Path) -> None:

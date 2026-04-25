@@ -1138,7 +1138,7 @@ async def compare_raters_from_files(
     query_embeddings = [q.get("embedding") for q in questions_data]
 
     # Load text units
-    df = pd.read_parquet(text_units_path)
+    text_units_df = pd.read_parquet(text_units_path)
     all_text_units = [
         TextUnit(
             id=str(row.get("id", idx)),
@@ -1146,7 +1146,7 @@ async def compare_raters_from_files(
             text=str(row["text"]),
             text_embedding=row.get("text_embedding"),
         )
-        for idx, row in df.iterrows()
+        for idx, row in enumerate(text_units_df.to_dict(orient="records"))
     ]
 
     if use_similarity_selection and max_text_units:
