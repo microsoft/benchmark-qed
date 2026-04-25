@@ -93,9 +93,7 @@ def get_assertion_scores(
         if "rank" in assertions.columns:
             # Rank by rank (ascending - lower rank = higher importance) and take top-k per question
             pairs = (
-                pairs.sort_values(
-                    by=["question_id", "rank"], ascending=[True, True]
-                )
+                pairs.sort_values(by=["question_id", "rank"], ascending=[True, True])
                 .groupby("question_id")
                 .head(top_k)
                 .drop(columns=["rank"])
