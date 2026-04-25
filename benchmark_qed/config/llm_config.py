@@ -78,6 +78,11 @@ class LLMConfig(BaseModel):
         description="The type of model to use.",
     )
 
+    azure_identity_scopes: list[str] = Field(
+        default_factory=lambda: ["https://cognitiveservices.azure.com/.default"],
+        description="The Azure identity scopes to request when using azure_managed_identity auth. Passed to get_bearer_token_provider.",
+    )
+
     init_args: dict[str, Any] = Field(
         default_factory=dict,
         description="Additional arguments to pass to the model when initializing it.",

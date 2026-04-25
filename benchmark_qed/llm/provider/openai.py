@@ -182,7 +182,7 @@ class AzureOpenAIChat(BaseOpenAIChat):
 
         if llm_config.auth_type == AuthType.AzureManagedIdentity:
             token_provider = get_bearer_token_provider(
-                DefaultAzureCredential(), "https://cognitiveservices.azure.com/.default"
+                DefaultAzureCredential(), *llm_config.azure_identity_scopes
             )
             self._client = AsyncAzureOpenAI(
                 azure_endpoint=azure_endpoint,
@@ -311,7 +311,7 @@ class AzureOpenAIEmbedding(BaseOpenAIEmbedding):
 
         if llm_config.auth_type == AuthType.AzureManagedIdentity:
             token_provider = get_bearer_token_provider(
-                DefaultAzureCredential(), "https://cognitiveservices.azure.com/.default"
+                DefaultAzureCredential(), *llm_config.azure_identity_scopes
             )
             self._client = AsyncAzureOpenAI(
                 azure_deployment=azure_deployment,
