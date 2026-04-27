@@ -1605,9 +1605,11 @@ RELEVANCE_THRESHOLD = 2</div>
 
 <span class="k">if</span> <span class="ow">not</span> <span class="n">combined_parquet</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span> <span class="ow">and</span> <span class="n">part1</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span> <span class="ow">and</span> <span class="n">part2</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">"Combining text_units_part1.parquet + text_units_part2.parquet ..."</span><span class="p">)</span>
-    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">pd</span><span class="o">.</span><span class="n">read_parquet</span><span class="p">(</span><span class="n">part1</span><span class="p">),</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_parquet</span><span class="p">(</span><span class="n">part2</span><span class="p">)],</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="n">df</span><span class="o">.</span><span class="n">to_parquet</span><span class="p">(</span><span class="n">combined_parquet</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Created </span><span class="si">{</span><span class="n">combined_parquet</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span><span class="si">}</span><span class="s2"> rows)"</span><span class="p">)</span>
+    <span class="n">text_units_combined</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span>
+        <span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">read_parquet</span><span class="p">(</span><span class="n">part1</span><span class="p">),</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_parquet</span><span class="p">(</span><span class="n">part2</span><span class="p">)],</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span>
+    <span class="p">)</span>
+    <span class="n">text_units_combined</span><span class="o">.</span><span class="n">to_parquet</span><span class="p">(</span><span class="n">combined_parquet</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Created </span><span class="si">{</span><span class="n">combined_parquet</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">text_units_combined</span><span class="p">)</span><span class="si">}</span><span class="s2"> rows)"</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
     <span class="k">if</span> <span class="n">combined_parquet</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">combined_parquet</span><span class="si">}</span><span class="s2"> already exists, skipping recombination"</span><span class="p">)</span>
@@ -1642,9 +1644,11 @@ part2 = example_answers_path / "text_units_part2.parquet"
 
 if not combined_parquet.exists() and part1.exists() and part2.exists():
     print("Combining text_units_part1.parquet + text_units_part2.parquet ...")
-    df = pd.concat([pd.read_parquet(part1), pd.read_parquet(part2)], ignore_index=True)
-    df.to_parquet(combined_parquet)
-    print(f"Created {combined_parquet} ({len(df)} rows)")
+    text_units_combined = pd.concat(
+        [pd.read_parquet(part1), pd.read_parquet(part2)], ignore_index=True
+    )
+    text_units_combined.to_parquet(combined_parquet)
+    print(f"Created {combined_parquet} ({len(text_units_combined)} rows)")
 else:
     if combined_parquet.exists():
         print(f"{combined_parquet} already exists, skipping recombination")

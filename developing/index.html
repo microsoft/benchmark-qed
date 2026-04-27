@@ -977,7 +977,8 @@
 </code></pre></div>
     Place your input files inside the <code>./input</code> directory. To get started, you can use the AP News dataset provided in the <a href="https://github.com/microsoft/benchmark-qed/tree/main/datasets/AP_news/raw_data">datasets folder</a>. To download this example dataset directly into your <code>input</code> folder, run:
     <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>uv<span class="w"> </span>run<span class="w"> </span>benchmark-qed<span class="w"> </span>data<span class="w"> </span>download<span class="w"> </span>AP_news<span class="w"> </span>input
-</code></pre></div></p>
+</code></pre></div>
+    You can also download directly to Azure Blob Storage or Cosmos DB. See the <a href="../datasets/">Datasets documentation</a> for storage options.</p>
 </li>
 <li>
 <p><strong>Initialize the configuration:</strong>
@@ -988,6 +989,7 @@
 <li><code>.env</code>: Stores environment variables for the AutoQ pipeline. Open this file and replace <code>&lt;API_KEY&gt;</code> with your OpenAI or Azure API key.</li>
 <li><code>settings.yaml</code>: Contains pipeline settings. Edit this file as needed for your use case.</li>
 </ul>
+<p>The generated <code>settings.yaml</code> includes commented-out sections for configuring Azure Blob Storage or Cosmos DB as input and output backends. Uncomment and fill in the <code>storage</code> section under <code>input</code> to read data from blob storage, or the <code>output_storage</code> section to write results to blob storage instead of the local filesystem.</p>
 </li>
 <li>
 <p><strong>Generate synthetic queries:</strong>
@@ -1016,7 +1018,8 @@
 </code></pre></div>
     Copy your RAG answer files into the <code>./input</code> directory. To get started, you can use the example RAG answers available in the <a href="https://github.com/microsoft/benchmark-qed/tree/main/docs/notebooks/example_answers">example data folder</a>. To download this example dataset directly into your <code>input</code> folder, run:
     <div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>uv<span class="w"> </span>run<span class="w"> </span>benchmark-qed<span class="w"> </span>data<span class="w"> </span>download<span class="w"> </span>example_answers<span class="w"> </span>input
-</code></pre></div></p>
+</code></pre></div>
+    You can also download directly to Azure Blob Storage or Cosmos DB. See the <a href="../datasets/">Datasets documentation</a> for storage options.</p>
 </li>
 <li>
 <p><strong>Create a configuration file for pairwise comparison:</strong>
@@ -1027,6 +1030,7 @@
 <li><code>.env</code>: Contains environment variables for the pairwise comparison tests. Open this file and replace <code>&lt;API_KEY&gt;</code> with your OpenAI or Azure API key.</li>
 <li><code>settings.yaml</code>: Contains pipeline settings, which you can modify as needed.</li>
 </ul>
+<p>The generated <code>settings.yaml</code> includes commented-out <code>input_storage</code> and <code>output_storage</code> sections for configuring Azure Blob Storage or Cosmos DB backends.</p>
 </li>
 <li>
 <p><strong>Run the pairwise comparison:</strong>
@@ -1050,7 +1054,8 @@
 </code></pre></div>
     Copy your RAG answers and reference answers into the <code>input</code> directory. To get started, you can use the example RAG answers available in the <a href="https://github.com/microsoft/benchmark-qed/tree/main/docs/notebooks/example_answers">example data folder</a>. To download this example dataset directly into your <code>input</code> folder, run:
     <div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>uv<span class="w"> </span>run<span class="w"> </span>benchmark-qed<span class="w"> </span>data<span class="w"> </span>download<span class="w"> </span>example_answers<span class="w"> </span>input
-</code></pre></div></p>
+</code></pre></div>
+    You can also download directly to Azure Blob Storage or Cosmos DB. See the <a href="../datasets/">Datasets documentation</a> for storage options.</p>
 </li>
 <li>
 <p><strong>Create a configuration file for reference scoring:</strong>
@@ -1061,6 +1066,7 @@
 <li><code>.env</code>: Contains environment variables for the reference scoring pipeline. Open this file and replace <code>&lt;API_KEY&gt;</code> with your OpenAI or Azure API key.</li>
 <li><code>settings.yaml</code>: Contains pipeline settings, which you can modify as needed.</li>
 </ul>
+<p>The generated <code>settings.yaml</code> includes commented-out <code>input_storage</code> and <code>output_storage</code> sections for configuring Azure Blob Storage or Cosmos DB backends.</p>
 </li>
 <li>
 <p><strong>Run the reference scoring:</strong>

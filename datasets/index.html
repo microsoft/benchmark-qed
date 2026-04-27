@@ -727,6 +727,19 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Datasets
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -738,6 +751,61 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#downloading-to-local-filesystem" class="md-nav__link">
+    <span class="md-ellipsis">
+      Downloading to Local Filesystem
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#downloading-to-azure-blob-storage" class="md-nav__link">
+    <span class="md-ellipsis">
+      Downloading to Azure Blob Storage
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#downloading-to-azure-cosmos-db" class="md-nav__link">
+    <span class="md-ellipsis">
+      Downloading to Azure Cosmos DB
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#storage-options-reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      Storage Options Reference
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -763,6 +831,50 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#downloading-to-local-filesystem" class="md-nav__link">
+    <span class="md-ellipsis">
+      Downloading to Local Filesystem
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#downloading-to-azure-blob-storage" class="md-nav__link">
+    <span class="md-ellipsis">
+      Downloading to Azure Blob Storage
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#downloading-to-azure-cosmos-db" class="md-nav__link">
+    <span class="md-ellipsis">
+      Downloading to Azure Cosmos DB
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#storage-options-reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      Storage Options Reference
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -786,6 +898,7 @@
 <li><strong>Podcast Transcripts:</strong> Contains transcripts from 70 episodes of the <a href="https://www.microsoft.com/en-us/behind-the-tech">Behind the Tech</a> podcast series. This is an updated version of the dataset featured in the <a href="https://arxiv.org/abs/2404.16130">GraphRAG</a> paper.</li>
 <li><strong>AP News:</strong> Includes 1,397 health-related news articles from the Associated Press.</li>
 </ul>
+<h2 id="downloading-to-local-filesystem">Downloading to Local Filesystem</h2>
 <p>To download these datasets programmatically, use the following commands:</p>
 <ul>
 <li><strong>Podcast Transcripts:</strong>
@@ -796,6 +909,66 @@
 </code></pre></div></li>
 </ul>
 <p>Replace <code>OUTPUT_DIR</code> with the path to the directory where you want the dataset to be saved.</p>
+<h2 id="downloading-to-azure-blob-storage">Downloading to Azure Blob Storage</h2>
+<p>You can download datasets directly into Azure Blob Storage by providing storage options:</p>
+<ul>
+<li>
+<p><strong>Using managed identity:</strong>
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>benchmark-qed<span class="w"> </span>data<span class="w"> </span>download<span class="w"> </span>AP_news<span class="w"> </span>input<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span>--storage-type<span class="w"> </span>blob<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">  </span>--container-name<span class="w"> </span>my-datasets<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">  </span>--account-url<span class="w"> </span>https://&lt;account&gt;.blob.core.windows.net
+</code></pre></div></p>
+</li>
+<li>
+<p><strong>Using a connection string:</strong>
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>benchmark-qed<span class="w"> </span>data<span class="w"> </span>download<span class="w"> </span>AP_news<span class="w"> </span>input<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span>--storage-type<span class="w"> </span>blob<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">  </span>--container-name<span class="w"> </span>my-datasets<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">  </span>--connection-string<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$AZURE_STORAGE_CONNECTION_STRING</span><span class="s2">&quot;</span>
+</code></pre></div></p>
+</li>
+</ul>
+<p>The <code>OUTPUT_DIR</code> argument (e.g., <code>input</code>) becomes the prefix path within the blob container. The dataset zip is downloaded from GitHub, extracted in memory, and each file is uploaded directly to the storage backend.</p>
+<h2 id="downloading-to-azure-cosmos-db">Downloading to Azure Cosmos DB</h2>
+<p>You can also download datasets into Azure Cosmos DB:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>benchmark-qed<span class="w"> </span>data<span class="w"> </span>download<span class="w"> </span>AP_news<span class="w"> </span>input<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span>--storage-type<span class="w"> </span>cosmosdb<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">  </span>--container-name<span class="w"> </span>my-container<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">  </span>--database-name<span class="w"> </span>my-database<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">  </span>--account-url<span class="w"> </span>https://&lt;account&gt;.documents.azure.com
+</code></pre></div>
+<h2 id="storage-options-reference">Storage Options Reference</h2>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--storage-type</code></td>
+<td>Storage backend: <code>blob</code> for Azure Blob Storage, <code>cosmosdb</code> for Azure Cosmos DB. Omit for local filesystem.</td>
+</tr>
+<tr>
+<td><code>--container-name</code></td>
+<td>The blob container or Cosmos DB container name.</td>
+</tr>
+<tr>
+<td><code>--account-url</code></td>
+<td>The storage account URL (uses managed identity for authentication).</td>
+</tr>
+<tr>
+<td><code>--connection-string</code></td>
+<td>The storage connection string (alternative to <code>--account-url</code>).</td>
+</tr>
+<tr>
+<td><code>--database-name</code></td>
+<td>The Cosmos DB database name (required for <code>cosmosdb</code> type).</td>
+</tr>
+</tbody>
+</table>
 <p>You can also find these datasets in the <a href="https://github.com/microsoft/benchmark-qed/tree/main/datasets">datasets directory</a>.</p>
 
 

@@ -630,6 +630,81 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="CLI Reference">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#download-command" class="md-nav__link">
+    <span class="md-ellipsis">
+      Download Command
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Download Command">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#arguments" class="md-nav__link">
+    <span class="md-ellipsis">
+      Arguments
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#options" class="md-nav__link">
+    <span class="md-ellipsis">
+      Options
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#local-filesystem" class="md-nav__link">
+    <span class="md-ellipsis">
+      Local Filesystem
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#azure-blob-storage" class="md-nav__link">
+    <span class="md-ellipsis">
+      Azure Blob Storage
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#azure-cosmos-db" class="md-nav__link">
+    <span class="md-ellipsis">
+      Azure Cosmos DB
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#path-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      Path Structure
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -652,7 +727,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#arguments" class="md-nav__link">
+  <a href="#arguments_1" class="md-nav__link">
     <span class="md-ellipsis">
       Arguments
     </span>
@@ -661,7 +736,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#options" class="md-nav__link">
+  <a href="#options_1" class="md-nav__link">
     <span class="md-ellipsis">
       Options
     </span>
@@ -869,6 +944,81 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="CLI Reference">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#download-command" class="md-nav__link">
+    <span class="md-ellipsis">
+      Download Command
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Download Command">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#arguments" class="md-nav__link">
+    <span class="md-ellipsis">
+      Arguments
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#options" class="md-nav__link">
+    <span class="md-ellipsis">
+      Options
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#local-filesystem" class="md-nav__link">
+    <span class="md-ellipsis">
+      Local Filesystem
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#azure-blob-storage" class="md-nav__link">
+    <span class="md-ellipsis">
+      Azure Blob Storage
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#azure-cosmos-db" class="md-nav__link">
+    <span class="md-ellipsis">
+      Azure Cosmos DB
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#path-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      Path Structure
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -891,7 +1041,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#arguments" class="md-nav__link">
+  <a href="#arguments_1" class="md-nav__link">
     <span class="md-ellipsis">
       Arguments
     </span>
@@ -900,7 +1050,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#options" class="md-nav__link">
+  <a href="#options_1" class="md-nav__link">
     <span class="md-ellipsis">
       Options
     </span>
@@ -943,12 +1093,119 @@
 
 <h2 id="cli-reference">CLI Reference</h2>
 <p>This page documents the command-line interface of the benchmark-qed data download package.</p>
+<h3 id="download-command">Download Command</h3>
+<p>The <code>data download</code> command downloads datasets from GitHub and optionally uploads them to cloud storage.</p>
+<h4 id="arguments">Arguments</h4>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>dataset</code></td>
+<td>The dataset to download. One of: <code>AP_news</code>, <code>podcast</code>, <code>example_answers</code>.</td>
+</tr>
+<tr>
+<td><code>output_dir</code></td>
+<td>The directory (local) or path prefix (cloud) to save the downloaded dataset.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="options">Options</h4>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--storage-type</code></td>
+<td><code>str</code></td>
+<td><code>None</code></td>
+<td>Storage backend: <code>blob</code> for Azure Blob Storage, <code>cosmosdb</code> for Azure Cosmos DB. Omit for local filesystem.</td>
+</tr>
+<tr>
+<td><code>--container-name</code></td>
+<td><code>str</code></td>
+<td><code>None</code></td>
+<td>The blob container or Cosmos DB container name. Required when <code>--storage-type</code> is set.</td>
+</tr>
+<tr>
+<td><code>--account-url</code></td>
+<td><code>str</code></td>
+<td><code>None</code></td>
+<td>The storage account URL. Uses managed identity (DefaultAzureCredential) for authentication.</td>
+</tr>
+<tr>
+<td><code>--connection-string</code></td>
+<td><code>str</code></td>
+<td><code>None</code></td>
+<td>The storage connection string. Alternative to <code>--account-url</code> for authentication.</td>
+</tr>
+<tr>
+<td><code>--database-name</code></td>
+<td><code>str</code></td>
+<td><code>None</code></td>
+<td>The Cosmos DB database name. Required when <code>--storage-type</code> is <code>cosmosdb</code>.</td>
+</tr>
+<tr>
+<td><code>--base-dir</code></td>
+<td><code>str</code></td>
+<td><code>None</code></td>
+<td>Base prefix in cloud storage. Files are stored under <code>{base_dir}/{output_dir}/</code>. If omitted, files are stored under <code>{output_dir}/</code> only.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="local-filesystem">Local Filesystem</h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>benchmark-qed<span class="w"> </span>data<span class="w"> </span>download<span class="w"> </span>AP_news<span class="w"> </span>./input
+</code></pre></div>
+<p>The dataset is extracted to the specified <code>output_dir</code> (e.g., <code>./input</code>).</p>
+<h4 id="azure-blob-storage">Azure Blob Storage</h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>benchmark-qed<span class="w"> </span>data<span class="w"> </span>download<span class="w"> </span>AP_news<span class="w"> </span>input<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span>--storage-type<span class="w"> </span>blob<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">  </span>--container-name<span class="w"> </span>my-container<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">  </span>--account-url<span class="w"> </span>https://myaccount.blob.core.windows.net<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">  </span>--base-dir<span class="w"> </span>my-project
+</code></pre></div>
+<p>Or with a connection string:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>benchmark-qed<span class="w"> </span>data<span class="w"> </span>download<span class="w"> </span>AP_news<span class="w"> </span>input<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span>--storage-type<span class="w"> </span>blob<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">  </span>--container-name<span class="w"> </span>my-container<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">  </span>--connection-string<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$AZURE_STORAGE_CONNECTION_STRING</span><span class="s2">&quot;</span>
+</code></pre></div>
+<h4 id="azure-cosmos-db">Azure Cosmos DB</h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>benchmark-qed<span class="w"> </span>data<span class="w"> </span>download<span class="w"> </span>AP_news<span class="w"> </span>input<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span>--storage-type<span class="w"> </span>cosmosdb<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">  </span>--container-name<span class="w"> </span>my-container<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">  </span>--database-name<span class="w"> </span>my-database<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">  </span>--account-url<span class="w"> </span>https://myaccount.documents.azure.com
+</code></pre></div>
+<h4 id="path-structure">Path Structure</h4>
+<ul>
+<li><strong>With <code>--base-dir</code></strong>: Files are stored as <code>{base_dir}/{output_dir}/{file_path}</code></li>
+<li>Example: <code>my-project/input/2023/11/22/file.json</code></li>
+<li><strong>Without <code>--base-dir</code></strong>: Files are stored as <code>{output_dir}/{file_path}</code></li>
+<li>Example: <code>input/2023/11/22/file.json</code></li>
+</ul>
+<p>This ensures cloud storage mirrors your local directory structure.</p>
 <div class="typer-docs">
 <h1 id="config">config</h1>
-<p>Download the specified dataset from the GitHub repository.</p>
+<p>Download the specified dataset from the GitHub repository.
+For local filesystem, the dataset is extracted to <code>output_dir</code>.
+For cloud storage (blob/Cosmos DB):
+- Files are stored under <code>{base_dir}/{output_dir}</code> if <code>base_dir</code> is provided.
+- Files are stored under <code>{output_dir}</code> if <code>base_dir</code> is omitted.
+This ensures cloud storage mirrors the local directory structure.</p>
 <h2 id="usage">Usage</h2>
 <p><code>config [OPTIONS] DATASET:{AP_news|podcast|example_answers} OUTPUT_DIR</code></p>
-<h2 id="arguments">Arguments</h2>
+<h2 id="arguments_1">Arguments</h2>
 <table>
 <thead>
 <tr>
@@ -970,7 +1227,7 @@
 </tr>
 </tbody>
 </table>
-<h2 id="options">Options</h2>
+<h2 id="options_1">Options</h2>
 <table>
 <thead>
 <tr>
@@ -981,6 +1238,42 @@
 </tr>
 </thead>
 <tbody>
+<tr>
+<td><code>--storage-type TEXT</code></td>
+<td>Storage type: 'blob' for Azure Blob Storage, 'cosmosdb' for Azure Cosmos DB. Omit for local filesystem.</td>
+<td>No</td>
+<td>-</td>
+</tr>
+<tr>
+<td><code>--container-name TEXT</code></td>
+<td>The blob container or Cosmos DB container name.</td>
+<td>No</td>
+<td>-</td>
+</tr>
+<tr>
+<td><code>--account-url TEXT</code></td>
+<td>The storage account URL (uses managed identity).</td>
+<td>No</td>
+<td>-</td>
+</tr>
+<tr>
+<td><code>--connection-string TEXT</code></td>
+<td>The storage connection string (alternative to account_url).</td>
+<td>No</td>
+<td>-</td>
+</tr>
+<tr>
+<td><code>--database-name TEXT</code></td>
+<td>The Cosmos DB database name (required for cosmosdb type).</td>
+<td>No</td>
+<td>-</td>
+</tr>
+<tr>
+<td><code>--base-dir TEXT</code></td>
+<td>Base prefix in cloud storage. Cloud files will be stored as: base_dir/output_dir/. If omitted, files are stored under output_dir/ only.</td>
+<td>No</td>
+<td>-</td>
+</tr>
 <tr>
 <td><code>--install-completion</code></td>
 <td>Install completion for the current shell.</td>
