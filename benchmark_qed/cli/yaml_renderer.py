@@ -53,7 +53,11 @@ def _render_llm_section(provider_dict: dict[str, Any], indent: int = 2) -> str:
     if init_args:
         lines.append(f"{pad}init_args:")
         for key, value in init_args.items():
-            lines.append(f"{pad}  {key}: {value}")
+            # Quote string values to prevent YAML coercion (e.g., api_version dates)
+            if isinstance(value, str):
+                lines.append(f'{pad}  {key}: "{value}"')
+            else:
+                lines.append(f"{pad}  {key}: {value}")
 
     return "\n".join(lines)
 
@@ -310,7 +314,7 @@ trials: {trials}
 llm_config:
 {llm_section}
 
-prompts_config:
+prompt_config:
   user_prompt:
     prompt: prompts/pairwise_user_prompt.txt
   system_prompt:
@@ -362,7 +366,7 @@ trials: {trials}
 llm_config:
 {llm_section}
 
-prompts_config:
+prompt_config:
   user_prompt:
     prompt: prompts/reference_user_prompt.txt
   system_prompt:
@@ -406,7 +410,7 @@ trials: {trials}
 llm_config:
 {llm_section}
 
-prompts_config:
+prompt_config:
   user_prompt:
     prompt: prompts/assertion_user_prompt.txt
   system_prompt:
@@ -438,6 +442,7 @@ _REQUIRED_KEYS: dict[str, list[str]] = {
         "question_sets",
         "trials",
         "llm_config",
+        "prompt_config",
     ],
     "autoe_reference": [
         "reference",
@@ -446,6 +451,7 @@ _REQUIRED_KEYS: dict[str, list[str]] = {
         "score_max",
         "trials",
         "llm_config",
+        "prompt_config",
     ],
     "autoe_assertion": [
         "generated",
@@ -453,6 +459,7 @@ _REQUIRED_KEYS: dict[str, list[str]] = {
         "pass_threshold",
         "trials",
         "llm_config",
+        "prompt_config",
     ],
 }
 

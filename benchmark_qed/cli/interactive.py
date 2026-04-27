@@ -48,9 +48,6 @@ from benchmark_qed.cli.yaml_renderer import (
     validate_config,
 )
 
-app: typer.Typer = typer.Typer(pretty_exceptions_show_locals=False)
-
-
 # ---------------------------------------------------------------------------
 # Data types
 # ---------------------------------------------------------------------------
@@ -727,7 +724,6 @@ def _copy_prompts_for_config(config_type: str, prompts_folder: Path) -> None:
 # ---------------------------------------------------------------------------
 
 
-@app.command()
 def interactive_init(
     root: Annotated[
         Path,
@@ -765,7 +761,7 @@ def interactive_init(
     }
     yaml_content = renderers[config_type](config_dict)
 
-    # 4. Validate against Pydantic model
+    # 4. Validate rendered YAML structure and basic config fields
     validate_config(yaml_content, config_type)
 
     # 5. Write files

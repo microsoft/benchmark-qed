@@ -211,4 +211,4 @@ Key highlights:
 - The `.env` file must be in the workspace root directory, not the project root.
 - Config types `autoe_pairwise`, `autoe_reference`, and `autoe_assertion` generate different settings.yaml templates — use the correct type for your evaluation method.
 - Prompts are copied as `.txt` files using Python `string.Template` syntax (`$variable` or `${variable}`).
-- **`prompts_config` vs `prompt_config`**: The non-interactive `config init` for some autoe types generates `prompts_config`, but the runtime expects `prompt_config`. The interactive `benchmark-qed init` wizard avoids this issue. If using `config init`, rename the key if you get validation errors.
+- **`prompt_config` key**: The runtime expects `prompt_config` (singular) for all autoe config types. Both `benchmark-qed init` and `config init` now generate the correct key. If you hand-edit YAML, ensure you use `prompt_config`, not `prompts_config`.

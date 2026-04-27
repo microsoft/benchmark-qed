@@ -232,6 +232,8 @@ class TestYamlRenderers:
         assert "question_sets" in parsed
         assert parsed["trials"] == 4
         assert "llm_config" in parsed
+        assert "prompt_config" in parsed
+        assert isinstance(parsed["prompt_config"], dict)
 
     def test_render_autoe_pairwise_yaml_with_criteria(self):
         """Pairwise YAML with custom criteria includes them."""
@@ -262,6 +264,8 @@ class TestYamlRenderers:
         assert parsed["score_min"] == 1
         assert parsed["score_max"] == 10
         assert "llm_config" in parsed
+        assert "prompt_config" in parsed
+        assert isinstance(parsed["prompt_config"], dict)
 
     def test_render_autoe_reference_yaml_multiple_generated(self):
         """Reference YAML with multiple generated conditions."""
@@ -282,9 +286,11 @@ class TestYamlRenderers:
         assert parsed is not None
         assert "generated" in parsed
         assert "assertions" in parsed
-        assert parsed["pass_threshold"] == 0.5
+        assert parsed["pass_threshold"] == pytest.approx(0.5)
         assert parsed["trials"] == 4
         assert "llm_config" in parsed
+        assert "prompt_config" in parsed
+        assert isinstance(parsed["prompt_config"], dict)
 
 
 # ═══════════════════════════════════════════════════════════════════════════
@@ -308,8 +314,8 @@ class TestLlmRendering:
         provider = _azure_chat_provider()
         section = _render_llm_section(provider)
         assert "init_args:" in section
-        assert "azure_endpoint: https://example.openai.azure.com" in section
-        assert "api_version: 2024-12-01-preview" in section
+        assert 'azure_endpoint: "https://example.openai.azure.com"' in section
+        assert 'api_version: "2024-12-01-preview"' in section
 
     def test_managed_identity_omits_api_key(self):
         """azure_managed_identity auth type does NOT include api_key line."""
