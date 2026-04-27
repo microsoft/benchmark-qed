@@ -1,9 +1,11 @@
 # Copyright (c) 2025 Microsoft Corporation.
 """Configuration for the autoq question generation process."""
 
+from enum import StrEnum
 from pathlib import Path
 from typing import ClassVar
 
+from graphrag_storage.storage_config import StorageConfig
 from pydantic import BaseModel, ConfigDict, Field
 
 from benchmark_qed.autod import prompts as autod_prompts
@@ -49,7 +51,7 @@ class InputConfig(BaseModel):
 
     dataset_path: Path = Field(
         ...,
-        description="Path to the input dataset file.",
+        description="Path to the input dataset file. When storage is configured, this is the path within the storage container.",
     )
 
     input_type: str = Field(
@@ -63,6 +65,10 @@ class InputConfig(BaseModel):
     )
     file_encoding: str = Field(
         default=defs.FILE_ENCODING, description="The encoding of the input files."
+    )
+    storage: StorageConfig | None = Field(
+        default=None,
+        description="Optional storage configuration for reading input from blob/cosmos. When omitted, reads from the local filesystem.",
     )
 
 
@@ -681,11 +687,14 @@ class QuestionGenerationConfig(BaseModel):
         description="Configuration for assertion generation prompts.",
     )
 
+    output_storage: StorageConfig | None = Field(
+        default=None,
+        description="Optional storage configuration for writing output to blob/cosmos. When omitted, writes to the local filesystem path specified in the CLI.",
+    )
 
-class QuestionType(str):
+
+class QuestionType(StrEnum):
     """Enumeration for question types that support assertion regeneration."""
-
-    __slots__ = ()
 
     DATA_LOCAL = "data_local"
     DATA_GLOBAL = "data_global"

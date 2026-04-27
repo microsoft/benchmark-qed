@@ -2,15 +2,17 @@
 """Autoq CLI for generating questions."""
 
 import asyncio
-import json
 from enum import StrEnum
 from pathlib import Path
 from typing import Annotated, Any
 
-import pandas as pd
 import tiktoken
 import typer
 from graphrag_common.config import load_config
+from graphrag_storage import Storage
+from graphrag_storage.file_storage import FileStorage
+from graphrag_storage.storage_factory import create_storage
+from graphrag_storage.tables.parquet_table_provider import ParquetTableProvider
 from rich import print as rich_print
 
 from benchmark_qed.autod.data_processor.embedding import TextEmbedder
@@ -27,8 +29,7 @@ from benchmark_qed.autoq.config import (
     DataLocalPromptConfig,
     QuestionGenerationConfig,
 )
-from benchmark_qed.autoq.data_model.activity import ActivityContext
-from benchmark_qed.autoq.io.activity import save_activity_context
+from benchmark_qed.autoq.io.activity import load_activity_context, save_activity_context
 from benchmark_qed.autoq.io.question import load_questions, save_questions
 from benchmark_qed.autoq.question_gen.activity_questions.context_gen.activity_context_gen import (
     ActivityContextGen,
@@ -65,7 +66,7 @@ class GenerationType(StrEnum):
 
 
 async def __generate_data_local(
-    output_data_path: Path,
+    output_storage: Storage,
     llm: ChatModel,
     text_embedder: TextEmbedder,
     num_questions: int,
@@ -77,7 +78,8 @@ async def __generate_data_local(
     assertion_prompt_config: AssertionPromptConfig,
     llm_params: dict[str, Any],
 ) -> None:
-    sample_texts_df = pd.read_parquet(f"{output_data_path}/sample_texts.parquet")
+    table_provider = ParquetTableProvider(output_storage)
+    sample_texts_df = await table_provider.read_dataframe("sample_texts")
     sample_texts = load_text_units(df=sample_texts_df)
 
     data_local_generator = DataLocalQuestionGen(
@@ -100,27 +102,28 @@ async def __generate_data_local(
     )
 
     # save both candidate questions and the final selected questions
-    save_questions(
+    data_local_storage = output_storage.child("data_local_questions")
+    await save_questions(
         data_local_question_results.selected_questions,
-        f"{output_data_path}/data_local_questions/",
+        data_local_storage,
         "selected_questions",
     )
-    save_questions(
+    await save_questions(
         data_local_question_results.selected_questions,
-        f"{output_data_path}/data_local_questions/",
+        data_local_storage,
         "selected_questions_text",
         question_text_only=True,
     )
-    save_questions(
+    await save_questions(
         data_local_question_results.candidate_questions,
-        f"{output_data_path}/data_local_questions/",
+        data_local_storage,
         "candidate_questions",
         save_assertions=False,  # Only save assertions for selected questions
     )
 
 
 async def __generate_data_global(
-    output_data_path: Path,
+    output_storage: Storage,
     llm: ChatModel,
     text_embedder: TextEmbedder,
     num_questions: int,
@@ -136,16 +139,15 @@ async def __generate_data_global(
     assertion_prompt_config: AssertionPromptConfig,
     llm_params: dict[str, Any],
 ) -> None:
-    if not (
-        output_data_path / "data_local_questions" / "candidate_questions.json"
-    ).exists():
+    data_local_storage = output_storage.child("data_local_questions")
+    if not await data_local_storage.has("candidate_questions.json"):
         rich_print(
             "Local candidate questions not found. Please run data_local generation first."
         )
         return
 
-    local_questions = load_questions(
-        f"{output_data_path}/data_local_questions/candidate_questions.json"
+    local_questions = await load_questions(
+        data_local_storage, "candidate_questions.json"
     )
 
     data_global_generator = DataGlobalQuestionGen(
@@ -171,27 +173,28 @@ async def __generate_data_global(
     )
 
     # save both candidate questions and the final selected questions
-    save_questions(
+    data_global_storage = output_storage.child("data_global_questions")
+    await save_questions(
         data_global_question_results.selected_questions,
-        f"{output_data_path}/data_global_questions/",
+        data_global_storage,
         "selected_questions",
     )
-    save_questions(
+    await save_questions(
         data_global_question_results.selected_questions,
-        f"{output_data_path}/data_global_questions/",
+        data_global_storage,
         "selected_questions_text",
         question_text_only=True,
     )
-    save_questions(
+    await save_questions(
         data_global_question_results.candidate_questions,
-        f"{output_data_path}/data_global_questions/",
+        data_global_storage,
         "candidate_questions",
         save_assertions=False,  # Only save assertions for selected questions
     )
 
 
 async def __generate_data_linked(
-    output_data_path: Path,
+    output_storage: Storage,
     llm: ChatModel,
     text_embedder: TextEmbedder,
     num_questions: int,
@@ -207,16 +210,15 @@ async def __generate_data_linked(
     llm_params: dict[str, Any],
 ) -> None:
     """Generate data-linked questions from local questions sharing named entities."""
-    if not (
-        output_data_path / "data_local_questions" / "candidate_questions.json"
-    ).exists():
+    data_local_storage = output_storage.child("data_local_questions")
+    if not await data_local_storage.has("candidate_questions.json"):
         rich_print(
             "Local candidate questions not found. Please run data_local generation first."
         )
         return
 
-    local_questions = load_questions(
-        f"{output_data_path}/data_local_questions/candidate_questions.json"
+    local_questions = await load_questions(
+        data_local_storage, "candidate_questions.json"
     )
 
     data_linked_generator = DataLinkedQuestionGen(
@@ -240,20 +242,21 @@ async def __generate_data_linked(
     )
 
     # save both candidate questions and the final selected questions
-    save_questions(
+    data_linked_storage = output_storage.child("data_linked_questions")
+    await save_questions(
         data_linked_question_results.selected_questions,
-        f"{output_data_path}/data_linked_questions/",
+        data_linked_storage,
         "selected_questions",
     )
-    save_questions(
+    await save_questions(
         data_linked_question_results.selected_questions,
-        f"{output_data_path}/data_linked_questions/",
+        data_linked_storage,
         "selected_questions_text",
         question_text_only=True,
     )
-    save_questions(
+    await save_questions(
         data_linked_question_results.candidate_questions,
-        f"{output_data_path}/data_linked_questions/",
+        data_linked_storage,
         "candidate_questions",
         save_assertions=False,  # Only save assertions for selected questions
     )
@@ -263,10 +266,9 @@ async def __generate_data_linked(
         import json
 
         stats = data_linked_question_results.pipeline_stats  # type: ignore[attr-defined]
-        stats_path = Path(
-            f"{output_data_path}/data_linked_questions/question_stats.json"
+        await data_linked_storage.set(
+            "question_stats.json", json.dumps(stats, indent=2)
         )
-        stats_path.write_text(json.dumps(stats, indent=2))
 
         # Print summary stats
         rich_print("\n[bold]Data-Linked Question Generation Summary:[/bold]")
@@ -289,7 +291,7 @@ async def __generate_data_linked(
 
 
 async def __generate_activity_context(
-    output_data_path: Path,
+    output_storage: Storage,
     llm: ChatModel,
     text_embedder: TextEmbedder,
     token_encoder: tiktoken.Encoding,
@@ -303,15 +305,15 @@ async def __generate_activity_context(
     use_representative_samples_only: bool = True,
     skip_warning: bool = False,
 ) -> None:
-    if (
-        output_data_path / "context" / "activity_context_full.json"
-    ).exists() and not skip_warning:
+    context_storage = output_storage.child("context")
+    if (await context_storage.has("activity_context_full.json")) and not skip_warning:
         rich_print(
             "Activity context already exists. Skipping generation.\n"
-            f"[bold yellow]If you want to generate a new context, delete context folder from {output_data_path}.[/bold yellow]"
+            "[bold yellow]If you want to generate a new context, delete context folder from output.[/bold yellow]"
         )
         return
-    sample_texts_df = pd.read_parquet(f"{output_data_path}/sample_texts.parquet")
+    table_provider = ParquetTableProvider(output_storage)
+    sample_texts_df = await table_provider.read_dataframe("sample_texts")
     sample_texts = load_text_units(
         df=sample_texts_df, attributes_cols=["is_representative"]
     )
@@ -338,11 +340,11 @@ async def __generate_activity_context(
         use_representative_samples_only=use_representative_samples_only,
     )
 
-    save_activity_context(activity_context, f"{output_data_path}/context/")
+    await save_activity_context(activity_context, context_storage)
 
 
 async def __generate_activity_local(
-    output_data_path: Path,
+    output_storage: Storage,
     llm: ChatModel,
     text_embedder: TextEmbedder,
     num_questions: int,
@@ -352,10 +354,9 @@ async def __generate_activity_local(
     config: ActivityLocalPromptConfig,
     llm_params: dict[str, Any],
 ) -> None:
-    activity_context = ActivityContext(
-        **json.loads(
-            (output_data_path / "context" / "activity_context_full.json").read_text()
-        )
+    context_storage = output_storage.child("context")
+    activity_context = await load_activity_context(
+        context_storage, "activity_context_full.json"
     )
 
     # Use PromptConfig.template property for all prompt templates
@@ -376,27 +377,28 @@ async def __generate_activity_local(
     )
 
     # save both candidate questions and the final selected questions
-    save_questions(
+    activity_local_storage = output_storage.child("activity_local_questions")
+    await save_questions(
         activity_local_question_results.selected_questions,
-        f"{output_data_path}/activity_local_questions/",
+        activity_local_storage,
         "selected_questions",
     )
-    save_questions(
+    await save_questions(
         activity_local_question_results.selected_questions,
-        f"{output_data_path}/activity_local_questions/",
+        activity_local_storage,
         "selected_questions_text",
         question_text_only=True,
     )
-    save_questions(
+    await save_questions(
         activity_local_question_results.candidate_questions,
-        f"{output_data_path}/activity_local_questions/",
+        activity_local_storage,
         "candidate_questions",
         save_assertions=False,  # Only save assertions for selected questions
     )
 
 
 async def __generate_activity_global(
-    output_data_path: Path,
+    output_storage: Storage,
     llm: ChatModel,
     text_embedder: TextEmbedder,
     num_questions: int,
@@ -406,10 +408,9 @@ async def __generate_activity_global(
     config: ActivityGlobalPromptConfig,
     llm_params: dict[str, Any],
 ) -> None:
-    activity_context = ActivityContext(
-        **json.loads(
-            (output_data_path / "context" / "activity_context_full.json").read_text()
-        )
+    context_storage = output_storage.child("context")
+    activity_context = await load_activity_context(
+        context_storage, "activity_context_full.json"
     )
 
     # Use PromptConfig.template property for all prompt templates
@@ -430,20 +431,21 @@ async def __generate_activity_global(
     )
 
     # save both candidate questions and the final selected questions
-    save_questions(
+    activity_global_storage = output_storage.child("activity_global_questions")
+    await save_questions(
         activity_global_question_results.selected_questions,
-        f"{output_data_path}/activity_global_questions/",
+        activity_global_storage,
         "selected_questions",
     )
-    save_questions(
+    await save_questions(
         activity_global_question_results.selected_questions,
-        f"{output_data_path}/activity_global_questions/",
+        activity_global_storage,
         "selected_questions_text",
         question_text_only=True,
     )
-    save_questions(
+    await save_questions(
         activity_global_question_results.candidate_questions,
-        f"{output_data_path}/activity_global_questions/",
+        activity_global_storage,
         "candidate_questions",
         save_assertions=False,  # Only save assertions for selected questions
     )
@@ -460,7 +462,7 @@ SCOPE_SOURCE_MAPPING: dict[Any, Any] = {
 
 async def __create_clustered_sample(
     input_data_path: Path,
-    output_data_path: Path,
+    output_storage: Storage,
     text_embedder: TextEmbedder,
     num_clusters: int,
     num_samples_per_cluster: int,
@@ -472,17 +474,18 @@ async def __create_clustered_sample(
     chunk_overlap: int,
     model_name: str,
     random_seed: int = 42,
+    input_storage: Storage | None = None,
 ) -> None:
-    if (output_data_path / "sample_texts.parquet").exists():
+    if await output_storage.has("sample_texts.parquet"):
         rich_print(
             "Sample files already exist. Skipping sampling step.\n"
-            f"[bold yellow]If you want to generate a new sample, delete sample_texts.parquet from {output_data_path}.[/bold yellow]"
+            "[bold yellow]If you want to generate a new sample, delete sample_texts.parquet from the output.[/bold yellow]"
         )
         return
 
     await acreate_clustered_sample(
         input_path=input_data_path.as_posix(),
-        output_path=output_data_path.as_posix(),
+        output_path="",
         text_embedder=text_embedder,
         num_clusters=num_clusters,
         num_samples_per_cluster=num_samples_per_cluster,
@@ -494,6 +497,8 @@ async def __create_clustered_sample(
         file_encoding=file_encoding,
         token_encoding=model_name,
         random_seed=random_seed,
+        input_storage=input_storage,
+        output_storage=output_storage,
     )
 
 
@@ -532,6 +537,27 @@ def autoq(
     chat_model = ModelFactory.create_chat_model(config.chat_model)
     token_encoder = tiktoken.get_encoding(config.encoding.model_name)
     loop = asyncio.get_event_loop()
+
+    # Create storage for output
+    if config.output_storage:
+        output_storage = create_storage(config.output_storage)
+        output_posix = output_data_path.as_posix().strip("./")
+        if output_posix:
+            output_storage = output_storage.child(output_posix)
+    else:
+        output_data_path.mkdir(parents=True, exist_ok=True)
+        output_storage = FileStorage(base_dir=str(output_data_path))
+
+    # Create storage for input (if configured)
+    if config.input.storage:
+        base_storage = create_storage(config.input.storage)
+        # Use dataset_path as a sub-path within the storage container
+        dataset_posix = config.input.dataset_path.as_posix().strip("./")
+        input_storage = (
+            base_storage.child(dataset_posix) if dataset_posix else base_storage
+        )
+    else:
+        input_storage = None
 
     # Log assertion generation status
     local_assertions_enabled = (
@@ -572,7 +598,7 @@ def autoq(
         loop.run_until_complete(
             __create_clustered_sample(
                 input_data_path=config.input.dataset_path,
-                output_data_path=output_data_path,
+                output_storage=output_storage,
                 text_embedder=text_embedder,
                 num_clusters=config.sampling.num_clusters,
                 num_samples_per_cluster=config.sampling.num_samples_per_cluster,
@@ -584,6 +610,7 @@ def autoq(
                 chunk_overlap=config.encoding.chunk_overlap,
                 model_name=config.encoding.model_name,
                 random_seed=config.sampling.random_seed,
+                input_storage=input_storage,
             )
         )
     first_activity = True
@@ -600,7 +627,7 @@ def autoq(
             )
             loop.run_until_complete(
                 __generate_activity_context(
-                    output_data_path=output_data_path,
+                    output_storage=output_storage,
                     llm=chat_model,
                     text_embedder=text_embedder,
                     token_encoder=token_encoder,
@@ -616,7 +643,7 @@ def autoq(
             )
             activity_fn = SCOPE_SOURCE_MAPPING[generation_type]
             activity_fn_kwargs: dict[str, Any] = {
-                "output_data_path": output_data_path,
+                "output_storage": output_storage,
                 "llm": chat_model,
                 "text_embedder": text_embedder,
                 "num_questions": activity_config.num_questions,
@@ -651,7 +678,7 @@ def autoq(
             data_fn = SCOPE_SOURCE_MAPPING[generation_type]
             # Build kwargs for the data function
             data_kwargs: dict[str, Any] = {
-                "output_data_path": output_data_path,
+                "output_storage": output_storage,
                 "llm": chat_model,
                 "text_embedder": text_embedder,
                 "num_questions": data_config.num_questions,
@@ -955,13 +982,16 @@ def generate_assertions(
             output/data_linked_questions/ --type linked
     """
     config = load_config(QuestionGenerationConfig, configuration_path)
+    loop = asyncio.get_event_loop()
 
     # Load questions
     if not questions_path.exists():
         rich_print(f"[red]Questions file not found: {questions_path}[/red]")
         raise typer.Exit(1)
 
-    questions = load_questions(str(questions_path))
+    questions = loop.run_until_complete(
+        load_questions(FileStorage(str(questions_path.parent)), questions_path.name)
+    )
     rich_print(f"Loaded {len(questions)} questions from {questions_path}")
 
     # Check if questions have claims (required for assertion generation)
@@ -996,7 +1026,6 @@ def generate_assertions(
         rich_print(f"  - min_validation_score: {assertion_cfg.min_validation_score}")
 
     # Generate assertions
-    loop = asyncio.get_event_loop()
     questions_with_assertions = loop.run_until_complete(
         __generate_assertions_for_questions(
             questions=questions_with_claims,
@@ -1011,10 +1040,12 @@ def generate_assertions(
 
     # Save results
     output_path.mkdir(parents=True, exist_ok=True)
-    save_questions(
-        questions_with_assertions,
-        str(output_path),
-        "questions_with_assertions",
+    loop.run_until_complete(
+        save_questions(
+            questions_with_assertions,
+            FileStorage(str(output_path)),
+            "questions_with_assertions",
+        )
     )
 
     # Count assertions generated

@@ -32,6 +32,7 @@ Follow these steps to generate synthetic queries using AutoQ:
     ```sh
     uv run benchmark-qed data download AP_news input
     ```
+    You can also download directly to Azure Blob Storage or Cosmos DB. See the [Datasets documentation](datasets.md) for storage options.
 
 3. **Initialize the configuration:**
     ```sh
@@ -40,6 +41,8 @@ Follow these steps to generate synthetic queries using AutoQ:
     This command creates two files in the `./autoq_test` directory:
     - `.env`: Stores environment variables for the AutoQ pipeline. Open this file and replace `<API_KEY>` with your OpenAI or Azure API key.
     - `settings.yaml`: Contains pipeline settings. Edit this file as needed for your use case.
+
+    The generated `settings.yaml` includes commented-out sections for configuring Azure Blob Storage or Cosmos DB as input and output backends. Uncomment and fill in the `storage` section under `input` to read data from blob storage, or the `output_storage` section to write results to blob storage instead of the local filesystem.
 
 4. **Generate synthetic queries:**
     ```sh
@@ -72,6 +75,7 @@ Follow these steps to compare RAG answer pairs using the pairwise scoring pipeli
     ```sh
     uv run benchmark-qed data download example_answers input
     ```
+    You can also download directly to Azure Blob Storage or Cosmos DB. See the [Datasets documentation](datasets.md) for storage options.
 
 3. **Create a configuration file for pairwise comparison:**
     ```sh
@@ -80,6 +84,8 @@ Follow these steps to compare RAG answer pairs using the pairwise scoring pipeli
     This command creates two files in the `./pairwise_test` directory:
     - `.env`: Contains environment variables for the pairwise comparison tests. Open this file and replace `<API_KEY>` with your OpenAI or Azure API key.
     - `settings.yaml`: Contains pipeline settings, which you can modify as needed.
+
+    The generated `settings.yaml` includes commented-out `input_storage` and `output_storage` sections for configuring Azure Blob Storage or Cosmos DB backends.
 
 4. **Run the pairwise comparison:**
     ```sh
@@ -104,6 +110,7 @@ Follow these steps to score RAG answers against reference answers using example 
     ```sh
     uv run benchmark-qed data download example_answers input
     ```
+    You can also download directly to Azure Blob Storage or Cosmos DB. See the [Datasets documentation](datasets.md) for storage options.
 
 3. **Create a configuration file for reference scoring:**
     ```sh
@@ -112,6 +119,8 @@ Follow these steps to score RAG answers against reference answers using example 
     This creates two files in the `./reference_test` directory:
     - `.env`: Contains environment variables for the reference scoring pipeline. Open this file and replace `<API_KEY>` with your OpenAI or Azure API key.
     - `settings.yaml`: Contains pipeline settings, which you can modify as needed.
+
+    The generated `settings.yaml` includes commented-out `input_storage` and `output_storage` sections for configuring Azure Blob Storage or Cosmos DB backends.
 
 4. **Run the reference scoring:**
     ```sh

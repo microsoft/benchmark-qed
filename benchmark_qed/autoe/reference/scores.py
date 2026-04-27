@@ -120,8 +120,10 @@ def get_reference_scores(
             for n in range(trials)
         ]
 
-        loop = asyncio.get_event_loop()
-        results = loop.run_until_complete(asyncio.gather(*tasks))
+        async def _run_tasks() -> list[dict[str, Any]]:
+            return await asyncio.gather(*tasks)
+
+        results = asyncio.run(_run_tasks())
 
         return pd.DataFrame(results)
 
