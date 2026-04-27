@@ -1,0 +1,455 @@
+# Configuration Reference
+
+Reference for benchmark-qed configuration fields. Load this file when you need to understand or modify specific config settings. Default values shown are from the source code Pydantic models.
+
+## autoq Configuration (`QuestionGenerationConfig`)
+
+### Input Configuration
+```yaml
+input:
+  dataset_path: ./input/data.csv    # Path to input dataset (when storage is configured, path within the container)
+  input_type: csv                    # csv or json
+  text_column: text                  # Column containing text content
+  metadata_columns: null             # Optional list of metadata columns (e.g., [headline, date])
+  file_encoding: utf-8               # File encoding (template uses utf-8-sig)
+  storage: null                      # Optional StorageConfig for cloud storage (Azure Blob or Cosmos DB)
+```
+
+### Encoding Configuration
+```yaml
+encoding:
+  model_name: o200k_base            # Tokenizer model
+  chunk_size: 600                    # Tokens per chunk
+  chunk_overlap: 100                 # Overlap between chunks
+```
+
+### Sampling Configuration
+```yaml
+sampling:
+  num_clusters: 50                   # Number of clusters for sampling
+  num_samples_per_cluster: 10        # Samples per cluster
+  random_seed: 42                    # Reproducibility seed
+```
+
+### LLM Configuration (shared across all commands)
+```yaml
+chat_model:
+  model: gpt-4.1                     # Model name
+  auth_type: api_key                 # api_key | azure_managed_identity
+  api_key: ${OPENAI_API_KEY}         # Required for api_key auth
+  llm_provider: openai.chat          # Provider (see table below)
+  concurrent_requests: 4             # Parallel LLM requests
+  azure_identity_scopes:             # Azure identity scopes (azure_managed_identity only)
+    - https://cognitiveservices.azure.com/.default
+  init_args: {}                      # Extra model init args (e.g., api_version, azure_endpoint)
+  call_args:                         # Extra model call args
+    temperature: 0.0
+    seed: 42
+  custom_providers: []               # Custom provider registrations
+
+embedding_model:
+  model: text-embedding-3-large      # Embedding model (template default; code default is gpt-4.1)
+  llm_provider: openai.embedding     # Must use an embedding provider
+  api_key: ${OPENAI_API_KEY}
+```
+
+### Azure Identity Scopes
+
+When using `auth_type: azure_managed_identity`, the `azure_identity_scopes` field controls which OAuth scopes are requested from Azure Active Directory via `get_bearer_token_provider`.
+
+```yaml
+azure_identity_scopes:
+  - https://cognitiveservices.azure.com/.default    # Default — Azure Cognitive Services
+```
+
+| Field | Type | Default | Description |
+|-------|------|---------|-------------|
+| `azure_identity_scopes` | `list[str]` | `["https://cognitiveservices.azure.com/.default"]` | OAuth scopes passed to `get_bearer_token_provider`. Only used when `auth_type` is `azure_managed_identity`. |
+
+**When to change this:**
+- The default scope (`https://cognitiveservices.azure.com/.default`) works for standard Azure OpenAI deployments
+- Use a custom scope if your Azure resource requires a different audience (e.g., private endpoints, sovereign clouds)
+- Multiple scopes can be listed if your deployment requires more than one
+
+### Storage Configuration (Optional)
+
+All config types support optional cloud storage backends for reading input and writing output. When omitted, the local filesystem is used (default behavior).
+
+```yaml
+# AutoQ — input storage (inside the 'input' block)
+input:
+  dataset_path: ./input           # When storage is set, this is the path within the container
+  storage:                        # Optional: read input from Azure Blob Storage
+    type: blob
+    container_name: my-datasets
+    connection_string: ${AZURE_STORAGE_CONNECTION_STRING}  # Or use account_url for managed identity
+    # account_url: https://<account>.blob.core.windows.net
+    # base_dir: path/within/container
+
+# AutoQ/AutoE — output storage (top-level)
+output_storage:                   # Optional: write output to Azure Blob Storage
+  type: blob
+  container_name: my-output
+  connection_string: ${AZURE_STORAGE_CONNECTION_STRING}
+  # base_dir: experiments/run1
+
+# AutoE — input storage (top-level, for reading answers/assertions)
+input_storage:                    # Optional: read input from Azure Blob Storage
+  type: blob
+  container_name: my-datasets
+  account_url: https://<account>.blob.core.windows.net
+```
+
+#### StorageConfig Fields
+
+| Field | Type | Default | Description |
+|-------|------|---------|-------------|
+| `type` | `str` | `"file"` | Storage backend: `file` (local), `blob` (Azure Blob Storage), `cosmosdb` (Azure Cosmos DB) |
+| `container_name` | `str \| null` | `null` | Azure Blob container or Cosmos DB container name |
+| `connection_string` | `str \| null` | `null` | Connection string for Azure (auth option 1) |
+| `account_url` | `str \| null` | `null` | Account URL for Azure managed identity (auth option 2) |
+| `base_dir` | `str \| null` | `null` | Base directory/prefix within the container |
+| `database_name` | `str \| null` | `null` | Database name (Cosmos DB only) |
+| `encoding` | `str \| null` | `null` | File encoding (file storage only) |
+
+### Question Generation Types
+
+All question types share a base config with `num_questions` (default: `50`) and `oversample_factor` (default: `2.0`). Type-specific fields are listed below.
+
+```yaml
+data_local:
+  num_questions: 50                  # Number of questions to generate
+  oversample_factor: 2.0             # Generate oversample_factor × num_questions candidates
+
+data_global:                         # Requires data_local to be run first
+  num_questions: 50
+  oversample_factor: 2.0
+  min_questions_in_context: 2        # Min local questions required to form global context
+  min_claim_count: 2                 # Min claims required for global question
+  min_relevant_reference_count: 10   # Min relevant references for global question
+  enable_question_validation: true   # Validate generated global questions
+
+data_linked:                         # Requires data_local; opt-in (not generated by default)
+  num_questions: 50
+  oversample_factor: 2.0
+  min_questions_per_entity: 2        # Min local questions sharing an entity to form a group
+  max_questions_per_entity: 3        # Max local questions per entity group
+  type_balance_weight: 0.5           # Weight for balancing linked question types
+  max_questions_to_generate: 2       # Max linked questions per entity group
+  entity_frequency_threshold: 2      # Min entity frequency to be considered
+
+activity_local:                      # Auto-generates activity_context first
+  num_questions: 50
+  oversample_factor: 2.0
+  num_personas: 5                    # Number of personas to generate
+  num_tasks_per_persona: 5           # Tasks per persona
+  num_entities_per_task: 10          # Entities per task
+
+activity_global:                     # Requires activity_local
+  num_questions: 50
+  oversample_factor: 2.0
+  num_personas: 5
+  num_tasks_per_persona: 5
+  num_entities_per_task: 10
+```
+
+### Assertion Configuration
+```yaml
+assertions:
+  local:
+    max_assertions: 20               # Max assertions per question (null = unlimited, 0 = disable)
+    enable_validation: true           # Quality filtering via LLM validation
+    min_validation_score: 3           # Min score (1-5) to pass validation
+    max_source_count: 500             # Max source chunks to consider
+    concurrent_llm_calls: 8           # Concurrent LLM calls for validation
+    max_concurrent_questions: 8       # Parallel questions for assertion generation
+  global:
+    max_assertions: 20
+    enable_validation: true
+    min_validation_score: 3
+    max_source_count: 500
+    batch_size: 100                   # Batch size for map-reduce processing
+    map_data_tokens: 8000             # Max tokens per cluster in map step
+    reduce_data_tokens: 32000         # Max input tokens for reduce step
+    enable_semantic_grouping: true    # Group similar claims before map step
+    validate_map_assertions: true     # Validate map assertions before reduce
+    validate_reduce_assertions: true  # Validate final assertions after reduce
+    concurrent_llm_calls: 8
+    max_concurrent_questions: 2
+  linked:
+    max_assertions: 20
+    enable_validation: true
+    min_validation_score: 3
+    max_source_count: 500
+    concurrent_llm_calls: 8
+    max_concurrent_questions: 2
+
+concurrent_requests: 8               # Top-level concurrency for autoq pipeline
+output_storage: null                 # Optional StorageConfig for writing output to cloud storage
+```
+
+## autoe Pairwise Configuration (`PairwiseConfig`)
+```yaml
+base:
+  name: method_a                     # REQUIRED
+  answer_base_path: ./answers/method_a/  # REQUIRED
+
+others:
+  - name: method_b
+    answer_base_path: ./answers/method_b/
+
+question_sets:
+  - data_local_questions
+  - data_global_questions
+
+criteria:                            # Default: comprehensiveness, diversity, empowerment, relevance
+  - name: comprehensiveness          # Each criterion requires both name and description
+    description: "..."
+  - name: diversity
+    description: "..."
+
+trials: 4                            # Must be even (counterbalancing)
+llm_config: ...                      # Same LLM config structure as above
+prompt_config:
+  user_prompt: prompts/pairwise_user.txt
+  system_prompt: prompts/pairwise_system.txt
+```
+
+## autoe Reference Configuration (`ReferenceConfig`)
+```yaml
+reference:
+  name: gold_standard                # REQUIRED
+  answer_base_path: ./answers/reference/  # REQUIRED
+
+generated:
+  - name: method_a
+    answer_base_path: ./answers/method_a/
+
+criteria:                            # Default: correctness, completeness
+  - name: correctness
+    description: "..."
+
+score_min: 1
+score_max: 10
+trials: 4                            # Default is 4 (not 3)
+```
+
+## autoe Assertion Configuration
+
+### Single-RAG (`AssertionConfig`)
+```yaml
+generated:
+  name: method_a                     # REQUIRED
+  answer_base_path: ./answers/method_a/  # REQUIRED
+
+assertions:
+  assertions_path: ./questions/assertions.json  # REQUIRED
+
+pass_threshold: 0.5
+trials: 4                            # Default is 4 (not 3)
+```
+
+### Multi-RAG (`MultiRAGAssertionConfig`)
+```yaml
+input_dir: ./data                    # REQUIRED
+output_dir: ./eval_output            # REQUIRED
+rag_methods:                         # REQUIRED
+  - method_a
+  - method_b
+
+question_sets:                       # REQUIRED
+  - data_local_questions
+
+assertions_filename_template: "{question_set}_assertions.json"
+answers_path_template: "{input_dir}/{rag_method}/{question_set}.json"
+question_text_key: question_text     # Key for question text in JSON
+answer_text_key: answer              # Key for answer text in JSON
+
+pass_threshold: 0.5
+top_k_assertions: null               # null = use all
+trials: 4
+
+run_significance_test: true
+significance_alpha: 0.05
+significance_correction: holm        # holm | bonferroni | fdr_bh
+
+run_clustered_permutation: false
+n_permutations: 10000                # Number of permutations for clustered test
+permutation_seed: null               # null = random seed
+```
+
+## autoe Hierarchical Assertion Configuration
+
+### Single-RAG (`HierarchicalAssertionConfig`)
+```yaml
+generated:
+  name: method_a                     # REQUIRED
+  answer_base_path: ./answers/method_a/  # REQUIRED
+
+assertions:
+  assertions_path: ./assertions.json # REQUIRED
+
+mode: staged                         # staged (default) or joint
+detect_discovery: true               # Detect novel findings not in assertions
+pass_threshold: 0.5
+trials: 4
+```
+
+### Multi-RAG (`MultiRAGHierarchicalAssertionConfig`)
+```yaml
+input_dir: ./data                    # REQUIRED
+output_dir: ./eval_output            # REQUIRED
+rag_methods:                         # REQUIRED
+  - method_a
+  - method_b
+assertions_file: assertions.json     # REQUIRED — assertions filename
+
+answers_path_template: "{input_dir}/{rag_method}/data_global.json"
+question_id_key: question_id
+question_text_key: question_text
+answer_text_key: answer
+supporting_assertions_key: supporting_assertions
+
+mode: staged                         # staged | joint
+pass_threshold: 0.5
+trials: 4
+
+run_significance_test: true
+significance_alpha: 0.05
+significance_correction: holm
+
+run_clustered_permutation: false
+n_permutations: 10000
+permutation_seed: null
+```
+
+## autoe Retrieval Reference Configuration (`RetrievalReferenceConfig`)
+```yaml
+# Provide EITHER questions_path OR question_sets (not both)
+questions_path: ./questions/selected_questions.json
+# OR for multiple question sets:
+question_sets:
+  - name: data_local
+    questions_path: ./questions/data_local/selected_questions.json
+
+text_units_path: ./data/text_units.parquet  # REQUIRED
+output_dir: ./retrieval_reference           # REQUIRED
+clusters_path: null                  # Optional pre-computed clusters
+num_clusters: null                   # int, list of ints, or null (auto)
+save_clusters: true
+
+semantic_neighbors: 10
+centroid_neighbors: 5
+relevance_threshold: 2               # Min relevance score for a text unit
+assessor_type: rationale             # rationale or bing
+concurrent_requests: 16
+max_questions: null                  # null = process all questions
+cache_dir: null                      # Optional cache directory
+
+embedding_config: ...                # LLM config for generating embeddings (if needed)
+
+text_unit_fields:
+  id_col: id
+  text_col: text
+  embedding_col: text_embedding      # Set to null to auto-generate embeddings
+  short_id_col: short_id             # Set to null to auto-generate from index
+```
+
+## autoe Retrieval Scores Configuration (`RetrievalScoresConfig`)
+```yaml
+rag_methods:
+  - name: method_a
+    retrieval_results_path: ./results/method_a/
+
+question_sets:
+  - data_local_questions
+
+reference_dir: ./retrieval_reference # REQUIRED
+reference_filename: reference.json   # Filename within reference_dir subdirectories
+clusters_path: ./clusters.parquet    # REQUIRED
+text_units_path: ./text_units.parquet  # REQUIRED
+output_dir: ./retrieval_eval         # REQUIRED
+
+relevance_threshold: 2
+assessor_type: rationale             # rationale or bing
+fidelity_metric: js                  # js (Jensen-Shannon) or tvd
+context_id_key: chunk_id             # Key for chunk ID in retrieval results
+context_text_key: text               # Key for chunk text in retrieval results
+cluster_match_by: text               # Field to match clusters
+
+cache_dir: null                      # Optional cache directory
+
+run_significance_test: true
+significance_alpha: 0.05
+significance_correction: holm
+```
+
+## LLM Providers Reference
+
+| Provider | Value | Use for |
+|----------|-------|---------|
+| OpenAI Chat | `openai.chat` | Chat/generation models |
+| OpenAI Embedding | `openai.embedding` | Embedding models |
+| Azure OpenAI Chat | `azure.openai.chat` | Azure-hosted chat models |
+| Azure OpenAI Embedding | `azure.openai.embedding` | Azure-hosted embeddings |
+| Azure Inference Chat | `azure.inference.chat` | Azure AI Inference chat |
+| Azure Inference Embedding | `azure.inference.embedding` | Azure AI Inference embeddings |
+
+## Custom LLM Providers
+```yaml
+custom_providers:
+  - model_type: chat                 # chat or embedding
+    name: custom.chat                # Matches llm_provider value
+    module: my_module.provider       # Python module path
+    model_class: MyCustomChatModel   # Class name
+```
+
+## Significance Test Options
+| Correction | Description |
+|------------|-------------|
+| `holm` | Holm-Bonferroni (default, recommended) |
+| `bonferroni` | Bonferroni (conservative) |
+| `fdr_bh` | Benjamini-Hochberg FDR |
+
+## Best Practices
+
+### LLM Configuration
+- Use `${OPENAI_API_KEY}` environment variable substitution — never hardcode secrets in YAML
+- Use `azure_managed_identity` for production Azure deployments (omit `api_key` entirely)
+- Set `temperature: 0.0` and `seed: 42` for reproducible LLM outputs
+- Start with `concurrent_requests: 4`; increase based on your rate limit budget
+- For Azure providers, always set `azure_endpoint` and `api_version` in `init_args`
+- Quote `api_version` values: `"2024-12-01-preview"` (YAML would otherwise parse as a date)
+
+### Question Generation (autoq)
+- **Wizard defaults vs model defaults**: The interactive wizard uses curated starter values (e.g., `num_questions: 10`, `num_clusters: 20`) suitable for initial exploration. The Pydantic model defaults (e.g., `num_questions: 50`, `num_clusters: 50`) are for production runs. Adjust based on your dataset size and budget.
+- Keep `chunk_overlap` at 15–20% of `chunk_size` (default: 100/600 ≈ 17%)
+- Use `oversample_factor: 2.0` to generate 2× candidates before filtering — lower values risk insufficient quality diversity
+- Enable `enable_semantic_grouping: true` for global assertions to improve claim consolidation
+- Set `max_concurrent_questions` lower for global (2) than local (8) — global processing is heavier per question
+
+### Assertion Generation
+- Keep `max_assertions: 20` as a reasonable limit per question
+- Enable validation (`enable_validation: true`) for production benchmarks — it filters low-quality assertions
+- `min_validation_score: 3` (scale 1–5) provides a good baseline quality threshold
+- Setting `max_assertions: 0` disables assertion generation entirely for that question type
+- `max_source_count: 500` drops entire questions when exceeded — monitor for unexpected question drops
+
+### Evaluation (autoe)
+- Trials must be **even** for pairwise and reference evaluation (counterbalancing) — the config validator rejects odd values
+- Assertion and hierarchical evaluation do NOT require even trials
+- Use `staged` mode for hierarchical assertions (more accurate); `joint` mode is cheaper but risks anchoring bias
+- Use `holm` correction for significance testing (default) — balances power and error control
+- Set `pass_threshold: 0.5` as the default quality bar; adjust based on assertion strictness
+
+### Retrieval Evaluation
+- `assessor_type: rationale` (default) provides structured JSON with reasoning; `bing` uses the UMBRELA DNA prompt
+- Match the assessor type between `generate-retrieval-reference` and `retrieval-scores` to share the cache
+- `relevance_threshold: 2` on a 0–3 scale is a reasonable default — lower values include marginal matches
+- Use `cache_dir` for iterative development to avoid redundant LLM calls across runs
+
+### Storage Configuration
+- Use `connection_string` with `${AZURE_STORAGE_CONNECTION_STRING}` for development; use `account_url` with managed identity for production
+- `base_dir` is optional — use it to organize multiple experiments within a single container
+- When `storage` is set on `input`, `dataset_path` becomes relative to the container/base_dir, not the local filesystem
+- Cosmos DB storage requires `database_name` in addition to `container_name`
