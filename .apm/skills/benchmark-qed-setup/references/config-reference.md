@@ -7,11 +7,12 @@ Reference for benchmark-qed configuration fields. Load this file when you need t
 ### Input Configuration
 ```yaml
 input:
-  dataset_path: ./input/data.csv    # Path to input dataset (REQUIRED)
+  dataset_path: ./input/data.csv    # Path to input dataset (when storage is configured, path within the container)
   input_type: csv                    # csv or json
   text_column: text                  # Column containing text content
   metadata_columns: null             # Optional list of metadata columns (e.g., [headline, date])
   file_encoding: utf-8               # File encoding (template uses utf-8-sig)
+  storage: null                      # Optional StorageConfig for cloud storage (Azure Blob or Cosmos DB)
 ```
 
 ### Encoding Configuration
@@ -69,6 +70,47 @@ azure_identity_scopes:
 - The default scope (`https://cognitiveservices.azure.com/.default`) works for standard Azure OpenAI deployments
 - Use a custom scope if your Azure resource requires a different audience (e.g., private endpoints, sovereign clouds)
 - Multiple scopes can be listed if your deployment requires more than one
+
+### Storage Configuration (Optional)
+
+All config types support optional cloud storage backends for reading input and writing output. When omitted, the local filesystem is used (default behavior).
+
+```yaml
+# AutoQ — input storage (inside the 'input' block)
+input:
+  dataset_path: ./input           # When storage is set, this is the path within the container
+  storage:                        # Optional: read input from Azure Blob Storage
+    type: blob
+    container_name: my-datasets
+    connection_string: ${AZURE_STORAGE_CONNECTION_STRING}  # Or use account_url for managed identity
+    # account_url: https://<account>.blob.core.windows.net
+    # base_dir: path/within/container
+
+# AutoQ/AutoE — output storage (top-level)
+output_storage:                   # Optional: write output to Azure Blob Storage
+  type: blob
+  container_name: my-output
+  connection_string: ${AZURE_STORAGE_CONNECTION_STRING}
+  # base_dir: experiments/run1
+
+# AutoE — input storage (top-level, for reading answers/assertions)
+input_storage:                    # Optional: read input from Azure Blob Storage
+  type: blob
+  container_name: my-datasets
+  account_url: https://<account>.blob.core.windows.net
+```
+
+#### StorageConfig Fields
+
+| Field | Type | Default | Description |
+|-------|------|---------|-------------|
+| `type` | `str` | `"file"` | Storage backend: `file` (local), `blob` (Azure Blob Storage), `cosmosdb` (Azure Cosmos DB) |
+| `container_name` | `str \| null` | `null` | Azure Blob container or Cosmos DB container name |
+| `connection_string` | `str \| null` | `null` | Connection string for Azure (auth option 1) |
+| `account_url` | `str \| null` | `null` | Account URL for Azure managed identity (auth option 2) |
+| `base_dir` | `str \| null` | `null` | Base directory/prefix within the container |
+| `database_name` | `str \| null` | `null` | Database name (Cosmos DB only) |
+| `encoding` | `str \| null` | `null` | File encoding (file storage only) |
 
 ### Question Generation Types
 
@@ -143,6 +185,7 @@ assertions:
     max_concurrent_questions: 2
 
 concurrent_requests: 8               # Top-level concurrency for autoq pipeline
+output_storage: null                 # Optional StorageConfig for writing output to cloud storage
 ```
 
 ## autoe Pairwise Configuration (`PairwiseConfig`)
@@ -404,3 +447,9 @@ custom_providers:
 - Match the assessor type between `generate-retrieval-reference` and `retrieval-scores` to share the cache
 - `relevance_threshold: 2` on a 0–3 scale is a reasonable default — lower values include marginal matches
 - Use `cache_dir` for iterative development to avoid redundant LLM calls across runs
+
+### Storage Configuration
+- Use `connection_string` with `${AZURE_STORAGE_CONNECTION_STRING}` for development; use `account_url` with managed identity for production
+- `base_dir` is optional — use it to organize multiple experiments within a single container
+- When `storage` is set on `input`, `dataset_path` becomes relative to the container/base_dir, not the local filesystem
+- Cosmos DB storage requires `database_name` in addition to `container_name`
