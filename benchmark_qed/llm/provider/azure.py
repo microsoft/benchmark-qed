@@ -27,8 +27,18 @@ class AzureInferenceChat:
             **llm_config.init_args,
         )
         self._model = llm_config.model
-        self._semaphore = asyncio.Semaphore(llm_config.concurrent_requests)
+        self._concurrent_requests = llm_config.concurrent_requests
+        self._semaphore: asyncio.Semaphore | None = None
+        self._semaphore_loop: asyncio.AbstractEventLoop | None = None
         self._usage = Usage(model=llm_config.model)
+
+    def _get_semaphore(self) -> asyncio.Semaphore:
+        """Return a semaphore bound to the current running event loop."""
+        loop = asyncio.get_running_loop()
+        if self._semaphore is None or self._semaphore_loop is not loop:
+            self._semaphore = asyncio.Semaphore(self._concurrent_requests)
+            self._semaphore_loop = loop
+        return self._semaphore
 
     def get_usage(self) -> dict[str, Any]:
         """Get the usage of the Model."""
@@ -48,7 +58,7 @@ class AzureInferenceChat:
         -------
             The response from the Model.
         """
-        async with self._semaphore:
+        async with self._get_semaphore():
             response: ChatCompletions = cast(
                 ChatCompletions,
                 await self._client.complete(
@@ -101,8 +111,18 @@ class AzureInferenceEmbedding:
             **llm_config.init_args,
         )
         self._model = llm_config.model
-        self._semaphore = asyncio.Semaphore(llm_config.concurrent_requests)
+        self._concurrent_requests = llm_config.concurrent_requests
+        self._semaphore: asyncio.Semaphore | None = None
+        self._semaphore_loop: asyncio.AbstractEventLoop | None = None
         self._usage = Usage(model=llm_config.model)
+
+    def _get_semaphore(self) -> asyncio.Semaphore:
+        """Return a semaphore bound to the current running event loop."""
+        loop = asyncio.get_running_loop()
+        if self._semaphore is None or self._semaphore_loop is not loop:
+            self._semaphore = asyncio.Semaphore(self._concurrent_requests)
+            self._semaphore_loop = loop
+        return self._semaphore
 
     def get_usage(self) -> dict[str, Any]:
         """Get the usage of the Model."""
@@ -120,7 +140,7 @@ class AzureInferenceEmbedding:
         -------
             A collections of list of floats representing the embedding vector for each item in the batch.
         """
-        async with self._semaphore:
+        async with self._get_semaphore():
             response = await self._client.embed(
                 model=self._model,
                 input=text_list,
