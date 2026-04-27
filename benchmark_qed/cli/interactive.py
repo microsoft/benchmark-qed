@@ -13,6 +13,41 @@ from rich import print as rich_print
 from rich.panel import Panel
 from rich.table import Table
 
+from benchmark_qed.autod.prompts import summarization
+from benchmark_qed.autoe.prompts import assertion as assertion_prompts
+from benchmark_qed.autoe.prompts import pairwise as pairwise_prompts
+from benchmark_qed.autoe.prompts import reference as reference_prompts
+from benchmark_qed.autoq.prompts import data_questions as data_questions_prompts
+from benchmark_qed.autoq.prompts.activity_questions import (
+    activity_context as activity_context_prompts,
+)
+from benchmark_qed.autoq.prompts.activity_questions import (
+    global_questions as activity_global_prompts,
+)
+from benchmark_qed.autoq.prompts.activity_questions import (
+    local_questions as activity_local_prompts,
+)
+from benchmark_qed.autoq.prompts.data_questions import (
+    assertions as autoq_assertion_prompts,
+)
+from benchmark_qed.autoq.prompts.data_questions import (
+    global_questions as data_global_prompts,
+)
+from benchmark_qed.autoq.prompts.data_questions import (
+    linked_questions as data_linked_prompts,
+)
+from benchmark_qed.autoq.prompts.data_questions import (
+    local_questions as data_local_prompts,
+)
+from benchmark_qed.cli.scaffold import copy_prompts, ensure_input_folder, write_env_file
+from benchmark_qed.cli.yaml_renderer import (
+    render_autoe_assertion_yaml,
+    render_autoe_pairwise_yaml,
+    render_autoe_reference_yaml,
+    render_autoq_yaml,
+    validate_config,
+)
+
 app: typer.Typer = typer.Typer(pretty_exceptions_show_locals=False)
 
 
@@ -88,11 +123,9 @@ def check_tty() -> None:
         raise typer.Exit(code=1)
 
 
-def confirm_overwrite(path: typer.Path | Any) -> None:
+def confirm_overwrite(path: Path | str) -> None:
     """Ask for confirmation before overwriting an existing settings file."""
-    from pathlib import Path as _Path
-
-    p = _Path(str(path))
+    p = Path(path) if not isinstance(path, Path) else path
     if p.exists():
         typer.confirm(
             f"{p} already exists. Overwrite?",
@@ -643,34 +676,6 @@ CONFIG_TYPE_OPTIONS: list[tuple[str, str]] = [
 
 def _copy_prompts_for_config(config_type: str, prompts_folder: Path) -> None:
     """Copy the appropriate prompt templates for the given config type."""
-    from benchmark_qed.autod.prompts import summarization
-    from benchmark_qed.autoe.prompts import assertion as assertion_prompts
-    from benchmark_qed.autoe.prompts import pairwise as pairwise_prompts
-    from benchmark_qed.autoe.prompts import reference as reference_prompts
-    from benchmark_qed.autoq.prompts import data_questions as data_questions_prompts
-    from benchmark_qed.autoq.prompts.activity_questions import (
-        activity_context as activity_context_prompts,
-    )
-    from benchmark_qed.autoq.prompts.activity_questions import (
-        global_questions as activity_global_prompts,
-    )
-    from benchmark_qed.autoq.prompts.activity_questions import (
-        local_questions as activity_local_prompts,
-    )
-    from benchmark_qed.autoq.prompts.data_questions import (
-        assertions as autoq_assertion_prompts,
-    )
-    from benchmark_qed.autoq.prompts.data_questions import (
-        global_questions as data_global_prompts,
-    )
-    from benchmark_qed.autoq.prompts.data_questions import (
-        linked_questions as data_linked_prompts,
-    )
-    from benchmark_qed.autoq.prompts.data_questions import (
-        local_questions as data_local_prompts,
-    )
-    from benchmark_qed.cli.scaffold import copy_prompts
-
     match config_type:
         case "autoq":
             copy_prompts(
@@ -730,15 +735,6 @@ def interactive_init(
     ],
 ) -> None:
     """Interactively create a benchmark-qed configuration."""
-    from benchmark_qed.cli.scaffold import ensure_input_folder, write_env_file
-    from benchmark_qed.cli.yaml_renderer import (
-        render_autoe_assertion_yaml,
-        render_autoe_pairwise_yaml,
-        render_autoe_reference_yaml,
-        render_autoq_yaml,
-        validate_config,
-    )
-
     check_tty()
 
     rich_print(

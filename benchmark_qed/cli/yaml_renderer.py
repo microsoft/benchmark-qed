@@ -8,6 +8,7 @@ comments and consistent formatting.
 
 from __future__ import annotations
 
+import dataclasses
 from typing import Any
 
 import typer
@@ -29,8 +30,6 @@ def _render_llm_section(provider_dict: dict[str, Any], indent: int = 2) -> str:
     indent:
         Number of leading spaces for each line.
     """
-    import dataclasses
-
     if dataclasses.is_dataclass(provider_dict) and not isinstance(provider_dict, type):
         provider_dict = dataclasses.asdict(provider_dict)
 
