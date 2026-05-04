@@ -1550,7 +1550,8 @@ sys.path.insert(1, "../../../")</div>
 </div>
 </clipboard-copy>
 </div>
-<div class="highlight-ipynb hl-python"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<div class="highlight-ipynb hl-python"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">asyncio</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 
@@ -1575,7 +1576,8 @@ sys.path.insert(1, "../../../")</div>
 <span class="k">if</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s2">"httpx"</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
     <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s2">"httpx"</span><span class="p">)</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">ERROR</span><span class="p">)</span>
 </pre></div>
-<div class="clipboard-copy-txt" id="cell-3">import json
+<div class="clipboard-copy-txt" id="cell-3">import asyncio
+import json
 import logging
 import os
 
@@ -1923,20 +1925,22 @@ token_encoder = tiktoken.get_encoding(ENCODING_MODEL)</div>
 </div>
 <div class="highlight-ipynb hl-python"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">benchmark_qed.autod.sampler.sample_gen</span><span class="w"> </span><span class="kn">import</span> <span class="n">acreate_clustered_sample</span>
 
-<span class="n">clustered_sample</span> <span class="o">=</span> <span class="k">await</span> <span class="n">acreate_clustered_sample</span><span class="p">(</span>
-    <span class="n">input_path</span><span class="o">=</span><span class="n">INPUT_DATA_PATH</span><span class="p">,</span>
-    <span class="n">output_path</span><span class="o">=</span><span class="n">OUTPUT_DATA_PATH</span><span class="p">,</span>
-    <span class="n">text_embedder</span><span class="o">=</span><span class="n">text_embedder</span><span class="p">,</span>
-    <span class="n">num_clusters</span><span class="o">=</span><span class="n">NUM_CLUSTERS</span><span class="p">,</span>
-    <span class="n">num_samples_per_cluster</span><span class="o">=</span><span class="n">NUM_SAMPLES_PER_CLUSTER</span><span class="p">,</span>
-    <span class="n">input_type</span><span class="o">=</span><span class="s2">"json"</span><span class="p">,</span>
-    <span class="n">text_tag</span><span class="o">=</span><span class="n">TEXT_COLUMN</span><span class="p">,</span>
-    <span class="n">metadata_tags</span><span class="o">=</span><span class="n">METADATA_COLUMNS</span><span class="p">,</span>
-    <span class="n">chunk_size</span><span class="o">=</span><span class="n">CHUNK_SIZE</span><span class="p">,</span>
-    <span class="n">chunk_overlap</span><span class="o">=</span><span class="n">CHUNK_OVERLAP</span><span class="p">,</span>
-    <span class="n">file_encoding</span><span class="o">=</span><span class="n">FILE_ENCODING</span><span class="p">,</span>
-    <span class="n">token_encoding</span><span class="o">=</span><span class="n">ENCODING_MODEL</span><span class="p">,</span>
-    <span class="n">random_seed</span><span class="o">=</span><span class="n">RANDOM_SEED</span><span class="p">,</span>
+<span class="n">clustered_sample</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+    <span class="n">acreate_clustered_sample</span><span class="p">(</span>
+        <span class="n">input_path</span><span class="o">=</span><span class="n">INPUT_DATA_PATH</span><span class="p">,</span>
+        <span class="n">output_path</span><span class="o">=</span><span class="n">OUTPUT_DATA_PATH</span><span class="p">,</span>
+        <span class="n">text_embedder</span><span class="o">=</span><span class="n">text_embedder</span><span class="p">,</span>
+        <span class="n">num_clusters</span><span class="o">=</span><span class="n">NUM_CLUSTERS</span><span class="p">,</span>
+        <span class="n">num_samples_per_cluster</span><span class="o">=</span><span class="n">NUM_SAMPLES_PER_CLUSTER</span><span class="p">,</span>
+        <span class="n">input_type</span><span class="o">=</span><span class="s2">"json"</span><span class="p">,</span>
+        <span class="n">text_tag</span><span class="o">=</span><span class="n">TEXT_COLUMN</span><span class="p">,</span>
+        <span class="n">metadata_tags</span><span class="o">=</span><span class="n">METADATA_COLUMNS</span><span class="p">,</span>
+        <span class="n">chunk_size</span><span class="o">=</span><span class="n">CHUNK_SIZE</span><span class="p">,</span>
+        <span class="n">chunk_overlap</span><span class="o">=</span><span class="n">CHUNK_OVERLAP</span><span class="p">,</span>
+        <span class="n">file_encoding</span><span class="o">=</span><span class="n">FILE_ENCODING</span><span class="p">,</span>
+        <span class="n">token_encoding</span><span class="o">=</span><span class="n">ENCODING_MODEL</span><span class="p">,</span>
+        <span class="n">random_seed</span><span class="o">=</span><span class="n">RANDOM_SEED</span><span class="p">,</span>
+    <span class="p">)</span>
 <span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span>
     <span class="sa">f</span><span class="s2">"Sampled </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">clustered_sample</span><span class="o">.</span><span class="n">sample_texts</span><span class="p">)</span><span class="si">}</span><span class="s2"> samples from </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">clustered_sample</span><span class="o">.</span><span class="n">text_units</span><span class="p">)</span><span class="si">}</span><span class="s2"> text units in </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">clustered_sample</span><span class="o">.</span><span class="n">documents</span><span class="p">)</span><span class="si">}</span><span class="s2"> documents."</span>
@@ -1944,20 +1948,22 @@ token_encoder = tiktoken.get_encoding(ENCODING_MODEL)</div>
 </pre></div>
 <div class="clipboard-copy-txt" id="cell-6">from benchmark_qed.autod.sampler.sample_gen import acreate_clustered_sample
 
-clustered_sample = await acreate_clustered_sample(
-    input_path=INPUT_DATA_PATH,
-    output_path=OUTPUT_DATA_PATH,
-    text_embedder=text_embedder,
-    num_clusters=NUM_CLUSTERS,
-    num_samples_per_cluster=NUM_SAMPLES_PER_CLUSTER,
-    input_type="json",
-    text_tag=TEXT_COLUMN,
-    metadata_tags=METADATA_COLUMNS,
-    chunk_size=CHUNK_SIZE,
-    chunk_overlap=CHUNK_OVERLAP,
-    file_encoding=FILE_ENCODING,
-    token_encoding=ENCODING_MODEL,
-    random_seed=RANDOM_SEED,
+clustered_sample = asyncio.run(
+    acreate_clustered_sample(
+        input_path=INPUT_DATA_PATH,
+        output_path=OUTPUT_DATA_PATH,
+        text_embedder=text_embedder,
+        num_clusters=NUM_CLUSTERS,
+        num_samples_per_cluster=NUM_SAMPLES_PER_CLUSTER,
+        input_type="json",
+        text_tag=TEXT_COLUMN,
+        metadata_tags=METADATA_COLUMNS,
+        chunk_size=CHUNK_SIZE,
+        chunk_overlap=CHUNK_OVERLAP,
+        file_encoding=FILE_ENCODING,
+        token_encoding=ENCODING_MODEL,
+        random_seed=RANDOM_SEED,
+    )
 )
 print(
     f"Sampled {len(clustered_sample.sample_texts)} samples from {len(clustered_sample.text_units)} text units in {len(clustered_sample.documents)} documents."
@@ -1997,7 +2003,9 @@ print(
 </div>
 </clipboard-copy>
 </div>
-<div class="highlight-ipynb hl-python"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">benchmark_qed.autoq.config</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+<div class="highlight-ipynb hl-python"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">graphrag_storage.file_storage</span><span class="w"> </span><span class="kn">import</span> <span class="n">FileStorage</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">benchmark_qed.autoq.config</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">AssertionConfig</span><span class="p">,</span>
     <span class="n">GlobalAssertionConfig</span><span class="p">,</span>
     <span class="n">LinkedAssertionConfig</span><span class="p">,</span>
@@ -2061,30 +2069,41 @@ print(
     <span class="n">assertion_config</span><span class="o">=</span><span class="n">assertion_config</span><span class="p">,</span>
 <span class="p">)</span>
 
-<span class="n">data_local_question_results</span> <span class="o">=</span> <span class="k">await</span> <span class="n">data_local_generator</span><span class="o">.</span><span class="n">agenerate</span><span class="p">(</span>
-    <span class="n">num_questions</span><span class="o">=</span><span class="n">NUM_QUESTIONS</span><span class="p">,</span>
-    <span class="n">oversample_factor</span><span class="o">=</span><span class="n">OVERSAMPLE_FACTOR</span><span class="p">,</span>
+<span class="n">data_local_question_results</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+    <span class="n">data_local_generator</span><span class="o">.</span><span class="n">agenerate</span><span class="p">(</span>
+        <span class="n">num_questions</span><span class="o">=</span><span class="n">NUM_QUESTIONS</span><span class="p">,</span>
+        <span class="n">oversample_factor</span><span class="o">=</span><span class="n">OVERSAMPLE_FACTOR</span><span class="p">,</span>
+    <span class="p">)</span>
 <span class="p">)</span>
+<span class="n">data_local_storage</span> <span class="o">=</span> <span class="n">FileStorage</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">OUTPUT_QUESTIONS_PATH</span><span class="si">}</span><span class="s2">/data_local_questions/"</span><span class="p">)</span>
 
 <span class="c1"># save both candidate questions and the final selected questions</span>
-<span class="n">save_questions</span><span class="p">(</span>
-    <span class="n">data_local_question_results</span><span class="o">.</span><span class="n">selected_questions</span><span class="p">,</span>
-    <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">OUTPUT_QUESTIONS_PATH</span><span class="si">}</span><span class="s2">/data_local_questions/"</span><span class="p">,</span>
-    <span class="s2">"selected_questions"</span><span class="p">,</span>
+<span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+    <span class="n">save_questions</span><span class="p">(</span>
+        <span class="n">data_local_question_results</span><span class="o">.</span><span class="n">selected_questions</span><span class="p">,</span>
+        <span class="n">data_local_storage</span><span class="p">,</span>
+        <span class="s2">"selected_questions"</span><span class="p">,</span>
+    <span class="p">)</span>
 <span class="p">)</span>
-<span class="n">save_questions</span><span class="p">(</span>
-    <span class="n">data_local_question_results</span><span class="o">.</span><span class="n">selected_questions</span><span class="p">,</span>
-    <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">OUTPUT_QUESTIONS_PATH</span><span class="si">}</span><span class="s2">/data_local_questions/"</span><span class="p">,</span>
-    <span class="s2">"selected_questions_text"</span><span class="p">,</span>
-    <span class="n">question_text_only</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+    <span class="n">save_questions</span><span class="p">(</span>
+        <span class="n">data_local_question_results</span><span class="o">.</span><span class="n">selected_questions</span><span class="p">,</span>
+        <span class="n">data_local_storage</span><span class="p">,</span>
+        <span class="s2">"selected_questions_text"</span><span class="p">,</span>
+        <span class="n">question_text_only</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="p">)</span>
 <span class="p">)</span>
-<span class="n">save_questions</span><span class="p">(</span>
-    <span class="n">data_local_question_results</span><span class="o">.</span><span class="n">candidate_questions</span><span class="p">,</span>
-    <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">OUTPUT_QUESTIONS_PATH</span><span class="si">}</span><span class="s2">/data_local_questions/"</span><span class="p">,</span>
-    <span class="s2">"candidate_questions"</span><span class="p">,</span>
+<span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+    <span class="n">save_questions</span><span class="p">(</span>
+        <span class="n">data_local_question_results</span><span class="o">.</span><span class="n">candidate_questions</span><span class="p">,</span>
+        <span class="n">data_local_storage</span><span class="p">,</span>
+        <span class="s2">"candidate_questions"</span><span class="p">,</span>
+    <span class="p">)</span>
 <span class="p">)</span>
 </pre></div>
-<div class="clipboard-copy-txt" id="cell-7">from benchmark_qed.autoq.config import (
+<div class="clipboard-copy-txt" id="cell-7">from graphrag_storage.file_storage import FileStorage
+
+from benchmark_qed.autoq.config import (
     AssertionConfig,
     GlobalAssertionConfig,
     LinkedAssertionConfig,
@@ -2148,27 +2167,36 @@ data_local_generator = DataLocalQuestionGen(
     assertion_config=assertion_config,
 )
 
-data_local_question_results = await data_local_generator.agenerate(
-    num_questions=NUM_QUESTIONS,
-    oversample_factor=OVERSAMPLE_FACTOR,
+data_local_question_results = asyncio.run(
+    data_local_generator.agenerate(
+        num_questions=NUM_QUESTIONS,
+        oversample_factor=OVERSAMPLE_FACTOR,
+    )
 )
+data_local_storage = FileStorage(f"{OUTPUT_QUESTIONS_PATH}/data_local_questions/")
 
 # save both candidate questions and the final selected questions
-save_questions(
-    data_local_question_results.selected_questions,
-    f"{OUTPUT_QUESTIONS_PATH}/data_local_questions/",
-    "selected_questions",
+asyncio.run(
+    save_questions(
+        data_local_question_results.selected_questions,
+        data_local_storage,
+        "selected_questions",
+    )
 )
-save_questions(
-    data_local_question_results.selected_questions,
-    f"{OUTPUT_QUESTIONS_PATH}/data_local_questions/",
-    "selected_questions_text",
-    question_text_only=True,
+asyncio.run(
+    save_questions(
+        data_local_question_results.selected_questions,
+        data_local_storage,
+        "selected_questions_text",
+        question_text_only=True,
+    )
 )
-save_questions(
-    data_local_question_results.candidate_questions,
-    f"{OUTPUT_QUESTIONS_PATH}/data_local_questions/",
-    "candidate_questions",
+asyncio.run(
+    save_questions(
+        data_local_question_results.candidate_questions,
+        data_local_storage,
+        "candidate_questions",
+    )
 )</div>
 </div>
 </div>
@@ -2213,8 +2241,11 @@ save_questions(
 <span class="c1"># Please note that we load all the candidate local questions (not just the selected ones) as that gives us a bigger pool of local questions to aggregate from.</span>
 <span class="c1"># If you have previously run the data local question generation step, you can load the candidate questions from disk instead of re-running the data local question generation step as the below example.</span>
 <span class="c1"># Otherwise, you can use data_local_question_results.candidate_questions directly</span>
-<span class="n">local_questions</span> <span class="o">=</span> <span class="n">load_questions</span><span class="p">(</span>
-    <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">OUTPUT_QUESTIONS_PATH</span><span class="si">}</span><span class="s2">/data_local_questions/candidate_questions.json"</span>
+<span class="n">local_questions</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+    <span class="n">load_questions</span><span class="p">(</span>
+        <span class="n">data_local_storage</span><span class="p">,</span>
+        <span class="s2">"candidate_questions.json"</span><span class="p">,</span>
+    <span class="p">)</span>
 <span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Loaded </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">local_questions</span><span class="p">)</span><span class="si">}</span><span class="s2"> candidate local questions."</span><span class="p">)</span>
 
@@ -2229,27 +2260,36 @@ save_questions(
     <span class="n">assertion_config</span><span class="o">=</span><span class="n">assertion_config</span><span class="p">,</span>
 <span class="p">)</span>
 
-<span class="n">data_global_question_results</span> <span class="o">=</span> <span class="k">await</span> <span class="n">data_global_generator</span><span class="o">.</span><span class="n">agenerate</span><span class="p">(</span>
-    <span class="n">num_questions</span><span class="o">=</span><span class="n">NUM_QUESTIONS</span><span class="p">,</span>
-    <span class="n">oversample_factor</span><span class="o">=</span><span class="n">OVERSAMPLE_FACTOR</span><span class="p">,</span>
+<span class="n">data_global_question_results</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+    <span class="n">data_global_generator</span><span class="o">.</span><span class="n">agenerate</span><span class="p">(</span>
+        <span class="n">num_questions</span><span class="o">=</span><span class="n">NUM_QUESTIONS</span><span class="p">,</span>
+        <span class="n">oversample_factor</span><span class="o">=</span><span class="n">OVERSAMPLE_FACTOR</span><span class="p">,</span>
+    <span class="p">)</span>
 <span class="p">)</span>
+<span class="n">data_global_storage</span> <span class="o">=</span> <span class="n">FileStorage</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">OUTPUT_QUESTIONS_PATH</span><span class="si">}</span><span class="s2">/data_global_questions/"</span><span class="p">)</span>
 
 <span class="c1"># save both candidate questions and the final selected questions</span>
-<span class="n">save_questions</span><span class="p">(</span>
-    <span class="n">data_global_question_results</span><span class="o">.</span><span class="n">selected_questions</span><span class="p">,</span>
-    <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">OUTPUT_QUESTIONS_PATH</span><span class="si">}</span><span class="s2">/data_global_questions/"</span><span class="p">,</span>
-    <span class="s2">"selected_questions"</span><span class="p">,</span>
+<span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+    <span class="n">save_questions</span><span class="p">(</span>
+        <span class="n">data_global_question_results</span><span class="o">.</span><span class="n">selected_questions</span><span class="p">,</span>
+        <span class="n">data_global_storage</span><span class="p">,</span>
+        <span class="s2">"selected_questions"</span><span class="p">,</span>
+    <span class="p">)</span>
 <span class="p">)</span>
-<span class="n">save_questions</span><span class="p">(</span>
-    <span class="n">data_global_question_results</span><span class="o">.</span><span class="n">selected_questions</span><span class="p">,</span>
-    <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">OUTPUT_QUESTIONS_PATH</span><span class="si">}</span><span class="s2">/data_global_questions/"</span><span class="p">,</span>
-    <span class="s2">"selected_questions_text"</span><span class="p">,</span>
-    <span class="n">question_text_only</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+    <span class="n">save_questions</span><span class="p">(</span>
+        <span class="n">data_global_question_results</span><span class="o">.</span><span class="n">selected_questions</span><span class="p">,</span>
+        <span class="n">data_global_storage</span><span class="p">,</span>
+        <span class="s2">"selected_questions_text"</span><span class="p">,</span>
+        <span class="n">question_text_only</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="p">)</span>
 <span class="p">)</span>
-<span class="n">save_questions</span><span class="p">(</span>
-    <span class="n">data_global_question_results</span><span class="o">.</span><span class="n">candidate_questions</span><span class="p">,</span>
-    <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">OUTPUT_QUESTIONS_PATH</span><span class="si">}</span><span class="s2">/data_global_questions/"</span><span class="p">,</span>
-    <span class="s2">"candidate_questions"</span><span class="p">,</span>
+<span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+    <span class="n">save_questions</span><span class="p">(</span>
+        <span class="n">data_global_question_results</span><span class="o">.</span><span class="n">candidate_questions</span><span class="p">,</span>
+        <span class="n">data_global_storage</span><span class="p">,</span>
+        <span class="s2">"candidate_questions"</span><span class="p">,</span>
+    <span class="p">)</span>
 <span class="p">)</span>
 </pre></div>
 <div class="clipboard-copy-txt" id="cell-8">from benchmark_qed.autoq.question_gen.data_questions.global_question_gen import (
@@ -2260,8 +2300,11 @@ save_questions(
 # Please note that we load all the candidate local questions (not just the selected ones) as that gives us a bigger pool of local questions to aggregate from.
 # If you have previously run the data local question generation step, you can load the candidate questions from disk instead of re-running the data local question generation step as the below example.
 # Otherwise, you can use data_local_question_results.candidate_questions directly
-local_questions = load_questions(
-    f"{OUTPUT_QUESTIONS_PATH}/data_local_questions/candidate_questions.json"
+local_questions = asyncio.run(
+    load_questions(
+        data_local_storage,
+        "candidate_questions.json",
+    )
 )
 print(f"Loaded {len(local_questions)} candidate local questions.")
 
@@ -2276,27 +2319,36 @@ data_global_generator = DataGlobalQuestionGen(
     assertion_config=assertion_config,
 )
 
-data_global_question_results = await data_global_generator.agenerate(
-    num_questions=NUM_QUESTIONS,
-    oversample_factor=OVERSAMPLE_FACTOR,
+data_global_question_results = asyncio.run(
+    data_global_generator.agenerate(
+        num_questions=NUM_QUESTIONS,
+        oversample_factor=OVERSAMPLE_FACTOR,
+    )
 )
+data_global_storage = FileStorage(f"{OUTPUT_QUESTIONS_PATH}/data_global_questions/")
 
 # save both candidate questions and the final selected questions
-save_questions(
-    data_global_question_results.selected_questions,
-    f"{OUTPUT_QUESTIONS_PATH}/data_global_questions/",
-    "selected_questions",
+asyncio.run(
+    save_questions(
+        data_global_question_results.selected_questions,
+        data_global_storage,
+        "selected_questions",
+    )
 )
-save_questions(
-    data_global_question_results.selected_questions,
-    f"{OUTPUT_QUESTIONS_PATH}/data_global_questions/",
-    "selected_questions_text",
-    question_text_only=True,
+asyncio.run(
+    save_questions(
+        data_global_question_results.selected_questions,
+        data_global_storage,
+        "selected_questions_text",
+        question_text_only=True,
+    )
 )
-save_questions(
-    data_global_question_results.candidate_questions,
-    f"{OUTPUT_QUESTIONS_PATH}/data_global_questions/",
-    "candidate_questions",
+asyncio.run(
+    save_questions(
+        data_global_question_results.candidate_questions,
+        data_global_storage,
+        "candidate_questions",
+    )
 )</div>
 </div>
 </div>
@@ -2445,8 +2497,8 @@ print(
 <span class="c1"># Load candidate local questions (result from the data local question generation step)</span>
 <span class="c1"># Linked questions are generated from local questions that share named entities.</span>
 <span class="c1"># We use candidate local questions to have a larger pool for entity linking.</span>
-<span class="n">local_questions</span> <span class="o">=</span> <span class="n">load_questions</span><span class="p">(</span>
-    <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">OUTPUT_QUESTIONS_PATH</span><span class="si">}</span><span class="s2">/data_local_questions/candidate_questions.json"</span>
+<span class="n">local_questions</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+    <span class="n">load_questions</span><span class="p">(</span><span class="n">data_local_storage</span><span class="p">,</span> <span class="s2">"candidate_questions.json"</span><span class="p">)</span>
 <span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span>
     <span class="sa">f</span><span class="s2">"Loaded </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">local_questions</span><span class="p">)</span><span class="si">}</span><span class="s2"> candidate local questions for linked question generation."</span>
@@ -2473,27 +2525,36 @@ print(
 <span class="p">)</span>
 
 <span class="c1"># Generate linked questions (using higher oversample factor due to validation filtering)</span>
-<span class="n">data_linked_question_results</span> <span class="o">=</span> <span class="k">await</span> <span class="n">data_linked_generator</span><span class="o">.</span><span class="n">agenerate</span><span class="p">(</span>
-    <span class="n">num_questions</span><span class="o">=</span><span class="n">NUM_QUESTIONS</span><span class="p">,</span>
-    <span class="n">oversample_factor</span><span class="o">=</span><span class="n">LINKED_OVERSAMPLE_FACTOR</span><span class="p">,</span>
+<span class="n">data_linked_question_results</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+    <span class="n">data_linked_generator</span><span class="o">.</span><span class="n">agenerate</span><span class="p">(</span>
+        <span class="n">num_questions</span><span class="o">=</span><span class="n">NUM_QUESTIONS</span><span class="p">,</span>
+        <span class="n">oversample_factor</span><span class="o">=</span><span class="n">LINKED_OVERSAMPLE_FACTOR</span><span class="p">,</span>
+    <span class="p">)</span>
 <span class="p">)</span>
+<span class="n">data_linked_storage</span> <span class="o">=</span> <span class="n">FileStorage</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">OUTPUT_QUESTIONS_PATH</span><span class="si">}</span><span class="s2">/data_linked_questions/"</span><span class="p">)</span>
 
 <span class="c1"># Save both candidate questions and the final selected questions</span>
-<span class="n">save_questions</span><span class="p">(</span>
-    <span class="n">data_linked_question_results</span><span class="o">.</span><span class="n">selected_questions</span><span class="p">,</span>
-    <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">OUTPUT_QUESTIONS_PATH</span><span class="si">}</span><span class="s2">/data_linked_questions/"</span><span class="p">,</span>
-    <span class="s2">"selected_questions"</span><span class="p">,</span>
+<span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+    <span class="n">save_questions</span><span class="p">(</span>
+        <span class="n">data_linked_question_results</span><span class="o">.</span><span class="n">selected_questions</span><span class="p">,</span>
+        <span class="n">data_linked_storage</span><span class="p">,</span>
+        <span class="s2">"selected_questions"</span><span class="p">,</span>
+    <span class="p">)</span>
 <span class="p">)</span>
-<span class="n">save_questions</span><span class="p">(</span>
-    <span class="n">data_linked_question_results</span><span class="o">.</span><span class="n">selected_questions</span><span class="p">,</span>
-    <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">OUTPUT_QUESTIONS_PATH</span><span class="si">}</span><span class="s2">/data_linked_questions/"</span><span class="p">,</span>
-    <span class="s2">"selected_questions_text"</span><span class="p">,</span>
-    <span class="n">question_text_only</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+    <span class="n">save_questions</span><span class="p">(</span>
+        <span class="n">data_linked_question_results</span><span class="o">.</span><span class="n">selected_questions</span><span class="p">,</span>
+        <span class="n">data_linked_storage</span><span class="p">,</span>
+        <span class="s2">"selected_questions_text"</span><span class="p">,</span>
+        <span class="n">question_text_only</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="p">)</span>
 <span class="p">)</span>
-<span class="n">save_questions</span><span class="p">(</span>
-    <span class="n">data_linked_question_results</span><span class="o">.</span><span class="n">candidate_questions</span><span class="p">,</span>
-    <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">OUTPUT_QUESTIONS_PATH</span><span class="si">}</span><span class="s2">/data_linked_questions/"</span><span class="p">,</span>
-    <span class="s2">"candidate_questions"</span><span class="p">,</span>
+<span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+    <span class="n">save_questions</span><span class="p">(</span>
+        <span class="n">data_linked_question_results</span><span class="o">.</span><span class="n">candidate_questions</span><span class="p">,</span>
+        <span class="n">data_linked_storage</span><span class="p">,</span>
+        <span class="s2">"candidate_questions"</span><span class="p">,</span>
+    <span class="p">)</span>
 <span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span>
@@ -2508,8 +2569,8 @@ print(
 # Load candidate local questions (result from the data local question generation step)
 # Linked questions are generated from local questions that share named entities.
 # We use candidate local questions to have a larger pool for entity linking.
-local_questions = load_questions(
-    f"{OUTPUT_QUESTIONS_PATH}/data_local_questions/candidate_questions.json"
+local_questions = asyncio.run(
+    load_questions(data_local_storage, "candidate_questions.json")
 )
 print(
     f"Loaded {len(local_questions)} candidate local questions for linked question generation."
@@ -2536,27 +2597,36 @@ data_linked_generator = DataLinkedQuestionGen(
 )
 
 # Generate linked questions (using higher oversample factor due to validation filtering)
-data_linked_question_results = await data_linked_generator.agenerate(
-    num_questions=NUM_QUESTIONS,
-    oversample_factor=LINKED_OVERSAMPLE_FACTOR,
+data_linked_question_results = asyncio.run(
+    data_linked_generator.agenerate(
+        num_questions=NUM_QUESTIONS,
+        oversample_factor=LINKED_OVERSAMPLE_FACTOR,
+    )
 )
+data_linked_storage = FileStorage(f"{OUTPUT_QUESTIONS_PATH}/data_linked_questions/")
 
 # Save both candidate questions and the final selected questions
-save_questions(
-    data_linked_question_results.selected_questions,
-    f"{OUTPUT_QUESTIONS_PATH}/data_linked_questions/",
-    "selected_questions",
+asyncio.run(
+    save_questions(
+        data_linked_question_results.selected_questions,
+        data_linked_storage,
+        "selected_questions",
+    )
 )
-save_questions(
-    data_linked_question_results.selected_questions,
-    f"{OUTPUT_QUESTIONS_PATH}/data_linked_questions/",
-    "selected_questions_text",
-    question_text_only=True,
+asyncio.run(
+    save_questions(
+        data_linked_question_results.selected_questions,
+        data_linked_storage,
+        "selected_questions_text",
+        question_text_only=True,
+    )
 )
-save_questions(
-    data_linked_question_results.candidate_questions,
-    f"{OUTPUT_QUESTIONS_PATH}/data_linked_questions/",
-    "candidate_questions",
+asyncio.run(
+    save_questions(
+        data_linked_question_results.candidate_questions,
+        data_linked_storage,
+        "candidate_questions",
+    )
 )
 
 print(
@@ -2630,15 +2700,17 @@ print(f"  (from {len(data_linked_question_results.candidate_questions)} candidat
     <span class="n">concurrent_coroutines</span><span class="o">=</span><span class="n">CONCURRENT_REQUESTS</span><span class="p">,</span>
 <span class="p">)</span>
 
-<span class="n">activity_context</span> <span class="o">=</span> <span class="k">await</span> <span class="n">activity_generator</span><span class="o">.</span><span class="n">agenerate</span><span class="p">(</span>
-    <span class="n">num_personas</span><span class="o">=</span><span class="n">NUM_PERSONAS</span><span class="p">,</span>
-    <span class="n">num_tasks</span><span class="o">=</span><span class="n">NUM_TASKS_PER_PERSONA</span><span class="p">,</span>
-    <span class="n">num_entities_per_task</span><span class="o">=</span><span class="n">NUM_ENTITIES_PER_TASK</span><span class="p">,</span>
-    <span class="n">oversample_factor</span><span class="o">=</span><span class="n">OVERSAMPLE_FACTOR</span><span class="p">,</span>
-    <span class="n">use_representative_samples_only</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>  <span class="c1"># if True, we will only use a subset of representative samples from the clustered texts to generate activity context (for efficiency). If False, we will use all the samples in the clustered texts.</span>
+<span class="n">activity_context</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+    <span class="n">activity_generator</span><span class="o">.</span><span class="n">agenerate</span><span class="p">(</span>
+        <span class="n">num_personas</span><span class="o">=</span><span class="n">NUM_PERSONAS</span><span class="p">,</span>
+        <span class="n">num_tasks</span><span class="o">=</span><span class="n">NUM_TASKS_PER_PERSONA</span><span class="p">,</span>
+        <span class="n">num_entities_per_task</span><span class="o">=</span><span class="n">NUM_ENTITIES_PER_TASK</span><span class="p">,</span>
+        <span class="n">oversample_factor</span><span class="o">=</span><span class="n">OVERSAMPLE_FACTOR</span><span class="p">,</span>
+        <span class="n">use_representative_samples_only</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>  <span class="c1"># if True, we will only use a subset of representative samples from the clustered texts to generate activity context (for efficiency). If False, we will use all the samples in the clustered texts.</span>
+    <span class="p">)</span>
 <span class="p">)</span>
-
-<span class="n">save_activity_context</span><span class="p">(</span><span class="n">activity_context</span><span class="p">,</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">OUTPUT_QUESTIONS_PATH</span><span class="si">}</span><span class="s2">/context/"</span><span class="p">)</span>
+<span class="n">activity_storage</span> <span class="o">=</span> <span class="n">FileStorage</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">OUTPUT_QUESTIONS_PATH</span><span class="si">}</span><span class="s2">/context/"</span><span class="p">)</span>
+<span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">save_activity_context</span><span class="p">(</span><span class="n">activity_context</span><span class="p">,</span> <span class="n">activity_storage</span><span class="p">))</span>
 </pre></div>
 <div class="clipboard-copy-txt" id="cell-11">from benchmark_qed.autoq.question_gen.activity_questions.context_gen.activity_context_gen import (
     ActivityContextGen,
@@ -2661,15 +2733,17 @@ activity_generator = ActivityContextGen(
     concurrent_coroutines=CONCURRENT_REQUESTS,
 )
 
-activity_context = await activity_generator.agenerate(
-    num_personas=NUM_PERSONAS,
-    num_tasks=NUM_TASKS_PER_PERSONA,
-    num_entities_per_task=NUM_ENTITIES_PER_TASK,
-    oversample_factor=OVERSAMPLE_FACTOR,
-    use_representative_samples_only=True,  # if True, we will only use a subset of representative samples from the clustered texts to generate activity context (for efficiency). If False, we will use all the samples in the clustered texts.
+activity_context = asyncio.run(
+    activity_generator.agenerate(
+        num_personas=NUM_PERSONAS,
+        num_tasks=NUM_TASKS_PER_PERSONA,
+        num_entities_per_task=NUM_ENTITIES_PER_TASK,
+        oversample_factor=OVERSAMPLE_FACTOR,
+        use_representative_samples_only=True,  # if True, we will only use a subset of representative samples from the clustered texts to generate activity context (for efficiency). If False, we will use all the samples in the clustered texts.
+    )
 )
-
-save_activity_context(activity_context, f"{OUTPUT_QUESTIONS_PATH}/context/")</div>
+activity_storage = FileStorage(f"{OUTPUT_QUESTIONS_PATH}/context/")
+asyncio.run(save_activity_context(activity_context, activity_storage))</div>
 </div>
 </div>
 </div>
@@ -2730,27 +2804,38 @@ save_activity_context(activity_context, f"{OUTPUT_QUESTIONS_PATH}/context/")</di
     <span class="n">random_seed</span><span class="o">=</span><span class="n">RANDOM_SEED</span><span class="p">,</span>
 <span class="p">)</span>
 
-<span class="n">activity_local_question_results</span> <span class="o">=</span> <span class="k">await</span> <span class="n">activity_local_generator</span><span class="o">.</span><span class="n">agenerate</span><span class="p">(</span>
-    <span class="n">num_questions</span><span class="o">=</span><span class="n">NUM_QUESTIONS</span><span class="p">,</span>
-    <span class="n">oversample_factor</span><span class="o">=</span><span class="n">OVERSAMPLE_FACTOR</span><span class="p">,</span>
+<span class="n">activity_local_question_results</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+    <span class="n">activity_local_generator</span><span class="o">.</span><span class="n">agenerate</span><span class="p">(</span>
+        <span class="n">num_questions</span><span class="o">=</span><span class="n">NUM_QUESTIONS</span><span class="p">,</span>
+        <span class="n">oversample_factor</span><span class="o">=</span><span class="n">OVERSAMPLE_FACTOR</span><span class="p">,</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+<span class="n">activity_local_storage</span> <span class="o">=</span> <span class="n">FileStorage</span><span class="p">(</span>
+    <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">OUTPUT_QUESTIONS_PATH</span><span class="si">}</span><span class="s2">/activity_local_questions/"</span>
 <span class="p">)</span>
 
 <span class="c1"># save both candidate questions and the final selected questions</span>
-<span class="n">save_questions</span><span class="p">(</span>
-    <span class="n">activity_local_question_results</span><span class="o">.</span><span class="n">selected_questions</span><span class="p">,</span>
-    <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">OUTPUT_QUESTIONS_PATH</span><span class="si">}</span><span class="s2">/activity_local_questions/"</span><span class="p">,</span>
-    <span class="s2">"selected_questions"</span><span class="p">,</span>
+<span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+    <span class="n">save_questions</span><span class="p">(</span>
+        <span class="n">activity_local_question_results</span><span class="o">.</span><span class="n">selected_questions</span><span class="p">,</span>
+        <span class="n">activity_local_storage</span><span class="p">,</span>
+        <span class="s2">"selected_questions"</span><span class="p">,</span>
+    <span class="p">)</span>
 <span class="p">)</span>
-<span class="n">save_questions</span><span class="p">(</span>
-    <span class="n">activity_local_question_results</span><span class="o">.</span><span class="n">selected_questions</span><span class="p">,</span>
-    <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">OUTPUT_QUESTIONS_PATH</span><span class="si">}</span><span class="s2">/activity_local_questions/"</span><span class="p">,</span>
-    <span class="s2">"selected_questions_text"</span><span class="p">,</span>
-    <span class="n">question_text_only</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+    <span class="n">save_questions</span><span class="p">(</span>
+        <span class="n">activity_local_question_results</span><span class="o">.</span><span class="n">selected_questions</span><span class="p">,</span>
+        <span class="n">activity_local_storage</span><span class="p">,</span>
+        <span class="s2">"selected_questions_text"</span><span class="p">,</span>
+        <span class="n">question_text_only</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="p">)</span>
 <span class="p">)</span>
-<span class="n">save_questions</span><span class="p">(</span>
-    <span class="n">activity_local_question_results</span><span class="o">.</span><span class="n">candidate_questions</span><span class="p">,</span>
-    <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">OUTPUT_QUESTIONS_PATH</span><span class="si">}</span><span class="s2">/activity_local_questions/"</span><span class="p">,</span>
-    <span class="s2">"candidate_questions"</span><span class="p">,</span>
+<span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+    <span class="n">save_questions</span><span class="p">(</span>
+        <span class="n">activity_local_question_results</span><span class="o">.</span><span class="n">candidate_questions</span><span class="p">,</span>
+        <span class="n">activity_local_storage</span><span class="p">,</span>
+        <span class="s2">"candidate_questions"</span><span class="p">,</span>
+    <span class="p">)</span>
 <span class="p">)</span>
 </pre></div>
 <div class="clipboard-copy-txt" id="cell-12">from pathlib import Path
@@ -2778,27 +2863,38 @@ activity_local_generator = ActivityLocalQuestionGen(
     random_seed=RANDOM_SEED,
 )
 
-activity_local_question_results = await activity_local_generator.agenerate(
-    num_questions=NUM_QUESTIONS,
-    oversample_factor=OVERSAMPLE_FACTOR,
+activity_local_question_results = asyncio.run(
+    activity_local_generator.agenerate(
+        num_questions=NUM_QUESTIONS,
+        oversample_factor=OVERSAMPLE_FACTOR,
+    )
+)
+activity_local_storage = FileStorage(
+    f"{OUTPUT_QUESTIONS_PATH}/activity_local_questions/"
 )
 
 # save both candidate questions and the final selected questions
-save_questions(
-    activity_local_question_results.selected_questions,
-    f"{OUTPUT_QUESTIONS_PATH}/activity_local_questions/",
-    "selected_questions",
+asyncio.run(
+    save_questions(
+        activity_local_question_results.selected_questions,
+        activity_local_storage,
+        "selected_questions",
+    )
 )
-save_questions(
-    activity_local_question_results.selected_questions,
-    f"{OUTPUT_QUESTIONS_PATH}/activity_local_questions/",
-    "selected_questions_text",
-    question_text_only=True,
+asyncio.run(
+    save_questions(
+        activity_local_question_results.selected_questions,
+        activity_local_storage,
+        "selected_questions_text",
+        question_text_only=True,
+    )
 )
-save_questions(
-    activity_local_question_results.candidate_questions,
-    f"{OUTPUT_QUESTIONS_PATH}/activity_local_questions/",
-    "candidate_questions",
+asyncio.run(
+    save_questions(
+        activity_local_question_results.candidate_questions,
+        activity_local_storage,
+        "candidate_questions",
+    )
 )</div>
 </div>
 </div>
@@ -2857,27 +2953,38 @@ save_questions(
     <span class="n">random_seed</span><span class="o">=</span><span class="n">RANDOM_SEED</span><span class="p">,</span>
 <span class="p">)</span>
 
-<span class="n">activity_global_question_results</span> <span class="o">=</span> <span class="k">await</span> <span class="n">activity_global_generator</span><span class="o">.</span><span class="n">agenerate</span><span class="p">(</span>
-    <span class="n">num_questions</span><span class="o">=</span><span class="n">NUM_QUESTIONS</span><span class="p">,</span>
-    <span class="n">oversample_factor</span><span class="o">=</span><span class="n">OVERSAMPLE_FACTOR</span><span class="p">,</span>
+<span class="n">activity_global_question_results</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+    <span class="n">activity_global_generator</span><span class="o">.</span><span class="n">agenerate</span><span class="p">(</span>
+        <span class="n">num_questions</span><span class="o">=</span><span class="n">NUM_QUESTIONS</span><span class="p">,</span>
+        <span class="n">oversample_factor</span><span class="o">=</span><span class="n">OVERSAMPLE_FACTOR</span><span class="p">,</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+<span class="n">activity_global_storage</span> <span class="o">=</span> <span class="n">FileStorage</span><span class="p">(</span>
+    <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">OUTPUT_QUESTIONS_PATH</span><span class="si">}</span><span class="s2">/activity_global_questions/"</span>
 <span class="p">)</span>
 
 <span class="c1"># save both candidate questions and the final selected questions</span>
-<span class="n">save_questions</span><span class="p">(</span>
-    <span class="n">activity_global_question_results</span><span class="o">.</span><span class="n">selected_questions</span><span class="p">,</span>
-    <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">OUTPUT_QUESTIONS_PATH</span><span class="si">}</span><span class="s2">/activity_global_questions/"</span><span class="p">,</span>
-    <span class="s2">"selected_questions"</span><span class="p">,</span>
+<span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+    <span class="n">save_questions</span><span class="p">(</span>
+        <span class="n">activity_global_question_results</span><span class="o">.</span><span class="n">selected_questions</span><span class="p">,</span>
+        <span class="n">activity_global_storage</span><span class="p">,</span>
+        <span class="s2">"selected_questions"</span><span class="p">,</span>
+    <span class="p">)</span>
 <span class="p">)</span>
-<span class="n">save_questions</span><span class="p">(</span>
-    <span class="n">activity_global_question_results</span><span class="o">.</span><span class="n">selected_questions</span><span class="p">,</span>
-    <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">OUTPUT_QUESTIONS_PATH</span><span class="si">}</span><span class="s2">/activity_global_questions/"</span><span class="p">,</span>
-    <span class="s2">"selected_questions_text"</span><span class="p">,</span>
-    <span class="n">question_text_only</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+    <span class="n">save_questions</span><span class="p">(</span>
+        <span class="n">activity_global_question_results</span><span class="o">.</span><span class="n">selected_questions</span><span class="p">,</span>
+        <span class="n">activity_global_storage</span><span class="p">,</span>
+        <span class="s2">"selected_questions_text"</span><span class="p">,</span>
+        <span class="n">question_text_only</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="p">)</span>
 <span class="p">)</span>
-<span class="n">save_questions</span><span class="p">(</span>
-    <span class="n">activity_global_question_results</span><span class="o">.</span><span class="n">candidate_questions</span><span class="p">,</span>
-    <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">OUTPUT_QUESTIONS_PATH</span><span class="si">}</span><span class="s2">/activity_global_questions/"</span><span class="p">,</span>
-    <span class="s2">"candidate_questions"</span><span class="p">,</span>
+<span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+    <span class="n">save_questions</span><span class="p">(</span>
+        <span class="n">activity_global_question_results</span><span class="o">.</span><span class="n">candidate_questions</span><span class="p">,</span>
+        <span class="n">activity_global_storage</span><span class="p">,</span>
+        <span class="s2">"candidate_questions"</span><span class="p">,</span>
+    <span class="p">)</span>
 <span class="p">)</span>
 </pre></div>
 <div class="clipboard-copy-txt" id="cell-13">from benchmark_qed.autoq.question_gen.activity_questions.global_question_gen import (
@@ -2902,27 +3009,38 @@ activity_global_generator = ActivityGlobalQuestionGen(
     random_seed=RANDOM_SEED,
 )
 
-activity_global_question_results = await activity_global_generator.agenerate(
-    num_questions=NUM_QUESTIONS,
-    oversample_factor=OVERSAMPLE_FACTOR,
+activity_global_question_results = asyncio.run(
+    activity_global_generator.agenerate(
+        num_questions=NUM_QUESTIONS,
+        oversample_factor=OVERSAMPLE_FACTOR,
+    )
+)
+activity_global_storage = FileStorage(
+    f"{OUTPUT_QUESTIONS_PATH}/activity_global_questions/"
 )
 
 # save both candidate questions and the final selected questions
-save_questions(
-    activity_global_question_results.selected_questions,
-    f"{OUTPUT_QUESTIONS_PATH}/activity_global_questions/",
-    "selected_questions",
+asyncio.run(
+    save_questions(
+        activity_global_question_results.selected_questions,
+        activity_global_storage,
+        "selected_questions",
+    )
 )
-save_questions(
-    activity_global_question_results.selected_questions,
-    f"{OUTPUT_QUESTIONS_PATH}/activity_global_questions/",
-    "selected_questions_text",
-    question_text_only=True,
+asyncio.run(
+    save_questions(
+        activity_global_question_results.selected_questions,
+        activity_global_storage,
+        "selected_questions_text",
+        question_text_only=True,
+    )
 )
-save_questions(
-    activity_global_question_results.candidate_questions,
-    f"{OUTPUT_QUESTIONS_PATH}/activity_global_questions/",
-    "candidate_questions",
+asyncio.run(
+    save_questions(
+        activity_global_question_results.candidate_questions,
+        activity_global_storage,
+        "candidate_questions",
+    )
 )</div>
 </div>
 </div>

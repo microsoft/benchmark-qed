@@ -1340,7 +1340,8 @@ sys.path.insert(1, "../../../")</div>
 </div>
 </clipboard-copy>
 </div>
-<div class="highlight-ipynb hl-python"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+<div class="highlight-ipynb hl-python"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">asyncio</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">pydantic</span><span class="w"> </span><span class="kn">import</span> <span class="n">SecretStr</span>
@@ -1360,7 +1361,8 @@ sys.path.insert(1, "../../../")</div>
 <span class="k">if</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s2">"httpx"</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
     <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s2">"httpx"</span><span class="p">)</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">ERROR</span><span class="p">)</span>
 </pre></div>
-<div class="clipboard-copy-txt" id="cell-3">import logging
+<div class="clipboard-copy-txt" id="cell-3">import asyncio
+import logging
 import os
 
 from pydantic import SecretStr
@@ -1601,13 +1603,16 @@ else:
 </div>
 </clipboard-copy>
 </div>
-<div class="highlight-ipynb hl-python"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">benchmark_qed.autoq.question_gen.data_questions.assertion_gen.local_claim_assertion_gen</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+<div class="highlight-ipynb hl-python"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">graphrag_storage.file_storage</span><span class="w"> </span><span class="kn">import</span> <span class="n">FileStorage</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">benchmark_qed.autoq.question_gen.data_questions.assertion_gen.local_claim_assertion_gen</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">LocalClaimAssertionGenerator</span><span class="p">,</span>
 <span class="p">)</span>
 
 <span class="c1"># Load existing data-local questions from disk</span>
-<span class="n">existing_local_questions</span> <span class="o">=</span> <span class="n">load_questions</span><span class="p">(</span>
-    <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">OUTPUT_QUESTIONS_PATH</span><span class="si">}</span><span class="s2">/data_local_questions/selected_questions.json"</span>
+<span class="n">local_question_storage</span> <span class="o">=</span> <span class="n">FileStorage</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">OUTPUT_QUESTIONS_PATH</span><span class="si">}</span><span class="s2">/data_local_questions/"</span><span class="p">)</span>
+<span class="n">existing_local_questions</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+    <span class="n">load_questions</span><span class="p">(</span><span class="n">local_question_storage</span><span class="p">,</span> <span class="s2">"selected_questions.json"</span><span class="p">)</span>
 <span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Loaded </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">existing_local_questions</span><span class="p">)</span><span class="si">}</span><span class="s2"> existing data-local questions"</span><span class="p">)</span>
@@ -1637,38 +1642,45 @@ else:
 <span class="p">)</span>
 
 <span class="c1"># Generate assertions for all questions with claims</span>
-<span class="k">await</span> <span class="n">local_assertion_generator</span><span class="o">.</span><span class="n">agenerate_assertions_for_questions</span><span class="p">(</span>
-    <span class="n">questions_with_claims</span>
+<span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+    <span class="n">local_assertion_generator</span><span class="o">.</span><span class="n">agenerate_assertions_for_questions</span><span class="p">(</span><span class="n">questions_with_claims</span><span class="p">)</span>
 <span class="p">)</span>
 
 <span class="c1"># Combine back with questions that had no claims</span>
 <span class="n">updated_local_questions</span> <span class="o">=</span> <span class="n">questions_with_claims</span> <span class="o">+</span> <span class="n">questions_without_claims</span>
 
 <span class="c1"># Save updated questions with assertions</span>
-<span class="n">save_questions</span><span class="p">(</span>
-    <span class="n">updated_local_questions</span><span class="p">,</span>
-    <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">OUTPUT_QUESTIONS_PATH</span><span class="si">}</span><span class="s2">/data_local_questions/"</span><span class="p">,</span>
-    <span class="s2">"selected_questions_with_assertions"</span><span class="p">,</span>
+<span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+    <span class="n">save_questions</span><span class="p">(</span>
+        <span class="n">updated_local_questions</span><span class="p">,</span>
+        <span class="n">local_question_storage</span><span class="p">,</span>
+        <span class="s2">"selected_questions_with_assertions"</span><span class="p">,</span>
+    <span class="p">)</span>
 <span class="p">)</span>
 
 <span class="c1"># Show summary</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">=== SUMMARY ==="</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Processed </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">questions_with_claims</span><span class="p">)</span><span class="si">}</span><span class="s2"> questions with claims"</span><span class="p">)</span>
 <span class="n">total_assertions</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span>
-    <span class="nb">len</span><span class="p">(</span><span class="n">q</span><span class="o">.</span><span class="n">attributes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"assertions"</span><span class="p">,</span> <span class="p">[]))</span> <span class="k">for</span> <span class="n">q</span> <span class="ow">in</span> <span class="n">questions_with_claims</span>
+    <span class="nb">len</span><span class="p">(</span><span class="n">q</span><span class="o">.</span><span class="n">attributes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"assertions"</span><span class="p">,</span> <span class="p">[]))</span>
+    <span class="k">for</span> <span class="n">q</span> <span class="ow">in</span> <span class="n">questions_with_claims</span>
+    <span class="k">if</span> <span class="n">q</span><span class="o">.</span><span class="n">attributes</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
 <span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Total assertions generated: </span><span class="si">{</span><span class="n">total_assertions</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span>
     <span class="sa">f</span><span class="s2">"Average assertions per question: </span><span class="si">{</span><span class="n">total_assertions</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nb">max</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">questions_with_claims</span><span class="p">),</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">"</span>
 <span class="p">)</span>
 </pre></div>
-<div class="clipboard-copy-txt" id="cell-6">from benchmark_qed.autoq.question_gen.data_questions.assertion_gen.local_claim_assertion_gen import (
+<div class="clipboard-copy-txt" id="cell-6">from graphrag_storage.file_storage import FileStorage
+
+from benchmark_qed.autoq.question_gen.data_questions.assertion_gen.local_claim_assertion_gen import (
     LocalClaimAssertionGenerator,
 )
 
 # Load existing data-local questions from disk
-existing_local_questions = load_questions(
-    f"{OUTPUT_QUESTIONS_PATH}/data_local_questions/selected_questions.json"
+local_question_storage = FileStorage(f"{OUTPUT_QUESTIONS_PATH}/data_local_questions/")
+existing_local_questions = asyncio.run(
+    load_questions(local_question_storage, "selected_questions.json")
 )
 
 print(f"Loaded {len(existing_local_questions)} existing data-local questions")
@@ -1698,25 +1710,29 @@ local_assertion_generator = LocalClaimAssertionGenerator(
 )
 
 # Generate assertions for all questions with claims
-await local_assertion_generator.agenerate_assertions_for_questions(
-    questions_with_claims
+asyncio.run(
+    local_assertion_generator.agenerate_assertions_for_questions(questions_with_claims)
 )
 
 # Combine back with questions that had no claims
 updated_local_questions = questions_with_claims + questions_without_claims
 
 # Save updated questions with assertions
-save_questions(
-    updated_local_questions,
-    f"{OUTPUT_QUESTIONS_PATH}/data_local_questions/",
-    "selected_questions_with_assertions",
+asyncio.run(
+    save_questions(
+        updated_local_questions,
+        local_question_storage,
+        "selected_questions_with_assertions",
+    )
 )
 
 # Show summary
 print("\n=== SUMMARY ===")
 print(f"Processed {len(questions_with_claims)} questions with claims")
 total_assertions = sum(
-    len(q.attributes.get("assertions", [])) for q in questions_with_claims
+    len(q.attributes.get("assertions", []))
+    for q in questions_with_claims
+    if q.attributes is not None
 )
 print(f"Total assertions generated: {total_assertions}")
 print(
@@ -1987,8 +2003,9 @@ print(
 <span class="p">)</span>
 
 <span class="c1"># Load existing data-global questions from disk</span>
-<span class="n">existing_global_questions</span> <span class="o">=</span> <span class="n">load_questions</span><span class="p">(</span>
-    <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">OUTPUT_QUESTIONS_PATH</span><span class="si">}</span><span class="s2">/data_global_questions/selected_questions.json"</span>
+<span class="n">global_question_storage</span> <span class="o">=</span> <span class="n">FileStorage</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">OUTPUT_QUESTIONS_PATH</span><span class="si">}</span><span class="s2">/data_global_questions/"</span><span class="p">)</span>
+<span class="n">existing_global_questions</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+    <span class="n">load_questions</span><span class="p">(</span><span class="n">global_question_storage</span><span class="p">,</span> <span class="s2">"selected_questions.json"</span><span class="p">)</span>
 <span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Loaded </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">existing_global_questions</span><span class="p">)</span><span class="si">}</span><span class="s2"> existing data-global questions"</span><span class="p">)</span>
@@ -2027,28 +2044,34 @@ print(
 <span class="p">)</span>
 
 <span class="c1"># Generate assertions for ALL questions with claims</span>
-<span class="k">await</span> <span class="n">global_assertion_generator</span><span class="o">.</span><span class="n">agenerate_assertions_for_questions</span><span class="p">(</span>
-    <span class="n">questions_with_claims</span>
+<span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+    <span class="n">global_assertion_generator</span><span class="o">.</span><span class="n">agenerate_assertions_for_questions</span><span class="p">(</span><span class="n">questions_with_claims</span><span class="p">)</span>
 <span class="p">)</span>
 
 <span class="c1"># Combine back with questions that had no claims</span>
 <span class="n">updated_global_questions</span> <span class="o">=</span> <span class="n">questions_with_claims</span> <span class="o">+</span> <span class="n">questions_without_claims</span>
 
 <span class="c1"># Save updated questions with assertions</span>
-<span class="n">save_questions</span><span class="p">(</span>
-    <span class="n">updated_global_questions</span><span class="p">,</span>
-    <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">OUTPUT_QUESTIONS_PATH</span><span class="si">}</span><span class="s2">/data_global_questions/"</span><span class="p">,</span>
-    <span class="s2">"selected_questions_with_assertions"</span><span class="p">,</span>
+<span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+    <span class="n">save_questions</span><span class="p">(</span>
+        <span class="n">updated_global_questions</span><span class="p">,</span>
+        <span class="n">global_question_storage</span><span class="p">,</span>
+        <span class="s2">"selected_questions_with_assertions"</span><span class="p">,</span>
+    <span class="p">)</span>
 <span class="p">)</span>
 
 <span class="c1"># Show summary</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">=== SUMMARY ==="</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Processed </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">questions_with_claims</span><span class="p">)</span><span class="si">}</span><span class="s2"> questions with claims"</span><span class="p">)</span>
 <span class="n">total_assertions</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span>
-    <span class="nb">len</span><span class="p">(</span><span class="n">q</span><span class="o">.</span><span class="n">attributes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"assertions"</span><span class="p">,</span> <span class="p">[]))</span> <span class="k">for</span> <span class="n">q</span> <span class="ow">in</span> <span class="n">questions_with_claims</span>
+    <span class="nb">len</span><span class="p">(</span><span class="n">q</span><span class="o">.</span><span class="n">attributes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"assertions"</span><span class="p">,</span> <span class="p">[]))</span>
+    <span class="k">for</span> <span class="n">q</span> <span class="ow">in</span> <span class="n">questions_with_claims</span>
+    <span class="k">if</span> <span class="n">q</span><span class="o">.</span><span class="n">attributes</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
 <span class="p">)</span>
 <span class="n">total_map_assertions</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span>
-    <span class="nb">len</span><span class="p">(</span><span class="n">q</span><span class="o">.</span><span class="n">attributes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"map_assertions"</span><span class="p">,</span> <span class="p">[]))</span> <span class="k">for</span> <span class="n">q</span> <span class="ow">in</span> <span class="n">questions_with_claims</span>
+    <span class="nb">len</span><span class="p">(</span><span class="n">q</span><span class="o">.</span><span class="n">attributes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"map_assertions"</span><span class="p">,</span> <span class="p">[]))</span>
+    <span class="k">for</span> <span class="n">q</span> <span class="ow">in</span> <span class="n">questions_with_claims</span>
+    <span class="k">if</span> <span class="n">q</span><span class="o">.</span><span class="n">attributes</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
 <span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Total map assertions generated: </span><span class="si">{</span><span class="n">total_map_assertions</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Total final assertions generated: </span><span class="si">{</span><span class="n">total_assertions</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
@@ -2059,8 +2082,10 @@ print(
 <span class="c1"># Show per-question breakdown</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">=== PER-QUESTION BREAKDOWN ==="</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">q</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">questions_with_claims</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span>
-    <span class="n">assertions</span> <span class="o">=</span> <span class="n">q</span><span class="o">.</span><span class="n">attributes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"assertions"</span><span class="p">,</span> <span class="p">[])</span>
-    <span class="n">map_assertions</span> <span class="o">=</span> <span class="n">q</span><span class="o">.</span><span class="n">attributes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"map_assertions"</span><span class="p">,</span> <span class="p">[])</span>
+    <span class="n">assertions</span> <span class="o">=</span> <span class="n">q</span><span class="o">.</span><span class="n">attributes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"assertions"</span><span class="p">,</span> <span class="p">[])</span> <span class="k">if</span> <span class="n">q</span><span class="o">.</span><span class="n">attributes</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="p">[]</span>
+    <span class="n">map_assertions</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">q</span><span class="o">.</span><span class="n">attributes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"map_assertions"</span><span class="p">,</span> <span class="p">[])</span> <span class="k">if</span> <span class="n">q</span><span class="o">.</span><span class="n">attributes</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="p">[]</span>
+    <span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span>
         <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">. [</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">map_assertions</span><span class="p">)</span><span class="si">}</span><span class="s2"> map → </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">assertions</span><span class="p">)</span><span class="si">}</span><span class="s2"> final] </span><span class="si">{</span><span class="n">q</span><span class="o">.</span><span class="n">text</span><span class="p">[:</span><span class="mi">60</span><span class="p">]</span><span class="si">}</span><span class="s2">..."</span>
     <span class="p">)</span>
@@ -2070,8 +2095,9 @@ print(
 )
 
 # Load existing data-global questions from disk
-existing_global_questions = load_questions(
-    f"{OUTPUT_QUESTIONS_PATH}/data_global_questions/selected_questions.json"
+global_question_storage = FileStorage(f"{OUTPUT_QUESTIONS_PATH}/data_global_questions/")
+existing_global_questions = asyncio.run(
+    load_questions(global_question_storage, "selected_questions.json")
 )
 
 print(f"Loaded {len(existing_global_questions)} existing data-global questions")
@@ -2110,28 +2136,34 @@ global_assertion_generator = GlobalClaimAssertionGenerator(
 )
 
 # Generate assertions for ALL questions with claims
-await global_assertion_generator.agenerate_assertions_for_questions(
-    questions_with_claims
+asyncio.run(
+    global_assertion_generator.agenerate_assertions_for_questions(questions_with_claims)
 )
 
 # Combine back with questions that had no claims
 updated_global_questions = questions_with_claims + questions_without_claims
 
 # Save updated questions with assertions
-save_questions(
-    updated_global_questions,
-    f"{OUTPUT_QUESTIONS_PATH}/data_global_questions/",
-    "selected_questions_with_assertions",
+asyncio.run(
+    save_questions(
+        updated_global_questions,
+        global_question_storage,
+        "selected_questions_with_assertions",
+    )
 )
 
 # Show summary
 print("\n=== SUMMARY ===")
 print(f"Processed {len(questions_with_claims)} questions with claims")
 total_assertions = sum(
-    len(q.attributes.get("assertions", [])) for q in questions_with_claims
+    len(q.attributes.get("assertions", []))
+    for q in questions_with_claims
+    if q.attributes is not None
 )
 total_map_assertions = sum(
-    len(q.attributes.get("map_assertions", [])) for q in questions_with_claims
+    len(q.attributes.get("map_assertions", []))
+    for q in questions_with_claims
+    if q.attributes is not None
 )
 print(f"Total map assertions generated: {total_map_assertions}")
 print(f"Total final assertions generated: {total_assertions}")
@@ -2142,8 +2174,10 @@ print(
 # Show per-question breakdown
 print("\n=== PER-QUESTION BREAKDOWN ===")
 for i, q in enumerate(questions_with_claims, 1):
-    assertions = q.attributes.get("assertions", [])
-    map_assertions = q.attributes.get("map_assertions", [])
+    assertions = q.attributes.get("assertions", []) if q.attributes is not None else []
+    map_assertions = (
+        q.attributes.get("map_assertions", []) if q.attributes is not None else []
+    )
     print(
         f"{i}. [{len(map_assertions)} map → {len(assertions)} final] {q.text[:60]}..."
     )</div>

@@ -1411,10 +1411,12 @@ nest_asyncio.apply()</div>
 </div>
 </clipboard-copy>
 </div>
-<div class="highlight-ipynb hl-python"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<div class="highlight-ipynb hl-python"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">asyncio</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">tiktoken</span>
@@ -1427,10 +1429,12 @@ nest_asyncio.apply()</div>
 <span class="k">if</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s2">"httpx"</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
     <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s2">"httpx"</span><span class="p">)</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">ERROR</span><span class="p">)</span>
 </pre></div>
-<div class="clipboard-copy-txt" id="cell-4">import json
+<div class="clipboard-copy-txt" id="cell-4">import asyncio
+import json
 import logging
 import os
 from pathlib import Path
+from typing import Any
 
 import pandas as pd
 import tiktoken
@@ -1794,7 +1798,9 @@ if relevance_rater.cache_enabled:
 </div>
 </clipboard-copy>
 </div>
-<div class="highlight-ipynb hl-python"><pre><span></span><span class="c1"># Load text units from parquet file</span>
+<div class="highlight-ipynb hl-python"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">benchmark_qed.autoe.retrieval</span><span class="w"> </span><span class="kn">import</span> <span class="n">save_cluster_references_to_json</span>
+
+<span class="c1"># Load text units from parquet file</span>
 <span class="n">text_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_parquet</span><span class="p">(</span><span class="n">REFERENCE_DATA_PATH</span> <span class="o">/</span> <span class="s2">"text_units.parquet"</span><span class="p">)</span>
 <span class="k">if</span> <span class="s2">"short_id"</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">text_df</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
     <span class="n">text_df</span><span class="p">[</span><span class="s2">"short_id"</span><span class="p">]</span> <span class="o">=</span> <span class="n">text_df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
@@ -1805,9 +1811,11 @@ if relevance_rater.cache_enabled:
 <span class="c1"># embed text units if needed</span>
 <span class="c1"># skip this if you already have embeddings in your corpus</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Embedding </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">corpus</span><span class="p">)</span><span class="si">}</span><span class="s2"> text units"</span><span class="p">)</span>
-<span class="n">corpus</span> <span class="o">=</span> <span class="k">await</span> <span class="n">text_embedder</span><span class="o">.</span><span class="n">embed_batch</span><span class="p">(</span>
-    <span class="n">text_units</span><span class="o">=</span><span class="n">corpus</span><span class="p">,</span>
-    <span class="n">batch_size</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span>
+<span class="n">corpus</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+    <span class="n">text_embedder</span><span class="o">.</span><span class="n">embed_batch</span><span class="p">(</span>
+        <span class="n">text_units</span><span class="o">=</span><span class="n">corpus</span><span class="p">,</span>
+        <span class="n">batch_size</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span>
+    <span class="p">)</span>
 <span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Embedded </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">corpus</span><span class="p">)</span><span class="si">}</span><span class="s2"> text units"</span><span class="p">)</span>
 
@@ -1849,7 +1857,7 @@ if relevance_rater.cache_enabled:
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Loaded </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">questions</span><span class="p">)</span><span class="si">}</span><span class="s2"> questions"</span><span class="p">)</span>
 
     <span class="c1"># Generate cluster references using batch assessment</span>
-    <span class="n">batch_results</span> <span class="o">=</span> <span class="k">await</span> <span class="n">cluster_rater</span><span class="o">.</span><span class="n">assess_batch</span><span class="p">(</span><span class="n">questions</span><span class="p">)</span>
+    <span class="n">batch_results</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">cluster_rater</span><span class="o">.</span><span class="n">assess_batch</span><span class="p">(</span><span class="n">questions</span><span class="p">))</span>
 
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Generated cluster references for </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">batch_results</span><span class="p">)</span><span class="si">}</span><span class="s2"> questions"</span><span class="p">)</span>
 
@@ -1860,7 +1868,7 @@ if relevance_rater.cache_enabled:
         <span class="o">/</span> <span class="sa">f</span><span class="s2">"clusters_</span><span class="si">{</span><span class="n">NUM_CLUSTERS</span><span class="si">}</span><span class="s2">"</span>
         <span class="o">/</span> <span class="s2">"reference.json"</span>
     <span class="p">)</span>
-    <span class="n">save_cluster_references_to_json</span><span class="p">(</span>  <span class="c1"># noqa: F821</span>
+    <span class="n">save_cluster_references_to_json</span><span class="p">(</span>
         <span class="n">batch_results</span><span class="p">,</span>
         <span class="n">output_path</span><span class="p">,</span>
         <span class="n">include_clusters</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
@@ -1871,7 +1879,9 @@ if relevance_rater.cache_enabled:
 
 <span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">✓ Cluster reference generation completed for all question sets"</span><span class="p">)</span>
 </pre></div>
-<div class="clipboard-copy-txt" id="cell-8"># Load text units from parquet file
+<div class="clipboard-copy-txt" id="cell-8">from benchmark_qed.autoe.retrieval import save_cluster_references_to_json
+
+# Load text units from parquet file
 text_df = pd.read_parquet(REFERENCE_DATA_PATH / "text_units.parquet")
 if "short_id" not in text_df.columns:
     text_df["short_id"] = text_df.index.astype(str)
@@ -1882,9 +1892,11 @@ print(f"Loaded {len(corpus)} text units")
 # embed text units if needed
 # skip this if you already have embeddings in your corpus
 print(f"Embedding {len(corpus)} text units")
-corpus = await text_embedder.embed_batch(
-    text_units=corpus,
-    batch_size=32,
+corpus = asyncio.run(
+    text_embedder.embed_batch(
+        text_units=corpus,
+        batch_size=32,
+    )
 )
 print(f"Embedded {len(corpus)} text units")
 
@@ -1926,7 +1938,7 @@ for question_set in QUESTION_SETS:
     print(f"Loaded {len(questions)} questions")
 
     # Generate cluster references using batch assessment
-    batch_results = await cluster_rater.assess_batch(questions)
+    batch_results = asyncio.run(cluster_rater.assess_batch(questions))
 
     print(f"Generated cluster references for {len(batch_results)} questions")
 
@@ -1937,7 +1949,7 @@ for question_set in QUESTION_SETS:
         / f"clusters_{NUM_CLUSTERS}"
         / "reference.json"
     )
-    save_cluster_references_to_json(  # noqa: F821
+    save_cluster_references_to_json(
         batch_results,
         output_path,
         include_clusters=True,
@@ -2127,8 +2139,10 @@ if relevance_rater.cache_enabled:
         <span class="k">if</span> <span class="n">NUM_QUESTIONS</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">retrieval_results</span> <span class="o">=</span> <span class="n">retrieval_results</span><span class="p">[:</span><span class="n">NUM_QUESTIONS</span><span class="p">]</span>
 
-        <span class="n">relevance_results</span> <span class="o">=</span> <span class="k">await</span> <span class="n">assess_batch_relevance</span><span class="p">(</span>
-            <span class="n">retrieval_results</span><span class="o">=</span><span class="n">retrieval_results</span><span class="p">,</span> <span class="n">relevance_rater</span><span class="o">=</span><span class="n">relevance_rater</span>
+        <span class="n">relevance_results</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+            <span class="n">assess_batch_relevance</span><span class="p">(</span>
+                <span class="n">retrieval_results</span><span class="o">=</span><span class="n">retrieval_results</span><span class="p">,</span> <span class="n">relevance_rater</span><span class="o">=</span><span class="n">relevance_rater</span>
+            <span class="p">)</span>
         <span class="p">)</span>
 
         <span class="c1"># save relevance results to json file</span>
@@ -2168,8 +2182,10 @@ if relevance_rater.cache_enabled:
         if NUM_QUESTIONS is not None:
             retrieval_results = retrieval_results[:NUM_QUESTIONS]
 
-        relevance_results = await assess_batch_relevance(
-            retrieval_results=retrieval_results, relevance_rater=relevance_rater
+        relevance_results = asyncio.run(
+            assess_batch_relevance(
+                retrieval_results=retrieval_results, relevance_rater=relevance_rater
+            )
         )
 
         # save relevance results to json file
@@ -2550,7 +2566,7 @@ print("\n✓ Fidelity calculation completed for all RAG methods and question set
 
 <span class="k">for</span> <span class="n">rag_method</span> <span class="ow">in</span> <span class="n">RAG_METHODS</span><span class="p">:</span>
     <span class="k">for</span> <span class="n">question_set</span> <span class="ow">in</span> <span class="n">QUESTION_SETS</span><span class="p">:</span>
-        <span class="n">row_data</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="n">row_data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
             <span class="s2">"Question_Set"</span><span class="p">:</span> <span class="n">question_set</span><span class="p">,</span>
             <span class="s2">"RAG_Method"</span><span class="p">:</span> <span class="n">rag_method</span><span class="p">,</span>
         <span class="p">}</span>
@@ -2623,7 +2639,7 @@ comparison_data = []
 
 for rag_method in RAG_METHODS:
     for question_set in QUESTION_SETS:
-        row_data = {
+        row_data: dict[str, Any] = {
             "Question_Set": question_set,
             "RAG_Method": rag_method,
         }
