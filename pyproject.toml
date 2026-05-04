@@ -43,7 +43,7 @@ dev = [
     "ipywidgets>=8.1.5",
     "mkdocs-material>=9.6.10",
     "poethepoet>=0.32.1",
-    "pyright>=1.1.392.post0",
+    "pyright>=1.1.409",
     "nest-asyncio>=1.6.0",
     "py7zr>=0.22.0",
     "pytest>=8.3.5",
@@ -57,6 +57,7 @@ dev = [
     "mkdocs-exclude-search>=0.6.6",
     "mkdocs-typer2>=0.1.4",
     "semversioner>=2.0.6",
+    "nbqa>=1.9.1",
 ]
 
 [build-system]
@@ -81,10 +82,20 @@ _ruff_check = 'ruff check . --preview'
 _format_code = "ruff format  . --preview"
 _format_check = 'ruff format . --check --preview'
 _check_typos = 'typos .'
-
+_typecheck_notebooks = 'nbqa pyright docs/notebooks'
 typecheck = "pyright"
+check_notebooks = [
+    '_typecheck_notebooks',
+]
 check_package_types = "pyright --verifytypes benchmark_qed --ignoreexternal"
-check = ['_check_typos', '_format_check', '_ruff_check', 'typecheck', 'check_package_types', ]
+check = [
+    '_check_typos', 
+    '_format_check', 
+    '_ruff_check', 
+    'typecheck', 
+    'check_notebooks',
+    'check_package_types', 
+]
 fix = "ruff check --fix ."
 fix_unsafe = "ruff check --preview --fix --unsafe-fixes ."
 format = ['_sort_imports', '_format_code']
@@ -127,7 +138,7 @@ sequence = [
 
 # https://github.com/microsoft/pyright/blob/9f81564a4685ff5c55edd3959f9b39030f590b2f/docs/configuration.md#sample-pyprojecttoml-file
 [tool.pyright]
-include = ["benchmark_qed", "tests"]
+include = ["benchmark_qed", "tests", "docs/notebooks"]
 exclude = ["**/__pycache__"]
 
 [tool.pytest.ini_options]
