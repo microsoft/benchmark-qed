@@ -23,6 +23,7 @@ from typing import Any
 from uuid import uuid4
 
 import pandas as pd
+from graphrag_llm.completion import LLMCompletion
 from rich import print as rich_print
 from rich.progress import Progress, TaskID
 
@@ -34,8 +35,7 @@ from benchmark_qed.autoe.data_model.assertion import (
 from benchmark_qed.autoe.prompts import assertion as assertion_prompts
 from benchmark_qed.config.llm_config import LLMConfig
 from benchmark_qed.config.utils import load_template_file
-from benchmark_qed.llm.type.base import ChatModel
-from benchmark_qed.llm.utils import chat_typed_response
+from benchmark_qed.llm import chat
 
 ASSERTION_PROMPTS = Path(assertion_prompts.__file__).parent
 
@@ -106,7 +106,7 @@ def _select_best_global_reasoning(row: pd.Series) -> str:
 
 def get_hierarchical_assertion_scores(
     *,
-    llm_client: ChatModel,
+    llm_client: LLMCompletion,
     llm_config: LLMConfig,
     answers: pd.DataFrame,
     assertions: pd.DataFrame,
@@ -199,7 +199,7 @@ def get_hierarchical_assertion_scores(
 
 def _get_hierarchical_scores_joint(
     *,
-    llm_client: ChatModel,
+    llm_client: LLMCompletion,
     llm_config: LLMConfig,
     answers: pd.DataFrame,
     assertions: pd.DataFrame,
@@ -314,7 +314,7 @@ def _get_hierarchical_scores_joint(
 
 def _get_hierarchical_scores_staged(
     *,
-    llm_client: ChatModel,
+    llm_client: LLMCompletion,
     llm_config: LLMConfig,
     answers: pd.DataFrame,
     assertions: pd.DataFrame,
@@ -606,7 +606,7 @@ def _get_hierarchical_scores_staged(
 
 
 async def evaluate_hierarchical_assertion(
-    llm_client: ChatModel,
+    llm_client: LLMCompletion,
     assertion: str,
     question: str,
     answer: str,
@@ -689,12 +689,17 @@ async def evaluate_hierarchical_assertion(
         },
     ]
 
-    response = await chat_typed_response(
-        llm=llm_client,
-        messages=messages,
-        data_model=HierarchicalAssertionLLMResponse,
-        **(additional_call_args or {}),
-    )
+    response = (
+        await chat(
+            llm_client,
+            messages=messages,
+            response_format=HierarchicalAssertionLLMResponse,
+            **(additional_call_args or {}),
+        )
+    ).formatted_response
+    if response is None:
+        msg = "LLM did not return a structured HierarchicalAssertionLLMResponse."
+        raise RuntimeError(msg)
 
     if complete_callback:
         complete_callback()
@@ -744,7 +749,7 @@ async def evaluate_hierarchical_assertion(
 
 
 async def evaluate_supporting_discovery(
-    llm_client: ChatModel,
+    llm_client: LLMCompletion,
     assertion: str,
     question: str,
     answer: str,
@@ -834,12 +839,17 @@ async def evaluate_supporting_discovery(
         },
     ]
 
-    response = await chat_typed_response(
-        llm=llm_client,
-        messages=messages,
-        data_model=SupportingDiscoveryLLMResponse,
-        **(additional_call_args or {}),
-    )
+    response = (
+        await chat(
+            llm_client,
+            messages=messages,
+            response_format=SupportingDiscoveryLLMResponse,
+            **(additional_call_args or {}),
+        )
+    ).formatted_response
+    if response is None:
+        msg = "LLM did not return a structured SupportingDiscoveryLLMResponse."
+        raise RuntimeError(msg)
 
     if complete_callback:
         complete_callback()

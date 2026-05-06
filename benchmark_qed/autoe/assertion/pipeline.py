@@ -9,6 +9,7 @@ from pathlib import Path
 from typing import Any, cast
 
 import pandas as pd
+from graphrag_llm.completion import LLMCompletion
 from rich import print as rich_print
 
 from benchmark_qed.autoe.assertion.aggregation import (
@@ -28,7 +29,6 @@ from benchmark_qed.autoe.assertion.significance import (
 from benchmark_qed.autoe.assertion.standard import get_assertion_scores
 from benchmark_qed.cli.utils import print_df
 from benchmark_qed.config.llm_config import LLMConfig
-from benchmark_qed.llm.type.base import ChatModel
 
 
 def load_and_normalize_assertions(
@@ -169,7 +169,7 @@ def load_and_normalize_hierarchical_assertions(
 
 
 def evaluate_rag_method(
-    llm_client: ChatModel,
+    llm_client: LLMCompletion,
     llm_config: LLMConfig,
     generated_rag: str,
     question_set: str,
@@ -312,7 +312,7 @@ def evaluate_rag_method(
 
 
 def run_assertion_evaluation(
-    llm_client: ChatModel,
+    llm_client: LLMCompletion,
     llm_config: LLMConfig,
     question_sets: list[str],
     generated_rags: list[str],
@@ -445,7 +445,7 @@ def run_assertion_evaluation(
 
 
 def run_hierarchical_assertion_evaluation(
-    llm_client: ChatModel,
+    llm_client: LLMCompletion,
     llm_config: LLMConfig,
     generated_rags: list[str],
     assertions: pd.DataFrame,

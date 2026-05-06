@@ -6,9 +6,10 @@ import logging
 from collections.abc import Generator
 from typing import Any
 
+from graphrag_llm.embedding import LLMEmbedding
+
 from benchmark_qed.autod.data_model.text_unit import TextUnit
 from benchmark_qed.config.defaults import EMBEDDING_BATCH_SIZE
-from benchmark_qed.llm.type.base import EmbeddingModel
 
 log: logging.Logger = logging.getLogger(__name__)
 
@@ -20,11 +21,11 @@ class TextEmbedder:
     using a provided embedding model.
     """
 
-    def __init__(self, text_embedder: EmbeddingModel) -> None:
+    def __init__(self, text_embedder: LLMEmbedding) -> None:
         """Initialize a TextEmbedder instance.
 
         Args:
-            text_embedder (EmbeddingModel): An instance of an embedding model
+            text_embedder (LLMEmbedding): An instance of an embedding model
                 that implements the `embed` method.
         """
         self.text_embedder = text_embedder
@@ -40,7 +41,9 @@ class TextEmbedder:
         -------
             list[float]: The embedding vector for the input text.
         """
-        embeddings = await self.text_embedder.embed(text_list=[text], **kwargs)
+        embeddings = (
+            await self.text_embedder.embedding_async(input=[text], **kwargs)
+        ).embeddings
         return embeddings[0]
 
     async def embed_text_unit(self, text_unit: TextUnit) -> TextUnit:
@@ -98,9 +101,12 @@ class TextEmbedder:
                 yield [text.text for text in texts[i : i + batch_size]]
 
         batches = list(get_batch(text_units, batch_size))
-        tasks = [
-            self.text_embedder.embed(text_list=batch, **kwargs) for batch in batches
-        ]
+
+        async def _embed_batch(batch: list[str]) -> list[list[float]]:
+            response = await self.text_embedder.embedding_async(input=batch, **kwargs)
+            return response.embeddings
+
+        tasks = [_embed_batch(batch) for batch in batches]
         results = await asyncio.gather(*tasks, return_exceptions=True)
 
         # Flatten results, skipping failed batches whose text units

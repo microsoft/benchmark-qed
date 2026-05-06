@@ -16,6 +16,7 @@ from typing import Any
 
 import numpy as np
 import pandas as pd
+from graphrag_llm.completion import LLMCompletion
 from rich.progress import Progress, TaskID
 from scipy.stats import shapiro, ttest_rel, wilcoxon
 from statsmodels.stats.multitest import multipletests
@@ -25,8 +26,7 @@ from benchmark_qed.autoe.data_model import ConditionPair, PairwiseLLMResponse
 from benchmark_qed.autoe.prompts import pairwise as pairwise_prompts
 from benchmark_qed.config.llm_config import LLMConfig
 from benchmark_qed.config.utils import load_template_file
-from benchmark_qed.llm.type.base import ChatModel
-from benchmark_qed.llm.utils import chat_typed_response
+from benchmark_qed.llm import chat
 
 PAIRWISE_PROMPTS_PATH = Path(pairwise_prompts.__file__).parent
 
@@ -39,7 +39,7 @@ SCORE_MAPPING = {
 
 def get_pairwise_scores(
     *,
-    llm_client: ChatModel,
+    llm_client: LLMCompletion,
     llm_config: LLMConfig,
     base_name: str,
     other_name: str,
@@ -139,7 +139,7 @@ def get_pairwise_scores(
 
 
 async def get_pairwise_score(
-    llm: ChatModel,
+    llm: LLMCompletion,
     *,
     question: str,
     answer_1_name: str,
@@ -211,22 +211,26 @@ async def get_pairwise_score(
     system_prompt = assessment_system_prompt.substitute(
         criteria_name=criteria_name, criteria_description=criteria_description
     )
-    assessment_response = await chat_typed_response(
-        llm,
-        messages=[
-            {
-                "role": "system",
-                "content": system_prompt,
-            },
-            {
-                "role": "user",
-                "content": user_prompt,
-            },
-        ],
-        data_model=PairwiseLLMResponse,
-        response_format={"type": "json_object"},
-        **(additional_call_args or {}),
-    )
+    assessment_response = (
+        await chat(
+            llm,
+            messages=[
+                {
+                    "role": "system",
+                    "content": system_prompt,
+                },
+                {
+                    "role": "user",
+                    "content": user_prompt,
+                },
+            ],
+            response_format=PairwiseLLMResponse,
+            **(additional_call_args or {}),
+        )
+    ).formatted_response
+    if assessment_response is None:
+        msg = "LLM did not return a structured PairwiseLLMResponse."
+        raise RuntimeError(msg)
 
     response = {
         "score_id": score_id,

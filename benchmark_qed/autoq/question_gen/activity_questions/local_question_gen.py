@@ -11,6 +11,8 @@ from pathlib import Path
 from string import Template
 from typing import Any
 
+from graphrag_llm.completion import LLMCompletion
+
 import benchmark_qed.config.defaults as defs
 from benchmark_qed.autod.data_model.text_unit import TextUnit
 from benchmark_qed.autod.data_processor.embedding import TextEmbedder
@@ -28,7 +30,7 @@ from benchmark_qed.autoq.prompts.activity_questions import local_questions
 from benchmark_qed.autoq.question_gen.base import BaseQuestionGen, QuestionGenResult
 from benchmark_qed.autoq.sampler.question_sampler import QuestionSampler
 from benchmark_qed.config.utils import load_template_file
-from benchmark_qed.llm.type.base import ChatModel
+from benchmark_qed.llm import chat
 
 log: logging.Logger = logging.getLogger(__name__)
 
@@ -40,7 +42,7 @@ class ActivityLocalQuestionGen(BaseQuestionGen):
 
     def __init__(
         self,
-        llm: ChatModel,
+        llm: LLMCompletion,
         activity_context: ActivityContext,
         text_embedder: TextEmbedder,
         question_sampler: QuestionSampler | None = None,
@@ -253,11 +255,11 @@ class ActivityLocalQuestionGen(BaseQuestionGen):
                 {"role": "user", "content": question_input_prompt},
             ]
 
-            model_response = await self.llm.chat(
-                messages=extraction_messages, **self.llm_params
+            model_response = await chat(
+                self.llm, messages=extraction_messages, **self.llm_params
             )
 
-            questions, j = try_parse_json_object(model_response.output.content)
+            questions, j = try_parse_json_object(model_response.content)
             if j == {}:
                 msg = f"Error parsing JSON response: {questions}"
                 log.error(msg)

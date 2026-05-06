@@ -35,15 +35,17 @@ from benchmark_qed.autoq.question_gen.data_questions.claim_extractor.local_claim
 )
 from benchmark_qed.autoq.sampler.question_sampler import QuestionSampler
 from benchmark_qed.config.utils import load_template_file
+from benchmark_qed.llm import chat
 
 if TYPE_CHECKING:
     from string import Template
+
+    from graphrag_llm.completion import LLMCompletion
 
     from benchmark_qed.autod.data_model.text_unit import TextUnit
     from benchmark_qed.autod.data_processor.embedding import TextEmbedder
     from benchmark_qed.autod.sampler.clustering.cluster import TextCluster
     from benchmark_qed.autoq.config import AssertionConfig, AssertionPromptConfig
-    from benchmark_qed.llm.type.base import ChatModel
 
 log: logging.Logger = logging.getLogger(__name__)
 
@@ -61,7 +63,7 @@ class DataLocalQuestionGen(BaseQuestionGen):
 
     def __init__(
         self,
-        llm: ChatModel,
+        llm: LLMCompletion,
         text_embedder: TextEmbedder,
         text_units: list[TextUnit],
         question_sampler: QuestionSampler | None = None,
@@ -81,7 +83,7 @@ class DataLocalQuestionGen(BaseQuestionGen):
 
         Parameters
         ----------
-        llm : ChatModel
+        llm : LLMCompletion
             The language model to use.
         text_embedder : TextEmbedder
             Text embedder for computing embeddings.
@@ -304,8 +306,8 @@ class DataLocalQuestionGen(BaseQuestionGen):
                     ),
                 },
             ]
-            initial_questions_result = await self.llm.chat(
-                messages=extraction_messages, **self.llm_params
+            initial_questions_result = await chat(
+                self.llm, messages=extraction_messages, **self.llm_params
             )
 
             # expand the original set of questions with additional information
@@ -313,18 +315,16 @@ class DataLocalQuestionGen(BaseQuestionGen):
                 *extraction_messages,
                 {
                     "role": "assistant",
-                    "content": initial_questions_result.output.content,
+                    "content": initial_questions_result.content,
                 },
                 {"role": "user", "content": self.generation_prompt},
             ]
 
-            final_questions_result = await self.llm.chat(
-                messages=generation_messages, **self.llm_params
+            final_questions_result = await chat(
+                self.llm, messages=generation_messages, **self.llm_params
             )
 
-            final_questions, j = try_parse_json_object(
-                final_questions_result.output.content
-            )
+            final_questions, j = try_parse_json_object(final_questions_result.content)
             if j == {}:
                 msg = f"Error parsing questions output: {final_questions}"
                 log.error(msg)

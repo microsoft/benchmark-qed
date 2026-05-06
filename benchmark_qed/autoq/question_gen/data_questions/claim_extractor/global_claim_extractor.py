@@ -5,6 +5,7 @@ import asyncio
 from typing import Any
 
 import numpy as np
+from graphrag_llm.completion import LLMCompletion
 
 from benchmark_qed.autod.data_model.text_unit import TextUnit
 from benchmark_qed.autoq.data_model.question import Question
@@ -14,7 +15,6 @@ from benchmark_qed.autoq.question_gen.data_questions.claim_extractor.local_claim
 from benchmark_qed.autoq.question_gen.data_questions.claim_extractor.typing import (
     ClaimExtractionResult,
 )
-from benchmark_qed.llm.type.base import ChatModel
 
 
 class DataGlobalClaimExtractor:
@@ -22,7 +22,7 @@ class DataGlobalClaimExtractor:
 
     def __init__(
         self,
-        llm: ChatModel,
+        llm: LLMCompletion,
         local_questions: list[Question],
         claim_extractor_params: dict[str, Any] | None = None,
         concurrent_coroutines: int = 32,

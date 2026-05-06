@@ -16,6 +16,7 @@ from typing import Any
 
 import numpy as np
 import pandas as pd
+from graphrag_llm.completion import LLMCompletion
 from rich.progress import Progress, TaskID
 
 from benchmark_qed.autoe.config import Criteria
@@ -23,15 +24,14 @@ from benchmark_qed.autoe.data_model import ConditionPair, ReferenceLLMResponse
 from benchmark_qed.autoe.prompts import reference as reference_prompts
 from benchmark_qed.config.llm_config import LLMConfig
 from benchmark_qed.config.utils import load_template_file
-from benchmark_qed.llm.type.base import ChatModel
-from benchmark_qed.llm.utils import chat_typed_response
+from benchmark_qed.llm import chat
 
 REFERENCE_PROMPTS_PATH = Path(reference_prompts.__file__).parent
 
 
 def get_reference_scores(
     *,
-    llm_client: ChatModel,
+    llm_client: LLMCompletion,
     llm_config: LLMConfig,
     generated_answers: pd.DataFrame,
     reference_answers: pd.DataFrame,
@@ -129,7 +129,7 @@ def get_reference_scores(
 
 
 async def get_reference_score(
-    llm: ChatModel,
+    llm: LLMCompletion,
     *,
     question: str,
     reference_answer: str,
@@ -204,22 +204,26 @@ async def get_reference_score(
         score_min=score_min,
         score_max=score_max,
     ).strip()
-    assessment_response = await chat_typed_response(
-        llm,
-        messages=[
-            {
-                "role": "system",
-                "content": system_prompt,
-            },
-            {
-                "role": "user",
-                "content": user_prompt,
-            },
-        ],
-        data_model=ReferenceLLMResponse,
-        response_format={"type": "json_object"},
-        **(additional_call_args or {}),
-    )
+    assessment_response = (
+        await chat(
+            llm,
+            messages=[
+                {
+                    "role": "system",
+                    "content": system_prompt,
+                },
+                {
+                    "role": "user",
+                    "content": user_prompt,
+                },
+            ],
+            response_format=ReferenceLLMResponse,
+            **(additional_call_args or {}),
+        )
+    ).formatted_response
+    if assessment_response is None:
+        msg = "LLM did not return a structured ReferenceLLMResponse."
+        raise RuntimeError(msg)
 
     response = {
         "score_id": score_id,

@@ -260,8 +260,12 @@ def pairwise_scores(
 
     if print_model_usage:
         rich_print("Model usage statistics:")
-        rich_print(llm_client.get_usage())
-    asyncio.run(_write_json(output_storage, "model_usage.json", llm_client.get_usage()))
+        rich_print(llm_client.metrics_store.get_metrics())
+    asyncio.run(
+        _write_json(
+            output_storage, "model_usage.json", llm_client.metrics_store.get_metrics()
+        )
+    )
 
 
 @app.command()
@@ -373,8 +377,12 @@ def reference_scores(
 
     if print_model_usage:
         rich_print("Model usage statistics:")
-        rich_print(llm_client.get_usage())
-    asyncio.run(_write_json(output_storage, "model_usage.json", llm_client.get_usage()))
+        rich_print(llm_client.metrics_store.get_metrics())
+    asyncio.run(
+        _write_json(
+            output_storage, "model_usage.json", llm_client.metrics_store.get_metrics()
+        )
+    )
 
 
 @app.command()
@@ -582,8 +590,12 @@ def _run_single_rag_assertion_scores(
 
     if print_model_usage:
         rich_print("Model usage statistics:")
-        rich_print(llm_client.get_usage())
-    asyncio.run(_write_json(output_storage, "model_usage.json", llm_client.get_usage()))
+        rich_print(llm_client.metrics_store.get_metrics())
+    asyncio.run(
+        _write_json(
+            output_storage, "model_usage.json", llm_client.metrics_store.get_metrics()
+        )
+    )
 
 
 def _run_multi_rag_assertion_scores(
@@ -649,9 +661,11 @@ def _run_multi_rag_assertion_scores(
 
     if print_model_usage:
         rich_print("\nModel usage statistics:")
-        rich_print(llm_client.get_usage())
+        rich_print(llm_client.metrics_store.get_metrics())
     usage_file = config.output_dir / "model_usage.json"
-    usage_file.write_text(json.dumps(llm_client.get_usage()), encoding="utf-8")
+    usage_file.write_text(
+        json.dumps(llm_client.metrics_store.get_metrics()), encoding="utf-8"
+    )
 
 
 @app.command()
@@ -872,9 +886,11 @@ def _run_single_rag_hierarchical_assertion_scores(
 
     if print_model_usage:
         rich_print("\nModel usage statistics:")
-        rich_print(llm_client.get_usage())
+        rich_print(llm_client.metrics_store.get_metrics())
     usage_file = output / "model_usage.json"
-    usage_file.write_text(json.dumps(llm_client.get_usage()), encoding="utf-8")
+    usage_file.write_text(
+        json.dumps(llm_client.metrics_store.get_metrics()), encoding="utf-8"
+    )
 
 
 def _run_multi_rag_hierarchical_assertion_scores(
@@ -954,9 +970,11 @@ def _run_multi_rag_hierarchical_assertion_scores(
 
     if print_model_usage:
         rich_print("\nModel usage statistics:")
-        rich_print(llm_client.get_usage())
+        rich_print(llm_client.metrics_store.get_metrics())
     usage_file = config.output_dir / "model_usage.json"
-    usage_file.write_text(json.dumps(llm_client.get_usage()), encoding="utf-8")
+    usage_file.write_text(
+        json.dumps(llm_client.metrics_store.get_metrics()), encoding="utf-8"
+    )
 
 
 @app.command()
@@ -1433,7 +1451,9 @@ async def _generate_retrieval_reference_async(
 
             # Save usage for this run
             usage_file = output_subdir / "model_usage.json"
-            usage_file.write_text(json.dumps(llm_client.get_usage()), encoding="utf-8")
+            usage_file.write_text(
+                json.dumps(llm_client.metrics_store.get_metrics()), encoding="utf-8"
+            )
 
     # Print final summary
     rich_print(f"\n[bold green]{'=' * 60}[/bold green]")
@@ -1449,7 +1469,7 @@ async def _generate_retrieval_reference_async(
 
     if print_model_usage:
         rich_print("Model usage statistics:")
-        rich_print(llm_client.get_usage())
+        rich_print(llm_client.metrics_store.get_metrics())
 
 
 @app.command()
@@ -1575,7 +1595,9 @@ def retrieval_scores(
 
     if print_model_usage:
         rich_print("Model usage statistics:")
-        rich_print(llm_client.get_usage())
+        rich_print(llm_client.metrics_store.get_metrics())
 
     usage_file = config.output_dir / "model_usage.json"
-    usage_file.write_text(json.dumps(llm_client.get_usage()), encoding="utf-8")
+    usage_file.write_text(
+        json.dumps(llm_client.metrics_store.get_metrics()), encoding="utf-8"
+    )

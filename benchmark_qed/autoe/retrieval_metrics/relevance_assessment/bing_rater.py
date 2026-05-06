@@ -8,6 +8,8 @@ from pathlib import Path
 from string import Template
 from typing import Any
 
+from graphrag_llm.completion import LLMCompletion
+
 from benchmark_qed.autod.data_model.text_unit import TextUnit
 from benchmark_qed.autoe.data_model.relevance import (
     RelevanceAssessmentItem,
@@ -19,7 +21,7 @@ from benchmark_qed.autoe.retrieval_metrics.relevance_assessment.base import (
 )
 from benchmark_qed.config.llm_config import LLMConfig
 from benchmark_qed.config.utils import load_template_file
-from benchmark_qed.llm.type.base import ChatModel
+from benchmark_qed.llm import chat
 
 log: logging.Logger = logging.getLogger(__name__)
 
@@ -31,7 +33,7 @@ class BingRelevanceRater(RelevanceRater):
 
     def __init__(
         self,
-        llm_client: ChatModel,
+        llm_client: LLMCompletion,
         llm_config: LLMConfig,
         prompt_template: Template | None = None,
         concurrent_requests: int = 32,
@@ -128,13 +130,14 @@ class BingRelevanceRater(RelevanceRater):
 
             try:
                 # Call the LLM directly
-                response = await self.llm_client.chat(
+                response = await chat(
+                    self.llm_client,
                     messages=messages,
                     **self.llm_config.call_args,
                 )
 
                 # Extract the score from the response using regex
-                score, reasoning = self._parse_response(response.output.content)
+                score, reasoning = self._parse_response(response.content)
 
                 return RelevanceAssessmentItem(
                     text_unit=unit,

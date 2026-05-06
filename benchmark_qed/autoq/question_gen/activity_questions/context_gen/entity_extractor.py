@@ -10,6 +10,7 @@ from string import Template
 from typing import Any
 
 import tiktoken
+from graphrag_llm.completion import LLMCompletion
 from tqdm.asyncio import tqdm_asyncio
 
 from benchmark_qed.autod.data_model.text_unit import TextUnit
@@ -24,7 +25,7 @@ from benchmark_qed.autoq.data_model.activity import Entity
 from benchmark_qed.autoq.prompts.activity_questions import activity_context
 from benchmark_qed.config.defaults import LLM_PARAMS
 from benchmark_qed.config.utils import load_template_file
-from benchmark_qed.llm.type.base import ChatModel
+from benchmark_qed.llm import chat
 
 log: logging.Logger = logging.getLogger(__name__)
 
@@ -46,7 +47,7 @@ class EntityExtractor:
 
     def __init__(
         self,
-        llm: ChatModel,
+        llm: LLMCompletion,
         token_encoder: tiktoken.Encoding | None = None,
         map_system_prompt: Template | None = None,
         map_user_prompt: Template | None = None,
@@ -181,11 +182,12 @@ class EntityExtractor:
 
         try:
             async with self.semaphore:
-                model_response = await self.llm.chat(
+                model_response = await chat(
+                    self.llm,
                     messages=map_messages,
                     **llm_kwargs,
                 )
-                map_response = model_response.output.content
+                map_response = model_response.content
                 log.debug("Map response: %s", map_response)
             try:
                 # parse search response json
@@ -318,21 +320,22 @@ class EntityExtractor:
                 },
             ]
 
-            response = await self.llm.chat(
+            response = await chat(
+                self.llm,
                 messages=reduce_messages,
                 **llm_kwargs,
             )
 
             return EntityExtractionResult(
                 entities=self._parse_extraction_response(
-                    response.output.content, num_entities=num_entities
+                    response.content, num_entities=num_entities
                 ),
                 llm_calls=1,
                 input_tokens=num_tokens(
                     reduce_messages[0]["content"] + reduce_messages[1]["content"],
                     self.token_encoder,
                 ),
-                output_tokens=num_tokens(response.output.content, self.token_encoder),
+                output_tokens=num_tokens(response.content, self.token_encoder),
             )
         except Exception:
             log.exception("Exception in reduce_response")

@@ -7,6 +7,8 @@ from pathlib import Path
 from string import Template
 from typing import Any
 
+from graphrag_llm.completion import LLMCompletion
+
 from benchmark_qed.autod.data_model.text_unit import TextUnit
 from benchmark_qed.autoe.data_model.relevance import (
     RelevanceAssessmentItem,
@@ -15,8 +17,7 @@ from benchmark_qed.autoe.data_model.relevance import (
 from benchmark_qed.autoe.prompts import retrieval as retrieval_prompts
 from benchmark_qed.config.llm_config import LLMConfig
 from benchmark_qed.config.utils import load_template_file
-from benchmark_qed.llm.type.base import ChatModel
-from benchmark_qed.llm.utils import chat_typed_response
+from benchmark_qed.llm import chat
 
 from .base import RelevanceRater
 
@@ -35,7 +36,7 @@ class RationaleRelevanceRater(RelevanceRater):
 
     def __init__(
         self,
-        llm_client: ChatModel,
+        llm_client: LLMCompletion,
         llm_config: LLMConfig,
         prompt_template: Template | None = None,
         concurrent_requests: int = 32,
@@ -135,14 +136,18 @@ class RationaleRelevanceRater(RelevanceRater):
 
                 messages = [{"role": "system", "content": user_message}]
 
-                # Use chat_typed_response for structured output
-                llm_response = await chat_typed_response(
-                    llm=self.llm_client,
-                    messages=messages,
-                    data_model=RelevanceAssessmentItem,
-                    response_format={"type": "json_object"},
-                    **self.llm_config.call_args,
-                )
+                # Use response_format for structured output
+                llm_response = (
+                    await chat(
+                        self.llm_client,
+                        messages=messages,
+                        response_format=RelevanceAssessmentItem,
+                        **self.llm_config.call_args,
+                    )
+                ).formatted_response
+                if llm_response is None:
+                    msg = "LLM did not return a structured RelevanceAssessmentItem."
+                    raise RuntimeError(msg)  # noqa: TRY301
 
                 # Create the final response with the text unit included
                 return RelevanceAssessmentItem(

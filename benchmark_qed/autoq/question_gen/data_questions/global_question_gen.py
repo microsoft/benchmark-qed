@@ -35,18 +35,19 @@ from benchmark_qed.autoq.question_gen.data_questions.question_validator import (
 )
 from benchmark_qed.autoq.sampler.question_sampler import QuestionSampler
 from benchmark_qed.config.utils import load_template_file
+from benchmark_qed.llm import chat
 
 if TYPE_CHECKING:
     from string import Template
 
     import tiktoken
+    from graphrag_llm.completion import LLMCompletion
 
     from benchmark_qed.autod.data_processor.embedding import TextEmbedder
     from benchmark_qed.autoq.config import AssertionConfig, AssertionPromptConfig
     from benchmark_qed.autoq.question_gen.data_questions.claim_extractor.typing import (
         ClaimExtractionResult,
     )
-    from benchmark_qed.llm.type.base import ChatModel
 
 log: logging.Logger = logging.getLogger(__name__)
 
@@ -151,7 +152,7 @@ class DataGlobalQuestionGen(BaseQuestionGen):
 
     def __init__(
         self,
-        llm: ChatModel,
+        llm: LLMCompletion,
         text_embedder: TextEmbedder,
         local_questions: list[Question],
         token_encoder: tiktoken.Encoding | None = None,
@@ -597,10 +598,10 @@ class DataGlobalQuestionGen(BaseQuestionGen):
                 ),
             },
         ]
-        questions_result = await self.llm.chat(
-            messages=extraction_messages, **self.llm_params
+        questions_result = await chat(
+            self.llm, messages=extraction_messages, **self.llm_params
         )
-        questions, j = try_parse_json_object(questions_result.output.content)
+        questions, j = try_parse_json_object(questions_result.content)
         if j == {}:
             msg = f"Error parsing JSON response: {questions}"
             log.error(msg)

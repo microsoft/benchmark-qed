@@ -8,6 +8,7 @@ from string import Template
 from typing import Any, cast
 
 import pandas as pd
+from graphrag_llm.completion import LLMCompletion
 
 from benchmark_qed.autod.data_model.text_unit import TextUnit
 from benchmark_qed.autod.data_processor.text_utils import try_parse_json_object
@@ -20,7 +21,7 @@ from benchmark_qed.autoq.question_gen.data_questions.claim_extractor.typing impo
 )
 from benchmark_qed.config.defaults import LLM_PARAMS
 from benchmark_qed.config.utils import load_template_file
-from benchmark_qed.llm.type.base import ChatModel
+from benchmark_qed.llm import chat
 
 log: logging.Logger = logging.getLogger(__name__)
 
@@ -37,7 +38,7 @@ class DataLocalClaimExtractor:
 
     def __init__(
         self,
-        llm: ChatModel,
+        llm: LLMCompletion,
         llm_params: dict[str, Any] = LLM_PARAMS,
         json_mode: bool = True,
         system_prompt: Template | None = None,
@@ -66,8 +67,8 @@ class DataLocalClaimExtractor:
             },
             {"role": "user", "content": question_text},
         ]
-        result = await self.llm.chat(messages=messages, **self.llm_params)
-        response, j = try_parse_json_object(result.output.content)
+        result = await chat(self.llm, messages=messages, **self.llm_params)
+        response, j = try_parse_json_object(result.content)
         if j == {}:
             msg = f"Invalid json response, returning empty claim list: {response}"
             log.warning(msg)

@@ -665,7 +665,7 @@ async def run_retrieval_evaluation(
             retrieval_path = Path(rag_method["retrieval_results_path"])
 
             # Check if path includes question_set placeholder
-            if "{question_set}" in str(retrieval_path):  # noqa: RUF027
+            if "{question_set}" in str(retrieval_path):
                 retrieval_path = Path(
                     str(retrieval_path).format(question_set=question_set)
                 )

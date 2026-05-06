@@ -17,14 +17,16 @@ from benchmark_qed.config.defaults import (
     MIN_ASSERTION_VALIDATION_SCORE,
 )
 from benchmark_qed.config.utils import load_template_file
+from benchmark_qed.llm import chat
 
 if TYPE_CHECKING:
     from string import Template
 
+    from graphrag_llm.completion import LLMCompletion
+
     from benchmark_qed.autoq.question_gen.data_questions.assertion_gen.base import (
         Assertion,
     )
-    from benchmark_qed.llm.type.base import ChatModel
 
 log: logging.Logger = logging.getLogger(__name__)
 
@@ -137,7 +139,7 @@ class AssertionValidator:
 
     def __init__(
         self,
-        llm: ChatModel,
+        llm: LLMCompletion,
         llm_params: dict[str, Any] = LLM_PARAMS,
         min_criterion_score: int = MIN_ASSERTION_VALIDATION_SCORE,
         validation_prompt: Template | None = None,
@@ -149,7 +151,7 @@ class AssertionValidator:
 
         Parameters
         ----------
-        llm : ChatModel
+        llm : LLMCompletion
             Language model for validation.
         llm_params : dict[str, Any]
             Parameters for the LLM.
@@ -246,13 +248,11 @@ class AssertionValidator:
             sources=sources_text,
         )
         messages = [{"role": "user", "content": prompt}]
-        result = await self.llm.chat(messages=messages, **self.llm_params)
-        _, parsed = try_parse_json_object(result.output.content)
+        result = await chat(self.llm, messages=messages, **self.llm_params)
+        _, parsed = try_parse_json_object(result.content)
 
         if not parsed:
-            log.warning(
-                "Failed to parse validation response: %s", result.output.content[:200]
-            )
+            log.warning("Failed to parse validation response: %s", result.content[:200])
             return ValidationScores(reasoning="Could not parse validation response")
 
         return ValidationScores.from_llm_response(parsed)
