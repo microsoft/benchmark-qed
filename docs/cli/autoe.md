@@ -5,16 +5,52 @@ This section describes the configuration schema for performing relative comparis
 To create a template configuration file, run:
 
 ```sh
-benchmark-qed config init autoe_pairwise local/pairwise_test/settings.yaml
+benchmark-qed config init autoe_pairwise ./local/pairwise_test
+```
+
+To create a template with active Azure Blob Storage configuration:
+
+```sh
+benchmark-qed config init autoe_pairwise ./local/pairwise_test --storage-type blob
 ```
 
 To perform pairwise scoring with your configuration file, use:
 
 ```sh
-benchmark-qed autoe pairwise-scores local/pairwise_test/settings.yaml local/pairwise_test/output
+benchmark-qed autoe pairwise-scores ./local/pairwise_test/settings.yaml ./local/pairwise_test/output
 ```
 
+If your config lives in Azure Blob Storage, pass a `blob://` URI and supply credentials inline with `--account-url` (managed identity) or `--connection-string`:
+
+```sh
+benchmark-qed autoe pairwise-scores blob://my-container/pairwise_test/settings.yaml ./local/output \
+  --account-url https://<account>.blob.core.windows.net
+```
+
+The same `--account-url` / `--connection-string` options are available on every `autoe` subcommand: `pairwise-scores`, `reference-scores`, `assertion-scores`, `hierarchical-assertion-scores`, `assertion-significance`, `hierarchical-assertion-significance`, `generate-retrieval-reference`, and `retrieval-scores`. If neither is supplied, auth falls back to `$AZURE_STORAGE_ACCOUNT_URL` / `$AZURE_STORAGE_CONNECTION_STRING`.
+
 For information about the `config init` command, refer to: [Config Init CLI](config_init.md)
+
+---
+
+### Storage Configuration
+
+AutoE supports reading input answers from and writing output scores to Azure Blob Storage. When using `--storage-type blob` during `config init`, the generated settings file includes active storage sections.
+
+```yaml
+## Storage Configuration
+input_storage:
+  type: blob
+  container_name: my-datasets
+  account_url: https://<account>.blob.core.windows.net  # Managed identity
+  # connection_string: ${AZURE_STORAGE_CONNECTION_STRING}  # Alternative: connection string
+output_storage:
+  type: blob
+  container_name: my-output
+  account_url: https://<account>.blob.core.windows.net
+```
+
+When storage is configured, all `answer_base_path` values are resolved relative to the blob container (and optional `base_dir`). Without storage configuration, paths are resolved from the local filesystem.
 
 ---
 
@@ -140,13 +176,19 @@ This section explains how to configure reference-based scoring, where generated 
 To create a template configuration file, run:
 
 ```sh
-benchmark-qed config init autoe_reference local/reference_test/settings.yaml
+benchmark-qed config init autoe_reference ./local/reference_test
+```
+
+To create a template with active Azure Blob Storage configuration:
+
+```sh
+benchmark-qed config init autoe_reference ./local/reference_test --storage-type blob
 ```
 
 To perform reference-based scoring with your configuration file, run:
 
 ```sh
-benchmark-qed autoe reference-scores local/reference_test/settings.yaml local/reference_test/output
+benchmark-qed autoe reference-scores ./local/reference_test/settings.yaml ./local/reference_test/output
 ```
 
 For information about the `config init` command, see: [Config Init CLI](config_init.md)
@@ -259,7 +301,13 @@ The command auto-detects the config format:
 To create a template configuration file, run:
 
 ```sh
-benchmark-qed config init autoe_assertion local/assertion_test/settings.yaml
+benchmark-qed config init autoe_assertion ./local/assertion_test
+```
+
+To create a template with active Azure Blob Storage configuration:
+
+```sh
+benchmark-qed config init autoe_assertion ./local/assertion_test --storage-type blob
 ```
 
 For information about the `config init` command, refer to: [Config Init CLI](config_init.md)

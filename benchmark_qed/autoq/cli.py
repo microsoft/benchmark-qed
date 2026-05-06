@@ -49,6 +49,11 @@ from benchmark_qed.autoq.question_gen.data_questions.linked_question_gen import 
 from benchmark_qed.autoq.question_gen.data_questions.local_question_gen import (
     DataLocalQuestionGen,
 )
+from benchmark_qed.cli.config_resolver import (
+    AccountUrlOption,
+    ConnectionStringOption,
+    resolve_config_path,
+)
 from benchmark_qed.llm.factory import ModelFactory
 from benchmark_qed.llm.type.base import ChatModel
 
@@ -519,8 +524,15 @@ def autoq(
         bool,
         typer.Option(help="Whether to print the model usage statistics after scoring."),
     ] = False,
+    account_url: AccountUrlOption = None,
+    connection_string: ConnectionStringOption = None,
 ) -> None:
     """Generate questions from the input data."""
+    configuration_path = resolve_config_path(
+        configuration_path,
+        account_url=account_url,
+        connection_string=connection_string,
+    )
     config = load_config(QuestionGenerationConfig, configuration_path)
 
     if generation_types is None:
@@ -958,6 +970,8 @@ def generate_assertions(
         bool,
         typer.Option(help="Whether to print the model usage statistics."),
     ] = False,
+    account_url: AccountUrlOption = None,
+    connection_string: ConnectionStringOption = None,
 ) -> None:
     r"""Generate assertions for existing questions.
 
@@ -981,6 +995,11 @@ def generate_assertions(
             output/data_linked_questions/candidate_questions.json \
             output/data_linked_questions/ --type linked
     """
+    configuration_path = resolve_config_path(
+        configuration_path,
+        account_url=account_url,
+        connection_string=connection_string,
+    )
     config = load_config(QuestionGenerationConfig, configuration_path)
     loop = asyncio.get_event_loop()
 

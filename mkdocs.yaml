@@ -38,6 +38,7 @@ nav:
   - CLI:
     - AutoQ: cli/autoq.md
     - AutoE: cli/autoe.md
+    - Retrieval Metrics: cli/retrieval_scores.md
     - LLM Configuration: cli/llm_config.md
     - Config Init: cli/config_init.md
     - Dataset Download: cli/data.md
@@ -45,6 +46,8 @@ nav:
     - AutoQ: notebooks/autoq.ipynb
     - AutoE: notebooks/autoe.ipynb
     - AutoD: notebooks/autod.ipynb
+    - Assertion Generation: notebooks/assertion_gen.ipynb
+    - Retrieval Metrics: notebooks/retrieval_metrics.ipynb
   - Datasets: datasets.md
   
 repo_url: https://github.com/microsoft/benchmark-qed

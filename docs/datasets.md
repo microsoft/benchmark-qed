@@ -42,26 +42,13 @@ You can download datasets directly into Azure Blob Storage by providing storage 
 
 The `OUTPUT_DIR` argument (e.g., `input`) becomes the prefix path within the blob container. The dataset zip is downloaded from GitHub, extracted in memory, and each file is uploaded directly to the storage backend.
 
-## Downloading to Azure Cosmos DB
-
-You can also download datasets into Azure Cosmos DB:
-
-```sh
-benchmark-qed data download AP_news input \
-  --storage-type cosmosdb \
-  --container-name my-container \
-  --database-name my-database \
-  --account-url https://<account>.documents.azure.com
-```
-
 ## Storage Options Reference
 
 | Option | Description |
 |---|---|
-| `--storage-type` | Storage backend: `blob` for Azure Blob Storage, `cosmosdb` for Azure Cosmos DB. Omit for local filesystem. |
-| `--container-name` | The blob container or Cosmos DB container name. |
+| `--storage-type` | Storage backend: `blob` for Azure Blob Storage. Omit for local filesystem. |
+| `--container-name` | The blob container name. |
 | `--account-url` | The storage account URL (uses managed identity for authentication). |
 | `--connection-string` | The storage connection string (alternative to `--account-url`). |
-| `--database-name` | The Cosmos DB database name (required for `cosmosdb` type). |
 
 You can also find these datasets in the [datasets directory](https://github.com/microsoft/benchmark-qed/tree/main/datasets).

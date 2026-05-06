@@ -5,16 +5,73 @@ This section provides an overview of the configuration schema for the question g
 To create a template configuration file, run:
 
 ```sh
-benchmark-qed config init autoq local/autoq_test/settings.yaml
+benchmark-qed config init autoq ./local/autoq_test
+```
+
+To create a template with active Azure Blob Storage configuration:
+
+```sh
+benchmark-qed config init autoq ./local/autoq_test --storage-type blob
 ```
 
 To generate synthetic queries using your configuration file, run:
 
 ```sh
-benchmark-qed autoq local/autoq_test/settings.yaml local/autoq_test/output
+benchmark-qed autoq ./local/autoq_test/settings.yaml ./local/autoq_test/output
 ```
 
+If your config lives in Azure Blob Storage, pass a `blob://` URI and supply credentials inline with `--account-url` (managed identity) or `--connection-string`:
+
+```sh
+benchmark-qed autoq blob://my-container/autoq_test/settings.yaml ./local/output \
+  --account-url https://<account>.blob.core.windows.net
+```
+
+```sh
+benchmark-qed autoq blob://my-container/autoq_test/settings.yaml ./local/output \
+  --connection-string "<your-connection-string>"
+```
+
+The same `--account-url` / `--connection-string` options are available on `autoq generate-assertions`. If neither is supplied, auth falls back to `$AZURE_STORAGE_ACCOUNT_URL` / `$AZURE_STORAGE_CONNECTION_STRING`.
+
 For more information about the `config init` command, see: [Config Init CLI](config_init.md)
+
+---
+
+### Storage Configuration
+
+AutoQ supports reading input data from and writing output to Azure Blob Storage. When using `--storage-type blob` during `config init`, the generated settings file includes active storage sections.
+
+#### Input Storage
+
+Configured under the `input:` section in `settings.yaml`:
+
+```yaml
+input:
+  dataset_path: ./input
+  input_type: json
+  text_column: body_nitf
+  file_encoding: utf-8-sig
+  storage:
+    type: blob
+    container_name: my-datasets
+    connection_string: ${AZURE_STORAGE_CONNECTION_STRING}
+    # account_url: https://<account>.blob.core.windows.net  # Alternative: managed identity
+    # base_dir: path/within/container  # Optional prefix path
+```
+
+#### Output Storage
+
+Configured at the top level in `settings.yaml`:
+
+```yaml
+output_storage:
+  type: blob
+  container_name: my-output
+  connection_string: ${AZURE_STORAGE_CONNECTION_STRING}
+  # account_url: https://<account>.blob.core.windows.net
+  # base_dir: path/within/container
+```
 
 ---
 
