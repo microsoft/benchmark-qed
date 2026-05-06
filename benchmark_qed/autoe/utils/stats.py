@@ -550,6 +550,9 @@ def _apply_correction_and_build_result(
     p_values = [c[3] for c in comparisons_raw]
 
     _, corrected_pvals, _, _ = multipletests(p_values, alpha=alpha, method=correction)
+    if corrected_pvals is None:
+        msg = f"Invalid correction method: {correction}"
+        raise ValueError(msg)
 
     comparisons = [
         PairwiseComparison(
