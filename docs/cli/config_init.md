@@ -33,6 +33,10 @@ This creates `./my_project/settings.yaml` with blob storage sections **commented
 
 #### Azure Blob Storage
 
+!!! note "Supported cloud backends"
+    Only **Azure Blob Storage** (`--storage-type blob`) is currently supported.
+    Azure Cosmos DB and other backends are **not supported**.
+
 ```bash
 benchmark-qed config init autoq ./my_project --storage-type blob
 ```

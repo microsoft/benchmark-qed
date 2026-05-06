@@ -44,6 +44,10 @@ The `OUTPUT_DIR` argument (e.g., `input`) becomes the prefix path within the blo
 
 ## Storage Options Reference
 
+!!! note "Supported cloud backends"
+    Only **Azure Blob Storage** (`--storage-type blob`) is currently supported.
+    Azure Cosmos DB and other backends are **not supported**.
+
 | Option | Description |
 |---|---|
 | `--storage-type` | Storage backend: `blob` for Azure Blob Storage. Omit for local filesystem. |

@@ -6,6 +6,10 @@ This page documents the command-line interface of the benchmark-qed data downloa
 
 The `data download` command downloads datasets from GitHub and optionally uploads them to Azure Blob Storage.
 
+!!! note "Supported cloud backends"
+    Only **Azure Blob Storage** (`--storage-type blob`) is currently supported.
+    Azure Cosmos DB and other backends are **not supported**.
+
 #### Arguments
 
 | Argument | Description |
