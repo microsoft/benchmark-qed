@@ -768,13 +768,13 @@ def assertion_stats(
     Examples
     --------
         # Generate stats for a single assertion file
-        benchmark-qed autoq assertion-stats output/assertions.json
+        benchmark-qed assertion-stats output/assertions.json
 
         # Generate stats for all assertion files in a directory
-        benchmark-qed autoq assertion-stats output/data_global_questions/
+        benchmark-qed assertion-stats output/data_global_questions/
 
         # Specify output path
-        benchmark-qed autoq assertion-stats assertions.json -o stats/my_stats.json
+        benchmark-qed assertion-stats assertions.json -o stats/my_stats.json
     """
     from benchmark_qed.autoq.question_gen.data_questions.assertion_gen.stats import (
         generate_stats_for_assertion_file,
@@ -967,17 +967,17 @@ def generate_assertions(
     Examples
     --------
         # Generate local assertions for candidate questions
-        benchmark-qed autoq generate-assertions settings.yaml \
+        benchmark-qed generate-assertions settings.yaml \
             output/data_local_questions/candidate_questions.json \
             output/data_local_questions/ --type local
 
         # Generate global assertions
-        benchmark-qed autoq generate-assertions settings.yaml \
+        benchmark-qed generate-assertions settings.yaml \
             output/data_global_questions/candidate_questions.json \
             output/data_global_questions/ --type global
 
         # Generate linked assertions
-        benchmark-qed autoq generate-assertions settings.yaml \
+        benchmark-qed generate-assertions settings.yaml \
             output/data_linked_questions/candidate_questions.json \
             output/data_linked_questions/ --type linked
     """
