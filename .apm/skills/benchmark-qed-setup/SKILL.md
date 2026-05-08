@@ -70,6 +70,26 @@ Example:
 uvx --from "git+https://github.com/microsoft/benchmark-qed" benchmark-qed config init autoq ./my_workspace
 ```
 
+**Storage options** for `config init`:
+| Option | Description |
+|--------|-------------|
+| `--storage-type` / `-s` | `local` (default) or `blob`. When `blob`, storage config sections are scaffolded as active YAML (not commented out). |
+| `--container-name` | Pre-fill the blob container name in generated storage config. |
+| `--account-url` | Pre-fill the account URL (managed-identity auth) in generated storage config. |
+| `--connection-string` | Pre-fill the connection string in generated storage config. |
+| `--base-dir` | Pre-fill a base prefix path within the container. |
+
+When `--storage-type blob` is combined with `--account-url` or `--connection-string`, the generated config and prompt files are also uploaded directly to the blob container.
+
+Example (blob):
+```bash
+uvx --from "git+https://github.com/microsoft/benchmark-qed" benchmark-qed config init autoq ./my_workspace \
+  --storage-type blob \
+  --container-name my-datasets \
+  --account-url https://myaccount.blob.core.windows.net \
+  --base-dir experiments/run1
+```
+
 This creates:
 ```
 root/
@@ -94,6 +114,23 @@ echo y | uvx --from "git+https://github.com/microsoft/benchmark-qed" benchmark-q
 ```
 
 **Available datasets**: `AP_news`, `podcast`, `example_answers`
+
+**Storage options** for `data download`:
+| Option | Description |
+|--------|-------------|
+| `--storage-type` | Set to `blob` to upload the dataset to Azure Blob Storage instead of extracting locally. |
+| `--container-name` | The blob container name. |
+| `--account-url` | Azure storage account URL (managed-identity auth). |
+| `--connection-string` | Azure storage connection string (alternative to `--account-url`). |
+| `--base-dir` | Base prefix in blob storage. Files are stored as `{base_dir}/{output_dir}/`. |
+
+Example (download to blob):
+```bash
+echo y | uvx --from "git+https://github.com/microsoft/benchmark-qed" benchmark-qed data download AP_news datasets \
+  --storage-type blob \
+  --container-name my-datasets \
+  --account-url https://myaccount.blob.core.windows.net
+```
 
 ### Step 3 — Gather Configuration Choices from the User
 
@@ -137,6 +174,22 @@ Only ask the questions relevant to the chosen `config_type`:
 - `autoe_pairwise`: `base.name` + `base.answer_base_path`, plus a list of `others` (each with `name` and `answer_base_path`), and `question_sets`.
 - `autoe_reference`: `reference.name` + `reference.answer_base_path`, list of `generated`, and `question_sets`.
 - `autoe_assertion`: in single-RAG mode, `generated.name` + `generated.answer_base_path` and `assertions.assertions_path`. In multi-RAG mode (`rag_methods` provided), ask for `input_dir`, `output_dir`, `rag_methods` list, and `question_sets`.
+
+#### Storage fields (all config types, optional)
+
+Ask the user if they want to use Azure Blob Storage for input/output. If yes, collect:
+
+| Field | Type | Notes |
+|-------|------|-------|
+| `use_blob_storage` | boolean | Whether to configure cloud storage. |
+| `storage_container_name` | string | Azure Blob container name (e.g. `my-datasets`). |
+| `storage_auth_method` | enum (`connection_string`, `managed_identity`) | How to authenticate to Azure. |
+| `storage_connection_string_env_var` | string | Env var name for connection string (default: `AZURE_STORAGE_CONNECTION_STRING`). Only when `storage_auth_method=connection_string`. |
+| `storage_account_url` | string (uri) | Storage account URL. Only when `storage_auth_method=managed_identity`. |
+| `storage_base_dir` | string | Optional prefix path within the container. |
+| `separate_output_container` | boolean | Whether output uses a different container than input. |
+
+If storage is enabled, write the appropriate `input.storage`, `input_storage`, and/or `output_storage` blocks into `settings.yaml`.
 
 If the user declines a field, fall back to the documented default and call out the assumption in your response.
 
@@ -212,3 +265,6 @@ Key highlights:
 - Config types `autoe_pairwise`, `autoe_reference`, and `autoe_assertion` generate different settings.yaml templates — use the correct type for your evaluation method.
 - Prompts are copied as `.txt` files using Python `string.Template` syntax (`$variable` or `${variable}`).
 - **`prompt_config` key**: The runtime expects `prompt_config` (singular) for all autoe config types. Both `benchmark-qed init` and `config init` now generate the correct key. If you hand-edit YAML, ensure you use `prompt_config`, not `prompts_config`.
+- **`config init --storage-type blob`**: When combined with `--account-url` or `--connection-string`, the command uploads the generated `settings.yaml` and prompt files directly to blob storage. Without those auth options, it only scaffolds the storage YAML sections locally.
+- **Blob URI format**: CLI commands accept `blob://<container>/<key>` for config paths. The CLI downloads the config and all sibling files (prompt templates) to a temp directory so relative paths resolve correctly. Credentials can be passed via `--account-url`/`--connection-string` or the environment variables `AZURE_STORAGE_ACCOUNT_URL`/`AZURE_STORAGE_CONNECTION_STRING`.
+- **Storage config in YAML**: AutoQ uses `input.storage` (nested under `input`) and `output_storage` (top-level). AutoE uses `input_storage` and `output_storage` (both top-level). When storage is omitted, local filesystem is used.

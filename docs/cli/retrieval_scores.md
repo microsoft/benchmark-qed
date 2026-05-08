@@ -121,7 +121,25 @@ python -m benchmark_qed autoe generate-retrieval-reference \
 python -m benchmark_qed autoe generate-retrieval-reference \
     retrieval_reference_config.yaml \
     --print-model-usage
+
+# Reading the config from Azure Blob Storage (managed identity)
+benchmark-qed autoe generate-retrieval-reference \
+    blob://my-container/retrieval/retrieval_reference_config.yaml \
+    --account-url https://<account>.blob.core.windows.net
+
+# Or with a connection string
+benchmark-qed autoe generate-retrieval-reference \
+    blob://my-container/retrieval/retrieval_reference_config.yaml \
+    --connection-string "<your-connection-string>"
 ```
+
+#### Options
+
+| Option | Type | Default | Description |
+|---|---|---|---|
+| `--print-model-usage` | `bool` | `False` | Print LLM usage statistics after the run. |
+| `--account-url` | `str` | `None` | Azure Blob Storage account URL (managed identity), used when `config_path` is a `blob://` URI. Falls back to `$AZURE_STORAGE_ACCOUNT_URL`. |
+| `--connection-string` | `str` | `None` | Azure Blob Storage connection string, used when `config_path` is a `blob://` URI. Falls back to `$AZURE_STORAGE_CONNECTION_STRING`. |
 
 ### Output Structure
 
@@ -241,7 +259,21 @@ python -m benchmark_qed autoe retrieval-scores \
 python -m benchmark_qed autoe retrieval-scores \
     retrieval_scores_config.yaml \
     --print-model-usage
+
+# Reading the config from Azure Blob Storage (managed identity)
+benchmark-qed autoe retrieval-scores \
+    blob://my-container/retrieval/retrieval_scores_config.yaml \
+    --account-url https://<account>.blob.core.windows.net
 ```
+
+#### Options
+
+| Option | Type | Default | Description |
+|---|---|---|---|
+| `--print-model-usage` | `bool` | `False` | Print LLM usage statistics after the run. |
+| `--max-concurrent` | `int` | `8` | Maximum concurrent relevance assessments. |
+| `--account-url` | `str` | `None` | Azure Blob Storage account URL (managed identity), used when `config_path` is a `blob://` URI. Falls back to `$AZURE_STORAGE_ACCOUNT_URL`. |
+| `--connection-string` | `str` | `None` | Azure Blob Storage connection string, used when `config_path` is a `blob://` URI. Falls back to `$AZURE_STORAGE_CONNECTION_STRING`. |
 
 ### Output Files
 

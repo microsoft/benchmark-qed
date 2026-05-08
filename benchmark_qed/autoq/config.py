@@ -68,7 +68,7 @@ class InputConfig(BaseModel):
     )
     storage: StorageConfig | None = Field(
         default=None,
-        description="Optional storage configuration for reading input from blob/cosmos. When omitted, reads from the local filesystem.",
+        description="Optional storage configuration for reading input from Azure Blob Storage. When omitted, reads from the local filesystem.",
     )
 
 
@@ -689,7 +689,7 @@ class QuestionGenerationConfig(BaseModel):
 
     output_storage: StorageConfig | None = Field(
         default=None,
-        description="Optional storage configuration for writing output to blob/cosmos. When omitted, writes to the local filesystem path specified in the CLI.",
+        description="Optional storage configuration for writing output to Azure Blob Storage. When omitted, writes to the local filesystem path specified in the CLI.",
     )
 
 

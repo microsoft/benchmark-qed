@@ -1,11 +1,14 @@
 # Copyright (c) 2025 Microsoft Corporation.
 """Autoq CLI for generating questions."""
 
+import asyncio
 from enum import StrEnum
 from pathlib import Path
 from typing import Annotated
 
 import typer
+from graphrag_storage.storage_config import StorageConfig
+from graphrag_storage.storage_factory import create_storage
 
 from benchmark_qed.autod.prompts import summarization
 from benchmark_qed.autoe.prompts import assertion as assertion_prompts
@@ -97,23 +100,9 @@ input:
   text_column: body_nitf # The column in the dataset that contains the text to be processed. Modify this based on your dataset.
   metadata_columns: [headline, firstcreated] # Additional metadata columns to include in the input. Modify this based on your dataset.
   file_encoding: utf-8-sig
-  # storage: # Optional: read input from Azure Blob Storage instead of local filesystem.
-  #   type: blob
-  #   container_name: my-datasets # The blob container name (acts as the root folder).
-  #   connection_string: $${{AZURE_STORAGE_CONNECTION_STRING}} # Auth option 1: connection string.
-  #   # account_url: https://<account>.blob.core.windows.net # Auth option 2: managed identity (use instead of connection_string).
-  #   # base_dir: path/within/container # Optional prefix path. dataset_path is resolved relative to this.
-
+{{INPUT_STORAGE}}
 ## Output Storage Configuration
-# output_storage: # Optional: write output to Azure Blob Storage instead of local filesystem.
-#   type: blob
-#   container_name: my-output # The blob container name (acts as the root folder).
-#   connection_string: $${{AZURE_STORAGE_CONNECTION_STRING}} # Auth option 1: connection string.
-#   # account_url: https://<account>.blob.core.windows.net # Auth option 2: managed identity (use instead of connection_string).
-#   # base_dir: path/within/container # Optional prefix path. The CLI output argument is resolved relative to this.
-#   # Example: with container_name=my-output, base_dir=experiments/run1, and CLI arg "output",
-#   #   files are written to: my-output/experiments/run1/output/
-
+{{OUTPUT_STORAGE}}
 ## Encoder configuration
 encoding:
   model_name: o200k_base
@@ -258,16 +247,7 @@ assertion_prompts:
 """
 
 AUTOE_ASSERTION_CONTENT = f"""## Storage Configuration
-# input_storage: # Optional: read input answers/assertions from Azure Blob Storage.
-#   type: blob
-#   container_name: my-datasets # The blob container name (acts as the root folder).
-#   account_url: https://<account>.blob.core.windows.net # Auth via managed identity.
-#   # connection_string: $${{AZURE_STORAGE_CONNECTION_STRING}} # Or use connection string instead.
-# output_storage: # Optional: write output scores to Azure Blob Storage.
-#   type: blob
-#   container_name: my-output
-#   account_url: https://<account>.blob.core.windows.net
-
+{{STORAGE}}
 ## Input Configuration
 generated:
   name: vector_rag
@@ -288,16 +268,7 @@ prompt_config:
     prompt: prompts/assertion_system_prompt.txt"""
 
 AUTOE_PAIRWISE_CONTENT = f"""## Storage Configuration
-# input_storage: # Optional: read input answers from Azure Blob Storage.
-#   type: blob
-#   container_name: my-datasets # The blob container name (acts as the root folder).
-#   account_url: https://<account>.blob.core.windows.net # Auth via managed identity.
-#   # connection_string: $${{AZURE_STORAGE_CONNECTION_STRING}} # Or use connection string instead.
-# output_storage: # Optional: write output scores to Azure Blob Storage.
-#   type: blob
-#   container_name: my-output
-#   account_url: https://<account>.blob.core.windows.net
-
+{{STORAGE}}
 ## Input Configuration
 base:
   name: vector_rag
@@ -328,16 +299,7 @@ prompt_config:
 
 
 AUTOE_REFERENCE_CONTENT = f"""## Storage Configuration
-# input_storage: # Optional: read input answers from Azure Blob Storage.
-#   type: blob
-#   container_name: my-datasets # The blob container name (acts as the root folder).
-#   account_url: https://<account>.blob.core.windows.net # Auth via managed identity.
-#   # connection_string: $${{AZURE_STORAGE_CONNECTION_STRING}} # Or use connection string instead.
-# output_storage: # Optional: write output scores to Azure Blob Storage.
-#   type: blob
-#   container_name: my-output
-#   account_url: https://<account>.blob.core.windows.net
-
+{{STORAGE}}
 ## Input Configuration
 reference:
   name: lazygraphrag
@@ -365,12 +327,214 @@ prompt_config:
     prompt: prompts/reference_system_prompt.txt"""
 
 
+AUTOQ_INPUT_STORAGE_SNIPPET = """  storage:
+    type: blob
+    container_name: my-datasets # The blob container name (acts as the root folder).
+    connection_string: ${AZURE_STORAGE_CONNECTION_STRING} # Auth option 1: connection string.
+    # account_url: https://<account>.blob.core.windows.net # Auth option 2: managed identity (use instead of connection_string).
+    # base_dir: path/within/container # Optional prefix path. dataset_path is resolved relative to this."""
+
+
+AUTOQ_OUTPUT_STORAGE_SNIPPET = """output_storage:
+  type: blob
+  container_name: my-output # The blob container name (acts as the root folder).
+  connection_string: ${AZURE_STORAGE_CONNECTION_STRING} # Auth option 1: connection string.
+  # account_url: https://<account>.blob.core.windows.net # Auth option 2: managed identity (use instead of connection_string).
+  # base_dir: path/within/container # Optional prefix path. The CLI output argument is resolved relative to this."""
+
+
+AUTOE_STORAGE_SNIPPET = """input_storage:
+  type: blob
+  container_name: my-datasets # The blob container name (acts as the root folder).
+  connection_string: ${AZURE_STORAGE_CONNECTION_STRING} # Auth option 1: connection string.
+  # account_url: https://<account>.blob.core.windows.net # Auth option 2: managed identity (use instead of connection_string).
+output_storage:
+  type: blob
+  container_name: my-output
+  connection_string: ${AZURE_STORAGE_CONNECTION_STRING}
+  # account_url: https://<account>.blob.core.windows.net"""
+
+
+def _commentify(active: str, indent: int = 0) -> str:
+    """Comment out a YAML block by inserting `# ` after the given leading indent on each line.
+
+    Also escapes ``$`` as ``$$`` so that ``${VAR}`` placeholders inside the commented
+    block are not picked up by ``graphrag_common``'s ``string.Template`` env-var
+    substitution (which scans the whole file regardless of YAML comments).
+    """
+    prefix = " " * indent
+    out_lines = []
+    for line in active.splitlines():
+        escaped = line.replace("$", "$$")
+        if not escaped.strip():
+            out_lines.append(escaped)
+        elif escaped.startswith(prefix):
+            out_lines.append(prefix + "# " + escaped[indent:])
+        else:
+            out_lines.append("# " + escaped)
+    return "\n".join(out_lines)
+
+
+def _get_content(config_type: ConfigType) -> str:
+    """Get the base template content for a config type."""
+    match config_type:
+        case ConfigType.autoq:
+            return AUTOQ_CONTENT
+        case ConfigType.autoe_pairwise:
+            return AUTOE_PAIRWISE_CONTENT
+        case ConfigType.autoe_reference:
+            return AUTOE_REFERENCE_CONTENT
+        case ConfigType.autoe_assertion:
+            return AUTOE_ASSERTION_CONTENT
+
+
+def _render_content(
+    config_type: ConfigType,
+    storage_type: str,
+    *,
+    container_name: str | None = None,
+    account_url: str | None = None,
+    connection_string: str | None = None,
+    base_dir: str | None = None,
+) -> str:
+    """Render template content with the storage section in either commented or active form.
+
+    Args:
+        config_type: The type of configuration to generate.
+        storage_type: Either 'local' (storage config commented out as documentation)
+                     or 'blob' (active Azure Blob storage config injected).
+        container_name: Optional container name to pre-fill in storage config.
+        account_url: Optional account URL to pre-fill in storage config.
+        connection_string: Optional connection string to pre-fill in storage config.
+        base_dir: Optional base directory to pre-fill in storage config.
+    """
+    template = _get_content(config_type)
+    active = storage_type == "blob"
+
+    if config_type == ConfigType.autoq:
+        input_block = (
+            AUTOQ_INPUT_STORAGE_SNIPPET
+            if active
+            else _commentify(AUTOQ_INPUT_STORAGE_SNIPPET, indent=2)
+        )
+        output_block = (
+            AUTOQ_OUTPUT_STORAGE_SNIPPET
+            if active
+            else _commentify(AUTOQ_OUTPUT_STORAGE_SNIPPET, indent=0)
+        )
+        content = template.replace("{INPUT_STORAGE}", input_block).replace(
+            "{OUTPUT_STORAGE}", output_block
+        )
+    else:
+        storage_block = (
+            AUTOE_STORAGE_SNIPPET
+            if active
+            else _commentify(AUTOE_STORAGE_SNIPPET, indent=0)
+        )
+        content = template.replace("{STORAGE}", storage_block)
+
+    if not active:
+        return content
+
+    # Substitute user-provided values into the active blob storage section.
+    # Auth methods are mutually exclusive: pick exactly one active line.
+    if container_name:
+        content = content.replace("my-datasets", container_name)
+        content = content.replace("my-output", container_name)
+    if connection_string:
+        # connection_string is the active default; just substitute the value.
+        content = content.replace(
+            "connection_string: ${AZURE_STORAGE_CONNECTION_STRING}",
+            f"connection_string: {connection_string}",
+        )
+    elif account_url:
+        # Activate account_url and comment out the default connection_string.
+        content = content.replace(
+            "# account_url: https://<account>.blob.core.windows.net",
+            f"account_url: {account_url}",
+        )
+        content = content.replace(
+            "connection_string: ${AZURE_STORAGE_CONNECTION_STRING}",
+            "# connection_string: $${AZURE_STORAGE_CONNECTION_STRING}",
+        )
+    if base_dir:
+        content = content.replace(
+            "# base_dir: path/within/container",
+            f"base_dir: {base_dir}",
+        )
+
+    return content
+
+
 def __copy_prompts(prompts_path: Path, output_path: Path) -> None:
     """Copy prompts from the prompts directory to the output directory.
 
     Delegates to the shared scaffold utility.
     """
     copy_prompts(prompts_path, output_path)
+
+
+def __get_prompt_files(prompts_path: Path) -> dict[str, str]:
+    """Get prompt file contents as a dict of {filename: content}."""
+    result = {}
+    for prompt_file in prompts_path.iterdir():
+        if prompt_file.is_file() and prompt_file.suffix == ".txt":
+            result[prompt_file.name] = prompt_file.read_text(encoding="utf-8")
+    return result
+
+
+def _write_to_local(
+    root: Path,
+    settings_content: str,
+    prompt_mapping: dict[str, dict[str, str]],
+) -> None:
+    """Write settings and prompts to local filesystem."""
+    input_folder = root / "input"
+    if not input_folder.exists():
+        input_folder.mkdir(parents=True, exist_ok=True)
+        typer.echo(f"Input folder created at {input_folder}")
+        typer.echo(
+            "Please place your input files in the 'input' folder before running, "
+            "or modify the settings.yaml to point to your input files."
+        )
+
+    settings = root / "settings.yaml"
+    settings.write_text(settings_content, encoding="utf-8")
+
+    for folder_path, files in prompt_mapping.items():
+        output_path = root / folder_path
+        output_path.mkdir(parents=True, exist_ok=True)
+        for filename, file_content in files.items():
+            (output_path / filename).write_text(file_content, encoding="utf-8")
+
+
+def _write_to_blob(
+    settings_content: str,
+    prompt_mapping: dict[str, dict[str, str]],
+    *,
+    container_name: str | None = None,
+    account_url: str | None = None,
+    connection_string: str | None = None,
+    base_dir: str | None = None,
+) -> None:
+    """Write settings and prompts to Azure Blob Storage."""
+    config = StorageConfig(
+        type="blob",
+        container_name=container_name,
+        account_url=account_url,
+        connection_string=connection_string,
+        base_dir=base_dir,
+    )
+    storage = create_storage(config)
+
+    async def _upload() -> None:
+        await storage.set("settings.yaml", settings_content)
+        await storage.set(".env", "OPENAI_API_KEY=<API_KEY>")
+        for folder_path, files in prompt_mapping.items():
+            for filename, file_content in files.items():
+                await storage.set(f"{folder_path}/{filename}", file_content)
+
+    asyncio.get_event_loop().run_until_complete(_upload())
 
 
 @app.command()
@@ -384,61 +548,117 @@ def init(
     root: Annotated[
         Path, typer.Argument(help="The path to root directory with the input folder.")
     ],
+    storage_type: Annotated[
+        str,
+        typer.Option(
+            "--storage-type",
+            "-s",
+            help="Storage setup mode for generated settings. Use 'blob' to scaffold active Azure Blob storage sections, or 'local' (default) for commented-out storage config.",
+        ),
+    ] = "local",
+    container_name: Annotated[
+        str | None,
+        typer.Option(
+            "--container-name",
+            help="The blob container name to pre-fill in the generated storage config.",
+        ),
+    ] = None,
+    account_url: Annotated[
+        str | None,
+        typer.Option(
+            "--account-url",
+            help="The storage account URL to pre-fill (uses managed identity for auth).",
+        ),
+    ] = None,
+    connection_string: Annotated[
+        str | None,
+        typer.Option(
+            "--connection-string",
+            help="The storage connection string to pre-fill (alternative to --account-url).",
+        ),
+    ] = None,
+    base_dir: Annotated[
+        str | None,
+        typer.Option(
+            "--base-dir",
+            help="Base prefix path within the container to pre-fill in storage config.",
+        ),
+    ] = None,
 ) -> None:
     """Generate settings file."""
-    ensure_input_folder(root)
+    settings_content = _render_content(
+        config_type,
+        storage_type,
+        container_name=container_name,
+        account_url=account_url,
+        connection_string=connection_string,
+        base_dir=base_dir,
+    )
 
-    settings = root / "settings.yaml"
-    prompts_folder = root / "prompts"
+    # Collect prompt files based on config type
+    prompt_mapping: dict[str, dict[str, str]] = {}
     match config_type:
         case ConfigType.autoq:
-            settings.write_text(AUTOQ_CONTENT, encoding="utf-8")
-            __copy_prompts(
-                Path(summarization.__file__).parent,
-                prompts_folder / "summarization",
+            prompt_mapping["prompts/summarization"] = __get_prompt_files(
+                Path(summarization.__file__).parent
             )
-            __copy_prompts(
-                Path(activity_context_prompts.__file__).parent,
-                prompts_folder / "activity_questions" / "activity_context",
+            prompt_mapping["prompts/activity_questions/activity_context"] = (
+                __get_prompt_files(Path(activity_context_prompts.__file__).parent)
             )
-            __copy_prompts(
-                Path(activity_global_prompts.__file__).parent,
-                prompts_folder / "activity_questions" / "activity_global",
+            prompt_mapping["prompts/activity_questions/activity_global"] = (
+                __get_prompt_files(Path(activity_global_prompts.__file__).parent)
             )
-            __copy_prompts(
-                Path(activity_local_prompts.__file__).parent,
-                prompts_folder / "activity_questions" / "activity_local",
+            prompt_mapping["prompts/activity_questions/activity_local"] = (
+                __get_prompt_files(Path(activity_local_prompts.__file__).parent)
             )
-            __copy_prompts(
-                Path(data_global_prompts.__file__).parent,
-                prompts_folder / "data_questions" / "data_global",
+            prompt_mapping["prompts/data_questions/data_global"] = __get_prompt_files(
+                Path(data_global_prompts.__file__).parent
             )
-            __copy_prompts(
-                Path(data_local_prompts.__file__).parent,
-                prompts_folder / "data_questions" / "data_local",
+            prompt_mapping["prompts/data_questions/data_local"] = __get_prompt_files(
+                Path(data_local_prompts.__file__).parent
             )
-            __copy_prompts(
-                Path(data_linked_prompts.__file__).parent,
-                prompts_folder / "data_questions" / "data_linked",
+            prompt_mapping["prompts/data_questions/data_linked"] = __get_prompt_files(
+                Path(data_linked_prompts.__file__).parent
             )
-            __copy_prompts(
-                Path(data_questions_prompts.__file__).parent,
-                prompts_folder / "data_questions",
+            prompt_mapping["prompts/data_questions"] = __get_prompt_files(
+                Path(data_questions_prompts.__file__).parent
             )
-            __copy_prompts(
-                Path(autoq_assertion_prompts.__file__).parent,
-                prompts_folder / "data_questions" / "assertions",
+            prompt_mapping["prompts/data_questions/assertions"] = __get_prompt_files(
+                Path(autoq_assertion_prompts.__file__).parent
             )
         case ConfigType.autoe_pairwise:
-            settings.write_text(AUTOE_PAIRWISE_CONTENT, encoding="utf-8")
-            __copy_prompts(Path(pairwise_prompts.__file__).parent, prompts_folder)
+            prompt_mapping["prompts"] = __get_prompt_files(
+                Path(pairwise_prompts.__file__).parent
+            )
         case ConfigType.autoe_reference:
-            settings.write_text(AUTOE_REFERENCE_CONTENT, encoding="utf-8")
-            __copy_prompts(Path(reference_prompts.__file__).parent, prompts_folder)
+            prompt_mapping["prompts"] = __get_prompt_files(
+                Path(reference_prompts.__file__).parent
+            )
         case ConfigType.autoe_assertion:
-            settings.write_text(AUTOE_ASSERTION_CONTENT, encoding="utf-8")
-            __copy_prompts(Path(assertion_prompts.__file__).parent, prompts_folder)
+            prompt_mapping["prompts"] = __get_prompt_files(
+                Path(assertion_prompts.__file__).parent
+            )
 
-    typer.echo(f"Configuration file created at {settings}")
-
-    write_env_file(root)
+    # Write to blob storage or local filesystem
+    if storage_type == "blob" and (account_url or connection_string):
+        _write_to_blob(
+            settings_content=settings_content,
+            prompt_mapping=prompt_mapping,
+            container_name=container_name,
+            account_url=account_url,
+            connection_string=connection_string,
+            base_dir=base_dir,
+        )
+        target = f"blob://{container_name or 'container'}"
+        if base_dir:
+            target += f"/{base_dir}"
+        typer.echo(f"Configuration files uploaded to {target}")
+    else:
+        ensure_input_folder(root)
+        _write_to_local(
+            root=root,
+            settings_content=settings_content,
+            prompt_mapping=prompt_mapping,
+        )
+        typer.echo(f"Configuration file created at {root / 'settings.yaml'}")
+        write_env_file(root)

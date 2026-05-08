@@ -41,6 +41,11 @@ from benchmark_qed.autoe.config import (
 )
 from benchmark_qed.autoe.pairwise import analyze_criteria, get_pairwise_scores
 from benchmark_qed.autoe.reference import get_reference_scores
+from benchmark_qed.cli.config_resolver import (
+    AccountUrlOption,
+    ConnectionStringOption,
+    resolve_config_path,
+)
 from benchmark_qed.cli.utils import print_df
 from benchmark_qed.llm.factory import ModelFactory
 
@@ -148,10 +153,17 @@ def pairwise_scores(
             help="The key in the JSON file that contains the question ID. This is used to match questions across different conditions."
         ),
     ] = "question_id",
+    account_url: AccountUrlOption = None,
+    connection_string: ConnectionStringOption = None,
 ) -> None:
     """Generate scores for the different conditions provided in the JSON file."""
     if exclude_criteria is None:
         exclude_criteria = []
+    comparison_spec = resolve_config_path(
+        comparison_spec,
+        account_url=account_url,
+        connection_string=connection_string,
+    )
     config = load_config(PairwiseConfig, comparison_spec)
 
     config.criteria = [
@@ -282,10 +294,17 @@ def reference_scores(
             help="The key in the JSON file that contains the question ID. This is used to match questions across different conditions."
         ),
     ] = "question_id",
+    account_url: AccountUrlOption = None,
+    connection_string: ConnectionStringOption = None,
 ) -> None:
     """Generate scores for the generated answers provided in the JSON file."""
     if exclude_criteria is None:
         exclude_criteria = []
+    comparison_spec = resolve_config_path(
+        comparison_spec,
+        account_url=account_url,
+        connection_string=connection_string,
+    )
     config = load_config(ReferenceConfig, comparison_spec)
 
     config.criteria = [
@@ -397,6 +416,8 @@ def assertion_scores(
         str,
         typer.Option(help="Assertions key in JSON (single-RAG mode only)."),
     ] = "assertions",
+    account_url: AccountUrlOption = None,
+    connection_string: ConnectionStringOption = None,
 ) -> None:
     """Score assertions for RAG method(s).
 
@@ -424,6 +445,12 @@ def assertion_scores(
         llm_config: ...
     """
     import yaml
+
+    config_path = resolve_config_path(
+        config_path,
+        account_url=account_url,
+        connection_string=connection_string,
+    )
 
     # Load raw YAML to detect format
     with Path(config_path).open(encoding="utf-8") as f:
@@ -672,6 +699,8 @@ def hierarchical_assertion_scores(
             help="The key in assertions that contains the supporting assertions list."
         ),
     ] = "supporting_assertions",
+    account_url: AccountUrlOption = None,
+    connection_string: ConnectionStringOption = None,
 ) -> None:
     """Score hierarchical assertions with supporting assertions.
 
@@ -708,6 +737,11 @@ def hierarchical_assertion_scores(
     """
     import yaml
 
+    config_path = resolve_config_path(
+        config_path,
+        account_url=account_url,
+        connection_string=connection_string,
+    )
     # Load raw YAML to detect format
     with Path(config_path).open(encoding="utf-8") as f:
         raw_config = yaml.safe_load(f)
@@ -933,6 +967,9 @@ def assertion_significance(
             help="Path to the assertion significance configuration YAML file."
         ),
     ],
+    *,
+    account_url: AccountUrlOption = None,
+    connection_string: ConnectionStringOption = None,
 ) -> None:
     """Run statistical significance tests on standard assertion scores.
 
@@ -954,6 +991,11 @@ def assertion_significance(
     """
     from benchmark_qed.autoe.assertion import compare_assertion_scores_significance
 
+    config_path = resolve_config_path(
+        config_path,
+        account_url=account_url,
+        connection_string=connection_string,
+    )
     config = load_config(AssertionSignificanceConfig, config_path)
 
     rich_print("[bold]Running assertion significance tests[/bold]")
@@ -996,6 +1038,9 @@ def hierarchical_assertion_significance(
             help="Path to the hierarchical assertion significance config YAML."
         ),
     ],
+    *,
+    account_url: AccountUrlOption = None,
+    connection_string: ConnectionStringOption = None,
 ) -> None:
     """Run statistical significance tests on hierarchical assertion scores.
 
@@ -1018,6 +1063,11 @@ def hierarchical_assertion_significance(
         compare_hierarchical_assertion_scores_significance,
     )
 
+    config_path = resolve_config_path(
+        config_path,
+        account_url=account_url,
+        connection_string=connection_string,
+    )
     config = load_config(HierarchicalAssertionSignificanceConfig, config_path)
 
     rich_print("[bold]Running hierarchical assertion significance tests[/bold]")
@@ -1073,6 +1123,8 @@ def generate_retrieval_reference(
         bool,
         typer.Option(help="Whether to print the model usage statistics."),
     ] = False,
+    account_url: AccountUrlOption = None,
+    connection_string: ConnectionStringOption = None,
 ) -> None:
     """Generate retrieval reference data (cluster relevance) for a question set.
 
@@ -1097,6 +1149,11 @@ def generate_retrieval_reference(
     Otherwise, text units will be loaded from text_units_path and clustered.
     """
     # Run all async work in a single event loop
+    config_path = resolve_config_path(
+        config_path,
+        account_url=account_url,
+        connection_string=connection_string,
+    )
     asyncio.run(_generate_retrieval_reference_async(config_path, print_model_usage))
 
 
@@ -1410,6 +1467,8 @@ def retrieval_scores(
         int,
         typer.Option(help="Maximum concurrent relevance assessments."),
     ] = 8,
+    account_url: AccountUrlOption = None,
+    connection_string: ConnectionStringOption = None,
 ) -> None:
     """Evaluate retrieval metrics (precision, recall, fidelity) for RAG methods.
 
@@ -1428,6 +1487,11 @@ def retrieval_scores(
         RationaleRelevanceRater,
     )
 
+    config_path = resolve_config_path(
+        config_path,
+        account_url=account_url,
+        connection_string=connection_string,
+    )
     config = load_config(RetrievalScoresConfig, config_path)
     config.output_dir.mkdir(parents=True, exist_ok=True)
 
