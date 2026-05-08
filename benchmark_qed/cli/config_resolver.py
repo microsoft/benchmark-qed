@@ -78,18 +78,12 @@ def parse_blob_uri(uri: str) -> tuple[str, str]:
     Also accepts the single-slash form produced when the URI is round-tripped
     through :class:`pathlib.Path` (e.g. ``blob:/<container>/<key>``).
     """
-    rest: str | None = None
-    if uri.startswith("blob://"):
-        rest = uri[len("blob://") :]
-    elif uri.startswith("blob:/"):
-        rest = uri[len("blob:/") :]
-    if rest is None or "/" not in rest:
+    parts = Path(uri).parts
+    if len(parts) < 3 or parts[0] != "blob:":
         msg = f"Invalid blob URI {uri!r}: expected blob://<container>/<key>"
         raise typer.BadParameter(msg)
-    container, _, key = rest.partition("/")
-    if not container or not key:
-        msg = f"Invalid blob URI {uri!r}: expected blob://<container>/<key>"
-        raise typer.BadParameter(msg)
+    container = parts[1]
+    key = "/".join(parts[2:])
     return container, key
 
 
