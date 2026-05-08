@@ -595,8 +595,6 @@ def init(
         base_dir=base_dir,
     )
 
-    ensure_input_folder(root)
-
     # Collect prompt files based on config type
     prompt_mapping: dict[str, dict[str, str]] = {}
     match config_type:
@@ -656,6 +654,7 @@ def init(
             target += f"/{base_dir}"
         typer.echo(f"Configuration files uploaded to {target}")
     else:
+        ensure_input_folder(root)
         _write_to_local(
             root=root,
             settings_content=settings_content,
