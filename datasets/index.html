@@ -9,7 +9,7 @@
       
       
       
-        <link rel="prev" href="../notebooks/autod/">
+        <link rel="prev" href="../notebooks/retrieval_metrics/">
       
       
       
@@ -525,6 +525,29 @@
   
   
     <li class="md-nav__item">
+      <a href="../cli/retrieval_scores/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Retrieval Metrics
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../cli/llm_config/" class="md-nav__link">
         
   
@@ -704,6 +727,52 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../notebooks/assertion_gen/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Assertion Generation for Existing Questions
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../notebooks/retrieval_metrics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Retrieval Metrics
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -786,15 +855,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#downloading-to-azure-cosmos-db" class="md-nav__link">
-    <span class="md-ellipsis">
-      Downloading to Azure Cosmos DB
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#storage-options-reference" class="md-nav__link">
     <span class="md-ellipsis">
       Storage Options Reference
@@ -850,15 +910,6 @@
   <a href="#downloading-to-azure-blob-storage" class="md-nav__link">
     <span class="md-ellipsis">
       Downloading to Azure Blob Storage
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#downloading-to-azure-cosmos-db" class="md-nav__link">
-    <span class="md-ellipsis">
-      Downloading to Azure Cosmos DB
     </span>
   </a>
   
@@ -930,15 +981,10 @@
 </li>
 </ul>
 <p>The <code>OUTPUT_DIR</code> argument (e.g., <code>input</code>) becomes the prefix path within the blob container. The dataset zip is downloaded from GitHub, extracted in memory, and each file is uploaded directly to the storage backend.</p>
-<h2 id="downloading-to-azure-cosmos-db">Downloading to Azure Cosmos DB</h2>
-<p>You can also download datasets into Azure Cosmos DB:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>benchmark-qed<span class="w"> </span>data<span class="w"> </span>download<span class="w"> </span>AP_news<span class="w"> </span>input<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span>--storage-type<span class="w"> </span>cosmosdb<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">  </span>--container-name<span class="w"> </span>my-container<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">  </span>--database-name<span class="w"> </span>my-database<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">  </span>--account-url<span class="w"> </span>https://&lt;account&gt;.documents.azure.com
-</code></pre></div>
 <h2 id="storage-options-reference">Storage Options Reference</h2>
+<p>!!! note "Supported cloud backends"
+    Only <strong>Azure Blob Storage</strong> (<code>--storage-type blob</code>) is currently supported.
+    Azure Cosmos DB and other backends are <strong>not supported</strong>.</p>
 <table>
 <thead>
 <tr>
@@ -949,11 +995,11 @@
 <tbody>
 <tr>
 <td><code>--storage-type</code></td>
-<td>Storage backend: <code>blob</code> for Azure Blob Storage, <code>cosmosdb</code> for Azure Cosmos DB. Omit for local filesystem.</td>
+<td>Storage backend: <code>blob</code> for Azure Blob Storage. Omit for local filesystem.</td>
 </tr>
 <tr>
 <td><code>--container-name</code></td>
-<td>The blob container or Cosmos DB container name.</td>
+<td>The blob container name.</td>
 </tr>
 <tr>
 <td><code>--account-url</code></td>
@@ -962,10 +1008,6 @@
 <tr>
 <td><code>--connection-string</code></td>
 <td>The storage connection string (alternative to <code>--account-url</code>).</td>
-</tr>
-<tr>
-<td><code>--database-name</code></td>
-<td>The Cosmos DB database name (required for <code>cosmosdb</code> type).</td>
 </tr>
 </tbody>
 </table>
@@ -999,7 +1041,7 @@
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../notebooks/autod/" class="md-footer__link md-footer__link--prev" aria-label="Previous: AutoD">
+          <a href="../notebooks/retrieval_metrics/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Retrieval Metrics">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -1009,7 +1051,7 @@
                 Previous
               </span>
               <div class="md-ellipsis">
-                AutoD
+                Retrieval Metrics
               </div>
             </div>
           </a>
