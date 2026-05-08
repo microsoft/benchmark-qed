@@ -36,6 +36,7 @@ from benchmark_qed.autoq.prompts.data_questions import (
 from benchmark_qed.autoq.prompts.data_questions import (
     local_questions as data_local_prompts,
 )
+from benchmark_qed.cli.scaffold import copy_prompts, ensure_input_folder, write_env_file
 
 app: typer.Typer = typer.Typer(pretty_exceptions_show_locals=False)
 
@@ -466,15 +467,74 @@ def _render_content(
 
 
 def __copy_prompts(prompts_path: Path, output_path: Path) -> None:
-    """Copy prompts from the prompts directory to the local output directory."""
-    if not output_path.exists():
-        output_path.mkdir(parents=True, exist_ok=True)
+    """Copy prompts from the prompts directory to the output directory.
+
+    Delegates to the shared scaffold utility.
+    """
+    copy_prompts(prompts_path, output_path)
+
+
+def __get_prompt_files(prompts_path: Path) -> dict[str, str]:
+    """Get prompt file contents as a dict of {filename: content}."""
+    result = {}
     for prompt_file in prompts_path.iterdir():
         if prompt_file.is_file() and prompt_file.suffix == ".txt":
-            target_file = output_path / prompt_file.name
-            target_file.write_text(
-                prompt_file.read_text(encoding="utf-8"), encoding="utf-8"
-            )
+            result[prompt_file.name] = prompt_file.read_text(encoding="utf-8")
+    return result
+
+
+def _write_to_local(
+    root: Path,
+    settings_content: str,
+    prompt_mapping: dict[str, dict[str, str]],
+) -> None:
+    """Write settings and prompts to local filesystem."""
+    input_folder = root / "input"
+    if not input_folder.exists():
+        input_folder.mkdir(parents=True, exist_ok=True)
+        typer.echo(f"Input folder created at {input_folder}")
+        typer.echo(
+            "Please place your input files in the 'input' folder before running, "
+            "or modify the settings.yaml to point to your input files."
+        )
+
+    settings = root / "settings.yaml"
+    settings.write_text(settings_content, encoding="utf-8")
+
+    for folder_path, files in prompt_mapping.items():
+        output_path = root / folder_path
+        output_path.mkdir(parents=True, exist_ok=True)
+        for filename, file_content in files.items():
+            (output_path / filename).write_text(file_content, encoding="utf-8")
+
+
+def _write_to_blob(
+    settings_content: str,
+    prompt_mapping: dict[str, dict[str, str]],
+    *,
+    container_name: str | None = None,
+    account_url: str | None = None,
+    connection_string: str | None = None,
+    base_dir: str | None = None,
+) -> None:
+    """Write settings and prompts to Azure Blob Storage."""
+    config = StorageConfig(
+        type="blob",
+        container_name=container_name,
+        account_url=account_url,
+        connection_string=connection_string,
+        base_dir=base_dir,
+    )
+    storage = create_storage(config)
+
+    async def _upload() -> None:
+        await storage.set("settings.yaml", settings_content)
+        await storage.set(".env", "OPENAI_API_KEY=<API_KEY>")
+        for folder_path, files in prompt_mapping.items():
+            for filename, file_content in files.items():
+                await storage.set(f"{folder_path}/{filename}", file_content)
+
+    asyncio.get_event_loop().run_until_complete(_upload())
 
 
 def __get_prompt_files(prompts_path: Path) -> dict[str, str]:
@@ -657,15 +717,11 @@ def init(
             target += f"/{base_dir}"
         typer.echo(f"Configuration files uploaded to {target}")
     else:
+        ensure_input_folder(root)
         _write_to_local(
             root=root,
             settings_content=settings_content,
             prompt_mapping=prompt_mapping,
         )
         typer.echo(f"Configuration file created at {root / 'settings.yaml'}")
-        env_file = root / ".env"
-        if not env_file.exists():
-            env_file.write_text("OPENAI_API_KEY=<API_KEY>", encoding="utf-8")
-        typer.echo(
-            f"Change the OPENAI_API_KEY placeholder at {env_file} with your actual OPENAI_API_KEY."
-        )
+        write_env_file(root)
