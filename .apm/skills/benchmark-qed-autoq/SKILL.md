@@ -41,6 +41,8 @@ uvx --from "git+https://github.com/microsoft/benchmark-qed" benchmark-qed autoq 
 |--------|-------------|
 | `--generation-types` | Specific types to generate (repeatable). CLI default: all except `data_linked`, but this skill always includes `data_linked` |
 | `--print-model-usage` | Print LLM token usage stats |
+| `--account-url` | Azure Blob Storage account URL (managed-identity auth). Use when the config path is a `blob://` URI. Falls back to `$AZURE_STORAGE_ACCOUNT_URL`. |
+| `--connection-string` | Azure Blob Storage connection string. Use when the config path is a `blob://` URI. Falls back to `$AZURE_STORAGE_CONNECTION_STRING`. |
 
 **Generation types and dependencies:**
 
@@ -73,6 +75,12 @@ uvx --from "git+https://github.com/microsoft/benchmark-qed" benchmark-qed autoq 
 # Generate local + linked questions
 uvx --from "git+https://github.com/microsoft/benchmark-qed" benchmark-qed autoq settings.yaml ./output \
   --generation-types data_local --generation-types data_linked
+
+# Use a config stored in Azure Blob Storage
+uvx --from "git+https://github.com/microsoft/benchmark-qed" benchmark-qed autoq \
+  blob://my-container/configs/settings.yaml ./output \
+  --account-url https://myaccount.blob.core.windows.net \
+  --generation-types data_local
 ```
 
 **Output structure:**
@@ -105,6 +113,8 @@ uvx --from "git+https://github.com/microsoft/benchmark-qed" benchmark-qed genera
 |--------|-------------|
 | `--type` / `-t` | Assertion type: `local`, `global`, or `linked` (default: `local`) |
 | `--print-model-usage` | Print LLM token usage stats |
+| `--account-url` | Azure Blob Storage account URL (managed-identity auth). Use when the config path is a `blob://` URI. |
+| `--connection-string` | Azure Blob Storage connection string. Use when the config path is a `blob://` URI. |
 
 **Examples:**
 ```bash
@@ -155,6 +165,39 @@ uvx --from "git+https://github.com/microsoft/benchmark-qed" benchmark-qed assert
 - [ ] Step 4: (Optional) Generate additional assertions — use `generate-assertions`
 - [ ] Step 5: (Optional) Check assertion quality — use `assertion-stats`
 
+## Azure Blob Storage
+
+All `autoq` and `generate-assertions` commands support reading config files from Azure Blob Storage using `blob://` URIs:
+
+```bash
+# Config file in blob storage — the CLI downloads the config (and sibling prompt files) to a temp directory
+uvx --from "git+https://github.com/microsoft/benchmark-qed" benchmark-qed autoq \
+  blob://my-container/project/settings.yaml ./output \
+  --connection-string "$AZURE_STORAGE_CONNECTION_STRING"
+```
+
+In addition, `settings.yaml` supports `input.storage` and `output_storage` blocks to read/write data from Azure Blob Storage:
+
+```yaml
+# Read input data from blob storage
+input:
+  dataset_path: data/input.csv
+  storage:
+    type: blob
+    container_name: my-datasets
+    connection_string: ${AZURE_STORAGE_CONNECTION_STRING}
+    # Or use managed identity:
+    # account_url: https://myaccount.blob.core.windows.net
+
+# Write output to blob storage
+output_storage:
+  type: blob
+  container_name: my-output
+  connection_string: ${AZURE_STORAGE_CONNECTION_STRING}
+```
+
+See [references/config-reference.md](../benchmark-qed-setup/references/config-reference.md) for full `StorageConfig` fields.
+
 ## Gotchas
 
 - **Path resolution**: The `autoq` and `generate-assertions` commands resolve `output_dir` (and other relative paths) **relative to the settings.yaml file's directory**, not the current working directory. Always `cd` into the workspace directory first, or use absolute paths. For example, running `benchmark-qed autoq workspace/settings.yaml workspace/output` from the repo root creates output at `workspace/workspace/output/` (not `workspace/output/`).
@@ -163,3 +206,4 @@ uvx --from "git+https://github.com/microsoft/benchmark-qed" benchmark-qed assert
 - **Output is in files, not stdout**: All results are written to JSON/CSV/Parquet files. Parse the output files, not CLI stdout.
 - **Generation ordering**: `data_global` and `data_linked` depend on `data_local`. `activity_global` depends on `activity_local`. Running dependent types without their prerequisites produces silent empty results.
 - **`data_linked` CLI opt-in**: The CLI excludes `data_linked` by default, but this skill always includes it. If running the CLI manually outside this skill, add `--generation-types data_linked`.
+- **Blob URI format**: Use `blob://<container>/<key>` for config paths. The CLI downloads the config and all sibling files (prompt templates) to a temp directory so relative paths resolve correctly.

@@ -54,6 +54,8 @@ uvx --from "git+https://github.com/microsoft/benchmark-qed" benchmark-qed autoe 
 | `--alpha` | `0.05` | P-value threshold for significance |
 | `--exclude-criteria` | `[]` | Criteria to exclude (repeatable) |
 | `--print-model-usage` | `false` | Print LLM token usage |
+| `--account-url` | `null` | Azure Blob Storage account URL (managed-identity auth). Use when the config path is a `blob://` URI. |
+| `--connection-string` | `null` | Azure Blob Storage connection string. Use when the config path is a `blob://` URI. |
 
 **Config requires**: `base` (reference method), `others` (methods to compare), `question_sets`, `criteria`, `trials` (must be even), `llm_config`, `prompt_config`
 
@@ -88,6 +90,8 @@ uvx --from "git+https://github.com/microsoft/benchmark-qed" benchmark-qed autoe 
 |--------|---------|-------------|
 | `--alpha` | `0.05` | Significance threshold (multi-RAG) |
 | `--print-model-usage` | `false` | Print LLM token usage |
+| `--account-url` | `null` | Azure Blob Storage account URL (managed-identity auth). Use when the config path is a `blob://` URI. |
+| `--connection-string` | `null` | Azure Blob Storage connection string. Use when the config path is a `blob://` URI. |
 
 **Auto-detection**: If the YAML contains a `rag_methods` key, it runs in multi-RAG mode with automated significance testing. Otherwise, single-RAG mode.
 
@@ -178,3 +182,36 @@ For comparing multiple RAG methods, use multi-RAG config format (include `rag_me
 - **Long-running**: Evaluation with many questions and trials can take hours. Use background execution.
 - **No `config init` for hierarchical/retrieval**: The `benchmark-qed-setup` skill only supports `autoe_assertion`, `autoe_pairwise`, and `autoe_reference`. For hierarchical, multi-RAG, and retrieval configs, create YAML manually.
 - **Advanced config types**: Use the `benchmark-qed-setup` skill for configuration guidance on advanced config types.
+
+## Azure Blob Storage
+
+All `autoe` commands support reading config files from Azure Blob Storage using `blob://` URIs:
+
+```bash
+# Config file in blob storage
+uvx --from "git+https://github.com/microsoft/benchmark-qed" benchmark-qed autoe assertion-scores \
+  blob://my-container/eval/settings.yaml ./eval_output \
+  --account-url https://myaccount.blob.core.windows.net
+```
+
+In addition, `settings.yaml` supports `input_storage` and `output_storage` blocks so the evaluation pipeline can read answers/assertions from and write results to Azure Blob Storage:
+
+```yaml
+# Read answers and assertions from blob storage
+input_storage:
+  type: blob
+  container_name: my-datasets
+  connection_string: ${AZURE_STORAGE_CONNECTION_STRING}
+  # Or use managed identity:
+  # account_url: https://myaccount.blob.core.windows.net
+
+# Write evaluation output to blob storage
+output_storage:
+  type: blob
+  container_name: my-output
+  connection_string: ${AZURE_STORAGE_CONNECTION_STRING}
+```
+
+When using storage blocks, `answer_base_path` and `assertions_path` in the config are resolved relative to the storage container (not the local filesystem).
+
+See [references/config-reference.md](../benchmark-qed-setup/references/config-reference.md) for full `StorageConfig` fields.
