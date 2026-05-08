@@ -36,6 +36,7 @@ from benchmark_qed.autoq.prompts.data_questions import (
 from benchmark_qed.autoq.prompts.data_questions import (
     local_questions as data_local_prompts,
 )
+from benchmark_qed.cli.scaffold import copy_prompts, ensure_input_folder, write_env_file
 
 app: typer.Typer = typer.Typer(pretty_exceptions_show_locals=False)
 
@@ -466,15 +467,11 @@ def _render_content(
 
 
 def __copy_prompts(prompts_path: Path, output_path: Path) -> None:
-    """Copy prompts from the prompts directory to the local output directory."""
-    if not output_path.exists():
-        output_path.mkdir(parents=True, exist_ok=True)
-    for prompt_file in prompts_path.iterdir():
-        if prompt_file.is_file() and prompt_file.suffix == ".txt":
-            target_file = output_path / prompt_file.name
-            target_file.write_text(
-                prompt_file.read_text(encoding="utf-8"), encoding="utf-8"
-            )
+    """Copy prompts from the prompts directory to the output directory.
+
+    Delegates to the shared scaffold utility.
+    """
+    copy_prompts(prompts_path, output_path)
 
 
 def __get_prompt_files(prompts_path: Path) -> dict[str, str]:
@@ -598,6 +595,8 @@ def init(
         base_dir=base_dir,
     )
 
+    ensure_input_folder(root)
+
     # Collect prompt files based on config type
     prompt_mapping: dict[str, dict[str, str]] = {}
     match config_type:
@@ -663,9 +662,4 @@ def init(
             prompt_mapping=prompt_mapping,
         )
         typer.echo(f"Configuration file created at {root / 'settings.yaml'}")
-        env_file = root / ".env"
-        if not env_file.exists():
-            env_file.write_text("OPENAI_API_KEY=<API_KEY>", encoding="utf-8")
-        typer.echo(
-            f"Change the OPENAI_API_KEY placeholder at {env_file} with your actual OPENAI_API_KEY."
-        )
+        write_env_file(root)

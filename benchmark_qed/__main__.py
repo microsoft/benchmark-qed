@@ -9,6 +9,7 @@ import typer
 from benchmark_qed.autoe.cli import app as autoe_cli
 from benchmark_qed.autoq.cli import app as autoq_cli
 from benchmark_qed.cli.init_config import app as init_cli
+from benchmark_qed.cli.interactive import interactive_init
 from benchmark_qed.data.cli import app as data_cli
 
 app: typer.Typer = typer.Typer(pretty_exceptions_show_locals=False)
@@ -16,6 +17,9 @@ app: typer.Typer = typer.Typer(pretty_exceptions_show_locals=False)
 app.add_typer(autoe_cli, name="autoe", help="Relative scores CLI.")
 app.add_typer(autoq_cli, help="Question generation CLI.")
 app.add_typer(init_cli, name="config", help="Configuration initialization CLI.")
+app.command(name="init", help="Interactively create a benchmark-qed configuration.")(
+    interactive_init
+)
 app.add_typer(data_cli, name="data", help="Dataset downloader CLI.")
 
 
