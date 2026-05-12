@@ -69,9 +69,9 @@ class ActivityContextGen:
         self.concurrent_coroutines = concurrent_coroutines
         self.json_mode = json_mode
         if json_mode:
-            self.llm_params["response_format"] = {"type": "json_object"}
+            self.llm_params["response_format_json_object"] = True
         else:
-            self.llm_params.pop("response_format", None)
+            self.llm_params.pop("response_format_json_object", None)
 
         self.semaphore: asyncio.Semaphore = asyncio.Semaphore(concurrent_coroutines)
 

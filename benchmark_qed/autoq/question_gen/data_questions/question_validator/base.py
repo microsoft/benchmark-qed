@@ -68,7 +68,7 @@ class BatchQuestionValidator(ABC):
         """
         self.llm = llm
         self.llm_params: dict[str, Any] = llm_params.copy()
-        self.llm_params["response_format"] = {"type": "json_object"}
+        self.llm_params["response_format_json_object"] = True
         self.batch_size = batch_size
         self.random_seed = random_seed
 

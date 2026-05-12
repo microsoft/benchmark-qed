@@ -51,9 +51,9 @@ class DataLocalClaimExtractor:
         self.llm_params = llm_params
         self.json_mode = json_mode
         if self.json_mode:
-            self.llm_params["response_format"] = {"type": "json_object"}
+            self.llm_params["response_format_json_object"] = True
         else:
-            self.llm_params.pop("response_format", None)
+            self.llm_params.pop("response_format_json_object", None)
 
     async def aextract_claims(
         self, question_text: str, question_references: list[TextUnit]

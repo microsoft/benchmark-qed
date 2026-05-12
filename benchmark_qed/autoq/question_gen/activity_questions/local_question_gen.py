@@ -79,9 +79,9 @@ class ActivityLocalQuestionGen(BaseQuestionGen):
 
         self.json_mode = json_mode
         if json_mode:
-            self.llm_params["response_format"] = {"type": "json_object"}
+            self.llm_params["response_format_json_object"] = True
         else:
-            self.llm_params.pop("response_format", None)
+            self.llm_params.pop("response_format_json_object", None)
 
         self.activity_context = activity_context
         self.activity_entities: list[Entity] = activity_context.get_all_entities()

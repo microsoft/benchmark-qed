@@ -177,9 +177,9 @@ class DataLocalQuestionGen(BaseQuestionGen):
 
         self.json_mode = json_mode
         if json_mode:
-            self.llm_params["response_format"] = {"type": "json_object"}
+            self.llm_params["response_format_json_object"] = True
         else:
-            self.llm_params.pop("response_format", None)
+            self.llm_params.pop("response_format_json_object", None)
 
         self.extraction_prompt: str = (
             generation_system_prompt
@@ -332,8 +332,21 @@ class DataLocalQuestionGen(BaseQuestionGen):
 
             parsed_final_questions = json.loads(final_questions)
 
+            # The model may return either {"questions": [...]} or a bare list [...].
+            if isinstance(parsed_final_questions, dict):
+                question_items = parsed_final_questions.get("questions", [])
+            elif isinstance(parsed_final_questions, list):
+                question_items = parsed_final_questions
+            else:
+                msg = (
+                    "Unexpected questions output structure: "
+                    f"{type(parsed_final_questions).__name__}"
+                )
+                log.error(msg)
+                return []
+
             question_set = set()
-            for question in parsed_final_questions["questions"]:
+            for question in question_items:
                 # extract claims and generate reference for each question
                 question_text = question.get("output_question", "")
                 if question_text.strip() != "":

@@ -85,11 +85,11 @@ class EntityExtractor:
         self.max_data_tokens = max_data_tokens
 
         if json_mode:
-            self.map_llm_params["response_format"] = {"type": "json_object"}
-            self.reduce_llm_params["response_format"] = {"type": "json_object"}
+            self.map_llm_params["response_format_json_object"] = True
+            self.reduce_llm_params["response_format_json_object"] = True
         else:
-            self.map_llm_params.pop("response_format", None)
-            self.reduce_llm_params.pop("response_format", None)
+            self.map_llm_params.pop("response_format_json_object", None)
+            self.reduce_llm_params.pop("response_format_json_object", None)
 
         self.semaphore: asyncio.Semaphore = asyncio.Semaphore(concurrent_coroutines)
 

@@ -8,6 +8,7 @@ from typing import Any, Self
 from graphrag_llm.config import ModelConfig
 from graphrag_llm.config.metrics_config import MetricsConfig
 from graphrag_llm.config.rate_limit_config import RateLimitConfig
+from graphrag_llm.config.retry_config import RetryConfig
 from graphrag_llm.config.types import AuthMethod, RateLimitType
 from pydantic import BaseModel, ConfigDict, Field, SecretStr, model_validator
 
@@ -110,6 +111,11 @@ class LLMConfig(BaseModel):
         description="Additional arguments to pass to the model when calling it.",
     )
 
+    retry: RetryConfig | None = Field(
+        default=None,
+        description="Optional retry policy for transient provider errors (for example, HTTP 429).",
+    )
+
     custom_providers: list[CustomLLMProvider] = Field(
         default_factory=list,
         description="List of custom LLM providers to register.",
@@ -175,6 +181,7 @@ class LLMConfig(BaseModel):
             "auth_method": auth_method,
             "azure_deployment_name": azure_deployment_name,
             "call_args": dict(self.call_args),
+            "retry": self.retry,
             "rate_limit": rate_limit,
             "metrics": metrics,
             **init_args,

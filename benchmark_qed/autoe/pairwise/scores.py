@@ -228,6 +228,7 @@ async def get_pairwise_score(
             **(additional_call_args or {}),
         )
     ).formatted_response
+
     if assessment_response is None:
         msg = "LLM did not return a structured PairwiseLLMResponse."
         raise RuntimeError(msg)
