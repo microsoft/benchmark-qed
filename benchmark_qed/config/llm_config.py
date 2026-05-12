@@ -3,7 +3,7 @@
 
 import os
 from enum import StrEnum
-from typing import Any, Self
+from typing import Any, ClassVar, Self
 
 from graphrag_llm.config import ModelConfig
 from graphrag_llm.config.metrics_config import MetricsConfig
@@ -73,7 +73,7 @@ _PROVIDER_TO_MODEL_PROVIDER: dict[str, str] = {
 class LLMConfig(BaseModel):
     """Configuration for the LLM to use."""
 
-    model_config = ConfigDict(extra="forbid")
+    model_config: ClassVar[ConfigDict] = ConfigDict(extra="forbid")
 
     model: str = Field(
         default="gpt-4.1",

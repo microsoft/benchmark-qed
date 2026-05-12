@@ -663,9 +663,10 @@ async def run_retrieval_evaluation(
         for rag_method in rag_methods:
             rag_name = rag_method["name"]
             retrieval_path = Path(rag_method["retrieval_results_path"])
+            question_set_placeholder = "{" + "question_set" + "}"
 
             # Check if path includes question_set placeholder
-            if "{question_set}" in str(retrieval_path):
+            if question_set_placeholder in str(retrieval_path):
                 retrieval_path = Path(
                     str(retrieval_path).format(question_set=question_set)
                 )
