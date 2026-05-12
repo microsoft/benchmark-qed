@@ -73,7 +73,7 @@ def test_resolve_config_path_blob_downloads_tree(monkeypatch) -> None:
         "prompts/sub/bar.txt",
     ])
 
-    async def fake_get(key: str, as_bytes: bool | None = False) -> bytes:  # noqa: RUF029
+    async def fake_get(key: str, as_bytes: bool | None = False) -> bytes:
         return f"content of {key}".encode()
 
     fake_storage.get = AsyncMock(side_effect=fake_get)
