@@ -6,7 +6,11 @@ import logging
 import re
 from typing import Any
 
-from azure.identity import DefaultAzureCredential, get_bearer_token_provider
+from azure.identity import (
+    DefaultAzureCredential,
+    ManagedIdentityCredential,
+    get_bearer_token_provider,
+)
 from openai import (
     APIConnectionError,
     APIStatusError,
@@ -165,9 +169,16 @@ class AzureOpenAIChat(BaseOpenAIChat):
         azure_endpoint = llm_config.init_args.pop("azure_endpoint")
         api_version = llm_config.init_args.pop("api_version")
 
-        if llm_config.auth_type == AuthType.AzureManagedIdentity:
+        if llm_config.auth_type in (
+            AuthType.AzureManagedIdentity,
+            AuthType.AzureDefaultCredential,
+        ):
+            if llm_config.auth_type == AuthType.AzureManagedIdentity:
+                credential = ManagedIdentityCredential()
+            else:
+                credential = DefaultAzureCredential()
             token_provider = get_bearer_token_provider(
-                DefaultAzureCredential(), *llm_config.azure_identity_scopes
+                credential, *llm_config.azure_identity_scopes
             )
             self._client = AsyncAzureOpenAI(
                 azure_endpoint=azure_endpoint,
@@ -284,9 +295,16 @@ class AzureOpenAIEmbedding(BaseOpenAIEmbedding):
         azure_endpoint = llm_config.init_args.pop("azure_endpoint")
         api_version = llm_config.init_args.pop("api_version")
 
-        if llm_config.auth_type == AuthType.AzureManagedIdentity:
+        if llm_config.auth_type in (
+            AuthType.AzureManagedIdentity,
+            AuthType.AzureDefaultCredential,
+        ):
+            if llm_config.auth_type == AuthType.AzureManagedIdentity:
+                credential = ManagedIdentityCredential()
+            else:
+                credential = DefaultAzureCredential()
             token_provider = get_bearer_token_provider(
-                DefaultAzureCredential(), *llm_config.azure_identity_scopes
+                credential, *llm_config.azure_identity_scopes
             )
             self._client = AsyncAzureOpenAI(
                 azure_deployment=azure_deployment,

@@ -52,6 +52,7 @@ class AuthType(StrEnum):
 
     API = "api_key"
     AzureManagedIdentity = "azure_managed_identity"
+    AzureDefaultCredential = "azure_default_credential"
 
 
 class LLMConfig(BaseModel):
@@ -63,7 +64,7 @@ class LLMConfig(BaseModel):
     )
     auth_type: AuthType = Field(
         default=AuthType.API,
-        description="The type of authentication to use. This should be either 'api_key' or 'azure_managed_identity'.",
+        description="The type of authentication to use. Options: 'api_key', 'azure_managed_identity', or 'azure_default_credential'.",
     )
     api_key: SecretStr = Field(
         default=SecretStr(os.environ.get("OPENAI_API_KEY", "")),
@@ -101,7 +102,7 @@ class LLMConfig(BaseModel):
     @model_validator(mode="after")
     def check_api_key(self) -> Self:
         """Check if the API key is set."""
-        if self.auth_type == "api_key" and (
+        if self.auth_type == AuthType.API and (
             self.api_key is None or self.api_key.get_secret_value().strip() == ""
         ):
             msg = "API key is required."

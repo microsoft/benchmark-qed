@@ -48,8 +48,8 @@ class ConfigType(StrEnum):
 
 CHAT_MODEL_DEFAULTS = """
   model: gpt-4.1
-  auth_type: api_key # or azure_managed_identity
-  api_key: ${OPENAI_API_KEY} # remove this if using azure_managed_identity
+  auth_type: api_key # or azure_managed_identity | azure_default_credential
+  api_key: ${OPENAI_API_KEY} # remove this if using azure_managed_identity or azure_default_credential
   llm_provider: openai.chat # or azure.openai.chat | azure.inference.chat
   concurrent_requests: 4 # The number of concurrent requests to send to the model.
   # init_args:
@@ -70,8 +70,8 @@ CHAT_MODEL_DEFAULTS = """
 
 EMBEDDING_MODEL_DEFAULTS = """
   model: text-embedding-3-large
-  auth_type: api_key # or azure_managed_identity
-  api_key: ${OPENAI_API_KEY} # remove this if using azure_managed_identity
+  auth_type: api_key # or azure_managed_identity | azure_default_credential
+  api_key: ${OPENAI_API_KEY} # remove this if using azure_managed_identity or azure_default_credential
   llm_provider: openai.embedding # or azure.openai.embedding | azure.inference.embedding
   # init_args:
   #   Additional initialization arguments for the LLM can be added here.

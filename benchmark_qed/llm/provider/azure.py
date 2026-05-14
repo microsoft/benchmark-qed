@@ -7,7 +7,7 @@ from typing import Any, cast
 from azure.ai.inference.aio import ChatCompletionsClient, EmbeddingsClient
 from azure.ai.inference.models import ChatCompletions, EmbeddingEncodingFormat
 from azure.core.credentials import AzureKeyCredential
-from azure.identity import DefaultAzureCredential
+from azure.identity import DefaultAzureCredential, ManagedIdentityCredential
 
 from benchmark_qed.config.llm_config import AuthType, LLMConfig
 from benchmark_qed.llm.type.base import BaseModelOutput, BaseModelResponse, Usage
@@ -18,6 +18,8 @@ class AzureInferenceChat:
 
     def __init__(self, llm_config: LLMConfig) -> None:
         if llm_config.auth_type == AuthType.AzureManagedIdentity:
+            credential = ManagedIdentityCredential()
+        elif llm_config.auth_type == AuthType.AzureDefaultCredential:
             credential = DefaultAzureCredential()
         else:
             credential = AzureKeyCredential(llm_config.api_key.get_secret_value())
@@ -92,6 +94,8 @@ class AzureInferenceEmbedding:
 
     def __init__(self, llm_config: LLMConfig) -> None:
         if llm_config.auth_type == AuthType.AzureManagedIdentity:
+            credential = ManagedIdentityCredential()
+        elif llm_config.auth_type == AuthType.AzureDefaultCredential:
             credential = DefaultAzureCredential()
         else:
             credential = AzureKeyCredential(llm_config.api_key.get_secret_value())

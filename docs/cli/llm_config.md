@@ -10,7 +10,7 @@ Defines the configuration for the language model used in scoring or generation t
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
 | `model` | `str` | `"gpt-4.1"` | The name of the model to use. Must be a valid model identifier. |
-| `auth_type` | `AuthType` | `"api_key"` | Authentication method. Options: `"api_key"` or `"azure_managed_identity"`. |
+| `auth_type` | `AuthType` | `"api_key"` | Authentication method. Options: `"api_key"`, `"azure_managed_identity"`, or `"azure_default_credential"`. |
 | `api_key` | `SecretStr` | `"$OPENAI_API_KEY"` | API key for accessing the model. Should be provided via environment variable. |
 | `concurrent_requests` | `int` | `4` | Number of concurrent requests allowed to the model. |
 | `llm_provider` | `LLMProvider \| str` | `"openai.chat"` | Specifies the provider and type of model. See `LLMProvider` enum for options. |
@@ -42,7 +42,8 @@ Specifies the authentication method used to access the model.
 | Value | Description |
 |-------|-------------|
 | `api_key` | Use a static API key for authentication. |
-| `azure_managed_identity` | Use Azure Managed Identity for authentication. |
+| `azure_managed_identity` | Use Azure Managed Identity credential for authentication. |
+| `azure_default_credential` | Use Azure Default credential for authentication (tries multiple credential sources). |
 
 ---
 
