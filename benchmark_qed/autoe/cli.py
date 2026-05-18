@@ -593,9 +593,7 @@ def _run_single_rag_assertion_scores(
         rich_print("[bold green]All assertions passed.[/bold green]")
 
     # Save machine-readable evaluation summary
-    asyncio.run(
-        _write_json(output_storage, "eval_summary.json", eval_summary)
-    )
+    asyncio.run(_write_json(output_storage, "eval_summary.json", eval_summary))
 
     if print_model_usage:
         rich_print("Model usage statistics:")
@@ -864,9 +862,7 @@ def _run_single_rag_hierarchical_assertion_scores(
 
     # Save raw scores
     asyncio.run(
-        _write_csv_df(
-            output_storage, "hierarchical_assertion_scores.csv", scores
-        )
+        _write_csv_df(output_storage, "hierarchical_assertion_scores.csv", scores)
     )
 
     # Aggregate across trials
@@ -874,9 +870,7 @@ def _run_single_rag_hierarchical_assertion_scores(
         scores, pass_threshold=config.pass_threshold
     )
     asyncio.run(
-        _write_csv_df(
-            output_storage, "hierarchical_assertion_summary.csv", aggregated
-        )
+        _write_csv_df(output_storage, "hierarchical_assertion_summary.csv", aggregated)
     )
 
     # Summarize by question
@@ -921,9 +915,7 @@ def _run_single_rag_hierarchical_assertion_scores(
         rich_print("\n[bold green]All global assertions passed.[/bold green]")
 
     # Save machine-readable evaluation summary
-    asyncio.run(
-        _write_json(output_storage, "eval_summary.json", eval_summary)
-    )
+    asyncio.run(_write_json(output_storage, "eval_summary.json", eval_summary))
 
     if print_model_usage:
         rich_print("\nModel usage statistics:")
@@ -1321,9 +1313,7 @@ async def _generate_retrieval_reference_async(
                 text_df = pd.read_parquet(BytesIO(read_bytes(input_storage, tu_key)))
             elif suffix == ".csv":
                 text_df = pd.read_csv(
-                    StringIO(
-                        asyncio.run(input_storage.get(tu_key)) or ""
-                    )
+                    StringIO(asyncio.run(input_storage.get(tu_key)) or "")
                 )
             elif suffix in {".json", ".jsonl"}:
                 text_df = pd.read_json(

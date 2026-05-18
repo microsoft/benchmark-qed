@@ -20,9 +20,7 @@ from graphrag_storage.storage_config import StorageConfig
 from graphrag_storage.storage_factory import create_storage
 
 
-def resolve_storage(
-    output_storage: Storage | None, output_dir: Path | None
-) -> Storage:
+def resolve_storage(output_storage: Storage | None, output_dir: Path | None) -> Storage:
     """Return ``output_storage`` when provided, otherwise build a FileStorage.
 
     When falling back to FileStorage, ``output_dir`` is created on disk so that
@@ -42,12 +40,16 @@ def _run(coro: object) -> object:
     return asyncio.run(coro)  # type: ignore[arg-type]
 
 
-def write_csv(storage: Storage, key: str, df: pd.DataFrame, *, index: bool = False) -> None:
+def write_csv(
+    storage: Storage, key: str, df: pd.DataFrame, *, index: bool = False
+) -> None:
     """Write a DataFrame as CSV to storage."""
     _run(storage.set(key, df.to_csv(index=index)))
 
 
-def write_json(storage: Storage, key: str, data: object, *, indent: int | None = None) -> None:
+def write_json(
+    storage: Storage, key: str, data: object, *, indent: int | None = None
+) -> None:
     """Write JSON-serializable data to storage."""
     _run(storage.set(key, json.dumps(data, indent=indent)))
 

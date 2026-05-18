@@ -597,9 +597,7 @@ def run_hierarchical_assertion_evaluation(
             scores, pass_threshold=pass_threshold
         )
         aggregated["rag_method"] = generated_rag
-        write_csv(
-            rag_storage, "hierarchical_scores_aggregated.csv", aggregated
-        )
+        write_csv(rag_storage, "hierarchical_scores_aggregated.csv", aggregated)
         all_aggregated.append(aggregated)
         aggregated_scores_dict[generated_rag] = aggregated
 
