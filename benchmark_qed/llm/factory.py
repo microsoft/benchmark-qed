@@ -26,13 +26,21 @@ def _register_custom_provider(model_config: LLMConfig, model_type: ModelType) ->
         return
     try:
         module = importlib.import_module(provider.module)
-        model_class = getattr(module, provider.model_class)
     except ImportError as e:
         msg = (
             f"Failed to import custom provider '{provider.name}' "
             f"from module '{provider.module}'. Please check the module and class name."
         )
         raise ImportError(msg) from e
+    try:
+        model_class = getattr(module, provider.model_class)
+    except AttributeError as e:
+        msg = (
+            f"Failed to load custom provider '{provider.name}': class "
+            f"'{provider.model_class}' not found in module '{provider.module}'. "
+            "Please check the module and class name."
+        )
+        raise AttributeError(msg) from e
 
     if model_type == ModelType.Chat:
         register_completion(provider.name, model_class)

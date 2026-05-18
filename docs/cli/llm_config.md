@@ -76,12 +76,12 @@ llm_config:
   call_args:
     temperature: 0.0
     seed: 42
-    retry:
-        type: exponential_backoff
-        max_retries: 6
-        base_delay: 2.0
-        max_delay: 30.0
-        jitter: true
+  retry:
+    type: exponential_backoff
+    max_retries: 6
+    base_delay: 2.0
+    max_delay: 30.0
+    jitter: true
 ```
 
 ```
@@ -105,12 +105,12 @@ llm_config:
   call_args:
     temperature: 0.0
     seed: 42
-    retry:
-        type: exponential_backoff
-        max_retries: 6
-        base_delay: 2.0
-        max_delay: 30.0
-        jitter: true
+  retry:
+    type: exponential_backoff
+    max_retries: 6
+    base_delay: 2.0
+    max_delay: 30.0
+    jitter: true
 ```
 
 > 💡 Note: If you use azure_manager_identity make sure to be authenticated with `az login` on a terminal, if you use api_key make sure to include the api reference and the .env file.

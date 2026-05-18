@@ -13,6 +13,7 @@ generation (RAG) methods, including:
 
 from __future__ import annotations
 
+import asyncio
 import json
 import logging
 from pathlib import Path
@@ -53,6 +54,8 @@ from benchmark_qed.autoe.utils.stats import GroupComparisonResult, compare_group
 from benchmark_qed.cli.utils import print_df
 
 if TYPE_CHECKING:
+    from graphrag_storage import Storage
+
     from benchmark_qed.autoe.retrieval_metrics.relevance_assessment.base import (
         RelevanceRater,
     )
@@ -63,6 +66,8 @@ log: logging.Logger = logging.getLogger(__name__)
 def load_clusters_from_json(
     clusters_path: Path,
     text_units_path: Path | None = None,
+    *,
+    input_storage: Storage | None = None,
 ) -> list[TextCluster]:
     """Load clusters from a JSON file.
 
@@ -71,16 +76,24 @@ def load_clusters_from_json(
     2. text_unit_ids: array of string IDs (requires text_units_path to load text)
 
     Args:
-        clusters_path: Path to clusters JSON file.
+        clusters_path: Path to clusters JSON file (or storage key when
+            ``input_storage`` is provided).
         text_units_path: Optional path to text units file (parquet/json/csv).
             Required if clusters use text_unit_ids format.
+        input_storage: Optional Storage to load files from instead of the local
+            filesystem.
 
     Returns
     -------
         List of TextCluster objects with full TextUnit data.
     """
-    with clusters_path.open(encoding="utf-8") as f:
-        data = json.load(f)
+    if input_storage is not None:
+        from benchmark_qed.autoe.utils.storage_io import read_json
+
+        data = read_json(input_storage, clusters_path.as_posix().lstrip("/"))
+    else:
+        with clusters_path.open(encoding="utf-8") as f:
+            data = json.load(f)
 
     # Check if we need to load text units separately
     needs_text_units = any(
@@ -96,12 +109,31 @@ def load_clusters_from_json(
                 "Text content will be empty, which may break cluster mapping."
             )
         else:
-            # TODO(benchmark-qed): These reads bypass the storage abstraction and read directly from disk.
-            # load_clusters_from_json should accept an optional Storage parameter so that
-            # blob storage users can load text units via the storage provider.
             # Load text units and create ID -> text mapping
             suffix = text_units_path.suffix.lower()
-            if suffix == ".parquet":
+            if input_storage is not None:
+                from io import BytesIO, StringIO
+
+                from benchmark_qed.autoe.utils.storage_io import read_bytes
+
+                tu_key = text_units_path.as_posix().lstrip("/")
+                if suffix == ".parquet":
+                    text_units_df = pd.read_parquet(
+                        BytesIO(read_bytes(input_storage, tu_key))
+                    )
+                elif suffix == ".csv":
+                    text_units_df = pd.read_csv(
+                        StringIO(asyncio.run(input_storage.get(tu_key)) or "")
+                    )
+                elif suffix in (".json", ".jsonl"):
+                    text_units_df = pd.read_json(
+                        StringIO(asyncio.run(input_storage.get(tu_key)) or ""),
+                        lines=(suffix == ".jsonl"),
+                    )
+                else:
+                    log.warning("Unknown text units file format: %s", suffix)
+                    text_units_df = None
+            elif suffix == ".parquet":
                 text_units_df = pd.read_parquet(text_units_path)
             elif suffix == ".csv":
                 text_units_df = pd.read_csv(text_units_path)
@@ -176,25 +208,40 @@ def load_reference_results(
     reference_dir: Path,
     question_set: str,  # noqa: ARG001
     reference_filename: str = "reference.json",
+    *,
+    input_storage: Storage | None = None,
 ) -> list[QueryClusterReferenceResult]:
     """Load reference cluster relevance results from JSON files.
 
     Args:
-        reference_dir: Directory containing reference data.
+        reference_dir: Directory containing reference data (or storage key prefix
+            when ``input_storage`` is provided).
         question_set: Name of the question set (unused when reference_filename is set).
         reference_filename: Filename for reference data within reference_dir.
+        input_storage: Optional Storage to load from instead of the local filesystem.
 
     Returns
     -------
         List of QueryClusterReferenceResult objects.
     """
-    reference_file = reference_dir / reference_filename
-    if not reference_file.exists():
-        msg = f"Reference file not found: {reference_file}"
-        raise FileNotFoundError(msg)
+    if input_storage is not None:
+        from benchmark_qed.autoe.utils.storage_io import read_json
 
-    with reference_file.open(encoding="utf-8") as f:
-        data = json.load(f)
+        prefix = reference_dir.as_posix().lstrip("/")
+        key = f"{prefix}/{reference_filename}" if prefix else reference_filename
+        try:
+            data = read_json(input_storage, key)
+        except FileNotFoundError as e:
+            msg = f"Reference file not found in storage: {key}"
+            raise FileNotFoundError(msg) from e
+    else:
+        reference_file = reference_dir / reference_filename
+        if not reference_file.exists():
+            msg = f"Reference file not found: {reference_file}"
+            raise FileNotFoundError(msg)
+
+        with reference_file.open(encoding="utf-8") as f:
+            data = json.load(f)
 
     # Handle wrapped format from generate-retrieval-reference
     if isinstance(data, dict) and "references" in data:
@@ -207,20 +254,29 @@ def load_retrieval_results(
     retrieval_path: Path,
     context_id_key: str = "chunk_id",
     context_text_key: str = "text",
+    *,
+    input_storage: Storage | None = None,
 ) -> list[RetrievalResult]:
     """Load retrieval results from a JSON file.
 
     Args:
-        retrieval_path: Path to the retrieval results JSON file.
+        retrieval_path: Path to the retrieval results JSON file (or storage key
+            when ``input_storage`` is provided).
         context_id_key: Key name for chunk ID in retrieval results.
         context_text_key: Key name for chunk text in retrieval results.
+        input_storage: Optional Storage to load from instead of the local filesystem.
 
     Returns
     -------
         List of RetrievalResult objects.
     """
-    with retrieval_path.open(encoding="utf-8") as f:
-        data = json.load(f)
+    if input_storage is not None:
+        from benchmark_qed.autoe.utils.storage_io import read_json
+
+        data = read_json(input_storage, retrieval_path.as_posix().lstrip("/"))
+    else:
+        with retrieval_path.open(encoding="utf-8") as f:
+            data = json.load(f)
 
     return load_retrieval_results_from_dicts(
         data,
@@ -490,6 +546,8 @@ def save_retrieval_results(
     metrics: dict[str, Any],
     per_query_df: pd.DataFrame,
     batch_relevance: BatchRelevanceResult,
+    *,
+    output_storage: Storage | None = None,
 ) -> None:
     """Save retrieval evaluation results to files.
 
@@ -500,24 +558,56 @@ def save_retrieval_results(
         metrics: Dictionary with all metrics.
         per_query_df: DataFrame with per-query metrics.
         batch_relevance: BatchRelevanceResult with relevance assessments.
+        output_storage: Optional Storage to write artifacts through.
     """
-    question_set_dir = output_dir / question_set
-    question_set_dir.mkdir(parents=True, exist_ok=True)
+    asyncio.run(
+        _save_retrieval_results_async(
+            output_dir=output_dir,
+            rag_name=rag_name,
+            question_set=question_set,
+            metrics=metrics,
+            per_query_df=per_query_df,
+            batch_relevance=batch_relevance,
+            output_storage=output_storage,
+        )
+    )
+
+
+async def _save_retrieval_results_async(
+    output_dir: Path,
+    rag_name: str,
+    question_set: str,
+    metrics: dict[str, Any],
+    per_query_df: pd.DataFrame,
+    batch_relevance: BatchRelevanceResult,
+    *,
+    output_storage: Storage | None,
+) -> None:
+    """Async implementation of :func:`save_retrieval_results`."""
+    from benchmark_qed.autoe.utils.storage_io import resolve_storage
+
+    storage = resolve_storage(output_storage, output_dir)
+    question_set_storage = storage.child(question_set)
 
     # Save summary metrics
     summary = metrics["summary"]
     summary["rag_method"] = rag_name
     summary["question_set"] = question_set
     summary_df = pd.DataFrame([summary])
-    summary_df.to_csv(question_set_dir / f"{rag_name}_summary.csv", index=False)
+    await question_set_storage.set(
+        f"{rag_name}_summary.csv", summary_df.to_csv(index=False)
+    )
 
     # Save per-query metrics
     per_query_df["rag_method"] = rag_name
-    per_query_df.to_csv(question_set_dir / f"{rag_name}_per_query.csv", index=False)
+    await question_set_storage.set(
+        f"{rag_name}_per_query.csv", per_query_df.to_csv(index=False)
+    )
 
     # Save full relevance results
-    batch_relevance.save_to_json(
-        question_set_dir / f"{rag_name}_relevance_results.json"
+    await question_set_storage.set(
+        f"{rag_name}_relevance_results.json",
+        json.dumps(batch_relevance.model_dump(), indent=2, ensure_ascii=False),
     )
 
 
@@ -526,6 +616,8 @@ def save_significance_results(
     question_set: str,
     significance_results: dict[str, GroupComparisonResult],
     rag_metrics: dict[str, pd.DataFrame],
+    *,
+    output_storage: Storage | None = None,
 ) -> None:
     """Save significance test results to files.
 
@@ -534,9 +626,32 @@ def save_significance_results(
         question_set: Name of the question set.
         significance_results: Dictionary mapping metric names to results.
         rag_metrics: Dictionary mapping RAG method names to DataFrames.
+        output_storage: Optional Storage to write artifacts through.
     """
-    question_set_dir = output_dir / question_set
-    question_set_dir.mkdir(parents=True, exist_ok=True)
+    asyncio.run(
+        _save_significance_results_async(
+            output_dir=output_dir,
+            question_set=question_set,
+            significance_results=significance_results,
+            rag_metrics=rag_metrics,
+            output_storage=output_storage,
+        )
+    )
+
+
+async def _save_significance_results_async(
+    output_dir: Path,
+    question_set: str,
+    significance_results: dict[str, GroupComparisonResult],
+    rag_metrics: dict[str, pd.DataFrame],
+    *,
+    output_storage: Storage | None,
+) -> None:
+    """Async implementation of :func:`save_significance_results`."""
+    from benchmark_qed.autoe.utils.storage_io import resolve_storage
+
+    storage = resolve_storage(output_storage, output_dir)
+    question_set_storage = storage.child(question_set)
 
     # Save group statistics per metric
     for metric_name, result in significance_results.items():
@@ -554,8 +669,9 @@ def save_significance_results(
                 })
 
         stats_df = pd.DataFrame(group_stats)
-        stats_df.to_csv(
-            question_set_dir / f"significance_{metric_name}_stats.csv", index=False
+        await question_set_storage.set(
+            f"significance_{metric_name}_stats.csv",
+            stats_df.to_csv(index=False),
         )
 
         # Save omnibus result
@@ -570,8 +686,9 @@ def save_significance_results(
                 "is_normal": result.omnibus.is_normal,
             }
         ])
-        omnibus_df.to_csv(
-            question_set_dir / f"significance_{metric_name}_omnibus.csv", index=False
+        await question_set_storage.set(
+            f"significance_{metric_name}_omnibus.csv",
+            omnibus_df.to_csv(index=False),
         )
 
         # Save pairwise comparisons if available
@@ -588,9 +705,9 @@ def save_significance_results(
                 for c in result.posthoc.comparisons
             ]
             pairwise_df = pd.DataFrame(pairwise_data)
-            pairwise_df.to_csv(
-                question_set_dir / f"significance_{metric_name}_pairwise.csv",
-                index=False,
+            await question_set_storage.set(
+                f"significance_{metric_name}_pairwise.csv",
+                pairwise_df.to_csv(index=False),
             )
 
 
@@ -611,6 +728,9 @@ async def run_retrieval_evaluation(
     max_concurrent: int = 8,
     reference_filename: str = "reference.json",
     cluster_match_by: str = "text",
+    *,
+    output_storage: Storage | None = None,
+    input_storage: Storage | None = None,
 ) -> pd.DataFrame:
     """Run retrieval evaluation for multiple RAG methods and question sets.
 
@@ -636,7 +756,9 @@ async def run_retrieval_evaluation(
     -------
         DataFrame with overall summary of retrieval metrics.
     """
-    output_dir.mkdir(parents=True, exist_ok=True)
+    from benchmark_qed.autoe.utils.storage_io import resolve_storage
+
+    storage = resolve_storage(output_storage, output_dir)
 
     # Pre-compute text unit to cluster mapping
     text_unit_to_cluster_mapping = create_text_unit_to_cluster_mapping(
@@ -651,7 +773,10 @@ async def run_retrieval_evaluation(
         # Load reference results for this question set
         try:
             reference_results = load_reference_results(
-                reference_dir, question_set, reference_filename
+                reference_dir,
+                question_set,
+                reference_filename,
+                input_storage=input_storage,
             )
         except FileNotFoundError as e:
             rich_print(f"  [red]Error: {e}[/red]")
@@ -673,7 +798,7 @@ async def run_retrieval_evaluation(
 
             rich_print(f"  Processing RAG method: {rag_name}")
 
-            if not retrieval_path.exists():
+            if input_storage is None and not retrieval_path.exists():
                 rich_print(
                     f"    [yellow]Warning: {retrieval_path} not found, skipping"
                     "[/yellow]"
@@ -686,6 +811,7 @@ async def run_retrieval_evaluation(
                     retrieval_path,
                     context_id_key=context_id_key,
                     context_text_key=context_text_key,
+                    input_storage=input_storage,
                 )
             except (FileNotFoundError, json.JSONDecodeError, KeyError) as e:
                 rich_print(f"    [red]Error loading retrieval results: {e}[/red]")
@@ -723,13 +849,14 @@ async def run_retrieval_evaluation(
             rag_per_query_metrics[rag_name] = per_query_df
 
             # Save results
-            save_retrieval_results(
+            await _save_retrieval_results_async(
                 output_dir=output_dir,
                 rag_name=rag_name,
                 question_set=question_set,
                 metrics=metrics,
                 per_query_df=per_query_df,
                 batch_relevance=batch_relevance,
+                output_storage=storage,
             )
 
             # Print summary
@@ -757,11 +884,12 @@ async def run_retrieval_evaluation(
                 alpha=significance_alpha,
                 correction_method=significance_correction,
             )
-            save_significance_results(
+            await _save_significance_results_async(
                 output_dir=output_dir,
                 question_set=question_set,
                 significance_results=significance_results,
                 rag_metrics=rag_per_query_metrics,
+                output_storage=storage,
             )
 
     # Create and save overall summary
@@ -770,7 +898,9 @@ async def run_retrieval_evaluation(
         overall_df = overall_df.sort_values(
             ["question_set", "recall"], ascending=[True, False]
         )
-        overall_df.to_csv(output_dir / "retrieval_scores_summary.csv", index=False)
+        await storage.set(
+            "retrieval_scores_summary.csv", overall_df.to_csv(index=False)
+        )
 
         print_df(overall_df, "Retrieval Metrics Summary")
 
@@ -780,7 +910,10 @@ async def run_retrieval_evaluation(
                 pivot = overall_df.pivot_table(
                     index="rag_method", columns="question_set", values=metric
                 )
-                pivot.to_csv(output_dir / f"retrieval_{metric}_pivot.csv")
+                await storage.set(
+                    f"retrieval_{metric}_pivot.csv",
+                    pivot.to_csv(index=True),
+                )
                 print_df(
                     pivot.reset_index(), f"{metric.replace('_', ' ').title()} by RAG"
                 )

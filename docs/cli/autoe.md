@@ -11,7 +11,7 @@ benchmark-qed config init autoe_pairwise ./local/pairwise_test
 To create a template with active Azure Blob Storage configuration:
 
 ```sh
-benchmark-qed config init autoe_pairwise ./local/pairwise_test --storage-type blob
+benchmark-qed config init autoe_pairwise ./local/pairwise_test --storage-type blob --base-dir pairwise_test
 ```
 
 To perform pairwise scoring with your configuration file, use:
@@ -35,7 +35,7 @@ For information about the `config init` command, refer to: [Config Init CLI](con
 
 ### Storage Configuration
 
-AutoE supports reading input answers from and writing output scores to Azure Blob Storage. When using `--storage-type blob` during `config init`, the generated settings file includes active storage sections.
+AutoE supports reading input answers from and writing output scores to Azure Blob Storage. When using `--storage-type blob` during `config init` (optionally with `--base-dir`), the generated settings file includes active storage sections.
 
 ```yaml
 ## Storage Configuration
@@ -182,7 +182,7 @@ benchmark-qed config init autoe_reference ./local/reference_test
 To create a template with active Azure Blob Storage configuration:
 
 ```sh
-benchmark-qed config init autoe_reference ./local/reference_test --storage-type blob
+benchmark-qed config init autoe_reference ./local/reference_test --storage-type blob --base-dir reference_test
 ```
 
 To perform reference-based scoring with your configuration file, run:
@@ -307,7 +307,7 @@ benchmark-qed config init autoe_assertion ./local/assertion_test
 To create a template with active Azure Blob Storage configuration:
 
 ```sh
-benchmark-qed config init autoe_assertion ./local/assertion_test --storage-type blob
+benchmark-qed config init autoe_assertion ./local/assertion_test --storage-type blob --base-dir assertion_test
 ```
 
 For information about the `config init` command, refer to: [Config Init CLI](config_init.md)

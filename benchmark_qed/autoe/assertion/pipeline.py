@@ -10,6 +10,7 @@ from typing import Any, cast
 
 import pandas as pd
 from graphrag_llm.completion import LLMCompletion
+from graphrag_storage import Storage
 from rich import print as rich_print
 
 from benchmark_qed.autoe.assertion.aggregation import (
@@ -27,6 +28,11 @@ from benchmark_qed.autoe.assertion.significance import (
     summarize_significance_results,
 )
 from benchmark_qed.autoe.assertion.standard import get_assertion_scores
+from benchmark_qed.autoe.utils.storage_io import (
+    read_json_df,
+    resolve_storage,
+    write_csv,
+)
 from benchmark_qed.cli.utils import print_df
 from benchmark_qed.config.llm_config import LLMConfig
 
@@ -35,14 +41,19 @@ def load_and_normalize_assertions(
     input_dir: str,
     question_set: str,
     assertions_filename_template: str = "{question_set}_assertions.json",
+    *,
+    input_storage: Storage | None = None,
 ) -> pd.DataFrame:
     """Load assertions from JSON file and normalize nested dictionaries.
 
     Args:
-        input_dir: Directory containing assertion files.
+        input_dir: Directory containing assertion files (used as path prefix
+            when ``input_storage`` is None).
         question_set: Name of the question set.
         assertions_filename_template: Template for assertion filename
             (default: "{question_set}_assertions.json").
+        input_storage: Optional Storage to read from. When provided,
+            ``input_dir`` is treated as a key prefix within the storage.
 
     Returns
     -------
@@ -50,7 +61,12 @@ def load_and_normalize_assertions(
         question_text, assertion, rank.
     """
     assertions_file = assertions_filename_template.format(question_set=question_set)
-    assertions_raw = pd.read_json(f"{input_dir}/{assertions_file}")
+    if input_storage is not None:
+        prefix = input_dir.strip("/")
+        key = f"{prefix}/{assertions_file}" if prefix else assertions_file
+        assertions_raw = read_json_df(input_storage, key)
+    else:
+        assertions_raw = pd.read_json(f"{input_dir}/{assertions_file}")
 
     # Explode assertions and normalize the nested dictionaries
     assertions = assertions_raw.explode("assertions").reset_index(drop=True)
@@ -76,6 +92,7 @@ def load_and_normalize_hierarchical_assertions(
     *,
     assertions_key: str = "assertions",
     supporting_assertions_key: str = "supporting_assertions",
+    input_storage: Storage | None = None,
 ) -> pd.DataFrame:
     """Load hierarchical assertions from JSON and normalize for evaluation.
 
@@ -107,7 +124,11 @@ def load_and_normalize_hierarchical_assertions(
         If the assertions file is missing required columns or contains
         no valid hierarchical assertions.
     """
-    assertions_raw = pd.read_json(assertions_path, encoding="utf-8")
+    assertions_raw = (
+        read_json_df(input_storage, str(assertions_path))
+        if input_storage is not None
+        else pd.read_json(assertions_path, encoding="utf-8")
+    )
 
     # Validate the assertions key exists
     if assertions_key not in assertions_raw.columns:
@@ -182,6 +203,9 @@ def evaluate_rag_method(
     answers_path_template: str = "{input_dir}/{generated_rag}/{question_set}.json",
     question_text_key: str = "question_text",
     answer_text_key: str = "answer",
+    *,
+    output_storage: Storage | None = None,
+    input_storage: Storage | None = None,
 ) -> dict[str, Any] | None:
     """Evaluate a single RAG method against assertions for a question set.
 
@@ -205,9 +229,8 @@ def evaluate_rag_method(
     -------
         Dictionary with evaluation results or None if evaluation failed.
     """
-    question_set_output_dir = output_dir / question_set
-    if not question_set_output_dir.exists():
-        question_set_output_dir.mkdir(parents=True)
+    storage = resolve_storage(output_storage, output_dir)
+    question_set_storage = storage.child(question_set)
 
     # Define answers path before try block so it's available in except block
     answers_path = answers_path_template.format(
@@ -216,7 +239,15 @@ def evaluate_rag_method(
 
     try:
         # Load answers for this RAG method and question set
-        answers = pd.read_json(answers_path)
+        if input_storage is not None:
+            # When using storage, format with empty input_dir so the resulting
+            # path is a storage-relative key.
+            answers_key = answers_path_template.format(
+                input_dir="", generated_rag=generated_rag, question_set=question_set
+            ).lstrip("/")
+            answers = read_json_df(input_storage, answers_key)
+        else:
+            answers = pd.read_json(answers_path)
 
         # Get assertion scores
         assertion_score = get_assertion_scores(
@@ -232,9 +263,10 @@ def evaluate_rag_method(
         )
 
         # Save detailed scores for this RAG method and question set
-        assertion_score.to_csv(
-            question_set_output_dir / f"{generated_rag}_assertion_scores.csv",
-            index=False,
+        write_csv(
+            question_set_storage,
+            f"{generated_rag}_assertion_scores.csv",
+            assertion_score,
         )
 
         # Calculate summary statistics using shared aggregation logic
@@ -248,13 +280,15 @@ def evaluate_rag_method(
         overall_accuracy = eval_stats["overall_accuracy"]
 
         # Save detailed summary for this RAG method and question set
-        summary_by_question.to_csv(
-            question_set_output_dir / f"{generated_rag}_summary_by_question.csv",
-            index=False,
+        write_csv(
+            question_set_storage,
+            f"{generated_rag}_summary_by_question.csv",
+            summary_by_question,
         )
-        summary_by_assertion.to_csv(
-            question_set_output_dir / f"{generated_rag}_summary_by_assertion.csv",
-            index=False,
+        write_csv(
+            question_set_storage,
+            f"{generated_rag}_summary_by_assertion.csv",
+            summary_by_assertion,
         )
 
         # Report failed assertions for this method
@@ -331,6 +365,9 @@ def run_assertion_evaluation(
     permutation_seed: int | None = None,
     question_text_key: str = "question_text",
     answer_text_key: str = "answer",
+    *,
+    output_storage: Storage | None = None,
+    input_storage: Storage | None = None,
 ) -> pd.DataFrame:
     """Run assertion-based evaluation for multiple question sets and RAG methods.
 
@@ -363,6 +400,7 @@ def run_assertion_evaluation(
     -------
         DataFrame with overall results summary.
     """
+    storage = resolve_storage(output_storage, output_dir)
     overall_results = []
 
     # Loop through each question set
@@ -371,7 +409,10 @@ def run_assertion_evaluation(
 
         # Load and normalize assertions
         assertions = load_and_normalize_assertions(
-            input_dir, question_set, assertions_filename_template
+            input_dir,
+            question_set,
+            assertions_filename_template,
+            input_storage=input_storage,
         )
 
         # Display assertion filtering info
@@ -398,6 +439,8 @@ def run_assertion_evaluation(
                 answers_path_template=answers_path_template,
                 question_text_key=question_text_key,
                 answer_text_key=answer_text_key,
+                output_storage=storage,
+                input_storage=input_storage,
             )
 
             if result is not None:
@@ -408,9 +451,7 @@ def run_assertion_evaluation(
     overall_summary_df = overall_summary_df.sort_values(
         ["question_set", "overall_accuracy"], ascending=[True, False]
     )
-    overall_summary_df.to_csv(
-        output_dir / "assertion_scores_overall_summary.csv", index=False
-    )
+    write_csv(storage, "assertion_scores_overall_summary.csv", overall_summary_df)
 
     # Display summary table
     print_df(
@@ -422,7 +463,7 @@ def run_assertion_evaluation(
     pivot_summary = overall_summary_df.pivot_table(
         index="rag_method", columns="question_set", values="overall_accuracy"
     )
-    pivot_summary.to_csv(output_dir / "assertion_scores_pivot_summary.csv")
+    write_csv(storage, "assertion_scores_pivot_summary.csv", pivot_summary, index=True)
     print_df(
         pivot_summary.reset_index(),
         "Assertion Accuracy Comparison (Pivot View)",
@@ -439,6 +480,7 @@ def run_assertion_evaluation(
             run_clustered_permutation=run_clustered_permutation,
             n_permutations=n_permutations,
             permutation_seed=permutation_seed,
+            output_storage=storage,
         )
 
     return overall_summary_df
@@ -465,6 +507,9 @@ def run_hierarchical_assertion_evaluation(
     question_text_key: str = "question_text",
     answer_text_key: str = "answer",
     supporting_assertions_key: str = "supporting_assertions",
+    *,
+    output_storage: Storage | None = None,
+    input_storage: Storage | None = None,
 ) -> pd.DataFrame:
     """Run hierarchical assertion evaluation for multiple RAG methods.
 
@@ -500,7 +545,7 @@ def run_hierarchical_assertion_evaluation(
     -------
         DataFrame with comparison summary across all RAG methods.
     """
-    output_dir.mkdir(parents=True, exist_ok=True)
+    storage = resolve_storage(output_storage, output_dir)
 
     all_aggregated: list[pd.DataFrame] = []
     aggregated_scores_dict: dict[str, pd.DataFrame] = {}
@@ -515,7 +560,13 @@ def run_hierarchical_assertion_evaluation(
         )
 
         try:
-            answers = pd.read_json(answers_path)
+            if input_storage is not None:
+                answers_key = answers_path_template.format(
+                    input_dir="", generated_rag=generated_rag
+                ).lstrip("/")
+                answers = read_json_df(input_storage, answers_key)
+            else:
+                answers = pd.read_json(answers_path)
         except FileNotFoundError:
             rich_print(
                 f"  [yellow]Warning: {answers_path} not found, skipping[/yellow]"
@@ -538,17 +589,16 @@ def run_hierarchical_assertion_evaluation(
         )
 
         # Save raw per-trial scores
-        rag_output_dir = output_dir / generated_rag
-        rag_output_dir.mkdir(parents=True, exist_ok=True)
-        scores.to_csv(rag_output_dir / "hierarchical_scores_raw.csv", index=False)
+        rag_storage = storage.child(generated_rag)
+        write_csv(rag_storage, "hierarchical_scores_raw.csv", scores)
 
         # Aggregate scores across trials
         aggregated = aggregate_hierarchical_scores(
             scores, pass_threshold=pass_threshold
         )
         aggregated["rag_method"] = generated_rag
-        aggregated.to_csv(
-            rag_output_dir / "hierarchical_scores_aggregated.csv", index=False
+        write_csv(
+            rag_storage, "hierarchical_scores_aggregated.csv", aggregated
         )
         all_aggregated.append(aggregated)
         aggregated_scores_dict[generated_rag] = aggregated
@@ -567,7 +617,7 @@ def run_hierarchical_assertion_evaluation(
 
     # Combine all results
     all_aggregated_df = pd.concat(all_aggregated, ignore_index=True)
-    all_aggregated_df.to_csv(output_dir / "all_hierarchical_scores.csv", index=False)
+    write_csv(storage, "all_hierarchical_scores.csv", all_aggregated_df)
 
     # Create comparison summary with per-question metrics
     # All metrics are computed per-question first, then averaged across questions
@@ -588,9 +638,7 @@ def run_hierarchical_assertion_evaluation(
         comparison_rows.append(row)
 
     comparison_df = pd.DataFrame(comparison_rows)
-    comparison_df.to_csv(
-        output_dir / "hierarchical_comparison_summary.csv", index=False
-    )
+    write_csv(storage, "hierarchical_comparison_summary.csv", comparison_df)
     print_df(comparison_df, "Hierarchical Assertion Scores Comparison")
 
     # Run statistical significance tests if requested
@@ -604,12 +652,13 @@ def run_hierarchical_assertion_evaluation(
             run_clustered_permutation=run_clustered_permutation,
             n_permutations=n_permutations,
             permutation_seed=permutation_seed,
+            output_storage=storage,
         )
 
         # Build and display significance summary table
         sig_summary = summarize_significance_results(sig_results)
         if not sig_summary.empty:
             print_df(sig_summary, "Significance Test Summary")
-            sig_summary.to_csv(output_dir / "significance_summary.csv", index=False)
+            write_csv(storage, "significance_summary.csv", sig_summary)
 
     return comparison_df

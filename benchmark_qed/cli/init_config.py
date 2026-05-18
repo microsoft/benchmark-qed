@@ -66,13 +66,13 @@ CHAT_MODEL_DEFAULTS = """
   #   For example, you can set the temperature, max tokens, etc.
   #   temperature: 0.0
   #   seed: 42
-  # retry:
-  #   Optional retry policy for transient provider errors (for example, HTTP 429).
-  #   type: exponential_backoff # or immediate
-  #   max_retries: 6
-  #   base_delay: 2.0
-  #   max_delay: 30.0
-  #   jitter: true
+  retry:
+    # Retry policy for transient provider errors (for example, HTTP 429).
+    type: exponential_backoff # or immediate
+    max_retries: 6
+    base_delay: 2.0
+    max_delay: 30.0
+    jitter: true
   # custom_providers: # When implementing a custom LLM provider, you can add it here.
   #   - model_type: chat
   #     name: custom.chat # This name should match the llm_provider above
@@ -94,13 +94,13 @@ EMBEDDING_MODEL_DEFAULTS = """
   #   For example, you can set the temperature, max tokens, etc.
   #   temperature: 0.0
   #   seed: 42
-  # retry:
-  #   Optional retry policy for transient provider errors (for example, HTTP 429).
-  #   type: exponential_backoff # or immediate
-  #   max_retries: 6
-  #   base_delay: 2.0
-  #   max_delay: 30.0
-  #   jitter: true
+  retry:
+    # Retry policy for transient provider errors (for example, HTTP 429).
+    type: exponential_backoff # or immediate
+    max_retries: 6
+    base_delay: 2.0
+    max_delay: 30.0
+    jitter: true
   # custom_providers: # When implementing a custom LLM provider, you can add it here.
   #   - model_type: chat
   #     name: custom.chat # This name should match the llm_provider above

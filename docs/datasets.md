@@ -26,21 +26,17 @@ You can download datasets directly into Azure Blob Storage by providing storage 
 
 - **Using managed identity:**
     ```sh
-    benchmark-qed data download AP_news input \
-      --storage-type blob \
-      --container-name my-datasets \
-      --account-url https://<account>.blob.core.windows.net
+        benchmark-qed data download AP_news input --storage-type blob --container-name my-datasets --account-url https://<account>.blob.core.windows.net --base-dir benchmark-qed
     ```
 
 - **Using a connection string:**
     ```sh
-    benchmark-qed data download AP_news input \
-      --storage-type blob \
-      --container-name my-datasets \
-      --connection-string "$AZURE_STORAGE_CONNECTION_STRING"
+        benchmark-qed data download AP_news input --storage-type blob --container-name my-datasets --connection-string "$AZURE_STORAGE_CONNECTION_STRING" --base-dir benchmark-qed
     ```
 
-The `OUTPUT_DIR` argument (e.g., `input`) becomes the prefix path within the blob container. The dataset zip is downloaded from GitHub, extracted in memory, and each file is uploaded directly to the storage backend.
+When `--base-dir` is provided, files are written under `{base_dir}/{OUTPUT_DIR}/...`. If omitted, files are written under `{OUTPUT_DIR}/...`.
+
+The dataset zip is downloaded from GitHub, extracted in memory, and each file is uploaded directly to the storage backend.
 
 ## Storage Options Reference
 
@@ -54,5 +50,6 @@ The `OUTPUT_DIR` argument (e.g., `input`) becomes the prefix path within the blo
 | `--container-name` | The blob container name. |
 | `--account-url` | The storage account URL (uses managed identity for authentication). |
 | `--connection-string` | The storage connection string (alternative to `--account-url`). |
+| `--base-dir` | Base prefix path in the blob container. Files are stored under `{base_dir}/{OUTPUT_DIR}/` when provided. |
 
 You can also find these datasets in the [datasets directory](https://github.com/microsoft/benchmark-qed/tree/main/datasets).
