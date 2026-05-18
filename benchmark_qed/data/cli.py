@@ -78,6 +78,13 @@ def download(
             help="Base prefix in blob storage. Files will be stored as: base_dir/output_dir/. If omitted, files are stored under output_dir/ only."
         ),
     ] = None,
+    accept_terms: Annotated[
+        bool,
+        typer.Option(
+            "--accept-terms",
+            help="Skip the interactive terms confirmation prompt.",
+        ),
+    ] = False,
 ) -> None:
     """Download the specified dataset from the GitHub repository.
 
@@ -92,10 +99,11 @@ def download(
     typer.echo(
         "By downloading this dataset, you agree to the terms of use described here: https://github.com/microsoft/benchmark-qed/blob/main/datasets/LICENSE."
     )
-    typer.confirm(
-        "Accept Terms?",
-        abort=True,
-    )
+    if not accept_terms:
+        typer.confirm(
+            "Accept Terms?",
+            abort=True,
+        )
 
     if storage_type and storage_type != "blob":
         msg = f"Unsupported storage type: {storage_type!r}. Only 'blob' is supported."
