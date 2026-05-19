@@ -50,7 +50,31 @@ export function looksLikeFolderPrompt(text: string): boolean {
 }
 
 export function looksLikeFilesPrompt(text: string): boolean {
-  return /\b(file|files|dataset|upload|import|csv|json|jsonl|documents?)\b/i.test(
+  return /\b(file|files|upload|import|csv|json|jsonl|documents?)\b/i.test(
     text,
+  );
+}
+
+/**
+ * True when at least one of the supplied choices looks like a filesystem
+ * path (absolute, relative, or `~`-prefixed). Used to decide whether the
+ * browse buttons make sense — a yes/no question with non-path choices
+ * shouldn't surface a file/folder picker even if the wording matches.
+ */
+export function choicesLookLikePaths(choices?: string[]): boolean {
+  if (!choices || choices.length === 0) return false;
+  return choices.some((c) => /^(\.\/|\.\.\/|\/|~\/|[A-Za-z]:[\\/])/.test(c));
+}
+
+/**
+ * True when a choice label implies "I'll provide my own data/files" — e.g.
+ * "No, I'll use my own data", "Bring my own files", "Upload my own",
+ * "No, skip sample data" (declining the sample means the user needs to
+ * point at their own dataset). When the user picks such an option we open
+ * a file/folder picker instead of submitting the label as-is.
+ */
+export function choiceImpliesOwnData(choice: string): boolean {
+  return /\b(my own|own (data|files|dataset)|bring my|provide (my|your) own|upload (my|your) own|use my own|skip (the )?(sample|dataset|sample data))\b/i.test(
+    choice,
   );
 }

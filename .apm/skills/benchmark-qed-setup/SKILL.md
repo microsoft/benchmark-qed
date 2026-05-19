@@ -13,6 +13,38 @@ description: >
 
 Initialize workspaces, generate configuration files, download datasets, and manage settings for the benchmark-qed RAG benchmarking tool.
 
+## Execution Environment
+
+This skill can be invoked from different hosts (a plain terminal/agent, the
+benchmark-qed VS Code extension, or the benchmark-qed UI). The caller is
+expected to declare which environment it is running in via a marker in the
+**initial prompt** of the form:
+
+```
+Execution context: <cli | vscode | ui>
+```
+
+If no marker is present, assume `cli`.
+
+Use the marker to decide what to say at the end of the flow:
+
+- **`cli`** (default): you may end with the exact CLI command the user
+  should run next (e.g. `uvx --from "git+https://github.com/microsoft/benchmark-qed" benchmark-qed autoq settings.yaml ./output …`).
+- **`vscode`**: instruct the user to use the extension's command palette
+  entry or the **Run** code-lens above their config file. Do not paste
+  long shell commands.
+- **`ui`**: the host has an integrated pipeline runner. Do **not** print
+  CLI commands or "now run `benchmark-qed autoq …`" instructions. Your
+  closing message should only:
+  1. Summarize what was created (workspace path, config type, dataset location).
+  2. Always include the note: **"⚠️ Update `.env` with your actual API
+     key — unless you are using managed identity (`auth_type:
+     azure_managed_identity`), in which case no key is required."**
+  3. Stop.
+
+During the rest of the flow the steps are the same regardless of the host
+— only the closing guidance changes.
+
 ## Prerequisites
 
 benchmark-qed requires Python 3.11+ and uv. Run commands with `uvx` to avoid installing globally:
@@ -99,21 +131,41 @@ root/
 └── prompts/          # LLM prompt templates
 ```
 
-### Step 2 — Download Sample Data (Optional)
+### Step 2 — Provide Data (Sample or User-Supplied)
 
-Download sample datasets for testing. This command has an interactive confirmation prompt with no `--yes` flag — use one of these approaches to avoid hanging:
+The workspace needs data under `<workspace>/input/` before any benchmark run can succeed. Two paths:
+
+**Option A — Download a sample dataset.** Use this when the user picks `AP_news`, `podcast`, or `example_answers`. The command has an interactive confirmation prompt with no `--yes` flag — use one of these approaches to avoid hanging:
 
 **Bash/Linux/macOS:**
 ```bash
-echo y | uvx --from "git+https://github.com/microsoft/benchmark-qed" benchmark-qed data download <dataset> <output_dir>
+echo y | uvx --from "git+https://github.com/microsoft/benchmark-qed" benchmark-qed data download <dataset> <workspace>/input
 ```
 
 **PowerShell:**
 ```powershell
-"y" | uvx --from "git+https://github.com/microsoft/benchmark-qed" benchmark-qed data download <dataset> <output_dir>
+"y" | uvx --from "git+https://github.com/microsoft/benchmark-qed" benchmark-qed data download <dataset> <workspace>/input
 ```
 
 **Available datasets**: `AP_news`, `podcast`, `example_answers`
+
+**Option B — User-supplied data.** When the user picks the "use my own data" / "skip sample data" choice and selects a folder via the file picker (the UI returns an absolute path like `/Users/alice/Desktop/raw_data`), **copy the contents of that folder into `<workspace>/input/`** — do **not** register the source folder as the workspace and do **not** modify the source in place.
+
+Use `cp` (macOS/Linux) or `Copy-Item` (PowerShell). Copy the *contents* (children) of the picked folder, not the folder itself, so the input layout matches what `dataset_path: ./input/...` expects:
+
+**Bash/Linux/macOS:**
+```bash
+mkdir -p "<workspace>/input"
+cp -R "<picked_folder>"/. "<workspace>/input/"
+```
+
+**PowerShell:**
+```powershell
+New-Item -ItemType Directory -Force -Path "<workspace>/input" | Out-Null
+Copy-Item -Path "<picked_folder>/*" -Destination "<workspace>/input/" -Recurse -Force
+```
+
+After copying, list the new contents of `<workspace>/input/` back to the user so they can confirm the files arrived where expected. From this point on, `dataset_path` in `settings.yaml` must reference paths under `./input/`, not the original source folder.
 
 **Storage options** for `data download`:
 | Option | Description |
@@ -134,7 +186,19 @@ echo y | uvx --from "git+https://github.com/microsoft/benchmark-qed" benchmark-q
 
 ### Step 3 — Gather Configuration Choices from the User
 
-Before writing any values into `settings.yaml`, **prompt the user with `ask_user`** to collect the LLM / auth / endpoint settings. Do not guess — these decisions are environment-specific and getting them wrong wastes downstream LLM calls. Use enum/boolean fields whenever possible so the user picks from a known set rather than typing free-form text.
+Before writing any values into `settings.yaml`, **first ask the user how they want to configure the LLM settings**. Many users prefer to skip the interactive Q&A and just edit `settings.yaml` themselves in the editor.
+
+Use a single `ask_user` with a closed enum:
+
+| Field | Type | Options |
+|-------|------|---------|
+| `llm_setup_mode` | enum | `customize` (walk me through the LLM/auth/endpoint settings now) · `scaffold_only` (just create `settings.yaml` with defaults and I'll edit it in the editor) |
+
+**Branching:**
+- If `llm_setup_mode = scaffold_only`: skip the rest of Step 3 and Step 4. The file already exists from Step 1 with placeholder values (e.g. `${OPENAI_API_KEY}`, default provider). Tell the user which file to open (`<workspace>/settings.yaml`) and which env vars to fill in `<workspace>/.env`, then jump straight to **Step 5 — Review Settings with the User** (or end the flow if they decline a review).
+- If `llm_setup_mode = customize`: continue with the prompts below.
+
+Do not guess these decisions — they are environment-specific and getting them wrong wastes downstream LLM calls. Use enum/boolean fields whenever possible so the user picks from a known set rather than typing free-form text.
 
 Ask in **a single `ask_user` form** (split into two if the workflow is autoq, since autoq also needs an embedding model). Tailor the follow-up fields based on the provider/auth choice — if the first answer reveals an Azure provider, ask the Azure-only fields in a second form.
 
@@ -158,6 +222,7 @@ Ask the same shape of questions for the embedding model:
 |-------|------|-------|
 | `embedding_provider` | enum (`openai.embedding`, `azure.openai.embedding`, `azure.inference.embedding`) | Must be an *embedding* provider. |
 | `embedding_model` | string | e.g. `text-embedding-3-large`, or an Azure deployment name. |
+| `embedding_azure_deployment` | string | **Required when `embedding_provider=azure.openai.embedding`.** The Azure deployment name for the embedding model (often the same as `embedding_model`). Written to `embedding_model.init_args.azure_deployment`. |
 | Reuse `auth_type` / `api_key_env_var` / `azure_endpoint` / `api_version` from the chat answers unless the user wants different values — ask a yes/no `reuse_chat_auth` boolean first. |
 
 #### Input data fields (autoq only)
@@ -208,6 +273,7 @@ chat_model:
   init_args:                            # only for azure.* providers
     azure_endpoint: <azure_endpoint>
     api_version: "<api_version>"        # azure.openai.* only
+    azure_deployment: <azure_deployment> # azure.openai.embedding only — REQUIRED
 
 # Input data (autoq only)
 input:
@@ -220,8 +286,10 @@ input:
 - Omit `api_key` entirely when `auth_type=azure_managed_identity` — do not leave `${OPENAI_API_KEY}` in place.
 - Omit `init_args` for non-Azure providers.
 - Quote `api_version` (it would otherwise be parsed as a date).
-- For `azure_managed_identity`, do **not** add anything to `.env` for that key.
+- **`azure.openai.embedding` requires `azure_deployment` inside `init_args`** — the runtime calls `init_args.pop("azure_deployment")` and will raise `KeyError: 'azure_deployment'` if it is missing. Always ask the user for it (default to the embedding model name if they don't know) and write it under `embedding_model.init_args.azure_deployment`. Chat models (`azure.openai.chat`) do **not** need this field.
+- For `azure_managed_identity`, do **not** add anything to `.env` for that key, and do **not** include any "update .env with your API key" warning in the closing message — managed identity uses the ambient Azure credential, there is no key to fill in.
 - For `api_key` auth, append `<api_key_env_var>=<placeholder>` to `.env` if the variable is missing, and tell the user to replace the placeholder with their real key before running any command.
+- If the workspace mixes auth types (e.g. `chat_model` uses `api_key` but `embedding_model` uses `azure_managed_identity`), only warn about the keys that actually need to be set — name the specific env vars, do not blanket-say "update your API key".
 
 For the full set of optional fields, read [references/config-reference.md](references/config-reference.md).
 
@@ -246,7 +314,7 @@ For the full set of optional fields and best practices, read [references/config-
 
 ### Step 6 — Validate Configuration
 
-The benchmark-qed CLI validates `settings.yaml` via pydantic at startup, so any missing or malformed fields are reported when you run a command. After applying the answers, run the actual target command (e.g. `benchmark-qed autoq …`) — config errors surface immediately, before any LLM calls.
+The benchmark-qed CLI validates `settings.yaml` via pydantic at startup, so any missing or malformed fields are reported when the pipeline starts. After applying the answers, close the flow according to the **Execution Environment** rules at the top of this skill (CLI → show the next command; VS Code → point at the extension's Run action; UI → just confirm the workspace is ready).
 
 ## Best Practices
 

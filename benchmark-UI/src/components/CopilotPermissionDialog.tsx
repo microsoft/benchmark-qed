@@ -79,6 +79,15 @@ export function CopilotPermissionDialog({
           </button>
           <button
             type="button"
+            className="btn btn-primary"
+            disabled={submitting}
+            onClick={onApproveAll}
+            title="Auto-approve all future permission prompts in this session without asking"
+          >
+            Approve all (this session)
+          </button>
+          <button
+            type="button"
             className="btn"
             disabled={submitting}
             onClick={() => onSubmit({ decision: "approve-for-session" })}
@@ -88,15 +97,6 @@ export function CopilotPermissionDialog({
           <button
             type="button"
             className="btn"
-            disabled={submitting}
-            onClick={onApproveAll}
-            title="Auto-approve all future permission prompts in this session without asking"
-          >
-            Approve all (this session)
-          </button>
-          <button
-            type="button"
-            className="btn btn-primary"
             disabled={submitting}
             onClick={() => onSubmit({ decision: "approve-once" })}
           >

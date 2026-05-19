@@ -937,6 +937,38 @@ export default function App() {
     return () => window.clearInterval(timerId);
   }, [runJobs]);
 
+  // While any run job is active, periodically re-list the workspaces it
+  // targets so files the job creates appear in the sidebar without a
+  // manual refresh.
+  useEffect(() => {
+    const activeRootPaths = new Set(
+      runJobs
+        .filter((j) => j.status === "running" && j.rootPath)
+        .map((j) => j.rootPath!),
+    );
+    if (activeRootPaths.size === 0) return;
+
+    const tick = () => {
+      for (const ws of workspaces) {
+        if (ws.sourceKind !== "local") continue;
+        const wsRoot = ws.rootPath;
+        if (!wsRoot) continue;
+        // Refresh if the workspace root matches a running job root, or is a
+        // parent/child of it (so output written into a sibling folder shows up).
+        const match = [...activeRootPaths].some(
+          (rp) =>
+            wsRoot === rp ||
+            rp.startsWith(`${wsRoot}/`) ||
+            wsRoot.startsWith(`${rp}/`),
+        );
+        if (match) void refreshWorkspace(ws);
+      }
+    };
+    tick();
+    const timerId = window.setInterval(tick, 4000);
+    return () => window.clearInterval(timerId);
+  }, [runJobs, workspaces, refreshWorkspace]);
+
   const activeWorkspace = activeView?.type === "file"
     ? workspaces.find((w) => w.id === activeView.file.workspaceId)
     : undefined;
@@ -965,20 +997,13 @@ export default function App() {
             onClick={() => setCopilotWizardOpen(true)}
             title="Run the benchmark-qed-setup skill in an embedded Copilot agent"
           >
-            ✨ AI Wizard
+            ✨ AI Assistant
           </button>
           <button className="open-btn secondary" onClick={() => setInitDialogOpen(true)}>
-            + Create Configuration
+            + Create Configuration manually
           </button>
           <button className="open-btn secondary" onClick={() => setAddWorkspaceDialogOpen(true)}>
             + Add Workspace
-          </button>
-          <button
-            className="open-btn secondary"
-            onClick={() => setLoadDatasetDialogOpen(true)}
-            title="Download a predefined dataset into a new workspace"
-          >
-            + Load Dataset
           </button>
           <div className="ws-count">
             {workspaces.length} workspace{workspaces.length === 1 ? "" : "s"}
@@ -1251,7 +1276,7 @@ export default function App() {
       />
       <CopilotPanel
         open={copilotWizardOpen}
-        initialPrompt={"Run the benchmark-qed-setup skill end-to-end. Do not display the skill's contents in chat. Go straight into asking me the first question (one at a time) using the skill's ask_user / elicitation flow. Be brief — short prompts only."}
+        initialPrompt={"Execution context: ui\n\nRun the benchmark-qed-setup skill end-to-end. Do not display the skill's contents in chat. Go straight into asking me the first question (one at a time) using the skill's ask_user / elicitation flow. Be brief — short prompts only."}
         silentInitialPrompt
         onFolderDetected={(folderPath) => {
           // The agent typically asks for a root path; once we see one and it
@@ -1264,6 +1289,16 @@ export default function App() {
             void addLocalWorkspace(folderPath);
           }
         }}
+        onActivitySettled={() => {
+          // Re-list every local workspace so files the agent just created or
+          // moved appear in the sidebar without a manual reload.
+          for (const ws of workspaces) {
+            if (ws.sourceKind === "local") void refreshWorkspace(ws);
+          }
+        }}
+        onLogEvent={(action, details, type) =>
+          addActivityLog(action, details, type)
+        }
         onClose={() => setCopilotWizardOpen(false)}
       />
       <RunConfigDialog

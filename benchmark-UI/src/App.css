@@ -1022,9 +1022,26 @@ body,
   text-align: center;
 }
 
+.tab-close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  margin-left: 4px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: var(--text-dim);
+  border-radius: 4px;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: background 0.12s, color 0.12s, opacity 0.12s;
+}
 .tab-close:hover {
   background: var(--bg-3);
   color: var(--text);
+  opacity: 1;
 }
 
 /* Job log viewer */
@@ -1386,7 +1403,9 @@ body,
   padding: 1px 6px;
   border-radius: 8px;
   margin-left: 6px;
-  font-weight: 500;
+  font-weight: 600;
+  background: var(--bg-3, rgba(127, 127, 127, 0.18));
+  letter-spacing: 0.03em;
 }
 
 .init-jobs-cancel {
@@ -1765,7 +1784,7 @@ body,
   padding: 8px 4px;
 }
 
-/* Copilot AI Wizard — inline cards inside the transcript so prompts feel
+/* Copilot AI Assistant — inline cards inside the transcript so prompts feel
    like part of the conversation instead of stacked modals. */
 .copilot-inline-card {
   border: 1px solid var(--accent, #4a90e2);
@@ -1783,13 +1802,15 @@ body,
 .copilot-inline-card-body {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 12px;
 }
 .copilot-inline-actions {
   display: flex;
   gap: 8px;
   justify-content: flex-end;
-  margin-top: 4px;
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid var(--border, rgba(127, 127, 127, 0.2));
 }
 .copilot-choice-row {
   display: flex;
@@ -1809,4 +1830,178 @@ body,
   background: var(--accent, #4a90e2);
   border-color: var(--accent, #4a90e2);
   color: white;
+}
+
+/* Inline-card sub-sections — give the ask/elicit/permission dialogs a
+   clearer hierarchy: a small uppercase label above each input group. */
+.copilot-section {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.copilot-section-label {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  opacity: 0.65;
+}
+.copilot-link-btn {
+  align-self: flex-start;
+  background: transparent;
+  border: none;
+  color: var(--accent, #4a90e2);
+  cursor: pointer;
+  padding: 0;
+  font-size: 12px;
+  text-decoration: underline;
+}
+
+/* Two-column option card grid for assistant choices, matching the
+   Create Configuration dialog style. */
+.copilot-option-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+@media (max-width: 600px) {
+  .copilot-option-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Indeterminate progress bar shown at the top of the assistant panel
+   whenever the agent is in the "running" state. */
+.copilot-progress {
+  height: 3px;
+  width: 100%;
+  background: rgba(127, 127, 127, 0.15);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.copilot-progress-bar {
+  height: 100%;
+  width: 35%;
+  background: var(--accent, #4a90e2);
+  border-radius: 2px;
+  animation: copilot-progress-slide 1.4s ease-in-out infinite;
+}
+@keyframes copilot-progress-slide {
+  0%   { transform: translateX(-100%); }
+  50%  { transform: translateX(140%); }
+  100% { transform: translateX(280%); }
+}
+
+/* Inline "Copilot is thinking…" pill placed at the bottom of the transcript
+   while the agent is busy and no prompt is pending. */
+.copilot-thinking {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  align-self: flex-start;
+  padding: 6px 12px;
+  border-radius: 14px;
+  background: var(--turn-asst-bg, rgba(127, 127, 127, 0.12));
+  font-size: 12px;
+  opacity: 0.85;
+}
+.copilot-thinking-label { margin-left: 4px; }
+.copilot-thinking-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent, #4a90e2);
+  animation: copilot-thinking-bounce 1.2s ease-in-out infinite;
+}
+.copilot-thinking-dot:nth-child(2) { animation-delay: 0.15s; }
+.copilot-thinking-dot:nth-child(3) { animation-delay: 0.3s; }
+@keyframes copilot-thinking-bounce {
+  0%, 60%, 100% { transform: translateY(0); opacity: 0.5; }
+  30%           { transform: translateY(-4px); opacity: 1; }
+}
+
+/* Markdown rendering inside an assistant turn. Keeps things compact so the
+   transcript still feels like chat. */
+.copilot-md > *:first-child { margin-top: 0; }
+.copilot-md > *:last-child  { margin-bottom: 0; }
+.copilot-md p,
+.copilot-md ul,
+.copilot-md ol { margin: 6px 0; }
+.copilot-md ul, .copilot-md ol { padding-left: 22px; }
+.copilot-md li { margin: 2px 0; }
+.copilot-md h1, .copilot-md h2, .copilot-md h3,
+.copilot-md h4, .copilot-md h5, .copilot-md h6 {
+  margin: 10px 0 4px;
+  font-weight: 600;
+  line-height: 1.25;
+}
+.copilot-md h1 { font-size: 16px; }
+.copilot-md h2 { font-size: 15px; }
+.copilot-md h3 { font-size: 14px; }
+.copilot-md h4, .copilot-md h5, .copilot-md h6 { font-size: 13px; }
+.copilot-md a { color: var(--accent, #4a90e2); }
+.copilot-md code {
+  background: var(--code-bg, rgba(127,127,127,0.18));
+  padding: 1px 5px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+.copilot-md pre {
+  background: var(--code-bg, #1e1e1e);
+  color: var(--code-fg, #d4d4d4);
+  padding: 10px 12px;
+  border-radius: 6px;
+  overflow-x: auto;
+  font-size: 12px;
+  line-height: 1.45;
+  margin: 8px 0;
+  border: 1px solid var(--border, rgba(127,127,127,0.25));
+}
+.copilot-md pre code {
+  background: transparent;
+  padding: 0;
+  border-radius: 0;
+  font-size: 12px;
+  color: inherit;
+}
+.copilot-md blockquote {
+  margin: 8px 0;
+  padding: 4px 10px;
+  border-left: 3px solid var(--accent, #4a90e2);
+  opacity: 0.85;
+}
+.copilot-md hr {
+  border: none;
+  border-top: 1px solid var(--border, rgba(127,127,127,0.25));
+  margin: 10px 0;
+}
+.copilot-md table {
+  border-collapse: collapse;
+  margin: 8px 0;
+  font-size: 12px;
+}
+.copilot-md th, .copilot-md td {
+  border: 1px solid var(--border, rgba(127,127,127,0.3));
+  padding: 4px 8px;
+  text-align: left;
+}
+
+/* Inline "skill finished" banner with a Close button, shown at the bottom
+   of the transcript when the assistant is idle with no pending prompt. */
+.copilot-done {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 14px;
+  margin-top: 6px;
+  border-radius: 8px;
+  background: rgba(56, 161, 105, 0.12);
+  border: 1px solid rgba(56, 161, 105, 0.4);
+  color: var(--text);
+}
+.copilot-done-label {
+  font-weight: 600;
+  color: rgb(56, 161, 105);
 }
