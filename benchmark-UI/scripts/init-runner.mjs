@@ -38,6 +38,7 @@ const execFileAsync = promisify(execFile);
 const initJobs = new Map();
 const runJobs = new Map();
 const jobProcesses = new Map(); // jobId -> child process
+const cancelledJobs = new Set(); // jobIds that were user-cancelled
 
 function resolveCorsOrigin(req) {
   const origin = req.headers.origin;
@@ -277,7 +278,7 @@ function resolveBenchmarkInvocation() {
   return _resolvedBenchmarkInvocation;
 }
 
-function runCommandWithFallback(job, args) {
+function runCommandWithFallback(job, args, onCompleted) {
   const { absPath, prefix, label } = resolveBenchmarkInvocation();
   const cmdArgs = [...prefix, ...args];
   const commandLabel = `${label} ${args.join(" ")}`;
@@ -286,9 +287,23 @@ function runCommandWithFallback(job, args) {
   const markCompleted = (code) => {
     job.endedAt = new Date().toISOString();
     job.exitCode = code ?? -1;
-    job.status = code === 0 ? "succeeded" : "failed";
+    const wasCancelled = cancelledJobs.has(job.id);
+    if (wasCancelled) {
+      job.status = "cancelled";
+      cancelledJobs.delete(job.id);
+    } else {
+      job.status = code === 0 ? "succeeded" : "failed";
+    }
     if (jobProcesses.has(job.id)) {
       jobProcesses.delete(job.id);
+    }
+    if (typeof onCompleted === "function") {
+      try {
+        onCompleted(job);
+      } catch (err) {
+        // eslint-disable-next-line no-console
+        console.error("[init-runner] onCompleted handler failed:", err);
+      }
     }
   };
 
@@ -331,6 +346,7 @@ function runCommandWithFallback(job, args) {
 function cancelJob(jobId) {
   const proc = jobProcesses.get(jobId);
   if (proc && typeof proc.kill === "function") {
+    cancelledJobs.add(jobId);
     proc.kill("SIGTERM");
     jobProcesses.delete(jobId);
     return true;
@@ -453,6 +469,47 @@ function startInitJob(body) {
   return job;
 }
 
+// Strip common ANSI escape sequences (colors, cursor moves, tqdm redraws)
+// so the saved log file is human-readable in any text editor.
+function stripAnsi(input) {
+  if (!input) return "";
+  // eslint-disable-next-line no-control-regex
+  return input.replace(/\x1b\[[0-9;?]*[A-Za-z]/g, "").replace(/\r/g, "");
+}
+
+// On completion of a run job, persist the full captured output to a log
+// file inside the workspace's `output/` folder so the user can review it
+// after closing the tab.
+function persistRunJobLog(job) {
+  try {
+    if (!job?.rootPath) return;
+    const logDir = path.join(job.rootPath, "output");
+    fs.mkdirSync(logDir, { recursive: true });
+    const stamp = (job.endedAt || new Date().toISOString())
+      .replace(/[:.]/g, "-");
+    const fileName = `${job.configType || "run"}-${stamp}.log`;
+    const filePath = path.join(logDir, fileName);
+    const header = [
+      `# benchmark-qed run log`,
+      `# job id      : ${job.id}`,
+      `# config type : ${job.configType}`,
+      `# root path   : ${job.rootPath}`,
+      `# started at  : ${job.startedAt}`,
+      `# ended at    : ${job.endedAt}`,
+      `# exit code   : ${job.exitCode}`,
+      `# status      : ${job.status}`,
+      `# command     : ${job.command}`,
+      "",
+      "",
+    ].join("\n");
+    fs.writeFileSync(filePath, header + stripAnsi(job.output || ""), "utf-8");
+    job.logFilePath = filePath;
+  } catch (err) {
+    // eslint-disable-next-line no-console
+    console.error("[init-runner] Failed to persist run log:", err);
+  }
+}
+
 function startRunJob(body) {
   const allowedConfigTypes = [
     "autoq",
@@ -491,9 +548,10 @@ function startRunJob(body) {
     command: `benchmark-qed ${args.join(" ")}`,
     output: "",
     exitCode: null,
+    logFilePath: null,
   };
   runJobs.set(id, job);
-  runCommandWithFallback(job, args);
+  runCommandWithFallback(job, args, persistRunJobLog);
   return job;
 }
 

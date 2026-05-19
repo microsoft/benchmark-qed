@@ -399,7 +399,11 @@ export default function App() {
       const job = payload as RunJob;
       setRunJobs((prev) => normalizeJobs([job, ...prev]));
       handleOpenRunJobLog(job.id);
-      addActivityLog(`Started job`, configType, "success");
+      addActivityLog(
+        `Started job`,
+        `${workspace.name} · ${configType}`,
+        "success",
+      );
       return true;
     } catch (e) {
       setError(
@@ -625,7 +629,7 @@ export default function App() {
       setRunJobs((prev) =>
         prev.map((job) =>
           job.id === jobId
-            ? { ...job, status: "failed", endedAt: new Date().toISOString(), exitCode: -1 }
+            ? { ...job, status: "cancelled", endedAt: new Date().toISOString(), exitCode: -1 }
             : job,
         ),
       );
@@ -633,6 +637,31 @@ export default function App() {
       setError(`Failed to cancel job: ${e}`);
     }
   }, []);
+
+  const rerunJob = useCallback(async (jobId: string) => {
+    const job = runJobs.find((j) => j.id === jobId);
+    if (!job || !job.rootPath || !job.configType) {
+      setError("Cannot re-run job: missing workspace path or config type.");
+      return;
+    }
+    const existing = workspaces.find(
+      (w) => w.sourceKind === "local" && w.rootPath === job.rootPath,
+    );
+    const workspace: Workspace =
+      existing ?? {
+        id: `temp-rerun-${job.id}`,
+        version: 1,
+        name:
+          job.rootPath.split(/[/\\]/).filter(Boolean).pop() ?? job.rootPath,
+        sourceKind: "local",
+        rootPath: job.rootPath,
+        configType: job.configType,
+        source: new RunnerPathFileSource(job.rootPath, INIT_RUNNER_URL),
+        rootNodes: [],
+        collapsed: false,
+      };
+    await submitRunJob(workspace, job.configType);
+  }, [runJobs, workspaces, submitRunJob]);
 
   useEffect(() => {
     for (const job of initJobs) {
@@ -937,6 +966,45 @@ export default function App() {
     return () => window.clearInterval(timerId);
   }, [runJobs]);
 
+  // Detect run-job status transitions (running → succeeded/failed/cancelled)
+  // and emit a corresponding activity log entry exactly once per job.
+  const loggedRunJobStatusRef = useRef<Map<string, string>>(new Map());
+  useEffect(() => {
+    for (const job of runJobs) {
+      const prev = loggedRunJobStatusRef.current.get(job.id);
+      if (prev === job.status) continue;
+      if (job.status === "running") {
+        loggedRunJobStatusRef.current.set(job.id, job.status);
+        continue;
+      }
+      const label = job.configType ?? "job";
+      const folder = job.rootPath
+        ? job.rootPath.split(/[/\\]/).filter(Boolean).pop()
+        : undefined;
+      const target = folder ? `${folder} · ${label}` : label;
+      if (job.status === "succeeded") {
+        addActivityLog("Job succeeded", target, "success");
+      } else if (job.status === "failed") {
+        const lines = (job.output || "")
+          .split(/\r?\n/)
+          .map((l) => l.replace(/\s+$/g, ""))
+          .filter((l) => l.trim().length > 0);
+        // Prefer the last Python-style error line (e.g. "KeyError: 'x'").
+        const errorLine = [...lines]
+          .reverse()
+          .find((l) => /^[A-Za-z_][\w.]*Error\b|^Exception\b|^error:/i.test(l.trim()));
+        const summary = errorLine ?? lines[lines.length - 1] ?? "";
+        const detail = summary
+          ? `${target} (exit ${job.exitCode ?? "?"}) — ${summary}`
+          : `${target} (exit ${job.exitCode ?? "?"})`;
+        addActivityLog("Job failed", detail, "error");
+      } else if (job.status === "cancelled") {
+        addActivityLog("Job cancelled", `${target} — by the user`, "warning");
+      }
+      loggedRunJobStatusRef.current.set(job.id, job.status);
+    }
+  }, [runJobs, addActivityLog]);
+
   // While any run job is active, periodically re-list the workspaces it
   // targets so files the job creates appear in the sidebar without a
   // manual refresh.
@@ -1000,7 +1068,7 @@ export default function App() {
             ✨ AI Assistant
           </button>
           <button className="open-btn secondary" onClick={() => setInitDialogOpen(true)}>
-            + Create Configuration manually
+            + Create Configuration
           </button>
           <button className="open-btn secondary" onClick={() => setAddWorkspaceDialogOpen(true)}>
             + Add Workspace
@@ -1246,6 +1314,7 @@ export default function App() {
           <JobLogViewer
             job={runJobs.find((j) => j.id === activeView.jobId)!}
             onCancel={cancelRunJob}
+            onRerun={rerunJob}
           />
         ) : (
           <div className="empty-state">

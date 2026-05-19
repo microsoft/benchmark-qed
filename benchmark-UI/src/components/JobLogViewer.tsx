@@ -6,9 +6,15 @@ import type { RunJob } from "./RunJobsBottomTab";
 interface Props {
   job: RunJob;
   onCancel: (jobId: string) => void;
+  onRerun?: (jobId: string) => void;
 }
 
-export function JobLogViewer({ job, onCancel }: Props) {
+export function JobLogViewer({ job, onCancel, onRerun }: Props) {
+  const canRerun =
+    !!onRerun &&
+    !!job.rootPath &&
+    !!job.configType &&
+    job.status !== "running";
   return (
     <div className="job-log-viewer">
       <div className="file-header">
@@ -19,9 +25,18 @@ export function JobLogViewer({ job, onCancel }: Props) {
           </span>
           {new Date(job.startedAt).toLocaleTimeString()}
         </span>
-        {job.status === "running" && (
+        {job.status === "running" ? (
           <CancelJobButton jobId={job.id} onCancel={onCancel} />
-        )}
+        ) : canRerun ? (
+          <button
+            type="button"
+            className="init-jobs-clear"
+            title="Re-run this job"
+            onClick={() => onRerun!(job.id)}
+          >
+            Re-run
+          </button>
+        ) : null}
       </div>
       <div className="job-log-content">
         <div className="jobs-log-command">{job.command}</div>
