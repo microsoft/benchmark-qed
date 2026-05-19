@@ -149,6 +149,7 @@ Ask in **a single `ask_user` form** (split into two if the workflow is autoq, si
 | `azure_endpoint` | string (uri) | e.g. `https://my-resource.openai.azure.com/` | Only ask for `azure.*` providers. |
 | `api_version` | string | e.g. `2024-06-01` | Only ask for `azure.openai.*` providers. |
 | `concurrent_requests` | integer | default `4` | Optional; offer the default. |
+| `retry` | object | defaults to `exponential_backoff`/6 retries | Optional. The `config init` scaffold now writes a default `retry:` block; offer to keep the defaults unless the user has a reason to change them. See [references/config-reference.md](references/config-reference.md) for fields. |
 
 #### Embedding fields to collect (autoq only)
 
@@ -208,6 +209,12 @@ chat_model:
   init_args:                            # only for azure.* providers
     azure_endpoint: <azure_endpoint>
     api_version: "<api_version>"        # azure.openai.* only
+  retry:                                # scaffolded by `config init`; keep unless customized
+    type: exponential_backoff
+    max_retries: 6
+    base_delay: 2.0
+    max_delay: 30.0
+    jitter: true
 
 # Input data (autoq only)
 input:
@@ -268,3 +275,4 @@ Key highlights:
 - **`config init --storage-type blob`**: When combined with `--account-url` or `--connection-string`, the command uploads the generated `settings.yaml` and prompt files directly to blob storage. Without those auth options, it only scaffolds the storage YAML sections locally.
 - **Blob URI format**: CLI commands accept `blob://<container>/<key>` for config paths. The CLI downloads the config and all sibling files (prompt templates) to a temp directory so relative paths resolve correctly. Credentials can be passed via `--account-url`/`--connection-string` or the environment variables `AZURE_STORAGE_ACCOUNT_URL`/`AZURE_STORAGE_CONNECTION_STRING`.
 - **Storage config in YAML**: AutoQ uses `input.storage` (nested under `input`) and `output_storage` (top-level). AutoE uses `input_storage` and `output_storage` (both top-level). When storage is omitted, local filesystem is used.
+- **graphrag-llm backend**: As of the graphrag-llm migration, built-in providers (OpenAI, Azure OpenAI, Azure AI Inference) are served by `graphrag-llm`'s LiteLLM-backed factory. Custom providers must implement the `graphrag_llm.completion.LLMCompletion` or `graphrag_llm.embedding.LLMEmbedding` interfaces (the older `benchmark_qed.llm.type.base.ChatModel` / `EmbeddingModel` Protocols have been removed). See [references/config-reference.md](references/config-reference.md#custom-llm-providers).
