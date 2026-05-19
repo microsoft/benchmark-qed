@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite",
     "init-runner": "node scripts/init-runner.mjs",
-    "dev:all": "concurrently -n runner,ui -c cyan,magenta \"npm:init-runner\" \"npm:dev\"",
+    "copilot-bridge": "node ../copilot-bridge/src/server.mjs",
+    "dev:all": "concurrently -n runner,bridge,ui -c cyan,yellow,magenta \"npm:init-runner\" \"npm:copilot-bridge\" \"npm:dev\"",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview"

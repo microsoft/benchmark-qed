@@ -4,6 +4,10 @@ import {
   DatasetDownloadDialog,
   type PredefinedDataset,
 } from "./components/DatasetDownloadDialog";
+import {
+  LoadDatasetDialog,
+  type LoadDatasetSubmit,
+} from "./components/LoadDatasetDialog";
 import { FileEditor } from "./components/FileEditor";
 import { FolderTree } from "./components/FolderTree";
 import type { InitJob } from "./components/InitJobsPanel";
@@ -17,6 +21,7 @@ import type { RunJob } from "./components/RunJobsBottomTab";
 import { MultiConfigDialog, type DetectedConfig } from "./components/MultiConfigDialog";
 import { TreeCreateDialog } from "./components/TreeCreateDialog";
 import { TreeDeleteDialog } from "./components/TreeDeleteDialog";
+import { CopilotPanel } from "./components/CopilotPanel";
 import { BlobFileSource } from "./sources/BlobFileSource";
 import { RunnerPathFileSource } from "./sources/RunnerPathFileSource";
 import type {
@@ -113,6 +118,7 @@ export default function App() {
 
   const [addWorkspaceDialogOpen, setAddWorkspaceDialogOpen] = useState(false);
   const [initDialogOpen, setInitDialogOpen] = useState(false);
+  const [copilotWizardOpen, setCopilotWizardOpen] = useState(false);
 
   const [initSubmitting, setInitSubmitting] = useState(false);
   const [initJobs, setInitJobs] = useState<InitJob[]>([]);
@@ -125,6 +131,11 @@ export default function App() {
     null,
   );
   const [datasetSubmitting, setDatasetSubmitting] = useState(false);
+  const [loadDatasetDialogOpen, setLoadDatasetDialogOpen] = useState(false);
+  const [loadDatasetSubmitting, setLoadDatasetSubmitting] = useState(false);
+  const [configurePrompt, setConfigurePrompt] = useState<
+    { workspace: string; name: string; summary: string } | null
+  >(null);
   const [runConfigDialogOpen, setRunConfigDialogOpen] = useState(false);
   const [runConfigWorkspaceId, setRunConfigWorkspaceId] = useState<string | null>(
     null,
@@ -483,6 +494,68 @@ export default function App() {
       }
     },
     [addWorkspace, datasetDialogWorkspaceId, workspaces],
+  );
+
+  const submitLoadDataset = useCallback(
+    async (payload: LoadDatasetSubmit) => {
+      const { sourceFolder, destinationFolder, workspaceName, subdir } = payload;
+      setLoadDatasetSubmitting(true);
+      setError(null);
+      try {
+        const res = await fetch(`${INIT_RUNNER_URL}/api/datasets/import`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            sourcePaths: [sourceFolder],
+            destinationFolder,
+            subdir,
+            flatten: true,
+          }),
+        });
+        const body = (await res.json()) as {
+          error?: string;
+          imported?: Array<{ source: string; target: string }>;
+          skipped?: Array<{ source: string; error: string }>;
+          inputFolder?: string;
+        };
+        if (!res.ok) {
+          if (res.status === 404) {
+            throw new Error(
+              "Runner endpoint /api/datasets/import not found. Restart init-runner.",
+            );
+          }
+          const skippedNote =
+            body.skipped && body.skipped.length
+              ? `\nSkipped: ${body.skipped
+                  .map((s) => `${s.source} (${s.error})`)
+                  .join("; ")}`
+              : "";
+          throw new Error(`${body.error ?? "Import failed."}${skippedNote}`);
+        }
+
+        await addWorkspace(
+          workspaceName,
+          new RunnerPathFileSource(destinationFolder, INIT_RUNNER_URL),
+          { rootPath: destinationFolder },
+        );
+        setLoadDatasetDialogOpen(false);
+
+        const skippedSuffix =
+          body.skipped && body.skipped.length
+            ? ` (${body.skipped.length} skipped)`
+            : "";
+        setConfigurePrompt({
+          workspace: destinationFolder,
+          name: workspaceName,
+          summary: `Imported ${body.imported?.length ?? 0} entr${(body.imported?.length ?? 0) === 1 ? "y" : "ies"} into ${body.inputFolder}${skippedSuffix}.`,
+        });
+      } catch (e) {
+        setError(`Failed to load dataset: ${e}`);
+      } finally {
+        setLoadDatasetSubmitting(false);
+      }
+    },
+    [addWorkspace],
   );
 
   const handleRunWorkspace = useCallback(
@@ -887,11 +960,25 @@ export default function App() {
       <div className="dashboard" style={{ display: "flex" }}>
       <aside className="sidebar">
         <div className="sidebar-header">
-          <button className="open-btn" onClick={() => setInitDialogOpen(true)}>
+          <button
+            className="open-btn"
+            onClick={() => setCopilotWizardOpen(true)}
+            title="Run the benchmark-qed-setup skill in an embedded Copilot agent"
+          >
+            ✨ AI Wizard
+          </button>
+          <button className="open-btn secondary" onClick={() => setInitDialogOpen(true)}>
             + Create Configuration
           </button>
           <button className="open-btn secondary" onClick={() => setAddWorkspaceDialogOpen(true)}>
             + Add Workspace
+          </button>
+          <button
+            className="open-btn secondary"
+            onClick={() => setLoadDatasetDialogOpen(true)}
+            title="Download a predefined dataset into a new workspace"
+          >
+            + Load Dataset
           </button>
           <div className="ws-count">
             {workspaces.length} workspace{workspaces.length === 1 ? "" : "s"}
@@ -992,6 +1079,38 @@ export default function App() {
 
       <main className="main">
         {error && <div className="error-banner">{error}</div>}
+        {configurePrompt && (
+          <div className="info-banner configure-banner">
+            <div className="configure-banner-text">
+              <strong>{configurePrompt.summary}</strong>
+              <span>
+                Configure <code>{configurePrompt.name}</code> with Copilot to
+                generate <code>settings.yaml</code> using the{" "}
+                <code>benchmark-qed-setup</code> skill.
+              </span>
+            </div>
+            <div className="configure-banner-actions">
+              <button
+                className="btn primary"
+                onClick={() => {
+                  const params = new URLSearchParams({
+                    workspace: configurePrompt.workspace,
+                    dataset: configurePrompt.name,
+                  });
+                  window.location.href = `vscode://benchmark-qed.bridge/run-skill?${params.toString()}`;
+                }}
+              >
+                Configure with Copilot
+              </button>
+              <button
+                className="btn"
+                onClick={() => setConfigurePrompt(null)}
+              >
+                Dismiss
+              </button>
+            </div>
+          </div>
+        )}
         
         {/* Top-level tabs for files and job logs */}
         <div className="editor-tabs">
@@ -1130,6 +1249,23 @@ export default function App() {
         onClose={() => setInitDialogOpen(false)}
         onSubmit={submitInitJob}
       />
+      <CopilotPanel
+        open={copilotWizardOpen}
+        initialPrompt={"Run the benchmark-qed-setup skill end-to-end. Do not display the skill's contents in chat. Go straight into asking me the first question (one at a time) using the skill's ask_user / elicitation flow. Be brief — short prompts only."}
+        silentInitialPrompt
+        onFolderDetected={(folderPath) => {
+          // The agent typically asks for a root path; once we see one and it
+          // exists on disk, register it as a workspace so it shows up in the
+          // sidebar tree. Dedup against existing workspaces.
+          const alreadyAdded = workspaces.some(
+            (w) => w.rootPath === folderPath,
+          );
+          if (!alreadyAdded) {
+            void addLocalWorkspace(folderPath);
+          }
+        }}
+        onClose={() => setCopilotWizardOpen(false)}
+      />
       <RunConfigDialog
         open={runConfigDialogOpen}
         onClose={() => {
@@ -1149,6 +1285,12 @@ export default function App() {
         submitting={datasetSubmitting}
         onClose={() => setDatasetDialogWorkspaceId(null)}
         onSubmit={submitDatasetDownload}
+      />
+      <LoadDatasetDialog
+        open={loadDatasetDialogOpen}
+        submitting={loadDatasetSubmitting}
+        onClose={() => setLoadDatasetDialogOpen(false)}
+        onSubmit={submitLoadDataset}
       />
       <TreeCreateDialog
         open={createDialog.open}

@@ -883,6 +883,48 @@ body,
   font-size: 12px;
 }
 
+.info-banner {
+  background: var(--bg-2);
+  border-bottom: 1px solid var(--border);
+  padding: 10px 14px;
+  font-size: 13px;
+  color: var(--text);
+}
+
+.configure-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  border-left: 3px solid var(--accent, #2563eb);
+}
+
+.configure-banner-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+  flex: 1;
+}
+
+.configure-banner-text strong {
+  font-weight: 600;
+}
+
+.configure-banner-text code {
+  background: var(--bg-3, rgba(255, 255, 255, 0.06));
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-size: 12px;
+}
+
+.configure-banner-actions {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
 .empty-state {
   flex: 1;
   display: flex;
@@ -1721,4 +1763,50 @@ body,
 .activity-log-panel.collapsed .activity-log-header {
   writing-mode: horizontal-tb;
   padding: 8px 4px;
+}
+
+/* Copilot AI Wizard — inline cards inside the transcript so prompts feel
+   like part of the conversation instead of stacked modals. */
+.copilot-inline-card {
+  border: 1px solid var(--accent, #4a90e2);
+  background: var(--turn-asst-bg, rgba(74, 144, 226, 0.08));
+  border-radius: 8px;
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.copilot-inline-card-header {
+  font-size: 12px;
+  opacity: 0.85;
+}
+.copilot-inline-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.copilot-inline-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+  margin-top: 4px;
+}
+.copilot-choice-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.copilot-choice {
+  background: transparent;
+  border: 1px solid var(--border, rgba(127, 127, 127, 0.4));
+  border-radius: 16px;
+  padding: 4px 12px;
+  font-size: 13px;
+  cursor: pointer;
+  color: inherit;
+}
+.copilot-choice.active {
+  background: var(--accent, #4a90e2);
+  border-color: var(--accent, #4a90e2);
+  color: white;
 }

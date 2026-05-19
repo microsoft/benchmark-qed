@@ -521,6 +521,35 @@ async function pickFolderPath() {
   return selected.replace(/\/$/, "");
 }
 
+async function pickFilesPaths() {
+  if (process.platform !== "darwin") {
+    throw new Error("Native file picker is currently supported on macOS only.");
+  }
+
+  const { stdout } = await execFileAsync("osascript", [
+    "-e",
+    'set theFiles to choose file with prompt "Select dataset file(s) to import" with multiple selections allowed',
+    "-e",
+    'set out to ""',
+    "-e",
+    "repeat with f in theFiles",
+    "-e",
+    'set out to out & (POSIX path of f) & "\\n"',
+    "-e",
+    "end repeat",
+    "-e",
+    "return out",
+  ]);
+  const lines = stdout
+    .split("\n")
+    .map((s) => s.trim())
+    .filter(Boolean);
+  if (lines.length === 0) {
+    throw new Error("No files selected.");
+  }
+  return lines;
+}
+
 const server = createServer(async (req, res) => {
   if (!req.url || !req.method) {
     json(req, res, 400, { error: "Bad request" });
@@ -574,6 +603,23 @@ const server = createServer(async (req, res) => {
       json(req, res, 400, {
         error: message,
       });
+    }
+    return;
+  }
+
+  if (req.method === "GET" && pathname === "/api/pick-files") {
+    try {
+      const paths = await pickFilesPaths();
+      json(req, res, 200, { paths });
+    } catch (err) {
+      const message = err instanceof Error ? err.message : String(err);
+      if (
+        /User canceled|\(-128\)|execution error: User canceled/i.test(message)
+      ) {
+        json(req, res, 200, { cancelled: true });
+        return;
+      }
+      json(req, res, 400, { error: message });
     }
     return;
   }
@@ -649,6 +695,98 @@ const server = createServer(async (req, res) => {
         outputPath,
         command: result.command,
         output: result.output,
+      });
+    } catch (err) {
+      json(req, res, 400, {
+        error: err instanceof Error ? err.message : String(err),
+      });
+    }
+    return;
+  }
+
+  if (req.method === "POST" && pathname === "/api/datasets/import") {
+    try {
+      const body = await parseBody(req);
+      const destinationFolder = body.destinationFolder;
+      const sourcePaths = body.sourcePaths;
+      const flatten = body.flatten === true;
+      const subdir =
+        typeof body.subdir === "string" && body.subdir.trim().length > 0
+          ? body.subdir.trim()
+          : "input";
+
+      if (!destinationFolder || typeof destinationFolder !== "string") {
+        throw new Error("destinationFolder is required.");
+      }
+      if (!Array.isArray(sourcePaths) || sourcePaths.length === 0) {
+        throw new Error("sourcePaths must be a non-empty array.");
+      }
+      for (const p of sourcePaths) {
+        if (typeof p !== "string" || !path.isAbsolute(p)) {
+          throw new Error(`sourcePaths entries must be absolute paths. Got: ${p}`);
+        }
+      }
+
+      const destRoot = path.resolve(destinationFolder);
+      const { target: destInput } = resolveFsPath(destRoot, subdir);
+      await fsp.mkdir(destInput, { recursive: true });
+
+      // Expand sourcePaths: when flatten is true, replace any directory entry
+      // with its immediate children so they land directly under destInput.
+      const expanded = [];
+      for (const src of sourcePaths) {
+        if (flatten) {
+          try {
+            const stat = await fsp.stat(src);
+            if (stat.isDirectory()) {
+              const entries = await fsp.readdir(src);
+              for (const name of entries) {
+                expanded.push(path.join(src, name));
+              }
+              continue;
+            }
+          } catch {
+            // fall through; the copy loop will record the error
+          }
+        }
+        expanded.push(src);
+      }
+
+      const imported = [];
+      const skipped = [];
+      for (const src of expanded) {
+        try {
+          const stat = await fsp.stat(src);
+          const base = path.basename(src);
+          const target = path.join(destInput, base);
+          if (stat.isDirectory()) {
+            await fsp.cp(src, target, { recursive: true, force: true });
+          } else {
+            await fsp.copyFile(src, target);
+          }
+          imported.push({ source: src, target });
+        } catch (e) {
+          skipped.push({
+            source: src,
+            error: e instanceof Error ? e.message : String(e),
+          });
+        }
+      }
+
+      if (imported.length === 0) {
+        json(req, res, 400, {
+          error: "No files were imported.",
+          skipped,
+        });
+        return;
+      }
+
+      json(req, res, 200, {
+        ok: true,
+        destinationFolder: destRoot,
+        inputFolder: destInput,
+        imported,
+        skipped,
       });
     } catch (err) {
       json(req, res, 400, {
