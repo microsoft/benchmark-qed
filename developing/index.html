@@ -510,6 +510,57 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#running-with-blob-stored-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Running with Blob-Stored Configuration
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Running with Blob-Stored Configuration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#blob-uri-format" class="md-nav__link">
+    <span class="md-ellipsis">
+      Blob URI format
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#authentication-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      Authentication options
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#autoq-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      AutoQ example
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#autoe-examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      AutoE examples
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#diving-deeper" class="md-nav__link">
     <span class="md-ellipsis">
       Diving Deeper
@@ -977,6 +1028,57 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#running-with-blob-stored-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Running with Blob-Stored Configuration
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Running with Blob-Stored Configuration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#blob-uri-format" class="md-nav__link">
+    <span class="md-ellipsis">
+      Blob URI format
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#authentication-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      Authentication options
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#autoq-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      AutoQ example
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#autoe-examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      AutoE examples
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#diving-deeper" class="md-nav__link">
     <span class="md-ellipsis">
       Diving Deeper
@@ -1053,22 +1155,33 @@
 <p><strong>Initialize the configuration:</strong>
     <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>uv<span class="w"> </span>run<span class="w"> </span>benchmark-qed<span class="w"> </span>config<span class="w"> </span>init<span class="w"> </span>autoq<span class="w"> </span>.
 </code></pre></div>
-    This command creates two files in the <code>./autoq_test</code> directory:</p>
-<ul>
-<li><code>.env</code>: Stores environment variables for the AutoQ pipeline. Open this file and replace <code>&lt;API_KEY&gt;</code> with your OpenAI or Azure API key.</li>
-<li><code>settings.yaml</code>: Contains pipeline settings. Edit this file as needed for your use case.</li>
-</ul>
+    This is the local-filesystem variant.</p>
+<p>Alternative blob variant (choose this instead of the local command above; do not run both):
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>uv<span class="w"> </span>run<span class="w"> </span>benchmark-qed<span class="w"> </span>config<span class="w"> </span>init<span class="w"> </span>autoq<span class="w"> </span>.<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">    </span>--storage-type<span class="w"> </span>blob<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">    </span>--container-name<span class="w"> </span>my-container<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">    </span>--account-url<span class="w"> </span>https://&lt;account&gt;.blob.core.windows.net<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">    </span>--base-dir<span class="w"> </span>autoq_test
+</code></pre></div>
+This command creates two files in the <code>./autoq_test</code> directory:
+- <code>.env</code>: Stores environment variables for the AutoQ pipeline. Open this file and replace <code>&lt;API_KEY&gt;</code> with your OpenAI or Azure API key.
+- <code>settings.yaml</code>: Contains pipeline settings. Edit this file as needed for your use case.</p>
 <p>The generated <code>settings.yaml</code> includes commented-out sections for configuring Azure Blob Storage as input and output backends. Uncomment and fill in the <code>storage</code> section under <code>input</code> to read data from blob storage, or the <code>output_storage</code> section to write results to blob storage instead of the local filesystem.</p>
 </li>
 <li>
 <p><strong>Generate synthetic queries:</strong>
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>uv<span class="w"> </span>run<span class="w"> </span>benchmark-qed<span class="w"> </span>autoq<span class="w"> </span>settings.yaml<span class="w"> </span>output
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>uv<span class="w"> </span>run<span class="w"> </span>benchmark-qed<span class="w"> </span>autoq<span class="w"> </span>settings.yaml<span class="w"> </span>output
 </code></pre></div>
-    This will process your input data and save the generated queries in the <code>output</code> directory.</p>
+    This is the local-filesystem variant.</p>
+<p>Alternative blob-stored config variant (choose this instead of the local command above; do not run both):</p>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>uv<span class="w"> </span>run<span class="w"> </span>benchmark-qed<span class="w"> </span>autoq<span class="w"> </span>blob://my-container/autoq_test/settings.yaml<span class="w"> </span>output<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">    </span>--account-url<span class="w"> </span>https://&lt;account&gt;.blob.core.windows.net
+</code></pre></div>
+This will process your input data and save the generated queries in the <code>output</code> directory.</p>
 <p>By default, AutoQ also generates <strong>assertions</strong> for data-driven queries. Assertions are testable factual statements that can be used to evaluate answer accuracy. You can configure assertion generation in <code>settings.yaml</code>:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nt">assertions</span><span class="p">:</span>
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">  </span><span class="nt">max_assertions</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">20</span><span class="w">  </span><span class="c1"># Set to 0 to disable, or null for unlimited</span>
-<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">  </span><span class="nt">enable_validation</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w">  </span><span class="c1"># Enable to filter low-quality assertions (can be slow)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nt">assertions</span><span class="p">:</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">  </span><span class="nt">max_assertions</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">20</span><span class="w">  </span><span class="c1"># Set to 0 to disable, or null for unlimited</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">  </span><span class="nt">enable_validation</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w">  </span><span class="c1"># Enable to filter low-quality assertions (can be slow)</span>
 </code></pre></div></p>
 </li>
 </ol>
@@ -1077,35 +1190,46 @@
 <ol>
 <li>
 <p><strong>Set up your project directory:</strong>
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>mkdir<span class="w"> </span>-p<span class="w"> </span>./local/pairwise_test
-<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="nb">cd</span><span class="w"> </span>./local/pairwise_test
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>mkdir<span class="w"> </span>-p<span class="w"> </span>./local/pairwise_test
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="nb">cd</span><span class="w"> </span>./local/pairwise_test
 </code></pre></div></p>
 </li>
 <li>
 <p><strong>Create an <code>input</code> folder and add your question-answer data:</strong>
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>mkdir<span class="w"> </span>./input
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>mkdir<span class="w"> </span>./input
 </code></pre></div>
     Copy your RAG answer files into the <code>./input</code> directory. To get started, you can use the example RAG answers available in the <a href="https://github.com/microsoft/benchmark-qed/tree/main/docs/notebooks/example_answers">example data folder</a>. To download this example dataset directly into your <code>input</code> folder, run:
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>uv<span class="w"> </span>run<span class="w"> </span>benchmark-qed<span class="w"> </span>data<span class="w"> </span>download<span class="w"> </span>example_answers<span class="w"> </span>input
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>uv<span class="w"> </span>run<span class="w"> </span>benchmark-qed<span class="w"> </span>data<span class="w"> </span>download<span class="w"> </span>example_answers<span class="w"> </span>input
 </code></pre></div>
     You can also download directly to Azure Blob Storage. See the <a href="../datasets/">Datasets documentation</a> for storage options.</p>
 </li>
 <li>
 <p><strong>Create a configuration file for pairwise comparison:</strong>
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>uv<span class="w"> </span>run<span class="w"> </span>benchmark-qed<span class="w"> </span>config<span class="w"> </span>init<span class="w"> </span>autoe_pairwise<span class="w"> </span>.
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>uv<span class="w"> </span>run<span class="w"> </span>benchmark-qed<span class="w"> </span>config<span class="w"> </span>init<span class="w"> </span>autoe_pairwise<span class="w"> </span>.
 </code></pre></div>
-    This command creates two files in the <code>./pairwise_test</code> directory:</p>
-<ul>
-<li><code>.env</code>: Contains environment variables for the pairwise comparison tests. Open this file and replace <code>&lt;API_KEY&gt;</code> with your OpenAI or Azure API key.</li>
-<li><code>settings.yaml</code>: Contains pipeline settings, which you can modify as needed.</li>
-</ul>
+    This is the local-filesystem variant.</p>
+<p>Alternative blob variant (choose this instead of the local command above; do not run both):
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>uv<span class="w"> </span>run<span class="w"> </span>benchmark-qed<span class="w"> </span>config<span class="w"> </span>init<span class="w"> </span>autoe_pairwise<span class="w"> </span>.<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="w">    </span>--storage-type<span class="w"> </span>blob<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="w">    </span>--container-name<span class="w"> </span>my-container<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="w">    </span>--account-url<span class="w"> </span>https://&lt;account&gt;.blob.core.windows.net<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="w">    </span>--base-dir<span class="w"> </span>pairwise_test
+</code></pre></div>
+This command creates two files in the <code>./pairwise_test</code> directory:
+- <code>.env</code>: Contains environment variables for the pairwise comparison tests. Open this file and replace <code>&lt;API_KEY&gt;</code> with your OpenAI or Azure API key.
+- <code>settings.yaml</code>: Contains pipeline settings, which you can modify as needed.</p>
 <p>The generated <code>settings.yaml</code> includes commented-out <code>input_storage</code> and <code>output_storage</code> sections for configuring Azure Blob Storage backends.</p>
 </li>
 <li>
 <p><strong>Run the pairwise comparison:</strong>
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>uv<span class="w"> </span>run<span class="w"> </span>benchmark-qed<span class="w"> </span>autoe<span class="w"> </span>pairwise-scores<span class="w"> </span>settings.yaml<span class="w"> </span>output
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>uv<span class="w"> </span>run<span class="w"> </span>benchmark-qed<span class="w"> </span>autoe<span class="w"> </span>pairwise-scores<span class="w"> </span>settings.yaml<span class="w"> </span>output
 </code></pre></div>
-    The results will be saved in the <code>output</code> directory.</p>
+    This is the local-filesystem variant.</p>
+<p>Alternative blob-stored config variant (choose this instead of the local command above; do not run both):
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>uv<span class="w"> </span>run<span class="w"> </span>benchmark-qed<span class="w"> </span>autoe<span class="w"> </span>pairwise-scores<span class="w"> </span>blob://my-container/pairwise_test/settings.yaml<span class="w"> </span>output<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="w">    </span>--account-url<span class="w"> </span>https://&lt;account&gt;.blob.core.windows.net
+</code></pre></div>
+The results will be saved in the <code>output</code> directory.</p>
 </li>
 </ol>
 <h2 id="scoring-rag-answers-against-reference-answers">Scoring RAG answers against reference answers</h2>
@@ -1113,39 +1237,85 @@
 <ol>
 <li>
 <p><strong>Set up your project directory:</strong>
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>mkdir<span class="w"> </span>-p<span class="w"> </span>./local/reference_test
-<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="nb">cd</span><span class="w"> </span>./local/reference_test
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>mkdir<span class="w"> </span>-p<span class="w"> </span>./local/reference_test
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="nb">cd</span><span class="w"> </span>./local/reference_test
 </code></pre></div></p>
 </li>
 <li>
 <p><strong>Create an <code>input</code> folder and add your data:</strong>
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>mkdir<span class="w"> </span>./input
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>mkdir<span class="w"> </span>./input
 </code></pre></div>
     Copy your RAG answers and reference answers into the <code>input</code> directory. To get started, you can use the example RAG answers available in the <a href="https://github.com/microsoft/benchmark-qed/tree/main/docs/notebooks/example_answers">example data folder</a>. To download this example dataset directly into your <code>input</code> folder, run:
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>uv<span class="w"> </span>run<span class="w"> </span>benchmark-qed<span class="w"> </span>data<span class="w"> </span>download<span class="w"> </span>example_answers<span class="w"> </span>input
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>uv<span class="w"> </span>run<span class="w"> </span>benchmark-qed<span class="w"> </span>data<span class="w"> </span>download<span class="w"> </span>example_answers<span class="w"> </span>input
 </code></pre></div>
     You can also download directly to Azure Blob Storage. See the <a href="../datasets/">Datasets documentation</a> for storage options.</p>
 </li>
 <li>
 <p><strong>Create a configuration file for reference scoring:</strong>
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>uv<span class="w"> </span>run<span class="w"> </span>benchmark-qed<span class="w"> </span>config<span class="w"> </span>init<span class="w"> </span>autoe_reference<span class="w"> </span>.
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>uv<span class="w"> </span>run<span class="w"> </span>benchmark-qed<span class="w"> </span>config<span class="w"> </span>init<span class="w"> </span>autoe_reference<span class="w"> </span>.
 </code></pre></div>
-    This creates two files in the <code>./reference_test</code> directory:</p>
-<ul>
-<li><code>.env</code>: Contains environment variables for the reference scoring pipeline. Open this file and replace <code>&lt;API_KEY&gt;</code> with your OpenAI or Azure API key.</li>
-<li><code>settings.yaml</code>: Contains pipeline settings, which you can modify as needed.</li>
-</ul>
+    This is the local-filesystem variant.</p>
+<p>Alternative blob variant (choose this instead of the local command above; do not run both):
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>uv<span class="w"> </span>run<span class="w"> </span>benchmark-qed<span class="w"> </span>config<span class="w"> </span>init<span class="w"> </span>autoe_reference<span class="w"> </span>.<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a><span class="w">    </span>--storage-type<span class="w"> </span>blob<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a><span class="w">    </span>--container-name<span class="w"> </span>my-container<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a><span class="w">    </span>--account-url<span class="w"> </span>https://&lt;account&gt;.blob.core.windows.net<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-20-5" name="__codelineno-20-5" href="#__codelineno-20-5"></a><span class="w">    </span>--base-dir<span class="w"> </span>reference_test
+</code></pre></div>
+This creates two files in the <code>./reference_test</code> directory:
+- <code>.env</code>: Contains environment variables for the reference scoring pipeline. Open this file and replace <code>&lt;API_KEY&gt;</code> with your OpenAI or Azure API key.
+- <code>settings.yaml</code>: Contains pipeline settings, which you can modify as needed.</p>
 <p>The generated <code>settings.yaml</code> includes commented-out <code>input_storage</code> and <code>output_storage</code> sections for configuring Azure Blob Storage backends.</p>
 </li>
 <li>
 <p><strong>Run the reference scoring:</strong>
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>uv<span class="w"> </span>run<span class="w"> </span>benchmark-qed<span class="w"> </span>autoe<span class="w"> </span>reference-scores<span class="w"> </span>settings.yaml<span class="w"> </span>output
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>uv<span class="w"> </span>run<span class="w"> </span>benchmark-qed<span class="w"> </span>autoe<span class="w"> </span>reference-scores<span class="w"> </span>settings.yaml<span class="w"> </span>output
 </code></pre></div>
-    The results will be saved in the <code>output</code> directory.</p>
+    This is the local-filesystem variant.</p>
+<p>Alternative blob-stored config variant (choose this instead of the local command above; do not run both):
+<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>uv<span class="w"> </span>run<span class="w"> </span>benchmark-qed<span class="w"> </span>autoe<span class="w"> </span>reference-scores<span class="w"> </span>blob://my-container/reference_test/settings.yaml<span class="w"> </span>output<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a><span class="w">    </span>--account-url<span class="w"> </span>https://&lt;account&gt;.blob.core.windows.net
+</code></pre></div>
+The results will be saved in the <code>output</code> directory.</p>
 </li>
 </ol>
 <p>For detailed instructions on configuring and running AutoE subcommands, please refer to the <a href="../cli/autoe/">AutoE CLI Documentation</a>.</p>
 <p>To learn how to use AutoE programmatically, please see the <a href="../notebooks/autoe/">AutoE Notebook Example</a>.</p>
+<h2 id="running-with-blob-stored-configuration">Running with Blob-Stored Configuration</h2>
+<p>If your <code>settings.yaml</code> is stored in Azure Blob Storage, pass a <code>blob://</code> URI as the config path instead of a local file path.</p>
+<h3 id="blob-uri-format">Blob URI format</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>blob://&lt;container-name&gt;/&lt;optional-base-dir&gt;/settings.yaml
+</code></pre></div>
+<p>If you initialized config with <code>--base-dir</code>, include that same prefix in the URI.</p>
+<h3 id="authentication-options">Authentication options</h3>
+<p>For commands that read config from <code>blob://</code>, pass one of:</p>
+<ul>
+<li><code>--account-url https://&lt;account&gt;.blob.core.windows.net</code> (managed identity)</li>
+<li><code>--connection-string "$AZURE_STORAGE_CONNECTION_STRING"</code></li>
+</ul>
+<p>If neither flag is provided, auth falls back to environment variables:</p>
+<ul>
+<li><code>AZURE_STORAGE_ACCOUNT_URL</code></li>
+<li><code>AZURE_STORAGE_CONNECTION_STRING</code></li>
+</ul>
+<h3 id="autoq-example">AutoQ example</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>uv<span class="w"> </span>run<span class="w"> </span>benchmark-qed<span class="w"> </span>autoq<span class="w"> </span>blob://my-container/autoq_test/settings.yaml<span class="w"> </span>output<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a><span class="w">    </span>--account-url<span class="w"> </span>https://&lt;account&gt;.blob.core.windows.net
+</code></pre></div>
+<h3 id="autoe-examples">AutoE examples</h3>
+<p>Pairwise:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>uv<span class="w"> </span>run<span class="w"> </span>benchmark-qed<span class="w"> </span>autoe<span class="w"> </span>pairwise-scores<span class="w"> </span>blob://my-container/pairwise_test/settings.yaml<span class="w"> </span>output<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a><span class="w">    </span>--account-url<span class="w"> </span>https://&lt;account&gt;.blob.core.windows.net
+</code></pre></div>
+<p>Reference:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a>uv<span class="w"> </span>run<span class="w"> </span>benchmark-qed<span class="w"> </span>autoe<span class="w"> </span>reference-scores<span class="w"> </span>blob://my-container/reference_test/settings.yaml<span class="w"> </span>output<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a><span class="w">    </span>--account-url<span class="w"> </span>https://&lt;account&gt;.blob.core.windows.net
+</code></pre></div>
+<p>Assertion:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>uv<span class="w"> </span>run<span class="w"> </span>benchmark-qed<span class="w"> </span>autoe<span class="w"> </span>assertion-scores<span class="w"> </span>blob://my-container/assertion_test/settings.yaml<span class="w"> </span>output<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a><span class="w">    </span>--account-url<span class="w"> </span>https://&lt;account&gt;.blob.core.windows.net
+</code></pre></div>
+<p>When a blob config is loaded, the CLI downloads <code>settings.yaml</code> and sibling files (such as <code>.env</code> and <code>prompts/</code>) under the same prefix into a temporary local directory before execution.</p>
 <h2 id="diving-deeper">Diving Deeper</h2>
 <p>To explore the query synthesis workflow in detail, please see the <a href="../cli/autoq/">AutoQ CLI Documentation</a> for command-line usage and the <a href="../notebooks/autoq/">AutoQ Notebook Example</a> for a step-by-step programmatic guide.</p>
 <p>For a deeper understanding of AutoE evaluation pipelines, please refer to the <a href="../cli/autoe/">AutoE CLI Documentation</a> for available commands and the <a href="../notebooks/autoe/">AutoE Notebook Example</a> for hands-on examples.</p>

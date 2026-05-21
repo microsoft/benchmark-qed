@@ -965,22 +965,17 @@
 <ul>
 <li>
 <p><strong>Using managed identity:</strong>
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>benchmark-qed<span class="w"> </span>data<span class="w"> </span>download<span class="w"> </span>AP_news<span class="w"> </span>input<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span>--storage-type<span class="w"> </span>blob<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">  </span>--container-name<span class="w"> </span>my-datasets<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">  </span>--account-url<span class="w"> </span>https://&lt;account&gt;.blob.core.windows.net
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="w">    </span>benchmark-qed<span class="w"> </span>data<span class="w"> </span>download<span class="w"> </span>AP_news<span class="w"> </span>input<span class="w"> </span>--storage-type<span class="w"> </span>blob<span class="w"> </span>--container-name<span class="w"> </span>my-datasets<span class="w"> </span>--account-url<span class="w"> </span>https://&lt;account&gt;.blob.core.windows.net<span class="w"> </span>--base-dir<span class="w"> </span>benchmark-qed
 </code></pre></div></p>
 </li>
 <li>
 <p><strong>Using a connection string:</strong>
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>benchmark-qed<span class="w"> </span>data<span class="w"> </span>download<span class="w"> </span>AP_news<span class="w"> </span>input<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span>--storage-type<span class="w"> </span>blob<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">  </span>--container-name<span class="w"> </span>my-datasets<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">  </span>--connection-string<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$AZURE_STORAGE_CONNECTION_STRING</span><span class="s2">&quot;</span>
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="w">    </span>benchmark-qed<span class="w"> </span>data<span class="w"> </span>download<span class="w"> </span>AP_news<span class="w"> </span>input<span class="w"> </span>--storage-type<span class="w"> </span>blob<span class="w"> </span>--container-name<span class="w"> </span>my-datasets<span class="w"> </span>--connection-string<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$AZURE_STORAGE_CONNECTION_STRING</span><span class="s2">&quot;</span><span class="w"> </span>--base-dir<span class="w"> </span>benchmark-qed
 </code></pre></div></p>
 </li>
 </ul>
-<p>The <code>OUTPUT_DIR</code> argument (e.g., <code>input</code>) becomes the prefix path within the blob container. The dataset zip is downloaded from GitHub, extracted in memory, and each file is uploaded directly to the storage backend.</p>
+<p>When <code>--base-dir</code> is provided, files are written under <code>{base_dir}/{OUTPUT_DIR}/...</code>. If omitted, files are written under <code>{OUTPUT_DIR}/...</code>.</p>
+<p>The dataset zip is downloaded from GitHub, extracted in memory, and each file is uploaded directly to the storage backend.</p>
 <h2 id="storage-options-reference">Storage Options Reference</h2>
 <p>!!! note "Supported cloud backends"
     Only <strong>Azure Blob Storage</strong> (<code>--storage-type blob</code>) is currently supported.
@@ -1008,6 +1003,10 @@
 <tr>
 <td><code>--connection-string</code></td>
 <td>The storage connection string (alternative to <code>--account-url</code>).</td>
+</tr>
+<tr>
+<td><code>--base-dir</code></td>
+<td>Base prefix path in the blob container. Files are stored under <code>{base_dir}/{OUTPUT_DIR}/</code> when provided.</td>
 </tr>
 </tbody>
 </table>

@@ -2804,7 +2804,7 @@
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>benchmark-qed<span class="w"> </span>config<span class="w"> </span>init<span class="w"> </span>autoe_pairwise<span class="w"> </span>./local/pairwise_test
 </code></pre></div>
 <p>To create a template with active Azure Blob Storage configuration:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>benchmark-qed<span class="w"> </span>config<span class="w"> </span>init<span class="w"> </span>autoe_pairwise<span class="w"> </span>./local/pairwise_test<span class="w"> </span>--storage-type<span class="w"> </span>blob
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>benchmark-qed<span class="w"> </span>config<span class="w"> </span>init<span class="w"> </span>autoe_pairwise<span class="w"> </span>./local/pairwise_test<span class="w"> </span>--storage-type<span class="w"> </span>blob<span class="w"> </span>--base-dir<span class="w"> </span>pairwise_test
 </code></pre></div>
 <p>To perform pairwise scoring with your configuration file, use:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>benchmark-qed<span class="w"> </span>autoe<span class="w"> </span>pairwise-scores<span class="w"> </span>./local/pairwise_test/settings.yaml<span class="w"> </span>./local/pairwise_test/output
@@ -2817,7 +2817,7 @@
 <p>For information about the <code>config init</code> command, refer to: <a href="../config_init/">Config Init CLI</a></p>
 <hr />
 <h3 id="storage-configuration">Storage Configuration</h3>
-<p>AutoE supports reading input answers from and writing output scores to Azure Blob Storage. When using <code>--storage-type blob</code> during <code>config init</code>, the generated settings file includes active storage sections.</p>
+<p>AutoE supports reading input answers from and writing output scores to Azure Blob Storage. When using <code>--storage-type blob</code> during <code>config init</code> (optionally with <code>--base-dir</code>), the generated settings file includes active storage sections.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1">## Storage Configuration</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="nt">input_storage</span><span class="p">:</span>
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">blob</span>
@@ -3001,7 +3001,7 @@
 <div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>benchmark-qed<span class="w"> </span>config<span class="w"> </span>init<span class="w"> </span>autoe_reference<span class="w"> </span>./local/reference_test
 </code></pre></div>
 <p>To create a template with active Azure Blob Storage configuration:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>benchmark-qed<span class="w"> </span>config<span class="w"> </span>init<span class="w"> </span>autoe_reference<span class="w"> </span>./local/reference_test<span class="w"> </span>--storage-type<span class="w"> </span>blob
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>benchmark-qed<span class="w"> </span>config<span class="w"> </span>init<span class="w"> </span>autoe_reference<span class="w"> </span>./local/reference_test<span class="w"> </span>--storage-type<span class="w"> </span>blob<span class="w"> </span>--base-dir<span class="w"> </span>reference_test
 </code></pre></div>
 <p>To perform reference-based scoring with your configuration file, run:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>benchmark-qed<span class="w"> </span>autoe<span class="w"> </span>reference-scores<span class="w"> </span>./local/reference_test/settings.yaml<span class="w"> </span>./local/reference_test/output
@@ -3171,7 +3171,7 @@
 <div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>benchmark-qed<span class="w"> </span>config<span class="w"> </span>init<span class="w"> </span>autoe_assertion<span class="w"> </span>./local/assertion_test
 </code></pre></div>
 <p>To create a template with active Azure Blob Storage configuration:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>benchmark-qed<span class="w"> </span>config<span class="w"> </span>init<span class="w"> </span>autoe_assertion<span class="w"> </span>./local/assertion_test<span class="w"> </span>--storage-type<span class="w"> </span>blob
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>benchmark-qed<span class="w"> </span>config<span class="w"> </span>init<span class="w"> </span>autoe_assertion<span class="w"> </span>./local/assertion_test<span class="w"> </span>--storage-type<span class="w"> </span>blob<span class="w"> </span>--base-dir<span class="w"> </span>assertion_test
 </code></pre></div>
 <p>For information about the <code>config init</code> command, refer to: <a href="../config_init/">Config Init CLI</a></p>
 <hr />

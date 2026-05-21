@@ -1276,7 +1276,7 @@
 <p>!!! note "Supported cloud backends"
     Only <strong>Azure Blob Storage</strong> (<code>--storage-type blob</code>) is currently supported.
     Azure Cosmos DB and other backends are <strong>not supported</strong>.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>benchmark-qed<span class="w"> </span>config<span class="w"> </span>init<span class="w"> </span>autoq<span class="w"> </span>./my_project<span class="w"> </span>--storage-type<span class="w"> </span>blob
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>benchmark-qed<span class="w"> </span>config<span class="w"> </span>init<span class="w"> </span>autoq<span class="w"> </span>./my_project<span class="w"> </span>--storage-type<span class="w"> </span>blob<span class="w"> </span>--base-dir<span class="w"> </span>experiments/run1
 </code></pre></div>
 <p>This creates <code>./my_project/settings.yaml</code> with <strong>active</strong> (uncommented) blob storage sections for both input and output. You then fill in your container name and credentials.</p>
 <p>You can also pre-fill your storage credentials directly. When credentials (<code>--account-url</code> or <code>--connection-string</code>) are supplied, the generated <code>settings.yaml</code>, <code>.env</code>, and <code>prompts/</code> are uploaded <strong>directly to your blob container</strong> — no local files are created:</p>
@@ -1290,7 +1290,8 @@
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>benchmark-qed<span class="w"> </span>config<span class="w"> </span>init<span class="w"> </span>autoq<span class="w"> </span>./my_project<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span>--storage-type<span class="w"> </span>blob<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">  </span>--container-name<span class="w"> </span>my-datasets<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">  </span>--connection-string<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$AZURE_STORAGE_CONNECTION_STRING</span><span class="s2">&quot;</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">  </span>--connection-string<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$AZURE_STORAGE_CONNECTION_STRING</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">  </span>--base-dir<span class="w"> </span>experiments/run1
 </code></pre></div>
 <blockquote>
 <p><strong>Note:</strong> When <code>--storage-type blob</code> is used <strong>without</strong> <code>--account-url</code> or <code>--connection-string</code>, files are written locally with active blob sections in <code>settings.yaml</code> for you to fill in manually.</p>
@@ -1300,16 +1301,16 @@
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>benchmark-qed<span class="w"> </span>config<span class="w"> </span>init<span class="w"> </span>autoq<span class="w"> </span>./autoq_project
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>
 <a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="c1"># Generate AutoQ config with active blob storage scaffolding</span>
-<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>benchmark-qed<span class="w"> </span>config<span class="w"> </span>init<span class="w"> </span>autoq<span class="w"> </span>./autoq_project<span class="w"> </span>-s<span class="w"> </span>blob
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>benchmark-qed<span class="w"> </span>config<span class="w"> </span>init<span class="w"> </span>autoq<span class="w"> </span>./autoq_project<span class="w"> </span>-s<span class="w"> </span>blob<span class="w"> </span>--base-dir<span class="w"> </span>experiments/run1
 <a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>
 <a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="c1"># Generate AutoE pairwise config with blob storage</span>
-<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>benchmark-qed<span class="w"> </span>config<span class="w"> </span>init<span class="w"> </span>autoe_pairwise<span class="w"> </span>./pairwise_project<span class="w"> </span>--storage-type<span class="w"> </span>blob
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>benchmark-qed<span class="w"> </span>config<span class="w"> </span>init<span class="w"> </span>autoe_pairwise<span class="w"> </span>./pairwise_project<span class="w"> </span>--storage-type<span class="w"> </span>blob<span class="w"> </span>--base-dir<span class="w"> </span>experiments/run1
 <a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>
 <a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="c1"># Generate AutoE reference config with blob storage</span>
-<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>benchmark-qed<span class="w"> </span>config<span class="w"> </span>init<span class="w"> </span>autoe_reference<span class="w"> </span>./reference_project<span class="w"> </span>-s<span class="w"> </span>blob
+<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>benchmark-qed<span class="w"> </span>config<span class="w"> </span>init<span class="w"> </span>autoe_reference<span class="w"> </span>./reference_project<span class="w"> </span>-s<span class="w"> </span>blob<span class="w"> </span>--base-dir<span class="w"> </span>experiments/run1
 <a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>
 <a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a><span class="c1"># Generate AutoE assertion config with blob storage</span>
-<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a>benchmark-qed<span class="w"> </span>config<span class="w"> </span>init<span class="w"> </span>autoe_assertion<span class="w"> </span>./assertion_project<span class="w"> </span>-s<span class="w"> </span>blob
+<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a>benchmark-qed<span class="w"> </span>config<span class="w"> </span>init<span class="w"> </span>autoe_assertion<span class="w"> </span>./assertion_project<span class="w"> </span>-s<span class="w"> </span>blob<span class="w"> </span>--base-dir<span class="w"> </span>experiments/run1
 </code></pre></div>
 <h4 id="generated-files">Generated Files</h4>
 <p>The command creates the following structure in the <code>root</code> directory (when writing locally):</p>

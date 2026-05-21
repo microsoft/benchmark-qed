@@ -1934,7 +1934,7 @@
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>benchmark-qed<span class="w"> </span>config<span class="w"> </span>init<span class="w"> </span>autoq<span class="w"> </span>./local/autoq_test
 </code></pre></div>
 <p>To create a template with active Azure Blob Storage configuration:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>benchmark-qed<span class="w"> </span>config<span class="w"> </span>init<span class="w"> </span>autoq<span class="w"> </span>./local/autoq_test<span class="w"> </span>--storage-type<span class="w"> </span>blob
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>benchmark-qed<span class="w"> </span>config<span class="w"> </span>init<span class="w"> </span>autoq<span class="w"> </span>./local/autoq_test<span class="w"> </span>--storage-type<span class="w"> </span>blob<span class="w"> </span>--base-dir<span class="w"> </span>autoq_test
 </code></pre></div>
 <p>To generate synthetic queries using your configuration file, run:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>benchmark-qed<span class="w"> </span>autoq<span class="w"> </span>./local/autoq_test/settings.yaml<span class="w"> </span>./local/autoq_test/output
@@ -1950,7 +1950,7 @@
 <p>For more information about the <code>config init</code> command, see: <a href="../config_init/">Config Init CLI</a></p>
 <hr />
 <h3 id="storage-configuration">Storage Configuration</h3>
-<p>AutoQ supports reading input data from and writing output to Azure Blob Storage. When using <code>--storage-type blob</code> during <code>config init</code>, the generated settings file includes active storage sections.</p>
+<p>AutoQ supports reading input data from and writing output to Azure Blob Storage. When using <code>--storage-type blob</code> during <code>config init</code> (optionally with <code>--base-dir</code>), the generated settings file includes active storage sections.</p>
 <h4 id="input-storage">Input Storage</h4>
 <p>Configured under the <code>input:</code> section in <code>settings.yaml</code>:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nt">input</span><span class="p">:</span>

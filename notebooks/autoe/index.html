@@ -1720,10 +1720,10 @@ print_df(
 </clipboard-copy>
 </div>
 <div class="highlight-ipynb hl-python"><pre><span></span><span class="n">rich_print</span><span class="p">(</span><span class="s2">"Model usage statistics:"</span><span class="p">)</span>
-<span class="n">rich_print</span><span class="p">(</span><span class="n">llm_client</span><span class="o">.</span><span class="n">get_usage</span><span class="p">())</span>
+<span class="n">rich_print</span><span class="p">(</span><span class="n">llm_client</span><span class="o">.</span><span class="n">metrics_store</span><span class="o">.</span><span class="n">get_metrics</span><span class="p">())</span>
 </pre></div>
 <div class="clipboard-copy-txt" id="cell-7">rich_print("Model usage statistics:")
-rich_print(llm_client.get_usage())</div>
+rich_print(llm_client.metrics_store.get_metrics())</div>
 </div>
 </div>
 </div>
@@ -1861,6 +1861,7 @@ criteria = reference_scores_criteria()</div>
 <div class="highlight-ipynb hl-python"><pre><span></span><span class="c1"># run comparisons for each question set and each pair of [generated, reference].</span>
 <span class="n">all_results</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="n">all_summaries</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">question_set</span> <span class="o">=</span> <span class="s2">""</span>
 <span class="k">for</span> <span class="n">question_set</span> <span class="ow">in</span> <span class="n">question_sets</span><span class="p">:</span>
     <span class="k">for</span> <span class="n">generated</span> <span class="ow">in</span> <span class="n">generated_rags</span><span class="p">:</span>
         <span class="n">rich_print</span><span class="p">(</span>
@@ -1914,6 +1915,7 @@ criteria = reference_scores_criteria()</div>
 <div class="clipboard-copy-txt" id="cell-10"># run comparisons for each question set and each pair of [generated, reference].
 all_results = []
 all_summaries = []
+question_set = ""
 for question_set in question_sets:
     for generated in generated_rags:
         rich_print(
@@ -2107,7 +2109,7 @@ if not output_dir.exists():
     <span class="n">top_k_assertions</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  <span class="c1"># Use all assertions</span>
     <span class="n">pass_threshold</span><span class="o">=</span><span class="n">pass_threshold</span><span class="p">,</span>
     <span class="c1"># Assertions are in input_dir (not in RAG subdirs)</span>
-    <span class="n">assertions_filename_template</span><span class="o">=</span><span class="s2">"</span><span class="si">{question_set}</span><span class="s2">_assertions.json"</span><span class="p">,</span>  <span class="c1"># noqa: RUF027</span>
+    <span class="n">assertions_filename_template</span><span class="o">=</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">question_set</span><span class="si">}</span><span class="s2">_assertions.json"</span><span class="p">,</span>
     <span class="c1"># Answers are in RAG subdirs with question_set name</span>
     <span class="n">answers_path_template</span><span class="o">=</span><span class="s2">"</span><span class="si">{input_dir}</span><span class="s2">/</span><span class="si">{generated_rag}</span><span class="s2">/</span><span class="si">{question_set}</span><span class="s2">_answers.json"</span><span class="p">,</span>
     <span class="n">run_significance_test</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>  <span class="c1"># Run Friedman/Wilcoxon tests</span>
@@ -2133,7 +2135,7 @@ results_df = run_assertion_evaluation(
     top_k_assertions=None,  # Use all assertions
     pass_threshold=pass_threshold,
     # Assertions are in input_dir (not in RAG subdirs)
-    assertions_filename_template="{question_set}_assertions.json",  # noqa: RUF027
+    assertions_filename_template=f"{question_set}_assertions.json",
     # Answers are in RAG subdirs with question_set name
     answers_path_template="{input_dir}/{generated_rag}/{question_set}_answers.json",
     run_significance_test=True,  # Run Friedman/Wilcoxon tests
@@ -2169,10 +2171,10 @@ print_df(results_df, "Assertion Scoring Results Summary")</div>
 </clipboard-copy>
 </div>
 <div class="highlight-ipynb hl-python"><pre><span></span><span class="n">rich_print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Model usage statistics:"</span><span class="p">)</span>
-<span class="n">rich_print</span><span class="p">(</span><span class="n">llm_client</span><span class="o">.</span><span class="n">get_usage</span><span class="p">())</span>
+<span class="n">rich_print</span><span class="p">(</span><span class="n">llm_client</span><span class="o">.</span><span class="n">metrics_store</span><span class="o">.</span><span class="n">get_metrics</span><span class="p">())</span>
 </pre></div>
 <div class="clipboard-copy-txt" id="cell-14">rich_print("\nModel usage statistics:")
-rich_print(llm_client.get_usage())</div>
+rich_print(llm_client.metrics_store.get_metrics())</div>
 </div>
 </div>
 </div>
