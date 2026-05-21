@@ -38,7 +38,7 @@ This creates `./my_project/settings.yaml` with blob storage sections **commented
     Azure Cosmos DB and other backends are **not supported**.
 
 ```bash
-benchmark-qed config init autoq ./my_project --storage-type blob
+benchmark-qed config init autoq ./my_project --storage-type blob --base-dir experiments/run1
 ```
 
 This creates `./my_project/settings.yaml` with **active** (uncommented) blob storage sections for both input and output. You then fill in your container name and credentials.
@@ -59,7 +59,8 @@ Or using a connection string:
 benchmark-qed config init autoq ./my_project \
   --storage-type blob \
   --container-name my-datasets \
-  --connection-string "$AZURE_STORAGE_CONNECTION_STRING"
+  --connection-string "$AZURE_STORAGE_CONNECTION_STRING" \
+  --base-dir experiments/run1
 ```
 
 > **Note:** When `--storage-type blob` is used **without** `--account-url` or `--connection-string`, files are written locally with active blob sections in `settings.yaml` for you to fill in manually.
@@ -71,16 +72,16 @@ benchmark-qed config init autoq ./my_project \
 benchmark-qed config init autoq ./autoq_project
 
 # Generate AutoQ config with active blob storage scaffolding
-benchmark-qed config init autoq ./autoq_project -s blob
+benchmark-qed config init autoq ./autoq_project -s blob --base-dir experiments/run1
 
 # Generate AutoE pairwise config with blob storage
-benchmark-qed config init autoe_pairwise ./pairwise_project --storage-type blob
+benchmark-qed config init autoe_pairwise ./pairwise_project --storage-type blob --base-dir experiments/run1
 
 # Generate AutoE reference config with blob storage
-benchmark-qed config init autoe_reference ./reference_project -s blob
+benchmark-qed config init autoe_reference ./reference_project -s blob --base-dir experiments/run1
 
 # Generate AutoE assertion config with blob storage
-benchmark-qed config init autoe_assertion ./assertion_project -s blob
+benchmark-qed config init autoe_assertion ./assertion_project -s blob --base-dir experiments/run1
 ```
 
 #### Generated Files

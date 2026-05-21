@@ -6,9 +6,10 @@ from abc import ABC, abstractmethod
 from dataclasses import dataclass
 from typing import Any
 
+from graphrag_llm.completion import LLMCompletion
+
 from benchmark_qed.autoq.data_model.question import Question
 from benchmark_qed.autoq.sampler.question_sampler import QuestionSampler
-from benchmark_qed.llm.type.base import ChatModel
 
 
 @dataclass
@@ -27,7 +28,7 @@ class BaseQuestionGen(ABC):
 
     def __init__(
         self,
-        llm: ChatModel,
+        llm: LLMCompletion,
         llm_params: dict[str, Any] | None = None,
         question_sampler: QuestionSampler | None = None,
     ) -> None:

@@ -13,6 +13,7 @@ from uuid import uuid4
 
 import numpy as np
 import pandas as pd
+from graphrag_llm.completion import LLMCompletion
 from graphrag_storage import Storage
 from rich import print as rich_print
 from rich.progress import Progress, TaskID
@@ -22,15 +23,14 @@ from benchmark_qed.autoe.prompts import assertion as assertion_prompts
 from benchmark_qed.cli.utils import print_df
 from benchmark_qed.config.llm_config import LLMConfig
 from benchmark_qed.config.utils import load_template_file
-from benchmark_qed.llm.type.base import ChatModel
-from benchmark_qed.llm.utils import chat_typed_response
+from benchmark_qed.llm import chat
 
 ASSERTION_PROMPTS = Path(assertion_prompts.__file__).parent
 
 
 def get_assertion_scores(
     *,
-    llm_client: ChatModel,
+    llm_client: LLMCompletion,
     llm_config: LLMConfig,
     answers: pd.DataFrame,
     assertions: pd.DataFrame,
@@ -47,7 +47,7 @@ def get_assertion_scores(
     Score assertions based on the provided answers using a language model.
 
     Args:
-        llm_client (ChatModel): The LLM client to use for scoring.
+        llm_client (LLMCompletion): The LLM client to use for scoring.
         llm_config (LLMConfig): The LLM configuration to use for scoring.
         answers (pd.DataFrame): DataFrame containing answers with columns 'question', 'answer'.
         assertions (pd.DataFrame): DataFrame containing assertions with column 'assertion'.
@@ -138,7 +138,7 @@ def get_assertion_scores(
 
 
 async def evaluate_assertion(
-    llm_client: ChatModel,
+    llm_client: LLMCompletion,
     assertion: str,
     question: str,
     answer: str,
@@ -176,12 +176,17 @@ async def evaluate_assertion(
         },
     ]
 
-    response = await chat_typed_response(
-        llm=llm_client,
-        messages=messages,
-        data_model=AssertionLLMResponse,
-        **(additional_call_args or {}),
-    )
+    response = (
+        await chat(
+            llm_client,
+            messages=messages,
+            response_format=AssertionLLMResponse,
+            **(additional_call_args or {}),
+        )
+    ).formatted_response
+    if response is None:
+        msg = "LLM did not return a structured AssertionLLMResponse."
+        raise RuntimeError(msg)
 
     if complete_callback:
         complete_callback()
@@ -239,7 +244,7 @@ def load_and_normalize_assertions(
 
 
 def evaluate_rag_method(
-    llm_client: ChatModel,
+    llm_client: LLMCompletion,
     llm_config: LLMConfig,
     generated_rag: str,
     question_set: str,
@@ -402,7 +407,7 @@ def evaluate_rag_method(
 
 
 def run_assertion_evaluation(
-    llm_client: ChatModel,
+    llm_client: LLMCompletion,
     llm_config: LLMConfig,
     question_sets: list[str],
     generated_rags: list[str],

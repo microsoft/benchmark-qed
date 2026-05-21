@@ -19,12 +19,14 @@ from benchmark_qed.autoq.question_gen.data_questions.assertion_gen.base import (
 )
 from benchmark_qed.config.defaults import LLM_PARAMS, MAX_ASSERTIONS
 from benchmark_qed.config.utils import load_template_file
+from benchmark_qed.llm import chat
 
 if TYPE_CHECKING:
+    from graphrag_llm.completion import LLMCompletion
+
     from benchmark_qed.autoq.question_gen.data_questions.assertion_gen.validator import (
         AssertionValidator,
     )
-    from benchmark_qed.llm.type.base import ChatModel
 
 log: logging.Logger = logging.getLogger(__name__)
 
@@ -46,7 +48,7 @@ class LocalClaimAssertionGenerator(BaseAssertionGenerator):
 
     def __init__(
         self,
-        llm: ChatModel,
+        llm: LLMCompletion,
         llm_params: dict[str, Any] = LLM_PARAMS,
         json_mode: bool = True,
         system_prompt: Template | None = None,
@@ -123,9 +125,9 @@ class LocalClaimAssertionGenerator(BaseAssertionGenerator):
             },
         ]
 
-        result = await self.llm.chat(messages=messages, **self.llm_params)
+        result = await chat(self.llm, messages=messages, **self.llm_params)
         log.debug("Assertion results: %s", result)
-        response, j = try_parse_json_object(result.output.content)
+        response, j = try_parse_json_object(result.content)
         if j == {}:
             msg = f"Invalid json response, returning empty assertion list: {response}"
             log.warning(msg)

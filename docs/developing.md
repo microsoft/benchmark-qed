@@ -38,6 +38,16 @@ Follow these steps to generate synthetic queries using AutoQ:
     ```sh
     uv run benchmark-qed config init autoq .
     ```
+    This is the local-filesystem variant.
+
+    Alternative blob variant (choose this instead of the local command above; do not run both):
+    ```sh
+    uv run benchmark-qed config init autoq . \
+        --storage-type blob \
+        --container-name my-container \
+        --account-url https://<account>.blob.core.windows.net \
+        --base-dir autoq_test
+    ```
     This command creates two files in the `./autoq_test` directory:
     - `.env`: Stores environment variables for the AutoQ pipeline. Open this file and replace `<API_KEY>` with your OpenAI or Azure API key.
     - `settings.yaml`: Contains pipeline settings. Edit this file as needed for your use case.
@@ -47,6 +57,14 @@ Follow these steps to generate synthetic queries using AutoQ:
 4. **Generate synthetic queries:**
     ```sh
     uv run benchmark-qed autoq settings.yaml output
+    ```
+    This is the local-filesystem variant.
+
+    Alternative blob-stored config variant (choose this instead of the local command above; do not run both):
+
+    ```sh
+    uv run benchmark-qed autoq blob://my-container/autoq_test/settings.yaml output \
+        --account-url https://<account>.blob.core.windows.net
     ```
     This will process your input data and save the generated queries in the `output` directory.
 
@@ -81,6 +99,16 @@ Follow these steps to compare RAG answer pairs using the pairwise scoring pipeli
     ```sh
     uv run benchmark-qed config init autoe_pairwise .
     ```
+    This is the local-filesystem variant.
+
+    Alternative blob variant (choose this instead of the local command above; do not run both):
+    ```sh
+    uv run benchmark-qed config init autoe_pairwise . \
+        --storage-type blob \
+        --container-name my-container \
+        --account-url https://<account>.blob.core.windows.net \
+        --base-dir pairwise_test
+    ```
     This command creates two files in the `./pairwise_test` directory:
     - `.env`: Contains environment variables for the pairwise comparison tests. Open this file and replace `<API_KEY>` with your OpenAI or Azure API key.
     - `settings.yaml`: Contains pipeline settings, which you can modify as needed.
@@ -90,6 +118,13 @@ Follow these steps to compare RAG answer pairs using the pairwise scoring pipeli
 4. **Run the pairwise comparison:**
     ```sh
     uv run benchmark-qed autoe pairwise-scores settings.yaml output
+    ```
+    This is the local-filesystem variant.
+
+    Alternative blob-stored config variant (choose this instead of the local command above; do not run both):
+    ```sh
+    uv run benchmark-qed autoe pairwise-scores blob://my-container/pairwise_test/settings.yaml output \
+        --account-url https://<account>.blob.core.windows.net
     ```
     The results will be saved in the `output` directory.
 
@@ -116,6 +151,16 @@ Follow these steps to score RAG answers against reference answers using example 
     ```sh
     uv run benchmark-qed config init autoe_reference .
     ```
+    This is the local-filesystem variant.
+
+    Alternative blob variant (choose this instead of the local command above; do not run both):
+    ```sh
+    uv run benchmark-qed config init autoe_reference . \
+        --storage-type blob \
+        --container-name my-container \
+        --account-url https://<account>.blob.core.windows.net \
+        --base-dir reference_test
+    ```
     This creates two files in the `./reference_test` directory:
     - `.env`: Contains environment variables for the reference scoring pipeline. Open this file and replace `<API_KEY>` with your OpenAI or Azure API key.
     - `settings.yaml`: Contains pipeline settings, which you can modify as needed.
@@ -126,11 +171,74 @@ Follow these steps to score RAG answers against reference answers using example 
     ```sh
     uv run benchmark-qed autoe reference-scores settings.yaml output
     ```
+    This is the local-filesystem variant.
+
+    Alternative blob-stored config variant (choose this instead of the local command above; do not run both):
+    ```sh
+    uv run benchmark-qed autoe reference-scores blob://my-container/reference_test/settings.yaml output \
+        --account-url https://<account>.blob.core.windows.net
+    ```
     The results will be saved in the `output` directory.
 
 For detailed instructions on configuring and running AutoE subcommands, please refer to the [AutoE CLI Documentation](cli/autoe.md).
 
 To learn how to use AutoE programmatically, please see the [AutoE Notebook Example](notebooks/autoe.ipynb).
+
+## Running with Blob-Stored Configuration
+
+If your `settings.yaml` is stored in Azure Blob Storage, pass a `blob://` URI as the config path instead of a local file path.
+
+### Blob URI format
+
+```sh
+blob://<container-name>/<optional-base-dir>/settings.yaml
+```
+
+If you initialized config with `--base-dir`, include that same prefix in the URI.
+
+### Authentication options
+
+For commands that read config from `blob://`, pass one of:
+
+- `--account-url https://<account>.blob.core.windows.net` (managed identity)
+- `--connection-string "$AZURE_STORAGE_CONNECTION_STRING"`
+
+If neither flag is provided, auth falls back to environment variables:
+
+- `AZURE_STORAGE_ACCOUNT_URL`
+- `AZURE_STORAGE_CONNECTION_STRING`
+
+### AutoQ example
+
+```sh
+uv run benchmark-qed autoq blob://my-container/autoq_test/settings.yaml output \
+    --account-url https://<account>.blob.core.windows.net
+```
+
+### AutoE examples
+
+Pairwise:
+
+```sh
+uv run benchmark-qed autoe pairwise-scores blob://my-container/pairwise_test/settings.yaml output \
+    --account-url https://<account>.blob.core.windows.net
+```
+
+Reference:
+
+```sh
+uv run benchmark-qed autoe reference-scores blob://my-container/reference_test/settings.yaml output \
+    --account-url https://<account>.blob.core.windows.net
+```
+
+Assertion:
+
+```sh
+uv run benchmark-qed autoe assertion-scores blob://my-container/assertion_test/settings.yaml output \
+    --account-url https://<account>.blob.core.windows.net
+```
+
+When a blob config is loaded, the CLI downloads `settings.yaml` and sibling files (such as `.env` and `prompts/`) under the same prefix into a temporary local directory before execution.
 
 ## Diving Deeper
 To explore the query synthesis workflow in detail, please see the [AutoQ CLI Documentation](cli/autoq.md) for command-line usage and the [AutoQ Notebook Example](notebooks/autoq.ipynb) for a step-by-step programmatic guide.

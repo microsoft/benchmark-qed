@@ -40,11 +40,13 @@ from benchmark_qed.autoq.question_gen.data_questions.assertion_gen.validator imp
 from benchmark_qed.autoq.question_gen.data_questions.question_validator import (
     LinkedQuestionValidator,
 )
+from benchmark_qed.llm import chat
 
 if TYPE_CHECKING:
     from string import Template
 
     import tiktoken
+    from graphrag_llm.completion import LLMCompletion
 
     from benchmark_qed.autod.data_processor.embedding import TextEmbedder
     from benchmark_qed.autoq.config import (
@@ -53,7 +55,6 @@ if TYPE_CHECKING:
         DataLinkedPromptConfig,
     )
     from benchmark_qed.autoq.sampler.question_sampler import QuestionSampler
-    from benchmark_qed.llm.type.base import ChatModel
 
 log: logging.Logger = logging.getLogger(__name__)
 
@@ -161,7 +162,7 @@ class DataLinkedQuestionGen(BaseQuestionGen):
 
     def __init__(
         self,
-        llm: ChatModel,
+        llm: LLMCompletion,
         text_embedder: TextEmbedder,
         local_questions: list[Question],
         token_encoder: tiktoken.Encoding | None = None,
@@ -256,9 +257,9 @@ class DataLinkedQuestionGen(BaseQuestionGen):
 
         self.json_mode = json_mode
         if json_mode:
-            self.llm_params["response_format"] = {"type": "json_object"}
+            self.llm_params["response_format_json_object"] = True
         else:
-            self.llm_params.pop("response_format", None)
+            self.llm_params.pop("response_format_json_object", None)
 
         # Question validator setup
         self.question_validator: LinkedQuestionValidator | None = None
@@ -1125,11 +1126,11 @@ class DataLinkedQuestionGen(BaseQuestionGen):
                     {"role": "system", "content": system_prompt},
                     {"role": "user", "content": user_prompt},
                 ]
-                result = await self.llm.chat(messages=messages, **self.llm_params)
+                result = await chat(self.llm, messages=messages, **self.llm_params)
 
                 # Parse response
                 questions = self._parse_question_response(
-                    result.output.content, context, stats
+                    result.content, context, stats
                 )
 
                 # Tag questions with their type

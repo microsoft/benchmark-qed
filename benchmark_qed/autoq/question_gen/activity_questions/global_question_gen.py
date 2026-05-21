@@ -10,6 +10,8 @@ from pathlib import Path
 from string import Template
 from typing import Any
 
+from graphrag_llm.completion import LLMCompletion
+
 import benchmark_qed.config.defaults as defs
 from benchmark_qed.autod.data_processor.embedding import TextEmbedder
 from benchmark_qed.autod.data_processor.text_utils import try_parse_json_object
@@ -21,7 +23,7 @@ from benchmark_qed.autoq.prompts.activity_questions import global_questions
 from benchmark_qed.autoq.question_gen.base import BaseQuestionGen, QuestionGenResult
 from benchmark_qed.autoq.sampler.question_sampler import QuestionSampler
 from benchmark_qed.config.utils import load_template_file
-from benchmark_qed.llm.type.base import ChatModel
+from benchmark_qed.llm import chat
 
 log: logging.Logger = logging.getLogger(__name__)
 
@@ -33,7 +35,7 @@ class ActivityGlobalQuestionGen(BaseQuestionGen):
 
     def __init__(
         self,
-        llm: ChatModel,
+        llm: LLMCompletion,
         text_embedder: TextEmbedder,
         activity_context: ActivityContext,
         question_sampler: QuestionSampler | None = None,
@@ -59,9 +61,9 @@ class ActivityGlobalQuestionGen(BaseQuestionGen):
 
         self.json_mode = json_mode
         if json_mode:
-            self.llm_params["response_format"] = {"type": "json_object"}
+            self.llm_params["response_format_json_object"] = True
         else:
-            self.llm_params.pop("response_format", None)
+            self.llm_params.pop("response_format_json_object", None)
 
         self.generation_system_prompt: Template = (
             generation_system_prompt
@@ -137,12 +139,12 @@ class ActivityGlobalQuestionGen(BaseQuestionGen):
                 {"role": "system", "content": self.generation_system_prompt.template},
                 {"role": "user", "content": question_input_prompt},
             ]
-            model_response = await self.llm.chat(
-                messages=generation_messages, **self.llm_params
+            model_response = await chat(
+                self.llm, messages=generation_messages, **self.llm_params
             )
-            questions, j = try_parse_json_object(model_response.output.content)
+            questions, j = try_parse_json_object(model_response.content)
             if j == {}:
-                msg = f"Failed to parse questions response: {model_response.output.content}"
+                msg = f"Failed to parse questions response: {model_response.content}"
                 log.error(msg)
                 return []
             parsed_questions = json.loads(questions)

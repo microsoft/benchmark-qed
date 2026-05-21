@@ -9,6 +9,7 @@ from typing import Annotated, Any
 import tiktoken
 import typer
 from graphrag_common.config import load_config
+from graphrag_llm.completion import LLMCompletion
 from graphrag_storage import Storage
 from graphrag_storage.file_storage import FileStorage
 from graphrag_storage.storage_factory import create_storage
@@ -55,7 +56,6 @@ from benchmark_qed.cli.config_resolver import (
     resolve_config_path,
 )
 from benchmark_qed.llm.factory import ModelFactory
-from benchmark_qed.llm.type.base import ChatModel
 
 app: typer.Typer = typer.Typer(pretty_exceptions_show_locals=False)
 
@@ -72,7 +72,7 @@ class GenerationType(StrEnum):
 
 async def __generate_data_local(
     output_storage: Storage,
-    llm: ChatModel,
+    llm: LLMCompletion,
     text_embedder: TextEmbedder,
     num_questions: int,
     oversample_factor: float,
@@ -129,7 +129,7 @@ async def __generate_data_local(
 
 async def __generate_data_global(
     output_storage: Storage,
-    llm: ChatModel,
+    llm: LLMCompletion,
     text_embedder: TextEmbedder,
     num_questions: int,
     oversample_factor: float,
@@ -200,7 +200,7 @@ async def __generate_data_global(
 
 async def __generate_data_linked(
     output_storage: Storage,
-    llm: ChatModel,
+    llm: LLMCompletion,
     text_embedder: TextEmbedder,
     num_questions: int,
     oversample_factor: float,
@@ -297,7 +297,7 @@ async def __generate_data_linked(
 
 async def __generate_activity_context(
     output_storage: Storage,
-    llm: ChatModel,
+    llm: LLMCompletion,
     text_embedder: TextEmbedder,
     token_encoder: tiktoken.Encoding,
     num_personas: int,
@@ -350,7 +350,7 @@ async def __generate_activity_context(
 
 async def __generate_activity_local(
     output_storage: Storage,
-    llm: ChatModel,
+    llm: LLMCompletion,
     text_embedder: TextEmbedder,
     num_questions: int,
     oversample_factor: float,
@@ -404,7 +404,7 @@ async def __generate_activity_local(
 
 async def __generate_activity_global(
     output_storage: Storage,
-    llm: ChatModel,
+    llm: LLMCompletion,
     text_embedder: TextEmbedder,
     num_questions: int,
     oversample_factor: float,
@@ -729,10 +729,10 @@ def autoq(
 
     if print_model_usage:
         rich_print("Chat Model usage statistics:")
-        rich_print(chat_model.get_usage())
+        rich_print(chat_model.metrics_store.get_metrics())
 
         rich_print("Embedding Model usage statistics:")
-        rich_print(embedding_model.get_usage())
+        rich_print(embedding_model.metrics_store.get_metrics())
 
 
 @app.command(name="assertion-stats")
@@ -829,7 +829,7 @@ class AssertionType(StrEnum):
 async def __generate_assertions_for_questions(
     questions: list,
     assertion_type: AssertionType,
-    llm: ChatModel,
+    llm: LLMCompletion,
     text_embedder: TextEmbedder,
     assertion_config: AssertionConfig,
     assertion_prompt_config: AssertionPromptConfig,
@@ -1081,6 +1081,6 @@ def generate_assertions(
 
     if print_model_usage:
         rich_print("Chat Model usage statistics:")
-        rich_print(chat_model.get_usage())
+        rich_print(chat_model.metrics_store.get_metrics())
         rich_print("Embedding Model usage statistics:")
-        rich_print(embedding_model.get_usage())
+        rich_print(embedding_model.metrics_store.get_metrics())

@@ -89,6 +89,8 @@ Please follow these steps to generate synthetic queries from the [AP news datase
 
 For detailed instructions on configuring and running AutoQ from the command line, see the [AutoQ CLI Documentation](cli/autoq.md).
 
+If your `settings.yaml` is stored in Azure Blob Storage, see [Running with Blob-Stored Configuration](developing.md#running-with-blob-stored-configuration).
+
 To learn more about the query synthesis process and using AutoQ programmatically, refer to the [AutoQ Notebook Example](notebooks/autoq.ipynb).
 
 ### AutoE
@@ -193,6 +195,8 @@ Please follow these steps to evaluate RAG answers against predefined assertions 
     ```
 
 For more details on configuring and running AutoE, see the [AutoE CLI Documentation](cli/autoe.md).
+
+If your `settings.yaml` is stored in Azure Blob Storage, see [Running with Blob-Stored Configuration](developing.md#running-with-blob-stored-configuration).
 
 
 For detailed instructions on configuring and running AutoE subcommands, please refer to the [AutoE CLI Documentation](cli/autoe.md).

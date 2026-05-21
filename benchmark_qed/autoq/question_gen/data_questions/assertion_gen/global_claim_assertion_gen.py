@@ -36,13 +36,15 @@ from benchmark_qed.config.defaults import (
     MAX_ASSERTIONS,
 )
 from benchmark_qed.config.utils import load_template_file
+from benchmark_qed.llm import chat
 
 if TYPE_CHECKING:
+    from graphrag_llm.completion import LLMCompletion
+
     from benchmark_qed.autod.data_processor.embedding import TextEmbedder
     from benchmark_qed.autoq.question_gen.data_questions.assertion_gen.validator import (
         AssertionValidator,
     )
-    from benchmark_qed.llm.type.base import ChatModel
 
 log: logging.Logger = logging.getLogger(__name__)
 
@@ -72,7 +74,7 @@ class GlobalClaimAssertionGenerator(BaseAssertionGenerator):
 
     def __init__(
         self,
-        llm: ChatModel,
+        llm: LLMCompletion,
         llm_params: dict[str, Any] = LLM_PARAMS,
         json_mode: bool = True,
         map_system_prompt: Template | None = None,
@@ -798,8 +800,8 @@ class GlobalClaimAssertionGenerator(BaseAssertionGenerator):
 
         messages = [{"role": "user", "content": prompt_content}]
 
-        result = await self.llm.chat(messages=messages, **self.llm_params)
-        response, j = try_parse_json_object(result.output.content)
+        result = await chat(self.llm, messages=messages, **self.llm_params)
+        response, j = try_parse_json_object(result.content)
 
         if j == {}:
             log.warning(
