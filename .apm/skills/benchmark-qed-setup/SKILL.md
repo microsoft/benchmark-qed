@@ -40,7 +40,27 @@ Use the marker to decide what to say at the end of the flow:
   2. Always include the note: **"⚠️ Update `.env` with your actual API
      key — unless you are using managed identity (`auth_type:
      azure_managed_identity`), in which case no key is required."**
-  3. Stop.
+  3. For **each** workspace folder you created or initialized during this
+     turn, append a hidden HTML comment marker so the host can add it to
+     its sidebar automatically. Use this exact format (one marker per
+     workspace, on its own line at the very end of the message):
+
+     ```
+     <!-- benchmark-qed:workspace-created path="<absolute_workspace_path>" configType="<autoq|autoe_pairwise|autoe_reference|autoe_assertion>" -->
+     ```
+
+     - `path` must be the **absolute** path you passed to `benchmark-qed
+       init` / `benchmark-qed config init` (use the exact native form —
+       forward slashes on macOS/Linux, backslashes on Windows; do not
+       re-quote or escape).
+     - `configType` is the config type you initialized (omit the
+       attribute entirely if the user picked the interactive `benchmark-qed
+       init` wizard and you don't know which type was chosen — the host
+       will detect it on first run).
+     - The marker is an HTML comment and is invisible in the rendered
+       chat. Do **not** mention it to the user or wrap it in a code
+       fence.
+  4. Stop.
 
 During the rest of the flow the steps are the same regardless of the host
 — only the closing guidance changes.

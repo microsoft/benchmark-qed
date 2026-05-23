@@ -189,7 +189,244 @@ Object.keys(localStorage)
 
 ---
 
-## 7. Troubleshooting
+## 7. Azure Blob Storage workspaces
+
+The UI can mount an Azure Blob container as a read-only workspace (the
+"Add workspace → Azure Blob Container" tab). The browser talks to Azure
+**directly** via `@azure/storage-blob` — there is no backend proxy — so the
+storage account must explicitly allow your UI's origin via CORS, and the
+SAS URL you paste must grant the right permissions.
+
+### 7.1 Configure CORS on the storage account
+
+Without this, every request fails with:
+
+```
+Access to fetch at 'https://<account>.blob.core.windows.net/...' from origin
+'http://localhost:5173' has been blocked by CORS policy: Response to preflight
+request doesn't pass access control check: No 'Access-Control-Allow-Origin'
+header is present on the requested resource.
+```
+
+**Azure Portal**: Storage account → **Settings** → **Resource sharing (CORS)**
+→ **Blob service** tab → add a row:
+
+| Field | Value |
+|---|---|
+| Allowed origins | `http://localhost:5173` (one per line for multiple origins; `*` only for throw-away testing) |
+| Allowed methods | `GET, HEAD, OPTIONS` (add `PUT, POST, DELETE` if the UI will ever write) |
+| Allowed headers | `*` |
+| Exposed headers | `*` |
+| Max age (seconds) | `3600` |
+
+Save. The rule is effective within ~30 s; hard-refresh the UI (Cmd/Ctrl+
+Shift+R) before retrying.
+
+**Azure CLI** equivalent:
+
+```bash
+az storage cors add \
+  --services b \
+  --methods GET HEAD OPTIONS \
+  --origins http://localhost:5173 \
+  --allowed-headers '*' \
+  --exposed-headers '*' \
+  --max-age 3600 \
+  --account-name <your-storage-account>
+```
+
+For production, replace `http://localhost:5173` with the actual UI origin
+and **never** combine `*` origins with a SAS that grants write permissions.
+
+### 7.2 Generate a SAS URL with the right permissions
+
+The dialog accepts a **container-level** SAS URL of the form:
+
+```
+https://<account>.blob.core.windows.net/<container>?sv=...&sr=c&sp=...&sig=...
+```
+
+Minimum query parameters:
+
+| Param | Required value | Why |
+|---|---|---|
+| `sr` | `c` | Signed resource = container. |
+| `sp` | at least `rl` (read + list) | UI lists then reads blobs. Add `w` for upload, `d` for delete. |
+| `se` | future timestamp | SAS expiry. |
+| `spr` | `https` | Recommended; the SDK uses HTTPS. |
+| `sv`, `sig` | as generated | API version + signature. |
+
+Generate via the portal (Container → **Shared access tokens**, tick *Read*
+and *List*) or via CLI:
+
+```bash
+az storage container generate-sas \
+  --account-name <your-storage-account> \
+  --name <container> \
+  --permissions rl \
+  --expiry 2026-12-31T23:59:00Z \
+  --https-only \
+  --auth-mode key \
+  --as-user false \
+  --full-uri
+```
+
+Paste the full `--full-uri` output (including `https://` and `?...&sig=...`)
+into the dialog's "SAS URL" field. The optional **Prefix** field lets you
+mount a subfolder of the container (e.g. `autoe_test/`).
+
+### 7.3 Enable editing blob files from the UI
+
+By default a blob workspace is **read-only**: opening `settings.yaml` shows
+the content but the Save button is disabled, and right-click → Delete fails
+with *"This workspace source does not support deleting paths"*. The
+`BlobFileSource` constructor decides the per-action capability by looking
+at the SAS's `sp` parameter:
+
+```ts
+this.writable  = /w/i.test(sp) || /c/i.test(sp);   // BlobFileSource.ts
+this.deletable = /d/i.test(sp);
+```
+
+To make the workspace writable end-to-end you need to change **three**
+things — the SAS, the CORS rule, and the in-app workspace entry:
+
+1. **Regenerate the SAS with the permissions you need** — use `sp=rcwl`
+   for read + create + write + list, or `sp=rcwdl` if you also want to
+   delete blobs and folders.
+
+   ```bash
+   az storage container generate-sas \
+     --account-name <your-storage-account> \
+     --name <container> \
+     --permissions rcwdl \
+     --expiry 2026-12-31T23:59:00Z \
+     --https-only \
+     --auth-mode key \
+     --full-uri
+   ```
+
+   Portal equivalent: Container → **Shared access tokens** → tick **Read,
+   Add, Create, Write, List** (and **Delete** for removal) → Generate.
+
+2. **Extend the CORS rule** on the storage account (§7.1) so the browser
+   can issue write requests. The Allowed methods column must include the
+   verbs the SDK uses:
+
+   | Operation | Method(s) used by `@azure/storage-blob` |
+   |---|---|
+   | List + read | `GET, HEAD, OPTIONS` |
+   | Overwrite / upload (`writeFile`) | add `PUT` |
+   | Create-via-block (large uploads) | add `POST` |
+   | Delete | add `DELETE` |
+
+   A workable set for full edit access is:
+   `GET, HEAD, OPTIONS, PUT, POST, DELETE`.
+
+3. **Re-add the workspace in the UI.** The dialog reads `sp` only when the
+   workspace is created; the `writable` flag is cached for the session.
+   Right-click the existing blob workspace in the sidebar → **Remove**,
+   then add it again with the new SAS URL. The editor's Save button is now
+   enabled, and `BlobFileSource.writeFile` will `PUT` the file back to the
+   container.
+
+#### Caveats
+
+- **Folders are virtual.** Azure has no real directories — they only
+  exist as common prefixes. Deleting a "folder" via right-click iterates
+  every blob whose name starts with that prefix and deletes them one by
+  one (`BlobFileSource.deletePath`). For very large trees this can take
+  a while and the UI does not show per-blob progress.
+- **Last-writer-wins.** `writeFile` does a plain block-blob upload — no
+  ETag / If-Match precondition. If two people share the SAS and edit the
+  same file, the later save silently overwrites the earlier one.
+- **Content-Type is forced** to `text/plain; charset=utf-8` on save,
+  regardless of the original blob's type. Tools that switch behavior on
+  `Content-Type` (e.g. `application/x-yaml`) may break after an edit.
+- **Writeable SAS in the browser is sensitive.** Anyone who can read the
+  page (devtools, screen recording, localStorage) can write to your
+  container. Keep the CORS `Allowed origins` scoped to your real UI origin
+  (never `*` for writeable SAS), keep `se=` short, and revoke via the
+  portal's "Revoke all SAS" if it ever leaks.
+
+### 7.4 Run jobs and download datasets against a blob workspace
+
+The action-bar buttons next to a blob workspace — **Download predefined
+inputs** (⬇) and **Run workspace** (▶) — work the same way as for local
+workspaces, but the init-runner translates the click into a `benchmark-qed`
+invocation that talks to the container directly:
+
+- **Download** spawns:
+
+  ```text
+  benchmark-qed data download <dataset> <subdir> --accept-terms \
+    --storage-type blob \
+    --container-name <container> \
+    --connection-string "BlobEndpoint=https://<account>.blob.core.windows.net;SharedAccessSignature=<sas-token>" \
+    [--base-dir <workspace-prefix>]
+  ```
+
+  The dataset archive is extracted directly into
+  `<workspace-prefix>/<subdir>/` in the container — no local staging. The
+  dialog's "Pick Folder" button is hidden for blob workspaces because the
+  destination is interpreted as a sub-prefix of the container, not a host
+  filesystem path.
+
+- **Run workspace** spawns one of:
+
+  ```text
+  benchmark-qed autoq      blob://<container>/<prefix>/settings.yaml output --connection-string "<conn>"
+  benchmark-qed autoe pairwise-scores  blob://… output --connection-string "<conn>"
+  benchmark-qed autoe reference-scores blob://… output --connection-string "<conn>"
+  benchmark-qed autoe assertion-scores blob://… output --connection-string "<conn>"
+  ```
+
+  The Python CLI's `resolve_config_path` downloads the entire prefix into
+  a temp directory so prompt-template `!include` references resolve. The
+  second positional argument (`output`) is treated as a child path inside
+  the `output_storage` block configured in `settings.yaml`, so **the
+  settings.yaml in a blob workspace must declare `output_storage` (and
+  `input.storage` if reading data from blob) as blob** — otherwise the
+  CLI falls back to local `FileStorage` and writes to `./output` in the
+  init-runner's working directory.
+
+  `benchmark-qed config init … --storage-type blob …` (already wired into
+  the workspace-creation flow) emits the correct `output_storage` /
+  `input.storage` blocks; if you authored the settings.yaml by hand,
+  make sure those are present.
+
+Requirements for the buttons to succeed:
+
+1. The SAS must allow both read and write (`sp=rcwl` minimum,
+   `sp=rcwdl` if you also want to delete intermediate outputs).
+2. CORS on the storage account must allow `GET, HEAD, OPTIONS, PUT,
+   POST` (and `DELETE` if applicable) — the init-runner uses the SAS
+   from the browser; the Azure SDK in Python issues the actual data
+   requests from the runner process.
+3. The benchmark-qed Python venv must be active when you started
+   `npm run dev:all` (the runner can't find the CLI otherwise — see §8
+   for that error).
+
+### 7.5 Diagnose blob errors
+
+Open browser devtools → Network tab → retry → click the failing request:
+
+| Symptom | Cause | Fix |
+|---|---|---|
+| `Failed to fetch` + red "blocked by CORS policy" message | Storage account CORS doesn't include the UI origin | 7.1 above |
+| `403 AuthorizationFailure` / `AuthenticationFailed` | SAS lacks required permission or has expired | Regenerate with at least `sp=rl` and a future `se=` |
+| `403 AuthorizationPermissionMismatch` | SAS scoped to the wrong resource (`sr` mismatch) | Use a container SAS (`sr=c`), not an account or blob SAS |
+| `403 This request is not authorized to perform this operation using this permission` on list | SAS missing `l` | Regenerate with `sp=rl` (or `rcwl` for editing) |
+| `403 …using this permission` on save (`PUT`) | SAS missing `w` (and/or `c`) | Regenerate with `sp=rcwl` and re-add the workspace |
+| Save button stays disabled even with a writeable SAS | Old (read-only) workspace entry still active | Remove the workspace and re-add it with the new SAS — `writable` is cached on connect |
+| `"This workspace source does not support deleting paths"` banner on blob workspace | SAS lacks `d` permission (workspace was added with a non-deletable SAS) | Regenerate with `sp=rcwdl` and re-add the workspace |
+| `405 Method Not Allowed` on `PUT`/`DELETE` | CORS allows only `GET/HEAD/OPTIONS` | Add `PUT` (and `POST`/`DELETE` as needed) to §7.1 |
+| `404 ContainerNotFound` | Wrong container name in the SAS URL | Double-check the path segment after the account |
+| `400 InvalidQueryParameter` on `restype=container&comp=list` | SAS not allowed for listing | Add `l` to `sp` |
+
+---
+
+## 8. Troubleshooting
 
 - **"AI Assistant: not authenticated"** — run `copilot` in a shell, confirm with
   `copilot auth status`, then refresh the page. The bridge does not embed a
@@ -211,10 +448,13 @@ Object.keys(localStorage)
   `session.idle`. If the runner is down, the report still exists on disk but
   won't open automatically; use the "Recent reports" list in the picker to
   reopen it.
+- **"Failed to load `<workspace>`: RestError: Error sending request: Failed to
+  fetch"** when adding a blob workspace — CORS on the storage account; see
+  [§7.1](#71-configure-cors-on-the-storage-account).
 
 ---
 
-## 8. Where to look in the code
+## 9. Where to look in the code
 
 - Bridge protocol & SSE events: `../copilot-bridge/README.md`.
 - Sandboxed FS API (`/api/fs/list|read|write|create-file`) and job lifecycle:
@@ -224,3 +464,5 @@ Object.keys(localStorage)
 - Auto-open of generated reports + hidden destination workspaces:
   `src/App.tsx` (`openRecentReport`, `finalizePendingReport`,
   `addWorkspace({ hiddenFromSidebar: true })`).
+- Blob workspace integration: `src/sources/BlobFileSource.ts`,
+  `src/components/BlobConnectDialog.tsx`, `AddWorkspaceTabsDialog.tsx`.

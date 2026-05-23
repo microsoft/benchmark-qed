@@ -530,6 +530,22 @@ export default function App() {
     savePersistedWorkspaces([...persistedWorkspacesRef.current.values()]);
   }, []);
 
+  /**
+   * Look up the persisted blob connection info (SAS URL + prefix) for a
+   * workspace. Returns null for non-blob workspaces or when the persisted
+   * entry is missing. Used by run/download flows to forward the SAS to
+   * the init-runner so the Python CLI can talk to blob.
+   */
+  const getBlobInfo = useCallback(
+    (workspace: Workspace): { sasUrl: string; prefix: string } | null => {
+      if (workspace.sourceKind !== "blob") return null;
+      const persisted = persistedWorkspacesRef.current.get(workspace.id);
+      if (!persisted || persisted.kind !== "blob") return null;
+      return { sasUrl: persisted.sasUrl, prefix: persisted.prefix };
+    },
+    [],
+  );
+
   const addWorkspace = useCallback(
     async (
       name: string,
@@ -868,20 +884,41 @@ export default function App() {
     overrideConfigType?: WorkspaceConfigType,
   ): Promise<boolean> => {
     const configType = overrideConfigType ?? workspace.configType;
-    if (!workspace.rootPath || !configType) {
+    const blobInfo = getBlobInfo(workspace);
+    if (!configType) {
       setError("This workspace does not have a generated config type to run.");
       return false;
     }
+    if (!workspace.rootPath && !blobInfo) {
+      setError("This workspace cannot be run.");
+      return false;
+    }
+
+    const runRoot = blobInfo
+      ? `blob://${(() => {
+          try {
+            const u = new URL(blobInfo.sasUrl);
+            const container = u.pathname.replace(/^\/+/, "").split("/")[0];
+            const prefix = blobInfo.prefix.replace(/^\/+|\/+$/g, "");
+            return prefix ? `${container}/${prefix}` : container;
+          } catch {
+            return "blob";
+          }
+        })()}`
+      : workspace.rootPath;
 
     setError(null);
     try {
+      const requestBody: Record<string, unknown> = { configType };
+      if (blobInfo) {
+        requestBody.blob = blobInfo;
+      } else {
+        requestBody.rootPath = workspace.rootPath;
+      }
       const res = await fetch(`${INIT_RUNNER_URL}/api/run-jobs`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          rootPath: workspace.rootPath,
-          configType,
-        }),
+        body: JSON.stringify(requestBody),
       });
       const payload = (await res.json()) as RunJob | { error: string };
       if (!res.ok) {
@@ -898,7 +935,7 @@ export default function App() {
       handleOpenRunJobLog(job.id);
       addActivityLog(
         `Started job`,
-        jobActivityLabel(workspace.rootPath, configType),
+        jobActivityLabel(runRoot, configType),
         "success",
       );
       return true;
@@ -908,12 +945,12 @@ export default function App() {
       );
       addActivityLog(
         `Failed to start job`,
-        jobActivityLabel(workspace.rootPath, configType),
+        jobActivityLabel(runRoot, configType),
         "error",
       );
       return false;
     }
-  }, [handleOpenRunJobLog, addActivityLog, jobActivityLabel]);
+  }, [handleOpenRunJobLog, addActivityLog, jobActivityLabel, getBlobInfo]);
 
   const handleRunSubfolderConfig = useCallback(
     async (selectedConfigs: DetectedConfig[]) => {
@@ -955,22 +992,30 @@ export default function App() {
     async (dataset: PredefinedDataset, destinationPath: string) => {
       if (!datasetDialogWorkspaceId) return;
       const workspace = workspaces.find((w) => w.id === datasetDialogWorkspaceId);
-      if (!workspace?.rootPath) {
-        setError("This workspace is not backed by a local path.");
+      if (!workspace) return;
+
+      const blobInfo = getBlobInfo(workspace);
+      if (!workspace.rootPath && !blobInfo) {
+        setError("This workspace cannot host downloads.");
         return;
       }
 
       setDatasetSubmitting(true);
       setError(null);
       try {
+        const requestBody: Record<string, unknown> = {
+          dataset,
+          outputPath: destinationPath,
+        };
+        if (blobInfo) {
+          requestBody.blob = blobInfo;
+        } else {
+          requestBody.rootPath = workspace.rootPath;
+        }
         const res = await fetch(`${INIT_RUNNER_URL}/api/datasets/download`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            rootPath: workspace.rootPath,
-            dataset,
-            outputPath: destinationPath,
-          }),
+          body: JSON.stringify(requestBody),
         });
         const payload = (await res.json()) as {
           error?: string;
@@ -1007,7 +1052,7 @@ export default function App() {
         setDatasetSubmitting(false);
       }
     },
-    [addWorkspace, datasetDialogWorkspaceId, workspaces],
+    [addWorkspace, datasetDialogWorkspaceId, workspaces, getBlobInfo],
   );
 
   const submitLoadDataset = useCallback(
@@ -1081,7 +1126,23 @@ export default function App() {
 
   const handleRunWorkspace = useCallback(
     async (workspace: Workspace) => {
+      const blobInfo = getBlobInfo(workspace);
+      if (!workspace.rootPath && !blobInfo) return;
+
+      // Blob workspaces don't support the nested-config detection flow
+      // (which lists subdirectories on disk via /api/detect-configs). Go
+      // straight to the config-type dialog so the user picks autoq /
+      // autoe variant; the run uses blob:// URIs end to end.
+      if (blobInfo) {
+        setError(null);
+        setRunConfigWorkspaceId(workspace.id);
+        setRunConfigDialogOpen(true);
+        return;
+      }
+
+      // Below: local workspace path (narrowed by the early returns above).
       if (!workspace.rootPath) return;
+      const localRootPath = workspace.rootPath;
 
       // Always prompt for config selection so the user can pick which job to run.
       setError(null);
@@ -1089,7 +1150,7 @@ export default function App() {
         const detectRes = await fetch(`${INIT_RUNNER_URL}/api/detect-configs`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ rootPath: workspace.rootPath }),
+          body: JSON.stringify({ rootPath: localRootPath }),
         });
         const detectPayload = (await detectRes.json()) as {
           configs?: DetectedConfig[];
@@ -1100,7 +1161,7 @@ export default function App() {
           // Show selection dialog so the user can choose the command
           setMultiConfigDialog({
             open: true,
-            folderPath: workspace.rootPath,
+            folderPath: localRootPath,
             configs: detectPayload.configs,
             submitting: false,
           });
@@ -1115,7 +1176,7 @@ export default function App() {
         setError(`Failed to detect configs: ${e}`);
       }
     },
-    [],
+    [getBlobInfo],
   );
 
   const handleRunConfigSubmit = useCallback(
@@ -1276,12 +1337,23 @@ export default function App() {
 
   const refreshWorkspace = useCallback(
     async (workspace: Workspace) => {
-      await addWorkspace(workspace.name, workspace.source, {
-        rootPath: workspace.rootPath,
-        configType: workspace.configType,
-      });
+      // Re-list children in place instead of going through addWorkspace.
+      // addWorkspace dedups on rootPath, which blob workspaces don't have,
+      // so calling it for a refresh would append a duplicate entry.
+      try {
+        const rootNodes = await workspace.source.listChildren();
+        setWorkspaces((prev) =>
+          prev.map((w) =>
+            w.id === workspace.id
+              ? { ...w, version: w.version + 1, rootNodes }
+              : w,
+          ),
+        );
+      } catch (e) {
+        setError(`Failed to refresh ${workspace.name}: ${e}`);
+      }
     },
-    [addWorkspace],
+    [],
   );
 
   const requestCreatePath = useCallback(
@@ -1955,6 +2027,45 @@ export default function App() {
         // Try to open a freshly-written quality report (if any).
         void finalizePendingReport();
       }}
+      onWorkspaceCreated={({ path, configType }) => {
+        // The benchmark-qed-setup skill creates workspaces by running the
+        // CLI through its own shell tool, so the runner's /api/init-jobs
+        // auto-import effect never fires. The skill emits a hidden
+        // `<!-- benchmark-qed:workspace-created -->` marker in its closing
+        // message; we pick it up here and register the workspace so it
+        // shows up in the sidebar without the user having to add it
+        // manually.
+        if (!path) return;
+        const alreadyAdded = workspacesRef.current.some(
+          (w) => w.rootPath === path,
+        );
+        if (alreadyAdded) return;
+        const allowed: ReadonlyArray<WorkspaceConfigType> = [
+          "autoq",
+          "autoe_pairwise",
+          "autoe_reference",
+          "autoe_assertion",
+        ];
+        const typed =
+          configType && (allowed as readonly string[]).includes(configType)
+            ? (configType as WorkspaceConfigType)
+            : undefined;
+        const name = path.split(/[/\\]/).filter(Boolean).pop() ?? path;
+        void addWorkspace(
+          name,
+          new RunnerPathFileSource(path, INIT_RUNNER_URL),
+          {
+            rootPath: path,
+            configType: typed,
+            persisted: {
+              kind: "local",
+              name,
+              rootPath: path,
+              configType: typed,
+            },
+          },
+        );
+      }}
       onLogEvent={(action, details, type) =>
         addActivityLog(action, details, type)
       }
@@ -2185,9 +2296,13 @@ export default function App() {
                   <button
                     className="ws-run ws-icon-btn"
                     onClick={() => setDatasetDialogWorkspaceId(ws.id)}
-                    title={ws.rootPath ? "Download predefined inputs" : "Unavailable for this workspace"}
+                    title={
+                      ws.rootPath || ws.sourceKind === "blob"
+                        ? "Download predefined inputs"
+                        : "Unavailable for this workspace"
+                    }
                     aria-label="Download predefined inputs"
-                    disabled={!ws.rootPath}
+                    disabled={!ws.rootPath && ws.sourceKind !== "blob"}
                   >
                     <ArrowDownload16Regular />
                   </button>
@@ -2196,7 +2311,7 @@ export default function App() {
                     onClick={() => void handleRunWorkspace(ws)}
                     title={ws.configType ? `Run ${ws.configType}` : "Run workspace"}
                     aria-label="Run workspace"
-                    disabled={!ws.rootPath}
+                    disabled={!ws.rootPath && ws.sourceKind !== "blob"}
                   >
                     <Play16Regular />
                   </button>
@@ -2603,6 +2718,10 @@ export default function App() {
         }
         workspaceRootPath={
           workspaces.find((w) => w.id === datasetDialogWorkspaceId)?.rootPath
+        }
+        isBlob={
+          workspaces.find((w) => w.id === datasetDialogWorkspaceId)?.sourceKind ===
+          "blob"
         }
         submitting={datasetSubmitting}
         onClose={() => setDatasetDialogWorkspaceId(null)}

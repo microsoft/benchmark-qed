@@ -64,6 +64,19 @@ interface Props {
    */
   onActivitySettled?: () => void;
   /**
+   * Called whenever the agent emits one or more hidden
+   * `<!-- benchmark-qed:workspace-created path="..." configType="..." -->`
+   * markers in its closing message. The host should register each path as a
+   * new local workspace in the sidebar so the user does not have to add it
+   * manually after the assistant finishes.
+   *
+   * The marker is parsed deterministically (no LLM-side cooperation beyond
+   * emitting the literal HTML comment), so the host receives exactly the
+   * paths the assistant claims it created. Each entry is fired at most once
+   * per session.
+   */
+  onWorkspaceCreated?: (info: { path: string; configType?: string }) => void;
+  /**
    * Called whenever a noteworthy event happens inside the assistant
    * (session started, user answered a prompt, tool ran, error). The host
    * uses this to append entries to its global Activity Log.
@@ -98,6 +111,7 @@ export function CopilotPanel({
   model,
   onFolderDetected,
   onActivitySettled,
+  onWorkspaceCreated,
   onLogEvent,
   onBackToOptions,
   onClose,
@@ -220,10 +234,49 @@ export function CopilotPanel({
   // (or any non-idle state) back to idle. The agent has stopped doing work,
   // so any filesystem mutations it performed should now be reflected.
   const prevStateRef = useRef(status.state);
+  // Markers we've already reported during this session so we don't fire
+  // duplicates if the assistant repeats the closing summary across turns.
+  const reportedMarkersRef = useRef<Set<string>>(new Set());
   useEffect(() => {
     const prev = prevStateRef.current;
     if (prev !== "idle" && status.state === "idle") {
       onActivitySettled?.();
+      if (onWorkspaceCreated) {
+        // Marker format (HTML comment, invisible in rendered markdown):
+        //   <!-- benchmark-qed:workspace-created path="C:\Users\..." configType="autoq" -->
+        // configType is optional. The path attribute may use either /
+        // (POSIX) or \\ (Windows) separators; we pass it through unchanged
+        // so the runner FS endpoints get exactly what the skill produced.
+        const markerRe =
+          /<!--\s*benchmark-qed:workspace-created\s+([^>]*?)-->/g;
+        const attrRe = /(\w+)\s*=\s*"([^"]*)"/g;
+        for (const turn of turns) {
+          if (turn.role !== "assistant") continue;
+          const content = turn.content ?? "";
+          let m: RegExpExecArray | null;
+          while ((m = markerRe.exec(content))) {
+            const attrs: Record<string, string> = {};
+            const attrText = m[1];
+            let a: RegExpExecArray | null;
+            attrRe.lastIndex = 0;
+            while ((a = attrRe.exec(attrText))) {
+              attrs[a[1].toLowerCase()] = a[2];
+            }
+            const path = attrs.path;
+            if (!path) continue;
+            const configType = attrs.configtype || undefined;
+            const key = `${path}::${configType ?? ""}`;
+            if (reportedMarkersRef.current.has(key)) continue;
+            reportedMarkersRef.current.add(key);
+            try {
+              onWorkspaceCreated({ path, configType });
+            } catch (err) {
+              // eslint-disable-next-line no-console
+              console.error("[CopilotPanel] onWorkspaceCreated threw", err);
+            }
+          }
+        }
+      }
     }
     if (prev !== "error" && status.state === "error") {
       onLogEvent?.(
@@ -233,7 +286,7 @@ export function CopilotPanel({
       );
     }
     prevStateRef.current = status.state;
-  }, [status.state, status.error, onActivitySettled, onLogEvent]);
+  }, [status.state, status.error, onActivitySettled, onWorkspaceCreated, onLogEvent, turns]);
 
   if (!open) return null;
 

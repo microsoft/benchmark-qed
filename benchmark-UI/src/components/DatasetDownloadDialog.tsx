@@ -7,6 +7,12 @@ interface Props {
   open: boolean;
   workspaceName: string;
   workspaceRootPath?: string;
+  /**
+   * When true, the workspace is backed by Azure Blob Storage. The local
+   * "Pick Folder" button is hidden because the destination is interpreted
+   * as a prefix inside the container, not a host filesystem path.
+   */
+  isBlob?: boolean;
   submitting: boolean;
   onClose: () => void;
   onSubmit: (
@@ -41,6 +47,7 @@ export function DatasetDownloadDialog({
   open,
   workspaceName,
   workspaceRootPath,
+  isBlob,
   submitting,
   onClose,
   onSubmit,
@@ -123,18 +130,21 @@ export function DatasetDownloadDialog({
                 onChange={(e) => setDestinationPath(e.target.value)}
                 placeholder={workspaceRootPath || "Workspace root"}
               />
-              <button
-                type="button"
-                className="btn"
-                onClick={pickDestination}
-                disabled={pickingDestination}
-              >
-                {pickingDestination ? "Picking..." : "Pick Folder"}
-              </button>
+              {!isBlob && (
+                <button
+                  type="button"
+                  className="btn"
+                  onClick={pickDestination}
+                  disabled={pickingDestination}
+                >
+                  {pickingDestination ? "Picking..." : "Pick Folder"}
+                </button>
+              )}
             </div>
             <small>
-              Leave empty to use the workspace root. Relative paths resolve from
-              the workspace root.
+              {isBlob
+                ? "A sub-prefix inside the blob container. Files land under <prefix>/<destination>/."
+                : "Leave empty to use the workspace root. Relative paths resolve from the workspace root."}
             </small>
           </label>
 

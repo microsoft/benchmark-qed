@@ -350,19 +350,53 @@ const CHILD_ENV = {
   PYTHONIOENCODING: "utf-8",
 };
 
+const IS_WINDOWS = process.platform === "win32";
+
+// Quote a single argument for cmd.exe's `/c` line. cmd.exe parses its command
+// line itself (rather than handing it to CommandLineToArgvW), so we wrap any
+// token containing whitespace or cmd metacharacters in double quotes and
+// escape embedded quotes by doubling them — the convention `cmd.exe` uses
+// for `/c "..."`.
+function quoteForCmd(arg) {
+  const s = String(arg);
+  if (s.length === 0) return '""';
+  if (!/[\s"&|<>^()%!]/.test(s)) return s;
+  return `"${s.replace(/"/g, '""')}"`;
+}
+
+// On Windows, route spawns through `cmd.exe /d /s /c` so that PATHEXT
+// resolution kicks in and `.cmd`/`.bat` console-script shims (how pip / uv /
+// pipx install `benchmark-qed` on Windows) can actually execute. Both
+// node-pty's ConPTY backend and Node's child_process.spawn refuse to launch
+// .cmd files directly, producing a generic "File not found:" error.
+function toWindowsCmdInvocation(cmd, cmdArgs) {
+  const line = [cmd, ...cmdArgs].map(quoteForCmd).join(" ");
+  // `/s` makes cmd.exe strip exactly the first and last quote on the command
+  // line, so we wrap the whole inner command in outer quotes that get peeled
+  // back off, leaving our per-token quoting intact.
+  return {
+    cmd: process.env.ComSpec || "cmd.exe",
+    args: ["/d", "/s", "/c", `"${line}"`],
+  };
+}
+
 function spawnChild(cmd, cmdArgs) {
-  return spawn(cmd, cmdArgs, {
+  const target = IS_WINDOWS ? toWindowsCmdInvocation(cmd, cmdArgs) : { cmd, args: cmdArgs };
+  return spawn(target.cmd, target.args, {
     cwd: REPO_ROOT,
     stdio: ["ignore", "pipe", "pipe"],
     env: CHILD_ENV,
+    windowsVerbatimArguments: IS_WINDOWS,
   });
 }
 
 function spawnChildInCwd(cmd, cmdArgs, cwd = REPO_ROOT) {
-  return spawn(cmd, cmdArgs, {
+  const target = IS_WINDOWS ? toWindowsCmdInvocation(cmd, cmdArgs) : { cmd, args: cmdArgs };
+  return spawn(target.cmd, target.args, {
     cwd,
     stdio: ["ignore", "pipe", "pipe"],
     env: CHILD_ENV,
+    windowsVerbatimArguments: IS_WINDOWS,
   });
 }
 
@@ -476,7 +510,10 @@ function runCommandWithFallback(job, args, onCompleted) {
   // which appendOutput already interprets).
   let proc;
   try {
-    proc = pty.spawn(absPath, cmdArgs, {
+    const ptyTarget = IS_WINDOWS
+      ? toWindowsCmdInvocation(absPath, cmdArgs)
+      : { cmd: absPath, args: cmdArgs };
+    proc = pty.spawn(ptyTarget.cmd, ptyTarget.args, {
       name: "xterm-256color",
       cols: 120,
       rows: 30,
@@ -637,6 +674,37 @@ function startInitJob(body) {
   return job;
 }
 
+/**
+ * Parse a SAS URL like
+ *   https://acct.blob.core.windows.net/<container>?sv=...&sp=rcwdl&sig=...
+ * into the pieces the benchmark-qed CLI needs:
+ *   - container name
+ *   - SAS-based connection string accepted by azure-storage-blob:
+ *       BlobEndpoint=https://acct.blob.core.windows.net;SharedAccessSignature=<token>
+ *   - blob://<container>/... URI prefix used when passing config/output paths
+ *     to the Python CLI (which calls graphrag_storage under the hood).
+ */
+function parseBlobInfo(sasUrl, prefix) {
+  const u = new URL(sasUrl);
+  const account = u.host; // e.g. acct.blob.core.windows.net
+  const containerSegment = u.pathname.replace(/^\/+/, "").split("/")[0];
+  if (!containerSegment) {
+    throw new Error("SAS URL is missing the container path.");
+  }
+  const sasToken = u.search.replace(/^\?/, "");
+  if (!sasToken) {
+    throw new Error("SAS URL has no query string with the SAS token.");
+  }
+  const connectionString = `BlobEndpoint=https://${account};SharedAccessSignature=${sasToken}`;
+  const normalizedPrefix = (prefix || "").replace(/^\/+|\/+$/g, "");
+  return {
+    account,
+    container: containerSegment,
+    connectionString,
+    basePrefix: normalizedPrefix,
+  };
+}
+
 function startRunJob(body) {
   const allowedConfigTypes = [
     "autoq",
@@ -648,18 +716,51 @@ function startRunJob(body) {
   if (!allowedConfigTypes.includes(body.configType)) {
     throw new Error(`Invalid configType: ${body.configType}`);
   }
-  if (!body.rootPath || typeof body.rootPath !== "string") {
-    throw new Error("rootPath is required.");
+
+  let settingsPath;
+  let outputPath;
+  let extraArgs = [];
+  let displayRoot;
+
+  if (body.blob && typeof body.blob === "object") {
+    // Blob workspace: pass blob:// URIs to the CLI and authenticate via
+    // --connection-string (SAS-based). The CLI's resolve_config_path will
+    // download the settings.yaml and its siblings into a temp dir; the
+    // settings.yaml is expected to have output_storage / input.storage
+    // pointing at blob too, otherwise the output_path arg will fall back
+    // to local FileStorage and fail.
+    if (typeof body.blob.sasUrl !== "string" || !body.blob.sasUrl) {
+      throw new Error("blob.sasUrl is required for blob workspaces.");
+    }
+    const { container, connectionString, basePrefix } = parseBlobInfo(
+      body.blob.sasUrl,
+      body.blob.prefix,
+    );
+    const settingsBlob = basePrefix
+      ? `blob://${container}/${basePrefix}/settings.yaml`
+      : `blob://${container}/settings.yaml`;
+    settingsPath = settingsBlob;
+    // output_data_path is treated as a child-path inside the configured
+    // output_storage by autoq/autoe; "output" matches local convention.
+    outputPath = "output";
+    extraArgs = ["--connection-string", connectionString];
+    displayRoot = basePrefix
+      ? `blob://${container}/${basePrefix}`
+      : `blob://${container}`;
+  } else {
+    if (!body.rootPath || typeof body.rootPath !== "string") {
+      throw new Error("rootPath is required.");
+    }
+    settingsPath = path.join(body.rootPath, "settings.yaml");
+    outputPath = path.join(body.rootPath, "output");
+    displayRoot = body.rootPath;
   }
 
-  const settingsPath = path.join(body.rootPath, "settings.yaml");
-  const outputPath = path.join(body.rootPath, "output");
-
   const runArgsByType = {
-    autoq: ["autoq", settingsPath, outputPath],
-    autoe_pairwise: ["autoe", "pairwise-scores", settingsPath, outputPath],
-    autoe_reference: ["autoe", "reference-scores", settingsPath, outputPath],
-    autoe_assertion: ["autoe", "assertion-scores", settingsPath, outputPath],
+    autoq: ["autoq", settingsPath, outputPath, ...extraArgs],
+    autoe_pairwise: ["autoe", "pairwise-scores", settingsPath, outputPath, ...extraArgs],
+    autoe_reference: ["autoe", "reference-scores", settingsPath, outputPath, ...extraArgs],
+    autoe_assertion: ["autoe", "assertion-scores", settingsPath, outputPath, ...extraArgs],
   };
 
   const args = runArgsByType[body.configType];
@@ -670,7 +771,7 @@ function startRunJob(body) {
     status: "running",
     startedAt: new Date().toISOString(),
     endedAt: null,
-    rootPath: body.rootPath,
+    rootPath: displayRoot,
     configType: body.configType,
     command: `benchmark-qed ${args.join(" ")}`,
     output: "",
@@ -866,8 +967,13 @@ const server = createServer(async (req, res) => {
   if (req.method === "POST" && pathname === "/api/run-jobs") {
     try {
       const body = await parseBody(req);
-      const settingsPath = path.join(body.rootPath ?? "", "settings.yaml");
-      await fsp.access(settingsPath);
+      // For local workspaces, fail fast if settings.yaml is missing.
+      // Blob workspaces skip this check; the Python CLI will surface a
+      // clear error if the blob doesn't exist.
+      if (!body.blob) {
+        const settingsPath = path.join(body.rootPath ?? "", "settings.yaml");
+        await fsp.access(settingsPath);
+      }
       const job = startRunJob(body);
       json(req, res, 202, job);
     } catch (err) {
@@ -881,14 +987,10 @@ const server = createServer(async (req, res) => {
   if (req.method === "POST" && pathname === "/api/datasets/download") {
     try {
       const body = await parseBody(req);
-      const rootPath = body.rootPath;
       const dataset = body.dataset;
       const outputPathInput = body.outputPath;
       const allowedDatasets = ["AP_news", "podcast", "example_answers"];
 
-      if (!rootPath || typeof rootPath !== "string") {
-        throw new Error("rootPath is required.");
-      }
       if (!allowedDatasets.includes(dataset)) {
         throw new Error(`Invalid dataset: ${dataset}`);
       }
@@ -897,17 +999,57 @@ const server = createServer(async (req, res) => {
         typeof outputPathInput === "string" && outputPathInput.trim().length > 0
           ? outputPathInput.trim()
           : "input";
-      const { target: outputPath } = resolveFsPath(rootPath, outputRelPath);
-      const outputPathArg = path.relative(rootPath, outputPath) || ".";
-      await fsp.mkdir(outputPath, { recursive: true });
 
-      const args = [
-        "data",
-        "download",
-        dataset,
-        outputPath,
-        "--accept-terms",
-      ];
+      let args;
+      let outputPath; // for the success payload
+      if (body.blob && typeof body.blob === "object") {
+        if (typeof body.blob.sasUrl !== "string" || !body.blob.sasUrl) {
+          throw new Error("blob.sasUrl is required for blob workspaces.");
+        }
+        const { container, connectionString, basePrefix } = parseBlobInfo(
+          body.blob.sasUrl,
+          body.blob.prefix,
+        );
+        // The CLI joins base_dir + output_dir, so set base_dir to the
+        // workspace prefix and pass the user-chosen subdir (e.g. "input")
+        // as the second positional argument. Blobs land under
+        // <prefix>/<outputRelPath>/...
+        args = [
+          "data",
+          "download",
+          dataset,
+          outputRelPath,
+          "--accept-terms",
+          "--storage-type",
+          "blob",
+          "--container-name",
+          container,
+          "--connection-string",
+          connectionString,
+        ];
+        if (basePrefix) {
+          args.push("--base-dir", basePrefix);
+        }
+        outputPath = basePrefix
+          ? `blob://${container}/${basePrefix}/${outputRelPath}`
+          : `blob://${container}/${outputRelPath}`;
+      } else {
+        const rootPath = body.rootPath;
+        if (!rootPath || typeof rootPath !== "string") {
+          throw new Error("rootPath is required.");
+        }
+        const { target } = resolveFsPath(rootPath, outputRelPath);
+        outputPath = target;
+        await fsp.mkdir(outputPath, { recursive: true });
+        args = [
+          "data",
+          "download",
+          dataset,
+          outputPath,
+          "--accept-terms",
+        ];
+      }
+
       const result = await runCommandWithFallbackAndCapture(args, {
         cwd: REPO_ROOT,
       });
