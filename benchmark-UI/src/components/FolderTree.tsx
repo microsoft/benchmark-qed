@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Document16Regular,
   DocumentAdd16Regular,
@@ -9,6 +9,37 @@ import {
 } from "@fluentui/react-icons";
 import type { FileSource, TreeNode } from "../types";
 
+const EXPANDED_STORAGE_PREFIX = "tree-expanded:";
+
+function expandedStorageKey(workspaceKey: string, path: string): string {
+  return `${EXPANDED_STORAGE_PREFIX}${workspaceKey}::${path}`;
+}
+
+function readPersistedExpanded(workspaceKey: string, path: string): boolean {
+  try {
+    return localStorage.getItem(expandedStorageKey(workspaceKey, path)) === "1";
+  } catch {
+    return false;
+  }
+}
+
+function writePersistedExpanded(
+  workspaceKey: string,
+  path: string,
+  expanded: boolean,
+): void {
+  try {
+    const key = expandedStorageKey(workspaceKey, path);
+    if (expanded) {
+      localStorage.setItem(key, "1");
+    } else {
+      localStorage.removeItem(key);
+    }
+  } catch {
+    // ignore storage errors (quota, private mode, etc.)
+  }
+}
+
 interface Props {
   source: FileSource;
   nodes: TreeNode[];
@@ -18,6 +49,7 @@ interface Props {
   onCreateFolder?: (parent?: TreeNode) => void;
   onDeleteNode?: (node: TreeNode) => void;
   parentNode?: TreeNode;
+  workspaceKey: string;
 }
 
 export function FolderTree({
@@ -29,6 +61,7 @@ export function FolderTree({
   onCreateFolder,
   onDeleteNode,
   parentNode,
+  workspaceKey,
 }: Props) {
   return (
     <ul className="tree">
@@ -43,6 +76,7 @@ export function FolderTree({
           onCreateFolder={onCreateFolder}
           onDeleteNode={onDeleteNode}
           parentNode={parentNode}
+          workspaceKey={workspaceKey}
         />
       ))}
     </ul>
@@ -58,6 +92,7 @@ function TreeItem({
   onCreateFolder,
   onDeleteNode,
   parentNode,
+  workspaceKey,
 }: {
   node: TreeNode;
   source: FileSource;
@@ -67,16 +102,50 @@ function TreeItem({
   onCreateFolder?: (parent?: TreeNode) => void;
   onDeleteNode?: (node: TreeNode) => void;
   parentNode?: TreeNode;
+  workspaceKey: string;
 }) {
-  const [expanded, setExpanded] = useState(false);
+  const [expanded, setExpanded] = useState(() =>
+    node.kind === "directory"
+      ? readPersistedExpanded(workspaceKey, node.path)
+      : false,
+  );
   const [children, setChildren] = useState<TreeNode[] | undefined>(undefined);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  // Auto-load children when the node mounts already expanded (restored from
+  // localStorage) so the persisted state is reflected on first render.
+  useEffect(() => {
+    if (node.kind !== "directory" || !expanded || children !== undefined) return;
+    let cancelled = false;
+    setLoading(true);
+    setError(null);
+    source
+      .listChildren(node)
+      .then((c) => {
+        if (!cancelled) setChildren(c);
+      })
+      .catch((e: unknown) => {
+        if (!cancelled) setError(String(e));
+      })
+      .finally(() => {
+        // Always clear the loading flag, even if `cancelled` is true. The
+        // cleanup that sets `cancelled` runs synchronously when React re-runs
+        // this effect after `setChildren` resolves, but `.finally` is the
+        // continuation of that same promise — without this we'd be stuck on
+        // "Loading..." forever despite the children being populated.
+        setLoading(false);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [expanded, children, node, source]);
 
   const toggle = async () => {
     if (node.kind !== "directory") return;
     const next = !expanded;
     setExpanded(next);
+    writePersistedExpanded(workspaceKey, node.path, next);
     if (next && !children) {
       setLoading(true);
       setError(null);
@@ -180,6 +249,7 @@ function TreeItem({
               onCreateFolder={onCreateFolder}
               onDeleteNode={onDeleteNode}
               parentNode={node}
+              workspaceKey={workspaceKey}
             />
           )}
         </div>

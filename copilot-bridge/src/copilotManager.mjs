@@ -122,27 +122,29 @@ export class CopilotManager {
       },
 
       onPermissionRequest: async (request) => {
+        // Forward every field the SDK gives us so the UI can render a
+        // meaningful summary. The SDK's permission requests vary in shape
+        // by `kind`: a "read" permission typically carries `directory` or
+        // `path` instead of `fileName`, while shell permissions carry
+        // `fullCommandText`. We include all of them plus the named fields
+        // the UI types already understand.
+        const payload = {
+          ...request,
+          kind: request.kind,
+          toolName: request.toolName,
+          toolCallId: request.toolCallId,
+          fileName: request.fileName,
+          fullCommandText: request.fullCommandText,
+        };
         const { requestId, promise } = this.pending.create(
           session.sessionId,
           "permission",
-          {
-            kind: request.kind,
-            toolName: request.toolName,
-            toolCallId: request.toolCallId,
-            fileName: request.fileName,
-            fullCommandText: request.fullCommandText,
-          },
+          payload,
         );
         this.bus.publish(session.sessionId, {
           type: "permission.request",
           requestId,
-          data: {
-            kind: request.kind,
-            toolName: request.toolName,
-            toolCallId: request.toolCallId,
-            fileName: request.fileName,
-            fullCommandText: request.fullCommandText,
-          },
+          data: payload,
         });
         const reply = await promise;
         // reply: { decision: "approve-once"|"approve-for-session"|"reject", feedback? }

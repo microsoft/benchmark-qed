@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { ShieldKeyhole20Regular } from "@fluentui/react-icons";
 import type { PermissionAnswer, PermissionPayload } from "../copilot/types";
+import { summarizePermission } from "../copilot/permissionSummary";
 
 interface Props {
   payload: PermissionPayload;
@@ -22,13 +23,7 @@ export function CopilotPermissionDialog({
   const reject = () =>
     onSubmit({ decision: "reject", feedback: feedback.trim() || undefined });
 
-  const summary = (() => {
-    if (payload.fullCommandText)
-      return `Run command: ${payload.fullCommandText}`;
-    if (payload.fileName) return `${payload.kind}: ${payload.fileName}`;
-    if (payload.toolName) return `Tool: ${payload.toolName}`;
-    return payload.kind;
-  })();
+  const summary = summarizePermission(payload);
 
   // onCancel is wired by the panel close button; not surfaced inline.
   void onCancel;

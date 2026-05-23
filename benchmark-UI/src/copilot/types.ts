@@ -21,6 +21,11 @@ export interface PermissionPayload {
   toolCallId?: string;
   fileName?: string;
   fullCommandText?: string;
+  // The SDK includes extra fields for some `kind` values (e.g. read /
+  // list permissions ship `directory` or `path`, not `fileName`). Those
+  // are forwarded verbatim by the bridge, so allow arbitrary additional
+  // properties here.
+  [extra: string]: unknown;
 }
 
 export type PendingKind = "user_input" | "elicitation" | "permission";

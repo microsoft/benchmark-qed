@@ -52,4 +52,19 @@ export interface Workspace {
   source: FileSource;
   rootNodes: TreeNode[];
   collapsed: boolean;
+  /**
+   * When this workspace was created by copying another local workspace, the
+   * source workspace's rootPath. Used by the sidebar to visually nest copies
+   * underneath their original. Stable across reloads because rootPaths are
+   * persisted, while in-memory `id`s are regenerated on every session.
+   */
+  copyOfRootPath?: string;
+  /**
+   * When true, this workspace exists only to host an externally opened
+   * file (e.g. a previously generated quality report). It is NOT shown in
+   * the sidebar tree and NOT offered in workspace dropdowns. Such
+   * workspaces should also be created with `persisted: undefined` so
+   * they vanish on reload.
+   */
+  hiddenFromSidebar?: boolean;
 }

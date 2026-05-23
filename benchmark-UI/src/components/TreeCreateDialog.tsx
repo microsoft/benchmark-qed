@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Dismiss16Regular } from "@fluentui/react-icons";
 import type { TreeNode } from "../types";
 
@@ -19,7 +19,14 @@ export function TreeCreateDialog({
   onClose,
   onSubmit,
 }: Props) {
-  const [name, setName] = useState(kind === "file" ? "new-file.txt" : "new-folder");
+  const defaultName = kind === "file" ? "new-file.txt" : "new-folder";
+  const [name, setName] = useState(defaultName);
+
+  // Reset the input whenever the dialog re-opens or switches kind so it
+  // doesn't carry over text from a previous create.
+  useEffect(() => {
+    if (open) setName(defaultName);
+  }, [open, defaultName]);
 
   const title = kind === "file" ? "Create File" : "Create Folder";
   const noun = kind === "file" ? "file" : "folder";
@@ -45,7 +52,7 @@ export function TreeCreateDialog({
             <Dismiss16Regular />
           </button>
         </div>
-        <form className="modal-body" onSubmit={submit}>
+        <form className="modal-body" onSubmit={submit} autoComplete="off">
           <p>
             Create a new {noun} inside <strong>{parentLabel}</strong>.
           </p>
@@ -56,6 +63,15 @@ export function TreeCreateDialog({
               value={name}
               onChange={(e) => setName(e.target.value)}
               placeholder={kind === "file" ? "new-file.txt" : "new-folder"}
+              autoComplete="off"
+              autoCorrect="off"
+              autoCapitalize="off"
+              spellCheck={false}
+              name={
+                kind === "file"
+                  ? "tree-create-file-name"
+                  : "tree-create-folder-name"
+              }
             />
           </label>
 

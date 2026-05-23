@@ -15,6 +15,25 @@ export function JobLogViewer({ job, onCancel, onRerun }: Props) {
     !!job.rootPath &&
     !!job.configType &&
     job.status !== "running";
+
+  // Trigger a browser download of the current in-memory log as a .log file.
+  // The runner no longer persists logs to disk, so this is the user's only
+  // way to keep a copy of a finished run's output.
+  const downloadLog = () => {
+    const content = job.output || "(no output)";
+    const blob = new Blob([content], { type: "text/plain;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+    const stamp = job.startedAt.replace(/[:.]/g, "-");
+    const base = job.configType || "job";
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `${base}-${stamp}.log`;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+  };
+
   return (
     <div className="job-log-viewer">
       <div className="file-header">
@@ -25,18 +44,29 @@ export function JobLogViewer({ job, onCancel, onRerun }: Props) {
           </span>
           {new Date(job.startedAt).toLocaleTimeString()}
         </span>
-        {job.status === "running" ? (
-          <CancelJobButton jobId={job.id} onCancel={onCancel} />
-        ) : canRerun ? (
+        <div style={{ display: "flex", gap: 6 }}>
           <button
             type="button"
             className="init-jobs-clear"
-            title="Re-run this job"
-            onClick={() => onRerun!(job.id)}
+            title="Download the log as a .log file"
+            onClick={downloadLog}
+            disabled={!job.output}
           >
-            Re-run
+            Download log
           </button>
-        ) : null}
+          {job.status === "running" ? (
+            <CancelJobButton jobId={job.id} onCancel={onCancel} />
+          ) : canRerun ? (
+            <button
+              type="button"
+              className="init-jobs-clear"
+              title="Re-run this job"
+              onClick={() => onRerun!(job.id)}
+            >
+              Re-run
+            </button>
+          ) : null}
+        </div>
       </div>
       <div className="job-log-content">
         <div className="jobs-log-command">{job.command}</div>

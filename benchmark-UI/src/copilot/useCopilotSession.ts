@@ -40,6 +40,8 @@ export interface UseCopilotSessionResult {
   setAutoApprove: (on: boolean) => void;
   /** Push a synthetic user turn into the transcript (used to echo answers). */
   addLocalUserTurn: (content: string) => void;
+  /** Clear the in-memory transcript without touching the bridge session. */
+  resetTurns: () => void;
   end: () => Promise<void>;
 }
 
@@ -443,6 +445,10 @@ export function useCopilotSession(
     }
   }, [bridgeUrl, closeStream, sessionId]);
 
+  const resetTurns = useCallback(() => {
+    setTurns([]);
+  }, []);
+
   return useMemo(
     () => ({
       bridgeUrl,
@@ -459,6 +465,7 @@ export function useCopilotSession(
       autoApprove,
       setAutoApprove,
       addLocalUserTurn,
+      resetTurns,
       end,
     }),
     [
@@ -476,6 +483,7 @@ export function useCopilotSession(
       autoApprove,
       setAutoApprove,
       addLocalUserTurn,
+      resetTurns,
       end,
     ],
   );

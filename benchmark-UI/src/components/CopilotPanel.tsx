@@ -12,6 +12,7 @@ import { CopilotAskUserDialog } from "./CopilotAskUserDialog";
 import { CopilotElicitationDialog } from "./CopilotElicitationDialog";
 import { CopilotPermissionDialog } from "./CopilotPermissionDialog";
 import { CopilotAuthBadge } from "./CopilotAuthBadge";
+import { summarizePermission } from "../copilot/permissionSummary";
 
 interface Props {
   open: boolean;
@@ -23,6 +24,35 @@ interface Props {
   initialPrompt?: string;
   /** Send `initialPrompt` to the agent but don't show it in the transcript. */
   silentInitialPrompt?: boolean;
+  /** Optional label for the skill being launched (used in activity log). */
+  skillLabel?: string;
+  /**
+   * Optional list of skills to let the user choose from inside the panel.
+   * When provided AND `initialPrompt` is empty, the panel shows a chooser
+   * instead of auto-starting a session; selecting a card calls
+   * `onSkillSelected` so the host can either set `initialPrompt` (which
+   * starts the session) or route to a different flow (e.g. a folder picker
+   * dialog).
+   */
+  skillChoices?: Array<{
+    id: string;
+    label: string;
+    description?: string;
+  }>;
+  onSkillSelected?: (id: string) => void;
+  /**
+   * Optional inline view rendered inside the panel before the session
+   * starts. When provided it replaces the skill picker (used e.g. for the
+   * "Evaluate Question Quality" folder selector — keeps the user inside
+   * the Copilot popup instead of opening a separate dialog).
+   */
+  inlinePicker?: { title: string; node: React.ReactNode };
+  /**
+   * When true, render as a regular page region (full width/height of its
+   * parent, no modal backdrop, no close button — the host's tab UI owns
+   * lifecycle). When false (default), render as a centered modal.
+   */
+  inline?: boolean;
   /** Model id, e.g. "gpt-5" or "claude-sonnet-4-5". */
   model?: string;
   /** Called whenever the user answers with an absolute filesystem path. */
@@ -43,6 +73,14 @@ interface Props {
     details?: string,
     type?: "info" | "success" | "warning" | "error",
   ) => void;
+  /**
+   * Optional callback invoked when the user clicks "Back to options" after
+   * a session finishes. The host should clear whatever prompt/skill state
+   * caused the session to start so the skill picker renders again. The
+   * panel ends the current bridge session and keeps the prior transcript
+   * visible as history above the picker.
+   */
+  onBackToOptions?: () => void;
   onClose: () => void;
 }
 
@@ -52,10 +90,16 @@ export function CopilotPanel({
   skillDirectories,
   initialPrompt,
   silentInitialPrompt,
+  skillLabel,
+  skillChoices,
+  onSkillSelected,
+  inlinePicker,
+  inline,
   model,
   onFolderDetected,
   onActivitySettled,
   onLogEvent,
+  onBackToOptions,
   onClose,
 }: Props) {
   const session = useCopilotSession(bridgeUrl);
@@ -73,12 +117,20 @@ export function CopilotPanel({
     autoApprove,
     setAutoApprove,
     addLocalUserTurn,
+    resetTurns,
     end,
   } = session;
 
   const [draft, setDraft] = useState("");
   const [sending, setSending] = useState(false);
   const [answering, setAnswering] = useState(false);
+  const [cancelling, setCancelling] = useState(false);
+  // Past, finished sessions kept around so the user can scroll back through
+  // earlier skill runs after clicking "Back to options". Each entry holds
+  // an immutable snapshot of the chat turns plus a label.
+  const [archivedSessions, setArchivedSessions] = useState<
+    Array<{ id: string; label: string; turns: ChatTurn[] }>
+  >([]);
   const transcriptRef = useRef<HTMLDivElement>(null);
 
   // Start session when the panel opens; tear down when it closes.
@@ -93,8 +145,15 @@ export function CopilotPanel({
       return;
     }
     if (sessionId || startedRef.current) return;
+    // If the host is going to let the user pick a skill inside the panel,
+    // wait until that selection produces an `initialPrompt` before starting
+    // the session.
+    if (skillChoices && skillChoices.length > 0 && !initialPrompt) return;
+    // If the host is showing an inline picker (e.g. folder selection),
+    // wait until it's dismissed / submitted before starting.
+    if (inlinePicker && !initialPrompt) return;
     startedRef.current = true;
-    onLogEvent?.("AI Assistant started", "benchmark-qed-setup", "info");
+    onLogEvent?.("AI Assistant started", skillLabel ?? "benchmark-qed", "info");
     void start({ initialPrompt, silentInitialPrompt, model, skillDirectories }).catch((e) => {
       console.error("Failed to start copilot session", e);
       onLogEvent?.(
@@ -104,7 +163,7 @@ export function CopilotPanel({
       );
       startedRef.current = false;
     });
-  }, [open, sessionId, start, initialPrompt, silentInitialPrompt, model, skillDirectories, onLogEvent]);
+  }, [open, sessionId, start, initialPrompt, silentInitialPrompt, skillLabel, skillChoices, inlinePicker, model, skillDirectories, onLogEvent]);
 
   // Track running totals so the "ended" log entry can include a summary.
   const turnsCountRef = useRef(0);
@@ -130,11 +189,31 @@ export function CopilotPanel({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [open]);
 
+  // Auto-scroll the transcript to the bottom as new content arrives — but
+  // only when the user is already pinned to the bottom. If they have
+  // scrolled up to review earlier output we leave their position alone so
+  // streaming deltas don't yank them back down. The "near bottom" check
+  // uses a small threshold so trailing whitespace / inline cards don't
+  // accidentally unstick.
+  const stuckToBottomRef = useRef(true);
   useEffect(() => {
-    transcriptRef.current?.scrollTo({
-      top: transcriptRef.current.scrollHeight,
-      behavior: "smooth",
-    });
+    const el = transcriptRef.current;
+    if (!el) return;
+    const onScroll = () => {
+      const distance = el.scrollHeight - el.scrollTop - el.clientHeight;
+      stuckToBottomRef.current = distance < 40;
+    };
+    el.addEventListener("scroll", onScroll, { passive: true });
+    return () => el.removeEventListener("scroll", onScroll);
+  }, []);
+
+  useEffect(() => {
+    if (!stuckToBottomRef.current) return;
+    const el = transcriptRef.current;
+    if (!el) return;
+    // Instant (not smooth): smooth animation conflicts with wheel events
+    // and makes scrolling feel glitchy while content streams in.
+    el.scrollTop = el.scrollHeight;
   }, [turns, tools]);
 
   // Fire onActivitySettled whenever the session transitions from running
@@ -179,6 +258,59 @@ export function CopilotPanel({
       await fn(value);
     } finally {
       setAnswering(false);
+    }
+  };
+
+  /**
+   * Tear down the active Copilot session. Wired to the header "Cancel"
+   * button so the user can bail out of a long-running operation (the
+   * bridge's DELETE handler aborts the SDK run). We log a turn so the
+   * transcript shows that the user interrupted the run, and we close any
+   * pending permission / ask_user prompt by rejecting it first.
+   */
+  const cancelSession = async () => {
+    if (cancelling) return;
+    setCancelling(true);
+    try {
+      if (sessionId) {
+        addLocalUserTurn("⏹ Cancelled the current Copilot operation.");
+        onLogEvent?.(
+          "Copilot operation cancelled by user",
+          `session ${sessionId}`,
+          "info",
+        );
+      }
+      await end();
+    } finally {
+      setCancelling(false);
+    }
+  };
+
+  /**
+   * Archive the current chat turns, end the bridge session, and ask the
+   * host to reset its skill-selection state so the in-panel picker shows
+   * again. The archived turns stay visible above the picker as history.
+   */
+  const backToOptions = async () => {
+    if (!onBackToOptions) return;
+    if (turns.length > 0) {
+      const label = skillLabel ?? "Previous session";
+      setArchivedSessions((prev) => [
+        ...prev,
+        { id: crypto.randomUUID(), label, turns },
+      ]);
+    }
+    try {
+      await end();
+    } finally {
+      // Clear the live transcript: the snapshot now lives in
+      // archivedSessions and would otherwise render twice.
+      resetTurns();
+      // Reset the once-per-open guard so the next skill selection is
+      // allowed to start a fresh session. Without this, picking a skill
+      // after "Back to options" silently does nothing.
+      startedRef.current = false;
+      onBackToOptions();
     }
   };
 
@@ -254,14 +386,7 @@ export function CopilotPanel({
     let q = "";
     if (pending?.kind === "permission") {
       const p = pending.payload as PermissionPayload;
-      const summary = p.fullCommandText
-        ? `Run command: ${p.fullCommandText}`
-        : p.fileName
-          ? `${p.kind}: ${p.fileName}`
-          : p.toolName
-            ? `Tool: ${p.toolName}`
-            : p.kind;
-      q = summarizeQuestion(summary);
+      q = summarizeQuestion(summarizePermission(p));
     }
     const label =
       v.decision === "reject"
@@ -273,38 +398,45 @@ export function CopilotPanel({
     return handleAnswered(answerPermission, v);
   };
 
-  return (
-    <div className="modal-backdrop" onClick={onClose}>
-      <div
-        className="modal copilot-panel"
-        onClick={(e) => e.stopPropagation()}
-        style={{ width: "min(880px, 96vw)", maxHeight: "92vh" }}
-      >
-        <div className="modal-header">
-          <h3 style={{ margin: 0 }}>Copilot AI Assistant</h3>
-          <div style={{ display: "flex", gap: 10, alignItems: "center" }}>
-            <CopilotAuthBadge bridgeUrl={session.bridgeUrl} />
+  const headerNode = (
+    <div className="modal-header">
+      <h3 style={{ margin: 0 }}>Copilot AI Assistant</h3>
+      <div style={{ display: "flex", gap: 10, alignItems: "center" }}>
+        <CopilotAuthBadge bridgeUrl={session.bridgeUrl} />
+        {sessionId &&
+          status.state !== "closed" &&
+          status.state !== "error" && (
             <button
-              className="modal-close"
-              onClick={onClose}
-              aria-label="Close"
-              title="Close"
+              type="button"
+              className="btn btn-danger"
+              onClick={() => void cancelSession()}
+              disabled={cancelling}
+              title="Stop the current Copilot operation"
+              style={{
+                padding: "2px 10px",
+                fontSize: 12,
+              }}
             >
-              <Dismiss16Regular />
+              {cancelling ? "Cancelling…" : "Cancel"}
             </button>
-          </div>
-        </div>
+          )}
+        {!inline && (
+          <button
+            className="modal-close"
+            onClick={onClose}
+            aria-label="Close"
+            title="Close"
+          >
+            <Dismiss16Regular />
+          </button>
+        )}
+      </div>
+    </div>
+  );
 
-        <div
-          className="modal-body"
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            gap: 12,
-            minHeight: 360,
-          }}
-        >
-          <div
+  const bodyContent = (
+    <>
+      <div
             style={{
               fontSize: 12,
               opacity: 0.7,
@@ -380,6 +512,60 @@ export function CopilotPanel({
                 Waiting for the agent...
               </p>
             )}
+            {archivedSessions.map((a) => (
+              <div key={a.id} className="copilot-archived-session">
+                <div className="copilot-archived-separator">
+                  <span>Previous run · {a.label}</span>
+                </div>
+                {a.turns.map((t) => (
+                  <CopilotTurnView key={t.id} turn={t} />
+                ))}
+              </div>
+            ))}
+            {archivedSessions.length > 0 && !sessionId && (
+              <div className="copilot-archived-separator">
+                <span>New run</span>
+              </div>
+            )}
+            {!sessionId && inlinePicker && (
+              <div className="copilot-skill-picker">
+                <p className="copilot-skill-picker-title">
+                  {inlinePicker.title}
+                </p>
+                {inlinePicker.node}
+              </div>
+            )}
+            {!sessionId &&
+              !inlinePicker &&
+              !initialPrompt &&
+              skillChoices &&
+              skillChoices.length > 0 &&
+              status.state !== "connecting" && (
+                <div className="copilot-skill-picker">
+                  <p className="copilot-skill-picker-title">
+                    What do you want to do?
+                  </p>
+                  <div className="copilot-skill-picker-grid">
+                    {skillChoices.map((s) => (
+                      <button
+                        key={s.id}
+                        type="button"
+                        className="copilot-skill-card"
+                        onClick={() => onSkillSelected?.(s.id)}
+                      >
+                        <span className="copilot-skill-card-label">
+                          {s.label}
+                        </span>
+                        {s.description && (
+                          <span className="copilot-skill-card-desc">
+                            {s.description}
+                          </span>
+                        )}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
             {turns.map((t) => (
               <CopilotTurnView key={t.id} turn={t} />
             ))}
@@ -452,6 +638,16 @@ export function CopilotPanel({
                 <span className="copilot-done-label">
                   ✓ Assistant finished
                 </span>
+                {onBackToOptions && (
+                  <button
+                    type="button"
+                    className="btn"
+                    onClick={() => void backToOptions()}
+                    title="Return to the skill picker and keep this transcript as history"
+                  >
+                    Back to options
+                  </button>
+                )}
                 <button
                   type="button"
                   className="btn btn-primary"
@@ -501,6 +697,47 @@ export function CopilotPanel({
               <Send16Regular />
             </button>
           </form>
+        </>
+      );
+
+  if (inline) {
+    return (
+      <div className="copilot-inline">
+        {headerNode}
+        <div
+          className="modal-body copilot-inline-body"
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: 12,
+            flex: 1,
+            minHeight: 0,
+          }}
+        >
+          {bodyContent}
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="modal-backdrop" onClick={onClose}>
+      <div
+        className="modal copilot-panel"
+        onClick={(e) => e.stopPropagation()}
+        style={{ width: "min(880px, 96vw)", maxHeight: "92vh" }}
+      >
+        {headerNode}
+        <div
+          className="modal-body"
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: 12,
+            minHeight: 360,
+          }}
+        >
+          {bodyContent}
         </div>
       </div>
     </div>

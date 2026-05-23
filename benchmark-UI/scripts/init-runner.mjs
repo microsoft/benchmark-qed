@@ -40,6 +40,119 @@ const runJobs = new Map();
 const jobProcesses = new Map(); // jobId -> child process
 const cancelledJobs = new Set(); // jobIds that were user-cancelled
 
+// ---------------------------------------------------------------------------
+// Persistent job store. Survives runner restarts.
+// ---------------------------------------------------------------------------
+const JOBS_STORE_DIR = path.join(REPO_ROOT, ".benchmark-qed-runner");
+const JOBS_STORE_FILE = path.join(JOBS_STORE_DIR, "jobs.json");
+// Cap stored output per job so a long-running job's log doesn't blow up the
+// store file. The live in-memory copy is unbounded; we only truncate what
+// gets serialized to disk.
+const PERSISTED_OUTPUT_LIMIT = 200_000; // ~200 KB
+
+function truncateForPersist(s) {
+  if (!s) return "";
+  if (s.length <= PERSISTED_OUTPUT_LIMIT) return s;
+  const head = s.slice(0, 2000);
+  const tail = s.slice(-PERSISTED_OUTPUT_LIMIT + 2000);
+  return `${head}\n\n... [truncated ${s.length - PERSISTED_OUTPUT_LIMIT} chars] ...\n\n${tail}`;
+}
+
+let persistTimer = null;
+function persistJobsSoon() {
+  if (persistTimer) return;
+  persistTimer = setTimeout(() => {
+    persistTimer = null;
+    try {
+      if (!fs.existsSync(JOBS_STORE_DIR)) {
+        fs.mkdirSync(JOBS_STORE_DIR, { recursive: true });
+      }
+      const payload = {
+        version: 1,
+        initJobs: Array.from(initJobs.values()).map((j) => ({
+          ...j,
+          output: truncateForPersist(j.output),
+        })),
+        runJobs: Array.from(runJobs.values()).map((j) => ({
+          ...j,
+          output: truncateForPersist(j.output),
+        })),
+      };
+      const tmp = `${JOBS_STORE_FILE}.tmp`;
+      fs.writeFileSync(tmp, JSON.stringify(payload), "utf-8");
+      fs.renameSync(tmp, JOBS_STORE_FILE);
+    } catch (err) {
+      // eslint-disable-next-line no-console
+      console.error("[init-runner] Failed to persist jobs:", err);
+    }
+  }, 500);
+}
+
+function loadPersistedJobs() {
+  try {
+    if (!fs.existsSync(JOBS_STORE_FILE)) return;
+    const raw = fs.readFileSync(JOBS_STORE_FILE, "utf-8");
+    const data = JSON.parse(raw);
+    if (!data || typeof data !== "object") return;
+    const restore = (arr, map) => {
+      if (!Array.isArray(arr)) return;
+      for (const j of arr) {
+        if (!j || typeof j !== "object" || typeof j.id !== "string") continue;
+        // Any job that was 'running' when the runner died is now orphaned.
+        if (j.status === "running") {
+          j.status = "failed";
+          j.endedAt = j.endedAt || new Date().toISOString();
+          j.exitCode = j.exitCode ?? -1;
+          j.output = `${j.output || ""}\n[Runner restarted while job was running; status forced to failed.]\n`;
+        }
+        map.set(j.id, j);
+      }
+    };
+    restore(data.initJobs, initJobs);
+    restore(data.runJobs, runJobs);
+  } catch (err) {
+    // eslint-disable-next-line no-console
+    console.error("[init-runner] Failed to load persisted jobs:", err);
+  }
+}
+
+loadPersistedJobs();
+
+function flushPersistedJobs() {
+  if (persistTimer) {
+    clearTimeout(persistTimer);
+    persistTimer = null;
+  }
+  try {
+    if (!fs.existsSync(JOBS_STORE_DIR)) {
+      fs.mkdirSync(JOBS_STORE_DIR, { recursive: true });
+    }
+    const payload = {
+      version: 1,
+      initJobs: Array.from(initJobs.values()).map((j) => ({
+        ...j,
+        output: truncateForPersist(j.output),
+      })),
+      runJobs: Array.from(runJobs.values()).map((j) => ({
+        ...j,
+        output: truncateForPersist(j.output),
+      })),
+    };
+    fs.writeFileSync(JOBS_STORE_FILE, JSON.stringify(payload), "utf-8");
+  } catch {
+    /* ignore */
+  }
+}
+
+for (const signal of ["SIGINT", "SIGTERM", "SIGHUP"]) {
+  process.on(signal, () => {
+    flushPersistedJobs();
+    process.exit(0);
+  });
+}
+process.on("beforeExit", flushPersistedJobs);
+
+
 function resolveCorsOrigin(req) {
   const origin = req.headers.origin;
   if (!origin) return ALLOWED_ORIGIN;
@@ -73,9 +186,12 @@ function resolveFsPath(rootPath, relPath = "") {
 // spinners, etc.) overwrite the previous frame instead of accumulating as
 // duplicated text. Handles \r, CSI cursor-up (\x1b[<n>A), and CSI erase-line
 // (\x1b[K / \x1b[2K). All other ANSI escapes are stripped.
-function appendOutput(job, chunk) {
+//
+// Pure: takes the current cumulative buffer and a chunk of raw output,
+// returns the new buffer. Used by the live in-memory job.output buffer
+// (which gets size-capped by the caller).
+function processTerminalChunk(buf, chunk) {
   const txt = String(chunk ?? "");
-  let buf = job.output;
 
   const eraseCurrentLine = () => {
     const nl = buf.lastIndexOf("\n");
@@ -96,19 +212,28 @@ function appendOutput(job, chunk) {
         i += 1;
       }
     } else if (ch === "\x1b" && txt[i + 1] === "[") {
-      // CSI sequence: ESC [ params final
+      // CSI sequence: ESC [ <parameter bytes 0x30–0x3F> <intermediate 0x20–0x2F> <final 0x40–0x7E>
       let j = i + 2;
-      let params = "";
-      while (j < txt.length && /[0-9;]/.test(txt[j])) {
-        params += txt[j];
+      while (j < txt.length) {
+        const code = txt.charCodeAt(j);
+        if (code < 0x30 || code > 0x3f) break;
+        j += 1;
+      }
+      // Intermediate bytes (rare, but skip them for correctness).
+      while (j < txt.length) {
+        const code = txt.charCodeAt(j);
+        if (code < 0x20 || code > 0x2f) break;
         j += 1;
       }
       const final = txt[j];
-      if (final === undefined) {
+      const finalCode = final ? txt.charCodeAt(j) : 0;
+      if (!final || finalCode < 0x40 || finalCode > 0x7e) {
         // Incomplete escape at chunk boundary — drop it; subsequent chunk
         // would otherwise resync anyway.
         break;
       }
+      // Numeric params only (strip private-mode `?`, etc.) for our handlers.
+      const params = txt.slice(i + 2, j).replace(/[^0-9;]/g, "");
       if (final === "A") {
         // Cursor up N (default 1): clear current line, then drop N prior lines.
         const n = Math.max(1, parseInt(params || "1", 10) || 1);
@@ -120,11 +245,30 @@ function appendOutput(job, chunk) {
       } else if (final === "K" || final === "J") {
         // Erase in line / display — collapse to clearing current line.
         eraseCurrentLine();
+      } else if (final === "G" || final === "H" || final === "f") {
+        // Cursor horizontal absolute / cursor position — treat as carriage
+        // return for the current line (rich uses \x1b[1G between frames).
+        eraseCurrentLine();
       }
-      // All other CSI sequences (colors, cursor moves, etc.) are stripped.
+      // All other CSI sequences (colors, cursor moves, mode set/reset, …) are stripped.
       i = j + 1;
+    } else if (ch === "\x1b" && txt[i + 1] === "]") {
+      // OSC sequence: ESC ] ... (BEL | ESC \). Strip entirely.
+      let j = i + 2;
+      while (j < txt.length) {
+        if (txt[j] === "\x07") {
+          j += 1;
+          break;
+        }
+        if (txt[j] === "\x1b" && txt[j + 1] === "\\") {
+          j += 2;
+          break;
+        }
+        j += 1;
+      }
+      i = j;
     } else if (ch === "\x1b") {
-      // Other ESC sequence (e.g. ESC ] OSC, ESC ( charset). Skip ESC + next.
+      // Other ESC sequence (e.g. ESC ( charset). Skip ESC + next.
       i += txt[i + 1] ? 2 : 1;
     } else {
       buf += ch;
@@ -134,8 +278,11 @@ function appendOutput(job, chunk) {
 
   // Collapse consecutive progress-bar style lines (rich / tqdm) by label so
   // we don't accumulate hundreds of redraws when stdout isn't a TTY.
-  buf = collapseProgressLines(buf);
+  return collapseProgressLines(buf);
+}
 
+function appendOutput(job, chunk) {
+  let buf = processTerminalChunk(job.output, chunk);
   if (buf.length > 120_000) {
     buf = buf.slice(-120_000);
   }
@@ -224,15 +371,28 @@ function spawnChildInCwd(cmd, cmdArgs, cwd = REPO_ROOT) {
 // run. Result is cached for the lifetime of the runner process.
 let _resolvedBenchmarkInvocation = null;
 function which(cmd) {
+  // Cross-platform: use `where` on Windows, `command -v` on POSIX. Both print
+  // the resolved absolute path to stdout (one per line) when the binary is
+  // discoverable on PATH and exit 0; we keep the first match.
   try {
-    const res = spawnSync("/bin/sh", ["-c", `command -v ${cmd}`], {
-      env: CHILD_ENV,
-      encoding: "utf8",
-      timeout: 5000,
-    });
+    const isWin = process.platform === "win32";
+    const res = isWin
+      ? spawnSync("where", [cmd], {
+          env: CHILD_ENV,
+          encoding: "utf8",
+          timeout: 5000,
+          // `where` is a built-in resolver shim on Windows — run through the
+          // shell so PATHEXT (.cmd/.exe) lookup works for non-.exe shims.
+          shell: true,
+        })
+      : spawnSync("/bin/sh", ["-c", `command -v ${cmd}`], {
+          env: CHILD_ENV,
+          encoding: "utf8",
+          timeout: 5000,
+        });
     if (res.status === 0) {
       const out = (res.stdout || "").trim();
-      if (out) return out.split("\n")[0];
+      if (out) return out.split(/\r?\n/)[0];
     }
   } catch {
     /* ignore */
@@ -249,6 +409,9 @@ function resolveBenchmarkInvocation() {
         env: CHILD_ENV,
         stdio: "ignore",
         timeout: 15000,
+        // On Windows, npm/uv/pipx install console_scripts as `.cmd` shims;
+        // Node's spawn cannot execute them without the shell wrapper.
+        shell: process.platform === "win32",
       });
       return res.status === 0;
     } catch {
@@ -305,6 +468,7 @@ function runCommandWithFallback(job, args, onCompleted) {
         console.error("[init-runner] onCompleted handler failed:", err);
       }
     }
+    persistJobsSoon();
   };
 
   // Spawn through a pseudo-terminal so that rich/tqdm detect a real TTY and
@@ -339,7 +503,10 @@ function runCommandWithFallback(job, args, onCompleted) {
   };
   jobProcesses.set(job.id, handle);
 
-  proc.onData((data) => appendOutput(job, data));
+  proc.onData((data) => {
+    appendOutput(job, data);
+    persistJobsSoon();
+  });
   proc.onExit(({ exitCode }) => markCompleted(exitCode));
 }
 // Cancel a running job by id
@@ -464,50 +631,10 @@ function startInitJob(body) {
     exitCode: null,
   };
   initJobs.set(id, job);
+  persistJobsSoon();
   runCommandWithFallback(job, args);
 
   return job;
-}
-
-// Strip common ANSI escape sequences (colors, cursor moves, tqdm redraws)
-// so the saved log file is human-readable in any text editor.
-function stripAnsi(input) {
-  if (!input) return "";
-  // eslint-disable-next-line no-control-regex
-  return input.replace(/\x1b\[[0-9;?]*[A-Za-z]/g, "").replace(/\r/g, "");
-}
-
-// On completion of a run job, persist the full captured output to a log
-// file inside the workspace's `output/` folder so the user can review it
-// after closing the tab.
-function persistRunJobLog(job) {
-  try {
-    if (!job?.rootPath) return;
-    const logDir = path.join(job.rootPath, "output");
-    fs.mkdirSync(logDir, { recursive: true });
-    const stamp = (job.endedAt || new Date().toISOString())
-      .replace(/[:.]/g, "-");
-    const fileName = `${job.configType || "run"}-${stamp}.log`;
-    const filePath = path.join(logDir, fileName);
-    const header = [
-      `# benchmark-qed run log`,
-      `# job id      : ${job.id}`,
-      `# config type : ${job.configType}`,
-      `# root path   : ${job.rootPath}`,
-      `# started at  : ${job.startedAt}`,
-      `# ended at    : ${job.endedAt}`,
-      `# exit code   : ${job.exitCode}`,
-      `# status      : ${job.status}`,
-      `# command     : ${job.command}`,
-      "",
-      "",
-    ].join("\n");
-    fs.writeFileSync(filePath, header + stripAnsi(job.output || ""), "utf-8");
-    job.logFilePath = filePath;
-  } catch (err) {
-    // eslint-disable-next-line no-console
-    console.error("[init-runner] Failed to persist run log:", err);
-  }
 }
 
 function startRunJob(body) {
@@ -548,10 +675,10 @@ function startRunJob(body) {
     command: `benchmark-qed ${args.join(" ")}`,
     output: "",
     exitCode: null,
-    logFilePath: null,
   };
   runJobs.set(id, job);
-  runCommandWithFallback(job, args, persistRunJobLog);
+  persistJobsSoon();
+  runCommandWithFallback(job, args);
   return job;
 }
 
@@ -564,48 +691,94 @@ async function parseBody(req) {
 }
 
 async function pickFolderPath() {
-  if (process.platform !== "darwin") {
-    throw new Error("Native folder picker is currently supported on macOS only.");
+  if (process.platform === "darwin") {
+    const { stdout } = await execFileAsync("osascript", [
+      "-e",
+      'POSIX path of (choose folder with prompt "Select benchmark root folder")',
+    ]);
+    const selected = stdout.trim();
+    if (!selected) {
+      throw new Error("No folder selected.");
+    }
+    return selected.replace(/\/$/, "");
   }
 
-  const { stdout } = await execFileAsync("osascript", [
-    "-e",
-    'POSIX path of (choose folder with prompt "Select benchmark root folder")',
-  ]);
-  const selected = stdout.trim();
-  if (!selected) {
-    throw new Error("No folder selected.");
+  if (process.platform === "win32") {
+    // STA + WinForms FolderBrowserDialog. `__CANCELLED__` is our sentinel so
+    // we can distinguish a user cancel from an empty selection.
+    const script =
+      "Add-Type -AssemblyName System.Windows.Forms;" +
+      "$f = New-Object System.Windows.Forms.FolderBrowserDialog;" +
+      "$f.Description = 'Select benchmark root folder';" +
+      "if ($f.ShowDialog() -eq 'OK') { Write-Output $f.SelectedPath } else { Write-Output '__CANCELLED__' }";
+    const { stdout } = await execFileAsync(
+      "powershell.exe",
+      ["-NoProfile", "-NonInteractive", "-STA", "-Command", script],
+      { timeout: 5 * 60 * 1000 },
+    );
+    const selected = stdout.trim();
+    if (!selected || selected === "__CANCELLED__") {
+      throw new Error("No folder selected.");
+    }
+    return selected.replace(/[\\/]+$/, "");
   }
-  return selected.replace(/\/$/, "");
+
+  throw new Error(
+    `Native folder picker is not supported on platform '${process.platform}'.`,
+  );
 }
 
 async function pickFilesPaths() {
-  if (process.platform !== "darwin") {
-    throw new Error("Native file picker is currently supported on macOS only.");
+  if (process.platform === "darwin") {
+    const { stdout } = await execFileAsync("osascript", [
+      "-e",
+      'set theFiles to choose file with prompt "Select dataset file(s) to import" with multiple selections allowed',
+      "-e",
+      'set out to ""',
+      "-e",
+      "repeat with f in theFiles",
+      "-e",
+      'set out to out & (POSIX path of f) & "\\n"',
+      "-e",
+      "end repeat",
+      "-e",
+      "return out",
+    ]);
+    const lines = stdout
+      .split("\n")
+      .map((s) => s.trim())
+      .filter(Boolean);
+    if (lines.length === 0) {
+      throw new Error("No files selected.");
+    }
+    return lines;
   }
 
-  const { stdout } = await execFileAsync("osascript", [
-    "-e",
-    'set theFiles to choose file with prompt "Select dataset file(s) to import" with multiple selections allowed',
-    "-e",
-    'set out to ""',
-    "-e",
-    "repeat with f in theFiles",
-    "-e",
-    'set out to out & (POSIX path of f) & "\\n"',
-    "-e",
-    "end repeat",
-    "-e",
-    "return out",
-  ]);
-  const lines = stdout
-    .split("\n")
-    .map((s) => s.trim())
-    .filter(Boolean);
-  if (lines.length === 0) {
-    throw new Error("No files selected.");
+  if (process.platform === "win32") {
+    const script =
+      "Add-Type -AssemblyName System.Windows.Forms;" +
+      "$o = New-Object System.Windows.Forms.OpenFileDialog;" +
+      "$o.Title = 'Select dataset file(s) to import';" +
+      "$o.Multiselect = $true;" +
+      "if ($o.ShowDialog() -eq 'OK') { $o.FileNames | ForEach-Object { Write-Output $_ } } else { Write-Output '__CANCELLED__' }";
+    const { stdout } = await execFileAsync(
+      "powershell.exe",
+      ["-NoProfile", "-NonInteractive", "-STA", "-Command", script],
+      { timeout: 5 * 60 * 1000 },
+    );
+    const lines = stdout
+      .split(/\r?\n/)
+      .map((s) => s.trim())
+      .filter(Boolean);
+    if (lines.length === 0 || lines[0] === "__CANCELLED__") {
+      throw new Error("No files selected.");
+    }
+    return lines;
   }
-  return lines;
+
+  throw new Error(
+    `Native file picker is not supported on platform '${process.platform}'.`,
+  );
 }
 
 const server = createServer(async (req, res) => {
@@ -864,12 +1037,48 @@ const server = createServer(async (req, res) => {
 
   if (req.method === "DELETE" && pathname === "/api/init-jobs") {
     initJobs.clear();
+    persistJobsSoon();
     json(req, res, 200, { ok: true });
     return;
   }
 
   if (req.method === "DELETE" && pathname === "/api/run-jobs") {
     runJobs.clear();
+    persistJobsSoon();
+    json(req, res, 200, { ok: true });
+    return;
+  }
+
+  if (req.method === "DELETE" && pathname.startsWith("/api/init-jobs/")) {
+    const id = pathname.split("/").pop();
+    const job = id ? initJobs.get(id) : undefined;
+    if (!job) {
+      json(req, res, 404, { error: "Job not found" });
+      return;
+    }
+    if (job.status === "running") {
+      json(req, res, 400, { error: "Cannot delete a running job." });
+      return;
+    }
+    initJobs.delete(id);
+    persistJobsSoon();
+    json(req, res, 200, { ok: true });
+    return;
+  }
+
+  if (req.method === "DELETE" && pathname.startsWith("/api/run-jobs/")) {
+    const id = pathname.split("/").pop();
+    const job = id ? runJobs.get(id) : undefined;
+    if (!job) {
+      json(req, res, 404, { error: "Job not found" });
+      return;
+    }
+    if (job.status === "running") {
+      json(req, res, 400, { error: "Cannot delete a running job. Cancel it first." });
+      return;
+    }
+    runJobs.delete(id);
+    persistJobsSoon();
     json(req, res, 200, { ok: true });
     return;
   }
@@ -913,10 +1122,56 @@ const server = createServer(async (req, res) => {
       job.endedAt = new Date().toISOString();
       job.exitCode = -1;
       appendOutput(job, "\nJob cancelled by user.\n");
+      persistJobsSoon();
       json(req, res, 200, { ok: true });
     } else {
       json(req, res, 400, { error: "Failed to cancel job or already finished." });
     }
+    return;
+  }
+
+  if (req.method === "POST" && pathname.startsWith("/api/run-jobs/") && pathname.endsWith("/rerun")) {
+    const id = pathname.split("/").slice(-2, -1)[0];
+    const job = id ? runJobs.get(id) : undefined;
+    if (!job) {
+      json(req, res, 404, { error: "Job not found" });
+      return;
+    }
+    if (job.status === "running") {
+      json(req, res, 400, { error: "Job is already running." });
+      return;
+    }
+    if (!job.rootPath || !job.configType) {
+      json(req, res, 400, {
+        error: "Job is missing rootPath or configType; cannot re-run.",
+      });
+      return;
+    }
+
+    const settingsPath = path.join(job.rootPath, "settings.yaml");
+    const outputPath = path.join(job.rootPath, "output");
+    const runArgsByType = {
+      autoq: ["autoq", settingsPath, outputPath],
+      autoe_pairwise: ["autoe", "pairwise-scores", settingsPath, outputPath],
+      autoe_reference: ["autoe", "reference-scores", settingsPath, outputPath],
+      autoe_assertion: ["autoe", "assertion-scores", settingsPath, outputPath],
+    };
+    const args = runArgsByType[job.configType];
+    if (!args) {
+      json(req, res, 400, { error: `Unknown configType: ${job.configType}` });
+      return;
+    }
+
+    // Reset the existing job in place so the UI sees the same id with a
+    // fresh run rather than a new history entry.
+    job.status = "running";
+    job.startedAt = new Date().toISOString();
+    job.endedAt = null;
+    job.exitCode = null;
+    job.output = "";
+    persistJobsSoon();
+    runCommandWithFallback(job, args);
+    json(req, res, 202, job);
     return;
   }
 
@@ -1030,6 +1285,57 @@ const server = createServer(async (req, res) => {
       const { target } = resolveFsPath(rootPath, relPath);
       await fsp.rm(target, { recursive: true, force: false });
       json(req, res, 200, { ok: true });
+    } catch (err) {
+      json(req, res, 400, {
+        error: err instanceof Error ? err.message : String(err),
+      });
+    }
+    return;
+  }
+
+  // Recursively copy an entire workspace folder (or any absolute folder) to a
+  // new absolute destination path. Used by the "Copy workspace" action in the
+  // UI so users can fork a workspace and load the copy as a new tab.
+  if (req.method === "POST" && pathname === "/api/fs/copy-path") {
+    try {
+      const body = await parseBody(req);
+      const sourcePath = body.sourcePath;
+      const destPath = body.destPath;
+      const overwrite = Boolean(body.overwrite);
+      if (!sourcePath || typeof sourcePath !== "string") {
+        throw new Error("sourcePath is required.");
+      }
+      if (!destPath || typeof destPath !== "string") {
+        throw new Error("destPath is required.");
+      }
+      const absSource = path.resolve(sourcePath);
+      const absDest = path.resolve(destPath);
+      const srcStat = await fsp.stat(absSource).catch(() => null);
+      if (!srcStat || !srcStat.isDirectory()) {
+        throw new Error(`Source folder not found: ${absSource}`);
+      }
+      if (absDest === absSource) {
+        throw new Error("Destination must differ from source.");
+      }
+      if (
+        absDest.startsWith(`${absSource}${path.sep}`) ||
+        absDest === absSource
+      ) {
+        throw new Error("Destination cannot be inside the source folder.");
+      }
+      const destStat = await fsp.stat(absDest).catch(() => null);
+      if (destStat && !overwrite) {
+        throw new Error(
+          `Destination already exists: ${absDest}. Choose a different path.`,
+        );
+      }
+      await fsp.mkdir(path.dirname(absDest), { recursive: true });
+      await fsp.cp(absSource, absDest, {
+        recursive: true,
+        force: overwrite,
+        errorOnExist: !overwrite,
+      });
+      json(req, res, 200, { ok: true, path: absDest });
     } catch (err) {
       json(req, res, 400, {
         error: err instanceof Error ? err.message : String(err),

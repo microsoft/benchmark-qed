@@ -69,9 +69,12 @@ async function readBody(req) {
 async function checkAuthStatus() {
   // The bundled Copilot CLI stores login state under ~/.copilot. Easiest probe
   // is `copilot auth status` if available; otherwise we report unknown.
+  // On Windows the globally installed binary is `copilot.cmd`, which Node's
+  // execFile can only invoke through the shell — hence the `shell` flag.
   try {
     const { stdout } = await execFileAsync("copilot", ["auth", "status"], {
       timeout: 4000,
+      shell: process.platform === "win32",
     });
     return { ok: true, detail: stdout.trim() };
   } catch (err) {
