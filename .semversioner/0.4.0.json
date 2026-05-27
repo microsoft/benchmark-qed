@@ -1,0 +1,66 @@
+{
+  "changes": [
+    {
+      "description": "Add assertion generation for data-local and data-global questions with optional validation",
+      "type": "minor"
+    },
+    {
+      "description": "Add benchmark-qed agentic skills with interactive configuration wizard and best practices",
+      "type": "minor"
+    },
+    {
+      "description": "Add data-linked question generation with bridge, comparison, intersection, and temporal question types",
+      "type": "minor"
+    },
+    {
+      "description": "Add hierarchical assertion scoring with support for comparing multiple RAG methods, clustered permutation significance tests, and supporting assertions tracking",
+      "type": "minor"
+    },
+    {
+      "description": "Add retrieval metrics evaluation pipeline with CLI, caching, TVD metric, and significance testing",
+      "type": "minor"
+    },
+    {
+      "description": "Support azure identity scopes",
+      "type": "minor"
+    },
+    {
+      "description": "Support parquet inputs",
+      "type": "minor"
+    },
+    {
+      "description": "cleanup code using graphrag-llm",
+      "type": "minor"
+    },
+    {
+      "description": "storage improvements",
+      "type": "minor"
+    },
+    {
+      "description": "Add type-checking to Jupyter Notebooks, update Pyright",
+      "type": "patch"
+    },
+    {
+      "description": "Bug fixes, ruff lint/format cleanup, and pyright type annotation compliance",
+      "type": "patch"
+    },
+    {
+      "description": "add different storage options",
+      "type": "patch"
+    },
+    {
+      "description": "fix: use bool() instead of identity check for question validation pass field",
+      "type": "patch"
+    },
+    {
+      "description": "input migration",
+      "type": "patch"
+    },
+    {
+      "description": "migration to graphrag-common library",
+      "type": "patch"
+    }
+  ],
+  "created_at": "2026-05-27T19:56:28+00:00",
+  "version": "0.4.0"
+}
