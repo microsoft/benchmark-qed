@@ -999,11 +999,34 @@ body,
   padding: 0 4px;
   border-radius: 2px;
 }
+.checkbox-field {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: var(--text-dim);
+}
+.checkbox-field input {
+  margin: 0;
+}
 .picker-row {
   display: flex;
   gap: 8px;
 }
 .picker-row input {
+  flex: 1;
+}
+.child-workspace-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.child-workspace-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.child-workspace-row input {
   flex: 1;
 }
 .option-group {
@@ -1028,12 +1051,6 @@ body,
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 8px;
-}
-.command-display {
-  background: var(--bg);
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  padding: 10px;
 }
 .command-info {
   display: flex;
@@ -1137,6 +1154,44 @@ body,
   padding: 1px 4px;
   border-radius: 2px;
 }
+.modal-callout {
+  font-size: 12px;
+  line-height: 1.45;
+  padding: 10px 12px;
+  border-radius: 4px;
+  border-left: 3px solid var(--border);
+  background: var(--bg-3);
+  color: var(--text);
+}
+.modal-callout strong {
+  font-weight: 600;
+}
+.modal-callout-warning {
+  border-left-color: #f5a623;
+  background: rgba(245, 166, 35, 0.12);
+  color: #f5cf8a;
+}
+.modal-callout-info {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  border-left-color: #4ea1ff;
+  background: rgba(78, 161, 255, 0.12);
+  color: #cfe4ff;
+}
+.modal-callout-info .spinner {
+  flex: 0 0 14px;
+  width: 14px;
+  height: 14px;
+  margin-top: 2px;
+  border: 2px solid rgba(207, 228, 255, 0.3);
+  border-top-color: #cfe4ff;
+  border-radius: 50%;
+  animation: modal-callout-spin 0.8s linear infinite;
+}
+@keyframes modal-callout-spin {
+  to { transform: rotate(360deg); }
+}
 .modal-actions {
   display: flex;
   justify-content: flex-end;
@@ -1153,6 +1208,14 @@ body,
 }
 .btn:hover {
   background: var(--bg-hover);
+}
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+.btn-primary:disabled {
+  background: color-mix(in srgb, var(--accent) 70%, #111 30%);
+  border-color: color-mix(in srgb, var(--accent) 70%, #111 30%);
 }
 .btn-primary {
   background: var(--accent);

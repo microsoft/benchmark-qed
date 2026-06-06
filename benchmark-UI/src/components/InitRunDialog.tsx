@@ -65,11 +65,16 @@ export function InitRunDialog({ open, submitting, onClose, onSubmit }: Props) {
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!rootPath.trim()) return;
+    // For blob storage the CLI still wants a positional root argument but
+    // does not use it when uploading directly to the container. Default to
+    // "." (the runner's cwd) so the user doesn't have to think about it.
+    const effectiveRootPath =
+      storageType === "blob" ? (rootPath.trim() || ".") : rootPath.trim();
+    if (!effectiveRootPath) return;
 
     await onSubmit({
       configType,
-      rootPath: rootPath.trim(),
+      rootPath: effectiveRootPath,
       storageType,
       containerName: containerName.trim() || undefined,
       accountUrl: accountUrl.trim() || undefined,
@@ -77,6 +82,20 @@ export function InitRunDialog({ open, submitting, onClose, onSubmit }: Props) {
       baseDir: baseDir.trim() || undefined,
     });
   };
+
+  // The CLI's `benchmark-qed config init` always takes a local positional
+  // root argument, but its meaning changes with --storage-type:
+  //   * local                                 → settings.yaml/.env/prompts/
+  //                                             are written under <root>/
+  //   * blob                                  → the positional root argument
+  //                                             is unused when an account-url
+  //                                             or connection-string is
+  //                                             provided (files are uploaded
+  //                                             directly to the container);
+  //                                             without auth it falls back to
+  //                                             local scaffolding only.
+  // For blob mode the field is hidden and submit() substitutes "." so the
+  // user doesn't have to invent a meaningless path.
 
   const pickRootPath = async () => {
     setPickingRoot(true);
@@ -130,30 +149,6 @@ export function InitRunDialog({ open, submitting, onClose, onSubmit }: Props) {
             </div>
           </section>
 
-          <label className="field">
-            <span>Root folder path</span>
-            <div className="picker-row">
-              <input
-                type="text"
-                value={rootPath}
-                onChange={(e) => setRootPath(e.target.value)}
-                placeholder="/absolute/path/to/new-run-folder"
-                required
-              />
-              <button
-                type="button"
-                className="btn"
-                onClick={pickRootPath}
-                disabled={pickingRoot}
-              >
-                {pickingRoot ? "Picking..." : "Pick Folder"}
-              </button>
-            </div>
-            <small>
-              This path is on your machine where the local runner service is running.
-            </small>
-          </label>
-
           <section className="option-group">
             <h4>Storage Mode</h4>
             <div className="segmented-toggle">
@@ -173,6 +168,37 @@ export function InitRunDialog({ open, submitting, onClose, onSubmit }: Props) {
               </button>
             </div>
           </section>
+
+          {storageType === "local" && (
+            <section className="option-group option-group-muted">
+              <h4>Local Details</h4>
+              <label className="field">
+                <span>Root folder path</span>
+                <div className="picker-row">
+                  <input
+                    type="text"
+                    value={rootPath}
+                    onChange={(e) => setRootPath(e.target.value)}
+                    placeholder="/absolute/path/to/new-run-folder"
+                    required
+                  />
+                  <button
+                    type="button"
+                    className="btn"
+                    onClick={pickRootPath}
+                    disabled={pickingRoot}
+                  >
+                    {pickingRoot ? "Picking..." : "Pick Folder"}
+                  </button>
+                </div>
+                <small>
+                  Folder on the machine running the local runner where the
+                  workspace scaffold (settings.yaml, prompts/, .env, input/)
+                  will be created.
+                </small>
+              </label>
+            </section>
+          )}
 
           {storageType === "blob" && (
             <section className="option-group option-group-muted">
@@ -210,6 +236,12 @@ export function InitRunDialog({ open, submitting, onClose, onSubmit }: Props) {
                   onChange={(e) => setBaseDir(e.target.value)}
                 />
               </label>
+              <div className="modal-callout modal-callout-warning" role="note">
+                <strong>Heads up:</strong> blob workspaces are not
+                automatically mounted. After this job succeeds, click
+                <strong> + Add Workspace</strong> and connect to the container
+                with a SAS URL to browse it in the sidebar.
+              </div>
             </section>
           )}
 

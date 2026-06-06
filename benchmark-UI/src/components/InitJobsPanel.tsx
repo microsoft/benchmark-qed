@@ -5,6 +5,7 @@ export interface InitJob {
   endedAt: string | null;
   rootPath?: string;
   configType?: "autoq" | "autoe_pairwise" | "autoe_reference" | "autoe_assertion";
+  storageType?: "local" | "blob";
   command: string;
   output: string;
   exitCode: number | null;

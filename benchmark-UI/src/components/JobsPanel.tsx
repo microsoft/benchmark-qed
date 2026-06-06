@@ -44,9 +44,15 @@ function statusOrder(s: JobStatus): number {
 }
 
 function jobFolder(job: InitJob | RunJob): string | undefined {
-  return job.rootPath
-    ? job.rootPath.split(/[/\\]/).filter(Boolean).pop()
-    : undefined;
+  if (!job.rootPath) return undefined;
+  // For blob init jobs `rootPath` is typically "." (the runner's cwd) and
+  // isn't a meaningful display name. Hide it.
+  const isBlobJob =
+    (job as InitJob).storageType === "blob" ||
+    /--storage-type\s+blob\b/.test(job.command ?? "");
+  if (isBlobJob && (job.rootPath === "." || job.rootPath.trim() === ""))
+    return undefined;
+  return job.rootPath.split(/[/\\]/).filter(Boolean).pop();
 }
 
 function normalizePath(p: string): string {

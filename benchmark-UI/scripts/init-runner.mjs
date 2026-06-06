@@ -663,6 +663,7 @@ function startInitJob(body) {
     endedAt: null,
     rootPath: body.rootPath,
     configType: body.configType,
+    storageType: body.storageType === "blob" ? "blob" : "local",
     command: `benchmark-qed ${args.join(" ")}`,
     output: "",
     exitCode: null,
@@ -723,19 +724,18 @@ function startRunJob(body) {
   let displayRoot;
 
   if (body.blob && typeof body.blob === "object") {
-    // Blob workspace: pass blob:// URIs to the CLI and authenticate via
-    // --connection-string (SAS-based). The CLI's resolve_config_path will
-    // download the settings.yaml and its siblings into a temp dir; the
-    // settings.yaml is expected to have output_storage / input.storage
-    // pointing at blob too, otherwise the output_path arg will fall back
-    // to local FileStorage and fail.
+    // Blob workspace: pass blob:// URIs to the CLI. Prefer --account-url
+    // (DefaultAzureCredential / az CLI auth) over the SAS connection
+    // string, because graphrag_storage's Azure backend calls account-
+    // level APIs (e.g. list_containers) on init and a container-scoped
+    // SAS will be rejected with AuthenticationFailed. The caller can
+    // opt into SAS by setting body.blob.useSas === true.
     if (typeof body.blob.sasUrl !== "string" || !body.blob.sasUrl) {
       throw new Error("blob.sasUrl is required for blob workspaces.");
     }
-    const { container, connectionString, basePrefix } = parseBlobInfo(
-      body.blob.sasUrl,
-      body.blob.prefix,
-    );
+    const { account, container, connectionString, basePrefix } =
+      parseBlobInfo(body.blob.sasUrl, body.blob.prefix);
+    const accountUrl = `https://${account}`;
     const settingsBlob = basePrefix
       ? `blob://${container}/${basePrefix}/settings.yaml`
       : `blob://${container}/settings.yaml`;
@@ -743,7 +743,10 @@ function startRunJob(body) {
     // output_data_path is treated as a child-path inside the configured
     // output_storage by autoq/autoe; "output" matches local convention.
     outputPath = "output";
-    extraArgs = ["--connection-string", connectionString];
+    extraArgs =
+      body.blob.useSas === true
+        ? ["--connection-string", connectionString]
+        : ["--account-url", accountUrl];
     displayRoot = basePrefix
       ? `blob://${container}/${basePrefix}`
       : `blob://${container}`;
@@ -1006,14 +1009,17 @@ const server = createServer(async (req, res) => {
         if (typeof body.blob.sasUrl !== "string" || !body.blob.sasUrl) {
           throw new Error("blob.sasUrl is required for blob workspaces.");
         }
-        const { container, connectionString, basePrefix } = parseBlobInfo(
-          body.blob.sasUrl,
-          body.blob.prefix,
-        );
-        // The CLI joins base_dir + output_dir, so set base_dir to the
-        // workspace prefix and pass the user-chosen subdir (e.g. "input")
-        // as the second positional argument. Blobs land under
-        // <prefix>/<outputRelPath>/...
+        const { account, container, connectionString, basePrefix } =
+          parseBlobInfo(body.blob.sasUrl, body.blob.prefix);
+        const accountUrl = `https://${account}`;
+        // graphrag_storage's Azure backend calls list_containers() on init,
+        // which is an account-level API. A container-scoped SAS can't do
+        // that and Azure returns 403 AuthenticationFailed. So prefer
+        // --account-url (DefaultAzureCredential / az CLI auth) by default,
+        // and only fall back to the SAS connection string when the caller
+        // explicitly opts in (body.blob.useSas === true) or no Azure
+        // identity is available on the runner host.
+        const useSas = body.blob.useSas === true;
         args = [
           "data",
           "download",
@@ -1024,9 +1030,16 @@ const server = createServer(async (req, res) => {
           "blob",
           "--container-name",
           container,
-          "--connection-string",
-          connectionString,
         ];
+        if (useSas) {
+          args.push("--connection-string", connectionString);
+        } else {
+          args.push("--account-url", accountUrl);
+        }
+        // The CLI joins base_dir + output_dir, so set base_dir to the
+        // workspace prefix and pass the user-chosen subdir (e.g. "input")
+        // as the second positional argument. Blobs land under
+        // <prefix>/<outputRelPath>/...
         if (basePrefix) {
           args.push("--base-dir", basePrefix);
         }
@@ -1054,8 +1067,21 @@ const server = createServer(async (req, res) => {
         cwd: REPO_ROOT,
       });
       if (!result.ok) {
+        // The graphrag_storage Azure backend always calls
+        // BlobServiceClient.list_containers() on init (to verify / create
+        // the container). That's an account-level API, so a container-
+        // scoped SAS (the common case) gets 403 AuthenticationFailed:
+        // "The specified signed resource is not allowed for the this
+        // resource level". Translate that into something actionable.
+        const out = result.output ?? "";
+        const isContainerSasScopeError =
+          /AuthenticationFailed/i.test(out) &&
+          /signed resource is not allowed/i.test(out);
+        const friendly = isContainerSasScopeError
+          ? "Dataset download failed: the SAS token attached to this workspace doesn't allow account-level operations (the storage backend lists/creates the container on connect). Use an account-level SAS that includes the 'Service' resource type and 'List'+'Create' permissions, or create an account-level SAS scoped to Blob service. Container-only SAS tokens won't work for this operation."
+          : `Dataset download failed (exit code: ${result.exitCode}).`;
         json(req, res, 400, {
-          error: `Dataset download failed (exit code: ${result.exitCode}).`,
+          error: friendly,
           command: result.command,
           output: result.output,
         });

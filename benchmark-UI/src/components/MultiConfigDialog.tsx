@@ -7,6 +7,9 @@ export interface DetectedConfig {
   name: string;
   configType: WorkspaceConfigType;
   isRoot: boolean;
+  /** Blob workspaces only: subdir name under the workspace's base prefix
+   * (empty when isRoot). Used by run flows to build the sub-prefix. */
+  blobSubdir?: string;
 }
 
 interface Props {
@@ -87,7 +90,7 @@ export function MultiConfigDialog({
           </button>
         </div>
 
-        <form className="modal-body" onSubmit={handleSubmit}>
+        <form className="modal-body" onSubmit={handleSubmit} aria-busy={submitting}>
           <p className="modal-subtext">
             {configs.length === 1
               ? <>Configuration found in <code>{folderPath}</code>. Choose which command to run.</>
@@ -155,6 +158,16 @@ export function MultiConfigDialog({
             </button>
           </div>
 
+          {mode === "run" && submitting && (
+            <div className="modal-callout modal-callout-info" role="status" aria-live="polite">
+              <span className="spinner" aria-hidden="true" />
+              <span>
+                Starting selected job(s) in the background. The UI is still responsive;
+                check the Jobs panel for live progress.
+              </span>
+            </div>
+          )}
+
           <div className="modal-actions">
             <button
               type="button"
@@ -171,7 +184,7 @@ export function MultiConfigDialog({
             >
               {mode === "run"
                 ? submitting
-                  ? "Running..."
+                  ? "Starting..."
                   : "Run Selected"
                 : submitting
                 ? "Adding..."

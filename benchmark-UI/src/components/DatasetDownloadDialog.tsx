@@ -148,12 +148,27 @@ export function DatasetDownloadDialog({
             </small>
           </label>
 
+          {isBlob && submitting && (
+            <div className="modal-callout modal-callout-info" role="status">
+              <span className="spinner" aria-hidden="true" />
+              <span>
+                <strong>Uploading to Azure Blob Storage…</strong> This can take
+                a few minutes for large datasets. The window isn't frozen — keep
+                it open until the job finishes.
+              </span>
+            </div>
+          )}
+
           <div className="modal-actions">
             <button type="button" className="btn" onClick={onClose}>
               Cancel
             </button>
             <button type="submit" className="btn btn-primary" disabled={submitting}>
-              {submitting ? "Downloading..." : "Download"}
+              {submitting
+                ? isBlob
+                  ? "Uploading to blob…"
+                  : "Downloading..."
+                : "Download"}
             </button>
           </div>
         </form>

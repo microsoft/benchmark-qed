@@ -49,6 +49,10 @@ export interface Workspace {
   sourceKind: SourceKind;
   rootPath?: string;
   configType?: WorkspaceConfigType;
+  /** Marks a workspace that acts as a parent container for child workspaces. */
+  hasChildWorkspaces?: boolean;
+  /** Optional parent workspace rootPath for generic workspace nesting. */
+  parentRootPath?: string;
   source: FileSource;
   rootNodes: TreeNode[];
   collapsed: boolean;

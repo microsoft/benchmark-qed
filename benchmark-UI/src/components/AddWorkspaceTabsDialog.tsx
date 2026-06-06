@@ -5,7 +5,11 @@ interface Props {
   open: boolean;
   onClose: () => void;
   onPickLocalFolder: () => Promise<string | null>;
-  onAddLocal: (path: string) => Promise<void>;
+  onAddLocal: (data: {
+    path: string;
+    hasChildWorkspaces: boolean;
+    childWorkspacePaths: string[];
+  }) => Promise<void>;
   onAddBlob: (data: { sasUrl: string; prefix: string; label: string }) => void;
 }
 
@@ -19,6 +23,9 @@ export function AddWorkspaceTabsDialog({
   const [tab, setTab] = useState<"local" | "blob">("local");
   // Local fields
   const [localPath, setLocalPath] = useState("");
+  const [localHasChildren, setLocalHasChildren] = useState(false);
+  const [childWorkspacePaths, setChildWorkspacePaths] = useState<string[]>([]);
+  const [pickingChildIndex, setPickingChildIndex] = useState<number | null>(null);
   const [pickingLocal, setPickingLocal] = useState(false);
   // Blob fields
   const [sasUrl, setSasUrl] = useState("");
@@ -31,7 +38,13 @@ export function AddWorkspaceTabsDialog({
     e.preventDefault();
     if (tab === "local") {
       if (!localPath.trim()) return;
-      await onAddLocal(localPath.trim());
+      await onAddLocal({
+        path: localPath.trim(),
+        hasChildWorkspaces: localHasChildren,
+        childWorkspacePaths: localHasChildren
+          ? childWorkspacePaths.map((p) => p.trim()).filter(Boolean)
+          : [],
+      });
     } else {
       if (!sasUrl.trim()) return;
       let computedLabel = label.trim();
@@ -59,6 +72,41 @@ export function AddWorkspaceTabsDialog({
       }
     } finally {
       setPickingLocal(false);
+    }
+  };
+
+  const handleToggleHasChildren = (checked: boolean) => {
+    setLocalHasChildren(checked);
+    if (checked && childWorkspacePaths.length === 0) {
+      setChildWorkspacePaths([""]);
+    }
+  };
+
+  const handleAddChildRow = () => {
+    setChildWorkspacePaths((prev) => [...prev, ""]);
+  };
+
+  const handleRemoveChildRow = (index: number) => {
+    setChildWorkspacePaths((prev) => prev.filter((_, i) => i !== index));
+  };
+
+  const handleUpdateChildPath = (index: number, value: string) => {
+    setChildWorkspacePaths((prev) =>
+      prev.map((path, i) => (i === index ? value : path)),
+    );
+  };
+
+  const handlePickChildFolder = async (index: number) => {
+    setPickingChildIndex(index);
+    try {
+      const pickedPath = await onPickLocalFolder();
+      if (pickedPath) {
+        setChildWorkspacePaths((prev) =>
+          prev.map((path, i) => (i === index ? pickedPath : path)),
+        );
+      }
+    } finally {
+      setPickingChildIndex(null);
     }
   };
 
@@ -108,6 +156,59 @@ export function AddWorkspaceTabsDialog({
                   </button>
                 </div>
               </label>
+              <label className="checkbox-field">
+                <input
+                  type="checkbox"
+                  checked={localHasChildren}
+                  onChange={e => handleToggleHasChildren(e.target.checked)}
+                />
+                <span>This folder contains child workspaces</span>
+              </label>
+              {localHasChildren && (
+                <div className="field">
+                  <span>Child workspace folders</span>
+                  <div className="child-workspace-list">
+                    {childWorkspacePaths.map((childPath, index) => (
+                      <div key={`child-${index}`} className="child-workspace-row">
+                        <input
+                          type="text"
+                          value={childPath}
+                          onChange={e => handleUpdateChildPath(index, e.target.value)}
+                          placeholder="path/to/child or pick folder"
+                        />
+                        <button
+                          type="button"
+                          className="btn btn-secondary"
+                          onClick={() => void handlePickChildFolder(index)}
+                          disabled={pickingChildIndex !== null}
+                        >
+                          {pickingChildIndex === index ? "Picking..." : "Pick Folder"}
+                        </button>
+                        <button
+                          type="button"
+                          className="btn"
+                          onClick={() => handleRemoveChildRow(index)}
+                          disabled={childWorkspacePaths.length <= 1}
+                        >
+                          Remove
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                  <div>
+                    <button
+                      type="button"
+                      className="btn btn-secondary"
+                      onClick={handleAddChildRow}
+                    >
+                      + Add Child Workspace
+                    </button>
+                  </div>
+                  <small>
+                    Use relative paths or absolute paths. Relative paths are resolved from the selected parent folder.
+                  </small>
+                </div>
+              )}
             </>
           )}
           {tab === "blob" && (

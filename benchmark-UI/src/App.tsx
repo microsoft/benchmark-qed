@@ -169,6 +169,10 @@ type PersistedWorkspace =
       name: string;
       rootPath: string;
       configType?: WorkspaceConfigType;
+    /** Marks this workspace as a parent container for child workspaces. */
+    hasChildWorkspaces?: boolean;
+    /** Root path of this workspace's parent, when nested as a child. */
+    parentRootPath?: string;
       /** When set, marks this workspace as a copy of the workspace whose
        *  rootPath matches this value. Used to nest copies under their source
        *  in the sidebar tree. */
@@ -301,6 +305,95 @@ type ActiveView =
   | { type: "copilot" }
   | null;
 
+// Mirrors detectConfigType() in benchmark-UI/scripts/init-runner.mjs so blob
+// workspaces can detect configs client-side from yaml content fetched via
+// the workspace's BlobFileSource.
+function detectConfigTypeFromYaml(content: string): WorkspaceConfigType | null {
+  if (/^\s*base:\s*$|^\s*others:\s*[[\-]|score_min:|score_max:|pairwise/im.test(content)) {
+    return "autoe_pairwise";
+  }
+  if (/^\s*reference:\s*$|^\s*generated:\s*[[\-]|^\s*- name:|reference_base_path/im.test(content)) {
+    return "autoe_reference";
+  }
+  if (/^\s*generated:\s*$|^\s*assertions:\s*$|assertions_path:|pass_threshold:|detect_discovery/im.test(content)) {
+    return "autoe_assertion";
+  }
+  if (/^\s*input:\s*$|^\s*output:/im.test(content)) {
+    return "autoq";
+  }
+  if (/input|output|questions/im.test(content)) {
+    return "autoq";
+  }
+  return null;
+}
+
+async function detectBlobConfigs(workspace: Workspace): Promise<DetectedConfig[]> {
+  const results: DetectedConfig[] = [];
+  // Try to derive a `blob://<container>[/<prefix>]` URI for nicer display.
+  // Falls back to the workspace name if we can't introspect the source.
+  const blobBase = (() => {
+    const src = workspace.source as unknown as {
+      kind?: string;
+      // BlobFileSource internals, read defensively.
+      client?: { url?: string; containerName?: string };
+      prefix?: string;
+    };
+    if (workspace.sourceKind !== "blob") return workspace.name;
+    const container = src.client?.containerName ?? "";
+    const prefix = (src.prefix ?? "").replace(/\/+$/, "");
+    if (!container) return workspace.name;
+    return prefix
+      ? `blob://${container}/${prefix}`
+      : `blob://${container}`;
+  })();
+
+  // Root settings.yaml
+  const rootSettings = workspace.rootNodes.find(
+    (n) => n.kind === "file" && n.name === "settings.yaml",
+  );
+  if (rootSettings) {
+    try {
+      const content = await workspace.source.readFile(rootSettings);
+      const cfg = detectConfigTypeFromYaml(content);
+      if (cfg) {
+        results.push({
+          path: `${blobBase}/settings.yaml`,
+          name: workspace.name,
+          configType: cfg,
+          isRoot: true,
+          blobSubdir: "",
+        });
+      }
+    } catch {
+      // Couldn't read root settings.yaml; skip.
+    }
+  }
+  // One level deep: subdirectories that contain a settings.yaml
+  for (const node of workspace.rootNodes) {
+    if (node.kind !== "directory") continue;
+    try {
+      const children = await workspace.source.listChildren(node);
+      const settings = children.find(
+        (c) => c.kind === "file" && c.name === "settings.yaml",
+      );
+      if (!settings) continue;
+      const content = await workspace.source.readFile(settings);
+      const cfg = detectConfigTypeFromYaml(content);
+      if (!cfg) continue;
+      results.push({
+        path: `${blobBase}/${node.name}/settings.yaml`,
+        name: node.name,
+        configType: cfg,
+        isRoot: false,
+        blobSubdir: node.name,
+      });
+    } catch {
+      // Skip subdirs we can't read.
+    }
+  }
+  return results;
+}
+
 export default function App() {
   const [theme, setTheme] = useState<"dark" | "light">(() =>
     (localStorage.getItem("theme") as "dark" | "light") ?? "dark"
@@ -408,6 +501,31 @@ export default function App() {
       ...prev,
       [workspaceId]: (prev[workspaceId] ?? 0) + 1,
     }));
+  }, []);
+  // Debounce/remap repeated bumps per workspace to avoid excessive remounts
+  // when background polling refreshes the same tree many times in quick
+  // succession.
+  const treeBumpTimersRef = useRef<Record<string, number>>({});
+  const scheduleTreeNonceBump = useCallback(
+    (workspaceId: string, delayMs = 250) => {
+      const existing = treeBumpTimersRef.current[workspaceId];
+      if (existing !== undefined) {
+        window.clearTimeout(existing);
+      }
+      treeBumpTimersRef.current[workspaceId] = window.setTimeout(() => {
+        bumpTreeNonce(workspaceId);
+        delete treeBumpTimersRef.current[workspaceId];
+      }, delayMs);
+    },
+    [bumpTreeNonce],
+  );
+  useEffect(() => {
+    return () => {
+      for (const timerId of Object.values(treeBumpTimersRef.current)) {
+        window.clearTimeout(timerId);
+      }
+      treeBumpTimersRef.current = {};
+    };
   }, []);
   const [datasetDialogWorkspaceId, setDatasetDialogWorkspaceId] = useState<string | null>(
     null,
@@ -530,6 +648,63 @@ export default function App() {
     savePersistedWorkspaces([...persistedWorkspacesRef.current.values()]);
   }, []);
 
+  const isMissingPathError = useCallback((error: unknown): boolean => {
+    const text = String(error).toLowerCase();
+    return (
+      text.includes("enoent") ||
+      text.includes("no such file or directory") ||
+      text.includes("scandir") ||
+      text.includes("cannot find the path")
+    );
+  }, []);
+
+  const prunePersistedLocalByRootPath = useCallback(
+    (rootPath?: string): void => {
+      if (!rootPath) return;
+      let removed = false;
+      for (const [id, entry] of persistedWorkspacesRef.current) {
+        if (entry.kind === "local" && entry.rootPath === rootPath) {
+          persistedWorkspacesRef.current.delete(id);
+          removed = true;
+        }
+      }
+      if (removed) {
+        syncPersistedWorkspaces();
+      }
+    },
+    [syncPersistedWorkspaces],
+  );
+
+  const removeWorkspaceSilently = useCallback(
+    (workspaceId: string): void => {
+      setWorkspaces((prev) => prev.filter((w) => w.id !== workspaceId));
+      setOpenFiles((prev) => prev.filter((f) => f.workspaceId !== workspaceId));
+      setActiveView((prev) => {
+        if (prev?.type === "file" && prev.file.workspaceId === workspaceId) {
+          return null;
+        }
+        return prev;
+      });
+      setTreeNonces((prev) => {
+        if (!(workspaceId in prev)) return prev;
+        const next = { ...prev };
+        delete next[workspaceId];
+        return next;
+      });
+
+      const pendingTimer = treeBumpTimersRef.current[workspaceId];
+      if (pendingTimer !== undefined) {
+        window.clearTimeout(pendingTimer);
+        delete treeBumpTimersRef.current[workspaceId];
+      }
+
+      if (persistedWorkspacesRef.current.delete(workspaceId)) {
+        syncPersistedWorkspaces();
+      }
+    },
+    [syncPersistedWorkspaces],
+  );
+
   /**
    * Look up the persisted blob connection info (SAS URL + prefix) for a
    * workspace. Returns null for non-blob workspaces or when the persisted
@@ -553,6 +728,8 @@ export default function App() {
       options?: {
         rootPath?: string;
         configType?: WorkspaceConfigType;
+        hasChildWorkspaces?: boolean;
+        parentRootPath?: string;
         persisted?: PersistedWorkspace;
         /** When this workspace is a copy of another local workspace,
          *  the source's rootPath. Surfaces as nesting in the sidebar. */
@@ -593,6 +770,9 @@ export default function App() {
               name,
               sourceKind: source.kind,
               configType: options?.configType ?? existing.configType,
+              hasChildWorkspaces:
+                options?.hasChildWorkspaces ?? existing.hasChildWorkspaces,
+              parentRootPath: options?.parentRootPath ?? existing.parentRootPath,
               source,
               rootNodes,
               collapsed: false,
@@ -610,6 +790,8 @@ export default function App() {
               sourceKind: source.kind,
               rootPath: options?.rootPath,
               configType: options?.configType,
+              hasChildWorkspaces: options?.hasChildWorkspaces,
+              parentRootPath: options?.parentRootPath,
               source,
               rootNodes,
               collapsed: false,
@@ -624,10 +806,29 @@ export default function App() {
           syncPersistedWorkspaces();
         }
       } catch (e) {
+        if (
+          options?.persisted?.kind === "local" &&
+          isMissingPathError(e)
+        ) {
+          const rootPath = options.persisted.rootPath;
+          const existingWorkspaceId = workspacesRef.current.find(
+            (w) => w.rootPath === rootPath,
+          )?.id;
+          if (existingWorkspaceId) {
+            removeWorkspaceSilently(existingWorkspaceId);
+          }
+          prunePersistedLocalByRootPath(rootPath);
+          return;
+        }
         setError(`Failed to load ${name}: ${e}`);
       }
     },
-    [syncPersistedWorkspaces],
+    [
+      syncPersistedWorkspaces,
+      isMissingPathError,
+      removeWorkspaceSilently,
+      prunePersistedLocalByRootPath,
+    ],
   );
 
   const pickLocalFolderPath = useCallback(async (): Promise<string | null> => {
@@ -652,15 +853,51 @@ export default function App() {
   }, []);
 
   const addLocalWorkspace = useCallback(
-    async (path: string) => {
+    async (data: {
+      path: string;
+      hasChildWorkspaces: boolean;
+      childWorkspacePaths: string[];
+    }) => {
       setAddWorkspaceDialogOpen(false);
       setError(null);
       try {
+        const { path, hasChildWorkspaces, childWorkspacePaths } = data;
         const name = path.split(/[/\\]/).filter(Boolean).pop() ?? path;
         await addWorkspace(name, new RunnerPathFileSource(path, INIT_RUNNER_URL), {
           rootPath: path,
-          persisted: { kind: "local", name, rootPath: path },
+          hasChildWorkspaces,
+          persisted: {
+            kind: "local",
+            name,
+            rootPath: path,
+            hasChildWorkspaces,
+          },
         });
+
+        const isAbsolutePath = (value: string): boolean =>
+          /^(?:[a-zA-Z]:[\\/]|\\\\|\/)/.test(value);
+
+        for (const rawChildPath of childWorkspacePaths) {
+          const childPath = isAbsolutePath(rawChildPath)
+            ? rawChildPath
+            : `${path.replace(/[\\/]+$/, "")}/${rawChildPath.replace(/^[\\/]+/, "")}`;
+          if (childPath === path) continue;
+          const childName = childPath.split(/[/\\]/).filter(Boolean).pop() ?? childPath;
+          await addWorkspace(
+            childName,
+            new RunnerPathFileSource(childPath, INIT_RUNNER_URL),
+            {
+              rootPath: childPath,
+              parentRootPath: path,
+              persisted: {
+                kind: "local",
+                name: childName,
+                rootPath: childPath,
+                parentRootPath: path,
+              },
+            },
+          );
+        }
       } catch (e) {
         setError(`Failed to add local workspace: ${e}`);
       }
@@ -720,6 +957,8 @@ export default function App() {
             {
               rootPath: entry.rootPath,
               configType: entry.configType,
+              hasChildWorkspaces: entry.hasChildWorkspaces,
+              parentRootPath: entry.parentRootPath,
               copyOfRootPath: entry.copyOfRootPath,
               persisted: entry,
             },
@@ -882,9 +1121,10 @@ export default function App() {
   const submitRunJob = useCallback(async (
     workspace: Workspace,
     overrideConfigType?: WorkspaceConfigType,
+    blobInfoOverride?: { sasUrl: string; prefix: string },
   ): Promise<boolean> => {
     const configType = overrideConfigType ?? workspace.configType;
-    const blobInfo = getBlobInfo(workspace);
+    const blobInfo = blobInfoOverride ?? getBlobInfo(workspace);
     if (!configType) {
       setError("This workspace does not have a generated config type to run.");
       return false;
@@ -957,21 +1197,52 @@ export default function App() {
       setMultiConfigDialog((prev) => ({ ...prev, submitting: true }));
       setError(null);
       try {
-        // Run each selected config
-        for (const config of selectedConfigs) {
-          // Create a temporary workspace object to pass to submitRunJob
-          const tempWorkspace: Workspace = {
-            id: `temp-${config.path}`,
-            version: 1,
-            name: config.name,
-            sourceKind: "local",
-            rootPath: config.path,
-            configType: config.configType,
-            source: new RunnerPathFileSource(config.path, INIT_RUNNER_URL),
-            rootNodes: [],
-            collapsed: false,
-          };
-          await submitRunJob(tempWorkspace);
+        const parent = runSubfolderConfigWorkspaceId
+          ? workspaces.find((w) => w.id === runSubfolderConfigWorkspaceId)
+          : undefined;
+        const parentBlob = parent ? getBlobInfo(parent) : null;
+
+        if (parent && parentBlob) {
+          // Blob: each detected config maps to a sub-prefix under the
+          // workspace's basePrefix. Build a temp Workspace per config so
+          // submitRunJob can pass the right blob payload to the runner.
+          for (const cfg of selectedConfigs) {
+            const subdir = (cfg.blobSubdir ?? "").replace(/^\/+|\/+$/g, "");
+            const subPrefix = subdir
+              ? [parentBlob.prefix, subdir].filter(Boolean).join("/")
+              : parentBlob.prefix;
+            const tempWorkspace: Workspace = {
+              id: `temp-blob-${subdir || "root"}`,
+              version: 1,
+              name: cfg.name,
+              sourceKind: "blob",
+              configType: cfg.configType,
+              source: parent.source,
+              rootNodes: [],
+              collapsed: false,
+            };
+            await submitRunJob(tempWorkspace, cfg.configType, {
+              sasUrl: parentBlob.sasUrl,
+              prefix: subPrefix,
+            });
+          }
+        } else {
+          // Local: each detected config has its own folder path.
+          for (const config of selectedConfigs) {
+            // Create a temporary workspace object to pass to submitRunJob
+            const tempWorkspace: Workspace = {
+              id: `temp-${config.path}`,
+              version: 1,
+              name: config.name,
+              sourceKind: "local",
+              rootPath: config.path,
+              configType: config.configType,
+              source: new RunnerPathFileSource(config.path, INIT_RUNNER_URL),
+              rootNodes: [],
+              collapsed: false,
+            };
+            await submitRunJob(tempWorkspace);
+          }
         }
         setMultiConfigDialog({
           open: false,
@@ -985,7 +1256,7 @@ export default function App() {
         setMultiConfigDialog((prev) => ({ ...prev, submitting: false }));
       }
     },
-    [submitRunJob],
+    [submitRunJob, runSubfolderConfigWorkspaceId, workspaces, getBlobInfo],
   );
 
   const submitDatasetDownload = useCallback(
@@ -1032,19 +1303,23 @@ export default function App() {
           throw new Error(`${payload.error ?? "Download failed."}${details}`);
         }
 
-        await addWorkspace(workspace.name, workspace.source, {
-          rootPath: workspace.rootPath,
-          configType: workspace.configType,
-          persisted:
-            workspace.sourceKind === "local" && workspace.rootPath
-              ? {
-                  kind: "local",
-                  name: workspace.name,
-                  rootPath: workspace.rootPath,
-                  configType: workspace.configType,
-                }
-              : undefined,
-        });
+        // Reload the workspace tree in place. We can't use `refreshWorkspace`
+        // here because it's defined later in the file; `addWorkspace` would
+        // duplicate blob workspaces (its dedup keys on rootPath, which blob
+        // workspaces don't have).
+        try {
+          const rootNodes = await workspace.source.listChildren();
+          setWorkspaces((prev) =>
+            prev.map((w) =>
+              w.id === workspace.id
+                ? { ...w, version: w.version + 1, rootNodes }
+                : w,
+            ),
+          );
+          bumpTreeNonce(workspace.id);
+        } catch (e) {
+          setError(`Failed to refresh ${workspace.name}: ${e}`);
+        }
         setDatasetDialogWorkspaceId(null);
       } catch (e) {
         setError(`Failed to download dataset: ${e}`);
@@ -1052,7 +1327,7 @@ export default function App() {
         setDatasetSubmitting(false);
       }
     },
-    [addWorkspace, datasetDialogWorkspaceId, workspaces, getBlobInfo],
+    [datasetDialogWorkspaceId, workspaces, getBlobInfo, bumpTreeNonce],
   );
 
   const submitLoadDataset = useCallback(
@@ -1129,12 +1404,29 @@ export default function App() {
       const blobInfo = getBlobInfo(workspace);
       if (!workspace.rootPath && !blobInfo) return;
 
-      // Blob workspaces don't support the nested-config detection flow
-      // (which lists subdirectories on disk via /api/detect-configs). Go
-      // straight to the config-type dialog so the user picks autoq /
-      // autoe variant; the run uses blob:// URIs end to end.
+      // For blob workspaces, mirror the local detect-configs flow by
+      // scanning the workspace's own file source for settings.yaml files
+      // (root + one level deep). The runner's /api/detect-configs only
+      // walks the local filesystem, so we do this client-side using the
+      // already-connected BlobFileSource.
       if (blobInfo) {
         setError(null);
+        try {
+          const detected = await detectBlobConfigs(workspace);
+          if (detected.length > 0) {
+            setMultiConfigDialog({
+              open: true,
+              folderPath: workspace.name,
+              configs: detected,
+              submitting: false,
+            });
+            setRunSubfolderConfigWorkspaceId(workspace.id);
+            return;
+          }
+        } catch (e) {
+          setError(`Failed to detect configs in blob workspace: ${e}`);
+        }
+        // Fall back to the config-type picker when nothing was detected.
         setRunConfigWorkspaceId(workspace.id);
         setRunConfigDialogOpen(true);
         return;
@@ -1259,6 +1551,17 @@ export default function App() {
     for (const job of initJobs) {
       if (job.status !== "succeeded") continue;
       if (!job.rootPath) continue;
+      // Blob init jobs write to Azure, not to a usable local folder
+      // (rootPath is typically ".", the runner's cwd). Don't auto-add them
+      // as local sidebar workspaces. Fall back to inspecting the command
+      // string for older jobs / older runners that don't set storageType.
+      const isBlobJob =
+        job.storageType === "blob" ||
+        /--storage-type\s+blob\b/.test(job.command ?? "");
+      if (isBlobJob) {
+        importedInitJobIdsRef.current.add(job.id);
+        continue;
+      }
       if (importedInitJobIdsRef.current.has(job.id)) continue;
 
       importedInitJobIdsRef.current.add(job.id);
@@ -1336,7 +1639,7 @@ export default function App() {
   const [dragOverWorkspaceId, setDragOverWorkspaceId] = useState<string | null>(null);
 
   const refreshWorkspace = useCallback(
-    async (workspace: Workspace) => {
+    async (workspace: Workspace): Promise<boolean> => {
       // Re-list children in place instead of going through addWorkspace.
       // addWorkspace dedups on rootPath, which blob workspaces don't have,
       // so calling it for a refresh would append a duplicate entry.
@@ -1349,12 +1652,74 @@ export default function App() {
               : w,
           ),
         );
+        return true;
       } catch (e) {
+        if (workspace.sourceKind === "local" && isMissingPathError(e)) {
+          removeWorkspaceSilently(workspace.id);
+          if (workspace.rootPath) {
+            prunePersistedLocalByRootPath(workspace.rootPath);
+          }
+          return false;
+        }
         setError(`Failed to refresh ${workspace.name}: ${e}`);
+        return false;
       }
     },
-    [],
+    [
+      isMissingPathError,
+      removeWorkspaceSilently,
+      prunePersistedLocalByRootPath,
+    ],
   );
+
+  // Keep the sidebar in sync when folders are deleted outside the UI. This
+  // runs even while idle so stale local entries disappear without user action.
+  useEffect(() => {
+    const localWorkspaces = workspaces.filter(
+      (w) => w.sourceKind === "local" && !!w.rootPath,
+    );
+    if (localWorkspaces.length === 0) return;
+
+    let cancelled = false;
+    let running = false;
+
+    const sweep = async () => {
+      if (running) return;
+      running = true;
+      try {
+        for (const ws of localWorkspaces) {
+          if (cancelled) return;
+          try {
+            await ws.source.listChildren();
+          } catch (e) {
+            if (cancelled) return;
+            if (isMissingPathError(e)) {
+              removeWorkspaceSilently(ws.id);
+              if (ws.rootPath) {
+                prunePersistedLocalByRootPath(ws.rootPath);
+              }
+            }
+          }
+        }
+      } finally {
+        running = false;
+      }
+    };
+
+    void sweep();
+    const timerId = window.setInterval(() => {
+      void sweep();
+    }, 15000);
+    return () => {
+      cancelled = true;
+      window.clearInterval(timerId);
+    };
+  }, [
+    workspaces,
+    isMissingPathError,
+    removeWorkspaceSilently,
+    prunePersistedLocalByRootPath,
+  ]);
 
   const requestCreatePath = useCallback(
     (workspace: Workspace, kind: "file" | "directory", parentNode?: TreeNode) => {
@@ -1411,8 +1776,10 @@ export default function App() {
         } else {
           await workspace.source.createDirectory!(relPath);
         }
-        await refreshWorkspace(workspace);
-        bumpTreeNonce(workspace.id);
+        const refreshed = await refreshWorkspace(workspace);
+        if (refreshed) {
+          bumpTreeNonce(workspace.id);
+        }
         setCreateDialog({ open: false, workspaceId: null, kind: "file" });
       } catch (e) {
         setError(`Failed to create ${kind}: ${e}`);
@@ -1468,8 +1835,10 @@ export default function App() {
               (f.node.path !== node.path && !f.node.path.startsWith(`${node.path}/`)),
           ),
         );
-        await refreshWorkspace(workspace);
-        bumpTreeNonce(workspace.id);
+        const refreshed = await refreshWorkspace(workspace);
+        if (refreshed) {
+          bumpTreeNonce(workspace.id);
+        }
         setDeleteDialog({ open: false, workspaceId: null, node: undefined });
       } catch (e) {
         setError(`Failed to delete path: ${e}`);
@@ -1909,13 +2278,18 @@ export default function App() {
             rp.startsWith(`${wsRoot}/`) ||
             wsRoot.startsWith(`${rp}/`),
         );
-        if (match) void refreshWorkspace(ws);
+        if (match) {
+          void refreshWorkspace(ws).then((refreshed) => {
+            if (!refreshed) return;
+            scheduleTreeNonceBump(ws.id);
+          });
+        }
       }
     };
     tick();
     const timerId = window.setInterval(tick, 4000);
     return () => window.clearInterval(timerId);
-  }, [runJobs, workspaces, refreshWorkspace]);
+  }, [runJobs, workspaces, refreshWorkspace, scheduleTreeNonceBump]);
 
   const activeWorkspace = activeView?.type === "file"
     ? workspaces.find((w) => w.id === activeView.file.workspaceId)
@@ -2017,12 +2391,21 @@ export default function App() {
           (w) => w.rootPath === folderPath,
         );
         if (!alreadyAdded) {
-          void addLocalWorkspace(folderPath);
+          void addLocalWorkspace({
+            path: folderPath,
+            hasChildWorkspaces: false,
+            childWorkspacePaths: [],
+          });
         }
       }}
       onActivitySettled={() => {
         for (const ws of workspaces) {
-          if (ws.sourceKind === "local") void refreshWorkspace(ws);
+          if (ws.sourceKind === "local") {
+            void refreshWorkspace(ws).then((refreshed) => {
+              if (!refreshed) return;
+              scheduleTreeNonceBump(ws.id);
+            });
+          }
         }
         // Try to open a freshly-written quality report (if any).
         void finalizePendingReport();
@@ -2180,42 +2563,46 @@ export default function App() {
               const childrenByParent = new Map<string, Workspace[]>();
               for (const w of workspaces) {
                 if (w.hiddenFromSidebar) continue;
-                if (!w.copyOfRootPath) continue;
-                const arr = childrenByParent.get(w.copyOfRootPath) ?? [];
+                const parentRootPath = w.parentRootPath ?? w.copyOfRootPath;
+                if (!parentRootPath) continue;
+                const arr = childrenByParent.get(parentRootPath) ?? [];
                 arr.push(w);
-                childrenByParent.set(w.copyOfRootPath, arr);
+                childrenByParent.set(parentRootPath, arr);
               }
               const visited = new Set<string>();
               const ordered: Array<{
                 ws: Workspace;
                 depth: number;
                 parentName?: string;
+                isCopyChild: boolean;
               }> = [];
               const visit = (
                 ws: Workspace,
                 depth: number,
                 parentName?: string,
+                isCopyChild = false,
               ) => {
                 if (visited.has(ws.id)) return;
                 visited.add(ws.id);
-                ordered.push({ ws, depth, parentName });
+                ordered.push({ ws, depth, parentName, isCopyChild });
                 if (!ws.rootPath) return;
                 for (const k of childrenByParent.get(ws.rootPath) ?? []) {
-                  visit(k, depth + 1, ws.name);
+                  visit(k, depth + 1, ws.name, k.copyOfRootPath === ws.rootPath);
                 }
               };
               for (const w of workspaces) {
                 if (w.hiddenFromSidebar) continue;
                 // Treat as a root if it isn't a copy, or its parent isn't
                 // currently loaded (orphaned copy -> show at top level).
+                const linkedParentRoot = w.parentRootPath ?? w.copyOfRootPath;
                 const parentLoaded =
-                  !!w.copyOfRootPath &&
-                  workspaces.some((p) => p.rootPath === w.copyOfRootPath);
-                if (!w.copyOfRootPath || !parentLoaded) {
+                  !!linkedParentRoot &&
+                  workspaces.some((p) => p.rootPath === linkedParentRoot);
+                if (!linkedParentRoot || !parentLoaded) {
                   visit(w, 0);
                 }
               }
-              return ordered.map(({ ws, depth, parentName }) => (
+              return ordered.map(({ ws, depth, parentName, isCopyChild }) => (
               <div
                 key={ws.id}
                 className={`workspace${
@@ -2278,7 +2665,7 @@ export default function App() {
                   <span className={`ws-kind ws-kind-${ws.sourceKind}`}>
                     {ws.sourceKind === "blob" ? <Cloud16Regular /> : <Folder16Regular />}
                   </span>
-                  {parentName && (
+                  {parentName && isCopyChild && (
                     <span
                       className="ws-copy-indicator"
                       title={`Copy of ${parentName}`}
@@ -2289,7 +2676,13 @@ export default function App() {
                   )}
                   <span
                     className="ws-name"
-                    title={parentName ? `${ws.name} — copy of ${parentName}` : ws.name}
+                    title={
+                      parentName && isCopyChild
+                        ? `${ws.name} — copy of ${parentName}`
+                        : parentName
+                          ? `${ws.name} — child of ${parentName}`
+                          : ws.name
+                    }
                   >
                     {ws.name}
                   </span>
@@ -2563,8 +2956,12 @@ export default function App() {
               ? job.rootPath.split(/[/\\]/).filter(Boolean).pop()
               : undefined;
             const configLabel = job.configType ?? "init";
-            const label = folderName
-              ? `${folderName} · ${configLabel}`
+            const isBlobJob =
+              job.storageType === "blob" ||
+              /--storage-type\s+blob\b/.test(job.command ?? "");
+            const displayName = isBlobJob ? undefined : folderName;
+            const label = displayName
+              ? `${displayName} · ${configLabel}`
               : `init · ${configLabel}`;
             return (
               <button
