@@ -537,6 +537,11 @@ class AssertionSignificanceConfig(BaseModel):
         description="Random seed for reproducibility of permutation tests.",
     )
 
+    output_storage: StorageConfig | None = Field(
+        default=None,
+        description="Optional storage configuration for reading inputs and writing significance results to Azure Blob Storage. When omitted, uses the local filesystem path specified in output_dir.",
+    )
+
 
 class HierarchicalAssertionSignificanceConfig(BaseModel):
     """Configuration for hierarchical assertion significance testing.
@@ -591,6 +596,16 @@ class HierarchicalAssertionSignificanceConfig(BaseModel):
     permutation_seed: int | None = Field(
         None,
         description="Random seed for reproducibility of permutation tests.",
+    )
+
+    input_storage: StorageConfig | None = Field(
+        default=None,
+        description="Optional storage configuration for reading aggregated score CSVs from Azure Blob Storage. When omitted, reads from the local filesystem.",
+    )
+
+    output_storage: StorageConfig | None = Field(
+        default=None,
+        description="Optional storage configuration for writing significance results to Azure Blob Storage. When omitted, writes to the local filesystem path specified in output_dir.",
     )
 
 
@@ -710,6 +725,16 @@ class RetrievalReferenceConfig(BaseModel):
         description="Directory for caching relevance assessments.",
     )
 
+    input_storage: StorageConfig | None = Field(
+        default=None,
+        description="Optional storage configuration for reading text units, clusters, and question files from Azure Blob Storage. When omitted, reads from local filesystem paths.",
+    )
+
+    output_storage: StorageConfig | None = Field(
+        default=None,
+        description="Optional storage configuration for writing output to Azure Blob Storage. When omitted, writes to the local filesystem path specified in output_dir.",
+    )
+
     @model_validator(mode="after")
     def validate_question_config(self) -> Self:
         """Ensure either questions_path or question_sets is provided."""
@@ -816,4 +841,14 @@ class RetrievalScoresConfig(BaseModel):
     fidelity_metric: str = Field(
         default="js",
         description="Fidelity metric to use: 'js' (Jensen-Shannon) or 'tvd' (Total Variation Distance).",
+    )
+
+    input_storage: StorageConfig | None = Field(
+        default=None,
+        description="Optional storage configuration for reading clusters, text units, and reference data from Azure Blob Storage. When omitted, reads from local filesystem paths.",
+    )
+
+    output_storage: StorageConfig | None = Field(
+        default=None,
+        description="Optional storage configuration for writing output to Azure Blob Storage. When omitted, writes to the local filesystem path specified in output_dir.",
     )

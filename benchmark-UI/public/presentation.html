@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Presentation Starter</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&family=Manrope:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #f6efe4;
+        --ink: #1f1d1b;
+        --muted: #4d4942;
+        --accent: #d84f3e;
+        --accent-2: #147a67;
+        --card: #fff8eecc;
+        --shadow: 0 16px 55px rgba(53, 36, 25, 0.16);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        font-family: "Manrope", "Segoe UI", sans-serif;
+        color: var(--ink);
+        background:
+          radial-gradient(circle at 85% 10%, #f2c58a 0%, transparent 34%),
+          radial-gradient(circle at 20% 90%, #b8d8c6 0%, transparent 40%),
+          linear-gradient(135deg, #f9f2e8 0%, #efe4d3 100%);
+        display: grid;
+        place-items: center;
+        overflow: hidden;
+      }
+
+      .deck {
+        width: min(1100px, 95vw);
+        height: min(700px, 88vh);
+        position: relative;
+        border: 1px solid #ffffffaa;
+        border-radius: 24px;
+        box-shadow: var(--shadow);
+        backdrop-filter: blur(8px);
+        background: var(--card);
+        overflow: hidden;
+      }
+
+      .slide {
+        position: absolute;
+        inset: 0;
+        padding: clamp(1.4rem, 2vw, 2rem) clamp(1.4rem, 3.8vw, 3.3rem);
+        display: grid;
+        align-content: center;
+        gap: 1rem;
+        opacity: 0;
+        transform: translateX(35px) scale(0.985);
+        transition: opacity 300ms ease, transform 320ms ease;
+        pointer-events: none;
+      }
+
+      .slide.active {
+        opacity: 1;
+        transform: translateX(0) scale(1);
+        pointer-events: auto;
+      }
+
+      .eyebrow {
+        font-size: 0.84rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--accent-2);
+        font-weight: 700;
+      }
+
+      h1,
+      h2 {
+        margin: 0;
+        line-height: 1.08;
+        font-family: "Fraunces", Georgia, serif;
+      }
+
+      h1 {
+        font-size: clamp(2rem, 5vw, 4.4rem);
+      }
+
+      h2 {
+        font-size: clamp(1.55rem, 4vw, 3rem);
+      }
+
+      p {
+        margin: 0;
+        max-width: 70ch;
+        font-size: clamp(1rem, 1.75vw, 1.28rem);
+        color: var(--muted);
+      }
+
+      .grid {
+        display: grid;
+        gap: 0.9rem;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .card {
+        border: 1px solid #d7c9b6;
+        background: #fffdf9;
+        border-radius: 14px;
+        padding: 0.95rem;
+      }
+
+      .card strong {
+        display: block;
+        margin-bottom: 0.35rem;
+        color: var(--ink);
+      }
+
+      ul {
+        margin: 0;
+        padding-left: 1.2rem;
+        color: var(--muted);
+        font-size: clamp(1rem, 1.55vw, 1.2rem);
+        line-height: 1.6;
+      }
+
+      .controls {
+        position: absolute;
+        left: 1.2rem;
+        right: 1.2rem;
+        bottom: 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .btn {
+        border: none;
+        border-radius: 999px;
+        padding: 0.55rem 0.95rem;
+        background: #201d1a;
+        color: #fff;
+        font-weight: 700;
+        cursor: pointer;
+      }
+
+      .btn:disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
+      }
+
+      .progress {
+        display: flex;
+        gap: 0.45rem;
+      }
+
+      .dot {
+        width: 9px;
+        height: 9px;
+        border-radius: 50%;
+        background: #c8b79f;
+      }
+
+      .dot.active {
+        background: var(--accent);
+      }
+
+      .hint {
+        position: absolute;
+        top: 0.75rem;
+        right: 1rem;
+        font-size: 0.86rem;
+        color: #635748;
+        background: #fffbf2;
+        border: 1px solid #dbccb7;
+        border-radius: 999px;
+        padding: 0.35rem 0.65rem;
+      }
+
+      @media (max-width: 700px) {
+        .deck {
+          width: 97vw;
+          height: 95vh;
+          border-radius: 16px;
+        }
+
+        .grid {
+          grid-template-columns: 1fr;
+        }
+
+        .hint {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="deck" aria-label="Presentation slides">
+      <span class="hint">Arrow keys or buttons</span>
+
+      <section class="slide active">
+        <h1>Benchmark-QED</h1>
+        <p>
+          Replace this with your opening message. Keep this line short enough to
+          read in under 7 seconds.
+        </p>
+      </section>
+
+      <section class="slide">
+        <p class="eyebrow">Context</p>
+        <h2>Why Benchmarking Matters First</h2>
+        <ul>
+          <li>It turns opinions into measurable evidence before teams commit.</li>
+          <li>It makes model quality comparable across prompts, datasets, and runs.</li>
+          <li>It exposes trade-offs early: accuracy, latency, and cost.</li>
+          <li>It creates a baseline so every UI and workflow change can be validated.</li>
+        </ul>
+      </section>
+
+      <section class="slide">
+        <p class="eyebrow">UI Intro</p>
+        <h2>How the UI makes benchmarking practical</h2>
+        <ul>
+          <li>It centralizes setup, run controls, and results in one workspace.</li>
+          <li>It shortens feedback loops so teams can iterate faster.</li>
+          <li>It makes experiment outputs visible and easier to share.</li>
+        </ul>
+      </section>
+
+      <section class="slide">
+        <p class="eyebrow">Solution</p>
+        <h2>How your approach changes the outcome</h2>
+        <div class="grid">
+          <article class="card">
+            <strong>Feature A</strong>
+            <p>One sentence on what it does and why it matters.</p>
+          </article>
+          <article class="card">
+            <strong>Feature B</strong>
+            <p>One sentence on speed, quality, or user confidence.</p>
+          </article>
+          <article class="card">
+            <strong>Feature C</strong>
+            <p>One sentence on integration, reliability, or scale.</p>
+          </article>
+          <article class="card">
+            <strong>Feature D</strong>
+            <p>One sentence on why this is hard to copy.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="slide">
+        <p class="eyebrow">Proof</p>
+        <h2>Evidence that you are on the right track</h2>
+        <ul>
+          <li>Metric: include real numbers, percentages, and sample size.</li>
+          <li>Customer quote: one short sentence with a clear win.</li>
+          <li>Milestone: recent launch, partnership, or growth marker.</li>
+        </ul>
+      </section>
+
+      <section class="slide">
+        <p class="eyebrow">Close</p>
+        <h2>What you want from the audience</h2>
+        <p>
+          End with one clear ask: approval, funding, pilot, intro, or next
+          meeting date.
+        </p>
+      </section>
+
+      <footer class="controls">
+        <button class="btn" id="prevBtn" type="button">Previous</button>
+        <div class="progress" id="progress" aria-hidden="true"></div>
+        <button class="btn" id="nextBtn" type="button">Next</button>
+      </footer>
+    </main>
+
+    <script>
+      const slides = Array.from(document.querySelectorAll(".slide"));
+      const progress = document.getElementById("progress");
+      const prevBtn = document.getElementById("prevBtn");
+      const nextBtn = document.getElementById("nextBtn");
+      let current = 0;
+
+      const dots = slides.map(() => {
+        const dot = document.createElement("span");
+        dot.className = "dot";
+        progress.appendChild(dot);
+        return dot;
+      });
+
+      const render = () => {
+        slides.forEach((slide, i) => {
+          slide.classList.toggle("active", i === current);
+        });
+        dots.forEach((dot, i) => {
+          dot.classList.toggle("active", i === current);
+        });
+        prevBtn.disabled = current === 0;
+        nextBtn.disabled = current === slides.length - 1;
+      };
+
+      const next = () => {
+        current = Math.min(current + 1, slides.length - 1);
+        render();
+      };
+
+      const prev = () => {
+        current = Math.max(current - 1, 0);
+        render();
+      };
+
+      nextBtn.addEventListener("click", next);
+      prevBtn.addEventListener("click", prev);
+
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "ArrowRight" || event.key === "PageDown") {
+          next();
+        }
+        if (event.key === "ArrowLeft" || event.key === "PageUp") {
+          prev();
+        }
+      });
+
+      render();
+    </script>
+  </body>
+</html>

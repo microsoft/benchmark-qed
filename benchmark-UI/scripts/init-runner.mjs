@@ -7,6 +7,8 @@ import path from "node:path";
 import { promisify } from "node:util";
 import * as fs from "node:fs";
 import * as fsp from "node:fs/promises";
+import { DefaultAzureCredential } from "@azure/identity";
+import { BlobServiceClient } from "@azure/storage-blob";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -182,6 +184,48 @@ function resolveFsPath(rootPath, relPath = "") {
   return { root, target };
 }
 
+function normalizeBlobPrefix(prefix = "") {
+  return String(prefix).trim().replace(/^\/+|\/+$/g, "");
+}
+
+function resolveBlobConfig(blob) {
+  if (!blob || typeof blob !== "object") {
+    throw new Error("blob configuration is required.");
+  }
+
+  if (typeof blob.accountUrl === "string" && typeof blob.containerName === "string") {
+    return {
+      accountUrl: blob.accountUrl.replace(/\/+$/, ""),
+      containerName: blob.containerName.trim(),
+      prefix: normalizeBlobPrefix(blob.prefix),
+    };
+  }
+
+  throw new Error("blob.accountUrl and blob.containerName are required.");
+}
+
+function blobFullPath(prefix = "", relPath = "") {
+  const normalizedPrefix = normalizeBlobPrefix(prefix);
+  const normalizedPath = String(relPath).replace(/^\/+|\/+$/g, "");
+  return [normalizedPrefix, normalizedPath].filter(Boolean).join("/");
+}
+
+function getBlobContainerClient(accountUrl, containerName) {
+  const credential = new DefaultAzureCredential();
+  const service = new BlobServiceClient(accountUrl, credential);
+  return service.getContainerClient(containerName);
+}
+
+async function readBlobText(blobClient) {
+  const resp = await blobClient.download();
+  if (!resp.readableStreamBody) return "";
+  const chunks = [];
+  for await (const chunk of resp.readableStreamBody) {
+    chunks.push(Buffer.isBuffer(chunk) ? chunk : Buffer.from(chunk));
+  }
+  return Buffer.concat(chunks).toString("utf-8");
+}
+
 // Minimal terminal-style processor so in-place repaints (rich progress bars,
 // spinners, etc.) overwrite the previous frame instead of accumulating as
 // duplicated text. Handles \r, CSI cursor-up (\x1b[<n>A), and CSI erase-line
@@ -202,8 +246,6 @@ function processTerminalChunk(buf, chunk) {
   while (i < txt.length) {
     const ch = txt[i];
     if (ch === "\r") {
-      // Carriage return: rewind to start of current line.
-      // Treat \r\n as a regular newline.
       if (txt[i + 1] === "\n") {
         buf += "\n";
         i += 2;
@@ -212,30 +254,16 @@ function processTerminalChunk(buf, chunk) {
         i += 1;
       }
     } else if (ch === "\x1b" && txt[i + 1] === "[") {
-      // CSI sequence: ESC [ <parameter bytes 0x30–0x3F> <intermediate 0x20–0x2F> <final 0x40–0x7E>
       let j = i + 2;
       while (j < txt.length) {
         const code = txt.charCodeAt(j);
-        if (code < 0x30 || code > 0x3f) break;
+        if (code >= 0x40 && code <= 0x7e) break;
         j += 1;
       }
-      // Intermediate bytes (rare, but skip them for correctness).
-      while (j < txt.length) {
-        const code = txt.charCodeAt(j);
-        if (code < 0x20 || code > 0x2f) break;
-        j += 1;
-      }
+      if (j >= txt.length) break;
       const final = txt[j];
-      const finalCode = final ? txt.charCodeAt(j) : 0;
-      if (!final || finalCode < 0x40 || finalCode > 0x7e) {
-        // Incomplete escape at chunk boundary — drop it; subsequent chunk
-        // would otherwise resync anyway.
-        break;
-      }
-      // Numeric params only (strip private-mode `?`, etc.) for our handlers.
       const params = txt.slice(i + 2, j).replace(/[^0-9;]/g, "");
       if (final === "A") {
-        // Cursor up N (default 1): clear current line, then drop N prior lines.
         const n = Math.max(1, parseInt(params || "1", 10) || 1);
         eraseCurrentLine();
         for (let k = 0; k < n; k += 1) {
@@ -243,17 +271,12 @@ function processTerminalChunk(buf, chunk) {
           eraseCurrentLine();
         }
       } else if (final === "K" || final === "J") {
-        // Erase in line / display — collapse to clearing current line.
         eraseCurrentLine();
       } else if (final === "G" || final === "H" || final === "f") {
-        // Cursor horizontal absolute / cursor position — treat as carriage
-        // return for the current line (rich uses \x1b[1G between frames).
         eraseCurrentLine();
       }
-      // All other CSI sequences (colors, cursor moves, mode set/reset, …) are stripped.
       i = j + 1;
     } else if (ch === "\x1b" && txt[i + 1] === "]") {
-      // OSC sequence: ESC ] ... (BEL | ESC \). Strip entirely.
       let j = i + 2;
       while (j < txt.length) {
         if (txt[j] === "\x07") {
@@ -268,7 +291,6 @@ function processTerminalChunk(buf, chunk) {
       }
       i = j;
     } else if (ch === "\x1b") {
-      // Other ESC sequence (e.g. ESC ( charset). Skip ESC + next.
       i += txt[i + 1] ? 2 : 1;
     } else {
       buf += ch;
@@ -675,37 +697,6 @@ function startInitJob(body) {
   return job;
 }
 
-/**
- * Parse a SAS URL like
- *   https://acct.blob.core.windows.net/<container>?sv=...&sp=rcwdl&sig=...
- * into the pieces the benchmark-qed CLI needs:
- *   - container name
- *   - SAS-based connection string accepted by azure-storage-blob:
- *       BlobEndpoint=https://acct.blob.core.windows.net;SharedAccessSignature=<token>
- *   - blob://<container>/... URI prefix used when passing config/output paths
- *     to the Python CLI (which calls graphrag_storage under the hood).
- */
-function parseBlobInfo(sasUrl, prefix) {
-  const u = new URL(sasUrl);
-  const account = u.host; // e.g. acct.blob.core.windows.net
-  const containerSegment = u.pathname.replace(/^\/+/, "").split("/")[0];
-  if (!containerSegment) {
-    throw new Error("SAS URL is missing the container path.");
-  }
-  const sasToken = u.search.replace(/^\?/, "");
-  if (!sasToken) {
-    throw new Error("SAS URL has no query string with the SAS token.");
-  }
-  const connectionString = `BlobEndpoint=https://${account};SharedAccessSignature=${sasToken}`;
-  const normalizedPrefix = (prefix || "").replace(/^\/+|\/+$/g, "");
-  return {
-    account,
-    container: containerSegment,
-    connectionString,
-    basePrefix: normalizedPrefix,
-  };
-}
-
 function startRunJob(body) {
   const allowedConfigTypes = [
     "autoq",
@@ -724,32 +715,22 @@ function startRunJob(body) {
   let displayRoot;
 
   if (body.blob && typeof body.blob === "object") {
-    // Blob workspace: pass blob:// URIs to the CLI. Prefer --account-url
-    // (DefaultAzureCredential / az CLI auth) over the SAS connection
-    // string, because graphrag_storage's Azure backend calls account-
-    // level APIs (e.g. list_containers) on init and a container-scoped
-    // SAS will be rejected with AuthenticationFailed. The caller can
-    // opt into SAS by setting body.blob.useSas === true.
-    if (typeof body.blob.sasUrl !== "string" || !body.blob.sasUrl) {
-      throw new Error("blob.sasUrl is required for blob workspaces.");
-    }
-    const { account, container, connectionString, basePrefix } =
-      parseBlobInfo(body.blob.sasUrl, body.blob.prefix);
-    const accountUrl = `https://${account}`;
+    // Blob workspace: pass blob:// URIs to the CLI and authenticate via
+    // --account-url (DefaultAzureCredential / az CLI auth) on the runner.
+    const { accountUrl, containerName, prefix: basePrefix } = resolveBlobConfig(
+      body.blob,
+    );
     const settingsBlob = basePrefix
-      ? `blob://${container}/${basePrefix}/settings.yaml`
-      : `blob://${container}/settings.yaml`;
+      ? `blob://${containerName}/${basePrefix}/settings.yaml`
+      : `blob://${containerName}/settings.yaml`;
     settingsPath = settingsBlob;
     // output_data_path is treated as a child-path inside the configured
     // output_storage by autoq/autoe; "output" matches local convention.
     outputPath = "output";
-    extraArgs =
-      body.blob.useSas === true
-        ? ["--connection-string", connectionString]
-        : ["--account-url", accountUrl];
+    extraArgs = ["--account-url", accountUrl];
     displayRoot = basePrefix
-      ? `blob://${container}/${basePrefix}`
-      : `blob://${container}`;
+      ? `blob://${containerName}/${basePrefix}`
+      : `blob://${containerName}`;
   } else {
     if (!body.rootPath || typeof body.rootPath !== "string") {
       throw new Error("rootPath is required.");
@@ -1006,20 +987,12 @@ const server = createServer(async (req, res) => {
       let args;
       let outputPath; // for the success payload
       if (body.blob && typeof body.blob === "object") {
-        if (typeof body.blob.sasUrl !== "string" || !body.blob.sasUrl) {
-          throw new Error("blob.sasUrl is required for blob workspaces.");
-        }
-        const { account, container, connectionString, basePrefix } =
-          parseBlobInfo(body.blob.sasUrl, body.blob.prefix);
-        const accountUrl = `https://${account}`;
-        // graphrag_storage's Azure backend calls list_containers() on init,
-        // which is an account-level API. A container-scoped SAS can't do
-        // that and Azure returns 403 AuthenticationFailed. So prefer
-        // --account-url (DefaultAzureCredential / az CLI auth) by default,
-        // and only fall back to the SAS connection string when the caller
-        // explicitly opts in (body.blob.useSas === true) or no Azure
-        // identity is available on the runner host.
-        const useSas = body.blob.useSas === true;
+        const { accountUrl, containerName, prefix: basePrefix } = resolveBlobConfig(
+          body.blob,
+        );
+        // Use --account-url (DefaultAzureCredential / az CLI auth) on the
+        // runner so the storage backend can perform account-level operations
+        // when needed.
         args = [
           "data",
           "download",
@@ -1029,13 +1002,9 @@ const server = createServer(async (req, res) => {
           "--storage-type",
           "blob",
           "--container-name",
-          container,
+          containerName,
         ];
-        if (useSas) {
-          args.push("--connection-string", connectionString);
-        } else {
-          args.push("--account-url", accountUrl);
-        }
+        args.push("--account-url", accountUrl);
         // The CLI joins base_dir + output_dir, so set base_dir to the
         // workspace prefix and pass the user-chosen subdir (e.g. "input")
         // as the second positional argument. Blobs land under
@@ -1044,8 +1013,8 @@ const server = createServer(async (req, res) => {
           args.push("--base-dir", basePrefix);
         }
         outputPath = basePrefix
-          ? `blob://${container}/${basePrefix}/${outputRelPath}`
-          : `blob://${container}/${outputRelPath}`;
+          ? `blob://${containerName}/${basePrefix}/${outputRelPath}`
+          : `blob://${containerName}/${outputRelPath}`;
       } else {
         const rootPath = body.rootPath;
         if (!rootPath || typeof rootPath !== "string") {
@@ -1067,19 +1036,7 @@ const server = createServer(async (req, res) => {
         cwd: REPO_ROOT,
       });
       if (!result.ok) {
-        // The graphrag_storage Azure backend always calls
-        // BlobServiceClient.list_containers() on init (to verify / create
-        // the container). That's an account-level API, so a container-
-        // scoped SAS (the common case) gets 403 AuthenticationFailed:
-        // "The specified signed resource is not allowed for the this
-        // resource level". Translate that into something actionable.
-        const out = result.output ?? "";
-        const isContainerSasScopeError =
-          /AuthenticationFailed/i.test(out) &&
-          /signed resource is not allowed/i.test(out);
-        const friendly = isContainerSasScopeError
-          ? "Dataset download failed: the SAS token attached to this workspace doesn't allow account-level operations (the storage backend lists/creates the container on connect). Use an account-level SAS that includes the 'Service' resource type and 'List'+'Create' permissions, or create an account-level SAS scoped to Blob service. Container-only SAS tokens won't work for this operation."
-          : `Dataset download failed (exit code: ${result.exitCode}).`;
+        const friendly = `Dataset download failed (exit code: ${result.exitCode}).`;
         json(req, res, 400, {
           error: friendly,
           command: result.command,
@@ -1365,6 +1322,52 @@ const server = createServer(async (req, res) => {
     return;
   }
 
+  if (req.method === "GET" && pathname === "/api/blob/list") {
+    try {
+      const accountUrl = url.searchParams.get("accountUrl") ?? "";
+      const containerName = url.searchParams.get("containerName") ?? "";
+      const prefix = url.searchParams.get("prefix") ?? "";
+      const relPath = url.searchParams.get("path") ?? "";
+      if (!accountUrl || !containerName) {
+        throw new Error("accountUrl and containerName are required.");
+      }
+      const client = getBlobContainerClient(accountUrl, containerName);
+      const fullPrefix = blobFullPath(prefix, relPath);
+      const iter = client.listBlobsByHierarchy("/", {
+        prefix: fullPrefix ? `${fullPrefix}/` : "",
+      });
+      const basePath = relPath.replace(/^\/+|\/+$/g, "");
+      const nodes = [];
+      for await (const item of iter) {
+        if (item.kind === "prefix") {
+          const full = item.name.endsWith("/") ? item.name.slice(0, -1) : item.name;
+          const name = fullPrefix ? full.slice(fullPrefix.length + 1) : full;
+          if (!name) continue;
+          nodes.push({
+            name,
+            path: basePath ? `${basePath}/${name}` : name,
+            kind: "directory",
+          });
+        } else {
+          const full = item.name;
+          const name = fullPrefix ? full.slice(fullPrefix.length + 1) : full;
+          if (!name) continue;
+          nodes.push({
+            name,
+            path: basePath ? `${basePath}/${name}` : name,
+            kind: "file",
+          });
+        }
+      }
+      json(req, res, 200, { nodes });
+    } catch (err) {
+      json(req, res, 400, {
+        error: err instanceof Error ? err.message : String(err),
+      });
+    }
+    return;
+  }
+
   if (req.method === "GET" && pathname === "/api/fs/read") {
     try {
       const rootPath = url.searchParams.get("root") ?? "";
@@ -1372,6 +1375,27 @@ const server = createServer(async (req, res) => {
       if (!relPath) throw new Error("path is required.");
       const { target } = resolveFsPath(rootPath, relPath);
       const content = await fsp.readFile(target, "utf-8");
+      json(req, res, 200, { content });
+    } catch (err) {
+      json(req, res, 400, {
+        error: err instanceof Error ? err.message : String(err),
+      });
+    }
+    return;
+  }
+
+  if (req.method === "GET" && pathname === "/api/blob/read") {
+    try {
+      const accountUrl = url.searchParams.get("accountUrl") ?? "";
+      const containerName = url.searchParams.get("containerName") ?? "";
+      const prefix = url.searchParams.get("prefix") ?? "";
+      const relPath = url.searchParams.get("path") ?? "";
+      if (!accountUrl || !containerName || !relPath) {
+        throw new Error("accountUrl, containerName, and path are required.");
+      }
+      const client = getBlobContainerClient(accountUrl, containerName);
+      const blobClient = client.getBlobClient(blobFullPath(prefix, relPath));
+      const content = await readBlobText(blobClient);
       json(req, res, 200, { content });
     } catch (err) {
       json(req, res, 400, {
@@ -1402,6 +1426,28 @@ const server = createServer(async (req, res) => {
     return;
   }
 
+  if (req.method === "PUT" && pathname === "/api/blob/write") {
+    try {
+      const body = await parseBody(req);
+      const { accountUrl, containerName, prefix, path: relPath } = body;
+      const content = String(body.content ?? "");
+      if (!accountUrl || !containerName || !relPath) {
+        throw new Error("accountUrl, containerName, and path are required.");
+      }
+      const client = getBlobContainerClient(accountUrl, containerName);
+      const blob = client.getBlockBlobClient(blobFullPath(prefix, relPath));
+      await blob.upload(content, Buffer.byteLength(content, "utf-8"), {
+        blobHTTPHeaders: { blobContentType: "text/plain; charset=utf-8" },
+      });
+      json(req, res, 200, { ok: true });
+    } catch (err) {
+      json(req, res, 400, {
+        error: err instanceof Error ? err.message : String(err),
+      });
+    }
+    return;
+  }
+
   if (req.method === "POST" && pathname === "/api/fs/create-file") {
     try {
       const body = await parseBody(req);
@@ -1414,6 +1460,28 @@ const server = createServer(async (req, res) => {
       const { target } = resolveFsPath(rootPath, relPath);
       await fsp.mkdir(path.dirname(target), { recursive: true });
       await fsp.writeFile(target, content, "utf-8");
+      json(req, res, 200, { ok: true });
+    } catch (err) {
+      json(req, res, 400, {
+        error: err instanceof Error ? err.message : String(err),
+      });
+    }
+    return;
+  }
+
+  if (req.method === "POST" && pathname === "/api/blob/create-file") {
+    try {
+      const body = await parseBody(req);
+      const { accountUrl, containerName, prefix, path: relPath } = body;
+      const content = String(body.content ?? "");
+      if (!accountUrl || !containerName || !relPath) {
+        throw new Error("accountUrl, containerName, and path are required.");
+      }
+      const client = getBlobContainerClient(accountUrl, containerName);
+      const blob = client.getBlockBlobClient(blobFullPath(prefix, relPath));
+      await blob.upload(content, Buffer.byteLength(content, "utf-8"), {
+        blobHTTPHeaders: { blobContentType: "text/plain; charset=utf-8" },
+      });
       json(req, res, 200, { ok: true });
     } catch (err) {
       json(req, res, 400, {
@@ -1452,6 +1520,32 @@ const server = createServer(async (req, res) => {
       }
       const { target } = resolveFsPath(rootPath, relPath);
       await fsp.rm(target, { recursive: true, force: false });
+      json(req, res, 200, { ok: true });
+    } catch (err) {
+      json(req, res, 400, {
+        error: err instanceof Error ? err.message : String(err),
+      });
+    }
+    return;
+  }
+
+  if (req.method === "DELETE" && pathname === "/api/blob/delete") {
+    try {
+      const body = await parseBody(req);
+      const { accountUrl, containerName, prefix, path: relPath } = body;
+      if (!accountUrl || !containerName || !relPath) {
+        throw new Error("accountUrl, containerName, and path are required.");
+      }
+      const client = getBlobContainerClient(accountUrl, containerName);
+      const blobName = blobFullPath(prefix, relPath);
+      const single = client.getBlobClient(blobName);
+      const resDelete = await single.deleteIfExists();
+      if (!resDelete.succeeded) {
+        const folderPrefix = blobName.endsWith("/") ? blobName : `${blobName}/`;
+        for await (const item of client.listBlobsFlat({ prefix: folderPrefix })) {
+          await client.getBlobClient(item.name).deleteIfExists();
+        }
+      }
       json(req, res, 200, { ok: true });
     } catch (err) {
       json(req, res, 400, {

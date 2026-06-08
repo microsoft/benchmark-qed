@@ -35,15 +35,17 @@ from benchmark_qed.autoq.question_gen.data_questions.claim_extractor.local_claim
 )
 from benchmark_qed.autoq.sampler.question_sampler import QuestionSampler
 from benchmark_qed.config.utils import load_template_file
+from benchmark_qed.llm import chat
 
 if TYPE_CHECKING:
     from string import Template
+
+    from graphrag_llm.completion import LLMCompletion
 
     from benchmark_qed.autod.data_model.text_unit import TextUnit
     from benchmark_qed.autod.data_processor.embedding import TextEmbedder
     from benchmark_qed.autod.sampler.clustering.cluster import TextCluster
     from benchmark_qed.autoq.config import AssertionConfig, AssertionPromptConfig
-    from benchmark_qed.llm.type.base import ChatModel
 
 log: logging.Logger = logging.getLogger(__name__)
 
@@ -61,7 +63,7 @@ class DataLocalQuestionGen(BaseQuestionGen):
 
     def __init__(
         self,
-        llm: ChatModel,
+        llm: LLMCompletion,
         text_embedder: TextEmbedder,
         text_units: list[TextUnit],
         question_sampler: QuestionSampler | None = None,
@@ -81,7 +83,7 @@ class DataLocalQuestionGen(BaseQuestionGen):
 
         Parameters
         ----------
-        llm : ChatModel
+        llm : LLMCompletion
             The language model to use.
         text_embedder : TextEmbedder
             Text embedder for computing embeddings.
@@ -175,9 +177,9 @@ class DataLocalQuestionGen(BaseQuestionGen):
 
         self.json_mode = json_mode
         if json_mode:
-            self.llm_params["response_format"] = {"type": "json_object"}
+            self.llm_params["response_format_json_object"] = True
         else:
-            self.llm_params.pop("response_format", None)
+            self.llm_params.pop("response_format_json_object", None)
 
         self.extraction_prompt: str = (
             generation_system_prompt
@@ -304,8 +306,8 @@ class DataLocalQuestionGen(BaseQuestionGen):
                     ),
                 },
             ]
-            initial_questions_result = await self.llm.chat(
-                messages=extraction_messages, **self.llm_params
+            initial_questions_result = await chat(
+                self.llm, messages=extraction_messages, **self.llm_params
             )
 
             # expand the original set of questions with additional information
@@ -313,18 +315,16 @@ class DataLocalQuestionGen(BaseQuestionGen):
                 *extraction_messages,
                 {
                     "role": "assistant",
-                    "content": initial_questions_result.output.content,
+                    "content": initial_questions_result.content,
                 },
                 {"role": "user", "content": self.generation_prompt},
             ]
 
-            final_questions_result = await self.llm.chat(
-                messages=generation_messages, **self.llm_params
+            final_questions_result = await chat(
+                self.llm, messages=generation_messages, **self.llm_params
             )
 
-            final_questions, j = try_parse_json_object(
-                final_questions_result.output.content
-            )
+            final_questions, j = try_parse_json_object(final_questions_result.content)
             if j == {}:
                 msg = f"Error parsing questions output: {final_questions}"
                 log.error(msg)
@@ -332,8 +332,21 @@ class DataLocalQuestionGen(BaseQuestionGen):
 
             parsed_final_questions = json.loads(final_questions)
 
+            # The model may return either {"questions": [...]} or a bare list [...].
+            if isinstance(parsed_final_questions, dict):
+                question_items = parsed_final_questions.get("questions", [])
+            elif isinstance(parsed_final_questions, list):
+                question_items = parsed_final_questions
+            else:
+                msg = (
+                    "Unexpected questions output structure: "
+                    f"{type(parsed_final_questions).__name__}"
+                )
+                log.error(msg)
+                return []
+
             question_set = set()
-            for question in parsed_final_questions["questions"]:
+            for question in question_items:
                 # extract claims and generate reference for each question
                 question_text = question.get("output_question", "")
                 if question_text.strip() != "":

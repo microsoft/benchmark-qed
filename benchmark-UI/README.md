@@ -194,8 +194,7 @@ Object.keys(localStorage)
 The UI can mount an Azure Blob container as a read-only workspace (the
 "Add workspace → Azure Blob Container" tab). The browser talks to Azure
 **directly** via `@azure/storage-blob` — there is no backend proxy — so the
-storage account must explicitly allow your UI's origin via CORS, and the
-SAS URL you paste must grant the right permissions.
+storage account must explicitly allow your UI's origin via CORS.
 
 ### 7.1 Configure CORS on the storage account
 
@@ -235,47 +234,9 @@ az storage cors add \
   --account-name <your-storage-account>
 ```
 
-For production, replace `http://localhost:5173` with the actual UI origin
-and **never** combine `*` origins with a SAS that grants write permissions.
+For production, replace `http://localhost:5173` with the actual UI origin.
 
-### 7.2 Generate a SAS URL with the right permissions
-
-The dialog accepts a **container-level** SAS URL of the form:
-
-```
-https://<account>.blob.core.windows.net/<container>?sv=...&sr=c&sp=...&sig=...
-```
-
-Minimum query parameters:
-
-| Param | Required value | Why |
-|---|---|---|
-| `sr` | `c` | Signed resource = container. |
-| `sp` | at least `rl` (read + list) | UI lists then reads blobs. Add `w` for upload, `d` for delete. |
-| `se` | future timestamp | SAS expiry. |
-| `spr` | `https` | Recommended; the SDK uses HTTPS. |
-| `sv`, `sig` | as generated | API version + signature. |
-
-Generate via the portal (Container → **Shared access tokens**, tick *Read*
-and *List*) or via CLI:
-
-```bash
-az storage container generate-sas \
-  --account-name <your-storage-account> \
-  --name <container> \
-  --permissions rl \
-  --expiry 2026-12-31T23:59:00Z \
-  --https-only \
-  --auth-mode key \
-  --as-user false \
-  --full-uri
-```
-
-Paste the full `--full-uri` output (including `https://` and `?...&sig=...`)
-into the dialog's "SAS URL" field. The optional **Prefix** field lets you
-mount a subfolder of the container (e.g. `autoe_test/`).
-
-### 7.3 Enable editing blob files from the UI
+### 7.2 Enable editing blob files from the UI
 
 By default a blob workspace is **read-only**: opening `settings.yaml` shows
 the content but the Save button is disabled, and right-click → Delete fails
@@ -326,7 +287,7 @@ things — the SAS, the CORS rule, and the in-app workspace entry:
 3. **Re-add the workspace in the UI.** The dialog reads `sp` only when the
    workspace is created; the `writable` flag is cached for the session.
    Right-click the existing blob workspace in the sidebar → **Remove**,
-   then add it again with the new SAS URL. The editor's Save button is now
+   then add it again with the updated credentials. The editor's Save button is now
    enabled, and `BlobFileSource.writeFile` will `PUT` the file back to the
    container.
 
@@ -349,7 +310,7 @@ things — the SAS, the CORS rule, and the in-app workspace entry:
   (never `*` for writeable SAS), keep `se=` short, and revoke via the
   portal's "Revoke all SAS" if it ever leaks.
 
-### 7.4 Run jobs and download datasets against a blob workspace
+### 7.3 Run jobs and download datasets against a blob workspace
 
 The action-bar buttons next to a blob workspace — **Download predefined
 inputs** (⬇) and **Run workspace** (▶) — work the same way as for local
@@ -407,7 +368,7 @@ Requirements for the buttons to succeed:
    `npm run dev:all` (the runner can't find the CLI otherwise — see §8
    for that error).
 
-### 7.5 Diagnose blob errors
+### 7.4 Diagnose blob errors
 
 Open browser devtools → Network tab → retry → click the failing request:
 
@@ -421,7 +382,7 @@ Open browser devtools → Network tab → retry → click the failing request:
 | Save button stays disabled even with a writeable SAS | Old (read-only) workspace entry still active | Remove the workspace and re-add it with the new SAS — `writable` is cached on connect |
 | `"This workspace source does not support deleting paths"` banner on blob workspace | SAS lacks `d` permission (workspace was added with a non-deletable SAS) | Regenerate with `sp=rcwdl` and re-add the workspace |
 | `405 Method Not Allowed` on `PUT`/`DELETE` | CORS allows only `GET/HEAD/OPTIONS` | Add `PUT` (and `POST`/`DELETE` as needed) to §7.1 |
-| `404 ContainerNotFound` | Wrong container name in the SAS URL | Double-check the path segment after the account |
+| `404 ContainerNotFound` | Wrong container name | Double-check the path segment after the account |
 | `400 InvalidQueryParameter` on `restype=container&comp=list` | SAS not allowed for listing | Add `l` to `sp` |
 
 ---

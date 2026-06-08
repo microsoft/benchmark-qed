@@ -17,11 +17,12 @@ from benchmark_qed.autoq.question_gen.data_questions.assertion_gen.ranking impor
 from benchmark_qed.config.defaults import LLM_PARAMS, MAX_ASSERTIONS
 
 if TYPE_CHECKING:
+    from graphrag_llm.completion import LLMCompletion
+
     from benchmark_qed.autoq.data_model.question import Question
     from benchmark_qed.autoq.question_gen.data_questions.assertion_gen.validator import (
         AssertionValidator,
     )
-    from benchmark_qed.llm.type.base import ChatModel
 
 ClaimDict = dict[str, Any]  # Individual claim with statement, score, etc.
 
@@ -90,7 +91,7 @@ class BaseAssertionGenerator(ABC):
 
     def __init__(
         self,
-        llm: ChatModel,
+        llm: LLMCompletion,
         llm_params: dict[str, Any] = LLM_PARAMS,
         json_mode: bool = True,
         max_assertions: int | None = MAX_ASSERTIONS,
@@ -102,7 +103,7 @@ class BaseAssertionGenerator(ABC):
 
         Parameters
         ----------
-        llm : ChatModel
+        llm : LLMCompletion
             The language model to use for generation.
         llm_params : dict[str, Any]
             Parameters for the LLM.
@@ -126,9 +127,9 @@ class BaseAssertionGenerator(ABC):
         self.max_concurrent_questions = max_concurrent_questions
 
         if self.json_mode:
-            self.llm_params["response_format"] = {"type": "json_object"}
+            self.llm_params["response_format_json_object"] = True
         else:
-            self.llm_params.pop("response_format", None)
+            self.llm_params.pop("response_format_json_object", None)
 
     @abstractmethod
     async def agenerate_assertions(

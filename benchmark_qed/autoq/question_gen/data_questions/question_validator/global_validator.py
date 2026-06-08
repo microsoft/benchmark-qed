@@ -15,8 +15,9 @@ from benchmark_qed.config.defaults import LLM_PARAMS, RANDOM_SEED
 if TYPE_CHECKING:
     from string import Template
 
+    from graphrag_llm.completion import LLMCompletion
+
     from benchmark_qed.autoq.data_model.question import Question
-    from benchmark_qed.llm.type.base import ChatModel
 
 PROMPTS_PATH = Path(global_questions.__file__).parent
 
@@ -37,7 +38,7 @@ class GlobalQuestionValidator(BatchQuestionValidator):
 
     def __init__(
         self,
-        llm: ChatModel,
+        llm: LLMCompletion,
         llm_params: dict[str, Any] = LLM_PARAMS,
         validation_prompt: Template | None = None,
         batch_size: int = 15,
@@ -48,7 +49,7 @@ class GlobalQuestionValidator(BatchQuestionValidator):
 
         Parameters
         ----------
-        llm : ChatModel
+        llm : LLMCompletion
             Language model for validation.
         llm_params : dict[str, Any]
             Parameters for the LLM.

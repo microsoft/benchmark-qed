@@ -16,6 +16,7 @@ Defines the configuration for the language model used in scoring or generation t
 | `llm_provider` | `LLMProvider \| str` | `"openai.chat"` | Specifies the provider and type of model. See `LLMProvider` enum for options. |
 | `init_args` | `dict[str, Any]` | `{}` | Additional arguments passed during model initialization. |
 | `call_args` | `dict[str, Any]` | `{"temperature": 0.0, "seed": 42}` | Parameters passed when invoking the model. |
+| `retry` | `RetryConfig \| None` | `None` | Optional retry strategy for transient provider errors (for example HTTP 429 rate limits). |
 | `custom_providers` | `list[CustomLLMProvider]` | `list` | List of custom LLM providers to register. |
 
 
@@ -46,6 +47,20 @@ Specifies the authentication method used to access the model.
 
 ---
 
+### `RetryConfig`
+
+Optional retry behavior for transient failures.
+
+| Field | Type | Default | Description |
+|-------|------|---------|-------------|
+| `type` | `str` | `"exponential_backoff"` | Retry strategy. Supported values: `"exponential_backoff"`, `"immediate"`. |
+| `max_retries` | `int \| None` | `None` | Maximum retry attempts. |
+| `base_delay` | `float \| None` | `None` | Base delay in seconds for exponential backoff. |
+| `max_delay` | `float \| None` | `None` | Maximum delay in seconds between retries. |
+| `jitter` | `bool \| None` | `None` | Whether to randomize delay intervals. |
+
+---
+
 ### YAML Example for `LLMConfig`
 
 #### OpenAI
@@ -61,6 +76,12 @@ llm_config:
   call_args:
     temperature: 0.0
     seed: 42
+  retry:
+    type: exponential_backoff
+    max_retries: 6
+    base_delay: 2.0
+    max_delay: 30.0
+    jitter: true
 ```
 
 ```
@@ -84,6 +105,12 @@ llm_config:
   call_args:
     temperature: 0.0
     seed: 42
+  retry:
+    type: exponential_backoff
+    max_retries: 6
+    base_delay: 2.0
+    max_delay: 30.0
+    jitter: true
 ```
 
 > 💡 Note: If you use azure_manager_identity make sure to be authenticated with `az login` on a terminal, if you use api_key make sure to include the api reference and the .env file.
@@ -145,6 +172,12 @@ llm_config:
   api_key: ${YOUR_API_KEY}
   concurrent_requests: 4
   llm_provider: "custom.chat"
+    retry:
+        type: exponential_backoff
+        max_retries: 6
+        base_delay: 2.0
+        max_delay: 30.0
+        jitter: true
   custom_providers: # list of custom providers
     - model_type: chat 
       name: custom.chat # This name should match the llm_provider above

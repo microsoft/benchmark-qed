@@ -45,6 +45,12 @@ chat_model:
   call_args:                         # Extra model call args
     temperature: 0.0
     seed: 42
+  retry:                             # Optional retry policy for transient provider errors (e.g., HTTP 429)
+    type: exponential_backoff        # exponential_backoff | immediate
+    max_retries: 6
+    base_delay: 2.0
+    max_delay: 30.0
+    jitter: true
   custom_providers: []               # Custom provider registrations
 
 embedding_model:
@@ -396,12 +402,19 @@ significance_correction: holm
 | Azure Inference Embedding | `azure.inference.embedding` | Azure AI Inference embeddings |
 
 ## Custom LLM Providers
+
+Built-in providers are served by `graphrag-llm`'s LiteLLM-backed factory. To register a custom provider, point benchmark-qed at a class implementing the `graphrag_llm` interface:
+- Chat: `graphrag_llm.completion.LLMCompletion`
+- Embedding: `graphrag_llm.embedding.LLMEmbedding`
+
+> The legacy `benchmark_qed.llm.type.base.ChatModel` / `EmbeddingModel` Protocols were removed in the graphrag-llm migration — implement the graphrag-llm interfaces instead.
+
 ```yaml
 custom_providers:
   - model_type: chat                 # chat or embedding
     name: custom.chat                # Matches llm_provider value
     module: my_module.provider       # Python module path
-    model_class: MyCustomChatModel   # Class name
+    model_class: MyCustomChatModel   # Class implementing LLMCompletion / LLMEmbedding
 ```
 
 ## Significance Test Options

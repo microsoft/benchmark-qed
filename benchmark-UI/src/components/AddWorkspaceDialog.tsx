@@ -5,13 +5,19 @@ interface Props {
   open: boolean;
   onClose: () => void;
   onAddLocal: () => void;
-  onAddBlob: (data: { sasUrl: string; prefix: string; label: string }) => void;
+  onAddBlob: (data: {
+    accountUrl: string;
+    containerName: string;
+    prefix: string;
+    label: string;
+  }) => void;
 }
 
 export function AddWorkspaceDialog({ open, onClose, onAddLocal, onAddBlob }: Props) {
   const [type, setType] = useState<"local" | "blob">("local");
   // Blob fields
-  const [sasUrl, setSasUrl] = useState("");
+  const [accountUrl, setAccountUrl] = useState("");
+  const [containerName, setContainerName] = useState("");
   const [prefix, setPrefix] = useState("");
   const [label, setLabel] = useState("");
 
@@ -22,20 +28,20 @@ export function AddWorkspaceDialog({ open, onClose, onAddLocal, onAddBlob }: Pro
     if (type === "local") {
       onAddLocal();
     } else {
-      if (!sasUrl.trim()) return;
+      if (!accountUrl.trim() || !containerName.trim()) return;
       let computedLabel = label.trim();
       if (!computedLabel) {
-        try {
-          const u = new URL(sasUrl);
-          const container = u.pathname.replace(/^\//, "").split("/")[0];
-          computedLabel = `${u.hostname.split(".")[0]}/${container}${
-            prefix ? `/${prefix.replace(/\/$/, "")}` : ""
-          }`;
-        } catch {
-          computedLabel = "blob-container";
-        }
+        const host = accountUrl.trim().replace(/^https?:\/\//, "").replace(/\/+$/, "");
+        computedLabel = `${host.split(".")[0]}/${containerName.trim()}${
+          prefix ? `/${prefix.replace(/\/$/, "")}` : ""
+        }`;
       }
-      onAddBlob({ sasUrl: sasUrl.trim(), prefix: prefix.trim(), label: computedLabel });
+      onAddBlob({
+        accountUrl: accountUrl.trim(),
+        containerName: containerName.trim(),
+        prefix: prefix.trim(),
+        label: computedLabel,
+      });
     }
   };
 
@@ -57,17 +63,27 @@ export function AddWorkspaceDialog({ open, onClose, onAddLocal, onAddBlob }: Pro
           {type === "blob" && (
             <>
               <label className="field">
-                <span>Container SAS URL</span>
-                <textarea
-                  value={sasUrl}
-                  onChange={e => setSasUrl(e.target.value)}
-                  placeholder="https://<account>.blob.core.windows.net/<container>?sv=...&sig=..."
+                <span>Storage account URL</span>
+                <input
+                  type="text"
+                  value={accountUrl}
+                  onChange={e => setAccountUrl(e.target.value)}
+                  placeholder="https://<account>.blob.core.windows.net"
                   required={type === "blob"}
-                  rows={3}
                 />
               </label>
               <label className="field">
-                <span>Prefix (optional)</span>
+                <span>Container name</span>
+                <input
+                  type="text"
+                  value={containerName}
+                  onChange={e => setContainerName(e.target.value)}
+                  placeholder="my-container"
+                  required={type === "blob"}
+                />
+              </label>
+              <label className="field">
+                <span>Prefix / root (optional)</span>
                 <input
                   type="text"
                   value={prefix}

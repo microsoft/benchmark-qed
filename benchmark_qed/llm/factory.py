@@ -1,151 +1,90 @@
 # Copyright (c) 2025 Microsoft Corporation.
-"""A package containing a factory for supported llm types."""
+"""A factory for supported llm types backed by ``graphrag-llm``."""
 
 import importlib
-from collections.abc import Callable
 from typing import ClassVar
 
-from benchmark_qed.config.llm_config import LLMConfig, LLMProvider, ModelType
-from benchmark_qed.llm.provider.azure import AzureInferenceChat, AzureInferenceEmbedding
-from benchmark_qed.llm.provider.openai import (
-    AzureOpenAIChat,
-    AzureOpenAIEmbedding,
-    OpenAIChat,
-    OpenAIEmbedding,
-)
-from benchmark_qed.llm.type.base import ChatModel, EmbeddingModel
+from graphrag_llm.completion import LLMCompletion, create_completion
+from graphrag_llm.completion.completion_factory import register_completion
+from graphrag_llm.embedding import LLMEmbedding, create_embedding
+from graphrag_llm.embedding.embedding_factory import register_embedding
+
+from benchmark_qed.config.llm_config import LLMConfig, ModelType
 
 
-def _get_custom_provider_names(
-    model_config: LLMConfig, model_type: ModelType
-) -> list[str]:
-    """Get the names of custom providers for the given model config."""
-    return [
-        provider.name
-        for provider in model_config.custom_providers
-        if provider.model_type == model_type
-    ]
+def _register_custom_provider(model_config: LLMConfig, model_type: ModelType) -> None:
+    """Register a custom provider with the underlying graphrag-llm factory."""
+    provider = next(
+        (
+            p
+            for p in model_config.custom_providers
+            if p.name == str(model_config.llm_provider) and p.model_type == model_type
+        ),
+        None,
+    )
+    if provider is None:
+        return
+    try:
+        module = importlib.import_module(provider.module)
+    except ImportError as e:
+        msg = (
+            f"Failed to import custom provider '{provider.name}' "
+            f"from module '{provider.module}'. Please check the module and class name."
+        )
+        raise ImportError(msg) from e
+    try:
+        model_class = getattr(module, provider.model_class)
+    except AttributeError as e:
+        msg = (
+            f"Failed to load custom provider '{provider.name}': class "
+            f"'{provider.model_class}' not found in module '{provider.module}'. "
+            "Please check the module and class name."
+        )
+        raise AttributeError(msg) from e
+
+    if model_type == ModelType.Chat:
+        register_completion(provider.name, model_class)
+    else:
+        register_embedding(provider.name, model_class)
 
 
 class ModelFactory:
-    """A factory for creating Model instances."""
+    """Factory for creating ``graphrag-llm`` model instances from an :class:`LLMConfig`."""
 
-    _chat_registry: ClassVar[dict[str, Callable[..., ChatModel]]] = {}
-    _embedding_registry: ClassVar[dict[str, Callable[..., EmbeddingModel]]] = {}
-
-    @classmethod
-    def register_chat(cls, model_type: str, creator: Callable[..., ChatModel]) -> None:
-        """Register a ChatModel implementation."""
-        cls._chat_registry[model_type] = creator
+    _registered_chat: ClassVar[set[str]] = set()
+    _registered_embedding: ClassVar[set[str]] = set()
 
     @classmethod
-    def register_embedding(
-        cls, model_type: str, creator: Callable[..., EmbeddingModel]
-    ) -> None:
-        """Register an EmbeddingModel implementation."""
-        cls._embedding_registry[model_type] = creator
+    def create_chat_model(cls, model_config: LLMConfig) -> LLMCompletion:
+        """Create a chat completion client.
 
-    @classmethod
-    def _register_custom_provider(
-        cls, model_config: LLMConfig, model_type: ModelType
-    ) -> None:
-        provider = next(
-            filter(
-                lambda p: p.name == model_config.llm_provider,
-                model_config.custom_providers,
-            ),
-            None,
-        )
-        if provider is not None:
-            try:
-                module = importlib.import_module(provider.module)
-                model_class = getattr(module, provider.model_class)
-            except ImportError as e:
-                msg = (
-                    f"Failed to import custom provider '{provider.name}' "
-                    f"from module '{provider.module}'. Please check the module and class name."
-                )
-                raise ImportError(msg) from e
-            match model_type:
-                case ModelType.Chat:
-                    cls.register_chat(provider.name, lambda config: model_class(config))
-                case ModelType.Embedding:
-                    cls.register_embedding(
-                        provider.name, lambda config: model_class(config)
-                    )
-
-    @classmethod
-    def create_chat_model(cls, model_config: LLMConfig) -> ChatModel:
+        Built-in providers (OpenAI, Azure OpenAI, Azure AI Inference) are
+        served by ``LiteLLMCompletion``. Custom providers declared via
+        :class:`benchmark_qed.config.llm_config.CustomLLMProvider` are
+        registered with ``graphrag_llm.completion.completion_factory`` and
+        instantiated through it.
         """
-        Create a ChatModel instance.
-
-        Args:
-            model_type: The type of ChatModel to create.
-            **kwargs: Additional keyword arguments for the ChatModel constructor.
-
-        Returns
-        -------
-            A ChatModel instance.
-        """
-        custom_provider_names = _get_custom_provider_names(model_config, ModelType.Chat)
-        if (
-            model_config.llm_provider not in cls._chat_registry
-            and model_config.llm_provider not in custom_provider_names
-        ):
-            msg = f"ChatModel implementation '{model_config.llm_provider}' is not registered."
-            raise ValueError(msg)
-        if (
-            model_config.llm_provider in custom_provider_names
-            and model_config.llm_provider not in cls._chat_registry
-        ):
-            cls._register_custom_provider(model_config, ModelType.Chat)
-        return cls._chat_registry[model_config.llm_provider](model_config)
+        provider = str(model_config.llm_provider)
+        custom_names = {
+            p.name
+            for p in model_config.custom_providers
+            if p.model_type == ModelType.Chat
+        }
+        if provider in custom_names and provider not in cls._registered_chat:
+            _register_custom_provider(model_config, ModelType.Chat)
+            cls._registered_chat.add(provider)
+        return create_completion(model_config.to_model_config())
 
     @classmethod
-    def create_embedding_model(cls, model_config: LLMConfig) -> EmbeddingModel:
-        """
-        Create an EmbeddingModel instance.
-
-        Args:
-            model_type: The type of EmbeddingModel to create.
-            **kwargs: Additional keyword arguments for the EmbeddingLLM constructor.
-
-        Returns
-        -------
-            An EmbeddingLLM instance.
-        """
-        custom_provider_names = _get_custom_provider_names(
-            model_config, ModelType.Embedding
-        )
-        if (
-            model_config.llm_provider not in cls._embedding_registry
-            and model_config.llm_provider not in custom_provider_names
-        ):
-            msg = f"EmbeddingModel implementation '{model_config.llm_provider}' is not registered."
-            raise ValueError(msg)
-        if (
-            model_config.llm_provider in custom_provider_names
-            and model_config.llm_provider not in cls._embedding_registry
-        ):
-            cls._register_custom_provider(model_config, ModelType.Embedding)
-        return cls._embedding_registry[model_config.llm_provider](model_config)
-
-
-# --- Register default implementations ---
-ModelFactory.register_chat(LLMProvider.OpenAIChat, lambda config: OpenAIChat(config))
-ModelFactory.register_chat(
-    LLMProvider.AzureOpenAIChat, lambda config: AzureOpenAIChat(config)
-)
-ModelFactory.register_chat(
-    LLMProvider.AzureInferenceChat, lambda config: AzureInferenceChat(config)
-)
-
-ModelFactory.register_embedding(
-    LLMProvider.OpenAIEmbedding, lambda config: OpenAIEmbedding(config)
-)
-ModelFactory.register_embedding(
-    LLMProvider.AzureOpenAIEmbedding, lambda config: AzureOpenAIEmbedding(config)
-)
-ModelFactory.register_embedding(
-    LLMProvider.AzureInferenceEmbedding, lambda config: AzureInferenceEmbedding(config)
-)
+    def create_embedding_model(cls, model_config: LLMConfig) -> LLMEmbedding:
+        """Create an embedding client (see :meth:`create_chat_model`)."""
+        provider = str(model_config.llm_provider)
+        custom_names = {
+            p.name
+            for p in model_config.custom_providers
+            if p.model_type == ModelType.Embedding
+        }
+        if provider in custom_names and provider not in cls._registered_embedding:
+            _register_custom_provider(model_config, ModelType.Embedding)
+            cls._registered_embedding.add(provider)
+        return create_embedding(model_config.to_model_config())

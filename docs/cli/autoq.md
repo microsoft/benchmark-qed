@@ -11,7 +11,7 @@ benchmark-qed config init autoq ./local/autoq_test
 To create a template with active Azure Blob Storage configuration:
 
 ```sh
-benchmark-qed config init autoq ./local/autoq_test --storage-type blob
+benchmark-qed config init autoq ./local/autoq_test --storage-type blob --base-dir autoq_test
 ```
 
 To generate synthetic queries using your configuration file, run:
@@ -40,7 +40,7 @@ For more information about the `config init` command, see: [Config Init CLI](con
 
 ### Storage Configuration
 
-AutoQ supports reading input data from and writing output to Azure Blob Storage. When using `--storage-type blob` during `config init`, the generated settings file includes active storage sections.
+AutoQ supports reading input data from and writing output to Azure Blob Storage. When using `--storage-type blob` during `config init` (optionally with `--base-dir`), the generated settings file includes active storage sections.
 
 #### Input Storage
 

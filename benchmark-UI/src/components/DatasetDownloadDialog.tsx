@@ -91,15 +91,21 @@ export function DatasetDownloadDialog({
   };
 
   return (
-    <div className="modal-backdrop" onClick={onClose}>
+    <div className="modal-backdrop" onClick={submitting ? undefined : onClose}>
       <div className="modal" onClick={(e) => e.stopPropagation()}>
         <div className="modal-header">
           <h3>Download Predefined Input</h3>
-          <button className="modal-close" onClick={onClose}>
+          <button
+            type="button"
+            className="modal-close"
+            onClick={onClose}
+            disabled={submitting}
+            aria-label="Close"
+          >
             <Dismiss16Regular />
           </button>
         </div>
-        <form className="modal-body" onSubmit={submit}>
+        <form className="modal-body" onSubmit={submit} aria-busy={submitting}>
           <p>
             Select a dataset to download into <strong>{workspaceName}</strong>.
           </p>
@@ -112,6 +118,7 @@ export function DatasetDownloadDialog({
                   key={opt.value}
                   type="button"
                   className={`option-card ${dataset === opt.value ? "active" : ""}`}
+                  disabled={submitting}
                   onClick={() => selectDataset(opt.value)}
                 >
                   <span className="option-card-label">{opt.label}</span>
@@ -129,13 +136,14 @@ export function DatasetDownloadDialog({
                 value={destinationPath}
                 onChange={(e) => setDestinationPath(e.target.value)}
                 placeholder={workspaceRootPath || "Workspace root"}
+                disabled={submitting}
               />
               {!isBlob && (
                 <button
                   type="button"
                   className="btn"
                   onClick={pickDestination}
-                  disabled={pickingDestination}
+                  disabled={pickingDestination || submitting}
                 >
                   {pickingDestination ? "Picking..." : "Pick Folder"}
                 </button>
@@ -160,7 +168,7 @@ export function DatasetDownloadDialog({
           )}
 
           <div className="modal-actions">
-            <button type="button" className="btn" onClick={onClose}>
+            <button type="button" className="btn" onClick={onClose} disabled={submitting}>
               Cancel
             </button>
             <button type="submit" className="btn btn-primary" disabled={submitting}>

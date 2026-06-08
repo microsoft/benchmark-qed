@@ -67,25 +67,48 @@ async function readBody(req) {
 }
 
 async function checkAuthStatus() {
-  // The bundled Copilot CLI stores login state under ~/.copilot. Easiest probe
-  // is `copilot auth status` if available; otherwise we report unknown.
+  // Copilot CLI syntax differs across versions:
+  // - older: `copilot auth status`
+  // - newer: `copilot -p "auth status"` (or `-i` for interactive mode)
+  // Try both non-interactive command forms so the UI can detect auth state
+  // regardless of installed CLI version.
   // On Windows the globally installed binary is `copilot.cmd`, which Node's
   // execFile can only invoke through the shell — hence the `shell` flag.
-  try {
-    const { stdout } = await execFileAsync("copilot", ["auth", "status"], {
-      timeout: 4000,
-      shell: process.platform === "win32",
-    });
-    return { ok: true, detail: stdout.trim() };
-  } catch (err) {
-    return {
-      ok: false,
-      detail:
-        err?.stderr?.toString().trim() ||
-        err?.message ||
-        "Copilot CLI not found or not logged in. Run `copilot login`.",
-    };
+  const opts = {
+    timeout: 5000,
+    shell: process.platform === "win32",
+  };
+  const attempts = [
+    ["auth", "status"],
+    ["-p", "auth status"],
+  ];
+
+  let lastErr;
+  for (const args of attempts) {
+    try {
+      const { stdout, stderr } = await execFileAsync("copilot", args, opts);
+      const detail = `${stdout || ""}${stderr || ""}`.trim();
+      if (!detail) {
+        return { ok: true, detail: "Copilot CLI responded." };
+      }
+      const lower = detail.toLowerCase();
+      const unauthenticated =
+        lower.includes("not authenticated") ||
+        lower.includes("run 'copilot login'") ||
+        lower.includes("run \"copilot login\"");
+      return { ok: !unauthenticated, detail };
+    } catch (err) {
+      lastErr = err;
+    }
   }
+
+  return {
+    ok: false,
+    detail:
+      lastErr?.stderr?.toString().trim() ||
+      lastErr?.message ||
+      "Copilot CLI not found or not logged in. Run `copilot login`.",
+  };
 }
 
 function openSseStream(req, res, sessionId) {

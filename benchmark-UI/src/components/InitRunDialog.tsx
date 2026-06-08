@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Dismiss16Regular } from "@fluentui/react-icons";
 
 export type InitConfigType =
@@ -60,6 +60,23 @@ export function InitRunDialog({ open, submitting, onClose, onSubmit }: Props) {
   const [connectionString, setConnectionString] = useState("");
   const [baseDir, setBaseDir] = useState("");
   const [pickingRoot, setPickingRoot] = useState(false);
+
+  const resetForm = () => {
+    setConfigType("autoq");
+    setRootPath("");
+    setStorageType("local");
+    setContainerName("");
+    setAccountUrl("");
+    setConnectionString("");
+    setBaseDir("");
+    setPickingRoot(false);
+  };
+
+  useEffect(() => {
+    if (open) {
+      resetForm();
+    }
+  }, [open]);
 
   if (!open) return null;
 
@@ -240,7 +257,7 @@ export function InitRunDialog({ open, submitting, onClose, onSubmit }: Props) {
                 <strong>Heads up:</strong> blob workspaces are not
                 automatically mounted. After this job succeeds, click
                 <strong> + Add Workspace</strong> and connect to the container
-                with a SAS URL to browse it in the sidebar.
+                to browse it in the sidebar.
               </div>
             </section>
           )}

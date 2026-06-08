@@ -16,13 +16,15 @@ from sklearn.cluster import KMeans
 from benchmark_qed.autod.data_processor.text_utils import try_parse_json_object
 from benchmark_qed.config.defaults import LLM_PARAMS, RANDOM_SEED
 from benchmark_qed.config.utils import load_template_file
+from benchmark_qed.llm import chat
 
 if TYPE_CHECKING:
     from pathlib import Path
     from string import Template
 
+    from graphrag_llm.completion import LLMCompletion
+
     from benchmark_qed.autoq.data_model.question import Question
-    from benchmark_qed.llm.type.base import ChatModel
 
 log: logging.Logger = logging.getLogger(__name__)
 
@@ -42,7 +44,7 @@ class BatchQuestionValidator(ABC):
 
     def __init__(
         self,
-        llm: ChatModel,
+        llm: LLMCompletion,
         llm_params: dict[str, Any] = LLM_PARAMS,
         validation_prompt: Template | None = None,
         batch_size: int = 15,
@@ -53,7 +55,7 @@ class BatchQuestionValidator(ABC):
 
         Parameters
         ----------
-        llm : ChatModel
+        llm : LLMCompletion
             Language model for validation.
         llm_params : dict[str, Any]
             Parameters for the LLM.
@@ -66,7 +68,7 @@ class BatchQuestionValidator(ABC):
         """
         self.llm = llm
         self.llm_params: dict[str, Any] = llm_params.copy()
-        self.llm_params["response_format"] = {"type": "json_object"}
+        self.llm_params["response_format_json_object"] = True
         self.batch_size = batch_size
         self.random_seed = random_seed
 
@@ -208,11 +210,12 @@ class BatchQuestionValidator(ABC):
 
         try:
             messages = [{"role": "system", "content": prompt}]
-            response = await self.llm.chat(
+            response = await chat(
+                self.llm,
                 messages=messages,
                 **self.llm_params,
             )
-            _, parsed = try_parse_json_object(response.output.content)
+            _, parsed = try_parse_json_object(response.content)
         except (json.JSONDecodeError, KeyError, TypeError, ValueError) as e:
             log.warning("Batch validation failed: %s, keeping all questions", e)
             return batch, 0, 0

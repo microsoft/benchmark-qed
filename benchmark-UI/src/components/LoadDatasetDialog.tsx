@@ -202,7 +202,7 @@ export function LoadDatasetDialog({ open, submitting, onClose, onSubmit }: Props
             </button>
             <button
               type="submit"
-              className="btn primary"
+              className="btn btn-primary"
               disabled={
                 submitting || !sourceFolder.trim() || !destinationFolder.trim()
               }

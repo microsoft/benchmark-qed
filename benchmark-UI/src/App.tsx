@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { AddWorkspaceTabsDialog } from "./components/AddWorkspaceTabsDialog";
 import {
   DatasetDownloadDialog,
@@ -29,7 +29,7 @@ import {
   type EvaluateQuestionsSubmit,
 } from "./components/EvaluateQuestionsPickerDialog";
 import { addRecentReport, type RecentReport } from "./recentReports";
-import { BlobFileSource } from "./sources/BlobFileSource";
+import { RunnerBlobFileSource } from "./sources/RunnerBlobFileSource.ts";
 import { RunnerPathFileSource } from "./sources/RunnerPathFileSource";
 import type {
   FileSource,
@@ -181,7 +181,8 @@ type PersistedWorkspace =
   | {
       kind: "blob";
       label: string;
-      sasUrl: string;
+      accountUrl: string;
+      containerName: string;
       prefix: string;
     };
 
@@ -307,7 +308,7 @@ type ActiveView =
 
 // Mirrors detectConfigType() in benchmark-UI/scripts/init-runner.mjs so blob
 // workspaces can detect configs client-side from yaml content fetched via
-// the workspace's BlobFileSource.
+// the workspace's runner-backed blob source.
 function detectConfigTypeFromYaml(content: string): WorkspaceConfigType | null {
   if (/^\s*base:\s*$|^\s*others:\s*[[\-]|score_min:|score_max:|pairwise/im.test(content)) {
     return "autoe_pairwise";
@@ -334,12 +335,12 @@ async function detectBlobConfigs(workspace: Workspace): Promise<DetectedConfig[]
   const blobBase = (() => {
     const src = workspace.source as unknown as {
       kind?: string;
-      // BlobFileSource internals, read defensively.
-      client?: { url?: string; containerName?: string };
+      // RunnerBlobFileSource internals, read defensively.
+      containerName?: string;
       prefix?: string;
     };
     if (workspace.sourceKind !== "blob") return workspace.name;
-    const container = src.client?.containerName ?? "";
+    const container = src.containerName ?? "";
     const prefix = (src.prefix ?? "").replace(/\/+$/, "");
     if (!container) return workspace.name;
     return prefix
@@ -488,10 +489,13 @@ export default function App() {
   const [runJobs, setRunJobs] = useState<RunJob[]>(() =>
     normalizeJobs(loadPersistedJobs<RunJob>(PERSISTED_RUN_JOBS_KEY)),
   );
+  const hadRunningRunJobsRef = useRef(false);
+  const lastActiveRunRootsRef = useRef<Set<string>>(new Set());
   const [openRunJobIds, setOpenRunJobIds] = useState<Set<string>>(new Set());
   const [openInitJobIds, setOpenInitJobIds] = useState<Set<string>>(new Set());
   const [jobsPanelCollapsed, setJobsPanelCollapsed] = useState(false);
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+  const [workspaceFilter, setWorkspaceFilter] = useState("");
   // Per-workspace counter bumped on explicit create/delete actions to force
   // the FolderTree (and all cached subfolder children) to remount and
   // re-fetch. Persisted expansion state means expanded folders auto-reload.
@@ -706,17 +710,25 @@ export default function App() {
   );
 
   /**
-   * Look up the persisted blob connection info (SAS URL + prefix) for a
+  * Look up the persisted blob connection info (account URL + container + prefix) for a
    * workspace. Returns null for non-blob workspaces or when the persisted
-   * entry is missing. Used by run/download flows to forward the SAS to
-   * the init-runner so the Python CLI can talk to blob.
+  * entry is missing. Used by run/download flows to forward managed-identity
+  * blob context to the init-runner so the Python CLI can talk to blob.
    */
   const getBlobInfo = useCallback(
-    (workspace: Workspace): { sasUrl: string; prefix: string } | null => {
+    (
+      workspace: Workspace,
+    ):
+      | { accountUrl: string; containerName: string; prefix: string }
+      | null => {
       if (workspace.sourceKind !== "blob") return null;
       const persisted = persistedWorkspacesRef.current.get(workspace.id);
       if (!persisted || persisted.kind !== "blob") return null;
-      return { sasUrl: persisted.sasUrl, prefix: persisted.prefix };
+      return {
+        accountUrl: persisted.accountUrl,
+        containerName: persisted.containerName,
+        prefix: persisted.prefix,
+      };
     },
     [],
   );
@@ -907,18 +919,33 @@ export default function App() {
 
   // For AddWorkspaceDialog: add blob workspace
   const addBlobWorkspace = useCallback(
-    async (data: { sasUrl: string; prefix: string; label: string }) => {
+    async (data: {
+      accountUrl: string;
+      containerName: string;
+      prefix: string;
+      label: string;
+    }) => {
       setAddWorkspaceDialogOpen(false);
       setError(null);
       try {
-        await addWorkspace(data.label, new BlobFileSource(data.sasUrl, data.prefix), {
+        await addWorkspace(
+          data.label,
+          new RunnerBlobFileSource(
+            data.accountUrl,
+            data.containerName,
+            data.prefix,
+            INIT_RUNNER_URL,
+          ),
+          {
           persisted: {
             kind: "blob",
             label: data.label,
-            sasUrl: data.sasUrl,
+            accountUrl: data.accountUrl,
+            containerName: data.containerName,
             prefix: data.prefix,
           },
-        });
+          },
+        );
       } catch (e) {
         setError(`Failed to connect to blob: ${e}`);
       }
@@ -934,7 +961,7 @@ export default function App() {
     if (restoredWorkspacesRef.current) return;
     restoredWorkspacesRef.current = true;
     const persisted = loadPersistedWorkspaces();
-    // Dedupe by identity (rootPath for local, sasUrl+prefix for blob). Older
+    // Dedupe by identity (rootPath for local, accountUrl+container+prefix for blob). Older
     // builds with the Strict-Mode ref-leak bug could have written ghost
     // duplicates of the same workspace; without this they'd reappear as
     // separate sidebar entries after refresh.
@@ -943,7 +970,7 @@ export default function App() {
       const key =
         entry.kind === "local"
           ? `local:${entry.rootPath}`
-          : `blob:${entry.sasUrl}|${entry.prefix}`;
+          : `blob:${entry.accountUrl}|${entry.containerName}|${entry.prefix}`;
       if (seen.has(key)) return false;
       seen.add(key);
       return true;
@@ -966,7 +993,12 @@ export default function App() {
         } else {
           await addWorkspace(
             entry.label,
-            new BlobFileSource(entry.sasUrl, entry.prefix),
+            new RunnerBlobFileSource(
+              entry.accountUrl,
+              entry.containerName,
+              entry.prefix,
+              INIT_RUNNER_URL,
+            ),
             { persisted: entry },
           );
         }
@@ -1121,7 +1153,11 @@ export default function App() {
   const submitRunJob = useCallback(async (
     workspace: Workspace,
     overrideConfigType?: WorkspaceConfigType,
-    blobInfoOverride?: { sasUrl: string; prefix: string },
+    blobInfoOverride?: {
+      accountUrl: string;
+      containerName: string;
+      prefix: string;
+    },
   ): Promise<boolean> => {
     const configType = overrideConfigType ?? workspace.configType;
     const blobInfo = blobInfoOverride ?? getBlobInfo(workspace);
@@ -1136,14 +1172,9 @@ export default function App() {
 
     const runRoot = blobInfo
       ? `blob://${(() => {
-          try {
-            const u = new URL(blobInfo.sasUrl);
-            const container = u.pathname.replace(/^\/+/, "").split("/")[0];
-            const prefix = blobInfo.prefix.replace(/^\/+|\/+$/g, "");
-            return prefix ? `${container}/${prefix}` : container;
-          } catch {
-            return "blob";
-          }
+          const container = blobInfo.containerName.trim();
+          const prefix = blobInfo.prefix.replace(/^\/+|\/+$/g, "");
+          return prefix ? `${container}/${prefix}` : container || "blob";
         })()}`
       : workspace.rootPath;
 
@@ -1222,7 +1253,8 @@ export default function App() {
               collapsed: false,
             };
             await submitRunJob(tempWorkspace, cfg.configType, {
-              sasUrl: parentBlob.sasUrl,
+              accountUrl: parentBlob.accountUrl,
+              containerName: parentBlob.containerName,
               prefix: subPrefix,
             });
           }
@@ -1408,7 +1440,7 @@ export default function App() {
       // scanning the workspace's own file source for settings.yaml files
       // (root + one level deep). The runner's /api/detect-configs only
       // walks the local filesystem, so we do this client-side using the
-      // already-connected BlobFileSource.
+      // already-connected runner-backed blob source.
       if (blobInfo) {
         setError(null);
         try {
@@ -1637,9 +1669,14 @@ export default function App() {
 
   const [draggingWorkspaceId, setDraggingWorkspaceId] = useState<string | null>(null);
   const [dragOverWorkspaceId, setDragOverWorkspaceId] = useState<string | null>(null);
+  const workspaceRefreshInFlightRef = useRef<Set<string>>(new Set());
 
   const refreshWorkspace = useCallback(
     async (workspace: Workspace): Promise<boolean> => {
+      if (workspaceRefreshInFlightRef.current.has(workspace.id)) {
+        return false;
+      }
+      workspaceRefreshInFlightRef.current.add(workspace.id);
       // Re-list children in place instead of going through addWorkspace.
       // addWorkspace dedups on rootPath, which blob workspaces don't have,
       // so calling it for a refresh would append a duplicate entry.
@@ -1663,6 +1700,8 @@ export default function App() {
         }
         setError(`Failed to refresh ${workspace.name}: ${e}`);
         return false;
+      } finally {
+        workspaceRefreshInFlightRef.current.delete(workspace.id);
       }
     },
     [
@@ -1675,6 +1714,7 @@ export default function App() {
   // Keep the sidebar in sync when folders are deleted outside the UI. This
   // runs even while idle so stale local entries disappear without user action.
   useEffect(() => {
+    if (runJobs.some((j) => j.status === "running")) return;
     const localWorkspaces = workspaces.filter(
       (w) => w.sourceKind === "local" && !!w.rootPath,
     );
@@ -1716,6 +1756,7 @@ export default function App() {
     };
   }, [
     workspaces,
+    runJobs,
     isMissingPathError,
     removeWorkspaceSilently,
     prunePersistedLocalByRootPath,
@@ -2263,6 +2304,10 @@ export default function App() {
         .filter((j) => j.status === "running" && j.rootPath)
         .map((j) => j.rootPath!),
     );
+    if (activeRootPaths.size > 0) {
+      hadRunningRunJobsRef.current = true;
+      lastActiveRunRootsRef.current = activeRootPaths;
+    }
     if (activeRootPaths.size === 0) return;
 
     const tick = () => {
@@ -2279,16 +2324,49 @@ export default function App() {
             wsRoot.startsWith(`${rp}/`),
         );
         if (match) {
-          void refreshWorkspace(ws).then((refreshed) => {
-            if (!refreshed) return;
-            scheduleTreeNonceBump(ws.id);
-          });
+          // Lightweight refresh while the job is running. Avoid forcing
+          // FolderTree remounts on every tick, which can freeze the UI for
+          // file-heavy jobs.
+          void refreshWorkspace(ws);
         }
       }
     };
     tick();
     const timerId = window.setInterval(tick, 4000);
     return () => window.clearInterval(timerId);
+  }, [runJobs, workspaces, refreshWorkspace]);
+
+  // When run jobs finish, do one hard tree refresh so newly created files in
+  // expanded subfolders become visible without repeated remount churn.
+  useEffect(() => {
+    const activeRoots = new Set(
+      runJobs
+        .filter((j) => j.status === "running" && j.rootPath)
+        .map((j) => j.rootPath!),
+    );
+    if (activeRoots.size > 0) return;
+    if (!hadRunningRunJobsRef.current) return;
+
+    const previousRoots = lastActiveRunRootsRef.current;
+    hadRunningRunJobsRef.current = false;
+    lastActiveRunRootsRef.current = new Set();
+
+    for (const ws of workspaces) {
+      if (ws.sourceKind !== "local") continue;
+      const wsRoot = ws.rootPath;
+      if (!wsRoot) continue;
+      const match = [...previousRoots].some(
+        (rp) =>
+          wsRoot === rp ||
+          rp.startsWith(`${wsRoot}/`) ||
+          wsRoot.startsWith(`${rp}/`),
+      );
+      if (!match) continue;
+      void refreshWorkspace(ws).then((refreshed) => {
+        if (!refreshed) return;
+        scheduleTreeNonceBump(ws.id, 50);
+      });
+    }
   }, [runJobs, workspaces, refreshWorkspace, scheduleTreeNonceBump]);
 
   const activeWorkspace = activeView?.type === "file"
@@ -2472,6 +2550,92 @@ export default function App() {
     />
   );
 
+  const sidebarEntries = useMemo(() => {
+    const visibleWorkspaces = workspaces.filter((w) => !w.hiddenFromSidebar);
+    const childrenByParent = new Map<string, Workspace[]>();
+    for (const w of visibleWorkspaces) {
+      const parentRootPath = w.parentRootPath ?? w.copyOfRootPath;
+      if (!parentRootPath) continue;
+      const arr = childrenByParent.get(parentRootPath) ?? [];
+      arr.push(w);
+      childrenByParent.set(parentRootPath, arr);
+    }
+
+    const visited = new Set<string>();
+    const ordered: Array<{
+      ws: Workspace;
+      depth: number;
+      parentName?: string;
+      isCopyChild: boolean;
+    }> = [];
+    const visit = (
+      ws: Workspace,
+      depth: number,
+      parentName?: string,
+      isCopyChild = false,
+    ) => {
+      if (visited.has(ws.id)) return;
+      visited.add(ws.id);
+      ordered.push({ ws, depth, parentName, isCopyChild });
+      if (!ws.rootPath) return;
+      for (const child of childrenByParent.get(ws.rootPath) ?? []) {
+        visit(child, depth + 1, ws.name, child.copyOfRootPath === ws.rootPath);
+      }
+    };
+
+    for (const w of visibleWorkspaces) {
+      const linkedParentRoot = w.parentRootPath ?? w.copyOfRootPath;
+      const parentLoaded =
+        !!linkedParentRoot &&
+        visibleWorkspaces.some((p) => p.rootPath === linkedParentRoot);
+      if (!linkedParentRoot || !parentLoaded) {
+        visit(w, 0);
+      }
+    }
+
+    const normalizedFilter = workspaceFilter.trim().toLowerCase();
+    if (!normalizedFilter) {
+      return {
+        visibleCount: visibleWorkspaces.length,
+        filteredCount: ordered.length,
+        filtered: ordered,
+      };
+    }
+
+    const includeIds = new Set<string>();
+    for (const { ws } of ordered) {
+      const haystack = [
+        ws.name,
+        ws.rootPath ?? "",
+        ws.configType ?? "",
+        ws.parentRootPath ?? "",
+        ws.copyOfRootPath ?? "",
+      ]
+        .join(" ")
+        .toLowerCase();
+      if (!haystack.includes(normalizedFilter)) continue;
+
+      let current: Workspace | undefined = ws;
+      while (current) {
+        if (includeIds.has(current.id)) break;
+        includeIds.add(current.id);
+        const parentRoot: string | undefined =
+          current.parentRootPath ?? current.copyOfRootPath;
+        if (!parentRoot) break;
+        current = visibleWorkspaces.find(
+          (candidate) => candidate.rootPath === parentRoot,
+        );
+      }
+    }
+
+    const filtered = ordered.filter(({ ws }) => includeIds.has(ws.id));
+    return {
+      visibleCount: visibleWorkspaces.length,
+      filteredCount: filtered.length,
+      filtered,
+    };
+  }, [workspaces, workspaceFilter]);
+
   return (
     <div className="app-root">
       <nav className="navbar">
@@ -2545,8 +2709,37 @@ export default function App() {
           <button className="open-btn secondary" onClick={() => setAddWorkspaceDialogOpen(true)}>
             + Add Workspace
           </button>
+          <label className="sidebar-filter" aria-label="Filter workspaces">
+            <div className="sidebar-filter-input-wrap">
+              <input
+                type="text"
+                value={workspaceFilter}
+                onChange={(e) => setWorkspaceFilter(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === "Escape" && workspaceFilter) {
+                    e.preventDefault();
+                    setWorkspaceFilter("");
+                  }
+                }}
+                placeholder="Filter workspaces..."
+              />
+              {workspaceFilter && (
+                <button
+                  type="button"
+                  className="sidebar-filter-clear"
+                  onClick={() => setWorkspaceFilter("")}
+                  aria-label="Clear workspace filter"
+                  title="Clear"
+                >
+                  <Dismiss16Regular />
+                </button>
+              )}
+            </div>
+          </label>
           <div className="ws-count">
-            {workspaces.length} workspace{workspaces.length === 1 ? "" : "s"}
+            {workspaceFilter.trim()
+              ? `${sidebarEntries.filteredCount} of ${sidebarEntries.visibleCount}`
+              : `${sidebarEntries.visibleCount} workspace${sidebarEntries.visibleCount === 1 ? "" : "s"}`}
           </div>
         </div>
 
@@ -2557,52 +2750,15 @@ export default function App() {
             </div>
           ) : (
             (() => {
-              // Flatten workspaces into a depth-aware list so copies render
-              // nested under their source. Children are matched to parents by
-              // the parent's rootPath (stable across reloads).
-              const childrenByParent = new Map<string, Workspace[]>();
-              for (const w of workspaces) {
-                if (w.hiddenFromSidebar) continue;
-                const parentRootPath = w.parentRootPath ?? w.copyOfRootPath;
-                if (!parentRootPath) continue;
-                const arr = childrenByParent.get(parentRootPath) ?? [];
-                arr.push(w);
-                childrenByParent.set(parentRootPath, arr);
+              if (sidebarEntries.filtered.length === 0) {
+                return (
+                  <div className="empty-tree">
+                    No workspaces match <code>{workspaceFilter.trim()}</code>.
+                  </div>
+                );
               }
-              const visited = new Set<string>();
-              const ordered: Array<{
-                ws: Workspace;
-                depth: number;
-                parentName?: string;
-                isCopyChild: boolean;
-              }> = [];
-              const visit = (
-                ws: Workspace,
-                depth: number,
-                parentName?: string,
-                isCopyChild = false,
-              ) => {
-                if (visited.has(ws.id)) return;
-                visited.add(ws.id);
-                ordered.push({ ws, depth, parentName, isCopyChild });
-                if (!ws.rootPath) return;
-                for (const k of childrenByParent.get(ws.rootPath) ?? []) {
-                  visit(k, depth + 1, ws.name, k.copyOfRootPath === ws.rootPath);
-                }
-              };
-              for (const w of workspaces) {
-                if (w.hiddenFromSidebar) continue;
-                // Treat as a root if it isn't a copy, or its parent isn't
-                // currently loaded (orphaned copy -> show at top level).
-                const linkedParentRoot = w.parentRootPath ?? w.copyOfRootPath;
-                const parentLoaded =
-                  !!linkedParentRoot &&
-                  workspaces.some((p) => p.rootPath === linkedParentRoot);
-                if (!linkedParentRoot || !parentLoaded) {
-                  visit(w, 0);
-                }
-              }
-              return ordered.map(({ ws, depth, parentName, isCopyChild }) => (
+
+              return sidebarEntries.filtered.map(({ ws, depth, parentName, isCopyChild }) => (
               <div
                 key={ws.id}
                 className={`workspace${
@@ -2789,7 +2945,7 @@ export default function App() {
                   </div>
                 )}
               </div>
-            ));
+              ));
             })()
           )}
         </div>
@@ -2834,7 +2990,7 @@ export default function App() {
             </div>
             <div className="configure-banner-actions">
               <button
-                className="btn primary"
+                className="btn btn-primary"
                 onClick={() => {
                   const params = new URLSearchParams({
                     workspace: configurePrompt.workspace,

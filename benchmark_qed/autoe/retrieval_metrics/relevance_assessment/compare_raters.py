@@ -15,6 +15,7 @@ from benchmark_qed.autoe.retrieval_metrics.relevance_assessment.rationale_rater 
     RationaleRelevanceRater,
 )
 from benchmark_qed.config.llm_config import LLMConfig
+from benchmark_qed.llm import chat
 from benchmark_qed.llm.factory import ModelFactory
 
 log: logging.Logger = logging.getLogger(__name__)
@@ -739,11 +740,12 @@ async def judge_binary_disagreements(
         )
 
         try:
-            response = await llm_client.chat(
+            response = await chat(
+                llm_client,
                 messages=[{"role": "user", "content": prompt}],
                 **llm_config.call_args,
             )
-            response_text = response.output.content if response.output else ""
+            response_text = response.content
 
             # Parse JSON response
             _, parsed = try_parse_json_object(response_text)
@@ -971,7 +973,9 @@ async def _compare_raters_with_topk_selection(
             "Embedding %d queries without embeddings...", len(queries_needing_embedding)
         )
         texts_to_embed = [q for _, q in queries_needing_embedding]
-        embeddings = await embedding_model.embed(texts_to_embed)
+        embeddings = (
+            await embedding_model.embedding_async(input=texts_to_embed)
+        ).embeddings
 
         # Update query_embeddings list
         query_embeddings = list(query_embeddings)  # Make mutable copy
@@ -1000,8 +1004,8 @@ async def _compare_raters_with_topk_selection(
     )
 
     # Get initial token counts
-    bing_initial_usage = bing_rater.llm_client.get_usage()
-    rationale_initial_usage = rationale_rater.llm_client.get_usage()
+    bing_initial_usage = bing_rater.llm_client.metrics_store.get_metrics()
+    rationale_initial_usage = rationale_rater.llm_client.metrics_store.get_metrics()
 
     for query, query_emb in tqdm(
         query_pairs,
@@ -1054,21 +1058,25 @@ async def _compare_raters_with_topk_selection(
                 )
 
     # Calculate token usage (final - initial)
-    bing_final_usage = bing_rater.llm_client.get_usage()
-    rationale_final_usage = rationale_rater.llm_client.get_usage()
+    bing_final_usage = bing_rater.llm_client.metrics_store.get_metrics()
+    rationale_final_usage = rationale_rater.llm_client.metrics_store.get_metrics()
 
-    bing_stats.prompt_tokens = bing_final_usage.get(
-        "prompt_tokens", 0
-    ) - bing_initial_usage.get("prompt_tokens", 0)
-    bing_stats.completion_tokens = bing_final_usage.get(
-        "completion_tokens", 0
-    ) - bing_initial_usage.get("completion_tokens", 0)
-    rationale_stats.prompt_tokens = rationale_final_usage.get(
-        "prompt_tokens", 0
-    ) - rationale_initial_usage.get("prompt_tokens", 0)
-    rationale_stats.completion_tokens = rationale_final_usage.get(
-        "completion_tokens", 0
-    ) - rationale_initial_usage.get("completion_tokens", 0)
+    bing_stats.prompt_tokens = int(
+        bing_final_usage.get("prompt_tokens", 0)
+        - bing_initial_usage.get("prompt_tokens", 0)
+    )
+    bing_stats.completion_tokens = int(
+        bing_final_usage.get("completion_tokens", 0)
+        - bing_initial_usage.get("completion_tokens", 0)
+    )
+    rationale_stats.prompt_tokens = int(
+        rationale_final_usage.get("prompt_tokens", 0)
+        - rationale_initial_usage.get("prompt_tokens", 0)
+    )
+    rationale_stats.completion_tokens = int(
+        rationale_final_usage.get("completion_tokens", 0)
+        - rationale_initial_usage.get("completion_tokens", 0)
+    )
 
     log.info("Comparison complete. %d items compared.", len(comparison_items))
 

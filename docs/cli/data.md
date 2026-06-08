@@ -51,7 +51,8 @@ Or with a connection string:
 benchmark-qed data download AP_news input \
   --storage-type blob \
   --container-name my-container \
-  --connection-string "$AZURE_STORAGE_CONNECTION_STRING"
+  --connection-string "$AZURE_STORAGE_CONNECTION_STRING" \
+  --base-dir my-project
 ```
 
 #### Path Structure

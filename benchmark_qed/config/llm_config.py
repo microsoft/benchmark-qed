@@ -3,9 +3,14 @@
 
 import os
 from enum import StrEnum
-from typing import Any, Self
+from typing import Any, ClassVar, Self
 
-from pydantic import BaseModel, Field, SecretStr, model_validator
+from graphrag_llm.config import ModelConfig
+from graphrag_llm.config.metrics_config import MetricsConfig
+from graphrag_llm.config.rate_limit_config import RateLimitConfig
+from graphrag_llm.config.retry_config import RetryConfig
+from graphrag_llm.config.types import AuthMethod, RateLimitType
+from pydantic import BaseModel, ConfigDict, Field, SecretStr, model_validator
 
 
 class LLMProvider(StrEnum):
@@ -43,7 +48,7 @@ class CustomLLMProvider(BaseModel):
     )
     model_class: str = Field(
         ...,
-        description="Class name that implements the ChatModel or EmbeddingModel protocol.",
+        description="Class name that implements the LLMCompletion or LLMEmbedding interface.",
     )
 
 
@@ -54,8 +59,21 @@ class AuthType(StrEnum):
     AzureManagedIdentity = "azure_managed_identity"
 
 
+# Mapping from benchmark-qed LLMProvider values to litellm-style model_provider strings.
+_PROVIDER_TO_MODEL_PROVIDER: dict[str, str] = {
+    LLMProvider.OpenAIChat: "openai",
+    LLMProvider.OpenAIEmbedding: "openai",
+    LLMProvider.AzureOpenAIChat: "azure",
+    LLMProvider.AzureOpenAIEmbedding: "azure",
+    LLMProvider.AzureInferenceChat: "azure_ai",
+    LLMProvider.AzureInferenceEmbedding: "azure_ai",
+}
+
+
 class LLMConfig(BaseModel):
     """Configuration for the LLM to use."""
+
+    model_config: ClassVar[ConfigDict] = ConfigDict(extra="forbid")
 
     model: str = Field(
         default="gpt-4.1",
@@ -93,6 +111,11 @@ class LLMConfig(BaseModel):
         description="Additional arguments to pass to the model when calling it.",
     )
 
+    retry: RetryConfig | None = Field(
+        default=None,
+        description="Optional retry policy for transient provider errors (for example, HTTP 429).",
+    )
+
     custom_providers: list[CustomLLMProvider] = Field(
         default_factory=list,
         description="List of custom LLM providers to register.",
@@ -107,3 +130,67 @@ class LLMConfig(BaseModel):
             msg = "API key is required."
             raise ValueError(msg)
         return self
+
+    def to_model_config(self) -> ModelConfig:
+        """Translate this benchmark-qed config into a graphrag-llm ``ModelConfig``.
+
+        Built-in providers map to LiteLLM provider strings (``openai``,
+        ``azure``, ``azure_ai``). Custom providers are passed through with
+        their registered name as the ``ModelConfig.type`` so that
+        ``register_completion`` / ``register_embedding`` callers can resolve
+        them.
+        """
+        provider_key = str(self.llm_provider)
+        is_builtin = provider_key in _PROVIDER_TO_MODEL_PROVIDER
+        model_provider = _PROVIDER_TO_MODEL_PROVIDER.get(provider_key, provider_key)
+
+        init_args = dict(self.init_args)
+        api_base = init_args.pop("azure_endpoint", None)
+        api_version = init_args.pop("api_version", None)
+
+        auth_method = (
+            AuthMethod.AzureManagedIdentity
+            if self.auth_type == AuthType.AzureManagedIdentity
+            else AuthMethod.ApiKey
+        )
+        api_key: str | None
+        if auth_method == AuthMethod.AzureManagedIdentity:
+            api_key = None
+        else:
+            api_key = self.api_key.get_secret_value()
+
+        azure_deployment_name = self.model if model_provider == "azure" else None
+
+        rate_limit: RateLimitConfig | None = None
+        if self.concurrent_requests and self.concurrent_requests > 0:
+            rate_limit = RateLimitConfig(
+                type=RateLimitType.SlidingWindow,
+                period_in_seconds=1,
+                requests_per_period=max(1, self.concurrent_requests),
+            )
+
+        # Track usage by enabling a metrics processor with no writer (silent).
+        metrics = MetricsConfig(writer=None)
+
+        config_kwargs: dict[str, Any] = {
+            "model_provider": model_provider,
+            "model": self.model,
+            "api_base": api_base,
+            "api_version": api_version,
+            "api_key": api_key,
+            "auth_method": auth_method,
+            "azure_deployment_name": azure_deployment_name,
+            "call_args": dict(self.call_args),
+            "retry": self.retry,
+            "rate_limit": rate_limit,
+            "metrics": metrics,
+            **init_args,
+        }
+
+        if not is_builtin:
+            # Use the custom provider's name as the strategy/type so that the
+            # corresponding ``register_completion`` / ``register_embedding`` entry
+            # is selected by graphrag-llm's factories.
+            config_kwargs["type"] = provider_key
+
+        return ModelConfig(**config_kwargs)

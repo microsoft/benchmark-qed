@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Dismiss16Regular } from "@fluentui/react-icons";
 
 interface Props {
@@ -10,7 +10,12 @@ interface Props {
     hasChildWorkspaces: boolean;
     childWorkspacePaths: string[];
   }) => Promise<void>;
-  onAddBlob: (data: { sasUrl: string; prefix: string; label: string }) => void;
+  onAddBlob: (data: {
+    accountUrl: string;
+    containerName: string;
+    prefix: string;
+    label: string;
+  }) => void;
 }
 
 export function AddWorkspaceTabsDialog({
@@ -28,9 +33,29 @@ export function AddWorkspaceTabsDialog({
   const [pickingChildIndex, setPickingChildIndex] = useState<number | null>(null);
   const [pickingLocal, setPickingLocal] = useState(false);
   // Blob fields
-  const [sasUrl, setSasUrl] = useState("");
+  const [accountUrl, setAccountUrl] = useState("");
+  const [containerName, setContainerName] = useState("");
   const [prefix, setPrefix] = useState("");
   const [label, setLabel] = useState("");
+
+  const resetForm = () => {
+    setTab("local");
+    setLocalPath("");
+    setLocalHasChildren(false);
+    setChildWorkspacePaths([]);
+    setPickingChildIndex(null);
+    setPickingLocal(false);
+    setAccountUrl("");
+    setContainerName("");
+    setPrefix("");
+    setLabel("");
+  };
+
+  useEffect(() => {
+    if (open) {
+      resetForm();
+    }
+  }, [open]);
 
   if (!open) return null;
 
@@ -46,20 +71,20 @@ export function AddWorkspaceTabsDialog({
           : [],
       });
     } else {
-      if (!sasUrl.trim()) return;
+      if (!accountUrl.trim() || !containerName.trim()) return;
       let computedLabel = label.trim();
       if (!computedLabel) {
-        try {
-          const u = new URL(sasUrl);
-          const container = u.pathname.replace(/^\//, "").split("/")[0];
-          computedLabel = `${u.hostname.split(".")[0]}/${container}${
-            prefix ? `/${prefix.replace(/\/$/, "")}` : ""
-          }`;
-        } catch {
-          computedLabel = "blob-container";
-        }
+        const url = accountUrl.trim().replace(/^https?:\/\//, "").replace(/\/+$/, "");
+        computedLabel = `${url.split(".")[0]}/${containerName.trim()}${
+          prefix ? `/${prefix.replace(/\/$/, "")}` : ""
+        }`;
       }
-      onAddBlob({ sasUrl: sasUrl.trim(), prefix: prefix.trim(), label: computedLabel });
+      onAddBlob({
+        accountUrl: accountUrl.trim(),
+        containerName: containerName.trim(),
+        prefix: prefix.trim(),
+        label: computedLabel,
+      });
     }
   };
 
@@ -214,17 +239,27 @@ export function AddWorkspaceTabsDialog({
           {tab === "blob" && (
             <>
               <label className="field">
-                <span>Container SAS URL</span>
-                <textarea
-                  value={sasUrl}
-                  onChange={e => setSasUrl(e.target.value)}
-                  placeholder="https://<account>.blob.core.windows.net/<container>?sv=...&sig=..."
+                <span>Storage account URL</span>
+                <input
+                  type="text"
+                  value={accountUrl}
+                  onChange={e => setAccountUrl(e.target.value)}
+                  placeholder="https://<account>.blob.core.windows.net"
                   required={tab === "blob"}
-                  rows={3}
                 />
               </label>
               <label className="field">
-                <span>Prefix (optional)</span>
+                <span>Container name</span>
+                <input
+                  type="text"
+                  value={containerName}
+                  onChange={e => setContainerName(e.target.value)}
+                  placeholder="my-container"
+                  required={tab === "blob"}
+                />
+              </label>
+              <label className="field">
+                <span>Prefix / root (optional)</span>
                 <input
                   type="text"
                   value={prefix}
@@ -241,6 +276,10 @@ export function AddWorkspaceTabsDialog({
                   placeholder="my-init-run"
                 />
               </label>
+              <small>
+                Uses the local runner's Azure managed identity or Azure CLI login.
+                Start the runner from an environment that can access this storage account.
+              </small>
             </>
           )}
           <div className="modal-actions">
@@ -248,7 +287,11 @@ export function AddWorkspaceTabsDialog({
             <button
               type="submit"
               className="btn btn-primary"
-              disabled={tab === "local" ? !localPath.trim() : !sasUrl.trim()}
+              disabled={
+                tab === "local"
+                  ? !localPath.trim()
+                  : !accountUrl.trim() || !containerName.trim()
+              }
             >
               Add
             </button>

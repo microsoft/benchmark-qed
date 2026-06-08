@@ -433,6 +433,39 @@ class ClusterRelevanceRater:
         }
 
 
+def build_cluster_references_payload(
+    reference_results: list[QueryClusterReferenceResult],
+    include_clusters: bool = True,
+    clusters: list[TextCluster] | None = None,
+) -> dict[str, Any]:
+    """Build the JSON-serializable payload for cluster reference results."""
+    json_data = [result.model_dump() for result in reference_results]
+
+    data: dict[str, Any] = {
+        "total_questions": len(reference_results),
+        "references": json_data,
+    }
+
+    if include_clusters and clusters is not None:
+        cluster_data = []
+        for cluster in clusters:
+            cluster_dict = {
+                "id": cluster.id,
+                "text_units": [
+                    {
+                        "id": unit.id,
+                        "short_id": unit.short_id,
+                        "text": unit.text,
+                    }
+                    for unit in cluster.text_units
+                ],
+            }
+            cluster_data.append(cluster_dict)
+        data["clusters"] = cluster_data
+
+    return data
+
+
 def save_cluster_references_to_json(
     reference_results: list[QueryClusterReferenceResult],
     filepath: str | Path,
@@ -452,31 +485,11 @@ def save_cluster_references_to_json(
     filepath = Path(filepath)
     filepath.parent.mkdir(parents=True, exist_ok=True)
 
-    # Convert QueryClusterReferenceResult objects to dictionaries
-    json_data = [result.model_dump() for result in reference_results]
-
-    data = {
-        "total_questions": len(reference_results),
-        "references": json_data,
-    }
-
-    # Add cluster data if requested
-    if include_clusters and clusters is not None:
-        cluster_data = []
-        for cluster in clusters:
-            cluster_dict = {
-                "id": cluster.id,
-                "text_units": [
-                    {
-                        "id": unit.id,
-                        "short_id": unit.short_id,
-                        "text": unit.text,
-                    }
-                    for unit in cluster.text_units
-                ],
-            }
-            cluster_data.append(cluster_dict)
-        data["clusters"] = cluster_data
+    data = build_cluster_references_payload(
+        reference_results,
+        include_clusters=include_clusters,
+        clusters=clusters,
+    )
 
     with filepath.open("w", encoding="utf-8") as f:
         json.dump(data, f, indent=4, ensure_ascii=False)

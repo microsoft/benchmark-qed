@@ -10,6 +10,7 @@ from string import Template
 from typing import Any
 
 import tiktoken
+from graphrag_llm.completion import LLMCompletion
 
 import benchmark_qed.config.defaults as defs
 from benchmark_qed.autod.data_model.text_unit import TextUnit
@@ -23,7 +24,7 @@ from benchmark_qed.autoq.question_gen.activity_questions.context_gen.entity_extr
     EntityExtractor,
 )
 from benchmark_qed.config.utils import load_template_file
-from benchmark_qed.llm.type.base import ChatModel
+from benchmark_qed.llm import chat
 
 log: logging.Logger = logging.getLogger(__name__)
 
@@ -35,7 +36,7 @@ class ActivityContextGen:
 
     def __init__(
         self,
-        llm: ChatModel,
+        llm: LLMCompletion,
         text_embedder: TextEmbedder,
         text_units: list[TextUnit],
         token_encoder: tiktoken.Encoding | None = None,
@@ -68,9 +69,9 @@ class ActivityContextGen:
         self.concurrent_coroutines = concurrent_coroutines
         self.json_mode = json_mode
         if json_mode:
-            self.llm_params["response_format"] = {"type": "json_object"}
+            self.llm_params["response_format_json_object"] = True
         else:
-            self.llm_params.pop("response_format", None)
+            self.llm_params.pop("response_format_json_object", None)
 
         self.semaphore: asyncio.Semaphore = asyncio.Semaphore(concurrent_coroutines)
 
@@ -156,12 +157,12 @@ class ActivityContextGen:
                 ),
             },
         ]
-        activities_response = await self.llm.chat(
-            messages=activity_messages, **self.llm_params
+        activities_response = await chat(
+            self.llm, messages=activity_messages, **self.llm_params
         )
-        parsed_activities, j = try_parse_json_object(activities_response.output.content)
+        parsed_activities, j = try_parse_json_object(activities_response.content)
         if j == {}:
-            msg = f"Failed to parse activities response: {activities_response.output.content}"
+            msg = f"Failed to parse activities response: {activities_response.content}"
             log.warning(msg)
             return ActivityContext(dataset_description=summary_str, task_contexts=[])
 

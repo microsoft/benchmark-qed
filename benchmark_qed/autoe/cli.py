@@ -260,8 +260,12 @@ def pairwise_scores(
 
     if print_model_usage:
         rich_print("Model usage statistics:")
-        rich_print(llm_client.get_usage())
-    asyncio.run(_write_json(output_storage, "model_usage.json", llm_client.get_usage()))
+        rich_print(llm_client.metrics_store.get_metrics())
+    asyncio.run(
+        _write_json(
+            output_storage, "model_usage.json", llm_client.metrics_store.get_metrics()
+        )
+    )
 
 
 @app.command()
@@ -373,8 +377,12 @@ def reference_scores(
 
     if print_model_usage:
         rich_print("Model usage statistics:")
-        rich_print(llm_client.get_usage())
-    asyncio.run(_write_json(output_storage, "model_usage.json", llm_client.get_usage()))
+        rich_print(llm_client.metrics_store.get_metrics())
+    asyncio.run(
+        _write_json(
+            output_storage, "model_usage.json", llm_client.metrics_store.get_metrics()
+        )
+    )
 
 
 @app.command()
@@ -547,11 +555,19 @@ def _run_single_rag_assertion_scores(
     )
 
     # Save summary CSVs for consistency with multi-RAG pipeline
-    summary_by_question.to_csv(
-        output / "assertion_summary_by_question.csv", index=False
+    asyncio.run(
+        _write_csv_df(
+            output_storage,
+            "assertion_summary_by_question.csv",
+            summary_by_question,
+        )
     )
-    summary_by_assertion.to_csv(
-        output / "assertion_summary_by_assertion.csv", index=False
+    asyncio.run(
+        _write_csv_df(
+            output_storage,
+            "assertion_summary_by_assertion.csv",
+            summary_by_assertion,
+        )
     )
 
     print_df(
@@ -577,13 +593,16 @@ def _run_single_rag_assertion_scores(
         rich_print("[bold green]All assertions passed.[/bold green]")
 
     # Save machine-readable evaluation summary
-    eval_summary_file = output / "eval_summary.json"
-    eval_summary_file.write_text(json.dumps(eval_summary, indent=2), encoding="utf-8")
+    asyncio.run(_write_json(output_storage, "eval_summary.json", eval_summary))
 
     if print_model_usage:
         rich_print("Model usage statistics:")
-        rich_print(llm_client.get_usage())
-    asyncio.run(_write_json(output_storage, "model_usage.json", llm_client.get_usage()))
+        rich_print(llm_client.metrics_store.get_metrics())
+    asyncio.run(
+        _write_json(
+            output_storage, "model_usage.json", llm_client.metrics_store.get_metrics()
+        )
+    )
 
 
 def _run_multi_rag_assertion_scores(
@@ -592,7 +611,12 @@ def _run_multi_rag_assertion_scores(
 ) -> None:
     """Run assertion scoring for multiple RAG methods with significance testing."""
     config = load_config(MultiRAGAssertionConfig, config_path)
-    config.output_dir.mkdir(parents=True, exist_ok=True)
+    output_storage = _build_output_storage(config.output_storage, config.output_dir)
+    input_storage = (
+        create_storage(config.input_storage)
+        if config.input_storage is not None
+        else None
+    )
 
     llm_client = ModelFactory.create_chat_model(config.llm_config)
 
@@ -637,6 +661,8 @@ def _run_multi_rag_assertion_scores(
         permutation_seed=config.permutation_seed,
         question_text_key=config.question_text_key,
         answer_text_key=config.answer_text_key,
+        output_storage=output_storage,
+        input_storage=input_storage,
     )
 
     if len(results_df) > 0:
@@ -649,9 +675,12 @@ def _run_multi_rag_assertion_scores(
 
     if print_model_usage:
         rich_print("\nModel usage statistics:")
-        rich_print(llm_client.get_usage())
-    usage_file = config.output_dir / "model_usage.json"
-    usage_file.write_text(json.dumps(llm_client.get_usage()), encoding="utf-8")
+        rich_print(llm_client.metrics_store.get_metrics())
+    asyncio.run(
+        _write_json(
+            output_storage, "model_usage.json", llm_client.metrics_store.get_metrics()
+        )
+    )
 
 
 @app.command()
@@ -791,22 +820,33 @@ def _run_single_rag_hierarchical_assertion_scores(
     )
 
     config = load_config(HierarchicalAssertionConfig, config_path)
-    output.mkdir(parents=True, exist_ok=True)
+    output_storage = _build_output_storage(config.output_storage, output)
 
     llm_client = ModelFactory.create_chat_model(config.llm_config)
+    assertions_storage, assertions_filename = _build_condition_storage(
+        config.input_storage, config.assertions.assertions_path, is_dir=False
+    )
+    from benchmark_qed.autoe.utils.storage_io import read_json_df
+
     assertions = load_and_normalize_hierarchical_assertions(
-        config.assertions.assertions_path,
+        assertions_filename,
         assertions_key=assertions_key,
         supporting_assertions_key=supporting_assertions_key,
+        input_storage=assertions_storage,
     )
 
     rich_print(f"Evaluating {len(assertions)} hierarchical assertions...")
+
+    answers_storage, answers_filename = _build_condition_storage(
+        config.input_storage, config.generated.answer_base_path, is_dir=False
+    )
+    answers = read_json_df(answers_storage, answers_filename)
 
     # Get hierarchical scores
     scores = get_hierarchical_assertion_scores(
         llm_client=llm_client,
         llm_config=config.llm_config,
-        answers=pd.read_json(config.generated.answer_base_path, encoding="utf-8"),
+        answers=answers,
         assertions=assertions,
         assessment_user_prompt=config.prompt_config.user_prompt.template,
         assessment_system_prompt=config.prompt_config.system_prompt.template,
@@ -821,18 +861,26 @@ def _run_single_rag_hierarchical_assertion_scores(
     )
 
     # Save raw scores
-    scores.to_csv(output / "hierarchical_assertion_scores.csv", index=False)
+    asyncio.run(
+        _write_csv_df(output_storage, "hierarchical_assertion_scores.csv", scores)
+    )
 
     # Aggregate across trials
     aggregated = aggregate_hierarchical_scores(
         scores, pass_threshold=config.pass_threshold
     )
-    aggregated.to_csv(output / "hierarchical_assertion_summary.csv", index=False)
+    asyncio.run(
+        _write_csv_df(output_storage, "hierarchical_assertion_summary.csv", aggregated)
+    )
 
     # Summarize by question
     summary_by_question = summarize_hierarchical_by_question(aggregated)
-    summary_by_question.to_csv(
-        output / "hierarchical_summary_by_question.csv", index=False
+    asyncio.run(
+        _write_csv_df(
+            output_storage,
+            "hierarchical_summary_by_question.csv",
+            summary_by_question,
+        )
     )
 
     # Print summary
@@ -867,14 +915,16 @@ def _run_single_rag_hierarchical_assertion_scores(
         rich_print("\n[bold green]All global assertions passed.[/bold green]")
 
     # Save machine-readable evaluation summary
-    eval_summary_file = output / "eval_summary.json"
-    eval_summary_file.write_text(json.dumps(eval_summary, indent=2), encoding="utf-8")
+    asyncio.run(_write_json(output_storage, "eval_summary.json", eval_summary))
 
     if print_model_usage:
         rich_print("\nModel usage statistics:")
-        rich_print(llm_client.get_usage())
-    usage_file = output / "model_usage.json"
-    usage_file.write_text(json.dumps(llm_client.get_usage()), encoding="utf-8")
+        rich_print(llm_client.metrics_store.get_metrics())
+    asyncio.run(
+        _write_json(
+            output_storage, "model_usage.json", llm_client.metrics_store.get_metrics()
+        )
+    )
 
 
 def _run_multi_rag_hierarchical_assertion_scores(
@@ -886,7 +936,12 @@ def _run_multi_rag_hierarchical_assertion_scores(
     from benchmark_qed.autoe.config import MultiRAGHierarchicalAssertionConfig
 
     config = load_config(MultiRAGHierarchicalAssertionConfig, config_path)
-    config.output_dir.mkdir(parents=True, exist_ok=True)
+    output_storage = _build_output_storage(config.output_storage, config.output_dir)
+    input_storage = (
+        create_storage(config.input_storage)
+        if config.input_storage is not None
+        else None
+    )
 
     llm_client = ModelFactory.create_chat_model(config.llm_config)
 
@@ -915,8 +970,9 @@ def _run_multi_rag_hierarchical_assertion_scores(
         else Path(config.assertions_file)
     )
     assertions = load_and_normalize_hierarchical_assertions(
-        assertions_path,
+        str(assertions_path) if input_storage is None else config.assertions_file,
         supporting_assertions_key=config.supporting_assertions_key,
+        input_storage=input_storage,
     )
     rich_print(f"Loaded {len(assertions)} hierarchical assertions")
 
@@ -942,6 +998,8 @@ def _run_multi_rag_hierarchical_assertion_scores(
         question_text_key=config.question_text_key,
         answer_text_key=config.answer_text_key,
         supporting_assertions_key=config.supporting_assertions_key,
+        output_storage=output_storage,
+        input_storage=input_storage,
     )
 
     if len(results_df) > 0:
@@ -954,9 +1012,12 @@ def _run_multi_rag_hierarchical_assertion_scores(
 
     if print_model_usage:
         rich_print("\nModel usage statistics:")
-        rich_print(llm_client.get_usage())
-    usage_file = config.output_dir / "model_usage.json"
-    usage_file.write_text(json.dumps(llm_client.get_usage()), encoding="utf-8")
+        rich_print(llm_client.metrics_store.get_metrics())
+    asyncio.run(
+        _write_json(
+            output_storage, "model_usage.json", llm_client.metrics_store.get_metrics()
+        )
+    )
 
 
 @app.command()
@@ -1018,6 +1079,9 @@ def assertion_significance(
         run_clustered_permutation=config.run_clustered_permutation,
         n_permutations=config.n_permutations,
         permutation_seed=config.permutation_seed,
+        output_storage=_build_output_storage(config.output_storage, config.output_dir)
+        if config.output_storage is not None
+        else None,
     )
 
     # Summary
@@ -1069,6 +1133,16 @@ def hierarchical_assertion_significance(
         connection_string=connection_string,
     )
     config = load_config(HierarchicalAssertionSignificanceConfig, config_path)
+    input_storage = (
+        create_storage(config.input_storage)
+        if config.input_storage is not None
+        else FileStorage(base_dir=str(config.scores_dir))
+    )
+    output_storage = (
+        _build_output_storage(config.output_storage, config.output_dir)
+        if config.output_dir is not None
+        else None
+    )
 
     rich_print("[bold]Running hierarchical assertion significance tests[/bold]")
     rich_print(f"  Scores dir: {config.scores_dir}")
@@ -1079,11 +1153,17 @@ def hierarchical_assertion_significance(
     aggregated_scores: dict[str, pd.DataFrame] = {}
     for rag_method in config.rag_methods:
         filename = config.scores_filename_template.format(rag_method=rag_method)
-        filepath = config.scores_dir / filename
-        if not filepath.exists():
-            rich_print(f"  [yellow]Warning: {filepath} not found, skipping[/yellow]")
+        # When input_storage is configured, treat filename as a key relative to it.
+        # Otherwise the FileStorage built above is rooted at scores_dir, so the
+        # filename is also the key.
+        if not asyncio.run(input_storage.has(filename)):
+            rich_print(
+                f"  [yellow]Warning: {filename} not found in input storage, skipping[/yellow]"
+            )
             continue
-        aggregated_scores[rag_method] = pd.read_csv(filepath)
+        aggregated_scores[rag_method] = asyncio.run(
+            _read_csv_df(input_storage, filename)
+        )
         rich_print(
             f"  Loaded {len(aggregated_scores[rag_method])} rows for {rag_method}"
         )
@@ -1100,6 +1180,7 @@ def hierarchical_assertion_significance(
         run_clustered_permutation=config.run_clustered_permutation,
         n_permutations=config.n_permutations,
         permutation_seed=config.permutation_seed,
+        output_storage=output_storage,
     )
 
     # Summary
@@ -1168,7 +1249,7 @@ async def _generate_retrieval_reference_async(
     from benchmark_qed.autod.sampler.clustering.cluster import TextCluster
     from benchmark_qed.autoe.retrieval_metrics.reference_gen.cluster_relevance import (
         ClusterRelevanceRater,
-        save_cluster_references_to_json,
+        build_cluster_references_payload,
     )
     from benchmark_qed.autoe.retrieval_metrics.relevance_assessment.bing_rater import (
         BingRelevanceRater,
@@ -1178,7 +1259,12 @@ async def _generate_retrieval_reference_async(
     )
 
     config = load_config(RetrievalReferenceConfig, config_path)
-    config.output_dir.mkdir(parents=True, exist_ok=True)
+    output_storage = _build_output_storage(config.output_storage, config.output_dir)
+    input_storage: Storage | None = (
+        create_storage(config.input_storage)
+        if config.input_storage is not None
+        else None
+    )
 
     # Initialize LLM client
     llm_client = ModelFactory.create_chat_model(config.llm_config)
@@ -1217,7 +1303,27 @@ async def _generate_retrieval_reference_async(
         rich_print(f"Loading text units from {config.text_units_path}...")
 
         suffix = config.text_units_path.suffix.lower()
-        if suffix == ".parquet":
+        if input_storage is not None:
+            from io import BytesIO
+
+            from benchmark_qed.autoe.utils.storage_io import read_bytes
+
+            tu_key = config.text_units_path.as_posix().lstrip("/")
+            if suffix == ".parquet":
+                text_df = pd.read_parquet(BytesIO(read_bytes(input_storage, tu_key)))
+            elif suffix == ".csv":
+                text_df = pd.read_csv(
+                    StringIO(asyncio.run(input_storage.get(tu_key)) or "")
+                )
+            elif suffix in {".json", ".jsonl"}:
+                text_df = pd.read_json(
+                    StringIO(asyncio.run(input_storage.get(tu_key)) or ""),
+                    lines=(suffix == ".jsonl"),
+                )
+            else:
+                msg = f"Unsupported file format: {suffix}. Supported: .parquet, .csv, .json, .jsonl"
+                raise ValueError(msg)
+        elif suffix == ".parquet":
             text_df = pd.read_parquet(config.text_units_path)
         elif suffix == ".csv":
             text_df = pd.read_csv(config.text_units_path)
@@ -1288,11 +1394,10 @@ async def _generate_retrieval_reference_async(
     # Cache for clusters by num_clusters to avoid re-clustering
     clusters_cache: dict[int | None, list[TextCluster]] = {}
 
-    # Create clusters directory if saving clusters
-    clusters_dir: Path | None = None
-    if config.save_clusters:
-        clusters_dir = config.output_dir / "clusters"
-        clusters_dir.mkdir(parents=True, exist_ok=True)
+    # Storage for clusters subdirectory if saving clusters
+    clusters_storage: Storage | None = (
+        output_storage.child("clusters") if config.save_clusters else None
+    )
 
     # Calculate total combinations for progress tracking
     total_combinations = len(cluster_counts) * len(question_sets)
@@ -1314,8 +1419,16 @@ async def _generate_retrieval_reference_async(
         elif config.clusters_path is not None:
             # Load pre-computed clusters
             rich_print(f"Loading pre-computed clusters from {config.clusters_path}...")
-            with config.clusters_path.open(encoding="utf-8") as f:
-                clusters_data = json.load(f)
+            if input_storage is not None:
+                clusters_data = json.loads(
+                    asyncio.run(
+                        input_storage.get(config.clusters_path.as_posix().lstrip("/"))
+                    )
+                    or "[]"
+                )
+            else:
+                with config.clusters_path.open(encoding="utf-8") as f:
+                    clusters_data = json.load(f)
 
             clusters = []
             for cluster_data in clusters_data:
@@ -1351,8 +1464,7 @@ async def _generate_retrieval_reference_async(
             rich_print(f"Created {len(clusters)} clusters")
 
             # Save clusters if requested
-            if config.save_clusters and clusters_dir is not None:
-                clusters_file = clusters_dir / f"{cluster_label}.json"
+            if config.save_clusters and clusters_storage is not None:
                 clusters_data_out = [
                     {
                         "cluster_id": c.id,
@@ -1362,10 +1474,12 @@ async def _generate_retrieval_reference_async(
                     }
                     for c in clusters
                 ]
-                with clusters_file.open("w", encoding="utf-8") as f:
-                    json.dump(clusters_data_out, f, indent=2)
+                await clusters_storage.set(
+                    f"{cluster_label}.json",
+                    json.dumps(clusters_data_out, indent=2),
+                )
                 rich_print(
-                    f"[green]Saved clustering results to {clusters_file}[/green]"
+                    f"[green]Saved clustering results to clusters/{cluster_label}.json[/green]"
                 )
 
         # Process each question set
@@ -1377,14 +1491,25 @@ async def _generate_retrieval_reference_async(
                 f"\n[bold]Processing question set: {question_set.name} ({combination_count}/{total_combinations})[/bold]"
             )
 
-            # Create output directory for this combination
+            # Create output sub-storage for this combination
+            subdir_key = f"{question_set.name}/{cluster_label}"
             output_subdir = config.output_dir / question_set.name / cluster_label
-            output_subdir.mkdir(parents=True, exist_ok=True)
+            subdir_storage = output_storage.child(subdir_key)
 
             # Load questions
             rich_print(f"Loading questions from {question_set.questions_path}...")
-            with question_set.questions_path.open(encoding="utf-8") as f:
-                questions_data = json.load(f)
+            if input_storage is not None:
+                questions_data = json.loads(
+                    asyncio.run(
+                        input_storage.get(
+                            question_set.questions_path.as_posix().lstrip("/")
+                        )
+                    )
+                    or "[]"
+                )
+            else:
+                with question_set.questions_path.open(encoding="utf-8") as f:
+                    questions_data = json.load(f)
 
             if config.max_questions is not None and config.max_questions < len(
                 questions_data
@@ -1421,19 +1546,26 @@ async def _generate_retrieval_reference_async(
             results = await cluster_rater.assess_batch(questions)
 
             # Save results
-            output_file = output_subdir / "reference.json"
-            save_cluster_references_to_json(
+            reference_payload = build_cluster_references_payload(
                 results,
-                output_file,
                 include_clusters=True,
                 clusters=cluster_rater.clusters,
             )
+            await subdir_storage.set(
+                "reference.json",
+                json.dumps(reference_payload, indent=4, ensure_ascii=False),
+            )
 
-            rich_print(f"[green]Saved reference data to {output_file}[/green]")
+            rich_print(
+                f"[green]Saved reference data to {output_subdir / 'reference.json'}[/green]"
+            )
 
             # Save usage for this run
-            usage_file = output_subdir / "model_usage.json"
-            usage_file.write_text(json.dumps(llm_client.get_usage()), encoding="utf-8")
+            await _write_json(
+                subdir_storage,
+                "model_usage.json",
+                llm_client.metrics_store.get_metrics(),
+            )
 
     # Print final summary
     rich_print(f"\n[bold green]{'=' * 60}[/bold green]")
@@ -1449,7 +1581,7 @@ async def _generate_retrieval_reference_async(
 
     if print_model_usage:
         rich_print("Model usage statistics:")
-        rich_print(llm_client.get_usage())
+        rich_print(llm_client.metrics_store.get_metrics())
 
 
 @app.command()
@@ -1493,7 +1625,12 @@ def retrieval_scores(
         connection_string=connection_string,
     )
     config = load_config(RetrievalScoresConfig, config_path)
-    config.output_dir.mkdir(parents=True, exist_ok=True)
+    output_storage = _build_output_storage(config.output_storage, config.output_dir)
+    input_storage: Storage | None = (
+        create_storage(config.input_storage)
+        if config.input_storage is not None
+        else None
+    )
 
     # Parse fidelity metric
     fidelity_metric = (
@@ -1528,6 +1665,7 @@ def retrieval_scores(
     clusters = load_clusters_from_json(
         config.clusters_path,
         text_units_path=config.text_units_path,
+        input_storage=input_storage,
     )
     rich_print(f"Loaded {len(clusters)} clusters")
 
@@ -1559,6 +1697,8 @@ def retrieval_scores(
             max_concurrent=max_concurrent,
             reference_filename=config.reference_filename,
             cluster_match_by=config.cluster_match_by,
+            output_storage=output_storage,
+            input_storage=input_storage,
         )
     )
 
@@ -1575,7 +1715,10 @@ def retrieval_scores(
 
     if print_model_usage:
         rich_print("Model usage statistics:")
-        rich_print(llm_client.get_usage())
+        rich_print(llm_client.metrics_store.get_metrics())
 
-    usage_file = config.output_dir / "model_usage.json"
-    usage_file.write_text(json.dumps(llm_client.get_usage()), encoding="utf-8")
+    asyncio.run(
+        _write_json(
+            output_storage, "model_usage.json", llm_client.metrics_store.get_metrics()
+        )
+    )

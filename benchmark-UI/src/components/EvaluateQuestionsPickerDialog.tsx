@@ -415,7 +415,7 @@ export function EvaluateQuestionsPickerForm({
         </button>
         <button
           type="submit"
-          className="btn primary"
+          className="btn btn-primary"
           disabled={!canSubmit}
           title={
             canSubmit

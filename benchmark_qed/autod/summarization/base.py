@@ -6,9 +6,9 @@ from dataclasses import dataclass
 from typing import Any
 
 import tiktoken
+from graphrag_llm.completion import LLMCompletion
 
 from benchmark_qed.autod.data_model.text_unit import TextUnit
-from benchmark_qed.llm.type.base import ChatModel
 
 
 @dataclass
@@ -26,7 +26,7 @@ class BaseSummarizer(ABC):
 
     def __init__(
         self,
-        llm: ChatModel,
+        llm: LLMCompletion,
         token_encoder: tiktoken.Encoding | None = None,
     ) -> None:
         self.llm = llm
