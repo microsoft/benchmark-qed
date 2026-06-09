@@ -6,6 +6,8 @@ import {
   Dismiss16Regular,
   ChevronRight16Regular,
   ChevronDown16Regular,
+  Copy16Regular,
+  Edit16Regular,
 } from "@fluentui/react-icons";
 import type { FileSource, TreeNode } from "../types";
 
@@ -43,11 +45,14 @@ function writePersistedExpanded(
 interface Props {
   source: FileSource;
   nodes: TreeNode[];
+  hiddenDirectoryPathIds?: Set<string>;
   onSelectFile: (node: TreeNode) => void;
   selectedPath?: string;
   onCreateFile?: (parent?: TreeNode) => void;
   onCreateFolder?: (parent?: TreeNode) => void;
   onDeleteNode?: (node: TreeNode) => void;
+  onCopyNode?: (node: TreeNode) => void;
+  onRenameNode?: (node: TreeNode) => void;
   parentNode?: TreeNode;
   workspaceKey: string;
 }
@@ -55,17 +60,47 @@ interface Props {
 export function FolderTree({
   source,
   nodes,
+  hiddenDirectoryPathIds,
   onSelectFile,
   selectedPath,
   onCreateFile,
   onCreateFolder,
   onDeleteNode,
+  onCopyNode,
+  onRenameNode,
   parentNode,
   workspaceKey,
 }: Props) {
+  const normalizeNodePathId = (path: string): string => {
+    const parts = path
+      .replace(/\\/g, "/")
+      .replace(/^\/+/, "")
+      .split("/");
+    const stack: string[] = [];
+    for (const part of parts) {
+      if (!part || part === ".") continue;
+      if (part === "..") {
+        if (stack.length > 0 && stack[stack.length - 1] !== "..") {
+          stack.pop();
+        }
+        continue;
+      }
+      stack.push(part);
+    }
+    return stack.join("/").toLowerCase();
+  };
+
+  const visibleNodes =
+    hiddenDirectoryPathIds && hiddenDirectoryPathIds.size > 0
+      ? nodes.filter((n) => {
+          if (n.kind !== "directory") return true;
+          return !hiddenDirectoryPathIds.has(normalizeNodePathId(n.path));
+        })
+      : nodes;
+
   return (
     <ul className="tree">
-      {nodes.map((n) => (
+      {visibleNodes.map((n) => (
         <TreeItem
           key={n.path}
           node={n}
@@ -75,7 +110,10 @@ export function FolderTree({
           onCreateFile={onCreateFile}
           onCreateFolder={onCreateFolder}
           onDeleteNode={onDeleteNode}
+          onCopyNode={onCopyNode}
+          onRenameNode={onRenameNode}
           parentNode={parentNode}
+          hiddenDirectoryPathIds={hiddenDirectoryPathIds}
           workspaceKey={workspaceKey}
         />
       ))}
@@ -91,7 +129,10 @@ function TreeItem({
   onCreateFile,
   onCreateFolder,
   onDeleteNode,
+  onCopyNode,
+  onRenameNode,
   parentNode,
+  hiddenDirectoryPathIds,
   workspaceKey,
 }: {
   node: TreeNode;
@@ -101,7 +142,10 @@ function TreeItem({
   onCreateFile?: (parent?: TreeNode) => void;
   onCreateFolder?: (parent?: TreeNode) => void;
   onDeleteNode?: (node: TreeNode) => void;
+  onCopyNode?: (node: TreeNode) => void;
+  onRenameNode?: (node: TreeNode) => void;
   parentNode?: TreeNode;
+  hiddenDirectoryPathIds?: Set<string>;
   workspaceKey: string;
 }) {
   const [expanded, setExpanded] = useState(() =>
@@ -188,7 +232,7 @@ function TreeItem({
           )}
         </span>
         <span className="tree-name">{node.name}</span>
-        {(onCreateFile || onCreateFolder || onDeleteNode) && (
+        {(onCreateFile || onCreateFolder || onDeleteNode || onCopyNode || onRenameNode) && (
           <span className="tree-actions">
             {isDirectory && onCreateFile && (
               <button
@@ -218,6 +262,34 @@ function TreeItem({
                 <FolderAdd16Regular />
               </button>
             )}
+            {isDirectory && onCopyNode && (
+              <button
+                type="button"
+                className="tree-action-btn"
+                title="Copy folder to another workspace"
+                aria-label="Copy folder"
+                onClick={(event) => {
+                  event.stopPropagation();
+                  onCopyNode(node);
+                }}
+              >
+                <Copy16Regular />
+              </button>
+            )}
+            {onRenameNode && (
+              <button
+                type="button"
+                className="tree-action-btn"
+                title="Rename"
+                aria-label="Rename"
+                onClick={(event) => {
+                  event.stopPropagation();
+                  onRenameNode(node);
+                }}
+              >
+                <Edit16Regular />
+              </button>
+            )}
             {onDeleteNode && (
               <button
                 type="button"
@@ -243,11 +315,14 @@ function TreeItem({
             <FolderTree
               source={source}
               nodes={children}
+              hiddenDirectoryPathIds={hiddenDirectoryPathIds}
               onSelectFile={onSelectFile}
               selectedPath={selectedPath}
               onCreateFile={onCreateFile}
               onCreateFolder={onCreateFolder}
               onDeleteNode={onDeleteNode}
+              onCopyNode={onCopyNode}
+              onRenameNode={onRenameNode}
               parentNode={node}
               workspaceKey={workspaceKey}
             />

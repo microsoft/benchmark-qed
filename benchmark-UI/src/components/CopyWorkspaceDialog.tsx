@@ -38,6 +38,7 @@ export function CopyWorkspaceDialog({
   const [folderName, setFolderName] = useState(`${sourceName}-copy`);
   const [workspaceName, setWorkspaceName] = useState(`${sourceName} (copy)`);
   const [overwrite, setOverwrite] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   // Reset whenever the dialog re-opens for a (potentially different) source.
   useEffect(() => {
@@ -46,6 +47,7 @@ export function CopyWorkspaceDialog({
     setFolderName(`${sourceName}-copy`);
     setWorkspaceName(`${sourceName} (copy)`);
     setOverwrite(false);
+    setSubmitError(null);
   }, [open, defaultParentDir, sourceName]);
 
   if (!open) return null;
@@ -55,11 +57,16 @@ export function CopyWorkspaceDialog({
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!destPath || !workspaceName.trim()) return;
-    await onSubmit({
-      destPath,
-      workspaceName: workspaceName.trim(),
-      overwrite,
-    });
+    setSubmitError(null);
+    try {
+      await onSubmit({
+        destPath,
+        workspaceName: workspaceName.trim(),
+        overwrite,
+      });
+    } catch (err) {
+      setSubmitError(err instanceof Error ? err.message : String(err));
+    }
   };
 
   const handlePick = async () => {
@@ -90,7 +97,10 @@ export function CopyWorkspaceDialog({
             <div style={{ display: "flex", gap: 6 }}>
               <input
                 value={parentDir}
-                onChange={(e) => setParentDir(e.target.value)}
+                onChange={(e) => {
+                  setParentDir(e.target.value);
+                  setSubmitError(null);
+                }}
                 placeholder="/absolute/path/to/parent"
                 autoComplete="off"
                 spellCheck={false}
@@ -111,7 +121,10 @@ export function CopyWorkspaceDialog({
             <span>New folder name</span>
             <input
               value={folderName}
-              onChange={(e) => setFolderName(e.target.value)}
+              onChange={(e) => {
+                setFolderName(e.target.value);
+                setSubmitError(null);
+              }}
               autoComplete="off"
               autoCorrect="off"
               autoCapitalize="off"
@@ -138,7 +151,10 @@ export function CopyWorkspaceDialog({
             <input
               type="checkbox"
               checked={overwrite}
-              onChange={(e) => setOverwrite(e.target.checked)}
+              onChange={(e) => {
+                setOverwrite(e.target.checked);
+                if (e.target.checked) setSubmitError(null);
+              }}
             />
             <span>Overwrite if destination already exists</span>
           </label>
@@ -148,6 +164,58 @@ export function CopyWorkspaceDialog({
               Will copy to: <code>{destPath}</code>
             </p>
           )}
+
+          {submitError && (() => {
+            const isExists = /already exists/i.test(submitError);
+            return (
+              <div
+                role="alert"
+                style={{
+                  marginTop: 4,
+                  padding: "10px 12px",
+                  borderRadius: 6,
+                  background: "rgba(220, 80, 80, 0.10)",
+                  border: "1px solid rgba(220, 80, 80, 0.45)",
+                  color: "var(--text, inherit)",
+                  fontSize: 13,
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: 6,
+                }}
+              >
+                {isExists ? (
+                  <>
+                    <strong>That destination already has a folder.</strong>
+                    <span style={{ opacity: 0.85 }}>
+                      A folder named <code>{folderName}</code> already exists in
+                      <br />
+                      <code>{parentDir}</code>.
+                    </span>
+                    <span style={{ opacity: 0.85 }}>
+                      Pick a different name, choose another parent folder, or
+                      check <em>Overwrite</em> above to replace it.
+                    </span>
+                    {!overwrite && (
+                      <div>
+                        <button
+                          type="button"
+                          className="btn"
+                          onClick={() => {
+                            setOverwrite(true);
+                            setSubmitError(null);
+                          }}
+                        >
+                          Enable overwrite
+                        </button>
+                      </div>
+                    )}
+                  </>
+                ) : (
+                  <span>{submitError}</span>
+                )}
+              </div>
+            );
+          })()}
 
           <div className="modal-actions">
             <button

@@ -15,7 +15,7 @@ interface Props {
     containerName: string;
     prefix: string;
     label: string;
-  }) => void;
+  }) => Promise<void>;
 }
 
 export function AddWorkspaceTabsDialog({
@@ -37,6 +37,9 @@ export function AddWorkspaceTabsDialog({
   const [containerName, setContainerName] = useState("");
   const [prefix, setPrefix] = useState("");
   const [label, setLabel] = useState("");
+  // Submission state shared by both tabs.
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   const resetForm = () => {
     setTab("local");
@@ -49,6 +52,8 @@ export function AddWorkspaceTabsDialog({
     setContainerName("");
     setPrefix("");
     setLabel("");
+    setSubmitting(false);
+    setSubmitError(null);
   };
 
   useEffect(() => {
@@ -61,15 +66,24 @@ export function AddWorkspaceTabsDialog({
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (submitting) return;
+    setSubmitError(null);
     if (tab === "local") {
       if (!localPath.trim()) return;
-      await onAddLocal({
-        path: localPath.trim(),
-        hasChildWorkspaces: localHasChildren,
-        childWorkspacePaths: localHasChildren
-          ? childWorkspacePaths.map((p) => p.trim()).filter(Boolean)
-          : [],
-      });
+      setSubmitting(true);
+      try {
+        await onAddLocal({
+          path: localPath.trim(),
+          hasChildWorkspaces: localHasChildren,
+          childWorkspacePaths: localHasChildren
+            ? childWorkspacePaths.map((p) => p.trim()).filter(Boolean)
+            : [],
+        });
+      } catch (err) {
+        setSubmitError(err instanceof Error ? err.message : String(err));
+      } finally {
+        setSubmitting(false);
+      }
     } else {
       if (!accountUrl.trim() || !containerName.trim()) return;
       let computedLabel = label.trim();
@@ -79,12 +93,19 @@ export function AddWorkspaceTabsDialog({
           prefix ? `/${prefix.replace(/\/$/, "")}` : ""
         }`;
       }
-      onAddBlob({
-        accountUrl: accountUrl.trim(),
-        containerName: containerName.trim(),
-        prefix: prefix.trim(),
-        label: computedLabel,
-      });
+      setSubmitting(true);
+      try {
+        await onAddBlob({
+          accountUrl: accountUrl.trim(),
+          containerName: containerName.trim(),
+          prefix: prefix.trim(),
+          label: computedLabel,
+        });
+      } catch (err) {
+        setSubmitError(err instanceof Error ? err.message : String(err));
+      } finally {
+        setSubmitting(false);
+      }
     }
   };
 
@@ -283,19 +304,48 @@ export function AddWorkspaceTabsDialog({
             </>
           )}
           <div className="modal-actions">
-            <button type="button" className="btn" onClick={onClose}>Cancel</button>
+            <button
+              type="button"
+              className="btn"
+              onClick={onClose}
+              disabled={submitting}
+            >
+              Cancel
+            </button>
             <button
               type="submit"
               className="btn btn-primary"
               disabled={
-                tab === "local"
+                submitting ||
+                (tab === "local"
                   ? !localPath.trim()
-                  : !accountUrl.trim() || !containerName.trim()
+                  : !accountUrl.trim() || !containerName.trim())
               }
             >
-              Add
+              {submitting
+                ? tab === "local"
+                  ? "Adding..."
+                  : "Connecting..."
+                : "Add"}
             </button>
           </div>
+          {submitError && (
+            <div
+              className="hint"
+              role="alert"
+              style={{
+                marginTop: 8,
+                padding: "8px 10px",
+                borderRadius: 4,
+                background: "rgba(220, 53, 69, 0.12)",
+                color: "var(--danger, #c33)",
+                fontSize: 12,
+                whiteSpace: "pre-wrap",
+              }}
+            >
+              {submitError}
+            </div>
+          )}
         </form>
       </div>
     </div>

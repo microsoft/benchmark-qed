@@ -22,6 +22,9 @@ import { MultiConfigDialog, type DetectedConfig } from "./components/MultiConfig
 import { TreeCreateDialog } from "./components/TreeCreateDialog";
 import { TreeDeleteDialog } from "./components/TreeDeleteDialog";
 import { CopyWorkspaceDialog } from "./components/CopyWorkspaceDialog";
+import { RenameWorkspaceDialog } from "./components/RenameWorkspaceDialog";
+import { CopyNodeDialog } from "./components/CopyNodeDialog";
+import { RenameNodeDialog } from "./components/RenameNodeDialog";
 import { WorkspaceActionsMenu } from "./components/WorkspaceActionsMenu";
 import { CopilotPanel } from "./components/CopilotPanel";
 import {
@@ -48,6 +51,7 @@ import {
   Cloud16Regular,
   ArrowDownload16Regular,
   Play16Regular,
+  ArrowSync16Regular,
   Document16Regular,
   FolderAdd16Regular,
   Dismiss16Regular,
@@ -55,6 +59,7 @@ import {
   PanelLeft24Regular,
   Copy16Regular,
   Navigation16Regular,
+  Edit16Regular,
 } from '@fluentui/react-icons';
 import { detectKind, detectLanguage } from "./utils/files";
 import { ActivityLogPanel, type ActivityLogEntry } from "./components/ActivityLogPanel";
@@ -226,6 +231,77 @@ function workspaceStableKey(ws: {
     : `${ws.sourceKind}:${ws.name}`;
 }
 
+function normalizeLocalPath(value?: string): string | undefined {
+  if (!value) return undefined;
+  const raw = value.trim().replace(/\\/g, "/");
+  if (!raw) return undefined;
+
+  const driveMatch = raw.match(/^[a-zA-Z]:/);
+  const drive = driveMatch?.[0] ?? "";
+  let rest = drive ? raw.slice(drive.length) : raw;
+  const isAbsolute = rest.startsWith("/");
+  rest = rest.replace(/^\/+/, "");
+
+  const parts = rest.split("/");
+  const stack: string[] = [];
+  for (const part of parts) {
+    if (!part || part === ".") continue;
+    if (part === "..") {
+      if (stack.length > 0 && stack[stack.length - 1] !== "..") {
+        stack.pop();
+      } else if (!isAbsolute) {
+        stack.push(part);
+      }
+      continue;
+    }
+    stack.push(part);
+  }
+
+  if (drive) {
+    if (isAbsolute) {
+      return stack.length > 0 ? `${drive}/${stack.join("/")}` : `${drive}/`;
+    }
+    return stack.length > 0 ? `${drive}/${stack.join("/")}` : drive;
+  }
+
+  if (isAbsolute) {
+    return stack.length > 0 ? `/${stack.join("/")}` : "/";
+  }
+  return stack.length > 0 ? stack.join("/") : undefined;
+}
+
+function localPathIdentity(value?: string): string | undefined {
+  const normalized = normalizeLocalPath(value);
+  return normalized ? normalized.toLowerCase() : undefined;
+}
+
+function hasSameLocalRootPath(a?: string, b?: string): boolean {
+  const left = localPathIdentity(a);
+  const right = localPathIdentity(b);
+  return !!left && !!right && left === right;
+}
+
+type LocalSourceWithResolvedRoot = {
+  getResolvedRootPath?: () => string | undefined;
+};
+
+function getResolvedLocalRootPath(source: FileSource): string | undefined {
+  if (source.kind !== "local") return undefined;
+  const candidate = source as FileSource & LocalSourceWithResolvedRoot;
+  if (typeof candidate.getResolvedRootPath !== "function") return undefined;
+  return candidate.getResolvedRootPath();
+}
+
+function relativePathIdentity(value?: string): string | undefined {
+  if (!value) return undefined;
+  const normalized = normalizeLocalPath(value);
+  if (!normalized) return undefined;
+  return normalized
+    .replace(/^[a-zA-Z]:/, "")
+    .replace(/^\/+/, "")
+    .toLowerCase();
+}
+
 type JobLike = {
   id: string;
   startedAt: string;
@@ -246,6 +322,33 @@ function normalizeJobs<T extends JobLike>(jobs: T[]): T[] {
 // authoritative from the runner and are not persisted client-side.
 const PERSISTED_INIT_JOBS_KEY = "init-jobs";
 const PERSISTED_RUN_JOBS_KEY = "run-jobs";
+// Ids of init jobs whose workspace has already been imported into the
+// sidebar (or explicitly dismissed by closing that workspace). Persisted so
+// closing a workspace stays closed across reloads instead of being
+// resurrected by the init-job auto-import effect.
+const PERSISTED_IMPORTED_INIT_JOB_IDS_KEY = "imported-init-job-ids";
+
+function loadImportedInitJobIds(): Set<string> {
+  try {
+    const raw = localStorage.getItem(PERSISTED_IMPORTED_INIT_JOB_IDS_KEY);
+    if (!raw) return new Set();
+    const parsed = JSON.parse(raw);
+    return Array.isArray(parsed) ? new Set(parsed.filter((v): v is string => typeof v === "string")) : new Set();
+  } catch {
+    return new Set();
+  }
+}
+
+function saveImportedInitJobIds(ids: Set<string>): void {
+  try {
+    localStorage.setItem(
+      PERSISTED_IMPORTED_INIT_JOB_IDS_KEY,
+      JSON.stringify([...ids]),
+    );
+  } catch {
+    // ignore quota / private mode failures
+  }
+}
 const PERSISTED_JOB_OUTPUT_LIMIT = 50_000; // chars per job
 const PERSISTED_JOB_LIMIT = 100;
 
@@ -483,7 +586,7 @@ export default function App() {
   const [initJobs, setInitJobs] = useState<InitJob[]>(() =>
     normalizeJobs(loadPersistedJobs<InitJob>(PERSISTED_INIT_JOBS_KEY)),
   );
-  const importedInitJobIdsRef = useRef<Set<string>>(new Set());
+  const importedInitJobIdsRef = useRef<Set<string>>(loadImportedInitJobIds());
   const hadRunningInitJobsRef = useRef(false);
 
   const [runJobs, setRunJobs] = useState<RunJob[]>(() =>
@@ -496,6 +599,13 @@ export default function App() {
   const [jobsPanelCollapsed, setJobsPanelCollapsed] = useState(false);
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const [workspaceFilter, setWorkspaceFilter] = useState("");
+  // Tracks the initial blob-workspace restore so the sidebar can show a
+  // "Loading blob workspaces (N/M)..." indicator instead of looking empty.
+  const [blobRestoreProgress, setBlobRestoreProgress] = useState<{
+    total: number;
+    done: number;
+    currentLabel: string | null;
+  } | null>(null);
   // Per-workspace counter bumped on explicit create/delete actions to force
   // the FolderTree (and all cached subfolder children) to remount and
   // re-fetch. Persisted expansion state means expanded folders auto-reload.
@@ -569,6 +679,22 @@ export default function App() {
     workspaceId: string | null;
   }>({ open: false, workspaceId: null });
   const [copySubmitting, setCopySubmitting] = useState(false);
+  const [renameDialog, setRenameDialog] = useState<{
+    open: boolean;
+    workspaceId: string | null;
+  }>({ open: false, workspaceId: null });
+  const [copyNodeDialog, setCopyNodeDialog] = useState<{
+    open: boolean;
+    workspaceId: string | null;
+    node?: TreeNode;
+  }>({ open: false, workspaceId: null });
+  const [copyNodeSubmitting, setCopyNodeSubmitting] = useState(false);
+  const [renameNodeDialog, setRenameNodeDialog] = useState<{
+    open: boolean;
+    workspaceId: string | null;
+    node?: TreeNode;
+  }>({ open: false, workspaceId: null });
+  const [renameNodeSubmitting, setRenameNodeSubmitting] = useState(false);
   const [actionsMenuWorkspaceId, setActionsMenuWorkspaceId] = useState<
     string | null
   >(null);
@@ -586,6 +712,24 @@ export default function App() {
   const [runSubfolderConfigWorkspaceId, setRunSubfolderConfigWorkspaceId] = useState<
     string | null
   >(null);
+  const [detectingConfigsWorkspaceIds, setDetectingConfigsWorkspaceIds] =
+    useState<Set<string>>(new Set());
+  const beginDetectingConfigs = useCallback((id: string) => {
+    setDetectingConfigsWorkspaceIds((prev) => {
+      if (prev.has(id)) return prev;
+      const next = new Set(prev);
+      next.add(id);
+      return next;
+    });
+  }, []);
+  const endDetectingConfigs = useCallback((id: string) => {
+    setDetectingConfigsWorkspaceIds((prev) => {
+      if (!prev.has(id)) return prev;
+      const next = new Set(prev);
+      next.delete(id);
+      return next;
+    });
+  }, []);
   const [activityLog, setActivityLog] = useState<ActivityLogEntry[]>([]);
   const [activityLogCollapsed, setActivityLogCollapsed] = useState(false);
 
@@ -665,9 +809,14 @@ export default function App() {
   const prunePersistedLocalByRootPath = useCallback(
     (rootPath?: string): void => {
       if (!rootPath) return;
+      const targetPathId = localPathIdentity(rootPath);
+      if (!targetPathId) return;
       let removed = false;
       for (const [id, entry] of persistedWorkspacesRef.current) {
-        if (entry.kind === "local" && entry.rootPath === rootPath) {
+        if (
+          entry.kind === "local" &&
+          localPathIdentity(entry.rootPath) === targetPathId
+        ) {
           persistedWorkspacesRef.current.delete(id);
           removed = true;
         }
@@ -751,17 +900,76 @@ export default function App() {
          *  file" cases where the folder is not really part of the user's
          *  benchmark workflow. */
         hiddenFromSidebar?: boolean;
+        /** When true, errors are re-thrown instead of being routed to the
+         *  global error banner. Used by the Add Workspace dialog so it can
+         *  display failures inline and stay open. */
+        throwOnError?: boolean;
       },
     ) => {
       try {
         const rootNodes = await source.listChildren();
+        const normalizedRootPath = normalizeLocalPath(
+          getResolvedLocalRootPath(source) ?? options?.rootPath,
+        );
+        const normalizedParentRootPath = normalizeLocalPath(
+          options?.parentRootPath,
+        );
+        const normalizedCopyOfRootPath = normalizeLocalPath(
+          options?.copyOfRootPath,
+        );
+
+        // If the new workspace path is INSIDE an already-loaded local
+        // workspace (and not itself an existing workspace, child, copy, or
+        // hidden helper), skip creating a duplicate card and refresh the
+        // parent workspace so its tree reflects the new content.
+        if (
+          source.kind === "local" &&
+          normalizedRootPath &&
+          !normalizedParentRootPath &&
+          !normalizedCopyOfRootPath &&
+          !options?.hiddenFromSidebar
+        ) {
+          const newRootId = localPathIdentity(normalizedRootPath);
+          const exactMatch = workspacesRef.current.find((w) =>
+            hasSameLocalRootPath(w.rootPath, normalizedRootPath),
+          );
+          if (newRootId && !exactMatch) {
+            const ancestor = workspacesRef.current.find((w) => {
+              if (w.sourceKind !== "local" || !w.rootPath) return false;
+              const ancestorId = localPathIdentity(w.rootPath);
+              return !!ancestorId && newRootId.startsWith(`${ancestorId}/`);
+            });
+            if (ancestor) {
+              try {
+                const updatedRoot = await ancestor.source.listChildren();
+                setWorkspaces((prev) =>
+                  prev.map((w) =>
+                    w.id === ancestor.id
+                      ? {
+                          ...w,
+                          version: w.version + 1,
+                          rootNodes: updatedRoot,
+                        }
+                      : w,
+                  ),
+                );
+              } catch {
+                // Best-effort refresh; ignore failures.
+              }
+              prunePersistedLocalByRootPath(normalizedRootPath);
+              return;
+            }
+          }
+        }
 
         // Pre-compute the id OUTSIDE the state updater so React Strict Mode's
         // double-invocation of the updater does not register two separate ids
         // in `persistedWorkspacesRef` (the ghost id from the discarded first
         // run would otherwise survive deletion and resurrect on refresh).
-        const existingId = options?.rootPath
-          ? workspacesRef.current.find((w) => w.rootPath === options.rootPath)
+        const existingId = normalizedRootPath
+          ? workspacesRef.current.find((w) =>
+              hasSameLocalRootPath(w.rootPath, normalizedRootPath),
+            )
               ?.id
           : undefined;
         const savedId =
@@ -769,8 +977,10 @@ export default function App() {
           `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
 
         setWorkspaces((prev) => {
-          const existingIndex = options?.rootPath
-            ? prev.findIndex((w) => w.rootPath === options.rootPath)
+          const existingIndex = normalizedRootPath
+            ? prev.findIndex((w) =>
+                hasSameLocalRootPath(w.rootPath, normalizedRootPath),
+              )
             : -1;
 
           if (existingIndex >= 0) {
@@ -784,12 +994,13 @@ export default function App() {
               configType: options?.configType ?? existing.configType,
               hasChildWorkspaces:
                 options?.hasChildWorkspaces ?? existing.hasChildWorkspaces,
-              parentRootPath: options?.parentRootPath ?? existing.parentRootPath,
+              parentRootPath:
+                normalizedParentRootPath ?? existing.parentRootPath,
               source,
               rootNodes,
               collapsed: false,
               copyOfRootPath:
-                options?.copyOfRootPath ?? existing.copyOfRootPath,
+                normalizedCopyOfRootPath ?? existing.copyOfRootPath,
             };
             return next;
           }
@@ -800,21 +1011,34 @@ export default function App() {
               version: 1,
               name,
               sourceKind: source.kind,
-              rootPath: options?.rootPath,
+              rootPath: normalizedRootPath,
               configType: options?.configType,
               hasChildWorkspaces: options?.hasChildWorkspaces,
-              parentRootPath: options?.parentRootPath,
+              parentRootPath: normalizedParentRootPath,
               source,
               rootNodes,
               collapsed: false,
-              copyOfRootPath: options?.copyOfRootPath,
+              copyOfRootPath: normalizedCopyOfRootPath,
               hiddenFromSidebar: options?.hiddenFromSidebar,
             },
           ];
         });
 
         if (options?.persisted) {
-          persistedWorkspacesRef.current.set(savedId, options.persisted);
+          const persistedEntry =
+            options.persisted.kind === "local"
+              ? {
+                  ...options.persisted,
+                  rootPath: normalizedRootPath ?? options.persisted.rootPath,
+                  parentRootPath: normalizeLocalPath(
+                    options.persisted.parentRootPath,
+                  ),
+                  copyOfRootPath: normalizeLocalPath(
+                    options.persisted.copyOfRootPath,
+                  ),
+                }
+              : options.persisted;
+          persistedWorkspacesRef.current.set(savedId, persistedEntry);
           syncPersistedWorkspaces();
         }
       } catch (e) {
@@ -822,15 +1046,20 @@ export default function App() {
           options?.persisted?.kind === "local" &&
           isMissingPathError(e)
         ) {
-          const rootPath = options.persisted.rootPath;
+          const rootPath =
+            normalizeLocalPath(options.persisted.rootPath) ??
+            options.persisted.rootPath;
           const existingWorkspaceId = workspacesRef.current.find(
-            (w) => w.rootPath === rootPath,
+            (w) => hasSameLocalRootPath(w.rootPath, rootPath),
           )?.id;
           if (existingWorkspaceId) {
             removeWorkspaceSilently(existingWorkspaceId);
           }
           prunePersistedLocalByRootPath(rootPath);
           return;
+        }
+        if (options?.throwOnError) {
+          throw e instanceof Error ? e : new Error(String(e));
         }
         setError(`Failed to load ${name}: ${e}`);
       }
@@ -870,14 +1099,14 @@ export default function App() {
       hasChildWorkspaces: boolean;
       childWorkspacePaths: string[];
     }) => {
-      setAddWorkspaceDialogOpen(false);
       setError(null);
+      const { path, hasChildWorkspaces, childWorkspacePaths } = data;
+      const name = path.split(/[/\\]/).filter(Boolean).pop() ?? path;
       try {
-        const { path, hasChildWorkspaces, childWorkspacePaths } = data;
-        const name = path.split(/[/\\]/).filter(Boolean).pop() ?? path;
         await addWorkspace(name, new RunnerPathFileSource(path, INIT_RUNNER_URL), {
           rootPath: path,
           hasChildWorkspaces,
+          throwOnError: true,
           persisted: {
             kind: "local",
             name,
@@ -901,6 +1130,7 @@ export default function App() {
             {
               rootPath: childPath,
               parentRootPath: path,
+              throwOnError: true,
               persisted: {
                 kind: "local",
                 name: childName,
@@ -910,8 +1140,14 @@ export default function App() {
             },
           );
         }
+        setAddWorkspaceDialogOpen(false);
       } catch (e) {
-        setError(`Failed to add local workspace: ${e}`);
+        // Surface to the dialog so it stays open and shows the error.
+        throw new Error(
+          `Failed to add local workspace: ${
+            e instanceof Error ? e.message : String(e)
+          }`,
+        );
       }
     },
     [addWorkspace],
@@ -925,7 +1161,6 @@ export default function App() {
       prefix: string;
       label: string;
     }) => {
-      setAddWorkspaceDialogOpen(false);
       setError(null);
       try {
         await addWorkspace(
@@ -937,17 +1172,25 @@ export default function App() {
             INIT_RUNNER_URL,
           ),
           {
-          persisted: {
-            kind: "blob",
-            label: data.label,
-            accountUrl: data.accountUrl,
-            containerName: data.containerName,
-            prefix: data.prefix,
-          },
+            throwOnError: true,
+            persisted: {
+              kind: "blob",
+              label: data.label,
+              accountUrl: data.accountUrl,
+              containerName: data.containerName,
+              prefix: data.prefix,
+            },
           },
         );
+        setAddWorkspaceDialogOpen(false);
       } catch (e) {
-        setError(`Failed to connect to blob: ${e}`);
+        // Bubble the error up so the dialog can display it inline and the
+        // user can correct credentials / paths without re-opening the modal.
+        throw new Error(
+          `Failed to connect to blob: ${
+            e instanceof Error ? e.message : String(e)
+          }`,
+        );
       }
     },
     [addWorkspace],
@@ -969,39 +1212,94 @@ export default function App() {
     const unique = persisted.filter((entry) => {
       const key =
         entry.kind === "local"
-          ? `local:${entry.rootPath}`
+          ? `local:${localPathIdentity(entry.rootPath) ?? entry.rootPath}`
           : `blob:${entry.accountUrl}|${entry.containerName}|${entry.prefix}`;
       if (seen.has(key)) return false;
       seen.add(key);
       return true;
     });
+
+    // Drop persisted local workspaces whose path is inside another
+    // persisted local workspace (and that aren't explicit children or
+    // copies). Older builds added these as separate top-level cards;
+    // we now treat them as part of the parent and remove them on restore.
+    const localRootIds = new Map<string, PersistedWorkspace>();
+    for (const entry of unique) {
+      if (entry.kind !== "local") continue;
+      const id = localPathIdentity(entry.rootPath);
+      if (id) localRootIds.set(id, entry);
+    }
+    const restorable = unique.filter((entry) => {
+      if (entry.kind !== "local") return true;
+      if (entry.parentRootPath || entry.copyOfRootPath) return true;
+      const id = localPathIdentity(entry.rootPath);
+      if (!id) return true;
+      for (const otherId of localRootIds.keys()) {
+        if (otherId === id) continue;
+        if (id.startsWith(`${otherId}/`)) return false;
+      }
+      return true;
+    });
+    if (restorable.length !== persisted.length) {
+      // Rewrite localStorage so the cleanup survives the next reload.
+      savePersistedWorkspaces(restorable);
+    }
+
     void (async () => {
-      for (const entry of unique) {
-        if (entry.kind === "local") {
-          await addWorkspace(
-            entry.name,
-            new RunnerPathFileSource(entry.rootPath, INIT_RUNNER_URL),
-            {
-              rootPath: entry.rootPath,
-              configType: entry.configType,
-              hasChildWorkspaces: entry.hasChildWorkspaces,
-              parentRootPath: entry.parentRootPath,
-              copyOfRootPath: entry.copyOfRootPath,
-              persisted: entry,
-            },
-          );
-        } else {
-          await addWorkspace(
-            entry.label,
-            new RunnerBlobFileSource(
-              entry.accountUrl,
-              entry.containerName,
-              entry.prefix,
-              INIT_RUNNER_URL,
-            ),
-            { persisted: entry },
-          );
+      const blobEntries = restorable.filter((e) => e.kind === "blob");
+      const totalBlobs = blobEntries.length;
+      let doneBlobs = 0;
+      if (totalBlobs > 0) {
+        setBlobRestoreProgress({
+          total: totalBlobs,
+          done: 0,
+          currentLabel: blobEntries[0]?.kind === "blob"
+            ? blobEntries[0].label
+            : null,
+        });
+      }
+      try {
+        for (const entry of restorable) {
+          if (entry.kind === "local") {
+            await addWorkspace(
+              entry.name,
+              new RunnerPathFileSource(entry.rootPath, INIT_RUNNER_URL),
+              {
+                rootPath: entry.rootPath,
+                configType: entry.configType,
+                hasChildWorkspaces: entry.hasChildWorkspaces,
+                parentRootPath: entry.parentRootPath,
+                copyOfRootPath: entry.copyOfRootPath,
+                persisted: entry,
+              },
+            );
+          } else {
+            setBlobRestoreProgress((prev) =>
+              prev
+                ? { ...prev, currentLabel: entry.label }
+                : prev,
+            );
+            try {
+              await addWorkspace(
+                entry.label,
+                new RunnerBlobFileSource(
+                  entry.accountUrl,
+                  entry.containerName,
+                  entry.prefix,
+                  INIT_RUNNER_URL,
+                ),
+                { persisted: entry },
+              );
+            } finally {
+              doneBlobs += 1;
+              setBlobRestoreProgress((prev) =>
+                prev ? { ...prev, done: doneBlobs } : prev,
+              );
+            }
+          }
         }
+      } finally {
+        setBlobRestoreProgress(null);
       }
     })();
   }, [addWorkspace]);
@@ -1435,6 +1733,7 @@ export default function App() {
     async (workspace: Workspace) => {
       const blobInfo = getBlobInfo(workspace);
       if (!workspace.rootPath && !blobInfo) return;
+      if (detectingConfigsWorkspaceIds.has(workspace.id)) return;
 
       // For blob workspaces, mirror the local detect-configs flow by
       // scanning the workspace's own file source for settings.yaml files
@@ -1443,6 +1742,7 @@ export default function App() {
       // already-connected runner-backed blob source.
       if (blobInfo) {
         setError(null);
+        beginDetectingConfigs(workspace.id);
         try {
           const detected = await detectBlobConfigs(workspace);
           if (detected.length > 0) {
@@ -1457,6 +1757,8 @@ export default function App() {
           }
         } catch (e) {
           setError(`Failed to detect configs in blob workspace: ${e}`);
+        } finally {
+          endDetectingConfigs(workspace.id);
         }
         // Fall back to the config-type picker when nothing was detected.
         setRunConfigWorkspaceId(workspace.id);
@@ -1470,6 +1772,7 @@ export default function App() {
 
       // Always prompt for config selection so the user can pick which job to run.
       setError(null);
+      beginDetectingConfigs(workspace.id);
       try {
         const detectRes = await fetch(`${INIT_RUNNER_URL}/api/detect-configs`, {
           method: "POST",
@@ -1498,9 +1801,16 @@ export default function App() {
         setRunConfigDialogOpen(true);
       } catch (e) {
         setError(`Failed to detect configs: ${e}`);
+      } finally {
+        endDetectingConfigs(workspace.id);
       }
     },
-    [getBlobInfo],
+    [
+      getBlobInfo,
+      detectingConfigsWorkspaceIds,
+      beginDetectingConfigs,
+      endDetectingConfigs,
+    ],
   );
 
   const handleRunConfigSubmit = useCallback(
@@ -1580,6 +1890,7 @@ export default function App() {
   }, [runJobs, handleOpenRunJobLog, addActivityLog, jobActivityLabel]);
 
   useEffect(() => {
+    let dirty = false;
     for (const job of initJobs) {
       if (job.status !== "succeeded") continue;
       if (!job.rootPath) continue;
@@ -1591,12 +1902,16 @@ export default function App() {
         job.storageType === "blob" ||
         /--storage-type\s+blob\b/.test(job.command ?? "");
       if (isBlobJob) {
-        importedInitJobIdsRef.current.add(job.id);
+        if (!importedInitJobIdsRef.current.has(job.id)) {
+          importedInitJobIdsRef.current.add(job.id);
+          dirty = true;
+        }
         continue;
       }
       if (importedInitJobIdsRef.current.has(job.id)) continue;
 
       importedInitJobIdsRef.current.add(job.id);
+      dirty = true;
       const name =
         job.rootPath.split(/[/\\]/).filter(Boolean).pop() ?? job.rootPath;
       void addWorkspace(
@@ -1614,10 +1929,12 @@ export default function App() {
         },
       );
     }
+    if (dirty) saveImportedInitJobIds(importedInitJobIdsRef.current);
   }, [addWorkspace, initJobs]);
 
   const closeWorkspace = useCallback(
     (id: string) => {
+      const closed = workspacesRef.current.find((w) => w.id === id);
       setWorkspaces((prev) => prev.filter((w) => w.id !== id));
       if (activeView?.type === "file" && activeView.file.workspaceId === id) {
         setActiveView(null);
@@ -1626,8 +1943,28 @@ export default function App() {
       if (persistedWorkspacesRef.current.delete(id)) {
         syncPersistedWorkspaces();
       }
+      if (closed?.sourceKind === "local" && closed.rootPath) {
+        // Catch any orphan persisted entries that share the same rootPath
+        // but were keyed under a different (ghost) id in the Map. Without
+        // this they'd reappear on reload as a duplicate top-level card.
+        prunePersistedLocalByRootPath(closed.rootPath);
+        // Mark any init job that produced this workspace as dismissed so
+        // the auto-import effect doesn't resurrect it on the next reload.
+        const targetId = localPathIdentity(closed.rootPath);
+        if (targetId) {
+          let dirty = false;
+          for (const job of initJobs) {
+            if (!job.rootPath) continue;
+            if (localPathIdentity(job.rootPath) !== targetId) continue;
+            if (importedInitJobIdsRef.current.has(job.id)) continue;
+            importedInitJobIdsRef.current.add(job.id);
+            dirty = true;
+          }
+          if (dirty) saveImportedInitJobIds(importedInitJobIdsRef.current);
+        }
+      }
     },
-    [activeView, syncPersistedWorkspaces],
+    [activeView, syncPersistedWorkspaces, prunePersistedLocalByRootPath, initJobs],
   );
 
   const toggleWorkspace = useCallback((id: string) => {
@@ -1762,6 +2099,70 @@ export default function App() {
     prunePersistedLocalByRootPath,
   ]);
 
+  // When a blob init job succeeds, refresh any open blob workspace whose
+  // container/account match and whose prefix is an ancestor of the new
+  // config folder, so the freshly created folder shows up in the sidebar
+  // tree without requiring the user to remove and re-add the workspace.
+  const blobInitRefreshedJobIdsRef = useRef<Set<string>>(new Set());
+  useEffect(() => {
+    for (const job of initJobs) {
+      if (job.status !== "succeeded") continue;
+      if (!job.rootPath) continue;
+      const isBlobJob =
+        job.storageType === "blob" ||
+        /--storage-type\s+blob\b/.test(job.command ?? "");
+      if (!isBlobJob) continue;
+      if (blobInitRefreshedJobIdsRef.current.has(job.id)) continue;
+      blobInitRefreshedJobIdsRef.current.add(job.id);
+
+      const cmd = job.command ?? "";
+      const matchArg = (flag: string): string | undefined => {
+        const re = new RegExp(`${flag}\\s+("([^"]*)"|(\\S+))`);
+        const m = cmd.match(re);
+        return m ? (m[2] ?? m[3]) : undefined;
+      };
+      const jobContainer = matchArg("--container-name");
+      const jobAccountUrl = matchArg("--account-url");
+      const jobBaseDir = (matchArg("--base-dir") ?? "").replace(
+        /^[/\\]+|[/\\]+$/g,
+        "",
+      );
+      const jobRoot = (job.rootPath ?? "").replace(/^[/\\]+|[/\\]+$/g, "");
+      const newPath = [jobBaseDir, jobRoot]
+        .filter(Boolean)
+        .join("/")
+        .toLowerCase();
+
+      for (const ws of workspacesRef.current) {
+        if (ws.sourceKind !== "blob") continue;
+        const info = persistedWorkspacesRef.current.get(ws.id);
+        if (!info || info.kind !== "blob") continue;
+        if (jobContainer && info.containerName !== jobContainer) continue;
+        if (
+          jobAccountUrl &&
+          info.accountUrl.replace(/\/+$/, "") !==
+            jobAccountUrl.replace(/\/+$/, "")
+        ) {
+          continue;
+        }
+        const wsPrefix = (info.prefix ?? "")
+          .replace(/^[/\\]+|[/\\]+$/g, "")
+          .toLowerCase();
+        if (
+          wsPrefix &&
+          newPath &&
+          !newPath.startsWith(`${wsPrefix}/`) &&
+          newPath !== wsPrefix
+        ) {
+          continue;
+        }
+        void refreshWorkspace(ws).then((ok) => {
+          if (ok) bumpTreeNonce(ws.id);
+        });
+      }
+    }
+  }, [initJobs, refreshWorkspace, bumpTreeNonce]);
+
   const requestCreatePath = useCallback(
     (workspace: Workspace, kind: "file" | "directory", parentNode?: TreeNode) => {
       setCreateDialog({
@@ -1839,6 +2240,156 @@ export default function App() {
     });
   }, []);
 
+  const requestCopyNode = useCallback(
+    (workspace: Workspace, node: TreeNode) => {
+      if (node.kind !== "directory") {
+        setError("Only folders can be copied across workspaces.");
+        return;
+      }
+      setCopyNodeDialog({
+        open: true,
+        workspaceId: workspace.id,
+        node,
+      });
+    },
+    [],
+  );
+
+  const submitCopyNode = useCallback(
+    async ({
+      destWorkspaceId,
+      destRelPath,
+      newName,
+      overwrite,
+    }: {
+      destWorkspaceId: string;
+      destRelPath: string;
+      newName: string;
+      overwrite: boolean;
+    }) => {
+      const sourceWorkspace = workspaces.find(
+        (w) => w.id === copyNodeDialog.workspaceId,
+      );
+      const destWorkspace = workspaces.find((w) => w.id === destWorkspaceId);
+      const node = copyNodeDialog.node;
+      if (!sourceWorkspace?.rootPath || !destWorkspace?.rootPath || !node) {
+        setError("Source and destination must be local workspaces.");
+        return;
+      }
+      const srcRoot = sourceWorkspace.rootPath.replace(/[/\\]+$/, "");
+      const dstRoot = destWorkspace.rootPath.replace(/[/\\]+$/, "");
+      const srcRel = node.path.replace(/^[/\\]+/, "");
+      const sourcePath = `${srcRoot}/${srcRel}`;
+      const trimmedRel = destRelPath.replace(/^[/\\]+|[/\\]+$/g, "");
+      const destPath = trimmedRel
+        ? `${dstRoot}/${trimmedRel}/${newName}`
+        : `${dstRoot}/${newName}`;
+      setError(null);
+      setCopyNodeSubmitting(true);
+      try {
+        const res = await fetch(`${INIT_RUNNER_URL}/api/fs/copy-path`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ sourcePath, destPath, overwrite }),
+        });
+        if (!res.ok) {
+          const payload = (await res.json().catch(() => ({}))) as {
+            error?: string;
+          };
+          throw new Error(payload.error ?? `Copy failed (HTTP ${res.status}).`);
+        }
+        const refreshed = await refreshWorkspace(destWorkspace);
+        if (refreshed) {
+          bumpTreeNonce(destWorkspace.id);
+        }
+        setCopyNodeDialog({ open: false, workspaceId: null });
+      } catch (e) {
+        setError(`Failed to copy folder: ${e}`);
+      } finally {
+        setCopyNodeSubmitting(false);
+      }
+    },
+    [copyNodeDialog, workspaces, refreshWorkspace, bumpTreeNonce],
+  );
+
+  const requestRenameNode = useCallback(
+    (workspace: Workspace, node: TreeNode) => {
+      setRenameNodeDialog({
+        open: true,
+        workspaceId: workspace.id,
+        node,
+      });
+    },
+    [],
+  );
+
+  const submitRenameNode = useCallback(
+    async (newName: string) => {
+      const workspace = workspaces.find(
+        (w) => w.id === renameNodeDialog.workspaceId,
+      );
+      const node = renameNodeDialog.node;
+      if (!workspace || !node) return;
+      if (!workspace.source.canWrite() || !workspace.source.renamePath) {
+        setError("This workspace does not support renaming.");
+        return;
+      }
+      setError(null);
+      setRenameNodeSubmitting(true);
+      try {
+        const newRelPath = await workspace.source.renamePath(
+          node.path,
+          newName,
+        );
+        // Re-point any open files / active view that were under the renamed
+        // node so users don't end up with a stale path after rename.
+        const oldPath = node.path.replace(/\\/g, "/");
+        const newPath = newRelPath.replace(/\\/g, "/");
+        const rewriteNode = (n: TreeNode): TreeNode => {
+          if (n.path === oldPath) {
+            return { ...n, path: newPath, name: newName };
+          }
+          if (n.path.startsWith(`${oldPath}/`)) {
+            return {
+              ...n,
+              path: `${newPath}${n.path.slice(oldPath.length)}`,
+            };
+          }
+          return n;
+        };
+        setOpenFiles((prev) =>
+          prev.map((f) =>
+            f.workspaceId === workspace.id
+              ? { ...f, node: rewriteNode(f.node) }
+              : f,
+          ),
+        );
+        setActiveView((prev) => {
+          if (
+            prev?.type === "file" &&
+            prev.file.workspaceId === workspace.id
+          ) {
+            return {
+              ...prev,
+              file: { ...prev.file, node: rewriteNode(prev.file.node) },
+            };
+          }
+          return prev;
+        });
+        const refreshed = await refreshWorkspace(workspace);
+        if (refreshed) {
+          bumpTreeNonce(workspace.id);
+        }
+        setRenameNodeDialog({ open: false, workspaceId: null });
+      } catch (e) {
+        setError(`Failed to rename: ${e}`);
+      } finally {
+        setRenameNodeSubmitting(false);
+      }
+    },
+    [renameNodeDialog, workspaces, refreshWorkspace, bumpTreeNonce],
+  );
+
   const confirmDeletePath = useCallback(async () => {
     if (!deleteDialog.workspaceId || !deleteDialog.node) return;
     const workspace = workspaces.find((w) => w.id === deleteDialog.workspaceId);
@@ -1901,6 +2452,36 @@ export default function App() {
     }
     setCopyDialog({ open: true, workspaceId: workspace.id });
   }, []);
+
+  const requestRenameWorkspace = useCallback((workspace: Workspace) => {
+    setRenameDialog({ open: true, workspaceId: workspace.id });
+  }, []);
+
+  const submitRenameWorkspace = useCallback(
+    (newName: string) => {
+      const id = renameDialog.workspaceId;
+      if (!id) return;
+      const trimmed = newName.trim();
+      if (!trimmed) {
+        setRenameDialog({ open: false, workspaceId: null });
+        return;
+      }
+      setWorkspaces((prev) =>
+        prev.map((w) => (w.id === id ? { ...w, name: trimmed } : w)),
+      );
+      const persisted = persistedWorkspacesRef.current.get(id);
+      if (persisted) {
+        const updated: PersistedWorkspace =
+          persisted.kind === "local"
+            ? { ...persisted, name: trimmed }
+            : { ...persisted, label: trimmed };
+        persistedWorkspacesRef.current.set(id, updated);
+        syncPersistedWorkspaces();
+      }
+      setRenameDialog({ open: false, workspaceId: null });
+    },
+    [renameDialog, syncPersistedWorkspaces],
+  );
 
   const submitCopyWorkspace = useCallback(
     async ({
@@ -1983,7 +2564,10 @@ export default function App() {
         });
         setCopyDialog({ open: false, workspaceId: null });
       } catch (e) {
-        setError(`Failed to copy workspace: ${e}`);
+        // Surface the error inline in the dialog so the user sees it next to
+        // the Overwrite checkbox; do not blow it up into the global banner.
+        setCopySubmitting(false);
+        throw e instanceof Error ? e : new Error(String(e));
       } finally {
         setCopySubmitting(false);
       }
@@ -2466,7 +3050,7 @@ export default function App() {
       }
       onFolderDetected={(folderPath) => {
         const alreadyAdded = workspaces.some(
-          (w) => w.rootPath === folderPath,
+          (w) => hasSameLocalRootPath(w.rootPath, folderPath),
         );
         if (!alreadyAdded) {
           void addLocalWorkspace({
@@ -2498,7 +3082,7 @@ export default function App() {
         // manually.
         if (!path) return;
         const alreadyAdded = workspacesRef.current.some(
-          (w) => w.rootPath === path,
+          (w) => hasSameLocalRootPath(w.rootPath, path),
         );
         if (alreadyAdded) return;
         const allowed: ReadonlyArray<WorkspaceConfigType> = [
@@ -2636,6 +3220,48 @@ export default function App() {
     };
   }, [workspaces, workspaceFilter]);
 
+  const hiddenDirectoryPathIdsByWorkspace = useMemo(() => {
+    const visibleLocalWorkspaces = workspaces.filter(
+      (w) => !w.hiddenFromSidebar && w.sourceKind === "local" && !!w.rootPath,
+    );
+    const byWorkspaceId = new Map<string, Set<string>>();
+
+    for (const ws of visibleLocalWorkspaces) {
+      const wsRootId = localPathIdentity(ws.rootPath);
+      const hidden = new Set<string>();
+      if (!wsRootId) {
+        byWorkspaceId.set(ws.id, hidden);
+        continue;
+      }
+
+      for (const other of visibleLocalWorkspaces) {
+        if (other.id === ws.id) continue;
+        const otherRootId = localPathIdentity(other.rootPath);
+        if (!otherRootId) continue;
+        if (!otherRootId.startsWith(`${wsRootId}/`)) continue;
+        const rel = relativePathIdentity(otherRootId.slice(wsRootId.length + 1));
+        if (rel) hidden.add(rel);
+      }
+
+      // Fallback for parent workspaces that explicitly opt into child
+      // workspaces: hide top-level directory names that match basenames of
+      // loaded child workspace roots, even when absolute prefix comparison
+      // is insufficient due to path-shape differences.
+      if (ws.hasChildWorkspaces) {
+        for (const other of visibleLocalWorkspaces) {
+          if (other.id === ws.id) continue;
+          const basename = other.rootPath?.split(/[\\/]/).filter(Boolean).pop();
+          const relBase = relativePathIdentity(basename);
+          if (relBase) hidden.add(relBase);
+        }
+      }
+
+      byWorkspaceId.set(ws.id, hidden);
+    }
+
+    return byWorkspaceId;
+  }, [workspaces]);
+
   return (
     <div className="app-root">
       <nav className="navbar">
@@ -2744,10 +3370,51 @@ export default function App() {
         </div>
 
         <div className="sidebar-body">
-          {workspaces.length === 0 ? (
-            <div className="empty-tree">
-              No workspaces opened. Add a local folder or an Azure Blob container.
+          {blobRestoreProgress && (
+            <div
+              className="blob-restore-banner"
+              role="status"
+              aria-live="polite"
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: 8,
+                padding: "8px 10px",
+                margin: "6px 8px",
+                borderRadius: 6,
+                background: "rgba(80, 140, 220, 0.12)",
+                border: "1px solid rgba(80, 140, 220, 0.40)",
+                fontSize: 12,
+              }}
+            >
+              <ArrowSync16Regular className="spin" />
+              <div style={{ display: "flex", flexDirection: "column", gap: 2, minWidth: 0 }}>
+                <span>
+                  Loading blob workspaces ({blobRestoreProgress.done}/
+                  {blobRestoreProgress.total})...
+                </span>
+                {blobRestoreProgress.currentLabel && (
+                  <span
+                    style={{
+                      opacity: 0.75,
+                      whiteSpace: "nowrap",
+                      overflow: "hidden",
+                      textOverflow: "ellipsis",
+                    }}
+                    title={blobRestoreProgress.currentLabel}
+                  >
+                    {blobRestoreProgress.currentLabel}
+                  </span>
+                )}
+              </div>
             </div>
+          )}
+          {workspaces.length === 0 ? (
+            blobRestoreProgress ? null : (
+              <div className="empty-tree">
+                No workspaces opened. Add a local folder or an Azure Blob container.
+              </div>
+            )
           ) : (
             (() => {
               if (sidebarEntries.filtered.length === 0) {
@@ -2858,11 +3525,25 @@ export default function App() {
                   <button
                     className="ws-run ws-icon-btn"
                     onClick={() => void handleRunWorkspace(ws)}
-                    title={ws.configType ? `Run ${ws.configType}` : "Run workspace"}
+                    title={
+                      detectingConfigsWorkspaceIds.has(ws.id)
+                        ? "Detecting configs…"
+                        : ws.configType
+                          ? `Run ${ws.configType}`
+                          : "Run workspace"
+                    }
                     aria-label="Run workspace"
-                    disabled={!ws.rootPath && ws.sourceKind !== "blob"}
+                    aria-busy={detectingConfigsWorkspaceIds.has(ws.id)}
+                    disabled={
+                      (!ws.rootPath && ws.sourceKind !== "blob") ||
+                      detectingConfigsWorkspaceIds.has(ws.id)
+                    }
                   >
-                    <Play16Regular />
+                    {detectingConfigsWorkspaceIds.has(ws.id) ? (
+                      <ArrowSync16Regular className="spin" />
+                    ) : (
+                      <Play16Regular />
+                    )}
                   </button>
                   <div className="ws-actions-trigger-wrap">
                     <button
@@ -2912,6 +3593,12 @@ export default function App() {
                             ? "This workspace is already a copy"
                             : "Copy is only available for local workspaces",
                         },
+                        {
+                          key: "rename",
+                          label: "Rename workspace…",
+                          icon: <Edit16Regular />,
+                          onClick: () => requestRenameWorkspace(ws),
+                        },
                       ]}
                     />
                   </div>
@@ -2930,12 +3617,23 @@ export default function App() {
                       workspaceKey={workspaceStableKey(ws)}
                       source={ws.source}
                       nodes={ws.rootNodes}
+                      hiddenDirectoryPathIds={hiddenDirectoryPathIdsByWorkspace.get(ws.id)}
                       onSelectFile={(n) => handleSelectFile(ws, n)}
                       onCreateFile={(parent) => requestCreatePath(ws, "file", parent)}
                       onCreateFolder={(parent) =>
                         requestCreatePath(ws, "directory", parent)
                       }
                       onDeleteNode={(node) => requestDeletePath(ws, node)}
+                      onCopyNode={
+                        ws.sourceKind === "local"
+                          ? (node) => requestCopyNode(ws, node)
+                          : undefined
+                      }
+                      onRenameNode={
+                        ws.source.renamePath
+                          ? (node) => requestRenameNode(ws, node)
+                          : undefined
+                      }
                       selectedPath={
                         activeView?.type === "file" && activeView.file.workspaceId === ws.id
                           ? activeView.file.node.path
@@ -3319,6 +4017,65 @@ export default function App() {
             pickFolder={pickLocalFolderPath}
             onClose={() => setCopyDialog({ open: false, workspaceId: null })}
             onSubmit={submitCopyWorkspace}
+          />
+        );
+      })()}
+      {(() => {
+        const ws = workspaces.find((w) => w.id === renameDialog.workspaceId);
+        return (
+          <RenameWorkspaceDialog
+            open={renameDialog.open && !!ws}
+            currentName={ws?.name ?? ""}
+            onClose={() => setRenameDialog({ open: false, workspaceId: null })}
+            onSubmit={submitRenameWorkspace}
+          />
+        );
+      })()}
+      {(() => {
+        const sourceWs = workspaces.find(
+          (w) => w.id === copyNodeDialog.workspaceId,
+        );
+        const destWorkspaces = workspaces.filter(
+          (w) =>
+            w.sourceKind === "local" &&
+            !!w.rootPath &&
+            !w.hiddenFromSidebar,
+        );
+        return (
+          <CopyNodeDialog
+            open={copyNodeDialog.open && !!sourceWs && !!copyNodeDialog.node}
+            sourceWorkspace={sourceWs}
+            sourceNodePath={copyNodeDialog.node?.path}
+            sourceNodeName={copyNodeDialog.node?.name}
+            destWorkspaces={destWorkspaces}
+            submitting={copyNodeSubmitting}
+            onClose={() =>
+              setCopyNodeDialog({ open: false, workspaceId: null })
+            }
+            onSubmit={submitCopyNode}
+          />
+        );
+      })()}
+      {(() => {
+        const ws = workspaces.find(
+          (w) => w.id === renameNodeDialog.workspaceId,
+        );
+        const node = renameNodeDialog.node;
+        if (!ws || !node) return null;
+        const parentPath = node.path.includes("/")
+          ? node.path.slice(0, node.path.lastIndexOf("/"))
+          : "";
+        return (
+          <RenameNodeDialog
+            open={renameNodeDialog.open}
+            kind={node.kind === "directory" ? "directory" : "file"}
+            currentName={node.name}
+            parentPath={parentPath}
+            submitting={renameNodeSubmitting}
+            onClose={() =>
+              setRenameNodeDialog({ open: false, workspaceId: null })
+            }
+            onSubmit={submitRenameNode}
           />
         );
       })()}

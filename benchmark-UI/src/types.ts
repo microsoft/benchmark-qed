@@ -39,6 +39,8 @@ export interface FileSource {
   createFile?(path: string, content?: string): Promise<void>;
   createDirectory?(path: string): Promise<void>;
   deletePath?(path: string): Promise<void>;
+  /** Rename a file or folder. `newName` is a leaf name (no slashes). */
+  renamePath?(path: string, newName: string): Promise<string>;
   canWrite(): boolean;
 }
 

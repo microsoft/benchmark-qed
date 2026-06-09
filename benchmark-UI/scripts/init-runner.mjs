@@ -1529,6 +1529,60 @@ const server = createServer(async (req, res) => {
     return;
   }
 
+  // Rename (or move) a file or folder inside a workspace. The new name may
+  // include forward slashes to move within the workspace; both source and
+  // destination must stay inside the workspace root.
+  if (req.method === "POST" && pathname === "/api/fs/rename") {
+    try {
+      const body = await parseBody(req);
+      const rootPath = body.root;
+      const relPath = body.path;
+      const newName = body.newName;
+      if (!rootPath || !relPath || !newName) {
+        throw new Error("root, path, and newName are required.");
+      }
+      const trimmedName = String(newName)
+        .trim()
+        .replace(/^[/\\]+|[/\\]+$/g, "");
+      if (!trimmedName) {
+        throw new Error("newName cannot be empty.");
+      }
+      const { root, target: source } = resolveFsPath(rootPath, relPath);
+      const parentRel = path.posix.dirname(relPath.replace(/\\/g, "/"));
+      const destRel =
+        parentRel && parentRel !== "."
+          ? `${parentRel}/${trimmedName}`
+          : trimmedName;
+      const { target: dest } = resolveFsPath(rootPath, destRel);
+      if (source === dest) {
+        json(req, res, 200, { ok: true, path: destRel });
+        return;
+      }
+      const srcStat = await fsp.stat(source).catch(() => null);
+      if (!srcStat) {
+        throw new Error(`Source not found: ${relPath}`);
+      }
+      const destStat = await fsp.stat(dest).catch(() => null);
+      if (destStat) {
+        throw new Error(
+          `Destination already exists: ${destRel}. Choose a different name.`,
+        );
+      }
+      // Disallow renaming the workspace root itself.
+      if (source === root) {
+        throw new Error("Cannot rename the workspace root folder.");
+      }
+      await fsp.mkdir(path.dirname(dest), { recursive: true });
+      await fsp.rename(source, dest);
+      json(req, res, 200, { ok: true, path: destRel });
+    } catch (err) {
+      json(req, res, 400, {
+        error: err instanceof Error ? err.message : String(err),
+      });
+    }
+    return;
+  }
+
   if (req.method === "DELETE" && pathname === "/api/blob/delete") {
     try {
       const body = await parseBody(req);

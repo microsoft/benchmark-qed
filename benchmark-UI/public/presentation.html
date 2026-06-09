@@ -93,6 +93,17 @@
         font-size: clamp(1.55rem, 4vw, 3rem);
       }
 
+      .identity {
+        margin: 0;
+        line-height: 1.05;
+        font-family: "Fraunces", Georgia, serif;
+        font-size: clamp(0.8rem, 1.35vw, 1.15rem);
+      }
+
+      .identity span {
+        display: block;
+      }
+
       p {
         margin: 0;
         max-width: 70ch;
@@ -117,6 +128,11 @@
         display: block;
         margin-bottom: 0.35rem;
         color: var(--ink);
+      }
+
+      .cli-commands .card p {
+        font-size: clamp(0.86rem, 1.05vw, 0.95rem);
+        line-height: 1.35;
       }
 
       ul {
@@ -171,13 +187,139 @@
       .hint {
         position: absolute;
         top: 0.75rem;
-        right: 1rem;
-        font-size: 0.86rem;
-        color: #635748;
-        background: #fffbf2;
-        border: 1px solid #dbccb7;
+        left: 1rem;
+        font-size: 0.8rem;
+        color: #5e5345;
+        background: #fffaf1;
+        border: 1px solid #d9cab4;
         border-radius: 999px;
-        padding: 0.35rem 0.65rem;
+        padding: 0.32rem 0.62rem;
+      }
+
+      .slide-number {
+        position: absolute;
+        top: 0.75rem;
+        right: 1rem;
+        min-width: 2.65rem;
+        text-align: center;
+        font-size: 0.8rem;
+        color: #5e5345;
+        background: #fffaf1;
+        border: 1px solid #d9cab4;
+        border-radius: 999px;
+        padding: 0.32rem 0.62rem;
+        font-weight: 700;
+      }
+
+      .diagram-frame {
+        border: 1px solid #d7c9b6;
+        background: #fffdf9;
+        border-radius: 14px;
+        padding: 0.5rem;
+      }
+
+      .diagram-frame img {
+        width: 100%;
+        max-height: min(52vh, 420px);
+        object-fit: contain;
+        display: block;
+      }
+
+      .cli-gallery {
+        display: grid;
+        gap: 0.9rem;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        align-items: start;
+      }
+
+      .cli-shot {
+        margin: 0;
+        border: 1px solid #d7c9b6;
+        background: #fffdf9;
+        border-radius: 14px;
+        padding: 0.5rem;
+      }
+
+      .cli-shot img {
+        width: 100%;
+        max-height: 305px;
+        object-fit: contain;
+        display: block;
+        border-radius: 10px;
+      }
+
+      .cli-shot figcaption {
+        margin-top: 0.45rem;
+        font-size: 0.92rem;
+        color: var(--muted);
+      }
+
+      .cli-note {
+        margin: 0;
+        max-width: none;
+        font-size: 0.98rem;
+        color: var(--muted);
+      }
+
+      .solution-note {
+        margin: 0;
+        max-width: none;
+        font-size: 1rem;
+        color: var(--muted);
+      }
+
+      .ui-frame {
+        border: none;
+        background: transparent;
+        border-radius: 0;
+        padding: 0;
+        display: grid;
+        place-items: center;
+      }
+
+      .ui-frame img {
+        width: auto;
+        max-width: 100%;
+        max-height: min(44vh, 340px);
+        object-fit: contain;
+        display: block;
+      }
+
+      .solution-layout {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+        gap: 1rem;
+        align-items: center;
+      }
+
+      .solution-points {
+        margin: 0;
+        padding-left: 1.2rem;
+        color: var(--muted);
+        font-size: clamp(0.96rem, 1.15vw, 1.08rem);
+        line-height: 1.55;
+      }
+
+      .thanks-slide {
+        justify-items: center;
+        align-content: center;
+        text-align: center;
+        gap: 0.75rem;
+      }
+
+      .thanks-slide .eyebrow {
+        font-size: 0.92rem;
+        letter-spacing: 0.16em;
+      }
+
+      .thanks-title {
+        font-size: clamp(3rem, 10vw, 6.8rem);
+        line-height: 0.98;
+      }
+
+      .thanks-sub {
+        max-width: none;
+        font-size: clamp(1.05rem, 2vw, 1.55rem);
       }
 
       @media (max-width: 700px) {
@@ -188,6 +330,14 @@
         }
 
         .grid {
+          grid-template-columns: 1fr;
+        }
+
+        .cli-gallery {
+          grid-template-columns: 1fr;
+        }
+
+        .solution-layout {
           grid-template-columns: 1fr;
         }
 
@@ -202,74 +352,116 @@
       <span class="hint">Arrow keys or buttons</span>
 
       <section class="slide active">
+        <span class="slide-number">1 / 7</span>
         <h1>Benchmark-QED</h1>
-        <p>
-          Replace this with your opening message. Keep this line short enough to
-          read in under 7 seconds.
+        <p class="identity">
+          <span>Gaudy Blanco Meneses</span>
+          <span>Research Software Engineer at CatLab Fire Team</span>
         </p>
       </section>
 
       <section class="slide">
+        <span class="slide-number">2 / 7</span>
         <p class="eyebrow">Context</p>
-        <h2>Why Benchmarking Matters First</h2>
+        <h2>Benchmark-QED Initial Goal</h2>
         <ul>
-          <li>It turns opinions into measurable evidence before teams commit.</li>
-          <li>It makes model quality comparable across prompts, datasets, and runs.</li>
-          <li>It exposes trade-offs early: accuracy, latency, and cost.</li>
-          <li>It creates a baseline so every UI and workflow change can be validated.</li>
+          <li>Suite of tools designed to evaluate GraphRAG outputs.</li>
+          <li>Evolved to support automated benchmarking of RAG systems.</li>
+          <li>Key components: query generation, evaluation, and dataset preparation.</li>
         </ul>
       </section>
 
       <section class="slide">
-        <p class="eyebrow">UI Intro</p>
-        <h2>How the UI makes benchmarking practical</h2>
-        <ul>
-          <li>It centralizes setup, run controls, and results in one workspace.</li>
-          <li>It shortens feedback loops so teams can iterate faster.</li>
-          <li>It makes experiment outputs visible and easier to share.</li>
-        </ul>
+        <span class="slide-number">3 / 7</span>
+        <p class="eyebrow">Architecture</p>
+        <h2>AutoQ, AutoE, and AutoD Workflow</h2>
+        <div class="diagram-frame">
+          <img src="/benchmark-flow.png" alt="Diagram showing AutoQ generating queries, AutoD curating datasets, and AutoE evaluating answers and assertions." />
+        </div>
       </section>
 
-      <section class="slide">
-        <p class="eyebrow">Solution</p>
-        <h2>How your approach changes the outcome</h2>
+      <section class="slide cli-commands">
+        <span class="slide-number">4 / 7</span>
+        <p class="eyebrow">CLI</p>
+        <h2>Key Benchmark-QED Commands</h2>
         <div class="grid">
           <article class="card">
-            <strong>Feature A</strong>
-            <p>One sentence on what it does and why it matters.</p>
+            <strong>Data download</strong>
+            <p>Download predefined datasets.</p>
           </article>
           <article class="card">
-            <strong>Feature B</strong>
-            <p>One sentence on speed, quality, or user confidence.</p>
+            <strong>Init</strong>
+            <p>Interactive setup.</p>
           </article>
           <article class="card">
-            <strong>Feature C</strong>
-            <p>One sentence on integration, reliability, or scale.</p>
+            <strong>Autoq</strong>
+            <p>Generate synthetic queries.</p>
           </article>
           <article class="card">
-            <strong>Feature D</strong>
-            <p>One sentence on why this is hard to copy.</p>
+            <strong>Autoe pairwise-scores</strong>
+            <p>Pairwise comparison.</p>
           </article>
+          <article class="card">
+            <strong>Autoe reference-scores</strong>
+            <p>Reference scoring.</p>
+          </article>
+          
         </div>
       </section>
 
       <section class="slide">
-        <p class="eyebrow">Proof</p>
-        <h2>Evidence that you are on the right track</h2>
-        <ul>
-          <li>Metric: include real numbers, percentages, and sample size.</li>
-          <li>Customer quote: one short sentence with a clear win.</li>
-          <li>Milestone: recent launch, partnership, or growth marker.</li>
-        </ul>
+        <span class="slide-number">5 / 7</span>
+        <p class="eyebrow">CLI Demo</p>
+        <h2>CLI Works, But Can Feel Repetitive</h2>
+        <p class="cli-note">Multiple setup and validation steps are powerful, but can be time-consuming and cognitively heavy for new users. Local-only workflows also reduce team shareability and make collaboration harder.</p>
+        <div class="cli-gallery">
+          <figure class="cli-shot">
+            <img src="/img-1.png" alt="Terminal session showing benchmark-qed data download command and successful AP news download." />
+            <figcaption>Step 1: Run multiple setup commands in sequence.</figcaption>
+          </figure>
+          <figure class="cli-shot">
+            <img src="/img-2.png" alt="Finder window showing local test folders created for benchmark-qed runs." />
+            <figcaption>Step 2: Manually verify local folders and outputs, which are harder to share across teams.</figcaption>
+          </figure>
+          <figure class="cli-shot">
+            <img src="/img-3.png" alt="Person looking tired and confused, representing CLI complexity and repetitive manual steps." />
+            <figcaption>Result: Users can feel tired or confused during repetitive CLI workflows.</figcaption>
+          </figure>
+        </div>
       </section>
 
       <section class="slide">
-        <p class="eyebrow">Close</p>
-        <h2>What you want from the audience</h2>
-        <p>
-          End with one clear ask: approval, funding, pilot, intro, or next
-          meeting date.
-        </p>
+        <span class="slide-number">6 / 7</span>
+        <p class="eyebrow">Solution</p>
+        <h2>UI as the solution</h2>
+        <div class="solution-layout">
+          <ul class="solution-points">
+            <li>Reduces repetitive CLI steps with a guided workflow.</li>
+            <li>Lowers cognitive load for setup, run control, and validation.</li>
+            <li>Blob storage enables team collaboration with shareable configs, inputs, and outputs.</li>
+          </ul>
+          <div class="ui-frame">
+            <img src="/UI-site.png" alt="Benchmark-QED UI showing an integrated workflow that reduces manual CLI steps." />
+          </div>
+        </div>
+      </section>
+
+      <section class="slide">
+        <span class="slide-number">7 / 8</span>
+        <p class="eyebrow">Vision</p>
+        <h2>A Unified Place for Our Evals</h2>
+        <ul>
+          <li>The vision is a unified place where we can collect all our evals.</li>
+          <li>One workflow for setup, execution, review, and sharing.</li>
+          <li>Less operational friction, more focus on evaluation quality.</li>
+        </ul>
+      </section>
+
+      <section class="slide thanks-slide">
+        <span class="slide-number">8 / 8</span>
+        <p class="eyebrow">Thanks</p>
+        <h2 class="thanks-title">Thank You</h2>
+        <p class="thanks-sub">Questions?</p>
       </section>
 
       <footer class="controls">

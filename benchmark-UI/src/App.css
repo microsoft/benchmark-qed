@@ -1243,6 +1243,9 @@ body,
 @keyframes modal-callout-spin {
   to { transform: rotate(360deg); }
 }
+.spin {
+  animation: modal-callout-spin 0.9s linear infinite;
+}
 .modal-actions {
   display: flex;
   justify-content: flex-end;

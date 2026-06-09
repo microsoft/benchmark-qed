@@ -2,6 +2,8 @@ import type { FileSource, TreeNode } from "../types";
 import { sortNodes } from "../utils/files";
 
 interface FsListResponse {
+  root?: string;
+  path?: string;
   nodes: TreeNode[];
 }
 
@@ -9,10 +11,15 @@ export class RunnerPathFileSource implements FileSource {
   readonly kind = "local" as const;
   private rootPath: string;
   private baseUrl: string;
+  private resolvedRootPath?: string;
 
   constructor(rootPath: string, baseUrl: string) {
     this.rootPath = rootPath;
     this.baseUrl = baseUrl;
+  }
+
+  getResolvedRootPath(): string | undefined {
+    return this.resolvedRootPath;
   }
 
   private async safeFetch(url: string, init?: RequestInit): Promise<Response> {
@@ -39,6 +46,10 @@ export class RunnerPathFileSource implements FileSource {
       throw new Error(payload.error ?? "Failed to list files.");
     }
     const payload = (await res.json()) as FsListResponse;
+    if (typeof payload.root === "string" && payload.root.trim()) {
+      this.resolvedRootPath = payload.root;
+      this.rootPath = payload.root;
+    }
     return sortNodes(payload.nodes);
   }
 
@@ -118,6 +129,24 @@ export class RunnerPathFileSource implements FileSource {
       const payload = (await res.json()) as { error?: string };
       throw new Error(payload.error ?? "Failed to delete path.");
     }
+  }
+
+  async renamePath(path: string, newName: string): Promise<string> {
+    const res = await this.safeFetch(`${this.baseUrl}/api/fs/rename`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        root: this.rootPath,
+        path,
+        newName,
+      }),
+    });
+    if (!res.ok) {
+      const payload = (await res.json()) as { error?: string };
+      throw new Error(payload.error ?? "Failed to rename path.");
+    }
+    const payload = (await res.json()) as { path?: string };
+    return payload.path ?? newName;
   }
 
   canWrite(): boolean {
