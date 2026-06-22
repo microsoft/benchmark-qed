@@ -175,7 +175,7 @@ class DataGlobalQuestionGen(BaseQuestionGen):
         from benchmark_qed.autoq.config import AssertionConfig, AssertionPromptConfig
 
         if claim_extractor_params is None:
-            claim_extractor_params = {}
+            claim_extractor_params = {"llm_params": llm_params}
         if assertion_config is None:
             assertion_config = AssertionConfig()
         if assertion_prompt_config is None:
