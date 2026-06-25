@@ -432,13 +432,14 @@ function which(cmd) {
   // discoverable on PATH and exit 0; we keep the first match.
   try {
     const isWin = process.platform === "win32";
+    // Node 20+ deprecates passing an args array together with `shell: true`
+    // (DEP0190). When we need the shell (Windows PATHEXT resolution), pass
+    // the command as a single pre-quoted string instead.
     const res = isWin
-      ? spawnSync("where", [cmd], {
+      ? spawnSync(`where ${quoteForCmd(cmd)}`, {
           env: CHILD_ENV,
           encoding: "utf8",
           timeout: 5000,
-          // `where` is a built-in resolver shim on Windows — run through the
-          // shell so PATHEXT (.cmd/.exe) lookup works for non-.exe shims.
           shell: true,
         })
       : spawnSync("/bin/sh", ["-c", `command -v ${cmd}`], {
@@ -460,26 +461,64 @@ function resolveBenchmarkInvocation() {
   const defaultPython = process.env.BENCHMARK_QED_PYTHON || "python";
   const probe = (cmd, args) => {
     try {
-      const res = spawnSync(cmd, args, {
-        cwd: REPO_ROOT,
-        env: CHILD_ENV,
-        stdio: "ignore",
-        timeout: 15000,
-        // On Windows, npm/uv/pipx install console_scripts as `.cmd` shims;
-        // Node's spawn cannot execute them without the shell wrapper.
-        shell: process.platform === "win32",
-      });
+      // On Windows, console-script entry points (uv, benchmark-qed) are
+      // installed as `.cmd` shims that Node's `spawn` can't execute without
+      // a shell. Node 20+ deprecates passing an args array with `shell: true`
+      // (DEP0190), so we hand the shell a single pre-quoted command line.
+      const isWin = process.platform === "win32";
+      const res = isWin
+        ? spawnSync(
+            [cmd, ...args].map(quoteForCmd).join(" "),
+            {
+              cwd: REPO_ROOT,
+              env: CHILD_ENV,
+              stdio: "ignore",
+              timeout: 90000,
+              shell: true,
+            },
+          )
+        : spawnSync(cmd, args, {
+            cwd: REPO_ROOT,
+            env: CHILD_ENV,
+            stdio: "ignore",
+            // First-run `uv run` may sync/install the project venv, which
+            // can easily exceed a tight timeout. Give probes headroom.
+            timeout: 90000,
+          });
       return res.status === 0;
     } catch {
       return false;
     }
   };
 
-  const candidates = [
-    { cmd: "benchmark-qed", prefix: [], label: "benchmark-qed", probe: ["--help"] },
-    { cmd: "uv", prefix: ["run", "benchmark-qed"], label: "uv run benchmark-qed", probe: ["run", "benchmark-qed", "--help"] },
-    { cmd: defaultPython, prefix: ["-m", "benchmark_qed"], label: `${defaultPython} -m benchmark_qed`, probe: ["-m", "benchmark_qed", "--help"] },
-  ];
+  // On Windows, prefer `uv run benchmark-qed` when uv is available: a bare
+  // `benchmark-qed.cmd` shim often isn't on the PATH the runner inherits
+  // (especially when launched from VS Code outside an activated venv), so
+  // probing it first wastes time and the failure was the original Windows
+  // bug. On macOS / Linux the existing order (bare CLI first, uv second)
+  // already worked when the venv is activated, so we leave it untouched.
+  const uvAvailable = IS_WINDOWS && Boolean(which("uv"));
+  const uvCandidate = {
+    cmd: "uv",
+    prefix: ["run", "benchmark-qed"],
+    label: "uv run benchmark-qed",
+    probe: ["run", "benchmark-qed", "--help"],
+  };
+  const benchmarkCandidate = {
+    cmd: "benchmark-qed",
+    prefix: [],
+    label: "benchmark-qed",
+    probe: ["--help"],
+  };
+  const pythonCandidate = {
+    cmd: defaultPython,
+    prefix: ["-m", "benchmark_qed"],
+    label: `${defaultPython} -m benchmark_qed`,
+    probe: ["-m", "benchmark_qed", "--help"],
+  };
+  const candidates = uvAvailable
+    ? [uvCandidate, benchmarkCandidate, pythonCandidate]
+    : [benchmarkCandidate, uvCandidate, pythonCandidate];
 
   for (const c of candidates) {
     if (probe(c.cmd, c.probe)) {
@@ -489,6 +528,8 @@ function resolveBenchmarkInvocation() {
       console.log(`[init-runner] Using '${c.label}' (${absPath}) for benchmark-qed CLI.`);
       return _resolvedBenchmarkInvocation;
     }
+    // eslint-disable-next-line no-console
+    console.warn(`[init-runner] Probe failed for '${c.label}'.`);
   }
 
   // Nothing worked at probe time; fall back to plain `benchmark-qed` and let
@@ -535,7 +576,13 @@ function runCommandWithFallback(job, args, onCompleted) {
     const ptyTarget = IS_WINDOWS
       ? toWindowsCmdInvocation(absPath, cmdArgs)
       : { cmd: absPath, args: cmdArgs };
-    proc = pty.spawn(ptyTarget.cmd, ptyTarget.args, {
+    // On Windows, pass args as a pre-joined string so node-pty (ConPTY) does
+    // not apply its own CommandLineToArgvW escaping on top of our cmd.exe
+    // quoting. Without this, paths containing spaces get their inner quotes
+    // double-escaped, causing "The filename, directory name, or volume label
+    // syntax is incorrect" errors on Windows.
+    const ptyArgs = IS_WINDOWS ? ptyTarget.args.join(" ") : ptyTarget.args;
+    proc = pty.spawn(ptyTarget.cmd, ptyArgs, {
       name: "xterm-256color",
       cols: 120,
       rows: 30,

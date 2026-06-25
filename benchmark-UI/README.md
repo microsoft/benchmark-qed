@@ -88,7 +88,21 @@ npm install
 
 ## 4. Run
 
-From `benchmark-UI/`, with the repo's Python venv active:
+Activate the repo's Python venv first so the init-runner can find `uv` /
+`benchmark-qed` on `PATH`:
+
+```bash
+# macOS / Linux
+source .venv/bin/activate
+
+# Windows PowerShell
+.\.venv\Scripts\Activate.ps1
+
+# Windows cmd.exe
+.\.venv\Scripts\activate.bat
+```
+
+Then, from `benchmark-UI/`:
 
 ```bash
 npm run dev:all
