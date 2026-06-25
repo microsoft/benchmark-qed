@@ -285,6 +285,41 @@ body,
   color: var(--text);
 }
 
+.sidebar-filter-kind {
+  display: flex;
+  gap: 4px;
+  margin-top: 6px;
+}
+
+.sidebar-filter-kind-btn {
+  flex: 1;
+  padding: 3px 6px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: var(--bg-3);
+  color: var(--text-dim);
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.sidebar-filter-kind-btn:hover {
+  background: var(--bg-hover);
+  color: var(--text);
+}
+
+.sidebar-filter-kind-btn.active {
+  color: color-mix(in srgb, var(--accent, #4d9cff) 95%, #fff);
+  background: color-mix(in srgb, var(--accent, #4d9cff) 22%, transparent);
+  border-color: color-mix(in srgb, var(--accent, #4d9cff) 55%, transparent);
+}
+
+.sidebar-filter-kind-btn.blob.active {
+  color: color-mix(in srgb, #2bb6a8 95%, #fff);
+  background: color-mix(in srgb, #2bb6a8 22%, transparent);
+  border-color: color-mix(in srgb, #2bb6a8 55%, transparent);
+}
+
 .bottom-tabs {
   border-top: 1px solid var(--border);
   background: var(--bg-2);
@@ -2531,6 +2566,17 @@ body,
   color: color-mix(in srgb, var(--accent, #4d9cff) 95%, #fff);
   background: color-mix(in srgb, var(--accent, #4d9cff) 22%, transparent);
   border: 1px solid color-mix(in srgb, var(--accent, #4d9cff) 55%, transparent);
+}
+/* Blob jobs get a distinct (teal) badge + cloud icon so they are easy to tell
+   apart from local jobs at a glance. */
+.jobs-panel-item-ws-blob {
+  --blob-accent: #2bb6a8;
+  color: color-mix(in srgb, var(--blob-accent) 95%, #fff);
+  background: color-mix(in srgb, var(--blob-accent) 22%, transparent);
+  border: 1px solid color-mix(in srgb, var(--blob-accent) 55%, transparent);
+}
+.jobs-panel-item-icon-blob {
+  color: #2bb6a8;
 }
 .jobs-panel-item-actions {
   display: flex;

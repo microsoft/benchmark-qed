@@ -23,6 +23,12 @@ def test_is_blob_uri_detects_single_slash_path_form() -> None:
     assert is_blob_uri("blob:/my-container/path/to/settings.yaml")
 
 
+def test_is_blob_uri_detects_windows_backslash_form() -> None:
+    # On Windows, Typer coerces "blob://x/y" through pathlib.Path, which
+    # rewrites the separators to backslashes ("blob:\\x\\y").
+    assert is_blob_uri("blob:\\my-container\\path\\to\\settings.yaml")
+
+
 def test_is_blob_uri_rejects_local_path() -> None:
     assert not is_blob_uri("/tmp/settings.yaml")
     assert not is_blob_uri("./settings.yaml")
@@ -37,6 +43,12 @@ def test_parse_blob_uri_double_slash() -> None:
 
 def test_parse_blob_uri_single_slash() -> None:
     container, key = parse_blob_uri("blob:/my-container/dir/settings.yaml")
+    assert container == "my-container"
+    assert key == "dir/settings.yaml"
+
+
+def test_parse_blob_uri_windows_backslash_form() -> None:
+    container, key = parse_blob_uri("blob:\\my-container\\dir\\settings.yaml")
     assert container == "my-container"
     assert key == "dir/settings.yaml"
 

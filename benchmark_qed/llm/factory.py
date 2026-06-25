@@ -2,6 +2,7 @@
 """A factory for supported llm types backed by ``graphrag-llm``."""
 
 import importlib
+import sys
 from typing import ClassVar
 
 from graphrag_llm.completion import LLMCompletion, create_completion
@@ -10,6 +11,20 @@ from graphrag_llm.embedding import LLMEmbedding, create_embedding
 from graphrag_llm.embedding.embedding_factory import register_embedding
 
 from benchmark_qed.config.llm_config import LLMConfig, ModelType
+
+# litellm's aiohttp transport is unstable on Windows and intermittently raises
+# "[WinError 64] The specified network name is no longer available" during LLM
+# calls. Fall back to the httpx transport on Windows for reliability. Forcing
+# IPv4 additionally avoids httpx ConnectError/ReadError failures that occur when
+# Windows attempts (and times out) IPv6 connections to Azure OpenAI endpoints.
+if sys.platform == "win32":
+    try:
+        import litellm
+
+        litellm.disable_aiohttp_transport = True
+        litellm.force_ipv4 = True
+    except Exception:  # noqa: BLE001 - litellm internals may change
+        pass
 
 
 def _register_custom_provider(model_config: LLMConfig, model_type: ModelType) -> None:

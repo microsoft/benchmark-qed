@@ -3,6 +3,7 @@ import {
   ChevronRight16Regular,
   ChevronDown16Regular,
   ClipboardTask16Regular,
+  Cloud16Regular,
   Play16Regular,
   ArrowClockwise16Regular,
   ArrowDownload16Regular,
@@ -43,15 +44,37 @@ function statusOrder(s: JobStatus): number {
   }
 }
 
-function jobFolder(job: InitJob | RunJob): string | undefined {
-  if (!job.rootPath) return undefined;
-  // For blob init jobs `rootPath` is typically "." (the runner's cwd) and
-  // isn't a meaningful display name. Hide it.
-  const isBlobJob =
+function isBlobJob(job: InitJob | RunJob): boolean {
+  return (
     (job as InitJob).storageType === "blob" ||
-    /--storage-type\s+blob\b/.test(job.command ?? "");
-  if (isBlobJob && (job.rootPath === "." || job.rootPath.trim() === ""))
-    return undefined;
+    /--storage-type\s+blob\b/.test(job.command ?? "") ||
+    /blob:[/\\]/i.test(job.command ?? "")
+  );
+}
+
+/** Extract a meaningful folder name from the `blob://…` config URI in a job
+ *  command (e.g. `blob://container/ui_test/autoq/settings.yaml` → `autoq`). */
+function blobConfigFolder(command?: string): string | undefined {
+  if (!command) return undefined;
+  const match = command.match(/blob:[/\\]{1,2}(\S+)/i);
+  if (!match) return undefined;
+  const parts = match[1].split(/[/\\]/).filter(Boolean);
+  if (parts.length === 0) return undefined;
+  // parts[0] is the container; the remainder is the blob key.
+  if (parts.length === 1) return parts[0];
+  const last = parts[parts.length - 1];
+  // If the URI points at a config file, use its parent folder as the name.
+  const isFile = /\.[A-Za-z0-9]+$/.test(last);
+  return isFile ? parts[parts.length - 2] : last;
+}
+
+function jobFolder(job: InitJob | RunJob): string | undefined {
+  if (isBlobJob(job)) {
+    // For blob jobs `rootPath` is typically "." (the runner's cwd); derive a
+    // display name from the blob config URI instead.
+    return blobConfigFolder(job.command);
+  }
+  if (!job.rootPath) return undefined;
   return job.rootPath.split(/[/\\]/).filter(Boolean).pop();
 }
 
@@ -91,8 +114,11 @@ function lookupWorkspaceName(
 }
 
 function jobLabel(job: InitJob | RunJob): string {
-  const folder = jobFolder(job);
   const config = job.configType ?? "job";
+  // For blob jobs the folder is shown as a colored badge, so keep the label
+  // to just the config type to avoid duplicating the folder name.
+  if (isBlobJob(job)) return config;
+  const folder = jobFolder(job);
   return folder ? `${folder} · ${config}` : config;
 }
 function downloadJobLog(job: InitJob | RunJob, kind: "init" | "run"): void {
@@ -188,10 +214,13 @@ function JobSection({
           ) : (
             sorted.map((job) => {
               const label = jobLabel(job);
-              const wsBadge = job.rootPath
-                ? lookupWorkspaceName(job.rootPath, workspaceNameByRoot)
-                : undefined;
+              const wsBadge = isBlobJob(job)
+                ? blobConfigFolder(job.command)
+                : job.rootPath
+                  ? lookupWorkspaceName(job.rootPath, workspaceNameByRoot)
+                  : undefined;
               const active = selectedId === job.id;
+              const blob = isBlobJob(job);
               const canRerun =
                 kind === "run" &&
                 !!onRerun &&
@@ -201,21 +230,25 @@ function JobSection({
               return (
                 <div
                   key={job.id}
-                  className={`jobs-panel-item${active ? " active" : ""}`}
+                  className={`jobs-panel-item${active ? " active" : ""}${blob ? " blob" : " local"}`}
                 >
                   <button
                     type="button"
                     className="jobs-panel-item-main"
                     onClick={() => onOpen(job.id)}
-                    title={`${wsBadge ? `Workspace: ${wsBadge}\n` : ""}${label}\n${job.command}`}
+                    title={`${blob ? "Blob storage job" : "Local job"}\n${wsBadge ? `${blob ? "Folder" : "Workspace"}: ${wsBadge}\n` : ""}${label}\n${job.command}`}
                   >
-                    <ClipboardTask16Regular className="jobs-panel-item-icon" />
+                    {blob ? (
+                      <Cloud16Regular className="jobs-panel-item-icon jobs-panel-item-icon-blob" />
+                    ) : (
+                      <ClipboardTask16Regular className="jobs-panel-item-icon" />
+                    )}
                     <span className="jobs-panel-item-text">
                       <span className="jobs-panel-item-label">
                         {wsBadge && (
                           <span
-                            className="jobs-panel-item-ws"
-                            title={`Workspace: ${wsBadge}`}
+                            className={`jobs-panel-item-ws${blob ? " jobs-panel-item-ws-blob" : ""}`}
+                            title={`${blob ? "Folder" : "Workspace"}: ${wsBadge}`}
                           >
                             {wsBadge}
                           </span>

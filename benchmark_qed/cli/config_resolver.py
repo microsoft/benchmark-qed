@@ -68,17 +68,23 @@ ConnectionStringOption = Annotated[
 
 
 def is_blob_uri(path: Path | str) -> bool:
-    """Return True when ``path`` looks like a ``blob://`` URI."""
-    return str(path).startswith(_BLOB_SCHEMES)
+    """Return True when ``path`` looks like a ``blob://`` URI.
+
+    On Windows, Typer coerces the CLI argument through :class:`pathlib.Path`,
+    which rewrites the forward slashes to backslashes (``blob:\\container\\...``).
+    Normalize separators before matching so blob URIs are still detected there.
+    """
+    return str(path).replace("\\", "/").startswith(_BLOB_SCHEMES)
 
 
 def parse_blob_uri(uri: str) -> tuple[str, str]:
     """Parse ``blob://<container>/<key>`` into ``(container, key)``.
 
     Also accepts the single-slash form produced when the URI is round-tripped
-    through :class:`pathlib.Path` (e.g. ``blob:/<container>/<key>``).
+    through :class:`pathlib.Path` (e.g. ``blob:/<container>/<key>``) and the
+    backslash form produced on Windows (``blob:\\<container>\\<key>``).
     """
-    parts = Path(uri).parts
+    parts = Path(str(uri).replace("\\", "/")).parts
     if len(parts) < 3 or parts[0] != "blob:":
         msg = f"Invalid blob URI {uri!r}: expected blob://<container>/<key>"
         raise typer.BadParameter(msg)

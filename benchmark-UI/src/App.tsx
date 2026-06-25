@@ -281,6 +281,20 @@ function hasSameLocalRootPath(a?: string, b?: string): boolean {
   return !!left && !!right && left === right;
 }
 
+// True when two local root paths are the same folder, or one is an ancestor of
+// the other. Uses normalized, separator-agnostic identities so Windows
+// backslash paths (e.g. "C:\\a\\b" vs "C:\\a\\b\\output") match correctly.
+function rootPathsRelated(a?: string, b?: string): boolean {
+  const left = localPathIdentity(a);
+  const right = localPathIdentity(b);
+  if (!left || !right) return false;
+  return (
+    left === right ||
+    left.startsWith(`${right}/`) ||
+    right.startsWith(`${left}/`)
+  );
+}
+
 type LocalSourceWithResolvedRoot = {
   getResolvedRootPath?: () => string | undefined;
 };
@@ -599,6 +613,11 @@ export default function App() {
   const [jobsPanelCollapsed, setJobsPanelCollapsed] = useState(false);
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const [workspaceFilter, setWorkspaceFilter] = useState("");
+  // Optional source-kind filter for the sidebar: show all workspaces, or only
+  // local / only blob ones.
+  const [workspaceKindFilter, setWorkspaceKindFilter] = useState<
+    "all" | "local" | "blob"
+  >("all");
   // Tracks the initial blob-workspace restore so the sidebar can show a
   // "Loading blob workspaces (N/M)..." indicator instead of looking empty.
   const [blobRestoreProgress, setBlobRestoreProgress] = useState<{
@@ -1896,16 +1915,83 @@ export default function App() {
       if (!job.rootPath) continue;
       // Blob init jobs write to Azure, not to a usable local folder
       // (rootPath is typically ".", the runner's cwd). Don't auto-add them
-      // as local sidebar workspaces. Fall back to inspecting the command
-      // string for older jobs / older runners that don't set storageType.
+      // as LOCAL sidebar workspaces; instead surface the blob config as a new
+      // blob workspace. Fall back to inspecting the command string for older
+      // jobs / older runners that don't set storageType.
       const isBlobJob =
         job.storageType === "blob" ||
         /--storage-type\s+blob\b/.test(job.command ?? "");
       if (isBlobJob) {
-        if (!importedInitJobIdsRef.current.has(job.id)) {
-          importedInitJobIdsRef.current.add(job.id);
-          dirty = true;
-        }
+        if (importedInitJobIdsRef.current.has(job.id)) continue;
+        importedInitJobIdsRef.current.add(job.id);
+        dirty = true;
+
+        // Reconstruct the blob location from the command. Building a blob
+        // source needs account-url + container; jobs authenticated via a
+        // connection-string only can't be rebuilt here, so we just mark them
+        // handled and move on.
+        const cmd = job.command ?? "";
+        const matchArg = (flag: string): string | undefined => {
+          const re = new RegExp(`${flag}\\s+("([^"]*)"|(\\S+))`);
+          const m = cmd.match(re);
+          return m ? (m[2] ?? m[3]) : undefined;
+        };
+        const jobContainer = matchArg("--container-name");
+        const jobAccountUrl = matchArg("--account-url");
+        if (!jobContainer || !jobAccountUrl) continue;
+        const jobBaseDir = (matchArg("--base-dir") ?? "").replace(
+          /^[/\\]+|[/\\]+$/g,
+          "",
+        );
+        // In blob mode the positional root argument is unused (defaults to
+        // "."), so the config lives directly under <base-dir>.
+        const jobRoot = (job.rootPath ?? "").replace(/^[/\\]+|[/\\]+$/g, "");
+        const configRoot = jobRoot === "." ? "" : jobRoot;
+        const newPrefix = [jobBaseDir, configRoot].filter(Boolean).join("/");
+        const newPathLc = newPrefix.toLowerCase();
+        const accountId = jobAccountUrl.replace(/\/+$/, "");
+
+        // If an open blob workspace already covers this config (exact prefix,
+        // an ancestor prefix, or the container root), skip creating a card —
+        // the blob-refresh effect re-lists it so the new folder shows nested.
+        const coveredByExisting = workspacesRef.current.some((ws) => {
+          if (ws.sourceKind !== "blob") return false;
+          const info = persistedWorkspacesRef.current.get(ws.id);
+          if (!info || info.kind !== "blob") return false;
+          if (info.containerName !== jobContainer) return false;
+          if (info.accountUrl.replace(/\/+$/, "") !== accountId) return false;
+          const wsPrefix = (info.prefix ?? "")
+            .replace(/^[/\\]+|[/\\]+$/g, "")
+            .toLowerCase();
+          return (
+            !wsPrefix ||
+            wsPrefix === newPathLc ||
+            newPathLc.startsWith(`${wsPrefix}/`)
+          );
+        });
+        if (coveredByExisting) continue;
+
+        const label =
+          newPrefix.split("/").filter(Boolean).pop() ?? jobContainer;
+        void addWorkspace(
+          label,
+          new RunnerBlobFileSource(
+            jobAccountUrl,
+            jobContainer,
+            newPrefix,
+            INIT_RUNNER_URL,
+          ),
+          {
+            configType: job.configType,
+            persisted: {
+              kind: "blob",
+              label,
+              accountUrl: jobAccountUrl,
+              containerName: jobContainer,
+              prefix: newPrefix,
+            },
+          },
+        );
         continue;
       }
       if (importedInitJobIdsRef.current.has(job.id)) continue;
@@ -2127,8 +2213,12 @@ export default function App() {
         /^[/\\]+|[/\\]+$/g,
         "",
       );
+      // In blob mode the positional root argument is unused (it defaults to
+      // "."), so the config is uploaded directly under <base-dir>. Treat the
+      // base-dir as the config's container prefix and ignore a "." root.
       const jobRoot = (job.rootPath ?? "").replace(/^[/\\]+|[/\\]+$/g, "");
-      const newPath = [jobBaseDir, jobRoot]
+      const configRoot = jobRoot === "." ? "" : jobRoot;
+      const newPath = [jobBaseDir, configRoot]
         .filter(Boolean)
         .join("/")
         .toLowerCase();
@@ -2901,11 +2991,8 @@ export default function App() {
         if (!wsRoot) continue;
         // Refresh if the workspace root matches a running job root, or is a
         // parent/child of it (so output written into a sibling folder shows up).
-        const match = [...activeRootPaths].some(
-          (rp) =>
-            wsRoot === rp ||
-            rp.startsWith(`${wsRoot}/`) ||
-            wsRoot.startsWith(`${rp}/`),
+        const match = [...activeRootPaths].some((rp) =>
+          rootPathsRelated(wsRoot, rp),
         );
         if (match) {
           // Lightweight refresh while the job is running. Avoid forcing
@@ -2939,15 +3026,16 @@ export default function App() {
       if (ws.sourceKind !== "local") continue;
       const wsRoot = ws.rootPath;
       if (!wsRoot) continue;
-      const match = [...previousRoots].some(
-        (rp) =>
-          wsRoot === rp ||
-          rp.startsWith(`${wsRoot}/`) ||
-          wsRoot.startsWith(`${rp}/`),
+      const match = [...previousRoots].some((rp) =>
+        rootPathsRelated(wsRoot, rp),
       );
       if (!match) continue;
-      void refreshWorkspace(ws).then((refreshed) => {
-        if (!refreshed) return;
+      // Bump the tree nonce unconditionally (not gated on the refresh result).
+      // refreshWorkspace returns false when a refresh is already in-flight
+      // (the 4s running-tick refresh commonly overlaps job completion). The
+      // nonce bump remounts FolderTree, which re-fetches every persisted-
+      // expanded subfolder fresh, so newly created deep files become visible.
+      void refreshWorkspace(ws).finally(() => {
         scheduleTreeNonceBump(ws.id, 50);
       });
     }
@@ -3178,16 +3266,21 @@ export default function App() {
     }
 
     const normalizedFilter = workspaceFilter.trim().toLowerCase();
+    const kindOrdered =
+      workspaceKindFilter === "all"
+        ? ordered
+        : ordered.filter(({ ws }) => ws.sourceKind === workspaceKindFilter);
+
     if (!normalizedFilter) {
       return {
         visibleCount: visibleWorkspaces.length,
-        filteredCount: ordered.length,
-        filtered: ordered,
+        filteredCount: kindOrdered.length,
+        filtered: kindOrdered,
       };
     }
 
     const includeIds = new Set<string>();
-    for (const { ws } of ordered) {
+    for (const { ws } of kindOrdered) {
       const haystack = [
         ws.name,
         ws.rootPath ?? "",
@@ -3212,13 +3305,13 @@ export default function App() {
       }
     }
 
-    const filtered = ordered.filter(({ ws }) => includeIds.has(ws.id));
+    const filtered = kindOrdered.filter(({ ws }) => includeIds.has(ws.id));
     return {
       visibleCount: visibleWorkspaces.length,
       filteredCount: filtered.length,
       filtered,
     };
-  }, [workspaces, workspaceFilter]);
+  }, [workspaces, workspaceFilter, workspaceKindFilter]);
 
   const hiddenDirectoryPathIdsByWorkspace = useMemo(() => {
     const visibleLocalWorkspaces = workspaces.filter(
@@ -3362,8 +3455,34 @@ export default function App() {
               )}
             </div>
           </label>
+          <div
+            className="sidebar-filter-kind"
+            role="group"
+            aria-label="Filter by storage type"
+          >
+            {(["all", "local", "blob"] as const).map((kind) => (
+              <button
+                key={kind}
+                type="button"
+                className={`sidebar-filter-kind-btn${
+                  workspaceKindFilter === kind ? " active" : ""
+                }${kind === "blob" ? " blob" : ""}`}
+                aria-pressed={workspaceKindFilter === kind}
+                onClick={() => setWorkspaceKindFilter(kind)}
+                title={
+                  kind === "all"
+                    ? "Show all workspaces"
+                    : kind === "local"
+                      ? "Show local workspaces only"
+                      : "Show blob storage workspaces only"
+                }
+              >
+                {kind === "all" ? "All" : kind === "local" ? "Local" : "Blob"}
+              </button>
+            ))}
+          </div>
           <div className="ws-count">
-            {workspaceFilter.trim()
+            {workspaceFilter.trim() || workspaceKindFilter !== "all"
               ? `${sidebarEntries.filteredCount} of ${sidebarEntries.visibleCount}`
               : `${sidebarEntries.visibleCount} workspace${sidebarEntries.visibleCount === 1 ? "" : "s"}`}
           </div>
@@ -3420,7 +3539,14 @@ export default function App() {
               if (sidebarEntries.filtered.length === 0) {
                 return (
                   <div className="empty-tree">
-                    No workspaces match <code>{workspaceFilter.trim()}</code>.
+                    {workspaceFilter.trim() ? (
+                      <>
+                        No {workspaceKindFilter !== "all" ? `${workspaceKindFilter} ` : ""}
+                        workspaces match <code>{workspaceFilter.trim()}</code>.
+                      </>
+                    ) : (
+                      <>No {workspaceKindFilter} workspaces.</>
+                    )}
                   </div>
                 );
               }
