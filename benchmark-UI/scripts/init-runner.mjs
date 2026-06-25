@@ -402,6 +402,23 @@ function toWindowsCmdInvocation(cmd, cmdArgs) {
   };
 }
 
+// node-pty performs its OWN argv -> command-line quoting (it does not support
+// `windowsVerbatimArguments`). So the pre-quoted, outer-wrapped form produced
+// by toWindowsCmdInvocation gets re-escaped and mangled, which makes cmd.exe
+// report "The filename, directory name, or volume label syntax is incorrect."
+// For the pty path we therefore pass plain, un-pre-quoted tokens and let
+// node-pty quote them. A real .exe (e.g. uv.exe) can be launched directly;
+// only console-script *.cmd/*.bat shims need to go through cmd.exe.
+function toWindowsPtyInvocation(cmd, cmdArgs) {
+  if (/\.(cmd|bat)$/i.test(cmd)) {
+    return {
+      cmd: process.env.ComSpec || "cmd.exe",
+      args: ["/d", "/c", cmd, ...cmdArgs],
+    };
+  }
+  return { cmd, args: cmdArgs };
+}
+
 function spawnChild(cmd, cmdArgs) {
   const target = IS_WINDOWS ? toWindowsCmdInvocation(cmd, cmdArgs) : { cmd, args: cmdArgs };
   return spawn(target.cmd, target.args, {
@@ -532,8 +549,27 @@ function resolveBenchmarkInvocation() {
     console.warn(`[init-runner] Probe failed for '${c.label}'.`);
   }
 
-  // Nothing worked at probe time; fall back to plain `benchmark-qed` and let
-  // the spawn error surface to the user.
+  // Nothing worked at probe time (e.g. a probe timed out). Rather than fall
+  // back to a bare `benchmark-qed` that almost certainly isn't on PATH, prefer
+  // `uv run benchmark-qed` whenever `uv` is discoverable — that's the
+  // documented setup and matches how the CLI is launched on Linux.
+  const uvPath = which("uv");
+  if (uvPath) {
+    _resolvedBenchmarkInvocation = {
+      cmd: "uv",
+      absPath: uvPath,
+      prefix: ["run", "benchmark-qed"],
+      label: "uv run benchmark-qed",
+    };
+    // eslint-disable-next-line no-console
+    console.log(
+      `[init-runner] No probe succeeded; falling back to 'uv run benchmark-qed' (${uvPath}).`,
+    );
+    return _resolvedBenchmarkInvocation;
+  }
+
+  // No uv either; fall back to plain `benchmark-qed` and let the spawn error
+  // surface to the user.
   _resolvedBenchmarkInvocation = { cmd: "benchmark-qed", absPath: "benchmark-qed", prefix: [], label: "benchmark-qed" };
   return _resolvedBenchmarkInvocation;
 }
@@ -574,7 +610,7 @@ function runCommandWithFallback(job, args, onCompleted) {
   let proc;
   try {
     const ptyTarget = IS_WINDOWS
-      ? toWindowsCmdInvocation(absPath, cmdArgs)
+      ? toWindowsPtyInvocation(absPath, cmdArgs)
       : { cmd: absPath, args: cmdArgs };
     // On Windows, pass args as a pre-joined string so node-pty (ConPTY) does
     // not apply its own CommandLineToArgvW escaping on top of our cmd.exe
