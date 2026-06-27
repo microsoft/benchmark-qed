@@ -418,6 +418,51 @@ prompt_config:
 """
 
 
+def render_autoe_chunk_assertion_yaml(config: dict[str, Any]) -> str:
+    """Render a chunk-level assertion evaluation ``settings.yaml``.
+
+    Parameters
+    ----------
+    config:
+        Dict with keys ``chat_provider``, ``generated``, ``assertions``,
+        ``k_list``, ``pass_threshold``, ``cache_dir``.
+    """
+    gen = config["generated"]
+    assertions = config["assertions"]
+    k_list = config.get("k_list", [5, 10, 20, 50])
+    pass_threshold = config.get("pass_threshold", 0.5)
+    cache_dir = config.get("cache_dir", ".benchmark_qed_cache/chunk_assertions")
+
+    llm_section = _render_llm_section(config["chat_provider"])
+
+    k_list_str = ", ".join(str(k) for k in k_list)
+
+    return f"""\
+## Input Configuration
+generated:
+  name: {gen["name"]}
+  answer_base_path: {gen.get("answer_base_path", "")}  # Optional: path to answers with embedded chunks
+  chunks_path: {gen.get("chunks_path", "input/chunks.json")}  # Path to retrieved chunks JSON
+assertions:
+  assertions_path: {assertions["assertions_path"]}
+
+## Chunk Evaluation Configuration
+k_list: [{k_list_str}]  # Report coverage metrics at these k values
+pass_threshold: {pass_threshold}  # Score threshold: 0.5 = partial_support or full_support counts as pass
+cache_dir: {cache_dir}  # Persistent cache for (assertion, chunk) pairs
+
+## LLM Configuration
+llm_config:
+{llm_section}
+
+prompt_config:
+  user_prompt:
+    prompt: prompts/chunk_assertion/user_prompt.txt
+  system_prompt:
+    prompt: prompts/chunk_assertion/system_prompt.txt
+"""
+
+
 # ---------------------------------------------------------------------------
 # Validation
 # ---------------------------------------------------------------------------
@@ -458,6 +503,15 @@ _REQUIRED_KEYS: dict[str, list[str]] = {
         "assertions",
         "pass_threshold",
         "trials",
+        "llm_config",
+        "prompt_config",
+    ],
+    "autoe_chunk_assertion": [
+        "generated",
+        "assertions",
+        "k_list",
+        "pass_threshold",
+        "cache_dir",
         "llm_config",
         "prompt_config",
     ],

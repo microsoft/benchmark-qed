@@ -15,6 +15,7 @@ from rich.table import Table
 
 from benchmark_qed.autod.prompts import summarization
 from benchmark_qed.autoe.prompts import assertion as assertion_prompts
+from benchmark_qed.autoe.prompts import chunk_assertion as chunk_assertion_prompts
 from benchmark_qed.autoe.prompts import pairwise as pairwise_prompts
 from benchmark_qed.autoe.prompts import reference as reference_prompts
 from benchmark_qed.autoq.prompts import data_questions as data_questions_prompts
@@ -42,6 +43,7 @@ from benchmark_qed.autoq.prompts.data_questions import (
 from benchmark_qed.cli.scaffold import copy_prompts, ensure_input_folder, write_env_file
 from benchmark_qed.cli.yaml_renderer import (
     render_autoe_assertion_yaml,
+    render_autoe_chunk_assertion_yaml,
     render_autoe_pairwise_yaml,
     render_autoe_reference_yaml,
     render_autoq_yaml,
@@ -654,6 +656,55 @@ def build_autoe_assertion_config() -> dict[str, Any]:
     }
 
 
+def build_autoe_chunk_assertion_config() -> dict[str, Any]:
+    """Interactive flow for AutoE chunk-level assertion evaluation configuration."""
+    rich_print(Panel("AutoE — Chunk-Level Assertion Evaluation"))
+
+    # LLM provider
+    chat_provider = prompt_provider("chat")
+
+    # Generated condition (chunks)
+    rich_print("\n[bold]  Generated condition (chunks)[/bold]")
+    name = typer.prompt("  name", default="vector_rag")
+    answer_base_path = typer.prompt(
+        "  answer_base_path (optional, for embedded chunks)", default=""
+    )
+    chunks_path = typer.prompt(
+        "  chunks_path (or embedded in answers)", default="input/chunks.json"
+    )
+    generated = {
+        "name": name,
+        "answer_base_path": answer_base_path,
+        "chunks_path": chunks_path,
+    }
+
+    # Assertions path
+    assertions_path = typer.prompt(
+        "Path to assertions file", default="input/assertions.json"
+    )
+
+    # K values
+    k_list_raw = typer.prompt("K values (comma-separated)", default="5, 10, 20, 50")
+    k_list = [int(k.strip()) for k in k_list_raw.split(",") if k.strip()]
+
+    # Pass threshold
+    pass_threshold = typer.prompt("Pass threshold", default=0.5, type=float)
+
+    # Cache directory
+    cache_dir = typer.prompt(
+        "Cache directory", default=".benchmark_qed_cache/chunk_assertions"
+    )
+
+    return {
+        "chat_provider": chat_provider,
+        "generated": generated,
+        "assertions": {"assertions_path": assertions_path},
+        "k_list": k_list,
+        "pass_threshold": pass_threshold,
+        "cache_dir": cache_dir,
+    }
+
+
 # ---------------------------------------------------------------------------
 # Config type metadata
 # ---------------------------------------------------------------------------
@@ -662,7 +713,8 @@ CONFIG_TYPE_OPTIONS: list[tuple[str, str]] = [
     ("autoq", "AutoQ — Question Generation"),
     ("autoe_pairwise", "AutoE — Pairwise Evaluation"),
     ("autoe_reference", "AutoE — Reference Evaluation"),
-    ("autoe_assertion", "AutoE — Assertion Evaluation"),
+    ("autoe_assertion", "AutoE — Assertion Evaluation (Answer-Level)"),
+    ("autoe_chunk_assertion", "AutoE — Chunk-Level Assertion Evaluation"),
 ]
 
 
@@ -717,6 +769,11 @@ def _copy_prompts_for_config(config_type: str, prompts_folder: Path) -> None:
             copy_prompts(Path(reference_prompts.__file__).parent, prompts_folder)
         case "autoe_assertion":
             copy_prompts(Path(assertion_prompts.__file__).parent, prompts_folder)
+        case "autoe_chunk_assertion":
+            copy_prompts(
+                Path(chunk_assertion_prompts.__file__).parent,
+                prompts_folder / "chunk_assertion",
+            )
 
 
 # ---------------------------------------------------------------------------
@@ -749,6 +806,7 @@ def interactive_init(
         "autoe_pairwise": build_autoe_pairwise_config,
         "autoe_reference": build_autoe_reference_config,
         "autoe_assertion": build_autoe_assertion_config,
+        "autoe_chunk_assertion": build_autoe_chunk_assertion_config,
     }
     config_dict = builders[config_type]()
 
@@ -758,6 +816,7 @@ def interactive_init(
         "autoe_pairwise": render_autoe_pairwise_yaml,
         "autoe_reference": render_autoe_reference_yaml,
         "autoe_assertion": render_autoe_assertion_yaml,
+        "autoe_chunk_assertion": render_autoe_chunk_assertion_yaml,
     }
     yaml_content = renderers[config_type](config_dict)
 

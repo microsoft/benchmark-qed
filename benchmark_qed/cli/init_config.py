@@ -12,6 +12,7 @@ from graphrag_storage.storage_factory import create_storage
 
 from benchmark_qed.autod.prompts import summarization
 from benchmark_qed.autoe.prompts import assertion as assertion_prompts
+from benchmark_qed.autoe.prompts import chunk_assertion as chunk_assertion_prompts
 from benchmark_qed.autoe.prompts import pairwise as pairwise_prompts
 from benchmark_qed.autoe.prompts import reference as reference_prompts
 from benchmark_qed.autoq.prompts import data_questions as data_questions_prompts
@@ -48,6 +49,7 @@ class ConfigType(StrEnum):
     autoe_pairwise = "autoe_pairwise"
     autoe_reference = "autoe_reference"
     autoe_assertion = "autoe_assertion"
+    autoe_chunk_assertion = "autoe_chunk_assertion"
 
 
 CHAT_MODEL_DEFAULTS = """
@@ -281,6 +283,40 @@ prompt_config:
   system_prompt:
     prompt: prompts/assertion_system_prompt.txt"""
 
+AUTOE_CHUNK_ASSERTION_CONTENT = f"""## Storage Configuration
+{{STORAGE}}
+## Input Configuration
+generated:
+  name: my_retriever  # A label for the retriever being evaluated (appears in the output).
+  # Provide your retrieved chunks using ONE of the two options below (comment out the other):
+  #
+  # Option A - separate chunks file: a JSON array of questions, each with a "chunks" list.
+  #   Records look like: {{"question_id", "question_text", "chunks": [{{"text", "rank", "chunk_id"}}]}}
+  chunks_path: input/chunks.json
+  #
+  # Option B - reuse an existing answers file: a JSON array of answers that embed their
+  #   retrieved chunks under "retrieval_context". The "answer" text is ignored; only the
+  #   chunks are scored. Records look like:
+  #   {{"question_id", "question_text", "answer", "retrieval_context": [{{"regions": [{{"text", "chunk_id"}}]}}]}}
+  # answer_base_path: input/answers.json
+assertions:
+  assertions_path: input/assertions.json  # Path to assertions file
+
+## Chunk Evaluation Configuration
+k_list: [5, 10, 20, 50]  # Report coverage metrics at these k values (plus 'all')
+pass_threshold: 0.5  # Score threshold: 0.5 = partial_support or full_support counts as pass
+# max_chunks_per_question: 20  # Optional: cap chunks evaluated per question (keeps highest-ranked). Reduces LLM calls during testing. Omit to evaluate all.
+cache_dir: .benchmark_qed_cache/chunk_assertions  # Cache directory for (assertion, chunk) pairs
+
+## LLM Configuration
+llm_config: {CHAT_MODEL_DEFAULTS}
+
+prompt_config:
+  user_prompt:
+    prompt: prompts/chunk_assertion/user_prompt.txt
+  system_prompt:
+    prompt: prompts/chunk_assertion/system_prompt.txt"""
+
 AUTOE_PAIRWISE_CONTENT = f"""## Storage Configuration
 {{STORAGE}}
 ## Input Configuration
@@ -400,6 +436,8 @@ def _get_content(config_type: ConfigType) -> str:
             return AUTOE_REFERENCE_CONTENT
         case ConfigType.autoe_assertion:
             return AUTOE_ASSERTION_CONTENT
+        case ConfigType.autoe_chunk_assertion:
+            return AUTOE_CHUNK_ASSERTION_CONTENT
 
 
 def _render_content(
@@ -651,6 +689,10 @@ def init(
         case ConfigType.autoe_assertion:
             prompt_mapping["prompts"] = __get_prompt_files(
                 Path(assertion_prompts.__file__).parent
+            )
+        case ConfigType.autoe_chunk_assertion:
+            prompt_mapping["prompts/chunk_assertion"] = __get_prompt_files(
+                Path(chunk_assertion_prompts.__file__).parent
             )
 
     # Write to blob storage or local filesystem
