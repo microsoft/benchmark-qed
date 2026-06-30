@@ -7,8 +7,9 @@ import asyncio
 import json
 import logging
 import operator
+import re
 from pathlib import Path
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
 from rich import print as rich_print
 
@@ -23,19 +24,25 @@ from benchmark_qed.autoe.data_model.chunk_assertion import (
     grade_to_score,
 )
 
+if TYPE_CHECKING:
+    from graphrag_llm.completion import LLMCompletion
+    from graphrag_storage import Storage
+
+    from benchmark_qed.autoe.data_model.retrieval_result import RetrievalResult
+    from benchmark_qed.config.llm_config import LLMConfig
+
 log: logging.Logger = logging.getLogger(__name__)
 
 
-def _collect_chunks(eval_result: Any) -> list[dict[str, Any]]:
-    """Flatten one question's retrieval into a chunk list, preserving order.
+def _collect_chunks(eval_result: RetrievalResult) -> list[dict[str, Any]]:
+    """Flatten one question's retrieval into an ordered chunk list.
 
-    Handles three formats:
-    - chunks field with direct chunk list (Format A: separate chunks file)
-    - retrieval_context field with doc->regions structure (Format B: embedded in answers)
-    - direct chunks list (legacy)
+    Consumes a :class:`RetrievalResult`. When every context item carries an
+    explicit ``rank`` the items are sorted by it (top-k semantics) rather than
+    relying on list order. Duplicate (id, text) pairs and blank text are dropped.
 
     Args:
-        eval_result: Evaluation result object/dict
+        eval_result: Retrieval result for a single question.
 
     Returns
     -------
@@ -44,91 +51,41 @@ def _collect_chunks(eval_result: Any) -> list[dict[str, Any]]:
     chunks: list[dict[str, Any]] = []
     seen: set[tuple[str | int | None, str]] = set()
 
-    # Try chunks field first (separate chunks file format)
-    chunks_list = None
-    if isinstance(eval_result, dict):
-        chunks_list = eval_result.get("chunks", [])
-    else:
-        chunks_list = getattr(eval_result, "chunks", None)
-    chunks_list = chunks_list or []
-
-    if chunks_list:
-        for chunk in chunks_list:
-            text = (
-                chunk.get("text", "")
-                if isinstance(chunk, dict)
-                else (getattr(chunk, "text", "") or "")
+    items = list(eval_result.context)
+    ranks = [eval_result.get_context_item_rank(item) for item in items]
+    if items and all(rank is not None for rank in ranks):
+        items = [
+            item
+            for _rank, item in sorted(
+                zip(ranks, items, strict=True),
+                key=lambda pair: pair[0],  # type: ignore[arg-type, return-value]
             )
-            text = text.strip()
-            if not text:
-                continue
-            chunk_id_raw = (
-                chunk.get("chunk_id")
-                if isinstance(chunk, dict)
-                else getattr(chunk, "chunk_id", None)
-            )
-            chunk_id = chunk_id_raw if isinstance(chunk_id_raw, str | int) else None
-            dedupe_key = (chunk_id, text)
-            if dedupe_key in seen:
-                continue
-            seen.add(dedupe_key)
-            chunks.append({
-                "chunk_text": text,
-                "chunk_id": chunk_id,
-            })
-        return chunks
+        ]
 
-    # Try retrieval_context format next (embedded in answers)
-    retrieval_context = None
-    if isinstance(eval_result, dict):
-        retrieval_context = eval_result.get("retrieval_context", [])
-    else:
-        retrieval_context = getattr(eval_result, "retrieval_context", None)
-    retrieval_context = retrieval_context or []
-
-    # retrieval_context may be a single doc dict ({"regions": [...]}) or a list of docs.
-    if isinstance(retrieval_context, dict):
-        retrieval_context = [retrieval_context]
-
-    for doc in retrieval_context:
-        regions = (
-            doc.get("regions", [])
-            if isinstance(doc, dict)
-            else (getattr(doc, "regions", []) or [])
-        )
-        for region in regions:
-            text = (
-                region.get("text", "")
-                if isinstance(region, dict)
-                else (getattr(region, "text", "") or "")
-            )
-            text = text.strip()
-            if not text:
-                continue
-            chunk_id_raw = (
-                region.get("chunk_id")
-                if isinstance(region, dict)
-                else getattr(region, "chunk_id", None)
-            )
-            chunk_id = chunk_id_raw if isinstance(chunk_id_raw, str | int) else None
-            dedupe_key = (chunk_id, text)
-            if dedupe_key in seen:
-                continue
-            seen.add(dedupe_key)
-            chunks.append({
-                "chunk_text": text,
-                "chunk_id": chunk_id,
-            })
+    for item in items:
+        text = eval_result.get_context_item_text(item).strip()
+        if not text:
+            continue
+        chunk_id = eval_result.get_context_item_id(item)
+        dedupe_key = (chunk_id, text)
+        if dedupe_key in seen:
+            continue
+        seen.add(dedupe_key)
+        chunks.append({
+            "chunk_text": text,
+            "chunk_id": chunk_id,
+        })
 
     return chunks
 
 
 async def _label_chunk_assertion(
-    llm_client: Any,
+    llm_client: LLMCompletion,
     assertion_text: str,
     chunk_text: str,
     system_prompt: str,
     user_prompt: str,
+    additional_call_args: dict[str, Any] | None = None,
 ) -> tuple[str, str]:
     """Judge a single (assertion, chunk) pair via LLM.
 
@@ -138,6 +95,7 @@ async def _label_chunk_assertion(
         chunk_text: Chunk/passage text
         system_prompt: System prompt template
         user_prompt: User prompt template
+        additional_call_args: Extra arguments forwarded to the LLM call.
 
     Returns
     -------
@@ -158,6 +116,7 @@ async def _label_chunk_assertion(
                 {"role": "system", "content": formatted_system},
                 {"role": "user", "content": formatted_user},
             ],
+            **(additional_call_args or {}),
         )
 
         # Parse response
@@ -171,7 +130,11 @@ async def _label_chunk_assertion(
 
 
 def _extract_grade(response_text: str) -> str:
-    """Extract grade from LLM response.
+    """Extract a grade from an LLM response.
+
+    The prompt asks for a numeric score (1 / 0.5 / 0), which is the primary
+    signal and is mapped to a grade. Free-form label parsing is kept as a
+    fallback for robustness when a model ignores the format.
 
     Args:
         response_text: LLM response text
@@ -180,27 +143,60 @@ def _extract_grade(response_text: str) -> str:
     -------
         One of full_support, partial_support, no_support
     """
-    response_lower = response_text.lower()
-    if "full" in response_lower and "support" in response_lower:
+    response_lower = response_text.strip().lower()
+    if not response_lower:
+        return ChunkAssertionGrade.NO_SUPPORT
+
+    # Primary signal: a numeric score of 1, 0.5, or 0. Check 0.5 first so the
+    # "0" in "0.5" is not matched as a standalone zero.
+    if re.search(r"(?<![\d.])0\.5(?![\d])", response_lower):
+        return ChunkAssertionGrade.PARTIAL_SUPPORT
+    if re.search(r"(?<![\d.])1(?:\.0+)?(?![\d.])", response_lower):
         return ChunkAssertionGrade.FULL_SUPPORT
+    if re.search(r"(?<![\d.])0(?:\.0+)?(?![\d.])", response_lower):
+        return ChunkAssertionGrade.NO_SUPPORT
+
+    labels = (
+        ChunkAssertionGrade.FULL_SUPPORT,
+        ChunkAssertionGrade.PARTIAL_SUPPORT,
+        ChunkAssertionGrade.NO_SUPPORT,
+    )
+
+    # Fallback: prefer an explicit label token.
+    first_token = response_lower.split(None, 1)[0].strip(":-*. ")
+    if first_token in labels:
+        return first_token
+
+    # Search for an explicit underscore label anywhere in the response.
+    for label in labels:
+        if label in response_lower:
+            return label
+
+    # Final fallback: handle space-separated phrasing. Check negatives and
+    # partial before full so "does not support" / "partial support" aren't
+    # misread.
+    if (
+        "no support" in response_lower
+        or "not support" in response_lower
+        or "unsupported" in response_lower
+    ):
+        return ChunkAssertionGrade.NO_SUPPORT
     if "partial" in response_lower and "support" in response_lower:
         return ChunkAssertionGrade.PARTIAL_SUPPORT
-    if "no" in response_lower and "support" in response_lower:
-        return ChunkAssertionGrade.NO_SUPPORT
-    # Default fallback
-    if "yes" in response_lower or "support" in response_lower:
+    if "full" in response_lower and "support" in response_lower:
         return ChunkAssertionGrade.FULL_SUPPORT
+
     return ChunkAssertionGrade.NO_SUPPORT
 
 
 async def run_assertion_eval_chunk_mode(
-    eval_results: list[Any],
+    eval_results: list[RetrievalResult],
     question_set: dict[str, Any],
     *,
-    llm_client: Any,
-    llm_config: Any,
+    llm_client: LLMCompletion,
+    llm_config: LLMConfig,
+    output_storage: Storage,
     pass_threshold: float = 0.5,
-    debug_dir: str | Path = ".debug",
     cache_path: Path | None = None,
     k_list: list[int] | None = None,
     system_prompt: str = "",
@@ -217,8 +213,8 @@ async def run_assertion_eval_chunk_mode(
         question_set: Question set dict with 'assertions' field
         llm_client: LLM client for judging
         llm_config: LLM configuration
+        output_storage: Storage backend for writing debug records (local or blob)
         pass_threshold: Score threshold for pass (0.5 = partial+ is passing)
-        debug_dir: Directory for debug output
         cache_path: Path to persistent cache (created if not specified)
         k_list: List of k values to report (e.g., [5, 10, 20, 50])
         system_prompt: System prompt template
@@ -246,14 +242,30 @@ async def run_assertion_eval_chunk_mode(
 
     # First pass: collect chunks and check cache
     assertions_list = question_set.get("assertions", [])
+
+    # Prefer aligning eval_results by question_id to avoid silent mismatches when
+    # the assertions file and chunks/answers file have different ordering. Fall
+    # back to positional alignment (with a warning) when ids are missing or do
+    # not line up, so datasets that rely on ordering still work.
+    eval_by_question_id: dict[str, Any] = {}
+    for row in eval_results:
+        eval_by_question_id[str(row.question_id)] = row
+
+    positional_fallbacks = 0
+
     for q_idx, q_row in enumerate(assertions_list):
         assertions = q_row.get("assertions", [])
         if not assertions:
             continue
 
-        chunks = (
-            _collect_chunks(eval_results[q_idx]) if q_idx < len(eval_results) else []
-        )
+        qid = q_row.get("question_id")
+        eval_row = eval_by_question_id.get(str(qid)) if qid is not None else None
+        if eval_row is None:
+            # No id match: fall back to positional alignment.
+            if qid is not None and eval_by_question_id:
+                positional_fallbacks += 1
+            eval_row = eval_results[q_idx] if q_idx < len(eval_results) else None
+        chunks = _collect_chunks(eval_row) if eval_row is not None else []
         if max_chunks_per_question is not None and max_chunks_per_question > 0:
             chunks = chunks[:max_chunks_per_question]
         retrieved_chunk_counts.append(len(chunks))
@@ -289,6 +301,14 @@ async def run_assertion_eval_chunk_mode(
                         rank,
                     ))
 
+    if positional_fallbacks:
+        rich_print(
+            f"  [yellow]WARNING: {positional_fallbacks} question(s) had a "
+            "question_id with no match in the chunks/answers file; falling back "
+            "to positional alignment. Verify the two files refer to the same "
+            "questions.[/yellow]"
+        )
+
     if total_checks:
         hit_pct = 100 * cache_hits / total_checks
         rich_print(
@@ -302,7 +322,7 @@ async def run_assertion_eval_chunk_mode(
         rich_print(
             f"  Running {len(uncached_work)} LLM judgements for uncached (assertion, chunk) pairs...",
         )
-        concurrent_requests = getattr(llm_config, "concurrent_requests", 10)
+        concurrent_requests = llm_config.concurrent_requests
 
         n_total = len(uncached_work)
         next_progress_threshold = max(1, n_total // 10)
@@ -321,6 +341,7 @@ async def run_assertion_eval_chunk_mode(
                     chunk_content,
                     system_prompt=system_prompt,
                     user_prompt=user_prompt,
+                    additional_call_args=llm_config.call_args,
                 )
             return work_item, grade, reasoning
 
@@ -371,15 +392,16 @@ async def run_assertion_eval_chunk_mode(
     total_assertions = len(per_chunk_grades)
     successful_calls = total_checks - call_errors
 
-    # Write debug records
-    Path(debug_dir).mkdir(parents=True, exist_ok=True)
+    # Write debug records (child storage creates the debug/ subdir for local FS
+    # and prefixes keys for blob storage).
+    debug_storage = output_storage.child("debug")
     for q_idx, q_row in enumerate(assertions_list):
         q_text = q_row.get("question_text", "")
         assertions = q_row.get("assertions", [])
         if not assertions:
             continue
         debug_record: dict[str, Any] = {
-            "question_id": q_idx,
+            "question_id": q_row.get("question_id", q_idx),
             "question_text": q_text,
             "assertions": [],
         }
@@ -395,10 +417,9 @@ async def run_assertion_eval_chunk_mode(
                 "passed": (best_score is not None and best_score >= pass_threshold),
                 "scored": best_score is not None,
             })
-        debug_file = Path(debug_dir) / f"q_{q_idx:04d}.json"
-        debug_file.parent.mkdir(parents=True, exist_ok=True)
-        with debug_file.open("w", encoding="utf-8") as f:
-            json.dump(debug_record, f, indent=2)
+        await debug_storage.set(
+            f"q_{q_idx:04d}.json", json.dumps(debug_record, indent=2)
+        )
 
     if k_list is None:
         k_list = []

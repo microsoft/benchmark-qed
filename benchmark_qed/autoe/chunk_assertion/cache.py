@@ -75,14 +75,20 @@ class ContentAddressedCache:
             self.new_count += 1
 
     def flush(self) -> None:
-        """Write all new entries to disk."""
+        """Write cache contents to disk.
+
+        Rewrites the full JSONL file atomically to avoid duplicating existing
+        entries when flushing incremental updates.
+        """
         if self.new_count == 0:
             return
-        with self.cache_path.open("a", encoding="utf-8") as f:
+        tmp_path = self.cache_path.with_suffix(self.cache_path.suffix + ".tmp")
+        with tmp_path.open("w", encoding="utf-8") as f:
             f.writelines(
                 json.dumps({"key": cache_key, "grade": grade}) + "\n"
                 for cache_key, grade in self._data.items()
             )
+        tmp_path.replace(self.cache_path)
         self.new_count = 0
 
 

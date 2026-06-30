@@ -12,7 +12,6 @@ from graphrag_storage.storage_factory import create_storage
 
 from benchmark_qed.autod.prompts import summarization
 from benchmark_qed.autoe.prompts import assertion as assertion_prompts
-from benchmark_qed.autoe.prompts import chunk_assertion as chunk_assertion_prompts
 from benchmark_qed.autoe.prompts import pairwise as pairwise_prompts
 from benchmark_qed.autoe.prompts import reference as reference_prompts
 from benchmark_qed.autoq.prompts import data_questions as data_questions_prompts
@@ -37,7 +36,12 @@ from benchmark_qed.autoq.prompts.data_questions import (
 from benchmark_qed.autoq.prompts.data_questions import (
     local_questions as data_local_prompts,
 )
-from benchmark_qed.cli.scaffold import copy_prompts, ensure_input_folder, write_env_file
+from benchmark_qed.cli.scaffold import (
+    CHUNK_ASSERTION_PROMPT_FILES,
+    copy_prompts,
+    ensure_input_folder,
+    write_env_file,
+)
 
 app: typer.Typer = typer.Typer(pretty_exceptions_show_locals=False)
 
@@ -288,17 +292,11 @@ AUTOE_CHUNK_ASSERTION_CONTENT = f"""## Storage Configuration
 ## Input Configuration
 generated:
   name: my_retriever  # A label for the retriever being evaluated (appears in the output).
-  # Provide your retrieved chunks using ONE of the two options below (comment out the other):
-  #
-  # Option A - separate chunks file: a JSON array of questions, each with a "chunks" list.
-  #   Records look like: {{"question_id", "question_text", "chunks": [{{"text", "rank", "chunk_id"}}]}}
-  chunks_path: input/chunks.json
-  #
-  # Option B - reuse an existing answers file: a JSON array of answers that embed their
-  #   retrieved chunks under "retrieval_context". The "answer" text is ignored; only the
-  #   chunks are scored. Records look like:
-  #   {{"question_id", "question_text", "answer", "retrieval_context": [{{"regions": [{{"text", "chunk_id"}}]}}]}}
-  # answer_base_path: input/answers.json
+  # Provide your retrieved chunks as a JSON array of RetrievalResult records. Each record:
+  #   {{"question_id", "text", "context": [{{"chunk_id", "text", "rank"}}]}}
+  # "rank" is optional; when absent chunks are assumed pre-sorted by relevance.
+  # This matches the standard retrieval-results schema (e.g. data_local_retrieval_results.json).
+  retrieval_path: input/retrieval.json
 assertions:
   assertions_path: input/assertions.json  # Path to assertions file
 
@@ -313,9 +311,9 @@ llm_config: {CHAT_MODEL_DEFAULTS}
 
 prompt_config:
   user_prompt:
-    prompt: prompts/chunk_assertion/user_prompt.txt
+    prompt: prompts/assertion/chunk_assertion_user_prompt.txt
   system_prompt:
-    prompt: prompts/chunk_assertion/system_prompt.txt"""
+    prompt: prompts/assertion/chunk_assertion_system_prompt.txt"""
 
 AUTOE_PAIRWISE_CONTENT = f"""## Storage Configuration
 {{STORAGE}}
@@ -526,11 +524,18 @@ def __copy_prompts(prompts_path: Path, output_path: Path) -> None:
     copy_prompts(prompts_path, output_path)
 
 
-def __get_prompt_files(prompts_path: Path) -> dict[str, str]:
-    """Get prompt file contents as a dict of {filename: content}."""
+def __get_prompt_files(
+    prompts_path: Path, filenames: set[str] | None = None
+) -> dict[str, str]:
+    """Get prompt file contents as a dict of {filename: content}.
+
+    When ``filenames`` is provided, only those files are returned.
+    """
     result = {}
     for prompt_file in prompts_path.iterdir():
         if prompt_file.is_file() and prompt_file.suffix == ".txt":
+            if filenames is not None and prompt_file.name not in filenames:
+                continue
             result[prompt_file.name] = prompt_file.read_text(encoding="utf-8")
     return result
 
@@ -691,8 +696,9 @@ def init(
                 Path(assertion_prompts.__file__).parent
             )
         case ConfigType.autoe_chunk_assertion:
-            prompt_mapping["prompts/chunk_assertion"] = __get_prompt_files(
-                Path(chunk_assertion_prompts.__file__).parent
+            prompt_mapping["prompts/assertion"] = __get_prompt_files(
+                Path(assertion_prompts.__file__).parent,
+                CHUNK_ASSERTION_PROMPT_FILES,
             )
 
     # Write to blob storage or local filesystem

@@ -263,85 +263,62 @@ You'll provide this data to benchmark-qed in one of two formats (see Step 2 belo
     mkdir ./input
     ```
     
-    You need:
-    - **Assertion file**: Download example data and place it in your input directory:
-      ```sh
-      uv run benchmark-qed data download example_answers input
-      uv run benchmark-qed data download AP_news input
-      ```
-      Update `assertions_path` in `settings.yaml` to point to your assertions file.
-    - **Chunks file**: Created by YOUR retrieval system. The tool always evaluates the
+    You need two files whose `question_id`s line up:
+    - **Assertion file**: The per-question assertions to check. Set via `assertions_path`
+      in `settings.yaml`.
+    - **Retrieval file**: Created by YOUR retrieval system. The tool always evaluates the
       retrieved **chunks** (not the synthesized answer) against your assertions. Provide
-      these chunks in **one of two mutually exclusive formats** — pick whichever matches
-      the data you already have, and set the corresponding key in `settings.yaml`:
-      - **Format A** → a dedicated chunks file, set via `chunks_path`.
-      - **Format B** → an existing answers file with chunks embedded under `retrieval_context`, set via `answer_base_path`.
+      these chunks as a JSON array of `RetrievalResult` records, set via `retrieval_path`
+      in `settings.yaml`.
 
-      Set only ONE of `chunks_path` / `answer_base_path`; leave the other commented out.
+    > **Note:** To try the pipeline end-to-end without wiring up your own retriever, download
+    > the bundled example data, which ships matching retrieval-results and assertions files
+    > (same `question_id`s) for both short- and long-context retrievers:
+    > ```sh
+    > uv run benchmark-qed data download example_answers input
+    > ```
+    > Then set, for example:
+    > ```yaml
+    > retrieval_path: input/vector_rag_short_context/data_local_retrieval_results.json
+    > assertions_path: input/data_local_assertions.json
+    > ```
+    >
+    > Swap `data_local` for `data_global` or `data_linked` (and pick
+    > `vector_rag_short_context` or `vector_rag_long_context`) to evaluate a different
+    > question set — just keep the retrieval and assertions files on the same set so their
+    > `question_id`s match. These are the same files used by the AutoE notebook example.
 
-    ### Input Format Option A: Separate chunks JSON file
+    ### Input Format: RetrievalResult JSON file
 
-    Use this (`chunks_path`) when you can export retrieval results on their own. Create a
-    JSON array (e.g., `input/chunks.json`, `input/vector_rag/retrieved_chunks.json`, or any
-    path you prefer) with the retrieved passages per question:
+    Create a JSON array (e.g., `input/retrieval.json`, or any path you prefer) where each
+    record holds a question and its retrieved `context`. Each context item carries a
+    `chunk_id`, `text`, and an optional `rank`. When `rank` is present on every item,
+    chunks are evaluated in rank order (top-k semantics); otherwise the chunks are assumed
+    to be already pre-sorted in decreasing order of relevance and list order is used.
     ```json
     [
       {
         "question_id": "q1",
-        "question_text": "What is photosynthesis?",
-        "chunks": [
+        "text": "What is photosynthesis?",
+        "context": [
           {
+            "chunk_id": "0",
             "text": "Photosynthesis is the process by which plants convert sunlight into chemical energy...",
-            "rank": 0,
-            "chunk_id": 0
+            "rank": 0
           },
           {
-            "text": "In photosynthesis, light energy is captured by chlorophyll molecules...",
-            "rank": 1,
-            "chunk_id": 5
+            "chunk_id": "5",
+            "text": "In photosynthesis, light energy is captured by chlorophyll molecules..."
           }
         ]
       }
     ]
     ```
-    
-    **Convert your RAG output to this format** using the conversion notebook: [notebooks/chunk_format_conversion/convert_to_chunks_format_a.ipynb](../notebooks/chunk_format_conversion/convert_to_chunks_format_a.ipynb)
 
-    ### Input Format Option B: Embedded in answers JSON
-
-    Use this (`answer_base_path`) when you **already have an answers file** that carries its
-    retrieval context. The top-level `answer` text is ignored — only the chunks under
-    `retrieval_context[].regions[]` are scored. Note that in this format `chunk_id` must be
-    an integer:
-    ```json
-    [
-      {
-        "question_id": "q1",
-        "question_text": "What is photosynthesis?",
-        "answer": "Photosynthesis is a process where plants convert sunlight...",
-        "retrieval_context": [
-          {
-            "regions": [
-              {
-                "text": "Photosynthesis is the process by which plants...",
-                "chunk_id": 0
-              }
-            ]
-          },
-          {
-            "regions": [
-              {
-                "text": "In photosynthesis, light energy is captured...",
-                "chunk_id": 5
-              }
-            ]
-          }
-        ]
-      }
-    ]
-    ```
-    
-    **Convert your RAG output to this format** using the conversion notebook: [notebooks/chunk_format_conversion/convert_to_chunks_format_b.ipynb](../notebooks/chunk_format_conversion/convert_to_chunks_format_b.ipynb)
+    This is the same schema produced by the retrieval-results examples (e.g. the bundled
+    `data_local_retrieval_results.json`), so those files work directly with no conversion.
+    See the **chunk-level assertion** example in the AutoE notebook
+    ([notebooks/autoe.ipynb](notebooks/autoe.ipynb)) for end-to-end usage.
 
 3. **Create a configuration file for chunk-level evaluation:**
     ```sh
@@ -360,35 +337,22 @@ You'll provide this data to benchmark-qed in one of two formats (see Step 2 belo
     This command creates two files in the `./chunk_assertion_test` directory:
     - `.env`: Contains environment variables. Open this file and replace `<API_KEY>` with your OpenAI or Azure API key.
     - `settings.yaml`: Contains pipeline settings, including:
-      - `chunks_path`: Path to your retrieved chunks JSON (for Format A above)
-      - `answer_base_path`: Path to answers with embedded retrieval_context (for Format B above)
+      - `retrieval_path`: Path to your retrieved chunks JSON (RetrievalResult format above)
       - `k_list`: K values to report coverage metrics (e.g., [5, 10, 20, 50])
       - `cache_dir`: Directory for persistent (assertion, chunk) cache
 
     The generated `settings.yaml` includes commented-out `input_storage` and `output_storage` sections for configuring Azure Blob Storage backends.
 
-4. **Update settings.yaml for your data format:**
+4. **Update settings.yaml for your data:**
 
     The generated template includes placeholder paths. Update them to match your actual file locations:
 
-    **For Format A (separate chunks file):**
     ```yaml
     generated:
       name: my_retriever
-      chunks_path: input/chunks.json  # Update to your chunks file path
-      # answer_base_path: (leave commented out for Format A)
+      retrieval_path: input/vector_rag_short_context/data_local_retrieval_results.json  # Update to your RetrievalResult file path
     assertions:
-      assertions_path: input/activity_global_assertions.json  # Update to your assertions file path
-    ```
-
-    **For Format B (embedded in answers):**
-    ```yaml
-    generated:
-      name: my_retriever
-      answer_base_path: input/answers.json  # Update to your answers file path
-      # chunks_path: (leave commented out for Format B)
-    assertions:
-      assertions_path: input/activity_global_assertions.json  # Update to your assertions file path
+      assertions_path: input/data_local_assertions.json  # Update to your assertions file path
     ```
 
 5. **Run the chunk-level assertion evaluation:**

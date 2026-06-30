@@ -28,6 +28,7 @@ from benchmark_qed.autoe.assertion import (
     summarize_hierarchical_by_question,
     summarize_standard_scores,
 )
+from benchmark_qed.autoe.chunk_assertion import run_assertion_eval_chunk_mode
 from benchmark_qed.autoe.config import (
     AssertionConfig,
     AssertionSignificanceConfig,
@@ -38,6 +39,10 @@ from benchmark_qed.autoe.config import (
     ReferenceConfig,
     RetrievalReferenceConfig,
     RetrievalScoresConfig,
+)
+from benchmark_qed.autoe.data_model.chunk_assertion import ChunkAssertionConfig
+from benchmark_qed.autoe.data_model.retrieval_result import (
+    load_retrieval_results_from_dicts,
 )
 from benchmark_qed.autoe.pairwise import analyze_criteria, get_pairwise_scores
 from benchmark_qed.autoe.reference import get_reference_scores
@@ -1782,13 +1787,13 @@ def _load_chunk_assertion_prompts(config: Any) -> tuple[str, str]:
             if prompt_path.exists():
                 user_prompt = prompt_path.read_text()
 
-    prompts_dir = Path(__file__).parent / "prompts" / "chunk_assertion"
+    prompts_dir = Path(__file__).parent / "prompts" / "assertion"
     if not system_prompt:
-        default_system_prompt = prompts_dir / "system_prompt.txt"
+        default_system_prompt = prompts_dir / "chunk_assertion_system_prompt.txt"
         if default_system_prompt.exists():
             system_prompt = default_system_prompt.read_text()
     if not user_prompt:
-        default_user_prompt = prompts_dir / "user_prompt.txt"
+        default_user_prompt = prompts_dir / "chunk_assertion_user_prompt.txt"
         if default_user_prompt.exists():
             user_prompt = default_user_prompt.read_text()
 
@@ -1831,15 +1836,15 @@ def chunk_assertion_scores(
     Config format (YAML):
         generated:
           name: vector_rag
-          chunks_path: input/chunks.json  # or embedded in answer_base_path
+          retrieval_path: input/retrieval.json  # RetrievalResult JSON array
         assertions:
           assertions_path: input/assertions.json
         k_list: [5, 10, 20, 50]
         pass_threshold: 0.5
         llm_config: ...
         prompt_config:
-          system_prompt: {prompt: prompts/chunk_assertion/system_prompt.txt}
-          user_prompt: {prompt: prompts/chunk_assertion/user_prompt.txt}
+          system_prompt: {prompt: prompts/assertion/chunk_assertion_system_prompt.txt}
+          user_prompt: {prompt: prompts/assertion/chunk_assertion_user_prompt.txt}
     """
     config_path = resolve_config_path(
         config_path,
@@ -1850,11 +1855,8 @@ def chunk_assertion_scores(
     if output is None:
         output = Path.cwd() / "output"
 
-    from benchmark_qed.autoe.chunk_assertion import run_assertion_eval_chunk_mode
-    from benchmark_qed.autoe.data_model.chunk_assertion import ChunkAssertionConfig
-
     config = load_config(ChunkAssertionConfig, config_path)
-    output.mkdir(parents=True, exist_ok=True)
+    output_storage = _build_output_storage(config.output_storage, output)
 
     llm_client = ModelFactory.create_chat_model(config.llm_config)
 
@@ -1868,7 +1870,9 @@ def chunk_assertion_scores(
 
     # Convert to list of dicts (preserving assertion structure: each record has "assertions" array)
     if isinstance(assertions_data, pd.DataFrame):
-        assertions_list = assertions_data.to_dict(orient="records")
+        assertions_list = cast(
+            list[dict[str, Any]], assertions_data.to_dict(orient="records")
+        )
     elif isinstance(assertions_data, list):
         assertions_list = assertions_data
     else:
@@ -1888,40 +1892,38 @@ def chunk_assertion_scores(
     total_assertions = sum(len(r.get("assertions", [])) for r in processed_assertions)
     rich_print(f"✓ Total assertions: {total_assertions}")
 
-    # Load chunks (support both embedded in answers and separate chunks file)
-    eval_results = []
-    if config.generated.chunks_path:
-        chunks_path = config.generated.chunks_path
-        chunks_storage, chunks_filename = _build_condition_storage(
-            config.input_storage, chunks_path, is_dir=False
-        )
-        eval_results = asyncio.run(_read_json_df(chunks_storage, chunks_filename))
-        eval_results = (
-            eval_results.to_dict(orient="records")
-            if isinstance(eval_results, pd.DataFrame)
-            else eval_results
-        )
-        rich_print(f"✓ Loaded {len(eval_results)} chunk records from {chunks_path}")
-        if config.max_chunks_per_question:
-            rich_print(
-                f"✓ Capping evaluation to the top {config.max_chunks_per_question} "
-                "chunks per question (max_chunks_per_question)"
-            )
-    elif config.generated.answer_base_path:
-        answer_path = config.generated.answer_base_path
-        answers_storage, answers_filename = _build_condition_storage(
-            config.input_storage, answer_path, is_dir=False
-        )
-        eval_results = asyncio.run(_read_json_df(answers_storage, answers_filename))
-        eval_results = (
-            eval_results.to_dict(orient="records")
-            if isinstance(eval_results, pd.DataFrame)
-            else eval_results
-        )
-        rich_print(f"✓ Loaded {len(eval_results)} answer records from {answer_path}")
-    else:
-        msg = "Must specify either chunks_path or answer_base_path"
+    # Load retrieval results (single RetrievalResult JSON format)
+    if not config.generated.retrieval_path:
+        msg = "Must specify generated.retrieval_path"
         raise typer.BadParameter(msg)
+    retrieval_path = config.generated.retrieval_path
+    retrieval_storage, retrieval_filename = _build_condition_storage(
+        config.input_storage, retrieval_path, is_dir=False
+    )
+    retrieval_raw = asyncio.run(_read_json_df(retrieval_storage, retrieval_filename))
+    retrieval_records = cast(
+        list[dict[str, Any]],
+        retrieval_raw.to_dict(orient="records")
+        if isinstance(retrieval_raw, pd.DataFrame)
+        else retrieval_raw,
+    )
+    # Matches the standard retrieval-results schema (e.g. the bundled
+    # data_local_retrieval_results.json): top-level "text" question field and
+    # context items with "chunk_id"/"text" plus an optional "rank".
+    eval_results = load_retrieval_results_from_dicts(
+        retrieval_records,
+        context_id_key="chunk_id",
+        context_text_key="text",
+        question_text_key="text",
+    )
+    rich_print(
+        f"✓ Loaded {len(eval_results)} retrieval records from {retrieval_path}"
+    )
+    if config.max_chunks_per_question:
+        rich_print(
+            f"✓ Capping evaluation to the top {config.max_chunks_per_question} "
+            "chunks per question (max_chunks_per_question)"
+        )
 
     # Load prompts (use defaults from package if not configured)
     system_prompt, user_prompt = _load_chunk_assertion_prompts(config)
@@ -1942,7 +1944,7 @@ def chunk_assertion_scores(
             llm_client=llm_client,
             llm_config=config.llm_config,
             pass_threshold=config.pass_threshold,
-            debug_dir=output / "debug",
+            output_storage=output_storage,
             cache_path=cache_path,
             k_list=config.k_list,
             system_prompt=system_prompt,
@@ -1980,27 +1982,24 @@ def chunk_assertion_scores(
         })
 
     # Save results
-    results_file = output / "chunk_assertion_results.json"
-    results_file.write_text(json.dumps(results_rows, indent=2))
-    try:
-        display_path = results_file.relative_to(Path.cwd())
-    except ValueError:
-        display_path = results_file.absolute()
-    rich_print(f"\nResults saved to {display_path}")
+    asyncio.run(
+        _write_json(output_storage, "chunk_assertion_results.json", results_rows)
+    )
+    rich_print(f"\nResults saved to {output / 'chunk_assertion_results.json'}")
 
     # Save per-query metrics for each k
     for k_label, summary in summaries.items():
         if summary.per_query_metrics:
-            per_query_file = output / f"per_query_metrics_{k_label}.json"
-            per_query_file.write_text(
-                json.dumps(
+            asyncio.run(
+                _write_json(
+                    output_storage,
+                    f"per_query_metrics_{k_label}.json",
                     {
                         "k_label": k_label,
                         "k": summary.k,
                         "metrics": ["coverage", "strict_coverage", "mean_score"],
                         "per_query": summary.per_query_metrics,
                     },
-                    indent=2,
                 )
             )
 

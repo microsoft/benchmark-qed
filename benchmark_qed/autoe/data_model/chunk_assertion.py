@@ -2,7 +2,7 @@
 """Data models for chunk-level assertion evaluation."""
 
 from pathlib import Path
-from typing import Any, ClassVar
+from typing import ClassVar
 
 from graphrag_storage.storage_config import StorageConfig
 from pydantic import BaseModel, Field
@@ -37,7 +37,7 @@ def grade_to_score(grade: str) -> float:
     return 0.0
 
 
-class EvalSummary:
+class EvalSummary(BaseModel):
     """Per-k chunk-eval summary with stable metric surface.
 
     Exposes Coverage, Strict Coverage, Coverage Strength, plus bookkeeping
@@ -45,48 +45,23 @@ class EvalSummary:
     persisted alongside for downstream analysis.
     """
 
-    def __init__(self, **kwargs: Any) -> None:
-        self.k: int | None = kwargs.get("k")
-        self.n_questions: int = kwargs.get("n_questions", 0)
-        self.n_assertions: int = kwargs.get("n_assertions", 0)
-        self.n_questions_total: int = kwargs.get("n_questions_total", self.n_questions)
-        self.n_assertions_total: int = kwargs.get(
-            "n_assertions_total", self.n_assertions
-        )
-        self.coverage: float = kwargs.get("coverage", 0.0)
-        self.strict_coverage: float = kwargs.get("strict_coverage", 0.0)
-        self.mean_score: float = kwargs.get("mean_score", 0.0)
-        self.mean_retrieved_chunks: float = kwargs.get("mean_retrieved_chunks", 0.0)
-        self.pass_rate: float = kwargs.get("pass_rate", 0.0)
-        self.total_calls: int = kwargs.get("total_calls", 0)
-        self.successful_calls: int = kwargs.get("successful_calls", 0)
-        self.failed_calls: int = kwargs.get("failed_calls", 0)
-        self.eval_mode: str = kwargs.get("eval_mode", "chunk")
-        # Per-question rows: {q_idx_str: {coverage, strict_coverage, mean_score}}
-        # Same shape across every k so single comparator can process them uniformly
-        self.per_query_metrics: dict[str, dict[str, float]] = kwargs.get(
-            "per_query_metrics", {}
-        )
-
-    def to_dict(self) -> dict[str, Any]:
-        """Convert to dictionary for JSON serialization."""
-        return {
-            "k": self.k,
-            "n_questions": self.n_questions,
-            "n_assertions": self.n_assertions,
-            "n_questions_total": self.n_questions_total,
-            "n_assertions_total": self.n_assertions_total,
-            "coverage": self.coverage,
-            "strict_coverage": self.strict_coverage,
-            "mean_score": self.mean_score,
-            "mean_retrieved_chunks": self.mean_retrieved_chunks,
-            "pass_rate": self.pass_rate,
-            "total_calls": self.total_calls,
-            "successful_calls": self.successful_calls,
-            "failed_calls": self.failed_calls,
-            "eval_mode": self.eval_mode,
-            "per_query_metrics": self.per_query_metrics,
-        }
+    k: int | None = Field(default=None)
+    n_questions: int = Field(default=0)
+    n_assertions: int = Field(default=0)
+    n_questions_total: int = Field(default=0)
+    n_assertions_total: int = Field(default=0)
+    coverage: float = Field(default=0.0)
+    strict_coverage: float = Field(default=0.0)
+    mean_score: float = Field(default=0.0)
+    mean_retrieved_chunks: float = Field(default=0.0)
+    pass_rate: float = Field(default=0.0)
+    total_calls: int = Field(default=0)
+    successful_calls: int = Field(default=0)
+    failed_calls: int = Field(default=0)
+    eval_mode: str = Field(default="chunk")
+    # Per-question rows: {q_idx_str: {coverage, strict_coverage, mean_score}}
+    # Same shape across every k so single comparator can process them uniformly
+    per_query_metrics: dict[str, dict[str, float]] = Field(default_factory=dict)
 
 
 class SystemPromptConfig(BaseModel):
@@ -111,11 +86,14 @@ class PromptConfig(BaseModel):
 
 
 class GeneratedConfig(BaseModel):
-    """Generated/answers configuration."""
+    """Generated/retrieval configuration."""
 
     name: str
-    answer_base_path: Path | None = Field(default=None)
-    chunks_path: Path | None = Field(default=None)
+    retrieval_path: Path | None = Field(
+        default=None,
+        description="Path to a JSON array of RetrievalResult records "
+        "(question_id, question_text, context[]).",
+    )
 
 
 class AssertionsConfig(BaseModel):

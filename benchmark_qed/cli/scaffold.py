@@ -5,13 +5,31 @@ from pathlib import Path
 
 import typer
 
+# Chunk-assertion prompts live in the shared `assertion` prompt folder (chunk
+# evaluation is just another assertion metric). Only these two files belong to
+# the chunk-assertion config scaffold.
+CHUNK_ASSERTION_PROMPT_FILES = {
+    "chunk_assertion_system_prompt.txt",
+    "chunk_assertion_user_prompt.txt",
+}
 
-def copy_prompts(prompts_path: Path, output_path: Path) -> None:
-    """Copy prompt template files from a source directory to an output directory."""
+
+def copy_prompts(
+    prompts_path: Path,
+    output_path: Path,
+    filenames: set[str] | None = None,
+) -> None:
+    """Copy prompt template files from a source directory to an output directory.
+
+    When ``filenames`` is provided, only those files are copied; otherwise all
+    ``.txt`` files in ``prompts_path`` are copied.
+    """
     if not output_path.exists():
         output_path.mkdir(parents=True, exist_ok=True)
     for prompt_file in prompts_path.iterdir():
         if prompt_file.is_file() and prompt_file.suffix == ".txt":
+            if filenames is not None and prompt_file.name not in filenames:
+                continue
             target_file = output_path / prompt_file.name
             target_file.write_text(
                 prompt_file.read_text(encoding="utf-8"), encoding="utf-8"

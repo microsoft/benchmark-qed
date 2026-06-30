@@ -441,8 +441,7 @@ def render_autoe_chunk_assertion_yaml(config: dict[str, Any]) -> str:
 ## Input Configuration
 generated:
   name: {gen["name"]}
-  answer_base_path: {gen.get("answer_base_path", "")}  # Optional: path to answers with embedded chunks
-  chunks_path: {gen.get("chunks_path", "input/chunks.json")}  # Path to retrieved chunks JSON
+  retrieval_path: {gen.get("retrieval_path", "input/retrieval.json")}  # RetrievalResult JSON array
 assertions:
   assertions_path: {assertions["assertions_path"]}
 
@@ -457,9 +456,9 @@ llm_config:
 
 prompt_config:
   user_prompt:
-    prompt: prompts/chunk_assertion/user_prompt.txt
+    prompt: prompts/assertion/chunk_assertion_user_prompt.txt
   system_prompt:
-    prompt: prompts/chunk_assertion/system_prompt.txt
+    prompt: prompts/assertion/chunk_assertion_system_prompt.txt
 """
 
 

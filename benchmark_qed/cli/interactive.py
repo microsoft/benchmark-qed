@@ -15,7 +15,6 @@ from rich.table import Table
 
 from benchmark_qed.autod.prompts import summarization
 from benchmark_qed.autoe.prompts import assertion as assertion_prompts
-from benchmark_qed.autoe.prompts import chunk_assertion as chunk_assertion_prompts
 from benchmark_qed.autoe.prompts import pairwise as pairwise_prompts
 from benchmark_qed.autoe.prompts import reference as reference_prompts
 from benchmark_qed.autoq.prompts import data_questions as data_questions_prompts
@@ -40,7 +39,12 @@ from benchmark_qed.autoq.prompts.data_questions import (
 from benchmark_qed.autoq.prompts.data_questions import (
     local_questions as data_local_prompts,
 )
-from benchmark_qed.cli.scaffold import copy_prompts, ensure_input_folder, write_env_file
+from benchmark_qed.cli.scaffold import (
+    CHUNK_ASSERTION_PROMPT_FILES,
+    copy_prompts,
+    ensure_input_folder,
+    write_env_file,
+)
 from benchmark_qed.cli.yaml_renderer import (
     render_autoe_assertion_yaml,
     render_autoe_chunk_assertion_yaml,
@@ -663,19 +667,15 @@ def build_autoe_chunk_assertion_config() -> dict[str, Any]:
     # LLM provider
     chat_provider = prompt_provider("chat")
 
-    # Generated condition (chunks)
-    rich_print("\n[bold]  Generated condition (chunks)[/bold]")
+    # Generated condition (retrieval results)
+    rich_print("\n[bold]  Generated condition (retrieval results)[/bold]")
     name = typer.prompt("  name", default="vector_rag")
-    answer_base_path = typer.prompt(
-        "  answer_base_path (optional, for embedded chunks)", default=""
-    )
-    chunks_path = typer.prompt(
-        "  chunks_path (or embedded in answers)", default="input/chunks.json"
+    retrieval_path = typer.prompt(
+        "  retrieval_path (RetrievalResult JSON)", default="input/retrieval.json"
     )
     generated = {
         "name": name,
-        "answer_base_path": answer_base_path,
-        "chunks_path": chunks_path,
+        "retrieval_path": retrieval_path,
     }
 
     # Assertions path
@@ -771,8 +771,9 @@ def _copy_prompts_for_config(config_type: str, prompts_folder: Path) -> None:
             copy_prompts(Path(assertion_prompts.__file__).parent, prompts_folder)
         case "autoe_chunk_assertion":
             copy_prompts(
-                Path(chunk_assertion_prompts.__file__).parent,
-                prompts_folder / "chunk_assertion",
+                Path(assertion_prompts.__file__).parent,
+                prompts_folder / "assertion",
+                CHUNK_ASSERTION_PROMPT_FILES,
             )
 
 

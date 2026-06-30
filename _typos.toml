@@ -2,8 +2,6 @@
 extend-exclude = [
     "datasets/*",
     "docs/notebooks/example_answers/*",
-    # Generated chunk-conversion outputs contain raw source text (news articles)
-    "docs/notebooks/chunk_format_conversion/*.json",
 ]
 
 [default.extend-words]
