@@ -36,12 +36,12 @@ class TestComputeCacheKey:
 
     def test_distinguishes_prompts(self) -> None:
         """Different prompt templates produce different keys."""
-        assert compute_cache_key(
-            "a", "b", system_prompt="s1"
-        ) != compute_cache_key("a", "b", system_prompt="s2")
-        assert compute_cache_key(
-            "a", "b", user_prompt="u1"
-        ) != compute_cache_key("a", "b", user_prompt="u2")
+        assert compute_cache_key("a", "b", system_prompt="s1") != compute_cache_key(
+            "a", "b", system_prompt="s2"
+        )
+        assert compute_cache_key("a", "b", user_prompt="u1") != compute_cache_key(
+            "a", "b", user_prompt="u2"
+        )
 
 
 class TestContentAddressedCache:

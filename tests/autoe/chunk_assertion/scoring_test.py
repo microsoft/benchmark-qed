@@ -72,7 +72,8 @@ async def _run(
         question_set,
         llm_client=cast("LLMCompletion", object()),
         llm_config=cast(
-            "LLMConfig", SimpleNamespace(concurrent_requests=2, call_args={})
+            "LLMConfig",
+            SimpleNamespace(concurrent_requests=2, call_args={}, model="test-model"),
         ),
         output_storage=FileStorage(base_dir=str(output_dir)),
         pass_threshold=0.5,
