@@ -7,6 +7,7 @@ import hashlib
 import json
 import logging
 from pathlib import Path
+from typing import Any
 
 log: logging.Logger = logging.getLogger(__name__)
 
@@ -14,8 +15,10 @@ log: logging.Logger = logging.getLogger(__name__)
 class ContentAddressedCache:
     r"""Persistent SHA256-based cache for (assertion, chunk) -> grade.
 
-    Key is computed as SHA256(assertion_text + '\x00' + chunk_content),
-    ensuring stable cache hits across runs with identical assertions and chunks.
+    Key is computed by :func:`compute_cache_key`, which hashes the assertion,
+    chunk, judge model configuration, and prompt templates so that changes to
+    the model or prompts invalidate stale entries while identical configurations
+    reuse cached grades across runs.
     """
 
     def __init__(self, cache_path: Path | str) -> None:
@@ -92,16 +95,41 @@ class ContentAddressedCache:
         self.new_count = 0
 
 
-def compute_cache_key(assertion_text: str, chunk_content: str) -> str:
-    """Compute stable SHA256 cache key for (assertion, chunk) pair.
+def compute_cache_key(
+    assertion_text: str,
+    chunk_content: str,
+    *,
+    model: str = "",
+    call_args: dict[str, Any] | None = None,
+    system_prompt: str = "",
+    user_prompt: str = "",
+) -> str:
+    """Compute stable SHA256 cache key for an (assertion, chunk) judgement.
+
+    The judge model identifier, call arguments (for example temperature and
+    seed), and the prompt templates are folded into the key so that changing
+    the model or prompts invalidates stale cache entries instead of returning
+    grades produced under a different configuration.
 
     Args:
         assertion_text: Assertion statement
         chunk_content: Chunk/passage text
+        model: Judge model identifier (for example ``gpt-4.1``)
+        call_args: Additional LLM call arguments (for example temperature, seed)
+        system_prompt: System prompt template used for judging
+        user_prompt: User prompt template used for judging
 
     Returns
     -------
         SHA256 hexdigest
     """
-    payload = f"{assertion_text}\x00{chunk_content}"
-    return hashlib.sha256(payload.encode()).hexdigest()
+    payload = {
+        "assertion": assertion_text,
+        "chunk": chunk_content,
+        "model": model,
+        "call_args": call_args or {},
+        "system_prompt": system_prompt,
+        "user_prompt": user_prompt,
+    }
+    content_str = json.dumps(payload, sort_keys=True, default=str)
+    return hashlib.sha256(content_str.encode()).hexdigest()

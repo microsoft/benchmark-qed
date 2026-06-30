@@ -22,6 +22,27 @@ class TestComputeCacheKey:
         assert compute_cache_key("a", "b") != compute_cache_key("b", "a")
         assert compute_cache_key("a", "b") != compute_cache_key("a", "c")
 
+    def test_distinguishes_model(self) -> None:
+        """Different judge models produce different keys."""
+        assert compute_cache_key("a", "b", model="gpt-4.1") != compute_cache_key(
+            "a", "b", model="gpt-4o"
+        )
+
+    def test_distinguishes_call_args(self) -> None:
+        """Different call arguments produce different keys."""
+        assert compute_cache_key(
+            "a", "b", call_args={"temperature": 0.0}
+        ) != compute_cache_key("a", "b", call_args={"temperature": 1.0})
+
+    def test_distinguishes_prompts(self) -> None:
+        """Different prompt templates produce different keys."""
+        assert compute_cache_key(
+            "a", "b", system_prompt="s1"
+        ) != compute_cache_key("a", "b", system_prompt="s2")
+        assert compute_cache_key(
+            "a", "b", user_prompt="u1"
+        ) != compute_cache_key("a", "b", user_prompt="u2")
+
 
 class TestContentAddressedCache:
     """Tests for ContentAddressedCache persistence semantics."""

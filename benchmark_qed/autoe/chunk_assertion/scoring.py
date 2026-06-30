@@ -281,7 +281,14 @@ async def run_assertion_eval_chunk_mode(
             for rank, chunk in enumerate(chunks):
                 chunk_content = str(chunk["chunk_text"])
                 total_checks += 1
-                cache_key = compute_cache_key(assertion_text, chunk_content)
+                cache_key = compute_cache_key(
+                    assertion_text,
+                    chunk_content,
+                    model=llm_config.model,
+                    call_args=llm_config.call_args,
+                    system_prompt=system_prompt,
+                    user_prompt=user_prompt,
+                )
                 cached_grade = cache.get(cache_key)
                 if cached_grade is not None:
                     cache_hits += 1
