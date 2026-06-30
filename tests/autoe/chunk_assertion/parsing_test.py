@@ -2,6 +2,8 @@
 # Licensed under the MIT License.
 """Tests for chunk-assertion response parsing and chunk collection."""
 
+from typing import Any
+
 import pytest
 
 from benchmark_qed.autoe.chunk_assertion.scoring import (
@@ -39,8 +41,14 @@ class TestExtractGrade:
             ("0", ChunkAssertionGrade.NO_SUPPORT),
             ("1.0", ChunkAssertionGrade.FULL_SUPPORT),
             ("0.0", ChunkAssertionGrade.NO_SUPPORT),
-            ("Score: 0.5\nReasoning: partly relevant", ChunkAssertionGrade.PARTIAL_SUPPORT),
-            ("1 - the chunk states the claim directly", ChunkAssertionGrade.FULL_SUPPORT),
+            (
+                "Score: 0.5\nReasoning: partly relevant",
+                ChunkAssertionGrade.PARTIAL_SUPPORT,
+            ),
+            (
+                "1 - the chunk states the claim directly",
+                ChunkAssertionGrade.FULL_SUPPORT,
+            ),
             ("0 - unrelated", ChunkAssertionGrade.NO_SUPPORT),
         ],
     )
@@ -67,9 +75,7 @@ class TestExtractGrade:
 class TestCollectChunks:
     """Tests for _collect_chunks flattening and ordering."""
 
-    def _result(
-        self, context: list[dict[str, object]], question_id: str = "q1"
-    ) -> RetrievalResult:
+    def _result(self, context: list[Any], question_id: str = "q1") -> RetrievalResult:
         return RetrievalResult(
             question_id=question_id,
             question_text="question",

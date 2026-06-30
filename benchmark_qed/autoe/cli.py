@@ -1916,9 +1916,7 @@ def chunk_assertion_scores(
         context_text_key="text",
         question_text_key="text",
     )
-    rich_print(
-        f"✓ Loaded {len(eval_results)} retrieval records from {retrieval_path}"
-    )
+    rich_print(f"✓ Loaded {len(eval_results)} retrieval records from {retrieval_path}")
     if config.max_chunks_per_question:
         rich_print(
             f"✓ Capping evaluation to the top {config.max_chunks_per_question} "

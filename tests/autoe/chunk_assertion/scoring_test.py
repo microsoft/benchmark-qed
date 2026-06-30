@@ -8,7 +8,7 @@ across runs, with the LLM call mocked out.
 
 from pathlib import Path
 from types import SimpleNamespace
-from typing import Any
+from typing import TYPE_CHECKING, Any, cast
 
 import pytest
 from graphrag_storage.file_storage import FileStorage
@@ -18,12 +18,10 @@ from benchmark_qed.autoe.data_model.retrieval_result import (
     load_retrieval_results_from_dicts,
 )
 
+if TYPE_CHECKING:
+    from graphrag_llm.completion import LLMCompletion
 
-class _FakeResponse:
-    """Minimal stand-in for an LLM completion response."""
-
-    def __init__(self, content: str) -> None:
-        self.content = content
+    from benchmark_qed.config.llm_config import LLMConfig
 
 
 @pytest.fixture
@@ -46,10 +44,10 @@ def patched_chat(
 ) -> None:
     """Patch benchmark_qed.llm.chat to return grades from grade_by_chunk."""
 
-    async def _fake_chat(_llm: Any, messages: list[dict[str, str]], **_: Any) -> Any:
+    async def _fake_chat(_llm: Any, messages: list[dict[str, str]], **_: Any) -> Any:  # noqa: RUF029
         call_counter[0] += 1
         chunk_text = messages[-1]["content"]
-        return _FakeResponse(grade_by_chunk.get(chunk_text, "no_support"))
+        return SimpleNamespace(content=grade_by_chunk.get(chunk_text, "no_support"))
 
     monkeypatch.setattr("benchmark_qed.llm.chat", _fake_chat)
 
@@ -72,8 +70,10 @@ async def _run(
             question_text_key="text",
         ),
         question_set,
-        llm_client=object(),
-        llm_config=SimpleNamespace(concurrent_requests=2, call_args={}),
+        llm_client=cast("LLMCompletion", object()),
+        llm_config=cast(
+            "LLMConfig", SimpleNamespace(concurrent_requests=2, call_args={})
+        ),
         output_storage=FileStorage(base_dir=str(output_dir)),
         pass_threshold=0.5,
         cache_path=cache_path,
@@ -88,9 +88,11 @@ async def test_at_k_truncation_respects_rank_order(
     tmp_path: Path, grade_by_chunk: dict[str, str]
 ) -> None:
     """@k uses the top-ranked chunks even when the JSON list is unordered."""
-    grade_by_chunk.update(
-        {"rank1": "no_support", "rank2": "no_support", "rank3": "full_support"}
-    )
+    grade_by_chunk.update({
+        "rank1": "no_support",
+        "rank2": "no_support",
+        "rank3": "full_support",
+    })
     eval_results = [
         {
             "question_id": "q1",
@@ -104,12 +106,20 @@ async def test_at_k_truncation_respects_rank_order(
     ]
     question_set = {
         "assertions": [
-            {"question_id": "q1", "question_text": "Q", "assertions": [{"statement": "S"}]}
+            {
+                "question_id": "q1",
+                "question_text": "Q",
+                "assertions": [{"statement": "S"}],
+            }
         ]
     }
 
     summaries = await _run(
-        eval_results, question_set, tmp_path / "out", tmp_path / "cache.jsonl", k_list=[1]
+        eval_results,
+        question_set,
+        tmp_path / "out",
+        tmp_path / "cache.jsonl",
+        k_list=[1],
     )
 
     # Across all chunks the best is the rank-3 full_support chunk.
@@ -141,8 +151,16 @@ async def test_alignment_by_question_id(
     ]
     question_set = {
         "assertions": [
-            {"question_id": "q1", "question_text": "Q1", "assertions": [{"statement": "S1"}]},
-            {"question_id": "q2", "question_text": "Q2", "assertions": [{"statement": "S2"}]},
+            {
+                "question_id": "q1",
+                "question_text": "Q1",
+                "assertions": [{"statement": "S1"}],
+            },
+            {
+                "question_id": "q2",
+                "question_text": "Q2",
+                "assertions": [{"statement": "S2"}],
+            },
         ]
     }
 
@@ -174,7 +192,11 @@ async def test_second_run_uses_cache(
     ]
     question_set = {
         "assertions": [
-            {"question_id": "q1", "question_text": "Q", "assertions": [{"statement": "S"}]}
+            {
+                "question_id": "q1",
+                "question_text": "Q",
+                "assertions": [{"statement": "S"}],
+            }
         ]
     }
     cache_path = tmp_path / "cache.jsonl"

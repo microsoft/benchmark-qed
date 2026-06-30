@@ -58,7 +58,7 @@ def _collect_chunks(eval_result: RetrievalResult) -> list[dict[str, Any]]:
             item
             for _rank, item in sorted(
                 zip(ranks, items, strict=True),
-                key=lambda pair: pair[0],  # type: ignore[arg-type, return-value]
+                key=operator.itemgetter(0),  # type: ignore[arg-type, return-value]
             )
         ]
 
