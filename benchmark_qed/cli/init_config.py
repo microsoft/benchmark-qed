@@ -36,7 +36,12 @@ from benchmark_qed.autoq.prompts.data_questions import (
 from benchmark_qed.autoq.prompts.data_questions import (
     local_questions as data_local_prompts,
 )
-from benchmark_qed.cli.scaffold import copy_prompts, ensure_input_folder, write_env_file
+from benchmark_qed.cli.scaffold import (
+    CHUNK_ASSERTION_PROMPT_FILES,
+    copy_prompts,
+    ensure_input_folder,
+    write_env_file,
+)
 
 app: typer.Typer = typer.Typer(pretty_exceptions_show_locals=False)
 
@@ -48,6 +53,7 @@ class ConfigType(StrEnum):
     autoe_pairwise = "autoe_pairwise"
     autoe_reference = "autoe_reference"
     autoe_assertion = "autoe_assertion"
+    autoe_chunk_assertion = "autoe_chunk_assertion"
 
 
 CHAT_MODEL_DEFAULTS = """
@@ -281,6 +287,34 @@ prompt_config:
   system_prompt:
     prompt: prompts/assertion_system_prompt.txt"""
 
+AUTOE_CHUNK_ASSERTION_CONTENT = f"""## Storage Configuration
+{{STORAGE}}
+## Input Configuration
+generated:
+  name: my_retriever  # A label for the retriever being evaluated (appears in the output).
+  # Provide your retrieved chunks as a JSON array of RetrievalResult records. Each record:
+  #   {{"question_id", "text", "context": [{{"chunk_id", "text", "rank"}}]}}
+  # "rank" is optional; when absent chunks are assumed pre-sorted by relevance.
+  # This matches the standard retrieval-results schema (e.g. data_local_retrieval_results.json).
+  retrieval_path: input/retrieval.json
+assertions:
+  assertions_path: input/assertions.json  # Path to assertions file
+
+## Chunk Evaluation Configuration
+k_list: [5, 10, 20, 50]  # Report coverage metrics at these k values (plus 'all')
+pass_threshold: 0.5  # Score threshold: 0.5 = partial_support or full_support counts as pass
+# max_chunks_per_question: 20  # Optional: cap chunks evaluated per question (keeps highest-ranked). Reduces LLM calls during testing. Omit to evaluate all.
+cache_dir: .benchmark_qed_cache/chunk_assertions  # Cache directory for (assertion, chunk) pairs
+
+## LLM Configuration
+llm_config: {CHAT_MODEL_DEFAULTS}
+
+prompt_config:
+  user_prompt:
+    prompt: prompts/assertion/chunk_assertion_user_prompt.txt
+  system_prompt:
+    prompt: prompts/assertion/chunk_assertion_system_prompt.txt"""
+
 AUTOE_PAIRWISE_CONTENT = f"""## Storage Configuration
 {{STORAGE}}
 ## Input Configuration
@@ -400,6 +434,8 @@ def _get_content(config_type: ConfigType) -> str:
             return AUTOE_REFERENCE_CONTENT
         case ConfigType.autoe_assertion:
             return AUTOE_ASSERTION_CONTENT
+        case ConfigType.autoe_chunk_assertion:
+            return AUTOE_CHUNK_ASSERTION_CONTENT
 
 
 def _render_content(
@@ -488,11 +524,18 @@ def __copy_prompts(prompts_path: Path, output_path: Path) -> None:
     copy_prompts(prompts_path, output_path)
 
 
-def __get_prompt_files(prompts_path: Path) -> dict[str, str]:
-    """Get prompt file contents as a dict of {filename: content}."""
+def __get_prompt_files(
+    prompts_path: Path, filenames: set[str] | None = None
+) -> dict[str, str]:
+    """Get prompt file contents as a dict of {filename: content}.
+
+    When ``filenames`` is provided, only those files are returned.
+    """
     result = {}
     for prompt_file in prompts_path.iterdir():
         if prompt_file.is_file() and prompt_file.suffix == ".txt":
+            if filenames is not None and prompt_file.name not in filenames:
+                continue
             result[prompt_file.name] = prompt_file.read_text(encoding="utf-8")
     return result
 
@@ -651,6 +694,11 @@ def init(
         case ConfigType.autoe_assertion:
             prompt_mapping["prompts"] = __get_prompt_files(
                 Path(assertion_prompts.__file__).parent
+            )
+        case ConfigType.autoe_chunk_assertion:
+            prompt_mapping["prompts/assertion"] = __get_prompt_files(
+                Path(assertion_prompts.__file__).parent,
+                CHUNK_ASSERTION_PROMPT_FILES,
             )
 
     # Write to blob storage or local filesystem

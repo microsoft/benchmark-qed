@@ -15,7 +15,7 @@ class RetrievalResult(BaseModel):
     question_text: str = Field(
         description="The text of the question to assess relevance against."
     )
-    context: list[TextUnit | dict[str, str]] = Field(
+    context: list[TextUnit | dict[str, Any]] = Field(
         description="List of text units or dictionaries representing the context."
     )
     context_id_key: str = Field(
@@ -25,6 +25,10 @@ class RetrievalResult(BaseModel):
     context_text_key: str = Field(
         default="source_text",
         description="Key name for the text field in dictionary context items.",
+    )
+    context_rank_key: str = Field(
+        default="rank",
+        description="Key name for the optional retrieval rank in context items.",
     )
 
     model_config: ClassVar[ConfigDict] = ConfigDict(frozen=True)
@@ -61,26 +65,40 @@ class RetrievalResult(BaseModel):
         """Get the number of items in the context."""
         return len(self.context)
 
-    def get_context_item_id(self, item: TextUnit | dict[str, str]) -> str:
+    def get_context_item_id(self, item: TextUnit | dict[str, Any]) -> str:
         """Extract the ID from a context item."""
         if isinstance(item, TextUnit):
             return item.id
-        return item[self.context_id_key]
+        return str(item[self.context_id_key])
 
-    def get_context_item_text(self, item: TextUnit | dict[str, str]) -> str:
+    def get_context_item_text(self, item: TextUnit | dict[str, Any]) -> str:
         """Extract the text from a context item."""
         if isinstance(item, TextUnit):
             return item.text
-        return item[self.context_text_key]
+        return str(item[self.context_text_key])
+
+    def get_context_item_rank(self, item: TextUnit | dict[str, Any]) -> int | None:
+        """Extract the optional retrieval rank from a context item, if present."""
+        if isinstance(item, TextUnit):
+            rank = (item.attributes or {}).get(self.context_rank_key)
+        else:
+            rank = item.get(self.context_rank_key)
+        if rank is None:
+            return None
+        try:
+            return int(rank)
+        except (TypeError, ValueError):
+            return None
 
     @classmethod
     def from_question(
         cls,
         question_id: str,
         question_text: str,
-        context: list[TextUnit | dict[str, str]],
+        context: list[TextUnit | dict[str, Any]],
         context_id_key: str = "id",
         context_text_key: str = "text",
+        context_rank_key: str = "rank",
     ) -> "RetrievalResult":
         """Create RetrievalResult from question parameters."""
         return cls(
@@ -89,6 +107,7 @@ class RetrievalResult(BaseModel):
             context=context,
             context_id_key=context_id_key,
             context_text_key=context_text_key,
+            context_rank_key=context_rank_key,
         )
 
 
@@ -99,6 +118,7 @@ def load_retrieval_results_from_dicts(
     question_id_key: str = "question_id",
     question_text_key: str = "question_text",
     context_key: str = "context",
+    context_rank_key: str = "rank",
     auto_transform_context: bool = False,
 ) -> list[RetrievalResult]:
     """Load a list of RetrievalResult objects from a list of dictionaries.
@@ -111,6 +131,7 @@ def load_retrieval_results_from_dicts(
         question_id_key: Key name for the question ID field in input dictionaries.
         question_text_key: Key name for the question text field in input dictionaries.
         context_key: Key name for the context list field in input dictionaries.
+        context_rank_key: Key name for the optional retrieval rank in context items.
         auto_transform_context: If True, automatically convert dict context items to TextUnit objects.
 
     Returns
@@ -189,6 +210,7 @@ def load_retrieval_results_from_dicts(
                 context=context,
                 context_id_key=context_id_key,
                 context_text_key=context_text_key,
+                context_rank_key=context_rank_key,
             )
             retrieval_results.append(retrieval_result)
         except KeyError as e:
