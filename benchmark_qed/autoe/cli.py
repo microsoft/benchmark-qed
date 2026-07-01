@@ -1764,6 +1764,22 @@ def _normalize_assertion_record(record: dict[str, Any]) -> dict[str, Any]:
     return record
 
 
+def _read_prompt_spec(prompt_spec: Any) -> str:
+    """Read a prompt from a spec's ``prompt``/``template`` path, if it is a file.
+
+    Returns an empty string when no path is configured or the path does not
+    point to an existing file, so that callers fall back to package defaults
+    instead of crashing on an empty or directory path.
+    """
+    path_value = prompt_spec.prompt or prompt_spec.template
+    if not path_value:
+        return ""
+    prompt_path = Path(path_value)
+    if prompt_path.is_file():
+        return prompt_path.read_text()
+    return ""
+
+
 def _load_chunk_assertion_prompts(config: Any) -> tuple[str, str]:
     """Load system and user prompts, falling back to package defaults."""
     system_prompt = ""
@@ -1771,21 +1787,9 @@ def _load_chunk_assertion_prompts(config: Any) -> tuple[str, str]:
 
     if config.prompt_config:
         if config.prompt_config.system_prompt:
-            prompt_path = Path(
-                config.prompt_config.system_prompt.prompt
-                or config.prompt_config.system_prompt.template
-                or ""
-            )
-            if prompt_path.exists():
-                system_prompt = prompt_path.read_text()
+            system_prompt = _read_prompt_spec(config.prompt_config.system_prompt)
         if config.prompt_config.user_prompt:
-            prompt_path = Path(
-                config.prompt_config.user_prompt.prompt
-                or config.prompt_config.user_prompt.template
-                or ""
-            )
-            if prompt_path.exists():
-                user_prompt = prompt_path.read_text()
+            user_prompt = _read_prompt_spec(config.prompt_config.user_prompt)
 
     prompts_dir = Path(__file__).parent / "prompts" / "assertion"
     if not system_prompt:

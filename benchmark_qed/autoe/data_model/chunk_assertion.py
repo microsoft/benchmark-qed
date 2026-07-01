@@ -107,7 +107,7 @@ class ChunkAssertionConfig(BaseModel):
 
     generated: GeneratedConfig
     assertions: AssertionsConfig
-    k_list: list[int] = Field(default=[5, 10, 20, 50])
+    k_list: list[int] = Field(default_factory=lambda: [5, 10, 20, 50])
     pass_threshold: float = Field(default=0.5)
     max_chunks_per_question: int | None = Field(
         default=None,
