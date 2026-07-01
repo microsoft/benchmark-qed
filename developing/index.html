@@ -510,46 +510,46 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#running-with-blob-stored-configuration" class="md-nav__link">
+  <a href="#scoring-rag-answers-against-assertions" class="md-nav__link">
     <span class="md-ellipsis">
-      Running with Blob-Stored Configuration
+      Scoring RAG answers against assertions
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Running with Blob-Stored Configuration">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#evaluating-retrieved-chunks-against-assertions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Evaluating retrieved chunks against assertions
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Evaluating retrieved chunks against assertions">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#blob-uri-format" class="md-nav__link">
+  <a href="#prerequisites-where-do-chunks-come-from" class="md-nav__link">
     <span class="md-ellipsis">
-      Blob URI format
+      Prerequisites: Where do chunks come from?
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#authentication-options" class="md-nav__link">
+  <a href="#step-by-step-guide" class="md-nav__link">
     <span class="md-ellipsis">
-      Authentication options
+      Step-by-step guide
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#autoq-example" class="md-nav__link">
+  <a href="#input-format-retrievalresult-json-file" class="md-nav__link">
     <span class="md-ellipsis">
-      AutoQ example
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#autoe-examples" class="md-nav__link">
-    <span class="md-ellipsis">
-      AutoE examples
+      Input Format: RetrievalResult JSON file
     </span>
   </a>
   
@@ -1028,46 +1028,46 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#running-with-blob-stored-configuration" class="md-nav__link">
+  <a href="#scoring-rag-answers-against-assertions" class="md-nav__link">
     <span class="md-ellipsis">
-      Running with Blob-Stored Configuration
+      Scoring RAG answers against assertions
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Running with Blob-Stored Configuration">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#evaluating-retrieved-chunks-against-assertions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Evaluating retrieved chunks against assertions
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Evaluating retrieved chunks against assertions">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#blob-uri-format" class="md-nav__link">
+  <a href="#prerequisites-where-do-chunks-come-from" class="md-nav__link">
     <span class="md-ellipsis">
-      Blob URI format
+      Prerequisites: Where do chunks come from?
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#authentication-options" class="md-nav__link">
+  <a href="#step-by-step-guide" class="md-nav__link">
     <span class="md-ellipsis">
-      Authentication options
+      Step-by-step guide
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#autoq-example" class="md-nav__link">
+  <a href="#input-format-retrievalresult-json-file" class="md-nav__link">
     <span class="md-ellipsis">
-      AutoQ example
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#autoe-examples" class="md-nav__link">
-    <span class="md-ellipsis">
-      AutoE examples
+      Input Format: RetrievalResult JSON file
     </span>
   </a>
   
@@ -1279,43 +1279,183 @@ This creates two files in the <code>./reference_test</code> directory:
 The results will be saved in the <code>output</code> directory.</p>
 </li>
 </ol>
+<h2 id="scoring-rag-answers-against-assertions">Scoring RAG answers against assertions</h2>
+<p>Follow these steps to evaluate RAG answers against per-question assertions using answer-level (LLM-as-a-judge) evaluation:</p>
+<ol>
+<li>
+<p><strong>Set up your project directory:</strong>
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>mkdir<span class="w"> </span>-p<span class="w"> </span>./local/assertion_test
+<a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a><span class="nb">cd</span><span class="w"> </span>./local/assertion_test
+</code></pre></div></p>
+</li>
+<li>
+<p><strong>Create an <code>input</code> folder and add your data:</strong>
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>mkdir<span class="w"> </span>./input
+</code></pre></div>
+    Copy your RAG answers and assertion files into the <code>input</code> directory. To get started, you can use the example RAG answers and generated assertions from the AP news dataset:
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>uv<span class="w"> </span>run<span class="w"> </span>benchmark-qed<span class="w"> </span>data<span class="w"> </span>download<span class="w"> </span>example_answers<span class="w"> </span>input
+<a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a>uv<span class="w"> </span>run<span class="w"> </span>benchmark-qed<span class="w"> </span>data<span class="w"> </span>download<span class="w"> </span>AP_news<span class="w"> </span>input
+</code></pre></div>
+    This downloads example answers and assertion files. You can also use your own assertions JSON files or download directly from Azure Blob Storage. See the <a href="../datasets/">Datasets documentation</a> for storage options.</p>
+</li>
+<li>
+<p><strong>Create a configuration file for assertion evaluation:</strong>
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a>uv<span class="w"> </span>run<span class="w"> </span>benchmark-qed<span class="w"> </span>config<span class="w"> </span>init<span class="w"> </span>autoe_assertion<span class="w"> </span>.
+</code></pre></div>
+    This is the local-filesystem variant.</p>
+<p>Alternative blob variant (choose this instead of the local command above; do not run both):
+<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>uv<span class="w"> </span>run<span class="w"> </span>benchmark-qed<span class="w"> </span>config<span class="w"> </span>init<span class="w"> </span>autoe_assertion<span class="w"> </span>.<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a><span class="w">    </span>--storage-type<span class="w"> </span>blob<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a><span class="w">    </span>--container-name<span class="w"> </span>my-container<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-27-4" name="__codelineno-27-4" href="#__codelineno-27-4"></a><span class="w">    </span>--account-url<span class="w"> </span>https://&lt;account&gt;.blob.core.windows.net<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-27-5" name="__codelineno-27-5" href="#__codelineno-27-5"></a><span class="w">    </span>--base-dir<span class="w"> </span>assertion_test
+</code></pre></div>
+This command creates two files in the <code>./assertion_test</code> directory:
+- <code>.env</code>: Contains environment variables for the assertion evaluation pipeline. Open this file and replace <code>&lt;API_KEY&gt;</code> with your OpenAI or Azure API key.
+- <code>settings.yaml</code>: Contains pipeline settings, which you can modify as needed.</p>
+<p>The generated <code>settings.yaml</code> includes commented-out <code>input_storage</code> and <code>output_storage</code> sections for configuring Azure Blob Storage backends.</p>
+</li>
+<li>
+<p><strong>Run the assertion evaluation:</strong>
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a>uv<span class="w"> </span>run<span class="w"> </span>benchmark-qed<span class="w"> </span>autoe<span class="w"> </span>assertion-scores<span class="w"> </span>settings.yaml<span class="w"> </span>output
+</code></pre></div>
+    This is the local-filesystem variant.</p>
+<p>Alternative blob-stored config variant (choose this instead of the local command above; do not run both):
+<div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a>uv<span class="w"> </span>run<span class="w"> </span>benchmark-qed<span class="w"> </span>autoe<span class="w"> </span>assertion-scores<span class="w"> </span>blob://my-container/assertion_test/settings.yaml<span class="w"> </span>output<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-29-2" name="__codelineno-29-2" href="#__codelineno-29-2"></a><span class="w">    </span>--account-url<span class="w"> </span>https://&lt;account&gt;.blob.core.windows.net
+</code></pre></div>
+The results will be saved in the <code>output</code> directory, including per-assertion scores and per-question summaries.</p>
+</li>
+</ol>
+<h2 id="evaluating-retrieved-chunks-against-assertions">Evaluating retrieved chunks against assertions</h2>
+<p>Chunk-level evaluation scores how well retrieved passages (chunks) support assertions, without waiting for answer synthesis. This is useful for:
+- <strong>Fast retrieval evaluation</strong>: Assess retrieval quality before generating complete answers
+- <strong>Efficient iteration</strong>: Fix retriever settings without re-running expensive answer generation
+- <strong>Persistent caching</strong>: Avoid re-evaluating same (assertion, chunk) pairs across multiple runs</p>
+<h3 id="prerequisites-where-do-chunks-come-from">Prerequisites: Where do chunks come from?</h3>
+<p><strong>Chunks</strong> are the retrieved passages from your RAG system. You obtain them by running your retriever (e.g., vector search, BM25, hybrid) on each question. Chunks should include:
+- The passage text
+- The chunk index (chunk_id)
+- The retrieval rank</p>
+<p>You'll provide this data to benchmark-qed in one of two formats (see Step 2 below).</p>
+<h3 id="step-by-step-guide">Step-by-step guide</h3>
+<ol>
+<li>
+<p><strong>Set up your project directory:</strong>
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a>mkdir<span class="w"> </span>-p<span class="w"> </span>./local/chunk_assertion_test
+<a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a><span class="nb">cd</span><span class="w"> </span>./local/chunk_assertion_test
+</code></pre></div></p>
+</li>
+<li>
+<p><strong>Prepare your input data:</strong>
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a>mkdir<span class="w"> </span>./input
+</code></pre></div></p>
+<p>You need two files whose <code>question_id</code>s line up:
+- <strong>Assertion file</strong>: The per-question assertions to check. Set via <code>assertions_path</code>
+  in <code>settings.yaml</code>.
+- <strong>Retrieval file</strong>: Created by YOUR retrieval system. The tool always evaluates the
+  retrieved <strong>chunks</strong> (not the synthesized answer) against your assertions. Provide
+  these chunks as a JSON array of <code>RetrievalResult</code> records, set via <code>retrieval_path</code>
+  in <code>settings.yaml</code>.</p>
+<blockquote>
+<p><strong>Note:</strong> To try the pipeline end-to-end without wiring up your own retriever, download
+the bundled example data, which ships matching retrieval-results and assertions files
+(same <code>question_id</code>s) for both short- and long-context retrievers:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a>uv<span class="w"> </span>run<span class="w"> </span>benchmark-qed<span class="w"> </span>data<span class="w"> </span>download<span class="w"> </span>example_answers<span class="w"> </span>input
+</code></pre></div>
+Then set, for example:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a><span class="nt">retrieval_path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">input/vector_rag_short_context/data_local_retrieval_results.json</span>
+<a id="__codelineno-33-2" name="__codelineno-33-2" href="#__codelineno-33-2"></a><span class="nt">assertions_path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">input/data_local_assertions.json</span>
+</code></pre></div></p>
+<p>Swap <code>data_local</code> for <code>data_global</code> or <code>data_linked</code> (and pick
+<code>vector_rag_short_context</code> or <code>vector_rag_long_context</code>) to evaluate a different
+question set — just keep the retrieval and assertions files on the same set so their
+<code>question_id</code>s match. These are the same files used by the AutoE notebook example.</p>
+</blockquote>
+<h3 id="input-format-retrievalresult-json-file">Input Format: RetrievalResult JSON file</h3>
+<p>Create a JSON array (e.g., <code>input/retrieval.json</code>, or any path you prefer) where each
+record holds a question and its retrieved <code>context</code>. Each context item carries a
+<code>chunk_id</code>, <code>text</code>, and an optional <code>rank</code>. When <code>rank</code> is present on every item,
+chunks are evaluated in rank order (top-k semantics); otherwise the chunks are assumed
+to be already pre-sorted in decreasing order of relevance and list order is used.
+<div class="highlight"><pre><span></span><code><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a><span class="p">[</span>
+<a id="__codelineno-34-2" name="__codelineno-34-2" href="#__codelineno-34-2"></a><span class="w">  </span><span class="p">{</span>
+<a id="__codelineno-34-3" name="__codelineno-34-3" href="#__codelineno-34-3"></a><span class="w">    </span><span class="nt">&quot;question_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;q1&quot;</span><span class="p">,</span>
+<a id="__codelineno-34-4" name="__codelineno-34-4" href="#__codelineno-34-4"></a><span class="w">    </span><span class="nt">&quot;text&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;What is photosynthesis?&quot;</span><span class="p">,</span>
+<a id="__codelineno-34-5" name="__codelineno-34-5" href="#__codelineno-34-5"></a><span class="w">    </span><span class="nt">&quot;context&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<a id="__codelineno-34-6" name="__codelineno-34-6" href="#__codelineno-34-6"></a><span class="w">      </span><span class="p">{</span>
+<a id="__codelineno-34-7" name="__codelineno-34-7" href="#__codelineno-34-7"></a><span class="w">        </span><span class="nt">&quot;chunk_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0&quot;</span><span class="p">,</span>
+<a id="__codelineno-34-8" name="__codelineno-34-8" href="#__codelineno-34-8"></a><span class="w">        </span><span class="nt">&quot;text&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Photosynthesis is the process by which plants convert sunlight into chemical energy...&quot;</span><span class="p">,</span>
+<a id="__codelineno-34-9" name="__codelineno-34-9" href="#__codelineno-34-9"></a><span class="w">        </span><span class="nt">&quot;rank&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span>
+<a id="__codelineno-34-10" name="__codelineno-34-10" href="#__codelineno-34-10"></a><span class="w">      </span><span class="p">},</span>
+<a id="__codelineno-34-11" name="__codelineno-34-11" href="#__codelineno-34-11"></a><span class="w">      </span><span class="p">{</span>
+<a id="__codelineno-34-12" name="__codelineno-34-12" href="#__codelineno-34-12"></a><span class="w">        </span><span class="nt">&quot;chunk_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;5&quot;</span><span class="p">,</span>
+<a id="__codelineno-34-13" name="__codelineno-34-13" href="#__codelineno-34-13"></a><span class="w">        </span><span class="nt">&quot;text&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;In photosynthesis, light energy is captured by chlorophyll molecules...&quot;</span>
+<a id="__codelineno-34-14" name="__codelineno-34-14" href="#__codelineno-34-14"></a><span class="w">      </span><span class="p">}</span>
+<a id="__codelineno-34-15" name="__codelineno-34-15" href="#__codelineno-34-15"></a><span class="w">    </span><span class="p">]</span>
+<a id="__codelineno-34-16" name="__codelineno-34-16" href="#__codelineno-34-16"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-34-17" name="__codelineno-34-17" href="#__codelineno-34-17"></a><span class="p">]</span>
+</code></pre></div></p>
+<p>This is the same schema produced by the retrieval-results examples (e.g. the bundled
+<code>data_local_retrieval_results.json</code>), so those files work directly with no conversion.
+See the <strong>chunk-level assertion</strong> example in the AutoE notebook
+(<a href="../notebooks/autoe/">notebooks/autoe.ipynb</a>) for end-to-end usage.</p>
+</li>
+<li>
+<p><strong>Create a configuration file for chunk-level evaluation:</strong>
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a>uv<span class="w"> </span>run<span class="w"> </span>benchmark-qed<span class="w"> </span>config<span class="w"> </span>init<span class="w"> </span>autoe_chunk_assertion<span class="w"> </span>.
+</code></pre></div>
+    This is the local-filesystem variant.</p>
+<p>Alternative blob variant (choose this instead of the local command above; do not run both):
+<div class="highlight"><pre><span></span><code><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a>uv<span class="w"> </span>run<span class="w"> </span>benchmark-qed<span class="w"> </span>config<span class="w"> </span>init<span class="w"> </span>autoe_chunk_assertion<span class="w"> </span>.<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-36-2" name="__codelineno-36-2" href="#__codelineno-36-2"></a><span class="w">    </span>--storage-type<span class="w"> </span>blob<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-36-3" name="__codelineno-36-3" href="#__codelineno-36-3"></a><span class="w">    </span>--container-name<span class="w"> </span>my-container<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-36-4" name="__codelineno-36-4" href="#__codelineno-36-4"></a><span class="w">    </span>--account-url<span class="w"> </span>https://&lt;account&gt;.blob.core.windows.net<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-36-5" name="__codelineno-36-5" href="#__codelineno-36-5"></a><span class="w">    </span>--base-dir<span class="w"> </span>chunk_assertion_test
+</code></pre></div>
+This command creates two files in the <code>./chunk_assertion_test</code> directory:
+- <code>.env</code>: Contains environment variables. Open this file and replace <code>&lt;API_KEY&gt;</code> with your OpenAI or Azure API key.
+- <code>settings.yaml</code>: Contains pipeline settings, including:
+  - <code>retrieval_path</code>: Path to your retrieved chunks JSON (RetrievalResult format above)
+  - <code>k_list</code>: K values to report coverage metrics (e.g., [5, 10, 20, 50])
+  - <code>cache_dir</code>: Directory for persistent (assertion, chunk) cache</p>
+<p>The generated <code>settings.yaml</code> includes commented-out <code>input_storage</code> and <code>output_storage</code> sections for configuring Azure Blob Storage backends.</p>
+</li>
+<li>
+<p><strong>Update settings.yaml for your data:</strong></p>
+<p>The generated template includes placeholder paths. Update them to match your actual file locations:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a><span class="nt">generated</span><span class="p">:</span>
+<a id="__codelineno-37-2" name="__codelineno-37-2" href="#__codelineno-37-2"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">my_retriever</span>
+<a id="__codelineno-37-3" name="__codelineno-37-3" href="#__codelineno-37-3"></a><span class="w">  </span><span class="nt">retrieval_path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">input/vector_rag_short_context/data_local_retrieval_results.json</span><span class="w">  </span><span class="c1"># Update to your RetrievalResult file path</span>
+<a id="__codelineno-37-4" name="__codelineno-37-4" href="#__codelineno-37-4"></a><span class="nt">assertions</span><span class="p">:</span>
+<a id="__codelineno-37-5" name="__codelineno-37-5" href="#__codelineno-37-5"></a><span class="w">  </span><span class="nt">assertions_path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">input/data_local_assertions.json</span><span class="w">  </span><span class="c1"># Update to your assertions file path</span>
+</code></pre></div>
+</li>
+<li>
+<p><strong>Run the chunk-level assertion evaluation:</strong>
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a>uv<span class="w"> </span>run<span class="w"> </span>benchmark-qed<span class="w"> </span>autoe<span class="w"> </span>chunk-assertion-scores<span class="w"> </span>settings.yaml<span class="w"> </span>output
+</code></pre></div>
+    This is the local-filesystem variant.</p>
+<p>Alternative blob-stored config variant (choose this instead of the local command above; do not run both):
+<div class="highlight"><pre><span></span><code><a id="__codelineno-39-1" name="__codelineno-39-1" href="#__codelineno-39-1"></a>uv<span class="w"> </span>run<span class="w"> </span>benchmark-qed<span class="w"> </span>autoe<span class="w"> </span>chunk-assertion-scores<span class="w"> </span>blob://my-container/chunk_assertion_test/settings.yaml<span class="w"> </span>output<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-39-2" name="__codelineno-39-2" href="#__codelineno-39-2"></a><span class="w">    </span>--account-url<span class="w"> </span>https://&lt;account&gt;.blob.core.windows.net
+</code></pre></div>
+The results will be saved in the <code>output</code> directory, including:
+- <code>chunk_assertion_results.json</code>: Coverage metrics at each k
+- <code>per_query_metrics_*.json</code>: Per-question metrics for paired significance testing
+- <code>debug/</code>: Detailed per-question evaluation records</p>
+</li>
+</ol>
+<p><strong>Chunk-level evaluation benefits:</strong>
+- <strong>Efficient caching</strong>: Results cached at (assertion, chunk) granularity using SHA256 content-addressing
+- <strong>Multi-k reporting</strong>: Coverage, Strict Coverage, and Coverage Strength metrics at each k value
+- <strong>Reusable cache</strong>: Re-run with different k values or retriever configs with zero LLM cost on overlapping chunks
+- <strong>Coverage metrics</strong>:
+  - Coverage: % of assertions with full or partial support in top-k chunks
+  - Strict Coverage: % of assertions with full support only
+  - Coverage Strength: Average score across all assertions</p>
 <p>For detailed instructions on configuring and running AutoE subcommands, please refer to the <a href="../cli/autoe/">AutoE CLI Documentation</a>.</p>
 <p>To learn how to use AutoE programmatically, please see the <a href="../notebooks/autoe/">AutoE Notebook Example</a>.</p>
-<h2 id="running-with-blob-stored-configuration">Running with Blob-Stored Configuration</h2>
-<p>If your <code>settings.yaml</code> is stored in Azure Blob Storage, pass a <code>blob://</code> URI as the config path instead of a local file path.</p>
-<h3 id="blob-uri-format">Blob URI format</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>blob://&lt;container-name&gt;/&lt;optional-base-dir&gt;/settings.yaml
-</code></pre></div>
-<p>If you initialized config with <code>--base-dir</code>, include that same prefix in the URI.</p>
-<h3 id="authentication-options">Authentication options</h3>
-<p>For commands that read config from <code>blob://</code>, pass one of:</p>
-<ul>
-<li><code>--account-url https://&lt;account&gt;.blob.core.windows.net</code> (managed identity)</li>
-<li><code>--connection-string "$AZURE_STORAGE_CONNECTION_STRING"</code></li>
-</ul>
-<p>If neither flag is provided, auth falls back to environment variables:</p>
-<ul>
-<li><code>AZURE_STORAGE_ACCOUNT_URL</code></li>
-<li><code>AZURE_STORAGE_CONNECTION_STRING</code></li>
-</ul>
-<h3 id="autoq-example">AutoQ example</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>uv<span class="w"> </span>run<span class="w"> </span>benchmark-qed<span class="w"> </span>autoq<span class="w"> </span>blob://my-container/autoq_test/settings.yaml<span class="w"> </span>output<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a><span class="w">    </span>--account-url<span class="w"> </span>https://&lt;account&gt;.blob.core.windows.net
-</code></pre></div>
-<h3 id="autoe-examples">AutoE examples</h3>
-<p>Pairwise:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>uv<span class="w"> </span>run<span class="w"> </span>benchmark-qed<span class="w"> </span>autoe<span class="w"> </span>pairwise-scores<span class="w"> </span>blob://my-container/pairwise_test/settings.yaml<span class="w"> </span>output<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a><span class="w">    </span>--account-url<span class="w"> </span>https://&lt;account&gt;.blob.core.windows.net
-</code></pre></div>
-<p>Reference:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a>uv<span class="w"> </span>run<span class="w"> </span>benchmark-qed<span class="w"> </span>autoe<span class="w"> </span>reference-scores<span class="w"> </span>blob://my-container/reference_test/settings.yaml<span class="w"> </span>output<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a><span class="w">    </span>--account-url<span class="w"> </span>https://&lt;account&gt;.blob.core.windows.net
-</code></pre></div>
-<p>Assertion:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>uv<span class="w"> </span>run<span class="w"> </span>benchmark-qed<span class="w"> </span>autoe<span class="w"> </span>assertion-scores<span class="w"> </span>blob://my-container/assertion_test/settings.yaml<span class="w"> </span>output<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a><span class="w">    </span>--account-url<span class="w"> </span>https://&lt;account&gt;.blob.core.windows.net
-</code></pre></div>
-<p>When a blob config is loaded, the CLI downloads <code>settings.yaml</code> and sibling files (such as <code>.env</code> and <code>prompts/</code>) under the same prefix into a temporary local directory before execution.</p>
 <h2 id="diving-deeper">Diving Deeper</h2>
 <p>To explore the query synthesis workflow in detail, please see the <a href="../cli/autoq/">AutoQ CLI Documentation</a> for command-line usage and the <a href="../notebooks/autoq/">AutoQ Notebook Example</a> for a step-by-step programmatic guide.</p>
 <p>For a deeper understanding of AutoE evaluation pipelines, please refer to the <a href="../cli/autoe/">AutoE CLI Documentation</a> for available commands and the <a href="../notebooks/autoe/">AutoE Notebook Example</a> for hands-on examples.</p>

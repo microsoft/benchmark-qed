@@ -2490,6 +2490,212 @@ print_df(sig_summary, "Significance Test Summary")</div>
 </div>
 </div>
 </div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=51a744d1">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="chunk-level-assertion-scoring">Chunk-level Assertion Scoring<a class="anchor-link" href="#chunk-level-assertion-scoring">¶</a></h3><p>Instead of scoring a synthesized answer, chunk-level assertion scoring evaluates each <strong>retrieved chunk</strong> directly against the per-question assertions and reports coverage at each <code>k</code>. This isolates retrieval quality from generation quality.</p>
+<p>The input is a standard retrieval-results file using the same <code>data_*_retrieval_results.json</code> schema produced for the retrieval metrics, so <strong>no conversion is required</strong>:</p>
+<ul>
+<li>Each record has a <code>question_id</code>, a <code>text</code> question field, and a <code>context</code> list.</li>
+<li>Each context item has a <code>chunk_id</code>, <code>text</code>, and an optional <code>rank</code>. When <code>rank</code> is present on every item, chunks are evaluated in rank order (top-k semantics); otherwise the chunks are assumed to be already pre-sorted in decreasing order of relevance.</li>
+</ul>
+<p>Three metrics are reported at each <code>k</code>:</p>
+<ul>
+<li><strong>Coverage</strong>: macro-averaged pass rate (full + partial support)</li>
+<li><strong>Strict Coverage</strong>: macro-averaged full-support rate only</li>
+<li><strong>Coverage Strength</strong>: mean score across assertions</li>
+</ul>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=24bb2bf7">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="CodeMirror cm-s-jupyter">
+<div class="zeroclipboard-container">
+<clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-21">
+<div>
+<span class="notice" hidden="">Copied!</span>
+<svg aria-hidden="true" class="clipboard-copy-icon" data-view-component="true" height="20" version="1.1" viewbox="0 0 16 16" width="20">
+<path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z" fill="currentColor" fill-rule="evenodd"></path>
+<path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z" fill="currentColor" fill-rule="evenodd"></path>
+</svg>
+</div>
+</clipboard-copy>
+</div>
+<div class="highlight-ipynb hl-python"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">asyncio</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">graphrag_storage.file_storage</span><span class="w"> </span><span class="kn">import</span> <span class="n">FileStorage</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">benchmark_qed.autoe.chunk_assertion</span><span class="w"> </span><span class="kn">import</span> <span class="n">run_assertion_eval_chunk_mode</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">benchmark_qed.autoe.data_model.retrieval_result</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">load_retrieval_results_from_dicts</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">benchmark_qed.autoe.prompts</span><span class="w"> </span><span class="kn">import</span> <span class="n">assertion</span> <span class="k">as</span> <span class="n">chunk_assertion_prompts</span>
+
+<span class="c1"># Retrieval results: standard schema {question_id, text, context: [{chunk_id, text, rank?}]}.</span>
+<span class="c1"># rank is optional; when absent the chunks are assumed to be pre-sorted by relevance.</span>
+<span class="n">generated_rag</span> <span class="o">=</span> <span class="s2">"vector_rag_long_context"</span>
+<span class="n">retrieval_path</span> <span class="o">=</span> <span class="n">input_dir</span> <span class="o">/</span> <span class="n">generated_rag</span> <span class="o">/</span> <span class="s2">"data_global_retrieval_results.json"</span>
+<span class="n">retrieval_records</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">retrieval_path</span><span class="o">.</span><span class="n">read_text</span><span class="p">(</span><span class="n">encoding</span><span class="o">=</span><span class="s2">"utf-8"</span><span class="p">))</span>
+<span class="n">eval_results</span> <span class="o">=</span> <span class="n">load_retrieval_results_from_dicts</span><span class="p">(</span>
+    <span class="n">retrieval_records</span><span class="p">,</span>
+    <span class="n">context_id_key</span><span class="o">=</span><span class="s2">"chunk_id"</span><span class="p">,</span>
+    <span class="n">context_text_key</span><span class="o">=</span><span class="s2">"text"</span><span class="p">,</span>
+    <span class="n">question_text_key</span><span class="o">=</span><span class="s2">"text"</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># Assertions: each record carries an "assertions" list of {"statement": ...}.</span>
+<span class="n">assertions_records</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span>
+    <span class="p">(</span><span class="n">input_dir</span> <span class="o">/</span> <span class="s2">"data_global_assertions.json"</span><span class="p">)</span><span class="o">.</span><span class="n">read_text</span><span class="p">(</span><span class="n">encoding</span><span class="o">=</span><span class="s2">"utf-8"</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="n">question_set</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"assertions"</span><span class="p">:</span> <span class="n">assertions_records</span><span class="p">}</span>
+
+<span class="c1"># Default chunk-assertion prompts shipped with the package.</span>
+<span class="n">prompts_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">chunk_assertion_prompts</span><span class="o">.</span><span class="vm">__file__</span><span class="p">)</span><span class="o">.</span><span class="n">parent</span>
+<span class="n">system_prompt</span> <span class="o">=</span> <span class="p">(</span><span class="n">prompts_dir</span> <span class="o">/</span> <span class="s2">"chunk_assertion_system_prompt.txt"</span><span class="p">)</span><span class="o">.</span><span class="n">read_text</span><span class="p">(</span>
+    <span class="n">encoding</span><span class="o">=</span><span class="s2">"utf-8"</span>
+<span class="p">)</span>
+<span class="n">user_prompt</span> <span class="o">=</span> <span class="p">(</span><span class="n">prompts_dir</span> <span class="o">/</span> <span class="s2">"chunk_assertion_user_prompt.txt"</span><span class="p">)</span><span class="o">.</span><span class="n">read_text</span><span class="p">(</span>
+    <span class="n">encoding</span><span class="o">=</span><span class="s2">"utf-8"</span>
+<span class="p">)</span>
+
+<span class="n">chunk_output_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">"./output/chunk_assertion_scores"</span><span class="p">)</span>
+<span class="n">chunk_output_dir</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">chunk_output_storage</span> <span class="o">=</span> <span class="n">FileStorage</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">chunk_output_dir</span><span class="p">))</span>
+
+<span class="n">summaries</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+    <span class="n">run_assertion_eval_chunk_mode</span><span class="p">(</span>
+        <span class="n">eval_results</span><span class="p">,</span>
+        <span class="n">question_set</span><span class="p">,</span>
+        <span class="n">llm_client</span><span class="o">=</span><span class="n">llm_client</span><span class="p">,</span>
+        <span class="n">llm_config</span><span class="o">=</span><span class="n">llm_config</span><span class="p">,</span>
+        <span class="n">output_storage</span><span class="o">=</span><span class="n">chunk_output_storage</span><span class="p">,</span>
+        <span class="n">pass_threshold</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+        <span class="n">k_list</span><span class="o">=</span><span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">50</span><span class="p">],</span>
+        <span class="n">system_prompt</span><span class="o">=</span><span class="n">system_prompt</span><span class="p">,</span>
+        <span class="n">user_prompt</span><span class="o">=</span><span class="n">user_prompt</span><span class="p">,</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+<div class="clipboard-copy-txt" id="cell-21">import asyncio
+import json
+
+from graphrag_storage.file_storage import FileStorage
+
+from benchmark_qed.autoe.chunk_assertion import run_assertion_eval_chunk_mode
+from benchmark_qed.autoe.data_model.retrieval_result import (
+    load_retrieval_results_from_dicts,
+)
+from benchmark_qed.autoe.prompts import assertion as chunk_assertion_prompts
+
+# Retrieval results: standard schema {question_id, text, context: [{chunk_id, text, rank?}]}.
+# rank is optional; when absent the chunks are assumed to be pre-sorted by relevance.
+generated_rag = "vector_rag_long_context"
+retrieval_path = input_dir / generated_rag / "data_global_retrieval_results.json"
+retrieval_records = json.loads(retrieval_path.read_text(encoding="utf-8"))
+eval_results = load_retrieval_results_from_dicts(
+    retrieval_records,
+    context_id_key="chunk_id",
+    context_text_key="text",
+    question_text_key="text",
+)
+
+# Assertions: each record carries an "assertions" list of {"statement": ...}.
+assertions_records = json.loads(
+    (input_dir / "data_global_assertions.json").read_text(encoding="utf-8")
+)
+question_set = {"assertions": assertions_records}
+
+# Default chunk-assertion prompts shipped with the package.
+prompts_dir = Path(chunk_assertion_prompts.__file__).parent
+system_prompt = (prompts_dir / "chunk_assertion_system_prompt.txt").read_text(
+    encoding="utf-8"
+)
+user_prompt = (prompts_dir / "chunk_assertion_user_prompt.txt").read_text(
+    encoding="utf-8"
+)
+
+chunk_output_dir = Path("./output/chunk_assertion_scores")
+chunk_output_dir.mkdir(parents=True, exist_ok=True)
+chunk_output_storage = FileStorage(str(chunk_output_dir))
+
+summaries = asyncio.run(
+    run_assertion_eval_chunk_mode(
+        eval_results,
+        question_set,
+        llm_client=llm_client,
+        llm_config=llm_config,
+        output_storage=chunk_output_storage,
+        pass_threshold=0.5,
+        k_list=[5, 10, 20, 50],
+        system_prompt=system_prompt,
+        user_prompt=user_prompt,
+    )
+)</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=98e8cfaa">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="CodeMirror cm-s-jupyter">
+<div class="zeroclipboard-container">
+<clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-22">
+<div>
+<span class="notice" hidden="">Copied!</span>
+<svg aria-hidden="true" class="clipboard-copy-icon" data-view-component="true" height="20" version="1.1" viewbox="0 0 16 16" width="20">
+<path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z" fill="currentColor" fill-rule="evenodd"></path>
+<path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z" fill="currentColor" fill-rule="evenodd"></path>
+</svg>
+</div>
+</clipboard-copy>
+</div>
+<div class="highlight-ipynb hl-python"><pre><span></span><span class="c1"># Summarize coverage metrics at each k</span>
+<span class="n">chunk_results_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span>
+    <span class="p">{</span>
+        <span class="s2">"k"</span><span class="p">:</span> <span class="n">label</span><span class="p">,</span>
+        <span class="s2">"coverage"</span><span class="p">:</span> <span class="n">summary</span><span class="o">.</span><span class="n">coverage</span><span class="p">,</span>
+        <span class="s2">"strict_coverage"</span><span class="p">:</span> <span class="n">summary</span><span class="o">.</span><span class="n">strict_coverage</span><span class="p">,</span>
+        <span class="s2">"coverage_strength"</span><span class="p">:</span> <span class="n">summary</span><span class="o">.</span><span class="n">mean_score</span><span class="p">,</span>
+        <span class="s2">"mean_chunks"</span><span class="p">:</span> <span class="n">summary</span><span class="o">.</span><span class="n">mean_retrieved_chunks</span><span class="p">,</span>
+    <span class="p">}</span>
+    <span class="k">for</span> <span class="n">label</span><span class="p">,</span> <span class="n">summary</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">summaries</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
+<span class="p">])</span>
+<span class="n">print_df</span><span class="p">(</span><span class="n">chunk_results_df</span><span class="p">,</span> <span class="s2">"Chunk-level Assertion Scoring Results"</span><span class="p">)</span>
+</pre></div>
+<div class="clipboard-copy-txt" id="cell-22"># Summarize coverage metrics at each k
+chunk_results_df = pd.DataFrame([
+    {
+        "k": label,
+        "coverage": summary.coverage,
+        "strict_coverage": summary.strict_coverage,
+        "coverage_strength": summary.mean_score,
+        "mean_chunks": summary.mean_retrieved_chunks,
+    }
+    for label, summary in sorted(summaries.items())
+])
+print_df(chunk_results_df, "Chunk-level Assertion Scoring Results")</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
 </div> <!-- jp-Notebook -->
 </div> <!-- jupyter-wrapper -->
 

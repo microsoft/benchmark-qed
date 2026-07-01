@@ -1498,6 +1498,48 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#autoe-chunk-assertion-scores" class="md-nav__link">
+    <span class="md-ellipsis">
+      autoe chunk-assertion-scores
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="autoe chunk-assertion-scores">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#usage_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      Usage
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#arguments_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      Arguments
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#options_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      Options
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -2757,6 +2799,48 @@
         
           <li class="md-nav__item">
   <a href="#options_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      Options
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#autoe-chunk-assertion-scores" class="md-nav__link">
+    <span class="md-ellipsis">
+      autoe chunk-assertion-scores
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="autoe chunk-assertion-scores">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#usage_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      Usage
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#arguments_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      Arguments
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#options_9" class="md-nav__link">
     <span class="md-ellipsis">
       Options
     </span>
@@ -4267,6 +4351,10 @@
 <td><code>retrieval-scores</code></td>
 <td>Evaluate retrieval metrics (precision,...</td>
 </tr>
+<tr>
+<td><code>chunk-assertion-scores</code></td>
+<td>Score retrieved chunks against assertions...</td>
+</tr>
 </tbody>
 </table>
 <h2 id="sub-commands">Sub Commands</h2>
@@ -4923,6 +5011,91 @@ statistical significance tests.</p>
 <tr>
 <td><code>--max-concurrent INTEGER</code></td>
 <td>Maximum concurrent relevance assessments.  [default: 8]</td>
+<td>No</td>
+<td>-</td>
+</tr>
+<tr>
+<td><code>--account-url TEXT</code></td>
+<td>Azure Blob Storage account URL for managed-identity auth, used when the config path is a blob:// URI. Falls back to $AZURE_STORAGE_ACCOUNT_URL.</td>
+<td>No</td>
+<td>-</td>
+</tr>
+<tr>
+<td><code>--connection-string TEXT</code></td>
+<td>Azure Blob Storage connection string, used when the config path is a blob:// URI. Falls back to $AZURE_STORAGE_CONNECTION_STRING.</td>
+<td>No</td>
+<td>-</td>
+</tr>
+<tr>
+<td><code>--help</code></td>
+<td>Show this message and exit.</td>
+<td>No</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<h3 id="autoe-chunk-assertion-scores"><code>autoe chunk-assertion-scores</code></h3>
+<p>Score retrieved chunks against assertions using chunk-level evaluation.
+This command evaluates retrieved chunks directly (not synthesized answers)
+against per-question assertions. Results are cached at (assertion, chunk)
+granularity using SHA256 content-addressing, enabling efficient re-runs
+with different k values or retriever configurations.
+Three metrics are reported at each k:
+- Coverage: Macro-averaged pass rate (full+partial support)
+- Strict Coverage: Macro-averaged full-support rate only
+- Coverage Strength: Mean score across assertions
+Example usage:
+benchmark-qed autoe chunk-assertion-scores config.yaml output/
+Config format (YAML):
+generated:
+name: vector_rag
+retrieval_path: input/retrieval.json  # RetrievalResult JSON array
+assertions:
+assertions_path: input/assertions.json
+k_list: [5, 10, 20, 50]
+pass_threshold: 0.5
+llm_config: ...
+prompt_config:
+system_prompt: {prompt: prompts/assertion/chunk_assertion_system_prompt.txt}
+user_prompt: {prompt: prompts/assertion/chunk_assertion_user_prompt.txt}</p>
+<h4 id="usage_9">Usage</h4>
+<p><code>autoe chunk-assertion-scores [OPTIONS] CONFIG_PATH [OUTPUT]</code></p>
+<h4 id="arguments_9">Arguments</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+<th>Required</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>CONFIG_PATH</code></td>
+<td>The path to the configuration file.</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td><code>[OUTPUT]</code></td>
+<td>The path to the output directory.</td>
+<td>No</td>
+</tr>
+</tbody>
+</table>
+<h4 id="options_9">Options</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+<th>Required</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--print-model-usage / --no-print-model-usage</code></td>
+<td>Whether to print the model usage statistics.  [default: no-print-model-usage]</td>
 <td>No</td>
 <td>-</td>
 </tr>
