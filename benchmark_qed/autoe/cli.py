@@ -359,7 +359,8 @@ def reference_scores(
         )
         summary_df = cast(
             pd.DataFrame,
-            result.drop(
+            result
+            .drop(
                 columns=[
                     "question",
                     "reference_answer",
@@ -530,7 +531,8 @@ def _run_single_rag_assertion_scores(
     )
 
     assertions = (
-        assertions.explode(assertions_key)
+        assertions
+        .explode(assertions_key)
         .rename(columns={assertions_key: "assertion"})
         .reset_index(drop=True)
     )

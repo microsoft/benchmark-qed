@@ -11,53 +11,53 @@ license = "MIT"
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
-    "aiohttp>=3.11.15",
+    "aiohttp>=3.14.1",
     "azure-ai-inference>=1.0.0b9",
-    "azure-identity>=1.22.0",
+    "azure-identity>=1.25.3",
     "nest-asyncio>=1.6.0",
-    "fastparquet>=2024.11.0",
-    "json-repair>=0.44.1",
-    "numpy>=2.2.0",
-    "openai>=1.68.2",
-    "pandas>=2.2.3",
-    "pyarrow>=19.0.1",
-    "pydantic>=2.10.4",
-    "python-dotenv>=1.0.1",
-    "pyyaml>=6.0.2",
-    "scikit-learn>=1.6.1",
-    "scikit-posthocs>=0.11.0",
-    "scipy>=1.14.1",
-    "statsmodels>=0.14.4",
-    "tiktoken>=0.9.0",
-    "typer>=0.15.1",
-    "matplotlib>=3.10.5",
+    "fastparquet>=2026.5.0",
+    "json-repair>=0.61.1",
+    "numpy>=2.4.6",
+    "openai>=2.44.0",
+    "pandas>=2.3.3",
+    "pyarrow>=24.0.0",
+    "pydantic>=2.13.4",
+    "python-dotenv>=1.2.2",
+    "pyyaml>=6.0.3",
+    "scikit-learn>=1.9.0",
+    "scikit-posthocs>=0.14.0",
+    "scipy>=1.17.1",
+    "statsmodels>=0.14.6",
+    "tiktoken>=0.13.0",
+    "typer>=0.26.8",
+    "matplotlib>=3.11.0",
     "seaborn>=0.13.2",
-    "graphrag-common>=3.0.9",
-    "graphrag-input>=3.0.9",
-    "graphrag-storage>=3.0.9",
-    "graphrag-llm>=3.0.9"
+    "graphrag-common>=3.1.0",
+    "graphrag-input>=3.1.0",
+    "graphrag-storage>=3.1.0",
+    "graphrag-llm>=3.1.0"
 ]
 
 [dependency-groups]
 dev = [
-    "ipykernel>=6.29.5",
-    "ipywidgets>=8.1.5",
-    "mkdocs-material>=9.6.10",
-    "poethepoet>=0.32.1",
-    "pyright>=1.1.409",
+    "ipykernel>=7.3.0",
+    "ipywidgets>=8.1.8",
+    "mkdocs-material>=9.7.6",
+    "poethepoet>=0.47.0",
+    "pyright>=1.1.411",
     "nest-asyncio>=1.6.0",
-    "py7zr>=0.22.0",
-    "pytest>=8.3.5",
-    "pytest-asyncio>=0.26.0",
-    "pytest-cov>=6.1.0",
-    "psutil>=6.1.0",
-    "ruff>=0.8.4",
-    "uv-dynamic-versioning>=0.6.0",
-    "typos>=1.32.0",
-    "mkdocs-jupyter>=0.25.1",
+    "py7zr>=1.1.3",
+    "pytest>=9.1.1",
+    "pytest-asyncio>=1.4.0",
+    "pytest-cov>=7.1.0",
+    "psutil>=7.2.2",
+    "ruff>=0.15.20",
+    "uv-dynamic-versioning>=0.14.0",
+    "typos>=1.48.0",
+    "mkdocs-jupyter>=0.26.3",
     "mkdocs-exclude-search>=0.6.6",
-    "mkdocs-typer2>=0.1.4",
-    "semversioner>=2.0.6",
+    "mkdocs-typer2>=0.4.1",
+    "semversioner>=3.0.1",
     "nbqa>=1.9.1",
 ]
 
@@ -72,10 +72,10 @@ benchmark-qed = "benchmark_qed.__main__:main"
 source = "uv-dynamic-versioning"
 
 [tool.uv]
-# graphrag-llm 3.0.9 strict-pins litellm==1.82.6, but its source imports
+# graphrag-llm strict-pins an older litellm, but its source imports
 # AnthropicThinkingParam which only exists in litellm>=1.84. Override until
 # the upstream pin is relaxed.
-override-dependencies = ["litellm>=1.84.0rc1"]
+override-dependencies = ["litellm>=1.84.0"]
 
 [tool.uv-dynamic-versioning]
 vcs = "git"

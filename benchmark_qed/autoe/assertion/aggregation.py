@@ -258,7 +258,8 @@ def summarize_hierarchical_by_question(
 
     # Basic aggregations
     summary = (
-        aggregated_df.groupby("question")
+        aggregated_df
+        .groupby("question")
         .agg(
             assertions_passed=("global_score", lambda x: (x == 1).sum()),
             assertions_failed=("global_score", lambda x: (x == 0).sum()),
@@ -278,7 +279,8 @@ def summarize_hierarchical_by_question(
     # n_with_both: has_discovery=True AND n_supporting_passed > 0
     # n_support_only: n_supporting_passed > 0 AND has_discovery=False
     both_counts = (
-        aggregated_df.groupby("question")
+        aggregated_df
+        .groupby("question")
         .apply(  # type: ignore[call-overload]
             lambda g: pd.Series({
                 "n_with_both": (
@@ -307,7 +309,8 @@ def summarize_hierarchical_by_question(
 
     # Compute deduplicated supporting assertion stats
     unique_stats = (
-        aggregated_df.groupby("question")
+        aggregated_df
+        .groupby("question")
         .apply(  # type: ignore[call-overload]
             _compute_unique_supporting_stats,
             include_groups=False,  # type: ignore[arg-type]
@@ -351,7 +354,8 @@ def summarize_standard_scores(
                 avg_question_pass_rate.
     """
     summary_by_assertion = (
-        assertion_scores.groupby(["question", "assertion"])
+        assertion_scores
+        .groupby(["question", "assertion"])
         .agg(
             score=(
                 "score",
@@ -363,7 +367,8 @@ def summarize_standard_scores(
     )
 
     summary_by_question = (
-        summary_by_assertion.groupby(["question"])
+        summary_by_assertion
+        .groupby(["question"])
         .agg(
             success=("score", lambda x: (x == 1).sum()),
             fail=("score", lambda x: (x == 0).sum()),

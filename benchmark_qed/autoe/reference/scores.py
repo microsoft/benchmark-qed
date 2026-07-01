@@ -67,7 +67,8 @@ def get_reference_scores(
         DataFrame containing the scores for each condition.
     """
     pairs = (
-        reference_answers.merge(
+        reference_answers
+        .merge(
             generated_answers,
             how="inner",
             on=[question_id_key],
@@ -253,7 +254,8 @@ def summarize_reference_scores(raw_scores: pd.DataFrame) -> pd.DataFrame:
         DataFrame with summarized scores including mean and standard deviation.
     """
     summary_df = (
-        raw_scores.drop(
+        raw_scores
+        .drop(
             columns=[
                 "question",
                 "reference_answer",

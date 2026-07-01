@@ -75,7 +75,8 @@ def get_pairwise_scores(
         DataFrame containing the scores for each condition.
     """
     pairs = (
-        base_answers.merge(
+        base_answers
+        .merge(
             other_answers,
             how="inner",
             on=[question_id_key],
@@ -278,7 +279,8 @@ def analyze_criteria(raw_scores: pd.DataFrame, alpha: float = 0.05) -> pd.DataFr
     ])
 
     results = [
-        scores_group.agg(
+        scores_group
+        .agg(
             base_mean=(f"{base_name}_score", "mean"),
             base_scores=(f"{base_name}_score", list),
             other_mean=(f"{other}_score", "mean"),
@@ -335,7 +337,8 @@ def analyze_criteria(raw_scores: pd.DataFrame, alpha: float = 0.05) -> pd.DataFr
         )
 
     final_result = (
-        all_results.groupby(["question_set", "criteria", "base_name", "other_name"])
+        all_results
+        .groupby(["question_set", "criteria", "base_name", "other_name"])
         .apply(  # type: ignore[call-overload]
             lambda x: _get_p_value(
                 x["base_mean"].to_numpy(),

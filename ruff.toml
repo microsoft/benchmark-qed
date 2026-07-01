@@ -80,6 +80,15 @@ ignore = [
     "TD003", # We're not tracking TODOs as issues ,
     "PGH003", # Use specific rule when ignoring issue - need a way to by bypass Pylint checks; this raises on type: ignore
     "FBT001", "FBT002", # Disable default positional boolean.
+    # The following preview rules were newly surfaced by the ruff 0.15 upgrade on
+    # pre-existing code. They are ignored here to keep the dependency-update sweep
+    # focused; address them in a dedicated lint-cleanup pass.
+    "RUF069", # float-equality-comparison
+    "ASYNC240", # blocking-path-method-in-async-function
+    "D420", # incorrect-section-order
+    "D421", # property-docstring-starts-with-verb
+    "RUF050", # unnecessary-if
+    "RUF067", # non-empty-init-module
 ]
 
 [lint.per-file-ignores]
