@@ -189,6 +189,106 @@ def _extract_grade(response_text: str) -> str:
     return ChunkAssertionGrade.NO_SUPPORT
 
 
+async def _evaluate_uncached_pairs(
+    uncached_work: list[tuple[str, str, str, int, int, int]],
+    *,
+    llm_client: LLMCompletion,
+    llm_config: LLMConfig,
+    system_prompt: str,
+    user_prompt: str,
+    cache: ContentAddressedCache,
+    per_chunk_grades: dict[tuple[int, int], list[tuple[int, float, str]]],
+    assertion_call_stats: dict[tuple[int, int], dict[str, int]],
+) -> int:
+    """Judge uncached (assertion, chunk) pairs via a bounded worker pool.
+
+    Uses a shared queue with at most ``concurrent_requests`` worker tasks so
+    that only O(concurrent_requests) tasks exist at any time, regardless of
+    dataset size. Result handling runs on the single event-loop thread, so the
+    shared counters and grade maps are mutated safely between awaits.
+
+    Args:
+        uncached_work: Work items of (assertion, chunk, cache_key, q_idx, a_idx, rank).
+        llm_client: LLM client for judging.
+        llm_config: LLM configuration.
+        system_prompt: System prompt template.
+        user_prompt: User prompt template.
+        cache: Cache to store new grades in.
+        per_chunk_grades: Mutated in place with (rank, score, grade) per (q, a).
+        assertion_call_stats: Mutated in place with successful/failed call counts.
+
+    Returns
+    -------
+        Number of LLM calls that failed.
+    """
+    n_total = len(uncached_work)
+    next_progress_threshold = max(1, n_total // 10)
+    call_errors = 0
+    n_done = 0
+
+    work_queue: asyncio.Queue[tuple[str, str, str, int, int, int]] = asyncio.Queue()
+    for work_item in uncached_work:
+        work_queue.put_nowait(work_item)
+
+    def _record_result(
+        work_item: tuple[str, str, str, int, int, int], grade: str
+    ) -> None:
+        nonlocal call_errors, n_done, next_progress_threshold
+        _assertion_text, _chunk_content, cache_key, q_idx, a_idx, rank = work_item
+
+        q_key = (q_idx, a_idx)
+        if grade == "__error__":
+            call_errors += 1
+            assertion_call_stats[q_key]["failed"] += 1
+        else:
+            cache.put(cache_key, grade)
+            mapped_grade = (
+                grade
+                if grade
+                in {
+                    ChunkAssertionGrade.FULL_SUPPORT,
+                    ChunkAssertionGrade.PARTIAL_SUPPORT,
+                    ChunkAssertionGrade.NO_SUPPORT,
+                }
+                else ChunkAssertionGrade.NO_SUPPORT
+            )
+            per_chunk_grades[q_key].append((
+                rank,
+                grade_to_score(grade),
+                mapped_grade,
+            ))
+            assertion_call_stats[q_key]["successful"] += 1
+
+        n_done += 1
+        if n_done >= next_progress_threshold:
+            rich_print(
+                f"    LLM judging progress: {n_done}/{n_total} pairs ({(100.0 * n_done / n_total):.1f}%)",
+            )
+            next_progress_threshold += max(1, n_total // 10)
+
+    async def _worker() -> None:
+        while True:
+            try:
+                work_item = work_queue.get_nowait()
+            except asyncio.QueueEmpty:
+                return
+            assertion_text, chunk_content, _cache_key, _q_idx, _a_idx, _rank = work_item
+            grade, _reasoning = await _label_chunk_assertion(
+                llm_client,
+                assertion_text,
+                chunk_content,
+                system_prompt=system_prompt,
+                user_prompt=user_prompt,
+                additional_call_args=llm_config.call_args,
+            )
+            _record_result(work_item, grade)
+
+    n_workers = max(1, min(llm_config.concurrent_requests, n_total))
+    await asyncio.gather(*[asyncio.ensure_future(_worker()) for _ in range(n_workers)])
+
+    return call_errors
+
+
 async def run_assertion_eval_chunk_mode(
     eval_results: list[RetrievalResult],
     question_set: dict[str, Any],
@@ -329,62 +429,16 @@ async def run_assertion_eval_chunk_mode(
         rich_print(
             f"  Running {len(uncached_work)} LLM judgements for uncached (assertion, chunk) pairs...",
         )
-        concurrent_requests = llm_config.concurrent_requests
-
-        n_total = len(uncached_work)
-        next_progress_threshold = max(1, n_total // 10)
-
-        # Process work concurrently using a semaphore to limit parallelism
-        semaphore = asyncio.Semaphore(max(1, concurrent_requests))
-
-        async def _judge_one(
-            work_item: tuple[str, str, str, int, int, int],
-        ) -> tuple[tuple[str, str, str, int, int, int], str, str]:
-            assertion_text, chunk_content, _cache_key, _q_idx, _a_idx, _rank = work_item
-            async with semaphore:
-                grade, reasoning = await _label_chunk_assertion(
-                    llm_client,
-                    assertion_text,
-                    chunk_content,
-                    system_prompt=system_prompt,
-                    user_prompt=user_prompt,
-                    additional_call_args=llm_config.call_args,
-                )
-            return work_item, grade, reasoning
-
-        tasks = [asyncio.ensure_future(_judge_one(w)) for w in uncached_work]
-        for n_done, coro in enumerate(asyncio.as_completed(tasks), start=1):
-            work_item, grade, _reasoning = await coro
-            _assertion_text, _chunk_content, cache_key, q_idx, a_idx, rank = work_item
-
-            q_key = (q_idx, a_idx)
-            if grade == "__error__":
-                call_errors += 1
-                assertion_call_stats[q_key]["failed"] += 1
-            else:
-                cache.put(cache_key, grade)
-                mapped_grade = (
-                    grade
-                    if grade
-                    in {
-                        ChunkAssertionGrade.FULL_SUPPORT,
-                        ChunkAssertionGrade.PARTIAL_SUPPORT,
-                        ChunkAssertionGrade.NO_SUPPORT,
-                    }
-                    else ChunkAssertionGrade.NO_SUPPORT
-                )
-                per_chunk_grades[q_key].append((
-                    rank,
-                    grade_to_score(grade),
-                    mapped_grade,
-                ))
-                assertion_call_stats[q_key]["successful"] += 1
-
-            if n_done >= next_progress_threshold:
-                rich_print(
-                    f"    LLM judging progress: {n_done}/{n_total} pairs ({(100.0 * n_done / n_total):.1f}%)",
-                )
-                next_progress_threshold += max(1, n_total // 10)
+        call_errors += await _evaluate_uncached_pairs(
+            uncached_work,
+            llm_client=llm_client,
+            llm_config=llm_config,
+            system_prompt=system_prompt,
+            user_prompt=user_prompt,
+            cache=cache,
+            per_chunk_grades=per_chunk_grades,
+            assertion_call_stats=assertion_call_stats,
+        )
 
         # Flush cache
         cache.flush()

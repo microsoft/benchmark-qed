@@ -95,7 +95,7 @@ class RetrievalResult(BaseModel):
         cls,
         question_id: str,
         question_text: str,
-        context: list[TextUnit | dict[str, str]],
+        context: list[TextUnit | dict[str, Any]],
         context_id_key: str = "id",
         context_text_key: str = "text",
         context_rank_key: str = "rank",

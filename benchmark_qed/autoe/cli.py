@@ -1959,7 +1959,10 @@ def chunk_assertion_scores(
     rich_print("-" * 60)
 
     results_rows = []
-    for k_label, summary in sorted(summaries.items()):
+    for k_label, summary in sorted(
+        summaries.items(),
+        key=lambda kv: (kv[1].k is None, kv[1].k or 0),
+    ):
         k_display = "all" if k_label == "all" else k_label
         rich_print(
             f"{k_display:>6}  {summary.coverage:>10.1%}  {summary.strict_coverage:>10.1%}  "
