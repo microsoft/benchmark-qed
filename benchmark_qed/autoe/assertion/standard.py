@@ -112,9 +112,8 @@ def get_assertion_scores(
                 assertions[["assertion", "rank"]], on="assertion", how="left"
             )
             pairs = (
-                pairs_with_rank.sort_values(
-                    ["question_id", "rank"], ascending=[True, True]
-                )
+                pairs_with_rank
+                .sort_values(["question_id", "rank"], ascending=[True, True])
                 .groupby("question_id")
                 .head(top_k)
                 .drop(columns=["rank"])

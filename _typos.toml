@@ -9,3 +9,7 @@ extend-exclude = [
 UMBRELA = "UMBRELA"
 # "ba" appears in auto-generated Jupyter notebook cell IDs (e.g. "ba3ab816")
 ba = "ba"
+# "ttest" is the statistical paired t-test (scipy.stats.ttest_rel), not a typo
+ttest = "ttest"
+# "CPY" is the ruff rule prefix for flake8-copyright
+CPY = "CPY"

@@ -58,30 +58,40 @@ def calculate_rrf_scores(
         ... ]
         >>> rrf_scores = calculate_rrf_scores(
         ...     items=documents,
-        ...     score_key_func=lambda d: d[
-        ...         "relevance"
-        ...     ],
-        ...     source_count_key_func=lambda d: d[
-        ...         "citations"
-        ...     ],
+        ...     score_key_func=lambda d: (
+        ...         d[
+        ...             "relevance"
+        ...         ]
+        ...     ),
+        ...     source_count_key_func=lambda d: (
+        ...         d[
+        ...             "citations"
+        ...         ]
+        ...     ),
         ... )
         >>> # Sort by RRF score (descending)
         >>> ranked_docs = sorted(
         ...     documents,
-        ...     key=lambda d: -rrf_scores[
-        ...         id(d)
-        ...     ],
+        ...     key=lambda d: (
+        ...         -rrf_scores[
+        ...             id(d)
+        ...         ]
+        ...     ),
         ... )
 
         # Custom weights example (prioritize score over source count):
         >>> rrf_scores_weighted = calculate_rrf_scores(
         ...     items=documents,
-        ...     score_key_func=lambda d: d[
-        ...         "relevance"
-        ...     ],
-        ...     source_count_key_func=lambda d: d[
-        ...         "citations"
-        ...     ],
+        ...     score_key_func=lambda d: (
+        ...         d[
+        ...             "relevance"
+        ...         ]
+        ...     ),
+        ...     source_count_key_func=lambda d: (
+        ...         d[
+        ...             "citations"
+        ...         ]
+        ...     ),
         ...     score_weight=0.7,
         ...     source_count_weight=0.3,
         ... )

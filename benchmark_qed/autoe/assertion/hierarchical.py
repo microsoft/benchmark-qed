@@ -220,7 +220,8 @@ def _get_hierarchical_scores_joint(
     """
     # Merge answers with assertions
     pairs = (
-        answers.merge(
+        answers
+        .merge(
             assertions,
             how="inner",
             on=[question_id_key],
@@ -259,9 +260,8 @@ def _get_hierarchical_scores_joint(
                 assertions[["assertion", "rank"]], on="assertion", how="left"
             )
             pairs = (
-                pairs_with_rank.sort_values(
-                    ["question_id", "rank"], ascending=[True, True]
-                )
+                pairs_with_rank
+                .sort_values(["question_id", "rank"], ascending=[True, True])
                 .groupby("question_id")
                 .head(top_k)
                 .drop(columns=["rank"])
@@ -384,7 +384,8 @@ def _get_hierarchical_scores_staged(
 
     # Aggregate global scores to determine which assertions passed
     global_aggregated = (
-        global_scores_raw.groupby(["question_id", "question", "assertion"])
+        global_scores_raw
+        .groupby(["question_id", "question", "assertion"])
         .agg(
             global_score_mean=("score", "mean"),
             global_score=("score", lambda x: int(x.mean() > pass_threshold)),

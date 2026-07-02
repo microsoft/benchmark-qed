@@ -44,7 +44,8 @@ def try_parse_json_object(
 
     # Clean up json string.
     input = (
-        input.replace("{{", "{")
+        input
+        .replace("{{", "{")
         .replace("}}", "}")
         .replace('"[{', "[{")
         .replace('}]"', "}]")

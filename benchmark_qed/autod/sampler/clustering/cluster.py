@@ -34,11 +34,11 @@ class TextCluster:
         centroid = self.get_centroid()
         neighbors = sorted(
             self.text_units,
-            key=lambda unit: float(
-                np.linalg.norm(np.array(unit.text_embedding) - centroid)
-            )
-            if unit.text_embedding is not None
-            else float("inf"),
+            key=lambda unit: (
+                float(np.linalg.norm(np.array(unit.text_embedding) - centroid))
+                if unit.text_embedding is not None
+                else float("inf")
+            ),
         )
         return neighbors[:n]
 

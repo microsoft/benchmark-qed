@@ -67,7 +67,8 @@ def get_assertion_scores(
         pd.DataFrame: Results with assertion scores and metadata.
     """
     pairs = (
-        answers.merge(
+        answers
+        .merge(
             assertions,
             how="inner",
             on=[question_id_key],
@@ -93,7 +94,8 @@ def get_assertion_scores(
         if "rank" in assertions.columns:
             # Rank by rank (ascending - lower rank = higher importance) and take top-k per question
             pairs = (
-                pairs.sort_values(
+                pairs
+                .sort_values(
                     by=["question_id", "rank"],
                     ascending=[True, True],  # type: ignore[arg-type]
                 )
@@ -312,7 +314,8 @@ def evaluate_rag_method(
 
         # Calculate summary statistics
         summary_by_assertion = (
-            assertion_score.groupby(["question", "assertion"])
+            assertion_score
+            .groupby(["question", "assertion"])
             .agg(
                 score=("score", lambda x: int(x.mean() > pass_threshold)),
                 scores=("score", list),
@@ -321,7 +324,8 @@ def evaluate_rag_method(
         )
 
         summary_by_question = (
-            summary_by_assertion.groupby(["question"])
+            summary_by_assertion
+            .groupby(["question"])
             .agg(
                 success=("score", lambda x: (x == 1).sum()),
                 fail=("score", lambda x: (x == 0).sum()),
