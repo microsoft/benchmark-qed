@@ -1,0 +1,30 @@
+${score_id}
+
+---Question---
+${question}
+
+---Common Content (shared by both answers)---
+${common}
+
+---Start of Unique Content of Answer 1---
+${unique1}
+---End of Unique Content of Answer 1---
+
+
+---Start of Unique Content of Answer 2---
+${unique2}
+---End of Unique Content of Answer 2---
+
+Compare the unique content of Answer 1 and Answer 2 on relevance and diversity, relative to the question. Remember, the null assumption is that there is no material difference; for an answer to win on a criterion, its unique content must demonstrate clear superiority and add meaningful value over the Common Content.
+
+Format your response as a JSON object with the following structure:
+{
+    "relevance": {
+        "reasoning": "A detailed explanation of your relevance assessment.",
+        "winner": One of the following values: 1 (if Answer 1's unique content is better), 2 (if Answer 2's unique content is better), or 0 (tie).
+    },
+    "diversity": {
+        "reasoning": "A detailed explanation of your diversity assessment.",
+        "winner": One of the following values: 1 (if Answer 1's unique content is better), 2 (if Answer 2's unique content is better), or 0 (tie).
+    }
+}

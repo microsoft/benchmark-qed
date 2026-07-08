@@ -1,0 +1,22 @@
+${score_id}
+
+---Question---
+${question}
+
+---Start of Answer 1---
+${answer1}
+---End of Answer 1---
+
+
+---Start of Answer 2---
+${answer2}
+---End of Answer 2---
+
+Identify the common content and the content unique to each answer, following the guidelines.
+
+Format your response as a JSON object with the following structure:
+{
+    "common": "A summary of the content shared by both answers.",
+    "unique_answer_1": "Content unique to Answer 1, or 'No unique part'.",
+    "unique_answer_2": "Content unique to Answer 2, or 'No unique part'."
+}

@@ -10,7 +10,12 @@ from .assertion import (
     SupportingDiscoveryLLMResponse,
 )
 from .condition_pair import ConditionPair
-from .pairwise import PairwiseLLMResponse
+from .pairwise import (
+    CriterionVerdict,
+    PairwiseExtractionLLMResponse,
+    PairwiseLLMResponse,
+    UnbiasedPairwiseLLMResponse,
+)
 from .reference import ReferenceLLMResponse
 from .retrieval_result import RetrievalResult, load_retrieval_results_from_dicts
 
@@ -18,12 +23,15 @@ __all__ = [
     "Assertion",
     "AssertionLLMResponse",
     "ConditionPair",
+    "CriterionVerdict",
     "HierarchicalAssertion",
     "HierarchicalAssertionLLMResponse",
+    "PairwiseExtractionLLMResponse",
     "PairwiseLLMResponse",
     "ReferenceLLMResponse",
     "RetrievalResult",
     "SupportingAssertionResult",
     "SupportingDiscoveryLLMResponse",
+    "UnbiasedPairwiseLLMResponse",
     "load_retrieval_results_from_dicts",
 ]

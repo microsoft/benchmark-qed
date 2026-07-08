@@ -51,6 +51,7 @@ class ConfigType(StrEnum):
 
     autoq = "autoq"
     autoe_pairwise = "autoe_pairwise"
+    autoe_unbiased_pairwise = "autoe_unbiased_pairwise"
     autoe_reference = "autoe_reference"
     autoe_assertion = "autoe_assertion"
     autoe_chunk_assertion = "autoe_chunk_assertion"
@@ -346,6 +347,42 @@ prompt_config:
     prompt: prompts/pairwise_system_prompt.txt"""
 
 
+AUTOE_UNBIASED_PAIRWISE_CONTENT = f"""## Storage Configuration
+{{STORAGE}}
+## Input Configuration
+base:
+  name: vector_rag
+  answer_base_path: input/vector_rag  # The path to the base answers that you want to compare other RAG answers to. Modify this based on your dataset.
+others: # List of other conditions to compare against the base.
+  - name: lazygraphrag
+    answer_base_path: input/lazygraphrag
+  - name: graphrag_global
+    answer_base_path: input/graphrag_global
+question_sets: # List of question sets to use for scoring.
+  - activity_global
+  - activity_local
+
+## Scoring Configuration
+# The unbiased method first extracts the common and unique content of each answer,
+# then judges only the unique content on two fixed criteria: relevance and diversity.
+# The criteria are not configurable for this method.
+trials: 4 # Number of trials to repeat the scoring process for each question. Should be an even number to allow for counterbalancing.
+
+## LLM Configuration
+llm_config: {CHAT_MODEL_DEFAULTS}
+
+# Prompts for the two-step extract-and-judge method. The defaults are used if omitted.
+prompt_config:
+  extract_system_prompt:
+    prompt: prompts/pairwise_extract_system_prompt.txt
+  extract_user_prompt:
+    prompt: prompts/pairwise_extract_user_prompt.txt
+  judge_system_prompt:
+    prompt: prompts/pairwise_unique_judge_system_prompt.txt
+  judge_user_prompt:
+    prompt: prompts/pairwise_unique_judge_user_prompt.txt"""
+
+
 AUTOE_REFERENCE_CONTENT = f"""## Storage Configuration
 {{STORAGE}}
 ## Input Configuration
@@ -430,6 +467,8 @@ def _get_content(config_type: ConfigType) -> str:
             return AUTOQ_CONTENT
         case ConfigType.autoe_pairwise:
             return AUTOE_PAIRWISE_CONTENT
+        case ConfigType.autoe_unbiased_pairwise:
+            return AUTOE_UNBIASED_PAIRWISE_CONTENT
         case ConfigType.autoe_reference:
             return AUTOE_REFERENCE_CONTENT
         case ConfigType.autoe_assertion:
@@ -684,6 +723,10 @@ def init(
                 Path(autoq_assertion_prompts.__file__).parent
             )
         case ConfigType.autoe_pairwise:
+            prompt_mapping["prompts"] = __get_prompt_files(
+                Path(pairwise_prompts.__file__).parent
+            )
+        case ConfigType.autoe_unbiased_pairwise:
             prompt_mapping["prompts"] = __get_prompt_files(
                 Path(pairwise_prompts.__file__).parent
             )

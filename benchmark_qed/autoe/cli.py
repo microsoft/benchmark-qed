@@ -39,12 +39,17 @@ from benchmark_qed.autoe.config import (
     ReferenceConfig,
     RetrievalReferenceConfig,
     RetrievalScoresConfig,
+    UnbiasedPairwiseConfig,
 )
 from benchmark_qed.autoe.data_model.chunk_assertion import ChunkAssertionConfig
 from benchmark_qed.autoe.data_model.retrieval_result import (
     load_retrieval_results_from_dicts,
 )
-from benchmark_qed.autoe.pairwise import analyze_criteria, get_pairwise_scores
+from benchmark_qed.autoe.pairwise import (
+    analyze_criteria,
+    get_pairwise_scores,
+    get_unbiased_pairwise_scores,
+)
 from benchmark_qed.autoe.reference import get_reference_scores
 from benchmark_qed.cli.config_resolver import (
     AccountUrlOption,
@@ -261,6 +266,141 @@ def pairwise_scores(
             ],
         ),
         "Pairwise Scores Summary",
+    )
+
+    if print_model_usage:
+        rich_print("Model usage statistics:")
+        rich_print(llm_client.metrics_store.get_metrics())
+    asyncio.run(
+        _write_json(
+            output_storage, "model_usage.json", llm_client.metrics_store.get_metrics()
+        )
+    )
+
+
+@app.command()
+def unbiased_pairwise_scores(
+    comparison_spec: Annotated[
+        Path,
+        typer.Argument(help="The path to the JSON file containing the conditions."),
+    ],
+    output: Annotated[
+        Path, typer.Argument(help="The path to the output file for the scores.")
+    ],
+    *,
+    alpha: Annotated[
+        float, typer.Option(help="The p-value threshold for the significance test.")
+    ] = 0.05,
+    print_model_usage: Annotated[
+        bool,
+        typer.Option(help="Whether to print the model usage statistics after scoring."),
+    ] = False,
+    include_score_id_in_prompt: Annotated[
+        bool,
+        typer.Option(
+            help="Whether to include the score ID in the evaluation prompt for the LLM (might be useful to avoid cached scores)."
+        ),
+    ] = True,
+    question_id_key: Annotated[
+        str,
+        typer.Option(
+            help="The key in the JSON file that contains the question ID. This is used to match questions across different conditions."
+        ),
+    ] = "question_id",
+    account_url: AccountUrlOption = None,
+    connection_string: ConnectionStringOption = None,
+) -> None:
+    """Generate unbiased pairwise scores using the extract-and-judge method.
+
+    Reduces length/formatting bias by extracting the common and unique content of
+    each answer, then judging only the unique content on relevance and diversity.
+    Output is compatible with the standard pairwise significance pipeline.
+    """
+    comparison_spec = resolve_config_path(
+        comparison_spec,
+        account_url=account_url,
+        connection_string=connection_string,
+    )
+    config = load_config(UnbiasedPairwiseConfig, comparison_spec)
+
+    llm_client = ModelFactory.create_chat_model(config.llm_config)
+    output_storage = _build_output_storage(config.output_storage, output)
+    all_results = []
+
+    all_combinations = (
+        product([config.base], config.others)
+        if config.base
+        else combinations(config.others, 2)
+    )
+
+    for base, other in all_combinations:
+        for question_set in config.question_sets:
+            rich_print(
+                f"Unbiased scoring {base.name} vs {other.name} for {question_set}"
+            )
+            cache_key = f"{question_set}_{base.name}--{other.name}.csv"
+            if asyncio.run(output_storage.has(cache_key)):
+                rich_print(
+                    f"{base.name} vs {other.name} for {question_set} already exists. Skipping generation.\n"
+                    f"[bold yellow]If you want to generate a new comparison, delete {cache_key} from {output}.[/bold yellow]"
+                )
+                result = asyncio.run(_read_csv_df(output_storage, cache_key))
+            else:
+                base_storage, _ = _build_condition_storage(
+                    config.input_storage, base.answer_base_path, is_dir=True
+                )
+                other_storage, _ = _build_condition_storage(
+                    config.input_storage, other.answer_base_path, is_dir=True
+                )
+                result = get_unbiased_pairwise_scores(
+                    llm_client=llm_client,
+                    llm_config=config.llm_config,
+                    base_name=base.name,
+                    other_name=other.name,
+                    base_answers=asyncio.run(
+                        _read_json_df(base_storage, f"{question_set}.json")
+                    ),
+                    other_answers=asyncio.run(
+                        _read_json_df(other_storage, f"{question_set}.json")
+                    ),
+                    extract_user_prompt=config.prompt_config.extract_user_prompt.template,
+                    extract_system_prompt=config.prompt_config.extract_system_prompt.template,
+                    judge_user_prompt=config.prompt_config.judge_user_prompt.template,
+                    judge_system_prompt=config.prompt_config.judge_system_prompt.template,
+                    trials=config.trials,
+                    question_id_key=question_id_key,
+                    include_score_id_in_prompt=include_score_id_in_prompt,
+                )
+
+                asyncio.run(_write_csv_df(output_storage, cache_key, result))
+            result["question_set"] = question_set
+            all_results.append(result)
+
+    all_results = pd.concat(all_results)
+    asyncio.run(_write_csv_df(output_storage, "win_rates.csv", all_results))
+
+    all_results_p_value = analyze_criteria(all_results, alpha=alpha)
+
+    asyncio.run(
+        _write_csv_df(output_storage, "winrates_sig_tests.csv", all_results_p_value)
+    )
+
+    print_df(
+        cast(
+            pd.DataFrame,
+            all_results_p_value[
+                [
+                    "question_set",
+                    "criteria",
+                    "base_name",
+                    "other_name",
+                    "base_mean",
+                    "other_mean",
+                    "formatted_corrected_p_value",
+                ]
+            ],
+        ),
+        "Unbiased Pairwise Scores Summary",
     )
 
     if print_model_usage:
