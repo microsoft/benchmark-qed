@@ -7,8 +7,9 @@ first extracting the content that is COMMON to both answers and the content that
 UNIQUE to each, then judging only the unique content on three criteria: relevance,
 diversity, and comprehensiveness.
 
-The output DataFrame uses the exact same schema as
-``benchmark_qed.autoe.pairwise.scores.get_pairwise_scores`` so that the existing
+The output DataFrame is schema-compatible with
+``benchmark_qed.autoe.pairwise.scores.get_pairwise_scores`` (it includes the same
+required columns, plus extracted common/unique fields) so that the existing
 ``analyze_criteria`` significance pipeline and ``win_rates.csv`` output work unchanged.
 """
 
@@ -86,8 +87,9 @@ def get_differential_pairwise_scores(
 
     Returns
     -------
-        DataFrame containing per-criterion win scores for each condition, in the same
-        schema produced by ``get_pairwise_scores``.
+        DataFrame containing per-criterion win scores for each condition,
+        schema-compatible with ``get_pairwise_scores`` (same required columns, plus
+        extracted common/unique fields).
     """
     pairs = (
         base_answers
@@ -171,9 +173,10 @@ async def get_differential_pairwise_score(
 ) -> list[dict[str, Any]]:
     """Extract common/unique content then judge the unique content for one pair.
 
-    Returns one row per criterion (relevance, diversity, comprehensiveness), each in
-    the same schema as
-    ``get_pairwise_score`` so results can flow through ``analyze_criteria`` unchanged.
+    Returns one row per criterion (relevance, diversity, comprehensiveness), each
+    schema-compatible with
+    ``get_pairwise_score`` (same required columns, plus extracted common/unique
+    fields) so results can flow through ``analyze_criteria`` unchanged.
     """
     extract_system_prompt = extract_system_prompt or load_template_file(
         PAIRWISE_PROMPTS_PATH / "pairwise_extract_system_prompt.txt"
