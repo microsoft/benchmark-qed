@@ -306,7 +306,7 @@ def differential_pairwise_scores(
     question_id_key: Annotated[
         str,
         typer.Option(
-            help="The key in the JSON file that contains the question ID. This is used to match questions across different conditions."
+            help="The key in the input file that contains the question ID. This is used to match questions across different conditions."
         ),
     ] = "question_id",
     account_url: AccountUrlOption = None,
