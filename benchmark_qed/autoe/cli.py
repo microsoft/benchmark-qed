@@ -282,7 +282,9 @@ def pairwise_scores(
 def differential_pairwise_scores(
     comparison_spec: Annotated[
         Path,
-        typer.Argument(help="The path to the JSON file containing the conditions."),
+        typer.Argument(
+            help="The path to the configuration file (YAML/JSON) containing the conditions."
+        ),
     ],
     output: Annotated[
         Path, typer.Argument(help="The path to the output file for the scores.")
