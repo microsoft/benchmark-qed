@@ -12,7 +12,7 @@ class PairwiseLLMResponse(BaseModel):
 
 
 class PairwiseExtractionLLMResponse(BaseModel):
-    """Response from the LLM for the extraction step of unbiased pairwise scoring."""
+    """Response from the LLM for the extraction step of differential pairwise scoring."""
 
     common: str = Field(description="Summary of the content shared by both answers.")
     unique_answer_1: str = Field(
@@ -24,17 +24,17 @@ class PairwiseExtractionLLMResponse(BaseModel):
 
 
 class CriterionVerdict(BaseModel):
-    """Verdict for a single criterion in unbiased pairwise judging."""
+    """Verdict for a single criterion in differential pairwise judging."""
 
     winner: int = Field(description="The index of the winning answer (1, 2, or 0).")
     reasoning: str = Field(description="The reasoning behind the verdict.")
 
 
-class UnbiasedPairwiseLLMResponse(BaseModel):
-    """Response from the LLM for the judging step of unbiased pairwise scoring.
+class DifferentialPairwiseLLMResponse(BaseModel):
+    """Response from the LLM for the judging step of differential pairwise scoring.
 
-    Both relevance and diversity are judged in a single call, based only on the
-    unique content extracted from each answer.
+    Relevance, diversity, and comprehensiveness are judged in a single call, based
+    only on the unique content extracted from each answer.
     """
 
     relevance: CriterionVerdict = Field(
@@ -42,4 +42,7 @@ class UnbiasedPairwiseLLMResponse(BaseModel):
     )
     diversity: CriterionVerdict = Field(
         description="Verdict comparing the unique content on diversity."
+    )
+    comprehensiveness: CriterionVerdict = Field(
+        description="Verdict comparing the unique content on comprehensiveness."
     )

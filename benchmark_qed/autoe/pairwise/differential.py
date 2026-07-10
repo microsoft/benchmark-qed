@@ -1,11 +1,11 @@
 # Copyright (c) 2025 Microsoft Corporation.
-"""Unbiased pairwise scoring (Extract-common-and-unique method).
+"""Differential pairwise scoring (Extract-common-and-unique method).
 
 Standard pairwise judging compares full answers, which makes the verdict sensitive
 to confounds such as answer length and formatting. This module reduces that bias by
 first extracting the content that is COMMON to both answers and the content that is
-UNIQUE to each, then judging only the unique content on two criteria: relevance and
-diversity.
+UNIQUE to each, then judging only the unique content on three criteria: relevance,
+diversity, and comprehensiveness.
 
 The output DataFrame uses the exact same schema as
 ``benchmark_qed.autoe.pairwise.scores.get_pairwise_scores`` so that the existing
@@ -27,8 +27,8 @@ from rich.progress import Progress, TaskID
 
 from benchmark_qed.autoe.data_model import (
     ConditionPair,
+    DifferentialPairwiseLLMResponse,
     PairwiseExtractionLLMResponse,
-    UnbiasedPairwiseLLMResponse,
 )
 from benchmark_qed.autoe.pairwise.scores import SCORE_MAPPING
 from benchmark_qed.autoe.prompts import pairwise as pairwise_prompts
@@ -38,12 +38,12 @@ from benchmark_qed.llm import chat
 
 PAIRWISE_PROMPTS_PATH = Path(pairwise_prompts.__file__).parent
 
-# The unbiased judge always evaluates these two criteria (hardcoded, judged together
+# The differential judge always evaluates these criteria (hardcoded, judged together
 # in a single call based only on the unique content of each answer).
-UNBIASED_CRITERIA: tuple[str, ...] = ("relevance", "diversity")
+DIFFERENTIAL_CRITERIA: tuple[str, ...] = ("relevance", "diversity", "comprehensiveness")
 
 
-def get_unbiased_pairwise_scores(
+def get_differential_pairwise_scores(
     *,
     llm_client: LLMCompletion,
     llm_config: LLMConfig,
@@ -60,10 +60,11 @@ def get_unbiased_pairwise_scores(
     question_id_key: str = "question_id",
     question_text_key: str = "question_text",
 ) -> pd.DataFrame:
-    """Score a pair of conditions with the unbiased extract-and-judge method.
+    """Score a pair of conditions with the differential extract-and-judge method.
 
     For each question the answers are first reduced to their common and unique parts,
-    then only the unique parts are judged on relevance and diversity. Answer order is
+    then only the unique parts are judged on relevance, diversity, and
+    comprehensiveness. Answer order is
     counterbalanced across trials (as in standard pairwise scoring) to control for
     position bias.
 
@@ -112,12 +113,12 @@ def get_unbiased_pairwise_scores(
             progress.update(progress_task, advance=1, refresh=True)
 
         progress_task = progress.add_task(
-            "Scoring relevance & diversity (unbiased)...",
+            "Scoring relevance, diversity & comprehensiveness (differential)...",
             total=len(pairs) * trials,
         )
 
         tasks = [
-            get_unbiased_pairwise_score(
+            get_differential_pairwise_score(
                 llm=llm_client,
                 question=pair.question_text,
                 answer_1_name=base_name,
@@ -151,7 +152,7 @@ def get_unbiased_pairwise_scores(
         return result
 
 
-async def get_unbiased_pairwise_score(
+async def get_differential_pairwise_score(
     llm: LLMCompletion,
     *,
     question: str,
@@ -170,7 +171,8 @@ async def get_unbiased_pairwise_score(
 ) -> list[dict[str, Any]]:
     """Extract common/unique content then judge the unique content for one pair.
 
-    Returns one row per criterion (relevance, diversity), each in the same schema as
+    Returns one row per criterion (relevance, diversity, comprehensiveness), each in
+    the same schema as
     ``get_pairwise_score`` so results can flow through ``analyze_criteria`` unchanged.
     """
     extract_system_prompt = extract_system_prompt or load_template_file(
@@ -226,7 +228,7 @@ async def get_unbiased_pairwise_score(
         msg = "LLM did not return a structured PairwiseExtractionLLMResponse."
         raise RuntimeError(msg)
 
-    # --- Step 2: judge the unique content on relevance and diversity ---
+    # --- Step 2: judge the unique content on relevance, diversity, comprehensiveness ---
     judge_user = judge_user_prompt.substitute(
         score_id=score_id_text,
         question=question,
@@ -243,22 +245,23 @@ async def get_unbiased_pairwise_score(
                 {"role": "system", "content": judge_system},
                 {"role": "user", "content": judge_user},
             ],
-            response_format=UnbiasedPairwiseLLMResponse,
+            response_format=DifferentialPairwiseLLMResponse,
             **(additional_call_args or {}),
         )
     ).formatted_response
 
     if verdict is None:
-        msg = "LLM did not return a structured UnbiasedPairwiseLLMResponse."
+        msg = "LLM did not return a structured DifferentialPairwiseLLMResponse."
         raise RuntimeError(msg)
 
     criterion_verdicts = {
         "relevance": verdict.relevance,
         "diversity": verdict.diversity,
+        "comprehensiveness": verdict.comprehensiveness,
     }
 
     rows: list[dict[str, Any]] = []
-    for criterion_name in UNBIASED_CRITERIA:
+    for criterion_name in DIFFERENTIAL_CRITERIA:
         criterion_verdict = criterion_verdicts[criterion_name]
         rows.append({
             "score_id": score_id,

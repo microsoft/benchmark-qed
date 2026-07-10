@@ -5,24 +5,24 @@ This module provides functions for pairwise comparison scoring using LLM-based
 evaluation with configurable criteria.
 """
 
+from benchmark_qed.autoe.pairwise.differential import (
+    DIFFERENTIAL_CRITERIA,
+    get_differential_pairwise_score,
+    get_differential_pairwise_scores,
+)
 from benchmark_qed.autoe.pairwise.scores import (
     SCORE_MAPPING,
     analyze_criteria,
     get_pairwise_score,
     get_pairwise_scores,
 )
-from benchmark_qed.autoe.pairwise.unbiased import (
-    UNBIASED_CRITERIA,
-    get_unbiased_pairwise_score,
-    get_unbiased_pairwise_scores,
-)
 
 __all__ = [
+    "DIFFERENTIAL_CRITERIA",
     "SCORE_MAPPING",
-    "UNBIASED_CRITERIA",
     "analyze_criteria",
+    "get_differential_pairwise_score",
+    "get_differential_pairwise_scores",
     "get_pairwise_score",
     "get_pairwise_scores",
-    "get_unbiased_pairwise_score",
-    "get_unbiased_pairwise_scores",
 ]

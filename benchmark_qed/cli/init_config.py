@@ -51,7 +51,7 @@ class ConfigType(StrEnum):
 
     autoq = "autoq"
     autoe_pairwise = "autoe_pairwise"
-    autoe_unbiased_pairwise = "autoe_unbiased_pairwise"
+    autoe_differential_pairwise = "autoe_differential_pairwise"
     autoe_reference = "autoe_reference"
     autoe_assertion = "autoe_assertion"
     autoe_chunk_assertion = "autoe_chunk_assertion"
@@ -347,7 +347,7 @@ prompt_config:
     prompt: prompts/pairwise_system_prompt.txt"""
 
 
-AUTOE_UNBIASED_PAIRWISE_CONTENT = f"""## Storage Configuration
+AUTOE_DIFFERENTIAL_PAIRWISE_CONTENT = f"""## Storage Configuration
 {{STORAGE}}
 ## Input Configuration
 base:
@@ -363,8 +363,9 @@ question_sets: # List of question sets to use for scoring.
   - activity_local
 
 ## Scoring Configuration
-# The unbiased method first extracts the common and unique content of each answer,
-# then judges only the unique content on two fixed criteria: relevance and diversity.
+# The differential method first extracts the common and unique content of each answer,
+# then judges only the unique content on three fixed criteria: relevance, diversity,
+# and comprehensiveness.
 # The criteria are not configurable for this method.
 trials: 4 # Number of trials to repeat the scoring process for each question. Should be an even number to allow for counterbalancing.
 
@@ -467,8 +468,8 @@ def _get_content(config_type: ConfigType) -> str:
             return AUTOQ_CONTENT
         case ConfigType.autoe_pairwise:
             return AUTOE_PAIRWISE_CONTENT
-        case ConfigType.autoe_unbiased_pairwise:
-            return AUTOE_UNBIASED_PAIRWISE_CONTENT
+        case ConfigType.autoe_differential_pairwise:
+            return AUTOE_DIFFERENTIAL_PAIRWISE_CONTENT
         case ConfigType.autoe_reference:
             return AUTOE_REFERENCE_CONTENT
         case ConfigType.autoe_assertion:
@@ -726,7 +727,7 @@ def init(
             prompt_mapping["prompts"] = __get_prompt_files(
                 Path(pairwise_prompts.__file__).parent
             )
-        case ConfigType.autoe_unbiased_pairwise:
+        case ConfigType.autoe_differential_pairwise:
             prompt_mapping["prompts"] = __get_prompt_files(
                 Path(pairwise_prompts.__file__).parent
             )

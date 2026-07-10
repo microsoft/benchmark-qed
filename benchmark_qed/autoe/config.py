@@ -139,8 +139,8 @@ class PairwiseConfig(BaseAutoEConfig):
     )
 
 
-class UnbiasedPairwisePromptConfig(BaseModel):
-    """Prompt configuration for unbiased (extract-and-judge) pairwise scoring."""
+class DifferentialPairwisePromptConfig(BaseModel):
+    """Prompt configuration for differential (extract-and-judge) pairwise scoring."""
 
     extract_user_prompt: PromptConfig = Field(
         default=PromptConfig(
@@ -172,11 +172,12 @@ class UnbiasedPairwisePromptConfig(BaseModel):
     )
 
 
-class UnbiasedPairwiseConfig(BaseModel):
-    """Configuration for unbiased (extract-and-judge) pairwise scoring.
+class DifferentialPairwiseConfig(BaseModel):
+    """Configuration for differential (extract-and-judge) pairwise scoring.
 
     Reduces length/formatting bias by extracting the common and unique content of
-    each answer and judging only the unique content on relevance and diversity.
+    each answer and judging only the unique content on relevance, diversity, and
+    comprehensiveness.
     This extends the standard pairwise flow; it does not replace it.
     """
 
@@ -212,9 +213,9 @@ class UnbiasedPairwiseConfig(BaseModel):
         description="List of question sets to use for scoring.",
     )
 
-    prompt_config: UnbiasedPairwisePromptConfig = Field(
-        default_factory=UnbiasedPairwisePromptConfig,
-        description="Configuration for prompts used in unbiased pairwise scoring.",
+    prompt_config: DifferentialPairwisePromptConfig = Field(
+        default_factory=DifferentialPairwisePromptConfig,
+        description="Configuration for prompts used in differential pairwise scoring.",
     )
 
     @model_validator(mode="after")

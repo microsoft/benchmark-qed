@@ -32,6 +32,7 @@ from benchmark_qed.autoe.chunk_assertion import run_assertion_eval_chunk_mode
 from benchmark_qed.autoe.config import (
     AssertionConfig,
     AssertionSignificanceConfig,
+    DifferentialPairwiseConfig,
     HierarchicalAssertionConfig,
     HierarchicalAssertionSignificanceConfig,
     MultiRAGAssertionConfig,
@@ -39,7 +40,6 @@ from benchmark_qed.autoe.config import (
     ReferenceConfig,
     RetrievalReferenceConfig,
     RetrievalScoresConfig,
-    UnbiasedPairwiseConfig,
 )
 from benchmark_qed.autoe.data_model.chunk_assertion import ChunkAssertionConfig
 from benchmark_qed.autoe.data_model.retrieval_result import (
@@ -47,8 +47,8 @@ from benchmark_qed.autoe.data_model.retrieval_result import (
 )
 from benchmark_qed.autoe.pairwise import (
     analyze_criteria,
+    get_differential_pairwise_scores,
     get_pairwise_scores,
-    get_unbiased_pairwise_scores,
 )
 from benchmark_qed.autoe.reference import get_reference_scores
 from benchmark_qed.cli.config_resolver import (
@@ -279,7 +279,7 @@ def pairwise_scores(
 
 
 @app.command()
-def unbiased_pairwise_scores(
+def differential_pairwise_scores(
     comparison_spec: Annotated[
         Path,
         typer.Argument(help="The path to the JSON file containing the conditions."),
@@ -310,10 +310,11 @@ def unbiased_pairwise_scores(
     account_url: AccountUrlOption = None,
     connection_string: ConnectionStringOption = None,
 ) -> None:
-    """Generate unbiased pairwise scores using the extract-and-judge method.
+    """Generate differential pairwise scores using the extract-and-judge method.
 
     Reduces length/formatting bias by extracting the common and unique content of
-    each answer, then judging only the unique content on relevance and diversity.
+    each answer, then judging only the unique content on relevance, diversity, and
+    comprehensiveness.
     Output is compatible with the standard pairwise significance pipeline.
     """
     comparison_spec = resolve_config_path(
@@ -321,7 +322,7 @@ def unbiased_pairwise_scores(
         account_url=account_url,
         connection_string=connection_string,
     )
-    config = load_config(UnbiasedPairwiseConfig, comparison_spec)
+    config = load_config(DifferentialPairwiseConfig, comparison_spec)
 
     llm_client = ModelFactory.create_chat_model(config.llm_config)
     output_storage = _build_output_storage(config.output_storage, output)
@@ -336,7 +337,7 @@ def unbiased_pairwise_scores(
     for base, other in all_combinations:
         for question_set in config.question_sets:
             rich_print(
-                f"Unbiased scoring {base.name} vs {other.name} for {question_set}"
+                f"Differential scoring {base.name} vs {other.name} for {question_set}"
             )
             cache_key = f"{question_set}_{base.name}--{other.name}.csv"
             if asyncio.run(output_storage.has(cache_key)):
@@ -352,7 +353,7 @@ def unbiased_pairwise_scores(
                 other_storage, _ = _build_condition_storage(
                     config.input_storage, other.answer_base_path, is_dir=True
                 )
-                result = get_unbiased_pairwise_scores(
+                result = get_differential_pairwise_scores(
                     llm_client=llm_client,
                     llm_config=config.llm_config,
                     base_name=base.name,
@@ -400,7 +401,7 @@ def unbiased_pairwise_scores(
                 ]
             ],
         ),
-        "Unbiased Pairwise Scores Summary",
+        "Differential Pairwise Scores Summary",
     )
 
     if print_model_usage:
