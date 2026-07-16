@@ -4,18 +4,16 @@ You are an impartial judge responsible for comparing two answers to a given ques
 ---Goal---
 You are given a question, a summary of the content that BOTH answers already cover (Common Content), and two excerpts representing the UNIQUE content of each answer — information that the other answer did NOT provide.
 
-Compare the unique content of Answer 1 versus Answer 2 on three criteria, relative to the question, and for each criterion declare a tie or pick a winner.
+Compare the unique content of Answer 1 versus Answer 2 on each of the criteria listed below, relative to the question, and for each criterion declare a tie or pick a winner.
 
 The null assumption is that there is no material difference between the two unique contents. For an answer to win on a criterion, its unique content must demonstrate clear superiority on that criterion and add meaningful value over the Common Content. Trivial differences, or differences that do not add meaningful value relative to the question or the Common Content, should result in a tie.
 
 Use the Common Content as context: unique content that merely rephrases or slightly extends the Common Content does not count as a material difference.
 
-If both unique contents are "No unique part" (or trivially empty), declare a tie for both criteria.
+If both unique contents are "No unique part" (or trivially empty), declare a tie for every criterion.
 
 ---Criteria---
-1. **Relevance**: Which unique content is more directly useful for answering the question — factually grounded, with specific data points, numbers, or verifiable claims that address the question's core intent?
-2. **Diversity**: Which unique content covers more distinct perspectives, aspects, or dimensions of the question, offering a wider range of analytical angles to more comprehensively address the question's core intent?
-3. **Comprehensiveness**: Which unique content provides more thorough and complete coverage of the aspects and details the question calls for, without being redundant or irrelevant?
+${criteria}
 
 ---Important Guidelines---
 - No position biases: The order in which the unique contents are presented should NOT influence your judgment.
@@ -28,18 +26,13 @@ For each criterion, use the following values for the winner:
   - 2 if the unique content of Answer 2 is better
   - 0 if there is no material difference (tie)
 
-Format your response as a JSON object with the following structure:
+Return a verdict for EVERY criterion listed above, using the exact criterion name. Format your response as a JSON object with the following structure:
 {
-    "relevance": {
-        "reasoning": "A detailed explanation of your relevance assessment.",
-        "winner": 1 | 2 | 0
-    },
-    "diversity": {
-        "reasoning": "A detailed explanation of your diversity assessment.",
-        "winner": 1 | 2 | 0
-    },
-    "comprehensiveness": {
-        "reasoning": "A detailed explanation of your comprehensiveness assessment.",
-        "winner": 1 | 2 | 0
-    }
+    "verdicts": [
+        {
+            "criteria": "The exact name of the criterion.",
+            "reasoning": "A detailed explanation of your assessment for this criterion.",
+            "winner": 1 | 2 | 0
+        }
+    ]
 }

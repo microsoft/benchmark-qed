@@ -135,14 +135,14 @@ The standard `pairwise-scores` command shows the judge the **full text** of both
 The `differential-pairwise-scores` command reduces those biases with a two-step **extract-and-judge** method (Censheng's method):
 
 1. **Extract** — For each question, the LLM first separates the two answers into three buckets: content that is **common** to both, content that is **unique to answer A**, and content that is **unique to answer B**.
-2. **Judge** — The judge then compares **only the unique content** (with the common content supplied as context) on three fixed criteria: **relevance**, **diversity**, and **comprehensiveness**.
+2. **Judge** — The judge then compares **only the unique content** (with the common content supplied as context) on the configured criteria (the standard defaults or any user-defined criteria).
 
 Because the shared material and padding are stripped out before judging, the verdict is driven by each answer's **substantive, distinct contribution** rather than by its length or presentation. If two answers convey the same information in different amounts of text, they correctly come out as a tie.
 
 Key points:
 
 - This is **additive** — it is a separate command and does not change the existing `pairwise-scores` behavior.
-- The criteria are **fixed to relevance, diversity, and comprehensiveness** (they are judged together in a single call), so a `criteria` field in the config is not required.
+- The criteria are **configurable** via a `criteria` field (the standard defaults are used when omitted), and they are judged together in a single call.
 - The output uses the **same schema and significance pipeline** as `pairwise-scores` (`win_rates.csv`, `winrates_sig_tests.csv`), so results are directly comparable to the standard method.
 - **Cost trade-off:** each comparison makes roughly **twice the LLM calls** (one extraction step plus one judging step) in exchange for a more bias-resistant verdict.
 
@@ -182,7 +182,7 @@ Follow these steps to run the differential pairwise scoring pipeline:
     - `.env`: Contains environment variables for the pairwise comparison tests. Open this file and replace `<API_KEY>` with your OpenAI or Azure API key.
     - `settings.yaml`: Contains pipeline settings, which you can modify as needed.
 
-    The differential command reuses the pairwise configuration structure (`base`, `others`, `question_sets`, `trials`, `llm_config`), but there is no `criteria` field, since the criteria are fixed to relevance, diversity, and comprehensiveness. The generated `settings.yaml` wires up the extract-and-judge prompts under `prompt_config` (`extract_system_prompt`, `extract_user_prompt`, `judge_system_prompt`, `judge_user_prompt`); edit those prompt files under `prompts/` or remove the `prompt_config` section to use the built-in defaults.
+    The differential command reuses the pairwise configuration structure (`base`, `others`, `question_sets`, `trials`, `llm_config`, `criteria`); when `criteria` is omitted the standard defaults are used. The generated `settings.yaml` wires up the extract-and-judge prompts under `prompt_config` (`extract_system_prompt`, `extract_user_prompt`, `judge_system_prompt`, `judge_user_prompt`); edit those prompt files under `prompts/` or remove the `prompt_config` section to use the built-in defaults.
 
     The generated `settings.yaml` includes commented-out `input_storage` and `output_storage` sections for configuring Azure Blob Storage backends.
 

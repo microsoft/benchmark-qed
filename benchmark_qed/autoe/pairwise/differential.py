@@ -4,8 +4,8 @@
 Standard pairwise judging compares full answers, which makes the verdict sensitive
 to confounds such as answer length and formatting. This module reduces that bias by
 first extracting the content that is COMMON to both answers and the content that is
-UNIQUE to each, then judging only the unique content on three criteria: relevance,
-diversity, and comprehensiveness.
+UNIQUE to each, then judging only the unique content on a configurable set of criteria
+(the standard defaults or any user-defined criteria).
 
 The output DataFrame is schema-compatible with
 ``benchmark_qed.autoe.pairwise.scores.get_pairwise_scores`` (it includes the same
@@ -34,14 +34,19 @@ from benchmark_qed.autoe.data_model import (
 from benchmark_qed.autoe.pairwise.scores import SCORE_MAPPING
 from benchmark_qed.autoe.prompts import pairwise as pairwise_prompts
 from benchmark_qed.config.llm_config import LLMConfig
+from benchmark_qed.config.model.score import Criteria, pairwise_scores_criteria
 from benchmark_qed.config.utils import load_template_file
 from benchmark_qed.llm import chat
 
 PAIRWISE_PROMPTS_PATH = Path(pairwise_prompts.__file__).parent
 
-# The differential judge always evaluates these criteria (hardcoded, judged together
-# in a single call based only on the unique content of each answer).
-DIFFERENTIAL_CRITERIA: tuple[str, ...] = ("relevance", "diversity", "comprehensiveness")
+
+def _format_criteria_block(criteria: list[Criteria]) -> str:
+    """Render the criteria as a numbered ``name: description`` block for the prompt."""
+    return "\n".join(
+        f"{index}. **{criterion.name}**: {criterion.description}"
+        for index, criterion in enumerate(criteria, start=1)
+    )
 
 
 def get_differential_pairwise_scores(
@@ -52,6 +57,7 @@ def get_differential_pairwise_scores(
     other_name: str,
     base_answers: pd.DataFrame,
     other_answers: pd.DataFrame,
+    criteria: list[Criteria] | None = None,
     extract_system_prompt: Template | None = None,
     extract_user_prompt: Template | None = None,
     judge_system_prompt: Template | None = None,
@@ -64,10 +70,9 @@ def get_differential_pairwise_scores(
     """Score a pair of conditions with the differential extract-and-judge method.
 
     For each question the answers are first reduced to their common and unique parts,
-    then only the unique parts are judged on relevance, diversity, and
-    comprehensiveness. Answer order is
-    counterbalanced across trials (as in standard pairwise scoring) to control for
-    position bias.
+    then only the unique parts are judged on the given ``criteria`` (any set of
+    default or user-defined criteria). Answer order is counterbalanced across trials
+    (as in standard pairwise scoring) to control for position bias.
 
     Args:
         llm_client: The LLM client to use for scoring.
@@ -76,6 +81,7 @@ def get_differential_pairwise_scores(
         other_name: Name of the other condition to compare.
         base_answers: DataFrame with base condition answers.
         other_answers: DataFrame with other condition answers.
+        criteria: The criteria to judge. Defaults to ``pairwise_scores_criteria()``.
         extract_system_prompt: Optional custom extraction system prompt template.
         extract_user_prompt: Optional custom extraction user prompt template.
         judge_system_prompt: Optional custom judge system prompt template.
@@ -91,6 +97,7 @@ def get_differential_pairwise_scores(
         schema-compatible with ``get_pairwise_scores`` (same required columns, plus
         extracted common/unique fields).
     """
+    criteria = criteria or pairwise_scores_criteria()
     pairs = (
         base_answers
         .merge(
@@ -115,7 +122,7 @@ def get_differential_pairwise_scores(
             progress.update(progress_task, advance=1, refresh=True)
 
         progress_task = progress.add_task(
-            "Scoring relevance, diversity & comprehensiveness (differential)...",
+            "Scoring criteria (differential)...",
             total=len(pairs) * trials,
         )
 
@@ -127,6 +134,7 @@ def get_differential_pairwise_scores(
                 answer_1=pair.answer_base,
                 answer_2_name=other_name,
                 answer_2=pair.answer_other,
+                criteria=criteria,
                 extract_system_prompt=extract_system_prompt,
                 extract_user_prompt=extract_user_prompt,
                 judge_system_prompt=judge_system_prompt,
@@ -162,6 +170,7 @@ async def get_differential_pairwise_score(
     answer_1: str,
     answer_2_name: str,
     answer_2: str,
+    criteria: list[Criteria] | None = None,
     extract_system_prompt: Template | None = None,
     extract_user_prompt: Template | None = None,
     judge_system_prompt: Template | None = None,
@@ -173,11 +182,11 @@ async def get_differential_pairwise_score(
 ) -> list[dict[str, Any]]:
     """Extract common/unique content then judge the unique content for one pair.
 
-    Returns one row per criterion (relevance, diversity, comprehensiveness), each
-    schema-compatible with
-    ``get_pairwise_score`` (same required columns, plus extracted common/unique
-    fields) so results can flow through ``analyze_criteria`` unchanged.
+    Returns one row per criterion, each schema-compatible with ``get_pairwise_score``
+    (same required columns, plus extracted common/unique fields) so results can flow
+    through ``analyze_criteria`` unchanged.
     """
+    criteria = criteria or pairwise_scores_criteria()
     extract_system_prompt = extract_system_prompt or load_template_file(
         PAIRWISE_PROMPTS_PATH / "pairwise_extract_system_prompt.txt"
     )
@@ -190,6 +199,8 @@ async def get_differential_pairwise_score(
     judge_user_prompt = judge_user_prompt or load_template_file(
         PAIRWISE_PROMPTS_PATH / "pairwise_unique_judge_user_prompt.txt"
     )
+
+    criteria_block = _format_criteria_block(criteria)
 
     answers_text = {
         answer_1_name: answer_1,
@@ -231,15 +242,16 @@ async def get_differential_pairwise_score(
         msg = "LLM did not return a structured PairwiseExtractionLLMResponse."
         raise RuntimeError(msg)
 
-    # --- Step 2: judge the unique content on relevance, diversity, comprehensiveness ---
+    # --- Step 2: judge the unique content on the requested criteria ---
     judge_user = judge_user_prompt.substitute(
         score_id=score_id_text,
         question=question,
         common=extraction.common,
         unique1=extraction.unique_answer_1,
         unique2=extraction.unique_answer_2,
+        criteria=criteria_block,
     ).strip()
-    judge_system = judge_system_prompt.template
+    judge_system = judge_system_prompt.substitute(criteria=criteria_block)
 
     verdict = (
         await chat(
@@ -257,15 +269,16 @@ async def get_differential_pairwise_score(
         msg = "LLM did not return a structured DifferentialPairwiseLLMResponse."
         raise RuntimeError(msg)
 
-    criterion_verdicts = {
-        "relevance": verdict.relevance,
-        "diversity": verdict.diversity,
-        "comprehensiveness": verdict.comprehensiveness,
+    verdicts_by_name = {
+        item.criteria.strip().lower(): item for item in verdict.verdicts
     }
 
     rows: list[dict[str, Any]] = []
-    for criterion_name in DIFFERENTIAL_CRITERIA:
-        criterion_verdict = criterion_verdicts[criterion_name]
+    for criterion in criteria:
+        criterion_verdict = verdicts_by_name.get(criterion.name.strip().lower())
+        if criterion_verdict is None:
+            msg = f"LLM did not return a verdict for criterion '{criterion.name}'."
+            raise RuntimeError(msg)
         rows.append({
             "score_id": score_id,
             "question": question,
@@ -273,7 +286,7 @@ async def get_differential_pairwise_score(
             "answer_1": answers_text[answers_order[0]],
             "answer_2_name": answers_order[1],
             "answer_2": answers_text[answers_order[1]],
-            "criteria": criterion_name,
+            "criteria": criterion.name,
             f"{answers_order[0]}_score": SCORE_MAPPING[criterion_verdict.winner],
             f"{answers_order[1]}_score": 1 - SCORE_MAPPING[criterion_verdict.winner],
             "reasoning": criterion_verdict.reasoning,

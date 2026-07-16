@@ -315,8 +315,8 @@ def differential_pairwise_scores(
     """Generate differential pairwise scores using the extract-and-judge method.
 
     Reduces length/formatting bias by extracting the common and unique content of
-    each answer, then judging only the unique content on relevance, diversity, and
-    comprehensiveness.
+    each answer, then judging only the unique content on the configured criteria
+    (the standard defaults or any user-defined criteria).
     Output is compatible with the standard pairwise significance pipeline.
     """
     comparison_spec = resolve_config_path(
@@ -366,6 +366,7 @@ def differential_pairwise_scores(
                     other_answers=asyncio.run(
                         _read_json_df(other_storage, f"{question_set}.json")
                     ),
+                    criteria=config.criteria,
                     extract_user_prompt=config.prompt_config.extract_user_prompt.template,
                     extract_system_prompt=config.prompt_config.extract_system_prompt.template,
                     judge_user_prompt=config.prompt_config.judge_user_prompt.template,

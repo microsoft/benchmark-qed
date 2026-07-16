@@ -364,9 +364,11 @@ question_sets: # List of question sets to use for scoring.
 
 ## Scoring Configuration
 # The differential method first extracts the common and unique content of each answer,
-# then judges only the unique content on three fixed criteria: relevance, diversity,
-# and comprehensiveness.
-# The criteria are not configurable for this method.
+# then judges only the unique content on the configured criteria. Defaults are used if
+# omitted; you can also provide your own criteria:
+# criteria:
+#   - name: "criteria name"
+#     description: "criteria description"
 trials: 4 # Number of trials to repeat the scoring process for each question. Should be an even number to allow for counterbalancing.
 
 ## LLM Configuration

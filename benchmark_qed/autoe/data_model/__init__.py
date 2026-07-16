@@ -12,6 +12,7 @@ from .assertion import (
 from .condition_pair import ConditionPair
 from .pairwise import (
     CriterionVerdict,
+    DifferentialCriterionVerdict,
     DifferentialPairwiseLLMResponse,
     PairwiseExtractionLLMResponse,
     PairwiseLLMResponse,
@@ -24,6 +25,7 @@ __all__ = [
     "AssertionLLMResponse",
     "ConditionPair",
     "CriterionVerdict",
+    "DifferentialCriterionVerdict",
     "DifferentialPairwiseLLMResponse",
     "HierarchicalAssertion",
     "HierarchicalAssertionLLMResponse",

@@ -30,19 +30,25 @@ class CriterionVerdict(BaseModel):
     reasoning: str = Field(description="The reasoning behind the verdict.")
 
 
+class DifferentialCriterionVerdict(CriterionVerdict):
+    """Named verdict for one criterion in differential pairwise judging.
+
+    Extends ``CriterionVerdict`` with the criterion name so that an arbitrary set of
+    criteria (the defaults or user-defined ones) can be judged in a single call
+    without hardcoding the criteria in the response schema.
+    """
+
+    criteria: str = Field(description="Name of the criterion being judged.")
+
+
 class DifferentialPairwiseLLMResponse(BaseModel):
     """Response from the LLM for the judging step of differential pairwise scoring.
 
-    Relevance, diversity, and comprehensiveness are judged in a single call, based
-    only on the unique content extracted from each answer.
+    Contains one verdict per requested criterion, all judged in a single call based
+    only on the unique content extracted from each answer. The criteria are not fixed:
+    any set of criteria (default or user-defined) can be scored.
     """
 
-    relevance: CriterionVerdict = Field(
-        description="Verdict comparing the unique content on relevance."
-    )
-    diversity: CriterionVerdict = Field(
-        description="Verdict comparing the unique content on diversity."
-    )
-    comprehensiveness: CriterionVerdict = Field(
-        description="Verdict comparing the unique content on comprehensiveness."
+    verdicts: list[DifferentialCriterionVerdict] = Field(
+        description="One verdict per criterion, comparing the unique content of the two answers.",
     )

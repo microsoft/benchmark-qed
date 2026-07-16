@@ -176,14 +176,19 @@ class DifferentialPairwiseConfig(BaseModel):
     """Configuration for differential (extract-and-judge) pairwise scoring.
 
     Reduces length/formatting bias by extracting the common and unique content of
-    each answer and judging only the unique content on relevance, diversity, and
-    comprehensiveness.
+    each answer and judging only the unique content on the configured criteria
+    (the standard defaults or any user-defined criteria).
     This extends the standard pairwise flow; it does not replace it.
     """
 
     llm_config: LLMConfig = Field(
         default_factory=LLMConfig,
         description="Configuration for the LLM to use for scoring.",
+    )
+
+    criteria: list[Criteria] = Field(
+        default_factory=pairwise_scores_criteria,
+        description="List of criteria to judge on the extracted unique content.",
     )
 
     trials: int = Field(

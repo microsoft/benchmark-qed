@@ -6,7 +6,6 @@ evaluation with configurable criteria.
 """
 
 from benchmark_qed.autoe.pairwise.differential import (
-    DIFFERENTIAL_CRITERIA,
     get_differential_pairwise_score,
     get_differential_pairwise_scores,
 )
@@ -18,7 +17,6 @@ from benchmark_qed.autoe.pairwise.scores import (
 )
 
 __all__ = [
-    "DIFFERENTIAL_CRITERIA",
     "SCORE_MAPPING",
     "analyze_criteria",
     "get_differential_pairwise_score",
