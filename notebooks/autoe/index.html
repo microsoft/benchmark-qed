@@ -2928,7 +2928,7 @@ print_df(sig_summary, "Significance Test Summary")</div>
 
 <span class="c1"># Retrieval results: standard schema {question_id, text, context: [{chunk_id, text, rank?}]}.</span>
 <span class="c1"># rank is optional; when absent the chunks are assumed to be pre-sorted by relevance.</span>
-<span class="n">generated_rag</span> <span class="o">=</span> <span class="s2">"vector_rag_long_context"</span>
+<span class="n">generated_rag</span> <span class="o">=</span> <span class="s2">"vector_rag_short_context"</span>
 <span class="n">retrieval_path</span> <span class="o">=</span> <span class="n">input_dir</span> <span class="o">/</span> <span class="n">generated_rag</span> <span class="o">/</span> <span class="s2">"data_global_retrieval_results.json"</span>
 <span class="n">retrieval_records</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">retrieval_path</span><span class="o">.</span><span class="n">read_text</span><span class="p">(</span><span class="n">encoding</span><span class="o">=</span><span class="s2">"utf-8"</span><span class="p">))</span>
 <span class="n">eval_results</span> <span class="o">=</span> <span class="n">load_retrieval_results_from_dicts</span><span class="p">(</span>
@@ -2984,7 +2984,7 @@ from benchmark_qed.autoe.prompts import assertion as chunk_assertion_prompts
 
 # Retrieval results: standard schema {question_id, text, context: [{chunk_id, text, rank?}]}.
 # rank is optional; when absent the chunks are assumed to be pre-sorted by relevance.
-generated_rag = "vector_rag_long_context"
+generated_rag = "vector_rag_short_context"
 retrieval_path = input_dir / generated_rag / "data_global_retrieval_results.json"
 retrieval_records = json.loads(retrieval_path.read_text(encoding="utf-8"))
 eval_results = load_retrieval_results_from_dicts(
@@ -3051,6 +3051,16 @@ summaries = asyncio.run(
 </clipboard-copy>
 </div>
 <div class="highlight-ipynb hl-python"><pre><span></span><span class="c1"># Summarize coverage metrics at each k</span>
+
+
+<span class="c1"># Sort by numeric k (labels look like "k5", "k10", ...), keeping the "all" entry last.</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_k_sort_key</span><span class="p">(</span><span class="n">item</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">object</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+    <span class="n">label</span> <span class="o">=</span> <span class="n">item</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">label</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">"k"</span><span class="p">)</span> <span class="ow">and</span> <span class="n">label</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span><span class="o">.</span><span class="n">isdigit</span><span class="p">():</span>
+        <span class="k">return</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">label</span><span class="p">[</span><span class="mi">1</span><span class="p">:]))</span>
+    <span class="k">return</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+
 <span class="n">chunk_results_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span>
     <span class="p">{</span>
         <span class="s2">"k"</span><span class="p">:</span> <span class="n">label</span><span class="p">,</span>
@@ -3059,11 +3069,21 @@ summaries = asyncio.run(
         <span class="s2">"coverage_strength"</span><span class="p">:</span> <span class="n">summary</span><span class="o">.</span><span class="n">mean_score</span><span class="p">,</span>
         <span class="s2">"mean_chunks"</span><span class="p">:</span> <span class="n">summary</span><span class="o">.</span><span class="n">mean_retrieved_chunks</span><span class="p">,</span>
     <span class="p">}</span>
-    <span class="k">for</span> <span class="n">label</span><span class="p">,</span> <span class="n">summary</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">summaries</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
+    <span class="k">for</span> <span class="n">label</span><span class="p">,</span> <span class="n">summary</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">summaries</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="n">_k_sort_key</span><span class="p">)</span>
 <span class="p">])</span>
 <span class="n">print_df</span><span class="p">(</span><span class="n">chunk_results_df</span><span class="p">,</span> <span class="s2">"Chunk-level Assertion Scoring Results"</span><span class="p">)</span>
 </pre></div>
 <div class="clipboard-copy-txt" id="cell-22"># Summarize coverage metrics at each k
+
+
+# Sort by numeric k (labels look like "k5", "k10", ...), keeping the "all" entry last.
+def _k_sort_key(item: tuple[str, object]) -&gt; tuple[int, int]:
+    label = item[0]
+    if label.startswith("k") and label[1:].isdigit():
+        return (0, int(label[1:]))
+    return (1, 0)
+
+
 chunk_results_df = pd.DataFrame([
     {
         "k": label,
@@ -3072,9 +3092,1811 @@ chunk_results_df = pd.DataFrame([
         "coverage_strength": summary.mean_score,
         "mean_chunks": summary.mean_retrieved_chunks,
     }
-    for label, summary in sorted(summaries.items())
+    for label, summary in sorted(summaries.items(), key=_k_sort_key)
 ])
 print_df(chunk_results_df, "Chunk-level Assertion Scoring Results")</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=361ff819">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="original-vs-differential-pairwise-scoring">Original vs. Differential Pairwise Scoring<a class="anchor-link" href="#original-vs-differential-pairwise-scoring">¶</a></h2><p>Standard ("original") pairwise judging compares the <strong>full</strong> answers, which makes the verdict sensitive to confounds such as answer length and formatting. <strong>Differential</strong> pairwise judging (the <em>extract-common-and-unique</em> method) reduces that bias in two steps:</p>
+<ol>
+<li><strong>Extract</strong>: for each question, isolate the content that is <strong>common</strong> to both answers and the content that is <strong>unique</strong> to each.</li>
+<li><strong>Judge</strong>: score only the <strong>unique</strong> content, evaluating <code>relevance</code>, <code>diversity</code>, and <code>comprehensiveness</code> together in a single call.</li>
+</ol>
+<p>Because the differential judge always scores exactly these criteria, the cells below restrict the original judge to the same criteria and run <strong>both</strong> methods on the <strong>same</strong> answer pairs. We then compare their win rates side-by-side to see how much the judging method changes the assessment scores.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=32d4b5ee">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="CodeMirror cm-s-jupyter">
+<div class="zeroclipboard-container">
+<clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-23">
+<div>
+<span class="notice" hidden="">Copied!</span>
+<svg aria-hidden="true" class="clipboard-copy-icon" data-view-component="true" height="20" version="1.1" viewbox="0 0 16 16" width="20">
+<path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z" fill="currentColor" fill-rule="evenodd"></path>
+<path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z" fill="currentColor" fill-rule="evenodd"></path>
+</svg>
+</div>
+</clipboard-copy>
+</div>
+<div class="highlight-ipynb hl-python"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">benchmark_qed.autoe.pairwise</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_differential_pairwise_scores</span>
+
+<span class="c1"># Config LLM model to be used as judge</span>
+<span class="n">llm_config</span> <span class="o">=</span> <span class="n">LLMConfig</span><span class="p">(</span>
+    <span class="n">model</span><span class="o">=</span><span class="s2">"gpt-5.2"</span><span class="p">,</span>
+    <span class="n">api_key</span><span class="o">=</span><span class="n">SecretStr</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">"OPENAI_API_KEY"</span><span class="p">]),</span>
+    <span class="n">llm_provider</span><span class="o">=</span><span class="n">LLMProvider</span><span class="o">.</span><span class="n">OpenAIChat</span><span class="p">,</span>
+    <span class="n">concurrent_requests</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span>
+    <span class="n">call_args</span><span class="o">=</span><span class="p">{</span><span class="s2">"temperature"</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span> <span class="s2">"seed"</span><span class="p">:</span> <span class="mi">42</span><span class="p">},</span>
+<span class="p">)</span>
+<span class="n">llm_client</span> <span class="o">=</span> <span class="n">ModelFactory</span><span class="o">.</span><span class="n">create_chat_model</span><span class="p">(</span><span class="n">llm_config</span><span class="p">)</span>
+
+<span class="c1"># Compare the original vs. differential judge on the SAME answer pairs.</span>
+<span class="n">diff_base</span> <span class="o">=</span> <span class="s2">"vector_rag_short_context"</span>
+<span class="n">diff_others</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"vector_rag_long_context"</span><span class="p">]</span>
+<span class="n">diff_question_sets</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"data_global"</span><span class="p">,</span> <span class="s2">"data_local"</span><span class="p">,</span> <span class="s2">"data_linked"</span><span class="p">]</span>
+<span class="n">diff_trials</span> <span class="o">=</span> <span class="mi">4</span>  <span class="c1"># must be even to support counterbalancing</span>
+<span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.05</span>
+
+<span class="n">diff_input_dir</span> <span class="o">=</span> <span class="s2">"./example_answers"</span>
+<span class="n">diff_output_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">"./output/original_vs_differential"</span><span class="p">)</span>
+<span class="n">diff_output_dir</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># The differential judge now accepts any criteria (defaults or user-defined). For this</span>
+<span class="c1"># experiment we score these three; the original judge is restricted to the same set so</span>
+<span class="c1"># the two methods are directly comparable.</span>
+<span class="n">DIFFERENTIAL_CRITERIA</span> <span class="o">=</span> <span class="p">(</span><span class="s2">"relevance"</span><span class="p">,</span> <span class="s2">"diversity"</span><span class="p">,</span> <span class="s2">"comprehensiveness"</span><span class="p">)</span>
+<span class="n">comparable_criteria</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">c</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">pairwise_scores_criteria</span><span class="p">()</span> <span class="k">if</span> <span class="n">c</span><span class="o">.</span><span class="n">name</span> <span class="ow">in</span> <span class="n">DIFFERENTIAL_CRITERIA</span>
+<span class="p">]</span>
+</pre></div>
+<div class="clipboard-copy-txt" id="cell-23">from benchmark_qed.autoe.pairwise import get_differential_pairwise_scores
+
+# Config LLM model to be used as judge
+llm_config = LLMConfig(
+    model="gpt-5.2",
+    api_key=SecretStr(os.environ["OPENAI_API_KEY"]),
+    llm_provider=LLMProvider.OpenAIChat,
+    concurrent_requests=32,
+    call_args={"temperature": 0.0, "seed": 42},
+)
+llm_client = ModelFactory.create_chat_model(llm_config)
+
+# Compare the original vs. differential judge on the SAME answer pairs.
+diff_base = "vector_rag_short_context"
+diff_others = ["vector_rag_long_context"]
+diff_question_sets = ["data_global", "data_local", "data_linked"]
+diff_trials = 4  # must be even to support counterbalancing
+alpha = 0.05
+
+diff_input_dir = "./example_answers"
+diff_output_dir = Path("./output/original_vs_differential")
+diff_output_dir.mkdir(parents=True, exist_ok=True)
+
+# The differential judge now accepts any criteria (defaults or user-defined). For this
+# experiment we score these three; the original judge is restricted to the same set so
+# the two methods are directly comparable.
+DIFFERENTIAL_CRITERIA = ("relevance", "diversity", "comprehensiveness")
+comparable_criteria = [
+    c for c in pairwise_scores_criteria() if c.name in DIFFERENTIAL_CRITERIA
+]</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=afae6a2e">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="CodeMirror cm-s-jupyter">
+<div class="zeroclipboard-container">
+<clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-24">
+<div>
+<span class="notice" hidden="">Copied!</span>
+<svg aria-hidden="true" class="clipboard-copy-icon" data-view-component="true" height="20" version="1.1" viewbox="0 0 16 16" width="20">
+<path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z" fill="currentColor" fill-rule="evenodd"></path>
+<path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z" fill="currentColor" fill-rule="evenodd"></path>
+</svg>
+</div>
+</clipboard-copy>
+</div>
+<div class="highlight-ipynb hl-python"><pre><span></span><span class="c1"># Run BOTH the original and the differential judge on the same answer pairs.</span>
+<span class="n">original_results</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">differential_results</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">question_set</span> <span class="ow">in</span> <span class="n">diff_question_sets</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">other</span> <span class="ow">in</span> <span class="n">diff_others</span><span class="p">:</span>
+        <span class="n">base_answers</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_json</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">diff_input_dir</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">diff_base</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">question_set</span><span class="si">}</span><span class="s2">_answers.json"</span>
+        <span class="p">)</span>
+        <span class="n">other_answers</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_json</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">diff_input_dir</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">other</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">question_set</span><span class="si">}</span><span class="s2">_answers.json"</span>
+        <span class="p">)</span>
+
+        <span class="n">rich_print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"[Original] </span><span class="si">{</span><span class="n">diff_base</span><span class="si">}</span><span class="s2"> vs </span><span class="si">{</span><span class="n">other</span><span class="si">}</span><span class="s2"> — </span><span class="si">{</span><span class="n">question_set</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+        <span class="n">original</span> <span class="o">=</span> <span class="n">get_pairwise_scores</span><span class="p">(</span>
+            <span class="n">llm_client</span><span class="o">=</span><span class="n">llm_client</span><span class="p">,</span>
+            <span class="n">llm_config</span><span class="o">=</span><span class="n">llm_config</span><span class="p">,</span>
+            <span class="n">base_name</span><span class="o">=</span><span class="n">diff_base</span><span class="p">,</span>
+            <span class="n">other_name</span><span class="o">=</span><span class="n">other</span><span class="p">,</span>
+            <span class="n">base_answers</span><span class="o">=</span><span class="n">base_answers</span><span class="p">,</span>
+            <span class="n">other_answers</span><span class="o">=</span><span class="n">other_answers</span><span class="p">,</span>
+            <span class="n">criteria</span><span class="o">=</span><span class="n">comparable_criteria</span><span class="p">,</span>
+            <span class="n">trials</span><span class="o">=</span><span class="n">diff_trials</span><span class="p">,</span>
+            <span class="n">include_score_id_in_prompt</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="n">question_id_key</span><span class="o">=</span><span class="s2">"question_id"</span><span class="p">,</span>
+            <span class="n">question_text_key</span><span class="o">=</span><span class="s2">"question"</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">original</span><span class="p">[</span><span class="s2">"question_set"</span><span class="p">]</span> <span class="o">=</span> <span class="n">question_set</span>
+        <span class="n">original_results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">original</span><span class="p">)</span>
+
+        <span class="n">rich_print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"[Differential] </span><span class="si">{</span><span class="n">diff_base</span><span class="si">}</span><span class="s2"> vs </span><span class="si">{</span><span class="n">other</span><span class="si">}</span><span class="s2"> — </span><span class="si">{</span><span class="n">question_set</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+        <span class="n">differential</span> <span class="o">=</span> <span class="n">get_differential_pairwise_scores</span><span class="p">(</span>
+            <span class="n">llm_client</span><span class="o">=</span><span class="n">llm_client</span><span class="p">,</span>
+            <span class="n">llm_config</span><span class="o">=</span><span class="n">llm_config</span><span class="p">,</span>
+            <span class="n">base_name</span><span class="o">=</span><span class="n">diff_base</span><span class="p">,</span>
+            <span class="n">other_name</span><span class="o">=</span><span class="n">other</span><span class="p">,</span>
+            <span class="n">base_answers</span><span class="o">=</span><span class="n">base_answers</span><span class="p">,</span>
+            <span class="n">other_answers</span><span class="o">=</span><span class="n">other_answers</span><span class="p">,</span>
+            <span class="n">criteria</span><span class="o">=</span><span class="n">comparable_criteria</span><span class="p">,</span>
+            <span class="n">trials</span><span class="o">=</span><span class="n">diff_trials</span><span class="p">,</span>
+            <span class="n">include_score_id_in_prompt</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="n">question_id_key</span><span class="o">=</span><span class="s2">"question_id"</span><span class="p">,</span>
+            <span class="n">question_text_key</span><span class="o">=</span><span class="s2">"question"</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">differential</span><span class="p">[</span><span class="s2">"question_set"</span><span class="p">]</span> <span class="o">=</span> <span class="n">question_set</span>
+        <span class="n">differential_results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">differential</span><span class="p">)</span>
+
+<span class="n">original_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">original_results</span><span class="p">,</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">differential_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">differential_results</span><span class="p">,</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">original_df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">diff_output_dir</span> <span class="o">/</span> <span class="s2">"original_pairwise_scores.csv"</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">differential_df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span>
+    <span class="n">diff_output_dir</span> <span class="o">/</span> <span class="s2">"differential_pairwise_scores.csv"</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span>
+<span class="p">)</span>
+</pre></div>
+<div class="clipboard-copy-txt" id="cell-24"># Run BOTH the original and the differential judge on the same answer pairs.
+original_results = []
+differential_results = []
+for question_set in diff_question_sets:
+    for other in diff_others:
+        base_answers = pd.read_json(
+            f"{diff_input_dir}/{diff_base}/{question_set}_answers.json"
+        )
+        other_answers = pd.read_json(
+            f"{diff_input_dir}/{other}/{question_set}_answers.json"
+        )
+
+        rich_print(f"[Original] {diff_base} vs {other} — {question_set}")
+        original = get_pairwise_scores(
+            llm_client=llm_client,
+            llm_config=llm_config,
+            base_name=diff_base,
+            other_name=other,
+            base_answers=base_answers,
+            other_answers=other_answers,
+            criteria=comparable_criteria,
+            trials=diff_trials,
+            include_score_id_in_prompt=True,
+            question_id_key="question_id",
+            question_text_key="question",
+        )
+        original["question_set"] = question_set
+        original_results.append(original)
+
+        rich_print(f"[Differential] {diff_base} vs {other} — {question_set}")
+        differential = get_differential_pairwise_scores(
+            llm_client=llm_client,
+            llm_config=llm_config,
+            base_name=diff_base,
+            other_name=other,
+            base_answers=base_answers,
+            other_answers=other_answers,
+            criteria=comparable_criteria,
+            trials=diff_trials,
+            include_score_id_in_prompt=True,
+            question_id_key="question_id",
+            question_text_key="question",
+        )
+        differential["question_set"] = question_set
+        differential_results.append(differential)
+
+original_df = pd.concat(original_results, ignore_index=True)
+differential_df = pd.concat(differential_results, ignore_index=True)
+original_df.to_csv(diff_output_dir / "original_pairwise_scores.csv", index=False)
+differential_df.to_csv(
+    diff_output_dir / "differential_pairwise_scores.csv", index=False
+)</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=c2473f9f">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="CodeMirror cm-s-jupyter">
+<div class="zeroclipboard-container">
+<clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-25">
+<div>
+<span class="notice" hidden="">Copied!</span>
+<svg aria-hidden="true" class="clipboard-copy-icon" data-view-component="true" height="20" version="1.1" viewbox="0 0 16 16" width="20">
+<path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z" fill="currentColor" fill-rule="evenodd"></path>
+<path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z" fill="currentColor" fill-rule="evenodd"></path>
+</svg>
+</div>
+</clipboard-copy>
+</div>
+<div class="highlight-ipynb hl-python"><pre><span></span><span class="c1"># Compute win rates for each method and compare the assessment scores side-by-side.</span>
+<span class="c1"># analyze_criteria returns the "other" method win rate (other_mean) per</span>
+<span class="c1"># question_set &amp; criterion, along with Holm-corrected significance.</span>
+<span class="n">original_summary</span> <span class="o">=</span> <span class="n">analyze_criteria</span><span class="p">(</span><span class="n">original_df</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="n">alpha</span><span class="p">)</span>
+<span class="n">differential_summary</span> <span class="o">=</span> <span class="n">analyze_criteria</span><span class="p">(</span><span class="n">differential_df</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="n">alpha</span><span class="p">)</span>
+
+<span class="n">merge_keys</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"question_set"</span><span class="p">,</span> <span class="s2">"criteria"</span><span class="p">,</span> <span class="s2">"base_name"</span><span class="p">,</span> <span class="s2">"other_name"</span><span class="p">]</span>
+<span class="n">comparison</span> <span class="o">=</span> <span class="n">original_summary</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span>
+    <span class="n">differential_summary</span><span class="p">,</span>
+    <span class="n">on</span><span class="o">=</span><span class="n">merge_keys</span><span class="p">,</span>
+    <span class="n">suffixes</span><span class="o">=</span><span class="p">(</span><span class="s2">"_original"</span><span class="p">,</span> <span class="s2">"_differential"</span><span class="p">),</span>
+<span class="p">)</span>
+
+<span class="c1"># Difference in the "other" method win rate between the two judging methods.</span>
+<span class="n">comparison</span><span class="p">[</span><span class="s2">"winrate_delta"</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">comparison</span><span class="p">[</span><span class="s2">"other_mean_differential"</span><span class="p">]</span> <span class="o">-</span> <span class="n">comparison</span><span class="p">[</span><span class="s2">"other_mean_original"</span><span class="p">]</span>
+<span class="p">)</span>
+<span class="n">comparison</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span>
+    <span class="n">diff_output_dir</span> <span class="o">/</span> <span class="s2">"original_vs_differential_comparison.csv"</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span>
+<span class="p">)</span>
+
+<span class="c1"># Build an unambiguous display table.</span>
+<span class="c1"># Win rate always refers to the "other" method (long context) beating the "base"</span>
+<span class="c1"># method (short context); the base win rate is simply 1 - other. Showing both sides</span>
+<span class="c1"># for BOTH judges, and naming columns after the actual methods, avoids misreading.</span>
+<span class="n">base_label</span> <span class="o">=</span> <span class="n">comparison</span><span class="p">[</span><span class="s2">"base_name"</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">other_label</span> <span class="o">=</span> <span class="n">comparison</span><span class="p">[</span><span class="s2">"other_name"</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_distinguishing_labels</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">"""Strip the shared prefix/suffix so labels keep only the differing part.</span>
+
+<span class="sd">    e.g. ("vector_rag_short_context", "vector_rag_long_context") -&gt; ("short", "long").</span>
+<span class="sd">    Falls back to the full names if they share no distinguishing middle.</span>
+<span class="sd">    """</span>
+    <span class="n">prefix_len</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">ca</span><span class="p">,</span> <span class="n">cb</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">ca</span> <span class="o">!=</span> <span class="n">cb</span><span class="p">:</span>
+            <span class="k">break</span>
+        <span class="n">prefix_len</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="n">suffix_len</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">ca</span><span class="p">,</span> <span class="n">cb</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">prefix_len</span><span class="p">:][::</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">b</span><span class="p">[</span><span class="n">prefix_len</span><span class="p">:][::</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">strict</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">ca</span> <span class="o">!=</span> <span class="n">cb</span><span class="p">:</span>
+            <span class="k">break</span>
+        <span class="n">suffix_len</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="n">short_a</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="n">prefix_len</span> <span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">-</span> <span class="n">suffix_len</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s2">"_"</span><span class="p">)</span>
+    <span class="n">short_b</span> <span class="o">=</span> <span class="n">b</span><span class="p">[</span><span class="n">prefix_len</span> <span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="o">-</span> <span class="n">suffix_len</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s2">"_"</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">short_a</span> <span class="ow">or</span> <span class="n">a</span><span class="p">,</span> <span class="n">short_b</span> <span class="ow">or</span> <span class="n">b</span><span class="p">)</span>
+
+
+<span class="n">base_short</span><span class="p">,</span> <span class="n">other_short</span> <span class="o">=</span> <span class="n">_distinguishing_labels</span><span class="p">(</span><span class="n">base_label</span><span class="p">,</span> <span class="n">other_label</span><span class="p">)</span>
+
+<span class="n">display_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s2">"question set"</span><span class="p">:</span> <span class="n">comparison</span><span class="p">[</span><span class="s2">"question_set"</span><span class="p">],</span>
+    <span class="s2">"criteria"</span><span class="p">:</span> <span class="n">comparison</span><span class="p">[</span><span class="s2">"criteria"</span><span class="p">],</span>
+    <span class="c1"># Original judge: both sides + significance</span>
+    <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">base_short</span><span class="si">}</span><span class="s2"> WR (orig)"</span><span class="p">:</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">comparison</span><span class="p">[</span><span class="s2">"other_mean_original"</span><span class="p">],</span>
+    <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">other_short</span><span class="si">}</span><span class="s2"> WR (orig)"</span><span class="p">:</span> <span class="n">comparison</span><span class="p">[</span><span class="s2">"other_mean_original"</span><span class="p">],</span>
+    <span class="s2">"p (orig)"</span><span class="p">:</span> <span class="n">comparison</span><span class="p">[</span><span class="s2">"formatted_corrected_p_value_original"</span><span class="p">],</span>
+    <span class="c1"># Differential judge: both sides + significance</span>
+    <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">base_short</span><span class="si">}</span><span class="s2"> WR (diff)"</span><span class="p">:</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">comparison</span><span class="p">[</span><span class="s2">"other_mean_differential"</span><span class="p">],</span>
+    <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">other_short</span><span class="si">}</span><span class="s2"> WR (diff)"</span><span class="p">:</span> <span class="n">comparison</span><span class="p">[</span><span class="s2">"other_mean_differential"</span><span class="p">],</span>
+    <span class="s2">"p (diff)"</span><span class="p">:</span> <span class="n">comparison</span><span class="p">[</span><span class="s2">"formatted_corrected_p_value_differential"</span><span class="p">],</span>
+    <span class="c1"># How much the "other" method win rate shifted after bias correction</span>
+    <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">other_short</span><span class="si">}</span><span class="s2"> WR Δ (diff-orig)"</span><span class="p">:</span> <span class="n">comparison</span><span class="p">[</span><span class="s2">"winrate_delta"</span><span class="p">],</span>
+<span class="p">})</span>
+
+<span class="n">print_df</span><span class="p">(</span>
+    <span class="n">cast</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">display_df</span><span class="p">),</span>
+    <span class="sa">f</span><span class="s2">"Win rate of '</span><span class="si">{</span><span class="n">other_label</span><span class="si">}</span><span class="s2">' vs '</span><span class="si">{</span><span class="n">base_label</span><span class="si">}</span><span class="s2">'  "</span>
+    <span class="sa">f</span><span class="s2">"(columns show '</span><span class="si">{</span><span class="n">other_short</span><span class="si">}</span><span class="s2">'/'</span><span class="si">{</span><span class="n">base_short</span><span class="si">}</span><span class="s2">'; base WR = 1 - other WR; "</span>
+    <span class="sa">f</span><span class="s2">"orig=original judge, diff=differential judge)"</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+<div class="clipboard-copy-txt" id="cell-25"># Compute win rates for each method and compare the assessment scores side-by-side.
+# analyze_criteria returns the "other" method win rate (other_mean) per
+# question_set &amp; criterion, along with Holm-corrected significance.
+original_summary = analyze_criteria(original_df, alpha=alpha)
+differential_summary = analyze_criteria(differential_df, alpha=alpha)
+
+merge_keys = ["question_set", "criteria", "base_name", "other_name"]
+comparison = original_summary.merge(
+    differential_summary,
+    on=merge_keys,
+    suffixes=("_original", "_differential"),
+)
+
+# Difference in the "other" method win rate between the two judging methods.
+comparison["winrate_delta"] = (
+    comparison["other_mean_differential"] - comparison["other_mean_original"]
+)
+comparison.to_csv(
+    diff_output_dir / "original_vs_differential_comparison.csv", index=False
+)
+
+# Build an unambiguous display table.
+# Win rate always refers to the "other" method (long context) beating the "base"
+# method (short context); the base win rate is simply 1 - other. Showing both sides
+# for BOTH judges, and naming columns after the actual methods, avoids misreading.
+base_label = comparison["base_name"].iloc[0]
+other_label = comparison["other_name"].iloc[0]
+
+
+def _distinguishing_labels(a: str, b: str) -&gt; tuple[str, str]:
+    """Strip the shared prefix/suffix so labels keep only the differing part.
+
+    e.g. ("vector_rag_short_context", "vector_rag_long_context") -&gt; ("short", "long").
+    Falls back to the full names if they share no distinguishing middle.
+    """
+    prefix_len = 0
+    for ca, cb in zip(a, b, strict=False):
+        if ca != cb:
+            break
+        prefix_len += 1
+    suffix_len = 0
+    for ca, cb in zip(a[prefix_len:][::-1], b[prefix_len:][::-1], strict=False):
+        if ca != cb:
+            break
+        suffix_len += 1
+    short_a = a[prefix_len : len(a) - suffix_len].strip("_")
+    short_b = b[prefix_len : len(b) - suffix_len].strip("_")
+    return (short_a or a, short_b or b)
+
+
+base_short, other_short = _distinguishing_labels(base_label, other_label)
+
+display_df = pd.DataFrame({
+    "question set": comparison["question_set"],
+    "criteria": comparison["criteria"],
+    # Original judge: both sides + significance
+    f"{base_short} WR (orig)": 1 - comparison["other_mean_original"],
+    f"{other_short} WR (orig)": comparison["other_mean_original"],
+    "p (orig)": comparison["formatted_corrected_p_value_original"],
+    # Differential judge: both sides + significance
+    f"{base_short} WR (diff)": 1 - comparison["other_mean_differential"],
+    f"{other_short} WR (diff)": comparison["other_mean_differential"],
+    "p (diff)": comparison["formatted_corrected_p_value_differential"],
+    # How much the "other" method win rate shifted after bias correction
+    f"{other_short} WR Δ (diff-orig)": comparison["winrate_delta"],
+})
+
+print_df(
+    cast(pd.DataFrame, display_df),
+    f"Win rate of '{other_label}' vs '{base_label}'  "
+    f"(columns show '{other_short}'/'{base_short}'; base WR = 1 - other WR; "
+    f"orig=original judge, diff=differential judge)",
+)</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=238fc6e1">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="experiment-joint-vs-separate-criterion-judging">Experiment: joint vs. separate criterion judging<a class="anchor-link" href="#experiment-joint-vs-separate-criterion-judging">¶</a></h3><p>The differential judge scores all criteria (<code>relevance</code>, <code>diversity</code>, <code>comprehensiveness</code>) <strong>together in a single LLM call</strong>. A natural question is whether judging each criterion in its <strong>own</strong> call would change the verdicts. Historically (on older models such as GPT-4) scoring metrics separately sometimes gave different results, which is why the standard pairwise judge evaluates one criterion per call.</p>
+<p>This experiment tests whether that still matters for the differential judge:</p>
+<ul>
+<li><strong>Joint</strong> — the shipped <code>get_differential_pairwise_scores</code> (one judge call scores all criteria). We reuse the <code>differential_df</code> computed above.</li>
+<li><strong>Separate</strong> — the same extraction step, but <strong>one judge call per criterion</strong> (each call sees only that criterion's definition).</li>
+</ul>
+<p>Both variants use the identical extraction step and the same answer pairs, so the only difference is joint-vs-separate judging. We then compare (a) the aggregate win rates and (b) the per-<code>(question, criterion, trial)</code> <strong>verdict agreement rate</strong> between the two variants. If agreement is high and win rates match, joint judging is safe; if not, separate judging is warranted.</p>
+<blockquote>
+<p>Note: this reuses <code>differential_df</code>, <code>llm_client</code>, <code>llm_config</code>, and the <code>diff_*</code> config from the differential section above, so run that section first.</p>
+</blockquote>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=592b2c29">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="CodeMirror cm-s-jupyter">
+<div class="zeroclipboard-container">
+<clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-26">
+<div>
+<span class="notice" hidden="">Copied!</span>
+<svg aria-hidden="true" class="clipboard-copy-icon" data-view-component="true" height="20" version="1.1" viewbox="0 0 16 16" width="20">
+<path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z" fill="currentColor" fill-rule="evenodd"></path>
+<path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z" fill="currentColor" fill-rule="evenodd"></path>
+</svg>
+</div>
+</clipboard-copy>
+</div>
+<div class="highlight-ipynb hl-python"><pre><span></span><span class="c1"># Separate-call variant of the differential judge: identical extraction, but one</span>
+<span class="c1"># judge call per criterion (instead of all criteria in a single call).</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">asyncio</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">itertools</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">uuid</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">graphrag_llm.completion</span><span class="w"> </span><span class="kn">import</span> <span class="n">LLMCompletion</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">benchmark_qed.autoe.data_model</span><span class="w"> </span><span class="kn">import</span> <span class="n">ConditionPair</span><span class="p">,</span> <span class="n">PairwiseExtractionLLMResponse</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">benchmark_qed.autoe.data_model.pairwise</span><span class="w"> </span><span class="kn">import</span> <span class="n">CriterionVerdict</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">benchmark_qed.autoe.pairwise</span><span class="w"> </span><span class="kn">import</span> <span class="n">SCORE_MAPPING</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">benchmark_qed.autoe.pairwise.differential</span><span class="w"> </span><span class="kn">import</span> <span class="n">PAIRWISE_PROMPTS_PATH</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">benchmark_qed.config.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_template_file</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">benchmark_qed.llm</span><span class="w"> </span><span class="kn">import</span> <span class="n">chat</span>
+
+<span class="c1"># Criterion definitions kept in sync with the shipped joint judge system prompt.</span>
+<span class="n">JUDGE_CRITERIA_DESCRIPTIONS</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">"relevance"</span><span class="p">:</span> <span class="p">(</span>
+        <span class="s2">"Which unique content is more directly useful for answering the question — "</span>
+        <span class="s2">"factually grounded, with specific data points, numbers, or verifiable claims "</span>
+        <span class="s2">"that address the question's core intent?"</span>
+    <span class="p">),</span>
+    <span class="s2">"diversity"</span><span class="p">:</span> <span class="p">(</span>
+        <span class="s2">"Which unique content covers more distinct perspectives, aspects, or dimensions "</span>
+        <span class="s2">"of the question, offering a wider range of analytical angles to more "</span>
+        <span class="s2">"comprehensively address the question's core intent?"</span>
+    <span class="p">),</span>
+    <span class="s2">"comprehensiveness"</span><span class="p">:</span> <span class="p">(</span>
+        <span class="s2">"Which unique content provides more thorough and complete coverage of the "</span>
+        <span class="s2">"aspects and details the question calls for, without being redundant or "</span>
+        <span class="s2">"irrelevant?"</span>
+    <span class="p">),</span>
+<span class="p">}</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_single_criterion_judge_system</span><span class="p">(</span><span class="n">criterion</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s2">"""---Role---</span>
+<span class="s2">You are an impartial judge comparing two answers to a question based only on the content that is UNIQUE to each answer.</span>
+
+<span class="s2">---Goal---</span>
+<span class="s2">You are given a question, a summary of the content BOTH answers cover (Common Content), and the UNIQUE content of each answer. Compare the unique content of Answer 1 versus Answer 2 on a SINGLE criterion and declare a tie or pick a winner.</span>
+
+<span class="s2">The null assumption is that there is no material difference between the two unique contents. For an answer to win, its unique content must demonstrate clear superiority on this criterion and add meaningful value over the Common Content. Trivial differences result in a tie. If both unique contents are "No unique part" (or trivially empty), declare a tie.</span>
+
+<span class="s2">---Criterion---</span>
+<span class="si">{</span><span class="n">criterion</span><span class="o">.</span><span class="n">capitalize</span><span class="p">()</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">JUDGE_CRITERIA_DESCRIPTIONS</span><span class="p">[</span><span class="n">criterion</span><span class="p">]</span><span class="si">}</span>
+
+<span class="s2">---Important Guidelines---</span>
+<span class="s2">- No position biases: the order of the unique contents should NOT influence your judgment.</span>
+<span class="s2">- Ignore length: do NOT let the length of the unique content affect your evaluation.</span>
+<span class="s2">- Ignore formatting style: focus only on substantive content.</span>
+
+<span class="s2">---Output Format---</span>
+<span class="s2">Use these values for the winner: 1 (Answer 1 better), 2 (Answer 2 better), 0 (tie).</span>
+<span class="s2">Format your response as a JSON object with the structure:</span>
+<span class="se">{{</span>
+<span class="s2">    "reasoning": "A detailed explanation of your assessment.",</span>
+<span class="s2">    "winner": 1 | 2 | 0</span>
+<span class="se">}}</span>
+<span class="s2">"""</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_single_criterion_judge_user</span><span class="p">(</span>
+    <span class="n">criterion</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">score_id_text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">question</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">common</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">unique1</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">unique2</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s2">"""</span><span class="si">{</span><span class="n">score_id_text</span><span class="si">}</span>
+<span class="s2">---Question---</span>
+<span class="si">{</span><span class="n">question</span><span class="si">}</span>
+
+<span class="s2">---Common Content (shared by both answers)---</span>
+<span class="si">{</span><span class="n">common</span><span class="si">}</span>
+
+<span class="s2">---Start of Unique Content of Answer 1---</span>
+<span class="si">{</span><span class="n">unique1</span><span class="si">}</span>
+<span class="s2">---End of Unique Content of Answer 1---</span>
+
+<span class="s2">---Start of Unique Content of Answer 2---</span>
+<span class="si">{</span><span class="n">unique2</span><span class="si">}</span>
+<span class="s2">---End of Unique Content of Answer 2---</span>
+
+<span class="s2">Compare the unique content of Answer 1 and Answer 2 on </span><span class="si">{</span><span class="n">criterion</span><span class="si">}</span><span class="s2">, relative to the question. Remember, the null assumption is that there is no material difference.</span>
+
+<span class="s2">Format your response as a JSON object with the structure:</span>
+<span class="se">{{</span>
+<span class="s2">    "reasoning": "A detailed explanation of your assessment.",</span>
+<span class="s2">    "winner": 1 | 2 | 0</span>
+<span class="se">}}</span>
+<span class="s2">"""</span>
+
+
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">get_separate_differential_score</span><span class="p">(</span>
+    <span class="n">llm</span><span class="p">:</span> <span class="n">LLMCompletion</span><span class="p">,</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">question</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">answer_1_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">answer_1</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">answer_2_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">answer_2</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">trial</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="n">include_score_id_in_prompt</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">additional_call_args</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]:</span>
+<span class="w">    </span><span class="sd">"""Extract common/unique once, then judge each criterion in its own call."""</span>
+    <span class="n">extract_system</span> <span class="o">=</span> <span class="n">load_template_file</span><span class="p">(</span>
+        <span class="n">PAIRWISE_PROMPTS_PATH</span> <span class="o">/</span> <span class="s2">"pairwise_extract_system_prompt.txt"</span>
+    <span class="p">)</span>
+    <span class="n">extract_user</span> <span class="o">=</span> <span class="n">load_template_file</span><span class="p">(</span>
+        <span class="n">PAIRWISE_PROMPTS_PATH</span> <span class="o">/</span> <span class="s2">"pairwise_extract_user_prompt.txt"</span>
+    <span class="p">)</span>
+
+    <span class="n">answers_text</span> <span class="o">=</span> <span class="p">{</span><span class="n">answer_1_name</span><span class="p">:</span> <span class="n">answer_1</span><span class="p">,</span> <span class="n">answer_2_name</span><span class="p">:</span> <span class="n">answer_2</span><span class="p">}</span>
+    <span class="c1"># Counterbalance the presentation order across trials (matches the joint judge).</span>
+    <span class="n">answers_order</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="nb">list</span><span class="p">(</span><span class="n">answers_text</span><span class="p">)</span> <span class="k">if</span> <span class="n">trial</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="nb">list</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span><span class="n">answers_text</span><span class="p">))</span>
+    <span class="p">)</span>
+    <span class="n">score_id</span> <span class="o">=</span> <span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">()</span><span class="o">.</span><span class="n">hex</span>
+    <span class="n">score_id_text</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"Score ID: </span><span class="si">{</span><span class="n">score_id</span><span class="si">}</span><span class="se">\n</span><span class="s2">"</span> <span class="k">if</span> <span class="n">include_score_id_in_prompt</span> <span class="k">else</span> <span class="s2">""</span>
+
+    <span class="n">extract_user_text</span> <span class="o">=</span> <span class="n">extract_user</span><span class="o">.</span><span class="n">substitute</span><span class="p">(</span>
+        <span class="n">score_id</span><span class="o">=</span><span class="n">score_id_text</span><span class="p">,</span>
+        <span class="n">question</span><span class="o">=</span><span class="n">question</span><span class="p">,</span>
+        <span class="n">answer1</span><span class="o">=</span><span class="n">answers_text</span><span class="p">[</span><span class="n">answers_order</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span>
+        <span class="n">answer2</span><span class="o">=</span><span class="n">answers_text</span><span class="p">[</span><span class="n">answers_order</span><span class="p">[</span><span class="mi">1</span><span class="p">]],</span>
+    <span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+    <span class="n">extraction_response</span> <span class="o">=</span> <span class="k">await</span> <span class="n">chat</span><span class="p">(</span>
+        <span class="n">llm</span><span class="p">,</span>
+        <span class="n">messages</span><span class="o">=</span><span class="p">[</span>
+            <span class="p">{</span><span class="s2">"role"</span><span class="p">:</span> <span class="s2">"system"</span><span class="p">,</span> <span class="s2">"content"</span><span class="p">:</span> <span class="n">extract_system</span><span class="o">.</span><span class="n">template</span><span class="p">},</span>
+            <span class="p">{</span><span class="s2">"role"</span><span class="p">:</span> <span class="s2">"user"</span><span class="p">,</span> <span class="s2">"content"</span><span class="p">:</span> <span class="n">extract_user_text</span><span class="p">},</span>
+        <span class="p">],</span>
+        <span class="n">response_format</span><span class="o">=</span><span class="n">PairwiseExtractionLLMResponse</span><span class="p">,</span>
+        <span class="o">**</span><span class="p">(</span><span class="n">additional_call_args</span> <span class="ow">or</span> <span class="p">{}),</span>
+    <span class="p">)</span>
+    <span class="n">extraction</span> <span class="o">=</span> <span class="n">extraction_response</span><span class="o">.</span><span class="n">formatted_response</span>
+    <span class="k">if</span> <span class="n">extraction</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="s2">"LLM did not return a structured PairwiseExtractionLLMResponse."</span>
+        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+
+    <span class="n">rows</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">criterion</span> <span class="ow">in</span> <span class="n">DIFFERENTIAL_CRITERIA</span><span class="p">:</span>
+        <span class="n">judge_user</span> <span class="o">=</span> <span class="n">_single_criterion_judge_user</span><span class="p">(</span>
+            <span class="n">criterion</span><span class="p">,</span>
+            <span class="n">score_id_text</span><span class="p">,</span>
+            <span class="n">question</span><span class="p">,</span>
+            <span class="n">extraction</span><span class="o">.</span><span class="n">common</span><span class="p">,</span>
+            <span class="n">extraction</span><span class="o">.</span><span class="n">unique_answer_1</span><span class="p">,</span>
+            <span class="n">extraction</span><span class="o">.</span><span class="n">unique_answer_2</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">verdict_response</span> <span class="o">=</span> <span class="k">await</span> <span class="n">chat</span><span class="p">(</span>
+            <span class="n">llm</span><span class="p">,</span>
+            <span class="n">messages</span><span class="o">=</span><span class="p">[</span>
+                <span class="p">{</span>
+                    <span class="s2">"role"</span><span class="p">:</span> <span class="s2">"system"</span><span class="p">,</span>
+                    <span class="s2">"content"</span><span class="p">:</span> <span class="n">_single_criterion_judge_system</span><span class="p">(</span><span class="n">criterion</span><span class="p">),</span>
+                <span class="p">},</span>
+                <span class="p">{</span><span class="s2">"role"</span><span class="p">:</span> <span class="s2">"user"</span><span class="p">,</span> <span class="s2">"content"</span><span class="p">:</span> <span class="n">judge_user</span><span class="p">},</span>
+            <span class="p">],</span>
+            <span class="n">response_format</span><span class="o">=</span><span class="n">CriterionVerdict</span><span class="p">,</span>
+            <span class="o">**</span><span class="p">(</span><span class="n">additional_call_args</span> <span class="ow">or</span> <span class="p">{}),</span>
+        <span class="p">)</span>
+        <span class="n">verdict</span> <span class="o">=</span> <span class="n">verdict_response</span><span class="o">.</span><span class="n">formatted_response</span>
+        <span class="k">if</span> <span class="n">verdict</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="s2">"LLM did not return a structured CriterionVerdict."</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+        <span class="n">rows</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+            <span class="s2">"score_id"</span><span class="p">:</span> <span class="n">score_id</span><span class="p">,</span>
+            <span class="s2">"question"</span><span class="p">:</span> <span class="n">question</span><span class="p">,</span>
+            <span class="s2">"criteria"</span><span class="p">:</span> <span class="n">criterion</span><span class="p">,</span>
+            <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">answers_order</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">_score"</span><span class="p">:</span> <span class="n">SCORE_MAPPING</span><span class="p">[</span><span class="n">verdict</span><span class="o">.</span><span class="n">winner</span><span class="p">],</span>
+            <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">answers_order</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">_score"</span><span class="p">:</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">SCORE_MAPPING</span><span class="p">[</span><span class="n">verdict</span><span class="o">.</span><span class="n">winner</span><span class="p">],</span>
+            <span class="s2">"reasoning"</span><span class="p">:</span> <span class="n">verdict</span><span class="o">.</span><span class="n">reasoning</span><span class="p">,</span>
+            <span class="s2">"trial"</span><span class="p">:</span> <span class="n">trial</span><span class="p">,</span>
+        <span class="p">})</span>
+    <span class="k">return</span> <span class="n">rows</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">get_separate_differential_scores</span><span class="p">(</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">llm_client</span><span class="p">:</span> <span class="n">LLMCompletion</span><span class="p">,</span>
+    <span class="n">llm_config</span><span class="p">:</span> <span class="n">LLMConfig</span><span class="p">,</span>
+    <span class="n">base_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">other_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">base_answers</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
+    <span class="n">other_answers</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
+    <span class="n">trials</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="n">include_score_id_in_prompt</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">question_id_key</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"question_id"</span><span class="p">,</span>
+    <span class="n">question_text_key</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"question_text"</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Separate-call counterpart of get_differential_pairwise_scores (same schema)."""</span>
+    <span class="n">pairs</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">base_answers</span>
+        <span class="o">.</span><span class="n">merge</span><span class="p">(</span>
+            <span class="n">other_answers</span><span class="p">,</span>
+            <span class="n">how</span><span class="o">=</span><span class="s2">"inner"</span><span class="p">,</span>
+            <span class="n">on</span><span class="o">=</span><span class="p">[</span><span class="n">question_id_key</span><span class="p">],</span>
+            <span class="n">suffixes</span><span class="o">=</span><span class="p">(</span><span class="s2">"_base"</span><span class="p">,</span> <span class="s2">"_other"</span><span class="p">),</span>
+        <span class="p">)</span>
+        <span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">question_text_key</span><span class="si">}</span><span class="s2">_other"</span><span class="p">])</span>
+        <span class="o">.</span><span class="n">rename</span><span class="p">(</span>
+            <span class="n">columns</span><span class="o">=</span><span class="p">{</span>
+                <span class="n">question_id_key</span><span class="p">:</span> <span class="s2">"question_id"</span><span class="p">,</span>
+                <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">question_text_key</span><span class="si">}</span><span class="s2">_base"</span><span class="p">:</span> <span class="s2">"question_text"</span><span class="p">,</span>
+            <span class="p">}</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+    <span class="n">pairs</span> <span class="o">=</span> <span class="n">pairs</span><span class="p">[[</span><span class="s2">"question_id"</span><span class="p">,</span> <span class="s2">"question_text"</span><span class="p">,</span> <span class="s2">"answer_base"</span><span class="p">,</span> <span class="s2">"answer_other"</span><span class="p">]]</span>
+
+    <span class="n">tasks</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">get_separate_differential_score</span><span class="p">(</span>
+            <span class="n">llm_client</span><span class="p">,</span>
+            <span class="n">question</span><span class="o">=</span><span class="n">pair</span><span class="o">.</span><span class="n">question_text</span><span class="p">,</span>
+            <span class="n">answer_1_name</span><span class="o">=</span><span class="n">base_name</span><span class="p">,</span>
+            <span class="n">answer_1</span><span class="o">=</span><span class="n">pair</span><span class="o">.</span><span class="n">answer_base</span><span class="p">,</span>
+            <span class="n">answer_2_name</span><span class="o">=</span><span class="n">other_name</span><span class="p">,</span>
+            <span class="n">answer_2</span><span class="o">=</span><span class="n">pair</span><span class="o">.</span><span class="n">answer_other</span><span class="p">,</span>
+            <span class="n">trial</span><span class="o">=</span><span class="n">n</span><span class="p">,</span>
+            <span class="n">include_score_id_in_prompt</span><span class="o">=</span><span class="n">include_score_id_in_prompt</span><span class="p">,</span>
+            <span class="n">additional_call_args</span><span class="o">=</span><span class="n">llm_config</span><span class="o">.</span><span class="n">call_args</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="k">for</span> <span class="n">pair</span> <span class="ow">in</span> <span class="n">itertools</span><span class="o">.</span><span class="n">starmap</span><span class="p">(</span><span class="n">ConditionPair</span><span class="p">,</span> <span class="n">pairs</span><span class="o">.</span><span class="n">itertuples</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">trials</span><span class="p">)</span>
+    <span class="p">]</span>
+
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">_run_tasks</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]]:</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">gather</span><span class="p">(</span><span class="o">*</span><span class="n">tasks</span><span class="p">)</span>
+
+    <span class="n">nested_results</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">_run_tasks</span><span class="p">())</span>
+    <span class="n">flat_rows</span> <span class="o">=</span> <span class="p">[</span><span class="n">row</span> <span class="k">for</span> <span class="n">group</span> <span class="ow">in</span> <span class="n">nested_results</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">group</span><span class="p">]</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">flat_rows</span><span class="p">)</span>
+    <span class="n">result</span><span class="p">[</span><span class="s2">"base_name"</span><span class="p">]</span> <span class="o">=</span> <span class="n">base_name</span>
+    <span class="n">result</span><span class="p">[</span><span class="s2">"other_name"</span><span class="p">]</span> <span class="o">=</span> <span class="n">other_name</span>
+    <span class="k">return</span> <span class="n">result</span>
+</pre></div>
+<div class="clipboard-copy-txt" id="cell-26"># Separate-call variant of the differential judge: identical extraction, but one
+# judge call per criterion (instead of all criteria in a single call).
+import asyncio
+import itertools
+import uuid
+from typing import Any
+
+from graphrag_llm.completion import LLMCompletion
+
+from benchmark_qed.autoe.data_model import ConditionPair, PairwiseExtractionLLMResponse
+from benchmark_qed.autoe.data_model.pairwise import CriterionVerdict
+from benchmark_qed.autoe.pairwise import SCORE_MAPPING
+from benchmark_qed.autoe.pairwise.differential import PAIRWISE_PROMPTS_PATH
+from benchmark_qed.config.utils import load_template_file
+from benchmark_qed.llm import chat
+
+# Criterion definitions kept in sync with the shipped joint judge system prompt.
+JUDGE_CRITERIA_DESCRIPTIONS = {
+    "relevance": (
+        "Which unique content is more directly useful for answering the question — "
+        "factually grounded, with specific data points, numbers, or verifiable claims "
+        "that address the question's core intent?"
+    ),
+    "diversity": (
+        "Which unique content covers more distinct perspectives, aspects, or dimensions "
+        "of the question, offering a wider range of analytical angles to more "
+        "comprehensively address the question's core intent?"
+    ),
+    "comprehensiveness": (
+        "Which unique content provides more thorough and complete coverage of the "
+        "aspects and details the question calls for, without being redundant or "
+        "irrelevant?"
+    ),
+}
+
+
+def _single_criterion_judge_system(criterion: str) -&gt; str:
+    return f"""---Role---
+You are an impartial judge comparing two answers to a question based only on the content that is UNIQUE to each answer.
+
+---Goal---
+You are given a question, a summary of the content BOTH answers cover (Common Content), and the UNIQUE content of each answer. Compare the unique content of Answer 1 versus Answer 2 on a SINGLE criterion and declare a tie or pick a winner.
+
+The null assumption is that there is no material difference between the two unique contents. For an answer to win, its unique content must demonstrate clear superiority on this criterion and add meaningful value over the Common Content. Trivial differences result in a tie. If both unique contents are "No unique part" (or trivially empty), declare a tie.
+
+---Criterion---
+{criterion.capitalize()}: {JUDGE_CRITERIA_DESCRIPTIONS[criterion]}
+
+---Important Guidelines---
+- No position biases: the order of the unique contents should NOT influence your judgment.
+- Ignore length: do NOT let the length of the unique content affect your evaluation.
+- Ignore formatting style: focus only on substantive content.
+
+---Output Format---
+Use these values for the winner: 1 (Answer 1 better), 2 (Answer 2 better), 0 (tie).
+Format your response as a JSON object with the structure:
+{{
+    "reasoning": "A detailed explanation of your assessment.",
+    "winner": 1 | 2 | 0
+}}
+"""
+
+
+def _single_criterion_judge_user(
+    criterion: str,
+    score_id_text: str,
+    question: str,
+    common: str,
+    unique1: str,
+    unique2: str,
+) -&gt; str:
+    return f"""{score_id_text}
+---Question---
+{question}
+
+---Common Content (shared by both answers)---
+{common}
+
+---Start of Unique Content of Answer 1---
+{unique1}
+---End of Unique Content of Answer 1---
+
+---Start of Unique Content of Answer 2---
+{unique2}
+---End of Unique Content of Answer 2---
+
+Compare the unique content of Answer 1 and Answer 2 on {criterion}, relative to the question. Remember, the null assumption is that there is no material difference.
+
+Format your response as a JSON object with the structure:
+{{
+    "reasoning": "A detailed explanation of your assessment.",
+    "winner": 1 | 2 | 0
+}}
+"""
+
+
+async def get_separate_differential_score(
+    llm: LLMCompletion,
+    *,
+    question: str,
+    answer_1_name: str,
+    answer_1: str,
+    answer_2_name: str,
+    answer_2: str,
+    trial: int = 0,
+    include_score_id_in_prompt: bool = True,
+    additional_call_args: dict[str, Any] | None = None,
+) -&gt; list[dict[str, Any]]:
+    """Extract common/unique once, then judge each criterion in its own call."""
+    extract_system = load_template_file(
+        PAIRWISE_PROMPTS_PATH / "pairwise_extract_system_prompt.txt"
+    )
+    extract_user = load_template_file(
+        PAIRWISE_PROMPTS_PATH / "pairwise_extract_user_prompt.txt"
+    )
+
+    answers_text = {answer_1_name: answer_1, answer_2_name: answer_2}
+    # Counterbalance the presentation order across trials (matches the joint judge).
+    answers_order = (
+        list(answers_text) if trial % 2 == 0 else list(reversed(answers_text))
+    )
+    score_id = uuid.uuid4().hex
+    score_id_text = f"Score ID: {score_id}\n" if include_score_id_in_prompt else ""
+
+    extract_user_text = extract_user.substitute(
+        score_id=score_id_text,
+        question=question,
+        answer1=answers_text[answers_order[0]],
+        answer2=answers_text[answers_order[1]],
+    ).strip()
+    extraction_response = await chat(
+        llm,
+        messages=[
+            {"role": "system", "content": extract_system.template},
+            {"role": "user", "content": extract_user_text},
+        ],
+        response_format=PairwiseExtractionLLMResponse,
+        **(additional_call_args or {}),
+    )
+    extraction = extraction_response.formatted_response
+    if extraction is None:
+        msg = "LLM did not return a structured PairwiseExtractionLLMResponse."
+        raise RuntimeError(msg)
+
+    rows: list[dict[str, Any]] = []
+    for criterion in DIFFERENTIAL_CRITERIA:
+        judge_user = _single_criterion_judge_user(
+            criterion,
+            score_id_text,
+            question,
+            extraction.common,
+            extraction.unique_answer_1,
+            extraction.unique_answer_2,
+        )
+        verdict_response = await chat(
+            llm,
+            messages=[
+                {
+                    "role": "system",
+                    "content": _single_criterion_judge_system(criterion),
+                },
+                {"role": "user", "content": judge_user},
+            ],
+            response_format=CriterionVerdict,
+            **(additional_call_args or {}),
+        )
+        verdict = verdict_response.formatted_response
+        if verdict is None:
+            msg = "LLM did not return a structured CriterionVerdict."
+            raise RuntimeError(msg)
+        rows.append({
+            "score_id": score_id,
+            "question": question,
+            "criteria": criterion,
+            f"{answers_order[0]}_score": SCORE_MAPPING[verdict.winner],
+            f"{answers_order[1]}_score": 1 - SCORE_MAPPING[verdict.winner],
+            "reasoning": verdict.reasoning,
+            "trial": trial,
+        })
+    return rows
+
+
+def get_separate_differential_scores(
+    *,
+    llm_client: LLMCompletion,
+    llm_config: LLMConfig,
+    base_name: str,
+    other_name: str,
+    base_answers: pd.DataFrame,
+    other_answers: pd.DataFrame,
+    trials: int,
+    include_score_id_in_prompt: bool = True,
+    question_id_key: str = "question_id",
+    question_text_key: str = "question_text",
+) -&gt; pd.DataFrame:
+    """Separate-call counterpart of get_differential_pairwise_scores (same schema)."""
+    pairs = (
+        base_answers
+        .merge(
+            other_answers,
+            how="inner",
+            on=[question_id_key],
+            suffixes=("_base", "_other"),
+        )
+        .drop(columns=[f"{question_text_key}_other"])
+        .rename(
+            columns={
+                question_id_key: "question_id",
+                f"{question_text_key}_base": "question_text",
+            }
+        )
+    )
+    pairs = pairs[["question_id", "question_text", "answer_base", "answer_other"]]
+
+    tasks = [
+        get_separate_differential_score(
+            llm_client,
+            question=pair.question_text,
+            answer_1_name=base_name,
+            answer_1=pair.answer_base,
+            answer_2_name=other_name,
+            answer_2=pair.answer_other,
+            trial=n,
+            include_score_id_in_prompt=include_score_id_in_prompt,
+            additional_call_args=llm_config.call_args,
+        )
+        for pair in itertools.starmap(ConditionPair, pairs.itertuples(index=False))
+        for n in range(trials)
+    ]
+
+    async def _run_tasks() -&gt; list[list[dict[str, Any]]]:
+        return await asyncio.gather(*tasks)
+
+    nested_results = asyncio.run(_run_tasks())
+    flat_rows = [row for group in nested_results for row in group]
+    result = pd.DataFrame(flat_rows)
+    result["base_name"] = base_name
+    result["other_name"] = other_name
+    return result</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=50f38663">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="CodeMirror cm-s-jupyter">
+<div class="zeroclipboard-container">
+<clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-27">
+<div>
+<span class="notice" hidden="">Copied!</span>
+<svg aria-hidden="true" class="clipboard-copy-icon" data-view-component="true" height="20" version="1.1" viewbox="0 0 16 16" width="20">
+<path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z" fill="currentColor" fill-rule="evenodd"></path>
+<path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z" fill="currentColor" fill-rule="evenodd"></path>
+</svg>
+</div>
+</clipboard-copy>
+</div>
+<div class="highlight-ipynb hl-python"><pre><span></span><span class="c1"># Run the SEPARATE-call variant on the same answer pairs as the joint differential run.</span>
+<span class="n">separate_results</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">question_set</span> <span class="ow">in</span> <span class="n">diff_question_sets</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">other</span> <span class="ow">in</span> <span class="n">diff_others</span><span class="p">:</span>
+        <span class="n">rich_print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"[Separate] </span><span class="si">{</span><span class="n">diff_base</span><span class="si">}</span><span class="s2"> vs </span><span class="si">{</span><span class="n">other</span><span class="si">}</span><span class="s2"> — </span><span class="si">{</span><span class="n">question_set</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+        <span class="n">separate</span> <span class="o">=</span> <span class="n">get_separate_differential_scores</span><span class="p">(</span>
+            <span class="n">llm_client</span><span class="o">=</span><span class="n">llm_client</span><span class="p">,</span>
+            <span class="n">llm_config</span><span class="o">=</span><span class="n">llm_config</span><span class="p">,</span>
+            <span class="n">base_name</span><span class="o">=</span><span class="n">diff_base</span><span class="p">,</span>
+            <span class="n">other_name</span><span class="o">=</span><span class="n">other</span><span class="p">,</span>
+            <span class="n">base_answers</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">read_json</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">diff_input_dir</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">diff_base</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">question_set</span><span class="si">}</span><span class="s2">_answers.json"</span>
+            <span class="p">),</span>
+            <span class="n">other_answers</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">read_json</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">diff_input_dir</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">other</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">question_set</span><span class="si">}</span><span class="s2">_answers.json"</span>
+            <span class="p">),</span>
+            <span class="n">trials</span><span class="o">=</span><span class="n">diff_trials</span><span class="p">,</span>
+            <span class="n">include_score_id_in_prompt</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="n">question_id_key</span><span class="o">=</span><span class="s2">"question_id"</span><span class="p">,</span>
+            <span class="n">question_text_key</span><span class="o">=</span><span class="s2">"question"</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">separate</span><span class="p">[</span><span class="s2">"question_set"</span><span class="p">]</span> <span class="o">=</span> <span class="n">question_set</span>
+        <span class="n">separate_results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">separate</span><span class="p">)</span>
+
+<span class="n">separate_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">separate_results</span><span class="p">,</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">separate_df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">diff_output_dir</span> <span class="o">/</span> <span class="s2">"separate_differential_scores.csv"</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># --- (a) Aggregate win-rate comparison: joint vs. separate ---</span>
+<span class="n">joint_summary</span> <span class="o">=</span> <span class="n">analyze_criteria</span><span class="p">(</span><span class="n">differential_df</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="n">alpha</span><span class="p">)</span>
+<span class="n">separate_summary</span> <span class="o">=</span> <span class="n">analyze_criteria</span><span class="p">(</span><span class="n">separate_df</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="n">alpha</span><span class="p">)</span>
+
+<span class="n">js_keys</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"question_set"</span><span class="p">,</span> <span class="s2">"criteria"</span><span class="p">,</span> <span class="s2">"base_name"</span><span class="p">,</span> <span class="s2">"other_name"</span><span class="p">]</span>
+<span class="n">js</span> <span class="o">=</span> <span class="n">joint_summary</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">separate_summary</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="n">js_keys</span><span class="p">,</span> <span class="n">suffixes</span><span class="o">=</span><span class="p">(</span><span class="s2">"_joint"</span><span class="p">,</span> <span class="s2">"_separate"</span><span class="p">))</span>
+<span class="n">js</span><span class="p">[</span><span class="s2">"winrate_delta"</span><span class="p">]</span> <span class="o">=</span> <span class="n">js</span><span class="p">[</span><span class="s2">"other_mean_separate"</span><span class="p">]</span> <span class="o">-</span> <span class="n">js</span><span class="p">[</span><span class="s2">"other_mean_joint"</span><span class="p">]</span>
+
+<span class="n">winrate_view</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s2">"question set"</span><span class="p">:</span> <span class="n">js</span><span class="p">[</span><span class="s2">"question_set"</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">"data_"</span><span class="p">,</span> <span class="s2">""</span><span class="p">,</span> <span class="n">regex</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span>
+    <span class="s2">"criteria"</span><span class="p">:</span> <span class="n">js</span><span class="p">[</span><span class="s2">"criteria"</span><span class="p">],</span>
+    <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">other_short</span><span class="si">}</span><span class="s2"> WR (joint)"</span><span class="p">:</span> <span class="n">js</span><span class="p">[</span><span class="s2">"other_mean_joint"</span><span class="p">],</span>
+    <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">other_short</span><span class="si">}</span><span class="s2"> WR (separate)"</span><span class="p">:</span> <span class="n">js</span><span class="p">[</span><span class="s2">"other_mean_separate"</span><span class="p">],</span>
+    <span class="s2">"WR Δ (sep-joint)"</span><span class="p">:</span> <span class="n">js</span><span class="p">[</span><span class="s2">"winrate_delta"</span><span class="p">],</span>
+    <span class="s2">"p (joint)"</span><span class="p">:</span> <span class="n">js</span><span class="p">[</span><span class="s2">"formatted_corrected_p_value_joint"</span><span class="p">],</span>
+    <span class="s2">"p (separate)"</span><span class="p">:</span> <span class="n">js</span><span class="p">[</span><span class="s2">"formatted_corrected_p_value_separate"</span><span class="p">],</span>
+<span class="p">})</span>
+<span class="n">print_df</span><span class="p">(</span><span class="n">cast</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">winrate_view</span><span class="p">),</span> <span class="s2">"Joint vs. Separate — Win Rates"</span><span class="p">)</span>
+
+<span class="c1"># --- (b) Per-(question, criterion, trial) verdict agreement ---</span>
+<span class="c1"># The base-condition score encodes the verdict (1=base win, 0=base loss, 0.5=tie),</span>
+<span class="c1"># so comparing it row-by-row tells us whether the two variants agreed.</span>
+<span class="n">base_score_col</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">diff_base</span><span class="si">}</span><span class="s2">_score"</span>
+<span class="n">pair_keys</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"question_set"</span><span class="p">,</span> <span class="s2">"question"</span><span class="p">,</span> <span class="s2">"criteria"</span><span class="p">,</span> <span class="s2">"trial"</span><span class="p">]</span>
+<span class="n">agree</span> <span class="o">=</span> <span class="n">differential_df</span><span class="p">[[</span><span class="o">*</span><span class="n">pair_keys</span><span class="p">,</span> <span class="n">base_score_col</span><span class="p">]]</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span>
+    <span class="n">separate_df</span><span class="p">[[</span><span class="o">*</span><span class="n">pair_keys</span><span class="p">,</span> <span class="n">base_score_col</span><span class="p">]],</span>
+    <span class="n">on</span><span class="o">=</span><span class="n">pair_keys</span><span class="p">,</span>
+    <span class="n">suffixes</span><span class="o">=</span><span class="p">(</span><span class="s2">"_joint"</span><span class="p">,</span> <span class="s2">"_separate"</span><span class="p">),</span>
+<span class="p">)</span>
+<span class="n">agree</span><span class="p">[</span><span class="s2">"agree"</span><span class="p">]</span> <span class="o">=</span> <span class="n">agree</span><span class="p">[</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">base_score_col</span><span class="si">}</span><span class="s2">_joint"</span><span class="p">]</span> <span class="o">==</span> <span class="n">agree</span><span class="p">[</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">base_score_col</span><span class="si">}</span><span class="s2">_separate"</span><span class="p">]</span>
+
+<span class="n">agreement_view</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">agree</span>
+    <span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">"criteria"</span><span class="p">)[</span><span class="s2">"agree"</span><span class="p">]</span>
+    <span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="n">agreement_rate</span><span class="o">=</span><span class="s2">"mean"</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="s2">"count"</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+<span class="p">)</span>
+<span class="n">agreement_view</span><span class="p">[</span><span class="s2">"question set"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"all"</span>
+<span class="n">overall</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span>
+    <span class="p">{</span>
+        <span class="s2">"criteria"</span><span class="p">:</span> <span class="s2">"ALL"</span><span class="p">,</span>
+        <span class="s2">"agreement_rate"</span><span class="p">:</span> <span class="n">agree</span><span class="p">[</span><span class="s2">"agree"</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span>
+        <span class="s2">"n"</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">agree</span><span class="p">),</span>
+        <span class="s2">"question set"</span><span class="p">:</span> <span class="s2">"all"</span><span class="p">,</span>
+    <span class="p">}</span>
+<span class="p">])</span>
+<span class="n">agreement_view</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">agreement_view</span><span class="p">,</span> <span class="n">overall</span><span class="p">],</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">print_df</span><span class="p">(</span>
+    <span class="n">cast</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">agreement_view</span><span class="p">[[</span><span class="s2">"criteria"</span><span class="p">,</span> <span class="s2">"agreement_rate"</span><span class="p">,</span> <span class="s2">"n"</span><span class="p">]]),</span>
+    <span class="s2">"Joint vs. Separate — Verdict Agreement (1.0 = identical verdicts)"</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+<div class="clipboard-copy-txt" id="cell-27"># Run the SEPARATE-call variant on the same answer pairs as the joint differential run.
+separate_results = []
+for question_set in diff_question_sets:
+    for other in diff_others:
+        rich_print(f"[Separate] {diff_base} vs {other} — {question_set}")
+        separate = get_separate_differential_scores(
+            llm_client=llm_client,
+            llm_config=llm_config,
+            base_name=diff_base,
+            other_name=other,
+            base_answers=pd.read_json(
+                f"{diff_input_dir}/{diff_base}/{question_set}_answers.json"
+            ),
+            other_answers=pd.read_json(
+                f"{diff_input_dir}/{other}/{question_set}_answers.json"
+            ),
+            trials=diff_trials,
+            include_score_id_in_prompt=True,
+            question_id_key="question_id",
+            question_text_key="question",
+        )
+        separate["question_set"] = question_set
+        separate_results.append(separate)
+
+separate_df = pd.concat(separate_results, ignore_index=True)
+separate_df.to_csv(diff_output_dir / "separate_differential_scores.csv", index=False)
+
+# --- (a) Aggregate win-rate comparison: joint vs. separate ---
+joint_summary = analyze_criteria(differential_df, alpha=alpha)
+separate_summary = analyze_criteria(separate_df, alpha=alpha)
+
+js_keys = ["question_set", "criteria", "base_name", "other_name"]
+js = joint_summary.merge(separate_summary, on=js_keys, suffixes=("_joint", "_separate"))
+js["winrate_delta"] = js["other_mean_separate"] - js["other_mean_joint"]
+
+winrate_view = pd.DataFrame({
+    "question set": js["question_set"].str.replace("data_", "", regex=False),
+    "criteria": js["criteria"],
+    f"{other_short} WR (joint)": js["other_mean_joint"],
+    f"{other_short} WR (separate)": js["other_mean_separate"],
+    "WR Δ (sep-joint)": js["winrate_delta"],
+    "p (joint)": js["formatted_corrected_p_value_joint"],
+    "p (separate)": js["formatted_corrected_p_value_separate"],
+})
+print_df(cast(pd.DataFrame, winrate_view), "Joint vs. Separate — Win Rates")
+
+# --- (b) Per-(question, criterion, trial) verdict agreement ---
+# The base-condition score encodes the verdict (1=base win, 0=base loss, 0.5=tie),
+# so comparing it row-by-row tells us whether the two variants agreed.
+base_score_col = f"{diff_base}_score"
+pair_keys = ["question_set", "question", "criteria", "trial"]
+agree = differential_df[[*pair_keys, base_score_col]].merge(
+    separate_df[[*pair_keys, base_score_col]],
+    on=pair_keys,
+    suffixes=("_joint", "_separate"),
+)
+agree["agree"] = agree[f"{base_score_col}_joint"] == agree[f"{base_score_col}_separate"]
+
+agreement_view = (
+    agree
+    .groupby("criteria")["agree"]
+    .agg(agreement_rate="mean", n="count")
+    .reset_index()
+)
+agreement_view["question set"] = "all"
+overall = pd.DataFrame([
+    {
+        "criteria": "ALL",
+        "agreement_rate": agree["agree"].mean(),
+        "n": len(agree),
+        "question set": "all",
+    }
+])
+agreement_view = pd.concat([agreement_view, overall], ignore_index=True)
+print_df(
+    cast(pd.DataFrame, agreement_view[["criteria", "agreement_rate", "n"]]),
+    "Joint vs. Separate — Verdict Agreement (1.0 = identical verdicts)",
+)</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=38bb4123">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h4 id="is-the-joint-vs-separate-difference-statistically-significant">Is the joint-vs-separate difference statistically significant?<a class="anchor-link" href="#is-the-joint-vs-separate-difference-statistically-significant">¶</a></h4><p>The agreement rate above tells us <em>how often</em> verdicts differ, but not whether the two approaches differ <strong>systematically</strong> (one consistently favouring a method). To test that, we treat each <code>(question_set, question, criterion)</code> as a paired observation: the mean base win rate under the <strong>joint</strong> judge vs. under the <strong>separate</strong> judge, and run a <strong>paired Wilcoxon signed-rank test</strong> per criterion and overall. A large p-value (&gt; <code>alpha</code>) means there is <strong>no statistically significant systematic difference</strong> between the two approaches.</p>
+<p>We then:</p>
+<ol>
+<li><strong>Inspect the reasoning</strong> on the cases where the two approaches disagree, to qualitatively judge whether one is more sound than the other (there is no ground truth here, so this is a manual sanity check).</li>
+<li><strong>Repeat the whole comparison across several judge models</strong>, since the joint-vs-separate gap may depend on model capability (the historical concern was specific to GPT-4-era models).</li>
+</ol>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=501477dd">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="CodeMirror cm-s-jupyter">
+<div class="zeroclipboard-container">
+<clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-28">
+<div>
+<span class="notice" hidden="">Copied!</span>
+<svg aria-hidden="true" class="clipboard-copy-icon" data-view-component="true" height="20" version="1.1" viewbox="0 0 16 16" width="20">
+<path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z" fill="currentColor" fill-rule="evenodd"></path>
+<path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z" fill="currentColor" fill-rule="evenodd"></path>
+</svg>
+</div>
+</clipboard-copy>
+</div>
+<div class="highlight-ipynb hl-python"><pre><span></span><span class="c1"># Paired significance test: joint vs. separate judging.</span>
+<span class="c1"># Unit of analysis = per (question_set, question, criterion) mean base win rate</span>
+<span class="c1"># (averaged over trials, so within-question trial correlation is not double-counted).</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy</span><span class="w"> </span><span class="kn">import</span> <span class="n">stats</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">paired_judging_significance</span><span class="p">(</span>
+    <span class="n">joint_df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
+    <span class="n">separate_df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">base_col</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">alpha</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.05</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Wilcoxon signed-rank test on paired joint vs. separate win rates."""</span>
+    <span class="n">keys</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"question_set"</span><span class="p">,</span> <span class="s2">"question"</span><span class="p">,</span> <span class="s2">"criteria"</span><span class="p">]</span>
+    <span class="n">joint_mean</span> <span class="o">=</span> <span class="n">joint_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">keys</span><span class="p">)[</span><span class="n">base_col</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">to_frame</span><span class="p">(</span><span class="s2">"joint"</span><span class="p">)</span>
+    <span class="n">separate_mean</span> <span class="o">=</span> <span class="n">separate_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">keys</span><span class="p">)[</span><span class="n">base_col</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">to_frame</span><span class="p">(</span><span class="s2">"separate"</span><span class="p">)</span>
+    <span class="n">merged</span> <span class="o">=</span> <span class="n">joint_mean</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">separate_mean</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s2">"inner"</span><span class="p">)</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_test</span><span class="p">(</span><span class="n">sub</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">:</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="n">sub</span><span class="p">[</span><span class="s2">"joint"</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+        <span class="n">b</span> <span class="o">=</span> <span class="n">sub</span><span class="p">[</span><span class="s2">"separate"</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+        <span class="n">diff</span> <span class="o">=</span> <span class="n">b</span> <span class="o">-</span> <span class="n">a</span>
+        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">diff</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">):</span>
+            <span class="n">stat</span><span class="p">,</span> <span class="n">p_value</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">result</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">wilcoxon</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+                <span class="n">stat</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">statistic</span><span class="p">)</span>  <span class="c1"># type: ignore[attr-defined]</span>
+                <span class="n">p_value</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">pvalue</span><span class="p">)</span>  <span class="c1"># type: ignore[attr-defined]</span>
+            <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+                <span class="n">stat</span><span class="p">,</span> <span class="n">p_value</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span>
+        <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">({</span>
+            <span class="s2">"n"</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">sub</span><span class="p">),</span>
+            <span class="s2">"joint_mean_wr"</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">mean</span><span class="p">()),</span>
+            <span class="s2">"separate_mean_wr"</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">b</span><span class="o">.</span><span class="n">mean</span><span class="p">()),</span>
+            <span class="s2">"mean_diff"</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">diff</span><span class="o">.</span><span class="n">mean</span><span class="p">()),</span>
+            <span class="s2">"wilcoxon_stat"</span><span class="p">:</span> <span class="n">stat</span><span class="p">,</span>
+            <span class="s2">"p_value"</span><span class="p">:</span> <span class="n">p_value</span><span class="p">,</span>
+            <span class="s2">"significant"</span><span class="p">:</span> <span class="n">p_value</span> <span class="o">&lt;</span> <span class="n">alpha</span><span class="p">,</span>
+        <span class="p">})</span>
+
+    <span class="n">per_criterion</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">merged</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">"criteria"</span><span class="p">)</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">_test</span><span class="p">,</span> <span class="n">include_groups</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+    <span class="p">)</span>
+    <span class="n">overall</span> <span class="o">=</span> <span class="n">_test</span><span class="p">(</span><span class="n">merged</span><span class="p">)</span>
+    <span class="n">overall</span><span class="p">[</span><span class="s2">"criteria"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"ALL"</span>
+    <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">per_criterion</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span><span class="n">overall</span><span class="p">])],</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+
+<span class="n">base_score_col</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">diff_base</span><span class="si">}</span><span class="s2">_score"</span>
+<span class="n">significance_df</span> <span class="o">=</span> <span class="n">paired_judging_significance</span><span class="p">(</span>
+    <span class="n">differential_df</span><span class="p">,</span> <span class="n">separate_df</span><span class="p">,</span> <span class="n">base_col</span><span class="o">=</span><span class="n">base_score_col</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="n">alpha</span>
+<span class="p">)</span>
+<span class="n">significance_df</span><span class="p">[</span><span class="s2">"p_value"</span><span class="p">]</span> <span class="o">=</span> <span class="n">significance_df</span><span class="p">[</span><span class="s2">"p_value"</span><span class="p">]</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">significance_df</span><span class="p">[</span><span class="s2">"mean_diff"</span><span class="p">]</span> <span class="o">=</span> <span class="n">significance_df</span><span class="p">[</span><span class="s2">"mean_diff"</span><span class="p">]</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">print_df</span><span class="p">(</span>
+    <span class="n">cast</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">significance_df</span><span class="p">),</span>
+    <span class="s2">"Joint vs. Separate — Paired Significance (Wilcoxon; p &gt; alpha ⇒ no systematic difference)"</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">overall_p</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span>
+    <span class="n">significance_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">significance_df</span><span class="p">[</span><span class="s2">"criteria"</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"ALL"</span><span class="p">,</span> <span class="s2">"p_value"</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="p">)</span>
+<span class="k">if</span> <span class="n">overall_p</span> <span class="o">&gt;</span> <span class="n">alpha</span><span class="p">:</span>
+    <span class="n">rich_print</span><span class="p">(</span>
+        <span class="sa">f</span><span class="s2">"[green]Overall p = </span><span class="si">{</span><span class="n">overall_p</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> &gt; alpha = </span><span class="si">{</span><span class="n">alpha</span><span class="si">}</span><span class="s2">: no statistically "</span>
+        <span class="sa">f</span><span class="s2">"significant systematic difference between joint and separate judging.[/green]"</span>
+    <span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">rich_print</span><span class="p">(</span>
+        <span class="sa">f</span><span class="s2">"[yellow]Overall p = </span><span class="si">{</span><span class="n">overall_p</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> &lt;= alpha = </span><span class="si">{</span><span class="n">alpha</span><span class="si">}</span><span class="s2">: the two approaches "</span>
+        <span class="sa">f</span><span class="s2">"differ systematically — prefer separate judging.[/yellow]"</span>
+    <span class="p">)</span>
+</pre></div>
+<div class="clipboard-copy-txt" id="cell-28"># Paired significance test: joint vs. separate judging.
+# Unit of analysis = per (question_set, question, criterion) mean base win rate
+# (averaged over trials, so within-question trial correlation is not double-counted).
+import numpy as np
+from scipy import stats
+
+
+def paired_judging_significance(
+    joint_df: pd.DataFrame,
+    separate_df: pd.DataFrame,
+    *,
+    base_col: str,
+    alpha: float = 0.05,
+) -&gt; pd.DataFrame:
+    """Wilcoxon signed-rank test on paired joint vs. separate win rates."""
+    keys = ["question_set", "question", "criteria"]
+    joint_mean = joint_df.groupby(keys)[base_col].mean().to_frame("joint")
+    separate_mean = separate_df.groupby(keys)[base_col].mean().to_frame("separate")
+    merged = joint_mean.join(separate_mean, how="inner").dropna().reset_index()
+
+    def _test(sub: pd.DataFrame) -&gt; pd.Series:
+        a = sub["joint"].to_numpy()
+        b = sub["separate"].to_numpy()
+        diff = b - a
+        if np.allclose(diff, 0.0):
+            stat, p_value = 0.0, 1.0
+        else:
+            try:
+                result = stats.wilcoxon(a, b)
+                stat = float(result.statistic)  # type: ignore[attr-defined]
+                p_value = float(result.pvalue)  # type: ignore[attr-defined]
+            except ValueError:
+                stat, p_value = 0.0, 1.0
+        return pd.Series({
+            "n": len(sub),
+            "joint_mean_wr": float(a.mean()),
+            "separate_mean_wr": float(b.mean()),
+            "mean_diff": float(diff.mean()),
+            "wilcoxon_stat": stat,
+            "p_value": p_value,
+            "significant": p_value &lt; alpha,
+        })
+
+    per_criterion = (
+        merged.groupby("criteria").apply(_test, include_groups=False).reset_index()
+    )
+    overall = _test(merged)
+    overall["criteria"] = "ALL"
+    return pd.concat([per_criterion, pd.DataFrame([overall])], ignore_index=True)
+
+
+base_score_col = f"{diff_base}_score"
+significance_df = paired_judging_significance(
+    differential_df, separate_df, base_col=base_score_col, alpha=alpha
+)
+significance_df["p_value"] = significance_df["p_value"].round(3)
+significance_df["mean_diff"] = significance_df["mean_diff"].round(4)
+print_df(
+    cast(pd.DataFrame, significance_df),
+    "Joint vs. Separate — Paired Significance (Wilcoxon; p &gt; alpha ⇒ no systematic difference)",
+)
+
+overall_p = float(
+    significance_df.loc[significance_df["criteria"] == "ALL", "p_value"].iloc[0]
+)
+if overall_p &gt; alpha:
+    rich_print(
+        f"[green]Overall p = {overall_p:.3f} &gt; alpha = {alpha}: no statistically "
+        f"significant systematic difference between joint and separate judging.[/green]"
+    )
+else:
+    rich_print(
+        f"[yellow]Overall p = {overall_p:.3f} &lt;= alpha = {alpha}: the two approaches "
+        f"differ systematically — prefer separate judging.[/yellow]"
+    )</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=50c75483">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="CodeMirror cm-s-jupyter">
+<div class="zeroclipboard-container">
+<clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-29">
+<div>
+<span class="notice" hidden="">Copied!</span>
+<svg aria-hidden="true" class="clipboard-copy-icon" data-view-component="true" height="20" version="1.1" viewbox="0 0 16 16" width="20">
+<path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z" fill="currentColor" fill-rule="evenodd"></path>
+<path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z" fill="currentColor" fill-rule="evenodd"></path>
+</svg>
+</div>
+</clipboard-copy>
+</div>
+<div class="highlight-ipynb hl-python"><pre><span></span><span class="c1"># Inspect the reasoning where the two approaches DISAGREE, to sanity-check which</span>
+<span class="c1"># verdict reads as more sound (no ground truth, so this is qualitative).</span>
+<span class="n">verdict_labels</span> <span class="o">=</span> <span class="p">{</span><span class="mf">1.0</span><span class="p">:</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">diff_base</span><span class="si">}</span><span class="s2"> wins"</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">:</span> <span class="s2">"other wins"</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">:</span> <span class="s2">"tie"</span><span class="p">}</span>
+<span class="n">reasoning_keys</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"question_set"</span><span class="p">,</span> <span class="s2">"question"</span><span class="p">,</span> <span class="s2">"criteria"</span><span class="p">,</span> <span class="s2">"trial"</span><span class="p">]</span>
+
+<span class="n">joint_slim</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span>
+    <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">differential_df</span><span class="p">[[</span><span class="o">*</span><span class="n">reasoning_keys</span><span class="p">,</span> <span class="n">base_score_col</span><span class="p">,</span> <span class="s2">"reasoning"</span><span class="p">]]</span>
+<span class="p">)</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="n">base_score_col</span><span class="p">:</span> <span class="s2">"joint_score"</span><span class="p">,</span> <span class="s2">"reasoning"</span><span class="p">:</span> <span class="s2">"joint_reasoning"</span><span class="p">})</span>
+<span class="n">separate_slim</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span>
+    <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">separate_df</span><span class="p">[[</span><span class="o">*</span><span class="n">reasoning_keys</span><span class="p">,</span> <span class="n">base_score_col</span><span class="p">,</span> <span class="s2">"reasoning"</span><span class="p">]]</span>
+<span class="p">)</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="n">base_score_col</span><span class="p">:</span> <span class="s2">"separate_score"</span><span class="p">,</span> <span class="s2">"reasoning"</span><span class="p">:</span> <span class="s2">"separate_reasoning"</span><span class="p">})</span>
+<span class="n">paired_reasoning</span> <span class="o">=</span> <span class="n">joint_slim</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">separate_slim</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="n">reasoning_keys</span><span class="p">)</span>
+<span class="n">disagreements</span> <span class="o">=</span> <span class="n">paired_reasoning</span><span class="p">[</span>
+    <span class="n">paired_reasoning</span><span class="p">[</span><span class="s2">"joint_score"</span><span class="p">]</span> <span class="o">!=</span> <span class="n">paired_reasoning</span><span class="p">[</span><span class="s2">"separate_score"</span><span class="p">]</span>
+<span class="p">]</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">rich_print</span><span class="p">(</span>
+    <span class="sa">f</span><span class="s2">"[bold]</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">disagreements</span><span class="p">)</span><span class="si">}</span><span class="s2"> / </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">paired_reasoning</span><span class="p">)</span><span class="si">}</span><span class="s2"> verdicts disagree "</span>
+    <span class="sa">f</span><span class="s2">"(</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">disagreements</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="n">paired_reasoning</span><span class="p">)</span><span class="si">:</span><span class="s2">.1%</span><span class="si">}</span><span class="s2">).[/bold] "</span>
+    <span class="s2">"Showing a few examples with both rationales:</span><span class="se">\n</span><span class="s2">"</span>
+<span class="p">)</span>
+
+<span class="n">n_examples</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">disagreements</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">disagreements</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="n">n_examples</span><span class="p">)</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+    <span class="n">rich_print</span><span class="p">(</span>
+        <span class="sa">f</span><span class="s2">"[bold cyan]</span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="s1">'question_set'</span><span class="p">]</span><span class="si">}</span><span class="s2"> · </span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="s1">'criteria'</span><span class="p">]</span><span class="si">}</span><span class="s2"> · trial </span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="s1">'trial'</span><span class="p">]</span><span class="si">}</span><span class="s2">[/bold cyan]"</span>
+    <span class="p">)</span>
+    <span class="n">rich_print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"[bold]Question:[/bold] </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s1">'question'</span><span class="p">])[:</span><span class="mi">200</span><span class="p">]</span><span class="si">}</span><span class="s2">..."</span><span class="p">)</span>
+    <span class="n">rich_print</span><span class="p">(</span>
+        <span class="sa">f</span><span class="s2">"[bold]JOINT verdict:[/bold] </span><span class="si">{</span><span class="n">verdict_labels</span><span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s1">'joint_score'</span><span class="p">])]</span><span class="si">}</span><span class="se">\n</span><span class="s2">"</span>
+        <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="s1">'joint_reasoning'</span><span class="p">]</span><span class="si">}</span><span class="se">\n</span><span class="s2">"</span>
+    <span class="p">)</span>
+    <span class="n">rich_print</span><span class="p">(</span>
+        <span class="sa">f</span><span class="s2">"[bold]SEPARATE verdict:[/bold] </span><span class="si">{</span><span class="n">verdict_labels</span><span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s1">'separate_score'</span><span class="p">])]</span><span class="si">}</span><span class="se">\n</span><span class="s2">"</span>
+        <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="s1">'separate_reasoning'</span><span class="p">]</span><span class="si">}</span><span class="se">\n</span><span class="s2">"</span>
+    <span class="p">)</span>
+    <span class="n">rich_print</span><span class="p">(</span><span class="s2">"[dim]"</span> <span class="o">+</span> <span class="s2">"-"</span> <span class="o">*</span> <span class="mi">80</span> <span class="o">+</span> <span class="s2">"[/dim]</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+<div class="clipboard-copy-txt" id="cell-29"># Inspect the reasoning where the two approaches DISAGREE, to sanity-check which
+# verdict reads as more sound (no ground truth, so this is qualitative).
+verdict_labels = {1.0: f"{diff_base} wins", 0.0: "other wins", 0.5: "tie"}
+reasoning_keys = ["question_set", "question", "criteria", "trial"]
+
+joint_slim = cast(
+    pd.DataFrame, differential_df[[*reasoning_keys, base_score_col, "reasoning"]]
+).rename(columns={base_score_col: "joint_score", "reasoning": "joint_reasoning"})
+separate_slim = cast(
+    pd.DataFrame, separate_df[[*reasoning_keys, base_score_col, "reasoning"]]
+).rename(columns={base_score_col: "separate_score", "reasoning": "separate_reasoning"})
+paired_reasoning = joint_slim.merge(separate_slim, on=reasoning_keys)
+disagreements = paired_reasoning[
+    paired_reasoning["joint_score"] != paired_reasoning["separate_score"]
+].reset_index(drop=True)
+
+rich_print(
+    f"[bold]{len(disagreements)} / {len(paired_reasoning)} verdicts disagree "
+    f"({len(disagreements) / len(paired_reasoning):.1%}).[/bold] "
+    "Showing a few examples with both rationales:\n"
+)
+
+n_examples = min(3, len(disagreements))
+for _, row in disagreements.head(n_examples).iterrows():
+    rich_print(
+        f"[bold cyan]{row['question_set']} · {row['criteria']} · trial {row['trial']}[/bold cyan]"
+    )
+    rich_print(f"[bold]Question:[/bold] {str(row['question'])[:200]}...")
+    rich_print(
+        f"[bold]JOINT verdict:[/bold] {verdict_labels[float(row['joint_score'])]}\n"
+        f"{row['joint_reasoning']}\n"
+    )
+    rich_print(
+        f"[bold]SEPARATE verdict:[/bold] {verdict_labels[float(row['separate_score'])]}\n"
+        f"{row['separate_reasoning']}\n"
+    )
+    rich_print("[dim]" + "-" * 80 + "[/dim]\n")</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=be3b95c5">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h4 id="repeat-across-judge-models">Repeat across judge models<a class="anchor-link" href="#repeat-across-judge-models">¶</a></h4><p>The joint-vs-separate gap may depend on the judge model. The sweep below re-runs <strong>both</strong> the joint and separate variants for each model in <code>judge_models</code> and reports, per model, the <strong>verdict agreement rate</strong> and the <strong>overall paired p-value</strong>. Edit <code>judge_models</code> to add/remove models.</p>
+<blockquote>
+<p>⚠️ This is expensive: for each model it runs the full joint pass (1 judge call per pair/trial) <strong>and</strong> the full separate pass (1 extraction + one judge call per criterion). Keep the model list short.</p>
+</blockquote>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=aa9f7e7d">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="CodeMirror cm-s-jupyter">
+<div class="zeroclipboard-container">
+<clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-30">
+<div>
+<span class="notice" hidden="">Copied!</span>
+<svg aria-hidden="true" class="clipboard-copy-icon" data-view-component="true" height="20" version="1.1" viewbox="0 0 16 16" width="20">
+<path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z" fill="currentColor" fill-rule="evenodd"></path>
+<path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z" fill="currentColor" fill-rule="evenodd"></path>
+</svg>
+</div>
+</clipboard-copy>
+</div>
+<div class="highlight-ipynb hl-python"><pre><span></span><span class="c1"># Multi-model sweep: per-model detail tables + one combined comparison table.</span>
+<span class="n">judge_models</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">"gpt-5.2"</span><span class="p">,</span>
+    <span class="s2">"gpt-4.1"</span><span class="p">,</span>
+    <span class="s2">"gpt-4o"</span><span class="p">,</span>
+<span class="p">]</span>  <span class="c1"># edit to add/remove judge models</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">run_joint_vs_separate_for_model</span><span class="p">(</span>
+    <span class="n">model_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">concurrent_requests</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">32</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">"""Run both joint and separate differential judging for a single judge model."""</span>
+    <span class="n">model_config</span> <span class="o">=</span> <span class="n">LLMConfig</span><span class="p">(</span>
+        <span class="n">model</span><span class="o">=</span><span class="n">model_name</span><span class="p">,</span>
+        <span class="n">api_key</span><span class="o">=</span><span class="n">SecretStr</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">"OPENAI_API_KEY"</span><span class="p">]),</span>
+        <span class="n">llm_provider</span><span class="o">=</span><span class="n">LLMProvider</span><span class="o">.</span><span class="n">OpenAIChat</span><span class="p">,</span>
+        <span class="n">concurrent_requests</span><span class="o">=</span><span class="n">concurrent_requests</span><span class="p">,</span>
+        <span class="n">call_args</span><span class="o">=</span><span class="p">{</span><span class="s2">"temperature"</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span> <span class="s2">"seed"</span><span class="p">:</span> <span class="mi">42</span><span class="p">},</span>
+    <span class="p">)</span>
+    <span class="n">model_client</span> <span class="o">=</span> <span class="n">ModelFactory</span><span class="o">.</span><span class="n">create_chat_model</span><span class="p">(</span><span class="n">model_config</span><span class="p">)</span>
+
+    <span class="n">joint_parts</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">separate_parts</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">question_set</span> <span class="ow">in</span> <span class="n">diff_question_sets</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">other</span> <span class="ow">in</span> <span class="n">diff_others</span><span class="p">:</span>
+            <span class="n">base_answers</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_json</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">diff_input_dir</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">diff_base</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">question_set</span><span class="si">}</span><span class="s2">_answers.json"</span>
+            <span class="p">)</span>
+            <span class="n">other_answers</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_json</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">diff_input_dir</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">other</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">question_set</span><span class="si">}</span><span class="s2">_answers.json"</span>
+            <span class="p">)</span>
+            <span class="n">joint_part</span> <span class="o">=</span> <span class="n">get_differential_pairwise_scores</span><span class="p">(</span>
+                <span class="n">llm_client</span><span class="o">=</span><span class="n">model_client</span><span class="p">,</span>
+                <span class="n">llm_config</span><span class="o">=</span><span class="n">model_config</span><span class="p">,</span>
+                <span class="n">base_name</span><span class="o">=</span><span class="n">diff_base</span><span class="p">,</span>
+                <span class="n">other_name</span><span class="o">=</span><span class="n">other</span><span class="p">,</span>
+                <span class="n">base_answers</span><span class="o">=</span><span class="n">base_answers</span><span class="p">,</span>
+                <span class="n">other_answers</span><span class="o">=</span><span class="n">other_answers</span><span class="p">,</span>
+                <span class="n">criteria</span><span class="o">=</span><span class="n">comparable_criteria</span><span class="p">,</span>
+                <span class="n">trials</span><span class="o">=</span><span class="n">diff_trials</span><span class="p">,</span>
+                <span class="n">include_score_id_in_prompt</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                <span class="n">question_id_key</span><span class="o">=</span><span class="s2">"question_id"</span><span class="p">,</span>
+                <span class="n">question_text_key</span><span class="o">=</span><span class="s2">"question"</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="n">joint_part</span><span class="p">[</span><span class="s2">"question_set"</span><span class="p">]</span> <span class="o">=</span> <span class="n">question_set</span>
+            <span class="n">joint_parts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">joint_part</span><span class="p">)</span>
+
+            <span class="n">separate_part</span> <span class="o">=</span> <span class="n">get_separate_differential_scores</span><span class="p">(</span>
+                <span class="n">llm_client</span><span class="o">=</span><span class="n">model_client</span><span class="p">,</span>
+                <span class="n">llm_config</span><span class="o">=</span><span class="n">model_config</span><span class="p">,</span>
+                <span class="n">base_name</span><span class="o">=</span><span class="n">diff_base</span><span class="p">,</span>
+                <span class="n">other_name</span><span class="o">=</span><span class="n">other</span><span class="p">,</span>
+                <span class="n">base_answers</span><span class="o">=</span><span class="n">base_answers</span><span class="p">,</span>
+                <span class="n">other_answers</span><span class="o">=</span><span class="n">other_answers</span><span class="p">,</span>
+                <span class="n">trials</span><span class="o">=</span><span class="n">diff_trials</span><span class="p">,</span>
+                <span class="n">include_score_id_in_prompt</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                <span class="n">question_id_key</span><span class="o">=</span><span class="s2">"question_id"</span><span class="p">,</span>
+                <span class="n">question_text_key</span><span class="o">=</span><span class="s2">"question"</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="n">separate_part</span><span class="p">[</span><span class="s2">"question_set"</span><span class="p">]</span> <span class="o">=</span> <span class="n">question_set</span>
+            <span class="n">separate_parts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">separate_part</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">joint_parts</span><span class="p">,</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
+        <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">separate_parts</span><span class="p">,</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
+    <span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">report_model_detail</span><span class="p">(</span>
+    <span class="n">model_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">joint_df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">separate_df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">object</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">"""Print the per-model detail tables and return the overall summary row."""</span>
+    <span class="n">summary_keys</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"question_set"</span><span class="p">,</span> <span class="s2">"criteria"</span><span class="p">,</span> <span class="s2">"base_name"</span><span class="p">,</span> <span class="s2">"other_name"</span><span class="p">]</span>
+
+    <span class="c1"># (1) Win rates: joint vs. separate.</span>
+    <span class="n">m_joint_summary</span> <span class="o">=</span> <span class="n">analyze_criteria</span><span class="p">(</span><span class="n">joint_df</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="n">alpha</span><span class="p">)</span>
+    <span class="n">m_separate_summary</span> <span class="o">=</span> <span class="n">analyze_criteria</span><span class="p">(</span><span class="n">separate_df</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="n">alpha</span><span class="p">)</span>
+    <span class="n">mjs</span> <span class="o">=</span> <span class="n">m_joint_summary</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span>
+        <span class="n">m_separate_summary</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="n">summary_keys</span><span class="p">,</span> <span class="n">suffixes</span><span class="o">=</span><span class="p">(</span><span class="s2">"_joint"</span><span class="p">,</span> <span class="s2">"_separate"</span><span class="p">)</span>
+    <span class="p">)</span>
+    <span class="n">mjs</span><span class="p">[</span><span class="s2">"winrate_delta"</span><span class="p">]</span> <span class="o">=</span> <span class="n">mjs</span><span class="p">[</span><span class="s2">"other_mean_separate"</span><span class="p">]</span> <span class="o">-</span> <span class="n">mjs</span><span class="p">[</span><span class="s2">"other_mean_joint"</span><span class="p">]</span>
+    <span class="n">win_rate_view</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+        <span class="s2">"question set"</span><span class="p">:</span> <span class="n">mjs</span><span class="p">[</span><span class="s2">"question_set"</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">"data_"</span><span class="p">,</span> <span class="s2">""</span><span class="p">,</span> <span class="n">regex</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span>
+        <span class="s2">"criteria"</span><span class="p">:</span> <span class="n">mjs</span><span class="p">[</span><span class="s2">"criteria"</span><span class="p">],</span>
+        <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">other_short</span><span class="si">}</span><span class="s2"> WR (joint)"</span><span class="p">:</span> <span class="n">mjs</span><span class="p">[</span><span class="s2">"other_mean_joint"</span><span class="p">]</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">),</span>
+        <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">other_short</span><span class="si">}</span><span class="s2"> WR (separate)"</span><span class="p">:</span> <span class="n">mjs</span><span class="p">[</span><span class="s2">"other_mean_separate"</span><span class="p">]</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">),</span>
+        <span class="s2">"WR Δ (sep-joint)"</span><span class="p">:</span> <span class="n">mjs</span><span class="p">[</span><span class="s2">"winrate_delta"</span><span class="p">]</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">),</span>
+        <span class="s2">"p (joint)"</span><span class="p">:</span> <span class="n">mjs</span><span class="p">[</span><span class="s2">"formatted_corrected_p_value_joint"</span><span class="p">],</span>
+        <span class="s2">"p (separate)"</span><span class="p">:</span> <span class="n">mjs</span><span class="p">[</span><span class="s2">"formatted_corrected_p_value_separate"</span><span class="p">],</span>
+    <span class="p">})</span>
+    <span class="n">print_df</span><span class="p">(</span>
+        <span class="n">cast</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">win_rate_view</span><span class="p">),</span>
+        <span class="sa">f</span><span class="s2">"[</span><span class="si">{</span><span class="n">model_name</span><span class="si">}</span><span class="s2">] Joint vs. Separate — Win Rates"</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="c1"># (2) Verdict agreement per criterion.</span>
+    <span class="n">agree_keys</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"question_set"</span><span class="p">,</span> <span class="s2">"question"</span><span class="p">,</span> <span class="s2">"criteria"</span><span class="p">,</span> <span class="s2">"trial"</span><span class="p">]</span>
+    <span class="n">merged_items</span> <span class="o">=</span> <span class="n">joint_df</span><span class="p">[[</span><span class="o">*</span><span class="n">agree_keys</span><span class="p">,</span> <span class="n">base_score_col</span><span class="p">]]</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span>
+        <span class="n">separate_df</span><span class="p">[[</span><span class="o">*</span><span class="n">agree_keys</span><span class="p">,</span> <span class="n">base_score_col</span><span class="p">]],</span>
+        <span class="n">on</span><span class="o">=</span><span class="n">agree_keys</span><span class="p">,</span>
+        <span class="n">suffixes</span><span class="o">=</span><span class="p">(</span><span class="s2">"_joint"</span><span class="p">,</span> <span class="s2">"_separate"</span><span class="p">),</span>
+    <span class="p">)</span>
+    <span class="n">merged_items</span><span class="p">[</span><span class="s2">"agree"</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">merged_items</span><span class="p">[</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">base_score_col</span><span class="si">}</span><span class="s2">_joint"</span><span class="p">]</span>
+        <span class="o">==</span> <span class="n">merged_items</span><span class="p">[</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">base_score_col</span><span class="si">}</span><span class="s2">_separate"</span><span class="p">]</span>
+    <span class="p">)</span>
+    <span class="n">agreement_view</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">merged_items</span>
+        <span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">"criteria"</span><span class="p">)[</span><span class="s2">"agree"</span><span class="p">]</span>
+        <span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="n">agreement_rate</span><span class="o">=</span><span class="s2">"mean"</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="s2">"count"</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+    <span class="p">)</span>
+    <span class="n">overall_agreement</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">merged_items</span><span class="p">[</span><span class="s2">"agree"</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+    <span class="n">agreement_view</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span>
+        <span class="p">[</span>
+            <span class="n">agreement_view</span><span class="p">,</span>
+            <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span>
+                <span class="p">{</span>
+                    <span class="s2">"criteria"</span><span class="p">:</span> <span class="s2">"ALL"</span><span class="p">,</span>
+                    <span class="s2">"agreement_rate"</span><span class="p">:</span> <span class="n">overall_agreement</span><span class="p">,</span>
+                    <span class="s2">"n"</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">merged_items</span><span class="p">),</span>
+                <span class="p">}</span>
+            <span class="p">]),</span>
+        <span class="p">],</span>
+        <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">agreement_view</span><span class="p">[</span><span class="s2">"agreement_rate"</span><span class="p">]</span> <span class="o">=</span> <span class="n">agreement_view</span><span class="p">[</span><span class="s2">"agreement_rate"</span><span class="p">]</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">print_df</span><span class="p">(</span>
+        <span class="n">cast</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">agreement_view</span><span class="p">),</span>
+        <span class="sa">f</span><span class="s2">"[</span><span class="si">{</span><span class="n">model_name</span><span class="si">}</span><span class="s2">] Joint vs. Separate — Verdict Agreement"</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="c1"># (3) Paired significance.</span>
+    <span class="n">model_sig</span> <span class="o">=</span> <span class="n">paired_judging_significance</span><span class="p">(</span>
+        <span class="n">joint_df</span><span class="p">,</span> <span class="n">separate_df</span><span class="p">,</span> <span class="n">base_col</span><span class="o">=</span><span class="n">base_score_col</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="n">alpha</span>
+    <span class="p">)</span>
+    <span class="n">sig_display</span> <span class="o">=</span> <span class="n">model_sig</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">"joint_mean_wr"</span><span class="p">,</span> <span class="s2">"separate_mean_wr"</span><span class="p">,</span> <span class="s2">"mean_diff"</span><span class="p">]:</span>
+        <span class="n">sig_display</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">sig_display</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+    <span class="n">sig_display</span><span class="p">[</span><span class="s2">"p_value"</span><span class="p">]</span> <span class="o">=</span> <span class="n">sig_display</span><span class="p">[</span><span class="s2">"p_value"</span><span class="p">]</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">print_df</span><span class="p">(</span>
+        <span class="n">cast</span><span class="p">(</span>
+            <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
+            <span class="n">sig_display</span><span class="p">[</span>
+                <span class="p">[</span>
+                    <span class="s2">"criteria"</span><span class="p">,</span>
+                    <span class="s2">"n"</span><span class="p">,</span>
+                    <span class="s2">"joint_mean_wr"</span><span class="p">,</span>
+                    <span class="s2">"separate_mean_wr"</span><span class="p">,</span>
+                    <span class="s2">"mean_diff"</span><span class="p">,</span>
+                    <span class="s2">"p_value"</span><span class="p">,</span>
+                    <span class="s2">"significant"</span><span class="p">,</span>
+                <span class="p">]</span>
+            <span class="p">],</span>
+        <span class="p">),</span>
+        <span class="sa">f</span><span class="s2">"[</span><span class="si">{</span><span class="n">model_name</span><span class="si">}</span><span class="s2">] Joint vs. Separate — Paired Significance"</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="n">overall</span> <span class="o">=</span> <span class="n">model_sig</span><span class="p">[</span><span class="n">model_sig</span><span class="p">[</span><span class="s2">"criteria"</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"ALL"</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s2">"judge_model"</span><span class="p">:</span> <span class="n">model_name</span><span class="p">,</span>
+        <span class="s2">"verdict_agreement"</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">overall_agreement</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
+        <span class="s2">"joint_mean_wr"</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">overall</span><span class="p">[</span><span class="s2">"joint_mean_wr"</span><span class="p">]),</span> <span class="mi">4</span><span class="p">),</span>
+        <span class="s2">"separate_mean_wr"</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">overall</span><span class="p">[</span><span class="s2">"separate_mean_wr"</span><span class="p">]),</span> <span class="mi">4</span><span class="p">),</span>
+        <span class="s2">"overall_p_value"</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">overall</span><span class="p">[</span><span class="s2">"p_value"</span><span class="p">]),</span> <span class="mi">3</span><span class="p">),</span>
+        <span class="s2">"significant_diff"</span><span class="p">:</span> <span class="nb">bool</span><span class="p">(</span><span class="n">overall</span><span class="p">[</span><span class="s2">"significant"</span><span class="p">]),</span>
+    <span class="p">}</span>
+
+
+<span class="n">model_rows</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">object</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">model_name</span> <span class="ow">in</span> <span class="n">judge_models</span><span class="p">:</span>
+    <span class="n">rich_print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"[bold]=== Judge model: </span><span class="si">{</span><span class="n">model_name</span><span class="si">}</span><span class="s2"> ===[/bold]"</span><span class="p">)</span>
+    <span class="n">model_joint_df</span><span class="p">,</span> <span class="n">model_separate_df</span> <span class="o">=</span> <span class="n">run_joint_vs_separate_for_model</span><span class="p">(</span><span class="n">model_name</span><span class="p">)</span>
+    <span class="n">model_rows</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+        <span class="n">report_model_detail</span><span class="p">(</span><span class="n">model_name</span><span class="p">,</span> <span class="n">model_joint_df</span><span class="p">,</span> <span class="n">model_separate_df</span><span class="p">)</span>
+    <span class="p">)</span>
+
+<span class="c1"># Combined comparison across all models (single shareable table).</span>
+<span class="n">model_summary_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">model_rows</span><span class="p">)</span>
+<span class="n">model_summary_df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">diff_output_dir</span> <span class="o">/</span> <span class="s2">"joint_vs_separate_by_model.csv"</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">print_df</span><span class="p">(</span>
+    <span class="n">cast</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">model_summary_df</span><span class="p">),</span>
+    <span class="s2">"Joint vs. Separate — All Judge Models (combined)"</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+<div class="clipboard-copy-txt" id="cell-30"># Multi-model sweep: per-model detail tables + one combined comparison table.
+judge_models = [
+    "gpt-5.2",
+    "gpt-4.1",
+    "gpt-4o",
+]  # edit to add/remove judge models
+
+
+def run_joint_vs_separate_for_model(
+    model_name: str, *, concurrent_requests: int = 32
+) -&gt; tuple[pd.DataFrame, pd.DataFrame]:
+    """Run both joint and separate differential judging for a single judge model."""
+    model_config = LLMConfig(
+        model=model_name,
+        api_key=SecretStr(os.environ["OPENAI_API_KEY"]),
+        llm_provider=LLMProvider.OpenAIChat,
+        concurrent_requests=concurrent_requests,
+        call_args={"temperature": 0.0, "seed": 42},
+    )
+    model_client = ModelFactory.create_chat_model(model_config)
+
+    joint_parts: list[pd.DataFrame] = []
+    separate_parts: list[pd.DataFrame] = []
+    for question_set in diff_question_sets:
+        for other in diff_others:
+            base_answers = pd.read_json(
+                f"{diff_input_dir}/{diff_base}/{question_set}_answers.json"
+            )
+            other_answers = pd.read_json(
+                f"{diff_input_dir}/{other}/{question_set}_answers.json"
+            )
+            joint_part = get_differential_pairwise_scores(
+                llm_client=model_client,
+                llm_config=model_config,
+                base_name=diff_base,
+                other_name=other,
+                base_answers=base_answers,
+                other_answers=other_answers,
+                criteria=comparable_criteria,
+                trials=diff_trials,
+                include_score_id_in_prompt=True,
+                question_id_key="question_id",
+                question_text_key="question",
+            )
+            joint_part["question_set"] = question_set
+            joint_parts.append(joint_part)
+
+            separate_part = get_separate_differential_scores(
+                llm_client=model_client,
+                llm_config=model_config,
+                base_name=diff_base,
+                other_name=other,
+                base_answers=base_answers,
+                other_answers=other_answers,
+                trials=diff_trials,
+                include_score_id_in_prompt=True,
+                question_id_key="question_id",
+                question_text_key="question",
+            )
+            separate_part["question_set"] = question_set
+            separate_parts.append(separate_part)
+
+    return (
+        pd.concat(joint_parts, ignore_index=True),
+        pd.concat(separate_parts, ignore_index=True),
+    )
+
+
+def report_model_detail(
+    model_name: str, joint_df: pd.DataFrame, separate_df: pd.DataFrame
+) -&gt; dict[str, object]:
+    """Print the per-model detail tables and return the overall summary row."""
+    summary_keys = ["question_set", "criteria", "base_name", "other_name"]
+
+    # (1) Win rates: joint vs. separate.
+    m_joint_summary = analyze_criteria(joint_df, alpha=alpha)
+    m_separate_summary = analyze_criteria(separate_df, alpha=alpha)
+    mjs = m_joint_summary.merge(
+        m_separate_summary, on=summary_keys, suffixes=("_joint", "_separate")
+    )
+    mjs["winrate_delta"] = mjs["other_mean_separate"] - mjs["other_mean_joint"]
+    win_rate_view = pd.DataFrame({
+        "question set": mjs["question_set"].str.replace("data_", "", regex=False),
+        "criteria": mjs["criteria"],
+        f"{other_short} WR (joint)": mjs["other_mean_joint"].round(4),
+        f"{other_short} WR (separate)": mjs["other_mean_separate"].round(4),
+        "WR Δ (sep-joint)": mjs["winrate_delta"].round(4),
+        "p (joint)": mjs["formatted_corrected_p_value_joint"],
+        "p (separate)": mjs["formatted_corrected_p_value_separate"],
+    })
+    print_df(
+        cast(pd.DataFrame, win_rate_view),
+        f"[{model_name}] Joint vs. Separate — Win Rates",
+    )
+
+    # (2) Verdict agreement per criterion.
+    agree_keys = ["question_set", "question", "criteria", "trial"]
+    merged_items = joint_df[[*agree_keys, base_score_col]].merge(
+        separate_df[[*agree_keys, base_score_col]],
+        on=agree_keys,
+        suffixes=("_joint", "_separate"),
+    )
+    merged_items["agree"] = (
+        merged_items[f"{base_score_col}_joint"]
+        == merged_items[f"{base_score_col}_separate"]
+    )
+    agreement_view = (
+        merged_items
+        .groupby("criteria")["agree"]
+        .agg(agreement_rate="mean", n="count")
+        .reset_index()
+    )
+    overall_agreement = float(merged_items["agree"].mean())
+    agreement_view = pd.concat(
+        [
+            agreement_view,
+            pd.DataFrame([
+                {
+                    "criteria": "ALL",
+                    "agreement_rate": overall_agreement,
+                    "n": len(merged_items),
+                }
+            ]),
+        ],
+        ignore_index=True,
+    )
+    agreement_view["agreement_rate"] = agreement_view["agreement_rate"].round(3)
+    print_df(
+        cast(pd.DataFrame, agreement_view),
+        f"[{model_name}] Joint vs. Separate — Verdict Agreement",
+    )
+
+    # (3) Paired significance.
+    model_sig = paired_judging_significance(
+        joint_df, separate_df, base_col=base_score_col, alpha=alpha
+    )
+    sig_display = model_sig.copy()
+    for col in ["joint_mean_wr", "separate_mean_wr", "mean_diff"]:
+        sig_display[col] = sig_display[col].round(4)
+    sig_display["p_value"] = sig_display["p_value"].round(3)
+    print_df(
+        cast(
+            pd.DataFrame,
+            sig_display[
+                [
+                    "criteria",
+                    "n",
+                    "joint_mean_wr",
+                    "separate_mean_wr",
+                    "mean_diff",
+                    "p_value",
+                    "significant",
+                ]
+            ],
+        ),
+        f"[{model_name}] Joint vs. Separate — Paired Significance",
+    )
+
+    overall = model_sig[model_sig["criteria"] == "ALL"].iloc[0]
+    return {
+        "judge_model": model_name,
+        "verdict_agreement": round(overall_agreement, 3),
+        "joint_mean_wr": round(float(overall["joint_mean_wr"]), 4),
+        "separate_mean_wr": round(float(overall["separate_mean_wr"]), 4),
+        "overall_p_value": round(float(overall["p_value"]), 3),
+        "significant_diff": bool(overall["significant"]),
+    }
+
+
+model_rows: list[dict[str, object]] = []
+for model_name in judge_models:
+    rich_print(f"[bold]=== Judge model: {model_name} ===[/bold]")
+    model_joint_df, model_separate_df = run_joint_vs_separate_for_model(model_name)
+    model_rows.append(
+        report_model_detail(model_name, model_joint_df, model_separate_df)
+    )
+
+# Combined comparison across all models (single shareable table).
+model_summary_df = pd.DataFrame(model_rows)
+model_summary_df.to_csv(diff_output_dir / "joint_vs_separate_by_model.csv", index=False)
+print_df(
+    cast(pd.DataFrame, model_summary_df),
+    "Joint vs. Separate — All Judge Models (combined)",
+)</div>
 </div>
 </div>
 </div>

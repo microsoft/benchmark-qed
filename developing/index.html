@@ -535,6 +535,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#comparing-rag-answer-pairs-differential-extract-and-judge" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comparing RAG answer pairs (differential, extract-and-judge)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#scoring-rag-answers-against-reference-answers" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1153,6 +1164,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#comparing-rag-answer-pairs-differential-extract-and-judge" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comparing RAG answer pairs (differential, extract-and-judge)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#scoring-rag-answers-against-reference-answers" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1381,35 +1403,97 @@ This command creates two files in the <code>./pairwise_test</code> directory:
 The results will be saved in the <code>output</code> directory.</p>
 </li>
 </ol>
-<h2 id="scoring-rag-answers-against-reference-answers">Scoring RAG answers against reference answers</h2>
-<p>Follow these steps to score RAG answers against reference answers using example data from the AP news dataset:</p>
+<h2 id="comparing-rag-answer-pairs-differential-extract-and-judge">Comparing RAG answer pairs (differential, extract-and-judge)</h2>
+<p>The standard <code>pairwise-scores</code> command shows the judge the <strong>full text</strong> of both answers side by side. LLM judges are known to have biases in this setting — they tend to favor longer answers, richer formatting, or whichever answer appears first, even when the underlying content is not actually better. Counterbalancing the answer order (as the standard pipeline does) cancels position bias, but not <strong>length</strong> and <strong>formatting</strong> bias.</p>
+<p>The <code>differential-pairwise-scores</code> command reduces those biases with a two-step <strong>extract-and-judge</strong> method (Censheng's method):</p>
+<ol>
+<li><strong>Extract</strong> — For each question, the LLM first separates the two answers into three buckets: content that is <strong>common</strong> to both, content that is <strong>unique to answer A</strong>, and content that is <strong>unique to answer B</strong>.</li>
+<li><strong>Judge</strong> — The judge then compares <strong>only the unique content</strong> (with the common content supplied as context) on the configured criteria (the standard defaults or any user-defined criteria).</li>
+</ol>
+<p>Because the shared material and padding are stripped out before judging, the verdict is driven by each answer's <strong>substantive, distinct contribution</strong> rather than by its length or presentation. If two answers convey the same information in different amounts of text, they correctly come out as a tie.</p>
+<p>Key points:</p>
+<ul>
+<li>This is <strong>additive</strong> — it is a separate command and does not change the existing <code>pairwise-scores</code> behavior.</li>
+<li>The criteria are <strong>configurable</strong> via a <code>criteria</code> field (the standard defaults are used when omitted), and they are judged together in a single call.</li>
+<li>The output uses the <strong>same schema and significance pipeline</strong> as <code>pairwise-scores</code> (<code>win_rates.csv</code>, <code>winrates_sig_tests.csv</code>), so results are directly comparable to the standard method.</li>
+<li><strong>Cost trade-off:</strong> each comparison makes roughly <strong>twice the LLM calls</strong> (one extraction step plus one judging step) in exchange for a more bias-resistant verdict.</li>
+</ul>
+<p>Follow these steps to run the differential pairwise scoring pipeline:</p>
 <ol>
 <li>
 <p><strong>Set up your project directory:</strong>
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>mkdir<span class="w"> </span>-p<span class="w"> </span>./local/reference_test
-<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="nb">cd</span><span class="w"> </span>./local/reference_test
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>mkdir<span class="w"> </span>-p<span class="w"> </span>./local/differential_pairwise_test
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="nb">cd</span><span class="w"> </span>./local/differential_pairwise_test
 </code></pre></div></p>
 </li>
 <li>
-<p><strong>Create an <code>input</code> folder and add your data:</strong>
+<p><strong>Create an <code>input</code> folder and add your question-answer data:</strong>
     <div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>mkdir<span class="w"> </span>./input
 </code></pre></div>
-    Copy your RAG answers and reference answers into the <code>input</code> directory. To get started, you can use the example RAG answers available in the <a href="https://github.com/microsoft/benchmark-qed/tree/main/docs/notebooks/example_answers">example data folder</a>. To download this example dataset directly into your <code>input</code> folder, run:
+    Copy your RAG answer files into the <code>./input</code> directory. To get started, you can use the example RAG answers available in the <a href="https://github.com/microsoft/benchmark-qed/tree/main/docs/notebooks/example_answers">example data folder</a>. To download this example dataset directly into your <code>input</code> folder, run:
     <div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>uv<span class="w"> </span>run<span class="w"> </span>benchmark-qed<span class="w"> </span>data<span class="w"> </span>download<span class="w"> </span>example_answers<span class="w"> </span>input
 </code></pre></div>
     You can also download directly to Azure Blob Storage. See the <a href="../datasets/">Datasets documentation</a> for storage options.</p>
 </li>
 <li>
-<p><strong>Create a configuration file for reference scoring:</strong>
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>uv<span class="w"> </span>run<span class="w"> </span>benchmark-qed<span class="w"> </span>config<span class="w"> </span>init<span class="w"> </span>autoe_reference<span class="w"> </span>.
+<p><strong>Create a configuration file for differential pairwise comparison:</strong>
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>uv<span class="w"> </span>run<span class="w"> </span>benchmark-qed<span class="w"> </span>config<span class="w"> </span>init<span class="w"> </span>autoe_differential_pairwise<span class="w"> </span>.
 </code></pre></div>
     This is the local-filesystem variant.</p>
 <p>Alternative blob variant (choose this instead of the local command above; do not run both):
-<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>uv<span class="w"> </span>run<span class="w"> </span>benchmark-qed<span class="w"> </span>config<span class="w"> </span>init<span class="w"> </span>autoe_reference<span class="w"> </span>.<span class="w"> </span><span class="se">\</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>uv<span class="w"> </span>run<span class="w"> </span>benchmark-qed<span class="w"> </span>config<span class="w"> </span>init<span class="w"> </span>autoe_differential_pairwise<span class="w"> </span>.<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a><span class="w">    </span>--storage-type<span class="w"> </span>blob<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a><span class="w">    </span>--container-name<span class="w"> </span>my-container<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a><span class="w">    </span>--account-url<span class="w"> </span>https://&lt;account&gt;.blob.core.windows.net<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-20-5" name="__codelineno-20-5" href="#__codelineno-20-5"></a><span class="w">    </span>--base-dir<span class="w"> </span>reference_test
+<a id="__codelineno-20-5" name="__codelineno-20-5" href="#__codelineno-20-5"></a><span class="w">    </span>--base-dir<span class="w"> </span>differential_pairwise_test
+</code></pre></div>
+This command creates two files in the <code>./differential_pairwise_test</code> directory:
+- <code>.env</code>: Contains environment variables for the pairwise comparison tests. Open this file and replace <code>&lt;API_KEY&gt;</code> with your OpenAI or Azure API key.
+- <code>settings.yaml</code>: Contains pipeline settings, which you can modify as needed.</p>
+<p>The differential command reuses the pairwise configuration structure (<code>base</code>, <code>others</code>, <code>question_sets</code>, <code>trials</code>, <code>llm_config</code>, <code>criteria</code>); when <code>criteria</code> is omitted the standard defaults are used. The generated <code>settings.yaml</code> wires up the extract-and-judge prompts under <code>prompt_config</code> (<code>extract_system_prompt</code>, <code>extract_user_prompt</code>, <code>judge_system_prompt</code>, <code>judge_user_prompt</code>); edit those prompt files under <code>prompts/</code> or remove the <code>prompt_config</code> section to use the built-in defaults.</p>
+<p>The generated <code>settings.yaml</code> includes commented-out <code>input_storage</code> and <code>output_storage</code> sections for configuring Azure Blob Storage backends.</p>
+</li>
+<li>
+<p><strong>Run the differential pairwise comparison:</strong>
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>uv<span class="w"> </span>run<span class="w"> </span>benchmark-qed<span class="w"> </span>autoe<span class="w"> </span>differential-pairwise-scores<span class="w"> </span>settings.yaml<span class="w"> </span>output
+</code></pre></div>
+    This is the local-filesystem variant.</p>
+<p>Alternative blob-stored config variant (choose this instead of the local command above; do not run both):
+<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>uv<span class="w"> </span>run<span class="w"> </span>benchmark-qed<span class="w"> </span>autoe<span class="w"> </span>differential-pairwise-scores<span class="w"> </span>blob://my-container/differential_pairwise_test/settings.yaml<span class="w"> </span>output<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a><span class="w">    </span>--account-url<span class="w"> </span>https://&lt;account&gt;.blob.core.windows.net
+</code></pre></div>
+The results will be saved in the <code>output</code> directory. In addition to the per-criterion win scores, each cached comparison CSV also records the extracted <code>common</code>, <code>unique_1</code>, and <code>unique_2</code> content for inspection.</p>
+</li>
+</ol>
+<h2 id="scoring-rag-answers-against-reference-answers">Scoring RAG answers against reference answers</h2>
+<p>Follow these steps to score RAG answers against reference answers using example data from the AP news dataset:</p>
+<ol>
+<li>
+<p><strong>Set up your project directory:</strong>
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>mkdir<span class="w"> </span>-p<span class="w"> </span>./local/reference_test
+<a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a><span class="nb">cd</span><span class="w"> </span>./local/reference_test
+</code></pre></div></p>
+</li>
+<li>
+<p><strong>Create an <code>input</code> folder and add your data:</strong>
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>mkdir<span class="w"> </span>./input
+</code></pre></div>
+    Copy your RAG answers and reference answers into the <code>input</code> directory. To get started, you can use the example RAG answers available in the <a href="https://github.com/microsoft/benchmark-qed/tree/main/docs/notebooks/example_answers">example data folder</a>. To download this example dataset directly into your <code>input</code> folder, run:
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>uv<span class="w"> </span>run<span class="w"> </span>benchmark-qed<span class="w"> </span>data<span class="w"> </span>download<span class="w"> </span>example_answers<span class="w"> </span>input
+</code></pre></div>
+    You can also download directly to Azure Blob Storage. See the <a href="../datasets/">Datasets documentation</a> for storage options.</p>
+</li>
+<li>
+<p><strong>Create a configuration file for reference scoring:</strong>
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a>uv<span class="w"> </span>run<span class="w"> </span>benchmark-qed<span class="w"> </span>config<span class="w"> </span>init<span class="w"> </span>autoe_reference<span class="w"> </span>.
+</code></pre></div>
+    This is the local-filesystem variant.</p>
+<p>Alternative blob variant (choose this instead of the local command above; do not run both):
+<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>uv<span class="w"> </span>run<span class="w"> </span>benchmark-qed<span class="w"> </span>config<span class="w"> </span>init<span class="w"> </span>autoe_reference<span class="w"> </span>.<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a><span class="w">    </span>--storage-type<span class="w"> </span>blob<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a><span class="w">    </span>--container-name<span class="w"> </span>my-container<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-27-4" name="__codelineno-27-4" href="#__codelineno-27-4"></a><span class="w">    </span>--account-url<span class="w"> </span>https://&lt;account&gt;.blob.core.windows.net<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-27-5" name="__codelineno-27-5" href="#__codelineno-27-5"></a><span class="w">    </span>--base-dir<span class="w"> </span>reference_test
 </code></pre></div>
 This creates two files in the <code>./reference_test</code> directory:
 - <code>.env</code>: Contains environment variables for the reference scoring pipeline. Open this file and replace <code>&lt;API_KEY&gt;</code> with your OpenAI or Azure API key.
@@ -1418,12 +1502,12 @@ This creates two files in the <code>./reference_test</code> directory:
 </li>
 <li>
 <p><strong>Run the reference scoring:</strong>
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>uv<span class="w"> </span>run<span class="w"> </span>benchmark-qed<span class="w"> </span>autoe<span class="w"> </span>reference-scores<span class="w"> </span>settings.yaml<span class="w"> </span>output
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a>uv<span class="w"> </span>run<span class="w"> </span>benchmark-qed<span class="w"> </span>autoe<span class="w"> </span>reference-scores<span class="w"> </span>settings.yaml<span class="w"> </span>output
 </code></pre></div>
     This is the local-filesystem variant.</p>
 <p>Alternative blob-stored config variant (choose this instead of the local command above; do not run both):
-<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>uv<span class="w"> </span>run<span class="w"> </span>benchmark-qed<span class="w"> </span>autoe<span class="w"> </span>reference-scores<span class="w"> </span>blob://my-container/reference_test/settings.yaml<span class="w"> </span>output<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a><span class="w">    </span>--account-url<span class="w"> </span>https://&lt;account&gt;.blob.core.windows.net
+<div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a>uv<span class="w"> </span>run<span class="w"> </span>benchmark-qed<span class="w"> </span>autoe<span class="w"> </span>reference-scores<span class="w"> </span>blob://my-container/reference_test/settings.yaml<span class="w"> </span>output<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-29-2" name="__codelineno-29-2" href="#__codelineno-29-2"></a><span class="w">    </span>--account-url<span class="w"> </span>https://&lt;account&gt;.blob.core.windows.net
 </code></pre></div>
 The results will be saved in the <code>output</code> directory.</p>
 </li>
@@ -1433,31 +1517,31 @@ The results will be saved in the <code>output</code> directory.</p>
 <ol>
 <li>
 <p><strong>Set up your project directory:</strong>
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>mkdir<span class="w"> </span>-p<span class="w"> </span>./local/assertion_test
-<a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a><span class="nb">cd</span><span class="w"> </span>./local/assertion_test
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a>mkdir<span class="w"> </span>-p<span class="w"> </span>./local/assertion_test
+<a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a><span class="nb">cd</span><span class="w"> </span>./local/assertion_test
 </code></pre></div></p>
 </li>
 <li>
 <p><strong>Create an <code>input</code> folder and add your data:</strong>
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>mkdir<span class="w"> </span>./input
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a>mkdir<span class="w"> </span>./input
 </code></pre></div>
     Copy your RAG answers and assertion files into the <code>input</code> directory. To get started, you can use the example RAG answers and generated assertions from the AP news dataset:
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>uv<span class="w"> </span>run<span class="w"> </span>benchmark-qed<span class="w"> </span>data<span class="w"> </span>download<span class="w"> </span>example_answers<span class="w"> </span>input
-<a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a>uv<span class="w"> </span>run<span class="w"> </span>benchmark-qed<span class="w"> </span>data<span class="w"> </span>download<span class="w"> </span>AP_news<span class="w"> </span>input
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a>uv<span class="w"> </span>run<span class="w"> </span>benchmark-qed<span class="w"> </span>data<span class="w"> </span>download<span class="w"> </span>example_answers<span class="w"> </span>input
+<a id="__codelineno-32-2" name="__codelineno-32-2" href="#__codelineno-32-2"></a>uv<span class="w"> </span>run<span class="w"> </span>benchmark-qed<span class="w"> </span>data<span class="w"> </span>download<span class="w"> </span>AP_news<span class="w"> </span>input
 </code></pre></div>
     This downloads example answers and assertion files. You can also use your own assertions JSON files or download directly from Azure Blob Storage. See the <a href="../datasets/">Datasets documentation</a> for storage options.</p>
 </li>
 <li>
 <p><strong>Create a configuration file for assertion evaluation:</strong>
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a>uv<span class="w"> </span>run<span class="w"> </span>benchmark-qed<span class="w"> </span>config<span class="w"> </span>init<span class="w"> </span>autoe_assertion<span class="w"> </span>.
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a>uv<span class="w"> </span>run<span class="w"> </span>benchmark-qed<span class="w"> </span>config<span class="w"> </span>init<span class="w"> </span>autoe_assertion<span class="w"> </span>.
 </code></pre></div>
     This is the local-filesystem variant.</p>
 <p>Alternative blob variant (choose this instead of the local command above; do not run both):
-<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>uv<span class="w"> </span>run<span class="w"> </span>benchmark-qed<span class="w"> </span>config<span class="w"> </span>init<span class="w"> </span>autoe_assertion<span class="w"> </span>.<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a><span class="w">    </span>--storage-type<span class="w"> </span>blob<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a><span class="w">    </span>--container-name<span class="w"> </span>my-container<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-27-4" name="__codelineno-27-4" href="#__codelineno-27-4"></a><span class="w">    </span>--account-url<span class="w"> </span>https://&lt;account&gt;.blob.core.windows.net<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-27-5" name="__codelineno-27-5" href="#__codelineno-27-5"></a><span class="w">    </span>--base-dir<span class="w"> </span>assertion_test
+<div class="highlight"><pre><span></span><code><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a>uv<span class="w"> </span>run<span class="w"> </span>benchmark-qed<span class="w"> </span>config<span class="w"> </span>init<span class="w"> </span>autoe_assertion<span class="w"> </span>.<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-34-2" name="__codelineno-34-2" href="#__codelineno-34-2"></a><span class="w">    </span>--storage-type<span class="w"> </span>blob<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-34-3" name="__codelineno-34-3" href="#__codelineno-34-3"></a><span class="w">    </span>--container-name<span class="w"> </span>my-container<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-34-4" name="__codelineno-34-4" href="#__codelineno-34-4"></a><span class="w">    </span>--account-url<span class="w"> </span>https://&lt;account&gt;.blob.core.windows.net<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-34-5" name="__codelineno-34-5" href="#__codelineno-34-5"></a><span class="w">    </span>--base-dir<span class="w"> </span>assertion_test
 </code></pre></div>
 This command creates two files in the <code>./assertion_test</code> directory:
 - <code>.env</code>: Contains environment variables for the assertion evaluation pipeline. Open this file and replace <code>&lt;API_KEY&gt;</code> with your OpenAI or Azure API key.
@@ -1466,12 +1550,12 @@ This command creates two files in the <code>./assertion_test</code> directory:
 </li>
 <li>
 <p><strong>Run the assertion evaluation:</strong>
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a>uv<span class="w"> </span>run<span class="w"> </span>benchmark-qed<span class="w"> </span>autoe<span class="w"> </span>assertion-scores<span class="w"> </span>settings.yaml<span class="w"> </span>output
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a>uv<span class="w"> </span>run<span class="w"> </span>benchmark-qed<span class="w"> </span>autoe<span class="w"> </span>assertion-scores<span class="w"> </span>settings.yaml<span class="w"> </span>output
 </code></pre></div>
     This is the local-filesystem variant.</p>
 <p>Alternative blob-stored config variant (choose this instead of the local command above; do not run both):
-<div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a>uv<span class="w"> </span>run<span class="w"> </span>benchmark-qed<span class="w"> </span>autoe<span class="w"> </span>assertion-scores<span class="w"> </span>blob://my-container/assertion_test/settings.yaml<span class="w"> </span>output<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-29-2" name="__codelineno-29-2" href="#__codelineno-29-2"></a><span class="w">    </span>--account-url<span class="w"> </span>https://&lt;account&gt;.blob.core.windows.net
+<div class="highlight"><pre><span></span><code><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a>uv<span class="w"> </span>run<span class="w"> </span>benchmark-qed<span class="w"> </span>autoe<span class="w"> </span>assertion-scores<span class="w"> </span>blob://my-container/assertion_test/settings.yaml<span class="w"> </span>output<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-36-2" name="__codelineno-36-2" href="#__codelineno-36-2"></a><span class="w">    </span>--account-url<span class="w"> </span>https://&lt;account&gt;.blob.core.windows.net
 </code></pre></div>
 The results will be saved in the <code>output</code> directory, including per-assertion scores and per-question summaries.</p>
 </li>
@@ -1491,13 +1575,13 @@ The results will be saved in the <code>output</code> directory, including per-as
 <ol>
 <li>
 <p><strong>Set up your project directory:</strong>
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a>mkdir<span class="w"> </span>-p<span class="w"> </span>./local/chunk_assertion_test
-<a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a><span class="nb">cd</span><span class="w"> </span>./local/chunk_assertion_test
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a>mkdir<span class="w"> </span>-p<span class="w"> </span>./local/chunk_assertion_test
+<a id="__codelineno-37-2" name="__codelineno-37-2" href="#__codelineno-37-2"></a><span class="nb">cd</span><span class="w"> </span>./local/chunk_assertion_test
 </code></pre></div></p>
 </li>
 <li>
 <p><strong>Prepare your input data:</strong>
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a>mkdir<span class="w"> </span>./input
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a>mkdir<span class="w"> </span>./input
 </code></pre></div></p>
 <p>You need two files whose <code>question_id</code>s line up:
 - <strong>Assertion file</strong>: The per-question assertions to check. Set via <code>assertions_path</code>
@@ -1510,11 +1594,11 @@ The results will be saved in the <code>output</code> directory, including per-as
 <p><strong>Note:</strong> To try the pipeline end-to-end without wiring up your own retriever, download
 the bundled example data, which ships matching retrieval-results and assertions files
 (same <code>question_id</code>s) for both short- and long-context retrievers:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a>uv<span class="w"> </span>run<span class="w"> </span>benchmark-qed<span class="w"> </span>data<span class="w"> </span>download<span class="w"> </span>example_answers<span class="w"> </span>input
+<div class="highlight"><pre><span></span><code><a id="__codelineno-39-1" name="__codelineno-39-1" href="#__codelineno-39-1"></a>uv<span class="w"> </span>run<span class="w"> </span>benchmark-qed<span class="w"> </span>data<span class="w"> </span>download<span class="w"> </span>example_answers<span class="w"> </span>input
 </code></pre></div>
 Then set, for example:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a><span class="nt">retrieval_path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">input/vector_rag_short_context/data_local_retrieval_results.json</span>
-<a id="__codelineno-33-2" name="__codelineno-33-2" href="#__codelineno-33-2"></a><span class="nt">assertions_path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">input/data_local_assertions.json</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-40-1" name="__codelineno-40-1" href="#__codelineno-40-1"></a><span class="nt">retrieval_path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">input/vector_rag_short_context/data_local_retrieval_results.json</span>
+<a id="__codelineno-40-2" name="__codelineno-40-2" href="#__codelineno-40-2"></a><span class="nt">assertions_path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">input/data_local_assertions.json</span>
 </code></pre></div></p>
 <p>Swap <code>data_local</code> for <code>data_global</code> or <code>data_linked</code> (and pick
 <code>vector_rag_short_context</code> or <code>vector_rag_long_context</code>) to evaluate a different
@@ -1527,23 +1611,23 @@ record holds a question and its retrieved <code>context</code>. Each context ite
 <code>chunk_id</code>, <code>text</code>, and an optional <code>rank</code>. When <code>rank</code> is present on every item,
 chunks are evaluated in rank order (top-k semantics); otherwise the chunks are assumed
 to be already pre-sorted in decreasing order of relevance and list order is used.
-<div class="highlight"><pre><span></span><code><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a><span class="p">[</span>
-<a id="__codelineno-34-2" name="__codelineno-34-2" href="#__codelineno-34-2"></a><span class="w">  </span><span class="p">{</span>
-<a id="__codelineno-34-3" name="__codelineno-34-3" href="#__codelineno-34-3"></a><span class="w">    </span><span class="nt">&quot;question_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;q1&quot;</span><span class="p">,</span>
-<a id="__codelineno-34-4" name="__codelineno-34-4" href="#__codelineno-34-4"></a><span class="w">    </span><span class="nt">&quot;text&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;What is photosynthesis?&quot;</span><span class="p">,</span>
-<a id="__codelineno-34-5" name="__codelineno-34-5" href="#__codelineno-34-5"></a><span class="w">    </span><span class="nt">&quot;context&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-<a id="__codelineno-34-6" name="__codelineno-34-6" href="#__codelineno-34-6"></a><span class="w">      </span><span class="p">{</span>
-<a id="__codelineno-34-7" name="__codelineno-34-7" href="#__codelineno-34-7"></a><span class="w">        </span><span class="nt">&quot;chunk_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0&quot;</span><span class="p">,</span>
-<a id="__codelineno-34-8" name="__codelineno-34-8" href="#__codelineno-34-8"></a><span class="w">        </span><span class="nt">&quot;text&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Photosynthesis is the process by which plants convert sunlight into chemical energy...&quot;</span><span class="p">,</span>
-<a id="__codelineno-34-9" name="__codelineno-34-9" href="#__codelineno-34-9"></a><span class="w">        </span><span class="nt">&quot;rank&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span>
-<a id="__codelineno-34-10" name="__codelineno-34-10" href="#__codelineno-34-10"></a><span class="w">      </span><span class="p">},</span>
-<a id="__codelineno-34-11" name="__codelineno-34-11" href="#__codelineno-34-11"></a><span class="w">      </span><span class="p">{</span>
-<a id="__codelineno-34-12" name="__codelineno-34-12" href="#__codelineno-34-12"></a><span class="w">        </span><span class="nt">&quot;chunk_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;5&quot;</span><span class="p">,</span>
-<a id="__codelineno-34-13" name="__codelineno-34-13" href="#__codelineno-34-13"></a><span class="w">        </span><span class="nt">&quot;text&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;In photosynthesis, light energy is captured by chlorophyll molecules...&quot;</span>
-<a id="__codelineno-34-14" name="__codelineno-34-14" href="#__codelineno-34-14"></a><span class="w">      </span><span class="p">}</span>
-<a id="__codelineno-34-15" name="__codelineno-34-15" href="#__codelineno-34-15"></a><span class="w">    </span><span class="p">]</span>
-<a id="__codelineno-34-16" name="__codelineno-34-16" href="#__codelineno-34-16"></a><span class="w">  </span><span class="p">}</span>
-<a id="__codelineno-34-17" name="__codelineno-34-17" href="#__codelineno-34-17"></a><span class="p">]</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-41-1" name="__codelineno-41-1" href="#__codelineno-41-1"></a><span class="p">[</span>
+<a id="__codelineno-41-2" name="__codelineno-41-2" href="#__codelineno-41-2"></a><span class="w">  </span><span class="p">{</span>
+<a id="__codelineno-41-3" name="__codelineno-41-3" href="#__codelineno-41-3"></a><span class="w">    </span><span class="nt">&quot;question_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;q1&quot;</span><span class="p">,</span>
+<a id="__codelineno-41-4" name="__codelineno-41-4" href="#__codelineno-41-4"></a><span class="w">    </span><span class="nt">&quot;text&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;What is photosynthesis?&quot;</span><span class="p">,</span>
+<a id="__codelineno-41-5" name="__codelineno-41-5" href="#__codelineno-41-5"></a><span class="w">    </span><span class="nt">&quot;context&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<a id="__codelineno-41-6" name="__codelineno-41-6" href="#__codelineno-41-6"></a><span class="w">      </span><span class="p">{</span>
+<a id="__codelineno-41-7" name="__codelineno-41-7" href="#__codelineno-41-7"></a><span class="w">        </span><span class="nt">&quot;chunk_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0&quot;</span><span class="p">,</span>
+<a id="__codelineno-41-8" name="__codelineno-41-8" href="#__codelineno-41-8"></a><span class="w">        </span><span class="nt">&quot;text&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Photosynthesis is the process by which plants convert sunlight into chemical energy...&quot;</span><span class="p">,</span>
+<a id="__codelineno-41-9" name="__codelineno-41-9" href="#__codelineno-41-9"></a><span class="w">        </span><span class="nt">&quot;rank&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span>
+<a id="__codelineno-41-10" name="__codelineno-41-10" href="#__codelineno-41-10"></a><span class="w">      </span><span class="p">},</span>
+<a id="__codelineno-41-11" name="__codelineno-41-11" href="#__codelineno-41-11"></a><span class="w">      </span><span class="p">{</span>
+<a id="__codelineno-41-12" name="__codelineno-41-12" href="#__codelineno-41-12"></a><span class="w">        </span><span class="nt">&quot;chunk_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;5&quot;</span><span class="p">,</span>
+<a id="__codelineno-41-13" name="__codelineno-41-13" href="#__codelineno-41-13"></a><span class="w">        </span><span class="nt">&quot;text&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;In photosynthesis, light energy is captured by chlorophyll molecules...&quot;</span>
+<a id="__codelineno-41-14" name="__codelineno-41-14" href="#__codelineno-41-14"></a><span class="w">      </span><span class="p">}</span>
+<a id="__codelineno-41-15" name="__codelineno-41-15" href="#__codelineno-41-15"></a><span class="w">    </span><span class="p">]</span>
+<a id="__codelineno-41-16" name="__codelineno-41-16" href="#__codelineno-41-16"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-41-17" name="__codelineno-41-17" href="#__codelineno-41-17"></a><span class="p">]</span>
 </code></pre></div></p>
 <p>This is the same schema produced by the retrieval-results examples (e.g. the bundled
 <code>data_local_retrieval_results.json</code>), so those files work directly with no conversion.
@@ -1552,15 +1636,15 @@ See the <strong>chunk-level assertion</strong> example in the AutoE notebook
 </li>
 <li>
 <p><strong>Create a configuration file for chunk-level evaluation:</strong>
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a>uv<span class="w"> </span>run<span class="w"> </span>benchmark-qed<span class="w"> </span>config<span class="w"> </span>init<span class="w"> </span>autoe_chunk_assertion<span class="w"> </span>.
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-42-1" name="__codelineno-42-1" href="#__codelineno-42-1"></a>uv<span class="w"> </span>run<span class="w"> </span>benchmark-qed<span class="w"> </span>config<span class="w"> </span>init<span class="w"> </span>autoe_chunk_assertion<span class="w"> </span>.
 </code></pre></div>
     This is the local-filesystem variant.</p>
 <p>Alternative blob variant (choose this instead of the local command above; do not run both):
-<div class="highlight"><pre><span></span><code><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a>uv<span class="w"> </span>run<span class="w"> </span>benchmark-qed<span class="w"> </span>config<span class="w"> </span>init<span class="w"> </span>autoe_chunk_assertion<span class="w"> </span>.<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-36-2" name="__codelineno-36-2" href="#__codelineno-36-2"></a><span class="w">    </span>--storage-type<span class="w"> </span>blob<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-36-3" name="__codelineno-36-3" href="#__codelineno-36-3"></a><span class="w">    </span>--container-name<span class="w"> </span>my-container<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-36-4" name="__codelineno-36-4" href="#__codelineno-36-4"></a><span class="w">    </span>--account-url<span class="w"> </span>https://&lt;account&gt;.blob.core.windows.net<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-36-5" name="__codelineno-36-5" href="#__codelineno-36-5"></a><span class="w">    </span>--base-dir<span class="w"> </span>chunk_assertion_test
+<div class="highlight"><pre><span></span><code><a id="__codelineno-43-1" name="__codelineno-43-1" href="#__codelineno-43-1"></a>uv<span class="w"> </span>run<span class="w"> </span>benchmark-qed<span class="w"> </span>config<span class="w"> </span>init<span class="w"> </span>autoe_chunk_assertion<span class="w"> </span>.<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-43-2" name="__codelineno-43-2" href="#__codelineno-43-2"></a><span class="w">    </span>--storage-type<span class="w"> </span>blob<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-43-3" name="__codelineno-43-3" href="#__codelineno-43-3"></a><span class="w">    </span>--container-name<span class="w"> </span>my-container<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-43-4" name="__codelineno-43-4" href="#__codelineno-43-4"></a><span class="w">    </span>--account-url<span class="w"> </span>https://&lt;account&gt;.blob.core.windows.net<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-43-5" name="__codelineno-43-5" href="#__codelineno-43-5"></a><span class="w">    </span>--base-dir<span class="w"> </span>chunk_assertion_test
 </code></pre></div>
 This command creates two files in the <code>./chunk_assertion_test</code> directory:
 - <code>.env</code>: Contains environment variables. Open this file and replace <code>&lt;API_KEY&gt;</code> with your OpenAI or Azure API key.
@@ -1573,21 +1657,21 @@ This command creates two files in the <code>./chunk_assertion_test</code> direct
 <li>
 <p><strong>Update settings.yaml for your data:</strong></p>
 <p>The generated template includes placeholder paths. Update them to match your actual file locations:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a><span class="nt">generated</span><span class="p">:</span>
-<a id="__codelineno-37-2" name="__codelineno-37-2" href="#__codelineno-37-2"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">my_retriever</span>
-<a id="__codelineno-37-3" name="__codelineno-37-3" href="#__codelineno-37-3"></a><span class="w">  </span><span class="nt">retrieval_path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">input/vector_rag_short_context/data_local_retrieval_results.json</span><span class="w">  </span><span class="c1"># Update to your RetrievalResult file path</span>
-<a id="__codelineno-37-4" name="__codelineno-37-4" href="#__codelineno-37-4"></a><span class="nt">assertions</span><span class="p">:</span>
-<a id="__codelineno-37-5" name="__codelineno-37-5" href="#__codelineno-37-5"></a><span class="w">  </span><span class="nt">assertions_path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">input/data_local_assertions.json</span><span class="w">  </span><span class="c1"># Update to your assertions file path</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-44-1" name="__codelineno-44-1" href="#__codelineno-44-1"></a><span class="nt">generated</span><span class="p">:</span>
+<a id="__codelineno-44-2" name="__codelineno-44-2" href="#__codelineno-44-2"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">my_retriever</span>
+<a id="__codelineno-44-3" name="__codelineno-44-3" href="#__codelineno-44-3"></a><span class="w">  </span><span class="nt">retrieval_path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">input/vector_rag_short_context/data_local_retrieval_results.json</span><span class="w">  </span><span class="c1"># Update to your RetrievalResult file path</span>
+<a id="__codelineno-44-4" name="__codelineno-44-4" href="#__codelineno-44-4"></a><span class="nt">assertions</span><span class="p">:</span>
+<a id="__codelineno-44-5" name="__codelineno-44-5" href="#__codelineno-44-5"></a><span class="w">  </span><span class="nt">assertions_path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">input/data_local_assertions.json</span><span class="w">  </span><span class="c1"># Update to your assertions file path</span>
 </code></pre></div>
 </li>
 <li>
 <p><strong>Run the chunk-level assertion evaluation:</strong>
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a>uv<span class="w"> </span>run<span class="w"> </span>benchmark-qed<span class="w"> </span>autoe<span class="w"> </span>chunk-assertion-scores<span class="w"> </span>settings.yaml<span class="w"> </span>output
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-45-1" name="__codelineno-45-1" href="#__codelineno-45-1"></a>uv<span class="w"> </span>run<span class="w"> </span>benchmark-qed<span class="w"> </span>autoe<span class="w"> </span>chunk-assertion-scores<span class="w"> </span>settings.yaml<span class="w"> </span>output
 </code></pre></div>
     This is the local-filesystem variant.</p>
 <p>Alternative blob-stored config variant (choose this instead of the local command above; do not run both):
-<div class="highlight"><pre><span></span><code><a id="__codelineno-39-1" name="__codelineno-39-1" href="#__codelineno-39-1"></a>uv<span class="w"> </span>run<span class="w"> </span>benchmark-qed<span class="w"> </span>autoe<span class="w"> </span>chunk-assertion-scores<span class="w"> </span>blob://my-container/chunk_assertion_test/settings.yaml<span class="w"> </span>output<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-39-2" name="__codelineno-39-2" href="#__codelineno-39-2"></a><span class="w">    </span>--account-url<span class="w"> </span>https://&lt;account&gt;.blob.core.windows.net
+<div class="highlight"><pre><span></span><code><a id="__codelineno-46-1" name="__codelineno-46-1" href="#__codelineno-46-1"></a>uv<span class="w"> </span>run<span class="w"> </span>benchmark-qed<span class="w"> </span>autoe<span class="w"> </span>chunk-assertion-scores<span class="w"> </span>blob://my-container/chunk_assertion_test/settings.yaml<span class="w"> </span>output<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-46-2" name="__codelineno-46-2" href="#__codelineno-46-2"></a><span class="w">    </span>--account-url<span class="w"> </span>https://&lt;account&gt;.blob.core.windows.net
 </code></pre></div>
 The results will be saved in the <code>output</code> directory, including:
 - <code>chunk_assertion_results.json</code>: Coverage metrics at each k
