@@ -139,6 +139,99 @@ class PairwiseConfig(BaseAutoEConfig):
     )
 
 
+class DifferentialPairwisePromptConfig(BaseModel):
+    """Prompt configuration for differential (extract-and-judge) pairwise scoring."""
+
+    extract_user_prompt: PromptConfig = Field(
+        default=PromptConfig(
+            prompt=Path(pairwise_prompts.__file__).parent
+            / "pairwise_extract_user_prompt.txt",
+        ),
+        description="User prompt for the common/unique extraction step.",
+    )
+    extract_system_prompt: PromptConfig = Field(
+        default=PromptConfig(
+            prompt=Path(pairwise_prompts.__file__).parent
+            / "pairwise_extract_system_prompt.txt",
+        ),
+        description="System prompt for the common/unique extraction step.",
+    )
+    judge_user_prompt: PromptConfig = Field(
+        default=PromptConfig(
+            prompt=Path(pairwise_prompts.__file__).parent
+            / "pairwise_unique_judge_user_prompt.txt",
+        ),
+        description="User prompt for judging the unique content.",
+    )
+    judge_system_prompt: PromptConfig = Field(
+        default=PromptConfig(
+            prompt=Path(pairwise_prompts.__file__).parent
+            / "pairwise_unique_judge_system_prompt.txt",
+        ),
+        description="System prompt for judging the unique content.",
+    )
+
+
+class DifferentialPairwiseConfig(BaseModel):
+    """Configuration for differential (extract-and-judge) pairwise scoring.
+
+    Reduces length/formatting bias by extracting the common and unique content of
+    each answer and judging only the unique content on the configured criteria
+    (the standard defaults or any user-defined criteria).
+    This extends the standard pairwise flow; it does not replace it.
+    """
+
+    llm_config: LLMConfig = Field(
+        default_factory=LLMConfig,
+        description="Configuration for the LLM to use for scoring.",
+    )
+
+    criteria: list[Criteria] = Field(
+        default_factory=pairwise_scores_criteria,
+        description="List of criteria to judge on the extracted unique content.",
+    )
+
+    trials: int = Field(
+        default=4,
+        description="Number of trials to run for each condition.",
+    )
+
+    input_storage: StorageConfig | None = Field(
+        default=None,
+        description="Optional storage configuration for reading input from Azure Blob Storage. When omitted, reads from local filesystem paths.",
+    )
+
+    output_storage: StorageConfig | None = Field(
+        default=None,
+        description="Optional storage configuration for writing output to Azure Blob Storage. When omitted, writes to the local filesystem path specified in the CLI.",
+    )
+
+    base: Condition | None = Field(default=None, description="Base Conditions.")
+
+    others: list[Condition] = Field(
+        default_factory=list,
+        description="Other Conditions to compare against the base.",
+    )
+
+    question_sets: list[str] = Field(
+        default_factory=list,
+        description="List of question sets to use for scoring.",
+    )
+
+    prompt_config: DifferentialPairwisePromptConfig = Field(
+        default_factory=DifferentialPairwisePromptConfig,
+        description="Configuration for prompts used in differential pairwise scoring.",
+    )
+
+    @model_validator(mode="after")
+    def check_trials_even(self) -> Self:
+        """Check if the number of trials is even for order counterbalancing."""
+        if self.trials % 2 != 0:
+            msg = "The number of trials must be even to allow for counterbalancing of conditions."
+            raise ValueError(msg)
+        return self
+
+
 class ReferenceConfig(BaseAutoEConfig):
     """Configuration for scoring based on reference answers."""
 
