@@ -297,9 +297,9 @@ generated:
   #   {{"question_id", "text", "context": [{{"chunk_id", "text", "rank"}}]}}
   # "rank" is optional; when absent chunks are assumed pre-sorted by relevance.
   # This matches the standard retrieval-results schema (e.g. data_local_retrieval_results.json).
-  retrieval_path: input/retrieval.json
+  retrieval_path: input/vector_rag_short_context/data_local_retrieval_results.json
 assertions:
-  assertions_path: input/assertions.json  # Path to assertions file
+  assertions_path: input/data_local_assertions.json  # Path to assertions file
 
 ## Chunk Evaluation Configuration
 k_list: [5, 10, 20, 50]  # Report coverage metrics at these k values (plus 'all')
