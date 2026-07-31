@@ -5,7 +5,7 @@ This module provides functions for aggregating assertion scores across trials
 and summarizing results by question.
 """
 
-from typing import Any
+from typing import Any, cast
 
 import numpy as np
 import pandas as pd
@@ -386,8 +386,8 @@ def summarize_standard_scores(
     summary_by_assertion = summary_by_assertion.drop(columns=["scores"])
 
     # Overall metrics
-    total_success = int(summary_by_question["success"].sum())
-    total_fail = int(summary_by_question["fail"].sum())
+    total_success = int(cast(float, summary_by_question["success"].sum()))
+    total_fail = int(cast(float, summary_by_question["fail"].sum()))
     total_assertions = total_success + total_fail
     overall_accuracy = total_success / total_assertions if total_assertions > 0 else 0.0
 
@@ -397,7 +397,7 @@ def summarize_standard_scores(
         summary_by_question["success"] + summary_by_question["fail"]
     )
     num_questions = len(summary_by_question)
-    avg_question_pass_rate = float(summary_by_question["pass_rate"].mean())
+    avg_question_pass_rate = float(cast(float, summary_by_question["pass_rate"].mean()))
 
     eval_stats: dict[str, object] = {
         "total_assertions": total_assertions,
@@ -452,17 +452,17 @@ def compute_hierarchical_eval_summary(
     failed_assertions = total_assertions - passed_assertions
 
     overridden_count = int(
-        aggregated["global_score_overridden"].sum()
+        cast(float, aggregated["global_score_overridden"].sum())
         if "global_score_overridden" in aggregated.columns
         else 0
     )
-    discovery_count = int(aggregated["has_discovery"].sum())
+    discovery_count = int(cast(float, aggregated["has_discovery"].sum()))
 
     # Per-question metrics (average per question, then mean across)
     per_q = aggregated.groupby("question")
-    avg_global_pass_rate = float(per_q["global_score"].mean().mean())
-    avg_support_level = float(per_q["support_level"].mean().mean())
-    discovery_rate = float(per_q["has_discovery"].mean().mean())
+    avg_global_pass_rate = float(cast("pd.Series", per_q["global_score"].mean()).mean())
+    avg_support_level = float(cast("pd.Series", per_q["support_level"].mean()).mean())
+    discovery_rate = float(cast("pd.Series", per_q["has_discovery"].mean()).mean())
 
     # Supporting pass rate: count all evaluations per question
     # (no deduplication, same as multi-RAG pipeline)
@@ -488,8 +488,12 @@ def compute_hierarchical_eval_summary(
 
     if not passed_df.empty:
         per_q_passed = passed_df.groupby("question")
-        support_level_passed = float(per_q_passed["support_level"].mean().mean())
-        discovery_rate_passed = float(per_q_passed["has_discovery"].mean().mean())
+        support_level_passed = float(
+            cast("pd.Series", per_q_passed["support_level"].mean()).mean()
+        )
+        discovery_rate_passed = float(
+            cast("pd.Series", per_q_passed["has_discovery"].mean()).mean()
+        )
 
         per_q_supp_rates_passed: list[float] = []
         for _, group in per_q_passed:
