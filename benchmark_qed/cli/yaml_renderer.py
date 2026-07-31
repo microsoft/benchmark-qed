@@ -441,7 +441,7 @@ def render_autoe_chunk_assertion_yaml(config: dict[str, Any]) -> str:
 ## Input Configuration
 generated:
   name: {gen["name"]}
-  retrieval_path: {gen.get("retrieval_path", "input/retrieval.json")}  # RetrievalResult JSON array
+  retrieval_path: {gen.get("retrieval_path", "input/vector_rag_short_context/data_local_retrieval_results.json")}  # RetrievalResult JSON array
 assertions:
   assertions_path: {assertions["assertions_path"]}
 

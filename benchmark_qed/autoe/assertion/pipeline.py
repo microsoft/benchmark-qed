@@ -602,7 +602,9 @@ def run_hierarchical_assertion_evaluation(
         aggregated_scores_dict[generated_rag] = aggregated
 
         # Print summary stats (per-question averages, consistent with significance tests)
-        per_q_support = aggregated.groupby("question")["support_level"].mean()
+        per_q_support = cast(
+            "pd.Series", aggregated.groupby("question")["support_level"].mean()
+        )
         if "support_level" in aggregated.columns:
             rich_print(
                 f"  Average support level (per-question avg): "
