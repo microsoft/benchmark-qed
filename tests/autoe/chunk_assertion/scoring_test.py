@@ -59,6 +59,7 @@ async def _run(
     cache_path: Path,
     *,
     k_list: list[int] | None = None,
+    model: str = "test-model",
 ) -> dict[str, Any]:
     """Invoke run_assertion_eval_chunk_mode with test-friendly defaults."""
     output_dir.mkdir(parents=True, exist_ok=True)
@@ -73,7 +74,7 @@ async def _run(
         llm_client=cast("LLMCompletion", object()),
         llm_config=cast(
             "LLMConfig",
-            SimpleNamespace(concurrent_requests=2, call_args={}, model="test-model"),
+            SimpleNamespace(concurrent_requests=2, call_args={}, model=model),
         ),
         output_storage=FileStorage(base_dir=str(output_dir)),
         pass_threshold=0.5,
@@ -208,3 +209,83 @@ async def test_second_run_uses_cache(
 
     await _run(eval_results, question_set, tmp_path / "out2", cache_path)
     assert call_counter[0] == calls_after_first  # fully served from cache
+
+
+@pytest.mark.usefixtures("patched_chat")
+async def test_duplicate_pairs_share_one_llm_call(
+    tmp_path: Path, grade_by_chunk: dict[str, str], call_counter: list[int]
+) -> None:
+    """Identical uncached pairs across questions share one in-process request."""
+    grade_by_chunk["same chunk"] = "full_support"
+    eval_results = [
+        {
+            "question_id": question_id,
+            "text": "Q",
+            "context": [{"text": "same chunk", "chunk_id": "c1", "rank": 1}],
+        }
+        for question_id in ("q1", "q2")
+    ]
+    question_set = {
+        "assertions": [
+            {
+                "question_id": question_id,
+                "question_text": "Q",
+                "assertions": [{"statement": "same assertion"}],
+            }
+            for question_id in ("q1", "q2")
+        ]
+    }
+
+    summaries = await _run(
+        eval_results,
+        question_set,
+        tmp_path / "out",
+        tmp_path / "cache.sqlite3",
+    )
+
+    assert call_counter[0] == 1
+    assert summaries["all"].successful_calls == 2
+
+
+@pytest.mark.usefixtures("patched_chat")
+async def test_warns_when_cached_configuration_differs(
+    tmp_path: Path,
+    grade_by_chunk: dict[str, str],
+    capsys: pytest.CaptureFixture[str],
+) -> None:
+    grade_by_chunk["chunk"] = "full_support"
+    eval_results = [
+        {
+            "question_id": "q1",
+            "text": "Q",
+            "context": [{"text": "chunk", "chunk_id": "c1", "rank": 1}],
+        }
+    ]
+    question_set = {
+        "assertions": [
+            {
+                "question_id": "q1",
+                "question_text": "Q",
+                "assertions": [{"statement": "assertion"}],
+            }
+        ]
+    }
+    cache_path = tmp_path / "cache.sqlite3"
+    await _run(
+        eval_results,
+        question_set,
+        tmp_path / "out1",
+        cache_path,
+        model="first-model",
+    )
+    capsys.readouterr()
+
+    await _run(
+        eval_results,
+        question_set,
+        tmp_path / "out2",
+        cache_path,
+        model="second-model",
+    )
+
+    assert "same inputs with different model" in capsys.readouterr().out

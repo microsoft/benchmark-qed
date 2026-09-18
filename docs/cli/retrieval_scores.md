@@ -349,6 +349,18 @@ Always enable `cache_dir` to:
 - Avoid re-assessing the same query-chunk pairs
 - Share cache across multiple runs
 
+Relevance assessments are stored in `relevance_cache.sqlite3` under this
+directory. SQLite WAL mode supports concurrent readers and writers. Existing
+per-assessment JSON cache files are imported automatically and retained for
+backward compatibility. Cross-process work leases prevent duplicate LLM calls
+and automatically expire after an interrupted worker exits.
+
+Use `benchmark-qed cache inspect <cache_dir>/relevance_cache.sqlite3` to view
+schema information, entry and configuration counts, active leases, and recent
+provenance. If the same query and text were previously evaluated with another
+model or prompt configuration, the evaluator logs a warning and computes a new
+result instead of reusing incompatible data.
+
 ### Concurrency
 
 - Start with `concurrent_requests: 16-32` for OpenAI

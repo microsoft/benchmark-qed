@@ -9,90 +9,224 @@ import logging
 from pathlib import Path
 from typing import Any
 
+from benchmark_qed.cache import (
+    SQLiteCache,
+    changed_configuration_fields,
+    redact_sensitive_values,
+    stable_fingerprint,
+)
+
 log: logging.Logger = logging.getLogger(__name__)
+
+_CACHE_NAMESPACE = "chunk_assertion"
+_CACHE_SCHEMA_VERSION = 1
+_DEFAULT_LEASE_TTL_SECONDS = 120.0
+
+
+def build_cache_metadata(
+    *,
+    model: str = "",
+    call_args: dict[str, Any] | None = None,
+    system_prompt: str = "",
+    user_prompt: str = "",
+) -> dict[str, Any]:
+    """Build inspectable, credential-safe metadata for a cached judgement."""
+    return {
+        "schema_version": _CACHE_SCHEMA_VERSION,
+        "evaluator": _CACHE_NAMESPACE,
+        "model": model,
+        "call_args": redact_sensitive_values(call_args or {}),
+        "system_prompt": system_prompt,
+        "user_prompt": user_prompt,
+    }
+
+
+def compute_logical_key(assertion_text: str, chunk_content: str) -> str:
+    """Fingerprint the inputs independently from judge configuration."""
+    return stable_fingerprint({
+        "assertion": assertion_text,
+        "chunk": chunk_content,
+    })
+
+
+def compute_config_fingerprint(
+    *,
+    model: str = "",
+    call_args: dict[str, Any] | None = None,
+    system_prompt: str = "",
+    user_prompt: str = "",
+) -> str:
+    """Fingerprint the judge configuration independently from inputs."""
+    return stable_fingerprint(
+        build_cache_metadata(
+            model=model,
+            call_args=call_args,
+            system_prompt=system_prompt,
+            user_prompt=user_prompt,
+        )
+    )
 
 
 class ContentAddressedCache:
-    r"""Persistent SHA256-based cache for (assertion, chunk) -> grade.
+    r"""Persistent SQLite cache for (assertion, chunk) -> grade.
 
-    Key is computed by :func:`compute_cache_key`, which hashes the assertion,
-    chunk, judge model configuration, and prompt templates so that changes to
-    the model or prompts invalidate stale entries while identical configurations
-    reuse cached grades across runs.
+    SQLite WAL mode allows readers and writers in separate processes to share
+    the cache safely. Writes use first-writer-wins semantics for a cache key.
+    Existing JSONL caches are imported once when the database is initialized.
     """
 
-    def __init__(self, cache_path: Path | str) -> None:
-        """Initialize cache at given path.
+    def __init__(
+        self,
+        cache_path: Path | str,
+        *,
+        lease_ttl_seconds: float = _DEFAULT_LEASE_TTL_SECONDS,
+    ) -> None:
+        """Initialize the cache and import a legacy JSONL cache when present."""
+        requested_path = Path(cache_path)
+        self.legacy_cache_path: Path | None = None
+        if requested_path.suffix.lower() == ".jsonl":
+            self.legacy_cache_path = requested_path
+            self.cache_path = requested_path.with_suffix(".sqlite3")
+        else:
+            self.cache_path = requested_path
+            legacy_path = requested_path.with_suffix(".jsonl")
+            if legacy_path.exists():
+                self.legacy_cache_path = legacy_path
 
-        Args:
-            cache_path: Path to JSONL cache file. Parent directory is created if needed.
-        """
-        self.cache_path: Path = Path(cache_path)
-        self.cache_path.parent.mkdir(parents=True, exist_ok=True)
-        self._data: dict[str, str] = {}
+        self._store = SQLiteCache(self.cache_path, _CACHE_NAMESPACE)
+        self.lease_ttl_seconds = lease_ttl_seconds
+        self._pending: dict[str, tuple[str, dict[str, Any]]] = {}
         self.new_count: int = 0
-        self._load()
+        self._migrate_legacy_cache()
 
-    def _load(self) -> None:
-        """Load existing cache from disk."""
-        if not self.cache_path.exists():
+    def _migrate_legacy_cache(self) -> None:
+        """Import an existing JSONL cache once without modifying the source."""
+        if self.legacy_cache_path is None or not self.legacy_cache_path.exists():
             return
+
+        migration_name = f"legacy_import:{self.legacy_cache_path.resolve()}"
+        if self._store.get_property(migration_name) is not None:
+            return
+
+        records: list[tuple[str, str, dict[str, Any]]] = []
         try:
-            with self.cache_path.open(encoding="utf-8") as f:
-                for line in f:
-                    stripped = line.strip()
-                    if not stripped:
-                        continue
+            with self.legacy_cache_path.open(encoding="utf-8") as legacy_file:
+                for line in legacy_file:
                     try:
-                        record = json.loads(stripped)
-                        cache_key = record.get("key")
-                        grade = record.get("grade")
-                        if cache_key and grade:
-                            self._data[cache_key] = grade
+                        record = json.loads(line)
                     except json.JSONDecodeError:
                         continue
+                    cache_key = record.get("key")
+                    grade = record.get("grade")
+                    if cache_key and grade:
+                        records.append((
+                            str(cache_key),
+                            str(grade),
+                            {
+                                "schema_version": _CACHE_SCHEMA_VERSION,
+                                "source": "legacy_jsonl",
+                            },
+                        ))
         except OSError as exc:
-            log.warning("Failed to load cache from %s: %s", self.cache_path, exc)
+            log.warning(
+                "Failed to import legacy cache from %s: %s", self.legacy_cache_path, exc
+            )
+            return
+
+        self._store.put_many(records)
+        self._store.set_property_if_absent(migration_name, "complete")
 
     def get(self, cache_key: str) -> str | None:
-        """Retrieve grade for cache key.
+        """Retrieve a grade for a cache key."""
+        pending = self._pending.get(cache_key)
+        if pending is not None:
+            return pending[0]
+        entry = self._store.get(cache_key)
+        return str(entry[0]) if entry is not None else None
 
-        Args:
-            cache_key: SHA256 hash of (assertion + chunk)
+    def get_metadata(self, cache_key: str) -> dict[str, Any] | None:
+        """Retrieve the inspectable metadata stored with a cache entry."""
+        pending = self._pending.get(cache_key)
+        if pending is not None:
+            return pending[1]
+        entry = self._store.get(cache_key)
+        return entry[1] if entry is not None else None
 
-        Returns
-        -------
-            Grade string ('full_support', 'partial_support', 'no_support') or None
-        """
-        return self._data.get(cache_key)
-
-    def put(self, cache_key: str, grade: str) -> None:
-        """Store grade for cache key.
-
-        Args:
-            cache_key: SHA256 hash of (assertion + chunk)
-            grade: Grade string ('full_support', 'partial_support', 'no_support')
-        """
-        if cache_key not in self._data:
-            self._data[cache_key] = grade
-            self.new_count += 1
-
-    def flush(self) -> None:
-        """Write cache contents to disk.
-
-        Rewrites the full JSONL file atomically to avoid duplicating existing
-        entries when flushing incremental updates.
-        """
-        if self.new_count == 0:
+    def put(
+        self,
+        cache_key: str,
+        grade: str,
+        metadata: dict[str, Any] | None = None,
+    ) -> None:
+        """Stage a grade for insertion on the next flush."""
+        if cache_key in self._pending or self.get(cache_key) is not None:
             return
-        tmp_path = self.cache_path.with_suffix(self.cache_path.suffix + ".tmp")
-        with tmp_path.open("w", encoding="utf-8") as f:
-            f.writelines(
-                json.dumps({"key": cache_key, "grade": grade}) + "\n"
-                for cache_key, grade in self._data.items()
-            )
-        tmp_path.replace(self.cache_path)
+        self._pending[cache_key] = (grade, metadata or {})
+        self.new_count = len(self._pending)
+
+    def claim(self, cache_key: str, owner_id: str) -> bool:
+        """Claim an uncached judgement for this worker."""
+        return self._store.try_acquire(
+            cache_key,
+            owner_id,
+            ttl_seconds=self.lease_ttl_seconds,
+        )
+
+    def renew(self, cache_keys: list[str], owner_id: str) -> int:
+        """Renew active judgement leases."""
+        return self._store.renew_leases(
+            cache_keys,
+            owner_id,
+            ttl_seconds=self.lease_ttl_seconds,
+        )
+
+    def release(self, cache_keys: list[str], owner_id: str) -> None:
+        """Release judgement leases without publishing."""
+        self._store.release_leases(cache_keys, owner_id)
+
+    def publish(
+        self,
+        cache_key: str,
+        grade: str,
+        metadata: dict[str, Any],
+        *,
+        owner_id: str,
+        logical_key: str,
+        config_fingerprint: str,
+    ) -> bool:
+        """Publish a grade and release its lease atomically."""
+        return self._store.publish(
+            cache_key,
+            grade,
+            metadata,
+            owner_id=owner_id,
+            logical_key=logical_key,
+            config_fingerprint=config_fingerprint,
+        )
+
+    def find_configuration_mismatches(
+        self,
+        identities: list[tuple[str, str]],
+        current_metadata: dict[str, Any],
+    ) -> tuple[int, list[str]]:
+        """Return the mismatch count and changed configuration fields."""
+        alternatives = self._store.find_alternate_configurations(identities)
+        changed_fields = {
+            field
+            for metadata in alternatives
+            for field in changed_configuration_fields(current_metadata, metadata)
+        }
+        return len(alternatives), sorted(changed_fields)
+
+    def flush(self) -> int:
+        """Atomically insert staged entries and return the number persisted."""
+        inserted_count = self._store.put_many([
+            (cache_key, grade, metadata)
+            for cache_key, (grade, metadata) in self._pending.items()
+        ])
+        self._pending.clear()
         self.new_count = 0
+        return inserted_count
 
 
 def compute_cache_key(
@@ -104,30 +238,12 @@ def compute_cache_key(
     system_prompt: str = "",
     user_prompt: str = "",
 ) -> str:
-    """Compute stable SHA256 cache key for an (assertion, chunk) judgement.
-
-    The judge model identifier, call arguments (for example temperature and
-    seed), and the prompt templates are folded into the key so that changing
-    the model or prompts invalidates stale cache entries instead of returning
-    grades produced under a different configuration.
-
-    Args:
-        assertion_text: Assertion statement
-        chunk_content: Chunk/passage text
-        model: Judge model identifier (for example ``gpt-4.1``)
-        call_args: Additional LLM call arguments (for example temperature, seed)
-        system_prompt: System prompt template used for judging
-        user_prompt: User prompt template used for judging
-
-    Returns
-    -------
-        SHA256 hexdigest
-    """
+    """Compute a stable SHA256 key for an (assertion, chunk) judgement."""
     payload = {
         "assertion": assertion_text,
         "chunk": chunk_content,
         "model": model,
-        "call_args": call_args or {},
+        "call_args": redact_sensitive_values(call_args or {}),
         "system_prompt": system_prompt,
         "user_prompt": user_prompt,
     }

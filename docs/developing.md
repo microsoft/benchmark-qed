@@ -410,7 +410,20 @@ You'll provide this data to benchmark-qed in one of two formats (see Step 2 belo
     - `settings.yaml`: Contains pipeline settings, including:
       - `retrieval_path`: Path to your retrieved chunks JSON (RetrievalResult format above)
       - `k_list`: K values to report coverage metrics (e.g., [5, 10, 20, 50])
-      - `cache_dir`: Directory for persistent (assertion, chunk) cache
+      - `cache_dir`: Directory for the persistent SQLite (assertion, chunk)
+        cache. The cache supports concurrent processes through WAL mode and
+        records the model, call arguments, and prompts used for each result.
+        Existing `chunk_assertions.jsonl` caches are imported automatically.
+        Concurrent processes claim uncached work so only one performs each LLM
+        request; leases are renewed during long calls and expire after an
+        interrupted process exits.
+
+    Inspect cache provenance, configuration counts, and active work leases with:
+
+    ```sh
+    uv run benchmark-qed cache inspect \
+        .benchmark_qed_cache/chunk_assertions.sqlite3
+    ```
 
     The generated `settings.yaml` includes commented-out `input_storage` and `output_storage` sections for configuring Azure Blob Storage backends.
 
@@ -459,5 +472,3 @@ To learn how to use AutoE programmatically, please see the [AutoE Notebook Examp
 To explore the query synthesis workflow in detail, please see the [AutoQ CLI Documentation](cli/autoq.md) for command-line usage and the [AutoQ Notebook Example](notebooks/autoq.ipynb) for a step-by-step programmatic guide.
 
 For a deeper understanding of AutoE evaluation pipelines, please refer to the [AutoE CLI Documentation](cli/autoe.md) for available commands and the [AutoE Notebook Example](notebooks/autoe.ipynb) for hands-on examples.
-
-

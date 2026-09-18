@@ -4,10 +4,12 @@
 from __future__ import annotations
 
 import asyncio
+import contextlib
 import json
 import logging
 import operator
 import re
+import uuid
 from pathlib import Path
 from typing import TYPE_CHECKING, Any
 
@@ -16,7 +18,10 @@ from rich import print as rich_print
 from benchmark_qed.autoe.chunk_assertion.aggregation import summarize_at_k
 from benchmark_qed.autoe.chunk_assertion.cache import (
     ContentAddressedCache,
+    build_cache_metadata,
     compute_cache_key,
+    compute_config_fingerprint,
+    compute_logical_key,
 )
 from benchmark_qed.autoe.data_model.chunk_assertion import (
     ChunkAssertionGrade,
@@ -32,6 +37,9 @@ if TYPE_CHECKING:
     from benchmark_qed.config.llm_config import LLMConfig
 
 log: logging.Logger = logging.getLogger(__name__)
+
+ChunkTarget = tuple[int, int, int]
+ChunkWork = tuple[str, str, str, str, str, list[ChunkTarget]]
 
 
 def _collect_chunks(eval_result: RetrievalResult) -> list[dict[str, Any]]:
@@ -190,16 +198,18 @@ def _extract_grade(response_text: str) -> str:
 
 
 async def _evaluate_uncached_pairs(
-    uncached_work: list[tuple[str, str, str, int, int, int]],
+    uncached_work: list[ChunkWork],
     *,
     llm_client: LLMCompletion,
     llm_config: LLMConfig,
     system_prompt: str,
     user_prompt: str,
+    cache_metadata: dict[str, Any],
     cache: ContentAddressedCache,
+    lease_owner: str,
     per_chunk_grades: dict[tuple[int, int], list[tuple[int, float, str]]],
     assertion_call_stats: dict[tuple[int, int], dict[str, int]],
-) -> int:
+) -> tuple[int, int]:
     """Judge uncached (assertion, chunk) pairs via a bounded worker pool.
 
     Uses a shared queue with at most ``concurrent_requests`` worker tasks so
@@ -208,40 +218,60 @@ async def _evaluate_uncached_pairs(
     shared counters and grade maps are mutated safely between awaits.
 
     Args:
-        uncached_work: Work items of (assertion, chunk, cache_key, q_idx, a_idx, rank).
+        uncached_work: Unique work items with all result targets for each cache key.
         llm_client: LLM client for judging.
         llm_config: LLM configuration.
         system_prompt: System prompt template.
         user_prompt: User prompt template.
+        cache_metadata: Reproducibility metadata stored with successful grades.
         cache: Cache to store new grades in.
+        lease_owner: Unique owner of the work-item leases.
         per_chunk_grades: Mutated in place with (rank, score, grade) per (q, a).
         assertion_call_stats: Mutated in place with successful/failed call counts.
 
     Returns
     -------
-        Number of LLM calls that failed.
+        Number of logical pairs that failed and number of cache entries inserted.
     """
-    n_total = len(uncached_work)
+    n_total = sum(len(targets) for *_inputs, targets in uncached_work)
     next_progress_threshold = max(1, n_total // 10)
     call_errors = 0
+    inserted_count = 0
     n_done = 0
 
-    work_queue: asyncio.Queue[tuple[str, str, str, int, int, int]] = asyncio.Queue()
+    work_queue: asyncio.Queue[ChunkWork] = asyncio.Queue()
     for work_item in uncached_work:
         work_queue.put_nowait(work_item)
 
     def _record_result(
-        work_item: tuple[str, str, str, int, int, int], grade: str
+        work_item: ChunkWork,
+        grade: str,
     ) -> None:
-        nonlocal call_errors, n_done, next_progress_threshold
-        _assertion_text, _chunk_content, cache_key, q_idx, a_idx, rank = work_item
-
-        q_key = (q_idx, a_idx)
+        nonlocal call_errors, inserted_count, n_done, next_progress_threshold
+        (
+            _assertion_text,
+            _chunk_content,
+            cache_key,
+            logical_key,
+            config_fingerprint,
+            targets,
+        ) = work_item
         if grade == "__error__":
-            call_errors += 1
-            assertion_call_stats[q_key]["failed"] += 1
+            call_errors += len(targets)
+            cache.release([cache_key], lease_owner)
+            for q_idx, a_idx, _rank in targets:
+                assertion_call_stats[(q_idx, a_idx)]["failed"] += 1
         else:
-            cache.put(cache_key, grade)
+            inserted_count += int(
+                cache.publish(
+                    cache_key,
+                    grade,
+                    cache_metadata,
+                    owner_id=lease_owner,
+                    logical_key=logical_key,
+                    config_fingerprint=config_fingerprint,
+                )
+            )
             mapped_grade = (
                 grade
                 if grade
@@ -252,14 +282,16 @@ async def _evaluate_uncached_pairs(
                 }
                 else ChunkAssertionGrade.NO_SUPPORT
             )
-            per_chunk_grades[q_key].append((
-                rank,
-                grade_to_score(grade),
-                mapped_grade,
-            ))
-            assertion_call_stats[q_key]["successful"] += 1
+            for q_idx, a_idx, rank in targets:
+                q_key = (q_idx, a_idx)
+                per_chunk_grades[q_key].append((
+                    rank,
+                    grade_to_score(grade),
+                    mapped_grade,
+                ))
+                assertion_call_stats[q_key]["successful"] += 1
 
-        n_done += 1
+        n_done += len(targets)
         if n_done >= next_progress_threshold:
             rich_print(
                 f"    LLM judging progress: {n_done}/{n_total} pairs ({(100.0 * n_done / n_total):.1f}%)",
@@ -272,7 +304,14 @@ async def _evaluate_uncached_pairs(
                 work_item = work_queue.get_nowait()
             except asyncio.QueueEmpty:
                 return
-            assertion_text, chunk_content, _cache_key, _q_idx, _a_idx, _rank = work_item
+            (
+                assertion_text,
+                chunk_content,
+                _cache_key,
+                _logical_key,
+                _config_fingerprint,
+                _targets,
+            ) = work_item
             grade, _reasoning = await _label_chunk_assertion(
                 llm_client,
                 assertion_text,
@@ -283,10 +322,96 @@ async def _evaluate_uncached_pairs(
             )
             _record_result(work_item, grade)
 
-    n_workers = max(1, min(llm_config.concurrent_requests, n_total))
-    await asyncio.gather(*[asyncio.ensure_future(_worker()) for _ in range(n_workers)])
+    async def _heartbeat() -> None:
+        cache_keys = [work_item[2] for work_item in uncached_work]
+        while True:
+            await asyncio.sleep(max(0.1, cache.lease_ttl_seconds / 3))
+            cache.renew(cache_keys, lease_owner)
 
-    return call_errors
+    n_workers = max(1, min(llm_config.concurrent_requests, len(uncached_work)))
+    heartbeat = asyncio.create_task(_heartbeat())
+    try:
+        await asyncio.gather(*[
+            asyncio.ensure_future(_worker()) for _ in range(n_workers)
+        ])
+    except (Exception, asyncio.CancelledError):
+        cache.release([work_item[2] for work_item in uncached_work], lease_owner)
+        raise
+    finally:
+        heartbeat.cancel()
+        with contextlib.suppress(asyncio.CancelledError):
+            await heartbeat
+
+    return call_errors, inserted_count
+
+
+async def _evaluate_with_leases(
+    uncached_work: list[ChunkWork],
+    *,
+    llm_client: LLMCompletion,
+    llm_config: LLMConfig,
+    system_prompt: str,
+    user_prompt: str,
+    cache_metadata: dict[str, Any],
+    cache: ContentAddressedCache,
+    per_chunk_grades: dict[tuple[int, int], list[tuple[int, float, str]]],
+    assertion_call_stats: dict[tuple[int, int], dict[str, int]],
+) -> tuple[int, int, int]:
+    """Evaluate owned work and reuse results published by other processes."""
+    lease_owner = uuid.uuid4().hex
+    owned_work: list[ChunkWork] = []
+    waiting_work: dict[str, ChunkWork] = {}
+    for work_item in uncached_work:
+        if cache.claim(work_item[2], lease_owner):
+            owned_work.append(work_item)
+        else:
+            waiting_work[work_item[2]] = work_item
+
+    call_errors = 0
+    inserted_count = 0
+    concurrent_hits = 0
+    while owned_work or waiting_work:
+        if owned_work:
+            failed, inserted = await _evaluate_uncached_pairs(
+                owned_work,
+                llm_client=llm_client,
+                llm_config=llm_config,
+                system_prompt=system_prompt,
+                user_prompt=user_prompt,
+                cache_metadata=cache_metadata,
+                cache=cache,
+                lease_owner=lease_owner,
+                per_chunk_grades=per_chunk_grades,
+                assertion_call_stats=assertion_call_stats,
+            )
+            call_errors += failed
+            inserted_count += inserted
+            owned_work = []
+
+        completed_keys: list[str] = []
+        for cache_key, work_item in waiting_work.items():
+            cached_grade = cache.get(cache_key)
+            if cached_grade is not None:
+                targets = work_item[5]
+                for q_idx, a_idx, rank in targets:
+                    q_key = (q_idx, a_idx)
+                    per_chunk_grades[q_key].append((
+                        rank,
+                        grade_to_score(cached_grade),
+                        cached_grade,
+                    ))
+                    assertion_call_stats[q_key]["successful"] += 1
+                concurrent_hits += len(targets)
+                completed_keys.append(cache_key)
+            elif cache.claim(cache_key, lease_owner):
+                owned_work.append(work_item)
+                completed_keys.append(cache_key)
+        for cache_key in completed_keys:
+            waiting_work.pop(cache_key)
+        if waiting_work and not owned_work:
+            await asyncio.sleep(0.1)
+
+    return call_errors, inserted_count, concurrent_hits
 
 
 async def run_assertion_eval_chunk_mode(
@@ -327,13 +452,25 @@ async def run_assertion_eval_chunk_mode(
         Dict of {label: EvalSummary} keyed by f"k{k}" plus "all" entry
     """
     if cache_path is None:
-        cache_path = Path.cwd() / ".benchmark_qed_cache" / "chunk_assertions.jsonl"
+        cache_path = Path.cwd() / ".benchmark_qed_cache" / "chunk_assertions.sqlite3"
     cache = ContentAddressedCache(cache_path)
+    cache_metadata = build_cache_metadata(
+        model=llm_config.model,
+        call_args=llm_config.call_args,
+        system_prompt=system_prompt,
+        user_prompt=user_prompt,
+    )
+    config_fingerprint = compute_config_fingerprint(
+        model=llm_config.model,
+        call_args=llm_config.call_args,
+        system_prompt=system_prompt,
+        user_prompt=user_prompt,
+    )
 
     # Track per-(q, a) chunk grades: (question_idx, assertion_idx) -> [(rank, score, grade), ...]
     per_chunk_grades: dict[tuple[int, int], list[tuple[int, float, str]]] = {}
     assertion_call_stats: dict[tuple[int, int], dict[str, int]] = {}
-    uncached_work: list[tuple[str, str, str, int, int, int]] = []
+    uncached_by_key: dict[str, tuple[str, str, str, str, list[ChunkTarget]]] = {}
     retrieved_chunk_counts: list[int] = []
 
     total_checks = 0
@@ -389,6 +526,7 @@ async def run_assertion_eval_chunk_mode(
                     system_prompt=system_prompt,
                     user_prompt=user_prompt,
                 )
+                logical_key = compute_logical_key(assertion_text, chunk_content)
                 cached_grade = cache.get(cache_key)
                 if cached_grade is not None:
                     cache_hits += 1
@@ -399,14 +537,17 @@ async def run_assertion_eval_chunk_mode(
                     ))
                     assertion_call_stats[q_key]["successful"] += 1
                 else:
-                    uncached_work.append((
-                        assertion_text,
-                        chunk_content,
-                        cache_key,
-                        q_idx,
-                        a_idx,
-                        rank,
-                    ))
+                    existing_work = uncached_by_key.get(cache_key)
+                    if existing_work is None:
+                        uncached_by_key[cache_key] = (
+                            assertion_text,
+                            chunk_content,
+                            logical_key,
+                            config_fingerprint,
+                            [(q_idx, a_idx, rank)],
+                        )
+                    else:
+                        existing_work[4].append((q_idx, a_idx, rank))
 
     if positional_fallbacks:
         rich_print(
@@ -425,24 +566,62 @@ async def run_assertion_eval_chunk_mode(
         rich_print("  No assertions or chunks to evaluate.")
 
     # Second pass: evaluate uncached pairs
-    if uncached_work:
+    if uncached_by_key:
+        uncached_work = [
+            (
+                assertion_text,
+                chunk_content,
+                cache_key,
+                logical_key,
+                work_config_fingerprint,
+                targets,
+            )
+            for cache_key, (
+                assertion_text,
+                chunk_content,
+                logical_key,
+                work_config_fingerprint,
+                targets,
+            ) in uncached_by_key.items()
+        ]
+        mismatch_count, changed_fields = cache.find_configuration_mismatches(
+            [
+                (logical_key, work_config_fingerprint)
+                for (
+                    _assertion,
+                    _chunk,
+                    _key,
+                    logical_key,
+                    work_config_fingerprint,
+                    _targets,
+                ) in uncached_work
+            ],
+            cache_metadata,
+        )
+        if mismatch_count:
+            changed_text = ", ".join(changed_fields) or "configuration metadata"
+            rich_print(
+                f"  [yellow]WARNING: Found {mismatch_count} cached result(s) for "
+                f"the same inputs with different {changed_text}; they will not "
+                "be reused.[/yellow]"
+            )
         rich_print(
             f"  Running {len(uncached_work)} LLM judgements for uncached (assertion, chunk) pairs...",
         )
-        call_errors += await _evaluate_uncached_pairs(
+        failed, inserted_count, concurrent_hits = await _evaluate_with_leases(
             uncached_work,
             llm_client=llm_client,
             llm_config=llm_config,
             system_prompt=system_prompt,
             user_prompt=user_prompt,
+            cache_metadata=cache_metadata,
             cache=cache,
             per_chunk_grades=per_chunk_grades,
             assertion_call_stats=assertion_call_stats,
         )
-
-        # Flush cache
-        cache.flush()
-        rich_print(f"  Cached {len(uncached_work)} new entries to {cache_path.name}")
+        call_errors += failed
+        cache_hits += concurrent_hits
+        rich_print(f"  Cached {inserted_count} new entries to {cache.cache_path.name}")
         if call_errors:
             rich_print(f"  WARNING: {call_errors} LLM calls failed")
 

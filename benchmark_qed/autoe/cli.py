@@ -2079,9 +2079,9 @@ def chunk_assertion_scores(
     # Set cache directory
     cache_path = None
     if config.cache_dir:
-        cache_path = Path(config.cache_dir) / "chunk_assertions.jsonl"
+        cache_path = Path(config.cache_dir) / "chunk_assertions.sqlite3"
     else:
-        cache_path = Path.cwd() / ".benchmark_qed_cache" / "chunk_assertions.jsonl"
+        cache_path = Path.cwd() / ".benchmark_qed_cache" / "chunk_assertions.sqlite3"
 
     # Run chunk-level evaluation
     rich_print("\n[bold]Running chunk-level assertion evaluation...[/bold]")
