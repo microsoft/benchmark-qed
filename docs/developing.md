@@ -49,6 +49,7 @@ Follow these steps to generate synthetic queries using AutoQ:
         --base-dir autoq_test
     ```
     This command creates two files in the `./autoq_test` directory:
+
     - `.env`: Stores environment variables for the AutoQ pipeline. Open this file and replace `<API_KEY>` with your OpenAI or Azure API key.
     - `settings.yaml`: Contains pipeline settings. Edit this file as needed for your use case.
 
@@ -110,6 +111,7 @@ Follow these steps to compare RAG answer pairs using the pairwise scoring pipeli
         --base-dir pairwise_test
     ```
     This command creates two files in the `./pairwise_test` directory:
+
     - `.env`: Contains environment variables for the pairwise comparison tests. Open this file and replace `<API_KEY>` with your OpenAI or Azure API key.
     - `settings.yaml`: Contains pipeline settings, which you can modify as needed.
 
@@ -179,6 +181,7 @@ Follow these steps to run the differential pairwise scoring pipeline:
         --base-dir differential_pairwise_test
     ```
     This command creates two files in the `./differential_pairwise_test` directory:
+
     - `.env`: Contains environment variables for the pairwise comparison tests. Open this file and replace `<API_KEY>` with your OpenAI or Azure API key.
     - `settings.yaml`: Contains pipeline settings, which you can modify as needed.
 
@@ -233,6 +236,7 @@ Follow these steps to score RAG answers against reference answers using example 
         --base-dir reference_test
     ```
     This creates two files in the `./reference_test` directory:
+
     - `.env`: Contains environment variables for the reference scoring pipeline. Open this file and replace `<API_KEY>` with your OpenAI or Azure API key.
     - `settings.yaml`: Contains pipeline settings, which you can modify as needed.
 
@@ -287,6 +291,7 @@ Follow these steps to evaluate RAG answers against per-question assertions using
         --base-dir assertion_test
     ```
     This command creates two files in the `./assertion_test` directory:
+
     - `.env`: Contains environment variables for the assertion evaluation pipeline. Open this file and replace `<API_KEY>` with your OpenAI or Azure API key.
     - `settings.yaml`: Contains pipeline settings, which you can modify as needed.
 
@@ -308,6 +313,7 @@ Follow these steps to evaluate RAG answers against per-question assertions using
 ## Evaluating retrieved chunks against assertions
 
 Chunk-level evaluation scores how well retrieved passages (chunks) support assertions, without waiting for answer synthesis. This is useful for:
+
 - **Fast retrieval evaluation**: Assess retrieval quality before generating complete answers
 - **Efficient iteration**: Fix retriever settings without re-running expensive answer generation
 - **Persistent caching**: Avoid re-evaluating same (assertion, chunk) pairs across multiple runs
@@ -315,6 +321,7 @@ Chunk-level evaluation scores how well retrieved passages (chunks) support asser
 ### Prerequisites: Where do chunks come from?
 
 **Chunks** are the retrieved passages from your RAG system. You obtain them by running your retriever (e.g., vector search, BM25, hybrid) on each question. Chunks should include:
+
 - The passage text
 - The chunk index (chunk_id)
 - The retrieval rank
@@ -335,6 +342,7 @@ You'll provide this data to benchmark-qed in one of two formats (see Step 2 belo
     ```
     
     You need two files whose `question_id`s line up:
+
     - **Assertion file**: The per-question assertions to check. Set via `assertions_path`
       in `settings.yaml`.
     - **Retrieval file**: Created by YOUR retrieval system. The tool always evaluates the
@@ -406,6 +414,7 @@ You'll provide this data to benchmark-qed in one of two formats (see Step 2 belo
         --base-dir chunk_assertion_test
     ```
     This command creates two files in the `./chunk_assertion_test` directory:
+
     - `.env`: Contains environment variables. Open this file and replace `<API_KEY>` with your OpenAI or Azure API key.
     - `settings.yaml`: Contains pipeline settings, including:
       - `retrieval_path`: Path to your retrieved chunks JSON (RetrievalResult format above)
@@ -438,11 +447,13 @@ You'll provide this data to benchmark-qed in one of two formats (see Step 2 belo
         --account-url https://<account>.blob.core.windows.net
     ```
     The results will be saved in the `output` directory, including:
+
     - `chunk_assertion_results.json`: Coverage metrics at each k
     - `per_query_metrics_*.json`: Per-question metrics for paired significance testing
     - `debug/`: Detailed per-question evaluation records
 
 **Chunk-level evaluation benefits:**
+
 - **Efficient caching**: Results cached at (assertion, chunk) granularity using SHA256 content-addressing
 - **Multi-k reporting**: Coverage, Strict Coverage, and Coverage Strength metrics at each k value
 - **Reusable cache**: Re-run with different k values or retriever configs with zero LLM cost on overlapping chunks

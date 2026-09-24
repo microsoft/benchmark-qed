@@ -292,7 +292,9 @@ class DataGlobalQuestionGen(BaseQuestionGen):
 
         self.claim_extractor_params = claim_extractor_params
         self.claim_extractor: DataGlobalClaimExtractor = DataGlobalClaimExtractor(
-            llm=llm, local_questions=local_questions, **claim_extractor_params
+            llm=llm,
+            local_questions=local_questions,
+            claim_extractor_params=claim_extractor_params,
         )
 
     async def agenerate(

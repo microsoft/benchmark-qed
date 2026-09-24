@@ -19,7 +19,7 @@ from collections.abc import Callable
 from enum import Enum
 from pathlib import Path
 from string import Template
-from typing import Any
+from typing import Any, cast
 from uuid import uuid4
 
 import pandas as pd
@@ -398,8 +398,11 @@ def _get_hierarchical_scores_staged(
 
     passed_count = global_aggregated["global_passed"].sum()
     total_count = len(global_aggregated)
-    per_q_pass_rate = (
-        global_aggregated.groupby("question")["global_score"].mean().mean()
+    per_q_pass_rate = float(
+        cast(
+            "pd.Series",
+            global_aggregated.groupby("question")["global_score"].mean(),
+        ).mean()
     )
     rich_print(
         f"  Global assertions: {passed_count}/{total_count} passed "
