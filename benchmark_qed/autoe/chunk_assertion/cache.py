@@ -89,7 +89,7 @@ class ContentAddressedCache:
         """Initialize the cache and import a legacy JSONL cache when present."""
         self.cache_config = cache_config
         base_dir = get_cache_base_dir(cache_config)
-        self.cache_path = get_sqlite_cache_path(cache_config)
+        self.cache_path: Path | None = get_sqlite_cache_path(cache_config)
         self.legacy_cache_path: Path | None = None
         if self.cache_path is not None:
             legacy_path = self.cache_path.with_suffix(".jsonl")

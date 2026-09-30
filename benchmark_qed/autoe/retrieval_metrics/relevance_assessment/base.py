@@ -42,7 +42,7 @@ class RelevanceRater(ABC):
                 no-op configuration disables caching.
         """
         self.cache_config = cache_config
-        self.cache_enabled = (
+        self.cache_enabled: bool = (
             cache_config is not None and cache_config.type != CacheType.Noop
         )
         self._cache_base_dir = (

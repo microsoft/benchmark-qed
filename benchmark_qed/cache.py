@@ -260,8 +260,8 @@ class CacheStore:
             config, f"{namespace}/configurations"
         )
         self._lease_ttl_seconds = lease_ttl_seconds
-        self.database_path = get_sqlite_cache_path(config)
-        self.base_dir = get_cache_base_dir(config)
+        self.database_path: Path | None = get_sqlite_cache_path(config)
+        self.base_dir: Path | None = get_cache_base_dir(config)
         namespace_hash = hashlib.sha256(namespace.encode()).hexdigest()[:16]
         config_hash = hashlib.sha256(config.model_dump_json().encode()).hexdigest()[:16]
         self._lease_dir = (
