@@ -44,8 +44,7 @@ def test_init_chunk_assertion_scaffolds_cache_config(tmp_path: Path) -> None:
 
     assert (
         "retrieval_path: "
-        "input/vector_rag_short_context/data_local_retrieval_results.json"
-        in settings
+        "input/vector_rag_short_context/data_local_retrieval_results.json" in settings
     )
     assert "assertions_path: input/data_local_assertions.json" in settings
     assert "cache_config:\n  type: sqlite" in settings

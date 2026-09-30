@@ -672,10 +672,7 @@ def build_autoe_chunk_assertion_config() -> dict[str, Any]:
     name = typer.prompt("  name", default="vector_rag")
     retrieval_path = typer.prompt(
         "  retrieval_path (RetrievalResult JSON)",
-        default=(
-            "input/vector_rag_short_context/"
-            "data_local_retrieval_results.json"
-        ),
+        default=("input/vector_rag_short_context/data_local_retrieval_results.json"),
     )
     generated = {
         "name": name,

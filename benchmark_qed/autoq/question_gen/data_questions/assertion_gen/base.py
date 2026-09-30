@@ -235,7 +235,7 @@ class BaseAssertionGenerator(ABC):
                 question.text,
             )
 
-        except Exception as e:  # noqa: BLE001
+        except Exception as e:  # ruff: ignore[blind-except]
             log.warning(
                 "Failed to generate assertions for question '%s': %s",
                 question.text,

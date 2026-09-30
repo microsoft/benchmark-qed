@@ -16,27 +16,23 @@ from benchmark_qed.config.llm_config import AuthType, LLMConfig
 
 
 def _answers(answer: str = "answer") -> pd.DataFrame:
-    return pd.DataFrame(
-        [
-            {
-                "question_id": "q1",
-                "question_text": "question",
-                "answer": answer,
-            }
-        ]
-    )
+    return pd.DataFrame([
+        {
+            "question_id": "q1",
+            "question_text": "question",
+            "answer": answer,
+        }
+    ])
 
 
 def _assertions(assertion: str = "assertion") -> pd.DataFrame:
-    return pd.DataFrame(
-        [
-            {
-                "question_id": "q1",
-                "question_text": "question",
-                "assertion": assertion,
-            }
-        ]
-    )
+    return pd.DataFrame([
+        {
+            "question_id": "q1",
+            "question_text": "question",
+            "assertion": assertion,
+        }
+    ])
 
 
 def _config(tmp_path: Path) -> dict[str, Any]:
@@ -94,6 +90,7 @@ def test_answer_and_assertion_changes_invalidate_cache(
 
     async def fake_chat(*args: Any, **kwargs: Any) -> Any:
         nonlocal call_count
+        await asyncio.sleep(0)
         call_count += 1
         return type(
             "Response",
@@ -124,6 +121,7 @@ def test_failed_assertion_call_is_not_cached(tmp_path: Path, monkeypatch: Any) -
 
     async def fake_chat(*args: Any, **kwargs: Any) -> Any:
         nonlocal call_count
+        await asyncio.sleep(0)
         call_count += 1
         if call_count == 1:
             message = "transient failure"

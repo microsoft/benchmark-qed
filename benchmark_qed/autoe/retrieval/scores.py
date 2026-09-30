@@ -206,7 +206,7 @@ def load_clusters_from_json(
 
 def load_reference_results(
     reference_dir: Path,
-    question_set: str,  # noqa: ARG001
+    question_set: str,  # ruff: ignore[unused-function-argument]
     reference_filename: str = "reference.json",
     *,
     input_storage: Storage | None = None,

@@ -49,24 +49,20 @@ def compute_logical_key(
     trial: int,
 ) -> str:
     """Fingerprint one assertion trial independently from judge configuration."""
-    return stable_fingerprint(
-        {
-            "question": question,
-            "answer": answer,
-            "assertion": assertion,
-            "trial": trial,
-        }
-    )
+    return stable_fingerprint({
+        "question": question,
+        "answer": answer,
+        "assertion": assertion,
+        "trial": trial,
+    })
 
 
 def compute_cache_key(logical_key: str, metadata: dict[str, Any]) -> str:
     """Fingerprint an assertion trial and complete judge configuration."""
-    return stable_fingerprint(
-        {
-            "logical_key": logical_key,
-            "configuration": metadata,
-        }
-    )
+    return stable_fingerprint({
+        "logical_key": logical_key,
+        "configuration": metadata,
+    })
 
 
 class AssertionScoreCache:
