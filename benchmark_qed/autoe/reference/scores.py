@@ -6,6 +6,7 @@ This module provides functions for scoring generated answers against reference
 """
 
 import asyncio
+import contextlib
 import functools
 import itertools
 import uuid
@@ -16,12 +17,19 @@ from typing import Any
 
 import numpy as np
 import pandas as pd
+from graphrag_cache import CacheConfig, CacheType
 from graphrag_llm.completion import LLMCompletion
 from rich.progress import Progress, TaskID
 
 from benchmark_qed.autoe.config import Criteria
 from benchmark_qed.autoe.data_model import ConditionPair, ReferenceLLMResponse
 from benchmark_qed.autoe.prompts import reference as reference_prompts
+from benchmark_qed.autoe.reference.cache import (
+    ReferenceScoreCache,
+    build_cache_metadata,
+    compute_cache_key,
+    compute_logical_key,
+)
 from benchmark_qed.config.llm_config import LLMConfig
 from benchmark_qed.config.utils import load_template_file
 from benchmark_qed.llm import chat
@@ -44,6 +52,7 @@ def get_reference_scores(
     include_score_id_in_prompt: bool = True,
     question_id_key: str = "question_id",
     question_text_key: str = "question_text",
+    cache_config: CacheConfig | None = None,
 ) -> pd.DataFrame:
     """Score generated answers against reference answers using specified criteria.
 
@@ -61,6 +70,8 @@ def get_reference_scores(
         include_score_id_in_prompt: Whether to include score ID in the prompt.
         question_id_key: The column name for question ID in the DataFrames.
         question_text_key: The column name for question text in the DataFrames.
+        cache_config: GraphRAG cache backend configuration. Caching is disabled
+            when omitted.
 
     Returns
     -------
@@ -84,6 +95,27 @@ def get_reference_scores(
     )
     # Select only the columns needed for ConditionPair
     pairs = pairs[["question_id", "question_text", "answer_base", "answer_other"]]
+    assessment_system_prompt = assessment_system_prompt or load_template_file(
+        REFERENCE_PROMPTS_PATH / "reference_system_prompt.txt"
+    )
+    assessment_user_prompt = assessment_user_prompt or load_template_file(
+        REFERENCE_PROMPTS_PATH / "reference_user_prompt.txt"
+    )
+    cache = ReferenceScoreCache(
+        cache_config or CacheConfig(type=CacheType.Noop, storage=None)
+    )
+    cache_metadata = build_cache_metadata(
+        model=llm_config.model,
+        llm_provider=str(llm_config.llm_provider),
+        init_args=llm_config.init_args,
+        call_args=llm_config.call_args,
+        custom_providers=[
+            provider.model_dump(mode="json") for provider in llm_config.custom_providers
+        ],
+        system_prompt=assessment_system_prompt.template,
+        user_prompt=assessment_user_prompt.template,
+        include_score_id_in_prompt=include_score_id_in_prompt,
+    )
 
     with Progress(transient=True) as progress:
 
@@ -98,8 +130,10 @@ def get_reference_scores(
         }
 
         tasks = [
-            get_reference_score(
+            _get_reference_score_with_cache(
                 llm_client,
+                cache=cache,
+                cache_metadata=cache_metadata,
                 question=pair.question_text,
                 reference_answer=pair.answer_base,
                 generated_answer=pair.answer_other,
@@ -127,6 +161,97 @@ def get_reference_scores(
         results = asyncio.run(_run_tasks())
 
         return pd.DataFrame(results)
+
+
+async def _get_reference_score_with_cache(
+    llm: LLMCompletion,
+    *,
+    cache: ReferenceScoreCache,
+    cache_metadata: dict[str, Any],
+    question: str,
+    reference_answer: str,
+    generated_answer: str,
+    criteria_name: str,
+    criteria_description: str,
+    assessment_system_prompt: Template,
+    assessment_user_prompt: Template,
+    complete_callback: Callable | None,
+    trial: int,
+    score_min: int,
+    score_max: int,
+    include_score_id_in_prompt: bool,
+    additional_call_args: dict[str, Any] | None,
+) -> dict[str, Any]:
+    """Reuse or compute one reference score with cross-process coalescing."""
+    logical_key = compute_logical_key(
+        question=question,
+        reference_answer=reference_answer,
+        generated_answer=generated_answer,
+        criteria_name=criteria_name,
+        criteria_description=criteria_description,
+        trial=trial,
+        score_min=score_min,
+        score_max=score_max,
+    )
+    cache_key = compute_cache_key(logical_key, cache_metadata)
+    owner_id = uuid.uuid4().hex
+
+    while True:
+        cached = await cache.get(cache_key)
+        if cached is not None:
+            if complete_callback:
+                complete_callback()
+            return cached
+        if await cache.claim(cache_key, owner_id):
+            cached = await cache.get(cache_key)
+            if cached is not None:
+                cache.release(cache_key, owner_id)
+                if complete_callback:
+                    complete_callback()
+                return cached
+            break
+        await asyncio.sleep(0.1)
+
+    async def _heartbeat() -> None:
+        while True:
+            await asyncio.sleep(max(0.1, cache.lease_ttl_seconds / 3))
+            cache.renew(cache_key, owner_id)
+
+    heartbeat = asyncio.create_task(_heartbeat())
+    try:
+        score = await get_reference_score(
+            llm,
+            question=question,
+            reference_answer=reference_answer,
+            generated_answer=generated_answer,
+            criteria_name=criteria_name,
+            criteria_description=criteria_description,
+            assessment_system_prompt=assessment_system_prompt,
+            assessment_user_prompt=assessment_user_prompt,
+            trial=trial,
+            score_min=score_min,
+            score_max=score_max,
+            include_score_id_in_prompt=include_score_id_in_prompt,
+            additional_call_args=additional_call_args,
+        )
+        await cache.publish(
+            cache_key,
+            score,
+            cache_metadata,
+            owner_id=owner_id,
+            logical_key=logical_key,
+        )
+    except (Exception, asyncio.CancelledError):
+        cache.release(cache_key, owner_id)
+        raise
+    finally:
+        heartbeat.cancel()
+        with contextlib.suppress(asyncio.CancelledError):
+            await heartbeat
+
+    if complete_callback:
+        complete_callback()
+    return score
 
 
 async def get_reference_score(

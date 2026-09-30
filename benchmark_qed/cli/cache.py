@@ -31,24 +31,15 @@ def inspect_command(
         typer.Option("--json", help="Emit machine-readable JSON."),
     ] = False,
 ) -> None:
-    """Show cache schema, namespaces, leases, and recent provenance."""
+    """Show graphrag-cache namespaces and active evaluation leases."""
     details = inspect_cache(cache_path)
     if json_output:
         typer.echo(json.dumps(details, indent=2, sort_keys=True))
         return
 
     typer.echo(f"Cache: {details['path']}")
-    typer.echo(f"Schema version: {details['schema_version']}")
+    typer.echo(f"Backend: {details['backend']}")
     typer.echo(f"Active leases: {details['active_leases']}")
     typer.echo("Namespaces:")
     for namespace in details["namespaces"]:
-        typer.echo(
-            f"  {namespace['namespace']}: {namespace['entries']} entries, "
-            f"{namespace['configurations']} configurations"
-        )
-    typer.echo("Recent provenance:")
-    for record in details["recent_provenance"]:
-        typer.echo(
-            f"  {record['created_at']} {record['namespace']}: "
-            f"{json.dumps(record['metadata'], sort_keys=True)}"
-        )
+        typer.echo(f"  {namespace['namespace']}: {namespace['entries']} entries")

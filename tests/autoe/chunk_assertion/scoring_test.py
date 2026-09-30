@@ -6,6 +6,7 @@ Covers question_id alignment, @k truncation with rank ordering, and cache reuse
 across runs, with the LLM call mocked out.
 """
 
+import asyncio
 from pathlib import Path
 from types import SimpleNamespace
 from typing import TYPE_CHECKING, Any, cast
@@ -17,6 +18,7 @@ from benchmark_qed.autoe.chunk_assertion.scoring import run_assertion_eval_chunk
 from benchmark_qed.autoe.data_model.retrieval_result import (
     load_retrieval_results_from_dicts,
 )
+from benchmark_qed.cache import create_default_cache_config
 
 if TYPE_CHECKING:
     from graphrag_llm.completion import LLMCompletion
@@ -44,7 +46,8 @@ def patched_chat(
 ) -> None:
     """Patch benchmark_qed.llm.chat to return grades from grade_by_chunk."""
 
-    async def _fake_chat(_llm: Any, messages: list[dict[str, str]], **_: Any) -> Any:  # noqa: RUF029
+    async def _fake_chat(_llm: Any, messages: list[dict[str, str]], **_: Any) -> Any:
+        await asyncio.sleep(0)
         call_counter[0] += 1
         chunk_text = messages[-1]["content"]
         return SimpleNamespace(content=grade_by_chunk.get(chunk_text, "no_support"))
@@ -63,6 +66,11 @@ async def _run(
 ) -> dict[str, Any]:
     """Invoke run_assertion_eval_chunk_mode with test-friendly defaults."""
     output_dir.mkdir(parents=True, exist_ok=True)
+    database_path = (
+        cache_path.with_suffix(".sqlite3")
+        if cache_path.suffix == ".jsonl"
+        else cache_path
+    )
     return await run_assertion_eval_chunk_mode(
         load_retrieval_results_from_dicts(
             eval_results,
@@ -78,7 +86,10 @@ async def _run(
         ),
         output_storage=FileStorage(base_dir=str(output_dir)),
         pass_threshold=0.5,
-        cache_path=cache_path,
+        cache_config=create_default_cache_config(
+            database_path.parent,
+            database_name=database_path.name,
+        ),
         k_list=k_list or [1],
         system_prompt="judge",
         user_prompt="{chunk}",

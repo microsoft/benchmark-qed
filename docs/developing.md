@@ -111,7 +111,9 @@ Follow these steps to compare RAG answer pairs using the pairwise scoring pipeli
     ```
     This command creates two files in the `./pairwise_test` directory:
     - `.env`: Contains environment variables for the pairwise comparison tests. Open this file and replace `<API_KEY>` with your OpenAI or Azure API key.
-    - `settings.yaml`: Contains pipeline settings, which you can modify as needed.
+    - `settings.yaml`: Contains pipeline settings, including a persistent
+      stage-aware SQLite cache under
+      `.benchmark_qed_cache/differential_pairwise`.
 
     The generated `settings.yaml` includes commented-out `input_storage` and `output_storage` sections for configuring Azure Blob Storage backends.
 
@@ -182,7 +184,20 @@ Follow these steps to run the differential pairwise scoring pipeline:
     - `.env`: Contains environment variables for the pairwise comparison tests. Open this file and replace `<API_KEY>` with your OpenAI or Azure API key.
     - `settings.yaml`: Contains pipeline settings, which you can modify as needed.
 
-    The differential command reuses the pairwise configuration structure (`base`, `others`, `question_sets`, `trials`, `llm_config`, `criteria`); when `criteria` is omitted the standard defaults are used. The generated `settings.yaml` wires up the extract-and-judge prompts under `prompt_config` (`extract_system_prompt`, `extract_user_prompt`, `judge_system_prompt`, `judge_user_prompt`); edit those prompt files under `prompts/` or remove the `prompt_config` section to use the built-in defaults.
+    The differential command reuses the pairwise configuration structure
+    (`base`, `others`, `question_sets`, `trials`, `llm_config`, `criteria`);
+    when `criteria` is omitted the standard defaults are used. The generated
+    `settings.yaml` wires up the extract-and-judge prompts under
+    `prompt_config` (`extract_system_prompt`, `extract_user_prompt`,
+    `judge_system_prompt`, `judge_user_prompt`); edit those prompt files under
+    `prompts/` or remove the `prompt_config` section to use the built-in
+    defaults.
+
+    The generated `cache_config` caches extraction and verdict stages
+    independently. A failed judge call can therefore resume from its completed
+    extraction, and changing criteria invalidates verdicts without repeating
+    extraction. Set `type: none` with `storage: null` to force both stages to
+    run again.
 
     The generated `settings.yaml` includes commented-out `input_storage` and `output_storage` sections for configuring Azure Blob Storage backends.
 
@@ -198,6 +213,18 @@ Follow these steps to run the differential pairwise scoring pipeline:
         --account-url https://<account>.blob.core.windows.net
     ```
     The results will be saved in the `output` directory. In addition to the per-criterion win scores, each cached comparison CSV also records the extracted `common`, `unique_1`, and `unique_2` content for inspection.
+
+    Inspect the default stage cache with:
+
+    ```sh
+    uv run benchmark-qed cache inspect \
+        .benchmark_qed_cache/differential_pairwise/differential_pairwise.sqlite3
+    ```
+
+    Existing comparison CSVs are checked before the stage cache. To fully
+    recompute a comparison, use a new output directory (or remove its CSV) and
+    also disable, relocate, or clear the stage cache. See
+    [Evaluation Caches](cli/cache.md) for backend and clearing guidance.
 
 ## Scoring RAG answers against reference answers
 Follow these steps to score RAG answers against reference answers using example data from the AP news dataset:
@@ -234,9 +261,11 @@ Follow these steps to score RAG answers against reference answers using example 
     ```
     This creates two files in the `./reference_test` directory:
     - `.env`: Contains environment variables for the reference scoring pipeline. Open this file and replace `<API_KEY>` with your OpenAI or Azure API key.
-    - `settings.yaml`: Contains pipeline settings, which you can modify as needed.
+    - `settings.yaml`: Contains pipeline settings, including a persistent
+      SQLite judgment cache under `.benchmark_qed_cache/reference`.
 
     The generated `settings.yaml` includes commented-out `input_storage` and `output_storage` sections for configuring Azure Blob Storage backends.
+    The SQLite cache remains local when blob input/output storage is enabled.
 
 4. **Run the reference scoring:**
     ```sh
@@ -250,6 +279,18 @@ Follow these steps to score RAG answers against reference answers using example 
         --account-url https://<account>.blob.core.windows.net
     ```
     The results will be saved in the `output` directory.
+
+    Successful question/criterion/trial judgments are cached immediately. If a
+    request fails, rerun the same command to reuse completed judgments and
+    evaluate only misses. Inspect the cache with:
+
+    ```sh
+    uv run benchmark-qed cache inspect \
+        .benchmark_qed_cache/reference/reference.sqlite3
+    ```
+
+    Set `cache_config.type: none` with `storage: null` when fresh judgments are
+    required.
 
 ## Scoring RAG answers against assertions
 
@@ -304,6 +345,21 @@ Follow these steps to evaluate RAG answers against per-question assertions using
         --account-url https://<account>.blob.core.windows.net
     ```
     The results will be saved in the `output` directory, including per-assertion scores and per-question summaries.
+
+    The generated single-RAG configuration enables a persistent SQLite cache at
+    `.benchmark_qed_cache/assertion/assertion.sqlite3`. Each
+    question/assertion/trial judgment is persisted independently, so rerunning
+    after an interruption evaluates only missing work. Inspect it with:
+
+    ```sh
+    uv run benchmark-qed cache inspect \
+        .benchmark_qed_cache/assertion/assertion.sqlite3
+    ```
+
+    Set `cache_config.type: none` with `storage: null` when fresh judgments are
+    required. This answer-level cache does not apply to multi-RAG or
+    hierarchical assertion scoring; chunk-level assertion evaluation uses its
+    own assertion/chunk cache.
 
 ## Evaluating retrieved chunks against assertions
 
@@ -410,20 +466,25 @@ You'll provide this data to benchmark-qed in one of two formats (see Step 2 belo
     - `settings.yaml`: Contains pipeline settings, including:
       - `retrieval_path`: Path to your retrieved chunks JSON (RetrievalResult format above)
       - `k_list`: K values to report coverage metrics (e.g., [5, 10, 20, 50])
-      - `cache_dir`: Directory for the persistent SQLite (assertion, chunk)
-        cache. The cache supports concurrent processes through WAL mode and
-        records the model, call arguments, and prompts used for each result.
-        Existing `chunk_assertions.jsonl` caches are imported automatically.
-        Concurrent processes claim uncached work so only one performs each LLM
-        request; leases are renewed during long calls and expire after an
-        interrupted process exits.
+      - `cache_config`: GraphRAG cache configuration for assertion/chunk
+        results. Supported types are `sqlite`, `json`, `memory`, and `none`.
+        Persistent backends record the model, call arguments, and prompts used
+        for each result. Existing `chunk_assertions.jsonl` caches are imported
+        automatically from a local file storage directory. Concurrent
+        processes using local file storage claim uncached work so only one
+        performs each LLM request.
 
-    Inspect cache provenance, configuration counts, and active work leases with:
+    Inspect cache namespaces and active work leases with:
 
     ```sh
     uv run benchmark-qed cache inspect \
         .benchmark_qed_cache/chunk_assertions.sqlite3
     ```
+
+    Use `cache_config.type: json` for storage-backed JSON entries,
+    `cache_config.type: memory` for a process-local cache, or
+    `cache_config.type: none` to disable caching. The inspection command applies
+    only to SQLite cache files.
 
     The generated `settings.yaml` includes commented-out `input_storage` and `output_storage` sections for configuring Azure Blob Storage backends.
 

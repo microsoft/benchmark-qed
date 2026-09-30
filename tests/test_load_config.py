@@ -10,13 +10,166 @@ from graphrag_common.config import load_config
 from graphrag_common.config.load_config import ConfigParsingError
 from pydantic import ValidationError
 
-from benchmark_qed.autoe.config import AssertionConfig, PairwiseConfig, ReferenceConfig
+from benchmark_qed.autoe.config import (
+    AssertionConfig,
+    DifferentialPairwiseConfig,
+    PairwiseConfig,
+    ReferenceConfig,
+    RetrievalReferenceConfig,
+    RetrievalScoresConfig,
+)
+from benchmark_qed.autoe.data_model.chunk_assertion import ChunkAssertionConfig
 from benchmark_qed.autoq.config import QuestionGenerationConfig
 from benchmark_qed.config.llm_config import AuthType, LLMConfig
 
 
 class TestLoadConfigBasicFunctionality:
     """Test basic functionality of load_config with different config types."""
+
+    def test_loads_graphrag_cache_config(self) -> None:
+        config = ChunkAssertionConfig.model_validate({
+            "generated": {"name": "test"},
+            "assertions": {"assertions_path": "assertions.json"},
+            "cache_config": {"type": "memory", "storage": None},
+            "llm_config": {},
+        })
+
+        assert config.cache_config.type == "memory"
+
+    def test_rejects_removed_cache_dir(self) -> None:
+        with pytest.raises(ValidationError, match="replaced by cache_config"):
+            ChunkAssertionConfig.model_validate({
+                "generated": {"name": "test"},
+                "assertions": {"assertions_path": "assertions.json"},
+                "cache_dir": ".cache",
+                "llm_config": {},
+            })
+
+    def test_retrieval_reference_loads_json_cache_config(self) -> None:
+        config = RetrievalReferenceConfig.model_validate({
+            "questions_path": "questions.json",
+            "text_units_path": "text_units.parquet",
+            "output_dir": "output",
+            "cache_config": {
+                "type": "json",
+                "storage": {"type": "file", "base_dir": "cache"},
+            },
+        })
+
+        assert config.cache_config.type == "json"
+        assert config.cache_config.storage is not None
+        assert config.cache_config.storage.base_dir == "cache"
+
+    def test_retrieval_scores_loads_memory_cache_config(self) -> None:
+        config = RetrievalScoresConfig.model_validate({
+            "reference_dir": "reference",
+            "clusters_path": "clusters.json",
+            "text_units_path": "text_units.parquet",
+            "output_dir": "output",
+            "cache_config": {"type": "memory", "storage": None},
+        })
+
+        assert config.cache_config.type == "memory"
+
+    def test_differential_pairwise_uses_stage_cache_by_default(self) -> None:
+        config = DifferentialPairwiseConfig.model_validate({})
+
+        assert config.cache_config.type == "sqlite"
+        assert config.cache_config.storage is not None
+        assert (
+            config.cache_config.storage.base_dir
+            == ".benchmark_qed_cache/differential_pairwise"
+        )
+        assert config.cache_config.database_name == "differential_pairwise.sqlite3"
+
+    def test_differential_pairwise_can_disable_cache(self) -> None:
+        config = DifferentialPairwiseConfig.model_validate({
+            "cache_config": {"type": "none", "storage": None},
+        })
+
+        assert config.cache_config.type == "none"
+
+    def test_reference_uses_judgment_cache_by_default(self) -> None:
+        config = ReferenceConfig.model_validate({
+            "reference": {"name": "reference", "answer_base_path": "reference.json"},
+        })
+
+        assert config.cache_config.type == "sqlite"
+        assert config.cache_config.storage is not None
+        assert config.cache_config.storage.base_dir == ".benchmark_qed_cache/reference"
+        assert config.cache_config.database_name == "reference.sqlite3"
+
+    def test_reference_can_disable_cache(self) -> None:
+        config = ReferenceConfig.model_validate({
+            "reference": {"name": "reference", "answer_base_path": "reference.json"},
+            "cache_config": {"type": "none", "storage": None},
+        })
+
+        assert config.cache_config.type == "none"
+
+    def test_assertion_uses_judgment_cache_by_default(self) -> None:
+        config = AssertionConfig.model_validate({
+            "generated": {"name": "test", "answer_base_path": "answers.json"},
+            "assertions": {"assertions_path": "assertions.json"},
+        })
+
+        assert config.cache_config.type == "sqlite"
+        assert config.cache_config.storage is not None
+        assert config.cache_config.storage.base_dir == ".benchmark_qed_cache/assertion"
+        assert config.cache_config.database_name == "assertion.sqlite3"
+
+    def test_assertion_can_disable_cache(self) -> None:
+        config = AssertionConfig.model_validate({
+            "generated": {"name": "test", "answer_base_path": "answers.json"},
+            "assertions": {"assertions_path": "assertions.json"},
+            "cache_config": {"type": "none", "storage": None},
+        })
+
+        assert config.cache_config.type == "none"
+
+    def test_sqlite_cache_remains_local_with_blob_output(self) -> None:
+        config = ChunkAssertionConfig.model_validate({
+            "generated": {"name": "test"},
+            "assertions": {"assertions_path": "assertions.json"},
+            "cache_config": {
+                "type": "sqlite",
+                "storage": {
+                    "type": "file",
+                    "base_dir": ".benchmark_qed_cache",
+                },
+                "database_name": "chunk_assertions.sqlite3",
+            },
+            "output_storage": {
+                "type": "blob",
+                "container_name": "results",
+                "account_url": "https://example.blob.core.windows.net",
+            },
+            "llm_config": {},
+        })
+
+        assert config.cache_config.storage is not None
+        assert config.cache_config.storage.type == "file"
+        assert config.output_storage is not None
+        assert config.output_storage.type == "blob"
+
+    def test_sqlite_cache_rejects_remote_storage(self) -> None:
+        with pytest.raises(
+            ValidationError,
+            match="Cache type 'sqlite' requires storage type 'file'",
+        ):
+            ChunkAssertionConfig.model_validate({
+                "generated": {"name": "test"},
+                "assertions": {"assertions_path": "assertions.json"},
+                "cache_config": {
+                    "type": "sqlite",
+                    "storage": {
+                        "type": "blob",
+                        "container_name": "cache",
+                        "account_url": "https://example.blob.core.windows.net",
+                    },
+                },
+                "llm_config": {},
+            })
 
     def test_load_pairwise_config_yaml(self, tmp_path: Path):
         """Test loading a PairwiseConfig from a YAML file."""
@@ -60,6 +213,16 @@ class TestLoadConfigBasicFunctionality:
         assert config.base.name == "base_condition"
         assert len(config.others) == 1
         assert config.others[0].name == "other_condition"
+        assert config.cache_config.type == "sqlite"
+        assert config.cache_config.storage is not None
+        assert config.cache_config.storage.base_dir == ".benchmark_qed_cache/pairwise"
+
+    def test_pairwise_config_can_disable_cache(self) -> None:
+        config = PairwiseConfig.model_validate({
+            "cache_config": {"type": "none", "storage": None},
+        })
+
+        assert config.cache_config.type == "none"
 
     def test_load_pairwise_config_json(self, tmp_path: Path):
         """Test loading a PairwiseConfig from a JSON file."""

@@ -310,6 +310,16 @@ question_sets:
 {criteria_lines}
 trials: {trials}
 
+## Cache Configuration
+# Reuses completed question/criterion/trial judgements across runs.
+# Set type: none and storage: null to force fresh LLM judgements.
+cache_config:
+  type: sqlite
+  storage:
+    type: file
+    base_dir: .benchmark_qed_cache/pairwise
+  database_name: pairwise.sqlite3
+
 ## LLM Configuration
 llm_config:
 {llm_section}
@@ -362,6 +372,16 @@ score_min: {score_min}
 score_max: {score_max}
 trials: {trials}
 
+## Cache Configuration
+# Reuses completed question/criterion/trial judgments across runs.
+# Set type: none and storage: null to force fresh LLM judgments.
+cache_config:
+  type: sqlite
+  storage:
+    type: file
+    base_dir: .benchmark_qed_cache/reference
+  database_name: reference.sqlite3
+
 ## LLM Configuration
 llm_config:
 {llm_section}
@@ -406,6 +426,16 @@ assertions:
 pass_threshold: {pass_threshold}
 trials: {trials}
 
+## Cache Configuration
+# Reuses completed question/assertion/trial judgments across runs.
+# Set type: none and storage: null to force fresh LLM judgments.
+cache_config:
+  type: sqlite
+  storage:
+    type: file
+    base_dir: .benchmark_qed_cache/assertion
+  database_name: assertion.sqlite3
+
 ## LLM Configuration
 llm_config:
 {llm_section}
@@ -425,13 +455,27 @@ def render_autoe_chunk_assertion_yaml(config: dict[str, Any]) -> str:
     ----------
     config:
         Dict with keys ``chat_provider``, ``generated``, ``assertions``,
-        ``k_list``, ``pass_threshold``, ``cache_dir``.
+        ``k_list``, ``pass_threshold``, ``cache_config``.
     """
     gen = config["generated"]
     assertions = config["assertions"]
     k_list = config.get("k_list", [5, 10, 20, 50])
     pass_threshold = config.get("pass_threshold", 0.5)
-    cache_dir = config.get("cache_dir", ".benchmark_qed_cache/chunk_assertions")
+    cache_config = config.get(
+        "cache_config",
+        {
+            "type": "sqlite",
+            "storage": {
+                "type": "file",
+                "base_dir": ".benchmark_qed_cache/chunk_assertions",
+            },
+            "database_name": "chunk_assertions.sqlite3",
+        },
+    )
+    cache_section = yaml.safe_dump(
+        {"cache_config": cache_config},
+        sort_keys=False,
+    ).rstrip()
 
     llm_section = _render_llm_section(config["chat_provider"])
 
@@ -448,7 +492,7 @@ assertions:
 ## Chunk Evaluation Configuration
 k_list: [{k_list_str}]  # Report coverage metrics at these k values
 pass_threshold: {pass_threshold}  # Score threshold: 0.5 = partial_support or full_support counts as pass
-cache_dir: {cache_dir}  # Persistent cache for (assertion, chunk) pairs
+{cache_section}
 
 ## LLM Configuration
 llm_config:
@@ -485,6 +529,7 @@ _REQUIRED_KEYS: dict[str, list[str]] = {
         "others",
         "question_sets",
         "trials",
+        "cache_config",
         "llm_config",
         "prompt_config",
     ],
@@ -494,6 +539,7 @@ _REQUIRED_KEYS: dict[str, list[str]] = {
         "score_min",
         "score_max",
         "trials",
+        "cache_config",
         "llm_config",
         "prompt_config",
     ],
@@ -502,6 +548,7 @@ _REQUIRED_KEYS: dict[str, list[str]] = {
         "assertions",
         "pass_threshold",
         "trials",
+        "cache_config",
         "llm_config",
         "prompt_config",
     ],
@@ -510,7 +557,7 @@ _REQUIRED_KEYS: dict[str, list[str]] = {
         "assertions",
         "k_list",
         "pass_threshold",
-        "cache_dir",
+        "cache_config",
         "llm_config",
         "prompt_config",
     ],
@@ -560,16 +607,19 @@ def validate_config(yaml_content: str, config_type: str) -> None:
             _check_type(data, "others", list)
             _check_type(data, "question_sets", list)
             _check_type(data, "trials", int)
+            _check_type(data, "cache_config", dict)
             _check_type(data, "llm_config", dict)
         elif config_type == "autoe_reference":
             _check_type(data, "reference", dict)
             _check_type(data, "generated", list)
             _check_type(data, "trials", int)
+            _check_type(data, "cache_config", dict)
             _check_type(data, "llm_config", dict)
         elif config_type == "autoe_assertion":
             _check_type(data, "generated", dict)
             _check_type(data, "assertions", dict)
             _check_type(data, "trials", int)
+            _check_type(data, "cache_config", dict)
             _check_type(data, "llm_config", dict)
     except typer.BadParameter:
         raise

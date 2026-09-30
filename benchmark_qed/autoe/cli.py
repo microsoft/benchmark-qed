@@ -154,7 +154,7 @@ def pairwise_scores(
     include_score_id_in_prompt: Annotated[
         bool,
         typer.Option(
-            help="Whether to include the score ID in the evaluation prompt for the LLM (might be useful to avoid cached scores)."
+            help="Whether to include a unique score ID in provider requests. This can avoid provider-side prompt caching, but does not bypass cache_config."
         ),
     ] = True,
     question_id_key: Annotated[
@@ -232,6 +232,7 @@ def pairwise_scores(
                     trials=config.trials,
                     question_id_key=question_id_key,
                     include_score_id_in_prompt=include_score_id_in_prompt,
+                    cache_config=config.cache_config,
                 )
 
                 asyncio.run(_write_csv_df(output_storage, cache_key, result))
@@ -300,7 +301,7 @@ def differential_pairwise_scores(
     include_score_id_in_prompt: Annotated[
         bool,
         typer.Option(
-            help="Whether to include the score ID in the evaluation prompt for the LLM (might be useful to avoid cached scores)."
+            help="Whether to include a unique score ID in provider requests. This can avoid provider-side prompt caching, but does not bypass cache_config."
         ),
     ] = True,
     question_id_key: Annotated[
@@ -374,6 +375,7 @@ def differential_pairwise_scores(
                     trials=config.trials,
                     question_id_key=question_id_key,
                     include_score_id_in_prompt=include_score_id_in_prompt,
+                    cache_config=config.cache_config,
                 )
 
                 asyncio.run(_write_csv_df(output_storage, cache_key, result))
@@ -438,7 +440,7 @@ def reference_scores(
     include_score_id_in_prompt: Annotated[
         bool,
         typer.Option(
-            help="Whether to include the score ID in the evaluation prompt for the LLM (might be useful to avoid cached scores)."
+            help="Whether to include a unique score ID in provider requests. This can avoid provider-side prompt caching, but does not bypass cache_config."
         ),
     ] = True,
     question_id_key: Annotated[
@@ -493,6 +495,7 @@ def reference_scores(
             trials=config.trials,
             include_score_id_in_prompt=include_score_id_in_prompt,
             question_id_key=question_id_key,
+            cache_config=config.cache_config,
         )
         asyncio.run(
             _write_csv_df(
@@ -555,7 +558,7 @@ def assertion_scores(
     include_score_id_in_prompt: Annotated[
         bool,
         typer.Option(
-            help="Whether to include the score ID in the prompt (single-RAG mode only)."
+            help="Whether to include a unique score ID in provider requests (single-RAG only). This can avoid provider-side prompt caching, but does not bypass cache_config."
         ),
     ] = True,
     question_id_key: Annotated[
@@ -696,6 +699,7 @@ def _run_single_rag_assertion_scores(
         question_id_key=question_id_key,
         question_text_key=question_text_key,
         answer_text_key=answer_text_key,
+        cache_config=config.cache_config,
     )
 
     asyncio.run(_write_csv_df(output_storage, "assertion_scores.csv", assertion_score))
@@ -1425,8 +1429,7 @@ async def _generate_retrieval_reference_async(
         relevance_rater = BingRelevanceRater(
             llm_client=llm_client,
             llm_config=config.llm_config,
-            cache_dir=config.cache_dir,
-            cache_enabled=config.cache_dir is not None,
+            cache_config=config.cache_config,
             concurrent_requests=config.concurrent_requests,
         )
         rich_print(
@@ -1436,8 +1439,7 @@ async def _generate_retrieval_reference_async(
         relevance_rater = RationaleRelevanceRater(
             llm_client=llm_client,
             llm_config=config.llm_config,
-            cache_dir=config.cache_dir,
-            cache_enabled=config.cache_dir is not None,
+            cache_config=config.cache_config,
             concurrent_requests=config.concurrent_requests,
         )
         rich_print(
@@ -1798,16 +1800,14 @@ def retrieval_scores(
         relevance_rater = BingRelevanceRater(
             llm_client=llm_client,
             llm_config=config.llm_config,
-            cache_dir=config.cache_dir,
-            cache_enabled=config.cache_dir is not None,
+            cache_config=config.cache_config,
         )
         rich_print("Using BingRelevanceRater (UMBRELA DNA prompt)")
     else:
         relevance_rater = RationaleRelevanceRater(
             llm_client=llm_client,
             llm_config=config.llm_config,
-            cache_dir=config.cache_dir,
-            cache_enabled=config.cache_dir is not None,
+            cache_config=config.cache_config,
         )
         rich_print("Using RationaleRelevanceRater (structured JSON)")
 
@@ -2076,13 +2076,6 @@ def chunk_assertion_scores(
     # Load prompts (use defaults from package if not configured)
     system_prompt, user_prompt = _load_chunk_assertion_prompts(config)
 
-    # Set cache directory
-    cache_path = None
-    if config.cache_dir:
-        cache_path = Path(config.cache_dir) / "chunk_assertions.sqlite3"
-    else:
-        cache_path = Path.cwd() / ".benchmark_qed_cache" / "chunk_assertions.sqlite3"
-
     # Run chunk-level evaluation
     rich_print("\n[bold]Running chunk-level assertion evaluation...[/bold]")
     summaries = asyncio.run(
@@ -2093,7 +2086,7 @@ def chunk_assertion_scores(
             llm_config=config.llm_config,
             pass_threshold=config.pass_threshold,
             output_storage=output_storage,
-            cache_path=cache_path,
+            cache_config=config.cache_config,
             k_list=config.k_list,
             system_prompt=system_prompt,
             user_prompt=user_prompt,

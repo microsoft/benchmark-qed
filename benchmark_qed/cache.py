@@ -1,22 +1,21 @@
 # Copyright (c) 2025 Microsoft Corporation.
-"""Shared concurrency-safe local cache storage."""
+"""Shared cache helpers backed by graphrag-cache."""
 
 from __future__ import annotations
 
 import hashlib
 import json
+import os
 import sqlite3
+import threading
 import time
-from contextlib import contextmanager
-from itertools import starmap
+from datetime import UTC, datetime
 from pathlib import Path
-from typing import TYPE_CHECKING, Any
+from typing import Any, ClassVar
 
-if TYPE_CHECKING:
-    from collections.abc import Iterator
+from graphrag_cache import Cache, CacheConfig, CacheType, create_cache
+from graphrag_storage import StorageConfig, StorageType
 
-_CACHE_SCHEMA_VERSION = 2
-_INITIALIZATION_TIMEOUT_SECONDS = 30
 _SENSITIVE_KEYS = {
     "api_key",
     "apikey",
@@ -81,185 +80,246 @@ def changed_configuration_fields(
     )
 
 
-class SQLiteCache:
-    """Namespaced JSON cache backed by SQLite in WAL mode."""
+def create_default_cache_config(
+    base_dir: Path | str,
+    *,
+    database_name: str,
+) -> CacheConfig:
+    """Create the default persistent SQLite cache configuration."""
+    return CacheConfig(
+        type=CacheType.Sqlite,
+        storage=StorageConfig(
+            type=StorageType.File,
+            base_dir=str(base_dir),
+        ),
+        database_name=database_name,
+    )
 
-    def __init__(self, database_path: Path | str, namespace: str) -> None:
-        """Initialize a cache namespace in a shared SQLite database."""
-        self.database_path = Path(database_path)
-        self.database_path.parent.mkdir(parents=True, exist_ok=True)
-        self.namespace = namespace
-        self._initialize()
 
-    @contextmanager
-    def _connect(self) -> Iterator[sqlite3.Connection]:
-        """Open a configured connection for one short cache operation."""
-        connection = sqlite3.connect(self.database_path, timeout=30)
-        connection.execute("PRAGMA busy_timeout = 30000")
-        try:
-            with connection:
-                yield connection
-        finally:
-            connection.close()
+def get_cache_base_dir(config: CacheConfig) -> Path | None:
+    """Return the configured local cache directory, when one exists."""
+    storage = config.storage
+    if (
+        config.type not in {CacheType.Json, CacheType.Sqlite}
+        or storage is None
+        or storage.type != StorageType.File
+        or storage.base_dir is None
+    ):
+        return None
+    return Path(storage.base_dir)
 
-    def _initialize(self) -> None:
-        """Initialize the schema, retrying only first-start lock contention."""
-        deadline = time.monotonic() + _INITIALIZATION_TIMEOUT_SECONDS
-        while True:
-            try:
-                self._initialize_once()
-            except sqlite3.OperationalError as exc:
-                if "locked" not in str(exc).lower() or time.monotonic() >= deadline:
-                    raise
-                time.sleep(0.05)
-            else:
-                return
 
-    def _initialize_once(self) -> None:
-        """Create or migrate the cache schema."""
-        with self._connect() as connection:
-            connection.execute("PRAGMA journal_mode = WAL")
-            connection.execute("PRAGMA synchronous = NORMAL")
-            connection.execute(
-                """
-                CREATE TABLE IF NOT EXISTS cache_properties (
-                    name TEXT PRIMARY KEY,
-                    value TEXT NOT NULL
-                )
-                """
-            )
-            version_row = connection.execute(
-                "SELECT value FROM cache_properties WHERE name = 'schema_version'"
-            ).fetchone()
-            if version_row is None:
-                self._create_latest_schema(connection)
-                connection.execute(
-                    "INSERT INTO cache_properties(name, value) VALUES (?, ?)",
-                    ("schema_version", str(_CACHE_SCHEMA_VERSION)),
-                )
-                return
+def get_sqlite_cache_path(config: CacheConfig) -> Path | None:
+    """Return the configured SQLite database path, when applicable."""
+    base_dir = get_cache_base_dir(config)
+    if config.type != CacheType.Sqlite or base_dir is None:
+        return None
+    return base_dir / config.database_name
 
-            version = int(version_row[0])
-            if version > _CACHE_SCHEMA_VERSION:
-                msg = (
-                    f"Unsupported cache schema version {version} "
-                    f"in {self.database_path}"
-                )
-                raise RuntimeError(msg)
-            if version == 1:
-                self._migrate_v1_to_v2(connection)
-                version = 2
-            if version != _CACHE_SCHEMA_VERSION:
-                msg = f"No migration available for cache schema version {version}"
-                raise RuntimeError(msg)
-            self._create_latest_schema(connection)
 
-    @staticmethod
-    def _create_latest_schema(connection: sqlite3.Connection) -> None:
-        """Create all tables and indexes for the latest schema."""
-        connection.execute(
-            """
-            CREATE TABLE IF NOT EXISTS cache_entries (
-                namespace TEXT NOT NULL,
-                key TEXT NOT NULL,
-                value_json TEXT NOT NULL,
-                metadata_json TEXT NOT NULL,
-                logical_key TEXT,
-                config_fingerprint TEXT,
-                created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
-                PRIMARY KEY (namespace, key)
-            )
-            """
-        )
-        connection.execute(
-            """
-            CREATE INDEX IF NOT EXISTS idx_cache_entries_logical
-            ON cache_entries(namespace, logical_key)
-            """
-        )
-        connection.execute(
-            """
-            CREATE TABLE IF NOT EXISTS cache_leases (
-                namespace TEXT NOT NULL,
-                key TEXT NOT NULL,
-                owner_id TEXT NOT NULL,
-                expires_at REAL NOT NULL,
-                created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
-                PRIMARY KEY (namespace, key)
-            )
-            """
-        )
+def create_configured_cache(config: CacheConfig, namespace: str) -> Cache:
+    """Create a namespaced cache from a GraphRAG cache configuration."""
+    database_path = get_sqlite_cache_path(config)
+    if database_path is not None:
+        database_path.parent.mkdir(parents=True, exist_ok=True)
+        _migrate_local_cache_schema(database_path)
+    return create_cache(config).child(namespace)
 
-    @staticmethod
-    def _migrate_v1_to_v2(connection: sqlite3.Connection) -> None:
-        """Add diagnostics and lease support to a v1 cache."""
+
+def _migrate_local_cache_schema(path: Path) -> None:
+    """Convert the retired benchmark-qed schema to graphrag-cache in place."""
+    if not path.exists():
+        return
+    connection = sqlite3.connect(path, timeout=30)
+    try:
         columns = {
             str(row[1])
             for row in connection.execute("PRAGMA table_info(cache_entries)")
         }
-        if "logical_key" not in columns:
-            connection.execute("ALTER TABLE cache_entries ADD COLUMN logical_key TEXT")
-        if "config_fingerprint" not in columns:
-            connection.execute(
-                "ALTER TABLE cache_entries ADD COLUMN config_fingerprint TEXT"
-            )
-        SQLiteCache._create_latest_schema(connection)
-        connection.execute(
-            "UPDATE cache_properties SET value = '2' WHERE name = 'schema_version'"
+        if not columns or columns == {"namespace", "key", "value_json"}:
+            return
+        required_old_columns = {
+            "namespace",
+            "key",
+            "value_json",
+            "metadata_json",
+        }
+        if not required_old_columns <= columns:
+            msg = f"Unsupported cache schema in {path}"
+            raise RuntimeError(msg)
+
+        logical_key_column = (
+            "logical_key" if "logical_key" in columns else "NULL AS logical_key"
         )
-
-    def get(self, key: str) -> tuple[Any, dict[str, Any]] | None:
-        """Return a decoded value and metadata for a key."""
-        with self._connect() as connection:
-            row = connection.execute(
+        config_fingerprint_column = (
+            "config_fingerprint"
+            if "config_fingerprint" in columns
+            else "NULL AS config_fingerprint"
+        )
+        created_at_column = (
+            "created_at" if "created_at" in columns else "NULL AS created_at"
+        )
+        rows = connection.execute(
+            f"""
+            SELECT namespace, key, value_json, metadata_json,
+                   {logical_key_column}, {config_fingerprint_column},
+                   {created_at_column}
+            FROM cache_entries
+            """  # ruff: ignore[hardcoded-sql-expression] -- fixed expressions only
+        ).fetchall()
+        with connection:
+            connection.execute("DROP TABLE IF EXISTS cache_entries_graphrag")
+            connection.execute(
                 """
-                SELECT value_json, metadata_json
-                FROM cache_entries
-                WHERE namespace = ? AND key = ?
-                """,
-                (self.namespace, key),
-            ).fetchone()
-        if row is None:
-            return None
-        return json.loads(row[0]), json.loads(row[1])
+                CREATE TABLE cache_entries_graphrag (
+                    namespace TEXT NOT NULL,
+                    key TEXT NOT NULL,
+                    value_json TEXT NOT NULL,
+                    PRIMARY KEY (namespace, key)
+                )
+                """
+            )
+            for (
+                namespace,
+                key,
+                value_json,
+                metadata_json,
+                logical_key,
+                config_fingerprint,
+                created_at,
+            ) in rows:
+                metadata = json.loads(metadata_json)
+                envelope = {
+                    "result": {
+                        "value": json.loads(value_json),
+                        "metadata": metadata,
+                        "logical_key": logical_key,
+                        "config_fingerprint": config_fingerprint,
+                        "created_at": created_at,
+                    }
+                }
+                connection.execute(
+                    """
+                    INSERT INTO cache_entries_graphrag(namespace, key, value_json)
+                    VALUES (?, ?, ?)
+                    """,
+                    (namespace, key, json.dumps(envelope, ensure_ascii=False)),
+                )
+                if logical_key is not None and config_fingerprint is not None:
+                    configuration = {
+                        "result": {
+                            "config_fingerprint": config_fingerprint,
+                            "metadata": metadata,
+                        }
+                    }
+                    connection.execute(
+                        """
+                        INSERT INTO cache_entries_graphrag(
+                            namespace, key, value_json
+                        )
+                        VALUES (?, ?, ?)
+                        ON CONFLICT(namespace, key)
+                        DO UPDATE SET value_json = excluded.value_json
+                        """,
+                        (
+                            f"{namespace}/configurations",
+                            logical_key,
+                            json.dumps(configuration, ensure_ascii=False),
+                        ),
+                    )
+            connection.execute("DROP TABLE cache_entries")
+            connection.execute(
+                "ALTER TABLE cache_entries_graphrag RENAME TO cache_entries"
+            )
+            connection.execute("DROP TABLE IF EXISTS cache_properties")
+            connection.execute("DROP TABLE IF EXISTS cache_leases")
+    finally:
+        connection.close()
 
-    def put_many(
+
+class CacheStore:
+    """Application cache metadata layered over graphrag-cache."""
+
+    _memory_lease_lock = threading.Lock()
+    _memory_leases: ClassVar[dict[tuple[str, str], tuple[str, float]]] = {}
+
+    def __init__(
+        self,
+        config: CacheConfig,
+        namespace: str,
+        *,
+        lease_ttl_seconds: float = 120.0,
+    ) -> None:
+        """Initialize cache namespaces and process-coordination files."""
+        self.config = config
+        self.namespace = namespace
+        root_cache = create_configured_cache(config, namespace)
+        self._cache = root_cache
+        self._properties = create_configured_cache(config, f"{namespace}/properties")
+        self._configurations = create_configured_cache(
+            config, f"{namespace}/configurations"
+        )
+        self._lease_ttl_seconds = lease_ttl_seconds
+        self.database_path = get_sqlite_cache_path(config)
+        self.base_dir = get_cache_base_dir(config)
+        namespace_hash = hashlib.sha256(namespace.encode()).hexdigest()[:16]
+        config_hash = hashlib.sha256(config.model_dump_json().encode()).hexdigest()[:16]
+        self._lease_dir = (
+            self.base_dir / ".benchmark_qed_cache_leases" / config_hash / namespace_hash
+            if self.base_dir is not None
+            else None
+        )
+        self._memory_lease_prefix = (config_hash, namespace)
+        self._known_keys: set[str] = set()
+
+    async def get(self, key: str) -> tuple[Any, dict[str, Any]] | None:
+        """Return a decoded value and metadata for a key."""
+        entry = await self._cache.get(key)
+        if not isinstance(entry, dict) or "value" not in entry:
+            return None
+        metadata = entry.get("metadata")
+        if not isinstance(metadata, dict):
+            return None
+        self._known_keys.add(key)
+        return entry["value"], metadata
+
+    async def put_many(
         self,
         entries: list[tuple[str, Any, dict[str, Any]]],
         *,
         identities: dict[str, tuple[str, str]] | None = None,
     ) -> int:
-        """Insert entries atomically with first-writer-wins semantics."""
-        if not entries:
+        """Insert entries with first-observed-writer semantics."""
+        if self.config.type == CacheType.Noop:
             return 0
-        records = [
-            (
-                self.namespace,
+        inserted = 0
+        for key, value, metadata in entries:
+            if await self.get(key) is not None:
+                continue
+            logical_key, config_fingerprint = (identities or {}).get(key, (None, None))
+            await self._cache.set(
                 key,
-                json.dumps(value, sort_keys=True, default=str),
-                json.dumps(metadata, sort_keys=True, default=str),
-                (identities or {}).get(key, (None, None))[0],
-                (identities or {}).get(key, (None, None))[1],
+                {
+                    "value": value,
+                    "metadata": metadata,
+                    "logical_key": logical_key,
+                    "config_fingerprint": config_fingerprint,
+                    "created_at": datetime.now(tz=UTC).isoformat(),
+                },
             )
-            for key, value, metadata in entries
-        ]
-        with self._connect() as connection:
-            connection.execute("BEGIN IMMEDIATE")
-            changes_before = connection.total_changes
-            connection.executemany(
-                """
-                INSERT INTO cache_entries(
-                    namespace, key, value_json, metadata_json,
-                    logical_key, config_fingerprint
+            self._known_keys.add(key)
+            inserted += 1
+            if logical_key is not None and config_fingerprint is not None:
+                await self._configurations.set(
+                    logical_key,
+                    {
+                        "config_fingerprint": config_fingerprint,
+                        "metadata": metadata,
+                    },
                 )
-                VALUES (?, ?, ?, ?, ?, ?)
-                ON CONFLICT(namespace, key) DO NOTHING
-                """,
-                records,
-            )
-            return connection.total_changes - changes_before
+        return inserted
 
-    def publish(
+    async def publish(
         self,
         key: str,
         value: Any,
@@ -269,284 +329,239 @@ class SQLiteCache:
         logical_key: str,
         config_fingerprint: str,
     ) -> bool:
-        """Publish a claimed result and release its lease atomically."""
-        with self._connect() as connection:
-            connection.execute("BEGIN IMMEDIATE")
-            changes_before = connection.total_changes
-            connection.execute(
-                """
-                INSERT INTO cache_entries(
-                    namespace, key, value_json, metadata_json,
-                    logical_key, config_fingerprint
-                )
-                VALUES (?, ?, ?, ?, ?, ?)
-                ON CONFLICT(namespace, key) DO NOTHING
-                """,
-                (
-                    self.namespace,
-                    key,
-                    json.dumps(value, sort_keys=True, default=str),
-                    json.dumps(metadata, sort_keys=True, default=str),
-                    logical_key,
-                    config_fingerprint,
-                ),
+        """Publish a claimed result, its configuration, and release the lease."""
+        inserted = (
+            await self.put_many(
+                [(key, value, metadata)],
+                identities={key: (logical_key, config_fingerprint)},
             )
-            inserted = connection.total_changes > changes_before
-            connection.execute(
-                """
-                DELETE FROM cache_leases
-                WHERE namespace = ? AND key = ? AND owner_id = ?
-                """,
-                (self.namespace, key, owner_id),
-            )
-            return inserted
+            == 1
+        )
+        self.release_leases([key], owner_id)
+        return inserted
 
     def try_acquire(
         self,
         key: str,
         owner_id: str,
         *,
-        ttl_seconds: float,
+        ttl_seconds: float | None = None,
         now: float | None = None,
     ) -> bool:
-        """Claim missing work, replacing an expired lease if necessary."""
+        """Claim work using an expiring local or in-memory lease."""
         current_time = time.time() if now is None else now
-        with self._connect() as connection:
-            connection.execute("BEGIN IMMEDIATE")
-            if (
-                connection.execute(
-                    """
-                    SELECT 1 FROM cache_entries
-                    WHERE namespace = ? AND key = ?
-                    """,
-                    (self.namespace, key),
-                ).fetchone()
-                is not None
-            ):
-                return False
-            connection.execute(
-                """
-                DELETE FROM cache_leases
-                WHERE namespace = ? AND key = ? AND expires_at <= ?
-                """,
-                (self.namespace, key, current_time),
-            )
-            changes_before = connection.total_changes
-            connection.execute(
-                """
-                INSERT INTO cache_leases(namespace, key, owner_id, expires_at)
-                VALUES (?, ?, ?, ?)
-                ON CONFLICT(namespace, key) DO NOTHING
-                """,
-                (self.namespace, key, owner_id, current_time + ttl_seconds),
-            )
-            return connection.total_changes > changes_before
+        lease_ttl = self._lease_ttl_seconds if ttl_seconds is None else ttl_seconds
+        if self._lease_dir is None:
+            lease_key = self._memory_lease_key(key)
+            with self._memory_lease_lock:
+                lease = self._memory_leases.get(lease_key)
+                if lease is not None and lease[1] > current_time:
+                    return False
+                self._memory_leases[lease_key] = (
+                    owner_id,
+                    current_time + lease_ttl,
+                )
+            return True
+
+        lease_path = self._lease_path(key)
+        lease_path.parent.mkdir(parents=True, exist_ok=True)
+        payload = json.dumps({
+            "owner_id": owner_id,
+            "expires_at": current_time + lease_ttl,
+        }).encode()
+
+        for _ in range(2):
+            try:
+                descriptor = os.open(
+                    lease_path,
+                    os.O_CREAT | os.O_EXCL | os.O_WRONLY,
+                    0o600,
+                )
+            except FileExistsError:
+                try:
+                    lease = json.loads(lease_path.read_text(encoding="utf-8"))
+                    if float(lease["expires_at"]) > current_time:
+                        return False
+                    lease_path.unlink()
+                except FileNotFoundError:
+                    continue
+                except (KeyError, TypeError, ValueError, json.JSONDecodeError):
+                    lease_path.unlink(missing_ok=True)
+                continue
+
+            with os.fdopen(descriptor, "wb") as lease_file:
+                lease_file.write(payload)
+            return True
+        return False
 
     def renew_leases(
-        self, keys: list[str], owner_id: str, *, ttl_seconds: float
+        self, keys: list[str], owner_id: str, *, ttl_seconds: float | None = None
     ) -> int:
         """Extend leases still owned by a worker."""
-        if not keys:
-            return 0
-        with self._connect() as connection:
-            changes_before = connection.total_changes
-            connection.executemany(
-                """
-                UPDATE cache_leases
-                SET expires_at = ?
-                WHERE namespace = ? AND owner_id = ?
-                  AND key = ?
-                """,
-                [
-                    (
-                        time.time() + ttl_seconds,
-                        self.namespace,
-                        owner_id,
-                        key,
-                    )
-                    for key in keys
-                ],
-            )
-            return connection.total_changes - changes_before
+        lease_ttl = self._lease_ttl_seconds if ttl_seconds is None else ttl_seconds
+        if self._lease_dir is None:
+            renewed = 0
+            with self._memory_lease_lock:
+                for key in keys:
+                    lease_key = self._memory_lease_key(key)
+                    lease = self._memory_leases.get(lease_key)
+                    if lease is not None and lease[0] == owner_id:
+                        self._memory_leases[lease_key] = (
+                            owner_id,
+                            time.time() + lease_ttl,
+                        )
+                        renewed += 1
+            return renewed
+
+        renewed = 0
+        for key in keys:
+            lease_path = self._lease_path(key)
+            try:
+                lease = json.loads(lease_path.read_text(encoding="utf-8"))
+            except (FileNotFoundError, json.JSONDecodeError):
+                continue
+            if lease.get("owner_id") != owner_id:
+                continue
+            lease["expires_at"] = time.time() + lease_ttl
+            lease_path.write_text(json.dumps(lease), encoding="utf-8")
+            renewed += 1
+        return renewed
 
     def release_leases(self, keys: list[str], owner_id: str) -> None:
         """Release leases owned by a worker without publishing results."""
-        if not keys:
+        if self._lease_dir is None:
+            with self._memory_lease_lock:
+                for key in keys:
+                    lease_key = self._memory_lease_key(key)
+                    lease = self._memory_leases.get(lease_key)
+                    if lease is not None and lease[0] == owner_id:
+                        self._memory_leases.pop(lease_key)
             return
-        with self._connect() as connection:
-            connection.executemany(
-                """
-                DELETE FROM cache_leases
-                WHERE namespace = ? AND owner_id = ?
-                  AND key = ?
-                """,
-                [(self.namespace, owner_id, key) for key in keys],
-            )
 
-    def find_alternate_configurations(
+        for key in keys:
+            lease_path = self._lease_path(key)
+            try:
+                lease = json.loads(lease_path.read_text(encoding="utf-8"))
+            except (FileNotFoundError, json.JSONDecodeError):
+                continue
+            if lease.get("owner_id") == owner_id:
+                lease_path.unlink(missing_ok=True)
+
+    async def find_alternate_configurations(
         self, requests: list[tuple[str, str]]
     ) -> list[dict[str, Any]]:
-        """Return metadata for matching inputs produced by other configurations."""
-        requested = dict(requests)
-        if not requested:
-            return []
-        with self._connect() as connection:
-            connection.execute(
-                """
-                CREATE TEMP TABLE requested_cache_configs (
-                    logical_key TEXT PRIMARY KEY,
-                    config_fingerprint TEXT NOT NULL
-                )
-                """
-            )
-            connection.executemany(
-                "INSERT INTO requested_cache_configs VALUES (?, ?)",
-                requested.items(),
-            )
-            rows = connection.execute(
-                """
-                SELECT entries.metadata_json
-                FROM cache_entries AS entries
-                INNER JOIN requested_cache_configs AS requested
-                    ON requested.logical_key = entries.logical_key
-                WHERE entries.namespace = ?
-                  AND entries.config_fingerprint IS NOT requested.config_fingerprint
-                """,
-                (self.namespace,),
-            ).fetchall()
-        return list(starmap(json.loads, rows))
+        """Return metadata for matching inputs produced by another configuration."""
+        alternatives: list[dict[str, Any]] = []
+        for logical_key, config_fingerprint in dict(requests).items():
+            cached = await self._configurations.get(logical_key)
+            if (
+                isinstance(cached, dict)
+                and cached.get("config_fingerprint") != config_fingerprint
+                and isinstance(cached.get("metadata"), dict)
+            ):
+                alternatives.append(cached["metadata"])
+        return alternatives
 
-    def get_property(self, name: str) -> str | None:
-        """Return a database-level property."""
-        with self._connect() as connection:
-            row = connection.execute(
-                "SELECT value FROM cache_properties WHERE name = ?", (name,)
-            ).fetchone()
-        return str(row[0]) if row is not None else None
+    async def get_property(self, name: str) -> str | None:
+        """Return a cache property."""
+        value = await self._properties.get(name)
+        return str(value) if value is not None else None
 
-    def set_property_if_absent(self, name: str, value: str) -> None:
-        """Set a database-level property without replacing an existing value."""
-        with self._connect() as connection:
-            connection.execute(
-                """
-                INSERT INTO cache_properties(name, value)
-                VALUES (?, ?)
-                ON CONFLICT(name) DO NOTHING
-                """,
-                (name, value),
-            )
+    async def set_property_if_absent(self, name: str, value: str) -> None:
+        """Set a cache property without replacing an existing value."""
+        if await self._properties.get(name) is None:
+            await self._properties.set(name, value)
 
     def count(self) -> int:
-        """Return the number of entries in this namespace."""
-        with self._connect() as connection:
-            row = connection.execute(
-                "SELECT COUNT(*) FROM cache_entries WHERE namespace = ?",
-                (self.namespace,),
-            ).fetchone()
-        return int(row[0]) if row is not None else 0
+        """Return the number of entries observed by this store instance."""
+        return len(self._known_keys)
 
-    def clear(self) -> None:
-        """Delete all entries and leases in this namespace."""
-        with self._connect() as connection:
-            connection.execute(
-                "DELETE FROM cache_entries WHERE namespace = ?", (self.namespace,)
-            )
-            connection.execute(
-                "DELETE FROM cache_leases WHERE namespace = ?", (self.namespace,)
-            )
+    async def clear(self) -> None:
+        """Delete entries and supporting metadata in this namespace."""
+        await self._cache.clear()
+        await self._properties.clear()
+        await self._configurations.clear()
+        self._known_keys.clear()
+        if self._lease_dir is not None and self._lease_dir.exists():
+            for lease_path in self._lease_dir.iterdir():
+                if lease_path.is_file():
+                    lease_path.unlink()
+        elif self._lease_dir is None:
+            with self._memory_lease_lock:
+                for lease_key in list(self._memory_leases):
+                    if lease_key[0] == ":".join(self._memory_lease_prefix):
+                        self._memory_leases.pop(lease_key)
 
     def size_bytes(self) -> int:
-        """Return total on-disk size of the database and WAL sidecars."""
-        return sum(
-            path.stat().st_size
-            for path in (
-                self.database_path,
-                Path(f"{self.database_path}-wal"),
-                Path(f"{self.database_path}-shm"),
+        """Return the size of configured local cache files."""
+        if self.database_path is not None:
+            return sum(
+                path.stat().st_size
+                for path in (
+                    self.database_path,
+                    Path(f"{self.database_path}-wal"),
+                    Path(f"{self.database_path}-shm"),
+                )
+                if path.exists()
             )
-            if path.exists()
+        if self.base_dir is None or not self.base_dir.exists():
+            return 0
+        return sum(
+            path.stat().st_size for path in self.base_dir.rglob("*") if path.is_file()
         )
+
+    def _lease_path(self, key: str) -> Path:
+        if self._lease_dir is None:
+            msg = "File lease path requested for a non-file cache"
+            raise RuntimeError(msg)
+        key_hash = hashlib.sha256(key.encode()).hexdigest()
+        return self._lease_dir / f"{key_hash}.lock"
+
+    def _memory_lease_key(self, key: str) -> tuple[str, str]:
+        return (":".join(self._memory_lease_prefix), key)
 
 
 def inspect_cache(database_path: Path | str) -> dict[str, Any]:
-    """Return schema, namespace, provenance, and lease details without mutation."""
+    """Inspect the graphrag-cache SQLite file without mutating it."""
     path = Path(database_path)
     if not path.exists():
         msg = f"Cache database does not exist: {path}"
         raise FileNotFoundError(msg)
     connection = sqlite3.connect(f"{path.resolve().as_uri()}?mode=ro", uri=True)
     try:
-        tables = {
-            str(row[0])
-            for row in connection.execute(
-                "SELECT name FROM sqlite_master WHERE type = 'table'"
-            )
-        }
-        if "cache_entries" not in tables or "cache_properties" not in tables:
-            msg = f"Not a benchmark-qed cache database: {path}"
-            raise ValueError(msg)
-        version_row = connection.execute(
-            "SELECT value FROM cache_properties WHERE name = 'schema_version'"
-        ).fetchone()
-        entry_columns = {
+        columns = {
             str(row[1])
             for row in connection.execute("PRAGMA table_info(cache_entries)")
         }
-        if "config_fingerprint" in entry_columns:
-            namespace_rows = connection.execute(
-                """
-                SELECT namespace, COUNT(*), COUNT(DISTINCT config_fingerprint)
-                FROM cache_entries
-                GROUP BY namespace
-                ORDER BY namespace
-                """
-            )
-        else:
-            namespace_rows = connection.execute(
-                """
-                SELECT namespace, COUNT(*), 0
-                FROM cache_entries
-                GROUP BY namespace
-                ORDER BY namespace
-                """
-            )
+        if columns != {"namespace", "key", "value_json"}:
+            msg = f"Not a graphrag-cache SQLite database: {path}"
+            raise ValueError(msg)
         namespaces = [
-            {
-                "namespace": namespace,
-                "entries": entry_count,
-                "configurations": config_count,
-            }
-            for namespace, entry_count, config_count in namespace_rows
-        ]
-        provenance = [
-            {
-                "namespace": namespace,
-                "created_at": created_at,
-                "metadata": json.loads(metadata_json),
-            }
-            for namespace, created_at, metadata_json in connection.execute(
+            {"namespace": namespace, "entries": entry_count}
+            for namespace, entry_count in connection.execute(
                 """
-                SELECT namespace, created_at, metadata_json
+                SELECT namespace, COUNT(*)
                 FROM cache_entries
-                ORDER BY created_at DESC
-                LIMIT 10
+                GROUP BY namespace
+                ORDER BY namespace
                 """
             )
         ]
-        lease_count = (
-            connection.execute(
-                "SELECT COUNT(*) FROM cache_leases WHERE expires_at > ?",
-                (time.time(),),
-            ).fetchone()[0]
-            if "cache_leases" in tables
-            else 0
-        )
     finally:
         connection.close()
+    lease_root = path.parent / ".benchmark_qed_cache_leases"
+    active_leases = 0
+    if lease_root.exists():
+        now = time.time()
+        for lease_path in lease_root.glob("*/*/*.lock"):
+            try:
+                lease = json.loads(lease_path.read_text(encoding="utf-8"))
+                active_leases += int(float(lease["expires_at"]) > now)
+            except (OSError, KeyError, TypeError, ValueError, json.JSONDecodeError):
+                continue
     return {
         "path": str(path),
-        "schema_version": int(version_row[0]) if version_row else None,
+        "backend": "graphrag-cache",
         "namespaces": namespaces,
-        "active_leases": lease_count,
-        "recent_provenance": provenance,
+        "active_leases": active_leases,
     }

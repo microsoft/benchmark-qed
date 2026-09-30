@@ -6,17 +6,23 @@ from __future__ import annotations
 import hashlib
 import json
 import logging
-from pathlib import Path
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
 from benchmark_qed.cache import (
-    SQLiteCache,
+    CacheStore,
     changed_configuration_fields,
+    get_cache_base_dir,
+    get_sqlite_cache_path,
     redact_sensitive_values,
     stable_fingerprint,
 )
 
 log: logging.Logger = logging.getLogger(__name__)
+
+if TYPE_CHECKING:
+    from pathlib import Path
+
+    from graphrag_cache import CacheConfig
 
 _CACHE_NAMESPACE = "chunk_assertion"
 _CACHE_SCHEMA_VERSION = 1
@@ -68,44 +74,59 @@ def compute_config_fingerprint(
 
 
 class ContentAddressedCache:
-    r"""Persistent SQLite cache for (assertion, chunk) -> grade.
+    r"""Persistent cache for (assertion, chunk) -> grade.
 
-    SQLite WAL mode allows readers and writers in separate processes to share
-    the cache safely. Writes use first-writer-wins semantics for a cache key.
-    Existing JSONL caches are imported once when the database is initialized.
+    The graphrag-cache SQLite backend allows readers and writers in separate
+    processes to share the cache. Existing JSONL caches are imported once.
     """
 
     def __init__(
         self,
-        cache_path: Path | str,
+        cache_config: CacheConfig,
         *,
         lease_ttl_seconds: float = _DEFAULT_LEASE_TTL_SECONDS,
     ) -> None:
         """Initialize the cache and import a legacy JSONL cache when present."""
-        requested_path = Path(cache_path)
+        self.cache_config = cache_config
+        base_dir = get_cache_base_dir(cache_config)
+        self.cache_path = get_sqlite_cache_path(cache_config)
         self.legacy_cache_path: Path | None = None
-        if requested_path.suffix.lower() == ".jsonl":
-            self.legacy_cache_path = requested_path
-            self.cache_path = requested_path.with_suffix(".sqlite3")
+        if self.cache_path is not None:
+            legacy_path = self.cache_path.with_suffix(".jsonl")
+        elif base_dir is not None:
+            legacy_path = base_dir / "chunk_assertions.jsonl"
         else:
-            self.cache_path = requested_path
-            legacy_path = requested_path.with_suffix(".jsonl")
-            if legacy_path.exists():
-                self.legacy_cache_path = legacy_path
+            legacy_path = None
+        if (
+            legacy_path is not None
+            and legacy_path != self.cache_path
+            and legacy_path.exists()
+        ):
+            self.legacy_cache_path = legacy_path
 
-        self._store = SQLiteCache(self.cache_path, _CACHE_NAMESPACE)
+        self._store = CacheStore(
+            cache_config,
+            _CACHE_NAMESPACE,
+            lease_ttl_seconds=lease_ttl_seconds,
+        )
         self.lease_ttl_seconds = lease_ttl_seconds
         self._pending: dict[str, tuple[str, dict[str, Any]]] = {}
         self.new_count: int = 0
-        self._migrate_legacy_cache()
+        self._initialized = False
 
-    def _migrate_legacy_cache(self) -> None:
+    async def _ensure_initialized(self) -> None:
+        if self._initialized:
+            return
+        await self._migrate_legacy_cache()
+        self._initialized = True
+
+    async def _migrate_legacy_cache(self) -> None:
         """Import an existing JSONL cache once without modifying the source."""
         if self.legacy_cache_path is None or not self.legacy_cache_path.exists():
             return
 
         migration_name = f"legacy_import:{self.legacy_cache_path.resolve()}"
-        if self._store.get_property(migration_name) is not None:
+        if await self._store.get_property(migration_name) is not None:
             return
 
         records: list[tuple[str, str, dict[str, Any]]] = []
@@ -127,45 +148,51 @@ class ContentAddressedCache:
                                 "source": "legacy_jsonl",
                             },
                         ))
-        except OSError as exc:
+        except (OSError, UnicodeError) as exc:
             log.warning(
                 "Failed to import legacy cache from %s: %s", self.legacy_cache_path, exc
             )
             return
 
-        self._store.put_many(records)
-        self._store.set_property_if_absent(migration_name, "complete")
+        await self._store.put_many(records)
+        await self._store.set_property_if_absent(migration_name, "complete")
 
-    def get(self, cache_key: str) -> str | None:
+    async def get(self, cache_key: str) -> str | None:
         """Retrieve a grade for a cache key."""
+        await self._ensure_initialized()
         pending = self._pending.get(cache_key)
         if pending is not None:
             return pending[0]
-        entry = self._store.get(cache_key)
+        entry = await self._store.get(cache_key)
         return str(entry[0]) if entry is not None else None
 
-    def get_metadata(self, cache_key: str) -> dict[str, Any] | None:
+    async def get_metadata(self, cache_key: str) -> dict[str, Any] | None:
         """Retrieve the inspectable metadata stored with a cache entry."""
+        await self._ensure_initialized()
         pending = self._pending.get(cache_key)
         if pending is not None:
             return pending[1]
-        entry = self._store.get(cache_key)
+        entry = await self._store.get(cache_key)
         return entry[1] if entry is not None else None
 
-    def put(
+    async def put(
         self,
         cache_key: str,
         grade: str,
         metadata: dict[str, Any] | None = None,
     ) -> None:
         """Stage a grade for insertion on the next flush."""
-        if cache_key in self._pending or self.get(cache_key) is not None:
+        await self._ensure_initialized()
+        if cache_key in self._pending or await self.get(cache_key) is not None:
             return
         self._pending[cache_key] = (grade, metadata or {})
         self.new_count = len(self._pending)
 
-    def claim(self, cache_key: str, owner_id: str) -> bool:
+    async def claim(self, cache_key: str, owner_id: str) -> bool:
         """Claim an uncached judgement for this worker."""
+        await self._ensure_initialized()
+        if await self._store.get(cache_key) is not None:
+            return False
         return self._store.try_acquire(
             cache_key,
             owner_id,
@@ -184,7 +211,7 @@ class ContentAddressedCache:
         """Release judgement leases without publishing."""
         self._store.release_leases(cache_keys, owner_id)
 
-    def publish(
+    async def publish(
         self,
         cache_key: str,
         grade: str,
@@ -195,7 +222,8 @@ class ContentAddressedCache:
         config_fingerprint: str,
     ) -> bool:
         """Publish a grade and release its lease atomically."""
-        return self._store.publish(
+        await self._ensure_initialized()
+        return await self._store.publish(
             cache_key,
             grade,
             metadata,
@@ -204,13 +232,14 @@ class ContentAddressedCache:
             config_fingerprint=config_fingerprint,
         )
 
-    def find_configuration_mismatches(
+    async def find_configuration_mismatches(
         self,
         identities: list[tuple[str, str]],
         current_metadata: dict[str, Any],
     ) -> tuple[int, list[str]]:
         """Return the mismatch count and changed configuration fields."""
-        alternatives = self._store.find_alternate_configurations(identities)
+        await self._ensure_initialized()
+        alternatives = await self._store.find_alternate_configurations(identities)
         changed_fields = {
             field
             for metadata in alternatives
@@ -218,9 +247,10 @@ class ContentAddressedCache:
         }
         return len(alternatives), sorted(changed_fields)
 
-    def flush(self) -> int:
+    async def flush(self) -> int:
         """Atomically insert staged entries and return the number persisted."""
-        inserted_count = self._store.put_many([
+        await self._ensure_initialized()
+        inserted_count = await self._store.put_many([
             (cache_key, grade, metadata)
             for cache_key, (grade, metadata) in self._pending.items()
         ])

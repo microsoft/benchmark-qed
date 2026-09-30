@@ -6,6 +6,7 @@ answers using a language model.
 """
 
 import asyncio
+import contextlib
 import functools
 import itertools
 from collections.abc import Callable
@@ -15,9 +16,16 @@ from typing import Any
 from uuid import uuid4
 
 import pandas as pd
+from graphrag_cache import CacheConfig, CacheType
 from graphrag_llm.completion import LLMCompletion
 from rich.progress import Progress, TaskID
 
+from benchmark_qed.autoe.assertion.cache import (
+    AssertionScoreCache,
+    build_cache_metadata,
+    compute_cache_key,
+    compute_logical_key,
+)
 from benchmark_qed.autoe.data_model.assertion import (
     Assertion,
     AssertionLLMResponse,
@@ -44,6 +52,7 @@ def get_assertion_scores(
     question_id_key: str = "question_id",
     question_text_key: str = "question_text",
     answer_text_key: str = "answer",
+    cache_config: CacheConfig | None = None,
 ) -> pd.DataFrame:
     """Score assertions based on the provided answers using a language model.
 
@@ -64,6 +73,8 @@ def get_assertion_scores(
         question_id_key: Column name for question ID.
         question_text_key: Column name for question text.
         answer_text_key: Column name for answer text.
+        cache_config: GraphRAG cache backend configuration. Caching is disabled
+            when omitted.
 
     Returns
     -------
@@ -112,8 +123,9 @@ def get_assertion_scores(
                 assertions[["assertion", "rank"]], on="assertion", how="left"
             )
             pairs = (
-                pairs_with_rank
-                .sort_values(["question_id", "rank"], ascending=[True, True])
+                pairs_with_rank.sort_values(
+                    ["question_id", "rank"], ascending=[True, True]
+                )
                 .groupby("question_id")
                 .head(top_k)
                 .drop(columns=["rank"])
@@ -123,6 +135,28 @@ def get_assertion_scores(
             # If no rank column, just take first k assertions per question
             pairs = pairs.groupby("question_id").head(top_k).reset_index(drop=True)
 
+    assessment_system_prompt = assessment_system_prompt or load_template_file(
+        ASSERTION_PROMPTS / "assertion_system_prompt.txt"
+    )
+    assessment_user_prompt = assessment_user_prompt or load_template_file(
+        ASSERTION_PROMPTS / "assertion_user_prompt.txt"
+    )
+    cache = AssertionScoreCache(
+        cache_config or CacheConfig(type=CacheType.Noop, storage=None)
+    )
+    cache_metadata = build_cache_metadata(
+        model=llm_config.model,
+        llm_provider=str(llm_config.llm_provider),
+        init_args=llm_config.init_args,
+        call_args=llm_config.call_args,
+        custom_providers=[
+            provider.model_dump(mode="json") for provider in llm_config.custom_providers
+        ],
+        system_prompt=assessment_system_prompt.template,
+        user_prompt=assessment_user_prompt.template,
+        include_score_id_in_prompt=include_score_id_in_prompt,
+    )
+
     with Progress() as progress:
 
         def on_complete_callback(progress_task: TaskID) -> None:
@@ -130,8 +164,10 @@ def get_assertion_scores(
 
         progress_task = progress.add_task("Scoring...", total=len(pairs) * trials)
         tasks = [
-            evaluate_assertion(
+            _evaluate_assertion_with_cache(
                 llm_client=llm_client,
+                cache=cache,
+                cache_metadata=cache_metadata,
                 assertion=assertion.assertion,
                 question=assertion.question_text,
                 answer=assertion.answer_text,
@@ -154,6 +190,85 @@ def get_assertion_scores(
         results = asyncio.run(_run_tasks())
 
         return pd.DataFrame(results)
+
+
+async def _evaluate_assertion_with_cache(
+    llm_client: LLMCompletion,
+    *,
+    cache: AssertionScoreCache,
+    cache_metadata: dict[str, Any],
+    assertion: str,
+    question: str,
+    answer: str,
+    trial: int,
+    assessment_system_prompt: Template,
+    assessment_user_prompt: Template,
+    include_score_id_in_prompt: bool,
+    additional_call_args: dict[str, Any] | None,
+    complete_callback: Callable | None,
+) -> dict[str, Any]:
+    """Reuse or compute one assertion score with cross-process coalescing."""
+    logical_key = compute_logical_key(
+        question=question,
+        answer=answer,
+        assertion=assertion,
+        trial=trial,
+    )
+    cache_key = compute_cache_key(logical_key, cache_metadata)
+    owner_id = uuid4().hex
+
+    while True:
+        cached = await cache.get(cache_key)
+        if cached is not None:
+            if complete_callback:
+                complete_callback()
+            return cached
+        if await cache.claim(cache_key, owner_id):
+            cached = await cache.get(cache_key)
+            if cached is not None:
+                cache.release(cache_key, owner_id)
+                if complete_callback:
+                    complete_callback()
+                return cached
+            break
+        await asyncio.sleep(0.1)
+
+    async def _heartbeat() -> None:
+        while True:
+            await asyncio.sleep(max(0.1, cache.lease_ttl_seconds / 3))
+            cache.renew(cache_key, owner_id)
+
+    heartbeat = asyncio.create_task(_heartbeat())
+    try:
+        score = await evaluate_assertion(
+            llm_client=llm_client,
+            assertion=assertion,
+            question=question,
+            answer=answer,
+            trial=trial,
+            assessment_system_prompt=assessment_system_prompt,
+            assessment_user_prompt=assessment_user_prompt,
+            include_score_id_in_prompt=include_score_id_in_prompt,
+            additional_call_args=additional_call_args,
+        )
+        await cache.publish(
+            cache_key,
+            score,
+            cache_metadata,
+            owner_id=owner_id,
+            logical_key=logical_key,
+        )
+    except (Exception, asyncio.CancelledError):
+        cache.release(cache_key, owner_id)
+        raise
+    finally:
+        heartbeat.cancel()
+        with contextlib.suppress(asyncio.CancelledError):
+            await heartbeat
+
+    if complete_callback:
+        complete_callback()
+    return score
 
 
 async def evaluate_assertion(

@@ -23,6 +23,7 @@ from string import Template
 from typing import Any
 
 import pandas as pd
+from graphrag_cache import CacheConfig, CacheType
 from graphrag_llm.completion import LLMCompletion
 from rich.progress import Progress, TaskID
 
@@ -30,6 +31,12 @@ from benchmark_qed.autoe.data_model import (
     ConditionPair,
     DifferentialPairwiseLLMResponse,
     PairwiseExtractionLLMResponse,
+)
+from benchmark_qed.autoe.pairwise.differential_cache import (
+    DifferentialPairwiseCache,
+    build_stage_metadata,
+    compute_cache_key,
+    compute_logical_key,
 )
 from benchmark_qed.autoe.pairwise.scores import SCORE_MAPPING
 from benchmark_qed.autoe.prompts import pairwise as pairwise_prompts
@@ -66,6 +73,7 @@ def get_differential_pairwise_scores(
     include_score_id_in_prompt: bool = True,
     question_id_key: str = "question_id",
     question_text_key: str = "question_text",
+    cache_config: CacheConfig | None = None,
 ) -> pd.DataFrame:
     """Score a pair of conditions with the differential extract-and-judge method.
 
@@ -90,6 +98,8 @@ def get_differential_pairwise_scores(
         include_score_id_in_prompt: Whether to include score ID in the prompt.
         question_id_key: The column name for question ID in the DataFrames.
         question_text_key: The column name for question text in the DataFrames.
+        cache_config: GraphRAG cache backend configuration. Caching is disabled
+            when omitted.
 
     Returns
     -------
@@ -115,6 +125,43 @@ def get_differential_pairwise_scores(
         )
     )
     pairs = pairs[["question_id", "question_text", "answer_base", "answer_other"]]
+    extract_system_prompt = extract_system_prompt or load_template_file(
+        PAIRWISE_PROMPTS_PATH / "pairwise_extract_system_prompt.txt"
+    )
+    extract_user_prompt = extract_user_prompt or load_template_file(
+        PAIRWISE_PROMPTS_PATH / "pairwise_extract_user_prompt.txt"
+    )
+    judge_system_prompt = judge_system_prompt or load_template_file(
+        PAIRWISE_PROMPTS_PATH / "pairwise_unique_judge_system_prompt.txt"
+    )
+    judge_user_prompt = judge_user_prompt or load_template_file(
+        PAIRWISE_PROMPTS_PATH / "pairwise_unique_judge_user_prompt.txt"
+    )
+    cache = DifferentialPairwiseCache(
+        cache_config or CacheConfig(type=CacheType.Noop, storage=None)
+    )
+    model_metadata = {
+        "model": llm_config.model,
+        "llm_provider": str(llm_config.llm_provider),
+        "init_args": llm_config.init_args,
+        "call_args": llm_config.call_args,
+        "custom_providers": [
+            provider.model_dump(mode="json") for provider in llm_config.custom_providers
+        ],
+        "include_score_id_in_prompt": include_score_id_in_prompt,
+    }
+    extraction_cache_metadata = build_stage_metadata(
+        stage="extraction",
+        system_prompt=extract_system_prompt.template,
+        user_prompt=extract_user_prompt.template,
+        **model_metadata,
+    )
+    verdict_cache_metadata = build_stage_metadata(
+        stage="verdict",
+        system_prompt=judge_system_prompt.template,
+        user_prompt=judge_user_prompt.template,
+        **model_metadata,
+    )
 
     with Progress() as progress:
 
@@ -139,6 +186,9 @@ def get_differential_pairwise_scores(
                 extract_user_prompt=extract_user_prompt,
                 judge_system_prompt=judge_system_prompt,
                 judge_user_prompt=judge_user_prompt,
+                cache=cache,
+                extraction_cache_metadata=extraction_cache_metadata,
+                verdict_cache_metadata=verdict_cache_metadata,
                 complete_callback=functools.partial(
                     on_complete_callback, progress_task
                 ),
@@ -179,6 +229,9 @@ async def get_differential_pairwise_score(
     trial: int = 0,
     include_score_id_in_prompt: bool = True,
     additional_call_args: dict[str, Any] | None = None,
+    cache: DifferentialPairwiseCache | None = None,
+    extraction_cache_metadata: dict[str, Any] | None = None,
+    verdict_cache_metadata: dict[str, Any] | None = None,
 ) -> list[dict[str, Any]]:
     """Extract common/unique content then judge the unique content for one pair.
 
@@ -218,29 +271,60 @@ async def get_differential_pairwise_score(
     score_id_text = f"Score ID: {score_id}\n" if include_score_id_in_prompt else ""
 
     # --- Step 1: extract common and unique content ---
-    extract_user = extract_user_prompt.substitute(
-        score_id=score_id_text,
-        question=question,
-        answer1=answers_text[answers_order[0]],
-        answer2=answers_text[answers_order[1]],
-    ).strip()
-    extract_system = extract_system_prompt.template
+    async def _extract() -> dict[str, Any]:
+        extract_user = extract_user_prompt.substitute(
+            score_id=score_id_text,
+            question=question,
+            answer1=answers_text[answers_order[0]],
+            answer2=answers_text[answers_order[1]],
+        ).strip()
+        extraction_response = (
+            await chat(
+                llm,
+                messages=[
+                    {"role": "system", "content": extract_system_prompt.template},
+                    {"role": "user", "content": extract_user},
+                ],
+                response_format=PairwiseExtractionLLMResponse,
+                **(additional_call_args or {}),
+            )
+        ).formatted_response
+        if extraction_response is None:
+            msg = "LLM did not return a structured PairwiseExtractionLLMResponse."
+            raise RuntimeError(msg)
+        return {
+            "score_id": score_id,
+            "response": extraction_response.model_dump(mode="json"),
+        }
 
-    extraction = (
-        await chat(
-            llm,
-            messages=[
-                {"role": "system", "content": extract_system},
-                {"role": "user", "content": extract_user},
-            ],
-            response_format=PairwiseExtractionLLMResponse,
-            **(additional_call_args or {}),
+    extraction_logical_key = compute_logical_key(
+        "extraction",
+        {
+            "question": question,
+            "answer_1_name": answer_1_name,
+            "answer_1": answer_1,
+            "answer_2_name": answer_2_name,
+            "answer_2": answer_2,
+            "trial": trial,
+        },
+    )
+    if cache is not None and extraction_cache_metadata is not None:
+        extraction_data = await cache.get_or_compute(
+            stage="extraction",
+            cache_key=compute_cache_key(
+                extraction_logical_key, extraction_cache_metadata
+            ),
+            logical_key=extraction_logical_key,
+            metadata=extraction_cache_metadata,
+            compute=_extract,
         )
-    ).formatted_response
-
-    if extraction is None:
-        msg = "LLM did not return a structured PairwiseExtractionLLMResponse."
-        raise RuntimeError(msg)
+    else:
+        extraction_data = await _extract()
+    score_id = str(extraction_data["score_id"])
+    score_id_text = f"Score ID: {score_id}\n" if include_score_id_in_prompt else ""
+    extraction = PairwiseExtractionLLMResponse.model_validate(
+        extraction_data["response"]
+    )
 
     # --- Step 2: judge the unique content on the requested criteria ---
     judge_user = judge_user_prompt.substitute(
@@ -253,21 +337,46 @@ async def get_differential_pairwise_score(
     ).strip()
     judge_system = judge_system_prompt.substitute(criteria=criteria_block)
 
-    verdict = (
-        await chat(
-            llm,
-            messages=[
-                {"role": "system", "content": judge_system},
-                {"role": "user", "content": judge_user},
-            ],
-            response_format=DifferentialPairwiseLLMResponse,
-            **(additional_call_args or {}),
-        )
-    ).formatted_response
+    async def _judge() -> dict[str, Any]:
+        verdict_response = (
+            await chat(
+                llm,
+                messages=[
+                    {"role": "system", "content": judge_system},
+                    {"role": "user", "content": judge_user},
+                ],
+                response_format=DifferentialPairwiseLLMResponse,
+                **(additional_call_args or {}),
+            )
+        ).formatted_response
+        if verdict_response is None:
+            msg = "LLM did not return a structured DifferentialPairwiseLLMResponse."
+            raise RuntimeError(msg)
+        return {"response": verdict_response.model_dump(mode="json")}
 
-    if verdict is None:
-        msg = "LLM did not return a structured DifferentialPairwiseLLMResponse."
-        raise RuntimeError(msg)
+    verdict_logical_key = compute_logical_key(
+        "verdict",
+        {
+            "question": question,
+            "answer_1_name": answer_1_name,
+            "answer_2_name": answer_2_name,
+            "trial": trial,
+            "score_id": score_id,
+            "extraction": extraction.model_dump(mode="json"),
+            "criteria": [criterion.model_dump(mode="json") for criterion in criteria],
+        },
+    )
+    if cache is not None and verdict_cache_metadata is not None:
+        verdict_data = await cache.get_or_compute(
+            stage="verdict",
+            cache_key=compute_cache_key(verdict_logical_key, verdict_cache_metadata),
+            logical_key=verdict_logical_key,
+            metadata=verdict_cache_metadata,
+            compute=_judge,
+        )
+    else:
+        verdict_data = await _judge()
+    verdict = DifferentialPairwiseLLMResponse.model_validate(verdict_data["response"])
 
     verdicts_by_name = {
         item.criteria.strip().lower(): item for item in verdict.verdicts

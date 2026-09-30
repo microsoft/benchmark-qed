@@ -9,8 +9,9 @@ import logging
 import uuid
 from abc import ABC, abstractmethod
 from datetime import UTC, datetime
-from pathlib import Path
 from typing import Any
+
+from graphrag_cache import CacheConfig, CacheType
 
 from benchmark_qed.autod.data_model.text_unit import TextUnit
 from benchmark_qed.autoe.data_model.relevance import (
@@ -18,8 +19,9 @@ from benchmark_qed.autoe.data_model.relevance import (
     RelevanceAssessmentResponse,
 )
 from benchmark_qed.cache import (
-    SQLiteCache,
+    CacheStore,
     changed_configuration_fields,
+    get_cache_base_dir,
     redact_sensitive_values,
     stable_fingerprint,
 )
@@ -31,28 +33,31 @@ _LEASE_TTL_SECONDS = 120.0
 class RelevanceRater(ABC):
     """Abstract base class for rating the relevance of text chunks to queries."""
 
-    def __init__(
-        self, cache_dir: Path | None = None, cache_enabled: bool = True
-    ) -> None:
+    def __init__(self, cache_config: CacheConfig | None = None) -> None:
         """
         Initialize the RelevanceRater with optional caching.
 
         Args:
-            cache_dir: Directory to store cache files. If None, caching is disabled.
-            cache_enabled: Whether to enable caching functionality.
+            cache_config: GraphRAG cache backend configuration. None or a
+                no-op configuration disables caching.
         """
-        self.cache_dir: Path | None = cache_dir
-        self.cache_enabled: bool = cache_enabled and cache_dir is not None
+        self.cache_config = cache_config
+        self.cache_enabled = (
+            cache_config is not None and cache_config.type != CacheType.Noop
+        )
+        self._cache_base_dir = (
+            get_cache_base_dir(cache_config) if cache_config is not None else None
+        )
         self.cache_hits: int = 0
         self.cache_misses: int = 0
-        self._cache_store: SQLiteCache | None = None
+        self._cache_store: CacheStore | None = None
+        self._legacy_cache_migrated = False
 
-        if self.cache_enabled and self.cache_dir:
-            self._cache_store = SQLiteCache(
-                self.cache_dir / "relevance_cache.sqlite3",
+        if self.cache_enabled and cache_config is not None:
+            self._cache_store = CacheStore(
+                cache_config,
                 namespace=self.__class__.__name__,
             )
-            self._migrate_legacy_cache_files()
 
     async def rate_relevance(
         self, query: str, text_units: list[TextUnit]
@@ -71,6 +76,7 @@ class RelevanceRater(ABC):
         if not self.cache_enabled:
             # No caching - call implementation directly
             return await self._rate_relevance_impl(query, text_units)
+        await self._migrate_legacy_cache_files()
 
         # With caching enabled, check each text unit individually
         cached_assessments: list[tuple[int, RelevanceAssessmentItem]] = []
@@ -80,7 +86,7 @@ class RelevanceRater(ABC):
 
         for i, text_unit in enumerate(text_units):
             cache_key = self._generate_cache_key(query, text_unit, rater_params)
-            cached_assessment = self._load_from_cache(cache_key)
+            cached_assessment = await self._load_from_cache(cache_key)
 
             if cached_assessment is not None:
                 cached_assessments.append((i, cached_assessment))
@@ -101,7 +107,7 @@ class RelevanceRater(ABC):
 
             config_fingerprint = self._generate_config_fingerprint(rater_params)
             current_metadata = self._build_cache_metadata(query, rater_params)
-            alternatives = self._cache_store.find_alternate_configurations([
+            alternatives = await self._cache_store.find_alternate_configurations([
                 (
                     self._generate_logical_key(query, text_unit),
                     config_fingerprint,
@@ -154,7 +160,7 @@ class RelevanceRater(ABC):
                 completed_keys: list[str] = []
                 recovered: dict[str, tuple[TextUnit, list[int]]] = {}
                 for cache_key, item in waiting.items():
-                    cached_assessment = self._load_from_cache(cache_key)
+                    cached_assessment = await self._load_from_cache(cache_key)
                     if cached_assessment is not None:
                         cached_assessments.extend(
                             (index, cached_assessment) for index in item[1]
@@ -219,7 +225,7 @@ class RelevanceRater(ABC):
                 cache_key,
                 (text_unit, indices),
             ), assessment in zip(claimed.items(), response.assessment, strict=True):
-                cache_store.publish(
+                await cache_store.publish(
                     cache_key,
                     assessment.model_dump(exclude={"text_unit": {"text_embedding"}}),
                     self._build_cache_metadata(query, rater_params),
@@ -305,13 +311,13 @@ class RelevanceRater(ABC):
             "rater_params": redact_sensitive_values(rater_params),
         }
 
-    def _load_from_cache(self, cache_key: str) -> RelevanceAssessmentItem | None:
+    async def _load_from_cache(self, cache_key: str) -> RelevanceAssessmentItem | None:
         """Load cached result for a single text unit if available."""
         if self._cache_store is None:
             return None
 
         try:
-            entry = self._cache_store.get(cache_key)
+            entry = await self._cache_store.get(cache_key)
             if entry is None:
                 return None
             assessment_data, _metadata = entry
@@ -320,16 +326,21 @@ class RelevanceRater(ABC):
             log.warning("Ignoring invalid relevance cache entry %s: %s", cache_key, exc)
             return None
 
-    def _migrate_legacy_cache_files(self) -> None:
+    async def _migrate_legacy_cache_files(self) -> None:
         """Import legacy per-key JSON files once without deleting them."""
-        if self._cache_store is None or self.cache_dir is None:
+        if (
+            self._legacy_cache_migrated
+            or self._cache_store is None
+            or self._cache_base_dir is None
+        ):
             return
         migration_name = f"legacy_relevance_import:{self.__class__.__name__}"
-        if self._cache_store.get_property(migration_name) is not None:
+        if await self._cache_store.get_property(migration_name) is not None:
+            self._legacy_cache_migrated = True
             return
 
         entries: list[tuple[str, Any, dict[str, Any]]] = []
-        for cache_file in self.cache_dir.glob("*.json"):
+        for cache_file in self._cache_base_dir.glob("*.json"):
             try:
                 with cache_file.open(encoding="utf-8") as file:
                     data = json.load(file)
@@ -356,8 +367,9 @@ class RelevanceRater(ABC):
             }
             entries.append((cache_file.stem, assessment_data, metadata))
 
-        self._cache_store.put_many(entries)
-        self._cache_store.set_property_if_absent(migration_name, "complete")
+        await self._cache_store.put_many(entries)
+        await self._cache_store.set_property_if_absent(migration_name, "complete")
+        self._legacy_cache_migrated = True
 
     def _get_cache_relevant_params(self) -> dict[str, Any]:
         """
@@ -428,24 +440,29 @@ class RelevanceRater(ABC):
             "hit_rate_percent": round(hit_rate, 1),
             "cache_files": cache_files,
             "cache_size_mb": round(cache_size_mb, 2),
-            "cache_dir": str(self.cache_dir) if self.cache_dir else None,
+            "cache_config": (
+                self.cache_config.model_dump(mode="json")
+                if self.cache_config is not None
+                else None
+            ),
         }
 
-    def clear_cache(self) -> None:
+    async def clear_cache(self) -> None:
         """Clear all cached results."""
-        if self._cache_store is None or self.cache_dir is None:
+        if self._cache_store is None:
             return
 
-        self._cache_store.clear()
-        for cache_file in self.cache_dir.glob("*.json"):
-            try:
-                cache_file.unlink()
-            except OSError as exc:
-                log.warning(
-                    "Failed to remove legacy relevance cache file %s: %s",
-                    cache_file,
-                    exc,
-                )
+        await self._cache_store.clear()
+        if self._cache_base_dir is not None:
+            for cache_file in self._cache_base_dir.glob("*.json"):
+                try:
+                    cache_file.unlink()
+                except OSError as exc:
+                    log.warning(
+                        "Failed to remove legacy relevance cache file %s: %s",
+                        cache_file,
+                        exc,
+                    )
 
         # Reset statistics
         self.cache_hits = 0

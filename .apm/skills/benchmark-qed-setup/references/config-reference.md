@@ -215,11 +215,57 @@ criteria:                            # Default: comprehensiveness, diversity, em
     description: "..."
 
 trials: 4                            # Must be even (counterbalancing)
+
+cache_config:
+  type: sqlite                       # sqlite, json, memory, or none
+  storage:
+    type: file
+    base_dir: .benchmark_qed_cache/pairwise
+  database_name: pairwise.sqlite3
+
 llm_config: ...                      # Same LLM config structure as above
 prompt_config:
   user_prompt: prompts/pairwise_user.txt
   system_prompt: prompts/pairwise_system.txt
 ```
+
+Pairwise caching stores each question/criterion/trial independently. Cache
+identity includes the answers and labels, criterion, trial, prompt templates,
+model/provider, call arguments, and score-ID mode. The default SQLite cache
+supports interruption recovery and cross-process work coordination. Use
+`type: none` with `storage: null` for fresh judgments. Existing output CSVs are
+separate: remove or relocate them as well when fully recomputing a comparison.
+The SQLite `base_dir` remains local when input/output storage is Azure Blob.
+
+## autoe Differential Pairwise Configuration (`DifferentialPairwiseConfig`)
+
+Differential pairwise uses the same `base`, `others`, `question_sets`,
+`criteria`, and even `trials` fields as standard pairwise, with four prompt
+entries for its extract-and-judge stages.
+
+```yaml
+cache_config:
+  type: sqlite
+  storage:
+    type: file
+    base_dir: .benchmark_qed_cache/differential_pairwise
+  database_name: differential_pairwise.sqlite3
+
+prompt_config:
+  extract_system_prompt:
+    prompt: prompts/pairwise_extract_system_prompt.txt
+  extract_user_prompt:
+    prompt: prompts/pairwise_extract_user_prompt.txt
+  judge_system_prompt:
+    prompt: prompts/pairwise_unique_judge_system_prompt.txt
+  judge_user_prompt:
+    prompt: prompts/pairwise_unique_judge_user_prompt.txt
+```
+
+The cache stores extraction and verdict stages in separate namespaces. Judge
+failures reuse completed extraction; criteria and judge-prompt changes
+invalidate verdicts only. Trials remain separate. Use `type: none` with
+`storage: null` to disable both stages.
 
 ## autoe Reference Configuration (`ReferenceConfig`)
 ```yaml
@@ -238,7 +284,18 @@ criteria:                            # Default: correctness, completeness
 score_min: 1
 score_max: 10
 trials: 4                            # Default is 4 (not 3)
+
+cache_config:
+  type: sqlite
+  storage:
+    type: file
+    base_dir: .benchmark_qed_cache/reference
+  database_name: reference.sqlite3
 ```
+
+Reference cache entries are specific to the question, both answers, criterion,
+trial/order, score range, prompts, model/provider, call arguments, and score-ID
+mode. Use `type: none` with `storage: null` when fresh judgments are required.
 
 ## autoe Assertion Configuration
 
@@ -253,7 +310,21 @@ assertions:
 
 pass_threshold: 0.5
 trials: 4                            # Default is 4 (not 3)
+
+cache_config:
+  type: sqlite
+  storage:
+    type: file
+    base_dir: .benchmark_qed_cache/assertion
+  database_name: assertion.sqlite3
 ```
+
+The standard single-RAG assertion cache stores each
+question/answer/assertion/trial judgment independently. Prompt templates,
+model/provider configuration, call arguments, and score-ID mode also affect
+identity. Use `type: none` with `storage: null` for fresh judgments. This cache
+does not apply to multi-RAG or hierarchical assertion scoring and is distinct
+from the chunk-assertion cache.
 
 ### Multi-RAG (`MultiRAGAssertionConfig`)
 ```yaml
@@ -350,7 +421,8 @@ relevance_threshold: 2               # Min relevance score for a text unit
 assessor_type: rationale             # rationale or bing
 concurrent_requests: 16
 max_questions: null                  # null = process all questions
-cache_dir: null                      # Optional cache directory
+cache_config:
+  type: none                         # sqlite, json, memory, or none
 
 embedding_config: ...                # LLM config for generating embeddings (if needed)
 
@@ -383,7 +455,8 @@ context_id_key: chunk_id             # Key for chunk ID in retrieval results
 context_text_key: text               # Key for chunk text in retrieval results
 cluster_match_by: text               # Field to match clusters
 
-cache_dir: null                      # Optional cache directory
+cache_config:
+  type: none                         # sqlite, json, memory, or none
 
 run_significance_test: true
 significance_alpha: 0.05
@@ -450,6 +523,12 @@ custom_providers:
 
 ### Evaluation (autoe)
 - Trials must be **even** for pairwise and reference evaluation (counterbalancing) — the config validator rejects odd values
+- Keep the default persistent pairwise `cache_config` for resumable evaluation;
+  use `type: none` only when new judgments are required. Each trial is cached
+  separately, so cache reuse preserves counterbalancing.
+- For a completely fresh pairwise comparison, use a new output directory (or
+  remove the comparison CSV) and disable, relocate, or clear the judgment
+  cache.
 - Assertion and hierarchical evaluation do NOT require even trials
 - Use `staged` mode for hierarchical assertions (more accurate); `joint` mode is cheaper but risks anchoring bias
 - Use `holm` correction for significance testing (default) — balances power and error control
@@ -459,7 +538,8 @@ custom_providers:
 - `assessor_type: rationale` (default) provides structured JSON with reasoning; `bing` uses the UMBRELA DNA prompt
 - Match the assessor type between `generate-retrieval-reference` and `retrieval-scores` to share the cache
 - `relevance_threshold: 2` on a 0–3 scale is a reasonable default — lower values include marginal matches
-- Use `cache_dir` for iterative development to avoid redundant LLM calls across runs
+- Use a persistent `cache_config` (`sqlite` or `json`) for iterative development
+  to avoid redundant LLM calls across runs
 
 ### Storage Configuration
 - Use `connection_string` with `${AZURE_STORAGE_CONNECTION_STRING}` for development; use `account_url` with managed identity for production

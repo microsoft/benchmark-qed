@@ -28,8 +28,10 @@ from benchmark_qed.autoe.data_model.chunk_assertion import (
     EvalSummary,
     grade_to_score,
 )
+from benchmark_qed.cache import create_default_cache_config
 
 if TYPE_CHECKING:
+    from graphrag_cache import CacheConfig
     from graphrag_llm.completion import LLMCompletion
     from graphrag_storage import Storage
 
@@ -129,7 +131,7 @@ async def _label_chunk_assertion(
 
         # Parse response
         response_text = (response.content or "").strip()
-    except Exception as e:  # noqa: BLE001 - any provider error maps to an error sentinel
+    except Exception as e:  # ruff: ignore[blind-except] - provider error sentinel
         log.warning("LLM judging failed for an (assertion, chunk) pair: %s", e)
         return "__error__", str(e)
 
@@ -243,7 +245,7 @@ async def _evaluate_uncached_pairs(
     for work_item in uncached_work:
         work_queue.put_nowait(work_item)
 
-    def _record_result(
+    async def _record_result(
         work_item: ChunkWork,
         grade: str,
     ) -> None:
@@ -263,7 +265,7 @@ async def _evaluate_uncached_pairs(
                 assertion_call_stats[(q_idx, a_idx)]["failed"] += 1
         else:
             inserted_count += int(
-                cache.publish(
+                await cache.publish(
                     cache_key,
                     grade,
                     cache_metadata,
@@ -320,7 +322,7 @@ async def _evaluate_uncached_pairs(
                 user_prompt=user_prompt,
                 additional_call_args=llm_config.call_args,
             )
-            _record_result(work_item, grade)
+            await _record_result(work_item, grade)
 
     async def _heartbeat() -> None:
         cache_keys = [work_item[2] for work_item in uncached_work]
@@ -362,7 +364,7 @@ async def _evaluate_with_leases(
     owned_work: list[ChunkWork] = []
     waiting_work: dict[str, ChunkWork] = {}
     for work_item in uncached_work:
-        if cache.claim(work_item[2], lease_owner):
+        if await cache.claim(work_item[2], lease_owner):
             owned_work.append(work_item)
         else:
             waiting_work[work_item[2]] = work_item
@@ -390,7 +392,7 @@ async def _evaluate_with_leases(
 
         completed_keys: list[str] = []
         for cache_key, work_item in waiting_work.items():
-            cached_grade = cache.get(cache_key)
+            cached_grade = await cache.get(cache_key)
             if cached_grade is not None:
                 targets = work_item[5]
                 for q_idx, a_idx, rank in targets:
@@ -403,7 +405,7 @@ async def _evaluate_with_leases(
                     assertion_call_stats[q_key]["successful"] += 1
                 concurrent_hits += len(targets)
                 completed_keys.append(cache_key)
-            elif cache.claim(cache_key, lease_owner):
+            elif await cache.claim(cache_key, lease_owner):
                 owned_work.append(work_item)
                 completed_keys.append(cache_key)
         for cache_key in completed_keys:
@@ -422,7 +424,7 @@ async def run_assertion_eval_chunk_mode(
     llm_config: LLMConfig,
     output_storage: Storage,
     pass_threshold: float = 0.5,
-    cache_path: Path | None = None,
+    cache_config: CacheConfig | None = None,
     k_list: list[int] | None = None,
     system_prompt: str = "",
     user_prompt: str = "",
@@ -440,7 +442,7 @@ async def run_assertion_eval_chunk_mode(
         llm_config: LLM configuration
         output_storage: Storage backend for writing debug records (local or blob)
         pass_threshold: Score threshold for pass (0.5 = partial+ is passing)
-        cache_path: Path to persistent cache (created if not specified)
+        cache_config: GraphRAG cache backend configuration.
         k_list: List of k values to report (e.g., [5, 10, 20, 50])
         system_prompt: System prompt template
         user_prompt: User prompt template
@@ -451,9 +453,12 @@ async def run_assertion_eval_chunk_mode(
     -------
         Dict of {label: EvalSummary} keyed by f"k{k}" plus "all" entry
     """
-    if cache_path is None:
-        cache_path = Path.cwd() / ".benchmark_qed_cache" / "chunk_assertions.sqlite3"
-    cache = ContentAddressedCache(cache_path)
+    if cache_config is None:
+        cache_config = create_default_cache_config(
+            Path.cwd() / ".benchmark_qed_cache",
+            database_name="chunk_assertions.sqlite3",
+        )
+    cache = ContentAddressedCache(cache_config)
     cache_metadata = build_cache_metadata(
         model=llm_config.model,
         call_args=llm_config.call_args,
@@ -527,7 +532,7 @@ async def run_assertion_eval_chunk_mode(
                     user_prompt=user_prompt,
                 )
                 logical_key = compute_logical_key(assertion_text, chunk_content)
-                cached_grade = cache.get(cache_key)
+                cached_grade = await cache.get(cache_key)
                 if cached_grade is not None:
                     cache_hits += 1
                     per_chunk_grades[q_key].append((
@@ -584,7 +589,7 @@ async def run_assertion_eval_chunk_mode(
                 targets,
             ) in uncached_by_key.items()
         ]
-        mismatch_count, changed_fields = cache.find_configuration_mismatches(
+        mismatch_count, changed_fields = await cache.find_configuration_mismatches(
             [
                 (logical_key, work_config_fingerprint)
                 for (
@@ -621,7 +626,8 @@ async def run_assertion_eval_chunk_mode(
         )
         call_errors += failed
         cache_hits += concurrent_hits
-        rich_print(f"  Cached {inserted_count} new entries to {cache.cache_path.name}")
+        cache_target = cache.cache_path.name if cache.cache_path else cache_config.type
+        rich_print(f"  Cached {inserted_count} new entries to {cache_target}")
         if call_errors:
             rich_print(f"  WARNING: {call_errors} LLM calls failed")
 

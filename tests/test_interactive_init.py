@@ -231,6 +231,7 @@ class TestYamlRenderers:
         assert "others" in parsed
         assert "question_sets" in parsed
         assert parsed["trials"] == 4
+        assert parsed["cache_config"]["type"] == "sqlite"
         assert "llm_config" in parsed
         assert "prompt_config" in parsed
         assert isinstance(parsed["prompt_config"], dict)
@@ -265,6 +266,7 @@ class TestYamlRenderers:
         assert parsed["score_max"] == 10
         assert "llm_config" in parsed
         assert "prompt_config" in parsed
+        assert parsed["cache_config"]["type"] == "sqlite"
         assert isinstance(parsed["prompt_config"], dict)
 
     def test_render_autoe_reference_yaml_multiple_generated(self):
@@ -288,6 +290,12 @@ class TestYamlRenderers:
         assert "assertions" in parsed
         assert parsed["pass_threshold"] == pytest.approx(0.5)
         assert parsed["trials"] == 4
+        assert parsed["cache_config"]["type"] == "sqlite"
+        assert (
+            parsed["cache_config"]["storage"]["base_dir"]
+            == ".benchmark_qed_cache/assertion"
+        )
+        assert parsed["cache_config"]["database_name"] == "assertion.sqlite3"
         assert "llm_config" in parsed
         assert "prompt_config" in parsed
         assert isinstance(parsed["prompt_config"], dict)

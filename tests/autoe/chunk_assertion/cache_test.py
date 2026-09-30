@@ -2,11 +2,16 @@
 # Licensed under the MIT License.
 """Tests for the content-addressed (assertion, chunk) cache."""
 
+import asyncio
 import json
 import sqlite3
 import time
 from concurrent.futures import ProcessPoolExecutor
 from pathlib import Path
+
+import pytest
+from graphrag_cache import CacheConfig, CacheType
+from graphrag_storage import StorageConfig, StorageType
 
 from benchmark_qed.autoe.chunk_assertion.cache import (
     ContentAddressedCache,
@@ -15,41 +20,83 @@ from benchmark_qed.autoe.chunk_assertion.cache import (
     compute_config_fingerprint,
     compute_logical_key,
 )
-from benchmark_qed.cache import SQLiteCache, inspect_cache
+from benchmark_qed.cache import CacheStore, create_default_cache_config, inspect_cache
+
+
+def _cache_config(cache_path: Path | str) -> CacheConfig:
+    path = Path(cache_path)
+    return create_default_cache_config(path.parent, database_name=path.name)
+
+
+@pytest.mark.parametrize(
+    "cache_type", [CacheType.Sqlite, CacheType.Json, CacheType.Memory]
+)
+async def test_supported_cache_backends_roundtrip(
+    tmp_path: Path, cache_type: CacheType
+) -> None:
+    if cache_type == CacheType.Sqlite:
+        config = _cache_config(tmp_path / "cache.sqlite3")
+    elif cache_type == CacheType.Json:
+        config = CacheConfig(
+            type=cache_type,
+            storage=StorageConfig(
+                type=StorageType.File, base_dir=str(tmp_path / "json")
+            ),
+        )
+    else:
+        config = CacheConfig(type=cache_type, storage=None)
+
+    store = CacheStore(config, "test")
+    assert await store.put_many([("key", "value", {"backend": cache_type})]) == 1
+    assert await store.get("key") == ("value", {"backend": cache_type})
+
+
+async def test_noop_cache_does_not_persist(tmp_path: Path) -> None:
+    store = CacheStore(CacheConfig(type=CacheType.Noop, storage=None), "test")
+
+    await store.put_many([("key", "value", {})])
+
+    assert await store.get("key") is None
 
 
 def _write_cache_entry(cache_path: str, cache_key: str, grade: str) -> None:
-    cache = ContentAddressedCache(cache_path)
-    cache.put(cache_key, grade, {"writer": cache_key})
-    cache.flush()
+    async def write() -> None:
+        cache = ContentAddressedCache(_cache_config(cache_path))
+        await cache.put(cache_key, grade, {"writer": cache_key})
+        await cache.flush()
+
+    asyncio.run(write())
 
 
 def _try_claim(cache_path: str, owner_id: str) -> bool:
-    store = SQLiteCache(cache_path, "lease-test")
+    store = CacheStore(_cache_config(cache_path), "lease-test")
     return store.try_acquire("shared", owner_id, ttl_seconds=30)
 
 
 def _compute_once(cache_path: str, owner_id: str) -> bool:
-    store = SQLiteCache(cache_path, "coalescing-test")
-    while True:
-        if store.get("shared") is not None:
-            return False
-        if store.try_acquire("shared", owner_id, ttl_seconds=5):
-            time.sleep(0.1)
-            store.publish(
-                "shared",
-                "result",
-                {"owner": owner_id},
-                owner_id=owner_id,
-                logical_key="logical",
-                config_fingerprint="config",
-            )
-            return True
-        time.sleep(0.02)
+    async def compute() -> bool:
+        store = CacheStore(_cache_config(cache_path), "coalescing-test")
+        while True:
+            if await store.get("shared") is not None:
+                return False
+            if store.try_acquire("shared", owner_id, ttl_seconds=5):
+                await asyncio.sleep(0.1)
+                await store.publish(
+                    "shared",
+                    "result",
+                    {"owner": owner_id},
+                    owner_id=owner_id,
+                    logical_key="logical",
+                    config_fingerprint="config",
+                )
+                return True
+            await asyncio.sleep(0.02)
+
+    return asyncio.run(compute())
 
 
 def _acquire_then_exit(cache_path: str) -> bool:
-    store = SQLiteCache(cache_path, "interruption-test")
+    store = CacheStore(_cache_config(cache_path), "interruption-test")
     return store.try_acquire("abandoned", "crashed", ttl_seconds=0.2)
 
 
@@ -118,42 +165,42 @@ def test_build_cache_metadata_redacts_credentials() -> None:
 class TestContentAddressedCache:
     """Tests for ContentAddressedCache persistence semantics."""
 
-    def test_put_get_roundtrip(self, tmp_path: Path) -> None:
+    async def test_put_get_roundtrip(self, tmp_path: Path) -> None:
         """Stored grades are retrievable and missing keys return None."""
-        cache = ContentAddressedCache(tmp_path / "cache.sqlite3")
-        cache.put("k1", "full_support")
-        assert cache.get("k1") == "full_support"
-        assert cache.get("missing") is None
+        cache = ContentAddressedCache(_cache_config(tmp_path / "cache.sqlite3"))
+        await cache.put("k1", "full_support")
+        assert await cache.get("k1") == "full_support"
+        assert await cache.get("missing") is None
 
-    def test_put_is_idempotent_for_new_count(self, tmp_path: Path) -> None:
+    async def test_put_is_idempotent_for_new_count(self, tmp_path: Path) -> None:
         """Re-putting an existing key does not increment the new-entry count."""
-        cache = ContentAddressedCache(tmp_path / "cache.sqlite3")
-        cache.put("k1", "full_support")
-        cache.put("k1", "no_support")
+        cache = ContentAddressedCache(_cache_config(tmp_path / "cache.sqlite3"))
+        await cache.put("k1", "full_support")
+        await cache.put("k1", "no_support")
         assert cache.new_count == 1
-        assert cache.get("k1") == "full_support"
+        assert await cache.get("k1") == "full_support"
 
-    def test_flush_persists_and_reloads(self, tmp_path: Path) -> None:
+    async def test_flush_persists_and_reloads(self, tmp_path: Path) -> None:
         """Flushed entries survive a reload from disk."""
         cache_path = tmp_path / "cache.sqlite3"
-        cache = ContentAddressedCache(cache_path)
-        cache.put("k1", "full_support")
-        cache.put("k2", "partial_support")
-        cache.flush()
+        cache = ContentAddressedCache(_cache_config(cache_path))
+        await cache.put("k1", "full_support")
+        await cache.put("k2", "partial_support")
+        await cache.flush()
 
-        reloaded = ContentAddressedCache(cache_path)
-        assert reloaded.get("k1") == "full_support"
-        assert reloaded.get("k2") == "partial_support"
+        reloaded = ContentAddressedCache(_cache_config(cache_path))
+        assert await reloaded.get("k1") == "full_support"
+        assert await reloaded.get("k2") == "partial_support"
 
-    def test_repeated_flush_does_not_duplicate(self, tmp_path: Path) -> None:
+    async def test_repeated_flush_does_not_duplicate(self, tmp_path: Path) -> None:
         """Incremental flushes preserve one row per cache key."""
         cache_path = tmp_path / "cache.sqlite3"
-        cache = ContentAddressedCache(cache_path)
+        cache = ContentAddressedCache(_cache_config(cache_path))
 
-        cache.put("k1", "full_support")
-        cache.flush()
-        cache.put("k2", "no_support")
-        cache.flush()
+        await cache.put("k1", "full_support")
+        await cache.flush()
+        await cache.put("k2", "no_support")
+        await cache.flush()
 
         with sqlite3.connect(cache_path) as connection:
             row_count = connection.execute(
@@ -161,47 +208,57 @@ class TestContentAddressedCache:
             ).fetchone()
         assert row_count == (2,)
 
-        reloaded = ContentAddressedCache(cache_path)
-        assert reloaded.get("k1") == "full_support"
-        assert reloaded.get("k2") == "no_support"
+        reloaded = ContentAddressedCache(_cache_config(cache_path))
+        assert await reloaded.get("k1") == "full_support"
+        assert await reloaded.get("k2") == "no_support"
 
-    def test_flush_noop_when_no_new_entries(self, tmp_path: Path) -> None:
+    async def test_flush_noop_when_no_new_entries(self, tmp_path: Path) -> None:
         """Flushing with no new entries leaves the database empty."""
         cache_path = tmp_path / "cache.sqlite3"
-        cache = ContentAddressedCache(cache_path)
-        assert cache.flush() == 0
+        cache = ContentAddressedCache(_cache_config(cache_path))
+        assert await cache.flush() == 0
         with sqlite3.connect(cache_path) as connection:
             row_count = connection.execute(
                 "SELECT COUNT(*) FROM cache_entries"
             ).fetchone()
         assert row_count == (0,)
 
-    def test_metadata_persists(self, tmp_path: Path) -> None:
+    async def test_metadata_persists(self, tmp_path: Path) -> None:
         cache_path = tmp_path / "cache.sqlite3"
         metadata = build_cache_metadata(model="gpt-test", call_args={"temperature": 0})
-        cache = ContentAddressedCache(cache_path)
-        cache.put("k1", "full_support", metadata)
-        cache.flush()
+        cache = ContentAddressedCache(_cache_config(cache_path))
+        await cache.put("k1", "full_support", metadata)
+        await cache.flush()
 
-        assert ContentAddressedCache(cache_path).get_metadata("k1") == metadata
+        assert (
+            await ContentAddressedCache(_cache_config(cache_path)).get_metadata("k1")
+            == metadata
+        )
 
-    def test_imports_legacy_jsonl_cache(self, tmp_path: Path) -> None:
+    async def test_imports_legacy_jsonl_cache(self, tmp_path: Path) -> None:
         legacy_path = tmp_path / "cache.jsonl"
         legacy_path.write_text(
             json.dumps({"key": "legacy", "grade": "partial_support"}) + "\n",
             encoding="utf-8",
         )
 
-        cache = ContentAddressedCache(legacy_path)
+        cache = ContentAddressedCache(
+            create_default_cache_config(
+                tmp_path,
+                database_name="cache.sqlite3",
+            )
+        )
 
         assert cache.cache_path == tmp_path / "cache.sqlite3"
-        assert cache.get("legacy") == "partial_support"
-        assert cache.get_metadata("legacy") == {
+        assert await cache.get("legacy") == "partial_support"
+        assert await cache.get_metadata("legacy") == {
             "schema_version": 1,
             "source": "legacy_jsonl",
         }
 
-    def test_concurrent_processes_preserve_all_entries(self, tmp_path: Path) -> None:
+    async def test_concurrent_processes_preserve_all_entries(
+        self, tmp_path: Path
+    ) -> None:
         cache_path = tmp_path / "cache.sqlite3"
         entries = [(f"k{index}", f"grade-{index}") for index in range(12)]
 
@@ -213,10 +270,10 @@ class TestContentAddressedCache:
             for future in futures:
                 future.result(timeout=30)
 
-        cache = ContentAddressedCache(cache_path)
-        assert {key: cache.get(key) for key, _grade in entries} == dict(entries)
+        cache = ContentAddressedCache(_cache_config(cache_path))
+        assert {key: await cache.get(key) for key, _grade in entries} == dict(entries)
 
-    def test_concurrent_same_key_uses_first_writer(self, tmp_path: Path) -> None:
+    async def test_concurrent_same_key_uses_first_writer(self, tmp_path: Path) -> None:
         cache_path = tmp_path / "cache.sqlite3"
         grades = [f"grade-{index}" for index in range(8)]
 
@@ -228,7 +285,10 @@ class TestContentAddressedCache:
             for future in futures:
                 future.result(timeout=30)
 
-        assert ContentAddressedCache(cache_path).get("shared") in grades
+        assert (
+            await ContentAddressedCache(_cache_config(cache_path)).get("shared")
+            in grades
+        )
         with sqlite3.connect(cache_path) as connection:
             row_count = connection.execute(
                 "SELECT COUNT(*) FROM cache_entries WHERE key = 'shared'"
@@ -250,7 +310,9 @@ class TestContentAddressedCache:
         assert acquired.count(True) == 1
         assert inspect_cache(cache_path)["active_leases"] == 1
 
-    def test_concurrent_processes_compute_same_work_once(self, tmp_path: Path) -> None:
+    async def test_concurrent_processes_compute_same_work_once(
+        self, tmp_path: Path
+    ) -> None:
         cache_path = tmp_path / "cache.sqlite3"
 
         with ProcessPoolExecutor(max_workers=4) as executor:
@@ -263,14 +325,14 @@ class TestContentAddressedCache:
             )
 
         assert computed.count(True) == 1
-        store = SQLiteCache(cache_path, "coalescing-test")
-        assert store.get("shared") is not None
+        store = CacheStore(_cache_config(cache_path), "coalescing-test")
+        assert await store.get("shared") is not None
         assert inspect_cache(cache_path)["active_leases"] == 0
 
     def test_expired_lease_is_recovered_after_writer_interruption(
         self, tmp_path: Path
     ) -> None:
-        store = SQLiteCache(tmp_path / "cache.sqlite3", "lease-test")
+        store = CacheStore(_cache_config(tmp_path / "cache.sqlite3"), "lease-test")
 
         assert store.try_acquire("k1", "crashed", ttl_seconds=1, now=100)
         assert not store.try_acquire("k1", "waiting", ttl_seconds=1, now=100.5)
@@ -284,15 +346,15 @@ class TestContentAddressedCache:
             )
 
         time.sleep(0.25)
-        store = SQLiteCache(cache_path, "interruption-test")
+        store = CacheStore(_cache_config(cache_path), "interruption-test")
         assert store.try_acquire("abandoned", "recovered", ttl_seconds=1)
 
-    def test_publish_releases_lease_atomically(self, tmp_path: Path) -> None:
+    async def test_publish_releases_lease_atomically(self, tmp_path: Path) -> None:
         cache_path = tmp_path / "cache.sqlite3"
-        store = SQLiteCache(cache_path, "lease-test")
+        store = CacheStore(_cache_config(cache_path), "lease-test")
         assert store.try_acquire("k1", "owner", ttl_seconds=30)
 
-        inserted = store.publish(
+        inserted = await store.publish(
             "k1",
             "value",
             {"model": "test"},
@@ -302,18 +364,14 @@ class TestContentAddressedCache:
         )
 
         assert inserted
-        assert store.get("k1") == ("value", {"model": "test"})
+        assert await store.get("k1") == ("value", {"model": "test"})
         assert inspect_cache(cache_path)["active_leases"] == 0
 
-    def test_migrates_v1_schema(self, tmp_path: Path) -> None:
+    async def test_migrates_local_schema_to_graphrag_cache(
+        self, tmp_path: Path
+    ) -> None:
         cache_path = tmp_path / "cache.sqlite3"
         with sqlite3.connect(cache_path) as connection:
-            connection.execute(
-                "CREATE TABLE cache_properties (name TEXT PRIMARY KEY, value TEXT NOT NULL)"
-            )
-            connection.execute(
-                "INSERT INTO cache_properties VALUES ('schema_version', '1')"
-            )
             connection.execute(
                 """
                 CREATE TABLE cache_entries (
@@ -333,26 +391,25 @@ class TestContentAddressedCache:
                 """
             )
 
-        store = SQLiteCache(cache_path, "chunk_assertion")
+        store = CacheStore(_cache_config(cache_path), "chunk_assertion")
 
-        assert store.get("old") == ("full_support", {})
-        assert inspect_cache(cache_path)["schema_version"] == 2
+        assert await store.get("old") == ("full_support", {})
         with sqlite3.connect(cache_path) as connection:
             columns = {
                 row[1] for row in connection.execute("PRAGMA table_info(cache_entries)")
             }
-        assert {"logical_key", "config_fingerprint"} <= columns
+        assert columns == {"namespace", "key", "value_json"}
 
-    def test_reports_alternate_configuration(self, tmp_path: Path) -> None:
-        cache = ContentAddressedCache(tmp_path / "cache.sqlite3")
+    async def test_reports_alternate_configuration(self, tmp_path: Path) -> None:
+        cache = ContentAddressedCache(_cache_config(tmp_path / "cache.sqlite3"))
         assertion = "assertion"
         chunk = "chunk"
         first_metadata = build_cache_metadata(model="first")
         first_key = compute_cache_key(assertion, chunk, model="first")
         logical_key = compute_logical_key(assertion, chunk)
         first_fingerprint = compute_config_fingerprint(model="first")
-        assert cache.claim(first_key, "owner")
-        cache.publish(
+        assert await cache.claim(first_key, "owner")
+        await cache.publish(
             first_key,
             "full_support",
             first_metadata,
@@ -361,7 +418,7 @@ class TestContentAddressedCache:
             config_fingerprint=first_fingerprint,
         )
 
-        mismatch_count, fields = cache.find_configuration_mismatches(
+        mismatch_count, fields = await cache.find_configuration_mismatches(
             [(logical_key, compute_config_fingerprint(model="second"))],
             build_cache_metadata(model="second"),
         )

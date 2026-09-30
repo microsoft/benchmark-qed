@@ -129,12 +129,26 @@ Please follow these steps to perform a relative comparison of RAG methods using 
     ```
     This command creates two files in the `./pairwise_test` directory:
     - `.env`: Contains environment variables for the pairwise comparison tests. Open this file and replace `<API_KEY>` with your own OpenAI or Azure API key.
-    - `settings.yaml`: Contains pipeline settings, which you can modify as needed.
+    - `settings.yaml`: Contains pipeline settings, including a persistent
+      SQLite pairwise cache under `.benchmark_qed_cache/pairwise`. The cache
+      lets interrupted and repeated runs reuse completed LLM judgments. Set
+      `cache_config.type: none` to disable it.
 
 4. **Run the pairwise comparison:**
     ```sh
     benchmark-qed autoe pairwise-scores settings.yaml output
     ```
+
+    Inspect the default pairwise cache with:
+
+    ```sh
+    benchmark-qed cache inspect \
+      .benchmark_qed_cache/pairwise/pairwise.sqlite3
+    ```
+
+    See [Evaluation Caches](cli/cache.md) for details about cache identity,
+    backend selection, forcing fresh judgments, and the distinction between
+    cached judgments and existing output CSVs.
 
 #### Example 2: Scoring of RAG answers against reference answers
 Please follow these steps to score RAG answers against reference answers using example data from the [AP news dataset](https://github.com/microsoft/benchmark-qed/tree/main/docs/notebooks/example_answers):
@@ -158,12 +172,18 @@ Please follow these steps to score RAG answers against reference answers using e
     ```
     This command creates two files in the `./reference_test` directory:
     - `.env`: Contains environment variables for the reference scoring tests. Open this file and replace `<API_KEY>` with your own OpenAI or Azure API key.
-    - `settings.yaml`: Contains pipeline settings, which you can modify as needed.
+    - `settings.yaml`: Contains pipeline settings and a persistent SQLite cache
+      under `.benchmark_qed_cache/reference`.
 
 4. **Run the reference scoring:**
     ```sh
     benchmark-qed autoe reference-scores settings.yaml output
     ```
+
+    Interrupted and unchanged reruns reuse completed question/criterion/trial
+    judgments. Set `cache_config.type: none` with `storage: null` for fresh
+    judgments. See [Evaluation Caches](cli/cache.md) for inspection and backend
+    options.
 
 #### Example 3: Assertion-based scoring of RAG answers
 Please follow these steps to evaluate RAG answers against predefined assertions using example data from the [AP news dataset](https://github.com/microsoft/benchmark-qed/tree/main/docs/notebooks/example_answers):
@@ -187,12 +207,19 @@ Please follow these steps to evaluate RAG answers against predefined assertions 
     ```
     This command creates two files in the `./assertion_test` directory:
     - `.env`: Contains environment variables for the assertion scoring tests. Open this file and replace `<API_KEY>` with your own OpenAI or Azure API key.
-    - `settings.yaml`: Contains pipeline settings, which you can modify as needed.
+    - `settings.yaml`: Contains pipeline settings, including a persistent
+      single-RAG assertion cache at
+      `.benchmark_qed_cache/assertion/assertion.sqlite3`.
 
 4. **Run the assertion scoring:**
     ```sh
     benchmark-qed autoe assertion-scores settings.yaml output
     ```
+
+    Repeated or resumed runs reuse completed question/assertion/trial
+    judgments. Run `benchmark-qed cache inspect
+    .benchmark_qed_cache/assertion/assertion.sqlite3` to inspect the cache, or
+    set `cache_config.type: none` with `storage: null` for fresh judgments.
 
 For more details on configuring and running AutoE, see the [AutoE CLI Documentation](cli/autoe.md).
 

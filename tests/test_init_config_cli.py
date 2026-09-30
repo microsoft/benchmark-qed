@@ -37,6 +37,61 @@ def test_init_autoe_blob_scaffolds_active_storage_sections(tmp_path: Path) -> No
     assert "output_storage:\n  type: blob\n  container_name: my-output" in settings
 
 
+def test_init_chunk_assertion_scaffolds_cache_config(tmp_path: Path) -> None:
+    init(ConfigType.autoe_chunk_assertion, tmp_path)
+
+    settings = (tmp_path / "settings.yaml").read_text(encoding="utf-8")
+
+    assert "cache_config:\n  type: sqlite" in settings
+    assert "base_dir: .benchmark_qed_cache/chunk_assertions" in settings
+    assert "database_name: chunk_assertions.sqlite3" in settings
+    assert "cache_dir:" not in settings
+
+
+def test_init_pairwise_scaffolds_cache_config(tmp_path: Path) -> None:
+    init(ConfigType.autoe_pairwise, tmp_path)
+
+    settings = (tmp_path / "settings.yaml").read_text(encoding="utf-8")
+
+    assert "cache_config:\n  type: sqlite" in settings
+    assert "base_dir: .benchmark_qed_cache/pairwise" in settings
+    assert "database_name: pairwise.sqlite3" in settings
+    assert "Set type: none and storage: null" in settings
+
+
+def test_init_differential_pairwise_scaffolds_stage_cache(tmp_path: Path) -> None:
+    init(ConfigType.autoe_differential_pairwise, tmp_path)
+
+    settings = (tmp_path / "settings.yaml").read_text(encoding="utf-8")
+
+    assert "cache_config:\n  type: sqlite" in settings
+    assert "base_dir: .benchmark_qed_cache/differential_pairwise" in settings
+    assert "database_name: differential_pairwise.sqlite3" in settings
+    assert "Caches extraction and verdict stages independently" in settings
+
+
+def test_init_reference_scaffolds_judgment_cache(tmp_path: Path) -> None:
+    init(ConfigType.autoe_reference, tmp_path)
+
+    settings = (tmp_path / "settings.yaml").read_text(encoding="utf-8")
+
+    assert "cache_config:\n  type: sqlite" in settings
+    assert "base_dir: .benchmark_qed_cache/reference" in settings
+    assert "database_name: reference.sqlite3" in settings
+    assert "Reuses completed question/criterion/trial judgments" in settings
+
+
+def test_init_assertion_scaffolds_judgment_cache(tmp_path: Path) -> None:
+    init(ConfigType.autoe_assertion, tmp_path)
+
+    settings = (tmp_path / "settings.yaml").read_text(encoding="utf-8")
+
+    assert "cache_config:\n  type: sqlite" in settings
+    assert "base_dir: .benchmark_qed_cache/assertion" in settings
+    assert "database_name: assertion.sqlite3" in settings
+    assert "Reuses completed question/assertion/trial judgments" in settings
+
+
 def test_init_autoq_blob_with_custom_values(tmp_path: Path) -> None:
     """Blob mode with custom values uploads settings with pre-filled values to blob storage."""
     with patch("benchmark_qed.cli.init_config._write_to_blob") as mock_write_blob:

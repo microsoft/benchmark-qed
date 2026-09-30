@@ -10,7 +10,7 @@ The `config init` command generates a starter `settings.yaml` file, prompt templ
 
 | Argument | Description |
 |---|---|
-| `config_type` | The type of configuration to generate. One of: `autoq`, `autoe_pairwise`, `autoe_reference`, `autoe_assertion`. |
+| `config_type` | The type of configuration to generate. One of: `autoq`, `autoe_pairwise`, `autoe_differential_pairwise`, `autoe_reference`, `autoe_assertion`, `autoe_chunk_assertion`. |
 | `root` | The path to the root directory where the configuration will be created. |
 
 #### Options
@@ -77,6 +77,9 @@ benchmark-qed config init autoq ./autoq_project -s blob --base-dir experiments/r
 # Generate AutoE pairwise config with blob storage
 benchmark-qed config init autoe_pairwise ./pairwise_project --storage-type blob --base-dir experiments/run1
 
+# Generate differential pairwise config with stage-aware caching
+benchmark-qed config init autoe_differential_pairwise ./differential_project
+
 # Generate AutoE reference config with blob storage
 benchmark-qed config init autoe_reference ./reference_project -s blob --base-dir experiments/run1
 
@@ -133,6 +136,43 @@ When `--storage-type blob` is used:
 - An **output_storage** block is added for writing scores to blob.
 
 Both blocks include placeholders for `container_name`, `connection_string`, and `account_url` (managed identity).
+
+#### Evaluation Cache Configuration
+
+Generated `autoe_pairwise` settings enable a persistent SQLite cache:
+
+```yaml
+cache_config:
+  type: sqlite
+  storage:
+    type: file
+    base_dir: .benchmark_qed_cache/pairwise
+  database_name: pairwise.sqlite3
+```
+
+This cache stores completed question/criterion/trial judgments and allows
+interrupted or repeated runs to avoid duplicate LLM calls. Set `type: none` and
+`storage: null` to disable it.
+
+The SQLite cache is always local, including when `--storage-type blob` is used
+for inputs and outputs. See [Evaluation Caches](cache.md) for supported
+backends, cache identity, inspection, and clearing instructions.
+
+Generated `autoe_differential_pairwise` settings use a separate SQLite database
+under `.benchmark_qed_cache/differential_pairwise`. Extraction and verdict
+stages are cached independently so judge failures can resume from extraction
+and criteria changes need only recompute verdicts.
+
+Generated `autoe_reference` settings enable a persistent SQLite cache under
+`.benchmark_qed_cache/reference`. Each question/criterion/trial judgment is
+stored independently. Set `type: none` with `storage: null` to request fresh
+judgments.
+
+Generated `autoe_assertion` settings enable a persistent SQLite cache under
+`.benchmark_qed_cache/assertion` for standard single-RAG answer-level scoring.
+Each question/assertion/trial judgment is stored independently. This cache is
+not used by multi-RAG or hierarchical assertion scoring, and chunk-assertion
+scoring uses its own assertion/chunk cache.
 
 ::: mkdocs-typer2
     :module: benchmark_qed.cli.init_config
