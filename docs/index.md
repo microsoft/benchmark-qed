@@ -27,6 +27,7 @@ To get started with BenchmarkQED, you have two options:
 ```sh
 pip install benchmark-qed
 ```
+
 2. [Use it from source](./developing.md)
 
 ## Usage
@@ -79,6 +80,7 @@ Please follow these steps to generate synthetic queries from the [AP news datase
     benchmark-qed config init autoq .
     ```
     This command creates two files in the `./autoq_test` directory:
+
     - `.env`: Contains environment variables for the AutoQ pipeline. Open this file and replace `<API_KEY>` with your own OpenAI or Azure API key.
     - `settings.yaml`: Contains pipeline settings, which you can modify as needed.
 
@@ -128,6 +130,7 @@ Please follow these steps to perform a relative comparison of RAG methods using 
     benchmark-qed config init autoe_pairwise .
     ```
     This command creates two files in the `./pairwise_test` directory:
+
     - `.env`: Contains environment variables for the pairwise comparison tests. Open this file and replace `<API_KEY>` with your own OpenAI or Azure API key.
     - `settings.yaml`: Contains pipeline settings, including a persistent
       SQLite pairwise cache under `.benchmark_qed_cache/pairwise`. The cache
@@ -171,6 +174,7 @@ Please follow these steps to score RAG answers against reference answers using e
     benchmark-qed config init autoe_reference .
     ```
     This command creates two files in the `./reference_test` directory:
+
     - `.env`: Contains environment variables for the reference scoring tests. Open this file and replace `<API_KEY>` with your own OpenAI or Azure API key.
     - `settings.yaml`: Contains pipeline settings and a persistent SQLite cache
       under `.benchmark_qed_cache/reference`.
@@ -206,6 +210,7 @@ Please follow these steps to evaluate RAG answers against predefined assertions 
     benchmark-qed config init autoe_assertion .
     ```
     This command creates two files in the `./assertion_test` directory:
+
     - `.env`: Contains environment variables for the assertion scoring tests. Open this file and replace `<API_KEY>` with your own OpenAI or Azure API key.
     - `settings.yaml`: Contains pipeline settings, including a persistent
       single-RAG assertion cache at

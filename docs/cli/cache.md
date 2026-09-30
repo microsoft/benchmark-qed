@@ -28,9 +28,10 @@ cache_config:
   database_name: pairwise.sqlite3
 ```
 
-`base_dir` is a local filesystem path. It is independent of `input_storage` and
-`output_storage`; configuring answers or outputs in Azure Blob Storage does not
-move a SQLite cache to blob storage.
+`cache_config.storage` is independent of `input_storage` and `output_storage`.
+Configuring inputs or outputs in Azure Blob Storage does not automatically move
+the cache to blob storage. SQLite requires `cache_config.storage.type: file`, so
+its `base_dir` is always a local filesystem path.
 
 A JSON file cache can be configured as:
 
@@ -41,6 +42,44 @@ cache_config:
     type: file
     base_dir: .benchmark_qed_cache/pairwise-json
 ```
+
+With `storage.type: file`, a relative `base_dir` is resolved from the working
+directory where `benchmark-qed` is executed, not from the directory containing
+`settings.yaml`. For example, running from `/work/my-evaluation` resolves the
+configuration above to:
+
+```text
+/work/my-evaluation/.benchmark_qed_cache/pairwise-json
+```
+
+The JSON backend writes individual entries under namespaced subdirectories; it
+does not create one JSON database file. `database_name` applies only to SQLite
+and should be omitted from JSON configurations.
+
+To store JSON cache entries in Azure Blob Storage, configure the cache storage
+itself as blob storage:
+
+```yaml
+cache_config:
+  type: json
+  storage:
+    type: blob
+    container_name: my-cache-container
+    base_dir: benchmark-qed/chunk-assertions
+    account_url: https://<account>.blob.core.windows.net
+```
+
+Alternatively, replace `account_url` with:
+
+```yaml
+    connection_string: ${AZURE_STORAGE_CONNECTION_STRING}
+```
+
+Entries are then stored below
+`my-cache-container/benchmark-qed/chunk-assertions/`. Cache storage does not
+inherit the container, credentials, or base directory from input or output
+storage; those values must be configured explicitly under
+`cache_config.storage`.
 
 Use `memory` or `none` without a storage block:
 
@@ -162,6 +201,44 @@ assertion, and trial. Its identity includes the question, generated answer,
 assertion text, trial, prompt templates, model/provider configuration, call
 arguments, and score-ID mode. `top_k` is not part of an entry's identity, so
 overlapping assertions remain reusable when that selection limit changes.
+
+The following changes produce new assertion cache entries:
+
+- `llm_config.model` or `llm_config.llm_provider`
+- Values under `llm_config.init_args`, including `azure_endpoint` and
+  `api_version`
+- Values under `llm_config.call_args`, such as `temperature`, `seed`, or token
+  limits
+- Custom provider configuration
+- System or user prompt contents
+- Score-ID mode
+- Question, generated-answer, or assertion text
+- Trial number
+
+Changing one of these values does not delete or overwrite the old entries. The
+new configuration receives a different fingerprint in the same database. If
+the previous configuration is restored later, its entries are reusable again.
+For example, moving from one Azure OpenAI endpoint to another causes cache
+misses, while switching back to the original endpoint makes its prior entries
+available again.
+
+The following settings do not change an assertion judgment's identity:
+
+- `llm_config.concurrent_requests`
+- Retry policy, retry count, delays, and jitter
+- `pass_threshold`
+- `top_k`
+- Input and output paths when the question, answer, and assertion contents are
+  unchanged
+- API keys, access tokens, credentials, and connection strings, which are
+  redacted before fingerprinting
+
+Increasing `trials` reuses existing trial numbers and evaluates only the newly
+requested trials. Decreasing it simply selects fewer trials.
+
+Changing the cache backend, `base_dir`, or database name selects a different
+cache store rather than invalidating entries in the old store. The old entries
+remain available if that original cache configuration is restored.
 
 The generated `autoe_assertion` configuration uses:
 

@@ -18,6 +18,7 @@ from benchmark_qed.cli.interactive import (
 from benchmark_qed.cli.yaml_renderer import (
     _render_llm_section,
     render_autoe_assertion_yaml,
+    render_autoe_chunk_assertion_yaml,
     render_autoe_pairwise_yaml,
     render_autoe_reference_yaml,
     render_autoq_yaml,
@@ -149,6 +150,16 @@ def _default_assertion_config() -> dict[str, Any]:
         "assertions": {"assertions_path": "input/assertions.json"},
         "pass_threshold": 0.5,
         "trials": 4,
+    }
+
+
+def _default_chunk_assertion_config() -> dict[str, Any]:
+    return {
+        "chat_provider": _openai_chat_provider(),
+        "generated": {"name": "vector_rag"},
+        "assertions": {"assertions_path": "input/data_local_assertions.json"},
+        "k_list": [5, 10, 20, 50],
+        "pass_threshold": 0.5,
     }
 
 
@@ -299,6 +310,22 @@ class TestYamlRenderers:
         assert "llm_config" in parsed
         assert "prompt_config" in parsed
         assert isinstance(parsed["prompt_config"], dict)
+
+    def test_render_autoe_chunk_assertion_yaml_uses_documented_inputs(self):
+        """Chunk assertion YAML defaults match the bundled data walkthrough."""
+        yaml_content = render_autoe_chunk_assertion_yaml(
+            _default_chunk_assertion_config()
+        )
+        parsed = yaml.safe_load(yaml_content)
+
+        assert (
+            parsed["generated"]["retrieval_path"]
+            == "input/vector_rag_short_context/data_local_retrieval_results.json"
+        )
+        assert (
+            parsed["assertions"]["assertions_path"]
+            == "input/data_local_assertions.json"
+        )
 
 
 # ═══════════════════════════════════════════════════════════════════════════

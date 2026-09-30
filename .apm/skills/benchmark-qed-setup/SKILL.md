@@ -44,6 +44,7 @@ uvx --from "git+https://github.com/microsoft/benchmark-qed" benchmark-qed init <
 ```
 
 This walks through:
+
 - Config type selection (autoq, autoe_pairwise, autoe_differential_pairwise, autoe_reference, autoe_assertion)
 - LLM provider selection with Azure-specific prompts (endpoint, API version)
 - Section-by-section customization (press Enter to accept defaults)
@@ -173,6 +174,7 @@ Ask the same shape of questions for the embedding model:
 #### Eval-config-specific fields (autoe_*)
 
 Only ask the questions relevant to the chosen `config_type`:
+
 - `autoe_pairwise`: `base.name` + `base.answer_base_path`, plus a list of `others` (each with `name` and `answer_base_path`), `question_sets`, and whether to keep the default persistent SQLite `cache_config` or select `json`, `memory`, or `none`.
 - `autoe_differential_pairwise`: the same condition and question-set fields as
   pairwise, plus whether to keep the default stage-aware SQLite cache. Explain
@@ -233,6 +235,7 @@ input:
 ```
 
 **Rules when writing the YAML:**
+
 - Omit `api_key` entirely when `auth_type=azure_managed_identity` — do not leave `${OPENAI_API_KEY}` in place.
 - Omit `init_args` for non-Azure providers.
 - Quote `api_version` (it would otherwise be parsed as a date).
@@ -253,6 +256,7 @@ After writing `settings.yaml`, **show the user the generated configuration** and
 Do **not** limit the user to predefined sections — they should be able to modify any field in `settings.yaml` by describing what they want.
 
 **Sections the user is most likely to customize** (call these out):
+
 - **autoq**: `num_questions` per type, `num_clusters`, `chunk_size`, assertion settings, `concurrent_requests`
 - **autoe_pairwise**: `trials`, `criteria`, `question_sets`, `cache_config`
 - **autoe_differential_pairwise**: `trials`, `criteria`, four extract/judge prompts, `cache_config`
@@ -270,6 +274,7 @@ The benchmark-qed CLI validates `settings.yaml` via pydantic at startup, so any 
 See [references/config-reference.md](references/config-reference.md) for detailed best practices covering LLM configuration, prompts, question generation, assertion generation, evaluation, and retrieval.
 
 Key highlights:
+
 - Use `${OPENAI_API_KEY}` env var substitution — never hardcode secrets
 - Use `benchmark-qed init` (interactive wizard) to avoid manual YAML errors
 - Pin a specific version of benchmark-qed for reproducibility in CI/CD

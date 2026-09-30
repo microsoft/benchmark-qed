@@ -449,6 +449,7 @@ benchmark-qed autoe assertion-scores config.yaml
 ```
 
 The command auto-detects the config format:
+
 - **Single-RAG**: Config has `generated` key → requires output argument
 - **Multi-RAG**: Config has `rag_methods` key → output in config, includes significance testing
 
@@ -561,6 +562,15 @@ cache_config:
   type: none
   storage: null
 ```
+
+Changing the model, provider, Azure endpoint, API version, call arguments,
+prompt contents, question, answer, assertion, trial, or score-ID mode produces
+new entries. Old entries remain stored and become reusable if their previous
+configuration is restored. Concurrency, retries, `pass_threshold`, `top_k`, and
+credentials do not affect judgment identity. Changing the cache path or
+database selects a different store rather than deleting the original entries.
+See [Evaluation Caches](cache.md#standard-assertion-score-cache-behavior) for
+the complete invalidation and reuse rules.
 
 This answer-level cache is currently limited to this single-RAG configuration.
 It is separate from chunk-assertion caching and is not used by the multi-RAG or
@@ -712,6 +722,7 @@ benchmark-qed autoe hierarchical-assertion-scores config.yaml
 ```
 
 The command auto-detects the config format:
+
 - **Single-RAG**: Config has `generated` key → requires output argument
 - **Multi-RAG**: Config has `rag_methods` key → output in config, includes significance testing
 

@@ -66,6 +66,7 @@ Default criteria: `comprehensiveness`, `diversity`, `empowerment`, `relevance`
 **Output**: `{question_set}_{base}--{other}.csv`, `win_rates.csv`, `winrates_sig_tests.csv`
 
 **Pairwise caching**:
+
 - Keep the generated SQLite `cache_config` to resume interrupted runs and reuse
   identical question/criterion/trial judgments.
 - Use `cache_config: {type: none, storage: null}` to request fresh judgments.
@@ -107,6 +108,7 @@ Default criteria: `correctness`, `completeness`. Default score range: 1–10.
 **Output**: `reference_scores-{name}.csv`, `model_usage.json`
 
 **Reference caching**:
+
 - Each question/criterion/trial is cached separately under the `reference`
   namespace.
 - Cache identity includes both answers, score range, prompts, model/provider,
@@ -139,6 +141,7 @@ uvx --from "git+https://github.com/microsoft/benchmark-qed" benchmark-qed autoe 
 **Multi-RAG output**: Per-method scores + significance tests in structured `output_dir/`
 
 **Single-RAG assertion caching**:
+
 - Generated configs use SQLite at
   `.benchmark_qed_cache/assertion/assertion.sqlite3`.
 - Each question/assertion/trial is cached independently; the identity also
@@ -235,6 +238,11 @@ For comparing multiple RAG methods, use multi-RAG config format (include `rag_me
 - **Blob storage does not relocate SQLite caches**: Pairwise
   `cache_config.storage.base_dir` remains a local path even when input/output
   storage uses Azure Blob Storage.
+- **Cache storage is independent**: JSON caches use the storage configured
+  under `cache_config.storage`; they do not inherit input/output blob settings.
+  `type: file` resolves a relative `base_dir` from the command's working
+  directory. Use `cache_config.storage.type: blob` with an explicit container
+  and credentials to store JSON entries in Azure Blob Storage.
 - **Stale outputs**: Several commands skip existing output files. Use a fresh output directory or delete specific files to force re-evaluation.
 - **Output is in files**: All scores are written to CSV/JSON files. Parse output files, not CLI stdout.
 - **Long-running**: Evaluation with many questions and trials can take hours. Use background execution.

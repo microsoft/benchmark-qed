@@ -42,6 +42,12 @@ def test_init_chunk_assertion_scaffolds_cache_config(tmp_path: Path) -> None:
 
     settings = (tmp_path / "settings.yaml").read_text(encoding="utf-8")
 
+    assert (
+        "retrieval_path: "
+        "input/vector_rag_short_context/data_local_retrieval_results.json"
+        in settings
+    )
+    assert "assertions_path: input/data_local_assertions.json" in settings
     assert "cache_config:\n  type: sqlite" in settings
     assert "base_dir: .benchmark_qed_cache/chunk_assertions" in settings
     assert "database_name: chunk_assertions.sqlite3" in settings

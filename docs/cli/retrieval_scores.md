@@ -20,6 +20,7 @@ python -m benchmark_qed autoe retrieval-scores <config_file> [options]
 ## Command 1: generate-retrieval-reference
 
 This command creates ground truth relevance assessments by:
+
 1. Clustering text units into semantic groups
 2. For each question, assessing which chunks are relevant using LLM-based relevance scoring
 3. Saving the reference data for later evaluation
@@ -355,6 +356,7 @@ python -m benchmark_qed autoe retrieval-scores \
 ### Caching
 
 Configure `cache_config` with `type: sqlite` or `type: json` to:
+
 - Resume interrupted runs
 - Avoid re-assessing the same query-chunk pairs
 - Share cache across multiple runs

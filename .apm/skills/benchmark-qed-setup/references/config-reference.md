@@ -73,6 +73,7 @@ azure_identity_scopes:
 | `azure_identity_scopes` | `list[str]` | `["https://cognitiveservices.azure.com/.default"]` | OAuth scopes passed to `get_bearer_token_provider`. Only used when `auth_type` is `azure_managed_identity`. |
 
 **When to change this:**
+
 - The default scope (`https://cognitiveservices.azure.com/.default`) works for standard Azure OpenAI deployments
 - Use a custom scope if your Azure resource requires a different audience (e.g., private endpoints, sovereign clouds)
 - Multiple scopes can be listed if your deployment requires more than one
@@ -326,6 +327,13 @@ identity. Use `type: none` with `storage: null` for fresh judgments. This cache
 does not apply to multi-RAG or hierarchical assertion scoring and is distinct
 from the chunk-assertion cache.
 
+Changing an Azure endpoint or API version under `llm_config.init_args`, the
+model/provider, call arguments, prompt contents, or judgment inputs produces
+new entries. Previous entries are retained and can be reused by restoring the
+old configuration. Concurrency, retry settings, `pass_threshold`, `top_k`, and
+credentials do not affect identity. Changing the cache path or database selects
+a different store; it does not remove the original cache.
+
 ### Multi-RAG (`MultiRAGAssertionConfig`)
 ```yaml
 input_dir: ./data                    # REQUIRED
@@ -477,6 +485,7 @@ significance_correction: holm
 ## Custom LLM Providers
 
 Built-in providers are served by `graphrag-llm`'s LiteLLM-backed factory. To register a custom provider, point benchmark-qed at a class implementing the `graphrag_llm` interface:
+
 - Chat: `graphrag_llm.completion.LLMCompletion`
 - Embedding: `graphrag_llm.embedding.LLMEmbedding`
 

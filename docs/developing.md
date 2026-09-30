@@ -49,6 +49,7 @@ Follow these steps to generate synthetic queries using AutoQ:
         --base-dir autoq_test
     ```
     This command creates two files in the `./autoq_test` directory:
+
     - `.env`: Stores environment variables for the AutoQ pipeline. Open this file and replace `<API_KEY>` with your OpenAI or Azure API key.
     - `settings.yaml`: Contains pipeline settings. Edit this file as needed for your use case.
 
@@ -110,6 +111,7 @@ Follow these steps to compare RAG answer pairs using the pairwise scoring pipeli
         --base-dir pairwise_test
     ```
     This command creates two files in the `./pairwise_test` directory:
+
     - `.env`: Contains environment variables for the pairwise comparison tests. Open this file and replace `<API_KEY>` with your OpenAI or Azure API key.
     - `settings.yaml`: Contains pipeline settings, including a persistent
       stage-aware SQLite cache under
@@ -181,6 +183,7 @@ Follow these steps to run the differential pairwise scoring pipeline:
         --base-dir differential_pairwise_test
     ```
     This command creates two files in the `./differential_pairwise_test` directory:
+
     - `.env`: Contains environment variables for the pairwise comparison tests. Open this file and replace `<API_KEY>` with your OpenAI or Azure API key.
     - `settings.yaml`: Contains pipeline settings, which you can modify as needed.
 
@@ -260,6 +263,7 @@ Follow these steps to score RAG answers against reference answers using example 
         --base-dir reference_test
     ```
     This creates two files in the `./reference_test` directory:
+
     - `.env`: Contains environment variables for the reference scoring pipeline. Open this file and replace `<API_KEY>` with your OpenAI or Azure API key.
     - `settings.yaml`: Contains pipeline settings, including a persistent
       SQLite judgment cache under `.benchmark_qed_cache/reference`.
@@ -328,6 +332,7 @@ Follow these steps to evaluate RAG answers against per-question assertions using
         --base-dir assertion_test
     ```
     This command creates two files in the `./assertion_test` directory:
+
     - `.env`: Contains environment variables for the assertion evaluation pipeline. Open this file and replace `<API_KEY>` with your OpenAI or Azure API key.
     - `settings.yaml`: Contains pipeline settings, which you can modify as needed.
 
@@ -364,6 +369,7 @@ Follow these steps to evaluate RAG answers against per-question assertions using
 ## Evaluating retrieved chunks against assertions
 
 Chunk-level evaluation scores how well retrieved passages (chunks) support assertions, without waiting for answer synthesis. This is useful for:
+
 - **Fast retrieval evaluation**: Assess retrieval quality before generating complete answers
 - **Efficient iteration**: Fix retriever settings without re-running expensive answer generation
 - **Persistent caching**: Avoid re-evaluating same (assertion, chunk) pairs across multiple runs
@@ -371,57 +377,70 @@ Chunk-level evaluation scores how well retrieved passages (chunks) support asser
 ### Prerequisites: Where do chunks come from?
 
 **Chunks** are the retrieved passages from your RAG system. You obtain them by running your retriever (e.g., vector search, BM25, hybrid) on each question. Chunks should include:
+
 - The passage text
 - The chunk index (chunk_id)
-- The retrieval rank
-
-You'll provide this data to benchmark-qed in one of two formats (see Step 2 below).
+- The retrieval rank when available
 
 ### Step-by-step guide
 
 1. **Set up your project directory:**
+
     ```sh
     mkdir -p ./local/chunk_assertion_test
     cd ./local/chunk_assertion_test
     ```
 
-2. **Prepare your input data:**
+2. **Initialize the chunk-assertion project:**
+
+    For a local-filesystem project, run:
+
     ```sh
-    mkdir ./input
+    uv run benchmark-qed config init autoe_chunk_assertion .
     ```
-    
-    You need two files whose `question_id`s line up:
-    - **Assertion file**: The per-question assertions to check. Set via `assertions_path`
-      in `settings.yaml`.
-    - **Retrieval file**: Created by YOUR retrieval system. The tool always evaluates the
-      retrieved **chunks** (not the synthesized answer) against your assertions. Provide
-      these chunks as a JSON array of `RetrievalResult` records, set via `retrieval_path`
-      in `settings.yaml`.
 
-    > **Note:** To try the pipeline end-to-end without wiring up your own retriever, download
-    > the bundled example data, which ships matching retrieval-results and assertions files
-    > (same `question_id`s) for both short- and long-context retrievers:
-    > ```sh
-    > uv run benchmark-qed data download example_answers input
-    > ```
-    > Then set, for example:
-    > ```yaml
-    > retrieval_path: input/vector_rag_short_context/data_local_retrieval_results.json
-    > assertions_path: input/data_local_assertions.json
-    > ```
-    >
-    > Swap `data_local` for `data_global` or `data_linked` (and pick
-    > `vector_rag_short_context` or `vector_rag_long_context`) to evaluate a different
-    > question set — just keep the retrieval and assertions files on the same set so their
-    > `question_id`s match. These are the same files used by the AutoE notebook example.
+    Alternative blob variant (choose this instead of the local command above; do not run both):
 
-    ### Input Format: RetrievalResult JSON file
+    ```sh
+    uv run benchmark-qed config init autoe_chunk_assertion . \
+        --storage-type blob \
+        --container-name my-container \
+        --account-url https://<account>.blob.core.windows.net \
+        --base-dir chunk_assertion_test
+    ```
 
-    Create a JSON array (e.g., `input/retrieval.json`, or any path you prefer) where each
-    record holds a question and its retrieved `context`. Each context item carries a
-    `chunk_id`, `text`, and an optional `rank`. When `rank` is present on every item,
-    chunks are evaluated in rank order (top-k semantics); otherwise the chunks are assumed
-    to be already pre-sorted in decreasing order of relevance and list order is used.
+    The command creates the project structure before any settings need to be
+    edited:
+
+    - `settings.yaml`: Pipeline configuration with input placeholders
+    - `.env`: Environment-variable placeholders for credentials
+    - `input/`: Local input directory
+    - `prompts/`: Default chunk-assertion judge prompts
+
+    Set the required credentials in `.env` before running the evaluation.
+
+3. **Prepare the retrieval and assertion inputs:**
+
+    You need two JSON files with matching `question_id` values:
+
+    - A **retrieval-results file** produced by your retriever. BenchmarkQED
+      evaluates the retrieved chunks, not the synthesized answer.
+    - An **assertions file** containing the per-question assertions to check.
+
+    To try the workflow with bundled example data, download both kinds of files
+    into the generated `input/` directory:
+
+    ```sh
+    uv run benchmark-qed data download example_answers input
+    ```
+
+    The examples include matching files for `data_local`, `data_global`, and
+    `data_linked`, with both `vector_rag_short_context` and
+    `vector_rag_long_context` retrieval results.
+
+    If you use your own retriever, its retrieval-results file must be a JSON
+    array in this form:
+
     ```json
     [
       {
@@ -430,97 +449,115 @@ You'll provide this data to benchmark-qed in one of two formats (see Step 2 belo
         "context": [
           {
             "chunk_id": "0",
-            "text": "Photosynthesis is the process by which plants convert sunlight into chemical energy...",
+            "text": "Photosynthesis converts sunlight into chemical energy.",
             "rank": 0
           },
           {
             "chunk_id": "5",
-            "text": "In photosynthesis, light energy is captured by chlorophyll molecules..."
+            "text": "Chlorophyll captures light energy.",
+            "rank": 1
           }
         ]
       }
     ]
     ```
 
-    This is the same schema produced by the retrieval-results examples (e.g. the bundled
-    `data_local_retrieval_results.json`), so those files work directly with no conversion.
-    See the **chunk-level assertion** example in the AutoE notebook
-    ([notebooks/autoe.ipynb](notebooks/autoe.ipynb)) for end-to-end usage.
+    Each context item requires `chunk_id` and `text`; `rank` is optional. When
+    every item has a rank, chunks are evaluated in rank order. Otherwise, their
+    existing list order is used. See the chunk-level assertion example in the
+    [AutoE notebook](notebooks/autoe.ipynb) for programmatic usage.
 
-3. **Create a configuration file for chunk-level evaluation:**
-    ```sh
-    uv run benchmark-qed config init autoe_chunk_assertion .
-    ```
-    This is the local-filesystem variant.
+4. **Review the generated `settings.yaml`:**
 
-    Alternative blob variant (choose this instead of the local command above; do not run both):
-    ```sh
-    uv run benchmark-qed config init autoe_chunk_assertion . \
-        --storage-type blob \
-        --container-name my-container \
-        --account-url https://<account>.blob.core.windows.net \
-        --base-dir chunk_assertion_test
-    ```
-    This command creates two files in the `./chunk_assertion_test` directory:
-    - `.env`: Contains environment variables. Open this file and replace `<API_KEY>` with your OpenAI or Azure API key.
-    - `settings.yaml`: Contains pipeline settings, including:
-      - `retrieval_path`: Path to your retrieved chunks JSON (RetrievalResult format above)
-      - `k_list`: K values to report coverage metrics (e.g., [5, 10, 20, 50])
-      - `cache_config`: GraphRAG cache configuration for assertion/chunk
-        results. Supported types are `sqlite`, `json`, `memory`, and `none`.
-        Persistent backends record the model, call arguments, and prompts used
-        for each result. Existing `chunk_assertions.jsonl` caches are imported
-        automatically from a local file storage directory. Concurrent
-        processes using local file storage claim uncached work so only one
-        performs each LLM request.
-
-    Inspect cache namespaces and active work leases with:
-
-    ```sh
-    uv run benchmark-qed cache inspect \
-        .benchmark_qed_cache/chunk_assertions.sqlite3
-    ```
-
-    Use `cache_config.type: json` for storage-backed JSON entries,
-    `cache_config.type: memory` for a process-local cache, or
-    `cache_config.type: none` to disable caching. The inspection command applies
-    only to SQLite cache files.
-
-    The generated `settings.yaml` includes commented-out `input_storage` and `output_storage` sections for configuring Azure Blob Storage backends.
-
-4. **Update settings.yaml for your data:**
-
-    The generated template includes placeholder paths. Update them to match your actual file locations:
+    The generated configuration already points to the bundled `data_local`
+    short-context example:
 
     ```yaml
     generated:
       name: my_retriever
-      retrieval_path: input/vector_rag_short_context/data_local_retrieval_results.json  # Update to your RetrievalResult file path
+      retrieval_path: input/vector_rag_short_context/data_local_retrieval_results.json
+
     assertions:
-      assertions_path: input/data_local_assertions.json  # Update to your assertions file path
+      assertions_path: input/data_local_assertions.json
     ```
 
+    If you downloaded the bundled data in the previous step, these defaults can
+    be used unchanged. To evaluate another example set, change `data_local` in
+    both paths to `data_global` or `data_linked`. To use the long-context
+    retriever, also change `vector_rag_short_context` to
+    `vector_rag_long_context`. The question set must match in both files.
+
+    Other important generated settings are:
+
+    - `k_list`: Retrieval depths for which coverage metrics are reported
+    - `max_chunks_per_question`: Optional cap on evaluated chunks
+    - `cache_config`: Cache backend for assertion/chunk judgments
+    - `llm_config`: Judge model, provider, credentials, and request settings
+    - `prompt_config`: Judge prompt files
+
+    The default cache is persistent SQLite:
+
+    ```yaml
+    cache_config:
+      type: sqlite
+      storage:
+        type: file
+        base_dir: .benchmark_qed_cache/chunk_assertions
+      database_name: chunk_assertions.sqlite3
+    ```
+
+    Supported cache types are `sqlite`, `json`, `memory`, and `none`. Existing
+    local `chunk_assertions.jsonl` caches are imported automatically. Persistent
+    local caches coordinate concurrent processes so only one process judges
+    each uncached assertion/chunk pair.
+
+    Cache storage is independent of `input_storage` and `output_storage`. A
+    JSON cache with `storage.type: file` remains local even when inputs and
+    outputs use Azure Blob Storage, and its relative `base_dir` is resolved from
+    the directory where the command is run. To place JSON entries in blob
+    storage, set `cache_config.storage.type: blob` and provide its container and
+    credentials explicitly. See [Evaluation Caches](cli/cache.md#cache-backends)
+    for local and blob JSON examples.
+
 5. **Run the chunk-level assertion evaluation:**
+
     ```sh
     uv run benchmark-qed autoe chunk-assertion-scores settings.yaml output
     ```
-    This is the local-filesystem variant.
 
     Alternative blob-stored config variant (choose this instead of the local command above; do not run both):
+
     ```sh
     uv run benchmark-qed autoe chunk-assertion-scores blob://my-container/chunk_assertion_test/settings.yaml output \
         --account-url https://<account>.blob.core.windows.net
     ```
-    The results will be saved in the `output` directory, including:
+
+6. **Review the outputs and cache:**
+
+    The `output/` directory contains:
+
     - `chunk_assertion_results.json`: Coverage metrics at each k
     - `per_query_metrics_*.json`: Per-question metrics for paired significance testing
     - `debug/`: Detailed per-question evaluation records
 
-**Chunk-level evaluation benefits:**
-- **Efficient caching**: Results cached at (assertion, chunk) granularity using SHA256 content-addressing
+    Inspect the default SQLite cache, including namespace counts and active work
+    leases, with:
+
+    ```sh
+    uv run benchmark-qed cache inspect \
+        .benchmark_qed_cache/chunk_assertions/chunk_assertions.sqlite3
+    ```
+
+    The inspection command applies only to SQLite cache files. To force fresh
+    LLM judgments, set `cache_config.type: none` and `storage: null`.
+
+### Chunk-level evaluation benefits
+
+- **Efficient caching**: Results cached at `(assertion, chunk)` granularity using SHA256 content-addressing
 - **Multi-k reporting**: Coverage, Strict Coverage, and Coverage Strength metrics at each k value
 - **Reusable cache**: Re-run with different k values or retriever configs with zero LLM cost on overlapping chunks
 - **Coverage metrics**:
+
   - Coverage: % of assertions with full or partial support in top-k chunks
   - Strict Coverage: % of assertions with full support only
   - Coverage Strength: Average score across all assertions
