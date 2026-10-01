@@ -8,11 +8,13 @@ import sqlite3
 import time
 from concurrent.futures import ProcessPoolExecutor
 from pathlib import Path
+from typing import Any
 
 import pytest
 from graphrag_cache import CacheConfig, CacheType
 from graphrag_storage import StorageConfig, StorageType
 
+import benchmark_qed.cache as cache_module
 from benchmark_qed.autoe.chunk_assertion.cache import (
     ContentAddressedCache,
     build_cache_metadata,
@@ -26,6 +28,29 @@ from benchmark_qed.cache import CacheStore, create_default_cache_config, inspect
 def _cache_config(cache_path: Path | str) -> CacheConfig:
     path = Path(cache_path)
     return create_default_cache_config(path.parent, database_name=path.name)
+
+
+def test_retries_locked_sqlite_initialization(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    real_create_cache = cache_module.create_cache
+    call_count = 0
+
+    def flaky_create_cache(config: CacheConfig) -> Any:
+        nonlocal call_count
+        call_count += 1
+        if call_count == 1:
+            message = "database is locked"
+            raise sqlite3.OperationalError(message)
+        return real_create_cache(config)
+
+    monkeypatch.setattr(cache_module, "create_cache", flaky_create_cache)
+
+    cache_module.create_configured_cache(
+        _cache_config(tmp_path / "cache.sqlite3"), "test"
+    )
+
+    assert call_count == 2
 
 
 @pytest.mark.parametrize(

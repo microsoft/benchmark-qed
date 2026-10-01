@@ -36,6 +36,8 @@ _SENSITIVE_KEY_SUFFIXES = (
     "_password",
     "_secret",
 )
+_SQLITE_INITIALIZATION_TIMEOUT_SECONDS = 30.0
+_SQLITE_INITIALIZATION_RETRY_SECONDS = 0.01
 
 
 def _is_sensitive_key(key: object) -> bool:
@@ -123,6 +125,16 @@ def create_configured_cache(config: CacheConfig, namespace: str) -> Cache:
     if database_path is not None:
         database_path.parent.mkdir(parents=True, exist_ok=True)
         _migrate_local_cache_schema(database_path)
+        deadline = time.monotonic() + _SQLITE_INITIALIZATION_TIMEOUT_SECONDS
+        retry_delay = _SQLITE_INITIALIZATION_RETRY_SECONDS
+        while True:
+            try:
+                return create_cache(config).child(namespace)
+            except sqlite3.OperationalError as exc:
+                if "locked" not in str(exc).lower() or time.monotonic() >= deadline:
+                    raise
+                time.sleep(retry_delay)
+                retry_delay = min(retry_delay * 2, 0.25)
     return create_cache(config).child(namespace)
 
 

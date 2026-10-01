@@ -7,6 +7,7 @@ from pathlib import Path
 from typing import TYPE_CHECKING, Any, cast
 
 import pandas as pd
+import pytest
 from graphrag_cache import CacheConfig, CacheType
 
 from benchmark_qed.autoe.config import Criteria
@@ -117,8 +118,12 @@ async def test_noop_cache_does_not_reuse_scores(monkeypatch: Any) -> None:
     assert call_count == 1
 
 
-def test_second_pairwise_run_uses_cached_trials(
-    tmp_path: Path, monkeypatch: Any
+@pytest.mark.parametrize("include_score_id_in_prompt", [True, False])
+def test_four_trials_are_independent_and_rerun_uses_cache(
+    tmp_path: Path,
+    monkeypatch: Any,
+    *,
+    include_score_id_in_prompt: bool,
 ) -> None:
     call_count = 0
 
@@ -163,13 +168,15 @@ def test_second_pairwise_run_uses_cached_trials(
         "base_answers": base_answers,
         "other_answers": other_answers,
         "criteria": [Criteria(name="relevance", description="description")],
-        "trials": 2,
-        "include_score_id_in_prompt": False,
+        "trials": 4,
+        "include_score_id_in_prompt": include_score_id_in_prompt,
         "cache_config": cache_config,
     }
 
     first = scores.get_pairwise_scores(**kwargs)
     second = scores.get_pairwise_scores(**kwargs)
 
-    assert call_count == 2
+    assert call_count == 4
+    assert first["trial"].tolist() == [0, 1, 2, 3]
+    assert first["answer_1_name"].tolist() == ["base", "other", "base", "other"]
     pd.testing.assert_frame_equal(first, second)
