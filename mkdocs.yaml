@@ -38,6 +38,7 @@ nav:
   - CLI:
     - AutoQ: cli/autoq.md
     - AutoE: cli/autoe.md
+    - Evaluation Caches: cli/cache.md
     - Retrieval Metrics: cli/retrieval_scores.md
     - LLM Configuration: cli/llm_config.md
     - Config Init: cli/config_init.md
@@ -48,6 +49,7 @@ nav:
     - AutoD: notebooks/autod.ipynb
     - Assertion Generation: notebooks/assertion_gen.ipynb
     - Retrieval Metrics: notebooks/retrieval_metrics.ipynb
+    - Cache and Parallelism Benchmark: notebooks/cache_parallelism_benchmark.ipynb
   - Datasets: datasets.md
   
 repo_url: https://github.com/microsoft/benchmark-qed

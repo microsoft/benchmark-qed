@@ -32,6 +32,7 @@ uvx --from "git+https://github.com/microsoft/benchmark-qed" benchmark-qed <comma
 | Method | Command | Best for |
 |--------|---------|----------|
 | Pairwise comparison | `autoe pairwise-scores` | Comparing two RAG methods head-to-head |
+| Differential pairwise | `autoe differential-pairwise-scores` | Reducing length/format bias with extract-and-judge |
 | Reference scoring | `autoe reference-scores` | Scoring against gold-standard answers |
 | Assertion scoring | `autoe assertion-scores` | Evaluating with ground-truth assertions (single or multi-RAG) |
 | Hierarchical assertions | `autoe hierarchical-assertion-scores` | Global + local assertion hierarchies |
@@ -54,14 +55,43 @@ uvx --from "git+https://github.com/microsoft/benchmark-qed" benchmark-qed autoe 
 | `--alpha` | `0.05` | P-value threshold for significance |
 | `--exclude-criteria` | `[]` | Criteria to exclude (repeatable) |
 | `--print-model-usage` | `false` | Print LLM token usage |
+| `--include-score-id-in-prompt` | `true` | Add a unique ID to provider requests; does not bypass `cache_config` |
 | `--account-url` | `null` | Azure Blob Storage account URL (managed-identity auth). Use when the config path is a `blob://` URI. |
 | `--connection-string` | `null` | Azure Blob Storage connection string. Use when the config path is a `blob://` URI. |
 
-**Config requires**: `base` (reference method), `others` (methods to compare), `question_sets`, `criteria`, `trials` (must be even), `llm_config`, `prompt_config`
+**Config requires**: `base` (reference method), `others` (methods to compare), `question_sets`, `criteria`, `trials` (must be even), `llm_config`, `prompt_config`. Generated configurations also include `cache_config`, with persistent SQLite enabled by default.
 
 Default criteria: `comprehensiveness`, `diversity`, `empowerment`, `relevance`
 
 **Output**: `{question_set}_{base}--{other}.csv`, `win_rates.csv`, `winrates_sig_tests.csv`
+
+**Pairwise caching**:
+
+- Keep the generated SQLite `cache_config` to resume interrupted runs and reuse
+  identical question/criterion/trial judgments.
+- Use `cache_config: {type: none, storage: null}` to request fresh judgments.
+- Each trial is cached separately; caching does not collapse repeated trials or
+  counterbalanced answer ordering.
+- Existing comparison CSVs are checked before the judgment cache. For a fully
+  fresh comparison, remove/use a new output CSV and disable or relocate the
+  cache.
+- Inspect the default cache with
+  `benchmark-qed cache inspect .benchmark_qed_cache/pairwise/pairwise.sqlite3`.
+- `--include-score-id-in-prompt` may avoid provider-side prompt caching but does
+  not bypass BenchmarkQED's configured pairwise cache.
+
+### 1a. Differential Pairwise Scores
+
+Use `autoe differential-pairwise-scores` for the two-stage extract-and-judge
+method. Generated configs use a separate SQLite cache at
+`.benchmark_qed_cache/differential_pairwise/differential_pairwise.sqlite3`.
+
+- Extraction and verdict stages are cached independently.
+- Judge failures resume from completed extraction.
+- Criteria or judge-prompt changes reuse extraction and recompute verdicts.
+- Trials remain separate and counterbalanced.
+- Use `cache_config: {type: none, storage: null}` for fully fresh calls, and
+  also remove/use a new output CSV.
 
 ### 2. Reference Scores
 
@@ -71,11 +101,22 @@ Score generated answers against reference (gold-standard) answers.
 uvx --from "git+https://github.com/microsoft/benchmark-qed" benchmark-qed autoe reference-scores <config.yaml> <output_dir> [OPTIONS]
 ```
 
-**Config requires**: `reference`, `generated` (list), `criteria`, `score_min`/`score_max`, `trials`, `llm_config`
+**Config requires**: `reference`, `generated` (list), `criteria`, `score_min`/`score_max`, `trials`, `llm_config`. Generated configs include a persistent SQLite `cache_config`.
 
 Default criteria: `correctness`, `completeness`. Default score range: 1–10.
 
 **Output**: `reference_scores-{name}.csv`, `model_usage.json`
+
+**Reference caching**:
+
+- Each question/criterion/trial is cached separately under the `reference`
+  namespace.
+- Cache identity includes both answers, score range, prompts, model/provider,
+  call arguments, and score-ID mode.
+- Rerun after a failure to reuse completed judgments.
+- Use `cache_config: {type: none, storage: null}` for fresh judgments.
+- Inspect the default cache with
+  `benchmark-qed cache inspect .benchmark_qed_cache/reference/reference.sqlite3`.
 
 ### 3. Assertion Scores
 
@@ -98,6 +139,20 @@ uvx --from "git+https://github.com/microsoft/benchmark-qed" benchmark-qed autoe 
 **Single-RAG output**: `assertion_scores.csv`, `assertion_summary_by_question.csv`, `eval_summary.json`
 
 **Multi-RAG output**: Per-method scores + significance tests in structured `output_dir/`
+
+**Single-RAG assertion caching**:
+
+- Generated configs use SQLite at
+  `.benchmark_qed_cache/assertion/assertion.sqlite3`.
+- Each question/assertion/trial is cached independently; the identity also
+  includes the answer, prompts, model/provider, call arguments, and score-ID
+  mode.
+- Rerun after a failure to reuse completed judgments.
+- Inspect with `benchmark-qed cache inspect
+  .benchmark_qed_cache/assertion/assertion.sqlite3`.
+- Use `cache_config: {type: none, storage: null}` for fresh judgments.
+- This cache is not used by multi-RAG or hierarchical assertion scoring.
+  Chunk-assertion scoring has a separate assertion/chunk cache.
 
 ### 4. Hierarchical Assertion Scores
 
@@ -177,6 +232,17 @@ For comparing multiple RAG methods, use multi-RAG config format (include `rag_me
 
 - **Config auto-detection**: `assertion-scores` and `hierarchical-assertion-scores` detect single vs multi-RAG based on the `rag_methods` key in YAML. Ensure your config matches your intent.
 - **Trials must be even**: For pairwise scores, `trials` must be even (for counterbalancing). Use 4 as default.
+- **Pairwise cache identity**: Questions, answers and labels, criterion, trial,
+  prompts, model/provider, call arguments, and score-ID mode determine reuse.
+  Changing any of them creates a cache miss.
+- **Blob storage does not relocate SQLite caches**: Pairwise
+  `cache_config.storage.base_dir` remains a local path even when input/output
+  storage uses Azure Blob Storage.
+- **Cache storage is independent**: JSON caches use the storage configured
+  under `cache_config.storage`; they do not inherit input/output blob settings.
+  `type: file` resolves a relative `base_dir` from the command's working
+  directory. Use `cache_config.storage.type: blob` with an explicit container
+  and credentials to store JSON entries in Azure Blob Storage.
 - **Stale outputs**: Several commands skip existing output files. Use a fresh output directory or delete specific files to force re-evaluation.
 - **Output is in files**: All scores are written to CSV/JSON files. Parse output files, not CLI stdout.
 - **Long-running**: Evaluation with many questions and trials can take hours. Use background execution.
