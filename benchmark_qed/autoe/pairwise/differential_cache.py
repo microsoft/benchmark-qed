@@ -102,18 +102,11 @@ class DifferentialPairwiseCache:
                     return entry[0]
                 msg = f"Invalid cached {stage} result for key {cache_key}"
                 raise RuntimeError(msg)
-            if store.try_acquire(
+            if await store.claim(
                 cache_key,
                 owner_id,
                 ttl_seconds=self.lease_ttl_seconds,
             ):
-                entry = await store.get(cache_key)
-                if entry is not None:
-                    store.release_leases([cache_key], owner_id)
-                    if isinstance(entry[0], dict):
-                        return entry[0]
-                    msg = f"Invalid cached {stage} result for key {cache_key}"
-                    raise RuntimeError(msg)
                 break
             await asyncio.sleep(0.1)
 
@@ -129,7 +122,7 @@ class DifferentialPairwiseCache:
         heartbeat = asyncio.create_task(_heartbeat())
         try:
             result = await compute()
-            await store.publish(
+            publication = await store.publish(
                 cache_key,
                 result,
                 metadata,
@@ -137,6 +130,8 @@ class DifferentialPairwiseCache:
                 logical_key=logical_key,
                 config_fingerprint=stable_fingerprint(metadata),
             )
+            if publication.accepted and isinstance(publication.value, dict):
+                result = publication.value
         except (Exception, asyncio.CancelledError):
             store.release_leases([cache_key], owner_id)
             raise

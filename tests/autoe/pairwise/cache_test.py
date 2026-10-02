@@ -14,6 +14,7 @@ from benchmark_qed.autoe.config import Criteria
 from benchmark_qed.autoe.data_model import PairwiseLLMResponse
 from benchmark_qed.autoe.pairwise import scores
 from benchmark_qed.autoe.pairwise.cache import (
+    PairwiseScoreCache,
     build_cache_metadata,
     compute_cache_key,
     compute_logical_key,
@@ -116,6 +117,67 @@ async def test_noop_cache_does_not_reuse_scores(monkeypatch: Any) -> None:
     )
 
     assert call_count == 1
+
+
+async def test_publish_in_claim_window_returns_cached_winner(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    cache = PairwiseScoreCache(CacheConfig(type=CacheType.Memory, storage=None))
+    canonical = {"reasoning": "cached winner"}
+    get_calls = 0
+    judge_called = False
+    completed = 0
+
+    async def racing_get(
+        _cache_key: str,
+    ) -> tuple[Any, dict[str, Any]] | None:
+        nonlocal get_calls
+        await asyncio.sleep(0)
+        get_calls += 1
+        return None if get_calls == 1 else (canonical, {})
+
+    async def fail_if_judged(*args: Any, **kwargs: Any) -> dict[str, Any]:
+        nonlocal judge_called
+        await asyncio.sleep(0)
+        judge_called = True
+        return {"reasoning": "wrong"}
+
+    def on_complete() -> None:
+        nonlocal completed
+        completed += 1
+
+    monkeypatch.setattr(cache._store, "get", racing_get)
+    monkeypatch.setattr(scores, "get_pairwise_score", fail_if_judged)
+
+    result = await scores._get_pairwise_score_with_cache(
+        cast("LLMCompletion", object()),
+        cache=cache,
+        cache_metadata=_metadata(),
+        question="question",
+        answer_1_name="base",
+        answer_1="base answer",
+        answer_2_name="other",
+        answer_2="other answer",
+        criteria_name="relevance",
+        criteria_description="description",
+        assessment_system_prompt=scores.Template(
+            "$criteria_name $criteria_description"
+        ),
+        assessment_user_prompt=scores.Template(
+            "$score_id $question $answer1 $answer2 $criteria_name $criteria_description"
+        ),
+        complete_callback=on_complete,
+        trial=0,
+        include_score_id_in_prompt=True,
+        additional_call_args={},
+    )
+
+    cache_key = compute_cache_key(_logical_key(), _metadata())
+    assert result == canonical
+    assert not judge_called
+    assert completed == 1
+    assert cache._store.try_acquire(cache_key, "next-owner", ttl_seconds=30)
+    cache._store.release_leases([cache_key], "next-owner")
 
 
 @pytest.mark.parametrize("include_score_id_in_prompt", [True, False])

@@ -81,17 +81,28 @@ async def test_second_rater_uses_sqlite_cache(tmp_path: Path) -> None:
 
 async def test_duplicate_pairs_share_one_assessment(tmp_path: Path) -> None:
     rater = StubRelevanceRater(_cache_config(tmp_path))
+    units = [_text_unit("semantic", "same"), _text_unit("centroid", " SAME ")]
 
-    result = await rater.rate_relevance(
-        "query",
-        [_text_unit("one", "same"), _text_unit("two", " SAME ")],
-    )
+    result = await rater.rate_relevance("query", units)
 
-    assert rater.calls == [["one"]]
+    assert rater.calls == [["semantic"]]
     assert len(result.assessment) == 2
-    assert result.assessment[0] == result.assessment[1]
+    assert [item.text_unit.id for item in result.assessment if item.text_unit] == [
+        "semantic",
+        "centroid",
+    ]
+    assert result.assessment[0].reasoning == result.assessment[1].reasoning
+    assert result.assessment[0].score == result.assessment[1].score
     assert rater.cache_misses == 2
     assert rater.get_cache_stats()["cache_files"] == 1
+
+    cached_rater = StubRelevanceRater(_cache_config(tmp_path))
+    cached_result = await cached_rater.rate_relevance("query", units)
+
+    assert cached_rater.calls == []
+    assert [
+        item.text_unit.id for item in cached_result.assessment if item.text_unit
+    ] == ["semantic", "centroid"]
 
 
 async def test_configuration_metadata_is_redacted(tmp_path: Path) -> None:

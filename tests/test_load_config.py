@@ -31,7 +31,7 @@ class TestLoadConfigBasicFunctionality:
             "generated": {"name": "test"},
             "assertions": {"assertions_path": "assertions.json"},
             "cache_config": {"type": "memory", "storage": None},
-            "llm_config": {},
+            "llm_config": {"auth_type": "azure_managed_identity"},
         })
 
         assert config.cache_config.type == "memory"
@@ -42,7 +42,7 @@ class TestLoadConfigBasicFunctionality:
                 "generated": {"name": "test"},
                 "assertions": {"assertions_path": "assertions.json"},
                 "cache_dir": ".cache",
-                "llm_config": {},
+                "llm_config": {"auth_type": "azure_managed_identity"},
             })
 
     def test_retrieval_reference_loads_json_cache_config(self) -> None:
@@ -54,6 +54,8 @@ class TestLoadConfigBasicFunctionality:
                 "type": "json",
                 "storage": {"type": "file", "base_dir": "cache"},
             },
+            "llm_config": {"auth_type": "azure_managed_identity"},
+            "embedding_config": {"auth_type": "azure_managed_identity"},
         })
 
         assert config.cache_config.type == "json"
@@ -67,12 +69,15 @@ class TestLoadConfigBasicFunctionality:
             "text_units_path": "text_units.parquet",
             "output_dir": "output",
             "cache_config": {"type": "memory", "storage": None},
+            "llm_config": {"auth_type": "azure_managed_identity"},
         })
 
         assert config.cache_config.type == "memory"
 
     def test_differential_pairwise_uses_stage_cache_by_default(self) -> None:
-        config = DifferentialPairwiseConfig.model_validate({})
+        config = DifferentialPairwiseConfig.model_validate({
+            "llm_config": {"auth_type": "azure_managed_identity"},
+        })
 
         assert config.cache_config.type == "sqlite"
         assert config.cache_config.storage is not None
@@ -85,6 +90,7 @@ class TestLoadConfigBasicFunctionality:
     def test_differential_pairwise_can_disable_cache(self) -> None:
         config = DifferentialPairwiseConfig.model_validate({
             "cache_config": {"type": "none", "storage": None},
+            "llm_config": {"auth_type": "azure_managed_identity"},
         })
 
         assert config.cache_config.type == "none"
@@ -92,6 +98,7 @@ class TestLoadConfigBasicFunctionality:
     def test_reference_uses_judgment_cache_by_default(self) -> None:
         config = ReferenceConfig.model_validate({
             "reference": {"name": "reference", "answer_base_path": "reference.json"},
+            "llm_config": {"auth_type": "azure_managed_identity"},
         })
 
         assert config.cache_config.type == "sqlite"
@@ -103,6 +110,7 @@ class TestLoadConfigBasicFunctionality:
         config = ReferenceConfig.model_validate({
             "reference": {"name": "reference", "answer_base_path": "reference.json"},
             "cache_config": {"type": "none", "storage": None},
+            "llm_config": {"auth_type": "azure_managed_identity"},
         })
 
         assert config.cache_config.type == "none"
@@ -111,6 +119,7 @@ class TestLoadConfigBasicFunctionality:
         config = AssertionConfig.model_validate({
             "generated": {"name": "test", "answer_base_path": "answers.json"},
             "assertions": {"assertions_path": "assertions.json"},
+            "llm_config": {"auth_type": "azure_managed_identity"},
         })
 
         assert config.cache_config.type == "sqlite"
@@ -123,6 +132,7 @@ class TestLoadConfigBasicFunctionality:
             "generated": {"name": "test", "answer_base_path": "answers.json"},
             "assertions": {"assertions_path": "assertions.json"},
             "cache_config": {"type": "none", "storage": None},
+            "llm_config": {"auth_type": "azure_managed_identity"},
         })
 
         assert config.cache_config.type == "none"
@@ -144,7 +154,7 @@ class TestLoadConfigBasicFunctionality:
                 "container_name": "results",
                 "account_url": "https://example.blob.core.windows.net",
             },
-            "llm_config": {},
+            "llm_config": {"auth_type": "azure_managed_identity"},
         })
 
         assert config.cache_config.storage is not None
@@ -168,7 +178,7 @@ class TestLoadConfigBasicFunctionality:
                         "account_url": "https://example.blob.core.windows.net",
                     },
                 },
-                "llm_config": {},
+                "llm_config": {"auth_type": "azure_managed_identity"},
             })
 
     def test_load_pairwise_config_yaml(self, tmp_path: Path):
@@ -220,6 +230,7 @@ class TestLoadConfigBasicFunctionality:
     def test_pairwise_config_can_disable_cache(self) -> None:
         config = PairwiseConfig.model_validate({
             "cache_config": {"type": "none", "storage": None},
+            "llm_config": {"auth_type": "azure_managed_identity"},
         })
 
         assert config.cache_config.type == "none"

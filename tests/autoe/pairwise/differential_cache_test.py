@@ -7,6 +7,7 @@ from pathlib import Path
 from typing import Any
 
 import pandas as pd
+import pytest
 
 from benchmark_qed.autoe.config import Criteria
 from benchmark_qed.autoe.data_model import (
@@ -139,6 +140,71 @@ def test_judge_failure_resumes_from_cached_extraction(
     else:
         msg = "Expected the first judge call to fail"
         raise AssertionError(msg)
+
+    result = differential.get_differential_pairwise_scores(**kwargs)
+
+    assert calls == {"extraction": 1, "verdict": 2}
+    assert len(result) == 1
+
+
+@pytest.mark.parametrize(
+    ("invalid_verdict", "error"),
+    [
+        (DifferentialPairwiseLLMResponse(verdicts=[]), "criterion 'relevance'"),
+        (
+            DifferentialPairwiseLLMResponse(
+                verdicts=[
+                    DifferentialCriterionVerdict(
+                        criteria="relevance",
+                        winner=3,
+                        reasoning="invalid",
+                    )
+                ]
+            ),
+            "invalid winner 3",
+        ),
+    ],
+)
+def test_invalid_verdict_is_not_cached(
+    tmp_path: Path,
+    monkeypatch: Any,
+    invalid_verdict: DifferentialPairwiseLLMResponse,
+    error: str,
+) -> None:
+    calls = {"extraction": 0, "verdict": 0}
+
+    async def fake_chat(*args: Any, **kwargs: Any) -> Any:
+        await asyncio.sleep(0)
+        if kwargs["response_format"] is PairwiseExtractionLLMResponse:
+            calls["extraction"] += 1
+            return _response(
+                PairwiseExtractionLLMResponse(
+                    common="common",
+                    unique_answer_1="first",
+                    unique_answer_2="second",
+                )
+            )
+        calls["verdict"] += 1
+        if calls["verdict"] == 1:
+            return _response(invalid_verdict)
+        return _response(
+            DifferentialPairwiseLLMResponse(
+                verdicts=[
+                    DifferentialCriterionVerdict(
+                        criteria="relevance",
+                        winner=1,
+                        reasoning="valid",
+                    )
+                ]
+            )
+        )
+
+    monkeypatch.setattr(differential, "chat", fake_chat)
+    kwargs = _config(tmp_path)
+    kwargs["trials"] = 1
+
+    with pytest.raises(RuntimeError, match=error):
+        differential.get_differential_pairwise_scores(**kwargs)
 
     result = differential.get_differential_pairwise_scores(**kwargs)
 

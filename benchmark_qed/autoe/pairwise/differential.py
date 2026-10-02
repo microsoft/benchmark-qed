@@ -29,6 +29,7 @@ from rich.progress import Progress, TaskID
 
 from benchmark_qed.autoe.data_model import (
     ConditionPair,
+    DifferentialCriterionVerdict,
     DifferentialPairwiseLLMResponse,
     PairwiseExtractionLLMResponse,
 )
@@ -54,6 +55,29 @@ def _format_criteria_block(criteria: list[Criteria]) -> str:
         f"{index}. **{criterion.name}**: {criterion.description}"
         for index, criterion in enumerate(criteria, start=1)
     )
+
+
+def _validate_verdicts(
+    response: DifferentialPairwiseLLMResponse,
+    criteria: list[Criteria],
+) -> dict[str, DifferentialCriterionVerdict]:
+    """Validate criterion coverage and winners before a verdict can be cached."""
+    verdicts_by_name = {
+        item.criteria.strip().lower(): item for item in response.verdicts
+    }
+    for criterion in criteria:
+        criterion_name = criterion.name.strip().lower()
+        criterion_verdict = verdicts_by_name.get(criterion_name)
+        if criterion_verdict is None:
+            msg = f"LLM did not return a verdict for criterion '{criterion.name}'."
+            raise RuntimeError(msg)
+        if criterion_verdict.winner not in SCORE_MAPPING:
+            msg = (
+                f"LLM returned invalid winner {criterion_verdict.winner} "
+                f"for criterion '{criterion.name}'; expected 0, 1, or 2."
+            )
+            raise RuntimeError(msg)
+    return verdicts_by_name
 
 
 def get_differential_pairwise_scores(
@@ -352,6 +376,7 @@ async def get_differential_pairwise_score(
         if verdict_response is None:
             msg = "LLM did not return a structured DifferentialPairwiseLLMResponse."
             raise RuntimeError(msg)
+        _validate_verdicts(verdict_response, criteria)
         return {"response": verdict_response.model_dump(mode="json")}
 
     verdict_logical_key = compute_logical_key(
@@ -377,17 +402,11 @@ async def get_differential_pairwise_score(
     else:
         verdict_data = await _judge()
     verdict = DifferentialPairwiseLLMResponse.model_validate(verdict_data["response"])
-
-    verdicts_by_name = {
-        item.criteria.strip().lower(): item for item in verdict.verdicts
-    }
+    verdicts_by_name = _validate_verdicts(verdict, criteria)
 
     rows: list[dict[str, Any]] = []
     for criterion in criteria:
-        criterion_verdict = verdicts_by_name.get(criterion.name.strip().lower())
-        if criterion_verdict is None:
-            msg = f"LLM did not return a verdict for criterion '{criterion.name}'."
-            raise RuntimeError(msg)
+        criterion_verdict = verdicts_by_name[criterion.name.strip().lower()]
         rows.append({
             "score_id": score_id,
             "question": question,

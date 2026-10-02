@@ -3,16 +3,20 @@
 
 from __future__ import annotations
 
+import asyncio
 import hashlib
 import json
 import os
 import sqlite3
+import tempfile
 import threading
 import time
+from dataclasses import dataclass
 from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any, ClassVar
 
+from filelock import FileLock
 from graphrag_cache import Cache, CacheConfig, CacheType, create_cache
 from graphrag_storage import StorageConfig, StorageType
 
@@ -38,6 +42,16 @@ _SENSITIVE_KEY_SUFFIXES = (
 )
 _SQLITE_INITIALIZATION_TIMEOUT_SECONDS = 30.0
 _SQLITE_INITIALIZATION_RETRY_SECONDS = 0.01
+
+
+@dataclass(frozen=True)
+class CachePublishResult:
+    """Result of publishing a cache entry under a lease."""
+
+    accepted: bool
+    inserted: bool
+    value: Any | None
+    metadata: dict[str, Any] | None
 
 
 def _is_sensitive_key(key: object) -> bool:
@@ -306,30 +320,75 @@ class CacheStore:
             return 0
         inserted = 0
         for key, value, metadata in entries:
-            if await self.get(key) is not None:
-                continue
-            logical_key, config_fingerprint = (identities or {}).get(key, (None, None))
-            await self._cache.set(
-                key,
-                {
-                    "value": value,
-                    "metadata": metadata,
-                    "logical_key": logical_key,
-                    "config_fingerprint": config_fingerprint,
-                    "created_at": datetime.now(tz=UTC).isoformat(),
-                },
-            )
-            self._known_keys.add(key)
-            inserted += 1
-            if logical_key is not None and config_fingerprint is not None:
-                await self._configurations.set(
-                    logical_key,
-                    {
-                        "config_fingerprint": config_fingerprint,
-                        "metadata": metadata,
-                    },
+            if self._lease_dir is None:
+                with self._memory_lease_lock:
+                    was_inserted, _ = await self._insert_if_absent(
+                        key, value, metadata, identities
+                    )
+            else:
+                was_inserted, _ = await asyncio.to_thread(
+                    self._insert_file_entry_if_absent,
+                    key,
+                    value,
+                    metadata,
+                    identities,
                 )
+            inserted += int(was_inserted)
         return inserted
+
+    def _insert_file_entry_if_absent(
+        self,
+        key: str,
+        value: Any,
+        metadata: dict[str, Any],
+        identities: dict[str, tuple[str, str]] | None,
+    ) -> tuple[bool, tuple[Any, dict[str, Any]]]:
+        with FileLock(self._lease_mutex_path(key)):
+            return asyncio.run(self._insert_if_absent(key, value, metadata, identities))
+
+    def _publish_file_entry(
+        self,
+        key: str,
+        value: Any,
+        metadata: dict[str, Any],
+        owner_id: str,
+        logical_key: str,
+        config_fingerprint: str,
+    ) -> CachePublishResult:
+        with FileLock(self._lease_mutex_path(key)):
+            lease_path = self._lease_path(key)
+            try:
+                lease = json.loads(lease_path.read_text(encoding="utf-8"))
+                owns_lease = (
+                    lease.get("owner_id") == owner_id
+                    and float(lease["expires_at"]) > time.time()
+                )
+            except (
+                AttributeError,
+                FileNotFoundError,
+                KeyError,
+                TypeError,
+                ValueError,
+            ):
+                owns_lease = False
+            if not owns_lease:
+                canonical = asyncio.run(self.get(key))
+                return self._rejected_publication(canonical)
+            inserted, canonical = asyncio.run(
+                self._insert_if_absent(
+                    key,
+                    value,
+                    metadata,
+                    {key: (logical_key, config_fingerprint)},
+                )
+            )
+            lease_path.unlink(missing_ok=True)
+            return CachePublishResult(
+                accepted=True,
+                inserted=inserted,
+                value=canonical[0],
+                metadata=canonical[1],
+            )
 
     async def publish(
         self,
@@ -340,17 +399,98 @@ class CacheStore:
         owner_id: str,
         logical_key: str,
         config_fingerprint: str,
-    ) -> bool:
+    ) -> CachePublishResult:
         """Publish a claimed result, its configuration, and release the lease."""
-        inserted = (
-            await self.put_many(
-                [(key, value, metadata)],
-                identities={key: (logical_key, config_fingerprint)},
+        if self._lease_dir is None:
+            with self._memory_lease_lock:
+                lease = self._memory_leases.get(self._memory_lease_key(key))
+                if lease is None or lease[0] != owner_id or lease[1] <= time.time():
+                    canonical = await self.get(key)
+                    return self._rejected_publication(canonical)
+                inserted, canonical = await self._insert_if_absent(
+                    key,
+                    value,
+                    metadata,
+                    {key: (logical_key, config_fingerprint)},
+                )
+                self._memory_leases.pop(self._memory_lease_key(key), None)
+        else:
+            return await asyncio.to_thread(
+                self._publish_file_entry,
+                key,
+                value,
+                metadata,
+                owner_id,
+                logical_key,
+                config_fingerprint,
             )
-            == 1
+
+        return CachePublishResult(
+            accepted=True,
+            inserted=inserted,
+            value=canonical[0],
+            metadata=canonical[1],
         )
+
+    async def _insert_if_absent(
+        self,
+        key: str,
+        value: Any,
+        metadata: dict[str, Any],
+        identities: dict[str, tuple[str, str]] | None,
+    ) -> tuple[bool, tuple[Any, dict[str, Any]]]:
+        canonical = await self.get(key)
+        if canonical is not None:
+            return False, canonical
+        logical_key, config_fingerprint = (identities or {}).get(key, (None, None))
+        await self._cache.set(
+            key,
+            {
+                "value": value,
+                "metadata": metadata,
+                "logical_key": logical_key,
+                "config_fingerprint": config_fingerprint,
+                "created_at": datetime.now(tz=UTC).isoformat(),
+            },
+        )
+        self._known_keys.add(key)
+        if logical_key is not None and config_fingerprint is not None:
+            await self._configurations.set(
+                logical_key,
+                {
+                    "config_fingerprint": config_fingerprint,
+                    "metadata": metadata,
+                },
+            )
+        return True, (value, metadata)
+
+    @staticmethod
+    def _rejected_publication(
+        canonical: tuple[Any, dict[str, Any]] | None,
+    ) -> CachePublishResult:
+        return CachePublishResult(
+            accepted=False,
+            inserted=False,
+            value=canonical[0] if canonical is not None else None,
+            metadata=canonical[1] if canonical is not None else None,
+        )
+
+    async def claim(
+        self,
+        key: str,
+        owner_id: str,
+        *,
+        ttl_seconds: float | None = None,
+    ) -> bool:
+        """Claim uncached work and close the check-after-publication race."""
+        if await self.get(key) is not None:
+            return False
+        if not self.try_acquire(key, owner_id, ttl_seconds=ttl_seconds):
+            return False
+        if await self.get(key) is None:
+            return True
         self.release_leases([key], owner_id)
-        return inserted
+        return False
 
     def try_acquire(
         self,
@@ -377,34 +517,20 @@ class CacheStore:
 
         lease_path = self._lease_path(key)
         lease_path.parent.mkdir(parents=True, exist_ok=True)
-        payload = json.dumps({
+        payload = {
             "owner_id": owner_id,
             "expires_at": current_time + lease_ttl,
-        }).encode()
+        }
 
-        for _ in range(2):
+        with FileLock(self._lease_mutex_path(key)):
             try:
-                descriptor = os.open(
-                    lease_path,
-                    os.O_CREAT | os.O_EXCL | os.O_WRONLY,
-                    0o600,
-                )
-            except FileExistsError:
-                try:
-                    lease = json.loads(lease_path.read_text(encoding="utf-8"))
-                    if float(lease["expires_at"]) > current_time:
-                        return False
-                    lease_path.unlink()
-                except FileNotFoundError:
-                    continue
-                except (KeyError, TypeError, ValueError, json.JSONDecodeError):
-                    lease_path.unlink(missing_ok=True)
-                continue
-
-            with os.fdopen(descriptor, "wb") as lease_file:
-                lease_file.write(payload)
+                lease = json.loads(lease_path.read_text(encoding="utf-8"))
+                if float(lease["expires_at"]) > current_time:
+                    return False
+            except (FileNotFoundError, KeyError, TypeError, ValueError):
+                pass
+            self._write_lease(lease_path, payload)
             return True
-        return False
 
     def renew_leases(
         self, keys: list[str], owner_id: str, *, ttl_seconds: float | None = None
@@ -428,15 +554,16 @@ class CacheStore:
         renewed = 0
         for key in keys:
             lease_path = self._lease_path(key)
-            try:
-                lease = json.loads(lease_path.read_text(encoding="utf-8"))
-            except (FileNotFoundError, json.JSONDecodeError):
-                continue
-            if lease.get("owner_id") != owner_id:
-                continue
-            lease["expires_at"] = time.time() + lease_ttl
-            lease_path.write_text(json.dumps(lease), encoding="utf-8")
-            renewed += 1
+            with FileLock(self._lease_mutex_path(key)):
+                try:
+                    lease = json.loads(lease_path.read_text(encoding="utf-8"))
+                except (FileNotFoundError, json.JSONDecodeError):
+                    continue
+                if lease.get("owner_id") != owner_id:
+                    continue
+                lease["expires_at"] = time.time() + lease_ttl
+                self._write_lease(lease_path, lease)
+                renewed += 1
         return renewed
 
     def release_leases(self, keys: list[str], owner_id: str) -> None:
@@ -452,12 +579,13 @@ class CacheStore:
 
         for key in keys:
             lease_path = self._lease_path(key)
-            try:
-                lease = json.loads(lease_path.read_text(encoding="utf-8"))
-            except (FileNotFoundError, json.JSONDecodeError):
-                continue
-            if lease.get("owner_id") == owner_id:
-                lease_path.unlink(missing_ok=True)
+            with FileLock(self._lease_mutex_path(key)):
+                try:
+                    lease = json.loads(lease_path.read_text(encoding="utf-8"))
+                except (FileNotFoundError, json.JSONDecodeError):
+                    continue
+                if lease.get("owner_id") == owner_id:
+                    lease_path.unlink(missing_ok=True)
 
     async def find_alternate_configurations(
         self, requests: list[tuple[str, str]]
@@ -493,11 +621,17 @@ class CacheStore:
         await self._cache.clear()
         await self._properties.clear()
         await self._configurations.clear()
+        if self.config.type == CacheType.Json and self.base_dir is not None:
+            for namespace in (
+                self.namespace,
+                f"{self.namespace}/properties",
+                f"{self.namespace}/configurations",
+            ):
+                (self.base_dir / namespace).mkdir(parents=True, exist_ok=True)
         self._known_keys.clear()
         if self._lease_dir is not None and self._lease_dir.exists():
-            for lease_path in self._lease_dir.iterdir():
-                if lease_path.is_file():
-                    lease_path.unlink()
+            for lease_path in self._lease_dir.glob("*.lock"):
+                lease_path.unlink()
         elif self._lease_dir is None:
             with self._memory_lease_lock:
                 for lease_key in list(self._memory_leases):
@@ -528,6 +662,24 @@ class CacheStore:
             raise RuntimeError(msg)
         key_hash = hashlib.sha256(key.encode()).hexdigest()
         return self._lease_dir / f"{key_hash}.lock"
+
+    def _lease_mutex_path(self, key: str) -> str:
+        return f"{self._lease_path(key)}.mutex"
+
+    @staticmethod
+    def _write_lease(lease_path: Path, lease: dict[str, Any]) -> None:
+        descriptor, temporary_name = tempfile.mkstemp(
+            dir=lease_path.parent,
+            prefix=f".{lease_path.name}.",
+            suffix=".tmp",
+        )
+        temporary_path = Path(temporary_name)
+        try:
+            with os.fdopen(descriptor, "w", encoding="utf-8") as lease_file:
+                json.dump(lease, lease_file)
+            temporary_path.replace(lease_path)
+        finally:
+            temporary_path.unlink(missing_ok=True)
 
     def _memory_lease_key(self, key: str) -> tuple[str, str]:
         return (":".join(self._memory_lease_prefix), key)

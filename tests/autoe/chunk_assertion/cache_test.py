@@ -6,8 +6,9 @@ import asyncio
 import json
 import sqlite3
 import time
-from concurrent.futures import ProcessPoolExecutor
+from concurrent.futures import ProcessPoolExecutor, ThreadPoolExecutor
 from pathlib import Path
+from threading import Event
 from typing import Any
 
 import pytest
@@ -76,6 +77,53 @@ async def test_supported_cache_backends_roundtrip(
     assert await store.get("key") == ("value", {"backend": cache_type})
 
 
+@pytest.mark.parametrize("cache_type", [CacheType.Sqlite, CacheType.Json])
+async def test_cleared_persistent_cache_can_be_reused(
+    tmp_path: Path, cache_type: CacheType
+) -> None:
+    if cache_type == CacheType.Sqlite:
+        config = _cache_config(tmp_path / "cache.sqlite3")
+    else:
+        config = CacheConfig(
+            type=cache_type,
+            storage=StorageConfig(
+                type=StorageType.File, base_dir=str(tmp_path / "json")
+            ),
+        )
+    store = CacheStore(config, "test")
+    assert (
+        await store.put_many(
+            [("old", "old-value", {"version": "old"})],
+            identities={"old": ("old-logical", "old-config")},
+        )
+        == 1
+    )
+    await store.set_property_if_absent("schema", "old")
+
+    await store.clear()
+
+    assert await store.get("old") is None
+    assert await store.get_property("schema") is None
+    assert await store.claim("new", "owner", ttl_seconds=30)
+    publication = await store.publish(
+        "new",
+        "new-value",
+        {"version": "new"},
+        owner_id="owner",
+        logical_key="new-logical",
+        config_fingerprint="new-config",
+    )
+    await store.set_property_if_absent("schema", "new")
+
+    assert publication.accepted
+    assert publication.inserted
+    assert await store.get("new") == ("new-value", {"version": "new"})
+    assert await store.get_property("schema") == "new"
+    assert await store.find_alternate_configurations([
+        ("new-logical", "different-config")
+    ]) == [{"version": "new"}]
+
+
 async def test_noop_cache_does_not_persist(tmp_path: Path) -> None:
     store = CacheStore(CacheConfig(type=CacheType.Noop, storage=None), "test")
 
@@ -84,13 +132,13 @@ async def test_noop_cache_does_not_persist(tmp_path: Path) -> None:
     assert await store.get("key") is None
 
 
-def _write_cache_entry(cache_path: str, cache_key: str, grade: str) -> None:
-    async def write() -> None:
+def _write_cache_entry(cache_path: str, cache_key: str, grade: str) -> int:
+    async def write() -> int:
         cache = ContentAddressedCache(_cache_config(cache_path))
         await cache.put(cache_key, grade, {"writer": cache_key})
-        await cache.flush()
+        return await cache.flush()
 
-    asyncio.run(write())
+    return asyncio.run(write())
 
 
 def _try_claim(cache_path: str, owner_id: str) -> bool:
@@ -104,7 +152,7 @@ def _compute_once(cache_path: str, owner_id: str) -> bool:
         while True:
             if await store.get("shared") is not None:
                 return False
-            if store.try_acquire("shared", owner_id, ttl_seconds=5):
+            if await store.claim("shared", owner_id, ttl_seconds=5):
                 await asyncio.sleep(0.1)
                 await store.publish(
                     "shared",
@@ -307,9 +355,9 @@ class TestContentAddressedCache:
                 executor.submit(_write_cache_entry, str(cache_path), "shared", grade)
                 for grade in grades
             ]
-            for future in futures:
-                future.result(timeout=30)
+            inserted = [future.result(timeout=30) for future in futures]
 
+        assert inserted.count(1) == 1
         assert (
             await ContentAddressedCache(_cache_config(cache_path)).get("shared")
             in grades
@@ -363,6 +411,77 @@ class TestContentAddressedCache:
         assert not store.try_acquire("k1", "waiting", ttl_seconds=1, now=100.5)
         assert store.try_acquire("k1", "recovered", ttl_seconds=1, now=101)
 
+    def test_lease_ownership_transitions_are_atomic(
+        self, tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+    ) -> None:
+        store = CacheStore(_cache_config(tmp_path / "cache.sqlite3"), "lease-test")
+        assert store.try_acquire("k1", "expired", ttl_seconds=1, now=100)
+
+        write_started = Event()
+        allow_write = Event()
+        real_write_lease = CacheStore._write_lease
+
+        def delayed_write_lease(lease_path: Path, lease: dict[str, Any]) -> None:
+            if lease["owner_id"] == "recovered":
+                write_started.set()
+                assert allow_write.wait(timeout=5)
+            real_write_lease(lease_path, lease)
+
+        monkeypatch.setattr(
+            CacheStore, "_write_lease", staticmethod(delayed_write_lease)
+        )
+
+        with ThreadPoolExecutor(max_workers=3) as executor:
+            acquire = executor.submit(
+                store.try_acquire,
+                "k1",
+                "recovered",
+                ttl_seconds=30,
+                now=101,
+            )
+            assert write_started.wait(timeout=5)
+            renew = executor.submit(
+                store.renew_leases,
+                ["k1"],
+                "expired",
+                ttl_seconds=30,
+            )
+            release = executor.submit(store.release_leases, ["k1"], "expired")
+
+            assert not renew.done()
+            assert not release.done()
+            allow_write.set()
+
+            assert acquire.result(timeout=5)
+            assert renew.result(timeout=5) == 0
+            release.result(timeout=5)
+
+        lease = json.loads(store._lease_path("k1").read_text(encoding="utf-8"))
+        assert lease["owner_id"] == "recovered"
+
+    def test_incomplete_lease_is_replaced_under_contention(
+        self, tmp_path: Path
+    ) -> None:
+        store = CacheStore(_cache_config(tmp_path / "cache.sqlite3"), "lease-test")
+        lease_path = store._lease_path("k1")
+        lease_path.parent.mkdir(parents=True)
+        lease_path.write_text("{", encoding="utf-8")
+        owners = [f"owner-{index}" for index in range(8)]
+
+        with ThreadPoolExecutor(max_workers=len(owners)) as executor:
+            acquired = list(
+                executor.map(
+                    lambda owner: store.try_acquire(
+                        "k1", owner, ttl_seconds=30, now=100
+                    ),
+                    owners,
+                )
+            )
+
+        assert acquired.count(True) == 1
+        lease = json.loads(lease_path.read_text(encoding="utf-8"))
+        assert lease["owner_id"] == owners[acquired.index(True)]
+
     def test_recovers_lease_abandoned_by_exited_process(self, tmp_path: Path) -> None:
         cache_path = tmp_path / "cache.sqlite3"
         with ProcessPoolExecutor(max_workers=1) as executor:
@@ -379,7 +498,7 @@ class TestContentAddressedCache:
         store = CacheStore(_cache_config(cache_path), "lease-test")
         assert store.try_acquire("k1", "owner", ttl_seconds=30)
 
-        inserted = await store.publish(
+        publication = await store.publish(
             "k1",
             "value",
             {"model": "test"},
@@ -388,9 +507,72 @@ class TestContentAddressedCache:
             config_fingerprint="config",
         )
 
-        assert inserted
+        assert publication.accepted
+        assert publication.inserted
+        assert publication.value == "value"
+        assert publication.metadata == {"model": "test"}
         assert await store.get("k1") == ("value", {"model": "test"})
         assert inspect_cache(cache_path)["active_leases"] == 0
+
+    async def test_publish_returns_canonical_first_writer_result(
+        self, tmp_path: Path
+    ) -> None:
+        cache_path = tmp_path / "cache.sqlite3"
+        owner = CacheStore(_cache_config(cache_path), "lease-test")
+        writer = CacheStore(_cache_config(cache_path), "lease-test")
+        assert owner.try_acquire("k1", "owner", ttl_seconds=30)
+        assert await writer.put_many([("k1", "canonical", {"writer": "first"})]) == 1
+
+        publication = await owner.publish(
+            "k1",
+            "later",
+            {"writer": "later"},
+            owner_id="owner",
+            logical_key="logical",
+            config_fingerprint="config",
+        )
+
+        assert publication.accepted
+        assert not publication.inserted
+        assert publication.value == "canonical"
+        assert publication.metadata == {"writer": "first"}
+        assert await owner.get("k1") == ("canonical", {"writer": "first"})
+
+    async def test_expired_owner_cannot_publish_after_reacquisition(
+        self, tmp_path: Path
+    ) -> None:
+        cache_path = tmp_path / "cache.sqlite3"
+        expired_owner = CacheStore(_cache_config(cache_path), "lease-test")
+        current_owner = CacheStore(_cache_config(cache_path), "lease-test")
+        assert expired_owner.try_acquire("k1", "expired", ttl_seconds=0.01)
+        time.sleep(0.02)
+        assert current_owner.try_acquire("k1", "current", ttl_seconds=30)
+
+        rejected = await expired_owner.publish(
+            "k1",
+            "stale",
+            {"writer": "expired"},
+            owner_id="expired",
+            logical_key="logical",
+            config_fingerprint="config",
+        )
+        accepted = await current_owner.publish(
+            "k1",
+            "current",
+            {"writer": "current"},
+            owner_id="current",
+            logical_key="logical",
+            config_fingerprint="config",
+        )
+
+        assert not rejected.accepted
+        assert not rejected.inserted
+        assert accepted.accepted
+        assert accepted.inserted
+        assert await current_owner.get("k1") == (
+            "current",
+            {"writer": "current"},
+        )
 
     async def test_migrates_local_schema_to_graphrag_cache(
         self, tmp_path: Path

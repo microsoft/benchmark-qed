@@ -238,13 +238,15 @@ async def _get_pairwise_score_with_cache(
             include_score_id_in_prompt=include_score_id_in_prompt,
             additional_call_args=additional_call_args,
         )
-        await cache.publish(
+        publication = await cache.publish(
             cache_key,
             score,
             cache_metadata,
             owner_id=owner_id,
             logical_key=logical_key,
         )
+        if publication.accepted and isinstance(publication.value, dict):
+            score = publication.value
     except (Exception, asyncio.CancelledError):
         cache.release(cache_key, owner_id)
         raise

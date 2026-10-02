@@ -5,7 +5,12 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING, Any
 
-from benchmark_qed.cache import CacheStore, redact_sensitive_values, stable_fingerprint
+from benchmark_qed.cache import (
+    CachePublishResult,
+    CacheStore,
+    redact_sensitive_values,
+    stable_fingerprint,
+)
 
 if TYPE_CHECKING:
     from graphrag_cache import CacheConfig
@@ -101,9 +106,7 @@ class ReferenceScoreCache:
 
     async def claim(self, cache_key: str, owner_id: str) -> bool:
         """Claim an uncached reference score for this worker."""
-        if await self._store.get(cache_key) is not None:
-            return False
-        return self._store.try_acquire(
+        return await self._store.claim(
             cache_key,
             owner_id,
             ttl_seconds=self.lease_ttl_seconds,
@@ -132,7 +135,7 @@ class ReferenceScoreCache:
         *,
         owner_id: str,
         logical_key: str,
-    ) -> bool:
+    ) -> CachePublishResult:
         """Publish a reference score and release its lease."""
         return await self._store.publish(
             cache_key,

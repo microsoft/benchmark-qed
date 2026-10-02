@@ -9,6 +9,7 @@ import logging
 from typing import TYPE_CHECKING, Any
 
 from benchmark_qed.cache import (
+    CachePublishResult,
     CacheStore,
     changed_configuration_fields,
     get_cache_base_dir,
@@ -191,9 +192,7 @@ class ContentAddressedCache:
     async def claim(self, cache_key: str, owner_id: str) -> bool:
         """Claim an uncached judgement for this worker."""
         await self._ensure_initialized()
-        if await self._store.get(cache_key) is not None:
-            return False
-        return self._store.try_acquire(
+        return await self._store.claim(
             cache_key,
             owner_id,
             ttl_seconds=self.lease_ttl_seconds,
@@ -220,7 +219,7 @@ class ContentAddressedCache:
         owner_id: str,
         logical_key: str,
         config_fingerprint: str,
-    ) -> bool:
+    ) -> CachePublishResult:
         """Publish a grade and release its lease atomically."""
         await self._ensure_initialized()
         return await self._store.publish(

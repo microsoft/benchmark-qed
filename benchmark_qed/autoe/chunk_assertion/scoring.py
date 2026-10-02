@@ -264,19 +264,23 @@ async def _evaluate_uncached_pairs(
             for q_idx, a_idx, _rank in targets:
                 assertion_call_stats[(q_idx, a_idx)]["failed"] += 1
         else:
-            inserted_count += int(
-                await cache.publish(
-                    cache_key,
-                    grade,
-                    cache_metadata,
-                    owner_id=lease_owner,
-                    logical_key=logical_key,
-                    config_fingerprint=config_fingerprint,
-                )
+            publication = await cache.publish(
+                cache_key,
+                grade,
+                cache_metadata,
+                owner_id=lease_owner,
+                logical_key=logical_key,
+                config_fingerprint=config_fingerprint,
+            )
+            inserted_count += int(publication.inserted)
+            canonical_grade = (
+                publication.value
+                if publication.accepted and isinstance(publication.value, str)
+                else grade
             )
             mapped_grade = (
-                grade
-                if grade
+                canonical_grade
+                if canonical_grade
                 in {
                     ChunkAssertionGrade.FULL_SUPPORT,
                     ChunkAssertionGrade.PARTIAL_SUPPORT,
@@ -288,7 +292,7 @@ async def _evaluate_uncached_pairs(
                 q_key = (q_idx, a_idx)
                 per_chunk_grades[q_key].append((
                     rank,
-                    grade_to_score(grade),
+                    grade_to_score(canonical_grade),
                     mapped_grade,
                 ))
                 assertion_call_stats[q_key]["successful"] += 1

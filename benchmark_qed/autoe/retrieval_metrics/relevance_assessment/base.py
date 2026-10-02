@@ -133,7 +133,7 @@ class RelevanceRater(ABC):
             owned = {
                 cache_key: item
                 for cache_key, item in uncached_by_key.items()
-                if self._cache_store.try_acquire(
+                if await self._cache_store.claim(
                     cache_key,
                     lease_owner,
                     ttl_seconds=_LEASE_TTL_SECONDS,
@@ -166,7 +166,7 @@ class RelevanceRater(ABC):
                             (index, cached_assessment) for index in item[1]
                         )
                         completed_keys.append(cache_key)
-                    elif self._cache_store.try_acquire(
+                    elif await self._cache_store.claim(
                         cache_key,
                         lease_owner,
                         ttl_seconds=_LEASE_TTL_SECONDS,
@@ -182,7 +182,8 @@ class RelevanceRater(ABC):
         # Combine cached and uncached results in original order
         assessments_by_index = dict(cached_assessments)
         all_assessments = [
-            assessments_by_index[index] for index in range(len(text_units))
+            self._attach_text_unit(assessments_by_index[index], text_unit)
+            for index, text_unit in enumerate(text_units)
         ]
 
         return RelevanceAssessmentResponse(assessment=all_assessments)
@@ -225,16 +226,21 @@ class RelevanceRater(ABC):
                 cache_key,
                 (text_unit, indices),
             ), assessment in zip(claimed.items(), response.assessment, strict=True):
-                await cache_store.publish(
+                publication = await cache_store.publish(
                     cache_key,
-                    assessment.model_dump(exclude={"text_unit": {"text_embedding"}}),
+                    assessment.model_dump(exclude={"text_unit"}),
                     self._build_cache_metadata(query, rater_params),
                     owner_id=lease_owner,
                     logical_key=self._generate_logical_key(query, text_unit),
                     config_fingerprint=config_fingerprint,
                 )
+                canonical_assessment = (
+                    RelevanceAssessmentItem(**publication.value)
+                    if publication.accepted and isinstance(publication.value, dict)
+                    else assessment
+                )
                 cached_assessments.extend(
-                    (original_idx, assessment) for original_idx in indices
+                    (original_idx, canonical_assessment) for original_idx in indices
                 )
         except (Exception, asyncio.CancelledError):
             cache_store.release_leases(cache_keys, lease_owner)
@@ -243,6 +249,17 @@ class RelevanceRater(ABC):
             heartbeat.cancel()
             with contextlib.suppress(asyncio.CancelledError):
                 await heartbeat
+
+    @staticmethod
+    def _attach_text_unit(
+        assessment: RelevanceAssessmentItem, text_unit: TextUnit
+    ) -> RelevanceAssessmentItem:
+        """Attach a cached judgment to the input identity it represents."""
+        return RelevanceAssessmentItem(
+            text_unit=text_unit,
+            reasoning=assessment.reasoning,
+            score=assessment.score,
+        )
 
     @staticmethod
     def _validate_result_count(
