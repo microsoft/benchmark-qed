@@ -1019,7 +1019,7 @@ class DataLinkedQuestionGen(BaseQuestionGen):
 
         if len(text_units) < 2:
             # Fall back to random selection
-            rng = random.Random(self.random_seed)  # noqa: S311
+            rng = random.Random(self.random_seed)  # ruff: ignore[suspicious-non-cryptographic-random-usage]
             return rng.sample(questions, min(max_count, len(questions)))
 
         # Use MMR sampler - high lambda to start from centroid, then diversify

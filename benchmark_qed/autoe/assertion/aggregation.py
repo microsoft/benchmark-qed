@@ -359,7 +359,7 @@ def summarize_standard_scores(
         .agg(
             score=(
                 "score",
-                lambda x: int(x.mean() > pass_threshold),
+                lambda x: int(np.asarray(x, dtype=float).mean() > pass_threshold),
             ),
             scores=("score", list),
         )
@@ -370,8 +370,8 @@ def summarize_standard_scores(
         summary_by_assertion
         .groupby(["question"])
         .agg(
-            success=("score", lambda x: (x == 1).sum()),
-            fail=("score", lambda x: (x == 0).sum()),
+            success=("score", lambda x: int(np.count_nonzero(np.asarray(x) == 1))),
+            fail=("score", lambda x: int(np.count_nonzero(np.asarray(x) == 0))),
         )
         .reset_index()
     )
@@ -386,8 +386,8 @@ def summarize_standard_scores(
     summary_by_assertion = summary_by_assertion.drop(columns=["scores"])
 
     # Overall metrics
-    total_success = int(summary_by_question["success"].sum())
-    total_fail = int(summary_by_question["fail"].sum())
+    total_success = int(summary_by_question["success"].to_numpy(dtype=int).sum())
+    total_fail = int(summary_by_question["fail"].to_numpy(dtype=int).sum())
     total_assertions = total_success + total_fail
     overall_accuracy = total_success / total_assertions if total_assertions > 0 else 0.0
 
@@ -397,7 +397,9 @@ def summarize_standard_scores(
         summary_by_question["success"] + summary_by_question["fail"]
     )
     num_questions = len(summary_by_question)
-    avg_question_pass_rate = float(summary_by_question["pass_rate"].mean())
+    avg_question_pass_rate = float(
+        summary_by_question["pass_rate"].to_numpy(dtype=float).mean()
+    )
 
     eval_stats: dict[str, object] = {
         "total_assertions": total_assertions,
@@ -448,21 +450,29 @@ def compute_hierarchical_eval_summary(
             - num_questions: number of unique questions
     """
     total_assertions = len(aggregated)
-    passed_assertions = int((aggregated["global_score"] == 1).sum())
+    passed_assertions = int(
+        np.count_nonzero(aggregated["global_score"].to_numpy() == 1)
+    )
     failed_assertions = total_assertions - passed_assertions
 
-    overridden_count = int(
-        aggregated["global_score_overridden"].sum()
+    overridden_count = (
+        int(aggregated["global_score_overridden"].to_numpy(dtype=int).sum())
         if "global_score_overridden" in aggregated.columns
         else 0
     )
-    discovery_count = int(aggregated["has_discovery"].sum())
+    discovery_count = int(aggregated["has_discovery"].to_numpy(dtype=int).sum())
 
     # Per-question metrics (average per question, then mean across)
     per_q = aggregated.groupby("question")
-    avg_global_pass_rate = float(per_q["global_score"].mean().mean())
-    avg_support_level = float(per_q["support_level"].mean().mean())
-    discovery_rate = float(per_q["has_discovery"].mean().mean())
+    avg_global_pass_rate = float(
+        np.asarray(per_q["global_score"].mean(), dtype=float).mean()
+    )
+    avg_support_level = float(
+        np.asarray(per_q["support_level"].mean(), dtype=float).mean()
+    )
+    discovery_rate = float(
+        np.asarray(per_q["has_discovery"].mean(), dtype=float).mean()
+    )
 
     # Supporting pass rate: count all evaluations per question
     # (no deduplication, same as multi-RAG pipeline)
@@ -488,8 +498,12 @@ def compute_hierarchical_eval_summary(
 
     if not passed_df.empty:
         per_q_passed = passed_df.groupby("question")
-        support_level_passed = float(per_q_passed["support_level"].mean().mean())
-        discovery_rate_passed = float(per_q_passed["has_discovery"].mean().mean())
+        support_level_passed = float(
+            np.asarray(per_q_passed["support_level"].mean(), dtype=float).mean()
+        )
+        discovery_rate_passed = float(
+            np.asarray(per_q_passed["has_discovery"].mean(), dtype=float).mean()
+        )
 
         per_q_supp_rates_passed: list[float] = []
         for _, group in per_q_passed:

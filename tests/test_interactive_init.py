@@ -18,6 +18,7 @@ from benchmark_qed.cli.interactive import (
 from benchmark_qed.cli.yaml_renderer import (
     _render_llm_section,
     render_autoe_assertion_yaml,
+    render_autoe_chunk_assertion_yaml,
     render_autoe_pairwise_yaml,
     render_autoe_reference_yaml,
     render_autoq_yaml,
@@ -152,6 +153,16 @@ def _default_assertion_config() -> dict[str, Any]:
     }
 
 
+def _default_chunk_assertion_config() -> dict[str, Any]:
+    return {
+        "chat_provider": _openai_chat_provider(),
+        "generated": {"name": "vector_rag"},
+        "assertions": {"assertions_path": "input/data_local_assertions.json"},
+        "k_list": [5, 10, 20, 50],
+        "pass_threshold": 0.5,
+    }
+
+
 # ═══════════════════════════════════════════════════════════════════════════
 # 1. YAML Renderer Tests
 # ═══════════════════════════════════════════════════════════════════════════
@@ -231,6 +242,7 @@ class TestYamlRenderers:
         assert "others" in parsed
         assert "question_sets" in parsed
         assert parsed["trials"] == 4
+        assert parsed["cache_config"]["type"] == "sqlite"
         assert "llm_config" in parsed
         assert "prompt_config" in parsed
         assert isinstance(parsed["prompt_config"], dict)
@@ -265,6 +277,7 @@ class TestYamlRenderers:
         assert parsed["score_max"] == 10
         assert "llm_config" in parsed
         assert "prompt_config" in parsed
+        assert parsed["cache_config"]["type"] == "sqlite"
         assert isinstance(parsed["prompt_config"], dict)
 
     def test_render_autoe_reference_yaml_multiple_generated(self):
@@ -288,9 +301,31 @@ class TestYamlRenderers:
         assert "assertions" in parsed
         assert parsed["pass_threshold"] == pytest.approx(0.5)
         assert parsed["trials"] == 4
+        assert parsed["cache_config"]["type"] == "sqlite"
+        assert (
+            parsed["cache_config"]["storage"]["base_dir"]
+            == ".benchmark_qed_cache/assertion"
+        )
+        assert parsed["cache_config"]["database_name"] == "assertion.sqlite3"
         assert "llm_config" in parsed
         assert "prompt_config" in parsed
         assert isinstance(parsed["prompt_config"], dict)
+
+    def test_render_autoe_chunk_assertion_yaml_uses_documented_inputs(self):
+        """Chunk assertion YAML defaults match the bundled data walkthrough."""
+        yaml_content = render_autoe_chunk_assertion_yaml(
+            _default_chunk_assertion_config()
+        )
+        parsed = yaml.safe_load(yaml_content)
+
+        assert (
+            parsed["generated"]["retrieval_path"]
+            == "input/vector_rag_short_context/data_local_retrieval_results.json"
+        )
+        assert (
+            parsed["assertions"]["assertions_path"]
+            == "input/data_local_assertions.json"
+        )
 
 
 # ═══════════════════════════════════════════════════════════════════════════

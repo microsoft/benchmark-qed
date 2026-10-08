@@ -8,6 +8,7 @@ from pathlib import Path
 from string import Template
 from typing import Any
 
+from graphrag_cache import CacheConfig
 from graphrag_llm.completion import LLMCompletion
 
 from benchmark_qed.autod.data_model.text_unit import TextUnit
@@ -37,8 +38,7 @@ class BingRelevanceRater(RelevanceRater):
         llm_config: LLMConfig,
         prompt_template: Template | None = None,
         concurrent_requests: int = 32,
-        cache_dir: Path | None = None,
-        cache_enabled: bool = True,
+        cache_config: CacheConfig | None = None,
     ) -> None:
         """
         Initialize the BingRelevanceRater.
@@ -48,10 +48,9 @@ class BingRelevanceRater(RelevanceRater):
             llm_config: The LLM configuration containing call arguments and other settings.
             prompt_template: UMBRELA prompt template. If None, uses default from file.
             concurrent_requests: Maximum number of concurrent requests to the LLM.
-            cache_dir: Directory to store cache files. If None, caching is disabled.
-            cache_enabled: Whether to enable caching functionality.
+            cache_config: GraphRAG cache backend configuration.
         """
-        super().__init__(cache_dir=cache_dir, cache_enabled=cache_enabled)
+        super().__init__(cache_config=cache_config)
         self.llm_client = llm_client
         self.llm_config = llm_config
         self.prompt_template: Template = prompt_template or load_template_file(
