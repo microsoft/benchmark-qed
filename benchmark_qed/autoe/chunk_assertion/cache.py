@@ -167,6 +167,19 @@ class ContentAddressedCache:
         entry = await self._store.get(cache_key)
         return str(entry[0]) if entry is not None else None
 
+    async def get_many(self, cache_keys: list[str]) -> dict[str, str]:
+        """Retrieve grades for existing cache keys in one backend operation."""
+        await self._ensure_initialized()
+        entries = await self._store.get_many(cache_keys)
+        grades = {key: str(entry[0]) for key, entry in entries.items()}
+        requested_keys = set(cache_keys)
+        grades.update({
+            key: pending[0]
+            for key, pending in self._pending.items()
+            if key in requested_keys
+        })
+        return grades
+
     async def get_metadata(self, cache_key: str) -> dict[str, Any] | None:
         """Retrieve the inspectable metadata stored with a cache entry."""
         await self._ensure_initialized()

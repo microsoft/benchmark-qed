@@ -73,8 +73,18 @@ async def test_supported_cache_backends_roundtrip(
         config = CacheConfig(type=cache_type, storage=None)
 
     store = CacheStore(config, "test")
-    assert await store.put_many([("key", "value", {"backend": cache_type})]) == 1
+    assert (
+        await store.put_many([
+            ("key", "value", {"backend": cache_type}),
+            ("other", "other-value", {"backend": cache_type}),
+        ])
+        == 2
+    )
     assert await store.get("key") == ("value", {"backend": cache_type})
+    assert await store.get_many(["key", "missing", "other", "key"]) == {
+        "key": ("value", {"backend": cache_type}),
+        "other": ("other-value", {"backend": cache_type}),
+    }
 
 
 @pytest.mark.parametrize("cache_type", [CacheType.Sqlite, CacheType.Json])
@@ -244,6 +254,27 @@ class TestContentAddressedCache:
         await cache.put("k1", "full_support")
         assert await cache.get("k1") == "full_support"
         assert await cache.get("missing") is None
+
+    async def test_get_many_includes_pending_and_persisted_grades(
+        self, tmp_path: Path
+    ) -> None:
+        cache_path = tmp_path / "cache.sqlite3"
+        cache = ContentAddressedCache(_cache_config(cache_path))
+        await cache.put("persisted", "full_support")
+        await cache.flush()
+
+        reloaded = ContentAddressedCache(_cache_config(cache_path))
+        await reloaded.put("pending", "partial_support")
+
+        assert await reloaded.get_many([
+            "persisted",
+            "missing",
+            "pending",
+            "persisted",
+        ]) == {
+            "persisted": "full_support",
+            "pending": "partial_support",
+        }
 
     async def test_put_is_idempotent_for_new_count(self, tmp_path: Path) -> None:
         """Re-putting an existing key does not increment the new-entry count."""

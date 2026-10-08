@@ -6,6 +6,64 @@ pairwise scoring, reference scoring, standard single-RAG assertion scoring,
 chunk-assertion scoring, and retrieval relevance assessment use the shared
 GraphRAG cache configuration format.
 
+## Migrating existing cache configuration
+
+`cache_dir` has been replaced by the GraphRAG `cache_config` object. Existing
+configurations that contain `cache_dir` are rejected so that BenchmarkQED does
+not silently select a different cache backend or location.
+
+For example, replace a chunk-assertion configuration such as:
+
+```yaml
+cache_dir: .benchmark_qed_cache
+```
+
+with:
+
+```yaml
+cache_config:
+  type: sqlite
+  storage:
+    type: file
+    base_dir: .benchmark_qed_cache/chunk_assertions
+  database_name: chunk_assertions.sqlite3
+```
+
+For retrieval relevance caches, use the same `cache_config` structure and
+choose a workflow-specific `base_dir` and `database_name`. Use `type: json`
+instead of `sqlite` when entries must be stored through a GraphRAG storage
+backend such as Azure Blob Storage.
+
+Existing chunk-assertion JSONL files are imported automatically when they are
+adjacent to the configured SQLite database. For example, configuring
+`cache.sqlite3` imports an existing `cache.jsonl` once and leaves the source
+file unchanged.
+
+The corresponding Python APIs also changed:
+
+| Previous API | Current API |
+|---|---|
+| `ContentAddressedCache(path)` | `ContentAddressedCache(cache_config)` |
+| `cache.get(...)`, `put(...)`, `flush()` | `await cache.get(...)`, `await cache.put(...)`, `await cache.flush()` |
+| `run_assertion_eval_chunk_mode(cache_path=...)` | `run_assertion_eval_chunk_mode(cache_config=...)` |
+| Relevance raters with `cache_dir` and `cache_enabled` | Relevance raters with `cache_config` |
+
+Use `create_default_cache_config()` to construct the standard local SQLite
+configuration from Python:
+
+```python
+from benchmark_qed.cache import create_default_cache_config
+
+cache_config = create_default_cache_config(
+    ".benchmark_qed_cache/chunk_assertions",
+    database_name="chunk_assertions.sqlite3",
+)
+```
+
+Standard pairwise, reference, assertion, and chunk-assertion configurations now
+enable persistent SQLite judgment caching by default. Select `type: none` with
+`storage: null` when every run must issue fresh provider requests.
+
 ## Cache backends
 
 Set `cache_config.type` to one of:

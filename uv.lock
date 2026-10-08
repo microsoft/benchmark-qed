@@ -203,7 +203,7 @@ wheels = [
 name = "appnope"
 version = "1.0.0"
 source = { registry = "https://packagefeedproxy.microsoft.io/pypi/simple/" }
-sdist = { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/appnope/1/appnope-1.0.0.tar.gz", hash = "sha256:685db59cb6043c3c2e528adc0b3bce3a5f8d09bcf7492c6ea650d1b7421f3c49", size = 5454, upload_time = "2026-08-20T21:36:13Z" }
+sdist = { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/appnope/1/appnope-1.0.0.tar.gz", hash = "sha256:685db59cb6043c3c2e528adc0b3bce3a5f8d09bcf7492c6ea650d1b7421f3c49", size = 5454, upload_time = "2026-10-05T00:21:52Z" }
 wheels = [
     { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/appnope/1/appnope-1.0.0-py3-none-any.whl", hash = "sha256:6fe0c04218aab65c54c4ff81638cdbf848d89f5653b74d68638a137f200dd16e", size = 4158, upload_time = "2026-08-27T22:48:42Z" },
 ]
@@ -212,7 +212,7 @@ wheels = [
 name = "asttokens"
 version = "3.0.2"
 source = { registry = "https://packagefeedproxy.microsoft.io/pypi/simple/" }
-sdist = { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/asttokens/3.0.2/asttokens-3.0.2.tar.gz", hash = "sha256:3ecdbd8f2cc195f53ccada3a613538bb5f9ef6f6869129f13e03c30a677b8fe2", size = 63136, upload_time = "2026-07-12T03:31:49Z" }
+sdist = { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/asttokens/3.0.2/asttokens-3.0.2.tar.gz", hash = "sha256:3ecdbd8f2cc195f53ccada3a613538bb5f9ef6f6869129f13e03c30a677b8fe2", size = 63136, upload_time = "2026-10-05T00:21:52Z" }
 wheels = [
     { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/asttokens/3.0.2/asttokens-3.0.2-py3-none-any.whl", hash = "sha256:9da13157f5b28becde0bd374fc677dcd3c290614264eff096f167c469cd9f933", size = 28702, upload_time = "2026-07-24T10:58:42Z" },
 ]
@@ -479,11 +479,11 @@ requires-dist = [
     { name = "azure-identity", specifier = ">=1.25.3" },
     { name = "fastparquet", specifier = ">=2026.5.0" },
     { name = "filelock", specifier = ">=3.20.3" },
-    { name = "graphrag-cache", specifier = ">=3.2.0" },
-    { name = "graphrag-common", specifier = ">=3.2.0" },
-    { name = "graphrag-input", specifier = ">=3.2.0" },
-    { name = "graphrag-llm", specifier = ">=3.2.0" },
-    { name = "graphrag-storage", specifier = ">=3.2.0" },
+    { name = "graphrag-cache", path = "local/graphrag_cache-3.3.0-py3-none-any.whl" },
+    { name = "graphrag-common", path = "local/graphrag_common-3.3.0-py3-none-any.whl" },
+    { name = "graphrag-input", path = "local/graphrag_input-3.3.0-py3-none-any.whl" },
+    { name = "graphrag-llm", path = "local/graphrag_llm-3.3.0-py3-none-any.whl" },
+    { name = "graphrag-storage", path = "local/graphrag_storage-3.3.0-py3-none-any.whl" },
     { name = "json-repair", specifier = ">=0.61.1" },
     { name = "matplotlib", specifier = ">=3.11.0" },
     { name = "nest-asyncio", specifier = ">=1.6.0" },
@@ -941,7 +941,7 @@ wheels = [
 name = "comm"
 version = "0.2.3"
 source = { registry = "https://packagefeedproxy.microsoft.io/pypi/simple/" }
-sdist = { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/comm/0.2.3/comm-0.2.3.tar.gz", hash = "sha256:2dc8048c10962d55d7ad693be1e7045d891b7ce8d999c97963a5e3e99c055971", size = 6319, upload_time = "2025-07-25T14:02:04Z" }
+sdist = { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/comm/0.2.3/comm-0.2.3.tar.gz", hash = "sha256:2dc8048c10962d55d7ad693be1e7045d891b7ce8d999c97963a5e3e99c055971", size = 6319, upload_time = "2026-10-05T00:21:54Z" }
 wheels = [
     { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/comm/0.2.3/comm-0.2.3-py3-none-any.whl", hash = "sha256:c615d91d75f7f04f095b30d1c1711babd43bdc6419c1be9886a85f2f4e489417", size = 7294, upload_time = "2026-07-24T10:21:31Z" },
 ]
@@ -1269,7 +1269,7 @@ wheels = [
     { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/cramjam/2.12.1/cramjam-2.12.1-cp312-cp312-macosx_10_12_x86_64.whl", hash = "sha256:4bb60168d79f047f3bf228c5e702cd2d8e0d31c096a93b1f6054b5b964b8a2c4", size = 1923130, upload_time = "2026-09-30T20:03:51Z" },
     { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/cramjam/2.12.1/cramjam-2.12.1-cp312-cp312-macosx_11_0_arm64.whl", hash = "sha256:68ec92ea10901e9333ac4869c7fe40809b3a72a967b503f8dad1810e1f5c9f1d", size = 1751320, upload_time = "2026-09-03T17:09:51Z" },
     { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/cramjam/2.12.1/cramjam-2.12.1-cp312-cp312-manylinux_2_12_i686.manylinux2010_i686.whl", hash = "sha256:f33e61bef3b8f22986f4f5f9ca1ec547b953175d3f5bf85abcf54695394f4058", size = 2064939, upload_time = "2026-08-25T13:12:09Z" },
-    { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/cramjam/2.12.1/cramjam-2.12.1-cp312-cp312-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:dd1521d73ed6e227c6aa23ba973495f22d8f340d5b1023771b756c7f4b9883a0", size = 1865257, upload_time = "2026-08-25T13:12:10Z" },
+    { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/cramjam/2.12.1/cramjam-2.12.1-cp312-cp312-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:dd1521d73ed6e227c6aa23ba973495f22d8f340d5b1023771b756c7f4b9883a0", size = 1865257, upload_time = "2026-10-02T18:13:12Z" },
     { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/cramjam/2.12.1/cramjam-2.12.1-cp312-cp312-manylinux_2_17_armv7l.manylinux2014_armv7l.whl", hash = "sha256:4f0cc6a64a708c5ee21e1fdbafd9dfcd76c7a0d574f0e21020ad3808ccfc6ce6", size = 1908855, upload_time = "2026-08-25T13:12:12Z" },
     { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/cramjam/2.12.1/cramjam-2.12.1-cp312-cp312-manylinux_2_17_ppc64le.manylinux2014_ppc64le.whl", hash = "sha256:20d8e2a9a11bc9a9028fffb72c8fe001c4ff2665b028e390ecc0572859d77d93", size = 2092106, upload_time = "2026-08-25T13:12:13Z" },
     { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/cramjam/2.12.1/cramjam-2.12.1-cp312-cp312-manylinux_2_17_s390x.manylinux2014_s390x.whl", hash = "sha256:d75a49543e869e7798400f9509cf90ff0c9feeba6a903df62b7f2dfe133bac7e", size = 2074193, upload_time = "2026-08-25T13:12:15Z" },
@@ -1497,7 +1497,7 @@ wheels = [
 name = "executing"
 version = "2.2.1"
 source = { registry = "https://packagefeedproxy.microsoft.io/pypi/simple/" }
-sdist = { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/executing/2.2.1/executing-2.2.1.tar.gz", hash = "sha256:3632cc370565f6648cc328b32435bd120a1e4ebb20c77e3fdde9a13cd1e533c4", size = 1129488, upload_time = "2025-09-01T09:48:10Z" }
+sdist = { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/executing/2.2.1/executing-2.2.1.tar.gz", hash = "sha256:3632cc370565f6648cc328b32435bd120a1e4ebb20c77e3fdde9a13cd1e533c4", size = 1129488, upload_time = "2026-10-05T00:21:55Z" }
 wheels = [
     { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/executing/2.2.1/executing-2.2.1-py2.py3-none-any.whl", hash = "sha256:760643d3452b4d777d295bb167ccc74c64a81df23fb5e08eff250c425a4b2017", size = 28317, upload_time = "2026-07-24T09:35:41Z" },
 ]
@@ -1870,35 +1870,46 @@ wheels = [
 
 [[package]]
 name = "graphrag-cache"
-version = "3.2.0"
-source = { registry = "https://packagefeedproxy.microsoft.io/pypi/simple/" }
+version = "3.3.0"
+source = { path = "local/graphrag_cache-3.3.0-py3-none-any.whl" }
 dependencies = [
     { name = "graphrag-common" },
     { name = "graphrag-storage" },
 ]
-sdist = { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/graphrag-cache/3.2/graphrag_cache-3.2.0.tar.gz", hash = "sha256:c88f73cb7b619df5383b2e1c2eb479b3a53fdcaee8d4a29b2413f8999b2f492d", size = 9125, upload_time = "2026-09-23T22:28:20Z" }
 wheels = [
-    { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/graphrag-cache/3.2/graphrag_cache-3.2.0-py3-none-any.whl", hash = "sha256:186499291da23212c6f208fa203bfa47702bbd4e00ff86198b5aa0f2f2fa1b5c", size = 11977, upload_time = "2026-09-30T23:33:57Z" },
+    { filename = "graphrag_cache-3.3.0-py3-none-any.whl", hash = "sha256:440fe7cc9460d18ae72379da90b1af82812b19db826f3f3b9fde4eaafc048980" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "graphrag-common", specifier = "==3.3.0" },
+    { name = "graphrag-storage", specifier = "==3.3.0" },
 ]
 
 [[package]]
 name = "graphrag-common"
-version = "3.2.0"
-source = { registry = "https://packagefeedproxy.microsoft.io/pypi/simple/" }
+version = "3.3.0"
+source = { path = "local/graphrag_common-3.3.0-py3-none-any.whl" }
 dependencies = [
     { name = "python-dotenv" },
     { name = "pyyaml" },
     { name = "toml" },
 ]
-sdist = { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/graphrag-common/3.2/graphrag_common-3.2.0.tar.gz", hash = "sha256:82da738dc86a26f4457a0f67a89828fdcd5234e901362f81db101b733ab38243", size = 9310, upload_time = "2026-09-23T22:28:36Z" }
 wheels = [
-    { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/graphrag-common/3.2/graphrag_common-3.2.0-py3-none-any.whl", hash = "sha256:9602c1804bbaf7bbe45363c757fab017d7eb07f9c1257ef0514eec7eb003bab2", size = 9166, upload_time = "2026-09-30T23:33:57Z" },
+    { filename = "graphrag_common-3.3.0-py3-none-any.whl", hash = "sha256:0d584370929959164f5058a5fb60ea80def6a25d72c8d4a8d61a6c28a2070683" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "python-dotenv", specifier = "~=1.2" },
+    { name = "pyyaml", specifier = "~=6.0" },
+    { name = "toml", specifier = "~=0.10" },
 ]
 
 [[package]]
 name = "graphrag-input"
-version = "3.2.0"
-source = { registry = "https://packagefeedproxy.microsoft.io/pypi/simple/" }
+version = "3.3.0"
+source = { path = "local/graphrag_input-3.3.0-py3-none-any.whl" }
 dependencies = [
     { name = "graphrag-common" },
     { name = "graphrag-storage" },
@@ -1906,15 +1917,23 @@ dependencies = [
     { name = "pyarrow" },
     { name = "pydantic" },
 ]
-sdist = { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/graphrag-input/3.2/graphrag_input-3.2.0.tar.gz", hash = "sha256:51c37438aafe919f6c56b71a230a0aa8bb623333fc4062d977bdf695150b78d5", size = 17101, upload_time = "2026-09-23T22:28:44Z" }
 wheels = [
-    { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/graphrag-input/3.2/graphrag_input-3.2.0-py3-none-any.whl", hash = "sha256:1aa1815f8597e9383214e6990017595b794f85456d776c0e8d261de672c007cf", size = 15089, upload_time = "2026-09-30T23:33:57Z" },
+    { filename = "graphrag_input-3.3.0-py3-none-any.whl", hash = "sha256:92ceb0029ba2aeb12e4ac1897d58edda6371296f3fcb625541e8e6b92242c956" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "graphrag-common", specifier = "==3.3.0" },
+    { name = "graphrag-storage", specifier = "==3.3.0" },
+    { name = "markitdown", extras = ["pdf"], specifier = "~=0.1.7" },
+    { name = "pyarrow", specifier = ">=14.0.0" },
+    { name = "pydantic", specifier = "~=2.13" },
 ]
 
 [[package]]
 name = "graphrag-llm"
-version = "3.2.0"
-source = { registry = "https://packagefeedproxy.microsoft.io/pypi/simple/" }
+version = "3.3.0"
+source = { path = "local/graphrag_llm-3.3.0-py3-none-any.whl" }
 dependencies = [
     { name = "azure-identity" },
     { name = "fastapi" },
@@ -1927,15 +1946,28 @@ dependencies = [
     { name = "pydantic" },
     { name = "typing-extensions" },
 ]
-sdist = { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/graphrag-llm/3.2/graphrag_llm-3.2.0.tar.gz", hash = "sha256:e2ee5a98a7bd751c9bb986c297fecc39a37f99d60dcc02f197a888b48efbacd2", size = 60526, upload_time = "2026-09-23T22:28:47Z" }
 wheels = [
-    { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/graphrag-llm/3.2/graphrag_llm-3.2.0-py3-none-any.whl", hash = "sha256:9ebb66a46896b4ce08fb0e591505fc40579893dbffc5b2a668177d24482a46cd", size = 84410, upload_time = "2026-09-30T23:33:56Z" },
+    { filename = "graphrag_llm-3.3.0-py3-none-any.whl", hash = "sha256:72bcd0bf5d1326659bd6bb5f42fb5046e6ced0c6551d231e6d8127498cd1bf63" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "azure-identity", specifier = "~=1.25" },
+    { name = "fastapi", specifier = ">=0.136.3,<1.0" },
+    { name = "graphrag-cache", specifier = "==3.3.0" },
+    { name = "graphrag-common", specifier = "==3.3.0" },
+    { name = "jinja2", specifier = "~=3.1" },
+    { name = "litellm", specifier = "==1.100.1" },
+    { name = "nest-asyncio2", specifier = "~=1.7" },
+    { name = "orjson", specifier = ">=3.11.6,<4.0" },
+    { name = "pydantic", specifier = "~=2.13" },
+    { name = "typing-extensions", specifier = "~=4.16" },
 ]
 
 [[package]]
 name = "graphrag-storage"
-version = "3.2.0"
-source = { registry = "https://packagefeedproxy.microsoft.io/pypi/simple/" }
+version = "3.3.0"
+source = { path = "local/graphrag_storage-3.3.0-py3-none-any.whl" }
 dependencies = [
     { name = "aiofiles" },
     { name = "azure-cosmos" },
@@ -1945,9 +1977,19 @@ dependencies = [
     { name = "pandas" },
     { name = "pydantic" },
 ]
-sdist = { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/graphrag-storage/3.2/graphrag_storage-3.2.0.tar.gz", hash = "sha256:0f749d6554248bcd05e929cb44bc5793b3e4a16fa12f90a9ff3f829f0b451961", size = 30845, upload_time = "2026-09-23T22:28:38Z" }
 wheels = [
-    { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/graphrag-storage/3.2/graphrag_storage-3.2.0-py3-none-any.whl", hash = "sha256:be6a28c94a9ba096a5f02da4898acd53dedb894ba7f9734e296159bcda611de9", size = 35872, upload_time = "2026-09-30T23:33:56Z" },
+    { filename = "graphrag_storage-3.3.0-py3-none-any.whl", hash = "sha256:adc62283bf9ce9189bd143dac70744c37016125aa9a01d6d9ffe8e3abb47ab63" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "aiofiles", specifier = "~=25.1" },
+    { name = "azure-cosmos", specifier = "~=4.16" },
+    { name = "azure-identity", specifier = "~=1.25" },
+    { name = "azure-storage-blob", specifier = "~=12.30" },
+    { name = "graphrag-common", specifier = "==3.3.0" },
+    { name = "pandas", specifier = "~=3.0" },
+    { name = "pydantic", specifier = "~=2.13" },
 ]
 
 [[package]]
@@ -2093,7 +2135,7 @@ wheels = [
     { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/inflate64/1.0.4/inflate64-1.0.4-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:ec40c0383cbd84d845dcb785a48ae76eef43246c923f84fda380fdd5ea653d3c", size = 99549, upload_time = "2026-07-27T08:12:43Z" },
     { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/inflate64/1.0.4/inflate64-1.0.4-cp311-cp311-musllinux_1_2_aarch64.whl", hash = "sha256:5b01539fea372c6078b9707d9121c12cb321e587e193f50e257ce06cf5b15e41", size = 95946, upload_time = "2025-11-28T10:54:41Z" },
     { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/inflate64/1.0.4/inflate64-1.0.4-cp311-cp311-musllinux_1_2_x86_64.whl", hash = "sha256:bf4e34e32a37a42e9cf8bd9681f89e3e37b218f97d8b8cc95bd065419bc8db13", size = 98766, upload_time = "2025-11-28T10:54:43Z" },
-    { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/inflate64/1.0.4/inflate64-1.0.4-cp311-cp311-win32.whl", hash = "sha256:2725ccc14b138f0ad622d0322b769f177f9edfe016ee9ed3404102935d39e7de", size = 32939, upload_time = "2025-11-28T10:54:44Z" },
+    { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/inflate64/1.0.4/inflate64-1.0.4-cp311-cp311-win32.whl", hash = "sha256:2725ccc14b138f0ad622d0322b769f177f9edfe016ee9ed3404102935d39e7de", size = 32939, upload_time = "2026-10-07T20:38:51Z" },
     { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/inflate64/1.0.4/inflate64-1.0.4-cp311-cp311-win_amd64.whl", hash = "sha256:7056148548c1f25dcb38251f88c19b4635a5f32af4c7bad00621c85509e3d8c0", size = 35535, upload_time = "2026-08-12T07:55:19Z" },
     { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/inflate64/1.0.4/inflate64-1.0.4-cp311-cp311-win_arm64.whl", hash = "sha256:2ea7bdcad65e255b4596f84880f6e0c1756d6336d620e302653257defa407742", size = 33457, upload_time = "2026-09-05T09:45:41Z" },
     { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/inflate64/1.0.4/inflate64-1.0.4-cp312-cp312-macosx_10_13_universal2.whl", hash = "sha256:c8009e4a4918ee6c8cbc49e58fe159464895064cfdf0565fed3f49ca81e45272", size = 58619, upload_time = "2026-08-21T17:13:37Z" },
@@ -2225,7 +2267,7 @@ dependencies = [
     { name = "traitlets" },
     { name = "widgetsnbextension" },
 ]
-sdist = { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/ipywidgets/8.1.9/ipywidgets-8.1.9.tar.gz", hash = "sha256:bcccba38a6ec3253f7a39c943cea5b9ad01999ce071396171adbc51c6a6a8613", size = 117252, upload_time = "2026-08-18T08:54:24Z" }
+sdist = { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/ipywidgets/8.1.9/ipywidgets-8.1.9.tar.gz", hash = "sha256:bcccba38a6ec3253f7a39c943cea5b9ad01999ce071396171adbc51c6a6a8613", size = 117252, upload_time = "2026-10-05T00:21:57Z" }
 wheels = [
     { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/ipywidgets/8.1.9/ipywidgets-8.1.9-py3-none-any.whl", hash = "sha256:f2b8cbcaae10252b809fbe4d7470db75c09b769a32cbf816d20e5ca6d3c5a79d", size = 140101, upload_time = "2026-08-25T10:45:31Z" },
 ]
@@ -2449,7 +2491,7 @@ wheels = [
 name = "jupyterlab-widgets"
 version = "3.0.17"
 source = { registry = "https://packagefeedproxy.microsoft.io/pypi/simple/" }
-sdist = { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/jupyterlab-widgets/3.0.17/jupyterlab_widgets-3.0.17.tar.gz", hash = "sha256:6e61fe21ca8a66039180a5cc52a433e07279d2fee79c8be963e00d55193f17a8", size = 213919, upload_time = "2026-08-18T08:52:17Z" }
+sdist = { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/jupyterlab-widgets/3.0.17/jupyterlab_widgets-3.0.17.tar.gz", hash = "sha256:6e61fe21ca8a66039180a5cc52a433e07279d2fee79c8be963e00d55193f17a8", size = 213919, upload_time = "2026-10-05T00:21:58Z" }
 wheels = [
     { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/jupyterlab-widgets/3.0.17/jupyterlab_widgets-3.0.17-py3-none-any.whl", hash = "sha256:40ac1e9955acf116c4d995d9bfa082d86ad9ec6d91c4f134827cf5e0a5eb75e0", size = 217292, upload_time = "2026-08-25T09:51:33Z" },
 ]
@@ -2823,7 +2865,7 @@ wheels = [
     { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/matplotlib/3.11.2/matplotlib-3.11.2-cp313-cp313-win_arm64.whl", hash = "sha256:3e8576f7c47e02fd4f21f44171302d2d1d58d4471d46da3d71fe8899d19539d9", size = 9028295, upload_time = "2026-09-18T22:14:50Z" },
     { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/matplotlib/3.11.2/matplotlib-3.11.2-cp314-cp314-macosx_10_15_x86_64.whl", hash = "sha256:c9721f81275499da1feeb36a2cf8192ea086283b3bd16b7dc4c9d7aedb7396d6", size = 9478976, upload_time = "2026-09-18T22:40:13Z" },
     { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/matplotlib/3.11.2/matplotlib-3.11.2-cp314-cp314-macosx_11_0_arm64.whl", hash = "sha256:1a3040b209f3968b4e84161df7b174f07a9fad33b0f2d7e48ea3bbd3075e2863", size = 9307932, upload_time = "2026-09-18T19:34:06Z" },
-    { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/matplotlib/3.11.2/matplotlib-3.11.2-cp314-cp314-manylinux_2_26_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:bf3fe71fbfb8ec0e310e0bc8537c3405a01f38f25f9394ed2135e6202fed542b", size = 10674370, upload_time = "2026-09-11T19:04:06Z" },
+    { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/matplotlib/3.11.2/matplotlib-3.11.2-cp314-cp314-manylinux_2_26_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:bf3fe71fbfb8ec0e310e0bc8537c3405a01f38f25f9394ed2135e6202fed542b", size = 10674370, upload_time = "2026-10-04T19:13:09Z" },
     { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/matplotlib/3.11.2/matplotlib-3.11.2-cp314-cp314-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:8c8255de28f986d935a64c9ca71c0ec2d2f41d355691f5ea684725dc91413f71", size = 10954597, upload_time = "2026-09-21T20:50:41Z" },
     { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/matplotlib/3.11.2/matplotlib-3.11.2-cp314-cp314-musllinux_1_2_x86_64.whl", hash = "sha256:a8756cc73d9af9a7fe0deb54ea2e75ef73b01d9e575877e72acad5458e660943", size = 10812583, upload_time = "2026-09-29T08:31:33Z" },
     { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/matplotlib/3.11.2/matplotlib-3.11.2-cp314-cp314-win_amd64.whl", hash = "sha256:ecea603dd2fbf8242fd31a305a8b12a4ece2de28096870c65fdd0d1e35b8d9a6", size = 9505972, upload_time = "2026-09-18T19:09:42Z" },
@@ -3726,7 +3768,7 @@ dependencies = [
     { name = "numpy", version = "2.5.3", source = { registry = "https://packagefeedproxy.microsoft.io/pypi/simple/" }, marker = "python_full_version >= '3.12'" },
     { name = "packaging" },
 ]
-sdist = { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/patsy/1.0.3/patsy-1.0.3.tar.gz", hash = "sha256:79ebf4c93ff4d296e58a9d5be2b2ee31bd49d737cf11d70ffbd8a44b2de42e65", size = 399992, upload_time = "2026-08-29T21:35:32Z" }
+sdist = { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/patsy/1.0.3/patsy-1.0.3.tar.gz", hash = "sha256:79ebf4c93ff4d296e58a9d5be2b2ee31bd49d737cf11d70ffbd8a44b2de42e65", size = 399992, upload_time = "2026-10-07T18:39:35Z" }
 wheels = [
     { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/patsy/1.0.3/patsy-1.0.3-py2.py3-none-any.whl", hash = "sha256:d3dbebe8fd5f46e29912d030b63c6268647b59bf788a99e2af28a30234cf357c", size = 233318, upload_time = "2026-09-05T23:11:00Z" },
 ]
@@ -4065,7 +4107,7 @@ wheels = [
 name = "pure-eval"
 version = "0.2.4"
 source = { registry = "https://packagefeedproxy.microsoft.io/pypi/simple/" }
-sdist = { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/pure-eval/0.2.4/pure_eval-0.2.4.tar.gz", hash = "sha256:260c2774686e651b79f8b8e7fc9d80b3599ea6a66334b47d5f4abb69fc2c0ea1", size = 20563, upload_time = "2026-09-10T21:41:22Z" }
+sdist = { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/pure-eval/0.2.4/pure_eval-0.2.4.tar.gz", hash = "sha256:260c2774686e651b79f8b8e7fc9d80b3599ea6a66334b47d5f4abb69fc2c0ea1", size = 20563, upload_time = "2026-10-05T00:22:02Z" }
 wheels = [
     { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/pure-eval/0.2.4/pure_eval-0.2.4-py3-none-any.whl", hash = "sha256:96cae060a313cfaad51bb761278bfb0e62dc0248d9315a81173752dc546cd37a", size = 11893, upload_time = "2026-09-17T21:41:54Z" },
 ]
@@ -4453,7 +4495,7 @@ wheels = [
     { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/pyppmd/1.3.1/pyppmd-1.3.1-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:89730cf026416ae2546c92738966ecf117c8176d52c229ad621a61c34643818b", size = 143643, upload_time = "2026-07-28T20:12:46Z" },
     { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/pyppmd/1.3.1/pyppmd-1.3.1-cp311-cp311-musllinux_1_2_aarch64.whl", hash = "sha256:e77f5a6770950d464b50da760d53e67bce308a3abc8e3bd51db620b3f8cf1fa8", size = 138625, upload_time = "2025-11-27T22:07:44Z" },
     { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/pyppmd/1.3.1/pyppmd-1.3.1-cp311-cp311-musllinux_1_2_x86_64.whl", hash = "sha256:8e3bf8deef44f8e03612689a6067a4a3dd7e50d2ef00af4cf987c59b62ff3006", size = 141663, upload_time = "2025-11-27T22:07:45Z" },
-    { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/pyppmd/1.3.1/pyppmd-1.3.1-cp311-cp311-win32.whl", hash = "sha256:a3509b3f881409ebc5522942438108c48a78f8df88bcf3f9d907b74131b9431c", size = 42014, upload_time = "2025-11-27T22:07:47Z" },
+    { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/pyppmd/1.3.1/pyppmd-1.3.1-cp311-cp311-win32.whl", hash = "sha256:a3509b3f881409ebc5522942438108c48a78f8df88bcf3f9d907b74131b9431c", size = 42014, upload_time = "2026-10-07T20:38:00Z" },
     { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/pyppmd/1.3.1/pyppmd-1.3.1-cp311-cp311-win_amd64.whl", hash = "sha256:23b83799f33f9a24577f22e092b0feecda8cd1ea33871ad8610a58629874f7bc", size = 46862, upload_time = "2026-07-31T18:03:55Z" },
     { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/pyppmd/1.3.1/pyppmd-1.3.1-cp311-cp311-win_arm64.whl", hash = "sha256:234489036a1758670655d1ceafd4caeb93b858bd4c0ca39686837d38aef044c0", size = 45249, upload_time = "2026-08-26T20:06:28Z" },
     { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/pyppmd/1.3.1/pyppmd-1.3.1-cp312-cp312-macosx_10_13_universal2.whl", hash = "sha256:3faa58ab2ebe3b13ec23b1904639d687fb727270d2962fd2d239ca00fd6eb865", size = 77796, upload_time = "2026-08-21T20:26:48Z" },
@@ -4658,7 +4700,7 @@ source = { registry = "https://packagefeedproxy.microsoft.io/pypi/simple/" }
 dependencies = [
     { name = "cffi", marker = "implementation_name == 'pypy'" },
 ]
-sdist = { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/pyzmq/27.2/pyzmq-27.2.0.tar.gz", hash = "sha256:54d4259d1bfae24ecdb5ca79f7acc2eac6c286a02d6a0ae617797cb45f0726d3", size = 292316, upload_time = "2026-08-20T19:08:21Z" }
+sdist = { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/pyzmq/27.2/pyzmq-27.2.0.tar.gz", hash = "sha256:54d4259d1bfae24ecdb5ca79f7acc2eac6c286a02d6a0ae617797cb45f0726d3", size = 292316, upload_time = "2026-10-05T00:22:14Z" }
 wheels = [
     { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/pyzmq/27.2/pyzmq-27.2.0-cp311-cp311-macosx_10_15_universal2.whl", hash = "sha256:9216132843d139a123f243c07fe70f7487dce5041093dd77040f9adb5dc91872", size = 1457109, upload_time = "2026-08-28T07:57:09Z" },
     { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/pyzmq/27.2/pyzmq-27.2.0-cp311-cp311-manylinux2014_i686.manylinux_2_17_i686.whl", hash = "sha256:d41ebb260b69329b7d4a2936d44c872c86dd785355b51366c8b14e07ed7e9373", size = 985701, upload_time = "2026-08-20T19:06:27Z" },
@@ -4671,14 +4713,14 @@ wheels = [
     { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/pyzmq/27.2/pyzmq-27.2.0-cp311-cp311-win_amd64.whl", hash = "sha256:8b86e04f55af0f4d8cd8ecf14c0b8b81ebc8fd66fa20126b753514628ecadc7e", size = 644845, upload_time = "2026-08-27T22:41:44Z" },
     { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/pyzmq/27.2/pyzmq-27.2.0-cp311-cp311-win_arm64.whl", hash = "sha256:917d601e9540098f580d2723d0ce6402cdb6f02bc8dc2de74e0dca6e13bffd1b", size = 567495, upload_time = "2026-08-27T23:05:39Z" },
     { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/pyzmq/27.2/pyzmq-27.2.0-cp312-abi3-macosx_10_15_universal2.whl", hash = "sha256:591c8de5851c5ea372194469fe97587b97c3b641e9a70f31bb3474acbfde0241", size = 1431074, upload_time = "2026-08-27T22:43:38Z" },
-    { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/pyzmq/27.2/pyzmq-27.2.0-cp312-abi3-manylinux2014_i686.manylinux_2_17_i686.whl", hash = "sha256:00e73942ef12cecbc7951c4a9104bb8ffaed742abb13af2da6833d90dd368cef", size = 973915, upload_time = "2026-08-20T19:06:42Z" },
+    { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/pyzmq/27.2/pyzmq-27.2.0-cp312-abi3-manylinux2014_i686.manylinux_2_17_i686.whl", hash = "sha256:00e73942ef12cecbc7951c4a9104bb8ffaed742abb13af2da6833d90dd368cef", size = 973915, upload_time = "2026-10-05T00:22:14Z" },
     { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/pyzmq/27.2/pyzmq-27.2.0-cp312-abi3-manylinux_2_26_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:1f8079d0521fe94bbb401fe9407578b28f3701627c8be2c9f7e0c5b77dcb0109", size = 697722, upload_time = "2026-08-30T20:03:58Z" },
     { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/pyzmq/27.2/pyzmq-27.2.0-cp312-abi3-manylinux_2_26_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:dea74fd65f1fc5f7fe167916a473ebe6ed6174e5e5d9de11ea6583661be6cf43", size = 872258, upload_time = "2026-08-27T19:08:38Z" },
-    { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/pyzmq/27.2/pyzmq-27.2.0-cp312-abi3-manylinux_2_38_riscv64.manylinux_2_39_riscv64.whl", hash = "sha256:dcc99ca132b667a4ed750afd42db4ea73288f18425a9b2e3c0af095665c491f5", size = 739591, upload_time = "2026-08-20T19:06:46Z" },
-    { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/pyzmq/27.2/pyzmq-27.2.0-cp312-abi3-musllinux_1_2_aarch64.whl", hash = "sha256:b8d5f66e4a8246cf77f7b8f7902af64f00553368fa0373c89d99b78f0ad79394", size = 1689031, upload_time = "2026-08-20T19:06:47Z" },
-    { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/pyzmq/27.2/pyzmq-27.2.0-cp312-abi3-musllinux_1_2_i686.whl", hash = "sha256:d1526b42a2e725b84ed226f37becedc250c6347594e5ed304e4e9aff68c9aec3", size = 2059547, upload_time = "2026-08-20T19:06:49Z" },
+    { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/pyzmq/27.2/pyzmq-27.2.0-cp312-abi3-manylinux_2_38_riscv64.manylinux_2_39_riscv64.whl", hash = "sha256:dcc99ca132b667a4ed750afd42db4ea73288f18425a9b2e3c0af095665c491f5", size = 739591, upload_time = "2026-10-05T00:22:17Z" },
+    { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/pyzmq/27.2/pyzmq-27.2.0-cp312-abi3-musllinux_1_2_aarch64.whl", hash = "sha256:b8d5f66e4a8246cf77f7b8f7902af64f00553368fa0373c89d99b78f0ad79394", size = 1689031, upload_time = "2026-10-05T00:22:16Z" },
+    { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/pyzmq/27.2/pyzmq-27.2.0-cp312-abi3-musllinux_1_2_i686.whl", hash = "sha256:d1526b42a2e725b84ed226f37becedc250c6347594e5ed304e4e9aff68c9aec3", size = 2059547, upload_time = "2026-10-05T00:22:17Z" },
     { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/pyzmq/27.2/pyzmq-27.2.0-cp312-abi3-musllinux_1_2_x86_64.whl", hash = "sha256:f707bcf2c1d007d14d70531d4dd7b41060881c73efa845580bf6faaf9ea24d42", size = 1910457, upload_time = "2026-09-29T21:27:30Z" },
-    { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/pyzmq/27.2/pyzmq-27.2.0-cp312-abi3-win32.whl", hash = "sha256:fdaaa4ea3242f6ad298eb5177eb042aea5c73c30e76d20caee7b15af20d24ec2", size = 563450, upload_time = "2026-08-20T19:06:52Z" },
+    { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/pyzmq/27.2/pyzmq-27.2.0-cp312-abi3-win32.whl", hash = "sha256:fdaaa4ea3242f6ad298eb5177eb042aea5c73c30e76d20caee7b15af20d24ec2", size = 563450, upload_time = "2026-10-05T00:22:18Z" },
     { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/pyzmq/27.2/pyzmq-27.2.0-cp312-abi3-win_amd64.whl", hash = "sha256:2c218c6ab8bc447ba62054b581fd30209689d199c6ecb253f79615ca74a38e12", size = 628633, upload_time = "2026-08-27T21:56:46Z" },
     { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/pyzmq/27.2/pyzmq-27.2.0-cp312-abi3-win_arm64.whl", hash = "sha256:348d6fd3e4b81ae4580622ea8c2ea60224e84b2ac1b3be4482e6edc7de06e7a3", size = 556006, upload_time = "2026-08-27T23:25:44Z" },
     { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/pyzmq/27.2/pyzmq-27.2.0-cp313-cp313-android_24_arm64_v8a.whl", hash = "sha256:c551b9e2f86dc625fcb1a032c0d68042678caf96a8dd7c28796766b673bd5b52", size = 1127193, upload_time = "2026-08-20T19:06:56Z" },
@@ -5072,28 +5114,28 @@ wheels = [
     { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/scikit-learn/1.9.1/scikit_learn-1.9.1-cp313-cp313-win_arm64.whl", hash = "sha256:613f0a783ca05aa844a4e1ac42d48425058f2c52be73f40f8cd98b7cd111acd6", size = 7875398, upload_time = "2026-09-17T23:20:48Z" },
     { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/scikit-learn/1.9.1/scikit_learn-1.9.1-cp314-cp314-macosx_10_15_x86_64.whl", hash = "sha256:d5d117952769b563067656784e03c75a2d8235a7a05cf7fffa78a311e75aac08", size = 8747414, upload_time = "2026-09-20T20:16:39Z" },
     { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/scikit-learn/1.9.1/scikit_learn-1.9.1-cp314-cp314-macosx_12_0_arm64.whl", hash = "sha256:8893bc6331f60f18d4ac75e12ed356e2dcf6a564bf767918b5b7ca54c8c8be49", size = 8279175, upload_time = "2026-09-17T19:54:01Z" },
-    { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/scikit-learn/1.9.1/scikit_learn-1.9.1-cp314-cp314-manylinux_2_27_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:b5492cf2df5226691c32611de8734bcf42148c6547ae53c7f4e6b847793addc0", size = 8881706, upload_time = "2026-09-10T18:33:14Z" },
+    { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/scikit-learn/1.9.1/scikit_learn-1.9.1-cp314-cp314-manylinux_2_27_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:b5492cf2df5226691c32611de8734bcf42148c6547ae53c7f4e6b847793addc0", size = 8881706, upload_time = "2026-10-02T17:53:54Z" },
     { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/scikit-learn/1.9.1/scikit_learn-1.9.1-cp314-cp314-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:993d332ff80e62efae9e39603b7e872297c418d780f01a01855269a3489c950f", size = 9152030, upload_time = "2026-09-18T07:51:48Z" },
     { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/scikit-learn/1.9.1/scikit_learn-1.9.1-cp314-cp314-win_amd64.whl", hash = "sha256:ca9051447455dae341d4d591eece7deb2d8e3d1020298fc87a81fc51e4da8f53", size = 8377024, upload_time = "2026-09-17T19:49:15Z" },
     { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/scikit-learn/1.9.1/scikit_learn-1.9.1-cp314-cp314-win_arm64.whl", hash = "sha256:90de6573f733a9fb79476ff1371af52a397d41c8b35f9146e20923db010d67b6", size = 8014196, upload_time = "2026-09-23T13:05:24Z" },
-    { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/scikit-learn/1.9.1/scikit_learn-1.9.1-cp314-cp314t-macosx_10_15_x86_64.whl", hash = "sha256:7b5cad1624de8b75e5b9ccb7b0ce1ff1d01306340a3efc56d5529c5ba92392eb", size = 9066066, upload_time = "2026-09-10T18:33:24Z" },
-    { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/scikit-learn/1.9.1/scikit_learn-1.9.1-cp314-cp314t-macosx_12_0_arm64.whl", hash = "sha256:d137ce8a6142029fb5c35bd82f470c40cd9e760e5e2f7694b362c497c4ab3fa2", size = 8647654, upload_time = "2026-09-10T18:33:26Z" },
-    { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/scikit-learn/1.9.1/scikit_learn-1.9.1-cp314-cp314t-manylinux_2_27_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:66f852f7325b5070bc28329005aca76055a2def78faac039548ae889aeaa45a6", size = 8889070, upload_time = "2026-09-10T18:33:28Z" },
-    { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/scikit-learn/1.9.1/scikit_learn-1.9.1-cp314-cp314t-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:748bcb0a4cc04aec470652c9e5ec68450948e867387e7dfade647107ade68d25", size = 9131227, upload_time = "2026-09-10T18:33:31Z" },
-    { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/scikit-learn/1.9.1/scikit_learn-1.9.1-cp314-cp314t-win_amd64.whl", hash = "sha256:38cd925e893e5539be704d5edc64dbe081aacdab6b89d8c2977c1f6a7a453ce5", size = 8683001, upload_time = "2026-09-10T18:33:33Z" },
-    { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/scikit-learn/1.9.1/scikit_learn-1.9.1-cp314-cp314t-win_arm64.whl", hash = "sha256:b01e5b01735d38474127ca3f49319b592506225a87793b27559816b5c75cea39", size = 8257996, upload_time = "2026-09-10T18:33:35Z" },
-    { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/scikit-learn/1.9.1/scikit_learn-1.9.1-cp315-cp315-macosx_10_15_x86_64.whl", hash = "sha256:8dec64f31a6e0ec826aca6c1b39a51e16d946e400d4c0904316f3ca72ccfb825", size = 8747991, upload_time = "2026-09-10T18:33:37Z" },
+    { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/scikit-learn/1.9.1/scikit_learn-1.9.1-cp314-cp314t-macosx_10_15_x86_64.whl", hash = "sha256:7b5cad1624de8b75e5b9ccb7b0ce1ff1d01306340a3efc56d5529c5ba92392eb", size = 9066066, upload_time = "2026-10-02T17:53:18Z" },
+    { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/scikit-learn/1.9.1/scikit_learn-1.9.1-cp314-cp314t-macosx_12_0_arm64.whl", hash = "sha256:d137ce8a6142029fb5c35bd82f470c40cd9e760e5e2f7694b362c497c4ab3fa2", size = 8647654, upload_time = "2026-10-02T17:53:24Z" },
+    { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/scikit-learn/1.9.1/scikit_learn-1.9.1-cp314-cp314t-manylinux_2_27_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:66f852f7325b5070bc28329005aca76055a2def78faac039548ae889aeaa45a6", size = 8889070, upload_time = "2026-10-02T17:52:49Z" },
+    { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/scikit-learn/1.9.1/scikit_learn-1.9.1-cp314-cp314t-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:748bcb0a4cc04aec470652c9e5ec68450948e867387e7dfade647107ade68d25", size = 9131227, upload_time = "2026-10-02T17:52:38Z" },
+    { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/scikit-learn/1.9.1/scikit_learn-1.9.1-cp314-cp314t-win_amd64.whl", hash = "sha256:38cd925e893e5539be704d5edc64dbe081aacdab6b89d8c2977c1f6a7a453ce5", size = 8683001, upload_time = "2026-10-02T17:52:33Z" },
+    { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/scikit-learn/1.9.1/scikit_learn-1.9.1-cp314-cp314t-win_arm64.whl", hash = "sha256:b01e5b01735d38474127ca3f49319b592506225a87793b27559816b5c75cea39", size = 8257996, upload_time = "2026-10-02T17:53:36Z" },
+    { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/scikit-learn/1.9.1/scikit_learn-1.9.1-cp315-cp315-macosx_10_15_x86_64.whl", hash = "sha256:8dec64f31a6e0ec826aca6c1b39a51e16d946e400d4c0904316f3ca72ccfb825", size = 8747991, upload_time = "2026-10-02T17:53:41Z" },
     { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/scikit-learn/1.9.1/scikit_learn-1.9.1-cp315-cp315-macosx_12_0_arm64.whl", hash = "sha256:e1b468241f4a7a9a7a0d6479ad3cc47681cc151a4046c530f2777c3d68f08942", size = 8279340, upload_time = "2026-09-18T11:48:08Z" },
-    { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/scikit-learn/1.9.1/scikit_learn-1.9.1-cp315-cp315-manylinux_2_27_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:8ca869d0080a5723cde2d5a8b54a2da1ff7e68735a9e9adb3da1243183a0fa01", size = 8881917, upload_time = "2026-09-10T18:33:41Z" },
-    { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/scikit-learn/1.9.1/scikit_learn-1.9.1-cp315-cp315-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:6754b7cabfc3df0b1f7b38f7a344f559bbae9d82f0ac5e3d48cccbd19fdcefdf", size = 9152805, upload_time = "2026-09-10T18:33:44Z" },
+    { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/scikit-learn/1.9.1/scikit_learn-1.9.1-cp315-cp315-manylinux_2_27_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:8ca869d0080a5723cde2d5a8b54a2da1ff7e68735a9e9adb3da1243183a0fa01", size = 8881917, upload_time = "2026-10-02T17:52:58Z" },
+    { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/scikit-learn/1.9.1/scikit_learn-1.9.1-cp315-cp315-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:6754b7cabfc3df0b1f7b38f7a344f559bbae9d82f0ac5e3d48cccbd19fdcefdf", size = 9152805, upload_time = "2026-10-02T17:53:46Z" },
     { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/scikit-learn/1.9.1/scikit_learn-1.9.1-cp315-cp315-win_amd64.whl", hash = "sha256:52cfdb1fed3a34362dbc0bd96f2e761a66fd5724d6901629f5a558f1f3bd9849", size = 8376719, upload_time = "2026-09-25T03:22:03Z" },
-    { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/scikit-learn/1.9.1/scikit_learn-1.9.1-cp315-cp315-win_arm64.whl", hash = "sha256:ae6571a4828c6f5019bcd2b4125e5b18c0af3dbc9c99726c891f45f41335ec8e", size = 8014341, upload_time = "2026-09-10T18:33:48Z" },
-    { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/scikit-learn/1.9.1/scikit_learn-1.9.1-cp315-cp315t-macosx_10_15_x86_64.whl", hash = "sha256:48fefd8eb42bd4eec3e2d348149368ccd6d71987e20c30706a56a24eb86a6e73", size = 9059953, upload_time = "2026-09-10T18:33:50Z" },
-    { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/scikit-learn/1.9.1/scikit_learn-1.9.1-cp315-cp315t-macosx_12_0_arm64.whl", hash = "sha256:09f4d73049cd63575157f6b1060e06a8c83a4bd3488dbfaeedf35ccba7aad712", size = 8646602, upload_time = "2026-09-10T18:33:53Z" },
-    { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/scikit-learn/1.9.1/scikit_learn-1.9.1-cp315-cp315t-manylinux_2_27_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:b3da53831534214322d9cb240fa6f390b36cf69eba727a6d4bd3238677630d70", size = 8880366, upload_time = "2026-09-10T18:33:55Z" },
-    { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/scikit-learn/1.9.1/scikit_learn-1.9.1-cp315-cp315t-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:caae15634feceafa2612566b109a3082d3293167fac388eedaf77bff66b51983", size = 9129640, upload_time = "2026-09-10T18:33:58Z" },
-    { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/scikit-learn/1.9.1/scikit_learn-1.9.1-cp315-cp315t-win_amd64.whl", hash = "sha256:ffbcbbbb44202fbe9bc64bced25a145759adb9ef010b3d37a8064958ac13df2a", size = 8678083, upload_time = "2026-09-10T18:34:00Z" },
-    { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/scikit-learn/1.9.1/scikit_learn-1.9.1-cp315-cp315t-win_arm64.whl", hash = "sha256:800dd22dd87fe97dcea484c24e85dd93cf1734d86bd74e668ad18f7967f4d1b5", size = 8259434, upload_time = "2026-09-10T18:34:02Z" },
+    { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/scikit-learn/1.9.1/scikit_learn-1.9.1-cp315-cp315-win_arm64.whl", hash = "sha256:ae6571a4828c6f5019bcd2b4125e5b18c0af3dbc9c99726c891f45f41335ec8e", size = 8014341, upload_time = "2026-10-02T17:53:32Z" },
+    { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/scikit-learn/1.9.1/scikit_learn-1.9.1-cp315-cp315t-macosx_10_15_x86_64.whl", hash = "sha256:48fefd8eb42bd4eec3e2d348149368ccd6d71987e20c30706a56a24eb86a6e73", size = 9059953, upload_time = "2026-10-02T17:52:45Z" },
+    { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/scikit-learn/1.9.1/scikit_learn-1.9.1-cp315-cp315t-macosx_12_0_arm64.whl", hash = "sha256:09f4d73049cd63575157f6b1060e06a8c83a4bd3488dbfaeedf35ccba7aad712", size = 8646602, upload_time = "2026-10-02T17:53:15Z" },
+    { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/scikit-learn/1.9.1/scikit_learn-1.9.1-cp315-cp315t-manylinux_2_27_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:b3da53831534214322d9cb240fa6f390b36cf69eba727a6d4bd3238677630d70", size = 8880366, upload_time = "2026-10-02T17:53:49Z" },
+    { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/scikit-learn/1.9.1/scikit_learn-1.9.1-cp315-cp315t-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:caae15634feceafa2612566b109a3082d3293167fac388eedaf77bff66b51983", size = 9129640, upload_time = "2026-10-02T17:53:08Z" },
+    { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/scikit-learn/1.9.1/scikit_learn-1.9.1-cp315-cp315t-win_amd64.whl", hash = "sha256:ffbcbbbb44202fbe9bc64bced25a145759adb9ef010b3d37a8064958ac13df2a", size = 8678083, upload_time = "2026-10-02T17:53:28Z" },
+    { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/scikit-learn/1.9.1/scikit_learn-1.9.1-cp315-cp315t-win_arm64.whl", hash = "sha256:800dd22dd87fe97dcea484c24e85dd93cf1734d86bd74e668ad18f7967f4d1b5", size = 8259434, upload_time = "2026-10-02T17:52:54Z" },
 ]
 
 [[package]]
@@ -5555,15 +5597,15 @@ wheels = [
     { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/tokenizers/0.23.2/tokenizers-0.23.2-cp310-abi3-macosx_10_12_x86_64.whl", hash = "sha256:85a9a357a3764aecc904ee76bdaf8cf1ad8e5a67a1b929a487c4a39b49ed0e90", size = 3148852, upload_time = "2026-09-10T09:21:29Z" },
     { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/tokenizers/0.23.2/tokenizers-0.23.2-cp310-abi3-macosx_11_0_arm64.whl", hash = "sha256:986670e43691469dcee610ea0f846f91a8f84e91fc6f7a48d4c064414c0ec2bf", size = 3101593, upload_time = "2026-09-10T08:55:33Z" },
     { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/tokenizers/0.23.2/tokenizers-0.23.2-cp310-abi3-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:a37039b5dfc4af84eb3ef0a92f4307e28936c8f9adccba2629d36f652e9bf7a2", size = 3516830, upload_time = "2026-09-10T09:15:19Z" },
-    { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/tokenizers/0.23.2/tokenizers-0.23.2-cp310-abi3-manylinux_2_17_armv7l.manylinux2014_armv7l.whl", hash = "sha256:7b7e37ba198f24150f523e1242e83c4970de4a525480586be5dcc24d9add32c5", size = 3407975, upload_time = "2026-09-03T08:55:16Z" },
-    { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/tokenizers/0.23.2/tokenizers-0.23.2-cp310-abi3-manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:43e4f2071e3cc8d5d86421c874aebc82659bb51a68bcdef5a0da75ee89511ccb", size = 3748165, upload_time = "2026-09-03T08:55:24Z" },
-    { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/tokenizers/0.23.2/tokenizers-0.23.2-cp310-abi3-manylinux_2_17_ppc64le.manylinux2014_ppc64le.whl", hash = "sha256:325fee2e0418a9dc6c9ecf736a5f5f0db7875183ace9549ae339da76f7a1fbb7", size = 4024165, upload_time = "2026-09-03T08:55:18Z" },
-    { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/tokenizers/0.23.2/tokenizers-0.23.2-cp310-abi3-manylinux_2_17_s390x.manylinux2014_s390x.whl", hash = "sha256:950d7c9426fa72406a0ffeacdbc0bb9985f5db20eb8b263f29c79aaf83105703", size = 3591899, upload_time = "2026-09-03T08:55:22Z" },
+    { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/tokenizers/0.23.2/tokenizers-0.23.2-cp310-abi3-manylinux_2_17_armv7l.manylinux2014_armv7l.whl", hash = "sha256:7b7e37ba198f24150f523e1242e83c4970de4a525480586be5dcc24d9add32c5", size = 3407975, upload_time = "2026-10-06T00:28:13Z" },
+    { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/tokenizers/0.23.2/tokenizers-0.23.2-cp310-abi3-manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:43e4f2071e3cc8d5d86421c874aebc82659bb51a68bcdef5a0da75ee89511ccb", size = 3748165, upload_time = "2026-10-06T00:28:29Z" },
+    { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/tokenizers/0.23.2/tokenizers-0.23.2-cp310-abi3-manylinux_2_17_ppc64le.manylinux2014_ppc64le.whl", hash = "sha256:325fee2e0418a9dc6c9ecf736a5f5f0db7875183ace9549ae339da76f7a1fbb7", size = 4024165, upload_time = "2026-10-06T00:28:20Z" },
+    { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/tokenizers/0.23.2/tokenizers-0.23.2-cp310-abi3-manylinux_2_17_s390x.manylinux2014_s390x.whl", hash = "sha256:950d7c9426fa72406a0ffeacdbc0bb9985f5db20eb8b263f29c79aaf83105703", size = 3591899, upload_time = "2026-10-06T00:28:22Z" },
     { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/tokenizers/0.23.2/tokenizers-0.23.2-cp310-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:41c2f84d172449b4dadb9cdc508e3e364076613c35b16e76ecfe47a60d1e3305", size = 3386843, upload_time = "2026-09-10T11:11:10Z" },
-    { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/tokenizers/0.23.2/tokenizers-0.23.2-cp310-abi3-manylinux_2_31_riscv64.whl", hash = "sha256:12f0835dc2ee694746a76adf7b1567d4346a4a502ebe93fb1f5f80ea49799b78", size = 3577314, upload_time = "2026-09-03T08:55:20Z" },
-    { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/tokenizers/0.23.2/tokenizers-0.23.2-cp310-abi3-musllinux_1_2_aarch64.whl", hash = "sha256:eb2f9c8a24da020ea8c11a01a19c1c2547912d92121ae4a01cfbca46125dee40", size = 9967367, upload_time = "2026-09-03T08:55:33Z" },
-    { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/tokenizers/0.23.2/tokenizers-0.23.2-cp310-abi3-musllinux_1_2_armv7l.whl", hash = "sha256:f486f402f6f9abee5bb032553736813af0c710a86b2e0ca592634c55cea1f835", size = 9811886, upload_time = "2026-09-03T08:55:35Z" },
-    { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/tokenizers/0.23.2/tokenizers-0.23.2-cp310-abi3-musllinux_1_2_i686.whl", hash = "sha256:bef235815a067b2648caf6dcc7a71091b0b0fff9ee8057f6451eb9335fae52ef", size = 10146224, upload_time = "2026-09-03T08:55:38Z" },
+    { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/tokenizers/0.23.2/tokenizers-0.23.2-cp310-abi3-manylinux_2_31_riscv64.whl", hash = "sha256:12f0835dc2ee694746a76adf7b1567d4346a4a502ebe93fb1f5f80ea49799b78", size = 3577314, upload_time = "2026-10-06T00:28:26Z" },
+    { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/tokenizers/0.23.2/tokenizers-0.23.2-cp310-abi3-musllinux_1_2_aarch64.whl", hash = "sha256:eb2f9c8a24da020ea8c11a01a19c1c2547912d92121ae4a01cfbca46125dee40", size = 9967367, upload_time = "2026-10-06T00:28:37Z" },
+    { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/tokenizers/0.23.2/tokenizers-0.23.2-cp310-abi3-musllinux_1_2_armv7l.whl", hash = "sha256:f486f402f6f9abee5bb032553736813af0c710a86b2e0ca592634c55cea1f835", size = 9811886, upload_time = "2026-10-06T00:28:17Z" },
+    { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/tokenizers/0.23.2/tokenizers-0.23.2-cp310-abi3-musllinux_1_2_i686.whl", hash = "sha256:bef235815a067b2648caf6dcc7a71091b0b0fff9ee8057f6451eb9335fae52ef", size = 10146224, upload_time = "2026-10-06T00:28:32Z" },
     { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/tokenizers/0.23.2/tokenizers-0.23.2-cp310-abi3-musllinux_1_2_x86_64.whl", hash = "sha256:5c56bda1511921587789163e524d196ed8284174ac23abd7685d5ea8da6c4718", size = 10256304, upload_time = "2026-09-17T06:08:33Z" },
     { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/tokenizers/0.23.2/tokenizers-0.23.2-cp310-abi3-win32.whl", hash = "sha256:debf978920d93ba9c219bd67cc4bbfaf912c9039e41e7a28b91ec15e3728c95a", size = 2592809, upload_time = "2026-09-10T11:23:14Z" },
     { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/tokenizers/0.23.2/tokenizers-0.23.2-cp310-abi3-win_amd64.whl", hash = "sha256:2e96f5699d5249c9c64aa8412e044f727aae3a4098cf830f9901ec1afc361cde", size = 2863236, upload_time = "2026-09-10T09:01:24Z" },
@@ -5675,7 +5717,7 @@ wheels = [
 name = "traitlets"
 version = "5.16.1"
 source = { registry = "https://packagefeedproxy.microsoft.io/pypi/simple/" }
-sdist = { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/traitlets/5.16.1/traitlets-5.16.1.tar.gz", hash = "sha256:ed900c2b631aa3a112811139fa97b8d2c3bad5e989656bba4b7e52c7852c18c1", size = 166137, upload_time = "2026-08-03T08:32:36Z" }
+sdist = { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/traitlets/5.16.1/traitlets-5.16.1.tar.gz", hash = "sha256:ed900c2b631aa3a112811139fa97b8d2c3bad5e989656bba4b7e52c7852c18c1", size = 166137, upload_time = "2026-10-05T00:22:34Z" }
 wheels = [
     { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/traitlets/5.16.1/traitlets-5.16.1-py3-none-any.whl", hash = "sha256:f775618166caa0396c8e337099240f2bd3e5e917d203b2e6fbe21a58d3cb1f6b", size = 86211, upload_time = "2026-08-03T20:39:28Z" },
 ]
@@ -5823,7 +5865,7 @@ wheels = [
 name = "widgetsnbextension"
 version = "4.0.16"
 source = { registry = "https://packagefeedproxy.microsoft.io/pypi/simple/" }
-sdist = { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/widgetsnbextension/4.0.16/widgetsnbextension-4.0.16.tar.gz", hash = "sha256:adeea0ae78f0856ee4945f413299801b82a0a01416303301f39a704282a37b73", size = 1111094, upload_time = "2026-08-18T08:52:55Z" }
+sdist = { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/widgetsnbextension/4.0.16/widgetsnbextension-4.0.16.tar.gz", hash = "sha256:adeea0ae78f0856ee4945f413299801b82a0a01416303301f39a704282a37b73", size = 1111094, upload_time = "2026-10-05T00:22:38Z" }
 wheels = [
     { url = "https://ms-feed-25.pkgs.visualstudio.com/6f084628-a36d-42cb-934d-057357e379dc/_packaging/49d7402f-07bb-4b18-a9ce-086e6e98a554/pypi/download/widgetsnbextension/4.0.16/widgetsnbextension-4.0.16-py3-none-any.whl", hash = "sha256:a31a8774885b96fe825462f5d6496166f0c7cae111195b6465c801d230eb5a4e", size = 2225148, upload_time = "2026-08-25T10:12:17Z" },
 ]

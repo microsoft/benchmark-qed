@@ -14,6 +14,7 @@ from typing import TYPE_CHECKING, Any, cast
 import pytest
 from graphrag_storage.file_storage import FileStorage
 
+from benchmark_qed.autoe.chunk_assertion.cache import ContentAddressedCache
 from benchmark_qed.autoe.chunk_assertion.scoring import run_assertion_eval_chunk_mode
 from benchmark_qed.autoe.data_model.retrieval_result import (
     load_retrieval_results_from_dicts,
@@ -189,9 +190,12 @@ async def test_alignment_by_question_id(
 
 @pytest.mark.usefixtures("patched_chat")
 async def test_second_run_uses_cache(
-    tmp_path: Path, grade_by_chunk: dict[str, str], call_counter: list[int]
+    tmp_path: Path,
+    grade_by_chunk: dict[str, str],
+    call_counter: list[int],
+    monkeypatch: pytest.MonkeyPatch,
 ) -> None:
-    """A second run with the same cache makes no new LLM calls."""
+    """A second run bulk-loads the cache and makes no new LLM calls."""
     grade_by_chunk.update({"a": "full_support", "b": "no_support"})
     eval_results = [
         {
@@ -218,8 +222,28 @@ async def test_second_run_uses_cache(
     calls_after_first = call_counter[0]
     assert calls_after_first == 2  # one call per (assertion, chunk) pair
 
+    get_many_calls = 0
+    real_get_many = ContentAddressedCache.get_many
+
+    async def tracked_get_many(
+        cache: ContentAddressedCache, cache_keys: list[str]
+    ) -> dict[str, str]:
+        nonlocal get_many_calls
+        get_many_calls += 1
+        return await real_get_many(cache, cache_keys)
+
+    async def fail_individual_get(
+        _cache: ContentAddressedCache, _cache_key: str
+    ) -> str | None:
+        await asyncio.sleep(0)
+        pytest.fail("warm-cache scan used individual get() instead of get_many()")
+
+    monkeypatch.setattr(ContentAddressedCache, "get_many", tracked_get_many)
+    monkeypatch.setattr(ContentAddressedCache, "get", fail_individual_get)
+
     await _run(eval_results, question_set, tmp_path / "out2", cache_path)
     assert call_counter[0] == calls_after_first  # fully served from cache
+    assert get_many_calls == 1
 
 
 @pytest.mark.usefixtures("patched_chat")

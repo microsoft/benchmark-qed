@@ -309,6 +309,20 @@ class CacheStore:
         self._known_keys.add(key)
         return entry["value"], metadata
 
+    async def get_many(self, keys: list[str]) -> dict[str, tuple[Any, dict[str, Any]]]:
+        """Return decoded values and metadata for existing keys."""
+        entries = await self._cache.get_many(keys)
+        results: dict[str, tuple[Any, dict[str, Any]]] = {}
+        for key, entry in entries.items():
+            if not isinstance(entry, dict) or "value" not in entry:
+                continue
+            metadata = entry.get("metadata")
+            if not isinstance(metadata, dict):
+                continue
+            results[key] = (entry["value"], metadata)
+        self._known_keys.update(results)
+        return results
+
     async def put_many(
         self,
         entries: list[tuple[str, Any, dict[str, Any]]],

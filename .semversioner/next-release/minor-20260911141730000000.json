@@ -1,0 +1,4 @@
+{
+  "type": "minor",
+  "description": "Add persistent, concurrency-safe evaluation caches with GraphRAG cache configuration and reproducibility metadata. Existing cache_dir settings and affected Python cache APIs must migrate to cache_config."
+}

@@ -536,27 +536,30 @@ async def run_assertion_eval_chunk_mode(
                     user_prompt=user_prompt,
                 )
                 logical_key = compute_logical_key(assertion_text, chunk_content)
-                cached_grade = await cache.get(cache_key)
-                if cached_grade is not None:
-                    cache_hits += 1
-                    per_chunk_grades[q_key].append((
-                        rank,
-                        grade_to_score(cached_grade),
-                        cached_grade,
-                    ))
-                    assertion_call_stats[q_key]["successful"] += 1
+                existing_work = uncached_by_key.get(cache_key)
+                if existing_work is None:
+                    uncached_by_key[cache_key] = (
+                        assertion_text,
+                        chunk_content,
+                        logical_key,
+                        config_fingerprint,
+                        [(q_idx, a_idx, rank)],
+                    )
                 else:
-                    existing_work = uncached_by_key.get(cache_key)
-                    if existing_work is None:
-                        uncached_by_key[cache_key] = (
-                            assertion_text,
-                            chunk_content,
-                            logical_key,
-                            config_fingerprint,
-                            [(q_idx, a_idx, rank)],
-                        )
-                    else:
-                        existing_work[4].append((q_idx, a_idx, rank))
+                    existing_work[4].append((q_idx, a_idx, rank))
+
+    cached_grades = await cache.get_many(list(uncached_by_key))
+    for cache_key, cached_grade in cached_grades.items():
+        work_item = uncached_by_key.pop(cache_key)
+        for q_idx, a_idx, rank in work_item[4]:
+            q_key = (q_idx, a_idx)
+            cache_hits += 1
+            per_chunk_grades[q_key].append((
+                rank,
+                grade_to_score(cached_grade),
+                cached_grade,
+            ))
+            assertion_call_stats[q_key]["successful"] += 1
 
     if positional_fallbacks:
         rich_print(
