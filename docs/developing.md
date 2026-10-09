@@ -49,6 +49,7 @@ Follow these steps to generate synthetic queries using AutoQ:
         --base-dir autoq_test
     ```
     This command creates two files in the `./autoq_test` directory:
+
     - `.env`: Stores environment variables for the AutoQ pipeline. Open this file and replace `<API_KEY>` with your OpenAI or Azure API key.
     - `settings.yaml`: Contains pipeline settings. Edit this file as needed for your use case.
 
@@ -110,8 +111,11 @@ Follow these steps to compare RAG answer pairs using the pairwise scoring pipeli
         --base-dir pairwise_test
     ```
     This command creates two files in the `./pairwise_test` directory:
+
     - `.env`: Contains environment variables for the pairwise comparison tests. Open this file and replace `<API_KEY>` with your OpenAI or Azure API key.
-    - `settings.yaml`: Contains pipeline settings, which you can modify as needed.
+    - `settings.yaml`: Contains pipeline settings, including a persistent
+      stage-aware SQLite cache under
+      `.benchmark_qed_cache/differential_pairwise`.
 
     The generated `settings.yaml` includes commented-out `input_storage` and `output_storage` sections for configuring Azure Blob Storage backends.
 
@@ -179,10 +183,24 @@ Follow these steps to run the differential pairwise scoring pipeline:
         --base-dir differential_pairwise_test
     ```
     This command creates two files in the `./differential_pairwise_test` directory:
+
     - `.env`: Contains environment variables for the pairwise comparison tests. Open this file and replace `<API_KEY>` with your OpenAI or Azure API key.
     - `settings.yaml`: Contains pipeline settings, which you can modify as needed.
 
-    The differential command reuses the pairwise configuration structure (`base`, `others`, `question_sets`, `trials`, `llm_config`, `criteria`); when `criteria` is omitted the standard defaults are used. The generated `settings.yaml` wires up the extract-and-judge prompts under `prompt_config` (`extract_system_prompt`, `extract_user_prompt`, `judge_system_prompt`, `judge_user_prompt`); edit those prompt files under `prompts/` or remove the `prompt_config` section to use the built-in defaults.
+    The differential command reuses the pairwise configuration structure
+    (`base`, `others`, `question_sets`, `trials`, `llm_config`, `criteria`);
+    when `criteria` is omitted the standard defaults are used. The generated
+    `settings.yaml` wires up the extract-and-judge prompts under
+    `prompt_config` (`extract_system_prompt`, `extract_user_prompt`,
+    `judge_system_prompt`, `judge_user_prompt`); edit those prompt files under
+    `prompts/` or remove the `prompt_config` section to use the built-in
+    defaults.
+
+    The generated `cache_config` caches extraction and verdict stages
+    independently. A failed judge call can therefore resume from its completed
+    extraction, and changing criteria invalidates verdicts without repeating
+    extraction. Set `type: none` with `storage: null` to force both stages to
+    run again.
 
     The generated `settings.yaml` includes commented-out `input_storage` and `output_storage` sections for configuring Azure Blob Storage backends.
 
@@ -198,6 +216,250 @@ Follow these steps to run the differential pairwise scoring pipeline:
         --account-url https://<account>.blob.core.windows.net
     ```
     The results will be saved in the `output` directory. In addition to the per-criterion win scores, each cached comparison CSV also records the extracted `common`, `unique_1`, and `unique_2` content for inspection.
+
+    Inspect the default stage cache with:
+
+    ```sh
+    uv run benchmark-qed cache inspect \
+        .benchmark_qed_cache/differential_pairwise/differential_pairwise.sqlite3
+    ```
+
+    Existing comparison CSVs are checked before the stage cache. To fully
+    recompute a comparison, use a new output directory (or remove its CSV) and
+    also disable, relocate, or clear the stage cache. See
+    [Evaluation Caches](cli/cache.md) for backend and clearing guidance.
+
+## Calibrating and applying an absolute answer-quality scale
+
+Calibrated absolute scoring first ranks a fixed population of answers into a
+five-level scale, then scores unseen answers against frozen exemplars from that
+scale. The unseen answers do not change the calibration population and do not
+receive synthetic Elo ratings.
+
+The downloadable `example_answers` archive contains all files referenced by
+the generated settings below.
+
+### Calibrating the absolute scale
+
+Follow these steps to build a frozen five-level scale:
+
+1. **Set up your project directory:**
+
+    ```sh
+    mkdir -p ./local/calibrated_absolute_test/calibration
+    cd ./local/calibrated_absolute_test/calibration
+    ```
+
+2. **Create an `input` folder:**
+
+    ```sh
+    mkdir ./input
+    ```
+
+3. **Download the example answers:**
+
+    ```sh
+    uv run benchmark-qed data download example_answers input
+    ```
+
+    This is the local-filesystem variant.
+
+    Alternative Blob variant (choose this instead of the local command above;
+    do not run both):
+
+    ```sh
+    uv run benchmark-qed data download example_answers input \
+        --storage-type blob \
+        --container-name my-container \
+        --account-url https://<account>.blob.core.windows.net
+    ```
+
+    The generated settings use `input/vector_rag/data_local.json` and
+    `input/lazygraphrag/data_local.json` as the calibration population.
+
+    Each file contains 50 records with `question_id`, `question_text`, and
+    `answer` fields.
+
+4. **Create a configuration file for absolute calibration:**
+
+    ```sh
+    uv run benchmark-qed config init autoe_absolute_calibrate .
+    ```
+
+    This is the local-filesystem variant.
+
+    Alternative Blob variant (choose this instead of the local command above;
+    do not run both):
+
+    ```sh
+    uv run benchmark-qed config init autoe_absolute_calibrate . \
+        --storage-type blob \
+        --container-name my-container \
+        --account-url https://<account>.blob.core.windows.net \
+        --base-dir calibrated_absolute_test/calibration
+    ```
+
+    This command creates two files in the `calibration` directory:
+
+    - `.env`: Contains environment variables for the calibration pipeline. Open
+      this file and replace `<API_KEY>` with your OpenAI or Azure API key.
+    - `settings.yaml`: Contains the calibration inputs, criteria, Elo settings,
+      LLM configuration, and a persistent SQLite cache under
+      `.benchmark_qed_cache/absolute_calibrate`.
+
+5. **Run the absolute calibration:**
+
+    ```sh
+    uv run benchmark-qed autoe absolute-calibrate settings.yaml output
+    ```
+
+    This is the local-filesystem variant.
+
+    Alternative Blob-stored config variant (choose this instead of the local
+    command above; do not run both):
+
+    ```sh
+    uv run benchmark-qed autoe absolute-calibrate \
+        blob://my-container/calibrated_absolute_test/calibration/settings.yaml \
+        output \
+        --account-url https://<account>.blob.core.windows.net
+    ```
+
+    The command writes:
+
+    - `output/calibration.json`: frozen items, Elo ratings, level assignments,
+      exemplars, and judgments.
+    - `output/calibration_summary.csv`: answer counts per level and criterion.
+    - `output/model_usage.json`: model usage metrics.
+
+    Calibration fails instead of publishing a partial scale if any of Levels
+    1-5 is empty.
+
+### Scoring answers against the absolute scale
+
+Follow these steps to score unseen answers without changing the frozen scale:
+
+1. **Set up your project directory:**
+
+    ```sh
+    mkdir -p ./local/calibrated_absolute_test/absolute_scoring
+    cd ./local/calibrated_absolute_test/absolute_scoring
+    ```
+
+2. **Create an `input` folder:**
+
+    ```sh
+    mkdir ./input
+    ```
+
+3. **Download the example answers:**
+
+    ```sh
+    uv run benchmark-qed data download example_answers input
+    ```
+
+    This is the local-filesystem variant.
+
+    Alternative Blob variant (choose this instead of the local command above;
+    do not run both):
+
+    ```sh
+    uv run benchmark-qed data download example_answers input \
+        --storage-type blob \
+        --container-name my-container \
+        --account-url https://<account>.blob.core.windows.net
+    ```
+
+    The generated settings score
+    `input/graphrag_global/data_local.json` as the unseen population. To use
+    other field names, pass `--question-id-key`, `--question-text-key`, or
+    `--answer-text-key`.
+
+4. **Create a configuration file for absolute scoring:**
+
+    ```sh
+    uv run benchmark-qed config init autoe_absolute_score .
+    ```
+
+    This is the local-filesystem variant.
+
+    Alternative Blob variant (choose this instead of the local command above;
+    do not run both):
+
+    ```sh
+    uv run benchmark-qed config init autoe_absolute_score . \
+        --storage-type blob \
+        --container-name my-container \
+        --account-url https://<account>.blob.core.windows.net \
+        --base-dir calibrated_absolute_test/absolute_scoring
+    ```
+
+    This command creates two files in the `absolute_scoring` directory:
+
+    - `.env`: Contains environment variables for the scoring pipeline. Open
+      this file and replace `<API_KEY>` with your OpenAI or Azure API key.
+    - `settings.yaml`: Contains the frozen calibration path, unseen answer
+      inputs, pass count, LLM configuration, and a persistent SQLite cache
+      under `.benchmark_qed_cache/absolute_score`.
+
+    The generated settings point to the sibling frozen scale:
+
+    ```yaml
+    calibration_path: ../calibration/output/calibration.json
+    ```
+
+    In the Blob scaffold, `calibration_path` is instead
+    `output/calibration.json`, the key written by the Blob calibration command.
+
+    This sibling path is only the generated example. If the frozen state is
+    elsewhere, set `calibration_path` to either:
+
+    - An absolute local path, such as
+      `/data/benchmark-scales/customer-support/calibration.json`.
+    - A local path relative to the directory where
+      `benchmark-qed autoe absolute-score` is run.
+    - A key relative to the configured `input_storage` root when reading from
+      Azure Blob Storage.
+
+    Calibration and scoring use separate projects because one frozen scale can
+    be reused across multiple unseen-answer runs.
+
+5. **Run the absolute scoring:**
+
+    ```sh
+    uv run benchmark-qed autoe absolute-score settings.yaml output
+    ```
+
+    This is the local-filesystem variant.
+
+    Alternative Blob-stored config variant (choose this instead of the local
+    command above; do not run both):
+
+    ```sh
+    uv run benchmark-qed autoe absolute-score \
+        blob://my-container/calibrated_absolute_test/absolute_scoring/settings.yaml \
+        output \
+        --account-url https://<account>.blob.core.windows.net
+    ```
+
+    The generated scoring settings use `passes: 3`, which votes across p50,
+    p75, and p25 exemplar sets. Set `passes: 1` for a lower-cost
+    median-exemplar run.
+
+    Outputs include
+    `calibrated_absolute_scores-graphrag_global.csv`,
+    `calibrated_absolute_summary.csv`, and `model_usage.json`. The detailed
+    score CSV retains pass votes, evidence, confidence, rationale, and
+    borderline status for auditing.
+
+    Both stages cache only fully validated structured judgments. Interrupted
+    runs reuse completed batch rankings or exemplar passes. Set
+    `cache_config.type: none` with `storage: null` to force fresh judgments.
+
+    To compare these results with repeated direct one-shot 1-5 judgments, run
+    the [calibrated absolute baseline notebook](notebooks/calibrated_absolute_baseline.ipynb).
+    The notebook keeps repeatability separate from cross-method agreement and
+    does not interpret agreement as correctness without human-gold labels.
 
 ## Scoring RAG answers against reference answers
 Follow these steps to score RAG answers against reference answers using example data from the AP news dataset:
@@ -233,10 +495,13 @@ Follow these steps to score RAG answers against reference answers using example 
         --base-dir reference_test
     ```
     This creates two files in the `./reference_test` directory:
+
     - `.env`: Contains environment variables for the reference scoring pipeline. Open this file and replace `<API_KEY>` with your OpenAI or Azure API key.
-    - `settings.yaml`: Contains pipeline settings, which you can modify as needed.
+    - `settings.yaml`: Contains pipeline settings, including a persistent
+      SQLite judgment cache under `.benchmark_qed_cache/reference`.
 
     The generated `settings.yaml` includes commented-out `input_storage` and `output_storage` sections for configuring Azure Blob Storage backends.
+    The SQLite cache remains local when blob input/output storage is enabled.
 
 4. **Run the reference scoring:**
     ```sh
@@ -250,6 +515,18 @@ Follow these steps to score RAG answers against reference answers using example 
         --account-url https://<account>.blob.core.windows.net
     ```
     The results will be saved in the `output` directory.
+
+    Successful question/criterion/trial judgments are cached immediately. If a
+    request fails, rerun the same command to reuse completed judgments and
+    evaluate only misses. Inspect the cache with:
+
+    ```sh
+    uv run benchmark-qed cache inspect \
+        .benchmark_qed_cache/reference/reference.sqlite3
+    ```
+
+    Set `cache_config.type: none` with `storage: null` when fresh judgments are
+    required.
 
 ## Scoring RAG answers against assertions
 
@@ -287,6 +564,7 @@ Follow these steps to evaluate RAG answers against per-question assertions using
         --base-dir assertion_test
     ```
     This command creates two files in the `./assertion_test` directory:
+
     - `.env`: Contains environment variables for the assertion evaluation pipeline. Open this file and replace `<API_KEY>` with your OpenAI or Azure API key.
     - `settings.yaml`: Contains pipeline settings, which you can modify as needed.
 
@@ -305,9 +583,25 @@ Follow these steps to evaluate RAG answers against per-question assertions using
     ```
     The results will be saved in the `output` directory, including per-assertion scores and per-question summaries.
 
+    The generated single-RAG configuration enables a persistent SQLite cache at
+    `.benchmark_qed_cache/assertion/assertion.sqlite3`. Each
+    question/assertion/trial judgment is persisted independently, so rerunning
+    after an interruption evaluates only missing work. Inspect it with:
+
+    ```sh
+    uv run benchmark-qed cache inspect \
+        .benchmark_qed_cache/assertion/assertion.sqlite3
+    ```
+
+    Set `cache_config.type: none` with `storage: null` when fresh judgments are
+    required. This answer-level cache does not apply to multi-RAG or
+    hierarchical assertion scoring; chunk-level assertion evaluation uses its
+    own assertion/chunk cache.
+
 ## Evaluating retrieved chunks against assertions
 
 Chunk-level evaluation scores how well retrieved passages (chunks) support assertions, without waiting for answer synthesis. This is useful for:
+
 - **Fast retrieval evaluation**: Assess retrieval quality before generating complete answers
 - **Efficient iteration**: Fix retriever settings without re-running expensive answer generation
 - **Persistent caching**: Avoid re-evaluating same (assertion, chunk) pairs across multiple runs
@@ -315,57 +609,70 @@ Chunk-level evaluation scores how well retrieved passages (chunks) support asser
 ### Prerequisites: Where do chunks come from?
 
 **Chunks** are the retrieved passages from your RAG system. You obtain them by running your retriever (e.g., vector search, BM25, hybrid) on each question. Chunks should include:
+
 - The passage text
 - The chunk index (chunk_id)
-- The retrieval rank
-
-You'll provide this data to benchmark-qed in one of two formats (see Step 2 below).
+- The retrieval rank when available
 
 ### Step-by-step guide
 
 1. **Set up your project directory:**
+
     ```sh
     mkdir -p ./local/chunk_assertion_test
     cd ./local/chunk_assertion_test
     ```
 
-2. **Prepare your input data:**
+2. **Initialize the chunk-assertion project:**
+
+    For a local-filesystem project, run:
+
     ```sh
-    mkdir ./input
+    uv run benchmark-qed config init autoe_chunk_assertion .
     ```
-    
-    You need two files whose `question_id`s line up:
-    - **Assertion file**: The per-question assertions to check. Set via `assertions_path`
-      in `settings.yaml`.
-    - **Retrieval file**: Created by YOUR retrieval system. The tool always evaluates the
-      retrieved **chunks** (not the synthesized answer) against your assertions. Provide
-      these chunks as a JSON array of `RetrievalResult` records, set via `retrieval_path`
-      in `settings.yaml`.
 
-    > **Note:** To try the pipeline end-to-end without wiring up your own retriever, download
-    > the bundled example data, which ships matching retrieval-results and assertions files
-    > (same `question_id`s) for both short- and long-context retrievers:
-    > ```sh
-    > uv run benchmark-qed data download example_answers input
-    > ```
-    > Then set, for example:
-    > ```yaml
-    > retrieval_path: input/vector_rag_short_context/data_local_retrieval_results.json
-    > assertions_path: input/data_local_assertions.json
-    > ```
-    >
-    > Swap `data_local` for `data_global` or `data_linked` (and pick
-    > `vector_rag_short_context` or `vector_rag_long_context`) to evaluate a different
-    > question set — just keep the retrieval and assertions files on the same set so their
-    > `question_id`s match. These are the same files used by the AutoE notebook example.
+    Alternative blob variant (choose this instead of the local command above; do not run both):
 
-    ### Input Format: RetrievalResult JSON file
+    ```sh
+    uv run benchmark-qed config init autoe_chunk_assertion . \
+        --storage-type blob \
+        --container-name my-container \
+        --account-url https://<account>.blob.core.windows.net \
+        --base-dir chunk_assertion_test
+    ```
 
-    Create a JSON array (e.g., `input/retrieval.json`, or any path you prefer) where each
-    record holds a question and its retrieved `context`. Each context item carries a
-    `chunk_id`, `text`, and an optional `rank`. When `rank` is present on every item,
-    chunks are evaluated in rank order (top-k semantics); otherwise the chunks are assumed
-    to be already pre-sorted in decreasing order of relevance and list order is used.
+    The command creates the project structure before any settings need to be
+    edited:
+
+    - `settings.yaml`: Pipeline configuration with input placeholders
+    - `.env`: Environment-variable placeholders for credentials
+    - `input/`: Local input directory
+    - `prompts/`: Default chunk-assertion judge prompts
+
+    Set the required credentials in `.env` before running the evaluation.
+
+3. **Prepare the retrieval and assertion inputs:**
+
+    You need two JSON files with matching `question_id` values:
+
+    - A **retrieval-results file** produced by your retriever. BenchmarkQED
+      evaluates the retrieved chunks, not the synthesized answer.
+    - An **assertions file** containing the per-question assertions to check.
+
+    To try the workflow with bundled example data, download both kinds of files
+    into the generated `input/` directory:
+
+    ```sh
+    uv run benchmark-qed data download example_answers input
+    ```
+
+    The examples include matching files for `data_local`, `data_global`, and
+    `data_linked`, with both `vector_rag_short_context` and
+    `vector_rag_long_context` retrieval results.
+
+    If you use your own retriever, its retrieval-results file must be a JSON
+    array in this form:
+
     ```json
     [
       {
@@ -374,79 +681,115 @@ You'll provide this data to benchmark-qed in one of two formats (see Step 2 belo
         "context": [
           {
             "chunk_id": "0",
-            "text": "Photosynthesis is the process by which plants convert sunlight into chemical energy...",
+            "text": "Photosynthesis converts sunlight into chemical energy.",
             "rank": 0
           },
           {
             "chunk_id": "5",
-            "text": "In photosynthesis, light energy is captured by chlorophyll molecules..."
+            "text": "Chlorophyll captures light energy.",
+            "rank": 1
           }
         ]
       }
     ]
     ```
 
-    This is the same schema produced by the retrieval-results examples (e.g. the bundled
-    `data_local_retrieval_results.json`), so those files work directly with no conversion.
-    See the **chunk-level assertion** example in the AutoE notebook
-    ([notebooks/autoe.ipynb](notebooks/autoe.ipynb)) for end-to-end usage.
+    Each context item requires `chunk_id` and `text`; `rank` is optional. When
+    every item has a rank, chunks are evaluated in rank order. Otherwise, their
+    existing list order is used. See the chunk-level assertion example in the
+    [AutoE notebook](notebooks/autoe.ipynb) for programmatic usage.
 
-3. **Create a configuration file for chunk-level evaluation:**
-    ```sh
-    uv run benchmark-qed config init autoe_chunk_assertion .
-    ```
-    This is the local-filesystem variant.
+4. **Review the generated `settings.yaml`:**
 
-    Alternative blob variant (choose this instead of the local command above; do not run both):
-    ```sh
-    uv run benchmark-qed config init autoe_chunk_assertion . \
-        --storage-type blob \
-        --container-name my-container \
-        --account-url https://<account>.blob.core.windows.net \
-        --base-dir chunk_assertion_test
-    ```
-    This command creates two files in the `./chunk_assertion_test` directory:
-    - `.env`: Contains environment variables. Open this file and replace `<API_KEY>` with your OpenAI or Azure API key.
-    - `settings.yaml`: Contains pipeline settings, including:
-      - `retrieval_path`: Path to your retrieved chunks JSON (RetrievalResult format above)
-      - `k_list`: K values to report coverage metrics (e.g., [5, 10, 20, 50])
-      - `cache_dir`: Directory for persistent (assertion, chunk) cache
-
-    The generated `settings.yaml` includes commented-out `input_storage` and `output_storage` sections for configuring Azure Blob Storage backends.
-
-4. **Update settings.yaml for your data:**
-
-    The generated template includes placeholder paths. Update them to match your actual file locations:
+    The generated configuration already points to the bundled `data_local`
+    short-context example:
 
     ```yaml
     generated:
       name: my_retriever
-      retrieval_path: input/vector_rag_short_context/data_local_retrieval_results.json  # Update to your RetrievalResult file path
+      retrieval_path: input/vector_rag_short_context/data_local_retrieval_results.json
+
     assertions:
-      assertions_path: input/data_local_assertions.json  # Update to your assertions file path
+      assertions_path: input/data_local_assertions.json
     ```
 
+    If you downloaded the bundled data in the previous step, these defaults can
+    be used unchanged. To evaluate another example set, change `data_local` in
+    both paths to `data_global` or `data_linked`. To use the long-context
+    retriever, also change `vector_rag_short_context` to
+    `vector_rag_long_context`. The question set must match in both files.
+
+    Other important generated settings are:
+
+    - `k_list`: Retrieval depths for which coverage metrics are reported
+    - `max_chunks_per_question`: Optional cap on evaluated chunks
+    - `cache_config`: Cache backend for assertion/chunk judgments
+    - `llm_config`: Judge model, provider, credentials, and request settings
+    - `prompt_config`: Judge prompt files
+
+    The default cache is persistent SQLite:
+
+    ```yaml
+    cache_config:
+      type: sqlite
+      storage:
+        type: file
+        base_dir: .benchmark_qed_cache/chunk_assertions
+      database_name: chunk_assertions.sqlite3
+    ```
+
+    Supported cache types are `sqlite`, `json`, `memory`, and `none`. Existing
+    local `chunk_assertions.jsonl` caches are imported automatically. Persistent
+    local caches coordinate concurrent processes so only one process judges
+    each uncached assertion/chunk pair.
+
+    Cache storage is independent of `input_storage` and `output_storage`. A
+    JSON cache with `storage.type: file` remains local even when inputs and
+    outputs use Azure Blob Storage, and its relative `base_dir` is resolved from
+    the directory where the command is run. To place JSON entries in blob
+    storage, set `cache_config.storage.type: blob` and provide its container and
+    credentials explicitly. See [Evaluation Caches](cli/cache.md#cache-backends)
+    for local and blob JSON examples.
+
 5. **Run the chunk-level assertion evaluation:**
+
     ```sh
     uv run benchmark-qed autoe chunk-assertion-scores settings.yaml output
     ```
-    This is the local-filesystem variant.
 
     Alternative blob-stored config variant (choose this instead of the local command above; do not run both):
+
     ```sh
     uv run benchmark-qed autoe chunk-assertion-scores blob://my-container/chunk_assertion_test/settings.yaml output \
         --account-url https://<account>.blob.core.windows.net
     ```
-    The results will be saved in the `output` directory, including:
+
+6. **Review the outputs and cache:**
+
+    The `output/` directory contains:
+
     - `chunk_assertion_results.json`: Coverage metrics at each k
     - `per_query_metrics_*.json`: Per-question metrics for paired significance testing
     - `debug/`: Detailed per-question evaluation records
 
-**Chunk-level evaluation benefits:**
-- **Efficient caching**: Results cached at (assertion, chunk) granularity using SHA256 content-addressing
+    Inspect the default SQLite cache, including namespace counts and active work
+    leases, with:
+
+    ```sh
+    uv run benchmark-qed cache inspect \
+        .benchmark_qed_cache/chunk_assertions/chunk_assertions.sqlite3
+    ```
+
+    The inspection command applies only to SQLite cache files. To force fresh
+    LLM judgments, set `cache_config.type: none` and `storage: null`.
+
+### Chunk-level evaluation benefits
+
+- **Efficient caching**: Results cached at `(assertion, chunk)` granularity using SHA256 content-addressing
 - **Multi-k reporting**: Coverage, Strict Coverage, and Coverage Strength metrics at each k value
 - **Reusable cache**: Re-run with different k values or retriever configs with zero LLM cost on overlapping chunks
 - **Coverage metrics**:
+
   - Coverage: % of assertions with full or partial support in top-k chunks
   - Strict Coverage: % of assertions with full support only
   - Coverage Strength: Average score across all assertions
@@ -459,5 +802,3 @@ To learn how to use AutoE programmatically, please see the [AutoE Notebook Examp
 To explore the query synthesis workflow in detail, please see the [AutoQ CLI Documentation](cli/autoq.md) for command-line usage and the [AutoQ Notebook Example](notebooks/autoq.ipynb) for a step-by-step programmatic guide.
 
 For a deeper understanding of AutoE evaluation pipelines, please refer to the [AutoE CLI Documentation](cli/autoe.md) for available commands and the [AutoE Notebook Example](notebooks/autoe.ipynb) for hands-on examples.
-
-

@@ -32,10 +32,12 @@ dependencies = [
     "typer>=0.26.8",
     "matplotlib>=3.11.0",
     "seaborn>=0.13.2",
-    "graphrag-common>=3.1.0",
-    "graphrag-input>=3.1.0",
-    "graphrag-storage>=3.1.0",
-    "graphrag-llm>=3.1.0"
+    "graphrag-common",
+    "graphrag-input",
+    "graphrag-storage",
+    "graphrag-llm",
+    "graphrag-cache>=3.3.0",
+    "filelock>=3.20.3",
 ]
 
 [dependency-groups]
@@ -76,6 +78,18 @@ source = "uv-dynamic-versioning"
 # AnthropicThinkingParam which only exists in litellm>=1.84. Override until
 # the upstream pin is relaxed.
 override-dependencies = ["litellm>=1.84.0"]
+
+[[tool.uv.index]]
+name = "cfs-feed"
+url = "https://packagefeedproxy.microsoft.io/pypi/simple/"
+default = true
+
+[tool.uv.sources]
+graphrag-common = { path = "local/graphrag_common-3.3.0-py3-none-any.whl" }
+graphrag-input = { path = "local/graphrag_input-3.3.0-py3-none-any.whl" }
+graphrag-storage = { path = "local/graphrag_storage-3.3.0-py3-none-any.whl" }
+graphrag-llm = { path = "local/graphrag_llm-3.3.0-py3-none-any.whl" }
+graphrag-cache = { path = "local/graphrag_cache-3.3.0-py3-none-any.whl" }
 
 [tool.uv-dynamic-versioning]
 vcs = "git"

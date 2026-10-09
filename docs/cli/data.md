@@ -35,6 +35,13 @@ benchmark-qed data download AP_news ./input
 
 The dataset is extracted to the specified `output_dir` (e.g., `./input`).
 
+Download the example RAG answers, assertions, and retrieval results used by
+the AutoE tutorials with:
+
+```bash
+benchmark-qed data download example_answers ./input
+```
+
 #### Azure Blob Storage
 
 ```bash

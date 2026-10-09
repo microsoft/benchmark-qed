@@ -2,8 +2,9 @@
 """Scoring configuration models."""
 
 from pathlib import Path
-from typing import Literal, Self
+from typing import Any, Literal, Self
 
+from graphrag_cache import CacheConfig, CacheType
 from graphrag_storage.storage_config import StorageConfig
 from pydantic import BaseModel, Field, model_validator
 
@@ -11,6 +12,7 @@ from benchmark_qed.autoe.assertion.hierarchical import HierarchicalMode
 from benchmark_qed.autoe.prompts import assertion as assertion_prompts
 from benchmark_qed.autoe.prompts import pairwise as pairwise_prompts
 from benchmark_qed.autoe.prompts import reference as reference_prompts
+from benchmark_qed.cache import create_default_cache_config
 from benchmark_qed.config.llm_config import LLMConfig
 from benchmark_qed.config.model.score import (
     Assertions,
@@ -124,6 +126,14 @@ class PairwiseConfig(BaseAutoEConfig):
         description="List of criteria to use for scoring.",
     )
 
+    cache_config: CacheConfig = Field(
+        default_factory=lambda: create_default_cache_config(
+            ".benchmark_qed_cache/pairwise",
+            database_name="pairwise.sqlite3",
+        ),
+        description="GraphRAG cache configuration for pairwise judgements.",
+    )
+
     prompt_config: AutoEPromptConfig = Field(
         default=AutoEPromptConfig(
             user_prompt=PromptConfig(
@@ -136,6 +146,91 @@ class PairwiseConfig(BaseAutoEConfig):
             ),
         ),
         description="Configuration for prompts used in pairwise scoring.",
+    )
+
+
+class CalibratedAbsoluteCalibrationConfig(BaseModel):
+    """Configuration for calibrating an absolute answer-quality scale."""
+
+    llm_config: LLMConfig = Field(
+        default_factory=LLMConfig,
+        description="Configuration for the LLM used to rank calibration batches.",
+    )
+    calibration: list[Condition] = Field(
+        min_length=1,
+        description="Answer files used to build the frozen scale.",
+    )
+    criteria: list[Criteria] = Field(
+        default_factory=pairwise_scores_criteria,
+        min_length=1,
+        description="Independent dimensions to calibrate.",
+    )
+    appearances: int = Field(
+        default=3,
+        ge=1,
+        description="Number of ranking-batch appearances per answer.",
+    )
+    max_batch_size: int = Field(
+        default=5,
+        ge=2,
+        le=5,
+        description="Maximum answers in one ranking batch.",
+    )
+    seed: int = Field(default=0, description="Deterministic scheduling seed.")
+    k_factor: float = Field(default=32.0, gt=0, description="Elo K-factor.")
+    initial_rating: float = Field(
+        default=1500.0,
+        description="Initial Elo rating for every calibration answer.",
+    )
+    cache_config: CacheConfig = Field(
+        default_factory=lambda: create_default_cache_config(
+            ".benchmark_qed_cache/absolute_calibrate",
+            database_name="absolute_calibrate.sqlite3",
+        ),
+        description="Cache for completed calibration batch rankings.",
+    )
+    input_storage: StorageConfig | None = Field(
+        default=None,
+        description="Optional storage configuration for input answer files.",
+    )
+    output_storage: StorageConfig | None = Field(
+        default=None,
+        description="Optional storage configuration for the calibration state.",
+    )
+
+
+class CalibratedAbsoluteScoringConfig(BaseModel):
+    """Configuration for scoring unseen answers on a calibrated scale."""
+
+    llm_config: LLMConfig = Field(
+        default_factory=LLMConfig,
+        description="Configuration for the LLM used for exemplar classification.",
+    )
+    calibration_path: Path = Field(
+        description="Path to the frozen calibration-state JSON file. Local paths may be absolute or relative to the command's working directory; with input_storage, the path is relative to that storage.",
+    )
+    generated: list[Condition] = Field(
+        min_length=1,
+        description="Unseen answer files to score.",
+    )
+    passes: Literal[1, 3] = Field(
+        default=3,
+        description="Use p50 only (1) or p50/p75/p25 voting (3).",
+    )
+    cache_config: CacheConfig = Field(
+        default_factory=lambda: create_default_cache_config(
+            ".benchmark_qed_cache/absolute_score",
+            database_name="absolute_score.sqlite3",
+        ),
+        description="Cache for completed exemplar-scoring passes.",
+    )
+    input_storage: StorageConfig | None = Field(
+        default=None,
+        description="Optional storage configuration for inputs and calibration.",
+    )
+    output_storage: StorageConfig | None = Field(
+        default=None,
+        description="Optional storage configuration for score outputs.",
     )
 
 
@@ -196,6 +291,14 @@ class DifferentialPairwiseConfig(BaseModel):
         description="Number of trials to run for each condition.",
     )
 
+    cache_config: CacheConfig = Field(
+        default_factory=lambda: create_default_cache_config(
+            ".benchmark_qed_cache/differential_pairwise",
+            database_name="differential_pairwise.sqlite3",
+        ),
+        description="GraphRAG cache configuration for extraction and verdict stages.",
+    )
+
     input_storage: StorageConfig | None = Field(
         default=None,
         description="Optional storage configuration for reading input from Azure Blob Storage. When omitted, reads from local filesystem paths.",
@@ -249,6 +352,14 @@ class ReferenceConfig(BaseAutoEConfig):
     score_min: int = Field(1, description="Minimum score for the criteria.")
     score_max: int = Field(10, description="Maximum score for the criteria.")
 
+    cache_config: CacheConfig = Field(
+        default_factory=lambda: create_default_cache_config(
+            ".benchmark_qed_cache/reference",
+            database_name="reference.sqlite3",
+        ),
+        description="GraphRAG cache configuration for reference judgments.",
+    )
+
     prompt_config: AutoEPromptConfig = Field(
         default=AutoEPromptConfig(
             user_prompt=PromptConfig(
@@ -279,6 +390,14 @@ class AssertionConfig(BaseAutoEConfig):
     pass_threshold: float = Field(
         0.5,
         description="Threshold for passing the assertion score.",
+    )
+
+    cache_config: CacheConfig = Field(
+        default_factory=lambda: create_default_cache_config(
+            ".benchmark_qed_cache/assertion",
+            database_name="assertion.sqlite3",
+        ),
+        description="GraphRAG cache configuration for answer-level assertion judgments.",
     )
 
     prompt_config: AutoEPromptConfig = Field(
@@ -813,10 +932,19 @@ class RetrievalReferenceConfig(BaseModel):
         description="Column name mappings for text unit data.",
     )
 
-    cache_dir: Path | None = Field(
-        default=None,
-        description="Directory for caching relevance assessments.",
+    cache_config: CacheConfig = Field(
+        default_factory=lambda: CacheConfig(type=CacheType.Noop),
+        description="GraphRAG cache configuration for relevance assessments.",
     )
+
+    @model_validator(mode="before")
+    @classmethod
+    def reject_legacy_cache_dir(cls, data: Any) -> Any:
+        """Reject the removed cache_dir setting with actionable guidance."""
+        if isinstance(data, dict) and "cache_dir" in data:
+            msg = "cache_dir was replaced by cache_config"
+            raise ValueError(msg)
+        return data
 
     input_storage: StorageConfig | None = Field(
         default=None,
@@ -896,10 +1024,19 @@ class RetrievalScoresConfig(BaseModel):
         description="Minimum relevance score to consider relevant (0-3 scale).",
     )
 
-    cache_dir: Path | None = Field(
-        default=None,
-        description="Directory for caching relevance assessments (shared across RAG methods).",
+    cache_config: CacheConfig = Field(
+        default_factory=lambda: CacheConfig(type=CacheType.Noop),
+        description="GraphRAG cache configuration shared across RAG methods.",
     )
+
+    @model_validator(mode="before")
+    @classmethod
+    def reject_legacy_cache_dir(cls, data: Any) -> Any:
+        """Reject the removed cache_dir setting with actionable guidance."""
+        if isinstance(data, dict) and "cache_dir" in data:
+            msg = "cache_dir was replaced by cache_config"
+            raise ValueError(msg)
+        return data
 
     context_id_key: str = Field(
         default="chunk_id",

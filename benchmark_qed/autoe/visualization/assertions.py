@@ -135,7 +135,7 @@ def plot_assertion_accuracy_by_rag_method(
 
 
 def plot_assertion_score_distribution(
-    results_df: pd.DataFrame,  # noqa: ARG001
+    results_df: pd.DataFrame,  # ruff: ignore[unused-function-argument]
     output_path: Path | None = None,
     figsize: tuple[int, int] = (10, 6),
     title: str = "Assertion Score Distribution by RAG Method",

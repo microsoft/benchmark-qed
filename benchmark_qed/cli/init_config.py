@@ -52,6 +52,8 @@ class ConfigType(StrEnum):
     autoq = "autoq"
     autoe_pairwise = "autoe_pairwise"
     autoe_differential_pairwise = "autoe_differential_pairwise"
+    autoe_absolute_calibrate = "autoe_absolute_calibrate"
+    autoe_absolute_score = "autoe_absolute_score"
     autoe_reference = "autoe_reference"
     autoe_assertion = "autoe_assertion"
     autoe_chunk_assertion = "autoe_chunk_assertion"
@@ -279,6 +281,16 @@ assertions: # List of other conditions to compare against the base.
 pass_threshold: 0.5 # The threshold for passing the assertion. If the score is above this threshold, the assertion is considered passed.
 trials: 4 # Number of trials to repeat the scoring process for each question-assertion pair.
 
+## Cache Configuration
+# Reuses completed question/assertion/trial judgments across runs.
+# Set type: none and storage: null to force fresh LLM judgments.
+cache_config:
+  type: sqlite # Supported: sqlite, json, memory, none
+  storage:
+    type: file
+    base_dir: .benchmark_qed_cache/assertion
+  database_name: assertion.sqlite3
+
 ## LLM Configuration
 llm_config: {CHAT_MODEL_DEFAULTS}
 
@@ -297,15 +309,20 @@ generated:
   #   {{"question_id", "text", "context": [{{"chunk_id", "text", "rank"}}]}}
   # "rank" is optional; when absent chunks are assumed pre-sorted by relevance.
   # This matches the standard retrieval-results schema (e.g. data_local_retrieval_results.json).
-  retrieval_path: input/retrieval.json
+  retrieval_path: input/vector_rag_short_context/data_local_retrieval_results.json
 assertions:
-  assertions_path: input/assertions.json  # Path to assertions file
+  assertions_path: input/data_local_assertions.json # Path to assertions file
 
 ## Chunk Evaluation Configuration
 k_list: [5, 10, 20, 50]  # Report coverage metrics at these k values (plus 'all')
 pass_threshold: 0.5  # Score threshold: 0.5 = partial_support or full_support counts as pass
 # max_chunks_per_question: 20  # Optional: cap chunks evaluated per question (keeps highest-ranked). Reduces LLM calls during testing. Omit to evaluate all.
-cache_dir: .benchmark_qed_cache/chunk_assertions  # Cache directory for (assertion, chunk) pairs
+cache_config:
+  type: sqlite  # Supported: sqlite, json, memory, none
+  storage:
+    type: file
+    base_dir: .benchmark_qed_cache/chunk_assertions
+  database_name: chunk_assertions.sqlite3
 
 ## LLM Configuration
 llm_config: {CHAT_MODEL_DEFAULTS}
@@ -336,6 +353,16 @@ question_sets: # List of question sets to use for scoring.
 #   - name: "criteria name"
 #     description: "criteria description"
 trials: 4 # Number of trials to repeat the scoring process for each question. Should be an even number to allow for counterbalancing.
+
+## Cache Configuration
+# Reuses completed question/criterion/trial judgements across runs.
+# Set type: none and storage: null to force fresh LLM judgements.
+cache_config:
+  type: sqlite # Supported: sqlite, json, memory, none
+  storage:
+    type: file
+    base_dir: .benchmark_qed_cache/pairwise
+  database_name: pairwise.sqlite3
 
 ## LLM Configuration
 llm_config: {CHAT_MODEL_DEFAULTS}
@@ -371,6 +398,16 @@ question_sets: # List of question sets to use for scoring.
 #     description: "criteria description"
 trials: 4 # Number of trials to repeat the scoring process for each question. Should be an even number to allow for counterbalancing.
 
+## Cache Configuration
+# Caches extraction and verdict stages independently for interruption recovery.
+# Set type: none and storage: null to force fresh LLM calls.
+cache_config:
+  type: sqlite # Supported: sqlite, json, memory, none
+  storage:
+    type: file
+    base_dir: .benchmark_qed_cache/differential_pairwise
+  database_name: differential_pairwise.sqlite3
+
 ## LLM Configuration
 llm_config: {CHAT_MODEL_DEFAULTS}
 
@@ -384,6 +421,74 @@ prompt_config:
     prompt: prompts/pairwise_unique_judge_system_prompt.txt
   judge_user_prompt:
     prompt: prompts/pairwise_unique_judge_user_prompt.txt"""
+
+
+AUTOE_CALIBRATED_ABSOLUTE_CALIBRATION_CONTENT = f"""## Storage Configuration
+{{STORAGE}}
+## Calibration Input
+calibration:
+  - name: vector_rag
+    answer_base_path: input/vector_rag/data_local.json
+  - name: lazygraphrag
+    answer_base_path: input/lazygraphrag/data_local.json
+
+## Independent dimensions to calibrate
+# Omit this section to use the default answer-quality criteria.
+# criteria:
+#   - name: correctness
+#     description: How factually accurate is the answer to its question?
+#   - name: completeness
+#     description: How completely does the answer address its question?
+
+## Calibration Configuration
+appearances: 3 # Ranking-batch appearances per answer.
+max_batch_size: 5 # Must be between 2 and 5.
+seed: 42 # Deterministic batch scheduling seed.
+k_factor: 32.0
+initial_rating: 1500.0
+
+## Cache Configuration
+# Reuses completed batch rankings across interrupted and repeated calibrations.
+# Set type: none and storage: null to force fresh LLM judgments.
+cache_config:
+  type: sqlite # Supported: sqlite, json, memory, none
+  storage:
+    type: file
+    base_dir: .benchmark_qed_cache/absolute_calibrate
+  database_name: absolute_calibrate.sqlite3
+
+## LLM Configuration
+llm_config: {CHAT_MODEL_DEFAULTS}"""
+
+
+AUTOE_CALIBRATED_ABSOLUTE_SCORING_CONTENT = f"""## Storage Configuration
+{{STORAGE}}
+## Frozen Calibration Scale
+# Local: use an absolute path or a path relative to the directory where the
+# command runs. With input_storage enabled, use a key relative to that storage.
+calibration_path: ../calibration/output/calibration.json
+
+## Unseen Answer Inputs
+generated:
+  - name: graphrag_global
+    answer_base_path: input/graphrag_global/data_local.json
+
+## Scoring Configuration
+# Use 1 for the median exemplar only or 3 for p50/p75/p25 voting.
+passes: 3
+
+## Cache Configuration
+# Reuses completed target/criterion/exemplar-pass judgments.
+# Set type: none and storage: null to force fresh LLM judgments.
+cache_config:
+  type: sqlite # Supported: sqlite, json, memory, none
+  storage:
+    type: file
+    base_dir: .benchmark_qed_cache/absolute_score
+  database_name: absolute_score.sqlite3
+
+## LLM Configuration
+llm_config: {CHAT_MODEL_DEFAULTS}"""
 
 
 AUTOE_REFERENCE_CONTENT = f"""## Storage Configuration
@@ -404,6 +509,16 @@ score_max: 10
 #   - name: "criteria name"
 #     description: "criteria description"
 trials: 4 # Number of trials to repeat the scoring process for each question. Should be an even number to allow for counterbalancing.
+
+## Cache Configuration
+# Reuses completed question/criterion/trial judgments across runs.
+# Set type: none and storage: null to force fresh LLM judgments.
+cache_config:
+  type: sqlite # Supported: sqlite, json, memory, none
+  storage:
+    type: file
+    base_dir: .benchmark_qed_cache/reference
+  database_name: reference.sqlite3
 
 ## LLM Configuration
 llm_config: {CHAT_MODEL_DEFAULTS}
@@ -472,6 +587,10 @@ def _get_content(config_type: ConfigType) -> str:
             return AUTOE_PAIRWISE_CONTENT
         case ConfigType.autoe_differential_pairwise:
             return AUTOE_DIFFERENTIAL_PAIRWISE_CONTENT
+        case ConfigType.autoe_absolute_calibrate:
+            return AUTOE_CALIBRATED_ABSOLUTE_CALIBRATION_CONTENT
+        case ConfigType.autoe_absolute_score:
+            return AUTOE_CALIBRATED_ABSOLUTE_SCORING_CONTENT
         case ConfigType.autoe_reference:
             return AUTOE_REFERENCE_CONTENT
         case ConfigType.autoe_assertion:
@@ -524,6 +643,11 @@ def _render_content(
             else _commentify(AUTOE_STORAGE_SNIPPET, indent=0)
         )
         content = template.replace("{STORAGE}", storage_block)
+        if active and config_type == ConfigType.autoe_absolute_score:
+            content = content.replace(
+                "calibration_path: ../calibration/output/calibration.json",
+                "calibration_path: output/calibration.json",
+            )
 
     if not active:
         return content
@@ -640,9 +764,7 @@ def _write_to_blob(
 def init(
     config_type: Annotated[
         ConfigType,
-        typer.Argument(
-            help="The type of configuration to generate. Options are: autoq, autoe_pairwise, autoe_reference."
-        ),
+        typer.Argument(help="The type of configuration to generate."),
     ],
     root: Annotated[
         Path, typer.Argument(help="The path to root directory with the input folder.")

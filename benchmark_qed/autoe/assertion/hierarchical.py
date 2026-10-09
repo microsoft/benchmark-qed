@@ -22,6 +22,7 @@ from string import Template
 from typing import Any
 from uuid import uuid4
 
+import numpy as np
 import pandas as pd
 from graphrag_llm.completion import LLMCompletion
 from rich import print as rich_print
@@ -388,7 +389,10 @@ def _get_hierarchical_scores_staged(
         .groupby(["question_id", "question", "assertion"])
         .agg(
             global_score_mean=("score", "mean"),
-            global_score=("score", lambda x: int(x.mean() > pass_threshold)),
+            global_score=(
+                "score",
+                lambda x: int(np.asarray(x, dtype=float).mean() > pass_threshold),
+            ),
             reasoning_list=("reasoning", list),
             trial_scores=("score", list),
         )
@@ -396,10 +400,13 @@ def _get_hierarchical_scores_staged(
     )
     global_aggregated["global_passed"] = global_aggregated["global_score"] == 1
 
-    passed_count = global_aggregated["global_passed"].sum()
+    passed_count = int(global_aggregated["global_passed"].to_numpy(dtype=int).sum())
     total_count = len(global_aggregated)
-    per_q_pass_rate = (
-        global_aggregated.groupby("question")["global_score"].mean().mean()
+    per_q_pass_rate = float(
+        np.asarray(
+            global_aggregated.groupby("question")["global_score"].mean(),
+            dtype=float,
+        ).mean()
     )
     rich_print(
         f"  Global assertions: {passed_count}/{total_count} passed "

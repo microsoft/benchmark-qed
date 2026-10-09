@@ -1,3 +1,140 @@
+## Calibrated Absolute Scoring
+
+Calibrated absolute scoring creates a stable five-level answer-quality scale,
+then classifies unseen answers against frozen exemplars from that scale. Unlike
+pairwise scoring, an unseen answer receives a level that is comparable across
+runs using the same calibration state. It does not receive a synthetic Elo
+rating or an exact rank within the calibration population.
+
+Scaffold conventional `settings.yaml` files for the two stages:
+
+```sh
+mkdir -p ./local/calibrated_absolute_test/calibration
+cd ./local/calibrated_absolute_test/calibration
+mkdir ./input
+benchmark-qed data download example_answers input
+benchmark-qed config init autoe_absolute_calibrate .
+```
+
+Run calibration with the same `settings.yaml output` convention as other
+AutoE commands:
+
+```sh
+benchmark-qed autoe absolute-calibrate settings.yaml output
+```
+
+Then create the scoring project with the same folder and example-download
+sequence:
+
+```sh
+mkdir -p ./local/calibrated_absolute_test/absolute_scoring
+cd ./local/calibrated_absolute_test/absolute_scoring
+mkdir ./input
+benchmark-qed data download example_answers input
+benchmark-qed config init autoe_absolute_score .
+benchmark-qed autoe absolute-score settings.yaml output
+```
+
+The complete sequence therefore creates two sibling projects:
+
+```text
+calibrated_absolute_test/
+├── calibration/
+│   ├── input/
+│   ├── settings.yaml
+│   └── output/
+└── absolute_scoring/
+   ├── input/
+   ├── settings.yaml
+   └── output/
+```
+
+The scoring settings reference the frozen sibling scale at
+`../calibration/output/calibration.json`. This is only the scaffold default.
+`calibration_path` may instead be an absolute local path, a path relative to
+the command's working directory, or a key relative to `input_storage`.
+
+Calibration ranks overlapping batches and replays the judgments in a
+deterministic order. Every criterion gets an independent Elo population and
+Levels 1-5. Calibration fails rather than publishing a partial scale when any
+level is empty. Completed batch rankings are cached in
+`.benchmark_qed_cache/absolute_calibrate/absolute_calibrate.sqlite3`.
+
+The generated calibration `settings.yaml` follows this schema:
+
+```yaml
+calibration:
+  - name: vector_rag
+    answer_base_path: input/vector_rag/data_local.json
+  - name: lazygraphrag
+    answer_base_path: input/lazygraphrag/data_local.json
+
+criteria:
+  - name: correctness
+    description: How factually accurate is the answer to its question?
+  - name: completeness
+    description: How completely does the answer address its question?
+
+appearances: 3
+max_batch_size: 5
+seed: 42
+k_factor: 32
+
+llm_config:
+  auth_type: api_key
+  model: gpt-4.1
+  api_key: ${OPENAI_API_KEY}
+  llm_provider: openai.chat
+  concurrent_requests: 20
+```
+
+The command writes `calibration.json`, `calibration_summary.csv`, and
+`model_usage.json`. Keep `calibration.json` immutable when comparing benchmark
+runs.
+
+The generated scoring `settings.yaml` follows this schema:
+
+```yaml
+calibration_path: ../calibration/output/calibration.json
+generated:
+  - name: graphrag_global
+    answer_base_path: input/graphrag_global/data_local.json
+
+# 1 uses only median exemplars; 3 votes across p50, p75, and p25.
+passes: 3
+
+llm_config:
+  auth_type: api_key
+  model: gpt-4.1
+  api_key: ${OPENAI_API_KEY}
+  llm_provider: openai.chat
+  concurrent_requests: 20
+```
+
+Completed target/criterion/exemplar-pass judgments are cached in
+`.benchmark_qed_cache/absolute_score/absolute_score.sqlite3`. Cache identities
+include the full inputs, criteria, exemplars, policy version, and
+credential-safe model configuration. Set `cache_config.type: none` with
+`storage: null` to force fresh judgments.
+
+Input JSON files must contain `question_id`, `question_text`, and `answer`.
+Use `--question-id-key`, `--question-text-key`, and `--answer-text-key` to map
+other field names. The three-pass mode uses majority vote; if all votes differ,
+the middle voted level wins. Disagreement and missing successful passes reduce
+confidence.
+
+When `input_storage` is configured, `calibration_path` and all
+`answer_base_path` values are relative to that storage. `output_storage` may be
+configured independently.
+
+To compare the method with repeated direct one-shot 1–5 judgments, use the
+[calibrated absolute baseline notebook](../notebooks/calibrated_absolute_baseline.ipynb).
+It reports within-method repeatability, cross-method agreement, latency, and
+model usage. Cross-method agreement is not accuracy; use independently
+adjudicated human labels when evaluating correctness.
+
+---
+
 ## Pairwise Scoring Configuration
 
 This section describes the configuration schema for performing relative comparisons of RAG methods using the LLM-as-a-Judge approach. It includes definitions for conditions, evaluation criteria, and model configuration. For more information about how to configure the LLM, please refer to: [LLM Configuration](llm_config.md)
@@ -19,6 +156,22 @@ To perform pairwise scoring with your configuration file, use:
 ```sh
 benchmark-qed autoe pairwise-scores ./local/pairwise_test/settings.yaml ./local/pairwise_test/output
 ```
+
+The generated configuration enables a persistent SQLite cache by default.
+Completed LLM judgments are reused when the same questions, answers, criteria,
+trials, prompts, and model configuration are evaluated again. See
+[Evaluation Caches](cache.md) for backend choices, inspection, clearing, and
+reproducibility guidance.
+
+Useful pairwise options include:
+
+| Option | Default | Description |
+|---|---|---|
+| `--alpha` | `0.05` | P-value threshold used by the significance analysis. |
+| `--exclude-criteria` | `[]` | Criterion name to exclude; repeat the option to exclude several. |
+| `--print-model-usage` | `false` | Print model usage statistics after scoring. |
+| `--include-score-id-in-prompt` / `--no-include-score-id-in-prompt` | enabled | Add a unique score ID to provider requests. This can avoid provider-side prompt caching, but it does not bypass `cache_config`. |
+| `--question-id-key` | `question_id` | Input field used to match questions across conditions. |
 
 If your config lives in Azure Blob Storage, pass a `blob://` URI and supply credentials inline with `--account-url` (managed identity) or `--connection-string`:
 
@@ -87,6 +240,7 @@ Top-level configuration for scoring a set of conditions.
 | `criteria` | `list[Criteria]` | `pairwise_scores_criteria()` | List of criteria to use for scoring. |
 | `llm_config` | `LLMConfig` | `LLMConfig()` | Configuration for the LLM used in scoring. |
 | `trials` | `int` | `4` | Number of trials to run for each condition. |
+| `cache_config` | `CacheConfig` | SQLite under `.benchmark_qed_cache/pairwise` | Cache for completed pairwise judgements. Use `type: none` to disable it. |
 
 ---
 
@@ -117,6 +271,13 @@ question_sets:
 
 trials: 4
 
+cache_config:
+  type: sqlite
+  storage:
+    type: file
+    base_dir: .benchmark_qed_cache/pairwise
+  database_name: pairwise.sqlite3
+
 llm_config:
   auth_type: api_key
   model: gpt-4.1
@@ -131,6 +292,100 @@ OPENAI_API_KEY=your-secret-api-key-here
 ```
 
 >💡 Note: The api_key field uses an environment variable reference `${OPENAI_API_KEY}`. Make sure to define this variable in a .env file or your environment before running the application.
+
+Each question, criterion, and trial has an independent cache entry. The cache
+identity includes both answers and their labels, the trial number, prompts,
+model/provider configuration, and call arguments. This preserves
+counterbalancing and repeated-trial behavior while allowing interrupted runs to
+resume. Changing any of those values causes a fresh judgement.
+
+### Using the Pairwise Cache
+
+SQLite is the recommended backend and is enabled in newly generated pairwise
+configurations:
+
+```yaml
+cache_config:
+  type: sqlite
+  storage:
+    type: file
+    base_dir: .benchmark_qed_cache/pairwise
+  database_name: pairwise.sqlite3
+```
+
+The supported backends are:
+
+- `sqlite`: persistent local database; recommended for resumable runs and
+  concurrent processes.
+- `json`: persistent JSON entries in the configured GraphRAG storage.
+- `memory`: process-local only; nothing is available to a later run.
+- `none`: disables pairwise judgment caching.
+
+To temporarily force new LLM judgments:
+
+```yaml
+cache_config:
+  type: none
+  storage: null
+```
+
+Inspect the default SQLite cache with:
+
+```sh
+benchmark-qed cache inspect \
+  .benchmark_qed_cache/pairwise/pairwise.sqlite3
+```
+
+Pairwise output files and judgment caching are separate. If a comparison CSV
+already exists in the output directory, the CLI skips that comparison before
+consulting the judgment cache. To fully recompute it, use a new output
+directory (or remove that comparison CSV) and also disable, relocate, or clear
+the judgment cache.
+
+The cache remains local when `input_storage` or `output_storage` uses Azure Blob
+Storage. For full backend examples and safe clearing instructions, see
+[Evaluation Caches](cache.md).
+
+---
+
+## Differential Pairwise Scoring
+
+Differential pairwise scoring first extracts common and unique content from the
+two answers, then judges only the unique content. Generate a configuration and
+run it with:
+
+```sh
+benchmark-qed config init autoe_differential_pairwise ./local/differential_test
+benchmark-qed autoe differential-pairwise-scores \
+  ./local/differential_test/settings.yaml \
+  ./local/differential_test/output
+```
+
+New configurations enable a stage-aware SQLite cache:
+
+```yaml
+cache_config:
+  type: sqlite
+  storage:
+    type: file
+    base_dir: .benchmark_qed_cache/differential_pairwise
+  database_name: differential_pairwise.sqlite3
+```
+
+Extraction and verdict results are stored independently. Consequently:
+
+- A judge failure resumes from a successful extraction.
+- Changing criteria or judge prompts recomputes verdicts but reuses compatible
+  extractions.
+- Changing answers, trial/order, extraction prompts, model/provider, or call
+  arguments recomputes extraction and its dependent verdict.
+- Every trial has its own entries, preserving stochastic trials and
+  counterbalancing.
+
+Set `cache_config.type: none` and `storage: null` to force fresh extraction and
+verdict calls. Existing output CSVs still take precedence over the stage cache;
+remove or relocate both when fully recomputing a comparison. See
+[Evaluation Caches](cache.md) for inspection and clearing instructions.
 
 ---
 
@@ -191,6 +446,10 @@ To perform reference-based scoring with your configuration file, run:
 benchmark-qed autoe reference-scores ./local/reference_test/settings.yaml ./local/reference_test/output
 ```
 
+New reference configurations enable a persistent SQLite cache. Successful
+question/criterion/trial judgments are saved immediately, so interrupted runs
+can resume and unchanged reruns avoid duplicate LLM calls.
+
 For information about the `config init` command, see: [Config Init CLI](config_init.md)
 
 ---
@@ -229,6 +488,7 @@ Top-level configuration for scoring generated answers against a reference.
 | `score_max` | `int` | `10` | Maximum score for each criterion. |
 | `llm_config` | `LLMConfig` | `LLMConfig()` | Configuration for the LLM used in scoring. |
 | `trials` | `int` | `4` | Number of trials to run for each condition. |
+| `cache_config` | `CacheConfig` | SQLite under `.benchmark_qed_cache/reference` | Cache for completed reference judgments. |
 
 ---
 
@@ -257,6 +517,13 @@ score_max: 10
 
 trials: 4
 
+cache_config:
+  type: sqlite
+  storage:
+    type: file
+    base_dir: .benchmark_qed_cache/reference
+  database_name: reference.sqlite3
+
 llm_config:
   model: "gpt-4.1"
   auth_type: "api_key"
@@ -275,6 +542,30 @@ OPENAI_API_KEY=your-secret-api-key-here
 ```
 
 >💡 Note: The api_key field uses an environment variable reference `${OPENAI_API_KEY}`. Make sure to define this variable in a .env file or your environment before running the application.
+
+Each question, criterion, and trial is cached independently. The cache identity
+also includes the reference and generated answers, score range, prompts,
+model/provider, call arguments, and score-ID mode. Trials therefore remain
+counterbalanced and stochastic samples are not collapsed.
+
+To force fresh judgments:
+
+```yaml
+cache_config:
+  type: none
+  storage: null
+```
+
+Inspect the default cache with:
+
+```sh
+benchmark-qed cache inspect .benchmark_qed_cache/reference/reference.sqlite3
+```
+
+Reference output CSVs are rewritten on each command invocation; cache hits
+avoid the LLM calls used to produce those rows. The SQLite path remains local
+when input or output storage uses Azure Blob Storage. See
+[Evaluation Caches](cache.md) for all backends and clearing guidance.
 
 ---
 
@@ -295,6 +586,7 @@ benchmark-qed autoe assertion-scores config.yaml
 ```
 
 The command auto-detects the config format:
+
 - **Single-RAG**: Config has `generated` key → requires output argument
 - **Multi-RAG**: Config has `rag_methods` key → output in config, includes significance testing
 
@@ -347,6 +639,7 @@ Top-level configuration for scoring generated answers against assertions.
 | `pass_threshold` | `float` | `0.5` | Threshold for passing the assertion score. |
 | `llm_config` | `LLMConfig` | `LLMConfig()` | Configuration for the LLM used in scoring. |
 | `trials` | `int` | `4` | Number of trials to run for each assertion. |
+| `cache_config` | `CacheConfig` | SQLite under `.benchmark_qed_cache/assertion` | Cache for completed question/assertion/trial judgments. Use `type: none` to disable it. |
 
 ---
 
@@ -367,6 +660,13 @@ pass_threshold: 0.5
 
 trials: 4
 
+cache_config:
+  type: sqlite
+  storage:
+    type: file
+    base_dir: .benchmark_qed_cache/assertion
+  database_name: assertion.sqlite3
+
 llm_config:
   auth_type: api_key
   model: gpt-4.1
@@ -381,6 +681,37 @@ OPENAI_API_KEY=your-secret-api-key-here
 ```
 
 >💡 Note: The api_key field uses an environment variable reference `${OPENAI_API_KEY}`. Make sure to define this variable in a .env file or your environment before running the application.
+
+The cache identity includes the question, answer, assertion, trial, prompts,
+model/provider, call arguments, and score-ID mode. Completed trials are
+persisted immediately and reused after an interrupted or repeated run. Inspect
+the default cache with:
+
+```sh
+benchmark-qed cache inspect \
+  .benchmark_qed_cache/assertion/assertion.sqlite3
+```
+
+To force fresh judgments, set:
+
+```yaml
+cache_config:
+  type: none
+  storage: null
+```
+
+Changing the model, provider, Azure endpoint, API version, call arguments,
+prompt contents, question, answer, assertion, trial, or score-ID mode produces
+new entries. Old entries remain stored and become reusable if their previous
+configuration is restored. Concurrency, retries, `pass_threshold`, `top_k`, and
+credentials do not affect judgment identity. Changing the cache path or
+database selects a different store rather than deleting the original entries.
+See [Evaluation Caches](cache.md#standard-assertion-score-cache-behavior) for
+the complete invalidation and reuse rules.
+
+This answer-level cache is currently limited to this single-RAG configuration.
+It is separate from chunk-assertion caching and is not used by the multi-RAG or
+hierarchical assertion paths.
 
 > 📋 Assertions json example:
 ```json
@@ -528,6 +859,7 @@ benchmark-qed autoe hierarchical-assertion-scores config.yaml
 ```
 
 The command auto-detects the config format:
+
 - **Single-RAG**: Config has `generated` key → requires output argument
 - **Multi-RAG**: Config has `rag_methods` key → output in config, includes significance testing
 
