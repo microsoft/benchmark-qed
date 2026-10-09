@@ -229,6 +229,238 @@ Follow these steps to run the differential pairwise scoring pipeline:
     also disable, relocate, or clear the stage cache. See
     [Evaluation Caches](cli/cache.md) for backend and clearing guidance.
 
+## Calibrating and applying an absolute answer-quality scale
+
+Calibrated absolute scoring first ranks a fixed population of answers into a
+five-level scale, then scores unseen answers against frozen exemplars from that
+scale. The unseen answers do not change the calibration population and do not
+receive synthetic Elo ratings.
+
+The downloadable `example_answers` archive contains all files referenced by
+the generated settings below.
+
+### Calibrating the absolute scale
+
+Follow these steps to build a frozen five-level scale:
+
+1. **Set up your project directory:**
+
+    ```sh
+    mkdir -p ./local/calibrated_absolute_test/calibration
+    cd ./local/calibrated_absolute_test/calibration
+    ```
+
+2. **Create an `input` folder:**
+
+    ```sh
+    mkdir ./input
+    ```
+
+3. **Download the example answers:**
+
+    ```sh
+    uv run benchmark-qed data download example_answers input
+    ```
+
+    This is the local-filesystem variant.
+
+    Alternative Blob variant (choose this instead of the local command above;
+    do not run both):
+
+    ```sh
+    uv run benchmark-qed data download example_answers input \
+        --storage-type blob \
+        --container-name my-container \
+        --account-url https://<account>.blob.core.windows.net
+    ```
+
+    The generated settings use `input/vector_rag/data_local.json` and
+    `input/lazygraphrag/data_local.json` as the calibration population.
+
+    Each file contains 50 records with `question_id`, `question_text`, and
+    `answer` fields.
+
+4. **Create a configuration file for absolute calibration:**
+
+    ```sh
+    uv run benchmark-qed config init autoe_absolute_calibrate .
+    ```
+
+    This is the local-filesystem variant.
+
+    Alternative Blob variant (choose this instead of the local command above;
+    do not run both):
+
+    ```sh
+    uv run benchmark-qed config init autoe_absolute_calibrate . \
+        --storage-type blob \
+        --container-name my-container \
+        --account-url https://<account>.blob.core.windows.net \
+        --base-dir calibrated_absolute_test/calibration
+    ```
+
+    This command creates two files in the `calibration` directory:
+
+    - `.env`: Contains environment variables for the calibration pipeline. Open
+      this file and replace `<API_KEY>` with your OpenAI or Azure API key.
+    - `settings.yaml`: Contains the calibration inputs, criteria, Elo settings,
+      LLM configuration, and a persistent SQLite cache under
+      `.benchmark_qed_cache/absolute_calibrate`.
+
+5. **Run the absolute calibration:**
+
+    ```sh
+    uv run benchmark-qed autoe absolute-calibrate settings.yaml output
+    ```
+
+    This is the local-filesystem variant.
+
+    Alternative Blob-stored config variant (choose this instead of the local
+    command above; do not run both):
+
+    ```sh
+    uv run benchmark-qed autoe absolute-calibrate \
+        blob://my-container/calibrated_absolute_test/calibration/settings.yaml \
+        output \
+        --account-url https://<account>.blob.core.windows.net
+    ```
+
+    The command writes:
+
+    - `output/calibration.json`: frozen items, Elo ratings, level assignments,
+      exemplars, and judgments.
+    - `output/calibration_summary.csv`: answer counts per level and criterion.
+    - `output/model_usage.json`: model usage metrics.
+
+    Calibration fails instead of publishing a partial scale if any of Levels
+    1-5 is empty.
+
+### Scoring answers against the absolute scale
+
+Follow these steps to score unseen answers without changing the frozen scale:
+
+1. **Set up your project directory:**
+
+    ```sh
+    mkdir -p ./local/calibrated_absolute_test/absolute_scoring
+    cd ./local/calibrated_absolute_test/absolute_scoring
+    ```
+
+2. **Create an `input` folder:**
+
+    ```sh
+    mkdir ./input
+    ```
+
+3. **Download the example answers:**
+
+    ```sh
+    uv run benchmark-qed data download example_answers input
+    ```
+
+    This is the local-filesystem variant.
+
+    Alternative Blob variant (choose this instead of the local command above;
+    do not run both):
+
+    ```sh
+    uv run benchmark-qed data download example_answers input \
+        --storage-type blob \
+        --container-name my-container \
+        --account-url https://<account>.blob.core.windows.net
+    ```
+
+    The generated settings score
+    `input/graphrag_global/data_local.json` as the unseen population. To use
+    other field names, pass `--question-id-key`, `--question-text-key`, or
+    `--answer-text-key`.
+
+4. **Create a configuration file for absolute scoring:**
+
+    ```sh
+    uv run benchmark-qed config init autoe_absolute_score .
+    ```
+
+    This is the local-filesystem variant.
+
+    Alternative Blob variant (choose this instead of the local command above;
+    do not run both):
+
+    ```sh
+    uv run benchmark-qed config init autoe_absolute_score . \
+        --storage-type blob \
+        --container-name my-container \
+        --account-url https://<account>.blob.core.windows.net \
+        --base-dir calibrated_absolute_test/absolute_scoring
+    ```
+
+    This command creates two files in the `absolute_scoring` directory:
+
+    - `.env`: Contains environment variables for the scoring pipeline. Open
+      this file and replace `<API_KEY>` with your OpenAI or Azure API key.
+    - `settings.yaml`: Contains the frozen calibration path, unseen answer
+      inputs, pass count, LLM configuration, and a persistent SQLite cache
+      under `.benchmark_qed_cache/absolute_score`.
+
+    The generated settings point to the sibling frozen scale:
+
+    ```yaml
+    calibration_path: ../calibration/output/calibration.json
+    ```
+
+    In the Blob scaffold, `calibration_path` is instead
+    `output/calibration.json`, the key written by the Blob calibration command.
+
+    This sibling path is only the generated example. If the frozen state is
+    elsewhere, set `calibration_path` to either:
+
+    - An absolute local path, such as
+      `/data/benchmark-scales/customer-support/calibration.json`.
+    - A local path relative to the directory where
+      `benchmark-qed autoe absolute-score` is run.
+    - A key relative to the configured `input_storage` root when reading from
+      Azure Blob Storage.
+
+    Calibration and scoring use separate projects because one frozen scale can
+    be reused across multiple unseen-answer runs.
+
+5. **Run the absolute scoring:**
+
+    ```sh
+    uv run benchmark-qed autoe absolute-score settings.yaml output
+    ```
+
+    This is the local-filesystem variant.
+
+    Alternative Blob-stored config variant (choose this instead of the local
+    command above; do not run both):
+
+    ```sh
+    uv run benchmark-qed autoe absolute-score \
+        blob://my-container/calibrated_absolute_test/absolute_scoring/settings.yaml \
+        output \
+        --account-url https://<account>.blob.core.windows.net
+    ```
+
+    The generated scoring settings use `passes: 3`, which votes across p50,
+    p75, and p25 exemplar sets. Set `passes: 1` for a lower-cost
+    median-exemplar run.
+
+    Outputs include
+    `calibrated_absolute_scores-graphrag_global.csv`,
+    `calibrated_absolute_summary.csv`, and `model_usage.json`. The detailed
+    score CSV retains pass votes, evidence, confidence, rationale, and
+    borderline status for auditing.
+
+    Both stages cache only fully validated structured judgments. Interrupted
+    runs reuse completed batch rankings or exemplar passes. Set
+    `cache_config.type: none` with `storage: null` to force fresh judgments.
+
+    To compare these results with repeated direct one-shot 1-5 judgments, run
+    the [calibrated absolute baseline notebook](notebooks/calibrated_absolute_baseline.ipynb).
+    The notebook keeps repeatability separate from cross-method agreement and
+    does not interpret agreement as correctness without human-gold labels.
+
 ## Scoring RAG answers against reference answers
 Follow these steps to score RAG answers against reference answers using example data from the AP news dataset:
 

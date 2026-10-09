@@ -149,6 +149,91 @@ class PairwiseConfig(BaseAutoEConfig):
     )
 
 
+class CalibratedAbsoluteCalibrationConfig(BaseModel):
+    """Configuration for calibrating an absolute answer-quality scale."""
+
+    llm_config: LLMConfig = Field(
+        default_factory=LLMConfig,
+        description="Configuration for the LLM used to rank calibration batches.",
+    )
+    calibration: list[Condition] = Field(
+        min_length=1,
+        description="Answer files used to build the frozen scale.",
+    )
+    criteria: list[Criteria] = Field(
+        default_factory=pairwise_scores_criteria,
+        min_length=1,
+        description="Independent dimensions to calibrate.",
+    )
+    appearances: int = Field(
+        default=3,
+        ge=1,
+        description="Number of ranking-batch appearances per answer.",
+    )
+    max_batch_size: int = Field(
+        default=5,
+        ge=2,
+        le=5,
+        description="Maximum answers in one ranking batch.",
+    )
+    seed: int = Field(default=0, description="Deterministic scheduling seed.")
+    k_factor: float = Field(default=32.0, gt=0, description="Elo K-factor.")
+    initial_rating: float = Field(
+        default=1500.0,
+        description="Initial Elo rating for every calibration answer.",
+    )
+    cache_config: CacheConfig = Field(
+        default_factory=lambda: create_default_cache_config(
+            ".benchmark_qed_cache/absolute_calibrate",
+            database_name="absolute_calibrate.sqlite3",
+        ),
+        description="Cache for completed calibration batch rankings.",
+    )
+    input_storage: StorageConfig | None = Field(
+        default=None,
+        description="Optional storage configuration for input answer files.",
+    )
+    output_storage: StorageConfig | None = Field(
+        default=None,
+        description="Optional storage configuration for the calibration state.",
+    )
+
+
+class CalibratedAbsoluteScoringConfig(BaseModel):
+    """Configuration for scoring unseen answers on a calibrated scale."""
+
+    llm_config: LLMConfig = Field(
+        default_factory=LLMConfig,
+        description="Configuration for the LLM used for exemplar classification.",
+    )
+    calibration_path: Path = Field(
+        description="Path to the frozen calibration-state JSON file. Local paths may be absolute or relative to the command's working directory; with input_storage, the path is relative to that storage.",
+    )
+    generated: list[Condition] = Field(
+        min_length=1,
+        description="Unseen answer files to score.",
+    )
+    passes: Literal[1, 3] = Field(
+        default=3,
+        description="Use p50 only (1) or p50/p75/p25 voting (3).",
+    )
+    cache_config: CacheConfig = Field(
+        default_factory=lambda: create_default_cache_config(
+            ".benchmark_qed_cache/absolute_score",
+            database_name="absolute_score.sqlite3",
+        ),
+        description="Cache for completed exemplar-scoring passes.",
+    )
+    input_storage: StorageConfig | None = Field(
+        default=None,
+        description="Optional storage configuration for inputs and calibration.",
+    )
+    output_storage: StorageConfig | None = Field(
+        default=None,
+        description="Optional storage configuration for score outputs.",
+    )
+
+
 class DifferentialPairwisePromptConfig(BaseModel):
     """Prompt configuration for differential (extract-and-judge) pairwise scoring."""
 

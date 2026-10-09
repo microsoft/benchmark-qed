@@ -12,6 +12,8 @@ from pydantic import ValidationError
 
 from benchmark_qed.autoe.config import (
     AssertionConfig,
+    CalibratedAbsoluteCalibrationConfig,
+    CalibratedAbsoluteScoringConfig,
     DifferentialPairwiseConfig,
     PairwiseConfig,
     ReferenceConfig,
@@ -86,6 +88,27 @@ class TestLoadConfigBasicFunctionality:
             == ".benchmark_qed_cache/differential_pairwise"
         )
         assert config.cache_config.database_name == "differential_pairwise.sqlite3"
+
+    def test_calibrated_absolute_config_defaults(self) -> None:
+        calibration = CalibratedAbsoluteCalibrationConfig.model_validate({
+            "calibration": [
+                {"name": "reference", "answer_base_path": "reference.json"}
+            ],
+            "llm_config": {"auth_type": "azure_managed_identity"},
+        })
+        scoring = CalibratedAbsoluteScoringConfig.model_validate({
+            "calibration_path": "output/calibration.json",
+            "generated": [{"name": "target", "answer_base_path": "target.json"}],
+            "llm_config": {"auth_type": "azure_managed_identity"},
+        })
+
+        assert calibration.appearances == 3
+        assert calibration.max_batch_size == 5
+        assert calibration.cache_config.type == "sqlite"
+        assert calibration.cache_config.database_name == "absolute_calibrate.sqlite3"
+        assert scoring.passes == 3
+        assert scoring.cache_config.type == "sqlite"
+        assert scoring.cache_config.database_name == "absolute_score.sqlite3"
 
     def test_differential_pairwise_can_disable_cache(self) -> None:
         config = DifferentialPairwiseConfig.model_validate({

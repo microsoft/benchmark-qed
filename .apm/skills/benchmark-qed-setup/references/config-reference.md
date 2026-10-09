@@ -119,6 +119,22 @@ input_storage:                    # Optional: read input from Azure Blob Storage
 | `database_name` | `str \| null` | `null` | Database name (Cosmos DB only) |
 | `encoding` | `str \| null` | `null` | File encoding (file storage only) |
 
+### Calibrated Absolute Scoring
+
+This workflow uses two `settings.yaml` files because calibration produces a
+frozen scale that can be reused by multiple scoring runs:
+
+```bash
+benchmark-qed config init autoe_absolute_calibrate ./calibration
+benchmark-qed config init autoe_absolute_score ./absolute_scoring
+```
+
+Calibration settings use `calibration`, `criteria`, `appearances`,
+`max_batch_size`, `seed`, `k_factor`, `initial_rating`, and `llm_config`.
+Scoring settings use `calibration_path`, `generated`, `passes`, and
+`llm_config`. Both support the standard top-level `input_storage` and
+`output_storage` fields.
+
 ### Question Generation Types
 
 All question types share a base config with `num_questions` (default: `50`) and `oversample_factor` (default: `2.0`). Type-specific fields are listed below.

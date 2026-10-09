@@ -52,6 +52,8 @@ class ConfigType(StrEnum):
     autoq = "autoq"
     autoe_pairwise = "autoe_pairwise"
     autoe_differential_pairwise = "autoe_differential_pairwise"
+    autoe_absolute_calibrate = "autoe_absolute_calibrate"
+    autoe_absolute_score = "autoe_absolute_score"
     autoe_reference = "autoe_reference"
     autoe_assertion = "autoe_assertion"
     autoe_chunk_assertion = "autoe_chunk_assertion"
@@ -421,6 +423,74 @@ prompt_config:
     prompt: prompts/pairwise_unique_judge_user_prompt.txt"""
 
 
+AUTOE_CALIBRATED_ABSOLUTE_CALIBRATION_CONTENT = f"""## Storage Configuration
+{{STORAGE}}
+## Calibration Input
+calibration:
+  - name: vector_rag
+    answer_base_path: input/vector_rag/data_local.json
+  - name: lazygraphrag
+    answer_base_path: input/lazygraphrag/data_local.json
+
+## Independent dimensions to calibrate
+# Omit this section to use the default answer-quality criteria.
+# criteria:
+#   - name: correctness
+#     description: How factually accurate is the answer to its question?
+#   - name: completeness
+#     description: How completely does the answer address its question?
+
+## Calibration Configuration
+appearances: 3 # Ranking-batch appearances per answer.
+max_batch_size: 5 # Must be between 2 and 5.
+seed: 42 # Deterministic batch scheduling seed.
+k_factor: 32.0
+initial_rating: 1500.0
+
+## Cache Configuration
+# Reuses completed batch rankings across interrupted and repeated calibrations.
+# Set type: none and storage: null to force fresh LLM judgments.
+cache_config:
+  type: sqlite # Supported: sqlite, json, memory, none
+  storage:
+    type: file
+    base_dir: .benchmark_qed_cache/absolute_calibrate
+  database_name: absolute_calibrate.sqlite3
+
+## LLM Configuration
+llm_config: {CHAT_MODEL_DEFAULTS}"""
+
+
+AUTOE_CALIBRATED_ABSOLUTE_SCORING_CONTENT = f"""## Storage Configuration
+{{STORAGE}}
+## Frozen Calibration Scale
+# Local: use an absolute path or a path relative to the directory where the
+# command runs. With input_storage enabled, use a key relative to that storage.
+calibration_path: ../calibration/output/calibration.json
+
+## Unseen Answer Inputs
+generated:
+  - name: graphrag_global
+    answer_base_path: input/graphrag_global/data_local.json
+
+## Scoring Configuration
+# Use 1 for the median exemplar only or 3 for p50/p75/p25 voting.
+passes: 3
+
+## Cache Configuration
+# Reuses completed target/criterion/exemplar-pass judgments.
+# Set type: none and storage: null to force fresh LLM judgments.
+cache_config:
+  type: sqlite # Supported: sqlite, json, memory, none
+  storage:
+    type: file
+    base_dir: .benchmark_qed_cache/absolute_score
+  database_name: absolute_score.sqlite3
+
+## LLM Configuration
+llm_config: {CHAT_MODEL_DEFAULTS}"""
+
+
 AUTOE_REFERENCE_CONTENT = f"""## Storage Configuration
 {{STORAGE}}
 ## Input Configuration
@@ -517,6 +587,10 @@ def _get_content(config_type: ConfigType) -> str:
             return AUTOE_PAIRWISE_CONTENT
         case ConfigType.autoe_differential_pairwise:
             return AUTOE_DIFFERENTIAL_PAIRWISE_CONTENT
+        case ConfigType.autoe_absolute_calibrate:
+            return AUTOE_CALIBRATED_ABSOLUTE_CALIBRATION_CONTENT
+        case ConfigType.autoe_absolute_score:
+            return AUTOE_CALIBRATED_ABSOLUTE_SCORING_CONTENT
         case ConfigType.autoe_reference:
             return AUTOE_REFERENCE_CONTENT
         case ConfigType.autoe_assertion:
@@ -569,6 +643,11 @@ def _render_content(
             else _commentify(AUTOE_STORAGE_SNIPPET, indent=0)
         )
         content = template.replace("{STORAGE}", storage_block)
+        if active and config_type == ConfigType.autoe_absolute_score:
+            content = content.replace(
+                "calibration_path: ../calibration/output/calibration.json",
+                "calibration_path: output/calibration.json",
+            )
 
     if not active:
         return content
@@ -685,9 +764,7 @@ def _write_to_blob(
 def init(
     config_type: Annotated[
         ConfigType,
-        typer.Argument(
-            help="The type of configuration to generate. Options are: autoq, autoe_pairwise, autoe_reference."
-        ),
+        typer.Argument(help="The type of configuration to generate."),
     ],
     root: Annotated[
         Path, typer.Argument(help="The path to root directory with the input folder.")

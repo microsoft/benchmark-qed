@@ -17,6 +17,7 @@ from graphrag_storage.file_storage import FileStorage
 from graphrag_storage.storage_config import StorageConfig
 from graphrag_storage.storage_factory import create_storage
 from rich import print as rich_print
+from rich.progress import Progress, TaskID
 from tqdm import tqdm
 
 from benchmark_qed.autoe.assertion import (
@@ -28,10 +29,17 @@ from benchmark_qed.autoe.assertion import (
     summarize_hierarchical_by_question,
     summarize_standard_scores,
 )
+from benchmark_qed.autoe.calibrated import (
+    answer_items_from_frame,
+    calibrate_answers,
+    score_answers,
+)
 from benchmark_qed.autoe.chunk_assertion import run_assertion_eval_chunk_mode
 from benchmark_qed.autoe.config import (
     AssertionConfig,
     AssertionSignificanceConfig,
+    CalibratedAbsoluteCalibrationConfig,
+    CalibratedAbsoluteScoringConfig,
     DifferentialPairwiseConfig,
     HierarchicalAssertionConfig,
     HierarchicalAssertionSignificanceConfig,
@@ -65,6 +73,29 @@ app: typer.Typer = typer.Typer(
 )
 
 
+def _summarize_calibrated_absolute_scores(
+    scores: pd.DataFrame,
+) -> pd.DataFrame:
+    """Summarize final calibrated scores and expose unscored results."""
+    return cast(
+        pd.DataFrame,
+        scores
+        .groupby(["condition", "criteria"])
+        .agg(
+            mean_level=("level", "mean"),
+            level_std=("level", "std"),
+            mean_confidence=("confidence_score", "mean"),
+            answers=("target_id", "count"),
+            scored_answers=("level", "count"),
+            insufficient_evidence=(
+                "status",
+                lambda statuses: statuses.eq("insufficient_evidence").sum(),
+            ),
+        )
+        .reset_index(),
+    )
+
+
 async def _read_json_df(storage: Storage, key: str) -> pd.DataFrame:
     """Read a JSON file from storage and return as a DataFrame."""
     data = await storage.get(key)
@@ -91,6 +122,15 @@ async def _write_csv_df(storage: Storage, key: str, df: pd.DataFrame) -> None:
 async def _write_json(storage: Storage, key: str, data: object) -> None:
     """Write JSON data to storage."""
     await storage.set(key, json.dumps(data))
+
+
+async def _read_json(storage: Storage, key: str) -> Any:
+    """Read a JSON value from storage."""
+    data = await storage.get(key)
+    if data is None:
+        msg = f"File not found in storage: {key}"
+        raise FileNotFoundError(msg)
+    return json.loads(data)
 
 
 def _build_output_storage(
@@ -128,6 +168,240 @@ def _build_condition_storage(
     if is_dir:
         return FileStorage(base_dir=str(answer_base_path)), ""
     return FileStorage(base_dir=str(answer_base_path.parent)), answer_base_path.name
+
+
+def _print_calibration_output_guide(output: Path) -> None:
+    """Explain where to inspect detailed calibration results."""
+    rich_print("\n[bold]Detailed calibration results[/bold]")
+    rich_print(
+        f"- [cyan]{output / 'calibration.json'}[/cyan]: Elo ratings, level "
+        "assignments, selected exemplars, batch rankings, and judge rationales."
+    )
+    rich_print(
+        f"- [cyan]{output / 'calibration_summary.csv'}[/cyan]: the level-count "
+        "summary shown above in CSV format."
+    )
+    rich_print(
+        f"- [cyan]{output / 'model_usage.json'}[/cyan]: model request and token "
+        "usage metrics."
+    )
+    rich_print(
+        "\nKeep [cyan]calibration.json[/cyan] unchanged when comparing systems. "
+        "Reference it from the absolute-scoring settings with "
+        "[cyan]calibration_path[/cyan]."
+    )
+
+
+@app.command(name="absolute-calibrate")
+def absolute_calibrate(
+    config_path: Annotated[
+        Path,
+        typer.Argument(help="Path to the calibrated absolute scoring config."),
+    ],
+    output: Annotated[
+        Path,
+        typer.Argument(help="Directory for the frozen calibration state."),
+    ],
+    *,
+    question_id_key: Annotated[
+        str, typer.Option(help="Input field containing the question ID.")
+    ] = "question_id",
+    question_text_key: Annotated[
+        str, typer.Option(help="Input field containing the question text.")
+    ] = "question_text",
+    answer_text_key: Annotated[
+        str, typer.Option(help="Input field containing the answer text.")
+    ] = "answer",
+    print_model_usage: Annotated[
+        bool, typer.Option(help="Whether to print model usage after calibration.")
+    ] = False,
+    account_url: AccountUrlOption = None,
+    connection_string: ConnectionStringOption = None,
+) -> None:
+    """Calibrate frozen five-level answer-quality scales with Elo rankings."""
+    config_path = resolve_config_path(
+        config_path,
+        account_url=account_url,
+        connection_string=connection_string,
+    )
+    config = load_config(CalibratedAbsoluteCalibrationConfig, config_path)
+    items = []
+    for condition in config.calibration:
+        storage, key = _build_condition_storage(
+            config.input_storage, condition.answer_base_path, is_dir=False
+        )
+        frame = asyncio.run(_read_json_df(storage, key))
+        items.extend(
+            answer_items_from_frame(
+                frame,
+                condition=condition.name,
+                question_id_key=question_id_key,
+                question_text_key=question_text_key,
+                answer_text_key=answer_text_key,
+            )
+        )
+
+    llm_client = ModelFactory.create_chat_model(config.llm_config)
+    calibration = asyncio.run(
+        calibrate_answers(
+            llm=llm_client,
+            llm_config=config.llm_config,
+            items=items,
+            criteria=config.criteria,
+            max_batch_size=config.max_batch_size,
+            appearances=config.appearances,
+            seed=config.seed,
+            k_factor=config.k_factor,
+            initial_rating=config.initial_rating,
+            cache_config=config.cache_config,
+        )
+    )
+    output_storage = _build_output_storage(config.output_storage, output)
+    asyncio.run(_write_json(output_storage, "calibration.json", calibration))
+
+    summary = pd.DataFrame([
+        {
+            "criteria": criterion,
+            "answers": len(scale["levels"]),
+            **{
+                f"level_{level}": sum(
+                    assigned == level for assigned in scale["levels"].values()
+                )
+                for level in range(1, 6)
+            },
+        }
+        for criterion, scale in calibration["scales"].items()
+    ])
+    asyncio.run(_write_csv_df(output_storage, "calibration_summary.csv", summary))
+    print_df(summary, "Calibrated Absolute Scale Summary")
+    _print_calibration_output_guide(output)
+    if print_model_usage:
+        rich_print("Model usage statistics:")
+        rich_print(llm_client.metrics_store.get_metrics())
+    asyncio.run(
+        _write_json(
+            output_storage, "model_usage.json", llm_client.metrics_store.get_metrics()
+        )
+    )
+
+
+@app.command(name="absolute-score")
+def absolute_score(
+    config_path: Annotated[
+        Path,
+        typer.Argument(help="Path to the calibrated absolute scoring config."),
+    ],
+    output: Annotated[
+        Path,
+        typer.Argument(help="Directory for absolute score outputs."),
+    ],
+    *,
+    question_id_key: Annotated[
+        str, typer.Option(help="Input field containing the question ID.")
+    ] = "question_id",
+    question_text_key: Annotated[
+        str, typer.Option(help="Input field containing the question text.")
+    ] = "question_text",
+    answer_text_key: Annotated[
+        str, typer.Option(help="Input field containing the answer text.")
+    ] = "answer",
+    print_model_usage: Annotated[
+        bool, typer.Option(help="Whether to print model usage after scoring.")
+    ] = False,
+    account_url: AccountUrlOption = None,
+    connection_string: ConnectionStringOption = None,
+) -> None:
+    """Score unseen answers against frozen calibrated exemplar scales."""
+    config_path = resolve_config_path(
+        config_path,
+        account_url=account_url,
+        connection_string=connection_string,
+    )
+    config = load_config(CalibratedAbsoluteScoringConfig, config_path)
+    calibration_storage, calibration_key = _build_condition_storage(
+        config.input_storage, config.calibration_path, is_dir=False
+    )
+    calibration = asyncio.run(_read_json(calibration_storage, calibration_key))
+    llm_client = ModelFactory.create_chat_model(config.llm_config)
+    output_storage = _build_output_storage(config.output_storage, output)
+    all_results = []
+    for condition in config.generated:
+        storage, key = _build_condition_storage(
+            config.input_storage, condition.answer_base_path, is_dir=False
+        )
+        targets = answer_items_from_frame(
+            asyncio.run(_read_json_df(storage, key)),
+            condition=condition.name,
+            question_id_key=question_id_key,
+            question_text_key=question_text_key,
+            answer_text_key=answer_text_key,
+        )
+        criteria_names = list(calibration["scales"])
+        total_judgments = len(targets) * len(criteria_names) * config.passes
+        rich_print(
+            f"Scoring [bold]{condition.name}[/bold]: {len(targets)} answers, "
+            f"{len(criteria_names)} criteria, {config.passes} pass(es), "
+            f"{total_judgments} total classifications."
+        )
+        with Progress() as progress:
+            progress_tasks = {
+                criterion_name: progress.add_task(
+                    f"Scoring {criterion_name}...",
+                    total=len(targets) * config.passes,
+                )
+                for criterion_name in criteria_names
+            }
+
+            def on_complete(
+                criterion_name: str,
+                *,
+                _progress_tasks: dict[str, TaskID] = progress_tasks,
+                _progress: Progress = progress,
+            ) -> None:
+                task_id = _progress_tasks[criterion_name]
+                _progress.update(task_id, advance=1, refresh=True)
+
+            results = asyncio.run(
+                score_answers(
+                    llm=llm_client,
+                    llm_config=config.llm_config,
+                    targets=targets,
+                    calibration=calibration,
+                    passes=config.passes,
+                    cache_config=config.cache_config,
+                    complete_callback=on_complete,
+                )
+            )
+        result_frame = pd.DataFrame(results)
+        asyncio.run(
+            _write_csv_df(
+                output_storage,
+                f"calibrated_absolute_scores-{condition.name}.csv",
+                result_frame,
+            )
+        )
+        all_results.append(result_frame)
+
+    combined = pd.concat(all_results, ignore_index=True)
+    summary = _summarize_calibrated_absolute_scores(combined)
+    asyncio.run(
+        _write_csv_df(output_storage, "calibrated_absolute_summary.csv", summary)
+    )
+    print_df(summary, "Calibrated Absolute Scores Summary")
+    insufficient_total = int(summary["insufficient_evidence"].sum())
+    rich_print(
+        "[yellow]Insufficient evidence:[/yellow] "
+        f"{insufficient_total} of {len(combined)} answer-criterion results. "
+        "These results are excluded from mean_level and level_std."
+    )
+    if print_model_usage:
+        rich_print("Model usage statistics:")
+        rich_print(llm_client.metrics_store.get_metrics())
+    asyncio.run(
+        _write_json(
+            output_storage, "model_usage.json", llm_client.metrics_store.get_metrics()
+        )
+    )
 
 
 @app.command()

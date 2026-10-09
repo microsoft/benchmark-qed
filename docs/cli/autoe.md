@@ -1,3 +1,140 @@
+## Calibrated Absolute Scoring
+
+Calibrated absolute scoring creates a stable five-level answer-quality scale,
+then classifies unseen answers against frozen exemplars from that scale. Unlike
+pairwise scoring, an unseen answer receives a level that is comparable across
+runs using the same calibration state. It does not receive a synthetic Elo
+rating or an exact rank within the calibration population.
+
+Scaffold conventional `settings.yaml` files for the two stages:
+
+```sh
+mkdir -p ./local/calibrated_absolute_test/calibration
+cd ./local/calibrated_absolute_test/calibration
+mkdir ./input
+benchmark-qed data download example_answers input
+benchmark-qed config init autoe_absolute_calibrate .
+```
+
+Run calibration with the same `settings.yaml output` convention as other
+AutoE commands:
+
+```sh
+benchmark-qed autoe absolute-calibrate settings.yaml output
+```
+
+Then create the scoring project with the same folder and example-download
+sequence:
+
+```sh
+mkdir -p ./local/calibrated_absolute_test/absolute_scoring
+cd ./local/calibrated_absolute_test/absolute_scoring
+mkdir ./input
+benchmark-qed data download example_answers input
+benchmark-qed config init autoe_absolute_score .
+benchmark-qed autoe absolute-score settings.yaml output
+```
+
+The complete sequence therefore creates two sibling projects:
+
+```text
+calibrated_absolute_test/
+├── calibration/
+│   ├── input/
+│   ├── settings.yaml
+│   └── output/
+└── absolute_scoring/
+   ├── input/
+   ├── settings.yaml
+   └── output/
+```
+
+The scoring settings reference the frozen sibling scale at
+`../calibration/output/calibration.json`. This is only the scaffold default.
+`calibration_path` may instead be an absolute local path, a path relative to
+the command's working directory, or a key relative to `input_storage`.
+
+Calibration ranks overlapping batches and replays the judgments in a
+deterministic order. Every criterion gets an independent Elo population and
+Levels 1-5. Calibration fails rather than publishing a partial scale when any
+level is empty. Completed batch rankings are cached in
+`.benchmark_qed_cache/absolute_calibrate/absolute_calibrate.sqlite3`.
+
+The generated calibration `settings.yaml` follows this schema:
+
+```yaml
+calibration:
+  - name: vector_rag
+    answer_base_path: input/vector_rag/data_local.json
+  - name: lazygraphrag
+    answer_base_path: input/lazygraphrag/data_local.json
+
+criteria:
+  - name: correctness
+    description: How factually accurate is the answer to its question?
+  - name: completeness
+    description: How completely does the answer address its question?
+
+appearances: 3
+max_batch_size: 5
+seed: 42
+k_factor: 32
+
+llm_config:
+  auth_type: api_key
+  model: gpt-4.1
+  api_key: ${OPENAI_API_KEY}
+  llm_provider: openai.chat
+  concurrent_requests: 20
+```
+
+The command writes `calibration.json`, `calibration_summary.csv`, and
+`model_usage.json`. Keep `calibration.json` immutable when comparing benchmark
+runs.
+
+The generated scoring `settings.yaml` follows this schema:
+
+```yaml
+calibration_path: ../calibration/output/calibration.json
+generated:
+  - name: graphrag_global
+    answer_base_path: input/graphrag_global/data_local.json
+
+# 1 uses only median exemplars; 3 votes across p50, p75, and p25.
+passes: 3
+
+llm_config:
+  auth_type: api_key
+  model: gpt-4.1
+  api_key: ${OPENAI_API_KEY}
+  llm_provider: openai.chat
+  concurrent_requests: 20
+```
+
+Completed target/criterion/exemplar-pass judgments are cached in
+`.benchmark_qed_cache/absolute_score/absolute_score.sqlite3`. Cache identities
+include the full inputs, criteria, exemplars, policy version, and
+credential-safe model configuration. Set `cache_config.type: none` with
+`storage: null` to force fresh judgments.
+
+Input JSON files must contain `question_id`, `question_text`, and `answer`.
+Use `--question-id-key`, `--question-text-key`, and `--answer-text-key` to map
+other field names. The three-pass mode uses majority vote; if all votes differ,
+the middle voted level wins. Disagreement and missing successful passes reduce
+confidence.
+
+When `input_storage` is configured, `calibration_path` and all
+`answer_base_path` values are relative to that storage. `output_storage` may be
+configured independently.
+
+To compare the method with repeated direct one-shot 1–5 judgments, use the
+[calibrated absolute baseline notebook](../notebooks/calibrated_absolute_baseline.ipynb).
+It reports within-method repeatability, cross-method agreement, latency, and
+model usage. Cross-method agreement is not accuracy; use independently
+adjudicated human labels when evaluating correctness.
+
+---
+
 ## Pairwise Scoring Configuration
 
 This section describes the configuration schema for performing relative comparisons of RAG methods using the LLM-as-a-Judge approach. It includes definitions for conditions, evaluation criteria, and model configuration. For more information about how to configure the LLM, please refer to: [LLM Configuration](llm_config.md)
