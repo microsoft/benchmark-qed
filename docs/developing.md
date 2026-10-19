@@ -236,6 +236,12 @@ five-level scale, then scores unseen answers against frozen exemplars from that
 scale. The unseen answers do not change the calibration population and do not
 receive synthetic Elo ratings.
 
+The calibration ranking and exemplar-scoring prompts are maintained as system
+and user `.txt` templates in
+[`benchmark_qed/autoe/prompts/calibrated`](../benchmark_qed/autoe/prompts/calibrated).
+The scoring code serializes criteria, answer items, and exemplars as JSON before
+substituting them into the user templates.
+
 The downloadable `example_answers` archive contains all files referenced by
 the generated settings below.
 
