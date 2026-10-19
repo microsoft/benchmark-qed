@@ -19,7 +19,6 @@ from benchmark_qed.autoe.pairwise.cache import (
     compute_cache_key,
     compute_logical_key,
 )
-from benchmark_qed.cache import create_default_cache_config
 from benchmark_qed.config.llm_config import AuthType, LLMConfig
 
 if TYPE_CHECKING:
@@ -181,9 +180,10 @@ async def test_publish_in_claim_window_returns_cached_winner(
 
 
 @pytest.mark.parametrize("include_score_id_in_prompt", [True, False])
-def test_four_trials_are_independent_and_rerun_uses_cache(
+def test_pairwise_cache_backend_reruns(
     tmp_path: Path,
     monkeypatch: Any,
+    evaluation_cache_config: CacheConfig,
     *,
     include_score_id_in_prompt: bool,
 ) -> None:
@@ -204,10 +204,6 @@ def test_four_trials_are_independent_and_rerun_uses_cache(
     llm_config = LLMConfig(
         auth_type=AuthType.AzureManagedIdentity,
         call_args={"temperature": 0},
-    )
-    cache_config = create_default_cache_config(
-        tmp_path,
-        database_name="pairwise.sqlite3",
     )
     base_answers = pd.DataFrame([
         {
@@ -233,16 +229,24 @@ def test_four_trials_are_independent_and_rerun_uses_cache(
         "criteria": [Criteria(name="relevance", description="description")],
         "trials": 4,
         "include_score_id_in_prompt": include_score_id_in_prompt,
-        "cache_config": cache_config,
+        "cache_config": evaluation_cache_config,
         "show_progress": False,
         "complete_callback": completed.append,
     }
 
     first = scores.get_pairwise_scores(**kwargs)
+    assert call_count == 4
     second = scores.get_pairwise_scores(**kwargs)
 
-    assert call_count == 4
+    persistent = evaluation_cache_config.type in {CacheType.Json, CacheType.Sqlite}
+    assert call_count == (4 if persistent else 8)
     assert completed == ["relevance"] * 8
     assert first["trial"].tolist() == [0, 1, 2, 3]
     assert first["answer_1_name"].tolist() == ["base", "other", "base", "other"]
-    pd.testing.assert_frame_equal(first, second)
+    if persistent:
+        pd.testing.assert_frame_equal(first, second)
+    else:
+        assert set(first["score_id"]).isdisjoint(second["score_id"])
+        pd.testing.assert_frame_equal(
+            first.drop(columns="score_id"), second.drop(columns="score_id")
+        )

@@ -8,6 +8,7 @@ from typing import Any
 
 import pandas as pd
 import pytest
+from graphrag_cache import CacheConfig, CacheType
 
 from benchmark_qed.autoe.config import Criteria
 from benchmark_qed.autoe.data_model import (
@@ -55,8 +56,8 @@ def _response(value: Any) -> Any:
     return type("Response", (), {"formatted_response": value})()
 
 
-def test_second_differential_run_reuses_both_stages(
-    tmp_path: Path, monkeypatch: Any
+def test_differential_cache_backend_reruns(
+    tmp_path: Path, monkeypatch: Any, evaluation_cache_config: CacheConfig
 ) -> None:
     calls = {"extraction": 0, "verdict": 0}
 
@@ -86,12 +87,22 @@ def test_second_differential_run_reuses_both_stages(
 
     monkeypatch.setattr(differential, "chat", fake_chat)
     kwargs = _config(tmp_path)
+    kwargs["cache_config"] = evaluation_cache_config
 
     first = differential.get_differential_pairwise_scores(**kwargs)
+    assert calls == {"extraction": 2, "verdict": 2}
     second = differential.get_differential_pairwise_scores(**kwargs)
 
-    assert calls == {"extraction": 2, "verdict": 2}
-    pd.testing.assert_frame_equal(first, second)
+    persistent = evaluation_cache_config.type in {CacheType.Json, CacheType.Sqlite}
+    expected_calls = 2 if persistent else 4
+    assert calls == {"extraction": expected_calls, "verdict": expected_calls}
+    if persistent:
+        pd.testing.assert_frame_equal(first, second)
+    else:
+        assert set(first["score_id"]).isdisjoint(second["score_id"])
+        pd.testing.assert_frame_equal(
+            first.drop(columns="score_id"), second.drop(columns="score_id")
+        )
 
 
 def test_judge_failure_resumes_from_cached_extraction(
