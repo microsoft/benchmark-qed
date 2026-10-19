@@ -106,14 +106,16 @@ def test_init_calibrated_absolute_calibration_settings(tmp_path: Path) -> None:
     assert "calibration:\n  - name: vector_rag" in settings
     assert "answer_base_path: input/vector_rag/data_local.json" in settings
     assert "answer_base_path: input/lazygraphrag/data_local.json" in settings
-    assert "appearances: 3" in settings
+    assert "appearances: 5" in settings
     assert "max_batch_size: 5" in settings
     assert "base_dir: .benchmark_qed_cache/absolute_calibrate" in settings
     assert "database_name: absolute_calibrate.sqlite3" in settings
     assert "llm_config:" in settings
+    assert "concurrent_requests: 2" in settings
     config = CalibratedAbsoluteCalibrationConfig.model_validate(
         yaml.safe_load(settings)
     )
+    assert config.llm_config.concurrent_requests == 2
     assert len(config.calibration) == 2
 
 
@@ -131,7 +133,9 @@ def test_init_calibrated_absolute_scoring_settings(tmp_path: Path) -> None:
     assert "base_dir: .benchmark_qed_cache/absolute_score" in settings
     assert "database_name: absolute_score.sqlite3" in settings
     assert "llm_config:" in settings
+    assert "concurrent_requests: 2" in settings
     config = CalibratedAbsoluteScoringConfig.model_validate(yaml.safe_load(settings))
+    assert config.llm_config.concurrent_requests == 2
     assert config.generated[0].name == "graphrag_global"
 
 

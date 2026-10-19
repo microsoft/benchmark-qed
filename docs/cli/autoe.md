@@ -75,7 +75,7 @@ criteria:
   - name: completeness
     description: How completely does the answer address its question?
 
-appearances: 3
+appearances: 5
 max_batch_size: 5
 seed: 42
 k_factor: 32
@@ -85,7 +85,7 @@ llm_config:
   model: gpt-4.1
   api_key: ${OPENAI_API_KEY}
   llm_provider: openai.chat
-  concurrent_requests: 20
+  concurrent_requests: 2
 ```
 
 The command writes `calibration.json`, `calibration_summary.csv`, and
@@ -108,7 +108,7 @@ llm_config:
   model: gpt-4.1
   api_key: ${OPENAI_API_KEY}
   llm_provider: openai.chat
-  concurrent_requests: 20
+  concurrent_requests: 2
 ```
 
 Completed target/criterion/exemplar-pass judgments are cached in
@@ -132,6 +132,12 @@ To compare the method with repeated direct one-shot 1–5 judgments, use the
 It reports within-method repeatability, cross-method agreement, latency, and
 model usage. Cross-method agreement is not accuracy; use independently
 adjudicated human labels when evaluating correctness.
+
+To run a known-direction sanity check with Vector RAG retrieval budgets of 50
+and 200 chunks, use the
+[retrieval-budget proxy experiment](../notebooks/calibrated_budget_proxy_experiment.ipynb).
+It compares calibrated absolute, pairwise, and assertion preferences while
+treating the larger budget as weak ground truth rather than human ground truth.
 
 ---
 

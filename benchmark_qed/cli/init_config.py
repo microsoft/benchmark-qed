@@ -88,6 +88,11 @@ CHAT_MODEL_DEFAULTS = """
   #     module: custom_test.custom_provider
   #     model_class: CustomChatModel"""
 
+CALIBRATED_ABSOLUTE_CHAT_MODEL_DEFAULTS = CHAT_MODEL_DEFAULTS.replace(
+    "concurrent_requests: 4",
+    "concurrent_requests: 2",
+)
+
 EMBEDDING_MODEL_DEFAULTS = """
   model: text-embedding-3-large
   auth_type: api_key # or azure_managed_identity
@@ -441,7 +446,7 @@ calibration:
 #     description: How completely does the answer address its question?
 
 ## Calibration Configuration
-appearances: 3 # Ranking-batch appearances per answer.
+appearances: 5 # Ranking-batch appearances per answer.
 max_batch_size: 5 # Must be between 2 and 5.
 seed: 42 # Deterministic batch scheduling seed.
 k_factor: 32.0
@@ -458,7 +463,7 @@ cache_config:
   database_name: absolute_calibrate.sqlite3
 
 ## LLM Configuration
-llm_config: {CHAT_MODEL_DEFAULTS}"""
+llm_config: {CALIBRATED_ABSOLUTE_CHAT_MODEL_DEFAULTS}"""
 
 
 AUTOE_CALIBRATED_ABSOLUTE_SCORING_CONTENT = f"""## Storage Configuration
@@ -488,7 +493,7 @@ cache_config:
   database_name: absolute_score.sqlite3
 
 ## LLM Configuration
-llm_config: {CHAT_MODEL_DEFAULTS}"""
+llm_config: {CALIBRATED_ABSOLUTE_CHAT_MODEL_DEFAULTS}"""
 
 
 AUTOE_REFERENCE_CONTENT = f"""## Storage Configuration

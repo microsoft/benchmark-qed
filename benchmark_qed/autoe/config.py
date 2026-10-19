@@ -166,7 +166,7 @@ class CalibratedAbsoluteCalibrationConfig(BaseModel):
         description="Independent dimensions to calibrate.",
     )
     appearances: int = Field(
-        default=3,
+        default=5,
         ge=1,
         description="Number of ranking-batch appearances per answer.",
     )

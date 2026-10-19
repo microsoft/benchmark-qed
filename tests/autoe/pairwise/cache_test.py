@@ -188,6 +188,7 @@ def test_four_trials_are_independent_and_rerun_uses_cache(
     include_score_id_in_prompt: bool,
 ) -> None:
     call_count = 0
+    completed: list[str] = []
 
     async def fake_chat(*args: Any, **kwargs: Any) -> Any:
         nonlocal call_count
@@ -233,12 +234,15 @@ def test_four_trials_are_independent_and_rerun_uses_cache(
         "trials": 4,
         "include_score_id_in_prompt": include_score_id_in_prompt,
         "cache_config": cache_config,
+        "show_progress": False,
+        "complete_callback": completed.append,
     }
 
     first = scores.get_pairwise_scores(**kwargs)
     second = scores.get_pairwise_scores(**kwargs)
 
     assert call_count == 4
+    assert completed == ["relevance"] * 8
     assert first["trial"].tolist() == [0, 1, 2, 3]
     assert first["answer_1_name"].tolist() == ["base", "other", "base", "other"]
     pd.testing.assert_frame_equal(first, second)

@@ -37,9 +37,13 @@ from benchmark_qed.config.model.score import Criteria
 def test_schedule_batches_is_balanced_and_deterministic() -> None:
     item_ids = [f"item-{index}" for index in range(8)]
 
+    default = schedule_batches(item_ids)
     first = schedule_batches(item_ids, appearances=3, seed=42)
     second = schedule_batches(item_ids, appearances=3, seed=42)
 
+    assert {
+        item_id: sum(item_id in batch for batch in default) for item_id in item_ids
+    } == dict.fromkeys(item_ids, 5)
     assert first == second
     assert all(2 <= len(batch) <= 5 for batch in first)
     assert {
@@ -431,6 +435,52 @@ async def test_score_pass_retries_semantically_invalid_response(
     assert "insufficient evidence cannot assign" in calls[1][-1]["content"]
 
 
+async def test_score_pass_recovers_missing_rationale_and_bounds_evidence(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    target = AnswerItem(
+        id="target:q0",
+        condition="target",
+        question_id="q0",
+        question="question",
+        answer="answer",
+    )
+    exemplars = {
+        level: target.model_copy(
+            update={"id": f"reference:q{level}", "condition": "reference"}
+        )
+        for level in range(1, 6)
+    }
+    repeated_evidence = "Evidence. " * 1_000
+    provider_response = calibrated.AbsoluteScoreLLMResponse(
+        status="ok",
+        level=3,
+        confidence="medium",
+        closest_level=3,
+        second_closest_level=2,
+        midpoint_relation="similar",
+        is_borderline=False,
+        evidence=[repeated_evidence],
+    )
+
+    async def fake_chat(*args: object, **kwargs: object) -> object:
+        await asyncio.sleep(0)
+        return SimpleNamespace(formatted_response=provider_response)
+
+    monkeypatch.setattr(calibrated, "chat", fake_chat)
+
+    response = await calibrated._score_one_pass_impl(
+        object(),  # type: ignore[arg-type]
+        LLMConfig.model_validate({"auth_type": "azure_managed_identity"}),
+        target,
+        exemplars,
+        Criteria(name="quality", description="Overall answer quality."),
+    )
+
+    assert len(response.evidence[0]) == calibrated._MAX_EVIDENCE_LENGTH
+    assert response.rationale == response.evidence[0]
+
+
 async def test_score_pass_reports_invalid_response_after_retries(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
@@ -553,6 +603,59 @@ async def test_calibrate_and_score_answers(
     assert scores[0]["votes"] == [3, 3, 3]
 
 
+async def test_calibration_bounds_cache_and_ranking_concurrency(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    items = [
+        AnswerItem(
+            id=f"reference:q{index}",
+            condition="reference",
+            question_id=f"q{index}",
+            question=f"question {index}",
+            answer=f"answer {index}",
+        )
+        for index in range(20)
+    ]
+    active = 0
+    maximum_active = 0
+    calls = 0
+
+    async def fake_rank_batch(*args: object) -> BatchRankingResponse:
+        nonlocal active, calls, maximum_active
+        active += 1
+        calls += 1
+        maximum_active = max(maximum_active, active)
+        try:
+            await asyncio.sleep(0.01)
+            batch = args[2]
+            assert isinstance(batch, list)
+            return BatchRankingResponse(
+                ranking=[
+                    RankingItem(item_id=item.id, rank=index)
+                    for index, item in enumerate(batch, start=1)
+                ],
+                rationale="bounded ranking",
+            )
+        finally:
+            active -= 1
+
+    monkeypatch.setattr(calibrated, "_rank_batch", fake_rank_batch)
+
+    await calibrate_answers(
+        llm=object(),  # type: ignore[arg-type]
+        llm_config=LLMConfig.model_validate({
+            "auth_type": "azure_managed_identity",
+            "concurrent_requests": 2,
+        }),
+        items=items,
+        criteria=[Criteria(name="quality", description="Overall answer quality.")],
+        appearances=1,
+    )
+
+    assert calls == 4
+    assert maximum_active == 2
+
+
 async def test_calibration_and_scoring_reruns_use_sqlite_cache(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
@@ -644,3 +747,169 @@ async def test_calibration_and_scoring_reruns_use_sqlite_cache(
     assert scoring_calls == 1
     assert second_scores == first_scores
     assert completed == ["quality"] * 6
+
+
+async def test_score_answers_cancels_remaining_jobs_after_failure(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    criterion = Criteria(name="quality", description="Overall answer quality.")
+    targets = [
+        AnswerItem(
+            id=f"target:q{index}",
+            condition="target",
+            question_id=f"q{index}",
+            question="question",
+            answer="answer",
+        )
+        for index in range(3)
+    ]
+    reference_items = {
+        f"reference:q{index}": AnswerItem(
+            id=f"reference:q{index}",
+            condition="reference",
+            question_id=f"q{index}",
+            question="question",
+            answer="answer",
+        )
+        for index in range(5)
+    }
+    calibration = {
+        "method": "calibrated_absolute",
+        "items": {
+            item_id: item.model_dump() for item_id, item in reference_items.items()
+        },
+        "scales": {
+            criterion.name: {
+                "criterion": criterion.model_dump(),
+                "exemplar_sets": {
+                    "50": {
+                        str(level): f"reference:q{level - 1}" for level in range(1, 6)
+                    }
+                },
+            }
+        },
+    }
+    all_started = asyncio.Event()
+    started = 0
+    cancelled = 0
+    completed: list[str] = []
+    disconnect_message = "provider disconnected"
+    unreachable_message = "unreachable"
+
+    async def fake_score_one_pass(
+        *args: object, **kwargs: object
+    ) -> AbsoluteScoreResponse:
+        nonlocal cancelled, started
+        started += 1
+        job_number = started
+        if started == len(targets):
+            all_started.set()
+        await all_started.wait()
+        if job_number == len(targets):
+            raise ConnectionError(disconnect_message)
+        try:
+            await asyncio.Event().wait()
+        except asyncio.CancelledError:
+            cancelled += 1
+            raise
+        raise AssertionError(unreachable_message)
+
+    monkeypatch.setattr(calibrated, "_score_one_pass", fake_score_one_pass)
+
+    with pytest.raises(ConnectionError, match="provider disconnected"):
+        await score_answers(
+            llm=object(),  # type: ignore[arg-type]
+            llm_config=LLMConfig.model_validate({
+                "auth_type": "azure_managed_identity"
+            }),
+            targets=targets,
+            calibration=calibration,
+            passes=1,
+            complete_callback=completed.append,
+        )
+
+    assert cancelled == 2
+    assert completed == []
+
+
+async def test_score_answers_bounds_cache_and_scoring_concurrency(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    targets = [
+        AnswerItem(
+            id=f"target:q{index}",
+            condition="target",
+            question_id=f"q{index}",
+            question="question",
+            answer="answer",
+        )
+        for index in range(10)
+    ]
+    reference_items = {
+        f"reference:q{index}": AnswerItem(
+            id=f"reference:q{index}",
+            condition="reference",
+            question_id=f"q{index}",
+            question="question",
+            answer="answer",
+        )
+        for index in range(5)
+    }
+    criterion = Criteria(name="quality", description="Overall answer quality.")
+    calibration = {
+        "method": "calibrated_absolute",
+        "items": {
+            item_id: item.model_dump() for item_id, item in reference_items.items()
+        },
+        "scales": {
+            criterion.name: {
+                "criterion": criterion.model_dump(),
+                "exemplar_sets": {
+                    "50": {
+                        str(level): f"reference:q{level - 1}" for level in range(1, 6)
+                    }
+                },
+            }
+        },
+    }
+    active = 0
+    calls = 0
+    maximum_active = 0
+
+    async def fake_score_one_pass(*args: object) -> AbsoluteScoreResponse:
+        nonlocal active, calls, maximum_active
+        active += 1
+        calls += 1
+        maximum_active = max(maximum_active, active)
+        try:
+            await asyncio.sleep(0.01)
+            return AbsoluteScoreResponse(
+                status="ok",
+                level=3,
+                confidence="high",
+                closest_level=3,
+                second_closest_level=2,
+                midpoint_relation="similar",
+                is_borderline=False,
+                evidence=["bounded evidence"],
+                rationale="bounded rationale",
+            )
+        finally:
+            active -= 1
+
+    monkeypatch.setattr(calibrated, "_score_one_pass", fake_score_one_pass)
+
+    scores = await score_answers(
+        llm=object(),  # type: ignore[arg-type]
+        llm_config=LLMConfig.model_validate({
+            "auth_type": "azure_managed_identity",
+            "concurrent_requests": 2,
+        }),
+        targets=targets,
+        calibration=calibration,
+        passes=1,
+    )
+
+    assert len(scores) == len(targets)
+    assert calls == len(targets)
+    assert maximum_active == 2

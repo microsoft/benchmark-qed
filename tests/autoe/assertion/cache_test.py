@@ -57,6 +57,11 @@ def test_second_assertion_run_reuses_all_trials(
     tmp_path: Path, monkeypatch: Any
 ) -> None:
     call_count = 0
+    completed = 0
+
+    def on_complete() -> None:
+        nonlocal completed
+        completed += 1
 
     async def fake_chat(*args: Any, **kwargs: Any) -> Any:
         nonlocal call_count
@@ -75,11 +80,14 @@ def test_second_assertion_run_reuses_all_trials(
 
     monkeypatch.setattr(standard, "chat", fake_chat)
     kwargs = _config(tmp_path)
+    kwargs["show_progress"] = False
+    kwargs["complete_callback"] = on_complete
 
     first = standard.get_assertion_scores(**kwargs)
     second = standard.get_assertion_scores(**kwargs)
 
     assert call_count == 2
+    assert completed == 4
     pd.testing.assert_frame_equal(first, second)
 
 

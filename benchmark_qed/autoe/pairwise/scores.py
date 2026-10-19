@@ -61,6 +61,8 @@ def get_pairwise_scores(
     question_id_key: str = "question_id",
     question_text_key: str = "question_text",
     cache_config: CacheConfig | None = None,
+    show_progress: bool = True,
+    complete_callback: Callable[[str], None] | None = None,
 ) -> pd.DataFrame:
     """Score a pair of conditions using the specified criteria.
 
@@ -80,6 +82,9 @@ def get_pairwise_scores(
         question_text_key: The column name for question text in the DataFrames.
         cache_config: GraphRAG cache backend configuration. Caching is disabled
             when omitted.
+        show_progress: Whether to render Rich progress output.
+        complete_callback: Optional callback receiving the criterion name after
+            each completed or cached judgment.
 
     Returns
     -------
@@ -125,10 +130,12 @@ def get_pairwise_scores(
         include_score_id_in_prompt=include_score_id_in_prompt,
     )
 
-    with Progress() as progress:
+    with Progress(disable=not show_progress) as progress:
 
-        def on_complete_callback(progress_task: TaskID) -> None:
+        def on_complete_callback(criterion_name: str, progress_task: TaskID) -> None:
             progress.update(progress_task, advance=1, refresh=True)
+            if complete_callback is not None:
+                complete_callback(criterion_name)
 
         progress_tasks = {
             criterion.name: progress.add_task(
@@ -151,7 +158,9 @@ def get_pairwise_scores(
                 assessment_system_prompt=assessment_system_prompt,
                 assessment_user_prompt=assessment_user_prompt,
                 complete_callback=functools.partial(
-                    on_complete_callback, progress_tasks[criterion.name]
+                    on_complete_callback,
+                    criterion.name,
+                    progress_tasks[criterion.name],
                 ),
                 trial=n,
                 include_score_id_in_prompt=include_score_id_in_prompt,

@@ -388,7 +388,9 @@ def absolute_score(
         _write_csv_df(output_storage, "calibrated_absolute_summary.csv", summary)
     )
     print_df(summary, "Calibrated Absolute Scores Summary")
-    insufficient_total = int(summary["insufficient_evidence"].sum())
+    insufficient_total = int(
+        np.asarray(summary["insufficient_evidence"], dtype=np.int64).sum()
+    )
     rich_print(
         "[yellow]Insufficient evidence:[/yellow] "
         f"{insufficient_total} of {len(combined)} answer-criterion results. "

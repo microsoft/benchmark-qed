@@ -53,6 +53,8 @@ def get_assertion_scores(
     question_text_key: str = "question_text",
     answer_text_key: str = "answer",
     cache_config: CacheConfig | None = None,
+    show_progress: bool = True,
+    complete_callback: Callable[[], None] | None = None,
 ) -> pd.DataFrame:
     """Score assertions based on the provided answers using a language model.
 
@@ -75,6 +77,9 @@ def get_assertion_scores(
         answer_text_key: Column name for answer text.
         cache_config: GraphRAG cache backend configuration. Caching is disabled
             when omitted.
+        show_progress: Whether to render Rich progress output.
+        complete_callback: Optional callback invoked after each completed or
+            cached judgment.
 
     Returns
     -------
@@ -156,10 +161,12 @@ def get_assertion_scores(
         include_score_id_in_prompt=include_score_id_in_prompt,
     )
 
-    with Progress() as progress:
+    with Progress(disable=not show_progress) as progress:
 
         def on_complete_callback(progress_task: TaskID) -> None:
             progress.update(progress_task, advance=1, refresh=True)
+            if complete_callback is not None:
+                complete_callback()
 
         progress_task = progress.add_task("Scoring...", total=len(pairs) * trials)
         tasks = [

@@ -102,7 +102,7 @@ class TestLoadConfigBasicFunctionality:
             "llm_config": {"auth_type": "azure_managed_identity"},
         })
 
-        assert calibration.appearances == 3
+        assert calibration.appearances == 5
         assert calibration.max_batch_size == 5
         assert calibration.cache_config.type == "sqlite"
         assert calibration.cache_config.database_name == "absolute_calibrate.sqlite3"
