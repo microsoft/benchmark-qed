@@ -19,7 +19,7 @@
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
@@ -27,7 +27,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
@@ -567,6 +567,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../cli/cache/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Evaluation Caches
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../cli/retrieval_scores/" class="md-nav__link">
         
   
@@ -871,6 +899,34 @@
     
   
     Retrieval Metrics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cache_parallelism_benchmark/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cache and parallelism benchmark
   
 
     
@@ -4256,21 +4312,21 @@ print_df(
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">"""Wilcoxon signed-rank test on paired joint vs. separate win rates."""</span>
     <span class="n">keys</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"question_set"</span><span class="p">,</span> <span class="s2">"question"</span><span class="p">,</span> <span class="s2">"criteria"</span><span class="p">]</span>
-    <span class="n">joint_mean</span> <span class="o">=</span> <span class="n">joint_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">keys</span><span class="p">)[</span><span class="n">base_col</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">to_frame</span><span class="p">(</span><span class="s2">"joint"</span><span class="p">)</span>
-    <span class="n">separate_mean</span> <span class="o">=</span> <span class="n">separate_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">keys</span><span class="p">)[</span><span class="n">base_col</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">to_frame</span><span class="p">(</span><span class="s2">"separate"</span><span class="p">)</span>
+    <span class="n">joint_mean</span> <span class="o">=</span> <span class="n">joint_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">keys</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="n">joint</span><span class="o">=</span><span class="p">(</span><span class="n">base_col</span><span class="p">,</span> <span class="s2">"mean"</span><span class="p">))</span>
+    <span class="n">separate_mean</span> <span class="o">=</span> <span class="n">separate_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">keys</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="n">separate</span><span class="o">=</span><span class="p">(</span><span class="n">base_col</span><span class="p">,</span> <span class="s2">"mean"</span><span class="p">))</span>
     <span class="n">merged</span> <span class="o">=</span> <span class="n">joint_mean</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">separate_mean</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s2">"inner"</span><span class="p">)</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_test</span><span class="p">(</span><span class="n">sub</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">:</span>
-        <span class="n">a</span> <span class="o">=</span> <span class="n">sub</span><span class="p">[</span><span class="s2">"joint"</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
-        <span class="n">b</span> <span class="o">=</span> <span class="n">sub</span><span class="p">[</span><span class="s2">"separate"</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">sub</span><span class="p">[</span><span class="s2">"joint"</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+        <span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">sub</span><span class="p">[</span><span class="s2">"separate"</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
         <span class="n">diff</span> <span class="o">=</span> <span class="n">b</span> <span class="o">-</span> <span class="n">a</span>
         <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">diff</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">):</span>
             <span class="n">stat</span><span class="p">,</span> <span class="n">p_value</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">try</span><span class="p">:</span>
-                <span class="n">result</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">wilcoxon</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
-                <span class="n">stat</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">statistic</span><span class="p">)</span>  <span class="c1"># type: ignore[attr-defined]</span>
-                <span class="n">p_value</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">pvalue</span><span class="p">)</span>  <span class="c1"># type: ignore[attr-defined]</span>
+                <span class="n">statistic</span><span class="p">,</span> <span class="n">probability</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">wilcoxon</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+                <span class="n">stat</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">statistic</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span><span class="o">.</span><span class="n">item</span><span class="p">())</span>
+                <span class="n">p_value</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">probability</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span><span class="o">.</span><span class="n">item</span><span class="p">())</span>
             <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
                 <span class="n">stat</span><span class="p">,</span> <span class="n">p_value</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span>
         <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">({</span>
@@ -4302,9 +4358,9 @@ print_df(
     <span class="s2">"Joint vs. Separate — Paired Significance (Wilcoxon; p &gt; alpha ⇒ no systematic difference)"</span><span class="p">,</span>
 <span class="p">)</span>
 
-<span class="n">overall_p</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span>
-    <span class="n">significance_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">significance_df</span><span class="p">[</span><span class="s2">"criteria"</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"ALL"</span><span class="p">,</span> <span class="s2">"p_value"</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-<span class="p">)</span>
+<span class="n">overall_p</span> <span class="o">=</span> <span class="n">significance_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span>
+    <span class="n">significance_df</span><span class="p">[</span><span class="s2">"criteria"</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"ALL"</span><span class="p">,</span> <span class="s2">"p_value"</span>
+<span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">(</span><span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
 <span class="k">if</span> <span class="n">overall_p</span> <span class="o">&gt;</span> <span class="n">alpha</span><span class="p">:</span>
     <span class="n">rich_print</span><span class="p">(</span>
         <span class="sa">f</span><span class="s2">"[green]Overall p = </span><span class="si">{</span><span class="n">overall_p</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> &gt; alpha = </span><span class="si">{</span><span class="n">alpha</span><span class="si">}</span><span class="s2">: no statistically "</span>
@@ -4332,21 +4388,21 @@ def paired_judging_significance(
 ) -&gt; pd.DataFrame:
     """Wilcoxon signed-rank test on paired joint vs. separate win rates."""
     keys = ["question_set", "question", "criteria"]
-    joint_mean = joint_df.groupby(keys)[base_col].mean().to_frame("joint")
-    separate_mean = separate_df.groupby(keys)[base_col].mean().to_frame("separate")
+    joint_mean = joint_df.groupby(keys).agg(joint=(base_col, "mean"))
+    separate_mean = separate_df.groupby(keys).agg(separate=(base_col, "mean"))
     merged = joint_mean.join(separate_mean, how="inner").dropna().reset_index()
 
     def _test(sub: pd.DataFrame) -&gt; pd.Series:
-        a = sub["joint"].to_numpy()
-        b = sub["separate"].to_numpy()
+        a = np.asarray(sub["joint"], dtype=float)
+        b = np.asarray(sub["separate"], dtype=float)
         diff = b - a
         if np.allclose(diff, 0.0):
             stat, p_value = 0.0, 1.0
         else:
             try:
-                result = stats.wilcoxon(a, b)
-                stat = float(result.statistic)  # type: ignore[attr-defined]
-                p_value = float(result.pvalue)  # type: ignore[attr-defined]
+                statistic, probability = stats.wilcoxon(a, b)
+                stat = float(np.asarray(statistic, dtype=float).item())
+                p_value = float(np.asarray(probability, dtype=float).item())
             except ValueError:
                 stat, p_value = 0.0, 1.0
         return pd.Series({
@@ -4378,9 +4434,9 @@ print_df(
     "Joint vs. Separate — Paired Significance (Wilcoxon; p &gt; alpha ⇒ no systematic difference)",
 )
 
-overall_p = float(
-    significance_df.loc[significance_df["criteria"] == "ALL", "p_value"].iloc[0]
-)
+overall_p = significance_df.loc[
+    significance_df["criteria"] == "ALL", "p_value"
+].to_numpy(dtype=float)[0]
 if overall_p &gt; alpha:
     rich_print(
         f"[green]Overall p = {overall_p:.3f} &gt; alpha = {alpha}: no statistically "
@@ -4439,16 +4495,18 @@ else:
 
 <span class="n">n_examples</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">disagreements</span><span class="p">))</span>
 <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">disagreements</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="n">n_examples</span><span class="p">)</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+    <span class="n">joint_score</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s2">"joint_score"</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span><span class="o">.</span><span class="n">item</span><span class="p">())</span>
+    <span class="n">separate_score</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s2">"separate_score"</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span><span class="o">.</span><span class="n">item</span><span class="p">())</span>
     <span class="n">rich_print</span><span class="p">(</span>
         <span class="sa">f</span><span class="s2">"[bold cyan]</span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="s1">'question_set'</span><span class="p">]</span><span class="si">}</span><span class="s2"> · </span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="s1">'criteria'</span><span class="p">]</span><span class="si">}</span><span class="s2"> · trial </span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="s1">'trial'</span><span class="p">]</span><span class="si">}</span><span class="s2">[/bold cyan]"</span>
     <span class="p">)</span>
     <span class="n">rich_print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"[bold]Question:[/bold] </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s1">'question'</span><span class="p">])[:</span><span class="mi">200</span><span class="p">]</span><span class="si">}</span><span class="s2">..."</span><span class="p">)</span>
     <span class="n">rich_print</span><span class="p">(</span>
-        <span class="sa">f</span><span class="s2">"[bold]JOINT verdict:[/bold] </span><span class="si">{</span><span class="n">verdict_labels</span><span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s1">'joint_score'</span><span class="p">])]</span><span class="si">}</span><span class="se">\n</span><span class="s2">"</span>
+        <span class="sa">f</span><span class="s2">"[bold]JOINT verdict:[/bold] </span><span class="si">{</span><span class="n">verdict_labels</span><span class="p">[</span><span class="n">joint_score</span><span class="p">]</span><span class="si">}</span><span class="se">\n</span><span class="s2">"</span>
         <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="s1">'joint_reasoning'</span><span class="p">]</span><span class="si">}</span><span class="se">\n</span><span class="s2">"</span>
     <span class="p">)</span>
     <span class="n">rich_print</span><span class="p">(</span>
-        <span class="sa">f</span><span class="s2">"[bold]SEPARATE verdict:[/bold] </span><span class="si">{</span><span class="n">verdict_labels</span><span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s1">'separate_score'</span><span class="p">])]</span><span class="si">}</span><span class="se">\n</span><span class="s2">"</span>
+        <span class="sa">f</span><span class="s2">"[bold]SEPARATE verdict:[/bold] </span><span class="si">{</span><span class="n">verdict_labels</span><span class="p">[</span><span class="n">separate_score</span><span class="p">]</span><span class="si">}</span><span class="se">\n</span><span class="s2">"</span>
         <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="s1">'separate_reasoning'</span><span class="p">]</span><span class="si">}</span><span class="se">\n</span><span class="s2">"</span>
     <span class="p">)</span>
     <span class="n">rich_print</span><span class="p">(</span><span class="s2">"[dim]"</span> <span class="o">+</span> <span class="s2">"-"</span> <span class="o">*</span> <span class="mi">80</span> <span class="o">+</span> <span class="s2">"[/dim]</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
@@ -4477,16 +4535,18 @@ rich_print(
 
 n_examples = min(3, len(disagreements))
 for _, row in disagreements.head(n_examples).iterrows():
+    joint_score = float(np.asarray(row["joint_score"], dtype=float).item())
+    separate_score = float(np.asarray(row["separate_score"], dtype=float).item())
     rich_print(
         f"[bold cyan]{row['question_set']} · {row['criteria']} · trial {row['trial']}[/bold cyan]"
     )
     rich_print(f"[bold]Question:[/bold] {str(row['question'])[:200]}...")
     rich_print(
-        f"[bold]JOINT verdict:[/bold] {verdict_labels[float(row['joint_score'])]}\n"
+        f"[bold]JOINT verdict:[/bold] {verdict_labels[joint_score]}\n"
         f"{row['joint_reasoning']}\n"
     )
     rich_print(
-        f"[bold]SEPARATE verdict:[/bold] {verdict_labels[float(row['separate_score'])]}\n"
+        f"[bold]SEPARATE verdict:[/bold] {verdict_labels[separate_score]}\n"
         f"{row['separate_reasoning']}\n"
     )
     rich_print("[dim]" + "-" * 80 + "[/dim]\n")</div>
@@ -4640,7 +4700,7 @@ for _, row in disagreements.head(n_examples).iterrows():
         <span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="n">agreement_rate</span><span class="o">=</span><span class="s2">"mean"</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="s2">"count"</span><span class="p">)</span>
         <span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
     <span class="p">)</span>
-    <span class="n">overall_agreement</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">merged_items</span><span class="p">[</span><span class="s2">"agree"</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+    <span class="n">overall_agreement</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">merged_items</span><span class="p">[</span><span class="s2">"agree"</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">(</span><span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
     <span class="n">agreement_view</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span>
         <span class="p">[</span>
             <span class="n">agreement_view</span><span class="p">,</span>
@@ -4686,14 +4746,21 @@ for _, row in disagreements.head(n_examples).iterrows():
         <span class="sa">f</span><span class="s2">"[</span><span class="si">{</span><span class="n">model_name</span><span class="si">}</span><span class="s2">] Joint vs. Separate — Paired Significance"</span><span class="p">,</span>
     <span class="p">)</span>
 
-    <span class="n">overall</span> <span class="o">=</span> <span class="n">model_sig</span><span class="p">[</span><span class="n">model_sig</span><span class="p">[</span><span class="s2">"criteria"</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"ALL"</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">overall</span> <span class="o">=</span> <span class="n">model_sig</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span>
+        <span class="n">model_sig</span><span class="p">[</span><span class="s2">"criteria"</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"ALL"</span><span class="p">,</span>
+        <span class="p">[</span><span class="s2">"joint_mean_wr"</span><span class="p">,</span> <span class="s2">"separate_mean_wr"</span><span class="p">,</span> <span class="s2">"p_value"</span><span class="p">,</span> <span class="s2">"significant"</span><span class="p">],</span>
+    <span class="p">]</span>
+    <span class="n">overall_rates</span> <span class="o">=</span> <span class="n">overall</span><span class="p">[[</span><span class="s2">"joint_mean_wr"</span><span class="p">,</span> <span class="s2">"separate_mean_wr"</span><span class="p">,</span> <span class="s2">"p_value"</span><span class="p">]]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">(</span>
+        <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span>
+    <span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">significant</span> <span class="o">=</span> <span class="n">overall</span><span class="p">[</span><span class="s2">"significant"</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">(</span><span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
     <span class="k">return</span> <span class="p">{</span>
         <span class="s2">"judge_model"</span><span class="p">:</span> <span class="n">model_name</span><span class="p">,</span>
         <span class="s2">"verdict_agreement"</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">overall_agreement</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
-        <span class="s2">"joint_mean_wr"</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">overall</span><span class="p">[</span><span class="s2">"joint_mean_wr"</span><span class="p">]),</span> <span class="mi">4</span><span class="p">),</span>
-        <span class="s2">"separate_mean_wr"</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">overall</span><span class="p">[</span><span class="s2">"separate_mean_wr"</span><span class="p">]),</span> <span class="mi">4</span><span class="p">),</span>
-        <span class="s2">"overall_p_value"</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">overall</span><span class="p">[</span><span class="s2">"p_value"</span><span class="p">]),</span> <span class="mi">3</span><span class="p">),</span>
-        <span class="s2">"significant_diff"</span><span class="p">:</span> <span class="nb">bool</span><span class="p">(</span><span class="n">overall</span><span class="p">[</span><span class="s2">"significant"</span><span class="p">]),</span>
+        <span class="s2">"joint_mean_wr"</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">overall_rates</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="mi">4</span><span class="p">),</span>
+        <span class="s2">"separate_mean_wr"</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">overall_rates</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="mi">4</span><span class="p">),</span>
+        <span class="s2">"overall_p_value"</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">overall_rates</span><span class="p">[</span><span class="mi">2</span><span class="p">]),</span> <span class="mi">3</span><span class="p">),</span>
+        <span class="s2">"significant_diff"</span><span class="p">:</span> <span class="nb">bool</span><span class="p">(</span><span class="n">significant</span><span class="p">),</span>
     <span class="p">}</span>
 
 
@@ -4825,7 +4892,7 @@ def report_model_detail(
         .agg(agreement_rate="mean", n="count")
         .reset_index()
     )
-    overall_agreement = float(merged_items["agree"].mean())
+    overall_agreement = float(merged_items["agree"].to_numpy(dtype=float).mean())
     agreement_view = pd.concat(
         [
             agreement_view,
@@ -4871,14 +4938,21 @@ def report_model_detail(
         f"[{model_name}] Joint vs. Separate — Paired Significance",
     )
 
-    overall = model_sig[model_sig["criteria"] == "ALL"].iloc[0]
+    overall = model_sig.loc[
+        model_sig["criteria"] == "ALL",
+        ["joint_mean_wr", "separate_mean_wr", "p_value", "significant"],
+    ]
+    overall_rates = overall[["joint_mean_wr", "separate_mean_wr", "p_value"]].to_numpy(
+        dtype=float
+    )[0]
+    significant = overall["significant"].to_numpy(dtype=bool)[0]
     return {
         "judge_model": model_name,
         "verdict_agreement": round(overall_agreement, 3),
-        "joint_mean_wr": round(float(overall["joint_mean_wr"]), 4),
-        "separate_mean_wr": round(float(overall["separate_mean_wr"]), 4),
-        "overall_p_value": round(float(overall["p_value"]), 3),
-        "significant_diff": bool(overall["significant"]),
+        "joint_mean_wr": round(float(overall_rates[0]), 4),
+        "separate_mean_wr": round(float(overall_rates[1]), 4),
+        "overall_p_value": round(float(overall_rates[2]), 3),
+        "significant_diff": bool(significant),
     }
 
 
@@ -5007,7 +5081,7 @@ print_df(
       <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["content.code.copy", "content.code.select", "navigation.footer", "navigation.tabs"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
       
         <script src="../../scripts/create_cookie_banner.js"></script>
       

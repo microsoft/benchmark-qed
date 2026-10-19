@@ -19,7 +19,7 @@
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
@@ -27,7 +27,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
@@ -572,6 +572,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../cache/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Evaluation Caches
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../retrieval_scores/" class="md-nav__link">
         
   
@@ -789,6 +817,17 @@
     <span class="md-ellipsis">
       
         Storage Configuration in Generated Settings
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#evaluation-cache-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Evaluation Cache Configuration
       
     </span>
   </a>
@@ -1100,6 +1139,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../notebooks/cache_parallelism_benchmark/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cache and parallelism benchmark
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1270,6 +1337,17 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#evaluation-cache-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Evaluation Cache Configuration
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1376,7 +1454,7 @@
 <tbody>
 <tr>
 <td><code>config_type</code></td>
-<td>The type of configuration to generate. One of: <code>autoq</code>, <code>autoe_pairwise</code>, <code>autoe_reference</code>, <code>autoe_assertion</code>.</td>
+<td>The type of configuration to generate. One of: <code>autoq</code>, <code>autoe_pairwise</code>, <code>autoe_differential_pairwise</code>, <code>autoe_reference</code>, <code>autoe_assertion</code>, <code>autoe_chunk_assertion</code>.</td>
 </tr>
 <tr>
 <td><code>root</code></td>
@@ -1455,7 +1533,7 @@
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>benchmark-qed<span class="w"> </span>config<span class="w"> </span>init<span class="w"> </span>autoq<span class="w"> </span>./my_project<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span>--storage-type<span class="w"> </span>blob<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">  </span>--container-name<span class="w"> </span>my-datasets<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">  </span>--connection-string<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$AZURE_STORAGE_CONNECTION_STRING</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">  </span>--connection-string<span class="w"> </span><span class="s2">"</span><span class="nv">$AZURE_STORAGE_CONNECTION_STRING</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">  </span>--base-dir<span class="w"> </span>experiments/run1
 </code></pre></div>
 <blockquote>
@@ -1471,11 +1549,14 @@
 <a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="c1"># Generate AutoE pairwise config with blob storage</span>
 <a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>benchmark-qed<span class="w"> </span>config<span class="w"> </span>init<span class="w"> </span>autoe_pairwise<span class="w"> </span>./pairwise_project<span class="w"> </span>--storage-type<span class="w"> </span>blob<span class="w"> </span>--base-dir<span class="w"> </span>experiments/run1
 <a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>
-<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="c1"># Generate AutoE reference config with blob storage</span>
-<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>benchmark-qed<span class="w"> </span>config<span class="w"> </span>init<span class="w"> </span>autoe_reference<span class="w"> </span>./reference_project<span class="w"> </span>-s<span class="w"> </span>blob<span class="w"> </span>--base-dir<span class="w"> </span>experiments/run1
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="c1"># Generate differential pairwise config with stage-aware caching</span>
+<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>benchmark-qed<span class="w"> </span>config<span class="w"> </span>init<span class="w"> </span>autoe_differential_pairwise<span class="w"> </span>./differential_project
 <a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>
-<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a><span class="c1"># Generate AutoE assertion config with blob storage</span>
-<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a>benchmark-qed<span class="w"> </span>config<span class="w"> </span>init<span class="w"> </span>autoe_assertion<span class="w"> </span>./assertion_project<span class="w"> </span>-s<span class="w"> </span>blob<span class="w"> </span>--base-dir<span class="w"> </span>experiments/run1
+<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a><span class="c1"># Generate AutoE reference config with blob storage</span>
+<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a>benchmark-qed<span class="w"> </span>config<span class="w"> </span>init<span class="w"> </span>autoe_reference<span class="w"> </span>./reference_project<span class="w"> </span>-s<span class="w"> </span>blob<span class="w"> </span>--base-dir<span class="w"> </span>experiments/run1
+<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a>
+<a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a><span class="c1"># Generate AutoE assertion config with blob storage</span>
+<a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a>benchmark-qed<span class="w"> </span>config<span class="w"> </span>init<span class="w"> </span>autoe_assertion<span class="w"> </span>./assertion_project<span class="w"> </span>-s<span class="w"> </span>blob<span class="w"> </span>--base-dir<span class="w"> </span>experiments/run1
 </code></pre></div>
 <h4 id="generated-files">Generated Files</h4>
 <p>The command creates the following structure in the <code>root</code> directory (when writing locally):</p>
@@ -1493,7 +1574,7 @@
 </code></pre></div>
 <p>Or with a connection string:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>benchmark-qed<span class="w"> </span>autoq<span class="w"> </span>blob://my-container/experiments/run1/settings.yaml<span class="w"> </span>output<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">  </span>--connection-string<span class="w"> </span><span class="s2">&quot;&lt;your-connection-string&gt;&quot;</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">  </span>--connection-string<span class="w"> </span><span class="s2">"&lt;your-connection-string&gt;"</span>
 </code></pre></div>
 <p>The CLI streams <code>settings.yaml</code> and <strong>every sibling file under the same prefix</strong> (e.g. <code>prompts/**/*.txt</code>, <code>.env</code>) into a temporary local directory before loading the config. If neither option is supplied, auth falls back to the <code>AZURE_STORAGE_CONNECTION_STRING</code> or <code>AZURE_STORAGE_ACCOUNT_URL</code> environment variables. Input data and output destinations still flow through the <code>input:</code> / <code>output_storage:</code> blocks declared inside <code>settings.yaml</code>.</p>
 <p>Every command that accepts a config path also accepts <code>--account-url</code> and <code>--connection-string</code>: <code>autoq</code>, <code>autoq generate-assertions</code>, <code>autoe pairwise-scores</code>, <code>autoe reference-scores</code>, <code>autoe assertion-scores</code>, <code>autoe hierarchical-assertion-scores</code>, <code>autoe assertion-significance</code>, <code>autoe hierarchical-assertion-significance</code>, <code>autoe generate-retrieval-reference</code>, and <code>autoe retrieval-scores</code>.</p>
@@ -1510,11 +1591,39 @@
 <li>An <strong>output_storage</strong> block is added for writing scores to blob.</li>
 </ul>
 <p>Both blocks include placeholders for <code>container_name</code>, <code>connection_string</code>, and <code>account_url</code> (managed identity).</p>
+<h4 id="evaluation-cache-configuration">Evaluation Cache Configuration</h4>
+<p>Generated <code>autoe_pairwise</code> settings enable a persistent SQLite cache:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nt">cache_config</span><span class="p">:</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sqlite</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">  </span><span class="nt">storage</span><span class="p">:</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">file</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="w">    </span><span class="nt">base_dir</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">.benchmark_qed_cache/pairwise</span>
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="w">  </span><span class="nt">database_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pairwise.sqlite3</span>
+</code></pre></div>
+<p>This cache stores completed question/criterion/trial judgments and allows
+interrupted or repeated runs to avoid duplicate LLM calls. Set <code>type: none</code> and
+<code>storage: null</code> to disable it.</p>
+<p>The SQLite cache is always local, including when <code>--storage-type blob</code> is used
+for inputs and outputs. See <a href="../cache/">Evaluation Caches</a> for supported
+backends, cache identity, inspection, and clearing instructions.</p>
+<p>Generated <code>autoe_differential_pairwise</code> settings use a separate SQLite database
+under <code>.benchmark_qed_cache/differential_pairwise</code>. Extraction and verdict
+stages are cached independently so judge failures can resume from extraction
+and criteria changes need only recompute verdicts.</p>
+<p>Generated <code>autoe_reference</code> settings enable a persistent SQLite cache under
+<code>.benchmark_qed_cache/reference</code>. Each question/criterion/trial judgment is
+stored independently. Set <code>type: none</code> with <code>storage: null</code> to request fresh
+judgments.</p>
+<p>Generated <code>autoe_assertion</code> settings enable a persistent SQLite cache under
+<code>.benchmark_qed_cache/assertion</code> for standard single-RAG answer-level scoring.
+Each question/assertion/trial judgment is stored independently. This cache is
+not used by multi-RAG or hierarchical assertion scoring, and chunk-assertion
+scoring uses its own assertion/chunk cache.</p>
 <div class="typer-docs">
 <h1 id="config">config</h1>
 <p>Generate settings file.</p>
 <h2 id="usage">Usage</h2>
-<p><code>config [OPTIONS] CONFIG_TYPE:{autoq|autoe_pairwise|autoe_differential_pairwise|autoe_reference|autoe_assertion|autoe_chunk_assertion} ROOT</code></p>
+<p><code>config [OPTIONS] {config_type}:<autoq|autoe_pairwise|autoe_differential_pairwise|autoe_reference|autoe_assertion|autoe_chunk_assertion> {root}</code></p>
 <h2 id="arguments_1">Arguments</h2>
 <table>
 <thead>
@@ -1526,12 +1635,12 @@
 </thead>
 <tbody>
 <tr>
-<td><code>CONFIG_TYPE:{autoq|autoe_pairwise|autoe_differential_pairwise|autoe_reference|autoe_assertion|autoe_chunk_assertion}</code></td>
+<td><code>config_type:<autoq|autoe_pairwise|autoe_differential_pairwise|autoe_reference|autoe_assertion|autoe_chunk_assertion></code></td>
 <td>The type of configuration to generate. Options are: autoq, autoe_pairwise, autoe_reference.</td>
 <td>Yes</td>
 </tr>
 <tr>
-<td><code>ROOT</code></td>
+<td><code>root</code></td>
 <td>The path to root directory with the input folder.</td>
 <td>Yes</td>
 </tr>
@@ -1549,31 +1658,31 @@
 </thead>
 <tbody>
 <tr>
-<td><code>-s, --storage-type TEXT</code></td>
+<td><code>-s, --storage-type <str></code></td>
 <td>Storage setup mode for generated settings. Use 'blob' to scaffold active Azure Blob storage sections, or 'local' (default) for commented-out storage config.</td>
 <td>No</td>
 <td><code>local</code></td>
 </tr>
 <tr>
-<td><code>--container-name TEXT</code></td>
+<td><code>--container-name <str></code></td>
 <td>The blob container name to pre-fill in the generated storage config.</td>
 <td>No</td>
 <td>-</td>
 </tr>
 <tr>
-<td><code>--account-url TEXT</code></td>
+<td><code>--account-url <str></code></td>
 <td>The storage account URL to pre-fill (uses managed identity for auth).</td>
 <td>No</td>
 <td>-</td>
 </tr>
 <tr>
-<td><code>--connection-string TEXT</code></td>
+<td><code>--connection-string <str></code></td>
 <td>The storage connection string to pre-fill (alternative to --account-url).</td>
 <td>No</td>
 <td>-</td>
 </tr>
 <tr>
-<td><code>--base-dir TEXT</code></td>
+<td><code>--base-dir <str></code></td>
 <td>Base prefix path within the container to pre-fill in storage config.</td>
 <td>No</td>
 <td>-</td>
@@ -1698,7 +1807,7 @@
       <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["content.code.copy", "content.code.select", "navigation.footer", "navigation.tabs"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
       
         <script src="../../scripts/create_cookie_banner.js"></script>
       

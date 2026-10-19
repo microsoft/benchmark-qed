@@ -17,7 +17,7 @@
       
       
       <link rel="icon" href="assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
@@ -25,7 +25,7 @@
       
     
     
-      <link rel="stylesheet" href="assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="assets/stylesheets/main.ec1eaa64.min.css">
       
         
         <link rel="stylesheet" href="assets/stylesheets/palette.ab4e12ef.min.css">
@@ -751,6 +751,34 @@
   
   
     <li class="md-nav__item">
+      <a href="cli/cache/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Evaluation Caches
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="cli/retrieval_scores/" class="md-nav__link">
         
   
@@ -1053,6 +1081,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="notebooks/cache_parallelism_benchmark/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cache and parallelism benchmark
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1285,10 +1341,14 @@
 <p>Install <a href="https://www.python.org/downloads/">Python 3.11+</a></p>
 <p>To get started with BenchmarkQED, you have two options:</p>
 <ol>
-<li><a href="https://pypi.org/project/benchmark-qed/">Install from PyPI</a>: 
+<li>
+<p><a href="https://pypi.org/project/benchmark-qed/">Install from PyPI</a>: 
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>pip<span class="w"> </span>install<span class="w"> </span>benchmark-qed
-</code></pre></div></li>
-<li><a href="developing/">Use it from source</a></li>
+</code></pre></div></p>
+</li>
+<li>
+<p><a href="developing/">Use it from source</a></p>
+</li>
 </ol>
 <h2 id="usage">Usage</h2>
 <p>The sections below describe the three main components of BenchmarkQED—AutoQ, AutoE, and AutoD. You will also find step-by-step examples demonstrating how to use AutoQ and AutoE, using the Install from PyPI option.</p>
@@ -1394,13 +1454,23 @@
     This command creates two files in the <code>./pairwise_test</code> directory:</p>
 <ul>
 <li><code>.env</code>: Contains environment variables for the pairwise comparison tests. Open this file and replace <code>&lt;API_KEY&gt;</code> with your own OpenAI or Azure API key.</li>
-<li><code>settings.yaml</code>: Contains pipeline settings, which you can modify as needed.</li>
+<li><code>settings.yaml</code>: Contains pipeline settings, including a persistent
+  SQLite pairwise cache under <code>.benchmark_qed_cache/pairwise</code>. The cache
+  lets interrupted and repeated runs reuse completed LLM judgments. Set
+  <code>cache_config.type: none</code> to disable it.</li>
 </ul>
 </li>
 <li>
 <p><strong>Run the pairwise comparison:</strong>
     <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>benchmark-qed<span class="w"> </span>autoe<span class="w"> </span>pairwise-scores<span class="w"> </span>settings.yaml<span class="w"> </span>output
 </code></pre></div></p>
+<p>Inspect the default pairwise cache with:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>benchmark-qed<span class="w"> </span>cache<span class="w"> </span>inspect<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="w">  </span>.benchmark_qed_cache/pairwise/pairwise.sqlite3
+</code></pre></div>
+<p>See <a href="cli/cache/">Evaluation Caches</a> for details about cache identity,
+backend selection, forcing fresh judgments, and the distinction between
+cached judgments and existing output CSVs.</p>
 </li>
 </ol>
 <h4 id="example-2-scoring-of-rag-answers-against-reference-answers">Example 2: Scoring of RAG answers against reference answers</h4>
@@ -1408,31 +1478,36 @@
 <ol>
 <li>
 <p><strong>Set up your project directory:</strong>
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>mkdir<span class="w"> </span>-p<span class="w"> </span>./local/reference_test
-<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="nb">cd</span><span class="w"> </span>./local/reference_test
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>mkdir<span class="w"> </span>-p<span class="w"> </span>./local/reference_test
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="nb">cd</span><span class="w"> </span>./local/reference_test
 </code></pre></div></p>
 </li>
 <li>
 <p><strong>Download the RAG answers and reference answers into the <code>input</code> subfolder</strong>:
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>mkdir<span class="w"> </span>./input
-<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>benchmark-qed<span class="w"> </span>data<span class="w"> </span>download<span class="w"> </span>example_answers<span class="w"> </span>input
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>mkdir<span class="w"> </span>./input
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>benchmark-qed<span class="w"> </span>data<span class="w"> </span>download<span class="w"> </span>example_answers<span class="w"> </span>input
 </code></pre></div>
     Alternatively, you can manually copy the files inside the <a href="https://github.com/microsoft/benchmark-qed/tree/main/docs/notebooks/example_answers">example data folder</a>.</p>
 </li>
 <li>
 <p><strong>Create a configuration file for reference scoring:</strong>
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>benchmark-qed<span class="w"> </span>config<span class="w"> </span>init<span class="w"> </span>autoe_reference<span class="w"> </span>.
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>benchmark-qed<span class="w"> </span>config<span class="w"> </span>init<span class="w"> </span>autoe_reference<span class="w"> </span>.
 </code></pre></div>
     This command creates two files in the <code>./reference_test</code> directory:</p>
 <ul>
 <li><code>.env</code>: Contains environment variables for the reference scoring tests. Open this file and replace <code>&lt;API_KEY&gt;</code> with your own OpenAI or Azure API key.</li>
-<li><code>settings.yaml</code>: Contains pipeline settings, which you can modify as needed.</li>
+<li><code>settings.yaml</code>: Contains pipeline settings and a persistent SQLite cache
+  under <code>.benchmark_qed_cache/reference</code>.</li>
 </ul>
 </li>
 <li>
 <p><strong>Run the reference scoring:</strong>
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>benchmark-qed<span class="w"> </span>autoe<span class="w"> </span>reference-scores<span class="w"> </span>settings.yaml<span class="w"> </span>output
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>benchmark-qed<span class="w"> </span>autoe<span class="w"> </span>reference-scores<span class="w"> </span>settings.yaml<span class="w"> </span>output
 </code></pre></div></p>
+<p>Interrupted and unchanged reruns reuse completed question/criterion/trial
+judgments. Set <code>cache_config.type: none</code> with <code>storage: null</code> for fresh
+judgments. See <a href="cli/cache/">Evaluation Caches</a> for inspection and backend
+options.</p>
 </li>
 </ol>
 <h4 id="example-3-assertion-based-scoring-of-rag-answers">Example 3: Assertion-based scoring of RAG answers</h4>
@@ -1440,31 +1515,37 @@
 <ol>
 <li>
 <p><strong>Set up your project directory:</strong>
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>mkdir<span class="w"> </span>-p<span class="w"> </span>./local/assertion_test
-<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="nb">cd</span><span class="w"> </span>./local/assertion_test
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>mkdir<span class="w"> </span>-p<span class="w"> </span>./local/assertion_test
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="nb">cd</span><span class="w"> </span>./local/assertion_test
 </code></pre></div></p>
 </li>
 <li>
 <p><strong>Download the RAG answers into the <code>input</code> subfolder</strong>:
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>mkdir<span class="w"> </span>./input
-<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>benchmark-qed<span class="w"> </span>data<span class="w"> </span>download<span class="w"> </span>example_answers<span class="w"> </span>input
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>mkdir<span class="w"> </span>./input
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>benchmark-qed<span class="w"> </span>data<span class="w"> </span>download<span class="w"> </span>example_answers<span class="w"> </span>input
 </code></pre></div>
     Alternatively, you can manually copy the files inside the <a href="https://github.com/microsoft/benchmark-qed/tree/main/docs/notebooks/example_answers">example data folder</a>.</p>
 </li>
 <li>
 <p><strong>Create a configuration file for assertion scoring:</strong>
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>benchmark-qed<span class="w"> </span>config<span class="w"> </span>init<span class="w"> </span>autoe_assertion<span class="w"> </span>.
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>benchmark-qed<span class="w"> </span>config<span class="w"> </span>init<span class="w"> </span>autoe_assertion<span class="w"> </span>.
 </code></pre></div>
     This command creates two files in the <code>./assertion_test</code> directory:</p>
 <ul>
 <li><code>.env</code>: Contains environment variables for the assertion scoring tests. Open this file and replace <code>&lt;API_KEY&gt;</code> with your own OpenAI or Azure API key.</li>
-<li><code>settings.yaml</code>: Contains pipeline settings, which you can modify as needed.</li>
+<li><code>settings.yaml</code>: Contains pipeline settings, including a persistent
+  single-RAG assertion cache at
+  <code>.benchmark_qed_cache/assertion/assertion.sqlite3</code>.</li>
 </ul>
 </li>
 <li>
 <p><strong>Run the assertion scoring:</strong>
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>benchmark-qed<span class="w"> </span>autoe<span class="w"> </span>assertion-scores<span class="w"> </span>settings.yaml<span class="w"> </span>output
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>benchmark-qed<span class="w"> </span>autoe<span class="w"> </span>assertion-scores<span class="w"> </span>settings.yaml<span class="w"> </span>output
 </code></pre></div></p>
+<p>Repeated or resumed runs reuse completed question/assertion/trial
+judgments. Run <code>benchmark-qed cache inspect
+.benchmark_qed_cache/assertion/assertion.sqlite3</code> to inspect the cache, or
+set <code>cache_config.type: none</code> with <code>storage: null</code> for fresh judgments.</p>
 </li>
 </ol>
 <p>For more details on configuring and running AutoE, see the <a href="cli/autoe/">AutoE CLI Documentation</a>.</p>
@@ -1563,7 +1644,7 @@
       <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": ["content.code.copy", "content.code.select", "navigation.footer", "navigation.tabs"], "search": "assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="assets/javascripts/bundle.d7400e89.min.js"></script>
       
         <script src="scripts/create_cookie_banner.js"></script>
       

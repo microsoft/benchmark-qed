@@ -19,7 +19,7 @@
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
@@ -27,7 +27,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
@@ -572,6 +572,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../cache/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Evaluation Caches
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../retrieval_scores/" class="md-nav__link">
         
   
@@ -1067,6 +1095,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../notebooks/cache_parallelism_benchmark/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cache and parallelism benchmark
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1379,7 +1435,7 @@
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>benchmark-qed<span class="w"> </span>data<span class="w"> </span>download<span class="w"> </span>AP_news<span class="w"> </span>input<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span>--storage-type<span class="w"> </span>blob<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">  </span>--container-name<span class="w"> </span>my-container<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">  </span>--connection-string<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$AZURE_STORAGE_CONNECTION_STRING</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">  </span>--connection-string<span class="w"> </span><span class="s2">"</span><span class="nv">$AZURE_STORAGE_CONNECTION_STRING</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">  </span>--base-dir<span class="w"> </span>my-project
 </code></pre></div>
 <h4 id="path-structure">Path Structure</h4>
@@ -1399,7 +1455,7 @@
 - Files are stored under <code>{output_dir}</code> if <code>base_dir</code> is omitted.</p>
 <p>This ensures blob storage mirrors the local directory structure.</p>
 <h2 id="usage">Usage</h2>
-<p><code>config [OPTIONS] DATASET:{AP_news|podcast|example_answers} OUTPUT_DIR</code></p>
+<p><code>config [OPTIONS] {dataset}:<AP_news|podcast|example_answers> {output_dir}</code></p>
 <h2 id="arguments_1">Arguments</h2>
 <table>
 <thead>
@@ -1411,12 +1467,12 @@
 </thead>
 <tbody>
 <tr>
-<td><code>DATASET:{AP_news|podcast|example_answers}</code></td>
+<td><code>dataset:<AP_news|podcast|example_answers></code></td>
 <td>The dataset to download.</td>
 <td>Yes</td>
 </tr>
 <tr>
-<td><code>OUTPUT_DIR</code></td>
+<td><code>output_dir</code></td>
 <td>The directory to save the downloaded dataset.</td>
 <td>Yes</td>
 </tr>
@@ -1434,31 +1490,31 @@
 </thead>
 <tbody>
 <tr>
-<td><code>--storage-type TEXT</code></td>
+<td><code>--storage-type <str></code></td>
 <td>Storage type: 'blob' for Azure Blob Storage. Omit for local filesystem.</td>
 <td>No</td>
 <td>-</td>
 </tr>
 <tr>
-<td><code>--container-name TEXT</code></td>
+<td><code>--container-name <str></code></td>
 <td>The blob container name.</td>
 <td>No</td>
 <td>-</td>
 </tr>
 <tr>
-<td><code>--account-url TEXT</code></td>
+<td><code>--account-url <str></code></td>
 <td>The storage account URL (uses managed identity).</td>
 <td>No</td>
 <td>-</td>
 </tr>
 <tr>
-<td><code>--connection-string TEXT</code></td>
+<td><code>--connection-string <str></code></td>
 <td>The storage connection string (alternative to account_url).</td>
 <td>No</td>
 <td>-</td>
 </tr>
 <tr>
-<td><code>--base-dir TEXT</code></td>
+<td><code>--base-dir <str></code></td>
 <td>Base prefix in blob storage. Files will be stored as: base_dir/output_dir/. If omitted, files are stored under output_dir/ only.</td>
 <td>No</td>
 <td>-</td>
@@ -1583,7 +1639,7 @@
       <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["content.code.copy", "content.code.select", "navigation.footer", "navigation.tabs"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
       
         <script src="../../scripts/create_cookie_banner.js"></script>
       

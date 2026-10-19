@@ -19,7 +19,7 @@
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
@@ -27,7 +27,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
@@ -1192,6 +1192,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../cache/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Evaluation Caches
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../retrieval_scores/" class="md-nav__link">
         
   
@@ -1481,6 +1509,34 @@
     
   
     Retrieval Metrics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../notebooks/cache_parallelism_benchmark/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cache and parallelism benchmark
   
 
     
@@ -2165,7 +2221,7 @@
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span>--account-url<span class="w"> </span>https://&lt;account&gt;.blob.core.windows.net
 </code></pre></div>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>benchmark-qed<span class="w"> </span>autoq<span class="w"> </span>blob://my-container/autoq_test/settings.yaml<span class="w"> </span>./local/output<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span>--connection-string<span class="w"> </span><span class="s2">&quot;&lt;your-connection-string&gt;&quot;</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span>--connection-string<span class="w"> </span><span class="s2">"&lt;your-connection-string&gt;"</span>
 </code></pre></div>
 <p>The same <code>--account-url</code> / <code>--connection-string</code> options are available on <code>autoq generate-assertions</code>. If neither is supplied, auth falls back to <code>$AZURE_STORAGE_ACCOUNT_URL</code> / <code>$AZURE_STORAGE_CONNECTION_STRING</code>.</p>
 <p>For more information about the <code>config init</code> command, see: <a href="../config_init/">Config Init CLI</a></p>
@@ -3026,7 +3082,7 @@
 <h3 id="autoq-autoq"><code>autoq autoq</code></h3>
 <p>Generate questions from the input data.</p>
 <h4 id="usage_1">Usage</h4>
-<p><code>autoq autoq [OPTIONS] CONFIGURATION_PATH OUTPUT_DATA_PATH</code></p>
+<p><code>autoq autoq [OPTIONS] {configuration_path} {output_data_path}</code></p>
 <h4 id="arguments_1">Arguments</h4>
 <table>
 <thead>
@@ -3038,12 +3094,12 @@
 </thead>
 <tbody>
 <tr>
-<td><code>CONFIGURATION_PATH</code></td>
+<td><code>configuration_path</code></td>
 <td>The path to the file containing the configuration.</td>
 <td>Yes</td>
 </tr>
 <tr>
-<td><code>OUTPUT_DATA_PATH</code></td>
+<td><code>output_data_path</code></td>
 <td>The path to the output folder for the results.</td>
 <td>Yes</td>
 </tr>
@@ -3061,7 +3117,7 @@
 </thead>
 <tbody>
 <tr>
-<td><code>--generation-types [data_local|data_global|data_linked|activity_local|activity_global]</code></td>
+<td><code>--generation-types <data_local|data_global|data_linked|activity_local|activity_global></code></td>
 <td>The source of the question generation.</td>
 <td>No</td>
 <td>-</td>
@@ -3073,13 +3129,13 @@
 <td><code>no-print-model-usage</code></td>
 </tr>
 <tr>
-<td><code>--account-url TEXT</code></td>
+<td><code>--account-url <str></code></td>
 <td>Azure Blob Storage account URL for managed-identity auth, used when the config path is a blob:// URI. Falls back to $AZURE_STORAGE_ACCOUNT_URL.</td>
 <td>No</td>
 <td>-</td>
 </tr>
 <tr>
-<td><code>--connection-string TEXT</code></td>
+<td><code>--connection-string <str></code></td>
 <td>Azure Blob Storage connection string, used when the config path is a blob:// URI. Falls back to $AZURE_STORAGE_CONNECTION_STRING.</td>
 <td>No</td>
 <td>-</td>
@@ -3111,7 +3167,7 @@ benchmark-qed assertion-stats output/data_global_questions/
 benchmark-qed assertion-stats assertions.json -o stats/my_stats.json
 </code></pre></div>
 <h4 id="usage_2">Usage</h4>
-<p><code>autoq assertion-stats [OPTIONS] ASSERTIONS_PATH</code></p>
+<p><code>autoq assertion-stats [OPTIONS] {assertions_path}</code></p>
 <h4 id="arguments_2">Arguments</h4>
 <table>
 <thead>
@@ -3123,7 +3179,7 @@ benchmark-qed assertion-stats assertions.json -o stats/my_stats.json
 </thead>
 <tbody>
 <tr>
-<td><code>ASSERTIONS_PATH</code></td>
+<td><code>assertions_path</code></td>
 <td>Path to assertion JSON file or directory containing assertion files.</td>
 <td>Yes</td>
 </tr>
@@ -3141,13 +3197,13 @@ benchmark-qed assertion-stats assertions.json -o stats/my_stats.json
 </thead>
 <tbody>
 <tr>
-<td><code>-o, --output PATH</code></td>
+<td><code>-o, --output <path></code></td>
 <td>Path to save stats JSON. If not specified, saves as {input}_stats.json.</td>
 <td>No</td>
 <td>-</td>
 </tr>
 <tr>
-<td><code>-t, --type TEXT</code></td>
+<td><code>-t, --type <str></code></td>
 <td>Type of assertions: 'global', 'map', or 'local'. If not specified, inferred from filename.</td>
 <td>No</td>
 <td>-</td>
@@ -3187,7 +3243,7 @@ benchmark-qed generate-assertions settings.yaml \
     output/data_linked_questions/ --type linked
 </code></pre></div>
 <h4 id="usage_3">Usage</h4>
-<p><code>autoq generate-assertions [OPTIONS] CONFIGURATION_PATH QUESTIONS_PATH OUTPUT_PATH</code></p>
+<p><code>autoq generate-assertions [OPTIONS] {configuration_path} {questions_path} {output_path}</code></p>
 <h4 id="arguments_3">Arguments</h4>
 <table>
 <thead>
@@ -3199,17 +3255,17 @@ benchmark-qed generate-assertions settings.yaml \
 </thead>
 <tbody>
 <tr>
-<td><code>CONFIGURATION_PATH</code></td>
+<td><code>configuration_path</code></td>
 <td>Path to the settings.yaml configuration file.</td>
 <td>Yes</td>
 </tr>
 <tr>
-<td><code>QUESTIONS_PATH</code></td>
+<td><code>questions_path</code></td>
 <td>Path to questions JSON file (e.g., candidate_questions.json).</td>
 <td>Yes</td>
 </tr>
 <tr>
-<td><code>OUTPUT_PATH</code></td>
+<td><code>output_path</code></td>
 <td>Output directory to save questions with assertions.</td>
 <td>Yes</td>
 </tr>
@@ -3227,7 +3283,7 @@ benchmark-qed generate-assertions settings.yaml \
 </thead>
 <tbody>
 <tr>
-<td><code>-t, --type [local|global|linked]</code></td>
+<td><code>-t, --type <local|global|linked></code></td>
 <td>Type of assertions to generate: 'local', 'global', or 'linked'.</td>
 <td>No</td>
 <td><code>local</code></td>
@@ -3239,13 +3295,13 @@ benchmark-qed generate-assertions settings.yaml \
 <td><code>no-print-model-usage</code></td>
 </tr>
 <tr>
-<td><code>--account-url TEXT</code></td>
+<td><code>--account-url <str></code></td>
 <td>Azure Blob Storage account URL for managed-identity auth, used when the config path is a blob:// URI. Falls back to $AZURE_STORAGE_ACCOUNT_URL.</td>
 <td>No</td>
 <td>-</td>
 </tr>
 <tr>
-<td><code>--connection-string TEXT</code></td>
+<td><code>--connection-string <str></code></td>
 <td>Azure Blob Storage connection string, used when the config path is a blob:// URI. Falls back to $AZURE_STORAGE_CONNECTION_STRING.</td>
 <td>No</td>
 <td>-</td>
@@ -3356,7 +3412,7 @@ benchmark-qed generate-assertions settings.yaml \
       <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["content.code.copy", "content.code.select", "navigation.footer", "navigation.tabs"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
       
         <script src="../../scripts/create_cookie_banner.js"></script>
       
