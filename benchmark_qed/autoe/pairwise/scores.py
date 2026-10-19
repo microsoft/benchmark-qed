@@ -6,6 +6,7 @@ LLM-based evaluation with configurable criteria.
 """
 
 import asyncio
+import contextlib
 import functools
 import itertools
 import uuid
@@ -16,6 +17,7 @@ from typing import Any
 
 import numpy as np
 import pandas as pd
+from graphrag_cache import CacheConfig, CacheType
 from graphrag_llm.completion import LLMCompletion
 from rich.progress import Progress, TaskID
 from scipy.stats import shapiro, ttest_rel, wilcoxon
@@ -23,6 +25,12 @@ from statsmodels.stats.multitest import multipletests
 
 from benchmark_qed.autoe.config import Criteria
 from benchmark_qed.autoe.data_model import ConditionPair, PairwiseLLMResponse
+from benchmark_qed.autoe.pairwise.cache import (
+    PairwiseScoreCache,
+    build_cache_metadata,
+    compute_cache_key,
+    compute_logical_key,
+)
 from benchmark_qed.autoe.prompts import pairwise as pairwise_prompts
 from benchmark_qed.config.llm_config import LLMConfig
 from benchmark_qed.config.utils import load_template_file
@@ -52,6 +60,7 @@ def get_pairwise_scores(
     include_score_id_in_prompt: bool = True,
     question_id_key: str = "question_id",
     question_text_key: str = "question_text",
+    cache_config: CacheConfig | None = None,
 ) -> pd.DataFrame:
     """Score a pair of conditions using the specified criteria.
 
@@ -69,6 +78,8 @@ def get_pairwise_scores(
         include_score_id_in_prompt: Whether to include score ID in the prompt.
         question_id_key: The column name for question ID in the DataFrames.
         question_text_key: The column name for question text in the DataFrames.
+        cache_config: GraphRAG cache backend configuration. Caching is disabled
+            when omitted.
 
     Returns
     -------
@@ -92,6 +103,27 @@ def get_pairwise_scores(
     )
     # Select only the columns needed for ConditionPair
     pairs = pairs[["question_id", "question_text", "answer_base", "answer_other"]]
+    assessment_system_prompt = assessment_system_prompt or load_template_file(
+        PAIRWISE_PROMPTS_PATH / "pairwise_system_prompt.txt"
+    )
+    assessment_user_prompt = assessment_user_prompt or load_template_file(
+        PAIRWISE_PROMPTS_PATH / "pairwise_user_prompt.txt"
+    )
+    cache = PairwiseScoreCache(
+        cache_config or CacheConfig(type=CacheType.Noop, storage=None)
+    )
+    cache_metadata = build_cache_metadata(
+        model=llm_config.model,
+        llm_provider=str(llm_config.llm_provider),
+        init_args=llm_config.init_args,
+        call_args=llm_config.call_args,
+        custom_providers=[
+            provider.model_dump(mode="json") for provider in llm_config.custom_providers
+        ],
+        system_prompt=assessment_system_prompt.template,
+        user_prompt=assessment_user_prompt.template,
+        include_score_id_in_prompt=include_score_id_in_prompt,
+    )
 
     with Progress() as progress:
 
@@ -105,8 +137,10 @@ def get_pairwise_scores(
             for criterion in criteria
         }
         tasks = [
-            get_pairwise_score(
+            _get_pairwise_score_with_cache(
                 llm=llm_client,
+                cache=cache,
+                cache_metadata=cache_metadata,
                 question=pair.question_text,
                 answer_1_name=base_name,
                 answer_1=pair.answer_base,
@@ -137,6 +171,93 @@ def get_pairwise_scores(
         result["base_name"] = base_name
         result["other_name"] = other_name
         return result
+
+
+async def _get_pairwise_score_with_cache(
+    llm: LLMCompletion,
+    *,
+    cache: PairwiseScoreCache,
+    cache_metadata: dict[str, Any],
+    question: str,
+    answer_1_name: str,
+    answer_1: str,
+    answer_2_name: str,
+    answer_2: str,
+    criteria_name: str,
+    criteria_description: str,
+    assessment_system_prompt: Template,
+    assessment_user_prompt: Template,
+    complete_callback: Callable | None,
+    trial: int,
+    include_score_id_in_prompt: bool,
+    additional_call_args: dict[str, Any] | None,
+) -> dict[str, Any]:
+    """Reuse or compute one pairwise score with cross-process coalescing."""
+    logical_key = compute_logical_key(
+        question=question,
+        answer_1_name=answer_1_name,
+        answer_1=answer_1,
+        answer_2_name=answer_2_name,
+        answer_2=answer_2,
+        criteria_name=criteria_name,
+        criteria_description=criteria_description,
+        trial=trial,
+    )
+    cache_key = compute_cache_key(logical_key, cache_metadata)
+    owner_id = uuid.uuid4().hex
+
+    while True:
+        cached = await cache.get(cache_key)
+        if cached is not None:
+            if complete_callback:
+                complete_callback()
+            return cached
+        if await cache.claim(cache_key, owner_id):
+            break
+        await asyncio.sleep(0.1)
+
+    async def _heartbeat() -> None:
+        while True:
+            await asyncio.sleep(max(0.1, cache.lease_ttl_seconds / 3))
+            cache.renew(cache_key, owner_id)
+
+    heartbeat = asyncio.create_task(_heartbeat())
+    try:
+        score = await get_pairwise_score(
+            llm,
+            question=question,
+            answer_1_name=answer_1_name,
+            answer_1=answer_1,
+            answer_2_name=answer_2_name,
+            answer_2=answer_2,
+            criteria_name=criteria_name,
+            criteria_description=criteria_description,
+            assessment_system_prompt=assessment_system_prompt,
+            assessment_user_prompt=assessment_user_prompt,
+            trial=trial,
+            include_score_id_in_prompt=include_score_id_in_prompt,
+            additional_call_args=additional_call_args,
+        )
+        publication = await cache.publish(
+            cache_key,
+            score,
+            cache_metadata,
+            owner_id=owner_id,
+            logical_key=logical_key,
+        )
+        if publication.accepted and isinstance(publication.value, dict):
+            score = publication.value
+    except (Exception, asyncio.CancelledError):
+        cache.release(cache_key, owner_id)
+        raise
+    finally:
+        heartbeat.cancel()
+        with contextlib.suppress(asyncio.CancelledError):
+            await heartbeat
+
+    if complete_callback:
+        complete_callback()
+    return score
 
 
 async def get_pairwise_score(

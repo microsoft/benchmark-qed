@@ -44,7 +44,8 @@ uvx --from "git+https://github.com/microsoft/benchmark-qed" benchmark-qed init <
 ```
 
 This walks through:
-- Config type selection (autoq, autoe_pairwise, autoe_reference, autoe_assertion)
+
+- Config type selection (autoq, autoe_pairwise, autoe_differential_pairwise, autoe_reference, autoe_assertion)
 - LLM provider selection with Azure-specific prompts (endpoint, API version)
 - Section-by-section customization (press Enter to accept defaults)
 - Automatic YAML validation before writing
@@ -62,6 +63,7 @@ uvx --from "git+https://github.com/microsoft/benchmark-qed" benchmark-qed config
 |------|---------|
 | `autoq` | Question generation (includes all prompt templates) |
 | `autoe_pairwise` | Pairwise comparison evaluation |
+| `autoe_differential_pairwise` | Two-stage extract-and-judge pairwise evaluation |
 | `autoe_reference` | Reference-based scoring |
 | `autoe_assertion` | Assertion-based scoring |
 
@@ -172,9 +174,18 @@ Ask the same shape of questions for the embedding model:
 #### Eval-config-specific fields (autoe_*)
 
 Only ask the questions relevant to the chosen `config_type`:
-- `autoe_pairwise`: `base.name` + `base.answer_base_path`, plus a list of `others` (each with `name` and `answer_base_path`), and `question_sets`.
-- `autoe_reference`: `reference.name` + `reference.answer_base_path`, list of `generated`, and `question_sets`.
-- `autoe_assertion`: in single-RAG mode, `generated.name` + `generated.answer_base_path` and `assertions.assertions_path`. In multi-RAG mode (`rag_methods` provided), ask for `input_dir`, `output_dir`, `rag_methods` list, and `question_sets`.
+
+- `autoe_pairwise`: `base.name` + `base.answer_base_path`, plus a list of `others` (each with `name` and `answer_base_path`), `question_sets`, and whether to keep the default persistent SQLite `cache_config` or select `json`, `memory`, or `none`.
+- `autoe_differential_pairwise`: the same condition and question-set fields as
+  pairwise, plus whether to keep the default stage-aware SQLite cache. Explain
+  that extraction and verdict entries are stored independently.
+- `autoe_reference`: `reference.name` + `reference.answer_base_path`, a list of `generated` conditions with `name` and `answer_base_path`, and whether to keep the default persistent SQLite `cache_config` or select another backend.
+- `autoe_assertion`: in single-RAG mode, `generated.name` +
+  `generated.answer_base_path`, `assertions.assertions_path`, and whether to
+  keep the default persistent SQLite `cache_config` or select `json`, `memory`,
+  or `none`. Explain that this cache does not apply to multi-RAG or
+  hierarchical scoring. In multi-RAG mode (`rag_methods` provided), ask for
+  `input_dir`, `output_dir`, `rag_methods` list, and `question_sets`.
 
 #### Storage fields (all config types, optional)
 
@@ -224,6 +235,7 @@ input:
 ```
 
 **Rules when writing the YAML:**
+
 - Omit `api_key` entirely when `auth_type=azure_managed_identity` — do not leave `${OPENAI_API_KEY}` in place.
 - Omit `init_args` for non-Azure providers.
 - Quote `api_version` (it would otherwise be parsed as a date).
@@ -244,9 +256,11 @@ After writing `settings.yaml`, **show the user the generated configuration** and
 Do **not** limit the user to predefined sections — they should be able to modify any field in `settings.yaml` by describing what they want.
 
 **Sections the user is most likely to customize** (call these out):
+
 - **autoq**: `num_questions` per type, `num_clusters`, `chunk_size`, assertion settings, `concurrent_requests`
-- **autoe_pairwise**: `trials`, `criteria`, `question_sets`
-- **autoe_reference**: `score_min`/`score_max`, `trials`
+- **autoe_pairwise**: `trials`, `criteria`, `question_sets`, `cache_config`
+- **autoe_differential_pairwise**: `trials`, `criteria`, four extract/judge prompts, `cache_config`
+- **autoe_reference**: `score_min`/`score_max`, `trials`, `criteria`, `cache_config`
 - **autoe_assertion**: `pass_threshold`, `trials`
 
 For the full set of optional fields and best practices, read [references/config-reference.md](references/config-reference.md).
@@ -260,6 +274,7 @@ The benchmark-qed CLI validates `settings.yaml` via pydantic at startup, so any 
 See [references/config-reference.md](references/config-reference.md) for detailed best practices covering LLM configuration, prompts, question generation, assertion generation, evaluation, and retrieval.
 
 Key highlights:
+
 - Use `${OPENAI_API_KEY}` env var substitution — never hardcode secrets
 - Use `benchmark-qed init` (interactive wizard) to avoid manual YAML errors
 - Pin a specific version of benchmark-qed for reproducibility in CI/CD
@@ -273,6 +288,14 @@ Key highlights:
 - Prompts are copied as `.txt` files using Python `string.Template` syntax (`$variable` or `${variable}`).
 - **`prompt_config` key**: The runtime expects `prompt_config` (singular) for all autoe config types. Both `benchmark-qed init` and `config init` now generate the correct key. If you hand-edit YAML, ensure you use `prompt_config`, not `prompts_config`.
 - **`config init --storage-type blob`**: When combined with `--account-url` or `--connection-string`, the command uploads the generated `settings.yaml` and prompt files directly to blob storage. Without those auth options, it only scaffolds the storage YAML sections locally.
+- **Pairwise cache location**: The generated SQLite cache path is local even
+  when pairwise input/output storage uses Azure Blob Storage. Set
+  `cache_config.type: none` to disable caching or choose another supported
+  backend explicitly.
+- **Assertion cache scope**: The generated `autoe_assertion` SQLite cache
+  applies to standard single-RAG answer-level scoring only. Multi-RAG and
+  hierarchical scoring do not use it; chunk-assertion scoring uses a separate
+  cache.
 - **Blob URI format**: CLI commands accept `blob://<container>/<key>` for config paths. The CLI downloads the config and all sibling files (prompt templates) to a temp directory so relative paths resolve correctly. Credentials can be passed via `--account-url`/`--connection-string` or the environment variables `AZURE_STORAGE_ACCOUNT_URL`/`AZURE_STORAGE_CONNECTION_STRING`.
 - **Storage config in YAML**: AutoQ uses `input.storage` (nested under `input`) and `output_storage` (top-level). AutoE uses `input_storage` and `output_storage` (both top-level). When storage is omitted, local filesystem is used.
 - **graphrag-llm backend**: As of the graphrag-llm migration, built-in providers (OpenAI, Azure OpenAI, Azure AI Inference) are served by `graphrag-llm`'s LiteLLM-backed factory. Custom providers must implement the `graphrag_llm.completion.LLMCompletion` or `graphrag_llm.embedding.LLMEmbedding` interfaces (the older `benchmark_qed.llm.type.base.ChatModel` / `EmbeddingModel` Protocols have been removed). See [references/config-reference.md](references/config-reference.md#custom-llm-providers).

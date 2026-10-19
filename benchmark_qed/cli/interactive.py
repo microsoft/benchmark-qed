@@ -671,7 +671,8 @@ def build_autoe_chunk_assertion_config() -> dict[str, Any]:
     rich_print("\n[bold]  Generated condition (retrieval results)[/bold]")
     name = typer.prompt("  name", default="vector_rag")
     retrieval_path = typer.prompt(
-        "  retrieval_path (RetrievalResult JSON)", default="input/retrieval.json"
+        "  retrieval_path (RetrievalResult JSON)",
+        default=("input/vector_rag_short_context/data_local_retrieval_results.json"),
     )
     generated = {
         "name": name,
@@ -680,7 +681,7 @@ def build_autoe_chunk_assertion_config() -> dict[str, Any]:
 
     # Assertions path
     assertions_path = typer.prompt(
-        "Path to assertions file", default="input/assertions.json"
+        "Path to assertions file", default="input/data_local_assertions.json"
     )
 
     # K values
@@ -690,10 +691,23 @@ def build_autoe_chunk_assertion_config() -> dict[str, Any]:
     # Pass threshold
     pass_threshold = typer.prompt("Pass threshold", default=0.5, type=float)
 
-    # Cache directory
-    cache_dir = typer.prompt(
-        "Cache directory", default=".benchmark_qed_cache/chunk_assertions"
-    )
+    cache_type = typer.prompt(
+        "Cache type (sqlite, json, memory, none)", default="sqlite"
+    ).lower()
+    cache_config: dict[str, Any] = {"type": cache_type}
+    if cache_type in {"sqlite", "json"}:
+        cache_config["storage"] = {
+            "type": "file",
+            "base_dir": typer.prompt(
+                "Cache directory",
+                default=".benchmark_qed_cache/chunk_assertions",
+            ),
+        }
+    if cache_type == "sqlite":
+        cache_config["database_name"] = typer.prompt(
+            "SQLite database name",
+            default="chunk_assertions.sqlite3",
+        )
 
     return {
         "chat_provider": chat_provider,
@@ -701,7 +715,7 @@ def build_autoe_chunk_assertion_config() -> dict[str, Any]:
         "assertions": {"assertions_path": assertions_path},
         "k_list": k_list,
         "pass_threshold": pass_threshold,
-        "cache_dir": cache_dir,
+        "cache_config": cache_config,
     }
 
 

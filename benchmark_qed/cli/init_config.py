@@ -279,6 +279,16 @@ assertions: # List of other conditions to compare against the base.
 pass_threshold: 0.5 # The threshold for passing the assertion. If the score is above this threshold, the assertion is considered passed.
 trials: 4 # Number of trials to repeat the scoring process for each question-assertion pair.
 
+## Cache Configuration
+# Reuses completed question/assertion/trial judgments across runs.
+# Set type: none and storage: null to force fresh LLM judgments.
+cache_config:
+  type: sqlite # Supported: sqlite, json, memory, none
+  storage:
+    type: file
+    base_dir: .benchmark_qed_cache/assertion
+  database_name: assertion.sqlite3
+
 ## LLM Configuration
 llm_config: {CHAT_MODEL_DEFAULTS}
 
@@ -297,15 +307,20 @@ generated:
   #   {{"question_id", "text", "context": [{{"chunk_id", "text", "rank"}}]}}
   # "rank" is optional; when absent chunks are assumed pre-sorted by relevance.
   # This matches the standard retrieval-results schema (e.g. data_local_retrieval_results.json).
-  retrieval_path: input/retrieval.json
+  retrieval_path: input/vector_rag_short_context/data_local_retrieval_results.json
 assertions:
-  assertions_path: input/assertions.json  # Path to assertions file
+  assertions_path: input/data_local_assertions.json # Path to assertions file
 
 ## Chunk Evaluation Configuration
 k_list: [5, 10, 20, 50]  # Report coverage metrics at these k values (plus 'all')
 pass_threshold: 0.5  # Score threshold: 0.5 = partial_support or full_support counts as pass
 # max_chunks_per_question: 20  # Optional: cap chunks evaluated per question (keeps highest-ranked). Reduces LLM calls during testing. Omit to evaluate all.
-cache_dir: .benchmark_qed_cache/chunk_assertions  # Cache directory for (assertion, chunk) pairs
+cache_config:
+  type: sqlite  # Supported: sqlite, json, memory, none
+  storage:
+    type: file
+    base_dir: .benchmark_qed_cache/chunk_assertions
+  database_name: chunk_assertions.sqlite3
 
 ## LLM Configuration
 llm_config: {CHAT_MODEL_DEFAULTS}
@@ -336,6 +351,16 @@ question_sets: # List of question sets to use for scoring.
 #   - name: "criteria name"
 #     description: "criteria description"
 trials: 4 # Number of trials to repeat the scoring process for each question. Should be an even number to allow for counterbalancing.
+
+## Cache Configuration
+# Reuses completed question/criterion/trial judgements across runs.
+# Set type: none and storage: null to force fresh LLM judgements.
+cache_config:
+  type: sqlite # Supported: sqlite, json, memory, none
+  storage:
+    type: file
+    base_dir: .benchmark_qed_cache/pairwise
+  database_name: pairwise.sqlite3
 
 ## LLM Configuration
 llm_config: {CHAT_MODEL_DEFAULTS}
@@ -371,6 +396,16 @@ question_sets: # List of question sets to use for scoring.
 #     description: "criteria description"
 trials: 4 # Number of trials to repeat the scoring process for each question. Should be an even number to allow for counterbalancing.
 
+## Cache Configuration
+# Caches extraction and verdict stages independently for interruption recovery.
+# Set type: none and storage: null to force fresh LLM calls.
+cache_config:
+  type: sqlite # Supported: sqlite, json, memory, none
+  storage:
+    type: file
+    base_dir: .benchmark_qed_cache/differential_pairwise
+  database_name: differential_pairwise.sqlite3
+
 ## LLM Configuration
 llm_config: {CHAT_MODEL_DEFAULTS}
 
@@ -404,6 +439,16 @@ score_max: 10
 #   - name: "criteria name"
 #     description: "criteria description"
 trials: 4 # Number of trials to repeat the scoring process for each question. Should be an even number to allow for counterbalancing.
+
+## Cache Configuration
+# Reuses completed question/criterion/trial judgments across runs.
+# Set type: none and storage: null to force fresh LLM judgments.
+cache_config:
+  type: sqlite # Supported: sqlite, json, memory, none
+  storage:
+    type: file
+    base_dir: .benchmark_qed_cache/reference
+  database_name: reference.sqlite3
 
 ## LLM Configuration
 llm_config: {CHAT_MODEL_DEFAULTS}
