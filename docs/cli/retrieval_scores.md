@@ -53,7 +53,7 @@ question_sets:
     questions_path: "./output/local_questions/selected_questions.json"
 
 # Path to text units (parquet, CSV, or JSON with embeddings)
-text_units_path: "./output/text_units.parquet"
+text_units_path: "./output/text_units.json"
 
 # Output directory for reference data
 output_dir: "./output/retrieval_reference"
@@ -73,7 +73,7 @@ centroid_neighbors: 10    # Chunks to test per cluster based on centroid distanc
 relevance_threshold: 2    # Min score to consider relevant (0-3 scale)
 
 # Relevance assessor type:
-#   "bing" - UMBRELA DNA prompt (faster, binary relevance)
+#   "bing" - UMBRELA DNA prompt (0-3 relevance)
 #   "rationale" - Structured JSON with reasoning (more detailed)
 assessor_type: bing
 
@@ -105,12 +105,12 @@ text_unit_fields:
 [
   {
     "question_id": "q1",
-    "question": "What were the key economic impacts of the 2024 policy changes?",
+    "text": "What were the key economic impacts of the 2024 policy changes?",
     "type": "global"
   },
   {
     "question_id": "q2", 
-    "question": "How did Company X respond to the market downturn?",
+    "text": "How did Company X respond to the market downturn?",
     "type": "local"
   }
 ]
@@ -154,14 +154,14 @@ output/retrieval_reference/
 ├── clusters/
 │   ├── clusters_10.json
 │   ├── clusters_20.json
-│   └── clusters_40.json
+│   └── clusters_30.json
 ├── global_questions/
 │   ├── clusters_10/
 │   │   ├── reference.json
 │   │   └── model_usage.json
 │   ├── clusters_20/
 │   │   └── reference.json
-│   └── clusters_40/
+│   └── clusters_30/
 │       └── reference.json
 ├── local_questions/
 │   └── ... (same structure)
@@ -188,20 +188,23 @@ llm_config:
 # RAG methods to evaluate
 rag_methods:
   - name: "graphrag"
-    retrieval_results_path: "./output/graphrag/retrieval_results.json"
+    retrieval_results_path: "./output/graphrag/{question_set}_retrieval_results.json"
   - name: "naive_rag"
-    retrieval_results_path: "./output/naive_rag/retrieval_results.json"
+    retrieval_results_path: "./output/naive_rag/{question_set}_retrieval_results.json"
   - name: "hyde_rag"
-    retrieval_results_path: "./output/hyde_rag/retrieval_results.json"
+    retrieval_results_path: "./output/hyde_rag/{question_set}_retrieval_results.json"
 
-# Question sets to evaluate (must match reference data)
+# Select the question set matching the reference artifact below
 question_sets:
   - "global_questions"
-  - "local_questions"
 
-# Paths to reference data and clusters
-reference_dir: "./output/retrieval_reference"
-clusters_path: "./output/retrieval_reference/clusters/clusters_40.json"
+# Match the reference-generation assessor ("rationale" is the code default)
+assessor_type: bing
+
+# Select one question-set/cluster-count reference artifact
+reference_dir: "./output/retrieval_reference/global_questions/clusters_30"
+reference_filename: "reference.json"
+clusters_path: "./output/retrieval_reference/clusters/clusters_30.json"
 text_units_path: "./output/text_units.json"
 
 # Output directory
@@ -211,6 +214,7 @@ output_dir: "./output/retrieval_scores"
 relevance_threshold: 2
 context_id_key: "chunk_id"     # Key in retrieval results for chunk ID
 context_text_key: "text"       # Key in retrieval results for chunk text
+cluster_match_by: "text"       # Match to clusters by "text", "id", or "short_id"
 
 # Statistical significance testing
 run_significance_test: true
@@ -229,6 +233,34 @@ cache_config:
   database_name: relevance_cache.sqlite3
 ```
 
+`reference_dir` is the directory **containing the selected `reference.json`**,
+not the reference-generation output root. The current loader reads that artifact
+directly; it does not automatically choose a question-set or cluster-count
+subdirectory. To evaluate `local_questions` or another cluster count, run with
+the matching `question_sets`, `reference_dir`, and `clusters_path`.
+
+The `{question_set}` placeholder in each retrieval-results path is expanded for
+the current question set. Keep the assessor, relevance threshold, source text
+units, and cluster definitions consistent with reference generation.
+
+### Additional Configuration
+
+| Field | Default | Description |
+|---|---|---|
+| `assessor_type` | `rationale` | `rationale` for structured reasoning or `bing` for UMBRELA DNA relevance. Use the same assessor as reference generation. |
+| `reference_filename` | `reference.json` | Filename loaded directly from `reference_dir`. |
+| `cluster_match_by` | `text` | Match retrieved chunks to reference clusters by normalized text, ID, or short ID. |
+| `context_id_key` | `chunk_id` | Identifier field inside each retrieved chunk. |
+| `context_text_key` | `text` | Content field inside each retrieved chunk. |
+| `cache_config` | No-op cache | Explicitly select SQLite or JSON for persistent relevance-judgment reuse; the example above enables SQLite. |
+| `input_storage` | Local filesystem | Optional GraphRAG storage configuration for reading reference data, text units, clusters, and retrieval results. |
+| `output_storage` | Local filesystem | Optional GraphRAG storage configuration for writing evaluation artifacts. |
+
+`input_storage` and `output_storage` are also available for reference generation.
+Use `type: blob` with a container, base prefix, and credentials for Blob Storage.
+Cache storage is configured independently under `cache_config.storage`; it does
+not inherit input or output storage settings. See [Evaluation Caches](cache.md).
+
 ### Retrieval Results File Format
 
 Each RAG method should produce a JSON file with retrieval results:
@@ -237,8 +269,8 @@ Each RAG method should produce a JSON file with retrieval results:
 [
   {
     "question_id": "q1",
-    "question": "What were the key economic impacts?",
-    "retrieved_chunks": [
+    "text": "What were the key economic impacts?",
+    "context": [
       {
         "chunk_id": "chunk_123",
         "text": "The economic impacts included...",
@@ -253,6 +285,10 @@ Each RAG method should produce a JSON file with retrieval results:
   }
 ]
 ```
+
+The outer keys are `question_id`, `text`, and `context`. The
+`context_id_key` and `context_text_key` settings map fields **inside** each chunk;
+they do not rename those outer keys.
 
 ### CLI Examples
 
@@ -290,14 +326,23 @@ benchmark-qed autoe retrieval-scores \
 
 ```
 output/retrieval_scores/
-├── metrics_summary.csv           # Aggregated metrics per method
-├── detailed_scores.csv           # Per-question scores
-├── significance_tests.csv        # Statistical test results
+├── retrieval_scores_summary.csv  # Overall method/question-set metrics
+├── retrieval_binary_precision_pivot.csv
+├── retrieval_recall_pivot.csv
+├── retrieval_fidelity_pivot.csv
 ├── model_usage.json
 └── {question_set}/
-    └── {rag_method}/
-        └── scores.json
+    ├── {rag_method}_summary.csv
+    ├── {rag_method}_per_query.csv
+    ├── {rag_method}_relevance_results.json
+    ├── significance_{metric}_stats.csv
+    ├── significance_{metric}_omnibus.csv
+    └── significance_{metric}_pairwise.csv
 ```
+
+Significance files are produced when significance testing is enabled and there
+are enough methods to compare. Pairwise files depend on the statistical test
+results. The `{metric}` placeholder names the metric being tested.
 
 ---
 
@@ -307,8 +352,8 @@ output/retrieval_scores/
 
 ```bash
 # Ensure you have:
-# - text_units.parquet (with id, text, text_embedding columns)
-# - selected_questions.json (with question_id, question fields)
+# - text_units.json (with id, text, text_embedding fields)
+# - selected_questions.json (with question_id and text fields)
 ```
 
 ### Step 2: Generate Reference Data
@@ -324,8 +369,8 @@ python -m benchmark_qed autoe generate-retrieval-reference \
 ```bash
 # Run each RAG method and save retrieval results
 # (This is your own RAG implementation)
-python my_graphrag.py --output output/graphrag/retrieval_results.json
-python my_naive_rag.py --output output/naive_rag/retrieval_results.json
+python my_graphrag.py --output output/graphrag/global_questions_retrieval_results.json
+python my_naive_rag.py --output output/naive_rag/global_questions_retrieval_results.json
 ```
 
 ### Step 4: Evaluate Retrieval Quality
@@ -344,7 +389,7 @@ python -m benchmark_qed autoe retrieval-scores \
 
 | Type | Description | Speed | Detail |
 |------|-------------|-------|--------|
-| `bing` | UMBRELA DNA prompt | Fast | Binary relevance (0-3) |
+| `bing` | UMBRELA DNA prompt | Fast | Relevance score (0-3) |
 | `rationale` | Structured JSON | Slower | Includes reasoning |
 
 ### Cluster Counts

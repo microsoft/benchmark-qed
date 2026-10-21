@@ -7,7 +7,7 @@ from pathlib import Path
 from typing import Any
 
 import pytest
-from graphrag_cache import CacheConfig
+from graphrag_cache import CacheConfig, CacheType
 
 from benchmark_qed.autod.data_model.text_unit import TextUnit
 from benchmark_qed.autoe.data_model.relevance import (
@@ -64,19 +64,24 @@ def _cache_config(cache_dir: Path) -> CacheConfig:
     )
 
 
-async def test_second_rater_uses_sqlite_cache(tmp_path: Path) -> None:
+async def test_relevance_cache_backend_reruns(
+    evaluation_cache_config: CacheConfig,
+) -> None:
     units = [_text_unit("one", "first"), _text_unit("two", "second")]
-    first = StubRelevanceRater(_cache_config(tmp_path))
+    first = StubRelevanceRater(evaluation_cache_config)
     expected = await first.rate_relevance("query", units)
+    repeated = await first.rate_relevance("query", units)
 
-    second = StubRelevanceRater(_cache_config(tmp_path))
+    second = StubRelevanceRater(evaluation_cache_config)
     actual = await second.rate_relevance("query", units)
 
-    assert len(first.calls) == 1
-    assert second.calls == []
-    assert actual == expected
-    assert second.cache_hits == 2
-    assert second.get_cache_stats()["cache_files"] == 2
+    enabled = evaluation_cache_config.type != CacheType.Noop
+    persistent = evaluation_cache_config.type in {CacheType.Json, CacheType.Sqlite}
+    assert len(first.calls) == (1 if enabled else 2)
+    assert first.cache_hits == (2 if enabled else 0)
+    assert len(second.calls) == (0 if persistent else 1)
+    assert actual == repeated == expected
+    assert second.cache_hits == (2 if persistent else 0)
 
 
 async def test_duplicate_pairs_share_one_assessment(tmp_path: Path) -> None:

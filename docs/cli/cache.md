@@ -3,7 +3,8 @@
 BenchmarkQED can cache individual LLM evaluations so interrupted or repeated
 runs do not need to make the same model calls again. Standard and differential
 pairwise scoring, reference scoring, standard single-RAG assertion scoring,
-chunk-assertion scoring, and retrieval relevance assessment use the shared
+chunk-assertion scoring, calibrated absolute scoring, and retrieval relevance
+assessment use the shared
 GraphRAG cache configuration format.
 
 ## Migrating existing cache configuration
@@ -60,8 +61,9 @@ cache_config = create_default_cache_config(
 )
 ```
 
-Standard pairwise, reference, assertion, and chunk-assertion configurations now
-enable persistent SQLite judgment caching by default. Select `type: none` with
+Standard pairwise, differential pairwise, reference, assertion, chunk-assertion,
+and calibrated absolute configurations enable persistent SQLite judgment
+caching by default. Select `type: none` with
 `storage: null` when every run must issue fresh provider requests.
 
 ## Cache backends
@@ -72,8 +74,16 @@ Set `cache_config.type` to one of:
 |---|---|---|
 | `sqlite` | Persistent, local file | Recommended for normal runs, resumability, and concurrent processes. |
 | `json` | Persistent GraphRAG storage | Useful when JSON entries are preferred over a SQLite database. |
-| `memory` | Current process only | Deduplicates work within one process but cannot resume a later run. |
-| `none` | None | Forces every required LLM evaluation to run. |
+| `memory` | Lifetime of one cache instance | Reuses work within that instance; new instances start empty, even in the same process. |
+| `none` | None | Does not retain completed judgments for later reuse. |
+
+Most scoring entry points construct a new cache instance for each invocation,
+so memory caches do not carry judgments into a second invocation. Relevance
+raters retain their cache for the lifetime of the rater instance. Use JSON or
+SQLite when reuse across separate invocations is required.
+
+Disabling the cache does not disable in-run batching or deduplication, and it
+does not bypass existing output-file reuse described below.
 
 A SQLite configuration has this shape:
 
@@ -324,6 +334,51 @@ This cache applies only to the standard single-RAG `AssertionConfig` path.
 Multi-RAG and hierarchical assertion scoring do not use this cache. The
 chunk-assertion workflow has its own cache at assertion/chunk granularity under
 `.benchmark_qed_cache/chunk_assertions`.
+
+## Calibrated absolute cache behavior
+
+The calibration and scoring stages use separate cache locations by default:
+
+| Stage | Default directory | SQLite database |
+|---|---|---|
+| Calibration | `.benchmark_qed_cache/absolute_calibrate` | `absolute_calibrate.sqlite3` |
+| Exemplar scoring | `.benchmark_qed_cache/absolute_score` | `absolute_score.sqlite3` |
+
+Calibration caches completed, validated rankings of answer batches. Scoring
+caches completed, validated judgments for a target answer, criterion, and set of
+level exemplars. Interrupted runs can reuse those completed judgments.
+
+Identity includes the judgment inputs, criterion, credential-safe model/provider
+configuration, and policy version. Scoring identity includes the selected
+exemplars. Passes using identical targets, criteria, and exemplars can share a
+judgment; the percentile label alone does not make it a new judgment.
+
+The current calibrated cache identity does not fingerprint the prompt template
+contents. If you edit the calibrated prompt templates, select a new cache
+location or disable caching to avoid reusing judgments produced by the old
+templates.
+
+For example, a scoring cache can be configured as:
+
+```yaml
+cache_config:
+  type: sqlite
+  storage:
+    type: file
+    base_dir: .benchmark_qed_cache/absolute_score
+  database_name: absolute_score.sqlite3
+```
+
+Inspect it with:
+
+```sh
+benchmark-qed cache inspect \
+  .benchmark_qed_cache/absolute_score/absolute_score.sqlite3
+```
+
+Use `type: none` with `storage: null` for fresh judgments. This does not modify
+the frozen calibration state. See
+[Calibrated Absolute Scoring](autoe.md#calibrated-absolute-scoring) for both stages.
 
 ## Output files versus cached judgments
 

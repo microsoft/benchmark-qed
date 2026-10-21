@@ -11,13 +11,14 @@ Defines the configuration for the language model used in scoring or generation t
 |-------|------|---------|-------------|
 | `model` | `str` | `"gpt-4.1"` | The name of the model to use. Must be a valid model identifier. |
 | `auth_type` | `AuthType` | `"api_key"` | Authentication method. Options: `"api_key"` or `"azure_managed_identity"`. |
-| `api_key` | `SecretStr` | `"$OPENAI_API_KEY"` | API key for accessing the model. Should be provided via environment variable. |
+| `api_key` | `SecretStr` | `OPENAI_API_KEY` environment value, otherwise empty | API key for accessing the model. Required and non-empty for API-key authentication. |
 | `concurrent_requests` | `int` | `4` | Number of concurrent requests allowed to the model. |
 | `llm_provider` | `LLMProvider \| str` | `"openai.chat"` | Specifies the provider and type of model. See `LLMProvider` enum for options. |
+| `azure_identity_scopes` | `list[str]` | `["https://cognitiveservices.azure.com/.default"]` | Accepted compatibility field; the current GraphRAG adapter does not forward it to the provider. |
 | `init_args` | `dict[str, Any]` | `{}` | Additional arguments passed during model initialization. |
 | `call_args` | `dict[str, Any]` | `{"temperature": 0.0, "seed": 42}` | Parameters passed when invoking the model. |
 | `retry` | `RetryConfig \| None` | `None` | Optional retry strategy for transient provider errors (for example HTTP 429 rate limits). |
-| `custom_providers` | `list[CustomLLMProvider]` | `list` | List of custom LLM providers to register. |
+| `custom_providers` | `list[CustomLLMProvider]` | `[]` | List of custom LLM providers to register. |
 
 
 
@@ -113,73 +114,81 @@ llm_config:
     jitter: true
 ```
 
-> 💡 Note: If you use azure_manager_identity make sure to be authenticated with `az login` on a terminal, if you use api_key make sure to include the api reference and the .env file.
+With `auth_type: azure_managed_identity`, authenticate locally with `az login`
+or configure an identity in the hosting environment. Built-in Azure completion
+uses the Cognitive Services audience by default. Although `azure_identity_scopes`
+is accepted in configuration, the current GraphRAG adapter does not forward that
+field; do not rely on it to change provider token scopes.
+API-key authentication instead requires
+a non-empty `api_key`, typically loaded from the environment.
 
 #### Custom Provider
 
-BenchmarkQED allows for a custom implementation for a LLM, to do so first it's needed to implement the corresponding Protocol (ChatModel or EmbeddingModel)
+BenchmarkQED uses the GraphRAG LLM interfaces. Custom providers must implement
+the corresponding interface, not the former BenchmarkQED `ChatModel`,
+`EmbeddingModel`, or `BaseModelResponse` APIs.
+
+| Provider kind | Interface | Required methods and properties |
+|---|---|---|
+| Chat | `graphrag_llm.completion.LLMCompletion` | Factory-compatible constructor, `completion`, `completion_async`, `tokenizer`, and `metrics_store` |
+| Embedding | `graphrag_llm.embedding.LLMEmbedding` | Factory-compatible constructor, `embedding`, `embedding_async`, `tokenizer`, and `metrics_store` |
+
+The factory supplies keyword arguments including `model_id`, `model_config`,
+`tokenizer`, `metrics_store`, and `cache_key_creator`, plus optional metrics,
+rate-limiting, retry, and cache components. The configuration object passed to
+the provider is a GraphRAG `ModelConfig`, not BenchmarkQED's `LLMConfig`.
+
+For chat providers, return GraphRAG completion responses and support structured
+response formats: evaluation workflows depend on `formatted_response`.
+Embedding providers return GraphRAG embedding responses.
+
+You can implement the interface for a new backend or subclass an existing
+implementation when extending its behavior. For example, the following minimal
+provider reuses the built-in LiteLLM implementation under a custom registration
+name. It does not introduce a new backend.
+
+Place it in an importable module named `your_package.providers.custom_chat`:
 
 ```python
-class ChatModel(Protocol):
-    def get_usage(self) -> dict[str, Any]: ...
-
-    async def chat(
-        self, messages: list[dict[str, str]], **kwargs: Any
-    ) -> BaseModelResponse: ...
+from graphrag_llm.completion.lite_llm_completion import LiteLLMCompletion
 
 
-class EmbeddingModel(Protocol):
-    def get_usage(self) -> dict[str, Any]: ...
-
-    async def embed(self, text_list: list[str], **kwargs: Any) -> list[list[float]]: ...
+class CustomChatModel(LiteLLMCompletion):
+    """Reuse LiteLLM completion behavior under a custom provider name."""
 ```
 
-
-For example, create a python project and copy this file under `your_package.providers.custom_chat.py`
-
-```python
-class CustomChatModel:
-    def __init__(self, llm_config: LLMConfig) -> None:
-        pass
-
-    def get_usage(self) -> dict[str, Any]:
-        return self._usage.model_dump()
-
-    async def chat(
-        self, messages: list[dict[str, str]], **kwargs: dict[str, Any]
-    ) -> BaseModelResponse:
-        return BaseModelResponse(
-            output=BaseModelOutput(
-                content="Hello from custom provider!",
-            ),
-            history=[],
-            usage={},
-        )
-```
-
-For more information about these protocols and subclasses check [base.py](https://github.com/microsoft/benchmark-qed/blob/main/benchmark_qed/llm/type/base.py)
-
-After implementing your own provider you can use it in a config file as follows:
+Register that class through configuration:
 
 ```yaml
 llm_config:
-  model: "your_model_name"
+  model: "gpt-4.1"
   auth_type: "api_key"
   api_key: ${YOUR_API_KEY}
   concurrent_requests: 4
   llm_provider: "custom.chat"
-    retry:
-        type: exponential_backoff
-        max_retries: 6
-        base_delay: 2.0
-        max_delay: 30.0
-        jitter: true
+  init_args:
+    model_provider: openai
+  retry:
+    type: exponential_backoff
+    max_retries: 6
+    base_delay: 2.0
+    max_delay: 30.0
+    jitter: true
   custom_providers: # list of custom providers
     - model_type: chat 
       name: custom.chat # This name should match the llm_provider above
       module: your_package.providers.custom_chat
       model_class: CustomChatModel
 ```
+
+`name` must match `llm_provider`, and `model_type` must match the operation
+(`chat` or `embedding`). BenchmarkQED imports the class and registers it with
+the corresponding GraphRAG factory. In this LiteLLM example,
+`init_args.model_provider: openai` selects the underlying OpenAI backend while
+`llm_provider: custom.chat` selects the registered class.
+
+Install your provider package into the same environment as BenchmarkQED before
+running the CLI.
 
 ```
 # .env file

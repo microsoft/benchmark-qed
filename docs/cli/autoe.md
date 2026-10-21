@@ -1,3 +1,146 @@
+## Calibrated Absolute Scoring
+
+Calibrated absolute scoring creates a stable five-level answer-quality scale,
+then classifies unseen answers against frozen exemplars from that scale. Unlike
+pairwise scoring, an unseen answer receives a level that is comparable across
+runs using the same calibration state. It does not receive a synthetic Elo
+rating or an exact rank within the calibration population.
+
+Scaffold conventional `settings.yaml` files for the two stages:
+
+```sh
+mkdir -p ./local/calibrated_absolute_test/calibration
+cd ./local/calibrated_absolute_test/calibration
+mkdir ./input
+benchmark-qed data download example_answers input
+benchmark-qed config init autoe_absolute_calibrate .
+```
+
+Run calibration with the same `settings.yaml output` convention as other
+AutoE commands:
+
+```sh
+benchmark-qed autoe absolute-calibrate settings.yaml output
+```
+
+Then create the scoring project with the same folder and example-download
+sequence:
+
+```sh
+mkdir -p ./local/calibrated_absolute_test/absolute_scoring
+cd ./local/calibrated_absolute_test/absolute_scoring
+mkdir ./input
+benchmark-qed data download example_answers input
+benchmark-qed config init autoe_absolute_score .
+benchmark-qed autoe absolute-score settings.yaml output
+```
+
+The complete sequence therefore creates two sibling projects:
+
+```text
+calibrated_absolute_test/
+├── calibration/
+│   ├── input/
+│   ├── settings.yaml
+│   └── output/
+└── absolute_scoring/
+   ├── input/
+   ├── settings.yaml
+   └── output/
+```
+
+The scoring settings reference the frozen sibling scale at
+`../calibration/output/calibration.json`. This is only the scaffold default.
+`calibration_path` may instead be an absolute local path, a path relative to
+the command's working directory, or a key relative to `input_storage`.
+
+Calibration ranks overlapping batches and replays the judgments in a
+deterministic order. Every criterion gets an independent Elo population and
+Levels 1-5. Calibration fails rather than publishing a partial scale when any
+level is empty. Completed batch rankings are cached in
+`.benchmark_qed_cache/absolute_calibrate/absolute_calibrate.sqlite3`.
+
+The generated calibration `settings.yaml` follows this schema:
+
+```yaml
+calibration:
+  - name: vector_rag
+    answer_base_path: input/vector_rag/data_local.json
+  - name: lazygraphrag
+    answer_base_path: input/lazygraphrag/data_local.json
+
+criteria:
+  - name: correctness
+    description: How factually accurate is the answer to its question?
+  - name: completeness
+    description: How completely does the answer address its question?
+
+appearances: 5
+max_batch_size: 5
+seed: 42
+k_factor: 32
+
+llm_config:
+  auth_type: api_key
+  model: gpt-4.1
+  api_key: ${OPENAI_API_KEY}
+  llm_provider: openai.chat
+  concurrent_requests: 2
+```
+
+The command writes `calibration.json`, `calibration_summary.csv`, and
+`model_usage.json`. Keep `calibration.json` immutable when comparing benchmark
+runs.
+
+The generated scoring `settings.yaml` follows this schema:
+
+```yaml
+calibration_path: ../calibration/output/calibration.json
+generated:
+  - name: graphrag_global
+    answer_base_path: input/graphrag_global/data_local.json
+
+# 1 uses only median exemplars; 3 votes across p50, p75, and p25.
+passes: 3
+
+llm_config:
+  auth_type: api_key
+  model: gpt-4.1
+  api_key: ${OPENAI_API_KEY}
+  llm_provider: openai.chat
+  concurrent_requests: 2
+```
+
+Completed target/criterion/exemplar-pass judgments are cached in
+`.benchmark_qed_cache/absolute_score/absolute_score.sqlite3`. Cache identities
+include the full inputs, criteria, exemplars, policy version, and
+credential-safe model configuration. Set `cache_config.type: none` with
+`storage: null` to force fresh judgments.
+
+Input JSON files must contain `question_id`, `question_text`, and `answer`.
+Use `--question-id-key`, `--question-text-key`, and `--answer-text-key` to map
+other field names. The three-pass mode uses majority vote; if all votes differ,
+the middle voted level wins. Disagreement and missing successful passes reduce
+confidence.
+
+When `input_storage` is configured, `calibration_path` and all
+`answer_base_path` values are relative to that storage. `output_storage` may be
+configured independently.
+
+To compare the method with repeated direct one-shot 1–5 judgments, use the
+[calibrated absolute baseline notebook](../notebooks/calibrated_absolute_baseline.ipynb).
+It reports within-method repeatability, cross-method agreement, latency, and
+model usage. Cross-method agreement is not accuracy; use independently
+adjudicated human labels when evaluating correctness.
+
+To run a known-direction sanity check with Vector RAG retrieval budgets of 50
+and 200 chunks, use the
+[retrieval-budget proxy experiment](../notebooks/calibrated_budget_proxy_experiment.ipynb).
+It compares calibrated absolute, pairwise, and assertion preferences while
+treating the larger budget as weak ground truth rather than human ground truth.
+
+---
+
 ## Pairwise Scoring Configuration
 
 This section describes the configuration schema for performing relative comparisons of RAG methods using the LLM-as-a-Judge approach. It includes definitions for conditions, evaluation criteria, and model configuration. For more information about how to configure the LLM, please refer to: [LLM Configuration](llm_config.md)
@@ -43,7 +186,10 @@ benchmark-qed autoe pairwise-scores blob://my-container/pairwise_test/settings.y
   --account-url https://<account>.blob.core.windows.net
 ```
 
-The same `--account-url` / `--connection-string` options are available on every `autoe` subcommand: `pairwise-scores`, `reference-scores`, `assertion-scores`, `hierarchical-assertion-scores`, `assertion-significance`, `hierarchical-assertion-significance`, `generate-retrieval-reference`, and `retrieval-scores`. If neither is supplied, auth falls back to `$AZURE_STORAGE_ACCOUNT_URL` / `$AZURE_STORAGE_CONNECTION_STRING`.
+The same `--account-url` / `--connection-string` options are available on all
+AutoE commands, including `differential-pairwise-scores`, `absolute-calibrate`,
+`absolute-score`, and `chunk-assertion-scores`. If neither is supplied, auth falls
+back to `$AZURE_STORAGE_ACCOUNT_URL` / `$AZURE_STORAGE_CONNECTION_STRING`.
 
 For information about the `config init` command, refer to: [Config Init CLI](config_init.md)
 
@@ -702,6 +848,130 @@ output_dir/
   assertion_scores_pivot_summary.csv
   model_usage.json
 ```
+
+---
+
+## Chunk Assertion Scoring Configuration
+
+This workflow evaluates **retrieved chunks**, not generated answers, against
+per-question assertions. See [Chunk Assertion Scoring](../evaluation/chunk_assertion.md)
+for a plain-language explanation.
+
+Create a scaffold:
+
+```sh
+benchmark-qed config init autoe_chunk_assertion ./local/chunk_assertion_test
+```
+
+From the project directory, provide the retrieval results, assertions, and
+model credentials, then run:
+
+```sh
+cd ./local/chunk_assertion_test
+benchmark-qed data download example_answers input
+benchmark-qed autoe chunk-assertion-scores settings.yaml output
+```
+
+The downloaded example archive contains the retrieval and assertion files used
+by the scaffold. For your own data, replace those paths in `settings.yaml`.
+
+### Configuration Fields
+
+| Field | Type | Default | Description |
+|---|---|---|---|
+| `generated.name` | `str` | _required_ | Label for the retriever. |
+| `generated.retrieval_path` | `Path` | _set in scaffold_ | JSON array of retrieval records. |
+| `assertions.assertions_path` | `Path` | _required_ | Assertions associated with each question. |
+| `k_list` | `list[int]` | `[5, 10, 20, 50]` | Report metrics at each retrieval depth, plus all evaluated chunks. |
+| `pass_threshold` | `float` | `0.5` | Minimum best-chunk score for an assertion to pass. |
+| `max_chunks_per_question` | `int \| None` | `None` | Optional cap; keep the highest-ranked chunks. |
+| `cache_config` | `CacheConfig` | Local SQLite cache | Reuse completed assertion/chunk judgments. |
+| `llm_config` | `LLMConfig` | _required_ | Judge configuration. |
+| `prompt_config` | Prompt configuration | Packaged defaults | System and user prompt file specifications. |
+| `input_storage` / `output_storage` | `StorageConfig \| None` | `None` | Optional Blob Storage inputs and outputs. |
+
+### Example Settings
+
+```yaml
+generated:
+  name: vector_rag
+  retrieval_path: input/vector_rag_short_context/data_local_retrieval_results.json
+assertions:
+  assertions_path: input/data_local_assertions.json
+k_list: [5, 10, 20, 50]
+pass_threshold: 0.5
+max_chunks_per_question: null
+cache_config:
+  type: sqlite
+  storage:
+    type: file
+    base_dir: .benchmark_qed_cache/chunk_assertions
+  database_name: chunk_assertions.sqlite3
+llm_config:
+  model: gpt-4.1
+  auth_type: api_key
+  api_key: ${OPENAI_API_KEY}
+  llm_provider: openai.chat
+  concurrent_requests: 4
+prompt_config:
+  system_prompt:
+    prompt: prompts/assertion/chunk_assertion_system_prompt.txt
+  user_prompt:
+    prompt: prompts/assertion/chunk_assertion_user_prompt.txt
+```
+
+The current chunk CLI interprets both `prompt` and `template` as file-path
+fields, not inline text. If a path is absent or is not a file, it falls back to
+the packaged prompt. These chunk-specific specifications differ from the
+`text` key used for inline prompts in other AutoE configurations.
+
+### Input Records
+
+Retrieval records use `question_id`, `text` for the question, and `context` for
+the retrieved chunks:
+
+```json
+[
+  {
+    "question_id": "q1",
+    "text": "When did the policy begin?",
+    "context": [
+      {"chunk_id": "c1", "text": "The policy began in 2020.", "rank": 1}
+    ]
+  }
+]
+```
+
+When ranks are absent, provide chunks in retrieval order. Assertions are matched
+by question ID. For example:
+
+```json
+[
+  {
+    "question_id": "q1",
+    "question_text": "When did the policy begin?",
+    "assertions": [{"statement": "The answer states that the policy began in 2020."}]
+  }
+]
+```
+
+### Metrics and Cache Behavior
+
+Each chunk receives `full_support` (1), `partial_support` (0.5), or `no_support`
+(0). For each assertion, evaluation uses the best single chunk within the
+selected depth; it does not combine multiple partial chunks into full support.
+
+- **Coverage:** Per-question fraction of scored assertions meeting the pass
+  threshold, averaged across questions.
+- **Strict coverage:** Per-question fraction with full support, averaged across
+  questions.
+- **Coverage strength:** Mean best-chunk score for scored assertions.
+
+Output includes summaries for the configured depths and per-question debug
+records. Cache identity includes assertion and chunk contents and the judgment
+configuration. Changing `k_list` or `pass_threshold` can reuse compatible
+judgments while recomputing the summaries. See [Evaluation Caches](cache.md)
+for alternate backends and clearing guidance.
 
 ---
 
