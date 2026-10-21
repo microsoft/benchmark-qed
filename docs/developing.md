@@ -7,12 +7,16 @@
 | Python 3.11+    | [Download](https://www.python.org/downloads/)                | The library is Python-based.                                                        |
 | uv              | [Instructions](https://docs.astral.sh/uv/getting-started/installation/) | uv is used for package management and virtualenv management in Python codebases |
 
+<hr class="section-divider">
+
 ## Installing dependencies
 
 ```sh
 # Install Python dependencies
 uv sync
 ```
+
+<hr class="section-divider">
 
 ## Generating synthetic queries
 
@@ -76,6 +80,8 @@ Follow these steps to generate synthetic queries using AutoQ:
       enable_validation: true  # Enable to filter low-quality assertions (can be slow)
     ```
 
+<hr class="section-divider">
+
 ## Comparing RAG answer pairs
 
 Follow these steps to compare RAG answer pairs using the pairwise scoring pipeline:
@@ -131,6 +137,8 @@ Follow these steps to compare RAG answer pairs using the pairwise scoring pipeli
         --account-url https://<account>.blob.core.windows.net
     ```
     The results will be saved in the `output` directory.
+
+<hr class="section-divider">
 
 ## Comparing RAG answer pairs (differential, extract-and-judge)
 
@@ -229,6 +237,8 @@ Follow these steps to run the differential pairwise scoring pipeline:
     also disable, relocate, or clear the stage cache. See
     [Evaluation Caches](cli/cache.md) for backend and clearing guidance.
 
+<hr class="section-divider">
+
 ## Calibrating and applying an absolute answer-quality scale
 
 Calibrated absolute scoring first ranks a fixed population of answers into a
@@ -244,6 +254,8 @@ substituting them into the user templates.
 
 The downloadable `example_answers` archive contains all files referenced by
 the generated settings below.
+
+<hr class="section-divider">
 
 ### Calibrating the absolute scale
 
@@ -340,6 +352,8 @@ Follow these steps to build a frozen five-level scale:
 
     Calibration fails instead of publishing a partial scale if any of Levels
     1-5 is empty.
+
+<hr class="section-divider">
 
 ### Scoring answers against the absolute scale
 
@@ -467,6 +481,8 @@ Follow these steps to score unseen answers without changing the frozen scale:
     The notebook keeps repeatability separate from cross-method agreement and
     does not interpret agreement as correctness without human-gold labels.
 
+<hr class="section-divider">
+
 ## Scoring RAG answers against reference answers
 Follow these steps to score RAG answers against reference answers using example data from the AP news dataset:
 
@@ -533,6 +549,8 @@ Follow these steps to score RAG answers against reference answers using example 
 
     Set `cache_config.type: none` with `storage: null` when fresh judgments are
     required.
+
+<hr class="section-divider">
 
 ## Scoring RAG answers against assertions
 
@@ -603,6 +621,8 @@ Follow these steps to evaluate RAG answers against per-question assertions using
     required. This answer-level cache does not apply to multi-RAG or
     hierarchical assertion scoring; chunk-level assertion evaluation uses its
     own assertion/chunk cache.
+
+<hr class="section-divider">
 
 ## Evaluating retrieved chunks against assertions
 
@@ -803,6 +823,8 @@ Chunk-level evaluation scores how well retrieved passages (chunks) support asser
 For detailed instructions on configuring and running AutoE subcommands, please refer to the [AutoE CLI Documentation](cli/autoe.md).
 
 To learn how to use AutoE programmatically, please see the [AutoE Notebook Example](notebooks/autoe.ipynb).
+
+<hr class="section-divider">
 
 ## Diving Deeper
 To explore the query synthesis workflow in detail, please see the [AutoQ CLI Documentation](cli/autoq.md) for command-line usage and the [AutoQ Notebook Example](notebooks/autoq.ipynb) for a step-by-step programmatic guide.

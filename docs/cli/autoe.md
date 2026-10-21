@@ -186,7 +186,10 @@ benchmark-qed autoe pairwise-scores blob://my-container/pairwise_test/settings.y
   --account-url https://<account>.blob.core.windows.net
 ```
 
-The same `--account-url` / `--connection-string` options are available on every `autoe` subcommand: `pairwise-scores`, `reference-scores`, `assertion-scores`, `hierarchical-assertion-scores`, `assertion-significance`, `hierarchical-assertion-significance`, `generate-retrieval-reference`, and `retrieval-scores`. If neither is supplied, auth falls back to `$AZURE_STORAGE_ACCOUNT_URL` / `$AZURE_STORAGE_CONNECTION_STRING`.
+The same `--account-url` / `--connection-string` options are available on all
+AutoE commands, including `differential-pairwise-scores`, `absolute-calibrate`,
+`absolute-score`, and `chunk-assertion-scores`. If neither is supplied, auth falls
+back to `$AZURE_STORAGE_ACCOUNT_URL` / `$AZURE_STORAGE_CONNECTION_STRING`.
 
 For information about the `config init` command, refer to: [Config Init CLI](config_init.md)
 
@@ -845,6 +848,130 @@ output_dir/
   assertion_scores_pivot_summary.csv
   model_usage.json
 ```
+
+---
+
+## Chunk Assertion Scoring Configuration
+
+This workflow evaluates **retrieved chunks**, not generated answers, against
+per-question assertions. See [Chunk Assertion Scoring](../evaluation/chunk_assertion.md)
+for a plain-language explanation.
+
+Create a scaffold:
+
+```sh
+benchmark-qed config init autoe_chunk_assertion ./local/chunk_assertion_test
+```
+
+From the project directory, provide the retrieval results, assertions, and
+model credentials, then run:
+
+```sh
+cd ./local/chunk_assertion_test
+benchmark-qed data download example_answers input
+benchmark-qed autoe chunk-assertion-scores settings.yaml output
+```
+
+The downloaded example archive contains the retrieval and assertion files used
+by the scaffold. For your own data, replace those paths in `settings.yaml`.
+
+### Configuration Fields
+
+| Field | Type | Default | Description |
+|---|---|---|---|
+| `generated.name` | `str` | _required_ | Label for the retriever. |
+| `generated.retrieval_path` | `Path` | _set in scaffold_ | JSON array of retrieval records. |
+| `assertions.assertions_path` | `Path` | _required_ | Assertions associated with each question. |
+| `k_list` | `list[int]` | `[5, 10, 20, 50]` | Report metrics at each retrieval depth, plus all evaluated chunks. |
+| `pass_threshold` | `float` | `0.5` | Minimum best-chunk score for an assertion to pass. |
+| `max_chunks_per_question` | `int \| None` | `None` | Optional cap; keep the highest-ranked chunks. |
+| `cache_config` | `CacheConfig` | Local SQLite cache | Reuse completed assertion/chunk judgments. |
+| `llm_config` | `LLMConfig` | _required_ | Judge configuration. |
+| `prompt_config` | Prompt configuration | Packaged defaults | System and user prompt file specifications. |
+| `input_storage` / `output_storage` | `StorageConfig \| None` | `None` | Optional Blob Storage inputs and outputs. |
+
+### Example Settings
+
+```yaml
+generated:
+  name: vector_rag
+  retrieval_path: input/vector_rag_short_context/data_local_retrieval_results.json
+assertions:
+  assertions_path: input/data_local_assertions.json
+k_list: [5, 10, 20, 50]
+pass_threshold: 0.5
+max_chunks_per_question: null
+cache_config:
+  type: sqlite
+  storage:
+    type: file
+    base_dir: .benchmark_qed_cache/chunk_assertions
+  database_name: chunk_assertions.sqlite3
+llm_config:
+  model: gpt-4.1
+  auth_type: api_key
+  api_key: ${OPENAI_API_KEY}
+  llm_provider: openai.chat
+  concurrent_requests: 4
+prompt_config:
+  system_prompt:
+    prompt: prompts/assertion/chunk_assertion_system_prompt.txt
+  user_prompt:
+    prompt: prompts/assertion/chunk_assertion_user_prompt.txt
+```
+
+The current chunk CLI interprets both `prompt` and `template` as file-path
+fields, not inline text. If a path is absent or is not a file, it falls back to
+the packaged prompt. These chunk-specific specifications differ from the
+`text` key used for inline prompts in other AutoE configurations.
+
+### Input Records
+
+Retrieval records use `question_id`, `text` for the question, and `context` for
+the retrieved chunks:
+
+```json
+[
+  {
+    "question_id": "q1",
+    "text": "When did the policy begin?",
+    "context": [
+      {"chunk_id": "c1", "text": "The policy began in 2020.", "rank": 1}
+    ]
+  }
+]
+```
+
+When ranks are absent, provide chunks in retrieval order. Assertions are matched
+by question ID. For example:
+
+```json
+[
+  {
+    "question_id": "q1",
+    "question_text": "When did the policy begin?",
+    "assertions": [{"statement": "The answer states that the policy began in 2020."}]
+  }
+]
+```
+
+### Metrics and Cache Behavior
+
+Each chunk receives `full_support` (1), `partial_support` (0.5), or `no_support`
+(0). For each assertion, evaluation uses the best single chunk within the
+selected depth; it does not combine multiple partial chunks into full support.
+
+- **Coverage:** Per-question fraction of scored assertions meeting the pass
+  threshold, averaged across questions.
+- **Strict coverage:** Per-question fraction with full support, averaged across
+  questions.
+- **Coverage strength:** Mean best-chunk score for scored assertions.
+
+Output includes summaries for the configured depths and per-question debug
+records. Cache identity includes assertion and chunk contents and the judgment
+configuration. Changing `k_list` or `pass_threshold` can reuse compatible
+judgments while recomputing the summaries. See [Evaluation Caches](cache.md)
+for alternate backends and clearing guidance.
 
 ---
 

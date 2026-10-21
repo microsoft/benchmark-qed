@@ -35,6 +35,17 @@ nav:
   - Home: 
     - Welcome: index.md
     - Developing: developing.md
+  - Evaluation:
+    - Choosing a Method: evaluation/index.md
+    - Pairwise Scoring: evaluation/pairwise.md
+    - Differential Pairwise Scoring: evaluation/differential_pairwise.md
+    - Reference-Based Scoring: evaluation/reference.md
+    - Assertion-Based Scoring: evaluation/assertion.md
+    - Hierarchical Assertion Scoring: evaluation/hierarchical_assertion.md
+    - Chunk Assertion Scoring: evaluation/chunk_assertion.md
+    - Retrieval Metrics: evaluation/retrieval.md
+    - Absolute Scoring: absolute_scoring.md
+    - Direct Absolute Baseline: evaluation/direct_absolute.md
   - CLI:
     - AutoQ: cli/autoq.md
     - AutoE: cli/autoe.md
@@ -70,6 +81,9 @@ extra:
     
 extra_javascript:
   - "scripts/create_cookie_banner.js"
+
+extra_css:
+  - "stylesheets/extra.css"
 
 markdown_extensions:
   - pymdownx.highlight:
