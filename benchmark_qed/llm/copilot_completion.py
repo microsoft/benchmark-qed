@@ -47,10 +47,10 @@ if TYPE_CHECKING:
     )
     from pydantic import BaseModel
 
-log = logging.getLogger(__name__)
+log: logging.Logger = logging.getLogger(__name__)
 
-DEFAULT_SYSTEM_PROMPT = "You are a helpful assistant."
-DEFAULT_TIMEOUT_SECONDS = 600.0
+DEFAULT_SYSTEM_PROMPT: str = "You are a helpful assistant."
+DEFAULT_TIMEOUT_SECONDS: float = 600.0
 
 _JSON_OBJECT_INSTRUCTION = (
     "Respond with a single valid JSON object only, with no surrounding prose "
