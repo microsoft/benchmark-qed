@@ -107,7 +107,7 @@ AUTH_TYPES: list[tuple[str, str]] = [
 ]
 
 DEFAULT_CHAT_MODEL = "gpt-4.1"
-DEFAULT_COPILOT_CHAT_MODEL = "claude-sonnet-5.5"
+DEFAULT_COPILOT_CHAT_MODEL = "gpt-6-luna"
 DEFAULT_EMBEDDING_MODEL = "text-embedding-3-large"
 DEFAULT_API_VERSION = "2024-12-01-preview"
 

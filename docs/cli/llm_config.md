@@ -122,7 +122,7 @@ The `copilot.chat` provider routes chat completions through the [GitHub Copilot 
 
 ```yaml
 llm_config:
-  model: "claude-sonnet-5.5" # any model listed by the Copilot CLI, e.g. gpt-5.6-sol
+  model: "gpt-6-luna" # any model listed by the Copilot CLI, e.g. claude-sonnet-5.5
   llm_provider: "copilot.chat"
   concurrent_requests: 4
   init_args: # all optional

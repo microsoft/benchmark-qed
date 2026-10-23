@@ -83,7 +83,7 @@ def fake_client(monkeypatch: pytest.MonkeyPatch) -> Iterator[_FakeClient]:
     client = _FakeClient(reply="Hello!")
     runtime = copilot_completion._CopilotRuntime(cli_path=None, github_token=None)
     runtime._client = client
-    runtime._models = {"claude-sonnet-5.5"}
+    runtime._models = {"gpt-6-luna"}
     monkeypatch.setattr(copilot_completion, "_get_runtime", lambda *_: runtime)
     yield client
     runtime.close()
@@ -91,7 +91,7 @@ def fake_client(monkeypatch: pytest.MonkeyPatch) -> Iterator[_FakeClient]:
 
 def _copilot_config(**overrides: Any) -> LLMConfig:
     return LLMConfig(
-        model="claude-sonnet-5.5", llm_provider=LLMProvider.CopilotChat, **overrides
+        model="gpt-6-luna", llm_provider=LLMProvider.CopilotChat, **overrides
     )
 
 
@@ -106,7 +106,7 @@ class TestCopilotConfig:
         config = _copilot_config(init_args={"timeout": 30, "cli_path": "copilot"})
         model_config = config.to_model_config()
         assert model_config.type == COPILOT_COMPLETION_TYPE
-        assert model_config.model == "claude-sonnet-5.5"
+        assert model_config.model == "gpt-6-luna"
         assert model_config.model_extra == {"timeout": 30, "cli_path": "copilot"}
 
     def test_embedding_not_supported(self) -> None:
@@ -174,7 +174,7 @@ class TestCopilotCLICompletion:
         assert response.usage.completion_tokens == 5
 
         session = fake_client.sessions[0]
-        assert session.kwargs["model"] == "claude-sonnet-5.5"
+        assert session.kwargs["model"] == "gpt-6-luna"
         assert session.kwargs["available_tools"] == []
         assert session.kwargs["system_message"] == {
             "mode": "replace",

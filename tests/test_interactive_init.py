@@ -383,13 +383,13 @@ class TestLlmRendering:
         """Copilot CLI provider renders no auth_type or api_key."""
         provider = {
             "llm_provider": "copilot.chat",
-            "model": "claude-sonnet-5.5",
+            "model": "gpt-6-luna",
             "auth_type": "copilot_cli",
             "init_args": {},
         }
         section = _render_llm_section(provider)
         assert "llm_provider: copilot.chat" in section
-        assert "model: claude-sonnet-5.5" in section
+        assert "model: gpt-6-luna" in section
         assert "auth_type" not in section
         assert "api_key" not in section
         assert "concurrent_requests: 4" in section
@@ -399,7 +399,7 @@ class TestLlmRendering:
         config = _default_autoq_config()
         config["chat_provider"] = {
             "llm_provider": "copilot.chat",
-            "model": "claude-sonnet-5.5",
+            "model": "gpt-6-luna",
             "auth_type": "copilot_cli",
             "init_args": {},
         }
@@ -442,7 +442,7 @@ class TestCopilotProviderPrompts:
         )
         chat = interactive.ProviderResult(
             llm_provider="copilot.chat",
-            model="claude-sonnet-5.5",
+            model="gpt-6-luna",
             auth_type="copilot_cli",
         )
         result = interactive.prompt_embedding_provider(chat)
