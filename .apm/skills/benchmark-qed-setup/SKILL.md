@@ -144,7 +144,7 @@ Ask in **a single `ask_user` form** (split into two if the workflow is autoq, si
 
 | Field | Type | Options / examples | Notes |
 |-------|------|--------------------|-------|
-| `llm_provider` | enum | `openai.chat`, `azure.openai.chat`, `azure.inference.chat` | See provider table in [references/config-reference.md](references/config-reference.md). |
+| `llm_provider` | enum | `openai.chat`, `azure.openai.chat`, `azure.inference.chat`, `copilot.chat` | See provider table in [references/config-reference.md](references/config-reference.md). |
 | `model` | string | `gpt-4.1`, `gpt-4o`, `o3-mini`, an Azure deployment name | For Azure providers this is the **deployment name**, not the base model id. |
 | `auth_type` | enum | `api_key` (default), `azure_managed_identity` | `azure_managed_identity` is only valid for `azure.*` providers. |
 | `api_key_env_var` | string | `OPENAI_API_KEY` (default), `AZURE_OPENAI_API_KEY`, … | Only ask when `auth_type=api_key`. The skill writes `${VAR_NAME}` into YAML and adds the variable to `.env`. |

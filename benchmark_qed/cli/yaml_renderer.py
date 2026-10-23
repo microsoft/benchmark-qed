@@ -34,12 +34,17 @@ def _render_llm_section(provider_dict: dict[str, Any], indent: int = 2) -> str:
         provider_dict = dataclasses.asdict(provider_dict)
 
     pad = " " * indent
-    lines: list[str] = []
+    lines: list[str] = [f"{pad}model: {provider_dict['model']}"]
 
-    lines.extend([
-        f"{pad}model: {provider_dict['model']}",
-        f"{pad}auth_type: {provider_dict['auth_type']}",
-    ])
+    if provider_dict["llm_provider"] == "copilot.chat":
+        # Copilot CLI authenticates via the user's GitHub login; no API key.
+        lines.extend([
+            f"{pad}llm_provider: {provider_dict['llm_provider']}",
+            f"{pad}concurrent_requests: 4",
+        ])
+        return "\n".join(lines)
+
+    lines.append(f"{pad}auth_type: {provider_dict['auth_type']}")
 
     if provider_dict["auth_type"] == "api_key":
         lines.append(f"{pad}api_key: ${{OPENAI_API_KEY}}")

@@ -9,7 +9,11 @@ from graphrag_llm.completion.completion_factory import register_completion
 from graphrag_llm.embedding import LLMEmbedding, create_embedding
 from graphrag_llm.embedding.embedding_factory import register_embedding
 
-from benchmark_qed.config.llm_config import LLMConfig, ModelType
+from benchmark_qed.config.llm_config import (
+    COPILOT_COMPLETION_TYPE,
+    LLMConfig,
+    ModelType,
+)
 
 
 def _register_custom_provider(model_config: LLMConfig, model_type: ModelType) -> None:
@@ -59,12 +63,23 @@ class ModelFactory:
         """Create a chat completion client.
 
         Built-in providers (OpenAI, Azure OpenAI, Azure AI Inference) are
-        served by ``LiteLLMCompletion``. Custom providers declared via
+        served by ``LiteLLMCompletion``. The GitHub Copilot CLI provider
+        (``copilot.chat``) is served by
+        :class:`benchmark_qed.llm.copilot_completion.CopilotCLICompletion`.
+        Custom providers declared via
         :class:`benchmark_qed.config.llm_config.CustomLLMProvider` are
         registered with ``graphrag_llm.completion.completion_factory`` and
         instantiated through it.
         """
         provider = str(model_config.llm_provider)
+        if (
+            model_config.is_copilot
+            and COPILOT_COMPLETION_TYPE not in cls._registered_chat
+        ):
+            from benchmark_qed.llm.copilot_completion import CopilotCLICompletion
+
+            register_completion(COPILOT_COMPLETION_TYPE, CopilotCLICompletion)
+            cls._registered_chat.add(COPILOT_COMPLETION_TYPE)
         custom_names = {
             p.name
             for p in model_config.custom_providers
@@ -78,6 +93,13 @@ class ModelFactory:
     @classmethod
     def create_embedding_model(cls, model_config: LLMConfig) -> LLMEmbedding:
         """Create an embedding client (see :meth:`create_chat_model`)."""
+        if model_config.is_copilot:
+            msg = (
+                "The 'copilot.chat' provider does not support embeddings. "
+                "Configure an embedding provider such as 'openai.embedding' or "
+                "'azure.openai.embedding'."
+            )
+            raise ValueError(msg)
         provider = str(model_config.llm_provider)
         custom_names = {
             p.name
