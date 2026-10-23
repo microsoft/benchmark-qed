@@ -88,6 +88,7 @@ CHAT_PROVIDERS: list[tuple[str, str, str]] = [
     ("openai.chat", "OpenAI", "OpenAI API (default)"),
     ("azure.openai.chat", "Azure OpenAI", "Azure-hosted OpenAI models"),
     ("azure.inference.chat", "Azure Inference", "Azure AI Inference endpoint"),
+    ("copilot.chat", "GitHub Copilot CLI", "Models available via GitHub Copilot"),
 ]
 
 EMBEDDING_PROVIDERS: list[tuple[str, str, str]] = [
@@ -106,6 +107,7 @@ AUTH_TYPES: list[tuple[str, str]] = [
 ]
 
 DEFAULT_CHAT_MODEL = "gpt-4.1"
+DEFAULT_COPILOT_CHAT_MODEL = "claude-sonnet-5.5"
 DEFAULT_EMBEDDING_MODEL = "text-embedding-3-large"
 DEFAULT_API_VERSION = "2024-12-01-preview"
 
@@ -255,6 +257,18 @@ def prompt_provider(
         [(val, label) for val, label, _desc in providers],
     )
 
+    if provider_value == "copilot.chat":
+        # The Copilot CLI handles authentication via the user's GitHub login.
+        model = typer.prompt(
+            "Model name",
+            default=default_model or DEFAULT_COPILOT_CHAT_MODEL,
+        )
+        return ProviderResult(
+            llm_provider=provider_value,
+            model=model,
+            auth_type="copilot_cli",
+        )
+
     # Auth type
     auth_type = select_option("Authentication type", AUTH_TYPES)
 
@@ -276,6 +290,12 @@ def prompt_embedding_provider(
     chat_result: ProviderResult,
 ) -> ProviderResult:
     """Ask whether to reuse the chat provider for embeddings, or configure separately."""
+    if chat_result.llm_provider == "copilot.chat":
+        rich_print(
+            "[yellow]GitHub Copilot CLI does not provide embeddings; "
+            "select a separate embedding provider.[/yellow]"
+        )
+        return prompt_provider("embedding")
     if typer.confirm("Use the same provider for embeddings?", default=True):
         # Derive the embedding provider from the chat provider
         mapping = {

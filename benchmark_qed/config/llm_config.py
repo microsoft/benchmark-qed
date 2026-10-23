@@ -22,6 +22,11 @@ class LLMProvider(StrEnum):
     AzureOpenAIEmbedding = "azure.openai.embedding"
     AzureInferenceChat = "azure.inference.chat"
     AzureInferenceEmbedding = "azure.inference.embedding"
+    CopilotChat = "copilot.chat"
+
+
+# graphrag-llm completion strategy name used for the GitHub Copilot CLI provider.
+COPILOT_COMPLETION_TYPE = "copilot_cli"
 
 
 class ModelType(StrEnum):
@@ -121,9 +126,17 @@ class LLMConfig(BaseModel):
         description="List of custom LLM providers to register.",
     )
 
+    @property
+    def is_copilot(self) -> bool:
+        """Whether this config targets the GitHub Copilot CLI provider."""
+        return str(self.llm_provider) == LLMProvider.CopilotChat
+
     @model_validator(mode="after")
     def check_api_key(self) -> Self:
         """Check if the API key is set."""
+        # The Copilot CLI authenticates with the user's GitHub login or token.
+        if self.is_copilot:
+            return self
         if self.auth_type == "api_key" and (
             self.api_key is None or self.api_key.get_secret_value().strip() == ""
         ):
@@ -138,8 +151,14 @@ class LLMConfig(BaseModel):
         ``azure``, ``azure_ai``). Custom providers are passed through with
         their registered name as the ``ModelConfig.type`` so that
         ``register_completion`` / ``register_embedding`` callers can resolve
-        them.
+        them. The GitHub Copilot CLI provider is mapped to the
+        ``copilot_cli`` completion type registered by
+        :class:`benchmark_qed.llm.factory.ModelFactory`; its ``init_args`` are
+        forwarded to :class:`benchmark_qed.llm.copilot_completion.CopilotCLICompletion`.
         """
+        if self.is_copilot:
+            return self._to_copilot_model_config()
+
         provider_key = str(self.llm_provider)
         is_builtin = provider_key in _PROVIDER_TO_MODEL_PROVIDER
         model_provider = _PROVIDER_TO_MODEL_PROVIDER.get(provider_key, provider_key)
@@ -161,17 +180,6 @@ class LLMConfig(BaseModel):
 
         azure_deployment_name = self.model if model_provider == "azure" else None
 
-        rate_limit: RateLimitConfig | None = None
-        if self.concurrent_requests and self.concurrent_requests > 0:
-            rate_limit = RateLimitConfig(
-                type=RateLimitType.SlidingWindow,
-                period_in_seconds=1,
-                requests_per_period=max(1, self.concurrent_requests),
-            )
-
-        # Track usage by enabling a metrics processor with no writer (silent).
-        metrics = MetricsConfig(writer=None)
-
         config_kwargs: dict[str, Any] = {
             "model_provider": model_provider,
             "model": self.model,
@@ -182,8 +190,9 @@ class LLMConfig(BaseModel):
             "azure_deployment_name": azure_deployment_name,
             "call_args": dict(self.call_args),
             "retry": self.retry,
-            "rate_limit": rate_limit,
-            "metrics": metrics,
+            "rate_limit": self._rate_limit_config(),
+            # Track usage by enabling a metrics processor with no writer (silent).
+            "metrics": MetricsConfig(writer=None),
             **init_args,
         }
 
@@ -194,3 +203,32 @@ class LLMConfig(BaseModel):
             config_kwargs["type"] = provider_key
 
         return ModelConfig(**config_kwargs)
+
+    def _rate_limit_config(self) -> RateLimitConfig | None:
+        if self.concurrent_requests and self.concurrent_requests > 0:
+            return RateLimitConfig(
+                type=RateLimitType.SlidingWindow,
+                period_in_seconds=1,
+                requests_per_period=max(1, self.concurrent_requests),
+            )
+        return None
+
+    def _to_copilot_model_config(self) -> ModelConfig:
+        """Build a ``ModelConfig`` for the GitHub Copilot CLI provider.
+
+        Authentication is handled by the Copilot CLI (logged-in user or a
+        ``github_token`` in ``init_args``), so ``api_key`` is not forwarded.
+        ``init_args`` become extra ``ModelConfig`` fields, which graphrag-llm
+        passes through to the completion constructor.
+        """
+        return ModelConfig(
+            type=COPILOT_COMPLETION_TYPE,
+            model_provider="copilot",
+            model=self.model,
+            auth_method=AuthMethod.ApiKey,
+            call_args=dict(self.call_args),
+            retry=self.retry,
+            rate_limit=self._rate_limit_config(),
+            metrics=MetricsConfig(writer=None),
+            **self.init_args,
+        )

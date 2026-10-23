@@ -33,6 +33,7 @@ Defines the supported LLM providers and model types.
 | `azure.openai.embedding` | Azure-hosted OpenAI embedding models. |
 | `azure.inference.chat` | Azure Inference Service chat models. |
 | `azure.inference.embedding` | Azure Inference Service embedding models. |
+| `copilot.chat` | Chat models served through the GitHub Copilot CLI (no embeddings). |
 
 ---
 
@@ -114,6 +115,37 @@ llm_config:
 ```
 
 > 💡 Note: If you use azure_manager_identity make sure to be authenticated with `az login` on a terminal, if you use api_key make sure to include the api reference and the .env file.
+
+#### GitHub Copilot CLI
+
+The `copilot.chat` provider routes chat completions through the [GitHub Copilot CLI](https://docs.github.com/copilot/how-tos/copilot-cli) using the [`github-copilot-sdk`](https://pypi.org/project/github-copilot-sdk/). Any model available to your Copilot subscription can be used.
+
+```yaml
+llm_config:
+  model: "claude-sonnet-5.5" # any model listed by the Copilot CLI, e.g. gpt-5.6-sol
+  llm_provider: "copilot.chat"
+  concurrent_requests: 4
+  init_args: # all optional
+    # cli_path: /path/to/copilot     # defaults to the SDK-bundled CLI (or $COPILOT_CLI_PATH)
+    # github_token: ${GITHUB_TOKEN}  # defaults to the logged-in Copilot CLI user
+    # timeout: 600                   # seconds to wait for each response
+    # reasoning_effort: medium       # low | medium | high | xhigh, for models that support it
+    # validate_model: true           # fail fast if the model is not available
+    # delete_sessions: true          # remove each Copilot session after its request
+  retry:
+    type: exponential_backoff
+    max_retries: 6
+    base_delay: 2.0
+    max_delay: 30.0
+    jitter: true
+```
+
+> 💡 Notes:
+> - Authenticate once with `copilot login` (or provide `github_token`); `auth_type` and `api_key` are not used.
+> - Each request runs in an isolated Copilot session with no tools, custom instructions, or skills, and with the system prompt replaced by the request's system messages.
+> - The Copilot CLI does not support embeddings, so `embedding_config` must use a different provider.
+> - `call_args` such as `temperature` and `seed` are not supported by the Copilot CLI and are ignored.
+> - Requests count against your Copilot premium request quota.
 
 #### Custom Provider
 

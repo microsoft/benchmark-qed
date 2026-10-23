@@ -61,7 +61,7 @@ CHAT_MODEL_DEFAULTS = """
   model: gpt-4.1
   auth_type: api_key # or azure_managed_identity
   api_key: ${OPENAI_API_KEY} # remove this if using azure_managed_identity
-  llm_provider: openai.chat # or azure.openai.chat | azure.inference.chat
+  llm_provider: openai.chat # or azure.openai.chat | azure.inference.chat | copilot.chat
   concurrent_requests: 4 # The number of concurrent requests to send to the model.
   # init_args:
   #   Additional initialization arguments for the LLM can be added here.
