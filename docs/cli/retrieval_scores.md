@@ -20,6 +20,7 @@ python -m benchmark_qed autoe retrieval-scores <config_file> [options]
 ## Command 1: generate-retrieval-reference
 
 This command creates ground truth relevance assessments by:
+
 1. Clustering text units into semantic groups
 2. For each question, assessing which chunks are relevant using LLM-based relevance scoring
 3. Saving the reference data for later evaluation
@@ -82,8 +83,13 @@ concurrent_requests: 32
 # Optional: limit questions for testing
 max_questions: null
 
-# Cache directory (enables resume on failure)
-cache_dir: "./output/retrieval_reference/cache"
+# Cache backend (use type: none to disable)
+cache_config:
+  type: sqlite
+  storage:
+    type: file
+    base_dir: "./output/retrieval_reference/cache"
+  database_name: relevance_cache.sqlite3
 
 # Text unit column mappings
 text_unit_fields:
@@ -215,7 +221,12 @@ significance_correction: "holm"  # P-value correction method
 fidelity_metric: "js"
 
 # Cache for relevance assessments
-cache_dir: "./output/retrieval_scores/cache"
+cache_config:
+  type: sqlite
+  storage:
+    type: file
+    base_dir: "./output/retrieval_scores/cache"
+  database_name: relevance_cache.sqlite3
 ```
 
 ### Retrieval Results File Format
@@ -344,10 +355,42 @@ python -m benchmark_qed autoe retrieval-scores \
 
 ### Caching
 
-Always enable `cache_dir` to:
+Configure `cache_config` with `type: sqlite` or `type: json` to:
+
 - Resume interrupted runs
 - Avoid re-assessing the same query-chunk pairs
 - Share cache across multiple runs
+
+The supported GraphRAG cache types are:
+
+- `sqlite`: persistent SQLite storage; requires `storage.type: file` and accepts
+  `database_name`.
+- `json`: JSON entries backed by the configured GraphRAG storage.
+- `memory`: process-local, non-persistent caching.
+- `none`: disables caching.
+
+For example, a JSON cache can be configured as:
+
+```yaml
+cache_config:
+  type: json
+  storage:
+    type: file
+    base_dir: "./output/cache"
+```
+
+Relevance assessments are stored through the `graphrag-cache` SQLite backend
+in `relevance_cache.sqlite3` under this directory. Existing per-assessment JSON
+cache files are imported automatically and retained for backward
+compatibility. Cross-process work leases prevent duplicate LLM calls and
+automatically expire after an interrupted worker exits.
+
+Use `benchmark-qed cache inspect <base_dir>/relevance_cache.sqlite3` for a
+SQLite cache to view
+the cache backend, namespace entry counts, and active leases. If the same query
+and text were previously evaluated with another model or prompt configuration,
+the evaluator logs a warning and computes a new result instead of reusing
+incompatible data.
 
 ### Concurrency
 

@@ -8,6 +8,7 @@ multiple RAG methods, and generating summary reports.
 from pathlib import Path
 from typing import Any, cast
 
+import numpy as np
 import pandas as pd
 from graphrag_llm.completion import LLMCompletion
 from graphrag_storage import Storage
@@ -606,7 +607,7 @@ def run_hierarchical_assertion_evaluation(
         if "support_level" in aggregated.columns:
             rich_print(
                 f"  Average support level (per-question avg): "
-                f"{per_q_support.mean() * 100:.1f}%"
+                f"{np.asarray(per_q_support, dtype=float).mean() * 100:.1f}%"
             )
 
     if not all_aggregated:

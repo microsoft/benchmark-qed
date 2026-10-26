@@ -331,7 +331,7 @@ async def test_create_documents_unsupported_input_type(
 ):
     input_file = tmp_path / "text_doc_1.txt"
     input_file.write_text("doc 1", encoding="utf-8")
-    with pytest.raises(ValueError):  # noqa: PT011, PT012
+    with pytest.raises(ValueError):  # ruff: ignore[pytest-raises-too-broad, pytest-raises-with-multiple-statements]
         if file_or_dir == "file":
             await create_documents(str(input_file), input_type="goblin")
         else:

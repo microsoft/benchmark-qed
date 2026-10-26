@@ -2,11 +2,13 @@
 """Data models for chunk-level assertion evaluation."""
 
 from pathlib import Path
-from typing import ClassVar
+from typing import Any, ClassVar
 
+from graphrag_cache import CacheConfig
 from graphrag_storage.storage_config import StorageConfig
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, model_validator
 
+from benchmark_qed.cache import create_default_cache_config
 from benchmark_qed.config.llm_config import LLMConfig
 
 
@@ -115,7 +117,22 @@ class ChunkAssertionConfig(BaseModel):
         "highest-ranked chunks). Useful for reducing LLM call volume during "
         "testing. None means evaluate all retrieved chunks.",
     )
-    cache_dir: str | None = Field(default=None)
+    cache_config: CacheConfig = Field(
+        default_factory=lambda: create_default_cache_config(
+            ".benchmark_qed_cache/chunk_assertions",
+            database_name="chunk_assertions.sqlite3",
+        )
+    )
+
+    @model_validator(mode="before")
+    @classmethod
+    def reject_legacy_cache_dir(cls, data: Any) -> Any:
+        """Reject the removed cache_dir setting with actionable guidance."""
+        if isinstance(data, dict) and "cache_dir" in data:
+            msg = "cache_dir was replaced by cache_config"
+            raise ValueError(msg)
+        return data
+
     output_storage: StorageConfig | None = Field(default=None)
     input_storage: StorageConfig | None = Field(default=None)
     llm_config: LLMConfig

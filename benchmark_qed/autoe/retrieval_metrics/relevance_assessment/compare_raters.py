@@ -7,6 +7,8 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
 
+from graphrag_cache import CacheConfig
+
 from benchmark_qed.autod.data_model.text_unit import TextUnit
 from benchmark_qed.autoe.retrieval_metrics.relevance_assessment.bing_rater import (
     BingRelevanceRater,
@@ -787,7 +789,7 @@ async def compare_raters(
     queries: list[str],
     text_units: list[TextUnit],
     llm_config: LLMConfig,
-    cache_dir: Path | None = None,
+    cache_config: CacheConfig | None = None,
 ) -> RaterComparisonResult:
     """Compare Bing and Rationale raters on the same queries and text units.
 
@@ -795,7 +797,7 @@ async def compare_raters(
         queries: List of queries to assess.
         text_units: List of text units to assess for each query.
         llm_config: LLM configuration for both raters.
-        cache_dir: Optional cache directory for assessments.
+        cache_config: Optional GraphRAG cache configuration for assessments.
 
     Returns
     -------
@@ -805,22 +807,16 @@ async def compare_raters(
     # Create LLM client
     llm_client = ModelFactory.create_chat_model(llm_config)
 
-    # Create both raters
-    bing_cache = cache_dir / "bing" if cache_dir else None
-    rationale_cache = cache_dir / "rationale" if cache_dir else None
-
     bing_rater = BingRelevanceRater(
         llm_client=llm_client,
         llm_config=llm_config,
-        cache_dir=bing_cache,
-        cache_enabled=cache_dir is not None,
+        cache_config=cache_config,
     )
 
     rationale_rater = RationaleRelevanceRater(
         llm_client=llm_client,
         llm_config=llm_config,
-        cache_dir=rationale_cache,
-        cache_enabled=cache_dir is not None,
+        cache_config=cache_config,
     )
 
     comparison_items: list[RaterComparisonItem] = []
@@ -910,7 +906,7 @@ async def _compare_raters_with_topk_selection(
     all_text_units: list[TextUnit],
     llm_config: LLMConfig,
     max_text_units: int,
-    cache_dir: Path | None = None,
+    cache_config: CacheConfig | None = None,
     embedding_config: LLMConfig | None = None,
 ) -> RaterComparisonResult:
     """Compare raters using top-K text units by similarity for each query.
@@ -921,7 +917,7 @@ async def _compare_raters_with_topk_selection(
         all_text_units: All text units to select from.
         llm_config: LLM configuration for raters.
         max_text_units: Number of top text units to select per query.
-        cache_dir: Optional cache directory.
+        cache_config: Optional GraphRAG cache configuration.
         embedding_config: LLM config for embedding queries without embeddings.
 
     Returns
@@ -934,21 +930,16 @@ async def _compare_raters_with_topk_selection(
     # Create LLM client and raters
     llm_client = ModelFactory.create_chat_model(llm_config)
 
-    bing_cache = cache_dir / "bing" if cache_dir else None
-    rationale_cache = cache_dir / "rationale" if cache_dir else None
-
     bing_rater = BingRelevanceRater(
         llm_client=llm_client,
         llm_config=llm_config,
-        cache_dir=bing_cache,
-        cache_enabled=cache_dir is not None,
+        cache_config=cache_config,
     )
 
     rationale_rater = RationaleRelevanceRater(
         llm_client=llm_client,
         llm_config=llm_config,
-        cache_dir=rationale_cache,
-        cache_enabled=cache_dir is not None,
+        cache_config=cache_config,
     )
 
     # Embed queries that don't have embeddings
@@ -1093,7 +1084,7 @@ async def compare_raters_from_files(
     llm_config: LLMConfig,
     max_questions: int | None = None,
     max_text_units: int | None = None,
-    cache_dir: Path | None = None,
+    cache_config: CacheConfig | None = None,
     output_path: Path | None = None,
     random_seed: int | None = 42,
     use_similarity_selection: bool = True,
@@ -1110,7 +1101,7 @@ async def compare_raters_from_files(
         llm_config: LLM configuration for both raters.
         max_questions: Maximum number of questions to process.
         max_text_units: Maximum number of text units per question.
-        cache_dir: Optional cache directory for assessments.
+        cache_config: Optional GraphRAG cache configuration for assessments.
         output_path: Optional path to save comparison results as JSON.
         random_seed: Random seed for reproducible sampling. Set to None for no seed.
         use_similarity_selection: If True, select top-K text units by similarity
@@ -1133,7 +1124,7 @@ async def compare_raters_from_files(
 
     if random_seed is not None:
         random.seed(random_seed)
-        np.random.seed(random_seed)  # noqa: NPY002
+        np.random.seed(random_seed)  # ruff: ignore[numpy-legacy-random]
 
     # Load questions
     questions_data = json.loads(Path(questions_path).read_text())
@@ -1170,7 +1161,7 @@ async def compare_raters_from_files(
             all_text_units=all_text_units,
             llm_config=llm_config,
             max_text_units=max_text_units,
-            cache_dir=cache_dir,
+            cache_config=cache_config,
             embedding_config=embedding_config,
         )
     else:
@@ -1188,7 +1179,7 @@ async def compare_raters_from_files(
             queries=queries,
             text_units=all_text_units,
             llm_config=llm_config,
-            cache_dir=cache_dir,
+            cache_config=cache_config,
         )
 
     # Run judge if requested

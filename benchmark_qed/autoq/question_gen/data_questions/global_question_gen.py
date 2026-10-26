@@ -292,7 +292,9 @@ class DataGlobalQuestionGen(BaseQuestionGen):
 
         self.claim_extractor_params = claim_extractor_params
         self.claim_extractor: DataGlobalClaimExtractor = DataGlobalClaimExtractor(
-            llm=llm, local_questions=local_questions, **claim_extractor_params
+            llm=llm,
+            local_questions=local_questions,
+            claim_extractor_params=claim_extractor_params,
         )
 
     async def agenerate(
@@ -507,7 +509,7 @@ class DataGlobalQuestionGen(BaseQuestionGen):
         num_questions: int,
     ) -> dict[str, int]:
         """Sample categories with probability proportional to log(question_count)."""
-        rng = random.Random(self.random_seed)  # noqa: S311
+        rng = random.Random(self.random_seed)  # ruff: ignore[suspicious-non-cryptographic-random-usage]
         # Use log(count + 1) to handle edge cases and compress weights
         weights = [
             math.log(len(category_to_questions[c]) + 1) for c in valid_categories

@@ -6,6 +6,7 @@ Covers question_id alignment, @k truncation with rank ordering, and cache reuse
 across runs, with the LLM call mocked out.
 """
 
+import asyncio
 from pathlib import Path
 from types import SimpleNamespace
 from typing import TYPE_CHECKING, Any, cast
@@ -13,10 +14,12 @@ from typing import TYPE_CHECKING, Any, cast
 import pytest
 from graphrag_storage.file_storage import FileStorage
 
+from benchmark_qed.autoe.chunk_assertion.cache import ContentAddressedCache
 from benchmark_qed.autoe.chunk_assertion.scoring import run_assertion_eval_chunk_mode
 from benchmark_qed.autoe.data_model.retrieval_result import (
     load_retrieval_results_from_dicts,
 )
+from benchmark_qed.cache import create_default_cache_config
 
 if TYPE_CHECKING:
     from graphrag_llm.completion import LLMCompletion
@@ -44,7 +47,8 @@ def patched_chat(
 ) -> None:
     """Patch benchmark_qed.llm.chat to return grades from grade_by_chunk."""
 
-    async def _fake_chat(_llm: Any, messages: list[dict[str, str]], **_: Any) -> Any:  # noqa: RUF029
+    async def _fake_chat(_llm: Any, messages: list[dict[str, str]], **_: Any) -> Any:
+        await asyncio.sleep(0)
         call_counter[0] += 1
         chunk_text = messages[-1]["content"]
         return SimpleNamespace(content=grade_by_chunk.get(chunk_text, "no_support"))
@@ -59,9 +63,15 @@ async def _run(
     cache_path: Path,
     *,
     k_list: list[int] | None = None,
+    model: str = "test-model",
 ) -> dict[str, Any]:
     """Invoke run_assertion_eval_chunk_mode with test-friendly defaults."""
     output_dir.mkdir(parents=True, exist_ok=True)
+    database_path = (
+        cache_path.with_suffix(".sqlite3")
+        if cache_path.suffix == ".jsonl"
+        else cache_path
+    )
     return await run_assertion_eval_chunk_mode(
         load_retrieval_results_from_dicts(
             eval_results,
@@ -73,11 +83,14 @@ async def _run(
         llm_client=cast("LLMCompletion", object()),
         llm_config=cast(
             "LLMConfig",
-            SimpleNamespace(concurrent_requests=2, call_args={}, model="test-model"),
+            SimpleNamespace(concurrent_requests=2, call_args={}, model=model),
         ),
         output_storage=FileStorage(base_dir=str(output_dir)),
         pass_threshold=0.5,
-        cache_path=cache_path,
+        cache_config=create_default_cache_config(
+            database_path.parent,
+            database_name=database_path.name,
+        ),
         k_list=k_list or [1],
         system_prompt="judge",
         user_prompt="{chunk}",
@@ -177,9 +190,12 @@ async def test_alignment_by_question_id(
 
 @pytest.mark.usefixtures("patched_chat")
 async def test_second_run_uses_cache(
-    tmp_path: Path, grade_by_chunk: dict[str, str], call_counter: list[int]
+    tmp_path: Path,
+    grade_by_chunk: dict[str, str],
+    call_counter: list[int],
+    monkeypatch: pytest.MonkeyPatch,
 ) -> None:
-    """A second run with the same cache makes no new LLM calls."""
+    """A second run bulk-loads the cache and makes no new LLM calls."""
     grade_by_chunk.update({"a": "full_support", "b": "no_support"})
     eval_results = [
         {
@@ -206,5 +222,105 @@ async def test_second_run_uses_cache(
     calls_after_first = call_counter[0]
     assert calls_after_first == 2  # one call per (assertion, chunk) pair
 
+    get_many_calls = 0
+    real_get_many = ContentAddressedCache.get_many
+
+    async def tracked_get_many(
+        cache: ContentAddressedCache, cache_keys: list[str]
+    ) -> dict[str, str]:
+        nonlocal get_many_calls
+        get_many_calls += 1
+        return await real_get_many(cache, cache_keys)
+
+    async def fail_individual_get(
+        _cache: ContentAddressedCache, _cache_key: str
+    ) -> str | None:
+        await asyncio.sleep(0)
+        pytest.fail("warm-cache scan used individual get() instead of get_many()")
+
+    monkeypatch.setattr(ContentAddressedCache, "get_many", tracked_get_many)
+    monkeypatch.setattr(ContentAddressedCache, "get", fail_individual_get)
+
     await _run(eval_results, question_set, tmp_path / "out2", cache_path)
     assert call_counter[0] == calls_after_first  # fully served from cache
+    assert get_many_calls == 1
+
+
+@pytest.mark.usefixtures("patched_chat")
+async def test_duplicate_pairs_share_one_llm_call(
+    tmp_path: Path, grade_by_chunk: dict[str, str], call_counter: list[int]
+) -> None:
+    """Identical uncached pairs across questions share one in-process request."""
+    grade_by_chunk["same chunk"] = "full_support"
+    eval_results = [
+        {
+            "question_id": question_id,
+            "text": "Q",
+            "context": [{"text": "same chunk", "chunk_id": "c1", "rank": 1}],
+        }
+        for question_id in ("q1", "q2")
+    ]
+    question_set = {
+        "assertions": [
+            {
+                "question_id": question_id,
+                "question_text": "Q",
+                "assertions": [{"statement": "same assertion"}],
+            }
+            for question_id in ("q1", "q2")
+        ]
+    }
+
+    summaries = await _run(
+        eval_results,
+        question_set,
+        tmp_path / "out",
+        tmp_path / "cache.sqlite3",
+    )
+
+    assert call_counter[0] == 1
+    assert summaries["all"].successful_calls == 2
+
+
+@pytest.mark.usefixtures("patched_chat")
+async def test_warns_when_cached_configuration_differs(
+    tmp_path: Path,
+    grade_by_chunk: dict[str, str],
+    capsys: pytest.CaptureFixture[str],
+) -> None:
+    grade_by_chunk["chunk"] = "full_support"
+    eval_results = [
+        {
+            "question_id": "q1",
+            "text": "Q",
+            "context": [{"text": "chunk", "chunk_id": "c1", "rank": 1}],
+        }
+    ]
+    question_set = {
+        "assertions": [
+            {
+                "question_id": "q1",
+                "question_text": "Q",
+                "assertions": [{"statement": "assertion"}],
+            }
+        ]
+    }
+    cache_path = tmp_path / "cache.sqlite3"
+    await _run(
+        eval_results,
+        question_set,
+        tmp_path / "out1",
+        cache_path,
+        model="first-model",
+    )
+    capsys.readouterr()
+
+    await _run(
+        eval_results,
+        question_set,
+        tmp_path / "out2",
+        cache_path,
+        model="second-model",
+    )
+
+    assert "same inputs with different model" in capsys.readouterr().out

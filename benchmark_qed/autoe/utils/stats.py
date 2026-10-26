@@ -381,7 +381,7 @@ def _run_tukey_posthoc(
     groups: Mapping[str, Sequence[float]],
     group_names: list[str],
     alpha: float,
-    correction: str,  # noqa: ARG001 - kept for API consistency
+    correction: str,  # ruff: ignore[unused-function-argument] - kept for API consistency
 ) -> PostHocResult:
     """Run Tukey HSD test for normal data (independent samples).
 
