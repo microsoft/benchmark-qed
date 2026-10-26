@@ -481,6 +481,7 @@ significance_correction: holm
 | Azure OpenAI Embedding | `azure.openai.embedding` | Azure-hosted embeddings |
 | Azure Inference Chat | `azure.inference.chat` | Azure AI Inference chat |
 | Azure Inference Embedding | `azure.inference.embedding` | Azure AI Inference embeddings |
+| GitHub Copilot CLI | `copilot.chat` | Chat models via the Copilot CLI (`copilot login`; no `api_key`/`auth_type`; no embeddings, so pair with another embedding provider; `temperature`/`seed` ignored). Optional `init_args`: `cli_path`, `github_token`, `timeout`, `reasoning_effort`, `validate_model`, `delete_sessions`. |
 
 ## Custom LLM Providers
 

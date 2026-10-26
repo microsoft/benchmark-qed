@@ -11,6 +11,7 @@ import yaml
 from typer.testing import CliRunner
 
 from benchmark_qed.__main__ import app
+from benchmark_qed.cli import interactive
 from benchmark_qed.cli.interactive import (
     prompt_comma_list,
     select_option,
@@ -377,6 +378,76 @@ class TestLlmRendering:
         section = _render_llm_section(provider, indent=4)
         for line in section.split("\n"):
             assert line.startswith("    ")
+
+    def test_copilot_provider_omits_auth(self):
+        """Copilot CLI provider renders no auth_type or api_key."""
+        provider = {
+            "llm_provider": "copilot.chat",
+            "model": "gpt-6-luna",
+            "auth_type": "copilot_cli",
+            "init_args": {},
+        }
+        section = _render_llm_section(provider)
+        assert "llm_provider: copilot.chat" in section
+        assert "model: gpt-6-luna" in section
+        assert "auth_type" not in section
+        assert "api_key" not in section
+        assert "concurrent_requests: 4" in section
+
+    def test_copilot_autoq_config_is_valid(self):
+        """An autoq config using Copilot for chat validates."""
+        config = _default_autoq_config()
+        config["chat_provider"] = {
+            "llm_provider": "copilot.chat",
+            "model": "gpt-6-luna",
+            "auth_type": "copilot_cli",
+            "init_args": {},
+        }
+        content = render_autoq_yaml(config)
+        validate_config(content, "autoq")
+        parsed = yaml.safe_load(content)
+        assert parsed["chat_model"]["llm_provider"] == "copilot.chat"
+
+
+class TestCopilotProviderPrompts:
+    """Verify the wizard flow for the Copilot CLI provider."""
+
+    def test_prompt_provider_skips_auth(self, monkeypatch):
+        """Selecting Copilot only asks for a model name."""
+        selections = iter(["copilot.chat"])
+        monkeypatch.setattr(
+            interactive, "select_option", lambda *_a, **_k: next(selections)
+        )
+        monkeypatch.setattr(typer, "prompt", lambda *_a, **k: k["default"])
+        result = interactive.prompt_provider("chat")
+        assert result.llm_provider == "copilot.chat"
+        assert result.model == interactive.DEFAULT_COPILOT_CHAT_MODEL
+        assert result.init_args == {}
+
+    def test_embedding_prompted_separately(self, monkeypatch):
+        """Copilot has no embeddings, so an embedding provider is prompted."""
+        calls: list[str] = []
+
+        def fake_prompt_provider(purpose="chat", **_kwargs):
+            calls.append(purpose)
+            return interactive.ProviderResult(
+                llm_provider="openai.embedding",
+                model="text-embedding-3-large",
+                auth_type="api_key",
+            )
+
+        monkeypatch.setattr(interactive, "prompt_provider", fake_prompt_provider)
+        monkeypatch.setattr(
+            typer, "confirm", lambda *_a, **_k: pytest.fail("should not confirm")
+        )
+        chat = interactive.ProviderResult(
+            llm_provider="copilot.chat",
+            model="gpt-6-luna",
+            auth_type="copilot_cli",
+        )
+        result = interactive.prompt_embedding_provider(chat)
+        assert calls == ["embedding"]
+        assert result.llm_provider == "openai.embedding"
 
 
 # ═══════════════════════════════════════════════════════════════════════════
