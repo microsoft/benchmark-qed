@@ -12,6 +12,7 @@ from types import SimpleNamespace
 from typing import TYPE_CHECKING, Any, cast
 
 import pytest
+from graphrag_cache import CacheConfig, CacheType
 from graphrag_storage.file_storage import FileStorage
 
 from benchmark_qed.autoe.chunk_assertion.cache import ContentAddressedCache
@@ -64,6 +65,7 @@ async def _run(
     *,
     k_list: list[int] | None = None,
     model: str = "test-model",
+    cache_config: CacheConfig | None = None,
 ) -> dict[str, Any]:
     """Invoke run_assertion_eval_chunk_mode with test-friendly defaults."""
     output_dir.mkdir(parents=True, exist_ok=True)
@@ -87,7 +89,8 @@ async def _run(
         ),
         output_storage=FileStorage(base_dir=str(output_dir)),
         pass_threshold=0.5,
-        cache_config=create_default_cache_config(
+        cache_config=cache_config
+        or create_default_cache_config(
             database_path.parent,
             database_name=database_path.name,
         ),
@@ -186,6 +189,57 @@ async def test_alignment_by_question_id(
     # q1 (index 0) got the "good" chunk -> covered; q2 (index 1) got "bad".
     assert per_query["0000"]["coverage"] == 1.0
     assert per_query["0001"]["coverage"] == 0.0
+
+
+@pytest.mark.usefixtures("patched_chat")
+async def test_chunk_assertion_cache_backend_reruns(
+    tmp_path: Path,
+    grade_by_chunk: dict[str, str],
+    call_counter: list[int],
+    evaluation_cache_config: CacheConfig,
+) -> None:
+    grade_by_chunk.update({"a": "full_support", "b": "no_support"})
+    eval_results = [
+        {
+            "question_id": "q1",
+            "text": "Q",
+            "context": [
+                {"text": "a", "chunk_id": "c1", "rank": 1},
+                {"text": "b", "chunk_id": "c2", "rank": 2},
+            ],
+        }
+    ]
+    question_set = {
+        "assertions": [
+            {
+                "question_id": "q1",
+                "question_text": "Q",
+                "assertions": [{"statement": "S"}],
+            }
+        ]
+    }
+    first = await _run(
+        eval_results,
+        question_set,
+        tmp_path / "out1",
+        tmp_path / "cache.sqlite3",
+        cache_config=evaluation_cache_config,
+    )
+    assert call_counter[0] == 2
+    second = await _run(
+        eval_results,
+        question_set,
+        tmp_path / "out2",
+        tmp_path / "cache.sqlite3",
+        cache_config=evaluation_cache_config,
+    )
+
+    persistent = evaluation_cache_config.type in {CacheType.Json, CacheType.Sqlite}
+    assert call_counter[0] == (2 if persistent else 4)
+    assert first.keys() == second.keys() == {"all", "k1"}
+    for label in first:
+        assert first[label].coverage == second[label].coverage == 1.0
+        assert first[label].per_query_metrics == second[label].per_query_metrics
 
 
 @pytest.mark.usefixtures("patched_chat")

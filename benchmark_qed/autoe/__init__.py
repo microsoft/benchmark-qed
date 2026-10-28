@@ -21,6 +21,9 @@ from benchmark_qed.autoe.assertion import (
     summarize_standard_scores,
 )
 
+# Calibrated absolute scoring
+from benchmark_qed.autoe.calibrated import calibrate_answers, score_answers
+
 # Pairwise scoring
 from benchmark_qed.autoe.pairwise import (
     SCORE_MAPPING,
@@ -84,6 +87,7 @@ __all__ = [
     "aggregate_hierarchical_scores",
     "analyze_criteria",
     "calculate_retrieval_metrics",
+    "calibrate_answers",
     "check_normality",
     "compare_groups",
     "compare_hierarchical_assertion_scores_significance",
@@ -108,6 +112,7 @@ __all__ = [
     "run_omnibus_test",
     "run_posthoc_pairwise",
     "run_retrieval_evaluation",
+    "score_answers",
     "summarize_hierarchical_by_question",
     "summarize_reference_scores",
     "summarize_standard_scores",

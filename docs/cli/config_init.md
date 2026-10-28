@@ -4,13 +4,14 @@ This page documents the command-line interface of the benchmark-qed configuratio
 
 ### Init Command
 
-The `config init` command generates a starter `settings.yaml` file, prompt templates, and an `.env` file for the specified workflow.
+The `config init` command generates a starter `settings.yaml`, an `.env` file,
+an input directory, and workflow-specific prompt files where applicable.
 
 #### Arguments
 
 | Argument | Description |
 |---|---|
-| `config_type` | The type of configuration to generate. One of: `autoq`, `autoe_pairwise`, `autoe_differential_pairwise`, `autoe_reference`, `autoe_assertion`, `autoe_chunk_assertion`. |
+| `config_type` | The workflow to scaffold. See the supported configuration types below. |
 | `root` | The path to the root directory where the configuration will be created. |
 
 #### Options
@@ -22,6 +23,23 @@ The `config init` command generates a starter `settings.yaml` file, prompt templ
 | `--account-url` | | `str` | `None` | The storage account URL to pre-fill (uses managed identity for auth). |
 | `--connection-string` | | `str` | `None` | The storage connection string to pre-fill (alternative to `--account-url`). |
 | `--base-dir` | | `str` | `None` | Base prefix path within the container to pre-fill in storage config. |
+
+#### Supported Configuration Types
+
+| Type | Workflow |
+|---|---|
+| `autoq` | Generate questions and assertions |
+| `autoe_pairwise` | Standard pairwise answer comparison |
+| `autoe_differential_pairwise` | Extract shared/unique content, then judge the differences |
+| `autoe_absolute_calibrate` | Build and freeze a five-level calibration scale |
+| `autoe_absolute_score` | Score new answers against a frozen calibration scale |
+| `autoe_reference` | Score generated answers against reference answers |
+| `autoe_assertion` | Check answer-level assertions |
+| `autoe_chunk_assertion` | Check retrieved chunks against assertions |
+
+Hierarchical assertion, multi-RAG assertion, and retrieval-metrics configurations
+are documented in [AutoE](autoe.md) and [Retrieval Metrics](retrieval_scores.md);
+they do not have separate `config init` types.
 
 #### Local Filesystem (Default)
 
@@ -85,7 +103,21 @@ benchmark-qed config init autoe_reference ./reference_project -s blob --base-dir
 
 # Generate AutoE assertion config with blob storage
 benchmark-qed config init autoe_assertion ./assertion_project -s blob --base-dir experiments/run1
+
+# Generate sibling calibration and scoring projects
+benchmark-qed config init autoe_absolute_calibrate ./absolute_project/calibration
+benchmark-qed config init autoe_absolute_score ./absolute_project/absolute_scoring
+
+# Generate retrieved-chunk assertion settings and prompt files
+benchmark-qed config init autoe_chunk_assertion ./chunk_assertion_project
 ```
+
+The absolute-scoring scaffold points to
+`../calibration/output/calibration.json` by default. Run the scoring command from
+the scoring project directory, or set `calibration_path` explicitly. With
+`--storage-type blob`, the scaffold instead uses `output/calibration.json`
+relative to the configured `input_storage`; set it to the actual calibration
+artifact's storage key when the two stages use different prefixes.
 
 #### Generated Files
 
@@ -96,8 +128,13 @@ root/
 ├── settings.yaml       # Main configuration file
 ├── .env                # Environment variables (e.g., OPENAI_API_KEY)
 ├── input/              # Placeholder for input data
-└── prompts/            # Prompt template files (copied from package defaults)
+└── prompts/            # Workflow-specific templates, when applicable
 ```
+
+The absolute-calibration and absolute-scoring scaffolds do not copy a
+`prompts/` directory or expose a `prompt_config` setting. They load packaged
+templates from `benchmark_qed/autoe/prompts/calibrated`. Other workflow
+scaffolds copy their relevant prompt files and reference them from settings.
 
 When `--storage-type blob` is used together with `--account-url` or `--connection-string`, the same `settings.yaml`, `.env`, and `prompts/` files are written **directly to the configured blob container** (under `--base-dir` if provided) instead of locally.
 
@@ -119,7 +156,13 @@ benchmark-qed autoq blob://my-container/experiments/run1/settings.yaml output \
 
 The CLI streams `settings.yaml` and **every sibling file under the same prefix** (e.g. `prompts/**/*.txt`, `.env`) into a temporary local directory before loading the config. If neither option is supplied, auth falls back to the `AZURE_STORAGE_CONNECTION_STRING` or `AZURE_STORAGE_ACCOUNT_URL` environment variables. Input data and output destinations still flow through the `input:` / `output_storage:` blocks declared inside `settings.yaml`.
 
-Every command that accepts a config path also accepts `--account-url` and `--connection-string`: `autoq`, `autoq generate-assertions`, `autoe pairwise-scores`, `autoe reference-scores`, `autoe assertion-scores`, `autoe hierarchical-assertion-scores`, `autoe assertion-significance`, `autoe hierarchical-assertion-significance`, `autoe generate-retrieval-reference`, and `autoe retrieval-scores`.
+Commands that accept a config path also accept `--account-url` and
+`--connection-string`: `autoq`, `autoq generate-assertions`, and the AutoE
+commands `pairwise-scores`, `differential-pairwise-scores`, `absolute-calibrate`,
+`absolute-score`, `reference-scores`, `assertion-scores`,
+`hierarchical-assertion-scores`, `chunk-assertion-scores`,
+`assertion-significance`, `hierarchical-assertion-significance`,
+`generate-retrieval-reference`, and `retrieval-scores`.
 
 #### Storage Configuration in Generated Settings
 
@@ -130,7 +173,7 @@ When `--storage-type blob` is used:
 - An **input storage** block is added under the `input:` section with `type: blob`, `container_name`, and auth options.
 - An **output storage** block is added at the top level (`output_storage:`) for writing results to blob.
 
-**For AutoE (`autoe_pairwise`, `autoe_reference`, `autoe_assertion`):**
+**For AutoE (all `autoe_*` types listed above):**
 
 - An **input_storage** block is added for reading answers/assertions from blob.
 - An **output_storage** block is added for writing scores to blob.
@@ -173,6 +216,19 @@ Generated `autoe_assertion` settings enable a persistent SQLite cache under
 Each question/assertion/trial judgment is stored independently. This cache is
 not used by multi-RAG or hierarchical assertion scoring, and chunk-assertion
 scoring uses its own assertion/chunk cache.
+
+The remaining generated evaluation caches are:
+
+| Configuration type | Cache directory | Database |
+|---|---|---|
+| `autoe_absolute_calibrate` | `.benchmark_qed_cache/absolute_calibrate` | `absolute_calibrate.sqlite3` |
+| `autoe_absolute_score` | `.benchmark_qed_cache/absolute_score` | `absolute_score.sqlite3` |
+| `autoe_chunk_assertion` | `.benchmark_qed_cache/chunk_assertions` | `chunk_assertions.sqlite3` |
+
+Calibration stores completed batch rankings; absolute scoring stores completed
+target/criterion/exemplar judgments. Chunk assertion scoring stores individual
+assertion/chunk judgments. See [Evaluation Caches](cache.md) for identity and
+invalidation rules.
 
 ::: mkdocs-typer2
     :module: benchmark_qed.cli.init_config

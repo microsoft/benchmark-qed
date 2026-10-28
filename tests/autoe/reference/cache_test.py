@@ -7,6 +7,7 @@ from pathlib import Path
 from typing import Any
 
 import pandas as pd
+from graphrag_cache import CacheConfig, CacheType
 
 from benchmark_qed.autoe.config import Criteria
 from benchmark_qed.autoe.data_model import ReferenceLLMResponse
@@ -44,8 +45,8 @@ def _config(tmp_path: Path) -> dict[str, Any]:
     }
 
 
-def test_second_reference_run_reuses_all_trials(
-    tmp_path: Path, monkeypatch: Any
+def test_reference_cache_backend_reruns(
+    tmp_path: Path, monkeypatch: Any, evaluation_cache_config: CacheConfig
 ) -> None:
     call_count = 0
 
@@ -66,12 +67,22 @@ def test_second_reference_run_reuses_all_trials(
 
     monkeypatch.setattr(scores, "chat", fake_chat)
     kwargs = _config(tmp_path)
+    kwargs["cache_config"] = evaluation_cache_config
 
     first = scores.get_reference_scores(**kwargs)
+    assert call_count == 2
+    assert first["score"].tolist() == [8, 8]
     second = scores.get_reference_scores(**kwargs)
 
-    assert call_count == 2
-    pd.testing.assert_frame_equal(first, second)
+    persistent = evaluation_cache_config.type in {CacheType.Json, CacheType.Sqlite}
+    assert call_count == (2 if persistent else 4)
+    if persistent:
+        pd.testing.assert_frame_equal(first, second)
+    else:
+        assert set(first["score_id"]).isdisjoint(second["score_id"])
+        pd.testing.assert_frame_equal(
+            first.drop(columns="score_id"), second.drop(columns="score_id")
+        )
 
 
 def test_score_range_change_invalidates_reference_cache(

@@ -95,8 +95,35 @@ Configuration for generating standard questions.
 
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
-| `num_questions` | `int` | `20` | Number of questions to generate per class. |
+| `num_questions` | `int` | `50` | Number of questions to generate per class. |
 | `oversample_factor` | `float` | `2.0` | Factor to overgenerate questions before filtering. |
+
+---
+
+#### `DataGlobalQuestionConfig`
+
+Extends `QuestionConfig` for data-global questions built from groups of local
+questions. Configure these fields under `data_global`:
+
+| Field | Type | Default | Description |
+|-------|------|---------|-------------|
+| `min_questions_in_context` | `int` | `2` | Minimum local questions required in a category before generating global questions from it. |
+| `min_claim_count` | `int` | `2` | Minimum claims needed to retain a global question before assertion generation. |
+| `min_relevant_reference_count` | `int` | `10` | Soft minimum for contributing local-question references. Questions below it are deprioritized, not necessarily discarded. |
+| `enable_question_validation` | `bool` | `true` | Validate generated questions for naturalness, answerability, and clarity with the LLM. |
+
+```yaml
+data_global:
+  num_questions: 50
+  oversample_factor: 2.0
+  min_questions_in_context: 2
+  min_claim_count: 2
+  min_relevant_reference_count: 10
+  enable_question_validation: true
+```
+
+Question validation is separate from assertion validation under
+`assertions.global`. Disabling one does not disable the other.
 
 ---
 
