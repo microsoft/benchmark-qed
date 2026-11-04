@@ -335,6 +335,24 @@ class AssertionConfig(BaseAutoEConfig):
         return self
 
 
+class NegativeAssertionConfig(AssertionConfig):
+    """Answer-level assertion scoring with opt-in negative assertion guidance."""
+
+    prompt_config: AutoEPromptConfig = Field(
+        default=AutoEPromptConfig(
+            user_prompt=PromptConfig(
+                prompt=Path(assertion_prompts.__file__).parent
+                / "negative_assertion_user_prompt.txt",
+            ),
+            system_prompt=PromptConfig(
+                prompt=Path(assertion_prompts.__file__).parent
+                / "negative_assertion_system_prompt.txt",
+            ),
+        ),
+        description="Prompts supporting both positive and negative assertions.",
+    )
+
+
 class HierarchicalAssertionConfig(BaseAutoEConfig):
     """Configuration for hierarchical assertion scoring with supporting assertions.
 

@@ -366,6 +366,105 @@ Follow these steps to evaluate RAG answers against per-question assertions using
     hierarchical assertion scoring; chunk-level assertion evaluation uses its
     own assertion/chunk cache.
 
+## Scoring RAG answers against negative assertions
+
+Follow these steps to evaluate RAG answers against assertions that require
+specified content to be absent. This single-RAG workflow uses separate judge
+prompts and supports both positive and negative assertions without changing
+the standard assertion workflow.
+
+1. **Set up your project directory:**
+    ```sh
+    mkdir -p ./local/negative_assertion_test
+    cd ./local/negative_assertion_test
+    ```
+
+2. **Create an `input` folder and add your data:**
+    ```sh
+    mkdir ./input
+    uv run benchmark-qed data download negative_assertion_examples input
+    ```
+    Accept the MIT license notice when prompted. This copies the bundled
+    synthetic answers, matching assertions, and expected-score labels:
+
+    - `negative_assertion_answers.json`: Six fictional answers.
+    - `negative_assertions.json`: Ten positive and negative assertions.
+    - `negative_assertion_expected_scores.json`: Six expected passes and four
+      intentional failures per trial.
+
+    You can also supply your own answers and assertions. Preserve matching
+    `question_id` values and update the input paths in `settings.yaml`.
+    Input preparation works offline; scoring requires an LLM. See the
+    [Data Download CLI](cli/data.md) for Azure Blob Storage options. For the
+    blob variant below, upload the inputs under the same project prefix.
+
+3. **Create a configuration file for negative assertion evaluation:**
+    ```sh
+    uv run benchmark-qed config init autoe_negative_assertion .
+    ```
+    This is the local-filesystem variant.
+
+    Alternative blob variant (choose this instead of the local command above; do not run both):
+    ```sh
+    uv run benchmark-qed config init autoe_negative_assertion . \
+        --storage-type blob \
+        --container-name my-container \
+        --account-url https://<account>.blob.core.windows.net \
+        --base-dir negative_assertion_test
+    ```
+    The local command creates:
+
+    - `.env`: Contains environment variables for evaluation. Replace `<API_KEY>`
+      with your OpenAI or Azure API key.
+    - `settings.yaml`: Contains model settings, sample input paths, and the
+      persistent assertion cache configuration.
+    - `prompts/`: Contains the separate negative-assertion judge prompts, already
+      selected in `settings.yaml`.
+
+    The generated settings use these default input names, matching the sample
+    files downloaded in step 2:
+
+    ```yaml
+    generated:
+      name: vector_rag
+      answer_base_path: input/negative_assertion_answers.json
+    assertions:
+      assertions_path: input/negative_assertions.json
+    ```
+
+    The sample inputs are ready to use without editing. Configure `llm_config`
+    as needed. See [LLM Configuration](cli/llm_config.md) for provider options.
+
+4. **Run the negative assertion evaluation:**
+    ```sh
+    uv run benchmark-qed autoe negative-assertion-scores settings.yaml output
+    ```
+    This is the local-filesystem variant.
+
+    Alternative blob-stored config variant (choose this instead of the local command above; do not run both):
+    ```sh
+    uv run benchmark-qed autoe negative-assertion-scores blob://my-container/negative_assertion_test/settings.yaml output \
+        --account-url https://<account>.blob.core.windows.net
+    ```
+    The results will be saved in the `output` directory, including
+    `assertion_scores.csv`, `assertion_summary_by_question.csv`, and
+    `eval_summary.json`. Compare per-assertion scores with
+    `input/negative_assertion_expected_scores.json`. The sample failures are
+    intentional; the labels are reference expectations, not forced LLM outputs.
+
+    Repeated or resumed runs reuse completed question/assertion/trial judgments.
+    Inspect the cache with:
+    ```sh
+    uv run benchmark-qed cache inspect \
+        .benchmark_qed_cache/assertion/assertion.sqlite3
+    ```
+    Set `cache_config.type: none` with `storage: null` for fresh judgments.
+
+A negative assertion scores **1 when the prohibited content is absent** and
+**0 when it is present**, including paraphrases. No score inversion is needed.
+See [Negative Assertion-Based Scoring Configuration](cli/autoe.md#negative-assertion-based-scoring-configuration)
+for assertion examples, wording guidance, configuration fields, and limitations.
+
 ## Evaluating retrieved chunks against assertions
 
 Chunk-level evaluation scores how well retrieved passages (chunks) support assertions, without waiting for answer synthesis. This is useful for:

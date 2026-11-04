@@ -10,7 +10,7 @@ The `config init` command generates a starter `settings.yaml` file, prompt templ
 
 | Argument | Description |
 |---|---|
-| `config_type` | The type of configuration to generate. One of: `autoq`, `autoe_pairwise`, `autoe_differential_pairwise`, `autoe_reference`, `autoe_assertion`, `autoe_chunk_assertion`. |
+| `config_type` | The type of configuration to generate. One of: `autoq`, `autoe_pairwise`, `autoe_differential_pairwise`, `autoe_reference`, `autoe_assertion`, `autoe_negative_assertion`, `autoe_chunk_assertion`. |
 | `root` | The path to the root directory where the configuration will be created. |
 
 #### Options
@@ -85,7 +85,13 @@ benchmark-qed config init autoe_reference ./reference_project -s blob --base-dir
 
 # Generate AutoE assertion config with blob storage
 benchmark-qed config init autoe_assertion ./assertion_project -s blob --base-dir experiments/run1
+
+# Generate AutoE negative assertion config
+benchmark-qed config init autoe_negative_assertion ./negative_assertion_project
 ```
+
+For sample inputs and scoring commands, see
+[Scoring RAG answers against negative assertions](../developing.md#scoring-rag-answers-against-negative-assertions).
 
 #### Generated Files
 
@@ -119,7 +125,7 @@ benchmark-qed autoq blob://my-container/experiments/run1/settings.yaml output \
 
 The CLI streams `settings.yaml` and **every sibling file under the same prefix** (e.g. `prompts/**/*.txt`, `.env`) into a temporary local directory before loading the config. If neither option is supplied, auth falls back to the `AZURE_STORAGE_CONNECTION_STRING` or `AZURE_STORAGE_ACCOUNT_URL` environment variables. Input data and output destinations still flow through the `input:` / `output_storage:` blocks declared inside `settings.yaml`.
 
-Every command that accepts a config path also accepts `--account-url` and `--connection-string`: `autoq`, `autoq generate-assertions`, `autoe pairwise-scores`, `autoe reference-scores`, `autoe assertion-scores`, `autoe hierarchical-assertion-scores`, `autoe assertion-significance`, `autoe hierarchical-assertion-significance`, `autoe generate-retrieval-reference`, and `autoe retrieval-scores`.
+Every command that accepts a config path also accepts `--account-url` and `--connection-string`: `autoq`, `autoq generate-assertions`, `autoe pairwise-scores`, `autoe reference-scores`, `autoe assertion-scores`, `autoe negative-assertion-scores`, `autoe hierarchical-assertion-scores`, `autoe assertion-significance`, `autoe hierarchical-assertion-significance`, `autoe generate-retrieval-reference`, and `autoe retrieval-scores`.
 
 #### Storage Configuration in Generated Settings
 
@@ -130,7 +136,7 @@ When `--storage-type blob` is used:
 - An **input storage** block is added under the `input:` section with `type: blob`, `container_name`, and auth options.
 - An **output storage** block is added at the top level (`output_storage:`) for writing results to blob.
 
-**For AutoE (`autoe_pairwise`, `autoe_reference`, `autoe_assertion`):**
+**For AutoE (`autoe_pairwise`, `autoe_reference`, `autoe_assertion`, `autoe_negative_assertion`):**
 
 - An **input_storage** block is added for reading answers/assertions from blob.
 - An **output_storage** block is added for writing scores to blob.

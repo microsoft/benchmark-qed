@@ -469,6 +469,12 @@ For information about the `config init` command, refer to: [Config Init CLI](con
 
 ---
 
+### Negative assertions
+
+For the separate single-RAG workflow with negative-assertion judge prompts, see
+[Negative Assertion-Based Scoring Configuration](#negative-assertion-based-scoring-configuration).
+The standard assertion configuration and prompt defaults remain unchanged.
+
 ### Single-RAG Configuration (Legacy)
 
 #### Classes and Fields
@@ -702,6 +708,186 @@ output_dir/
   assertion_scores_pivot_summary.csv
   model_usage.json
 ```
+
+---
+
+## Negative Assertion-Based Scoring Configuration
+
+This section describes the configuration schema for evaluating generated answers
+against assertions that require specified content to be absent. The
+`negative-assertion-scores` command supports **single-RAG evaluation** and uses
+separate prompts that handle both positive and negative assertions.
+
+For model configuration, see [LLM Configuration](llm_config.md). For a complete
+walkthrough, see [Scoring RAG answers against negative assertions](../developing.md#scoring-rag-answers-against-negative-assertions).
+
+### CLI Usage
+
+```sh
+benchmark-qed autoe negative-assertion-scores config.yaml output_dir
+```
+
+Both the configuration path and output directory are required. The command
+supports the same JSON-key, model-usage, score-ID, and storage options as
+single-RAG `assertion-scores`. Use
+`benchmark-qed autoe negative-assertion-scores --help` for all options.
+
+To create a template configuration file, run:
+
+```sh
+benchmark-qed config init autoe_negative_assertion ./local/negative_assertion_test
+```
+
+To create a template with active Azure Blob Storage configuration:
+
+```sh
+benchmark-qed config init autoe_negative_assertion ./local/negative_assertion_test --storage-type blob --base-dir negative_assertion_test
+```
+
+The interactive `benchmark-qed init` wizard also offers this workflow.
+For information about initialization, refer to [Config Init CLI](config_init.md).
+
+---
+
+### Classes and Fields
+
+#### `NegativeAssertionConfig`
+
+Extends `AssertionConfig` with separate system and user prompt defaults. Input
+schemas, scoring, aggregation, and cache behavior are unchanged.
+
+| Field | Type | Default | Description |
+|-------|------|---------|-------------|
+| `generated` | `Condition` | _required_ | Generated answers to evaluate. |
+| `assertions` | `Assertions` | _required_ | Positive and negative assertions to evaluate. |
+| `pass_threshold` | `float` | `0.5` | Threshold for passing an assertion. |
+| `trials` | `int` | `4` | Number of trials per question-assertion pair. |
+| `llm_config` | `LLMConfig` | `LLMConfig()` | Model and provider configuration. |
+| `cache_config` | `CacheConfig` | SQLite under `.benchmark_qed_cache/assertion` | Cache for completed judgments. |
+| `prompt_config` | `AutoEPromptConfig` | Negative-assertion prompt pair | Custom prompts override the defaults when supplied. |
+
+---
+
+### YAML Example
+
+The generated configuration selects the sample input files and separate prompts:
+
+```yaml
+generated:
+  name: vector_rag
+  answer_base_path: input/negative_assertion_answers.json
+
+assertions:
+  assertions_path: input/negative_assertions.json
+
+pass_threshold: 0.5
+trials: 4
+
+cache_config:
+  type: sqlite
+  storage:
+    type: file
+    base_dir: .benchmark_qed_cache/assertion
+  database_name: assertion.sqlite3
+
+llm_config:
+  auth_type: api_key
+  model: gpt-4.1
+  api_key: ${OPENAI_API_KEY}
+  llm_provider: openai.chat
+  concurrent_requests: 4
+
+prompt_config:
+  user_prompt:
+    prompt: prompts/negative_assertion_user_prompt.txt
+  system_prompt:
+    prompt: prompts/negative_assertion_system_prompt.txt
+```
+
+Set `OPENAI_API_KEY` in `.env` or your environment. Omitting `prompt_config` when
+using `negative-assertion-scores` selects the packaged negative-assertion defaults.
+Changing prompt contents creates different cache entries. For cache inspection
+and disabling reuse, see [Evaluation Caches](cache.md#standard-assertion-score-cache-behavior).
+
+---
+
+### Sample Inputs
+
+Download the sample answers, assertions, and expected-score labels:
+
+```sh
+benchmark-qed data download negative_assertion_examples ./local/negative_assertion_test/input
+```
+
+Accept the MIT license notice when prompted. The bundled samples work offline
+and match the generated input paths. Scoring still requires a configured LLM.
+See [Data Download CLI](data.md#negative-assertion-examples) for file descriptions
+and storage options.
+
+The six fictional answers cover ten assertions, with six expected passes and four
+intentional failures per trial. Compare your results with
+`negative_assertion_expected_scores.json`; these are reference labels, not
+guaranteed live-model outputs.
+
+### Assertion Examples
+
+Positive and negative assertions use the same format and can be mixed:
+
+```json
+[
+  {
+    "question_id": "clean-answer",
+    "question_text": "Who leads the fictional Atlas project?",
+    "assertions": [
+      "The answer identifies Avery as the Atlas project lead.",
+      "The answer does not mention the fictional internal codename Blue Finch."
+    ]
+  }
+]
+```
+
+The score always measures **satisfaction**, not the presence of a claim:
+
+| Assertion | Answer | Score |
+|-----------|--------|-------|
+| The answer does not mention Blue Finch. | Avery leads Atlas. | `1` (prohibited content absent) |
+| The answer does not mention Blue Finch. | The codename is Blue Finch. | `0` (prohibited content present) |
+| The answer does not mention a secret tunnel. | There is no secret tunnel. | `0` (a denial still mentions it) |
+| The answer does not claim that a secret tunnel exists. | There is no secret tunnel. | `1` (denial, not assertion) |
+
+The judge checks the entire answer, including paraphrases and strong implications,
+unless a literal text check is requested. Absence is sufficient; an explicit
+denial is not required. Content appearing only in the question or assertion does
+not count as content in the answer.
+
+### Output Structure
+
+```text
+output_dir/
+  assertion_scores.csv
+  assertion_summary_by_question.csv
+  assertion_summary_by_assertion.csv
+  eval_summary.json
+  model_usage.json
+```
+
+### Evaluation Behavior and Limitations
+
+- Existing `config init autoe_assertion` and `autoe assertion-scores` defaults
+  remain unchanged. Existing copied or custom prompts are not changed automatically.
+- This is LLM-as-a-judge evaluation, not a deterministic leakage filter. Pair
+  negative assertions with positive assertions to assess answer completeness.
+- The multi-RAG CLI pipeline and high-level staged hierarchical scorer do not
+  forward custom templates to their internal calls and still use the original
+  prompts. Chunk scoring measures passage support, not answer-level absence.
+- Python callers can pass the opt-in templates through `assessment_system_prompt`
+  and `assessment_user_prompt`. Joint hierarchical evaluation has
+  `negative_hierarchical_assertion_system_prompt.txt`, paired with the original
+  `hierarchical_assertion_user_prompt.txt`. Supporting/discovery evaluation has
+  `negative_supporting_discovery_system_prompt.txt`, paired with the original
+  `supporting_discovery_user_prompt.txt`. For staged evaluation with this guidance,
+  call the global and supporting evaluators separately with their respective
+  templates. Absence alone does not count as discovery.
 
 ---
 

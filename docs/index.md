@@ -226,6 +226,47 @@ Please follow these steps to evaluate RAG answers against predefined assertions 
     .benchmark_qed_cache/assertion/assertion.sqlite3` to inspect the cache, or
     set `cache_config.type: none` with `storage: null` for fresh judgments.
 
+#### Example 4: Negative assertion-based scoring of RAG answers
+
+Follow these steps to evaluate RAG answers against positive and negative
+assertions using the bundled synthetic examples:
+
+1. **Set up your project directory:**
+    ```sh
+    mkdir -p ./local/negative_assertion_test
+    cd ./local/negative_assertion_test
+    ```
+
+2. **Download the sample answers and assertions into the `input` subfolder:**
+    ```sh
+    mkdir ./input
+    benchmark-qed data download negative_assertion_examples input
+    ```
+    Accept the MIT license notice when prompted. The samples include six fictional
+    answers, ten matching assertions, and expected-score labels.
+
+3. **Create a configuration file for negative assertion scoring:**
+    ```sh
+    benchmark-qed config init autoe_negative_assertion .
+    ```
+    This creates:
+
+    - `.env`: Replace `<API_KEY>` with your OpenAI or Azure API key.
+    - `settings.yaml`: Contains sample input paths, model settings, and a persistent
+      cache under `.benchmark_qed_cache/assertion`.
+    - `prompts/`: Contains the separate negative-assertion judge prompts.
+
+4. **Run the negative assertion scoring:**
+    ```sh
+    benchmark-qed autoe negative-assertion-scores settings.yaml output
+    ```
+    The sample labels contain six expected passes and four intentional failures
+    per trial. Compare the results with
+    `input/negative_assertion_expected_scores.json`; live judge results may vary.
+
+For provider settings, blob-storage alternatives, and scoring semantics, see
+[Scoring RAG answers against negative assertions](developing.md#scoring-rag-answers-against-negative-assertions).
+
 For more details on configuring and running AutoE, see the [AutoE CLI Documentation](cli/autoe.md).
 
 If your `settings.yaml` is stored in Azure Blob Storage, see [Running with Blob-Stored Configuration](developing.md#running-with-blob-stored-configuration).

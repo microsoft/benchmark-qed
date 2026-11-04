@@ -4,7 +4,13 @@
 from pathlib import Path
 from unittest.mock import patch
 
+import pytest
+import yaml
+from typer.testing import CliRunner
+
+from benchmark_qed.__main__ import app
 from benchmark_qed.cli.init_config import ConfigType, init
+from benchmark_qed.cli.scaffold import NEGATIVE_ASSERTION_PROMPT_FILES
 
 
 def test_init_autoq_default_uses_local_storage_template(tmp_path: Path) -> None:
@@ -95,6 +101,59 @@ def test_init_assertion_scaffolds_judgment_cache(tmp_path: Path) -> None:
     assert "base_dir: .benchmark_qed_cache/assertion" in settings
     assert "database_name: assertion.sqlite3" in settings
     assert "Reuses completed question/assertion/trial judgments" in settings
+
+
+@pytest.mark.parametrize("storage_type", ["local", "blob"])
+def test_init_negative_assertion_scaffolds_separate_prompts(
+    tmp_path: Path, storage_type: str
+) -> None:
+    result = CliRunner().invoke(
+        app,
+        [
+            "config",
+            "init",
+            "autoe_negative_assertion",
+            str(tmp_path),
+            "--storage-type",
+            storage_type,
+        ],
+    )
+    assert result.exit_code == 0, result.output
+    settings = yaml.safe_load((tmp_path / "settings.yaml").read_text(encoding="utf-8"))
+    assert settings["prompt_config"] == {
+        "system_prompt": {"prompt": "prompts/negative_assertion_system_prompt.txt"},
+        "user_prompt": {"prompt": "prompts/negative_assertion_user_prompt.txt"},
+    }
+    assert {path.name for path in (tmp_path / "prompts").iterdir()} == (
+        NEGATIVE_ASSERTION_PROMPT_FILES
+    )
+    assert settings["cache_config"]["database_name"] == "assertion.sqlite3"
+    assert (
+        settings["generated"]["answer_base_path"]
+        == "input/negative_assertion_answers.json"
+    )
+    assert settings["assertions"]["assertions_path"] == "input/negative_assertions.json"
+    assert (tmp_path / ".env").exists()
+    assert (tmp_path / "input").is_dir()
+    assert ("input_storage" in settings) is (storage_type == "blob")
+
+
+def test_init_negative_assertion_uploads_prompt_pair_to_blob(tmp_path: Path) -> None:
+    with patch("benchmark_qed.cli.init_config._write_to_blob") as write_blob:
+        init(
+            ConfigType.autoe_negative_assertion,
+            tmp_path,
+            storage_type="blob",
+            container_name="negative-tests",
+            account_url="https://example.blob.core.windows.net",
+            base_dir="evaluation",
+        )
+    write_blob.assert_called_once()
+    kwargs = write_blob.call_args.kwargs
+    assert set(kwargs["prompt_mapping"]["prompts"]) == NEGATIVE_ASSERTION_PROMPT_FILES
+    assert "prompts/negative_assertion_system_prompt.txt" in kwargs["settings_content"]
+    assert kwargs["base_dir"] == "evaluation"
+    assert not (tmp_path / "settings.yaml").exists()
 
 
 def test_init_autoq_blob_with_custom_values(tmp_path: Path) -> None:

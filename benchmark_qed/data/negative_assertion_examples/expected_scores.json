@@ -1,0 +1,52 @@
+[
+  {
+    "question_id": "clean-answer",
+    "assertion": "The answer identifies Avery as the Atlas project lead.",
+    "score": 1
+  },
+  {
+    "question_id": "clean-answer",
+    "assertion": "The answer does not mention the fictional internal codename Blue Finch.",
+    "score": 1
+  },
+  {
+    "question_id": "prohibited-mention",
+    "assertion": "The answer identifies Avery as the Atlas project lead.",
+    "score": 1
+  },
+  {
+    "question_id": "prohibited-mention",
+    "assertion": "The answer does not mention the fictional internal codename Blue Finch.",
+    "score": 0
+  },
+  {
+    "question_id": "paraphrased-claim",
+    "assertion": "The answer names the project Atlas.",
+    "score": 1
+  },
+  {
+    "question_id": "paraphrased-claim",
+    "assertion": "The answer does not claim that Atlas will be released before July 2035.",
+    "score": 0
+  },
+  {
+    "question_id": "denied-claim",
+    "assertion": "The answer does not mention a secret tunnel under the fictional demo office.",
+    "score": 0
+  },
+  {
+    "question_id": "denied-claim",
+    "assertion": "The answer does not claim that a secret tunnel exists under the fictional demo office.",
+    "score": 1
+  },
+  {
+    "question_id": "literal-marker",
+    "assertion": "The answer does not contain the literal string DEMO_ONLY_TOKEN.",
+    "score": 0
+  },
+  {
+    "question_id": "question-only-mention",
+    "assertion": "The answer does not mention the fictional internal codename Blue Finch.",
+    "score": 1
+  }
+]

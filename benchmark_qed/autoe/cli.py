@@ -36,6 +36,7 @@ from benchmark_qed.autoe.config import (
     HierarchicalAssertionConfig,
     HierarchicalAssertionSignificanceConfig,
     MultiRAGAssertionConfig,
+    NegativeAssertionConfig,
     PairwiseConfig,
     ReferenceConfig,
     RetrievalReferenceConfig,
@@ -643,6 +644,61 @@ def assertion_scores(
         )
 
 
+@app.command()
+def negative_assertion_scores(
+    config_path: Annotated[
+        Path, typer.Argument(help="Path to the negative assertion scoring config YAML.")
+    ],
+    output: Annotated[
+        Path, typer.Argument(help="Output directory for assertion scores.")
+    ],
+    *,
+    print_model_usage: Annotated[
+        bool, typer.Option(help="Whether to print the model usage statistics.")
+    ] = False,
+    include_score_id_in_prompt: Annotated[
+        bool,
+        typer.Option(help="Whether to include a unique score ID in provider requests."),
+    ] = True,
+    question_id_key: Annotated[
+        str, typer.Option(help="Question ID key in JSON.")
+    ] = "question_id",
+    question_text_key: Annotated[
+        str, typer.Option(help="Question text key in JSON.")
+    ] = "question_text",
+    answer_text_key: Annotated[
+        str, typer.Option(help="Answer text key in JSON.")
+    ] = "answer",
+    assertions_key: Annotated[
+        str, typer.Option(help="Assertions key in JSON.")
+    ] = "assertions",
+    account_url: AccountUrlOption = None,
+    connection_string: ConnectionStringOption = None,
+) -> None:
+    """Score single-RAG answers using positive and negative assertions.
+
+    Initialize with `config init autoe_negative_assertion`. A satisfied assertion
+    scores 1, including when prohibited content is absent; a violation scores 0.
+    Uses separate default prompts and the standard assertion output format.
+    """
+    config_path = resolve_config_path(
+        config_path,
+        account_url=account_url,
+        connection_string=connection_string,
+    )
+    _run_single_rag_assertion_scores(
+        config_path=config_path,
+        output=output,
+        print_model_usage=print_model_usage,
+        include_score_id_in_prompt=include_score_id_in_prompt,
+        question_id_key=question_id_key,
+        question_text_key=question_text_key,
+        answer_text_key=answer_text_key,
+        assertions_key=assertions_key,
+        config_type=NegativeAssertionConfig,
+    )
+
+
 def _run_single_rag_assertion_scores(
     config_path: Path,
     output: Path,
@@ -653,9 +709,10 @@ def _run_single_rag_assertion_scores(
     question_text_key: str,
     answer_text_key: str,
     assertions_key: str,
+    config_type: type[AssertionConfig] = AssertionConfig,
 ) -> None:
-    """Run assertion scoring for a single RAG method (legacy mode)."""
-    config = load_config(AssertionConfig, config_path)
+    """Run single-RAG assertion scoring with the selected prompt configuration."""
+    config = load_config(config_type, config_path)
     output_storage = _build_output_storage(config.output_storage, output)
 
     llm_client = ModelFactory.create_chat_model(config.llm_config)

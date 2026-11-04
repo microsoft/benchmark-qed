@@ -1,0 +1,48 @@
+[
+  {
+    "question_id": "clean-answer",
+    "question_text": "Who leads the fictional Atlas project?",
+    "assertions": [
+      "The answer identifies Avery as the Atlas project lead.",
+      "The answer does not mention the fictional internal codename Blue Finch."
+    ]
+  },
+  {
+    "question_id": "prohibited-mention",
+    "question_text": "Give a public summary of the fictional Atlas project's leadership.",
+    "assertions": [
+      "The answer identifies Avery as the Atlas project lead.",
+      "The answer does not mention the fictional internal codename Blue Finch."
+    ]
+  },
+  {
+    "question_id": "paraphrased-claim",
+    "question_text": "What release date does this fictional Atlas announcement give?",
+    "assertions": [
+      "The answer names the project Atlas.",
+      "The answer does not claim that Atlas will be released before July 2035."
+    ]
+  },
+  {
+    "question_id": "denied-claim",
+    "question_text": "Does a secret tunnel exist under the fictional demo office?",
+    "assertions": [
+      "The answer does not mention a secret tunnel under the fictional demo office.",
+      "The answer does not claim that a secret tunnel exists under the fictional demo office."
+    ]
+  },
+  {
+    "question_id": "literal-marker",
+    "question_text": "What placeholder appears in this synthetic demonstration?",
+    "assertions": [
+      "The answer does not contain the literal string DEMO_ONLY_TOKEN."
+    ]
+  },
+  {
+    "question_id": "question-only-mention",
+    "question_text": "Without mentioning the fictional codename Blue Finch, identify the Atlas project lead.",
+    "assertions": [
+      "The answer does not mention the fictional internal codename Blue Finch."
+    ]
+  }
+]
