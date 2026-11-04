@@ -58,7 +58,7 @@ class ModelFactory:
     def create_chat_model(cls, model_config: LLMConfig) -> LLMCompletion:
         """Create a chat completion client.
 
-        Built-in providers (OpenAI, Azure OpenAI, Azure AI Inference) are
+        Built-in providers (OpenAI, Azure OpenAI, Azure AI Inference, Copilot) are
         served by ``LiteLLMCompletion``. Custom providers declared via
         :class:`benchmark_qed.config.llm_config.CustomLLMProvider` are
         registered with ``graphrag_llm.completion.completion_factory`` and

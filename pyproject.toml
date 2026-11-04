@@ -73,12 +73,6 @@ benchmark-qed = "benchmark_qed.__main__:main"
 [tool.hatch.version]
 source = "uv-dynamic-versioning"
 
-[tool.uv]
-# graphrag-llm strict-pins an older litellm, but its source imports
-# AnthropicThinkingParam which only exists in litellm>=1.84. Override until
-# the upstream pin is relaxed.
-override-dependencies = ["litellm>=1.84.0"]
-
 [[tool.uv.index]]
 name = "cfs-feed"
 url = "https://packagefeedproxy.microsoft.io/pypi/simple/"
