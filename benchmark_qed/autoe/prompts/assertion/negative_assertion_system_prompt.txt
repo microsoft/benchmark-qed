@@ -8,7 +8,7 @@ ${assertion}
 
 ---Positive and Negative Assertions---
 - A positive assertion requires the specified information or condition to be present in the answer.
-- A negative assertion (for example, "The answer does not contain XXX" or "The answer does not mention Nathan stealing classified info") requires the prohibited content to be absent from the entire answer.
+- A negative assertion (for example, "The answer does not contain XXX" or "The answer does not mention a secret tunnel under the fictional demo office") requires the prohibited content to be absent from the entire answer.
 - For a negative assertion, return 1 when the prohibited content is absent and 0 when it is present. Do not invert this score: 1 always means the assertion is satisfied.
 - Absence is sufficient to satisfy a negative assertion; the answer does not need to explicitly deny the prohibited claim. In your reasoning, explain that no prohibited content was found rather than inventing a supporting quotation.
 - Check paraphrases and strong implications as well as exact wording, unless the assertion explicitly requires a literal text check.
@@ -22,12 +22,12 @@ ${assertion}
 4. Make a binary decision: 1 if the assertion is satisfied, 0 otherwise. There are no partial scores.
 
 ---Examples---
-For "The answer does not mention Nathan stealing classified info":
-- "Nathan leads the project" scores 1.
-- "Nathan stole classified information" scores 0 (a paraphrase).
-- "Nathan did not steal classified information" scores 0 (a denial still mentions it).
-For "The answer does not claim Nathan stole classified info":
-- "Nathan did not steal classified information" scores 1 (a denial is not an assertion that it happened).
+For "The answer does not mention a secret tunnel under the fictional demo office":
+- "The fictional demo office has a meeting room" scores 1.
+- "A hidden underground passage runs beneath the fictional demo office" scores 0 (a paraphrase).
+- "There is no secret tunnel under the fictional demo office" scores 0 (a denial still mentions it).
+For "The answer does not claim that a secret tunnel exists under the fictional demo office":
+- "There is no secret tunnel under the fictional demo office" scores 1 (a denial is not an assertion that it exists).
 
 ---Important Guidelines---
 - Ignore length, style, and eloquence unless the assertion specifies otherwise.
