@@ -88,6 +88,7 @@ CHAT_PROVIDERS: list[tuple[str, str, str]] = [
     ("openai.chat", "OpenAI", "OpenAI API (default)"),
     ("azure.openai.chat", "Azure OpenAI", "Azure-hosted OpenAI models"),
     ("azure.inference.chat", "Azure Inference", "Azure AI Inference endpoint"),
+    ("github.copilot.chat", "GitHub Copilot", "Copilot Chat API via LiteLLM"),
 ]
 
 EMBEDDING_PROVIDERS: list[tuple[str, str, str]] = [
@@ -97,6 +98,11 @@ EMBEDDING_PROVIDERS: list[tuple[str, str, str]] = [
         "azure.inference.embedding",
         "Azure Inference",
         "Azure AI Inference endpoint",
+    ),
+    (
+        "github.copilot.embedding",
+        "GitHub Copilot",
+        "Copilot Embedding API via LiteLLM",
     ),
 ]
 
@@ -256,7 +262,16 @@ def prompt_provider(
     )
 
     # Auth type
-    auth_type = select_option("Authentication type", AUTH_TYPES)
+    if provider_value.startswith("github.copilot."):
+        auth_type = "provider"
+        typer.echo(
+            "LiteLLM manages Copilot device-flow login, credential caching, and refresh. "
+            "This is separate from Copilot CLI authentication. "
+            "Choose a model available to your account. "
+            "Requires a GraphRAG release supporting provider-managed authentication."
+        )
+    else:
+        auth_type = select_option("Authentication type", AUTH_TYPES)
 
     # Provider-specific init args
     init_args = _prompt_azure_init_args(provider_value)
@@ -282,11 +297,19 @@ def prompt_embedding_provider(
             "openai.chat": "openai.embedding",
             "azure.openai.chat": "azure.openai.embedding",
             "azure.inference.chat": "azure.inference.embedding",
+            "github.copilot.chat": "github.copilot.embedding",
         }
         emb_provider = mapping.get(chat_result.llm_provider, "openai.embedding")
         return ProviderResult(
             llm_provider=emb_provider,
-            model=DEFAULT_EMBEDDING_MODEL,
+            model=(
+                typer.prompt(
+                    "Copilot embedding model available to your account",
+                    default=DEFAULT_EMBEDDING_MODEL,
+                )
+                if emb_provider == "github.copilot.embedding"
+                else DEFAULT_EMBEDDING_MODEL
+            ),
             auth_type=chat_result.auth_type,
             init_args=dict(chat_result.init_args),
         )
@@ -848,11 +871,18 @@ def interactive_init(
     _copy_prompts_for_config(config_type, prompts_folder)
 
     ensure_input_folder(root)
-    write_env_file(root)
+    needs_api_key = any(
+        config_dict[key].auth_type == "api_key"
+        for key in ("chat_provider", "embedding_provider")
+        if key in config_dict
+    )
+    if needs_api_key:
+        write_env_file(root)
 
     # 6. Success summary
     rich_print(f"\n[green]✅ Configuration created at {settings_path}[/green]")
     rich_print(f"[green]✅ Prompt templates copied to {prompts_folder}/[/green]")
-    rich_print(
-        "[green]✅ .env file created — update OPENAI_API_KEY before running[/green]"
-    )
+    if needs_api_key:
+        rich_print(
+            "[green]✅ .env file created — update OPENAI_API_KEY before running[/green]"
+        )

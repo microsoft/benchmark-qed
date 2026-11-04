@@ -16,9 +16,6 @@ resolution-markers = [
     "python_full_version < '3.12' and sys_platform != 'emscripten' and sys_platform != 'win32'",
 ]
 
-[manifest]
-overrides = [{ name = "litellm", specifier = ">=1.84.0" }]
-
 [[package]]
 name = "aiofiles"
 version = "25.1.0"

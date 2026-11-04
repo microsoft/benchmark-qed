@@ -12,7 +12,10 @@ from typer.testing import CliRunner
 
 from benchmark_qed.__main__ import app
 from benchmark_qed.cli.interactive import (
+    ProviderResult,
     prompt_comma_list,
+    prompt_embedding_provider,
+    prompt_provider,
     select_option,
 )
 from benchmark_qed.cli.yaml_renderer import (
@@ -24,6 +27,7 @@ from benchmark_qed.cli.yaml_renderer import (
     render_autoq_yaml,
     validate_config,
 )
+from benchmark_qed.config.llm_config import LLMConfig
 
 # ---------------------------------------------------------------------------
 # Shared factory helpers
@@ -378,6 +382,39 @@ class TestLlmRendering:
         for line in section.split("\n"):
             assert line.startswith("    ")
 
+    @pytest.mark.parametrize("purpose", ["chat", "embedding"])
+    def test_copilot_config_round_trip(self, monkeypatch, purpose):
+        monkeypatch.setenv("OPENAI_API_KEY", "must-not-be-read")
+        section = _render_llm_section({
+            "llm_provider": f"github.copilot.{purpose}",
+            "model": "account-model",
+            "auth_type": "provider",
+        })
+        assert "api_key:" not in section
+        assert "OPENAI_API_KEY" not in section
+        config = LLMConfig.model_validate(yaml.safe_load(section))
+        assert config.llm_provider == f"github.copilot.{purpose}"
+        assert config.auth_type == "provider"
+        assert config.api_key.get_secret_value() == ""
+
+    @pytest.mark.parametrize("copilot_purpose", ["chat", "embedding"])
+    def test_autoq_allows_mixed_providers(self, copilot_purpose):
+        config = _default_autoq_config()
+        config[f"{copilot_purpose}_provider"] = {
+            "llm_provider": f"github.copilot.{copilot_purpose}",
+            "model": "account-model",
+            "auth_type": "provider",
+        }
+        rendered = yaml.safe_load(render_autoq_yaml(config))
+        for purpose in ("chat", "embedding"):
+            section = rendered[f"{purpose}_model"]
+            if purpose == copilot_purpose:
+                assert section["auth_type"] == "provider"
+                assert "api_key" not in section
+            else:
+                assert section["auth_type"] == "api_key"
+                assert section["api_key"] == "${OPENAI_API_KEY}"
+
 
 # ═══════════════════════════════════════════════════════════════════════════
 # 3. Validation Tests
@@ -511,6 +548,35 @@ class TestCliIntegration:
         assert "embedding_model" in settings
         assert "input" in settings
 
+    def test_init_copilot_autoq_omits_api_key_placeholder(self, tmp_path):
+        input_lines = [
+            "1",
+            "4",
+            "gpt-4o",
+            "Y",
+            "text-embedding-3-small",
+            "N",
+            "N",
+            "N",
+            "N",
+            "N",
+            "8",
+        ]
+        result = CliRunner().invoke(
+            app,
+            ["init", str(tmp_path)],
+            input="\n".join(input_lines) + "\n",
+        )
+        assert result.exit_code == 0, result.output
+        settings = yaml.safe_load(
+            (tmp_path / "settings.yaml").read_text(encoding="utf-8")
+        )
+        assert settings["chat_model"]["llm_provider"] == "github.copilot.chat"
+        assert settings["embedding_model"]["llm_provider"] == "github.copilot.embedding"
+        assert settings["embedding_model"]["model"] == "text-embedding-3-small"
+        assert not (tmp_path / ".env").exists()
+        assert "OPENAI_API_KEY" not in result.output
+
     def test_init_autoe_pairwise_creates_files(self, tmp_path):
         """Pairwise init creates correct files."""
         runner = CliRunner()
@@ -642,6 +708,32 @@ class TestOverwriteProtection:
 
 class TestHelpers:
     """Tests for individual interactive helper functions."""
+
+    @pytest.mark.parametrize("purpose", ["chat", "embedding"])
+    def test_copilot_selection_uses_provider_auth(self, monkeypatch, purpose):
+        monkeypatch.setattr(
+            "benchmark_qed.cli.interactive.select_option",
+            lambda title, options: f"github.copilot.{purpose}",
+        )
+        monkeypatch.setattr(typer, "prompt", lambda *args, **kwargs: "account-model")
+        result = prompt_provider(purpose)
+        assert result.auth_type == "provider"
+        assert result.init_args == {}
+        assert result.model == "account-model"
+
+    def test_embedding_selection_can_differ_from_copilot_chat(self, monkeypatch):
+        monkeypatch.setattr(typer, "confirm", lambda *args, **kwargs: False)
+        choices = iter(["openai.embedding", "api_key"])
+        monkeypatch.setattr(
+            "benchmark_qed.cli.interactive.select_option",
+            lambda *args: next(choices),
+        )
+        monkeypatch.setattr(typer, "prompt", lambda *args, **kwargs: "embedding-model")
+        result = prompt_embedding_provider(
+            ProviderResult("github.copilot.chat", "chat-model", "provider")
+        )
+        assert result.llm_provider == "openai.embedding"
+        assert result.auth_type == "api_key"
 
     def test_prompt_comma_list_splits(self):
         """prompt_comma_list splits comma-separated input."""

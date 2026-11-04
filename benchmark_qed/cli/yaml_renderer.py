@@ -43,6 +43,8 @@ def _render_llm_section(provider_dict: dict[str, Any], indent: int = 2) -> str:
 
     if provider_dict["auth_type"] == "api_key":
         lines.append(f"{pad}api_key: ${{OPENAI_API_KEY}}")
+    elif provider_dict["auth_type"] == "provider":
+        lines.append(f"{pad}# LiteLLM manages login and credentials; no API key.")
 
     lines.extend([
         f"{pad}llm_provider: {provider_dict['llm_provider']}",

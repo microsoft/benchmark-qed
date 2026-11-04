@@ -22,6 +22,8 @@ class LLMProvider(StrEnum):
     AzureOpenAIEmbedding = "azure.openai.embedding"
     AzureInferenceChat = "azure.inference.chat"
     AzureInferenceEmbedding = "azure.inference.embedding"
+    CopilotChat = "github.copilot.chat"
+    CopilotEmbedding = "github.copilot.embedding"
 
 
 class ModelType(StrEnum):
@@ -57,6 +59,7 @@ class AuthType(StrEnum):
 
     API = "api_key"
     AzureManagedIdentity = "azure_managed_identity"
+    Provider = "provider"
 
 
 # Mapping from benchmark-qed LLMProvider values to litellm-style model_provider strings.
@@ -67,6 +70,8 @@ _PROVIDER_TO_MODEL_PROVIDER: dict[str, str] = {
     LLMProvider.AzureOpenAIEmbedding: "azure",
     LLMProvider.AzureInferenceChat: "azure_ai",
     LLMProvider.AzureInferenceEmbedding: "azure_ai",
+    LLMProvider.CopilotChat: "github_copilot",
+    LLMProvider.CopilotEmbedding: "github_copilot",
 }
 
 
@@ -81,10 +86,15 @@ class LLMConfig(BaseModel):
     )
     auth_type: AuthType = Field(
         default=AuthType.API,
-        description="The type of authentication to use. This should be either 'api_key' or 'azure_managed_identity'.",
+        description="Authentication: 'api_key', 'azure_managed_identity', or 'provider' (managed by the provider).",
     )
     api_key: SecretStr = Field(
-        default=SecretStr(os.environ.get("OPENAI_API_KEY", "")),
+        default_factory=lambda data: SecretStr(
+            ""
+            if data.get("auth_type") == AuthType.Provider
+            else os.environ.get("OPENAI_API_KEY", "")
+        ),
+        exclude_if=lambda value: value.get_secret_value() == "",
         description="The API key to use for the model. This should be a valid API key.",
     )
     concurrent_requests: int = Field(
@@ -107,7 +117,11 @@ class LLMConfig(BaseModel):
     )
 
     call_args: dict[str, Any] = Field(
-        default_factory=lambda: {"temperature": 0.0, "seed": 42},
+        default_factory=lambda data: (
+            {}
+            if data.get("llm_provider") == LLMProvider.CopilotEmbedding
+            else {"temperature": 0.0, "seed": 42}
+        ),
         description="Additional arguments to pass to the model when calling it.",
     )
 
@@ -123,7 +137,31 @@ class LLMConfig(BaseModel):
 
     @model_validator(mode="after")
     def check_api_key(self) -> Self:
-        """Check if the API key is set."""
+        """Validate credentials without borrowing OpenAI credentials for provider auth."""
+        if (
+            _PROVIDER_TO_MODEL_PROVIDER.get(str(self.llm_provider)) == "github_copilot"
+            and self.auth_type != AuthType.Provider
+        ):
+            msg = "GitHub Copilot requires auth_type='provider'; omit api_key."
+            raise ValueError(msg)
+        if self.auth_type == AuthType.Provider:
+            if "api_key" in self.model_fields_set:
+                msg = "Omit api_key when auth_type='provider'; the provider manages credentials."
+                raise ValueError(msg)
+            credential_overrides = {
+                "api_key",
+                "api_token",
+                "azure_ad_token",
+                "azure_ad_token_provider",
+                "auth_method",
+                "type",
+                "model_provider",
+            }
+            if credential_overrides.intersection(self.init_args) or (
+                credential_overrides.intersection(self.call_args)
+            ):
+                msg = "Provider-managed authentication cannot include credential, auth_method, or routing overrides in init_args/call_args."
+                raise ValueError(msg)
         if self.auth_type == "api_key" and (
             self.api_key is None or self.api_key.get_secret_value().strip() == ""
         ):
@@ -135,26 +173,39 @@ class LLMConfig(BaseModel):
         """Translate this benchmark-qed config into a graphrag-llm ``ModelConfig``.
 
         Built-in providers map to LiteLLM provider strings (``openai``,
-        ``azure``, ``azure_ai``). Custom providers are passed through with
+        ``azure``, ``azure_ai``, ``github_copilot``). Custom providers are passed through with
         their registered name as the ``ModelConfig.type`` so that
         ``register_completion`` / ``register_embedding`` callers can resolve
         them.
         """
         provider_key = str(self.llm_provider)
         is_builtin = provider_key in _PROVIDER_TO_MODEL_PROVIDER
+        if not is_builtin and not any(
+            provider.name == provider_key for provider in self.custom_providers
+        ):
+            msg = (
+                f"Unknown LLM provider '{provider_key}'. Choose a supported llm_provider "
+                f"({', '.join(_PROVIDER_TO_MODEL_PROVIDER)}) or declare it in custom_providers."
+            )
+            raise ValueError(msg)
         model_provider = _PROVIDER_TO_MODEL_PROVIDER.get(provider_key, provider_key)
 
         init_args = dict(self.init_args)
         api_base = init_args.pop("azure_endpoint", None)
         api_version = init_args.pop("api_version", None)
 
-        auth_method = (
-            AuthMethod.AzureManagedIdentity
-            if self.auth_type == AuthType.AzureManagedIdentity
-            else AuthMethod.ApiKey
-        )
+        if self.auth_type == AuthType.Provider and "provider" not in {
+            method.value for method in AuthMethod
+        }:
+            msg = (
+                "Provider-managed authentication requires a graphrag-llm release "
+                "supporting auth_method='provider'. The pinned 3.3.0 release does "
+                "not support it; update the dependency after upstream support is published."
+            )
+            raise ValueError(msg)
+        auth_method = AuthMethod(self.auth_type.value)
         api_key: str | None
-        if auth_method == AuthMethod.AzureManagedIdentity:
+        if self.auth_type != AuthType.API:
             api_key = None
         else:
             api_key = self.api_key.get_secret_value()
@@ -177,15 +228,16 @@ class LLMConfig(BaseModel):
             "model": self.model,
             "api_base": api_base,
             "api_version": api_version,
-            "api_key": api_key,
             "auth_method": auth_method,
             "azure_deployment_name": azure_deployment_name,
             "call_args": dict(self.call_args),
             "retry": self.retry,
             "rate_limit": rate_limit,
             "metrics": metrics,
-            **init_args,
         }
+        if self.auth_type != AuthType.Provider:
+            config_kwargs["api_key"] = api_key
+        config_kwargs.update(init_args)
 
         if not is_builtin:
             # Use the custom provider's name as the strategy/type so that the

@@ -59,9 +59,11 @@ class ConfigType(StrEnum):
 
 CHAT_MODEL_DEFAULTS = """
   model: gpt-4.1
-  auth_type: api_key # or azure_managed_identity
-  api_key: ${OPENAI_API_KEY} # remove this if using azure_managed_identity
-  llm_provider: openai.chat # or azure.openai.chat | azure.inference.chat
+  auth_type: api_key # or azure_managed_identity | provider
+  api_key: ${OPENAI_API_KEY} # remove for azure_managed_identity or provider auth
+  llm_provider: openai.chat # or azure.openai.chat | azure.inference.chat | github.copilot.chat
+  # Copilot: set auth_type: provider, remove api_key, choose an entitled model.
+  # Requires GraphRAG provider-managed auth support (not in pinned 3.3.0).
   concurrent_requests: 4 # The number of concurrent requests to send to the model.
   # init_args:
   #   Additional initialization arguments for the LLM can be added here.
@@ -88,9 +90,11 @@ CHAT_MODEL_DEFAULTS = """
 
 EMBEDDING_MODEL_DEFAULTS = """
   model: text-embedding-3-large
-  auth_type: api_key # or azure_managed_identity
-  api_key: ${OPENAI_API_KEY} # remove this if using azure_managed_identity
-  llm_provider: openai.embedding # or azure.openai.embedding | azure.inference.embedding
+  auth_type: api_key # or azure_managed_identity | provider
+  api_key: ${OPENAI_API_KEY} # remove for azure_managed_identity or provider auth
+  llm_provider: openai.embedding # or azure.openai.embedding | azure.inference.embedding | github.copilot.embedding
+  # Copilot: set auth_type: provider, remove api_key, choose an entitled model.
+  # Requires GraphRAG provider-managed auth support (not in pinned 3.3.0).
   # init_args:
   #   Additional initialization arguments for the LLM can be added here.
   #   For example, you can set the model version or other parameters.
