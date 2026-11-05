@@ -19,6 +19,7 @@ from benchmark_qed.cli.yaml_renderer import (
     _render_llm_section,
     render_autoe_assertion_yaml,
     render_autoe_chunk_assertion_yaml,
+    render_autoe_negative_assertion_yaml,
     render_autoe_pairwise_yaml,
     render_autoe_reference_yaml,
     render_autoq_yaml,
@@ -150,6 +151,44 @@ def _default_assertion_config() -> dict[str, Any]:
         "assertions": {"assertions_path": "input/assertions.json"},
         "pass_threshold": 0.5,
         "trials": 4,
+    }
+
+
+def test_negative_assertion_renderer_preserves_input_paths() -> None:
+    config = _default_assertion_config()
+    config["generated"]["answer_base_path"] = "prompts/assertion_answers.json"
+    content = render_autoe_negative_assertion_yaml(config)
+    validate_config(content, "autoe_negative_assertion")
+    settings = yaml.safe_load(content)
+    assert settings["generated"]["answer_base_path"] == "prompts/assertion_answers.json"
+    assert settings["prompt_config"]["system_prompt"]["prompt"] == (
+        "prompts/negative_assertion_system_prompt.txt"
+    )
+
+
+def test_negative_assertion_wizard_creates_prompt_pair(tmp_path, monkeypatch) -> None:
+    monkeypatch.setattr("benchmark_qed.cli.interactive.check_tty", lambda: None)
+    input_lines = ["6", "1", "1", "", "method_a", "", "", "0.5", "4"]
+    result = CliRunner().invoke(
+        app, ["init", str(tmp_path)], input="\n".join(input_lines) + "\n"
+    )
+    assert result.exit_code == 0, result.output
+    settings = yaml.safe_load((tmp_path / "settings.yaml").read_text(encoding="utf-8"))
+    validate_config(
+        (tmp_path / "settings.yaml").read_text(encoding="utf-8"),
+        "autoe_negative_assertion",
+    )
+    assert settings["prompt_config"]["system_prompt"]["prompt"] == (
+        "prompts/negative_assertion_system_prompt.txt"
+    )
+    assert (
+        settings["generated"]["answer_base_path"]
+        == "input/negative_assertion_answers.json"
+    )
+    assert settings["assertions"]["assertions_path"] == "input/negative_assertions.json"
+    assert {path.name for path in (tmp_path / "prompts").iterdir()} == {
+        "negative_assertion_system_prompt.txt",
+        "negative_assertion_user_prompt.txt",
     }
 
 

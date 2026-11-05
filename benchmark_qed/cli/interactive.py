@@ -41,6 +41,7 @@ from benchmark_qed.autoq.prompts.data_questions import (
 )
 from benchmark_qed.cli.scaffold import (
     CHUNK_ASSERTION_PROMPT_FILES,
+    NEGATIVE_ASSERTION_PROMPT_FILES,
     copy_prompts,
     ensure_input_folder,
     write_env_file,
@@ -48,6 +49,7 @@ from benchmark_qed.cli.scaffold import (
 from benchmark_qed.cli.yaml_renderer import (
     render_autoe_assertion_yaml,
     render_autoe_chunk_assertion_yaml,
+    render_autoe_negative_assertion_yaml,
     render_autoe_pairwise_yaml,
     render_autoe_reference_yaml,
     render_autoq_yaml,
@@ -529,11 +531,13 @@ _CONDITION_FIELDS = [
 ]
 
 
-def _prompt_condition(label: str) -> dict[str, Any]:
+def _prompt_condition(
+    label: str, *, default_answer_path: str = "input/method_name"
+) -> dict[str, Any]:
     """Prompt for a single condition (name + answer_base_path)."""
     rich_print(f"\n[bold]  {label}[/bold]")
     name = typer.prompt("  name", default="")
-    answer_base_path = typer.prompt("  answer_base_path", default="input/method_name")
+    answer_base_path = typer.prompt("  answer_base_path", default=default_answer_path)
     return {"name": name, "answer_base_path": answer_base_path}
 
 
@@ -630,19 +634,36 @@ def build_autoe_reference_config() -> dict[str, Any]:
     }
 
 
-def build_autoe_assertion_config() -> dict[str, Any]:
+def build_autoe_assertion_config(
+    *, negative_assertions: bool = False
+) -> dict[str, Any]:
     """Interactive flow for AutoE assertion evaluation configuration."""
-    rich_print(Panel("AutoE — Assertion Evaluation"))
+    title = (
+        "Negative Assertion Evaluation"
+        if negative_assertions
+        else "Assertion Evaluation"
+    )
+    rich_print(Panel(f"AutoE — {title}"))
 
     # LLM provider
     chat_provider = prompt_provider("chat")
 
     # Generated condition
-    generated = _prompt_condition("Generated condition")
+    generated = _prompt_condition(
+        "Generated condition",
+        default_answer_path=(
+            "input/negative_assertion_answers.json"
+            if negative_assertions
+            else "input/method_name"
+        ),
+    )
 
     # Assertions path
     assertions_path = typer.prompt(
-        "Path to assertions file", default="input/assertions.json"
+        "Path to assertions file",
+        default="input/negative_assertions.json"
+        if negative_assertions
+        else "input/assertions.json",
     )
 
     # Pass threshold
@@ -729,6 +750,10 @@ CONFIG_TYPE_OPTIONS: list[tuple[str, str]] = [
     ("autoe_reference", "AutoE — Reference Evaluation"),
     ("autoe_assertion", "AutoE — Assertion Evaluation (Answer-Level)"),
     ("autoe_chunk_assertion", "AutoE — Chunk-Level Assertion Evaluation"),
+    (
+        "autoe_negative_assertion",
+        "AutoE — Negative Assertion Evaluation (Answer-Level)",
+    ),
 ]
 
 
@@ -783,6 +808,12 @@ def _copy_prompts_for_config(config_type: str, prompts_folder: Path) -> None:
             copy_prompts(Path(reference_prompts.__file__).parent, prompts_folder)
         case "autoe_assertion":
             copy_prompts(Path(assertion_prompts.__file__).parent, prompts_folder)
+        case "autoe_negative_assertion":
+            copy_prompts(
+                Path(assertion_prompts.__file__).parent,
+                prompts_folder,
+                NEGATIVE_ASSERTION_PROMPT_FILES,
+            )
         case "autoe_chunk_assertion":
             copy_prompts(
                 Path(assertion_prompts.__file__).parent,
@@ -821,6 +852,9 @@ def interactive_init(
         "autoe_pairwise": build_autoe_pairwise_config,
         "autoe_reference": build_autoe_reference_config,
         "autoe_assertion": build_autoe_assertion_config,
+        "autoe_negative_assertion": lambda: build_autoe_assertion_config(
+            negative_assertions=True
+        ),
         "autoe_chunk_assertion": build_autoe_chunk_assertion_config,
     }
     config_dict = builders[config_type]()
@@ -831,6 +865,7 @@ def interactive_init(
         "autoe_pairwise": render_autoe_pairwise_yaml,
         "autoe_reference": render_autoe_reference_yaml,
         "autoe_assertion": render_autoe_assertion_yaml,
+        "autoe_negative_assertion": render_autoe_negative_assertion_yaml,
         "autoe_chunk_assertion": render_autoe_chunk_assertion_yaml,
     }
     yaml_content = renderers[config_type](config_dict)

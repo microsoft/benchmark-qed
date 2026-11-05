@@ -38,6 +38,7 @@ from benchmark_qed.autoq.prompts.data_questions import (
 )
 from benchmark_qed.cli.scaffold import (
     CHUNK_ASSERTION_PROMPT_FILES,
+    NEGATIVE_ASSERTION_PROMPT_FILES,
     copy_prompts,
     ensure_input_folder,
     write_env_file,
@@ -54,6 +55,7 @@ class ConfigType(StrEnum):
     autoe_differential_pairwise = "autoe_differential_pairwise"
     autoe_reference = "autoe_reference"
     autoe_assertion = "autoe_assertion"
+    autoe_negative_assertion = "autoe_negative_assertion"
     autoe_chunk_assertion = "autoe_chunk_assertion"
 
 
@@ -298,6 +300,15 @@ prompt_config:
   system_prompt:
     prompt: prompts/assertion_system_prompt.txt"""
 
+AUTOE_NEGATIVE_ASSERTION_CONTENT = (
+    AUTOE_ASSERTION_CONTENT
+    .replace("prompts/assertion_", "prompts/negative_assertion_")
+    .replace(
+        "input/vector_rag/activity_global.json", "input/negative_assertion_answers.json"
+    )
+    .replace("input/activity_global_assertions.json", "input/negative_assertions.json")
+)
+
 AUTOE_CHUNK_ASSERTION_CONTENT = f"""## Storage Configuration
 {{STORAGE}}
 ## Input Configuration
@@ -521,6 +532,8 @@ def _get_content(config_type: ConfigType) -> str:
             return AUTOE_REFERENCE_CONTENT
         case ConfigType.autoe_assertion:
             return AUTOE_ASSERTION_CONTENT
+        case ConfigType.autoe_negative_assertion:
+            return AUTOE_NEGATIVE_ASSERTION_CONTENT
         case ConfigType.autoe_chunk_assertion:
             return AUTOE_CHUNK_ASSERTION_CONTENT
 
@@ -686,7 +699,7 @@ def init(
     config_type: Annotated[
         ConfigType,
         typer.Argument(
-            help="The type of configuration to generate. Options are: autoq, autoe_pairwise, autoe_reference."
+            help="The workflow configuration to generate, including autoe_assertion and autoe_negative_assertion."
         ),
     ],
     root: Annotated[
@@ -785,6 +798,11 @@ def init(
         case ConfigType.autoe_assertion:
             prompt_mapping["prompts"] = __get_prompt_files(
                 Path(assertion_prompts.__file__).parent
+            )
+        case ConfigType.autoe_negative_assertion:
+            prompt_mapping["prompts"] = __get_prompt_files(
+                Path(assertion_prompts.__file__).parent,
+                NEGATIVE_ASSERTION_PROMPT_FILES,
             )
         case ConfigType.autoe_chunk_assertion:
             prompt_mapping["prompts/assertion"] = __get_prompt_files(

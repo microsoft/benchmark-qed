@@ -13,6 +13,11 @@ CHUNK_ASSERTION_PROMPT_FILES = {
     "chunk_assertion_user_prompt.txt",
 }
 
+NEGATIVE_ASSERTION_PROMPT_FILES = {
+    "negative_assertion_system_prompt.txt",
+    "negative_assertion_user_prompt.txt",
+}
+
 
 def copy_prompts(
     prompts_path: Path,

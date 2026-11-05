@@ -1,0 +1,23 @@
+${score_id}
+
+---Question---
+${question}
+
+---Answer to Evaluate---
+${answer}
+---End of Answer---
+
+---Assertion to Check---
+${assertion}
+
+---Instructions---
+Evaluate whether the answer satisfies the assertion, respecting negation and its scope.
+For a positive assertion, cite evidence that satisfies or contradicts it.
+For a negative assertion, inspect the entire answer for prohibited content. Explain its absence if none is found, or cite the content that violates it.
+Return 1 for satisfaction and 0 for violation; do not invert scores for negative assertions.
+
+Return a JSON object:
+{
+    "reasoning": "Explanation citing evidence from the answer, or explaining the absence of prohibited content.",
+    "score": 1 if the assertion is satisfied, 0 otherwise
+}

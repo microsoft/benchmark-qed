@@ -399,7 +399,9 @@ prompt_config:
 # ---------------------------------------------------------------------------
 
 
-def render_autoe_assertion_yaml(config: dict[str, Any]) -> str:
+def render_autoe_assertion_yaml(
+    config: dict[str, Any], *, negative_assertions: bool = False
+) -> str:
     """Render an assertion evaluation ``settings.yaml`` from wizard configuration.
 
     Parameters
@@ -414,6 +416,7 @@ def render_autoe_assertion_yaml(config: dict[str, Any]) -> str:
     trials = config["trials"]
 
     llm_section = _render_llm_section(config["chat_provider"])
+    prompt_prefix = "negative_assertion" if negative_assertions else "assertion"
 
     return f"""\
 ## Input Configuration
@@ -442,10 +445,15 @@ llm_config:
 
 prompt_config:
   user_prompt:
-    prompt: prompts/assertion_user_prompt.txt
+    prompt: prompts/{prompt_prefix}_user_prompt.txt
   system_prompt:
-    prompt: prompts/assertion_system_prompt.txt
+    prompt: prompts/{prompt_prefix}_system_prompt.txt
 """
+
+
+def render_autoe_negative_assertion_yaml(config: dict[str, Any]) -> str:
+    """Render assertion settings with separate negative assertion prompts."""
+    return render_autoe_assertion_yaml(config, negative_assertions=True)
 
 
 def render_autoe_chunk_assertion_yaml(config: dict[str, Any]) -> str:
@@ -552,6 +560,15 @@ _REQUIRED_KEYS: dict[str, list[str]] = {
         "llm_config",
         "prompt_config",
     ],
+    "autoe_negative_assertion": [
+        "generated",
+        "assertions",
+        "pass_threshold",
+        "trials",
+        "cache_config",
+        "llm_config",
+        "prompt_config",
+    ],
     "autoe_chunk_assertion": [
         "generated",
         "assertions",
@@ -615,7 +632,7 @@ def validate_config(yaml_content: str, config_type: str) -> None:
             _check_type(data, "trials", int)
             _check_type(data, "cache_config", dict)
             _check_type(data, "llm_config", dict)
-        elif config_type == "autoe_assertion":
+        elif config_type in {"autoe_assertion", "autoe_negative_assertion"}:
             _check_type(data, "generated", dict)
             _check_type(data, "assertions", dict)
             _check_type(data, "trials", int)

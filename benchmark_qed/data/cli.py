@@ -4,6 +4,7 @@
 import asyncio
 import zipfile
 from enum import StrEnum
+from importlib.resources import files
 from io import BytesIO
 from pathlib import Path
 from typing import Annotated
@@ -23,6 +24,7 @@ class Dataset(StrEnum):
     AP_NEWS = "AP_news"
     PODCAST = "podcast"
     EXAMPLE_ANSWERS = "example_answers"
+    NEGATIVE_ASSERTION_EXAMPLES = "negative_assertion_examples"
 
 
 def _get_dataset_url(dataset: Dataset) -> str:
@@ -40,6 +42,25 @@ async def _upload_zip_to_storage(zip_bytes: bytes, storage: Storage) -> None:
                 continue
             data = zip_ref.read(name)
             await storage.set(name, data)
+
+
+def _get_dataset_bytes(dataset: Dataset) -> bytes:
+    """Read bundled synthetic examples or download an existing dataset archive."""
+    if dataset == Dataset.NEGATIVE_ASSERTION_EXAMPLES:
+        source = files("benchmark_qed.data").joinpath("negative_assertion_examples")
+        buffer = BytesIO()
+        with zipfile.ZipFile(buffer, "w") as archive:
+            for source_name, target_name in (
+                ("answers.json", "negative_assertion_answers.json"),
+                ("assertions.json", "negative_assertions.json"),
+                ("expected_scores.json", "negative_assertion_expected_scores.json"),
+            ):
+                archive.writestr(target_name, source.joinpath(source_name).read_bytes())
+        return buffer.getvalue()
+
+    response = requests.get(_get_dataset_url(dataset), timeout=60)
+    response.raise_for_status()
+    return response.content
 
 
 @app.command()
@@ -79,7 +100,7 @@ def download(
         ),
     ] = None,
 ) -> None:
-    """Download the specified dataset from the GitHub repository.
+    """Download a dataset or copy the bundled synthetic negative assertion examples.
 
     For local filesystem, the dataset is extracted to `output_dir`.
 
@@ -89,9 +110,14 @@ def download(
 
     This ensures blob storage mirrors the local directory structure.
     """
-    typer.echo(
-        "By downloading this dataset, you agree to the terms of use described here: https://github.com/microsoft/benchmark-qed/blob/main/datasets/LICENSE."
-    )
+    if dataset == Dataset.NEGATIVE_ASSERTION_EXAMPLES:
+        typer.echo(
+            "These fictional examples are bundled with BenchmarkQED under the MIT license: https://github.com/microsoft/benchmark-qed/blob/main/LICENSE."
+        )
+    else:
+        typer.echo(
+            "By downloading this dataset, you agree to the terms of use described here: https://github.com/microsoft/benchmark-qed/blob/main/datasets/LICENSE."
+        )
     typer.confirm(
         "Accept Terms?",
         abort=True,
@@ -101,9 +127,7 @@ def download(
         msg = f"Unsupported storage type: {storage_type!r}. Only 'blob' is supported."
         raise typer.BadParameter(msg)
 
-    api_url = _get_dataset_url(dataset)
-    response = requests.get(api_url, timeout=60)
-    response.raise_for_status()
+    zip_bytes = _get_dataset_bytes(dataset)
 
     # Determine base directory for blob storage
     # Include output_dir in the path so blob storage mirrors local directory structure
@@ -120,11 +144,11 @@ def download(
         )
         storage = create_storage(config)
         loop = asyncio.get_event_loop()
-        loop.run_until_complete(_upload_zip_to_storage(response.content, storage))
+        loop.run_until_complete(_upload_zip_to_storage(zip_bytes, storage))
     else:
         output_dir.mkdir(parents=True, exist_ok=True)
         output_file = output_dir / f"{dataset}.zip"
-        output_file.write_bytes(response.content)
+        output_file.write_bytes(zip_bytes)
         with zipfile.ZipFile(output_file, "r") as zip_ref:
             zip_ref.extractall(output_dir)
         output_file.unlink()
