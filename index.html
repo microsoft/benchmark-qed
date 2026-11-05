@@ -573,6 +573,17 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#example-4-negative-assertion-based-scoring-of-rag-answers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example 4: Negative assertion-based scoring of RAG answers
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1282,6 +1293,17 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#example-4-negative-assertion-based-scoring-of-rag-answers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example 4: Negative assertion-based scoring of RAG answers
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1548,6 +1570,47 @@ judgments. Run <code>benchmark-qed cache inspect
 set <code>cache_config.type: none</code> with <code>storage: null</code> for fresh judgments.</p>
 </li>
 </ol>
+<h4 id="example-4-negative-assertion-based-scoring-of-rag-answers">Example 4: Negative assertion-based scoring of RAG answers</h4>
+<p>Follow these steps to evaluate RAG answers against positive and negative
+assertions using the bundled synthetic examples:</p>
+<ol>
+<li>
+<p><strong>Set up your project directory:</strong>
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>mkdir<span class="w"> </span>-p<span class="w"> </span>./local/negative_assertion_test
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="nb">cd</span><span class="w"> </span>./local/negative_assertion_test
+</code></pre></div></p>
+</li>
+<li>
+<p><strong>Download the sample answers and assertions into the <code>input</code> subfolder:</strong>
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>mkdir<span class="w"> </span>./input
+<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>benchmark-qed<span class="w"> </span>data<span class="w"> </span>download<span class="w"> </span>negative_assertion_examples<span class="w"> </span>input
+</code></pre></div>
+    Accept the MIT license notice when prompted. The samples include six fictional
+    answers, ten matching assertions, and expected-score labels.</p>
+</li>
+<li>
+<p><strong>Create a configuration file for negative assertion scoring:</strong>
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>benchmark-qed<span class="w"> </span>config<span class="w"> </span>init<span class="w"> </span>autoe_negative_assertion<span class="w"> </span>.
+</code></pre></div>
+    This creates:</p>
+<ul>
+<li><code>.env</code>: Replace <code>&lt;API_KEY&gt;</code> with your OpenAI or Azure API key.</li>
+<li><code>settings.yaml</code>: Contains sample input paths, model settings, and a persistent
+  cache under <code>.benchmark_qed_cache/assertion</code>.</li>
+<li><code>prompts/</code>: Contains the separate negative-assertion judge prompts.</li>
+</ul>
+</li>
+<li>
+<p><strong>Run the negative assertion scoring:</strong>
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>benchmark-qed<span class="w"> </span>autoe<span class="w"> </span>negative-assertion-scores<span class="w"> </span>settings.yaml<span class="w"> </span>output
+</code></pre></div>
+    The sample labels contain six expected passes and four intentional failures
+    per trial. Compare the results with
+    <code>input/negative_assertion_expected_scores.json</code>; live judge results may vary.</p>
+</li>
+</ol>
+<p>For provider settings, blob-storage alternatives, and scoring semantics, see
+<a href="developing/#scoring-rag-answers-against-negative-assertions">Scoring RAG answers against negative assertions</a>.</p>
 <p>For more details on configuring and running AutoE, see the <a href="cli/autoe/">AutoE CLI Documentation</a>.</p>
 <p>If your <code>settings.yaml</code> is stored in Azure Blob Storage, see <a href="developing/#running-with-blob-stored-configuration">Running with Blob-Stored Configuration</a>.</p>
 <p>For detailed instructions on configuring and running AutoE subcommands, please refer to the <a href="cli/autoe/">AutoE CLI Documentation</a>.</p>

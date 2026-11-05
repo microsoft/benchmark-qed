@@ -568,6 +568,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#scoring-rag-answers-against-negative-assertions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scoring RAG answers against negative assertions
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#evaluating-retrieved-chunks-against-assertions" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1253,6 +1264,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#scoring-rag-answers-against-negative-assertions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scoring RAG answers against negative assertions
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#evaluating-retrieved-chunks-against-assertions" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1669,6 +1691,95 @@ hierarchical assertion scoring; chunk-level assertion evaluation uses its
 own assertion/chunk cache.</p>
 </li>
 </ol>
+<h2 id="scoring-rag-answers-against-negative-assertions">Scoring RAG answers against negative assertions</h2>
+<p>Follow these steps to evaluate RAG answers against assertions that require
+specified content to be absent. This single-RAG workflow uses separate judge
+prompts and supports both positive and negative assertions without changing
+the standard assertion workflow.</p>
+<ol>
+<li>
+<p><strong>Set up your project directory:</strong>
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-40-1" name="__codelineno-40-1" href="#__codelineno-40-1"></a>mkdir<span class="w"> </span>-p<span class="w"> </span>./local/negative_assertion_test
+<a id="__codelineno-40-2" name="__codelineno-40-2" href="#__codelineno-40-2"></a><span class="nb">cd</span><span class="w"> </span>./local/negative_assertion_test
+</code></pre></div></p>
+</li>
+<li>
+<p><strong>Create an <code>input</code> folder and add your data:</strong>
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-41-1" name="__codelineno-41-1" href="#__codelineno-41-1"></a>mkdir<span class="w"> </span>./input
+<a id="__codelineno-41-2" name="__codelineno-41-2" href="#__codelineno-41-2"></a>uv<span class="w"> </span>run<span class="w"> </span>benchmark-qed<span class="w"> </span>data<span class="w"> </span>download<span class="w"> </span>negative_assertion_examples<span class="w"> </span>input
+</code></pre></div>
+    Accept the MIT license notice when prompted. This copies the bundled
+    synthetic answers, matching assertions, and expected-score labels:</p>
+<ul>
+<li><code>negative_assertion_answers.json</code>: Six fictional answers.</li>
+<li><code>negative_assertions.json</code>: Ten positive and negative assertions.</li>
+<li><code>negative_assertion_expected_scores.json</code>: Six expected passes and four
+  intentional failures per trial.</li>
+</ul>
+<p>You can also supply your own answers and assertions. Preserve matching
+<code>question_id</code> values and update the input paths in <code>settings.yaml</code>.
+Input preparation works offline; scoring requires an LLM. See the
+<a href="../cli/data/">Data Download CLI</a> for Azure Blob Storage options. For the
+blob variant below, upload the inputs under the same project prefix.</p>
+</li>
+<li>
+<p><strong>Create a configuration file for negative assertion evaluation:</strong>
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-42-1" name="__codelineno-42-1" href="#__codelineno-42-1"></a>uv<span class="w"> </span>run<span class="w"> </span>benchmark-qed<span class="w"> </span>config<span class="w"> </span>init<span class="w"> </span>autoe_negative_assertion<span class="w"> </span>.
+</code></pre></div>
+    This is the local-filesystem variant.</p>
+<p>Alternative blob variant (choose this instead of the local command above; do not run both):
+<div class="highlight"><pre><span></span><code><a id="__codelineno-43-1" name="__codelineno-43-1" href="#__codelineno-43-1"></a>uv<span class="w"> </span>run<span class="w"> </span>benchmark-qed<span class="w"> </span>config<span class="w"> </span>init<span class="w"> </span>autoe_negative_assertion<span class="w"> </span>.<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-43-2" name="__codelineno-43-2" href="#__codelineno-43-2"></a><span class="w">    </span>--storage-type<span class="w"> </span>blob<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-43-3" name="__codelineno-43-3" href="#__codelineno-43-3"></a><span class="w">    </span>--container-name<span class="w"> </span>my-container<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-43-4" name="__codelineno-43-4" href="#__codelineno-43-4"></a><span class="w">    </span>--account-url<span class="w"> </span>https://&lt;account&gt;.blob.core.windows.net<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-43-5" name="__codelineno-43-5" href="#__codelineno-43-5"></a><span class="w">    </span>--base-dir<span class="w"> </span>negative_assertion_test
+</code></pre></div>
+The local command creates:</p>
+<ul>
+<li><code>.env</code>: Contains environment variables for evaluation. Replace <code>&lt;API_KEY&gt;</code>
+  with your OpenAI or Azure API key.</li>
+<li><code>settings.yaml</code>: Contains model settings, sample input paths, and the
+  persistent assertion cache configuration.</li>
+<li><code>prompts/</code>: Contains the separate negative-assertion judge prompts, already
+  selected in <code>settings.yaml</code>.</li>
+</ul>
+<p>The generated settings use these default input names, matching the sample
+files downloaded in step 2:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-44-1" name="__codelineno-44-1" href="#__codelineno-44-1"></a><span class="nt">generated</span><span class="p">:</span>
+<a id="__codelineno-44-2" name="__codelineno-44-2" href="#__codelineno-44-2"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">vector_rag</span>
+<a id="__codelineno-44-3" name="__codelineno-44-3" href="#__codelineno-44-3"></a><span class="w">  </span><span class="nt">answer_base_path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">input/negative_assertion_answers.json</span>
+<a id="__codelineno-44-4" name="__codelineno-44-4" href="#__codelineno-44-4"></a><span class="nt">assertions</span><span class="p">:</span>
+<a id="__codelineno-44-5" name="__codelineno-44-5" href="#__codelineno-44-5"></a><span class="w">  </span><span class="nt">assertions_path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">input/negative_assertions.json</span>
+</code></pre></div>
+<p>The sample inputs are ready to use without editing. Configure <code>llm_config</code>
+as needed. See <a href="../cli/llm_config/">LLM Configuration</a> for provider options.</p>
+</li>
+<li>
+<p><strong>Run the negative assertion evaluation:</strong>
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-45-1" name="__codelineno-45-1" href="#__codelineno-45-1"></a>uv<span class="w"> </span>run<span class="w"> </span>benchmark-qed<span class="w"> </span>autoe<span class="w"> </span>negative-assertion-scores<span class="w"> </span>settings.yaml<span class="w"> </span>output
+</code></pre></div>
+    This is the local-filesystem variant.</p>
+<p>Alternative blob-stored config variant (choose this instead of the local command above; do not run both):
+<div class="highlight"><pre><span></span><code><a id="__codelineno-46-1" name="__codelineno-46-1" href="#__codelineno-46-1"></a>uv<span class="w"> </span>run<span class="w"> </span>benchmark-qed<span class="w"> </span>autoe<span class="w"> </span>negative-assertion-scores<span class="w"> </span>blob://my-container/negative_assertion_test/settings.yaml<span class="w"> </span>output<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-46-2" name="__codelineno-46-2" href="#__codelineno-46-2"></a><span class="w">    </span>--account-url<span class="w"> </span>https://&lt;account&gt;.blob.core.windows.net
+</code></pre></div>
+The results will be saved in the <code>output</code> directory, including
+<code>assertion_scores.csv</code>, <code>assertion_summary_by_question.csv</code>, and
+<code>eval_summary.json</code>. Compare per-assertion scores with
+<code>input/negative_assertion_expected_scores.json</code>. The sample failures are
+intentional; the labels are reference expectations, not forced LLM outputs.</p>
+<p>Repeated or resumed runs reuse completed question/assertion/trial judgments.
+Inspect the cache with:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-47-1" name="__codelineno-47-1" href="#__codelineno-47-1"></a>uv<span class="w"> </span>run<span class="w"> </span>benchmark-qed<span class="w"> </span>cache<span class="w"> </span>inspect<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-47-2" name="__codelineno-47-2" href="#__codelineno-47-2"></a><span class="w">    </span>.benchmark_qed_cache/assertion/assertion.sqlite3
+</code></pre></div>
+Set <code>cache_config.type: none</code> with <code>storage: null</code> for fresh judgments.</p>
+</li>
+</ol>
+<p>A negative assertion scores <strong>1 when the prohibited content is absent</strong> and
+<strong>0 when it is present</strong>, including paraphrases. No score inversion is needed.
+See <a href="../cli/autoe/#negative-assertion-based-scoring-configuration">Negative Assertion-Based Scoring Configuration</a>
+for assertion examples, wording guidance, configuration fields, and limitations.</p>
 <h2 id="evaluating-retrieved-chunks-against-assertions">Evaluating retrieved chunks against assertions</h2>
 <p>Chunk-level evaluation scores how well retrieved passages (chunks) support assertions, without waiting for answer synthesis. This is useful for:</p>
 <ul>
@@ -1687,21 +1798,21 @@ own assertion/chunk cache.</p>
 <ol>
 <li>
 <p><strong>Set up your project directory:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-40-1" name="__codelineno-40-1" href="#__codelineno-40-1"></a>mkdir<span class="w"> </span>-p<span class="w"> </span>./local/chunk_assertion_test
-<a id="__codelineno-40-2" name="__codelineno-40-2" href="#__codelineno-40-2"></a><span class="nb">cd</span><span class="w"> </span>./local/chunk_assertion_test
+<div class="highlight"><pre><span></span><code><a id="__codelineno-48-1" name="__codelineno-48-1" href="#__codelineno-48-1"></a>mkdir<span class="w"> </span>-p<span class="w"> </span>./local/chunk_assertion_test
+<a id="__codelineno-48-2" name="__codelineno-48-2" href="#__codelineno-48-2"></a><span class="nb">cd</span><span class="w"> </span>./local/chunk_assertion_test
 </code></pre></div>
 </li>
 <li>
 <p><strong>Initialize the chunk-assertion project:</strong></p>
 <p>For a local-filesystem project, run:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-41-1" name="__codelineno-41-1" href="#__codelineno-41-1"></a>uv<span class="w"> </span>run<span class="w"> </span>benchmark-qed<span class="w"> </span>config<span class="w"> </span>init<span class="w"> </span>autoe_chunk_assertion<span class="w"> </span>.
+<div class="highlight"><pre><span></span><code><a id="__codelineno-49-1" name="__codelineno-49-1" href="#__codelineno-49-1"></a>uv<span class="w"> </span>run<span class="w"> </span>benchmark-qed<span class="w"> </span>config<span class="w"> </span>init<span class="w"> </span>autoe_chunk_assertion<span class="w"> </span>.
 </code></pre></div>
 <p>Alternative blob variant (choose this instead of the local command above; do not run both):</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-42-1" name="__codelineno-42-1" href="#__codelineno-42-1"></a>uv<span class="w"> </span>run<span class="w"> </span>benchmark-qed<span class="w"> </span>config<span class="w"> </span>init<span class="w"> </span>autoe_chunk_assertion<span class="w"> </span>.<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-42-2" name="__codelineno-42-2" href="#__codelineno-42-2"></a><span class="w">    </span>--storage-type<span class="w"> </span>blob<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-42-3" name="__codelineno-42-3" href="#__codelineno-42-3"></a><span class="w">    </span>--container-name<span class="w"> </span>my-container<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-42-4" name="__codelineno-42-4" href="#__codelineno-42-4"></a><span class="w">    </span>--account-url<span class="w"> </span>https://&lt;account&gt;.blob.core.windows.net<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-42-5" name="__codelineno-42-5" href="#__codelineno-42-5"></a><span class="w">    </span>--base-dir<span class="w"> </span>chunk_assertion_test
+<div class="highlight"><pre><span></span><code><a id="__codelineno-50-1" name="__codelineno-50-1" href="#__codelineno-50-1"></a>uv<span class="w"> </span>run<span class="w"> </span>benchmark-qed<span class="w"> </span>config<span class="w"> </span>init<span class="w"> </span>autoe_chunk_assertion<span class="w"> </span>.<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-50-2" name="__codelineno-50-2" href="#__codelineno-50-2"></a><span class="w">    </span>--storage-type<span class="w"> </span>blob<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-50-3" name="__codelineno-50-3" href="#__codelineno-50-3"></a><span class="w">    </span>--container-name<span class="w"> </span>my-container<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-50-4" name="__codelineno-50-4" href="#__codelineno-50-4"></a><span class="w">    </span>--account-url<span class="w"> </span>https://&lt;account&gt;.blob.core.windows.net<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-50-5" name="__codelineno-50-5" href="#__codelineno-50-5"></a><span class="w">    </span>--base-dir<span class="w"> </span>chunk_assertion_test
 </code></pre></div>
 <p>The command creates the project structure before any settings need to be
 edited:</p>
@@ -1723,31 +1834,31 @@ edited:</p>
 </ul>
 <p>To try the workflow with bundled example data, download both kinds of files
 into the generated <code>input/</code> directory:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-43-1" name="__codelineno-43-1" href="#__codelineno-43-1"></a>uv<span class="w"> </span>run<span class="w"> </span>benchmark-qed<span class="w"> </span>data<span class="w"> </span>download<span class="w"> </span>example_answers<span class="w"> </span>input
+<div class="highlight"><pre><span></span><code><a id="__codelineno-51-1" name="__codelineno-51-1" href="#__codelineno-51-1"></a>uv<span class="w"> </span>run<span class="w"> </span>benchmark-qed<span class="w"> </span>data<span class="w"> </span>download<span class="w"> </span>example_answers<span class="w"> </span>input
 </code></pre></div>
 <p>The examples include matching files for <code>data_local</code>, <code>data_global</code>, and
 <code>data_linked</code>, with both <code>vector_rag_short_context</code> and
 <code>vector_rag_long_context</code> retrieval results.</p>
 <p>If you use your own retriever, its retrieval-results file must be a JSON
 array in this form:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-44-1" name="__codelineno-44-1" href="#__codelineno-44-1"></a><span class="p">[</span>
-<a id="__codelineno-44-2" name="__codelineno-44-2" href="#__codelineno-44-2"></a><span class="w">  </span><span class="p">{</span>
-<a id="__codelineno-44-3" name="__codelineno-44-3" href="#__codelineno-44-3"></a><span class="w">    </span><span class="nt">"question_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"q1"</span><span class="p">,</span>
-<a id="__codelineno-44-4" name="__codelineno-44-4" href="#__codelineno-44-4"></a><span class="w">    </span><span class="nt">"text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"What is photosynthesis?"</span><span class="p">,</span>
-<a id="__codelineno-44-5" name="__codelineno-44-5" href="#__codelineno-44-5"></a><span class="w">    </span><span class="nt">"context"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-<a id="__codelineno-44-6" name="__codelineno-44-6" href="#__codelineno-44-6"></a><span class="w">      </span><span class="p">{</span>
-<a id="__codelineno-44-7" name="__codelineno-44-7" href="#__codelineno-44-7"></a><span class="w">        </span><span class="nt">"chunk_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span>
-<a id="__codelineno-44-8" name="__codelineno-44-8" href="#__codelineno-44-8"></a><span class="w">        </span><span class="nt">"text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Photosynthesis converts sunlight into chemical energy."</span><span class="p">,</span>
-<a id="__codelineno-44-9" name="__codelineno-44-9" href="#__codelineno-44-9"></a><span class="w">        </span><span class="nt">"rank"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span>
-<a id="__codelineno-44-10" name="__codelineno-44-10" href="#__codelineno-44-10"></a><span class="w">      </span><span class="p">},</span>
-<a id="__codelineno-44-11" name="__codelineno-44-11" href="#__codelineno-44-11"></a><span class="w">      </span><span class="p">{</span>
-<a id="__codelineno-44-12" name="__codelineno-44-12" href="#__codelineno-44-12"></a><span class="w">        </span><span class="nt">"chunk_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5"</span><span class="p">,</span>
-<a id="__codelineno-44-13" name="__codelineno-44-13" href="#__codelineno-44-13"></a><span class="w">        </span><span class="nt">"text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Chlorophyll captures light energy."</span><span class="p">,</span>
-<a id="__codelineno-44-14" name="__codelineno-44-14" href="#__codelineno-44-14"></a><span class="w">        </span><span class="nt">"rank"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span>
-<a id="__codelineno-44-15" name="__codelineno-44-15" href="#__codelineno-44-15"></a><span class="w">      </span><span class="p">}</span>
-<a id="__codelineno-44-16" name="__codelineno-44-16" href="#__codelineno-44-16"></a><span class="w">    </span><span class="p">]</span>
-<a id="__codelineno-44-17" name="__codelineno-44-17" href="#__codelineno-44-17"></a><span class="w">  </span><span class="p">}</span>
-<a id="__codelineno-44-18" name="__codelineno-44-18" href="#__codelineno-44-18"></a><span class="p">]</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-52-1" name="__codelineno-52-1" href="#__codelineno-52-1"></a><span class="p">[</span>
+<a id="__codelineno-52-2" name="__codelineno-52-2" href="#__codelineno-52-2"></a><span class="w">  </span><span class="p">{</span>
+<a id="__codelineno-52-3" name="__codelineno-52-3" href="#__codelineno-52-3"></a><span class="w">    </span><span class="nt">"question_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"q1"</span><span class="p">,</span>
+<a id="__codelineno-52-4" name="__codelineno-52-4" href="#__codelineno-52-4"></a><span class="w">    </span><span class="nt">"text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"What is photosynthesis?"</span><span class="p">,</span>
+<a id="__codelineno-52-5" name="__codelineno-52-5" href="#__codelineno-52-5"></a><span class="w">    </span><span class="nt">"context"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<a id="__codelineno-52-6" name="__codelineno-52-6" href="#__codelineno-52-6"></a><span class="w">      </span><span class="p">{</span>
+<a id="__codelineno-52-7" name="__codelineno-52-7" href="#__codelineno-52-7"></a><span class="w">        </span><span class="nt">"chunk_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span>
+<a id="__codelineno-52-8" name="__codelineno-52-8" href="#__codelineno-52-8"></a><span class="w">        </span><span class="nt">"text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Photosynthesis converts sunlight into chemical energy."</span><span class="p">,</span>
+<a id="__codelineno-52-9" name="__codelineno-52-9" href="#__codelineno-52-9"></a><span class="w">        </span><span class="nt">"rank"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span>
+<a id="__codelineno-52-10" name="__codelineno-52-10" href="#__codelineno-52-10"></a><span class="w">      </span><span class="p">},</span>
+<a id="__codelineno-52-11" name="__codelineno-52-11" href="#__codelineno-52-11"></a><span class="w">      </span><span class="p">{</span>
+<a id="__codelineno-52-12" name="__codelineno-52-12" href="#__codelineno-52-12"></a><span class="w">        </span><span class="nt">"chunk_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5"</span><span class="p">,</span>
+<a id="__codelineno-52-13" name="__codelineno-52-13" href="#__codelineno-52-13"></a><span class="w">        </span><span class="nt">"text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Chlorophyll captures light energy."</span><span class="p">,</span>
+<a id="__codelineno-52-14" name="__codelineno-52-14" href="#__codelineno-52-14"></a><span class="w">        </span><span class="nt">"rank"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span>
+<a id="__codelineno-52-15" name="__codelineno-52-15" href="#__codelineno-52-15"></a><span class="w">      </span><span class="p">}</span>
+<a id="__codelineno-52-16" name="__codelineno-52-16" href="#__codelineno-52-16"></a><span class="w">    </span><span class="p">]</span>
+<a id="__codelineno-52-17" name="__codelineno-52-17" href="#__codelineno-52-17"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-52-18" name="__codelineno-52-18" href="#__codelineno-52-18"></a><span class="p">]</span>
 </code></pre></div>
 <p>Each context item requires <code>chunk_id</code> and <code>text</code>; <code>rank</code> is optional. When
 every item has a rank, chunks are evaluated in rank order. Otherwise, their
@@ -1758,12 +1869,12 @@ existing list order is used. See the chunk-level assertion example in the
 <p><strong>Review the generated <code>settings.yaml</code>:</strong></p>
 <p>The generated configuration already points to the bundled <code>data_local</code>
 short-context example:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-45-1" name="__codelineno-45-1" href="#__codelineno-45-1"></a><span class="nt">generated</span><span class="p">:</span>
-<a id="__codelineno-45-2" name="__codelineno-45-2" href="#__codelineno-45-2"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">my_retriever</span>
-<a id="__codelineno-45-3" name="__codelineno-45-3" href="#__codelineno-45-3"></a><span class="w">  </span><span class="nt">retrieval_path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">input/vector_rag_short_context/data_local_retrieval_results.json</span>
-<a id="__codelineno-45-4" name="__codelineno-45-4" href="#__codelineno-45-4"></a>
-<a id="__codelineno-45-5" name="__codelineno-45-5" href="#__codelineno-45-5"></a><span class="nt">assertions</span><span class="p">:</span>
-<a id="__codelineno-45-6" name="__codelineno-45-6" href="#__codelineno-45-6"></a><span class="w">  </span><span class="nt">assertions_path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">input/data_local_assertions.json</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-53-1" name="__codelineno-53-1" href="#__codelineno-53-1"></a><span class="nt">generated</span><span class="p">:</span>
+<a id="__codelineno-53-2" name="__codelineno-53-2" href="#__codelineno-53-2"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">my_retriever</span>
+<a id="__codelineno-53-3" name="__codelineno-53-3" href="#__codelineno-53-3"></a><span class="w">  </span><span class="nt">retrieval_path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">input/vector_rag_short_context/data_local_retrieval_results.json</span>
+<a id="__codelineno-53-4" name="__codelineno-53-4" href="#__codelineno-53-4"></a>
+<a id="__codelineno-53-5" name="__codelineno-53-5" href="#__codelineno-53-5"></a><span class="nt">assertions</span><span class="p">:</span>
+<a id="__codelineno-53-6" name="__codelineno-53-6" href="#__codelineno-53-6"></a><span class="w">  </span><span class="nt">assertions_path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">input/data_local_assertions.json</span>
 </code></pre></div>
 <p>If you downloaded the bundled data in the previous step, these defaults can
 be used unchanged. To evaluate another example set, change <code>data_local</code> in
@@ -1779,12 +1890,12 @@ retriever, also change <code>vector_rag_short_context</code> to
 <li><code>prompt_config</code>: Judge prompt files</li>
 </ul>
 <p>The default cache is persistent SQLite:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-46-1" name="__codelineno-46-1" href="#__codelineno-46-1"></a><span class="nt">cache_config</span><span class="p">:</span>
-<a id="__codelineno-46-2" name="__codelineno-46-2" href="#__codelineno-46-2"></a><span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sqlite</span>
-<a id="__codelineno-46-3" name="__codelineno-46-3" href="#__codelineno-46-3"></a><span class="w">  </span><span class="nt">storage</span><span class="p">:</span>
-<a id="__codelineno-46-4" name="__codelineno-46-4" href="#__codelineno-46-4"></a><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">file</span>
-<a id="__codelineno-46-5" name="__codelineno-46-5" href="#__codelineno-46-5"></a><span class="w">    </span><span class="nt">base_dir</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">.benchmark_qed_cache/chunk_assertions</span>
-<a id="__codelineno-46-6" name="__codelineno-46-6" href="#__codelineno-46-6"></a><span class="w">  </span><span class="nt">database_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">chunk_assertions.sqlite3</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-54-1" name="__codelineno-54-1" href="#__codelineno-54-1"></a><span class="nt">cache_config</span><span class="p">:</span>
+<a id="__codelineno-54-2" name="__codelineno-54-2" href="#__codelineno-54-2"></a><span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sqlite</span>
+<a id="__codelineno-54-3" name="__codelineno-54-3" href="#__codelineno-54-3"></a><span class="w">  </span><span class="nt">storage</span><span class="p">:</span>
+<a id="__codelineno-54-4" name="__codelineno-54-4" href="#__codelineno-54-4"></a><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">file</span>
+<a id="__codelineno-54-5" name="__codelineno-54-5" href="#__codelineno-54-5"></a><span class="w">    </span><span class="nt">base_dir</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">.benchmark_qed_cache/chunk_assertions</span>
+<a id="__codelineno-54-6" name="__codelineno-54-6" href="#__codelineno-54-6"></a><span class="w">  </span><span class="nt">database_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">chunk_assertions.sqlite3</span>
 </code></pre></div>
 <p>Supported cache types are <code>sqlite</code>, <code>json</code>, <code>memory</code>, and <code>none</code>. Existing
 local <code>chunk_assertions.jsonl</code> caches are imported automatically. Persistent
@@ -1800,11 +1911,11 @@ for local and blob JSON examples.</p>
 </li>
 <li>
 <p><strong>Run the chunk-level assertion evaluation:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-47-1" name="__codelineno-47-1" href="#__codelineno-47-1"></a>uv<span class="w"> </span>run<span class="w"> </span>benchmark-qed<span class="w"> </span>autoe<span class="w"> </span>chunk-assertion-scores<span class="w"> </span>settings.yaml<span class="w"> </span>output
+<div class="highlight"><pre><span></span><code><a id="__codelineno-55-1" name="__codelineno-55-1" href="#__codelineno-55-1"></a>uv<span class="w"> </span>run<span class="w"> </span>benchmark-qed<span class="w"> </span>autoe<span class="w"> </span>chunk-assertion-scores<span class="w"> </span>settings.yaml<span class="w"> </span>output
 </code></pre></div>
 <p>Alternative blob-stored config variant (choose this instead of the local command above; do not run both):</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-48-1" name="__codelineno-48-1" href="#__codelineno-48-1"></a>uv<span class="w"> </span>run<span class="w"> </span>benchmark-qed<span class="w"> </span>autoe<span class="w"> </span>chunk-assertion-scores<span class="w"> </span>blob://my-container/chunk_assertion_test/settings.yaml<span class="w"> </span>output<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-48-2" name="__codelineno-48-2" href="#__codelineno-48-2"></a><span class="w">    </span>--account-url<span class="w"> </span>https://&lt;account&gt;.blob.core.windows.net
+<div class="highlight"><pre><span></span><code><a id="__codelineno-56-1" name="__codelineno-56-1" href="#__codelineno-56-1"></a>uv<span class="w"> </span>run<span class="w"> </span>benchmark-qed<span class="w"> </span>autoe<span class="w"> </span>chunk-assertion-scores<span class="w"> </span>blob://my-container/chunk_assertion_test/settings.yaml<span class="w"> </span>output<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-56-2" name="__codelineno-56-2" href="#__codelineno-56-2"></a><span class="w">    </span>--account-url<span class="w"> </span>https://&lt;account&gt;.blob.core.windows.net
 </code></pre></div>
 </li>
 <li>
@@ -1817,8 +1928,8 @@ for local and blob JSON examples.</p>
 </ul>
 <p>Inspect the default SQLite cache, including namespace counts and active work
 leases, with:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-49-1" name="__codelineno-49-1" href="#__codelineno-49-1"></a>uv<span class="w"> </span>run<span class="w"> </span>benchmark-qed<span class="w"> </span>cache<span class="w"> </span>inspect<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-49-2" name="__codelineno-49-2" href="#__codelineno-49-2"></a><span class="w">    </span>.benchmark_qed_cache/chunk_assertions/chunk_assertions.sqlite3
+<div class="highlight"><pre><span></span><code><a id="__codelineno-57-1" name="__codelineno-57-1" href="#__codelineno-57-1"></a>uv<span class="w"> </span>run<span class="w"> </span>benchmark-qed<span class="w"> </span>cache<span class="w"> </span>inspect<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-57-2" name="__codelineno-57-2" href="#__codelineno-57-2"></a><span class="w">    </span>.benchmark_qed_cache/chunk_assertions/chunk_assertions.sqlite3
 </code></pre></div>
 <p>The inspection command applies only to SQLite cache files. To force fresh
 LLM judgments, set <code>cache_config.type: none</code> and <code>storage: null</code>.</p>
